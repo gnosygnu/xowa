@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.gflucene.indexers.*;
@@ -34,7 +43,7 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 		if (ns_ids_str == null)
 			temp_ns_list.Add(Xow_ns_.Tid__main);
 		// if *, use all namespaces
-		else if (String_.Eq(ns_ids_str, "*")) {
+		else if (StringUtl.Eq(ns_ids_str, "*")) {
 			Xow_ns[] ns_ary = wiki.Ns_mgr().Ords_ary();
 			int len = ns_ary.length;
 			for (int i = 0; i < len; i++) {
@@ -46,9 +55,9 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 		}
 		// else, parse ns
 		else {
-			byte[][] ns_bry_ary = Bry_split_.Split(Bry_.new_u8(ns_ids_str), AsciiByte.Comma, true);
+			byte[][] ns_bry_ary = BrySplit.Split(BryUtl.NewU8(ns_ids_str), AsciiByte.Comma, true);
 			for (byte[] ns_bry : ns_bry_ary) {
-				temp_ns_list.Add(Bry_.To_int(ns_bry));
+				temp_ns_list.Add(BryUtl.ToInt(ns_bry));
 			}
 		}
 		ns_ids_ary = (int[])temp_ns_list.ToAryAndClear(int.class);

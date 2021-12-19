@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wkrs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class Xob_io_utl_ {
 	public static void Delete_sql_files(Io_url wiki_dir, String sql_file_name) {
 		Delete_by_wildcard(wiki_dir, sql_file_name + ".sql", ".gz", ".sql");
@@ -22,7 +29,7 @@ public class Xob_io_utl_ {
 		List_adp list = Find_by_wildcard(Io_mgr.Instance.QueryDir_args(dir).ExecAsUrlAry(), name_pattern, ext_ary);
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Io_url url = (Io_url)list.Get_at(i);
+			Io_url url = (Io_url)list.GetAt(i);
 			Io_mgr.Instance.DeleteFil(url);
 		}
 	}
@@ -32,7 +39,7 @@ public class Xob_io_utl_ {
 	public static Io_url Find_nth_by_wildcard_or_null(Io_url[] fil_ary, String name_pattern, String... ext_ary) {
 		List_adp list = Find_by_wildcard(fil_ary, name_pattern, ext_ary);
 		int list_len = list.Len();
-		return list_len == 0 ? null : (Io_url)list.Get_at(list_len - 1);
+		return list_len == 0 ? null : (Io_url)list.GetAt(list_len - 1);
 	}
 	public static List_adp Find_by_wildcard(Io_url[] fil_ary, String name_pattern, String... ext_ary) {
 		List_adp rv = List_adp_.New();
@@ -46,7 +53,7 @@ public class Xob_io_utl_ {
 		for (Io_url fil : fil_ary) {
 			// file matches pattern
 			if (	name_pattern == Pattern__wilcard				// empty String means match anything
-				||	String_.Has(fil.NameAndExt(), name_pattern)) {	// name has name_pattern; EX: "enwiki-latest-pages-articles-current.xml" and "pagelinks"
+				||	StringUtl.Has(fil.NameAndExt(), name_pattern)) {	// name has name_pattern; EX: "enwiki-latest-pages-articles-current.xml" and "pagelinks"
 				if (	ext_hash.Len() == 0				// empty hash means match any ext
 					||	ext_hash.Has(fil.Ext()))		// ext exists in hash
 					rv.Add(fil);
@@ -54,5 +61,5 @@ public class Xob_io_utl_ {
 		}
 		return rv;
 	}
-	public static final String Pattern__wilcard = String_.Empty;
+	public static final String Pattern__wilcard = StringUtl.Empty;
 }

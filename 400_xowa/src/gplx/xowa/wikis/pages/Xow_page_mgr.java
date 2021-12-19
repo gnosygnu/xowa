@@ -14,13 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoa_url_;
@@ -66,11 +67,11 @@ public class Xow_page_mgr implements Gfo_invk {
 						) {		
 						Xol_lang_itm lang = wiki.Lang();
 						byte[] msg_key = ttl.Page_db();
-						Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+						BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
 						msg_key = lang.Case_mgr().Case_build_1st_lower(tmp_bfr, msg_key, 0, msg_key.length);
 						byte[] msg_val = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, wiki.Lang(), msg_key).Val();	// NOTE: do not change to Get_msg_val; Get_msg_val, also replaces $1 with values, and $1 needs to be preserved for callers;
 						rv.Db().Text().Text_bry_(msg_val);
-						tmp_bfr.Mkr_rls();
+						tmp_bfr.MkrRls();
 						return;
 					}
 					break;
@@ -109,7 +110,7 @@ public class Xow_page_mgr implements Gfo_invk {
 
 			// handle redirects for html_dbs
 			if (	page_row.Redirect_id() > 0		// redirect exists
-				&&	Bry_.Len_eq_0(wtxt)) {			// wikitext is not found
+				&&	BryUtl.IsNullOrEmpty(wtxt)) {			// wikitext is not found
 				Redirect_to_html_page(rv, wiki, page_row);
 				return ttl;
 			}
@@ -140,7 +141,7 @@ public class Xow_page_mgr implements Gfo_invk {
 		rv.Db().Page().Id_(redirect_row.Id()).Modified_on_(redirect_row.Modified_on()).Html_db_id_(redirect_row.Html_db_id());
 		Xoa_ttl redirect_ttl = wiki.Ttl_parse(redirect_row.Ns_id(), redirect_row.Ttl_page_db());
 		rv.Ttl_(redirect_ttl);
-		rv.Redirect_trail().Itms__add__article(Xoa_url.New(wiki, redirect_ttl), redirect_ttl, Bry_.Empty);					// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
+		rv.Redirect_trail().Itms__add__article(Xoa_url.New(wiki, redirect_ttl), redirect_ttl, BryUtl.Empty);					// NOTE: must be url_encoded; EX: "en.wikipedia.org/?!" should generate link of "en.wikipedia.org/%3F!?redirect=no"
 	}
 	public Xoae_page Load_page_and_parse(Xoa_url url, Xoa_ttl ttl) {return Load_page_and_parse(url, ttl, wiki.Lang(), wiki.Appe().Gui_mgr().Browser_win().Active_tab(), true);}
 	public Xoae_page Load_page_and_parse(Xoa_url url, Xoa_ttl ttl, Xol_lang_itm lang, Xog_tab_itm tab, boolean parse_page) {
@@ -163,7 +164,7 @@ public class Xow_page_mgr implements Gfo_invk {
 				if (ttl.Ns().Id_is_file()) {
 					Xowe_wiki commons_wiki = (Xowe_wiki)wiki.Appe().Wiki_mgr().Get_by_or_null(wiki.Commons_wiki_key());
 					if (commons_wiki != null) {										// commons exists
-						if (!Bry_.Eq(wiki.Domain_bry(), commons_wiki.Domain_bry())) {		// !Bry_.Eq is recursion guard
+						if (!BryLni.Eq(wiki.Domain_bry(), commons_wiki.Domain_bry())) {		// !Bry_.Eq is recursion guard
 							Xoae_page rv = commons_wiki.Data_mgr().Load_page_and_parse(url, ttl, wiki.Lang(), tab, true);
 							if (rv.Db().Page().Exists()) {
 								rv.Commons_mgr().Source_wiki_(wiki);

@@ -13,17 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.tables; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.tables;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
+import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*;
 public class Xomw_table_wkr__tst {
 	private final Xomw_table_wkr__fxt fxt = new Xomw_table_wkr__fxt();
 	@Test public void Basic() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{|"
 		, "|-"
 		, "|a"
 		, "|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<table>"
 		, ""
 		, "<tr>"
@@ -32,12 +38,12 @@ public class Xomw_table_wkr__tst {
 		));
 	}		
 	@Test public void Tb__atrs() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{|id='1'"
 		, "|-"
 		, "|a"
 		, "|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<table id=\"1\">"
 		, ""
 		, "<tr>"
@@ -46,22 +52,22 @@ public class Xomw_table_wkr__tst {
 		));
 	}		
 	@Test public void Tc__atrs() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{|"
 		, "|+id='1'|a"
 		, "|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<table>"
 		, "<caption id=\"1\">a"
 		, "</caption><tr><td></td></tr></table>"
 		));
 	}
 	@Test public void Th__double() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{|"
 		, "!a!!b"
 		, "|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<table>"
 		, "<tr>"
 		, "<th>a</th>"
@@ -70,19 +76,19 @@ public class Xomw_table_wkr__tst {
 		));
 	}		
 	@Test public void Blank() {	// COVERS: "empty line, go to next line"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "   "
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "   "
 		));
 	}
 	@Test public void Tb__indent() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "::{|"
 		, "|-"
 		, "|a"
 		, "|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<dl><dd><dl><dd><table>"
 		, ""
 		, "<tr>"
@@ -91,21 +97,21 @@ public class Xomw_table_wkr__tst {
 		));
 	}
 	@Test public void Tb__empty() {	// COVERS: "if (has_opened_tr.Len() == 0) {"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{|"
 		, "|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<table>"
 		, "<tr><td></td></tr></table>"
 		));
 	}
 	@Test public void Td__empty() {	// PURPOSE: handles (a) failure due to "first_2" array not handling "\n|\n"; (b) missing <tr><td></td></tr>
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{|"
 		, "|-"
 		, "|"
 		, "|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<table>"
 		, ""
 		, "<tr>"
@@ -120,13 +126,13 @@ class Xomw_table_wkr__fxt {
 	private final Xomw_table_wkr wkr;
 	public Xomw_table_wkr__fxt() {
 		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());
-		this.wkr = new Xomw_table_wkr(Bry_bfr_.New(), parser.Sanitizer(), parser.Strip_state());
+		this.wkr = new Xomw_table_wkr(BryWtr.New(), parser.Sanitizer(), parser.Strip_state());
 	}
 
 	public void Test__parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		parser_bfr.Init(src_bry);
 		wkr.doTableStuff(pctx, parser_bfr);
-		Tfds.Eq_str_lines(expd, parser_bfr.Rslt().To_str_and_clear(), src_str);
+		GfoTstr.EqLines(expd, parser_bfr.Rslt().ToStrAndClear(), src_str);
 	}
 }

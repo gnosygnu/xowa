@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.errs.Err;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class GfmlDoc_ {
-	public static GfmlDoc parse_any_eol_(String raw) {return parse(String_.Replace(raw, String_.CrLf, String_.Lf));}
+	public static GfmlDoc parse_any_eol_(String raw) {return parse(StringUtl.Replace(raw, StringUtl.CrLf, StringUtl.Nl));}
 	public static GfmlDoc parse(String raw) {
 		GfmlBldr bldr = GfmlBldr_.default_();
 		return bldr.XtoGfmlDoc(raw);
@@ -31,13 +36,13 @@ class GfmlUsrMsgs {
 		GfmlStringHighlighter sh = GfmlStringHighlighter.new_();
 		sh.Raw_(raw).Mark_(bldr.StreamPos(), '*', "failed");
 		um.Add("errorPos", bldr.StreamPos());
-		um.Add("errorHighlight", String_.CrLf + String_.Concat_lines_crlf(sh.Gen()));
+		um.Add("errorHighlight", StringUtl.CrLf + StringUtl.ConcatLinesCrlf(sh.Gen()));
 	}
 	public static Err gfmlParseError(GfmlBldr bldr) {
-		Err rv = Err_.new_wo_type("gfml parse error");
+		Err rv = ErrUtl.NewArgs("gfml parse error");
 		for (int i = 0; i < bldr.Doc().UsrMsgs().Len(); i++) {
-			UsrMsg um = (UsrMsg)bldr.Doc().UsrMsgs().Get_at(i);
-			rv.Args_add("err" + Int_.To_str(i), um.To_str());
+			UsrMsg um = (UsrMsg)bldr.Doc().UsrMsgs().GetAt(i);
+			rv.ArgsAdd("err" + IntUtl.ToStr(i), um.To_str());
 		}
 		return rv;
 	}

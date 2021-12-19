@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.xtns.wbases.*;
 public class Xow_page_tid {
@@ -25,7 +26,7 @@ public class Xow_page_tid {
 			case Xow_ns_.Tid__user:
 				return Identify_by_ttl(ttl);
 			case Xow_ns_.Tid__module:
-				return	(Bry_.Has_at_end(ttl, Ext_doc))
+				return	(BryUtl.HasAtEnd(ttl, Ext_doc))
 					? Tid_wikitext : Tid_lua;
 			default:
 				return Wdata_wiki_mgr.Wiki_page_is_json(wiki_tid, ns_id)
@@ -33,10 +34,10 @@ public class Xow_page_tid {
 		}
 	}
 	public static byte Identify_by_ttl(byte[] ttl) {
-		if		(Bry_.Has_at_end(ttl, Ext_css))	return Tid_css;
-		else if (Bry_.Has_at_end(ttl, Ext_js))	return Tid_js;
+		if		(BryUtl.HasAtEnd(ttl, Ext_css))	return Tid_css;
+		else if (BryUtl.HasAtEnd(ttl, Ext_js))	return Tid_js;
 		else									return Tid_wikitext;
 	}
-	private static final byte[] Ext_js = Bry_.new_a7(".js"), Ext_css = Bry_.new_a7(".css"), Ext_doc= Bry_.new_a7("/doc");
+	private static final byte[] Ext_js = BryUtl.NewA7(".js"), Ext_css = BryUtl.NewA7(".css"), Ext_doc= BryUtl.NewA7("/doc");
 	public static final byte Tid_wikitext = 1, Tid_json = 2, Tid_js = 3, Tid_css = 4, Tid_lua = 5, Tid_msg = 6;
 }

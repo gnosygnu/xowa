@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.files.fsdb.*;
-import gplx.xowa.files.fsdb.fs_roots.*;
+package gplx.xowa.files;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr;
+import gplx.xowa.files.fsdb.fs_roots.Fs_root_core;
 class Xof_wkr_mgr implements Gfo_invk {
 	private Xow_file_mgr file_mgr;
 	public Xof_wkr_mgr(Xow_file_mgr file_mgr) {this.file_mgr = file_mgr;}
@@ -25,10 +31,10 @@ class Xof_wkr_mgr implements Gfo_invk {
 	}
 	private static final String Invk_get = "get";
 	private Xof_fsdb_mgr Get_or_new(String key) {
-		if (String_.Eq(key, "fs.dir")) {
+		if (StringUtl.Eq(key, "fs.dir")) {
 			return Fs_root_core.Set_fsdb_mgr(file_mgr, file_mgr.Wiki());
 		}
 		else
-			throw Err_.new_unhandled(key);
+			throw ErrUtl.NewUnhandled(key);
 	}
 }

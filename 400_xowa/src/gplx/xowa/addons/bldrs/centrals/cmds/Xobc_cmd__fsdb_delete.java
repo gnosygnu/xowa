@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.bldrs.centrals.cmds;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.xowa.addons.bldrs.updates.files.*;
 public class Xobc_cmd__fsdb_delete extends Xobc_cmd__base {
 	private final Io_url deletion_db_url;
@@ -26,14 +29,14 @@ public class Xobc_cmd__fsdb_delete extends Xobc_cmd__base {
 	@Override public String Cmd_name() {return "deleting old files";}
 	@Override public boolean Cmd_suspendable() {return true;}
 	@Override protected void Cmd_exec_hook(Xobc_cmd_ctx ctx) {
-		if (!Io_mgr.Instance.ExistsFil(deletion_db_url)) throw Err_.New("deletion db does not exist; file={0}", deletion_db_url.Raw());
+		if (!Io_mgr.Instance.ExistsFil(deletion_db_url)) throw ErrUtl.NewFmt("deletion db does not exist; file={0}", deletion_db_url.Raw());
 		boolean pass = false;
 		try {
 			new Xodel_exec_mgr().Exec_delete(this, ctx.App().Bldr(), deletion_db_url);
 			pass = true;
 		}
 		catch (Exception e) {
-			this.Cmd_exec_err_(Err_.Message_gplx_log(e));
+			this.Cmd_exec_err_(ErrUtl.ToStrLog(e));
 		}
 		Gfo_log_.Instance.Info("xobc_cmd task delete", "task_id", this.Task_id(), "step_id", this.Step_id(), "delete_url", deletion_db_url.Raw(), "pass", pass);
 	}

@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.parsers;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.langs.cases.Xol_case_mgr;
 public class Srch_text_parser {
 	private Btrie_slim_mgr parser_trie = Btrie_slim_mgr.cs(); public Btrie_slim_mgr word_end_trie = Btrie_slim_mgr.cs(); private Btrie_slim_mgr word_bgn_trie = Btrie_slim_mgr.cs();
 	private final Btrie_rv trv = new Btrie_rv();
 	private Xol_case_mgr case_mgr;
-	public final Bry_bfr Tmp_bfr = Bry_bfr_.New_w_size(32);
+	public final BryWtr Tmp_bfr = BryWtr.NewWithSize(32);
 	private byte[] src; private int end;
 	private Srch_sym_parser__split parser__ws; private Srch_sym_parser__dash parser__dash;
 	public Srch_word_hash word_hash = new Srch_word_hash();
@@ -127,10 +127,10 @@ public class Srch_text_parser {
 	}
 	public void Words__add__chk_dash(int word_bgn, int word_end) {
 		parser__dash.Add_pending_word(this, src, word_end);
-		byte[] word = Bry_.Mid(src, word_bgn, word_end);
+		byte[] word = BryLni.Mid(src, word_bgn, word_end);
 		Words__add_direct(word);
 	}
-	public void Words__add_direct(int bgn, int end)	{Words__add_direct(Bry_.Mid(src, bgn, end));}
+	public void Words__add_direct(int bgn, int end)	{Words__add_direct(BryLni.Mid(src, bgn, end));}
 	public void Words__add_direct(byte[] bry) {
 		word_hash.Add(bry);
 
@@ -148,7 +148,7 @@ public class Srch_text_parser {
 			}
 		}
 		if (dirty && pos < len) {
-			byte[] trunc = Bry_.Mid(bry, pos, len);
+			byte[] trunc = BryLni.Mid(bry, pos, len);
 			// if (!word_hash.Has(trunc))	// don't add if it exists; EX: "'tis"
 			word_hash.Add(trunc);
 		}
@@ -162,9 +162,9 @@ public class Srch_text_parser {
 			int hooks_len = hooks_ary.length;
 			for (int j = 0; j < hooks_len; ++j) {
 				byte[] hook = hooks_ary[j];
-				parser_trie.Add_obj(hook, parser);
+				parser_trie.AddObj(hook, parser);
 				if (parser.Tid() == Srch_sym_parser_.Tid__terminal)
-					word_end_trie.Add_obj(hook, parser);
+					word_end_trie.AddObj(hook, parser);
 			}
 		}
 	}
@@ -172,7 +172,7 @@ public class Srch_text_parser {
 		int rv_len = hooks.length;
 		Srch_sym_parser[] rv = new Srch_sym_parser[rv_len];
 		for (int i = 0; i < rv_len; ++i)
-			rv[i] = new Srch_sym_parser__terminal(Bry_.new_u8(hooks[i]));
+			rv[i] = new Srch_sym_parser__terminal(BryUtl.NewU8(hooks[i]));
 		return rv;
 	}
 	public static final int None = -1;

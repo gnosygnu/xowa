@@ -14,20 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.bldrs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Byte_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.brys.Bry_diff_;
 import gplx.dbs.Db_conn;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -40,12 +40,12 @@ import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.wikis.Xow_page_tid;
 import gplx.xowa.wikis.pages.Xopg_view_mode_;
 public class Xob_hdump_bldr implements Gfo_invk {
-	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = Byte_.Max_value_127;
+	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = ByteUtl.MaxValue127;
 	private Xowe_wiki wiki; private Xob_hdump_tbl_retriever html_tbl_retriever;
 	private int prv_row_len = 0;
-	private final Xoh_page tmp_hpg = new Xoh_page(); private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xoh_page tmp_hpg = new Xoh_page(); private final BryWtr tmp_bfr = BryWtr.New();
 	private boolean op_sys_is_wnt;
-	private byte[] toc_label = Bry_.Empty;
+	private byte[] toc_label = BryUtl.Empty;
 	public Xoh_page Tmp_hpg() {return tmp_hpg;}
 	public Xob_hdump_bldr Enabled_(boolean v) {this.enabled = v; return this;}
 	public Xob_hdump_bldr Hzip_enabled_(boolean v) {this.hzip_enabled = v; return this;}
@@ -58,7 +58,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		this.wiki = wiki; this.hdump_mgr = wiki.Html__hdump_mgr(); this.html_tbl_retriever = html_tbl_retriever;
 		this.toc_label = wiki.Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc);
 		
-		if (zip_tid == Byte_.Max_value_127) zip_tid = Xobldr_cfg.Zip_mode__html(wiki.App());
+		if (zip_tid == ByteUtl.MaxValue127) zip_tid = Xobldr_cfg.Zip_mode__html(wiki.App());
 		hdump_mgr.Init_by_db(zip_tid, hzip_enabled, hzip_b256);
 		return true;
 	}
@@ -70,10 +70,10 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		// write to html
 		Xoa_ttl ttl = wpg.Ttl();
 		boolean is_wikitext = Xow_page_tid.Identify(wpg.Wiki().Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext;
-		byte[] orig_bry = Bry_.Empty;
+		byte[] orig_bry = BryUtl.Empty;
 		if (is_wikitext) {
 			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_hdump(tmp_bfr, ctx, hctx, wpg);
-			orig_bry = tmp_bfr.To_bry_and_clear();
+			orig_bry = tmp_bfr.ToBryAndClear();
 			wpg.Db().Html().Html_bry_(orig_bry);
 		}
 		else {	// not wikitext; EX: pages in MediaWiki: ns; DATE:2016-09-12
@@ -87,11 +87,11 @@ public class Xob_hdump_bldr implements Gfo_invk {
 
 		// run hzip diff if enabled
 		if (hzip_diff && is_wikitext) {
-			byte[] expd_bry = op_sys_is_wnt ? Bry_.Replace(tmp_bfr, orig_bry, AsciiByte.CrLfBry, AsciiByte.NlBry) : orig_bry;	// tidy adds crlf if wnt
+			byte[] expd_bry = op_sys_is_wnt ? BryUtlByWtr.Replace(tmp_bfr, orig_bry, AsciiByte.CrLfBry, AsciiByte.NlBry) : orig_bry;	// tidy adds crlf if wnt
 			byte[] actl_bry = hdump_mgr.Load_mgr().Decode_as_bry(tmp_bfr, tmp_hpg, hdump_mgr.Save_mgr().Src_as_hzip(), BoolUtl.Y);
 			byte[][] diff = Bry_diff_.Diff_1st_line(expd_bry, actl_bry);
 			if (diff != null)
-				Gfo_usr_dlg_.Instance.Warn_many("", "", String_.Format("hzip diff: page={0} lhs='{1}' rhs='{2}'", tmp_hpg.Url_bry_safe(), diff[0], diff[1]));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", StringUtl.Format("hzip diff: page={0} lhs='{1}' rhs='{2}'", tmp_hpg.Url_bry_safe(), diff[0], diff[1]));
 		}
 	}
 	public void Commit() {

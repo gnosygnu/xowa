@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
-import gplx.core.encoders.*;
+package gplx.langs.phps;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
 public abstract class Php_tkn_base implements Php_tkn {
 	public abstract byte Tkn_tid();
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
@@ -38,12 +40,12 @@ class Php_tkn_ws extends Php_tkn_base {
 class Php_tkn_var extends Php_tkn_base {
 	public Php_tkn_var(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_var;}
-	public byte[] Var_name(byte[] src) {return Bry_.Mid(src, this.Src_bgn() + 1, this.Src_end());}	// NOTE: assume vars are of form $abc; +1 to skip first $
+	public byte[] Var_name(byte[] src) {return BryLni.Mid(src, this.Src_bgn() + 1, this.Src_end());}	// NOTE: assume vars are of form $abc; +1 to skip first $
 }
 class Php_tkn_num extends Php_tkn_base {
 	public Php_tkn_num(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_num;}
-	public int Num_val_int(byte[] src) {return Bry_.To_int_or(src, this.Src_bgn(), this.Src_end(), Int_.Min_value);}
+	public int Num_val_int(byte[] src) {return BryUtl.ToIntOr(src, this.Src_bgn(), this.Src_end(), IntUtl.MinValue);}
 }
 class Php_tkn_quote extends Php_tkn_base {
 	public Php_tkn_quote(int src_bgn, int src_end, byte quote_tid) {this.Src_rng_(src_bgn, src_end); this.quote_tid = quote_tid;}

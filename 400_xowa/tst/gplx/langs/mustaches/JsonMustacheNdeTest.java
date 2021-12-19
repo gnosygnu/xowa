@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.Bry_;
-import gplx.Bry_bfr_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_parser;
 import org.junit.Test;
@@ -59,13 +59,13 @@ class JsonMustacheNdeTestUtil {
         JsonMustacheNde nde = new JsonMustacheNde(jdoc.Root_nde());
 
         // parse template
-        Mustache_tkn_itm actl_itm = new Mustache_tkn_parser().Parse(Bry_.new_u8(mustache));
+        Mustache_tkn_itm actl_itm = new Mustache_tkn_parser().Parse(BryUtl.NewU8(mustache));
 
         // render
-        Mustache_bfr bfr = new Mustache_bfr(Bry_bfr_.New());
+        Mustache_bfr bfr = new Mustache_bfr(BryWtr.New());
 		actl_itm.Render(bfr, new Mustache_render_ctx().Init(nde));
 
         // test
-		Gftest.Eq__ary__lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.To_str_and_clear());
     }
 }

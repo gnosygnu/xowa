@@ -4,7 +4,7 @@ import gplx.gfdbs.cores.GfdbItm;
 import gplx.gfdbs.cores.GfdbMeta;
 import gplx.gfdbs.cores.GfdbTbl;
 import gplx.gfdbs.cores.cmds.GfdbSelectCmd;
-import gplx.objects.lists.GfoIndexedList;
+import gplx.types.commons.lists.GfoIndexedList;
 
 public class GfdbListWkrUtl {
 	public static <K, I extends GfdbItm<K, I>, M extends GfdbMeta<I>, T extends GfdbTbl<I, M>>

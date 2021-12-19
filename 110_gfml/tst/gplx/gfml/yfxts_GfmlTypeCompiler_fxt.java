@@ -13,14 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.TfdsTstr_fxt;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 class GfmlTypeCompiler_fxt {
 	public GfmlTyp_mok typ_() {return GfmlTyp_mok.new_();}
 	public GfmlNde_mok nde_() {return GfmlNde_mok.new_();}
 	public GfmlFld_mok fld_() {return GfmlFld_mok.new_();}
 	public GfmlTypRegy Regy() {return typBldr.TypeRegy();}
 	public void ini_Typ(List_adp typs, GfmlTyp_mok typ) {typs.Add(typ);}
-	@gplx.Internal protected void run_InitPragma(GfmlTypRegy regy, GfmlPragma pragma) {
+	public void run_InitPragma(GfmlTypRegy regy, GfmlPragma pragma) {
 		GfmlTypeMakr makr = GfmlTypeMakr.new_();
 		GfmlType[] typeAry = pragma.MakePragmaTypes(makr);
 		regy.Add_ary(typeAry);
@@ -55,7 +61,7 @@ class GfmlTypeCompiler_fxt {
 		for (int i = 0; i < max; i++) {
 			GfmlFld_mok expdFld = (GfmlFld_mok)tstr.List_FetchAtOrNull(expd.Subs(), i);
 			GfmlFld_mok actlFld = (GfmlFld_mok)tstr.List_FetchAtOrNull(actl.Subs(), i);
-			tstr.SubName_push(Int_.To_str(i) + " fld");
+			tstr.SubName_push(IntUtl.ToStr(i) + " fld");
 			tst(tstr, expdFld, actlFld);
 			tstr.SubName_pop();
 		}
@@ -66,7 +72,7 @@ class GfmlTypeCompiler_fxt {
 		if (expd.TypeKey() != null) tstr.Eq_str(expd.TypeKey(), actl.TypeKey(), "typekey");
 		if (expd.DefaultTkn() != null) tstr.Eq_str(expd.DefaultTknRaw(), actl.DefaultTknRaw(), "default");
 	}
-	static GfmlFld_mok NullObj(GfmlFld_mok v) {return (v == null) ? GfmlFld_mok.new_().ini_ndk_(String_.Null_mark, "") : v;}
+	static GfmlFld_mok NullObj(GfmlFld_mok v) {return (v == null) ? GfmlFld_mok.new_().ini_ndk_(StringUtl.NullMark, "") : v;}
 	public void tst_Resolve(GfmlTyp_mok typ, GfmlNde_mok nde, GfmlNde_mok expd) {
 		typBldr.TypeRegy().Add(typ.XtoGfmlType());
 		tst_Resolve(nde, expd);

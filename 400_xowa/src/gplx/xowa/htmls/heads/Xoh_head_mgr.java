@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls.heads;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.xowa.*;
 import gplx.core.bits.*;
 import gplx.xowa.wikis.pages.*;
-public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
+public class Xoh_head_mgr implements BryBfrArg {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; 
 	private Xoh_head_itm__base[] itms; private int itms_len;
 	private Xoh_head_wtr wtr = new Xoh_head_wtr();
@@ -80,8 +86,8 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		for (int i = 0; i < itms_len; ++i)
 			itms[i].Clear();
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {Write(bfr, app, wiki, page);}
-	public void Write(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
+	public void AddToBfr(BryWtr bfr) {Write(bfr, app, wiki, page);}
+	public void Write(BryWtr bfr, Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		Set_wkrs();
 		wtr.Init(bfr);
 		wtr.Indent_add();
@@ -146,8 +152,8 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		wtr.Term();
 	}
 	private static final byte[]
-	  Js__window_onload__bgn = Bry_.new_a7("window.onload = function() {")
-	, Js__window_onload__end = Bry_.new_a7("};")
+	  Js__window_onload__bgn = BryUtl.NewA7("window.onload = function() {")
+	, Js__window_onload__end = BryUtl.NewA7("};")
 	;
 	private void Itms_add(Xoh_head_itm__base... ary) {
 		this.itms_len = ary.length;
@@ -178,9 +184,9 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	}
 }
 class Xoh_head_wkr {
-	private final List_adp list = List_adp_.New_w_size(Xoh_head_itm__base.Idx__max);
+	private final List_adp list = List_adp_.NewWithSize(Xoh_head_itm__base.Idx__max);
 	public int Len() {return list.Len();}
 	public void Clear() {list.Clear();}
 	public void Add(Xoh_head_itm__base itm) {list.Add(itm);}
-	public Xoh_head_itm__base Get_at(int i) {return (Xoh_head_itm__base)list.Get_at(i);}
+	public Xoh_head_itm__base Get_at(int i) {return (Xoh_head_itm__base)list.GetAt(i);}
 }

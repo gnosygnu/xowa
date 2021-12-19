@@ -13,16 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.ios.*;
-import gplx.fsdb.meta.*;
-import gplx.xowa.wikis.data.*;
-import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*;
+package gplx.xowa.addons.bldrs.exports.packs.files;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.core.ios.IoItmFil;
+import gplx.core.ios.IoItmHash;
+import gplx.fsdb.meta.Fsm_bin_fil;
+import gplx.fsdb.meta.Fsm_bin_mgr;
+import gplx.fsdb.meta.Fsm_mnt_itm;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.Xobc_import_type;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
 class Pack_hash_bldr {
 	public static Pack_hash Bld(Xow_wiki wiki, Io_url wiki_dir, Io_url pack_dir, String wiki_date, Pack_file_cfg cfg) {
 		// boolean pack_text, boolean pack_html, boolean pack_file, DateAdp pack_file_cutoff, boolean pack_fsdb_delete
 		Pack_hash rv = new Pack_hash();
-		Pack_zip_name_bldr zip_name_bldr = new Pack_zip_name_bldr(pack_dir, wiki.Domain_str(), String_.new_a7(wiki.Domain_itm().Abrv_wm()), wiki_date, cfg.Pack_custom_name());
+		Pack_zip_name_bldr zip_name_bldr = new Pack_zip_name_bldr(pack_dir, wiki.Domain_str(), StringUtl.NewA7(wiki.Domain_itm().Abrv_wm()), wiki_date, cfg.Pack_custom_name());
 		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
 
 		// bld custom_files
@@ -35,7 +50,7 @@ class Pack_hash_bldr {
 			for (int i = 0; i < len; ++i) {
 				Xow_db_file file = db_mgr.Dbs__get_at(i);
 				int pack_tid = Get_pack_tid(file.Tid());
-				if (Int_.In(pack_tid, Xobc_import_type.Tid__ignore, Xobc_import_type.Tid__wiki__text)) continue;
+				if (IntUtl.In(pack_tid, Xobc_import_type.Tid__ignore, Xobc_import_type.Tid__wiki__text)) continue;
 				rv.Add(zip_name_bldr, pack_tid, file.Url());
 			}
 			rv.Consolidate(Xobc_import_type.Tid__wiki__srch);
@@ -70,8 +85,8 @@ class Pack_hash_bldr {
 
 					// ignore if bin_fil is earlier than cutoff
 					if (cfg.Pack_file_cutoff() != null) {
-						DateAdp bin_fil_date = Io_mgr.Instance.QueryFil(bin_fil_url).ModifiedTime();
-						if (bin_fil_date.Timestamp_unix() < cfg.Pack_file_cutoff().Timestamp_unix()) continue;
+						GfoDate bin_fil_date = Io_mgr.Instance.QueryFil(bin_fil_url).ModifiedTime();
+						if (bin_fil_date.TimestampUnix() < cfg.Pack_file_cutoff().TimestampUnix()) continue;
 					}
 					rv.Add(zip_name_bldr, Xobc_import_type.Tid__file__data, bin_fil_url);
 				}
@@ -81,7 +96,7 @@ class Pack_hash_bldr {
 		// bld pack_fsdb_delete
 		if (cfg.Pack_fsdb_delete()) {
 			gplx.xowa.bldrs.Xob_db_file fsdb_deletion_db = gplx.xowa.bldrs.Xob_db_file.New__deletion_db(wiki);
-			if (!Io_mgr.Instance.ExistsFil(fsdb_deletion_db.Url())) throw Err_.new_wo_type("deletion db does not exists: url=" + fsdb_deletion_db.Url().Raw());
+			if (!Io_mgr.Instance.ExistsFil(fsdb_deletion_db.Url())) throw ErrUtl.NewArgs("deletion db does not exists: url=" + fsdb_deletion_db.Url().Raw());
 			rv.Add(zip_name_bldr, Xobc_import_type.Tid__fsdb__delete, fsdb_deletion_db.Url());
 		}
 		return rv;
@@ -101,7 +116,7 @@ class Pack_hash_bldr {
 
 		// loop over each file
 		while (fil_idx < fils_len) {
-			IoItmFil fil = (IoItmFil)fils.Get_at(fil_idx);
+			IoItmFil fil = (IoItmFil)fils.GetAt(fil_idx);
 
 			// calc size_new
 			long size_new = size_cur + fil.Size();
@@ -132,7 +147,7 @@ class Pack_hash_bldr {
 		}
 	}
 	private static Pack_hash Bld_custom_files(Pack_hash rv, Xow_wiki wiki, Io_url wiki_dir, Pack_zip_name_bldr zip_name_bldr, String custom_files_blob) {
-		String[] custom_files = String_.Split(custom_files_blob, "|");
+		String[] custom_files = StringUtl.Split(custom_files_blob, "|");
 		int len = custom_files.length;
 		for (int i = 0; i < len; ++i) {
 			Io_url file_url = wiki_dir.GenSubFil(custom_files[i]);

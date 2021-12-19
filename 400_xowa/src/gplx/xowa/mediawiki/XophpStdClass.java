@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 public class XophpStdClass {
 	private final List_adp list = List_adp_.New();
 	private final Ordered_hash hash = Ordered_hash_.New();
@@ -26,17 +31,17 @@ public class XophpStdClass {
 		list.Add(itm);
 		hash.Add(key, itm);
 	}
-	public XophpStdClass Get_at_as_itm(int idx)      {return (XophpStdClass)list.Get_at(idx);}
+	public XophpStdClass Get_at_as_itm(int idx)      {return (XophpStdClass)list.GetAt(idx);}
 	public Object Get_by_as_obj(String key)          {return hash.GetByOrNull(key);}
 	public XophpStdClass Get_by_as_itm(String key)   {return (XophpStdClass)hash.GetByOrNull(key);}
 	public String Get_by_as_str(String key)          {return (String)hash.GetByOrNull(key);}
-	public String Get_at_as_str(int idx)             {return (String)list.Get_at(idx);}
+	public String Get_at_as_str(int idx)             {return (String)list.GetAt(idx);}
 	public XophpStdClass Get_by_ary_as_itm(String... keys) {
 		return (XophpStdClass)Get_by_ary_or_null(false, keys, keys.length - 1, 0);
 	}
 	public boolean Comp_str(String key, String expd) {
 		String actl = Get_by_as_str(key);
-		return String_.Eq(expd, actl);
+		return StringUtl.Eq(expd, actl);
 	}
 	public void Set_by_as_itm(String key, XophpStdClass itm) {
 		hash.AddIfDupeUseNth(key, itm);

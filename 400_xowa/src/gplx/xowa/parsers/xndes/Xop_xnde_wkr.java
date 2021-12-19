@@ -14,17 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.xndes;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.String_;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
 import gplx.core.envs.Env_;
-import gplx.langs.htmls.entitys.Gfh_entity_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.langs.html.HtmlEntityCodes;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_ctx_wkr;
@@ -168,7 +169,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					int name_bgn_pos = i + 1;
 					if (name_bgn_pos < src_len) {	// chk that name_bgn is less than src_len else arrayIndex error; EX: <ref><p></p<<ref/>; not that "<" is last char of String; DATE:2014-01-18							
 						int valid_inner_xnde_gt = atr_parser.Xnde_find_gt_find(src, name_bgn_pos, src_len); // check if <nowiki>, <noinclude>, <includeonly> or <onlyinclude> (which can exist inside tag)
-						if (valid_inner_xnde_gt == String_.Find_none){	// not a <nowiki>
+						if (valid_inner_xnde_gt == StringUtl.FindNone){	// not a <nowiki>
 							switch (tag.Id()) {
 								case Xop_xnde_tag_.Tid__input:	break; // noop; needed for Options which may have < in value; DATE:2014-07-04
 								default:						return ctx.Lxr_make_txt_(cur_pos);	// escape text; EX: "<div </div>" -> "&lt;div </div>"; SEE:it.u:; DATE:2014-02-03
@@ -177,7 +178,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						else {											// is a <nowiki> skip to </nowiki>
 							if (	i == end_name_pos
 								&&	ctx.Parse_tid() == Xop_parser_tid_.Tid__defn
-								&&	Bry_.Eq(atr_parser.Bry_obj().Val(), Xop_xnde_tag_.Tag__includeonly.Name_bry())
+								&&	BryLni.Eq(atr_parser.Bry_obj().Val(), Xop_xnde_tag_.Tag__includeonly.Name_bry())
 								) {
 								pre2_hack = true;
 							}
@@ -251,14 +252,14 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private static Xop_tkn_itm Make_bry_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int bgn_pos, int cur_pos) {
 		int len = cur_pos - bgn_pos;
 		byte[] bry = null;
-		if		(len == 1	&& src[bgn_pos]		== AsciiByte.Lt)		bry = Gfh_entity_.Lt_bry;
+		if		(len == 1	&& src[bgn_pos]		== AsciiByte.Lt)		bry = HtmlEntityCodes.LtBry;
 		else if	(len == 2	&& src[bgn_pos]		== AsciiByte.Lt
 							&& src[bgn_pos + 1]	== AsciiByte.Slash)	bry = Bry_escape_lt_slash;	// NOTE: should use bgn_pos, not cur_pos; DATE:2014-10-22
-		else															bry = Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
+		else															bry = BryUtl.Add(HtmlEntityCodes.LtBry, BryLni.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
 		return tkn_mkr.Bry_raw(bgn_pos, cur_pos, bry);
 	}
 	private int Make_noinclude(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, Xop_xnde_tag tag, int tag_end_pos, boolean tag_is_closing) {
-		tag_end_pos = Bry_find_.Find_fwd_while(src, tag_end_pos, src_len, AsciiByte.Space);// NOTE: must skip spaces else "<noinclude />" will not work with safesubst; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
+		tag_end_pos = BryFind.FindFwdWhile(src, tag_end_pos, src_len, AsciiByte.Space);// NOTE: must skip spaces else "<noinclude />" will not work with safesubst; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
 		byte tag_end_byte = src[tag_end_pos];
 		if (tag_end_byte == AsciiByte.Slash) {	// inline
 			boolean valid = true;
@@ -283,7 +284,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			end_rhs = gtPos;
 		else {				// <noinclude>; search for end tag
 			while (true) {
-				int end_lhs = Bry_find_.Find_fwd(src, end_bry, findPos);
+				int end_lhs = BryFind.FindFwd(src, end_bry, findPos);
 				if (end_lhs == -1 || (end_lhs + end_bry_len) == src_len) break;	// nothing found or EOS;
 				findPos = end_lhs;
 				for (int i = end_lhs + end_bry_len; i < src_len; i++) {
@@ -352,7 +353,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (	page.Html_data().Html_restricted() 
 				&&	page.Wiki().Domain_tid() != Xow_domain_tid_.Tid__home) {
 				int end_pos = gtPos + 1;
-				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
+				ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, end_pos, BryUtl.Add(HtmlEntityCodes.LtBry, BryLni.Mid(src, bgn_pos + 1, end_pos)))); // +1 to skip <
 				return end_pos;
 			}
 		}
@@ -382,7 +383,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			Xop_xnde_tkn xnde_inline = Xnde_bgn(ctx, tkn_mkr, root, tag, Xop_xnde_tkn.CloseMode_open, src, bgn_pos, open_tag_end, atrs_bgn, atrs_end, atrs);
 			End_tag(ctx, root, xnde_inline, src, src_len, bgn_pos, gtPos, tagId, false, tag);
 			ctx.Msg_log().Add_itm_none(Xop_xnde_log.No_inline, src, bgn_pos, gtPos);
-			return gtPos + Int_.Offset_1;
+			return gtPos + IntUtl.Offset1;
 		}
 		Xop_xnde_tkn xnde = null;
 		xnde = Xnde_bgn(ctx, tkn_mkr, root, tag, inline ? Xop_xnde_tkn.CloseMode_inline : Xop_xnde_tkn.CloseMode_open, src, bgn_pos, open_tag_end, atrs_bgn, atrs_end, atrs);
@@ -448,7 +449,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	}		
 	private int Make_xtag_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_xnde_tag end_tag) {
 		int end_tag_id = end_tag.Id();
-		cur_pos = Bry_find_.Find_fwd_while_not_ws(src, cur_pos, src_len) + 1;
+		cur_pos = BryFind.FindFwdWhileNotWs(src, cur_pos, src_len) + 1;
 		int prv_xnde_pos = ctx.Stack_idx_find_but_stop_at_tbl(Xop_tkn_itm_.Tid_xnde);	// find any previous xnde on stack
 		Xop_xnde_tkn bgn_nde = (Xop_xnde_tkn)ctx.Stack_get(prv_xnde_pos);
 		int bgn_tag_id = bgn_nde == null ? -1 : bgn_nde.Tag().Id();
@@ -477,7 +478,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		}
 		switch (end_nde_mode) {
 			case Xop_xnde_tag_.End_mode__inline:	// PATCH.WP: allows </br>, </br/> and many other variants
-				Xnde_bgn(ctx, tkn_mkr, root, end_tag, Xop_xnde_tkn.CloseMode_inline, src, bgn_pos, cur_pos, Int_.Min_value, Int_.Min_value, null);	// NOTE: atrs is null b/c </br> will never have atrs
+				Xnde_bgn(ctx, tkn_mkr, root, end_tag, Xop_xnde_tkn.CloseMode_inline, src, bgn_pos, cur_pos, IntUtl.MinValue, IntUtl.MinValue, null);	// NOTE: atrs is null b/c </br> will never have atrs
 				return cur_pos;
 			case Xop_xnde_tag_.End_mode__escape:	// handle </hr>
 				ctx.Lxr_make_(false);
@@ -512,7 +513,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (end_tag.Restricted())	// restricted tags (like <script>) are not placed on stack; for now, just write it out
-			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
+			ctx.Subs_add(root, tkn_mkr.Bry_raw(bgn_pos, cur_pos, BryUtl.Add(HtmlEntityCodes.LtBry, BryLni.Mid(src, bgn_pos + 1, cur_pos)))); // +1 to skip <
 		else {                
 			if (pre2_pending) {
 				pre2_pending = false;
@@ -575,7 +576,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					break;
 			}
 		}
-		return found ? rv : Bry_find_.Not_found;
+		return found ? rv : BryFind.NotFound;
 	}
 	private int Find_xtn_end_lhs(Xop_ctx ctx, Xop_xnde_tag tag, byte[] src, int src_len, int open_bgn, int open_end, byte[] open_bry, byte[] close_bry) {
 		return Xop_xnde_wkr_.Find_xtn_end(ctx, src, open_end, src_len, open_bry, close_bry); // UNIQ; DATE:2017-03-31
@@ -612,7 +613,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			// search for </xtn>
 			byte close_mode = XTN_CLOSE_MODE__MAKE;
 			int close_bgn = Find_xtn_end_lhs(ctx, tag, src, src_len, open_bgn, open_end, tag.Xtn_bgn_tag(), close_bry);
-			if (close_bgn == Bry_find_.Not_found) {// </xtn> not found
+			if (close_bgn == BryFind.NotFound) {// </xtn> not found
 				close_mode = (tag.Id() == Xop_xnde_tag_.Tag__references.Id()) // dangling <references> has partial auto-close behavior; ISSUE#:583; DATE:2019-10-05
 					? XTN_CLOSE_MODE__AUTO_INLINE
 					: XTN_CLOSE_MODE__ESCAPE; // escape if end not found; verified with <poem>, <gallery>, <imagemap>, <hiero>; DATE:2014-08-23; DATE:2019-10-05
@@ -628,11 +629,11 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 					return ctx.Lxr_make_txt_(open_end);
 				case XTN_CLOSE_MODE__MAKE:
 					close_end = Find_end_tag_pos(src, src_len, close_bgn + close_bry.length); // search for ">"
-					if (close_end == Bry_find_.Not_found)
+					if (close_end == BryFind.NotFound)
 						return ctx.Lxr_make_log_(Xop_xnde_log.Xtn_end_not_found, src, open_bgn, open_end);
 					xnde_end = close_end;
 					break;
-				default: throw Err_.new_unhandled_default(close_mode);
+				default: throw ErrUtl.NewUnhandled(close_mode);
 			}
 
 			// pre2_hack
@@ -734,7 +735,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						break;
 					case Xop_xnde_tag_.Tid__pre:	 // NOTE: pre must be an xtn, but does not create an xtn node (it gobbles up everything between); still need to touch the para_wkr; DATE:2014-02-20
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_bgn);
-						if (Bry_find_.Find_fwd(src, AsciiByte.Nl, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != Bry_find_.Not_found)
+						if (BryFind.FindFwd(src, AsciiByte.Nl, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != BryFind.NotFound)
 							ctx.Para().Process_nl(ctx, root, src, xnde.Tag_open_bgn(), xnde.Tag_open_bgn());
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_end);
 						break;
@@ -749,11 +750,11 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						xnde_xtn.Xtn_parse(ctx.Wiki(), ctx, root, src, xnde);
 					}
 					catch (Exception e) {
-						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", ctx.Page().Ttl().Full_txt()
-							, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())
-							, Err_.Message_gplx_log(e));
+						String err_msg = StringUtl.Format("failed to render extension: title={0} excerpt={1} err={2}", ctx.Page().Ttl().Full_txt()
+							, BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())
+							, ErrUtl.ToStrLog(e));
 						if (Env_.Mode_testing()) 
-							throw Err_.new_exc(e, "xo", err_msg);
+							throw ErrUtl.NewArgs(e, err_msg);
 						else
 							ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", err_msg);
 					}
@@ -771,7 +772,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		return rv;
 	}
 	private static final byte[]
-	  Bry_escape_lt_slash = Bry_.new_a7("&lt;/")
+	  Bry_escape_lt_slash = BryUtl.NewA7("&lt;/")
 	;
 	public static int Find_gt_pos(Xop_ctx ctx, byte[] src, int cur_pos, int src_len) {	// UNUSED
 		int gt_pos = -1;	// find closing >
@@ -780,7 +781,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			switch (b) {
 				case AsciiByte.Lt:	// < encountered; may be inner node inside tag which is legal in wikitext; EX: "<ul style=<nowiki>#</nowiki>FFFFFF>"
 					int valid_inner_xnde_gt = ctx.App().Parser_mgr().Xnde__atr_parser().Xnde_find_gt_find(src, i + 1, src_len);
-					if (valid_inner_xnde_gt != String_.Find_none) {
+					if (valid_inner_xnde_gt != StringUtl.FindNone) {
 						i = valid_inner_xnde_gt;
 					}
 					break;

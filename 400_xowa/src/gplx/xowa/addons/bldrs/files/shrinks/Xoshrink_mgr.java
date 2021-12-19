@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.shrinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.shrinks;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.dbs.*;
-import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
+import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
 class Xoshrink_mgr {
 	private Io_url src_url, trg_url;
 	private Process_adp convert_cmd;
@@ -43,7 +48,7 @@ class Xoshrink_mgr {
 
 		// prep for update
 		conn.Txn_bgn("tbl_update");
-		Db_stmt stmt = conn.Stmt_update(tbl.Tbl_name(), String_.Ary(tbl.fld__owner_id), tbl.fld__data);
+		Db_stmt stmt = conn.Stmt_update(tbl.Tbl_name(), StringUtl.Ary(tbl.fld__owner_id), tbl.fld__data);
 
 		// get rdr
 		Db_rdr rdr = conn.Stmt_select_all(tbl.Tbl_name(), tbl.Flds()).Exec_select__rls_auto();

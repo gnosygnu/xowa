@@ -13,16 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
-import gplx.core.primitives.*;
+package gplx.xowa.xtns.imaps.itms;
+import gplx.types.basics.wrappers.DoubleVal;
 import gplx.xowa.parsers.*;
 public class Imap_part_shape implements Imap_part, Imap_link_owner {
-	public Imap_part_shape(byte shape_tid, Double_obj_val[] shape_pts) {
+	public Imap_part_shape(byte shape_tid, DoubleVal[] shape_pts) {
 		this.shape_tid = shape_tid;
 		this.shape_pts = shape_pts;
 	}
 	public byte				Part_tid() {return shape_tid;} private final byte shape_tid;
-	public Double_obj_val[] Shape_pts() {return shape_pts;} private final Double_obj_val[] shape_pts;
+	public DoubleVal[] Shape_pts() {return shape_pts;} private final DoubleVal[] shape_pts;
 	public int				Link_tid() {return link_tid;} private int link_tid;
 	public Xop_tkn_itm		Link_tkn() {return link_tkn;} private Xop_tkn_itm link_tkn; public void	Link_tid_(int tid, Xop_tkn_itm tkn) {link_tid = tid; link_tkn = tkn;} 
 	public byte[]			Link_href() {return link_href;} private byte[] link_href;	public void Link_href_(byte[] v) {this.link_href = v;}

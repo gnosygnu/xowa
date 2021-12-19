@@ -13,17 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.relatedArticles; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.relatedArticles;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Articles_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_relatedArticles;}
 	@Override public Pf_func New(int id, byte[] name) {return new Articles_func().Name_(name);}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = this.Eval_argx(ctx, src, caller, self);
 		Articles_xtn_skin_itm xtn_itm = (Articles_xtn_skin_itm)ctx.Page().Html_data().Xtn_skin_mgr().Get_or_null(Articles_xtn_skin_itm.KEY);
 		if (xtn_itm == null) {
@@ -33,12 +41,12 @@ public class Articles_func extends Pf_func_base {
 		Parse(xtn_itm, argx);
 	}
 	private void Parse(Articles_xtn_skin_itm xtn_itm, byte[] argx) {
-		int pos = Bry_find_.Find_fwd(argx, Const_dlm);
-		if (pos == Bry_find_.Not_found)						// && missing; argx is both ttl and text
+		int pos = BryFind.FindFwd(argx, Const_dlm);
+		if (pos == BryFind.NotFound)						// && missing; argx is both ttl and text
 			xtn_itm.Add(new Articles_itm(argx, argx));
 		else {													// && exists; split by &&
-			byte[] ttl	= Bry_.Trim(Bry_.Mid(argx, 0, pos));
-			byte[] text = Bry_.Trim(Bry_.Mid(argx, pos + Const_dlm.length));
+			byte[] ttl	= BryUtl.Trim(BryLni.Mid(argx, 0, pos));
+			byte[] text = BryUtl.Trim(BryLni.Mid(argx, pos + Const_dlm.length));
 			xtn_itm.Add(new Articles_itm(ttl, text));
 		}
 	}
@@ -53,32 +61,32 @@ class Articles_itm {
 	public byte[] Ttl() {return ttl;} private byte[] ttl;
 	public byte[] Text() {return text;} private byte[] text;
 }
-class Articles_itm_fmtr implements gplx.core.brys.Bfr_arg {
+class Articles_itm_fmtr implements BryBfrArg {
 	private Xowe_wiki wiki; private List_adp itms;
 	public void Init(Xowe_wiki wiki, List_adp itms) {this.wiki = wiki; this.itms = itms;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = itms.Len();
 		for (int i = 0; i < len; i++) {
-			Articles_itm itm = (Articles_itm)itms.Get_at(i);
+			Articles_itm itm = (Articles_itm)itms.GetAt(i);
 			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, itm.Ttl()); if (ttl == null) continue;
-			fmtr.Bld_bfr(bfr, ttl.Full_db(), itm.Text());
+			fmtr.BldToBfr(bfr, ttl.Full_db(), itm.Text());
 		}
 	}
-	private static final Bry_fmtr fmtr = Bry_fmtr.new_("\n      <li class=\"interwiki-relart\"><a href=\"/wiki/~{ttl}\">~{text}</a></li>",  "ttl", "text");
+	private static final BryFmtr fmtr = BryFmtr.New("\n      <li class=\"interwiki-relart\"><a href=\"/wiki/~{ttl}\">~{text}</a></li>",  "ttl", "text");
 	public static final Articles_itm_fmtr Instance = new Articles_itm_fmtr(); Articles_itm_fmtr() {}
 }
 class Articles_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.New();
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_a7("RelatedArticles");
+	public byte[] Key() {return KEY;} public static final byte[] KEY = BryUtl.NewA7("RelatedArticles");
 	public void Add(Articles_itm itm) {itms.Add(itm);}
-	public void Write(Bry_bfr bfr, Xoae_page page) {
+	public void Write(BryWtr bfr, Xoae_page page) {
 		Xowe_wiki wiki = page.Wikie();
 		itms_fmtr.Init(wiki, itms);
-		html_fmtr.Bld_bfr_many(bfr, wiki.Msg_mgr().Val_by_key_obj("relatedarticles-title"), itms_fmtr);
+		html_fmtr.BldToBfrMany(bfr, wiki.Msg_mgr().Val_by_key_obj("relatedarticles-title"), itms_fmtr);
 	}
 	private static final Articles_itm_fmtr itms_fmtr = Articles_itm_fmtr.Instance;
-	private static final Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final BryFmtr html_fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	(  "<div class=\"portal\" role=\"navigation\" id=\"p-relatedarticles\">"
 	, "  <h3>~{h3}</h3>"
 	, "  <div class=\"body\">"

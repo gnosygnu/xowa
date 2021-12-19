@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.indicators;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Hash_adp_bry;
-import gplx.core.primitives.Byte_obj_val;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -39,11 +39,11 @@ public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public byte[] Html() {return html;} public void Html_(byte[] v) {this.html = v;} private byte[] html;
 	public void Init_for_test(String name, byte[] html) {this.name = name; this.html = html;}	// TEST
 	public byte[] GetHdumpSrc() {
-		return Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+		return BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 	}
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
 		if (xatr_id_obj == null) return;
-		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		ByteVal xatr_id = (ByteVal)xatr_id_obj;
 		switch (xatr_id.Val()) {
 			case Xatr_name:		this.name = xatr.Val_as_str(); break;
 		}
@@ -52,14 +52,14 @@ public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		this.xnde = xnde;
 		this.src = src;
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
-		this.html = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
+		this.html = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 		Indicator_html_bldr html_bldr = ctx.Page().Html_data().Indicators();
 		if (this.name != null) html_bldr.Add(this);	// NOTE: must do null-check b/c Add will use Name as key for hashtable
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
-		if (this.name == null) bfr.Add_str_a7("Error: Page status indicators' name attribute must not be empty.");
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+		if (this.name == null) bfr.AddStrA7("Error: Page status indicators' name attribute must not be empty.");
 	}
 	private static final byte Xatr_name = 0;
 	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
-	.Add_str_obj("name", Byte_obj_val.new_(Xatr_name));
+	.Add_str_obj("name", ByteVal.New(Xatr_name));
 }

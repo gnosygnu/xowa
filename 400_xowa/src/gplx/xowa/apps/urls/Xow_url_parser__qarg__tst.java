@@ -30,7 +30,7 @@ public class Xow_url_parser__qarg__tst {
 	@Test public void Query_arg() {	// PURPOSE.fix: query args were not printing out
 		fxt.Exec__parse("en.wikipedia.org/wiki/Special:Search/Earth?fulltext=yes").Test__build_str_is_same();
 	}
-	@Test  public void Dupe_key() {
+	@Test public void Dupe_key() {
 		fxt.Exec__parse("A?B=C1&B=C2").Test__page("A").Test__qargs("?B=C1&B=C2");
 	}
 	@Test public void Question_is_eos() {

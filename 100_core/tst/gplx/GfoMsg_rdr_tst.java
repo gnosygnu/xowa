@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,12 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class GfoMsg_rdr_tst {
 	@Before public void setup() {
 		msg = msg_().Add("a", "1").Add("b", "2").Add("c", "3");
 		ctx.Match("init", "init");
-	}	GfoMsg msg; GfsCtx ctx = GfsCtx.new_();
+	}   GfoMsg msg; GfsCtx ctx = GfsCtx.new_();
 	@Test public void Key() {
 		tst_Msg(msg, "a", "1");
 		tst_Msg(msg, "b", "2");
@@ -51,5 +55,5 @@ public class GfoMsg_rdr_tst {
 		tst_Msg(msg, "", "3");
 	}
 	GfoMsg msg_() {return GfoMsg_.new_parse_("test");}
-	void tst_Msg(GfoMsg m, String k, String expd) {Tfds.Eq(expd, m.ReadStrOr(k, null));}
+	void tst_Msg(GfoMsg m, String k, String expd) {GfoTstr.EqObj(expd, m.ReadStrOr(k, null));}
 }

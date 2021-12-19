@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.commons.GfoDate;
+import gplx.xowa.*;
 class Pft_fmt_itm_iranian {
 	private static final int[] Md__greg	= new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 	private static final int[] Md__iran	= new int[] { 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29 };
-	public static int[] Calc_date(DateAdp date) {
+	public static int[] Calc_date(GfoDate date) {
 		int[] rv = new int[3]; // MEM:cache
 		Calc_date(rv, date.Year(), date.Month(), date.Day());
 		return rv;
@@ -71,17 +75,17 @@ class Pft_fmt_itm_iranian {
 		rv[2] = iran_d;
 		return true;
 	}
-	public static byte[] Get_month_name(Xowe_wiki wiki, DateAdp date) {
+	public static byte[] Get_month_name(Xowe_wiki wiki, GfoDate date) {
 		int[] seg_ary = Calc_date(date);
 		int m = seg_ary[Rslt__month] - List_adp_.Base1;
 		byte[] msg_key = Month_names[m];
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
 	private static final byte[][] Month_names = new byte[][]
-	{ Bry_.new_a7("iranian-calendar-m1"), Bry_.new_a7("iranian-calendar-m2"), Bry_.new_a7("iranian-calendar-m3")
-	, Bry_.new_a7("iranian-calendar-m4"), Bry_.new_a7("iranian-calendar-m5"), Bry_.new_a7("iranian-calendar-m6")
-	, Bry_.new_a7("iranian-calendar-m7"), Bry_.new_a7("iranian-calendar-m8"), Bry_.new_a7("iranian-calendar-m9")
-	, Bry_.new_a7("iranian-calendar-m10"), Bry_.new_a7("iranian-calendar-m11"), Bry_.new_a7("iranian-calendar-m12")
+	{ BryUtl.NewA7("iranian-calendar-m1"), BryUtl.NewA7("iranian-calendar-m2"), BryUtl.NewA7("iranian-calendar-m3")
+	, BryUtl.NewA7("iranian-calendar-m4"), BryUtl.NewA7("iranian-calendar-m5"), BryUtl.NewA7("iranian-calendar-m6")
+	, BryUtl.NewA7("iranian-calendar-m7"), BryUtl.NewA7("iranian-calendar-m8"), BryUtl.NewA7("iranian-calendar-m9")
+	, BryUtl.NewA7("iranian-calendar-m10"), BryUtl.NewA7("iranian-calendar-m11"), BryUtl.NewA7("iranian-calendar-m12")
 	};
 	public static final int
 	  Rslt__year			= 0

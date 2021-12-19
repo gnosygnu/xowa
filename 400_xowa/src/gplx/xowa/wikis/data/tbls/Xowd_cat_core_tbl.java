@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*;
+package gplx.xowa.wikis.data.tbls;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Cancelable;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 public class Xowd_cat_core_tbl implements Db_tbl {
 	private final String tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_pages, fld_subcats, fld_files, fld_hidden, fld_link_db_id;
@@ -46,7 +51,7 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 			.Val_byte(fld_hidden, hidden).Val_int(fld_link_db_id, link_db_id)
 			.Exec_insert();
 	}
-	public void Update_bgn() {conn.Txn_bgn("schema__cat_core__update"); stmt_update = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_hidden);}
+	public void Update_bgn() {conn.Txn_bgn("schema__cat_core__update"); stmt_update = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_hidden);}
 	public void Update_end() {conn.Txn_end(); stmt_update = Db_stmt_.Rls(stmt_update);}
 	public void Update_by_batch(int id, byte hidden) {
 		stmt_update.Clear().Val_byte(fld_hidden, hidden).Crt_int(fld_id, id).Exec_update();
@@ -59,7 +64,7 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 	public void Delete_all() {conn.Stmt_delete(tbl_name, DbmetaFldItm.StrAryEmpty).Exec_delete();}
 	public void Update_page_id(int old_id, int new_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_core: update page_id started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
-		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_id).Val_int(fld_id, new_id).Crt_int(fld_id, old_id).Exec_update();
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_id).Val_int(fld_id, new_id).Crt_int(fld_id, old_id).Exec_update();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_core: update page_id done");
 	}
 	public void Update(Xowd_category_itm itm) {
@@ -88,12 +93,12 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 	public void Select_by_cat_id_many(Select_in_cbk cbk) {
 		synchronized (thread_lock) {// THREAD: locking pre-emptively; ISSUE#:389; DATE:2019-03-20
 			int pos = 0;
-			Bry_bfr bfr = Bry_bfr_.New();
-			Select_in_wkr wkr = Select_in_wkr.New(bfr, tbl_name, String_.Ary(fld_id, fld_pages, fld_subcats, fld_files, fld_hidden), fld_id);
+			BryWtr bfr = BryWtr.New();
+			Select_in_wkr wkr = Select_in_wkr.New(bfr, tbl_name, StringUtl.Ary(fld_id, fld_pages, fld_subcats, fld_files, fld_hidden), fld_id);
 			while (true) {
 				pos = wkr.Make_sql_or_null(bfr, cbk, pos);
 				if (pos == -1) break;
-				Db_rdr rdr = conn.Stmt_sql(bfr.To_str_and_clear()).Exec_select__rls_auto();
+				Db_rdr rdr = conn.Stmt_sql(bfr.ToStrAndClear()).Exec_select__rls_auto();
 				try {
 					while (rdr.Move_next())
 						cbk.Read_data(rdr);

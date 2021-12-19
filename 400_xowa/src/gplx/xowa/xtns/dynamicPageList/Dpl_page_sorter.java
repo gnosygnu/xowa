@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.dynamicPageList;
-import gplx.Bry_;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
 class Dpl_page_sorter implements ComparerAble {
 	public Dpl_page_sorter(Dpl_itm itm) {this.itm = itm;} private Dpl_itm itm;
@@ -27,7 +27,7 @@ class Dpl_page_sorter implements ComparerAble {
 		int multiplier = itm.Sort_ascending() == BoolUtl.YByte ? 1 : -1;
 		switch (itm.Sort_tid()) {
 			case Dpl_sort.Tid_categorysortkey:
-			case Dpl_sort.Tid_categoryadd: 			return multiplier * Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db()); 
+			case Dpl_sort.Tid_categoryadd: 			return multiplier * BryUtl.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db());
 		}
 		return CompareAbleUtl.Same;
 	}

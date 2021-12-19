@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.langs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_i18n_tst {
 	private final Pfunc_i18n_fxt fxt = new Pfunc_i18n_fxt();
@@ -42,7 +47,7 @@ class Pfunc_i18n_fxt {
 	}
 	public void Init__lang(String lang_key) {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit(false);
-		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_load(Bry_.new_a7(lang_key));
+		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_load(BryUtl.NewA7(lang_key));
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, lang_key + ".wikipedia.org", lang);
 		this.parser_fxt = new Xop_fxt(app, wiki);
 	}

@@ -13,12 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.users.history.*;
-public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
+public class Xoctg_double_itm implements BryBfrArg {
 	private final List_adp itms = List_adp_.New();
 	private Xow_wiki wiki; private Xoh_href_wtr href_wtr; private Xou_history_mgr history_mgr;
 	public void Init_by_wiki(Xow_wiki wiki, Xou_history_mgr history_mgr) {
@@ -29,10 +35,10 @@ public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
 	public void Itms__clear() {itms.Clear();}
 	public int Itms__count() {return itms.Len();}
 	public void Itms__add(Xoctg_pagebox_itm page) {itms.Add(page);}	
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = itms.Len();
 		for (int i = 0; i < len; ++i) {
-			Xoctg_pagebox_itm itm = (Xoctg_pagebox_itm)itms.Get_at(i);
+			Xoctg_pagebox_itm itm = (Xoctg_pagebox_itm)itms.GetAt(i);
 			Xoa_ttl ttl = itm.Ttl();
 			byte[] lnki_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 			byte[] lnki_href = href_wtr.Build_to_bry(wiki, ttl);
@@ -50,7 +56,7 @@ public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
 			Fmt__itm.Bld_many(bfr, lnki_cls, lnki_href, lnki_ttl, lnki_text);
 		}
 	}
-	private static final Bry_fmt Fmt__itm = Bry_fmt.Auto_nl_skip_last
+	private static final BryFmt Fmt__itm = BryFmt.Auto_nl_skip_last
 	( ""
 	,     "<li>"
 	,       "<a~{lnki_cls} href=\"~{lnki_href}\" title=\"~{lnki_ttl}\">~{lnki_text}</a>"

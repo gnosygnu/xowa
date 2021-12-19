@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.pools; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.pools;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
-import gplx.xowa.addons.bldrs.mass_parses.parses.wkrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.locks.*;
+import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.locks.*;
 public class Xomp_page_pool_loader {
 	private final Xow_wiki wiki;
 	private final int num_pages_per_load;
@@ -40,7 +45,7 @@ public class Xomp_page_pool_loader {
 
 		// add remaining pages from old pool to new_pool;
 		for (int i = list_idx; i < list_len; ++i) {
-			rv.Add((Xomp_page_itm)list.Get_at(i));
+			rv.Add((Xomp_page_itm)list.GetAt(i));
 		}
 		
 		// load pages into new pool
@@ -56,7 +61,7 @@ public class Xomp_page_pool_loader {
 	}
 	private int Load_from_db(List_adp list, int uid_prv) {
 		// prepare for page_tbl
-		String sql = String_.Format(String_.Concat_lines_nl_skip_last	// ANSI.Y
+		String sql = StringUtl.Format(StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "SELECT  mp.xomp_uid"
 		, ",       pp.page_id"
 		, ",       pp.page_namespace"

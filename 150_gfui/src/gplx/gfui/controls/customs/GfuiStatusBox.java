@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.core.envs.*; import gplx.gfui.kits.core.*; import gplx.gfui.envs.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.standards.*;
+package gplx.gfui.controls.customs;
+import gplx.core.envs.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.kits.core.*; import gplx.gfui.envs.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.standards.*;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.libs.dlgs.UsrMsgWkr;
+import gplx.libs.dlgs.UsrMsgWkr_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyValHash;
 public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public GfuiStatusBox Active_(boolean v)			{active = v; return this;} private boolean active = true;
 	public GfuiStatusBox VisibilityDuration_(int v) {timer.Interval_(v); visibilityDuration = v; return this;} int visibilityDuration;
 	@Override public void Opened_cbk() {
@@ -28,7 +38,7 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 			) return;
 		this.CreateControlIfNeeded();		// WORKAROUND.WINFORMS: else will sometimes throw: Cannot call Invoke or InvokeAsync on a control until the window handle has been created
 		this.VisibilityDuration_(umsg.VisibilityDuration());		
-		String text = String_.Replace(umsg.To_str(), Op_sys.Cur().Nl_str(), " "); // replace NewLine with " " since TextBox cannot show NewLine
+		String text = StringUtl.Replace(umsg.To_str(), Op_sys.Cur().Nl_str(), " "); // replace NewLine with " " since TextBox cannot show NewLine
 		Invoke(Gfo_invk_cmd.New_by_val(this, Invk_WriteText, text));
 	}
 	public void WriteText(String text) {
@@ -66,14 +76,14 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 		return this;
 	}	static final String Invk_HideWindow = "HideWindow", Invk_WriteText = "WriteText", Invk_Text_empty = "Text_empty";
 	TimerAdp timer;
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.Border_on_(false);
 		this.Focus_able_(false);
 		this.Visible_set(false);
 		timer = TimerAdp.new_(this, Invk_HideWindow, 2000, false);
 	}
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		this.Border_on_(false);
 		this.Focus_able_(false);
@@ -81,7 +91,7 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 		timerCmd = kit.New_cmd_sync(this);
 		timer = TimerAdp.new_(timerCmd, GfuiInvkCmd_.Invk_sync, 2000, false);
 	}	GfuiInvkCmd timerCmd;
-	public void ctor_kit_GfuiElemBase_drd(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
+	public void ctor_kit_GfuiElemBase_drd(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		this.Border_on_(false);
 		this.Focus_able_(false);

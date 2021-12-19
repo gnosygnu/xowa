@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
 import gplx.xowa.mediawiki.languages.*;
 public class XomwMessageMgr {
 	private final Hash_adp hash = Hash_adp_.New();
 	public void Old_add(String key, String val, XomwLanguage language) {
-		hash.Add(key, new XomwMessageOld(Bry_.new_u8(val), language));
+		hash.Add(key, new XomwMessageOld(BryUtl.NewU8(val), language));
 	}
 	public XomwMessageOld Old_get_by_str(String key) {return (XomwMessageOld)hash.GetByOrNull(key);}
 }

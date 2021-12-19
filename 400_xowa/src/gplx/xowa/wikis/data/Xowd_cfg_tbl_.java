@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.data;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 public class Xowd_cfg_tbl_ {
 	public static final String Tbl_name = "xowa_cfg";
@@ -24,7 +28,7 @@ public class Xowd_cfg_tbl_ {
 	}
 	public static Db_cfg_tbl Get_or_fail(Db_conn conn) {
 		Db_cfg_tbl rv = Get_or_null(conn);
-		if (rv == null) throw Err_.New("xowa_cfg tbl does not exist: file={0}", conn.Conn_info().Raw());
+		if (rv == null) throw ErrUtl.NewFmt("xowa_cfg tbl does not exist: file={0}", conn.Conn_info().Raw());
 		return rv;
 	}
 
@@ -40,6 +44,6 @@ public class Xowd_cfg_tbl_ {
 		cfg_tbl.Upsert_str(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__core__name        , name);
 		cfg_tbl.Upsert_int(Xowd_cfg_key_.Grp__empty    , Xowd_cfg_key_.Key__wiki__upgrade__version  , gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_upgrade_.Upgrade_version__cur);
 		cfg_tbl.Upsert_bry(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__main_page         , main_page);
-		cfg_tbl.Upsert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest   , Datetime_now.Get().XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+		cfg_tbl.Upsert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest   , GfoDateNow.Get().ToStrFmt(GfoDateUtl.FmtIso8561DateTime));
 	}
 }

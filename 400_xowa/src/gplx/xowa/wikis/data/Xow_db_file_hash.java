@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data; import gplx.*;
+package gplx.xowa.wikis.data;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.errs.ErrUtl;
 class Xow_db_file_hash {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Count_total() {return count_total;} private int count_total;
@@ -31,8 +34,8 @@ class Xow_db_file_hash {
 	}
 	public void Del(Xow_db_file file) {
 		Ordered_hash tids = (Ordered_hash)hash.GetByOrNull(file.Tid());
-		if (tids == null) throw Err_.new_wo_type("unknown file.tid", "url", file.Url());
-		if (!tids.Has(file.Id())) throw Err_.new_wo_type("unknown file.id", "url", file.Url());
+		if (tids == null) throw ErrUtl.NewArgs("unknown file.tid", "url", file.Url());
+		if (!tids.Has(file.Id())) throw ErrUtl.NewArgs("unknown file.id", "url", file.Url());
 		tids.Del(file.Id());
 		--count_total;
 	}

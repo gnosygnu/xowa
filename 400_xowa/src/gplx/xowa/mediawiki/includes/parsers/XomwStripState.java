@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.btries.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public class XomwStripState {
 //		protected $prefix;
 //		protected $data;
@@ -28,8 +30,8 @@ public class XomwStripState {
 
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private final Btrie_rv trv = new Btrie_rv();
-	private final Bry_bfr tmp_1 = Bry_bfr_.New();
-	private final Bry_bfr tmp_2 = Bry_bfr_.New();
+	private final BryWtr tmp_1 = BryWtr.New();
+	private final BryWtr tmp_2 = BryWtr.New();
 	private boolean tmp_2_used = false;
 	private int generalLen, nowikiLen;
 
@@ -65,7 +67,7 @@ public class XomwStripState {
 		this.addItem(TYPE_NOWIKI, marker, val);
 	}
 
-	public void addGeneral(String marker, String val) {this.addGeneral(Bry_.new_u8(marker), Bry_.new_u8(val));}
+	public void addGeneral(String marker, String val) {this.addGeneral(BryUtl.NewU8(marker), BryUtl.NewU8(val));}
 	/**
 	* @param String $marker
 	* @param String $value
@@ -87,7 +89,7 @@ public class XomwStripState {
 
 		// XO.MW:ported
 		// this.data[$type][$m[1]] = $value;
-		trie.Add_obj(marker, new XomwStripItem(type, marker, val));
+		trie.AddObj(marker, new XomwStripItem(type, marker, val));
 		if (type == TYPE_GENERAL)
 			generalLen++;
 		else
@@ -122,7 +124,7 @@ public class XomwStripState {
 
 	public byte[] unstripType(byte tid, byte[] text) {
 		boolean dirty = unstripType(tid, tmp_1, text, 0, text.length);
-		return dirty ? tmp_1.To_bry_and_clear() : text;
+		return dirty ? tmp_1.ToBryAndClear() : text;
 	}
 
 	// XOWA
@@ -131,8 +133,8 @@ public class XomwStripState {
 	public void unstripBoth(XomwParserBfr pbfr)    {unstripType(TYPE_BOTH   , pbfr);}
 	private boolean unstripType(byte tid, XomwParserBfr pbfr) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		boolean dirty = unstripType(tid, pbfr.Trg(), src, 0, src_bfr.Len());
 		if (dirty)
 			pbfr.Switch();
@@ -144,7 +146,7 @@ public class XomwStripState {
 	* @param String $text
 	* @return mixed
 	*/
-	private boolean unstripType(byte tid, Bry_bfr trg, byte[] src, int src_bgn, int src_end) {
+	private boolean unstripType(byte tid, BryWtr trg, byte[] src, int src_bgn, int src_end) {
 		//	// Shortcut
 		//	if (!count(this.data[$type])) {
 		//		return $text;
@@ -173,21 +175,21 @@ public class XomwStripState {
 			// EOS: exit
 			if (cur == src_end) {
 				if (dirty)	// add remainder if dirty
-					trg.Add_mid(src, prv, src_end);
+					trg.AddMid(src, prv, src_end);
 				break;
 			}
 
 			// check if current pos matches strip state
-			Object o = trie.Match_at(trv, src, cur, src_end);
+			Object o = trie.MatchAt(trv, src, cur, src_end);
 			if (o != null) {	// match
 				XomwStripItem item = (XomwStripItem)o;
 				byte item_tid = item.Type();
 				if ((tid & item_tid) == item_tid) {	// check if types match
 					// get bfr for recursion
-					Bry_bfr nested_bfr = null;
+					BryWtr nested_bfr = null;
 					boolean tmp_2_release = false;
 					if (tmp_2_used) {
-						nested_bfr = Bry_bfr_.New();
+						nested_bfr = BryWtr.New();
 					}
 					else {
 						nested_bfr = tmp_2;
@@ -198,12 +200,12 @@ public class XomwStripState {
 					// recurse
 					byte[] item_val = item.Val();
 					if (unstripType(tid, nested_bfr, item_val, 0, item_val.length))
-						item_val = nested_bfr.To_bry_and_clear();
+						item_val = nested_bfr.ToBryAndClear();
 					if (tmp_2_release)
 						tmp_2_used = false;
 
 					// add to trg
-					trg.Add_mid(src, prv, cur);
+					trg.AddMid(src, prv, cur);
 					trg.Add(item_val);
 
 					// update vars

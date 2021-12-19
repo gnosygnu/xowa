@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.htmls.css.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.htmls.*; import gplx.xowa.addons.wikis.htmls.css.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.wikis.htmls.css.mgrs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.xowa.*;
+import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.wikis.htmls.css.dbs.*;
 public class Xow_css_mgr {
 	private final Xow_wiki wiki;

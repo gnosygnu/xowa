@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.windows;
 import javax.swing.JComponent;
 import javax.swing.ToolTipManager;
 import gplx.gfui.controls.elems.*;
+import gplx.types.basics.utls.StringUtl;
 class GfuiTipTextMgr implements GfuiWinOpenAble {
 		public void Open_exec(GfuiWin form, GfuiElemBase owner, GfuiElemBase sub) {
 		if (!(sub.UnderElem() instanceof JComponent)) return;
-		if (String_.Eq(sub.TipText(), "")) return;	// don't register components without tooltips; will leave blue dots (blue tool tip windows with 1x1 size)
+		if (StringUtl.Eq(sub.TipText(), "")) return;	// don't register components without tooltips; will leave blue dots (blue tool tip windows with 1x1 size)
 		JComponent jcomp = (JComponent)sub.UnderElem();
 		ToolTipManager.sharedInstance().registerComponent(jcomp);
 		ToolTipManager.sharedInstance().setInitialDelay(0);

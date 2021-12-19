@@ -13,16 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.exception; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import gplx.core.strings.*;
+package gplx.xowa.mediawiki.includes.exception;
+import gplx.types.errs.Err;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.utls.StringUtl;
 public class XomwMWException extends Err {
 	public XomwMWException(String fmt, Object... args) {
-		super(true, "", "", String_.Format(fmt, args));
+		super(StringUtl.Format(fmt, args));
 	}
 	public static Err New_by_method(Class<?> type, String method, String msg) {
-		return Err_.new_wo_type(Type_.Name(type) + "." + method + ":" + msg);
+		return ErrUtl.NewArgs(ClassUtl.Name(type) + "." + method + ":" + msg);
 	}
 	public static Err New_by_method_obj(Object obj, String method, String msg) {
-		return Err_.new_wo_type(Type_.Name_by_obj(obj) + "." + method + msg);
+		return ErrUtl.NewArgs(ClassUtl.NameByObj(obj) + "." + method + msg);
 	}
 }

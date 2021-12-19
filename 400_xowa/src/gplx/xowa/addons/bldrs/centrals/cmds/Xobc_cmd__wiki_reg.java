@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.core.security.*;
+package gplx.xowa.addons.bldrs.centrals.cmds;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.xowa.wikis.*;
 public class Xobc_cmd__wiki_reg extends Xobc_cmd__base {
 	private final Io_url wiki_dir;
@@ -39,7 +43,7 @@ public class Xobc_cmd__wiki_reg extends Xobc_cmd__base {
 				break;
 			}
 		}
-		if (wiki_core_url == null) throw Err_.new_("wiki_import", "import_url not found", "domain", wiki_domain);
+		if (wiki_core_url == null) throw ErrUtl.NewArgs("import_url not found", "domain", wiki_domain);
 
 		// import; open
 		Xoa_wiki_mgr wiki_mgr = ctx.App().Wiki_mgri();

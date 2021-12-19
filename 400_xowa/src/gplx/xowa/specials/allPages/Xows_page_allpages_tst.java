@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.xowa.specials.allPages;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.specials.*;
 import org.junit.*;
 import gplx.core.net.qargs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
@@ -33,7 +40,7 @@ public class Xows_page_allpages_tst {
 	}
 	@Test public void Build_html_main() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), 5, 7);
-		fxt.Clear().Init_arg("from", "B2").Init_itms_per_page(5).Test_build_html(String_.Concat_lines_nl
+		fxt.Clear().Init_arg("from", "B2").Init_itms_per_page(5).Test_build_html(StringUtl.ConcatLinesNl
 		(	"<table class=\"mw-allpages-table-form\">"
 		,	"  <tr>"
 		,	"    <td class=\"mw-allpages-nav\">"
@@ -64,7 +71,7 @@ public class Xows_page_allpages_tst {
 	}
 	@Test public void Build_html_redirect() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), 1, 7);
-		fxt.Clear().Init_arg("from", "A2").Init_arg("hideredirects", "1").Init_itms_per_page(2).Test_build_html(String_.Concat_lines_nl
+		fxt.Clear().Init_arg("from", "A2").Init_arg("hideredirects", "1").Init_itms_per_page(2).Test_build_html(StringUtl.ConcatLinesNl
 		(	"<table class=\"mw-allpages-table-form\">"
 		,	"  <tr>"
 		,	"    <td class=\"mw-allpages-nav\">"
@@ -90,7 +97,7 @@ public class Xows_page_allpages_tst {
 	}
 	@Test public void Build_html_ns() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), fxt.Wiki().Ns_mgr().Ns_template(), 1, 7);
-		fxt.Clear().Init_arg("from", "A2").Init_arg("namespace", "10").Init_itms_per_page(2).Test_build_html(String_.Concat_lines_nl
+		fxt.Clear().Init_arg("from", "A2").Init_arg("namespace", "10").Init_itms_per_page(2).Test_build_html(StringUtl.ConcatLinesNl
 		(	"<table class=\"mw-allpages-table-form\">"
 		,	"  <tr>"
 		,	"    <td class=\"mw-allpages-nav\">"
@@ -114,7 +121,7 @@ public class Xows_page_allpages_tst {
 		,	"</div>"
 		));
 	}
-	@Test  public void Misc() {
+	@Test public void Misc() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), fxt.Wiki().Ns_mgr().Ns_template(), 1, 7);
 		fxt.Clear().Init_arg("from", "Template:B1").Expd_arg("from", "B1").Expd_arg("namespace", "10").Test_build_data();	// extract ns from ttl
 		fxt.Clear().Init_arg("from", "Template:B1").Expd_display_ttl("All pages").Expd_address_page("Special:AllPages").Test_special_gen();	// display ttl
@@ -135,10 +142,10 @@ class Xows_page_allpages_fxt {
 		return this;
 	}	private Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki; Xows_page_allpages allpages;
-	public Xows_page_allpages_fxt Init_arg(String key, String val) {init_args.Add(new Gfo_qarg_itm(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp init_args = List_adp_.New();
+	public Xows_page_allpages_fxt Init_arg(String key, String val) {init_args.Add(new Gfo_qarg_itm(BryUtl.NewA7(key), BryUtl.NewA7(val))); return this;} private List_adp init_args = List_adp_.New();
 	public Xows_page_allpages_fxt Init_ttl_leaf(String val) {init_ttl_leaf = val; return this;} private String init_ttl_leaf;
 	public Xows_page_allpages_fxt Init_itms_per_page(int v) {init_itms_per_page = v; return this;} private int init_itms_per_page = 5;
-	public Xows_page_allpages_fxt Expd_arg(String key, String val) {expd_args.Add(new Gfo_qarg_itm(Bry_.new_a7(key), Bry_.new_a7(val))); return this;} private List_adp expd_args = List_adp_.New();
+	public Xows_page_allpages_fxt Expd_arg(String key, String val) {expd_args.Add(new Gfo_qarg_itm(BryUtl.NewA7(key), BryUtl.NewA7(val))); return this;} private List_adp expd_args = List_adp_.New();
 	public Xows_page_allpages_fxt Expd_prv(String v) {expd_prv = v; return this;} private String expd_prv;
 	public Xows_page_allpages_fxt Expd_nxt(String v) {expd_nxt = v; return this;} private String expd_nxt;
 	public Xows_page_allpages_fxt Expd_ttls(String... v) {expd_ttls = v; return this;} private String[] expd_ttls;
@@ -148,8 +155,8 @@ class Xows_page_allpages_fxt {
 	public static String Xto_str(Xowe_wiki wiki, Xowd_page_itm v) {
 		if (v == null) return null;
 		Xow_ns ns = wiki.Ns_mgr().Ids_get_or_null(v.Ns_id());
-		String ns_str = ns == null ? "" : String_.new_a7(ns.Name_db_w_colon());
-		return ns_str + String_.new_a7(v.Ttl_page_db());
+		String ns_str = ns == null ? "" : StringUtl.NewA7(ns.Name_db_w_colon());
+		return ns_str + StringUtl.NewA7(v.Ttl_page_db());
 	}
 	public static String[] Xto_str_ary(Xowe_wiki wiki, Xowd_page_itm[] ary) {
 		int ary_len = ary.length;
@@ -165,7 +172,7 @@ class Xows_page_allpages_fxt {
 		String[] rv = new String[ary_len];
 		for (int i = 0; i < ary_len; i++) {
 			Gfo_qarg_itm itm = ary[i];
-			rv[i] = String_.new_u8(itm.Key_bry()) + "=" + String_.new_u8(itm.Val_bry());
+			rv[i] = StringUtl.NewU8(itm.Key_bry()) + "=" + StringUtl.NewU8(itm.Val_bry());
 		}
 		return rv;
 	}
@@ -173,25 +180,25 @@ class Xows_page_allpages_fxt {
 		init_url = app.User().Wikii().Utl__url_parser().Parse(Xow_special_meta_.Itm__all_pages.Ttl_bry());
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Special__gen(wiki, wiki.Parser_mgr().Ctx().Page(), init_url, init_ttl);
-		if (expd_display_ttl != null) Tfds.Eq(expd_display_ttl, String_.new_u8(wiki.Parser_mgr().Ctx().Page().Html_data().Display_ttl()));
-		if (expd_address_page != null) Tfds.Eq(expd_address_page, String_.new_u8(init_url.Page_bry()));
+		if (expd_display_ttl != null) GfoTstr.EqObj(expd_display_ttl, StringUtl.NewU8(wiki.Parser_mgr().Ctx().Page().Html_data().Display_ttl()));
+		if (expd_address_page != null) GfoTstr.EqObj(expd_address_page, StringUtl.NewU8(init_url.Page_bry()));
 		return this;
 	}
 	public Xows_page_allpages_fxt Test_build_data() {
 		Exec_build();
-		if (expd_ttls != null) Tfds.Eq_ary_str(expd_ttls, Xto_str_ary(wiki, allpages.Rslt_list_ttls()));
-		if (expd_nxt != null) Tfds.Eq(expd_nxt, Xto_str(wiki, allpages.Rslt_nxt()));
-		if (expd_prv != null) Tfds.Eq(expd_prv, Xto_str(wiki, allpages.Rslt_prv()));
+		if (expd_ttls != null) GfoTstr.EqLines(expd_ttls, Xto_str_ary(wiki, allpages.Rslt_list_ttls()));
+		if (expd_nxt != null) GfoTstr.EqObj(expd_nxt, Xto_str(wiki, allpages.Rslt_nxt()));
+		if (expd_prv != null) GfoTstr.EqObj(expd_prv, Xto_str(wiki, allpages.Rslt_prv()));
 		if (expd_args.Len() > 0) {
 			Gfo_qarg_itm[] expd_args_ary = (Gfo_qarg_itm[])expd_args.ToAry(Gfo_qarg_itm.class);
-			Tfds.Eq_ary_str(Xto_str_ary(expd_args_ary), Xto_str_ary(init_url.Qargs_ary()));
+			GfoTstr.EqLines(Xto_str_ary(expd_args_ary), Xto_str_ary(init_url.Qargs_ary()));
 		}
 		return this;
 	}	private Xoa_url init_url = Xoa_url.blank();
 	public Xows_page_allpages_fxt Test_build_html(String expd) {
 		Exec_build();
 		allpages.Build_html(wiki.Parser_mgr().Ctx().Page());
-		Tfds.Eq_str_lines(expd, String_.new_a7(wiki.Parser_mgr().Ctx().Page().Db().Text().Text_bry()));
+		GfoTstr.EqLines(expd, StringUtl.NewA7(wiki.Parser_mgr().Ctx().Page().Db().Text().Text_bry()));
 		return this;
 	}
 	private void Exec_build() {
@@ -201,5 +208,5 @@ class Xows_page_allpages_fxt {
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);
 	}
-	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.Parse(wiki, Bry_.new_u8(Xow_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
+	private Xoa_ttl Make_init_ttl() {return Xoa_ttl.Parse(wiki, BryUtl.NewU8(Xow_special_meta_.Itm__all_pages.Ttl_str() + init_ttl_leaf));}
 }

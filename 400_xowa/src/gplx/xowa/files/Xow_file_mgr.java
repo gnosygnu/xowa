@@ -14,17 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.dbs.cfgs.Db_cfg_hash;
 import gplx.fsdb.Fsdb_db_mgr;
 import gplx.fsdb.Fsdb_db_mgr_;
@@ -32,7 +33,7 @@ import gplx.fsdb.Fsdb_db_mgr__v1;
 import gplx.fsdb.Fsdb_db_mgr__v2_bldr;
 import gplx.fsdb.meta.Fsm_mnt_itm;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.files.fsdb.Xof_fsdb_mgr;
@@ -91,7 +92,7 @@ public class Xow_file_mgr implements Gfo_invk {
 			: fsdb_mgr.Mnt_mgr().Patch_upright()
 			;
 	}
-	public static final byte Version_null = Byte_.Max_value_127, Version_1 = 1, Version_2 = 2;
+	public static final byte Version_null = ByteUtl.MaxValue127, Version_1 = 1, Version_2 = 2;
 	public Xowe_repo_mgr Repo_mgr() {return repo_mgr;} private Xowe_repo_mgr repo_mgr;
 	public Xof_meta_mgr  Dbmeta_mgr() {return meta_mgr;} private Xof_meta_mgr meta_mgr;
 	public Xof_cfg_download Cfg_download() {return cfg_download;} private Xof_cfg_download cfg_download = new Xof_cfg_download();
@@ -103,18 +104,18 @@ public class Xow_file_mgr implements Gfo_invk {
 			if (wiki.Data__core_mgr() == null) return; // HACK: ignore if null; occurs when importing wikia wikis; TODO: rewrite data_core layer; DATE:2018-06-16
 			String cfg_domain_str = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_str_or("xowa.bldr.session", "wiki_domain", wiki.Domain_str());		// NOTE: or is "wiki.domain" for user_wikis
 			// FOLDER.RENAME: do not change to fs.dir if renamed; DATE:2017-02-06
-			if (String_.Eq(cfg_domain_str, wiki.Domain_str())) {
+			if (StringUtl.Eq(cfg_domain_str, wiki.Domain_str())) {
 				// wiki has not been renamed; use fs.dir
 				gplx.xowa.files.fsdb.fs_roots.Fs_root_core fsdir_core = gplx.xowa.files.fsdb.fs_roots.Fs_root_core.Set_fsdb_mgr(this, this.wiki);
 				fsdir_core.Orig_dir_(wiki.Fsys_mgr().Root_dir().GenSubDir_nest("file", "orig"));
 			}
 			else {
 				// wiki has been renamed; apply "imported name" to wikis; note that this won't support renamed wikia wikis; DATE:2017-02-07
-				byte[] cfg_domain_bry = Bry_.new_u8(cfg_domain_str);
+				byte[] cfg_domain_bry = BryUtl.NewU8(cfg_domain_str);
 				Xof_repo_pair[] repo_pairs = wiki.File__repo_mgr().Repos_ary();
 				for (int i = 0; i < repo_pairs.length; i++) {
 					Xof_repo_pair repo_pair = repo_pairs[i];
-					if (Bry_.Eq(wiki.Domain_bry(), repo_pair.Trg().Wiki_domain())) {
+					if (BryLni.Eq(wiki.Domain_bry(), repo_pair.Trg().Wiki_domain())) {
 						repo_pair.Wiki_domain_(cfg_domain_bry);
 						repo_pair.Src().Wiki_domain_(cfg_domain_bry);
 						repo_pair.Trg().Wiki_domain_(cfg_domain_bry);
@@ -151,7 +152,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	public boolean Find_meta(Xof_xfer_itm xfer_itm) {
 		xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_unknown);
 		byte[] xfer_itm_ttl = xfer_itm.Lnki_ttl();
-		xfer_itm.Orig_ttl_and_redirect_(xfer_itm_ttl, Bry_.Empty);
+		xfer_itm.Orig_ttl_and_redirect_(xfer_itm_ttl, BryUtl.Empty);
 		Xof_meta_itm meta_itm = meta_mgr.Get_itm_or_new(xfer_itm_ttl, xfer_itm.Orig_ttl_md5());
 		xfer_itm.Set__meta_only(meta_itm);
 		if (meta_itm.State_new()) {														// meta_itm is brand new

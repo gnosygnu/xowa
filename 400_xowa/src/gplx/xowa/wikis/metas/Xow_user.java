@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.metas;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
 public class Xow_user implements Gfo_invk {
-	public byte[] Name() {return name;} private byte[] name = Bry_.new_a7("anonymous");
+	public byte[] Name() {return name;} private byte[] name = BryUtl.NewA7("anonymous");
 	public void Name_(byte[] v) {this.name = v;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_name_))						name = m.ReadBry("v");

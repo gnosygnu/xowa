@@ -13,17 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 class Wdata_toc_data {
 	private final Wdata_fmtr__toc_div fmtr_toc;
 	private final Gfo_url_encoder href_encoder;
-	private final Bry_fmtr text_fmtr = Bry_fmtr.new_("~{orig} <sup><small>(~{len})</small></sup>", "orig", "len");
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(8);
+	private final BryFmtr text_fmtr = BryFmtr.New("~{orig} <sup><small>(~{len})</small></sup>", "orig", "len");
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(8);
 	public Wdata_toc_data(Wdata_fmtr__toc_div fmtr_toc, Gfo_url_encoder href_encoder) {this.fmtr_toc = fmtr_toc; this.href_encoder = href_encoder;}
 	public Wdata_toc_data Make(int itms_len) {
-		this.text = itms_len_enable ? text_fmtr.Bld_bry_many(tmp_bfr, orig, itms_len) : orig;
+		this.text = itms_len_enable ? text_fmtr.BldToBryMany(tmp_bfr, orig, itms_len) : orig;
 		this.href = href_encoder.Encode(orig);
 		fmtr_toc.Add(this);
 		return this;

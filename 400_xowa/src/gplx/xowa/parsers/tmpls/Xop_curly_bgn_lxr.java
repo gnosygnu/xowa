@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.tblws.*;
@@ -27,12 +28,12 @@ public class Xop_curly_bgn_lxr implements Xop_lxr {
 	public static final Xop_curly_bgn_lxr Instance = new Xop_curly_bgn_lxr(); Xop_curly_bgn_lxr() {}
 	public static Btrie_fast_mgr tmpl_bgn_trie_() {	// hook sequences for adding new_line to tmpl return; "{|" "|-" ":" ";" "#" "*"; EX: "{{a}}" returns "*"; convert to "\n*"
 		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
-		rv.Add(Xop_tblw_lxr_ws.Hook_tb, Bry_.Empty);
-		rv.Add(Bry_.new_a7("|-"), Bry_.Empty);
-		rv.Add(AsciiByte.Colon, Bry_.Empty);
-		rv.Add(AsciiByte.Semic, Bry_.Empty);
-		rv.Add(AsciiByte.Hash, Bry_.Empty);
-		rv.Add(AsciiByte.Star, Bry_.Empty);
+		rv.Add(Xop_tblw_lxr_ws.Hook_tb, BryUtl.Empty);
+		rv.Add(BryUtl.NewA7("|-"), BryUtl.Empty);
+		rv.Add(AsciiByte.Colon, BryUtl.Empty);
+		rv.Add(AsciiByte.Semic, BryUtl.Empty);
+		rv.Add(AsciiByte.Hash, BryUtl.Empty);
+		rv.Add(AsciiByte.Star, BryUtl.Empty);
 		return rv;
 	}
 }

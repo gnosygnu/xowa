@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.domains;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xow_abrv_xo__tst {
 	@Before public void init() {fxt.Clear();} private final Xow_abrv_xo__fxt fxt = new Xow_abrv_xo__fxt();
@@ -32,10 +35,10 @@ public class Xow_abrv_xo__tst {
 class Xow_abrv_xo__fxt {
 	public void Clear() {}
 	public void Test(String domain_str, String expd_abrv) {
-		Xow_domain_itm domain = Xow_domain_itm_.parse(Bry_.new_u8(domain_str));
+		Xow_domain_itm domain = Xow_domain_itm_.parse(BryUtl.NewU8(domain_str));
 		byte[] actl_abrv = Xow_abrv_xo_.To_bry(domain.Domain_bry(), domain.Lang_actl_key(), domain.Domain_type());
-		Tfds.Eq(expd_abrv, String_.new_u8(actl_abrv), "To_bry");
+		GfoTstr.EqObj(expd_abrv, StringUtl.NewU8(actl_abrv), "To_bry");
 		domain = Xow_abrv_xo_.To_itm(actl_abrv);
-		Tfds.Eq(domain_str, domain.Domain_str(), "To_itm");
+		GfoTstr.EqObj(domain_str, domain.Domain_str(), "To_itm");
 	}
 }

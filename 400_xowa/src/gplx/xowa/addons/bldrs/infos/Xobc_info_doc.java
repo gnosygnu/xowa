@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.infos; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.infos;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.mustaches.*;
 class Xobc_info_doc implements Mustache_doc_itm {
 	private final byte[] wiki_domain, task_size;
@@ -23,14 +24,14 @@ class Xobc_info_doc implements Mustache_doc_itm {
 		this.wiki_domain = wiki_domain; this.wiki_dir = wiki_dir; this.task_size = task_size; this.torrent_fil = torrent_fil; this.urls = urls;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "wiki_domain"))	bfr.Add_bry(wiki_domain);
-		else if	(String_.Eq(key, "wiki_dir"))		bfr.Add_str_u8(wiki_dir);
-		else if	(String_.Eq(key, "task_size"))		bfr.Add_bry(task_size);
-		else if	(String_.Eq(key, "torrent_fil"))	bfr.Add_str_u8(torrent_fil);
+		if		(StringUtl.Eq(key, "wiki_domain"))	bfr.Add_bry(wiki_domain);
+		else if	(StringUtl.Eq(key, "wiki_dir"))		bfr.Add_str_u8(wiki_dir);
+		else if	(StringUtl.Eq(key, "task_size"))		bfr.Add_bry(task_size);
+		else if	(StringUtl.Eq(key, "torrent_fil"))	bfr.Add_str_u8(torrent_fil);
 		return false;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "urls"))		return urls;
+		if		(StringUtl.Eq(key, "urls"))		return urls;
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }
@@ -40,9 +41,9 @@ class Xobc_info_url implements Mustache_doc_itm {
 		this.url = url; this.size = size; this.md5 = md5;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "url"))			bfr.Add_str_u8(url);
-		else if	(String_.Eq(key, "size"))			bfr.Add_bry(size);
-		else if	(String_.Eq(key, "md5"))			bfr.Add_str_u8(md5);
+		if		(StringUtl.Eq(key, "url"))			bfr.Add_str_u8(url);
+		else if	(StringUtl.Eq(key, "size"))			bfr.Add_bry(size);
+		else if	(StringUtl.Eq(key, "md5"))			bfr.Add_str_u8(md5);
 		else										return false;
 		return true;
 	}

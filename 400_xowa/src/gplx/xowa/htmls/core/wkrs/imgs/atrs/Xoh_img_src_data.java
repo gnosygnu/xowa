@@ -14,25 +14,26 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.imgs.atrs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.core.brys.Bfr_arg_clearable;
-import gplx.core.brys.Bry_err_wkr;
-import gplx.core.brys.Bry_rdr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgClearable;
+import gplx.types.custom.brys.rdrs.BryRdrErrWkr;
+import gplx.types.custom.brys.rdrs.BryRdr;
 import gplx.core.btries.Btrie_slim_mgr;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.docs.Gfh_atr;
 import gplx.langs.htmls.docs.Gfh_tag;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.files.Xof_ext;
 import gplx.xowa.files.Xof_ext_;
 import gplx.xowa.files.repos.Xof_repo_tid_;
 import gplx.xowa.htmls.core.wkrs.Xoh_itm_parser;
 import gplx.xowa.wikis.domains.Xow_domain_itm_;
-public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(AsciiByte.Slash);
+public class Xoh_img_src_data implements BryBfrArgClearable, Xoh_itm_parser {
+	private final BryRdr rdr = new BryRdr().DfltDlmSet(AsciiByte.Slash);
 	private boolean fail_throws_err;
 	private byte[] src_bry;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
@@ -60,62 +61,62 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		repo_tid = Xof_repo_tid_.Tid__null;
 		file_ttl_bry = null;
 	}
-	public boolean Parse(Bry_err_wkr err_wkr, byte[] domain_bry, Gfh_tag tag) {
+	public boolean Parse(BryRdrErrWkr err_wkr, byte[] domain_bry, Gfh_tag tag) {
 		this.Clear();
 		Gfh_atr atr = tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__src);
 		return Parse(err_wkr, domain_bry, atr.Src(), atr.Val_bgn(), atr.Val_end());
 	}
-	public boolean Parse(Bry_err_wkr err_wkr, byte[] domain_bry, byte[] src_bry, int src_bgn, int src_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
+	public boolean Parse(BryRdrErrWkr err_wkr, byte[] domain_bry, byte[] src_bry, int src_bgn, int src_end) { // EX: src="file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/1/2/A.png/220px.png"
 		this.Clear();
 		this.src_bry = src_bry;
 		this.src_bgn = src_bgn; this.src_end = src_end;
 		if (src_end == src_bgn) return true;						// empty src; just return true;
-		this.src_mid = Bry_.Mid(src_bry, src_bgn, src_end);
+		this.src_mid = BryLni.Mid(src_bry, src_bgn, src_end);
 
 		// get repo_bgn; note that some <img> may be hiero / enlarge / magnify and should exit
-		rdr.Init_by_wkr(err_wkr, "img.src.xowa", src_bgn, src_end).Fail_throws_err_(fail_throws_err);
-		repo_bgn = rdr.Find_fwd_rr_or(Bry__file, -1);
+		rdr.InitByWkr(err_wkr, "img.src.xowa", src_bgn, src_end).FailThrowsErrSet(fail_throws_err);
+		repo_bgn = rdr.FindFwdRrOr(Bry__file, -1);
 		if (repo_bgn == -1) {
-			repo_bgn = rdr.Find_fwd_rr_or(Bry__math, Bry_find_.Not_found);
-			if (repo_bgn == Bry_find_.Not_found) return false;
-            this.file_ttl_bry = Bry_.Mid(rdr.Src(), repo_bgn, src_end);
+			repo_bgn = rdr.FindFwdRrOr(Bry__math, BryFind.NotFound);
+			if (repo_bgn == BryFind.NotFound) return false;
+            this.file_ttl_bry = BryLni.Mid(rdr.Src(), repo_bgn, src_end);
 			this.repo_is_commons = true;
 			this.repo_tid = Xof_repo_tid_.Tid__math;
 			this.file_is_orig = true;
 			return true;
 		}
 
-		rdr.Fail_throws_err_(BoolUtl.Y);
+		rdr.FailThrowsErrSet(BoolUtl.Y);
 
 		// get repo
-		repo_end = rdr.Find_fwd_lr();
-		repo_is_commons = Bry_.Match(rdr.Src(), repo_bgn, repo_end, Xow_domain_itm_.Bry__commons);
+		repo_end = rdr.FindFwdLr();
+		repo_is_commons = BryLni.Eq(rdr.Src(), repo_bgn, repo_end, Xow_domain_itm_.Bry__commons);
 		repo_tid = repo_is_commons ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
 		if (!repo_is_commons) {
-			if (!Bry_.Match(rdr.Src(), repo_bgn, repo_end, domain_bry)) rdr.Err_wkr().Fail("repo must be commons or self", "repo", Bry_.Mid(rdr.Src(), repo_bgn, repo_end));
+			if (!BryLni.Eq(rdr.Src(), repo_bgn, repo_end, domain_bry)) rdr.ErrWkr().Fail("repo must be commons or self", "repo", BryLni.Mid(rdr.Src(), repo_bgn, repo_end));
 		}
 
 		// get orig / thumb; md5; file_ttl
 		file_is_orig = rdr.Chk(trie) == Tid__orig;					// check if 'orig/' or 'thumb/'
 		file_ttl_bgn = Skip_md5();									// skip md5; EX: "0/1/2/3/"
 		if (file_is_orig)
-			file_ttl_end = rdr.Src_end();		
+			file_ttl_end = rdr.SrcEnd();
 		else
-			file_ttl_end = rdr.Find_fwd_lr();
-		file_ttl_bry = Bry_.Mid(src_bry, file_ttl_bgn, file_ttl_end); 
+			file_ttl_end = rdr.FindFwdLr();
+		file_ttl_bry = BryLni.Mid(src_bry, file_ttl_bgn, file_ttl_end);
 
 		// get file_w; file_page; file_time
 		if (!file_is_orig) {
-			file_w = rdr.Read_int_to(AsciiByte.Ltr_p);					// EX: "220px"
+			file_w = rdr.ReadIntTo(AsciiByte.Ltr_p);					// EX: "220px"
 			rdr.Chk(AsciiByte.Ltr_x);
 			if		(rdr.Is(AsciiByte.Dash)) {
 				Xof_ext ext = Xof_ext_.new_by_ttl_(file_ttl_bry);
 				if (ext.Id_supports_page())
-					file_page = rdr.Read_int_to(AsciiByte.Dot);		// EX: "220px-5.png"
+					file_page = rdr.ReadIntTo(AsciiByte.Dot);		// EX: "220px-5.png"
 				else {
 					int time_bgn = rdr.Pos();
-					int time_end = rdr.Find_fwd_lr(ext.Ext_view()) - 1;	// -1 to position b/c ext doesn't have "."; 
-					file_time = Bry_.To_double_or(src_bry, time_bgn, time_end, -1);
+					int time_end = rdr.FindFwdLr(ext.Ext_view()) - 1;	// -1 to position b/c ext doesn't have ".";
+					file_time = BryUtl.ToDoubleOr(src_bry, time_bgn, time_end, -1);
 				}
 			}
 		}
@@ -123,13 +124,13 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 	}
 	public void Init_by_decode(byte[] src, boolean file_is_orig, byte[] file_ttl_bry, int file_w, double file_time, int file_page) {
 		this.src_bry = src; this.src_bgn = 0; this.src_end = src.length;
-		this.src_mid = Bry_.Mid(src, src_bgn, src_end);
+		this.src_mid = BryLni.Mid(src, src_bgn, src_end);
 		this.file_is_orig = file_is_orig;
 		this.file_ttl_bry = file_ttl_bry; this.file_w = file_w; this.file_time = file_time; this.file_page = file_page;
 	}
-	public void Bfr_arg__clear() {this.Clear();}
-	public boolean Bfr_arg__missing() {return src_bry == null;}
-	public void Bfr_arg__add(Bry_bfr bfr) {bfr.Add_mid(src_bry, src_bgn, src_end);}
+	public void BfrArgClear() {this.Clear();}
+	public boolean BfrArgIsMissing() {return src_bry == null;}
+	public void AddToBfr(BryWtr bfr) {bfr.AddMid(src_bry, src_bgn, src_end);}
 	private int Skip_md5() {
 		byte[] src = rdr.Src();
 		int pos = rdr.Pos();
@@ -143,14 +144,14 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 				break;
 			}
 		}
-		return rdr.Move_to(pos);
+		return rdr.MoveTo(pos);
 	}
 	public void Fail_throws_err_(boolean v) {// TEST
 		this.fail_throws_err = v;
-		rdr.Fail_throws_err_(v);
+		rdr.FailThrowsErrSet(v);
 	}
 
-	private static final byte[] Bry__file = Bry_.new_a7("/file/"), Bry__math = Bry_.new_a7("/math/"), Bry__orig = Bry_.new_a7("orig/"), Bry__thumb = Bry_.new_a7("thumb/");
+	private static final byte[] Bry__file = BryUtl.NewA7("/file/"), Bry__math = BryUtl.NewA7("/math/"), Bry__orig = BryUtl.NewA7("orig/"), Bry__thumb = BryUtl.NewA7("thumb/");
 	private static final byte Tid__orig = 1, Tid__thumb = 2;
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__orig, Tid__orig).Add_bry_byte(Bry__thumb, Tid__thumb);
 }

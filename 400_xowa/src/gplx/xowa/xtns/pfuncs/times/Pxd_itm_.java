@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.core.log_msgs.*;
 interface Pxd_itm {

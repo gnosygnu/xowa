@@ -14,20 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_log_bfr;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg__log;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.core.brys.Bry_bfr_mkr;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.logs.Gfo_log_bfr;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg__log;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.custom.brys.wtrs.BryBfrMkr;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.envs.System_;
+import gplx.core.envs.SystemUtl;
 import gplx.core.flds.Gfo_fld_rdr;
 import gplx.core.ios.Io_download_fmt;
 import gplx.core.ios.Io_stream_zip_mgr;
@@ -39,7 +39,7 @@ import gplx.core.threads.Gfo_async_mgr;
 import gplx.core.threads.Gfo_thread_mgr;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
 import gplx.langs.jsons.Json_parser;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.Xoax_addon_mgr;
 import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
 import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
@@ -146,7 +146,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
 	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr;
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
-	public Bry_bfr_mkr				Utl__bfr_mkr()				{return utl__bry_bfr_mkr;} private final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public BryBfrMkr Utl__bfr_mkr()				{return utl__bry_bfr_mkr;} private final BryBfrMkr utl__bry_bfr_mkr = new BryBfrMkr();
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
 	public Xoa_meta_mgr				Dbmeta_mgr()				{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
@@ -197,7 +197,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Gfo_fld_rdr			Utl_fld_rdr() {return utl_fld_rdr;} Gfo_fld_rdr utl_fld_rdr = Gfo_fld_rdr.xowa_();
 	public Gfo_log_bfr			Log_bfr() {return log_bfr;} private Gfo_log_bfr log_bfr = new Gfo_log_bfr();
 	public Xoa_sys_cfg			Sys_cfg() {return sys_cfg;} private Xoa_sys_cfg sys_cfg;
-	public Bry_fmtr				Tmp_fmtr() {return tmp_fmtr;} Bry_fmtr tmp_fmtr = Bry_fmtr.new_("");
+	public BryFmtr Tmp_fmtr() {return tmp_fmtr;} BryFmtr tmp_fmtr = BryFmtr.New("");
 	public Xoa_ctg_mgr			Ctg_mgr() {return ctg_mgr;} private Xoa_ctg_mgr ctg_mgr = new Xoa_ctg_mgr();
 	public Xoa_fsys_eval		Url_cmd_eval() {return url_cmd_eval;} Xoa_fsys_eval url_cmd_eval;
 	public Xoa_cur				Cur_redirect() {return cur_redirect;} private Xoa_cur cur_redirect;
@@ -266,7 +266,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public void Reset_all() {
 		this.Free_mem(true);
 		gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all(this);
-		System_.Garbage_collect();
+		SystemUtl.Garbage_collect();
 	}
 	public void Free_mem(boolean clear_ctx) {
 		this.Utl__bfr_mkr().Clear();
@@ -277,11 +277,11 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		if (gplx.core.envs.Env_.Mode_testing()) return;
 		String read_only_detection_str = cfg.Get_str_app_or("xowa.app.dbs.sqlite.read_only_detection", "basic_file");
 		int read_only_detection = Io_mgr.Read_only__basic__file;
-		if (String_.Eq(read_only_detection_str, "basic_file"))
+		if (StringUtl.Eq(read_only_detection_str, "basic_file"))
 			read_only_detection = Io_mgr.Read_only__basic__file;
-		else if (String_.Eq(read_only_detection_str, "basic_file_and_dirs"))
+		else if (StringUtl.Eq(read_only_detection_str, "basic_file_and_dirs"))
 			read_only_detection = Io_mgr.Read_only__basic__file_and_dirs;
-		else if (String_.Eq(read_only_detection_str, "perms_file"))
+		else if (StringUtl.Eq(read_only_detection_str, "perms_file"))
 			read_only_detection = Io_mgr.Read_only__perms__file;
 		gplx.dbs.engines.sqlite.Sqlite_engine_.Read_only_detection = read_only_detection;
 	}

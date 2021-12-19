@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*;
+package gplx.xowa.bldrs.xmls;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Xob_xml_parser_ {
 	public static Btrie_fast_mgr trie_() {
 		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
@@ -29,19 +31,19 @@ public class Xob_xml_parser_ {
 		return rv;
 	}
 	public static final byte[]
-		  Bry_page_bgn = Bry_.new_a7("<page>"), Bry_page_bgn_frag = Bry_.new_a7("<page"), Bry_page_end = Bry_.new_a7("</page>")
-		, Bry_title_bgn = Bry_.new_a7("<title>"), Bry_title_bgn_frag = Bry_.new_a7("<title"), Bry_title_end = Bry_.new_a7("</title>")
-		, Bry_id_bgn = Bry_.new_a7("<id>"), Bry_id_bgn_frag = Bry_.new_a7("<id"), Bry_id_end = Bry_.new_a7("</id>")
-		, Bry_redirect_bgn = Bry_.new_a7("<redirect>"), Bry_redirect_bgn_frag = Bry_.new_a7("<redirect"), Bry_redirect_end = Bry_.new_a7("</redirect>")
-		, Bry_revision_bgn = Bry_.new_a7("<revision>"), Bry_revision_bgn_frag = Bry_.new_a7("<revision"), Bry_revision_end = Bry_.new_a7("</revision>")
-		, Bry_timestamp_bgn = Bry_.new_a7("<timestamp>"), Bry_timestamp_bgn_frag = Bry_.new_a7("<timestamp"), Bry_timestamp_end = Bry_.new_a7("</timestamp>")
-		, Bry_contributor_bgn = Bry_.new_a7("<contributor>"), Bry_contributor_bgn_frag = Bry_.new_a7("<contributor"), Bry_contributor_end = Bry_.new_a7("</contributor>")
-		, Bry_username_bgn = Bry_.new_a7("<username>"), Bry_username_bgn_frag = Bry_.new_a7("<username"), Bry_username_end = Bry_.new_a7("</username>")
-		, Bry_minor_bgn = Bry_.new_a7("<minor>"), Bry_minor_bgn_frag = Bry_.new_a7("<minor"), Bry_minor_end = Bry_.new_a7("</minor>")
-		, Bry_comment_bgn = Bry_.new_a7("<comment>"), Bry_comment_bgn_frag = Bry_.new_a7("<comment"), Bry_comment_end = Bry_.new_a7("</comment>")
-		, Bry_text_bgn = Bry_.new_a7("<text>"), Bry_text_bgn_frag = Bry_.new_a7("<text"), Bry_text_end = Bry_.new_a7("</text>")
-		, Bry_amp = Bry_.new_a7("&amp;"), Bry_quot = Bry_.new_a7("&quot;"), Bry_gt = Bry_.new_a7("&gt;"), Bry_lt = Bry_.new_a7("&lt;")
-		, Bry_tab_ent = Bry_.new_a7("&#09;"), Bry_tab = Bry_.new_a7("\t"), Bry_cr_nl = Bry_.new_a7("\r\n"), Bry_cr = Bry_.new_a7("\r")			
+		  Bry_page_bgn = BryUtl.NewA7("<page>"), Bry_page_bgn_frag = BryUtl.NewA7("<page"), Bry_page_end = BryUtl.NewA7("</page>")
+		, Bry_title_bgn = BryUtl.NewA7("<title>"), Bry_title_bgn_frag = BryUtl.NewA7("<title"), Bry_title_end = BryUtl.NewA7("</title>")
+		, Bry_id_bgn = BryUtl.NewA7("<id>"), Bry_id_bgn_frag = BryUtl.NewA7("<id"), Bry_id_end = BryUtl.NewA7("</id>")
+		, Bry_redirect_bgn = BryUtl.NewA7("<redirect>"), Bry_redirect_bgn_frag = BryUtl.NewA7("<redirect"), Bry_redirect_end = BryUtl.NewA7("</redirect>")
+		, Bry_revision_bgn = BryUtl.NewA7("<revision>"), Bry_revision_bgn_frag = BryUtl.NewA7("<revision"), Bry_revision_end = BryUtl.NewA7("</revision>")
+		, Bry_timestamp_bgn = BryUtl.NewA7("<timestamp>"), Bry_timestamp_bgn_frag = BryUtl.NewA7("<timestamp"), Bry_timestamp_end = BryUtl.NewA7("</timestamp>")
+		, Bry_contributor_bgn = BryUtl.NewA7("<contributor>"), Bry_contributor_bgn_frag = BryUtl.NewA7("<contributor"), Bry_contributor_end = BryUtl.NewA7("</contributor>")
+		, Bry_username_bgn = BryUtl.NewA7("<username>"), Bry_username_bgn_frag = BryUtl.NewA7("<username"), Bry_username_end = BryUtl.NewA7("</username>")
+		, Bry_minor_bgn = BryUtl.NewA7("<minor>"), Bry_minor_bgn_frag = BryUtl.NewA7("<minor"), Bry_minor_end = BryUtl.NewA7("</minor>")
+		, Bry_comment_bgn = BryUtl.NewA7("<comment>"), Bry_comment_bgn_frag = BryUtl.NewA7("<comment"), Bry_comment_end = BryUtl.NewA7("</comment>")
+		, Bry_text_bgn = BryUtl.NewA7("<text>"), Bry_text_bgn_frag = BryUtl.NewA7("<text"), Bry_text_end = BryUtl.NewA7("</text>")
+		, Bry_amp = BryUtl.NewA7("&amp;"), Bry_quot = BryUtl.NewA7("&quot;"), Bry_gt = BryUtl.NewA7("&gt;"), Bry_lt = BryUtl.NewA7("&lt;")
+		, Bry_tab_ent = BryUtl.NewA7("&#09;"), Bry_tab = BryUtl.NewA7("\t"), Bry_cr_nl = BryUtl.NewA7("\r\n"), Bry_cr = BryUtl.NewA7("\r")
 		;
 	public static final byte
 		  Id_page_bgn = 0, Id_page_bgn_frag = 1, Id_page_end = 2
@@ -58,9 +60,9 @@ public class Xob_xml_parser_ {
 		, Id_amp = 33, Id_quot = 34, Id_gt = 35, Id_lt = 36
 		, Id_tab = 37, Id_cr_nl = 38, Id_cr = 39
 		;
-	private static void trie_add(Btrie_fast_mgr rv, byte[] hook, byte id)						{rv.Add(hook, new Xob_xml_parser_itm(hook, id, Byte_.Zero	, Bry_.Empty));}
-	private static void trie_add(Btrie_fast_mgr rv, byte[] hook, byte id, byte subst_byte)	{rv.Add(hook, new Xob_xml_parser_itm(hook, id, subst_byte	, Bry_.Empty));}
-	private static void trie_add(Btrie_fast_mgr rv, byte[] hook, byte id, byte[] subst_ary)	{rv.Add(hook, new Xob_xml_parser_itm(hook, id, Byte_.Zero	, subst_ary));}
+	private static void trie_add(Btrie_fast_mgr rv, byte[] hook, byte id)						{rv.Add(hook, new Xob_xml_parser_itm(hook, id, ByteUtl.Zero	, BryUtl.Empty));}
+	private static void trie_add(Btrie_fast_mgr rv, byte[] hook, byte id, byte subst_byte)	{rv.Add(hook, new Xob_xml_parser_itm(hook, id, subst_byte	, BryUtl.Empty));}
+	private static void trie_add(Btrie_fast_mgr rv, byte[] hook, byte id, byte[] subst_ary)	{rv.Add(hook, new Xob_xml_parser_itm(hook, id, ByteUtl.Zero	, subst_ary));}
 }
 class Xob_xml_parser_itm {
 	public Xob_xml_parser_itm(byte[] hook, byte tid, byte subst_byte, byte[] subst_ary) {this.hook = hook; this.hook_len = hook.length; this.tid = tid; this.subst_byte = subst_byte; this.subst_ary = subst_ary;}

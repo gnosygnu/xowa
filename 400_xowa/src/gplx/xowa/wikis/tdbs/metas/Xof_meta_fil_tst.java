@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.metas;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url_;
 import org.junit.*; import gplx.xowa.files.*;
 public class Xof_meta_fil_tst {
 	Xof_meta_fil_fxt fxt = new Xof_meta_fil_fxt();
@@ -23,5 +26,5 @@ public class Xof_meta_fil_tst {
 class Xof_meta_fil_fxt {
 	byte[] md5_(byte[] name) {return Xof_file_wkr_.Md5(name);}
 	public void Ini() {}
-	public void Bld_url(String root, String md5, int depth, String expd) {Tfds.Eq(expd, Xof_meta_fil.Bld_url(Io_url_.new_dir_(root), Bry_.new_a7(md5), depth).Raw());}
+	public void Bld_url(String root, String md5, int depth, String expd) {GfoTstr.EqObj(expd, Xof_meta_fil.Bld_url(Io_url_.new_dir_(root), BryUtl.NewA7(md5), depth).Raw());}
 }

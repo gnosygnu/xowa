@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.wikis.tdbs.hives;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*;
 import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.wikis.nss.*;
@@ -39,13 +43,13 @@ public class Xowd_hive_mgr {
 		Io_url url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), fil_idx);
 		byte[] bry = Io_mgr.Instance.LoadFilBry(url);
 		Xob_xdat_file xdat = new Xob_xdat_file();
-		if (bry != Bry_.Empty)
+		if (bry != BryUtl.Empty)
 			xdat.Parse(bry, bry.length, url);
-		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tmp = wiki.Utl__bfr_mkr().GetM001();
 		xdat.Insert(tmp, data);
 		if (comparer != null)
 			xdat.Sort(tmp, comparer);
-		tmp.Mkr_rls();
+		tmp.MkrRls();
 		xdat.Save(url);
 		reg_mgr.Save();
 	}
@@ -63,13 +67,13 @@ public class Xowd_hive_mgr {
 		Io_url url = fsys_mgr.Url_site_fil(dir_tid, fil_idx);
 		byte[] bry = Io_mgr.Instance.LoadFilBry(url);
 		Xob_xdat_file xdat = new Xob_xdat_file();
-		if (bry != Bry_.Empty)
+		if (bry != BryUtl.Empty)
 			xdat.Parse(bry, bry.length, url);
-		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tmp = wiki.Utl__bfr_mkr().GetM001();
 		xdat.Insert(tmp, data);
 		if (comparer != null)
 			xdat.Sort(tmp, comparer);
-		tmp.Mkr_rls();
+		tmp.MkrRls();
 		xdat.Save(url);
 		reg_mgr.Save();
 	}
@@ -82,15 +86,15 @@ public class Xowd_hive_mgr {
 		Io_url url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), fil_idx);
 		byte[] bry = Io_mgr.Instance.LoadFilBry(url);
 		Xob_xdat_file xdat = new Xob_xdat_file();
-		if (bry != Bry_.Empty)
+		if (bry != BryUtl.Empty)
 			xdat.Parse(bry, bry.length, url);
-		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tmp = wiki.Utl__bfr_mkr().GetM001();
 		Xob_xdat_itm itm = new Xob_xdat_itm(); 
 		xdat.Find(itm, old_key, lkp_bgn, lkp_dlm, exact);
 		if (itm.Missing()) return;
 		xdat.Update(tmp, itm, data);
 		if (sort) xdat.Sort(tmp, new Bry_comparer_bgn_eos(lkp_bgn));
-		tmp.Mkr_rls();
+		tmp.MkrRls();
 		xdat.Save(url);
 		if (reg_save) reg_mgr.Save();
 	}

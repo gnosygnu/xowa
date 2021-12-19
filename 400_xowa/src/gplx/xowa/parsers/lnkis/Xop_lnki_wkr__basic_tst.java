@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.lnkis;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xop_fxt;
@@ -103,7 +103,7 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test public void Border_with_space_should_not_be_caption() {// happens with {{flag}}; EX: [[Image:Flag of Argentina.svg|22x20px|border |alt=|link=]]
 		Xop_root_tkn root = fxt.Test_parse_page_wiki_root("[[Image:a.svg|22x20px|border |alt=|link=]]");
 		Xop_lnki_tkn lnki = (Xop_lnki_tkn)root.Subs_get(0);
-		Tfds.Eq(Xop_tkn_itm_.Tid_null, lnki.Caption_tkn().Tkn_tid());
+		GfoTstr.EqObj(Xop_tkn_itm_.Tid_null, lnki.Caption_tkn().Tkn_tid());
 	}
 	@Test public void Ws_key_bgn() {
 		fxt.Test_parse_page_wiki("[[Image:a| alt=b]]", fxt.tkn_lnki_()
@@ -166,14 +166,14 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_wiki("[[a|=]]", fxt.tkn_lnki_(0, 7));
 	}
 	@Test public void Unclosed() {	// PURPOSE: unclosed lnki skips rendering of next table; PAGE:en.w:William Penn (Royal Navy officer)
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "a [[b|c]"
 		, ""
 		, "{|"
 		, "|-"
 		, "|d"
 		, "|}"
-		),String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "a [[b|c] "	// NOTE: \n is converted to \s b/c caption does not allow \n
 		, "<table>"
 		, "  <tr>"
@@ -186,12 +186,12 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test public void Caption_nl() {	// PURPOSE: \n in caption should be rendered as space; PAGE:en.w:Schwarzschild radius; and the stellar [[Velocity dispersion|velocity\ndispersion]]
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "a [[b|c"
 		, ""
 		, ""
 		, "d]]"
-		),	String_.Concat_lines_nl_skip_last
+		),	StringUtl.ConcatLinesNlSkipLast
 		( "<p>a <a href=\"/wiki/B\">c   d</a>"	// NOTE: this depends on html viewer to collapse multiple spaces into 1
 		, "</p>"
 		, ""
@@ -200,12 +200,12 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test public void Caption_nl_2() {	// PURPOSE: unclosed lnki breaks paragraph unexpectedly; PAGE:en.w:Oldsmobile;
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, ""
 		, "b [[c"
 		, ""	// NOTE: this new line is needed to produce strange behavior
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<p>a"
 		, "</p>"
 		, ""
@@ -216,9 +216,9 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Init_para_n_();
 	}
 	@Test public void Caption_ref() {	// PURPOSE: <ref> not handled in lnki; PAGE:en.w:WWI
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "[[File:A.png|thumb|b <ref>c</ref>]]"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
 		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
@@ -232,13 +232,13 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test public void Html_ent_pound() {
 		fxt.Test_parse_page_wiki_str
-		( "[[A&#35;b|c]]", String_.Concat_lines_nl_skip_last
+		( "[[A&#35;b|c]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/A#b\">c</a>"
 		));
 	}
 	@Test public void Html_ent_ltr_a() {
 		fxt.Test_parse_page_wiki_str
-		( "[[A&#98;|c]]", String_.Concat_lines_nl_skip_last
+		( "[[A&#98;|c]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/Ab\">c</a>"
 		));
 	}
@@ -248,7 +248,7 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test public void Thumb_first_align_trumps_all() {	// PURPOSE: if there are multiple alignment instructions, take the first EX:[[File:A.png|thumb|center|left]] DATE:20121226
 		fxt.Test_parse_page_wiki_str("[[File:A.png|thumb|right|center]]"	// NOTE: right trumps center
-			, String_.Concat_lines_nl_skip_last
+			, StringUtl.ConcatLinesNlSkipLast
 		( Xop_para_wkr_basic_tst.File_html("File", "A.png", "7/0", "")
 		, ""
 		));
@@ -275,36 +275,36 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test public void Link__invalid() {	// PURPOSE.fix: do not render invalid text; EX: link={{{1}}}; [[Fil:Randers_-_Hadsund_railway.png|120x160px|link={{{3}}}|Randers-Hadsund Jernbane]]; DATE:2013-03-04
 		fxt.Test_parse_page_wiki_str
-		( "[[File:A.png|12x10px|link={{{1}}}|c]]", String_.Concat_lines_nl_skip_last
+		( "[[File:A.png|12x10px|link={{{1}}}|c]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/12px.png\" width=\"12\" height=\"10\" /></a>"
 		));
 	}
 	@Test public void Link__html_ent() {// PURPOSE:html entities should be converted to chars; EX:&nbsp; -> _; DATE:2013-12-16
 		fxt.Test_parse_page_wiki_str
-		( "[[File:A.png|link=b&nbsp;c]]", String_.Concat_lines_nl_skip_last
+		( "[[File:A.png|link=b&nbsp;c]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/B_c\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		));
 	}
 	@Test public void Link__encode() {// PURPOSE:spaces should become underscore; DATE:2015-11-27
 		fxt.Test_parse_page_wiki_str
-		( "[[File:A.png|link=File:A b ç.ogg]]", String_.Concat_lines_nl_skip_last
+		( "[[File:A.png|link=File:A b ç.ogg]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/File:A_b_%C3%A7.ogg\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>"
 		));
 	}
 	@Test public void Href_anchor_leading_space() {	// PURPOSE: ?action=edit should be encoded; DATE:2013-02-10
 		fxt.Test_parse_page_all_str("[[A #b]]", "<a href=\"/wiki/A#b\">A #b</a>");
 	}
-	@Test  public void Anchor_not_shown_for_wikipedia_ns() {	// PURPOSE: Help:A#b was omitting anchor; showing text of "Help:A"; DATE:2013-06-21
+	@Test public void Anchor_not_shown_for_wikipedia_ns() {	// PURPOSE: Help:A#b was omitting anchor; showing text of "Help:A"; DATE:2013-06-21
 		fxt.Test_parse_page_all_str("[[Help:A#b]]", "<a href=\"/wiki/Help:A#b\">Help:A#b</a>");
 	}
-	@Test  public void Anchor_shown_for_main_ns() {	// PURPOSE: counterpart to Anchor_not_shown_for_wikipedia_ns; DATE:2013-06-21
+	@Test public void Anchor_shown_for_main_ns() {	// PURPOSE: counterpart to Anchor_not_shown_for_wikipedia_ns; DATE:2013-06-21
 		fxt.Test_parse_page_all_str("[[A#b]]", "<a href=\"/wiki/A#b\">A#b</a>");
 	}
-	@Test  public void Trail_en() {
+	@Test public void Trail_en() {
 		fxt.Test_parse_page_all_str("[[Ab]]cd e", "<a href=\"/wiki/Ab\">Abcd</a> e");
 	}
-	@Test  public void Trail_fr() {
-		byte[] ltr_c_in_french = Bry_.new_u8("ç");
+	@Test public void Trail_fr() {
+		byte[] ltr_c_in_french = BryUtl.NewU8("ç");
 		Xol_lnki_trail_mgr lnki_trail_mgr = fxt.Wiki().Lang().Lnki_trail_mgr();
 		lnki_trail_mgr.Add(ltr_c_in_french);
 		fxt.Test_parse_page_all_str("[[Ab]]çd e", "<a href=\"/wiki/Ab\">Abçd</a> e");
@@ -315,7 +315,7 @@ public class Xop_lnki_wkr__basic_tst {
 	}
 	@Test public void Visited() { // PURPOSE: show redirected titles as visited; EX:fr.w:Alpes_Pennines; DATE:2014-02-28
 		Xowe_wiki wiki = fxt.Wiki();
-		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_a7("Src"));								// simulate requrest for "Src" page
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, BryUtl.NewA7("Src"));								// simulate requrest for "Src" page
 		Xoae_page previous_page = Xoae_page.New_test(wiki, ttl);
 		previous_page.Redirect_trail().Itms__add__article(previous_page.Url(), ttl, null);	// simulate redirect from "Src"
 		fxt.App().Usere().History_mgr().Add(previous_page);									// simulate "Src" already being clicked once; this is the key call
@@ -323,14 +323,14 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_all_str("[[Src]]"		, "<a href=\"/wiki/Src\" class=\"xowa-visited\">Src</a>");	// show [[Src]] as visited since it exists in history
 		fxt.Test_parse_page_all_str("[[Other]]"		, "<a href=\"/wiki/Other\">Other</a>");						// show other pages as not visited
 	}
-	@Test  public void File_keywords__ignore_if_not_file_ns() { // ISSUE#:303 DATE:2019-03-24
+	@Test public void File_keywords__ignore_if_not_file_ns() { // ISSUE#:303 DATE:2019-03-24
 		fxt.Test_parse_page_all_str("[[A|class]]", "<a href=\"/wiki/A\">class</a>");
 		fxt.Test_parse_page_all_str("[[A|alt]]", "<a href=\"/wiki/A\">alt</a>");
 		fxt.Test_parse_page_all_str("[[A|sub]]", "<a href=\"/wiki/A\">sub</a>");
 		fxt.Test_parse_page_all_str("[[A|sup]]", "<a href=\"/wiki/A\">sup</a>");
 		fxt.Test_parse_page_all_str("[[A|alt|a|b]]", "<a href=\"/wiki/A\">alt|a|b</a>");
 	}
-	@Test  public void File_keywords__ignore_if_no_key() { // ISSUE#:303; DATE:2019-03-24
+	@Test public void File_keywords__ignore_if_no_key() { // ISSUE#:303; DATE:2019-03-24
 		// assert treated as captions if no key
 		Test__File_keywords__ignore_if_no_key("class", "alt", "link", "page", "thumbtime");
 

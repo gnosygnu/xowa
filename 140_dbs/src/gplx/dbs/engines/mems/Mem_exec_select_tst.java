@@ -14,61 +14,61 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.mems;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_null;
 import gplx.dbs.Db_qry;
 import gplx.dbs.Db_qry_;
 import gplx.dbs.sqls.itms.Sql_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Mem_exec_select_tst {
 	private final Mem_db_fxt__single fxt = new Mem_db_fxt__single();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Exec__create_tbl("tbl_1", "fld_1");
 		fxt.Exec__insert("tbl_1"
-		, String_.Ary("a_1")
-		, String_.Ary("a_2")
-		, String_.Ary("a_0")
+		, StringUtl.Ary("a_1")
+		, StringUtl.Ary("a_2")
+		, StringUtl.Ary("a_0")
 		);
 
 		// select all
 		fxt.Test__select(Db_qry_.select_().From_("tbl_1").Cols_all_()
-		, String_.Ary("a_1")
-		, String_.Ary("a_2")
-		, String_.Ary("a_0")
+		, StringUtl.Ary("a_1")
+		, StringUtl.Ary("a_2")
+		, StringUtl.Ary("a_0")
 		);
 
 		// order by
 		fxt.Test__select(Db_qry_.select_().From_("tbl_1").Cols_all_().Order_("fld_1", BoolUtl.N)
-		, String_.Ary("a_2")
-		, String_.Ary("a_1")
-		, String_.Ary("a_0")
+		, StringUtl.Ary("a_2")
+		, StringUtl.Ary("a_1")
+		, StringUtl.Ary("a_0")
 		);
 
 		// offset
 		fxt.Test__select(Db_qry_.select_().From_("tbl_1").Cols_all_().Offset_(1)
-		, String_.Ary("a_2")
-		, String_.Ary("a_0")
+		, StringUtl.Ary("a_2")
+		, StringUtl.Ary("a_0")
 		);
 
 		// limit
 		fxt.Test__select(Db_qry_.select_().From_("tbl_1").Cols_all_().Limit_(2)
-		, String_.Ary("a_1")
-		, String_.Ary("a_2")
+		, StringUtl.Ary("a_1")
+		, StringUtl.Ary("a_2")
 		);
 	}
-	@Test   public void Join__single() {
+	@Test  public void Join__single() {
 		fxt.Exec__create_tbl("tbl_1", "fld_a", "fld_1a");
 		fxt.Exec__create_tbl("tbl_2", "fld_a", "fld_2a");
 		fxt.Exec__insert("tbl_1"
-		, String_.Ary("a_0", "1a_0")
-		, String_.Ary("a_1", "1a_1")
-		, String_.Ary("a_2", "1a_2")
+		, StringUtl.Ary("a_0", "1a_0")
+		, StringUtl.Ary("a_1", "1a_1")
+		, StringUtl.Ary("a_2", "1a_2")
 		);
 		fxt.Exec__insert("tbl_2"
-		, String_.Ary("a_0", "2a_0")
-		, String_.Ary("a_2", "2a_2")
+		, StringUtl.Ary("a_0", "2a_0")
+		, StringUtl.Ary("a_2", "2a_2")
 		);
 
 		// inner join
@@ -76,8 +76,8 @@ public class Mem_exec_select_tst {
 		.Cols_w_tbl_("t1", "fld_a", "fld_1a").Cols_w_tbl_("t2", "fld_2a")
 		.From_("tbl_1", "t1")
 		.	Join_("tbl_2", "t2", Db_qry_.New_join__join("fld_a", "t1", "fld_a"))
-		, String_.Ary("a_0", "1a_0", "2a_0")
-		, String_.Ary("a_2", "1a_2", "2a_2")
+		, StringUtl.Ary("a_0", "1a_0", "2a_0")
+		, StringUtl.Ary("a_2", "1a_2", "2a_2")
 		);
 
 		// left join
@@ -85,21 +85,21 @@ public class Mem_exec_select_tst {
 		.Cols_w_tbl_("t1", "fld_a", "fld_1a").Cols_w_tbl_("t2", "fld_2a")
 		.From_("tbl_1", "t1")
 		.	Join_(Sql_tbl_itm.Tid__left, Sql_tbl_itm.Db__null, "tbl_2", "t2", Db_qry_.New_join__join("fld_a", "t1", "fld_a"))
-		, String_.Ary("a_0", "1a_0", "2a_0")
-		, String_.Ary("a_1", "1a_1", Db_null.Null_str)
-		, String_.Ary("a_2", "1a_2", "2a_2")
+		, StringUtl.Ary("a_0", "1a_0", "2a_0")
+		, StringUtl.Ary("a_1", "1a_1", Db_null.Null_str)
+		, StringUtl.Ary("a_2", "1a_2", "2a_2")
 		);
 	}
-	@Test   public void Join__many() {
+	@Test  public void Join__many() {
 		fxt.Exec__create_tbl("tbl_1", "fld_a", "fld_1a");
 		fxt.Exec__create_tbl("tbl_2", "fld_a", "fld_2a");
 		fxt.Exec__insert("tbl_1"
-		, String_.Ary("a_0", "1a_0")
-		, String_.Ary("a_1", "1a_1")
+		, StringUtl.Ary("a_0", "1a_0")
+		, StringUtl.Ary("a_1", "1a_1")
 		);
 		fxt.Exec__insert("tbl_2"
-		, String_.Ary("a_0", "2a_0")
-		, String_.Ary("a_0", "2a_1")
+		, StringUtl.Ary("a_0", "2a_0")
+		, StringUtl.Ary("a_0", "2a_1")
 		);
 
 		// inner join
@@ -107,8 +107,8 @@ public class Mem_exec_select_tst {
 		.Cols_w_tbl_("t1", "fld_a", "fld_1a").Cols_w_tbl_("t2", "fld_2a")
 		.From_("tbl_1", "t1")
 		.	Join_("tbl_2", "t2", Db_qry_.New_join__join("fld_a", "t1", "fld_a"))
-		, String_.Ary("a_0", "1a_0", "2a_0")
-		, String_.Ary("a_0", "1a_0", "2a_1")
+		, StringUtl.Ary("a_0", "1a_0", "2a_0")
+		, StringUtl.Ary("a_0", "1a_0", "2a_1")
 		);
 
 		// left join
@@ -116,9 +116,9 @@ public class Mem_exec_select_tst {
 		.Cols_w_tbl_("t1", "fld_a", "fld_1a").Cols_w_tbl_("t2", "fld_2a")
 		.From_("tbl_1", "t1")
 		.	Join_(Sql_tbl_itm.Tid__left, Sql_tbl_itm.Db__null, "tbl_2", "t2", Db_qry_.New_join__join("fld_a", "t1", "fld_a"))
-		, String_.Ary("a_0", "1a_0", "2a_0")
-		, String_.Ary("a_0", "1a_0", "2a_1")
-		, String_.Ary("a_1", "1a_1", Db_null.Null_str)
+		, StringUtl.Ary("a_0", "1a_0", "2a_0")
+		, StringUtl.Ary("a_0", "1a_0", "2a_1")
+		, StringUtl.Ary("a_1", "1a_1", Db_null.Null_str)
 		);
 	}
 }

@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.jsonConfigs.scribunto;
-
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.wikis.domains.Xow_domain_itm_;
@@ -55,12 +55,12 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_get:										return Get(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int Proc_get = 0;
 	public static final String Invk_get = "get";
-	private static final String[] Proc_names = String_.Ary(Invk_get);
+	private static final String[] Proc_names = StringUtl.Ary(Invk_get);
 	public boolean Get(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Xstr_bry_or_null(0);
 		byte[] langCode = args.Xstr_bry_or_null(1);
@@ -70,7 +70,7 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 		if (langCode == null) {
 			language = this.core.Wiki().Lang();
 		}
-		else if (!Bry_.Eq(langCode, AsciiByte.UnderlineBry)) {
+		else if (!BryLni.Eq(langCode, AsciiByte.UnderlineBry)) {
 			language = this.core.Wiki().App().Lang_mgr().Get_by_or_null(langCode);
 		}
 		else {
@@ -86,16 +86,16 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 		commons_wiki.Init_assert();
 
 		// get page
-		byte[] ttl_in_data_ns = Bry_.Add(gplx.xowa.wikis.nss.Xow_ns_.Bry__data, AsciiByte.ColonBry, ttl_bry);
+		byte[] ttl_in_data_ns = BryUtl.Add(gplx.xowa.wikis.nss.Xow_ns_.Bry__data, AsciiByte.ColonBry, ttl_bry);
 		byte[] page = Scrib_lib_title.GetContentInternal(core, commons_wiki, ttl_in_data_ns);
 		if (page == null) {
-			throw Err_.new_wo_type("bad argument #1 to 'get' (not a valid title) " + String_.new_u8(ttl_bry));
+			throw ErrUtl.NewArgs("bad argument #1 to 'get' (not a valid title) " + StringUtl.NewU8(ttl_bry));
 		}
 
 		// get content
-		Keyval[] rv = null;
+		KeyVal[] rv = null;
 		if (page == null) {
-			rv = Keyval_.Ary_empty;
+			rv = KeyValUtl.AryEmpty;
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "bad argument #1 to 'get' (page does not exist): ~{0}", ttl_bry);
 		} else {
 			rv = Scrib_lib_text.JsonDecodeStatic(args, core, json_util, page, Scrib_lib_text__json_util.Opt__force_assoc, Scrib_lib_text__json_util.Flag__none);

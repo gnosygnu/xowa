@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.dynamicPageList;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 class Dpl_sort {
 	public static final byte Tid_null = 0, Tid_lastedit = 1, Tid_length = 2, Tid_created = 3, Tid_sortkey = 4, Tid_categorysortkey = 5, Tid_popularity = 6, Tid_categoryadd = 7;
 	public static byte Parse_as_bool_byte(byte[] bry) {

@@ -13,16 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wiki_cfgs; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
+package gplx.xowa.bldrs.wiki_cfgs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 import gplx.xowa.*;
-import org.junit.*; import gplx.core.strings.*;
+import org.junit.*;
 import gplx.xowa.addons.bldrs.app_cfgs.*;
 public class Xoi_wiki_props_api_tst {
 	private Xoi_wiki_props_fxt fxt = new Xoi_wiki_props_fxt();
 	@Before public void init() {} // private Xob_subpage_tst_fxt fxt = new] Xob_subpage_tst_fxt();
-	@Test  public void Parse() {
-		fxt.Test_parse(String_.Concat_lines_nl
+	@Test public void Parse() {
+		fxt.Test_parse(StringUtl.ConcatLinesNl
 		(	"<api>"
 		,	"<query>"
 		,	"	<namespacealiases>"
@@ -40,7 +48,7 @@ public class Xoi_wiki_props_api_tst {
 		.Ns_ary_(fxt.ns_(0, false), fxt.ns_(1, true))
 		);
 	}
-//		@Test  public void Build() {
+//		@Test public void Build() {
 //			fxt.Test_build(fxt.wiki_("enwiki")
 //				.Alias_ary_(fxt.alias_(4, "WP"), fxt.alias_(5, "WT"))
 //				.Ns_ary_(fxt.ns_(0, false), fxt.ns_(1, true))
@@ -62,35 +70,35 @@ public class Xoi_wiki_props_api_tst {
 }
 class Xoi_wiki_props_fxt {
 	private Xoi_wiki_props_api api = new Xoi_wiki_props_api();
-	private Bry_bfr bfr = Bry_bfr_.New();
+	private BryWtr bfr = BryWtr.New();
 	public Xoi_wiki_props_wiki wiki_() {return wiki_("domain_doesnt_matter");}
-	public Xoi_wiki_props_wiki wiki_(String wiki_domain) {return new Xoi_wiki_props_wiki().Wiki_domain_(Bry_.new_a7(wiki_domain));}
+	public Xoi_wiki_props_wiki wiki_(String wiki_domain) {return new Xoi_wiki_props_wiki().Wiki_domain_(BryUtl.NewA7(wiki_domain));}
 	public Xoi_wiki_props_alias alias_(int id, String alias) {return new Xoi_wiki_props_alias().Init_by_ctor(id, alias);}
 	public Xoi_wiki_props_ns ns_(int id, boolean subpages_enabled) {return new Xoi_wiki_props_ns().Init_by_ctor(id, subpages_enabled);}
 	public void Test_parse(String xml, Xoi_wiki_props_wiki expd) {
 		Xoi_wiki_props_wiki actl = new Xoi_wiki_props_wiki();
 		api.Parse(actl, xml);
-		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(actl));
+		GfoTstr.EqLines(Xto_str(expd), Xto_str(actl));
 	}
 	public void Test_build(Xoi_wiki_props_wiki wiki, String expd) {
 		api.Build_cfg(bfr, wiki);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 	private String Xto_str(Xoi_wiki_props_wiki v) {
 		int len = v.Alias_ary().length;
-		bfr.Add_str_a7("aliases").Add_byte_nl();
+		bfr.AddStrA7("aliases").AddByteNl();
 		for (int i = 0; i < len; i++) {
 			Xoi_wiki_props_alias alias = v.Alias_ary()[i];
-			bfr.Add_int_variable(alias.Id()).Add_byte_pipe().Add_str_u8(alias.Alias()).Add_byte_nl();
+			bfr.AddIntVariable(alias.Id()).AddBytePipe().AddStrU8(alias.Alias()).AddByteNl();
 		}
-		bfr.Add_str_a7("ns").Add_byte_nl();
+		bfr.AddStrA7("ns").AddByteNl();
 		len = v.Ns_ary().length;
 		for (int i = 0; i < len; i++) {
 			Xoi_wiki_props_ns ns = v.Ns_ary()[i];
-			bfr.Add_int_variable(ns.Id()).Add_byte_pipe().Add_int_bool(ns.Subpages_enabled()).Add_byte_nl();
+			bfr.AddIntVariable(ns.Id()).AddBytePipe().AddIntBool(ns.Subpages_enabled()).AddByteNl();
 		}
-		bfr.Add_byte_nl();
-		return bfr.To_str_and_clear();
+		bfr.AddByteNl();
+		return bfr.ToStrAndClear();
 	}
 }
 class Xob_subpage_tst_fxt {
@@ -114,12 +122,12 @@ class Xob_subpage_tst_fxt {
 	}
 	private String_bldr sb = String_bldr_.new_();
 	public void Test_parse(String s) {
-		Xob_subpage_wiki[] actl = parser.Parse(Bry_.new_u8(s));
-		Tfds.Eq_str_lines("", X_str_wikis(actl));
+		Xob_subpage_wiki[] actl = parser.Parse(BryUtl.NewU8(s));
+		GfoTstr.EqLines("", X_str_wikis(actl));
 	}		
 	public String X_str_wikis(Xob_subpage_wiki[] ary) {
 		X_str_wikis(sb, ary);
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 		
 	}
 	private void X_str_wikis(String_bldr sb, Xob_subpage_wiki[] ary) {
@@ -130,12 +138,12 @@ class Xob_subpage_tst_fxt {
 		}
 	}
 	private void X_str_wiki(String_bldr sb, Xob_subpage_wiki wiki) {
-		sb.Add(wiki.Name()).Add_char_nl();
+		sb.Add(wiki.Name()).AddCharNl();
 		int ns_len = wiki.Ns_list().Len();
 		for (int i = 0; i < ns_len; i++) {
-			Xob_subpage_ns ns = (Xob_subpage_ns)wiki.Ns_list().Get_at(i);
-			sb.Add(ns.Id()).Add("=").Add(BoolUtl.ToStrLower(ns.Enabled())).Add_char_nl();
+			Xob_subpage_ns ns = (Xob_subpage_ns)wiki.Ns_list().GetAt(i);
+			sb.Add(ns.Id()).Add("=").Add(BoolUtl.ToStrLower(ns.Enabled())).AddCharNl();
 		}
-		sb.Add_char_nl();
+		sb.AddCharNl();
 	}
 }

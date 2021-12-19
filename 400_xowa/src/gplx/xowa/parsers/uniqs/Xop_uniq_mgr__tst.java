@@ -14,34 +14,34 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.uniqs;
-import gplx.Bry_;
-import gplx.Int_ary_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xop_uniq_mgr__tst {
 	private final Xop_uniq_mgr__fxt fxt = new Xop_uniq_mgr__fxt();
 	@Before public void init() {fxt.Init();}
 	@Test public void Test__random_bry() {
-		fxt.Init_random_int_ary(Int_ary_.New(240563374, 22728940, 1451248133));
+		fxt.Init_random_int_ary(IntAryUtl.New(240563374, 22728940, 1451248133));
 		fxt.Test__uniq_bry_new("'\"`UNIQ-E56B4AE15AD0EC68");
 
-		fxt.Init_random_int_ary(Int_ary_.New(1363621437, 426295411, 421041101));
+		fxt.Init_random_int_ary(IntAryUtl.New(1363621437, 426295411, 421041101));
 		fxt.Test__uniq_bry_new("'\"`UNIQ-147363D968C07391");
 	}
-	@Test  public void Add_and_get() {
+	@Test public void Add_and_get() {
 		String expd_key = "'\"`UNIQ--item-0-QINU`\"'";
 		fxt.Test__add("a", expd_key);
 		fxt.Test__get(expd_key, "a");
 	}
-	@Test  public void Parse__basic() {
+	@Test public void Parse__basic() {
 		String expd_key = "'\"`UNIQ--item-0-QINU`\"'";
 		fxt.Test__add("_b_", expd_key);
 		fxt.Test__parse("a" + expd_key + "c", "a_b_c");
 	}
-	@Test  public void Parse__recurse() {
+	@Test public void Parse__recurse() {
 		String key_0 = "'\"`UNIQ--item-0-QINU`\"'";
 		String key_1 = "'\"`UNIQ--item-1-QINU`\"'";
 		String key_2 = "'\"`UNIQ--item-2-QINU`\"'";
@@ -50,12 +50,12 @@ public class Xop_uniq_mgr__tst {
 		fxt.Test__add("2-" + key_1 + "-2", key_2);
 		fxt.Test__parse("3-" + key_2 + "-3", "3-2-1-0-1-2-3");
 	}
-	@Test  public void Convert() {
+	@Test public void Convert() {
 		String key = "'\"`UNIQ--item-0-QINU`\"'";
 		fxt.Test__add("2", key);
 		fxt.Test__convert("1" + key + "3", "123");
 	}
-	@Test  public void Convert__many() {
+	@Test public void Convert__many() {
 		String key_0 = "'\"`UNIQ--item-0-QINU`\"'";
 		String key_1 = "'\"`UNIQ--item-1-QINU`\"'";
 		fxt.Test__add("0", key_0);
@@ -68,18 +68,18 @@ class Xop_uniq_mgr__fxt {
 	public Xop_uniq_mgr__fxt Init_random_int_ary(int... v) {mgr.Random_int_ary_(v); return this;}
 	public void Init() {mgr.Clear();}
 	public void Test__uniq_bry_new(String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Uniq_bry_new()), "unique_bry");
+		GfoTstr.Eq(expd, StringUtl.NewA7(mgr.Uniq_bry_new()), "unique_bry");
 	}
 	public void Test__add(String raw, String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Add(BoolUtl.Y, Bry_.new_a7("item"), Bry_.new_a7(raw))), "add");
+		GfoTstr.Eq(expd, StringUtl.NewA7(mgr.Add(BoolUtl.Y, BryUtl.NewA7("item"), BryUtl.NewA7(raw))), "add");
 	}
 	public void Test__get(String key, String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Get(Bry_.new_a7(key))), "get");
+		GfoTstr.Eq(expd, StringUtl.NewA7(mgr.Get(BryUtl.NewA7(key))), "get");
 	}
 	public void Test__parse(String raw, String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Parse(Bry_.new_a7(raw))), "parse");
+		GfoTstr.Eq(expd, StringUtl.NewA7(mgr.Parse(BryUtl.NewA7(raw))), "parse");
 	}
 	public void Test__convert(String raw, String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Parse(Bry_.new_a7(raw))), "convert");
+		GfoTstr.Eq(expd, StringUtl.NewA7(mgr.Parse(BryUtl.NewA7(raw))), "convert");
 	}
 }

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.lnkes;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
@@ -56,7 +58,7 @@ public class Xoh_lnke_data implements Xoh_data_itm {
 		this.capt_end = anch_tail.Src_bgn();
 		switch (lnke_tid) {
 			case Xoh_lnke_dict_.Type__free:
-				if (!Bry_.Match(src, href_bgn, href_end, src, capt_bgn, capt_end)) 				// EX: <a href='https://a.org/. ' rel='nofollow' class='external free'>https://a.org/.</a>
+				if (!BryLni.Eq(src, href_bgn, href_end, src, capt_bgn, capt_end)) 				// EX: <a href='https://a.org/. ' rel='nofollow' class='external free'>https://a.org/.</a>
 					capt_exists = true;
 				break;
 			case Xoh_lnke_dict_.Type__text:
@@ -65,7 +67,7 @@ public class Xoh_lnke_data implements Xoh_data_itm {
 			case Xoh_lnke_dict_.Type__auto:
 				if (	src[capt_bgn]		== AsciiByte.BrackBgn                                // is capt surround by bracks; EX: "[123]"
 					&&	src[capt_end - 1]	== AsciiByte.BrackEnd) {
-					int tmp_id = Bry_.To_int_or(src, capt_bgn + 1, capt_end - 1, -1);			// extract int; EX: "<a ...>[123]</a>"
+					int tmp_id = BryUtl.ToIntOr(src, capt_bgn + 1, capt_end - 1, -1);			// extract int; EX: "<a ...>[123]</a>"
 					if (tmp_id == -1)															// HTML tidy can reparent lnkes in strange ways; EX: "<a ...><b>[123]</b></a>" DATE:2015-08-25
 						capt_exists = true;
 					else

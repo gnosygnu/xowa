@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.GfoMsg;
-import gplx.GfoMsg_;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
+package gplx.gfui.ipts; import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.controls.elems.GfuiElemKeys;
 import gplx.gfui.envs.TimerAdp;

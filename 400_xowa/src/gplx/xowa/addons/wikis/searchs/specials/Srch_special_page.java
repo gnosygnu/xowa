@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.searchs.specials;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 import gplx.xowa.specials.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 public class Srch_special_page implements Xow_special_page {
@@ -29,8 +35,8 @@ public class Srch_special_page implements Xow_special_page {
 
 		// parse args_default_str
 		String args_default_str = wiki.App().Cfg().Get_str_wiki_or(wiki, Srch_search_mgr.Cfg__args_default, "");
-		if (String_.Len_gt_0(args_default_str)) {
-			byte[] bry = Bry_.new_a7("http://x.org/a?" + args_default_str);
+		if (StringUtl.IsNotNullOrEmpty(args_default_str)) {
+			byte[] bry = BryUtl.NewA7("http://x.org/a?" + args_default_str);
 			gplx.core.net.Gfo_url tmp_url = wiki.App().User().Wikii().Utl__url_parser().Url_parser().Parse(bry, 0, bry.length);
 			qargs_mgr.Parse(tmp_url.Qargs());
 		}
@@ -43,14 +49,14 @@ public class Srch_special_page implements Xow_special_page {
 			search_raw = ttl.Leaf_txt_wo_qarg();	// assume search is in leaf; EX: Special:Search/Earth
 			qargs_mgr.Search_raw_(search_raw);
 		}
-		if (Bry_.Len_eq_0(search_raw)) return;		// emptry String; exit now, else null ref error; DATE:2015-08-11
+		if (BryUtl.IsNullOrEmpty(search_raw)) return;		// emptry String; exit now, else null ref error; DATE:2015-08-11
 
 		// get page directly from url
 		boolean fulltext_invoked = url.Qargs_mgr().Match(Qarg__fulltext, Qarg__fulltext__y);
 		Xoa_ttl search_ttl = Xoa_ttl.Parse(wiki, search_raw); 
 		Xoae_page search_page = page;
 		if (	!fulltext_invoked
-			&&	!Bry_.Eq(search_raw, Xow_special_meta_.Itm__search.Ttl_bry()))	// do not lookup self else stack overflow; happens when going directly to Special:Search (from history)
+			&&	!BryLni.Eq(search_raw, Xow_special_meta_.Itm__search.Ttl_bry()))	// do not lookup self else stack overflow; happens when going directly to Special:Search (from history)
 			search_page = wiki.Data_mgr().Load_page_by_ttl(search_ttl);					// try to find page; EX:Special:Search?search=Earth -> en.w:Earth; needed for search suggest
 
 		// page not found, or explicit_search invoked
@@ -79,7 +85,7 @@ public class Srch_special_page implements Xow_special_page {
 	}
 	public static final byte Match_tid_all = 0, Match_tid_bgn = 1;
 	public static final byte Version_null = 0, Version_1 = 1, Version_2 = 2;
-	private static final byte[] Qarg__fulltext = Bry_.new_a7("fulltext"), Qarg__fulltext__y = Bry_.new_a7("y");
+	private static final byte[] Qarg__fulltext = BryUtl.NewA7("fulltext"), Qarg__fulltext__y = BryUtl.NewA7("y");
 	private static Xow_domain_itm[] Get_by_crt(gplx.xowa.wikis.xwikis.Xow_xwiki_mgr xwiki_mgr, Xow_domain_itm cur, gplx.xowa.wikis.domains.crts.Xow_domain_crt_itm crt) {
 		List_adp rv = List_adp_.New();
 		int len = xwiki_mgr.Len();

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-import gplx.core.primitives.*; import gplx.langs.jsons.*;
+package gplx.xowa.bldrs.wms.sites;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.langs.jsons.*;
 public class Site_json_parser {
 	private final Json_parser json_parser;
 	private final Json_parser__list_nde__base parser__basic = new Json_parser__list_nde__base();

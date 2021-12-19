@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.imaps.itms.*;
+package gplx.xowa.xtns.imaps;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_parser_tst {		
 	@Before public void init() {fxt.Reset();} private Imap_parser_fxt fxt = new Imap_parser_fxt();
 	@Test public void Rect_pass()				{fxt.Test_shape("rect 1 2 3 4 [[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));}
@@ -39,7 +45,7 @@ class Imap_parser_fxt extends Imap_base_fxt {
 	private Imap_map imap;
 	@Override public void Reset() {
 		super.Reset();
-		byte[] ttl_bry = Bry_.new_a7("Test_1");
+		byte[] ttl_bry = BryUtl.NewA7("Test_1");
 		Imap_xtn_mgr xtn_mgr = new Imap_xtn_mgr();
 		Xoae_page page = Xoae_page.New(wiki, wiki.Ttl_parse(ttl_bry));
 		parser = new Imap_parser(xtn_mgr);
@@ -49,27 +55,27 @@ class Imap_parser_fxt extends Imap_base_fxt {
 	}
 	public void Test_shape(String raw_str, Imap_part_shape expd) {
 		raw_str = "File:A.png\n" + raw_str;
-		byte[] raw = Bry_.new_u8(raw_str);			
+		byte[] raw = BryUtl.NewU8(raw_str);
 		parser.Parse(imap, raw, 0, raw.length);
 		Imap_part_shape[] actl_ary = imap.Shapes();
 		Imap_part_shape actl = actl_ary == null | actl_ary.length != 1 ? null : (Imap_part_shape)actl_ary[0];
 		if		(actl == null && expd == null) {}	// noop; test passed
-		else if (actl == null && expd != null) {Tfds.Fail("actl should not be null", raw);}
-		else if (actl != null && expd == null) {Tfds.Fail("actl should be null", raw);}
+		else if (actl == null && expd != null) {GfoTstr.Fail("actl should not be null", raw);}
+		else if (actl != null && expd == null) {GfoTstr.Fail("actl should be null", raw);}
 		else {
-			Tfds.Eq(expd.Part_tid(), actl.Part_tid(), "tid");
-			Tfds.Eq_ary(expd.Shape_pts(), actl.Shape_pts(), "pts");
-			Tfds.Eq(String_.new_u8(expd.Link_href()), String_.new_u8(actl.Link_href()));
-			Tfds.Eq(String_.new_u8(expd.Link_text()), String_.new_u8(actl.Link_text()));
+			GfoTstr.EqObj(expd.Part_tid(), actl.Part_tid(), "tid");
+			GfoTstr.EqAryObj(expd.Shape_pts(), actl.Shape_pts(), "pts");
+			GfoTstr.EqObj(StringUtl.NewU8(expd.Link_href()), StringUtl.NewU8(actl.Link_href()));
+			GfoTstr.EqObj(StringUtl.NewU8(expd.Link_text()), StringUtl.NewU8(actl.Link_text()));
 		}
-		Tfds.Eq(0, imap.Errs().length, "expd 0 errors");
+		GfoTstr.EqObj(0, imap.Errs().length, "expd 0 errors");
 	}
 	public void Test_shape_err(String raw_str, String expd_err) {
 		raw_str = "File:A.png\n" + raw_str;
-		byte[] raw = Bry_.new_u8(raw_str);
+		byte[] raw = BryUtl.NewU8(raw_str);
 		parser.Parse(imap, raw, 0, raw.length);
 		Imap_err[] err_ary = imap.Errs();
-		Tfds.Eq(1, err_ary.length, "expd 1 err");
-		Tfds.Eq(expd_err, err_ary[0].Err_msg());
+		GfoTstr.EqObj(1, err_ary.length, "expd 1 err");
+		GfoTstr.EqObj(expd_err, err_ary[0].Err_msg());
 	}
 }

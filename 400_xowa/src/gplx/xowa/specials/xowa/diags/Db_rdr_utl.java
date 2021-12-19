@@ -13,12 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.xowa.diags; import gplx.*;
+package gplx.xowa.specials.xowa.diags;
 import gplx.core.stores.*;
 import gplx.dbs.*;
 import gplx.dbs.engines.mems.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
 public class Db_rdr_utl {
-	public static void Load_and_write(Db_conn conn, String sql, Bry_bfr bfr) {
+	public static void Load_and_write(Db_conn conn, String sql, BryWtr bfr) {
 		Write_to_bfr(bfr, Load(conn, sql));
 	}
 	public static Mem_qry_set Load_as_qry_set(Db_conn conn, DbmetaFldList fld_list, String sql) {
@@ -56,17 +60,17 @@ public class Db_rdr_utl {
 		}
 		return (Object[][])list.ToAryAndClear(Object[].class);
 	}
-	public static void Write_to_bfr(Bry_bfr bfr, Object[][] rows, int... skip) {
+	public static void Write_to_bfr(BryWtr bfr, Object[][] rows, int... skip) {
 		int rows_len = rows.length;
 		for (int i = 0; i < rows_len; ++i) {
 			Object[] row = (Object[])rows[i];
 			int row_len = row.length;
 			for (int j = 0; j < row_len; ++j) {
-				if (skip != null && Int_.In(j, skip)) continue;
+				if (skip != null && IntUtl.In(j, skip)) continue;
 				Object val = row[j];
-				bfr.Add_obj(val).Add_byte_pipe();
+				bfr.AddObj(val).AddBytePipe();
 			}
-			bfr.Add_byte_nl();
+			bfr.AddByteNl();
 		}
 	}
 }

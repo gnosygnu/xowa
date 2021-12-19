@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.bnds;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.gfui.ipts.IptArg;
 import gplx.gfui.ipts.IptArg_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.guis.cmds.Xog_cmd_itm_;
 interface Xog_bnd_wkr {
@@ -51,7 +51,7 @@ class Xog_bnd_temp implements Gfo_invk {
 	}
 	// private void Init_itm(String cmd, int idx, int box, String ipt) {Init_itm(cmd, idx, box, IptArg_.parse_or_none_(ipt));}
 	private void Init_itm(String cmd, int idx, int box, IptArg ipt) {
-		String key = cmd + "-" + Int_.To_str(idx + List_adp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
+		String key = cmd + "-" + IntUtl.ToStr(idx + List_adp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
 		Xog_bnd_itm itm = new Xog_bnd_itm(key, BoolUtl.Y, cmd, box, ipt);
 		boxs[box].Add(itm);
 		regy.Add(itm.Key(), itm);
@@ -71,7 +71,7 @@ class Xog_bnd_cfg_itm {
 	public String Box() {return box;} private final String box;
 	public String Ipt() {return ipt;} private final String ipt;
 	public static Xog_bnd_cfg_itm Parse(String s) {
-		String[] parts = String_.Split(s, "|");
+		String[] parts = StringUtl.Split(s, "|");
 		return new Xog_bnd_cfg_itm(parts[0], parts[1]);
 	}
 }

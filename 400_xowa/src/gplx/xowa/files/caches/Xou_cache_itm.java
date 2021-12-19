@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.files.caches;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
 import gplx.xowa.files.*;
 import gplx.dbs.*;
 public class Xou_cache_itm {
 	public Xou_cache_itm
-	( Bry_bfr lnki_key_bfr, byte db_state
+	(BryWtr lnki_key_bfr, byte db_state
 	, byte[] lnki_wiki_abrv, byte[] lnki_ttl, int lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, int user_thumb_w
 	, int orig_repo_id, byte[] orig_ttl, int orig_ext_id, int orig_w, int orig_h
 	, int html_w, int html_h, double html_time, int html_page
@@ -61,29 +65,29 @@ public class Xou_cache_itm {
 	public double		File_time() {return file_time;} private final double file_time;
 	public int			File_page() {return file_page;} private final int file_page;
 	public long			File_size() {return file_size;} private final long file_size;
-	public Io_url		File_url() {return file_url;} public void File_url_(Io_url v) {file_url = v;} private Io_url file_url;
+	public Io_url File_url() {return file_url;} public void File_url_(Io_url v) {file_url = v;} private Io_url file_url;
 	public int			View_count() {return view_count;} private int view_count;
 	public long			View_date() {return view_date;} private long view_date;
 	public void Update_view_stats() {
 		++view_count;
-		view_date = Datetime_now.Get().Timestamp_unix();
+		view_date = GfoDateNow.Get().TimestampUnix();
 		db_state = Db_cmd_mode.To_update(db_state);
 	}
 	public static final Xou_cache_itm Null = null;
-	public static byte[] Key_gen(Bry_bfr key_bfr, byte[] lnki_wiki_abrv, byte[] ttl, int type, double upright, int w, int h, double time, int page, int user_thumb_w) {
-		key_bfr.Add(lnki_wiki_abrv).Add_byte_pipe()
-			.Add(ttl).Add_byte_pipe().Add_int_variable(type).Add_byte_pipe().Add_double(upright).Add_byte_pipe()
-			.Add_int_variable(w).Add_byte_pipe().Add_int_variable(h).Add_byte_pipe().Add_double(time).Add_byte_pipe().Add_int_variable(page)
-			.Add_int_variable(user_thumb_w)
+	public static byte[] Key_gen(BryWtr key_bfr, byte[] lnki_wiki_abrv, byte[] ttl, int type, double upright, int w, int h, double time, int page, int user_thumb_w) {
+		key_bfr.Add(lnki_wiki_abrv).AddBytePipe()
+			.Add(ttl).AddBytePipe().AddIntVariable(type).AddBytePipe().AddDouble(upright).AddBytePipe()
+			.AddIntVariable(w).AddBytePipe().AddIntVariable(h).AddBytePipe().AddDouble(time).AddBytePipe().AddIntVariable(page)
+			.AddIntVariable(user_thumb_w)
 			;
-		return key_bfr.To_bry_and_clear();
+		return key_bfr.ToBryAndClear();
 	}
 }
 class Xof_cache_mgr_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xou_cache_itm lhs = (Xou_cache_itm)lhsObj;
 		Xou_cache_itm rhs = (Xou_cache_itm)rhsObj;
-		return -Long_.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
+		return -LongUtl.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
 	}
 	public static final Xof_cache_mgr_sorter Instance = new Xof_cache_mgr_sorter(); Xof_cache_mgr_sorter() {}
 }

@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.core.primitives.*;
+package gplx.xowa.mediawiki;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.wrappers.IntRef;
+import org.junit.*;
 import gplx.langs.regxs.*;
 public class XophpRegex_replace_tst {
 	private final XophpRegex_replace_fxt fxt = new XophpRegex_replace_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		// basic
 		fxt.Test__preg_replace("0", "1", "0ab0cd0ef", fxt.Expd("1ab1cd1ef").Count_(3));
 
@@ -31,12 +32,12 @@ class XophpRegex_replace_fxt {
 	public XophpRegex_replace_expd Expd(String rslt) {return new XophpRegex_replace_expd(rslt);}
 	public void Test__preg_replace(String pattern, String replacement, String subject, XophpRegex_replace_expd rslt) {Test__preg_replace(pattern, replacement, subject, XophpRegex_.preg_replace_limit_none, rslt);}
 	public void Test__preg_replace(String pattern, String replacement, String subject, int limit, XophpRegex_replace_expd expd) {
-		Int_obj_ref actl_count = Int_obj_ref.New_zero();
+		IntRef actl_count = IntRef.NewZero();
 		String actl = XophpRegex_.preg_replace(Regx_adp_.new_(pattern), replacement, subject, limit, actl_count);
 
-		Gftest.Eq__str(expd.Rslt(), actl);
+		GfoTstr.Eq(expd.Rslt(), actl);
 		if (expd.Count() != -1)
-			Gftest.Eq__int(expd.Count(), actl_count.Val());
+			GfoTstr.Eq(expd.Count(), actl_count.Val());
 	}
 }
 class XophpRegex_replace_expd {

@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.magiclinks;
-import gplx.Bry_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.mediawiki.XomwEnv_fxt;
 import gplx.xowa.mediawiki.includes.XomwTitleOld;
 import gplx.xowa.mediawiki.includes.parsers.XomwParser;
@@ -28,11 +28,11 @@ import gplx.xowa.mediawiki.includes.parsers.Xomw_regex_url;
 import org.junit.Test;
 public class Xomw_magiclinks_wkr__tst {
 	private final Xomw_magiclinks_wkr__fxt fxt = new Xomw_magiclinks_wkr__fxt();
-	@Test  public void Basic() {fxt.Test__parse("a https://b.org z", "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a> z");}
-	@Test  public void Invalid() {fxt.Test__parse("a _https://b.org z", "a _https://b.org z");}
-	@Test  public void Tag__anch() {fxt.Test__parse("a <a title=\"https://b.org\">b</a> z", "a <a title=\"https://b.org\">b</a> z");}
-	@Test  public void Tag__misc() {fxt.Test__parse("a <div title=\"https://b.org\">b</div> z", "a <div title=\"https://b.org\">b</div> z");}
-	@Test  public void Interrupt() {
+	@Test public void Basic() {fxt.Test__parse("a https://b.org z", "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a> z");}
+	@Test public void Invalid() {fxt.Test__parse("a _https://b.org z", "a _https://b.org z");}
+	@Test public void Tag__anch() {fxt.Test__parse("a <a title=\"https://b.org\">b</a> z", "a <a title=\"https://b.org\">b</a> z");}
+	@Test public void Tag__misc() {fxt.Test__parse("a <div title=\"https://b.org\">b</div> z", "a <div title=\"https://b.org\">b</div> z");}
+	@Test public void Interrupt() {
 		// ent
 		fxt.Test__parse("a https://b.org&lt;z"   , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>&lt;z");
 		// hex
@@ -42,11 +42,11 @@ public class Xomw_magiclinks_wkr__tst {
 		// num_post_proto rule
 		fxt.Test__parse("a https://&lt; z"       , "a https://&lt; z");
 	}
-	@Test  public void Interrupt__hex_dec() {// implementation specific test for mixed hex / dec
+	@Test public void Interrupt__hex_dec() {// implementation specific test for mixed hex / dec
 		// dec-hex
 		fxt.Test__parse("a https://b.org&#3c;z"      , "a <a rel='nofollow' class='external free' href='https://b.org&amp;#3c;z'>https://b.org&amp;#3c;z</a>");
 	}
-	@Test  public void Separator() {
+	@Test public void Separator() {
 		// basic; ,;.:!?
 		fxt.Test__parse("a https://b.org,;.:!? z"    , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>,;.:!? z");
 		// ")" excluded
@@ -70,7 +70,7 @@ public class Xomw_magiclinks_wkr__tst {
 		// num_post_proto rule
 		fxt.Test__parse("a https://.:!? z"           , "a https://.:!? z");
 	}
-	@Test  public void Clean_url() {
+	@Test public void Clean_url() {
 		// basic
 		fxt.Test__parse("http://a᠆b.org/c᠆d"          , "<a rel='nofollow' class='external free' href='http://ab.org/c᠆d'>http://ab.org/c᠆d</a>");
 	}
@@ -82,16 +82,16 @@ class Xomw_magiclinks_wkr__fxt {
 	public Xomw_magiclinks_wkr__fxt() {
 		Xomw_regex_space regex_space = new Xomw_regex_space();
 		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());
-		pctx.Init_by_page(XomwTitleOld.newFromText(parser.Env(), Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(XomwTitleOld.newFromText(parser.Env(), BryUtl.NewA7("Page_1")));
 		this.wkr = new Xomw_magiclinks_wkr(parser, parser.Sanitizer(), parser.Linker(), new Xomw_regex_boundary(regex_space), new Xomw_regex_url(regex_space));
 		wkr.Init_by_wiki();
 	}
 	public void Test__parse(String src_str, String expd) {Test__parse(BoolUtl.Y, src_str, expd);}
 	public void Test__parse(boolean apos, String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		pbfr.Init(src_bry);
 		wkr.doMagicLinks(pctx, pbfr);
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
-		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
+		GfoTstr.EqLines(expd, pbfr.Rslt().ToStrAndClear(), src_str);
 	}
 }

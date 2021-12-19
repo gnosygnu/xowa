@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ArrayUtl;
 import org.junit.*;
 public class z016_GfmlScopeList_tst {
 	@Before public void setup() {
@@ -49,6 +50,6 @@ public class z016_GfmlScopeList_tst {
 	void tst_Itm(GfmlScopeList list, GfmlDocPos pos, String expd) {
 		GfmlVarItm itm = (GfmlVarItm)list.Get_by(pos);
 		String actl = itm == null ? null : itm.TknVal();
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 }

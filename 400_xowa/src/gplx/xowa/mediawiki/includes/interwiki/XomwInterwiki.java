@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.interwiki; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.interwiki;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 /**
 * Value Object for representing interwiki records.
 */
@@ -164,7 +167,7 @@ public class XomwInterwiki {
 //			XomwMessage msg = XomwGlobalFunctions.wfMessage(env, "interwiki-name-" + this.mPrefix).inContentLanguage();
 //
 //			return !msg.exists() ? Bry_.Empty : msg.text();
-            Tfds.Write(mPrefix);
+            GfoTstr.Write(mPrefix);
 		return null;
 	}
 
@@ -178,5 +181,5 @@ public class XomwInterwiki {
 //
 //			return !msg.exists() ? '' : msg.text();
 //		}
-	private static final byte[] ARG_1 = Bry_.new_a7("$1");
+	private static final byte[] ARG_1 = BryUtl.NewA7("$1");
 }

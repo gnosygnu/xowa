@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges;
+import gplx.core.envs.SystemUtl;
+import gplx.libs.files.Io_url;
 import gplx.core.progs.*; import gplx.dbs.bulks.*;
 public class Merge_prog_wkr implements Db_bulk_prog {
 	private final Gfo_prog_ui prog_ui;
@@ -43,7 +45,7 @@ public class Merge_prog_wkr implements Db_bulk_prog {
 		this.cur_fil = fil;
 		this.cur_wkr_tid = wkr_tid;
 		this.Checkpoint__save();
-		time_nxt = gplx.core.envs.System_.Ticks() + time_gap;
+		time_nxt = SystemUtl.Ticks() + time_gap;
 		return false;
 	}
 	public void Checkpoint__save() {
@@ -52,7 +54,7 @@ public class Merge_prog_wkr implements Db_bulk_prog {
 	}
 	public boolean Prog__insert_and_stop_if_suspended(int row_size) {
 		++prog_count_cur;
-		long time_cur = gplx.core.envs.System_.Ticks();
+		long time_cur = SystemUtl.Ticks();
 		if (time_cur < time_nxt) return false;
 		// gplx.core.threads.Thread_adp_.Sleep(10);
 		time_nxt = time_cur + time_gap;

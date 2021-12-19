@@ -14,13 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.phps;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Php_text_itm_tst {
@@ -46,14 +45,14 @@ class Php_text_itm_fxt {
 	public Php_text_itm_fxt Init_q2() {parser.Quote_is_single_(BoolUtl.N); return this;}
 	public void Test_parse(String raw_str, String expd) {
 		List_adp list = List_adp_.New();
-		byte[] raw = Bry_.new_u8(raw_str);
+		byte[] raw = BryUtl.NewU8(raw_str);
 		parser.Parse(list, raw);
-		Bry_bfr bfr = Bry_bfr_.Reset(255);
+		BryWtr bfr = BryWtr.NewAndReset(255);
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
-			Php_text_itm itm = (Php_text_itm)list.Get_at(i);
+			Php_text_itm itm = (Php_text_itm)list.GetAt(i);
 			itm.Bld(bfr, raw);
 		}
-		Tfds.Eq(expd, bfr.To_str_and_clear());
+		GfoTstr.EqObj(expd, bfr.ToStrAndClear());
 	}
 }

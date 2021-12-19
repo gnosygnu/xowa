@@ -13,37 +13,39 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.metas.parsers; import gplx.dbs.*;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Dbmeta_parser__tbl {
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	private final Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
 	public Dbmeta_tbl_itm Parse(byte[] src) {
-		rdr.Init_by_page(Bry_.Empty, src, src.length);
-		rdr.Skip_ws().Chk_trie_val(trie, Tid__create);
-		rdr.Skip_ws().Chk_trie_val(trie, Tid__table);
+		rdr.InitByPage(BryUtl.Empty, src, src.length);
+		rdr.SkipWs().ChkTrieVal(trie, Tid__create);
+		rdr.SkipWs().ChkTrieVal(trie, Tid__table);
 		byte[] tbl_name = rdr.Read_sql_identifier();
-		rdr.Skip_ws().Chk(AsciiByte.ParenBgn);
-		Dbmeta_tbl_itm rv = Dbmeta_tbl_itm.New(String_.new_u8(tbl_name));
+		rdr.SkipWs().Chk(AsciiByte.ParenBgn);
+		Dbmeta_tbl_itm rv = Dbmeta_tbl_itm.New(StringUtl.NewU8(tbl_name));
 		boolean loop = true;
 		while (loop) {
-			DbmetaFldItm fld = fld_parser.Parse_fld(rdr); if (fld == null) rdr.Err_wkr().Fail("unknown field", "src", src);
+			DbmetaFldItm fld = fld_parser.Parse_fld(rdr); if (fld == null) rdr.ErrWkr().Fail("unknown field", "src", src);
 			rv.Flds().Add(fld);
 			int pos = rdr.Pos();
-			byte b = pos == rdr.Src_end() ? AsciiByte.Null : src[pos];
+			byte b = pos == rdr.SrcEnd() ? AsciiByte.Null : src[pos];
 			switch (b) {
-				case AsciiByte.Comma:		rdr.Move_by_one(); break;
-				case AsciiByte.ParenEnd:	rdr.Move_by_one(); loop = false; break;
-				default:					rdr.Err_wkr().Fail("premature end of flds"); break;
+				case AsciiByte.Comma:		rdr.MoveByOne(); break;
+				case AsciiByte.ParenEnd:	rdr.MoveByOne(); loop = false; break;
+				default:					rdr.ErrWkr().Fail("premature end of flds"); break;
 			}
 		}
 		return rv;
 	}
 	private static final byte Tid__create = 0, Tid__table = 1;
 	private static final byte[]
-	  Bry__create	= Bry_.new_a7("create")
-	, Bry__table	= Bry_.new_a7("table");
+	  Bry__create	= BryUtl.NewA7("create")
+	, Bry__table	= BryUtl.NewA7("table");
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Bry__create	, Tid__create)
 	.Add_bry_byte(Bry__table	, Tid__table);

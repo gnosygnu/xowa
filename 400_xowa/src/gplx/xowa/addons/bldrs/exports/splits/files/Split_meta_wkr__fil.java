@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.splits.files;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_attach_itm;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
@@ -24,7 +24,7 @@ import gplx.dbs.Db_stmt_;
 import gplx.fsdb.data.Fsd_fil_itm;
 import gplx.fsdb.data.Fsd_fil_tbl;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.bldrs.exports.splits.Split_ctx;
 import gplx.xowa.addons.bldrs.exports.splits.metas.Split_meta_wkr_base;
 import gplx.xowa.addons.bldrs.exports.splits.metas.Split_page_list_type_;
@@ -46,7 +46,7 @@ class Split_meta_wkr__fil extends Split_meta_wkr_base {
 	@Override public void On_nth_rls(Split_ctx ctx, Db_conn trg_conn) {this.stmt = Db_stmt_.Rls(stmt);}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
 		attach_mgr.Conn_links_(new Db_attach_itm("atr_db", atr_conn));
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		( "SELECT  f.fil_id, f.fil_owner_id, f.fil_xtn_id, f.fil_ext_id, f.fil_bin_db_id, f.fil_name, f.fil_size, f.fil_modified, f.fil_hash, fir.page_id"
 		, "FROM    <atr_db>fsdb_fil f"
 		, "        JOIN fsdb_fil_regy fir ON f.fil_id = fir.fil_id"

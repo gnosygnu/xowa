@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis;
+import gplx.types.basics.utls.BryLni;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.xowa.*;
 import gplx.xowa.files.repos.*;
 public class Xowv_repo_mgr implements Xow_repo_mgr {
 	private final List_adp repos = List_adp_.New();
@@ -21,17 +26,17 @@ public class Xowv_repo_mgr implements Xow_repo_mgr {
 	public Xof_repo_pair		Repos_get_by_wiki(byte[] wiki) {
 		int len = repos.Len();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
-			if (Bry_.Eq(wiki, pair.Wiki_domain()))
+			Xof_repo_pair pair = (Xof_repo_pair)repos.GetAt(i);
+			if (BryLni.Eq(wiki, pair.Wiki_domain()))
 				return pair;
 		}
 		return null;
 	}
-	public Xof_repo_pair		Repos_get_at(int i) {return (Xof_repo_pair)repos.Get_at(i);}
+	public Xof_repo_pair		Repos_get_at(int i) {return (Xof_repo_pair)repos.GetAt(i);}
 	private Xof_repo_pair		Repos_get_by_id(int id) {
 		int len = repos.Len();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.GetAt(i);
 			if (pair.Id() == id) return pair;
 		}
 		return null;

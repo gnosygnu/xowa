@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.names; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.langs.names;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.xtns.cldrs.*;
 
 public class Xol_name_mgr {
@@ -40,11 +49,11 @@ public class Xol_name_mgr {
 	*/
 	public String fetchLanguageName(String code, String inLanguage, String include, byte[] page_url) {
 		synchronized (thread_lock) {
-		code = String_.Lower(code);
+		code = StringUtl.Lower(code);
 		if (include == null) include = Scope__str__all;
 		Ordered_hash array = fetchLanguageNames(inLanguage, include, page_url);
-		Keyval rv = (Keyval)array.GetByOrNull(code);
-		return rv == null ? "" : rv.Val_to_str_or_null();
+		KeyVal rv = (KeyVal)array.GetByOrNull(code);
+		return rv == null ? "" : rv.ValToStrOrNull();
 		}
 	}
 	/**
@@ -71,7 +80,7 @@ public class Xol_name_mgr {
 			languageNameCache = Ordered_hash_.New();
 		Ordered_hash ret = (Ordered_hash)languageNameCache.GetByOrNull(cacheKey);
 		if (ret == null) {
-			Byte_obj_val include_byte = (Byte_obj_val)Scope__hash.GetByOrNull(include_str);
+			ByteVal include_byte = (ByteVal)Scope__hash.GetByOrNull(include_str);
 			byte include = include_byte == null ? Scope__int__all : include_byte.Val();
 
 			Cldr_name_file cldr_file = cldr_loader.Load_or_empty(inLanguage);
@@ -87,7 +96,7 @@ public class Xol_name_mgr {
 				Io_url[] urls = Io_mgr.Instance.QueryDir_fils(root_dir.GenSubDir_nest("bin", "any", "xowa", "cfg", "lang", "core"));
 				for (Io_url url : urls) {
 					String code = url.NameOnly();
-					lang_files_cached.Add(code, Keyval_.new_(code, code));
+					lang_files_cached.Add(code, KeyVal.NewStr(code, code));
 				}
 			}
 			
@@ -167,9 +176,9 @@ public class Xol_name_mgr {
 		, Scope__str__mwFile  = "mwFile"
 		;
 	private static final Hash_adp Scope__hash = Hash_adp_.New()
-		.AddAndMore(Scope__str__mw    , Byte_obj_val.new_(Scope__int__mw))
-		.AddAndMore(Scope__str__all   , Byte_obj_val.new_(Scope__int__all))
-		.AddAndMore(Scope__str__mwFile, Byte_obj_val.new_(Scope__int__mwFile))
+		.AddAndMore(Scope__str__mw    , ByteVal.New(Scope__int__mw))
+		.AddAndMore(Scope__str__all   , ByteVal.New(Scope__int__all))
+		.AddAndMore(Scope__str__mwFile, ByteVal.New(Scope__int__mwFile))
 		;
 	public static Ordered_hash fetchLanguageNamesUncached
 		( String inLanguage, byte include
@@ -190,8 +199,8 @@ public class Xol_name_mgr {
 		// }
 		int cldr_names_len = cldr_names.Len();
 		for (int i = 0; i < cldr_names_len; i++) {
-			Keyval kv = (Keyval)cldr_names.Get_at(i);
-			names.Add(kv.Key(), kv);
+			KeyVal kv = (KeyVal)cldr_names.GetAt(i);
+			names.Add(kv.KeyToStr(), kv);
 		}
 
 		// REF.MW: /includes/DefaultSettings.php
@@ -203,26 +212,26 @@ public class Xol_name_mgr {
 		Ordered_hash mwNames = lang_names;
 		int mwNames_len = mwNames.Len();
 		for (int i = 0; i < mwNames_len; i++) {
-			Keyval mw_name = (Keyval)mwNames.Get_at(i);
+			KeyVal mw_name = (KeyVal)mwNames.GetAt(i);
 			// # - Prefer own MediaWiki native name when not using the hook
 			// # - For other mwNames just add if not added through the hook
-			String code = mw_name.Key();
-			if (String_.Eq(code, inLanguage) || !names.Has(code)) {
-				names.AddIfDupeUseNth(code, Keyval_.new_(code, mw_name.Val_to_str_or_empty()));
+			String code = mw_name.KeyToStr();
+			if (StringUtl.Eq(code, inLanguage) || !names.Has(code)) {
+				names.AddIfDupeUseNth(code, KeyVal.NewStr(code, mw_name.ValToStrOrEmpty()));
 			}
 		}
 
 		if (include == Scope__int__all) {
-			names.Sort_by(Hash_kv_sorter.Instance);
+			names.SortBy(Hash_kv_sorter.Instance);
 			return names;
 		}
 
 		Ordered_hash returnMw = Ordered_hash_.New();
 		mwNames_len = mwNames.Len();
 		for (int i = 0; i < mwNames_len; i++) {
-			Keyval coreName = (Keyval)mwNames.Get_at(i);
-			String code = coreName.Key();
-			returnMw.Add(code, (Keyval)names.GetByOrNull(code));
+			KeyVal coreName = (KeyVal)mwNames.GetAt(i);
+			String code = coreName.KeyToStr();
+			returnMw.Add(code, (KeyVal)names.GetByOrNull(code));
 		}
 
 		// REF.MW: /languages/classes/i18n/*.json
@@ -233,18 +242,18 @@ public class Xol_name_mgr {
 			// # loop so that messages files in extensions will work correctly.
 			int returnMwLen = returnMw.Len();
 			for (int i = 0; i < returnMwLen; i++) {
-				Keyval kv = (Keyval)returnMw.Get_at(i);
-				String code = kv.Key();
+				KeyVal kv = (KeyVal)returnMw.GetAt(i);
+				String code = kv.KeyToStr();
 				if (lang_files.Has(code)) {
-					namesMwFile.Add(code, (Keyval)names.GetByOrNull(code));
+					namesMwFile.Add(code, (KeyVal)names.GetByOrNull(code));
 				}
 			}
 
-			namesMwFile.Sort_by(Hash_kv_sorter.Instance);
+			namesMwFile.SortBy(Hash_kv_sorter.Instance);
 			return namesMwFile;
 		}
 
-		returnMw.Sort_by(Hash_kv_sorter.Instance);
+		returnMw.SortBy(Hash_kv_sorter.Instance);
 		// # 'mw' option; default if it's not one of the other two options (all/mwfile)
 		return returnMw;
 	}
@@ -255,9 +264,9 @@ public class Xol_name_mgr {
 }
 class Hash_kv_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
-		Keyval lhs = (Keyval)lhsObj;
-		Keyval rhs = (Keyval)rhsObj;
-		return String_.Compare(lhs.Key(), rhs.Key());
+		KeyVal lhs = (KeyVal)lhsObj;
+		KeyVal rhs = (KeyVal)rhsObj;
+		return StringUtl.Compare(lhs.KeyToStr(), rhs.KeyToStr());
 	}
         public static final Hash_kv_sorter Instance = new Hash_kv_sorter(); Hash_kv_sorter() {}
 }

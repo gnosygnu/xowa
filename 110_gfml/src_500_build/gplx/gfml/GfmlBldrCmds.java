@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 class GfmlBldrCmd_pendingTkns_add implements GfmlBldrCmd {
 	public String Key() {return "gfml.pendingTkns_add";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {bldr.CurFrame().WaitingTkns().Add(tkn);}
@@ -38,7 +39,7 @@ class GfmlBldrCmd_ndeBody_bgn implements GfmlBldrCmd {
 	public String Key() {return "gfml.nodeBody_bgn";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {
 		bldr.CurNdeFrame().NdeBody_bgn(tkn);
-		bldr.CurNdeFrame().BgnPos_set(bldr.StreamPos() - String_.Len(tkn.Raw()));// stream has already advanced tkn.len so subtract
+		bldr.CurNdeFrame().BgnPos_set(bldr.StreamPos() - StringUtl.Len(tkn.Raw()));// stream has already advanced tkn.len so subtract
 	}
 	public static final GfmlBldrCmd_ndeBody_bgn Instance = new GfmlBldrCmd_ndeBody_bgn(); GfmlBldrCmd_ndeBody_bgn() {}
 }
@@ -78,7 +79,7 @@ class GfmlBldrCmd_frameBgn implements GfmlBldrCmd {
 		GfmlFrame newFrame = frame.MakeNew(lxr.SubLxr());
 		bldr.Frames_push(newFrame);
 		bldr.CurFrame().WaitingTkns().Add(tkn);
-		bldr.CurNdeFrame().BgnPos_set(bldr.StreamPos() - String_.Len(tkn.Raw()));// stream has already advanced tkn.len so subtract
+		bldr.CurNdeFrame().BgnPos_set(bldr.StreamPos() - StringUtl.Len(tkn.Raw()));// stream has already advanced tkn.len so subtract
 	}
 	GfmlLxr lxr; GfmlFrame frame;
 	public static GfmlBldrCmd_frameBgn new_(GfmlFrame frame, GfmlLxr lxr) {
@@ -97,7 +98,7 @@ class GfmlBldrCmd_frameEnd implements GfmlBldrCmd {
 		else
 			bldr.CurFrame().WaitingTkns().Add(tkn);
 		if (bldr.CurNdeFrame().CurNdeStartType() == GfmlNdeStartType.Prop
-			&& String_.Eq(tkn.Raw(), "}")) return;
+			&& StringUtl.Eq(tkn.Raw(), "}")) return;
 		bldr.Frames_end();
 	}
 	int ndeSymType;
@@ -112,7 +113,7 @@ class GfmlBldrCmd_whitespace implements GfmlBldrCmd {
 	public String Key() {return "gfml.whitespace_exec";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {
 		if (bldr.CurNdeFrame().waitingTkns.Len() > 0) {
-			GfmlObj t = (GfmlObj)bldr.CurNdeFrame().waitingTkns.Get_at(bldr.CurNdeFrame().waitingTkns.Len() - 1);
+			GfmlObj t = (GfmlObj)bldr.CurNdeFrame().waitingTkns.GetAt(bldr.CurNdeFrame().waitingTkns.Len() - 1);
 			if (t.ObjType() == GfmlObj_.Type_nde)
 				bldr.CurNdeFrame().IdxNdeBgn_set(bldr.CurNdeFrame().WaitingTkns().Len() + 1);
 		}

@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.jsonConfigs.scribunto;
 
-import gplx.Bry_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
 import gplx.langs.jsons.Json_doc;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xoa_lang_mgr;
@@ -46,7 +46,7 @@ public class Jscfg_scrib_lib_tst {
 		, "  ]"
 		, "}"
 		));
-		fxt.Test__get("Test.tab", String_.Concat_lines_nl_skip_last
+		fxt.Test__get("Test.tab", StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  data="
 		, "    1="
@@ -59,7 +59,7 @@ public class Jscfg_scrib_lib_tst {
 	}
 	@Test public void Get_localize_null() { // null defaults to wiki.Lang
 		fxt.Init__page__multilingual();
-		fxt.Test__get( "Test_localize.tab", null, String_.Concat_lines_nl_skip_last
+		fxt.Test__get( "Test_localize.tab", null, StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  license=CC0-1.0"
 		, "  description=Object table"
@@ -85,7 +85,7 @@ public class Jscfg_scrib_lib_tst {
 	}
 	@Test public void Get_localize_underscore() {// underscore retrieves the entire document
 		fxt.Init__page__multilingual();
-		fxt.Test__get( "Test_localize.tab", "_", String_.Concat_lines_nl_skip_last
+		fxt.Test__get( "Test_localize.tab", "_", StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  license=CC0-1.0"
 		, "  description="
@@ -122,7 +122,7 @@ public class Jscfg_scrib_lib_tst {
 	@Test public void Get_localize_de() {
 		fxt.Init__lang("de", "en");
 		fxt.Init__page__multilingual();
-		fxt.Test__get( "Test_localize.tab", "de", String_.Concat_lines_nl_skip_last
+		fxt.Test__get( "Test_localize.tab", "de", StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  license=CC0-1.0"
 		, "  description=Objekttabelle"
@@ -227,18 +227,18 @@ class Jscfg_scrib_lib_fxt {
 	public Xol_lang_itm Init__lang(String key, String fallbacks) {
 		Xoa_lang_mgr lang_mgr = fxt.Core().App().Lang_mgr();
 
-		Xol_lang_itm lang = Xol_lang_itm.New(lang_mgr, Bry_.new_u8(key));
-		lang.Fallback_bry_(Bry_.new_a7(fallbacks));
+		Xol_lang_itm lang = Xol_lang_itm.New(lang_mgr, BryUtl.NewU8(key));
+		lang.Fallback_bry_(BryUtl.NewA7(fallbacks));
 		lang_mgr.Add(lang);
 
 		return lang;
 	}
-	public Keyval[] Init__picklocalizedStringKvs(String... vals) {
+	public KeyVal[] Init__picklocalizedStringKvs(String... vals) {
 		int len = vals.length;
-		Keyval[] rv = new Keyval[len];
+		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
 			String val = vals[i];
-			rv[i] = Keyval_.new_(val, val);
+			rv[i] = KeyVal.NewStr(val, val);
 		}
 		return rv;
 	}
@@ -246,10 +246,10 @@ class Jscfg_scrib_lib_fxt {
 		Test__get(page, null, expd);
 	}
 	public void Test__get(String page, String lang, String expd) {
-		fxt.Test_scrib_proc_str_ary(lib, Jscfg_scrib_lib.Invk_get, Keyval_.Ary(Keyval_.int_(1, page), Keyval_.int_(2, lang)), expd);
+		fxt.Test_scrib_proc_str_ary(lib, Jscfg_scrib_lib.Invk_get, KeyValUtl.Ary(KeyVal.NewInt(1, page), KeyVal.NewInt(2, lang)), expd);
 	}
-	public void Test__pickLocalizedString(Xol_lang_itm lang, Keyval[] kv_ary, String expd) {
-		Keyval actl_kv = Jscfg_localizer.pickLocalizedString(lang, "key", kv_ary);
-		Gftest.Eq__obj_or_null(expd, actl_kv.Val());
+	public void Test__pickLocalizedString(Xol_lang_itm lang, KeyVal[] kv_ary, String expd) {
+		KeyVal actl_kv = Jscfg_localizer.pickLocalizedString(lang, "key", kv_ary);
+		GfoTstr.EqObjToStr(expd, actl_kv.Val());
 	}
 }

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*;
+package gplx.core.caches;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Gfo_cache_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	private final List_adp tmp_delete = List_adp_.New();
@@ -57,7 +62,7 @@ public class Gfo_cache_mgr {
 		int len = hash.Len();
 		int list_size = 0;
 		for (int i = 0; i < len; ++i) {
-			Gfo_cache_data itm = (Gfo_cache_data)hash.Get_at(i);
+			Gfo_cache_data itm = (Gfo_cache_data)hash.GetAt(i);
 			int itm_size = itm.Size();
 			if (itm_size == 0)
 				itm_size = 1; // if itm_size remains 0, it will never be added to tmp_delete cache; ISSUE#:561; DATE:2019-09-04
@@ -70,14 +75,14 @@ public class Gfo_cache_mgr {
 		this.cur_size = list_size;
 		len = tmp_delete.Len();
 		for (int i = 0; i < len; ++i) {
-			Gfo_cache_data itm = (Gfo_cache_data)tmp_delete.Get_at(i);
+			Gfo_cache_data itm = (Gfo_cache_data)tmp_delete.GetAt(i);
 			hash.Del(itm.Key());
 		}
 		tmp_delete.Clear();
 	}
 	public int Test__len()		{return hash.Len();}
 	public Object Test__get_at(int i) {
-		Gfo_cache_data rv = (Gfo_cache_data)hash.Get_at(i);
+		Gfo_cache_data rv = (Gfo_cache_data)hash.GetAt(i);
 		return rv.Val();
 	}
 	// NOTE: not called yet

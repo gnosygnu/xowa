@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.tmpls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.core.strings.*;
+import org.junit.*;
 public class Xot_defn_trace_brief_tst {
 	Xot_defn_trace_fxt fxt = new Xot_defn_trace_fxt();
 	@Before public void init() {
@@ -37,20 +43,20 @@ class Xot_defn_trace_fxt {
 	public void tst_(String raw, String... expd_ary) {
 		Xop_ctx ctx = fxt.Ctx();
 		ctx.Defn_trace().Clear();
-		byte[] src = Bry_.new_u8(raw);
-		ctx.Page().Ttl_(Xoa_ttl.Parse(fxt.Wiki(), Bry_.new_a7("test")));
+		byte[] src = BryUtl.NewU8(raw);
+		ctx.Page().Ttl_(Xoa_ttl.Parse(fxt.Wiki(), BryUtl.NewA7("test")));
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(src);
 		fxt.Parser().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), src);
 		ctx.Defn_trace().Print(src, tmp);
-		String[] actl_ary = String_.Split(tmp.To_str_and_clear(), (char)AsciiByte.Nl);
-		Tfds.Eq_ary(expd_ary, actl_ary);
-	}	private Bry_bfr tmp = Bry_bfr_.New();
+		String[] actl_ary = StringUtl.Split(tmp.ToStrAndClear(), (char)AsciiByte.Nl);
+		GfoTstr.EqLines(expd_ary, actl_ary);
+	}	private BryWtr tmp = BryWtr.New();
 	String[] To_str(Xot_defn_trace_itm_brief[] ary) {
 		String[] rv = new String[ary.length];
 		for (int i = 0; i < rv.length; i++) {
 			Xot_defn_trace_itm_brief itm = ary[i];
-			sb.Add(String_.new_u8(itm.Name())).Add("|").Add(itm.Count());
-			rv[i] = sb.To_str_and_clear();
+			sb.Add(StringUtl.NewU8(itm.Name())).Add("|").Add(itm.Count());
+			rv[i] = sb.ToStrAndClear();
 		}
 		return rv;
 	}

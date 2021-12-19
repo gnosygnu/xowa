@@ -13,15 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.envs.*;
+package gplx.fsdb.data;
+import gplx.core.envs.*;
 import gplx.dbs.*;
 import gplx.core.ios.streams.*;
-
+import gplx.frameworks.objects.Rls_able;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.wrappers.BoolRef;
 public class Fsd_bin_tbl implements Rls_able {
 	public final String fld__owner_id, fld__owner_tid, fld__part_id, fld__data_url, fld__data;
-	private Db_conn conn; private Db_stmt stmt_insert, stmt_select, stmt_select_itm; private Bry_bfr tmp_bfr;
-	private final Bool_obj_ref saved_in_parts = Bool_obj_ref.n_();
+	private Db_conn conn; private Db_stmt stmt_insert, stmt_select, stmt_select_itm; private BryWtr tmp_bfr;
+	private final BoolRef saved_in_parts = BoolRef.NewN();
 	public Fsd_bin_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		fld__owner_id		= flds.AddIntPkey("bin_owner_id");
@@ -45,7 +53,7 @@ public class Fsd_bin_tbl implements Rls_able {
 	public void Insert_rdr(int id, byte tid, long bin_len, Io_stream_rdr bin_rdr) {
 		if (stmt_insert == null) {
 			stmt_insert = conn.Stmt_insert(tbl_name, flds);
-			tmp_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
+			tmp_bfr = BryWtr.NewAndReset(IoConsts.LenKB);
 		}
 		byte[] bin_ary = Io_stream_rdr_.Load_all_as_bry(tmp_bfr, bin_rdr);
 		stmt_insert.Clear()
@@ -66,15 +74,15 @@ public class Fsd_bin_tbl implements Rls_able {
 			: Io_stream_rdr_.New__mem(rv);
 	}
 	public boolean Select_to_url(int owner_id, Io_url url) {
-		saved_in_parts.Val_n();
+		saved_in_parts.ValN();
 		byte[] rv = Select(owner_id, url);
 		if (rv == null) return false;
-		if (saved_in_parts.Val_y()) return true;
+		if (saved_in_parts.ValY()) return true;
 		Io_mgr.Instance.SaveFilBry(url, rv);
 		return true;
 	}
 	private byte[] Select(int owner_id, Io_url url) {
-		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, String_.Ary(fld__data), fld__owner_id);
+		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, StringUtl.Ary(fld__data), fld__owner_id);
 		Db_rdr rdr = stmt_select.Clear().Crt_int(fld__owner_id, owner_id).Exec_select__rls_manual();
 		try {
 			if (rdr.Move_next()) {
@@ -83,13 +91,13 @@ public class Fsd_bin_tbl implements Rls_able {
 				catch (Exception e) {
 					if (	Op_sys.Cur().Tid_is_drd()										// drd error when selecting large blobs (> 4 MB?)
 						&&	url != null														// called by Select_to_url
-						&&	String_.Has(Err_.Message_lang(e), "get field slot from row")	// get field slot from row 0 col 0 failed
+						&&	StringUtl.Has(ErrUtl.Message(e), "get field slot from row")	// get field slot from row 0 col 0 failed
 						) { 	
 						rdr.Save_bry_in_parts(url, tbl_name, fld__data, fld__owner_id, owner_id);
-						saved_in_parts.Val_y_();
+						saved_in_parts.ValSetY();
 					}
 				}
-				return rv == null ? Bry_.Empty : rv;	// NOTE: bug in v0.10.1 where .ogg would save as null; return Bry_.Empty instead, else java.io.ByteArrayInputStream would fail on null
+				return rv == null ? BryUtl.Empty : rv;	// NOTE: bug in v0.10.1 where .ogg would save as null; return Bry_.Empty instead, else java.io.ByteArrayInputStream would fail on null
 			}
 			else
 				return null;

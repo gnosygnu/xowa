@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.Int_;
-import gplx.Object_;
-import gplx.String_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
 public class DbmetaFldItm {
 	public DbmetaFldItm(String name, DbmetaFldType type) {
 		this.name = name;
@@ -33,12 +33,12 @@ public class DbmetaFldItm {
 	public boolean Autonum() {return autonum;} public DbmetaFldItm AutonumSetY() {autonum = true; return this;} private boolean autonum;
 	public Object DefaultVal() {return defaultVal;} public DbmetaFldItm DefaultValSet(Object v) {defaultVal = v; return this;} private Object defaultVal;
 	public boolean Eq(DbmetaFldItm comp) {
-		return String_.Eq(name, comp.name)
+		return StringUtl.Eq(name, comp.name)
 			&& type.Eq(comp.type)
 			&& nullable == comp.nullable
 			&& primary == comp.primary
 			&& autonum == comp.autonum
-			&& Object_.Eq(defaultVal, comp.defaultVal);
+			&& ObjectUtl.Eq(defaultVal, comp.defaultVal);
 	}
 	public static final int NullableUnspecified = 0, NullableNull = 1, NullableNotNull = 2;
 	public static final Object DefaultValNull = null;
@@ -63,7 +63,7 @@ public class DbmetaFldItm {
 		return rv;
 	}
 
-	public static final String[] StrAryEmpty = String_.Ary_empty; // marker constant; should add overrides
+	public static final String[] StrAryEmpty = StringUtl.AryEmpty; // marker constant; should add overrides
 	public static String Make_or_null(Db_conn conn, DbmetaFldList flds, String tbl_name, int fld_type, Object fld_dflt, String fld_name) {
 		boolean tbl_exists = conn.Meta_tbl_exists(tbl_name);
 		boolean fld_exists = true;
@@ -79,5 +79,5 @@ public class DbmetaFldItm {
 		flds.Add(fld);
 		return fld.name;
 	}
-	public static String ToDoubleStrByInt(int v) {return Int_.To_str(v) + ".0";} // move
+	public static String ToDoubleStrByInt(int v) {return IntUtl.ToStr(v) + ".0";} // move
 }

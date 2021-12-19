@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.apos;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.parsers.Xop_ctx;
 public class Xop_apos_dat {
 	public int State() {return state;} public void State_clear() {state = Xop_apos_tkn_.State_nil;} private int state = Xop_apos_tkn_.State_nil;
 	public int Typ() {return typ;} private int typ;
@@ -45,7 +47,7 @@ public class Xop_apos_dat {
 					case Xop_apos_tkn_.State_dual:	cmd = Xop_apos_tkn_.Cmd_i_end;			state = Xop_apos_tkn_.State_b;		dual_cmd = Xop_apos_tkn_.Cmd_bi_bgn; break;
 					case Xop_apos_tkn_.State_b:		cmd = Xop_apos_tkn_.Cmd_i_bgn;			state = Xop_apos_tkn_.State_bi;		break;
 					case Xop_apos_tkn_.State_nil:	cmd = Xop_apos_tkn_.Cmd_i_bgn;			state = Xop_apos_tkn_.State_i;		break;
-					default:						throw Err_.new_unhandled(state);
+					default:						throw ErrUtl.NewUnhandled(state);
 				}
 				break;
 			}
@@ -57,7 +59,7 @@ public class Xop_apos_dat {
 					case Xop_apos_tkn_.State_dual:	cmd = Xop_apos_tkn_.Cmd_b_end;			state = Xop_apos_tkn_.State_i;		break; // NOTE: dual_cmd = Cmd_ib_bgn is implied
 					case Xop_apos_tkn_.State_i:		cmd = Xop_apos_tkn_.Cmd_b_bgn;			state = Xop_apos_tkn_.State_ib;		break;
 					case Xop_apos_tkn_.State_nil:	cmd = Xop_apos_tkn_.Cmd_b_bgn;			state = Xop_apos_tkn_.State_b;		break;
-					default:						throw Err_.new_unhandled(state);
+					default:						throw ErrUtl.NewUnhandled(state);
 				}
 				break;
 			}
@@ -69,11 +71,11 @@ public class Xop_apos_dat {
 					case Xop_apos_tkn_.State_ib:	cmd = Xop_apos_tkn_.Cmd_bi_end;			state = Xop_apos_tkn_.State_nil;	break;
 					case Xop_apos_tkn_.State_dual:	cmd = Xop_apos_tkn_.Cmd_bi_end;			state = Xop_apos_tkn_.State_nil;	break; // NOTE: dual_cmd = Cmd_ib_bgn is implied
 					case Xop_apos_tkn_.State_nil:	cmd = Xop_apos_tkn_.Cmd_ib_bgn;			state = Xop_apos_tkn_.State_dual;	break;
-					default:						throw Err_.new_unhandled(state);
+					default:						throw ErrUtl.NewUnhandled(state);
 				}
 				break;
 			}
-			default: throw Err_.new_unhandled(apos_len);
+			default: throw ErrUtl.NewUnhandled(apos_len);
 		}
 	}
 }

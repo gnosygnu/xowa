@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.site; import gplx.*;
+package gplx.xowa.mediawiki.includes.site;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.libs.*;
 /**
@@ -83,7 +87,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 		Ordered_hash ids = site.getNavigationIds();
 		int len = ids.Len();
 		for (int i = 0; i < len; i++) {
-			int navId = Int_.Cast(ids.Get_at(i));
+			int navId = IntUtl.Cast(ids.GetAt(i));
 			this.byNavigationId.Add(navId, index);
 		}
 
@@ -110,7 +114,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 			Ordered_hash ids = site.getNavigationIds();
 			int len = ids.Len();
 			for (int i = 0; i < len; i++) {
-				int navId = Int_.Cast(ids.Get_at(i));
+				int navId = IntUtl.Cast(ids.GetAt(i));
 				XophpArray.unset(this.byNavigationId, navId);
 			}
 		}
@@ -282,7 +286,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 		int len = this.count();
 		for (int i = 0; i < len; i++) {
 			XomwSite site = (XomwSite)this.Get_at(i);
-			if (String_.Eq(site.getGroup(), groupName)) {
+			if (StringUtl.Eq(site.getGroup(), groupName)) {
 				group.Add_or_update(site);
 			}
 		}

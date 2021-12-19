@@ -13,14 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xop_xnde_wkr__basic_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test public void Escape_lt() {	// PURPOSE: some templates have unknown tags; PAGE:en.w:PHP
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str("a<code><?</code>b", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("a<code><?</code>b", StringUtl.ConcatLinesNlSkipLast
 			(	"<p>a<code>&lt;?</code>b"
 			,	"</p>"
 			,	""
@@ -92,14 +94,14 @@ public class Xop_xnde_wkr__basic_tst {
 			,	"b"
 			);
 	}
-	@Test  public void CaseSensitivity_xtn_2() {	// PURPOSE: xtn end_tag may not match bgn_tag; EX: w:Ehrenfest_paradox; <References></references>
-		fxt.Test_parse_page_all_str("a<ref name=b /><References><ref name=b>c</ref></references>", String_.Concat_lines_nl
+	@Test public void CaseSensitivity_xtn_2() {	// PURPOSE: xtn end_tag may not match bgn_tag; EX: w:Ehrenfest_paradox; <References></references>
+		fxt.Test_parse_page_all_str("a<ref name=b /><References><ref name=b>c</ref></references>", StringUtl.ConcatLinesNl
 		(	"a<sup id=\"cite_ref-b_0-0\" class=\"reference\"><a href=\"#cite_note-b-0\">[1]</a></sup><ol class=\"references\">"
 		,	"<li id=\"cite_note-b-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-b_0-0\">^</a></span> <span class=\"reference-text\">c</span></li>"
 		,	"</ol>"
 		));
 	}
-	@Test  public void CaseSensitivity_xtn_3() {// PURPOSE: xtn xnde must do case-insensitive match DATE:2013-12-02
+	@Test public void CaseSensitivity_xtn_3() {// PURPOSE: xtn xnde must do case-insensitive match DATE:2013-12-02
 		fxt.Test_parse_page_all_str
 		( "<translatE>a</translate> b <translate>c</translatE>"	// <translatE> should match </translate> not </translatE>
 		, "a b c"
@@ -117,7 +119,7 @@ public class Xop_xnde_wkr__basic_tst {
 	@Test public void Script() { // PURPOSE: nested script should (a) write attributes; (b) write close tag; DATE:2014-01-24
 		fxt.Test_parse_page_all_str("<code><script src='a'>b</script></code>", "<code>&lt;script src='a'>b&lt;/script></code>");
 	}
-	@Test  public void Script_in_syntaxhighlight() {
+	@Test public void Script_in_syntaxhighlight() {
 		fxt.Test_parse_page_all_str("<syntaxhighlight><script>alert('fail');</script></syntaxhighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">&lt;script&gt;alert('fail');&lt;/script&gt;</pre></div>");
 	}
 	@Test public void Html5_time() {// PURPOSE: HTML5; should output self (i.e.: must be whitelisted)

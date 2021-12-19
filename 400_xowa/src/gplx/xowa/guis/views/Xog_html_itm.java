@@ -13,17 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
+package gplx.xowa.guis.views;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.wrappers.StringRef;
 import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.primitives.*;
 import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.htmls.*;
 public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page_html_source {
 	private Xoae_app app; private final Object thread_lock = new Object();
-	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
+	private final StringRef scroll_top = StringRef.NewNull(), node_path = StringRef.NewNull();
 	protected Xog_html_itm() {}	// TEST: for prefs_mgr
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;
@@ -51,7 +63,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 		Gfo_evt_mgr_.Sub_same(html_box, Gfui_html.Evt_zoom_changed, this);
 	}
 	public byte[] Get_page_html() {
-		return Bry_.new_u8(html_box.Text());
+		return BryUtl.NewU8(html_box.Text());
 	}
 	public String Html_selected_get_src_or_empty()			{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_src_or_empty);}
 	public String Html_selected_get_href_or_text()			{return Html_extract_text(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_href_or_text));}
@@ -61,7 +73,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 		if (v == null) return "";	// NOTE: Selection__get_text_or_href never gets called on blank hdoc, which is what happens for Special:XowaDefaultTab; DATE:2015-07-09
 		Xoae_page page = owner_tab.Page();
 		String site = owner_tab.Wiki().Domain_str();
-		String ttl = String_.new_u8(page.Ttl().Full_db());
+		String ttl = StringUtl.NewU8(page.Ttl().Full_db());
 		return Xoh_href_gui_utl.Html_extract_text(site, ttl, v);
 	}
 	public void Show(Xoae_page page) {
@@ -75,12 +87,12 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 		}
 	}
 	private void Html_src_(Xoae_page page, byte[] html_bry) {
-		String html_str = String_.new_u8(html_bry);
+		String html_str = StringUtl.NewU8(html_bry);
 		if (owner_tab.Tab_mgr().Page_load_mode_is_url()) {
 			Io_url html_url = app.Usere().Fsys_mgr().App_temp_html_dir().GenSubFil_ary(owner_tab.Tab_key(), ".html");
 			try {html_box.Html_doc_html_load_by_url(html_url, html_str);}
 			catch (Exception e) {
-				app.Usr_dlg().Warn_many("", "", "failed to write html to file; writing directly by memory: page=~{0} file=~{1} err=~{2}", page.Url().To_str(), html_url.Raw(), Err_.Message_gplx_full(e));
+				app.Usr_dlg().Warn_many("", "", "failed to write html to file; writing directly by memory: page=~{0} file=~{1} err=~{2}", page.Url().To_str(), html_url.Raw(), ErrUtl.ToStrFull(e));
 				html_box.Html_doc_html_load_by_mem(html_str);
 			}
 		}
@@ -98,7 +110,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 		src_itm.js_cbk = trg_js_cbk;
 		trg_itm.js_cbk = src_js_cbk;
 	}
-	public byte[] Get_elem_value_for_edit_box_as_bry()	{return Bry_.new_u8(this.Get_elem_value_for_edit_box());}
+	public byte[] Get_elem_value_for_edit_box_as_bry()	{return BryUtl.NewU8(this.Get_elem_value_for_edit_box());}
 	public String Get_elem_value_for_edit_box()			{return Html_elem_atr_get_str(Elem_id__xowa_edit_data_box, Gfui_html.Atr_value);}
 	public String Get_elem_value(String elem_id)		{return Html_elem_atr_get_str(elem_id, Gfui_html.Atr_value);}
 	public void Html_img_update(String elem_id, String elem_src, int elem_width, int elem_height) {
@@ -137,13 +149,13 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 		}
 	}
 	public void Html_gallery_packed_exec() {
-		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
+		if (!StringUtl.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_gallery_packed_exec);
 		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_gallery_packed_exec, m);
 		module_packed_done = true;
 	}
 	public void Html_popups_bind_hover_to_doc() {
-		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
+		if (!StringUtl.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return;	// do not exec unless active;
 		GfoMsg m = GfoMsg_.new_cast_(Invk_html_popups_bind_hover_to_doc);
 		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_popups_bind_hover_to_doc, m);
 		module_popups_done = true;
@@ -158,17 +170,17 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 	}
 	public void Scroll_page_by_bmk_gui()	{Gfo_invk_.Invk_by_key(cmd_async, Invk_scroll_page_by_bmk);}
 	private void Scroll_page_by_bmk() {
-		if (!String_.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return; // only set html page position on active tab; otherwise, page "scrolls down" mysteriously on unseen tab; DATE:2014-05-02
+		if (!StringUtl.Eq(owner_tab.Tab_key(), owner_tab.Tab_mgr().Active_tab().Tab_key())) return; // only set html page position on active tab; otherwise, page "scrolls down" mysteriously on unseen tab; DATE:2014-05-02
 		String html_doc_pos = owner_tab.Page().Html_data().Bmk_pos();
 		if (html_doc_pos == null) {
 			String auto_focus_id = app.Gui_mgr().Html_mgr().Auto_focus_id();
-			if (String_.Len_eq_0(auto_focus_id)) return;					// don't focus anything
-			if (String_.Eq(auto_focus_id, " first_anchor"))					// NOTE: HTML 4/5 do not allow space as id; XOWA using space here to create a unique_key that will never collide with any id
+			if (StringUtl.IsNullOrEmpty(auto_focus_id)) return;					// don't focus anything
+			if (StringUtl.Eq(auto_focus_id, " first_anchor"))					// NOTE: HTML 4/5 do not allow space as id; XOWA using space here to create a unique_key that will never collide with any id
 				html_box.Html_js_eval_proc_as_str(Xog_js_procs.Win__focus_body);	// NOTE: will focus body if content-editable, else first_anchor
 			else
 				html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, auto_focus_id);
 		}
-		else if (String_.Eq(html_doc_pos, gplx.xowa.guis.history.Xog_history_itm.Html_doc_pos_toc))	// NOTE: special case to handle TOC clicks; DATE:2013-07-17
+		else if (StringUtl.Eq(html_doc_pos, gplx.xowa.guis.history.Xog_history_itm.Html_doc_pos_toc))	// NOTE: special case to handle TOC clicks; DATE:2013-07-17
 			Scroll_page_by_id("toc");
 		else {
 			Html_window_vpos_parse(html_doc_pos, scroll_top, node_path);
@@ -188,9 +200,9 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 		Xoa_gui_mgr gui_mgr = app.Gui_mgr(); Gfui_kit kit = gui_mgr.Kit();
 		Xog_popup_mnu_mgr popup_mnu_mgr = gui_mgr.Menu_mgr().Popup();
 		Xog_mnu_grp popup_mnu = popup_mnu_mgr.Html_page();
-		if		(String_.Len_gt_0(this.Html_selected_get_src_or_empty()))
+		if		(StringUtl.IsNotNullOrEmpty(this.Html_selected_get_src_or_empty()))
 			popup_mnu = popup_mnu_mgr.Html_file();
-		else if (String_.Len_gt_0(this.Html_selected_get_text_or_href()))
+		else if (StringUtl.IsNotNullOrEmpty(this.Html_selected_get_text_or_href()))
 			popup_mnu = popup_mnu_mgr.Html_link();
 		kit.Set_mnu_popup(html_box, popup_mnu.Under_mnu());
 	}
@@ -226,11 +238,11 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 	, Elem_id__first_heading			= "firstHeading"
 	, Invk_html_elem_focus				= "html_elem_focus"
 	;
-	public static void Html_window_vpos_parse(String v, String_obj_ref scroll_top, String_obj_ref node_path) {
-		int pipe_pos = String_.FindFwd(v, "|"); if (pipe_pos == String_.Find_none) return; // if elem_get_path returns invalid value, don't fail; DATE:2014-04-05
-		scroll_top.Val_(String_.Mid(v, 0, pipe_pos));
-		String node_path_val = String_.Mid(v, pipe_pos + 1, String_.Len(v));
-		node_path_val = "'" + String_.Replace(node_path_val, ",", "','") + "'";
-		node_path.Val_(node_path_val);
+	public static void Html_window_vpos_parse(String v, StringRef scroll_top, StringRef node_path) {
+		int pipe_pos = StringUtl.FindFwd(v, "|"); if (pipe_pos == StringUtl.FindNone) return; // if elem_get_path returns invalid value, don't fail; DATE:2014-04-05
+		scroll_top.ValSet(StringUtl.Mid(v, 0, pipe_pos));
+		String node_path_val = StringUtl.Mid(v, pipe_pos + 1, StringUtl.Len(v));
+		node_path_val = "'" + StringUtl.Replace(node_path_val, ",", "','") + "'";
+		node_path.ValSet(node_path_val);
 	}
 }

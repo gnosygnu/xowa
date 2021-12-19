@@ -18,7 +18,7 @@ import gplx.dbs.Db_conn;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.bulks.Db_tbl_copy;
 import gplx.dbs.cfgs.Db_cfg_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.bldrs.exports.splits.Split_ctx;
 import gplx.xowa.addons.bldrs.exports.splits.Split_wkr;

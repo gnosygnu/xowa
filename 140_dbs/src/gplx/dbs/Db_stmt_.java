@@ -14,16 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.Double_;
-import gplx.Err;
-import gplx.Err_;
-import gplx.Float_;
-import gplx.Int_;
-import gplx.Long_;
-import gplx.String_;
-import gplx.Type_ids_;
 import gplx.dbs.qrys.Db_qry__select_cmd;
 import gplx.dbs.qrys.Db_qry__select_in_tbl;
 import gplx.dbs.qrys.Db_qry_delete;
@@ -31,7 +21,17 @@ import gplx.dbs.qrys.Db_qry_insert;
 import gplx.dbs.qrys.Db_qry_sql;
 import gplx.dbs.qrys.Db_qry_update;
 import gplx.dbs.qrys.Db_stmt_sql;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.errs.Err;
+import gplx.types.errs.ErrUtl;
 public class Db_stmt_ {
 	public static final Db_stmt Null = new Db_stmt_sql();
 	public static Db_stmt new_insert_(Db_conn conn, String tbl, String... flds) {
@@ -64,28 +64,26 @@ public class Db_stmt_ {
 		return conn.Stmt_new(Db_qry_sql.rdr_(sql));
 	}
 	public static Db_stmt New_sql_lines(Db_conn conn, String... lines) {
-		Db_qry qry = Db_qry_sql.sql_(String_.Concat_with_str("\n", lines));
+		Db_qry qry = Db_qry_sql.sql_(StringUtl.ConcatWith("\n", lines));
 		return conn.Stmt_new(qry);
 	}
-	public static Err err_(Exception e, Db_stmt stmt, String proc) {
-		throw Err_.new_exc(e, "db", "db stmt failed", "proc", proc);
-	}
+	public static Err err_(Exception e, Db_stmt stmt, String proc) {throw ErrUtl.NewArgs(e, "db stmt failed", "proc", proc).FrameIgnoreAdd1();}
 	public static Err err_(Exception e, String tbl, String proc) {
-		throw Err_.new_exc(e, "core", "db call failed", "tbl", tbl, "proc", proc);
+		throw ErrUtl.NewArgs(e, "db call failed", "tbl", tbl, "proc", proc).FrameIgnoreAdd1();
 	}
 	public static Db_stmt Rls(Db_stmt v) {if (v != null) v.Rls(); return null;}
 	public static void Val_by_obj(Db_stmt stmt, String key, Object val) {
-		int tid = Type_ids_.To_id_by_obj(val);
+		int tid = TypeIds.ToIdByObj(val);
 		switch (tid) {
-			case Type_ids_.Id__bool:        stmt.Val_bool_as_byte   (key, BoolUtl.Cast(val)); break;
-			case Type_ids_.Id__byte:        stmt.Val_byte           (key, Byte_.Cast(val)); break;
-			case Type_ids_.Id__int:         stmt.Val_int            (key, Int_.Cast(val)); break;
-			case Type_ids_.Id__long:        stmt.Val_long           (key, Long_.cast(val)); break;
-			case Type_ids_.Id__float:       stmt.Val_float          (key, Float_.cast(val)); break;
-			case Type_ids_.Id__double:      stmt.Val_double         (key, Double_.cast(val)); break;
-			case Type_ids_.Id__str:         stmt.Val_str            (key, String_.cast(val)); break;
-			case Type_ids_.Id__bry:         stmt.Val_bry            (key, Bry_.cast(val)); break;
-			default:                        throw Err_.new_unhandled_default(tid);
+			case TypeIds.IdBool:        stmt.Val_bool_as_byte   (key, BoolUtl.Cast(val)); break;
+			case TypeIds.IdByte:        stmt.Val_byte           (key, ByteUtl.Cast(val)); break;
+			case TypeIds.IdInt:         stmt.Val_int            (key, IntUtl.Cast(val)); break;
+			case TypeIds.IdLong:        stmt.Val_long           (key, LongUtl.Cast(val)); break;
+			case TypeIds.IdFloat:       stmt.Val_float          (key, FloatUtl.Cast(val)); break;
+			case TypeIds.IdDouble:      stmt.Val_double         (key, DoubleUtl.Cast(val)); break;
+			case TypeIds.IdStr:         stmt.Val_str            (key, StringUtl.Cast(val)); break;
+			case TypeIds.IdBry:         stmt.Val_bry            (key, BryUtl.Cast(val)); break;
+			default:                        throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public static void Insert_by_rdr(DbmetaFldList flds, Db_rdr rdr, Db_stmt stmt) {
@@ -109,7 +107,7 @@ public class Db_stmt_ {
 				case DbmetaFldType.TidDouble:      stmt.Val_double         (fld_name, rdr.Read_double(fld_name)); break;
 				case DbmetaFldType.TidStr:         stmt.Val_str            (fld_name, rdr.Read_str(fld_name)); break;
 				case DbmetaFldType.TidBry:         stmt.Val_bry            (fld_name, rdr.Read_bry(fld_name)); break;
-				default:                              throw Err_.new_unhandled_default_w_msg(fld_tid, fld_name);
+				default:                              throw ErrUtl.NewUnhandled(fld_tid, fld_name);
 			}
 		}
 	}

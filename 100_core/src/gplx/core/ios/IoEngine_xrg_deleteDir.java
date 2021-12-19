@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
 import gplx.core.consoles.*; import gplx.core.criterias.*;
+import gplx.libs.files.Io_url;
 public class IoEngine_xrg_deleteDir {
 	public Io_url Url() {return url;} public IoEngine_xrg_deleteDir Url_(Io_url val) {url = val; return this;} Io_url url;
 	public boolean Recur() {return recur;} public IoEngine_xrg_deleteDir Recur_() {return Recur_(true);} public IoEngine_xrg_deleteDir Recur_(boolean v) {recur = v; return this;} private boolean recur = false;
@@ -28,5 +29,5 @@ public class IoEngine_xrg_deleteDir {
 		IoEngine_xrg_deleteDir rv = new IoEngine_xrg_deleteDir();
 		rv.url = url;
 		return rv;
-	}	IoEngine_xrg_deleteDir() {}
+	}   IoEngine_xrg_deleteDir() {}
 }

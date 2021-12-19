@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cites;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Ref_itm_mgr_cfg_tst {		
 	@Before public void init() {fxt.Clear();} private Ref_itm_mgr_cfg_fxt fxt = new Ref_itm_mgr_cfg_fxt();
@@ -27,7 +30,7 @@ public class Ref_itm_mgr_cfg_tst {
 class Ref_itm_mgr_cfg_fxt {
 	public void Clear() {}
 	public void Test_Ref_backlabels_xby_bry(String raw, String... expd) {
-		byte[][] actl = Ref_html_wtr_cfg.Ref_backlabels_xby_bry(Bry_.new_u8(raw));
-		Tfds.Eq_ary_str(expd, String_.Ary(actl));
+		byte[][] actl = Ref_html_wtr_cfg.Ref_backlabels_xby_bry(BryUtl.NewU8(raw));
+		GfoTstr.EqLines(expd, StringUtl.Ary(actl));
 	}
 }

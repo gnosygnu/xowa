@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
+package gplx.xowa.bldrs.setups.upgrades;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xoa_upgrade_mgr_tst {
 	@Test public void Run() {
@@ -22,10 +26,10 @@ public class Xoa_upgrade_mgr_tst {
 		Io_url new_history_dir = app.Usere().Fsys_mgr().App_data_dir().GenSubDir("history");
 		Io_mgr.Instance.SaveFilStr(old_history_dir.GenSubFil("page_history.csv"), "test");
 		Xoa_upgrade_mgr.Check(app);
-		Tfds.Eq("test", Io_mgr.Instance.LoadFilStr(old_history_dir.GenSubFil("page_history.csv")));	// old file still exists
-		Tfds.Eq("test", Io_mgr.Instance.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// new file exists
+		GfoTstr.EqObj("test", Io_mgr.Instance.LoadFilStr(old_history_dir.GenSubFil("page_history.csv")));	// old file still exists
+		GfoTstr.EqObj("test", Io_mgr.Instance.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// new file exists
 		Io_mgr.Instance.SaveFilStr(new_history_dir.GenSubFil("page_history.csv"), "test1");			// dirty file
 		Xoa_upgrade_mgr.Check(app);																// rerun
-		Tfds.Eq("test1", Io_mgr.Instance.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// dirty file remains (not replaced by old file)
+		GfoTstr.EqObj("test1", Io_mgr.Instance.LoadFilStr(new_history_dir.GenSubFil("page_history.csv")));	// dirty file remains (not replaced by old file)
 	}
 }

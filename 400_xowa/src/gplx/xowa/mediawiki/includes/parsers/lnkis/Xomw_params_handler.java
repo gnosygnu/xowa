@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.lnkis;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.mediawiki.XophpObject_;
 public class Xomw_params_handler {
 	public int width;
 	public int height;
@@ -36,7 +38,7 @@ public class Xomw_params_handler {
 		switch (uid) {
 			case Xomw_param_itm.Name__width: width = val_int; break;
 			case Xomw_param_itm.Name__height: height = val_int; break;
-			default: throw Err_.new_unhandled_default(uid);
+			default: throw ErrUtl.NewUnhandled(uid);
 		}
 	}
 }

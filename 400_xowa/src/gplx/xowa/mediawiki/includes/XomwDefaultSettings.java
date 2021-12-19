@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
 
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 

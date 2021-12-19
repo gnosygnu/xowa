@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
+package gplx.xowa.bldrs.cmds.texts.xmls;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.xowa.wikis.nss.*;
 public class Xob_siteinfo_nde {
 	public Xob_siteinfo_nde(String site_name, String db_name, byte[] main_page, String generator, String case_dflt, Xow_ns_mgr ns_mgr) {
@@ -30,18 +31,18 @@ public class Xob_siteinfo_nde {
 	public String		Generator() {return generator;} private final String generator;
 	public String		Case_dflt() {return case_dflt;} private final String case_dflt;
 	public Xow_ns_mgr	Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
-	public void To_bfr(Bry_bfr bfr) {
-		bfr.Add       (main_page).Add_byte_pipe();
-		bfr.Add_str_u8(case_dflt).Add_byte_pipe();
-		bfr.Add_str_u8(site_name).Add_byte_pipe();
-		bfr.Add_str_u8(db_name).Add_byte_pipe();
-		bfr.Add_str_u8(generator).Add_byte_nl();
+	public void To_bfr(BryWtr bfr) {
+		bfr.Add       (main_page).AddBytePipe();
+		bfr.AddStrU8(case_dflt).AddBytePipe();
+		bfr.AddStrU8(site_name).AddBytePipe();
+		bfr.AddStrU8(db_name).AddBytePipe();
+		bfr.AddStrU8(generator).AddByteNl();
 		int len = ns_mgr.Count();
 		for (int i = 0; i < len; ++i) {
 			Xow_ns ns = ns_mgr.Ords_get_at(i);
-			bfr.Add_int_variable(ns.Id()).Add_byte_pipe();
-			bfr.Add_str_u8(Xow_ns_case_.To_str(ns.Case_match())).Add_byte_pipe();
-			bfr.Add(ns.Name_ui()).Add_byte_nl();
+			bfr.AddIntVariable(ns.Id()).AddBytePipe();
+			bfr.AddStrU8(Xow_ns_case_.To_str(ns.Case_match())).AddBytePipe();
+			bfr.Add(ns.Name_ui()).AddByteNl();
 		}
 	}
 }

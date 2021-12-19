@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.glys;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*; import gplx.langs.htmls.clses.*;
 import gplx.xowa.xtns.gallery.*;
@@ -40,9 +47,9 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 	public int				Capt_bgn() {return capt_bgn;} private int capt_bgn;
 	public int				Capt_end() {return capt_end;} private int capt_end;
 	public int				Itms__len() {return itms_list.Len();}
-	public Xoh_gly_itm_data Itms__get_at(int i) {return (Xoh_gly_itm_data)itms_list.Get_at(i);}
+	public Xoh_gly_itm_data Itms__get_at(int i) {return (Xoh_gly_itm_data)itms_list.GetAt(i);}
 	private void Clear() {
-		this.gly_tid = Byte_.Max_value_127;
+		this.gly_tid = ByteUtl.MaxValue127;
 		this.ul_style_max_w = ul_style_w = 0;
 		this.xtra_atr_bgn = xtra_atr_end = xtra_cls_bgn = xtra_cls_end = xtra_style_bgn = xtra_style_end = -1;
 		this.xnde_per_row = xnde_w = xnde_h = capt_bgn = capt_end = -1;
@@ -89,9 +96,9 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 		int pos = 0;
 		for (int i = 0; i < 3; ++i) {
 			int bgn = pos;
-			int end = Bry_find_.Find_fwd(val, AsciiByte.Pipe, bgn + 1, val_len);
-			if (end == Bry_find_.Not_found) end = val_len;
-			int num = Bry_.To_int_or(val, bgn, end, -1);
+			int end = BryFind.FindFwd(val, AsciiByte.Pipe, bgn + 1, val_len);
+			if (end == BryFind.NotFound) end = val_len;
+			int num = BryUtl.ToIntOr(val, bgn, end, -1);
 			pos = end + 1;
 			switch (i) {
 				case 0: xnde_w = num; break;
@@ -104,7 +111,7 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 	private boolean Parse_cls(byte[] src, Gfh_tag_rdr tag_rdr, Gfh_tag ul_head) {
 		Gfh_atr ul_cls = ul_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__class);
 		Gfh_class_parser_.Parse(src, ul_cls.Val_bgn(), ul_cls.Val_end(), this);
-		if (gly_tid == Byte_.Max_value_127) {
+		if (gly_tid == ByteUtl.MaxValue127) {
 			tag_rdr.Err_wkr().Fail("unable to find gallery tid");
 			return false;
 		}
@@ -127,12 +134,12 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 	}
 	public boolean On_cls(byte[] src, int atr_idx, int atr_bgn, int atr_end, int val_bgn, int val_end) {
             int val_pos = val_bgn - atr_bgn;
-		if		(	Bry_.Match(src, val_bgn, val_end, Atr__cls__gallery)	// ignore "gallery"
+		if		(	BryLni.Eq(src, val_bgn, val_end, Atr__cls__gallery)	// ignore "gallery"
 				&&	val_pos == 0) {}										// only if 1st; EX:'gallery mw-traditional gallery'; PAGE:en.w:Butuan; DATE:2016-01-05
-		else if (Bry_.Match(src, val_bgn, val_bgn + Atr__cls__mw_gallery.length, Atr__cls__mw_gallery)	// starts with 'mw-gallery-'
+		else if (BryLni.Eq(src, val_bgn, val_bgn + Atr__cls__mw_gallery.length, Atr__cls__mw_gallery)	// starts with 'mw-gallery-'
 				&&	val_pos == 8) {											// occurs after "gallery "
 			int tid_bgn = val_bgn + Atr__cls__mw_gallery.length;
-			this.gly_tid = Gallery_mgr_base_.To_tid_or(src, tid_bgn, val_end, Byte_.Max_value_127);
+			this.gly_tid = Gallery_mgr_base_.To_tid_or(src, tid_bgn, val_end, ByteUtl.MaxValue127);
 			return true;
 		}
 		else {
@@ -144,15 +151,15 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 		return true;
 	}		
 	public boolean On_atr(byte[] src, int atr_idx, int atr_val_bgn, int atr_val_end, int itm_bgn, int itm_end, int key_bgn, int key_end, int val_bgn, int val_end) {
-		if		(Bry_.Match(src, key_bgn, key_end, Style__max_width)) {	// 'max-width'
+		if		(BryLni.Eq(src, key_bgn, key_end, Style__max_width)) {	// 'max-width'
 			if (ul_style_max_w == 0) {
-				ul_style_max_w = Bry_.To_int_or__lax(src, val_bgn, val_end, 0);
+				ul_style_max_w = BryUtl.ToIntOrLax(src, val_bgn, val_end, 0);
 				return true;
 			}	// else if already set, fall-thru to below
 		}
-		else if	(Bry_.Match(src, key_bgn, key_end, Style___width)) {	// '_width'
+		else if	(BryLni.Eq(src, key_bgn, key_end, Style___width)) {	// '_width'
 			if (ul_style_w == 0) {
-				ul_style_w = Bry_.To_int_or__lax(src, val_bgn, val_end, 0);
+				ul_style_w = BryUtl.ToIntOrLax(src, val_bgn, val_end, 0);
 				return true;
 			}	// else if already set, fall-thru to below
 		}			
@@ -162,11 +169,11 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 		}
 		return true;
 	}
-	public static final byte[] Atr__cls__gallery = Bry_.new_a7("gallery");
-	private static final byte[] Atr__cls__mw_gallery = Bry_.new_a7("mw-gallery-"), Atr__cls__gallerybox = Bry_.new_a7("gallerybox")
-	, Style__max_width = Bry_.new_a7("max-width"), Style___width = Bry_.new_a7("_width")
+	public static final byte[] Atr__cls__gallery = BryUtl.NewA7("gallery");
+	private static final byte[] Atr__cls__mw_gallery = BryUtl.NewA7("mw-gallery-"), Atr__cls__gallerybox = BryUtl.NewA7("gallerybox")
+	, Style__max_width = BryUtl.NewA7("max-width"), Style___width = BryUtl.NewA7("_width")
 	;
-	public static final byte[] Atr__cls__gallerycaption = Bry_.new_a7("gallerycaption");
+	public static final byte[] Atr__cls__gallerycaption = BryUtl.NewA7("gallerycaption");
 	private static final Hash_adp_bry atrs_ignored = Make_atrs_ignored();
 	private static Hash_adp_bry Make_atrs_ignored() {
 		Hash_adp_bry rv = Hash_adp_bry.ci_a7();

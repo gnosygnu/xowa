@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys;
+import gplx.types.basics.utls.ByteUtl;
 import gplx.xowa.htmls.core.hzips.*;
 public class Bit_heap_rdr {
 	private final byte[] hzip_int_bry = new byte[5];
@@ -65,7 +66,7 @@ public class Bit_heap_rdr {
 		hzip_int_bry[0] = b0;
 		for (int i = 1; i < full_len; ++i)
 			hzip_int_bry[i] = Get_byte(8);
-		return Xoh_hzip_int.To_int_by_bry(hzip_int_bry, bgn_idx, full_len, Byte_.Zero, 256);
+		return Xoh_hzip_int.To_int_by_bry(hzip_int_bry, bgn_idx, full_len, ByteUtl.Zero, 256);
 	}
 	private byte Get_byte_private(int bits, int chk_bits) {
 		Get_bgn(chk_bits);

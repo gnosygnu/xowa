@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
 import gplx.gfui.RectAdp;
 import gplx.gfui.SizeAdp;
 import gplx.gfui.SizeAdp_;
 import gplx.gfui.imgs.ImageAdp;
 import gplx.gfui.kits.core.Gfui_kit;
-
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.errs.ErrUtl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -35,8 +37,8 @@ public class Swt_img implements ImageAdp {
 	public Object Under() {return under;} Image under;
 	public boolean Disposed() {return under.isDisposed();}
 	public void Rls() {under.dispose();}
-	public void SaveAsBmp(Io_url url) {throw Err_.new_unimplemented();}
-	public void SaveAsPng(Io_url url) {throw Err_.new_unimplemented();}
+	public void SaveAsBmp(Io_url url) {throw ErrUtl.NewUnimplemented();}
+	public void SaveAsPng(Io_url url) {throw ErrUtl.NewUnimplemented();}
 	public ImageAdp Resize(int trg_w, int trg_h) {return Extract_image(0, 0, width, height, trg_w, trg_h);}
 	public ImageAdp Extract_image(RectAdp src_rect, SizeAdp trg_size) {return Extract_image(src_rect.X(), src_rect.Y(), src_rect.Width(), src_rect.Height(), trg_size.Width(), trg_size.Height());}
 	public ImageAdp Extract_image(int src_x, int src_y, int src_w, int src_h, int trg_w, int trg_h) {

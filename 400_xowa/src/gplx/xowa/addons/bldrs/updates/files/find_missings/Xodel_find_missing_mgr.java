@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.updates.files.find_missings; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.updates.*; import gplx.xowa.addons.bldrs.updates.files.*;
+package gplx.xowa.addons.bldrs.updates.files.find_missings;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.updates.files.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.addons.bldrs.files.dbs.*;
 class Xodel_find_missing_mgr {
@@ -25,7 +28,7 @@ class Xodel_find_missing_mgr {
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(pfm_conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Tbl__page().Conn()));
 		Page_file_map_tbl pfm_tbl = new Page_file_map_tbl(pfm_conn, "page_file_map_found");
 		pfm_conn.Meta_tbl_remake(pfm_tbl);
-		attach_mgr.Exec_sql_w_msg("generating page_file_map_found", Db_sql_.Make_by_fmt(String_.Ary
+		attach_mgr.Exec_sql_w_msg("generating page_file_map_found", Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "INSERT INTO page_file_map_found (page_id, fil_id, thm_id, sort_id, count_of)"
 		, "SELECT  pfm.page_id, pfm.fil_id, pfm.thm_id, pfm.sort_id, pfm.count_of"
 		, "FROM    page_file_map pfm"
@@ -34,7 +37,7 @@ class Xodel_find_missing_mgr {
 		pfm_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl("page_file_map_found", "fil_id__thm_id", "fil_id", "thm_id"));
 
 		// update fsdb_deleted
-		pfm_conn.Exec_sql("", Db_sql_.Make_by_fmt(String_.Ary
+		pfm_conn.Exec_sql("", Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "UPDATE  fsdb_regy"
 		, "SET     fsdb_deleted = 1"
 		, "WHERE   NOT EXISTS "

@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*;
-import gplx.objects.lists.CompareAble;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.lists.CompareAble;
 import gplx.dbs.*;
+import gplx.types.basics.utls.IntUtl;
 class Xob_lnki_temp_row implements CompareAble {
 	public int Lnki_id() {return lnki_id;} private int lnki_id;
 	public int Lnki_tier_id() {return lnki_tier_id;} private int lnki_tier_id;
@@ -35,7 +37,7 @@ class Xob_lnki_temp_row implements CompareAble {
 		this.lnki_tier_id = rdr.Read_int("lnki_tier_id");
 		this.lnki_page_id = rdr.Read_int("lnki_page_id");
 		this.lnki_ttl = rdr.Read_bry_by_str("lnki_ttl");
-		this.lnki_commons_ttl = Bry_.new_u8_safe(rdr.Read_str("lnki_commons_ttl"));
+		this.lnki_commons_ttl = BryUtl.NewU8Safe(rdr.Read_str("lnki_commons_ttl"));
 		this.lnki_ext = rdr.Read_byte("lnki_ext");
 		this.lnki_type = rdr.Read_byte("lnki_type");
 		this.lnki_src_tid = rdr.Read_byte("lnki_src_tid");
@@ -47,6 +49,6 @@ class Xob_lnki_temp_row implements CompareAble {
 	}
 	public int compareTo(Object obj) {
 		Xob_lnki_temp_row comp = (Xob_lnki_temp_row)obj;
-		return Int_.Compare(lnki_id, comp.lnki_id);
+		return IntUtl.Compare(lnki_id, comp.lnki_id);
 	}
 }

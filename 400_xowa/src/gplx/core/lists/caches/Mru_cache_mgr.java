@@ -14,24 +14,25 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.lists.caches;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Datetime_now;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Io_mgr;
-import gplx.Object_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
+import gplx.core.envs.SystemUtl;
+import gplx.libs.ios.IoConsts;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.core.lists.Sorted_hash;
 import gplx.core.logs.Gfo_log_wtr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Mru_cache_mgr {
 	private final Mru_cache_time_mgr time_mgr;
 	private final Gfo_log_wtr log_wtr;
 	private final Hash_adp key_hash = Hash_adp_.New();
 	private final Sorted_hash val_hash;
-	private final Bry_bfr log_bfr = Bry_bfr_.New_w_size(255);
+	private final BryWtr log_bfr = BryWtr.NewWithSize(255);
 	private final Mru_cache_itm_comparer comparer;
 	private final Ordered_hash dirty = Ordered_hash_.New();
 	private long cache_max, cache_size, compress_size;
@@ -64,7 +65,7 @@ public class Mru_cache_mgr {
 	public void Compress(long val_size) {
 		int dirty_len = dirty.Len();
 		for (int i = 0; i < dirty_len; i++) {
-			Mru_cache_itm dirty_itm = (Mru_cache_itm)dirty.Get_at(i);
+			Mru_cache_itm dirty_itm = (Mru_cache_itm)dirty.GetAt(i);
 			val_hash.Del(dirty_itm);
 			dirty_itm.Update();
 			val_hash.Add(dirty_itm, dirty_itm);
@@ -94,13 +95,13 @@ public class Mru_cache_mgr {
 	}
 	private void Write(boolean write_time, Mru_cache_itm itm) {
 		// 20180625_112443.506|Q2|123uses|10ms|1234bytes\n
-		if (write_time) log_bfr.Add_dte_under(Datetime_now.Get_force()).Add_byte_pipe();
-		log_bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(itm.Key()));
-		log_bfr.Add_byte_pipe().Add_long_fixed(comparer.Score(itm), 10);
-		log_bfr.Add_byte_pipe().Add_long_variable(itm.Size());
-		log_bfr.Add_byte_pipe().Add_long_variable(itm.Time_dif());
-		log_bfr.Add_byte_pipe().Add_long_variable(itm.Used());
-		log_bfr.Add_byte_nl();
+		if (write_time) log_bfr.AddDateUnderline(GfoDateNow.GetForce()).AddBytePipe();
+		log_bfr.AddStrU8(ObjectUtl.ToStrOrNullMark(itm.Key()));
+		log_bfr.AddBytePipe().AddLongFixed(comparer.Score(itm), 10);
+		log_bfr.AddBytePipe().AddLongVariable(itm.Size());
+		log_bfr.AddBytePipe().AddLongVariable(itm.Time_dif());
+		log_bfr.AddBytePipe().AddLongVariable(itm.Used());
+		log_bfr.AddByteNl();
 	}
 	public void Clear() {
 		key_hash.Clear();
@@ -110,10 +111,10 @@ public class Mru_cache_mgr {
 		cache_size = 0;
 	}
 	public static Mru_cache_mgr New_by_mb_secs(Gfo_log_wtr log_wtr, long cache_max_in_mb, long compress_size, long used_weight_in_secs) {
-		return new Mru_cache_mgr(new Mru_cache_time_mgr__clock(), log_wtr, Io_mgr.Len_mb * cache_max_in_mb, Io_mgr.Len_mb * compress_size, gplx.core.envs.System_.Ticks__per_second * used_weight_in_secs);
+		return new Mru_cache_mgr(new Mru_cache_time_mgr__clock(), log_wtr, IoConsts.LenMB * cache_max_in_mb, IoConsts.LenMB * compress_size, SystemUtl.Ticks__per_second * used_weight_in_secs);
 	}
 
 	// TEST
 	public Object[] Values_array() {return val_hash.Values_array();}
-	@gplx.Internal protected static Mru_cache_mgr New_test(Mru_cache_time_mgr time_mgr, Gfo_log_wtr log_wtr, long cache_max, long compress_size, long used_weight) {return new Mru_cache_mgr(time_mgr, log_wtr, cache_max, compress_size, used_weight);}
+	public static Mru_cache_mgr New_test(Mru_cache_time_mgr time_mgr, Gfo_log_wtr log_wtr, long cache_max, long compress_size, long used_weight) {return new Mru_cache_mgr(time_mgr, log_wtr, cache_max, compress_size, used_weight);}
 }

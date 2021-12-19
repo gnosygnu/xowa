@@ -15,15 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.caches;
 
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Hash_adp_bry;
-import gplx.Io_mgr;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.caches.Gfo_cache_mgr;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.xwikis.sitelinks.Xoa_sitelink_itm;
@@ -41,7 +40,7 @@ public class Xow_cache_mgr {
 	public Hash_adp_bry			Lst_cache()			{return lst_cache;}			private final Hash_adp_bry lst_cache = Hash_adp_bry.cs();
 	public Hash_adp				Misc_cache()		{return misc_cache;}		private final Hash_adp misc_cache = Hash_adp_.New();
 	public Xow_page_cache		Page_cache()		{return page_cache;}		private Xow_page_cache page_cache;
-	public Gfo_cache_mgr		Commons_cache()		{return commons_cache;}		private Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(64 * Io_mgr.Len_mb).Reduce_by_(32 * Io_mgr.Len_mb);
+	public Gfo_cache_mgr		Commons_cache()		{return commons_cache;}		private Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(64 * IoConsts.LenMB).Reduce_by_(32 * IoConsts.LenMB);
 	public Xow_ifexist_cache	Ifexist_cache()		{return ifexist_cache;}		private Xow_ifexist_cache ifexist_cache;
 
 	public Xow_cache_mgr	Page_cache_(Xow_page_cache v) {this.page_cache = v; return this;}
@@ -51,17 +50,17 @@ public class Xow_cache_mgr {
 		page_cache.Load_wkr_(v);
 		ifexist_cache.Load_wkr_(v);
 	}
-	public Keyval[] Scrib_lang_names() {
+	public KeyVal[] Scrib_lang_names() {
 		if (scrib_lang_names == null) {
 			List_adp list = List_adp_.New();
 			Xoa_sitelink_itm_mgr itm_mgr = wiki.App().Xwiki_mgr__sitelink_mgr().Itm_mgr();
 			int len = itm_mgr.Len();
 			for (int i = 0; i < len; ++i) {
 				Xoa_sitelink_itm itm = itm_mgr.Get_at(i);
-				Keyval kv = Keyval_.new_(String_.new_u8(itm.Key()), String_.new_u8(itm.Name()));
+				KeyVal kv = KeyVal.NewStr(StringUtl.NewU8(itm.Key()), StringUtl.NewU8(itm.Name()));
 				list.Add(kv);
 			}
-			scrib_lang_names = (Keyval[])list.ToAry(Keyval.class);
+			scrib_lang_names = (KeyVal[])list.ToAry(KeyVal.class);
 		}
 		return scrib_lang_names;
 	}
@@ -91,5 +90,5 @@ public class Xow_cache_mgr {
 		// scrib_lang_names = null;
 	}
 	private static final int Free_mem__page_tid = 0, Free_mem__wbase_tid = 1, Free_mem__all_tid = 2;
-	private static Keyval[] scrib_lang_names;
+	private static KeyVal[] scrib_lang_names;
 }

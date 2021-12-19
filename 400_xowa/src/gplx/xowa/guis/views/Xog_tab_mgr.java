@@ -15,20 +15,20 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.views;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_itm;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.gfui.controls.gxws.Gxw_html_load_tid_;
 import gplx.gfui.controls.standards.Gfui_tab_itm;
 import gplx.gfui.controls.standards.Gfui_tab_itm_data;
@@ -80,20 +80,20 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	}
 	public int Tabs_len() {return tab_regy.Len();}
 	public Xog_tab_itm Tabs_new_init(Xowe_wiki wiki, Xoae_page page) {return this.Tabs_new(true, true, wiki, page);}
-	public Xog_tab_itm Tabs_get_at(int i) {return (Xog_tab_itm)tab_regy.Get_at(i);}
+	public Xog_tab_itm Tabs_get_at(int i) {return (Xog_tab_itm)tab_regy.GetAt(i);}
 	public Xog_tab_itm Tabs_new_dflt() {return Tabs_new_dflt(false);}
 	public Xog_tab_itm Tabs_new_dflt(boolean focus) {
 		boolean active_tab_is_null = this.Active_tab_is_null();
 		Xowe_wiki cur_wiki = active_tab_is_null ? win.App().Usere().Wiki() : active_tab.Wiki();
 		Xoa_ttl ttl = Xoa_ttl.Parse(cur_wiki, Xow_special_meta_.Itm__default_tab.Ttl_bry());
-		Xoa_url url = cur_wiki.Utl__url_parser().Parse_by_urlbar_or_null(ttl.Full_db_as_str()); if (url == null) throw Err_.new_("url", "invalid url", "url", url);
+		Xoa_url url = cur_wiki.Utl__url_parser().Parse_by_urlbar_or_null(ttl.Full_db_as_str()); if (url == null) throw ErrUtl.NewArgs("invalid url", "url", url);
 		Xog_tab_itm rv = Tabs_new(focus, active_tab_is_null, cur_wiki, Xoae_page.New(cur_wiki, ttl));
 		rv.Page_update_ui();
 		rv.Show_url_bgn(url);
 		return rv;
 	}
 	private Xog_tab_itm Tabs_new(boolean focus, boolean active_tab_is_null, Xowe_wiki wiki, Xoae_page page) {
-		String tab_key = "tab_" + Int_.To_str(tab_uid++); int tab_idx = tab_regy.Len();
+		String tab_key = "tab_" + IntUtl.ToStr(tab_uid++); int tab_idx = tab_regy.Len();
 		Gfui_tab_itm_data tab_data = new Gfui_tab_itm_data(tab_key, tab_idx);
 		Xog_tab_itm rv = new Xog_tab_itm(this, tab_data, wiki, page);
 		Gfui_tab_itm tab_box = tab_mgr.Tabs_add(tab_data);
@@ -187,7 +187,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		return rv;
 	}
 	private Xog_tab_itm Tabs_get_by_idx_or_warn(int idx) {
-		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.Get_at(idx); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; idx={0}", idx);
+		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.GetAt(idx); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; idx={0}", idx);
 		return rv;
 	}
 	private void Tabs_recalc_idx() {
@@ -219,7 +219,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		active_tab = trg_itm;	// NOTE: src_itm initiated switch, but trg_itm is now active b/c everything in src_itm has now been reparented to trg_itm; DATE:2014-05-12
 	}
 	public void Tabs_new_link(boolean focus, String link) {	// handle empty link
-		if (String_.Len_eq_0(link)) {
+		if (StringUtl.IsNullOrEmpty(link)) {
 			if (this.Active_tab_is_null()) return;
 			link = active_tab.Html_itm().Html_selected_get_active_or_selection();
 			// 2020-12-16|ISSUE#:823|Open in new tab creates links like `about:/wiki/PAGE_NAME` or `about:/site/WIKI_NAME/wiki/PAGE_NAME`
@@ -232,7 +232,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 			}
 			link = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode_str(link);	// NOTE: must decode else url-encoded special pages don't work; EX:home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.html.css; DATE:2017-01-02
 		}
-		if (String_.Len_eq_0(link)) {win.App().Usr_dlg().Prog_many("", "", "no link or text selected"); return;}
+		if (StringUtl.IsNullOrEmpty(link)) {win.App().Usr_dlg().Prog_many("", "", "no link or text selected"); return;}
 		Tabs_new_link(link, focus);
 	}
 	public void Tabs_new_link(String link, boolean focus) {

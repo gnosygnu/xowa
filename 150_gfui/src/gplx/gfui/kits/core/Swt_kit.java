@@ -14,31 +14,30 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.core;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_invk_cmd;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.Keyval;
-import gplx.Keyval_hash;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.UsrDlg_;
-import gplx.UsrMsg;
-import gplx.UsrMsgWkr;
-import gplx.UsrMsgWkr_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValHash;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.libs.dlgs.UsrMsgWkr;
+import gplx.libs.dlgs.UsrMsgWkr_;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.core.threads.Thread_adp_;
 import gplx.gfui.controls.customs.GfuiStatusBox;
 import gplx.gfui.controls.customs.GfuiStatusBox_;
@@ -78,7 +77,7 @@ import gplx.gfui.kits.swts.Swt_tab_mgr;
 import gplx.gfui.kits.swts.Swt_text;
 import gplx.gfui.kits.swts.Swt_text_w_border;
 import gplx.gfui.kits.swts.Swt_win;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
@@ -90,10 +89,10 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 public class Swt_kit implements Gfui_kit {
-	private final Keyval_hash ctor_args = new Keyval_hash(); private final Keyval_hash ctor_args_null = new Keyval_hash();
+	private final KeyValHash ctor_args = new KeyValHash(); private final KeyValHash ctor_args_null = new KeyValHash();
 	private final Hash_adp kit_args = Hash_adp_.New(); private Swt_msg_wkr_stop msg_wkr_stop;
 	private Gfo_usr_dlg gui_wtr; private String xul_runner_path = null;
-	private final Bry_fmtr ask_fmtr = Bry_fmtr.new_().Fail_when_invalid_escapes_(false); private final Bry_bfr ask_bfr = Bry_bfr_.New();
+	private final BryFmtr ask_fmtr = BryFmtr.New().FailWhenInvalidEscapesSet(false); private final BryWtr ask_bfr = BryWtr.New();
 	private final Object thread_lock = new Object();
 	private Cursor hand_cursor;
 	public byte 				Tid() {return Gfui_kit_.Swt_tid;}
@@ -146,66 +145,66 @@ public class Swt_kit implements Gfui_kit {
 	}	
 	public void Cfg_set(String type, String key, Object val) {
 		// XulRunnerPath gets set immediately; do not add to widget_cfg_hash
-		if 	(String_.Eq(type, Gfui_kit_.Cfg_HtmlBox) && String_.Eq(key, "XulRunnerPath")) {
+		if 	(StringUtl.Eq(type, Gfui_kit_.Cfg_HtmlBox) && StringUtl.Eq(key, "XulRunnerPath")) {
 			this.xul_runner_path = (String)val;
 			return;
 		}
 		// add kv to widget_cfg_hash; new controls will get properties from cfg_hash
-		Keyval_hash widget_cfg_hash = (Keyval_hash)kit_args.GetByOrNull(type);
+		KeyValHash widget_cfg_hash = (KeyValHash)kit_args.GetByOrNull(type);
 		if (widget_cfg_hash == null) {
-			widget_cfg_hash = new Keyval_hash();
+			widget_cfg_hash = new KeyValHash();
 			kit_args.Add(type, widget_cfg_hash);
 		}
-		widget_cfg_hash.Add_if_dupe_use_nth(key, val);
+		widget_cfg_hash.AddIfDupeUseNth(key, val);
 	}
 	public boolean Ask_yes_no(String grp_key, String msg_key, String fmt, Object... args) {
-		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_yes, Gfui_dlg_msg_.Btn_no).Init_ico_(Gfui_dlg_msg_.Ico_question);
+		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.BldToStrMany(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_yes, Gfui_dlg_msg_.Btn_no).Init_ico_(Gfui_dlg_msg_.Ico_question);
 		display.syncExec(dlg);
 		return dlg.Ask_rslt == Gfui_dlg_msg_.Btn_yes;
 	}
 	public boolean Ask_ok_cancel(String grp_key, String msg_key, String fmt, Object... args) {
-		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_ok, Gfui_dlg_msg_.Btn_cancel).Init_ico_(Gfui_dlg_msg_.Ico_question);
+		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.BldToStrMany(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_ok, Gfui_dlg_msg_.Btn_cancel).Init_ico_(Gfui_dlg_msg_.Ico_question);
 		display.syncExec(dlg);
 		return dlg.Ask_rslt == Gfui_dlg_msg_.Btn_ok;
 	}
 	public int Ask_yes_no_cancel(String grp_key, String msg_key, String fmt, Object... args) 	{
-		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_yes, Gfui_dlg_msg_.Btn_no, Gfui_dlg_msg_.Btn_cancel).Init_ico_(Gfui_dlg_msg_.Ico_question);		
+		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.BldToStrMany(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_yes, Gfui_dlg_msg_.Btn_no, Gfui_dlg_msg_.Btn_cancel).Init_ico_(Gfui_dlg_msg_.Ico_question);
 		display.syncExec(dlg);
 		return dlg.Ask_rslt;
 	}
 	public void Ask_ok(String grp_key, String msg_key, String fmt, Object... args) 				{
-		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_ok).Init_ico_(Gfui_dlg_msg_.Ico_information);
+		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.BldToStrMany(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_ok).Init_ico_(Gfui_dlg_msg_.Ico_information);
 		display.syncExec(dlg);
 	}
 	public GfuiInvkCmd New_cmd_sync	(Gfo_invk invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, BoolUtl.N);}
 	public GfuiInvkCmd New_cmd_async(Gfo_invk invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, BoolUtl.Y);}
-	public GfuiWin New_win_utl(String key, GfuiWin owner, Keyval... args) {
+	public GfuiWin New_win_utl(String key, GfuiWin owner, KeyVal... args) {
 		return GfuiWin_.kit_(this, key, new Swt_win(shell), ctor_args_null);
 		}
-	public GfuiWin New_win_app(String key, Keyval... args) {
+	public GfuiWin New_win_app(String key, KeyVal... args) {
 		Swt_win win = new Swt_win(display);
 		this.shell = win.UnderShell();
 		shell.setLayout(null);
 		return GfuiWin_.kit_(this, key, win, ctor_args_null);
 	}
-	public GfuiBtn New_btn(String key, GfuiElem owner, Keyval... args) {
+	public GfuiBtn New_btn(String key, GfuiElem owner, KeyVal... args) {
 		ctor_args.Add("cursor", hand_cursor);
 		GfuiBtn rv = GfuiBtn_.kit_(this, key, new Swt_btn_no_border(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
 		ctor_args.Del("cursor");
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public GfuiLbl New_lbl(String key, GfuiElem owner, Keyval... args) {
+	public GfuiLbl New_lbl(String key, GfuiElem owner, KeyVal... args) {
 		GfuiLbl rv = GfuiLbl_.kit_(this, key, new Swt_lbl(Swt_control_.cast_or_fail(owner), ctor_args), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public Gfui_html New_html(String key, GfuiElem owner, Keyval... args) {
+	public Gfui_html New_html(String key, GfuiElem owner, KeyVal... args) {
 		ctor_args.Clear();
 		// check cfg for browser type
-		Keyval_hash html_cfg_args = (Keyval_hash)kit_args.GetByOrNull(Gfui_kit_.Cfg_HtmlBox);
+		KeyValHash html_cfg_args = (KeyValHash)kit_args.GetByOrNull(Gfui_kit_.Cfg_HtmlBox);
 		if (html_cfg_args != null) {
-			Keyval browser_type = html_cfg_args.Get_kvp_or_null(Cfg_Html_BrowserType);
+			KeyVal browser_type = html_cfg_args.GetByAsKeyValOrNull(Cfg_Html_BrowserType);
 			if (browser_type != null) ctor_args.Add(browser_type);
 		}
 		Swt_html swt_html = new Swt_html(this, Swt_control_.cast_or_fail(owner), ctor_args);
@@ -216,7 +215,7 @@ public class Swt_kit implements Gfui_kit {
 		swt_html.Evt_mgr_(gfui_html.Evt_mgr());
 		return gfui_html;
 	}
-	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, Keyval... args) {
+	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, KeyVal... args) {
 		ctor_args.Clear();
 		Swt_tab_mgr rv_swt = new Swt_tab_mgr(this, Swt_control_.cast_or_fail(owner), ctor_args);
 		Gfui_tab_mgr rv = Gfui_tab_mgr.kit_(this, key, rv_swt, ctor_args);
@@ -224,19 +223,19 @@ public class Swt_kit implements Gfui_kit {
 		rv_swt.Evt_mgr_(rv.Evt_mgr());
 		return rv;
 	}
-	public GfuiTextBox New_text_box(String key, GfuiElem owner, Keyval... args) {
+	public GfuiTextBox New_text_box(String key, GfuiElem owner, KeyVal... args) {
 		ctor_args.Clear();
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++)
 			ctor_args.Add(args[i]);
-		boolean border_on = BoolUtl.Cast(ctor_args.Get_val_or(GfuiTextBox.CFG_border_on_, true));
+		boolean border_on = BoolUtl.Cast(ctor_args.GetByValOr(GfuiTextBox.CFG_border_on_, true));
 		GxwTextFld under = new Swt_text_w_border(this, Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args);
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, under, ctor_args);
 		rv.Owner_(owner);
 		ctor_args.Clear();
 		return rv;
 	}
-	public Gfui_grp New_grp(String key, GfuiElem owner, Keyval... args) {
+	public Gfui_grp New_grp(String key, GfuiElem owner, KeyVal... args) {
 		ctor_args.Clear();
 		Swt_grp rv_swt = new Swt_grp(this, Swt_control_.cast_or_fail(owner), ctor_args);
 		Gfui_grp rv = Gfui_grp.kit_(this, key, rv_swt, ctor_args);
@@ -244,14 +243,14 @@ public class Swt_kit implements Gfui_kit {
 		rv_swt.Evt_mgr_(rv.Evt_mgr());
 		return rv;
 	}
-	public GfuiComboBox New_combo(String key, GfuiElem owner, Keyval... args) {
+	public GfuiComboBox New_combo(String key, GfuiElem owner, KeyVal... args) {
 		Swt_combo_ctrl rv_swt = new Swt_combo_ctrl(this, Swt_control_.cast_or_fail(owner), this.New_color(ColorAdp_.LightGray), ctor_args);
 		GfuiComboBox rv = GfuiComboBox.kit_(this, key, rv_swt, ctor_args);
 		rv.Owner_(owner);
 		rv_swt.Evt_mgr_(rv.Evt_mgr());
 		return rv;
 	}
-	public GfuiStatusBox New_status_box(String key, GfuiElem owner, Keyval... args) {
+	public GfuiStatusBox New_status_box(String key, GfuiElem owner, KeyVal... args) {
 		ctor_args.Clear();
 		GfuiStatusBox rv = GfuiStatusBox_.kit_(this, key, new Swt_text(Swt_control_.cast_or_fail(owner), ctor_args));
 		rv.Owner_(owner);
@@ -278,7 +277,7 @@ public class Swt_kit implements Gfui_kit {
 	public Gfui_mnu_grp New_mnu_popup(String key, GfuiElem owner) 	{return Swt_popup_grp.new_popup(key, owner);}
 	public Gfui_mnu_grp New_mnu_bar(String key, GfuiWin owner) 		{return Swt_popup_grp.new_bar(key, owner);}
 	public float Calc_font_height(GfuiElem elem, String s) {
-		if (String_.Len_eq_0(s)) return 8;
+		if (StringUtl.IsNullOrEmpty(s)) return 8;
 		try {
 			String old_text = elem.Text();
 			elem.Text_(s);
@@ -287,7 +286,7 @@ public class Swt_kit implements Gfui_kit {
 			return rv;
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "error while calculating font height; err=~{0}", Err_.Message_gplx_full(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "error while calculating font height; err=~{0}", ErrUtl.ToStrFull(e));
 			return 8;
 		}
 	}
@@ -297,28 +296,28 @@ public class Swt_kit implements Gfui_kit {
 		control.setMenu(popup.Under_menu());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(String_.Eq(k, Invk_Cfg_add)) {
+		if		(StringUtl.Eq(k, Invk_Cfg_add)) {
 			String type = m.ReadStrOr("type", "");
 			String key = m.ReadStrOr("key", "");
 			String val = m.ReadStrOr("val", "");
 			if (ctx.Deny()) return this;			
-			if (String_.Eq(type, Gfui_kit_.Cfg_HtmlBox)) {
-				if 		(String_.Eq(key, "XulRunnerPath"))
+			if (StringUtl.Eq(type, Gfui_kit_.Cfg_HtmlBox)) {
+				if 		(StringUtl.Eq(key, "XulRunnerPath"))
 					xul_runner_path = val;
-				else if (String_.Eq(key, Swt_kit.Cfg_Html_BrowserType))
+				else if (StringUtl.Eq(key, Swt_kit.Cfg_Html_BrowserType))
 					Cfg_set(type, Swt_kit.Cfg_Html_BrowserType, Cfg_Html_BrowserType_parse(val));
 			}
 		}
-		else if	(String_.Eq(k, Invk_ask_file)) { 
+		else if	(StringUtl.Eq(k, Invk_ask_file)) {
 			String exts = "";
 			
 			// note that Dashboard/Offline does not specify exts
 			if (m.Args_count() > 1)
-				exts = m.Args_getAt(1).Val_to_str_or_empty();
-			return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).Val_to_str_or_empty(), exts).Ask();
+				exts = m.Args_getAt(1).ValToStrOrEmpty();
+			return this.New_dlg_file(Gfui_kit_.File_dlg_type_open, m.Args_getAt(0).ValToStrOrEmpty(), exts).Ask();
 		}
-		else if	(String_.Eq(k, "ask_dir")) return this.New_dlg_dir(m.Args_getAt(0).Val_to_str_or_empty()).Ask();
-		else if (String_.Eq(k, Invk_shell_close)) shell.close();
+		else if	(StringUtl.Eq(k, "ask_dir")) return this.New_dlg_dir(m.Args_getAt(0).ValToStrOrEmpty()).Ask();
+		else if (StringUtl.Eq(k, Invk_shell_close)) shell.close();
 		return this;
 	}
 	public static final String Invk_Cfg_add = "Cfg_add", Invk_ask_file = "ask_file";	// private or public?
@@ -326,8 +325,8 @@ public class Swt_kit implements Gfui_kit {
 	public static final Swt_kit Instance = new Swt_kit(); private Swt_kit() {}	// singleton b/c of following line "In particular, some platforms which SWT supports will not allow more than one active display" (http://help.eclipse.org/indigo/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/widgets/Display.html)
 	public static final String Cfg_Html_BrowserType = "BrowserType";
 	public static int Cfg_Html_BrowserType_parse(String v) {
-		if		(String_.Eq(v, "mozilla"))	return Swt_html.Browser_tid_mozilla;
-		else if	(String_.Eq(v, "webkit"))	return Swt_html.Browser_tid_webkit;
+		if		(StringUtl.Eq(v, "mozilla"))	return Swt_html.Browser_tid_mozilla;
+		else if	(StringUtl.Eq(v, "webkit"))	return Swt_html.Browser_tid_webkit;
 		else								return Swt_html.Browser_tid_none;
 	}
 }
@@ -399,7 +398,7 @@ class Swt_gui_cmd implements GfuiInvkCmd, Runnable {
 			try {rv_obj = target.Invk(invk_ctx, invk_ikey, invk_key, invk_msg);}
 			catch (Exception e) {
 				if (kit.Kit_mode__term()) return;	// NOTE: if shutting down, don't warn; warn will try to write to status.bar, which will fail b/c SWT is shutting down; failures will try to write to status.bar again, causing StackOverflow exception; DATE:2014-05-04
-				usr_dlg.Warn_many("", "", "fatal error while running; key=~{0} err=~{1}", invk_key, Err_.Message_gplx_full(e));
+				usr_dlg.Warn_many("", "", "fatal error while running; key=~{0} err=~{1}", invk_key, ErrUtl.ToStrFull(e));
 			}
 		}
 	} 

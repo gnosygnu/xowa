@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.dbs;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.StringUtl;
 public class Xob_lnki_regy_tbl {
 	public static void Create_table(Db_conn p) {Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
 	public static void Create_data(Gfo_usr_dlg usr_dlg, Db_conn p, boolean wiki_ns_for_file_is_case_match_all) {
@@ -30,7 +32,7 @@ public class Xob_lnki_regy_tbl {
 	, Fld_lnki_w = "lnki_w", Fld_lnki_h = "lnki_h", Fld_lnki_upright = "lnki_upright", Fld_lnki_time = "lnki_time", Fld_lnki_page = "lnki_page"
 	, Fld_lnki_count = "lnki_count"
 	;
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = StringUtl.ConcatLinesNl
 	(	"CREATE TABLE IF NOT EXISTS lnki_regy"
 	,	"( lnki_id                 integer             NOT NULL			    PRIMARY KEY"
 	,	", lnki_tier_id            integer             NOT NULL"
@@ -49,7 +51,7 @@ public class Xob_lnki_regy_tbl {
 	,	", lnki_count              integer             NOT NULL"
 	,	");"
 	);
-	public static final String Sql_create_data = String_.Concat_lines_nl
+	public static final String Sql_create_data = StringUtl.ConcatLinesNl
 	(	"INSERT INTO lnki_regy (lnki_id, lnki_tier_id, lnki_page_id, lnki_ttl, lnki_commons_ttl, lnki_ext, lnki_type, lnki_src_tid, lnki_w, lnki_h, lnki_upright, lnki_time, lnki_page, lnki_count)"
 	,	"SELECT  Min(lnki_id)"
 	,	",       Min(lnki_tier_id)"
@@ -79,7 +81,7 @@ public class Xob_lnki_regy_tbl {
 	,	",       lnki_page"
 	,	";"
 	)
-	,	Sql_cs_mark_changed = String_.Concat_lines_nl
+	,	Sql_cs_mark_changed = StringUtl.ConcatLinesNl
 	(	"REPLACE INTO lnki_regy"
 	,	"SELECT  l.lnki_id"
 	,	",       l.lnki_tier_id"
@@ -100,7 +102,7 @@ public class Xob_lnki_regy_tbl {
 	,	"        LEFT JOIN orig_regy o ON o.lnki_ttl = l.lnki_commons_ttl AND o.orig_commons_flag = 2"
 	,	";"
 	)
-	,	Sql_cs_update_ttls = String_.Concat_lines_nl
+	,	Sql_cs_update_ttls = StringUtl.ConcatLinesNl
 	(	"UPDATE  lnki_regy"
 	,	"SET     lnki_ttl = lnki_commons_ttl"
 	,	"WHERE   lnki_commons_flag = 1"

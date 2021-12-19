@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.utls;
 import gplx.core.envs.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsgUtl;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
 public class Db_cmd_backup implements Gfo_invk {
 	public String DbName() {return dbName;} public Db_cmd_backup DbName_(String val) {dbName = val; return this;} private String dbName = "db";
 	public Io_url ExeUrl() {return exeUrl;} public Db_cmd_backup ExeUrl_(Io_url val) {exeUrl = val; return this;} Io_url exeUrl;
@@ -49,16 +58,16 @@ public class Db_cmd_backup implements Gfo_invk {
 		this.InitVars();
 		Io_url bkpCmdFil = bkpDir.GenSubFil_ary("backup_", dbName, ".cmd");
 		// Io_url bkpCmdFil = Io_url_.new_dir_("/home/").GenSubFil_ary("backup_", dbName, ".cmd"); // LNX: uncomment
-		Io_mgr.Instance.SaveFilStr_args(bkpCmdFil, cmdText).Exec(); // explicitly state utf8; 
+		Io_mgr.Instance.SaveFilStr_args(bkpCmdFil, cmdText).Exec(); // explicitly state utf8;
 		Process_adp.run_wait_(bkpCmdFil);
 		Io_mgr.Instance.DeleteFil(bkpCmdFil);
 		return this;
 	}
-	@gplx.Internal protected Db_cmd_backup InitVars() {
-		String dteStr = Datetime_now.Get().XtoStr_fmt(dteFmt);
-		bkpFilName = String_.Format(bkpFilNameFmt, dbName, dteStr);
+	public Db_cmd_backup InitVars() {
+		String dteStr = GfoDateNow.Get().ToStrFmt(dteFmt);
+		bkpFilName = StringUtl.Format(bkpFilNameFmt, dbName, dteStr);
 		bkpFil = bkpDir.GenSubFil(bkpFilName);
-		cmdText = String_.Format("\"{0}\" -u {1} -p{2} {3} > {4}", exeUrl.Xto_api(), usr, pwd, dbName, bkpFil.Xto_api());
+		cmdText = StringUtl.Format("\"{0}\" -u {1} -p{2} {3} > {4}", exeUrl.Xto_api(), usr, pwd, dbName, bkpFil.Xto_api());
 		return this;
 	}
         public static Db_cmd_backup new_() {return new Db_cmd_backup();} Db_cmd_backup() {}

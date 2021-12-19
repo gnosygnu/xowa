@@ -13,12 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.missing_origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.dbs.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;	
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.apps.wms.apis.origs.*;
-import gplx.xowa.addons.bldrs.files.dbs.*;
-import gplx.xowa.addons.bldrs.files.missing_origs.apis.*;
+package gplx.xowa.addons.bldrs.files.missing_origs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_sql_;
+import gplx.dbs.Db_stmt;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.files.missing_origs.apis.Xowmf_imageinfo_api;
+import gplx.xowa.addons.bldrs.files.missing_origs.apis.Xowmf_imageinfo_item;
+import gplx.xowa.addons.bldrs.files.missing_origs.apis.Xowmf_recentchanges_api;
+import gplx.xowa.addons.bldrs.files.missing_origs.apis.Xowmf_recentchanges_item;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_db_file;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wkrs.Xob_cmd__base;
+import gplx.xowa.files.repos.Xof_repo_tid_;
 public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 	private int fail_max = 100000;
 	private String recentchanges_bgn, recentchanges_end;
@@ -29,7 +47,7 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		// get recentchanges
 		Xowmf_recentchanges_api rc_api = new Xowmf_recentchanges_api();
 		if (recentchanges_bgn == null || recentchanges_end == null) {
-			throw Err_.new_wo_type("bldr.find_missing: recentchanges_bgn or recentchanges_end not set");
+			throw ErrUtl.NewArgs("bldr.find_missing: recentchanges_bgn or recentchanges_end not set");
 		}
 		Ordered_hash rc_list = rc_api.Find(download_wkr, gplx.xowa.wikis.domains.Xow_domain_itm_.Str__commons, recentchanges_bgn, recentchanges_end, 500);
 
@@ -41,15 +59,15 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		int rc_list_len = rc_list.Len();
 		conn.Txn_bgn("orig_regy__recentchanges");
 		for (int i = 0; i < rc_list_len; i++) {
-			Xowmf_recentchanges_item item = (Xowmf_recentchanges_item)rc_list.Get_at(i);
+			Xowmf_recentchanges_item item = (Xowmf_recentchanges_item)rc_list.GetAt(i);
 			conn.Exec_sql_args(sql_fmt, item.Title());
 		}
 		conn.Txn_end();
 
 		// get counts; fail if too many
-		int fail_count = conn.Exec_select_as_int(Db_sql_.Make_by_fmt(String_.Ary("SELECT Count(lnki_ttl) FROM orig_regy WHERE orig_page_id = -1")), Int_.Max_value);
+		int fail_count = conn.Exec_select_as_int(Db_sql_.Make_by_fmt(StringUtl.Ary("SELECT Count(lnki_ttl) FROM orig_regy WHERE orig_page_id = -1")), IntUtl.MaxValue);
 		if (fail_count > fail_max) {
-			throw Err_.new_wo_type("bldr.find_missing: too many missing: missing=~{0} max=~{1}", fail_count, fail_max);
+			throw ErrUtl.NewArgs("bldr.find_missing: too many missing: missing=~{0} max=~{1}", fail_count, fail_max);
 		}
 		Gfo_usr_dlg_.Instance.Note_many("", "", "bldr.find_missing: found=~{0}", fail_count);
 
@@ -83,7 +101,7 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 		Ordered_hash unfound = Ordered_hash_.New();
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
-			Xowmf_imageinfo_item item = (Xowmf_imageinfo_item)list.Get_at(i);
+			Xowmf_imageinfo_item item = (Xowmf_imageinfo_item)list.GetAt(i);
 			if (item.Orig_page_id() == -1)
 				unfound.Add(item.Lnki_ttl(), item);
 		}
@@ -105,14 +123,14 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 
 			// loop list and update
 			conn.Txn_bgn("bldr.find_missing");
-			Db_stmt update_stmt = conn.Stmt_update("orig_regy", String_.Ary("lnki_ttl")
+			Db_stmt update_stmt = conn.Stmt_update("orig_regy", StringUtl.Ary("lnki_ttl")
 				, "orig_repo"
 				, "orig_page_id", "orig_redirect_id", "orig_redirect_ttl"
 				, "orig_file_id", "orig_file_ttl", "orig_file_ext"
 				, "orig_size", "orig_w", "orig_h", "orig_media_type", "orig_minor_mime", "orig_timestamp");
 			// , "orig_bits"
 			for (int i = list_bgn; i < list_end; i++)  {
-				Xowmf_imageinfo_item itm = (Xowmf_imageinfo_item)list.Get_at(i);
+				Xowmf_imageinfo_item itm = (Xowmf_imageinfo_item)list.GetAt(i);
 				update_stmt
 					.Val_byte("orig_repo", itm.Orig_repo())
 					.Val_int("orig_page_id", itm.Orig_page_id())

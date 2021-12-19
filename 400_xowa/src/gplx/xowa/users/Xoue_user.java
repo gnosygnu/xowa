@@ -14,23 +14,23 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_split_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_evt_mgr_owner;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.core.envs.Env_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
@@ -92,20 +92,20 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		app.File_mgr().Cache_mgr().Db_term();
 	}
 	public void Bookmarks_add(byte[] wiki_domain, byte[] ttl_full_txt) {
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
-		bookmarks_add_fmtr.Bld_bfr_many(tmp_bfr, wiki_domain, ttl_full_txt);
-		byte[] new_entry = tmp_bfr.To_bry_and_rls();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetK004();
+		bookmarks_add_fmtr.BldToBfrMany(tmp_bfr, wiki_domain, ttl_full_txt);
+		byte[] new_entry = tmp_bfr.ToBryAndRls();
 		Xoa_ttl bookmarks_ttl = Xoa_ttl.Parse(wiki, Bry_data_bookmarks);
 		Xoae_page bookmarks_page = wiki.Data_mgr().Load_page_by_ttl(bookmarks_ttl);
-		byte[] new_data = Bry_.Add(bookmarks_page.Db().Text().Text_bry(), new_entry);
+		byte[] new_data = BryUtl.Add(bookmarks_page.Db().Text().Text_bry(), new_entry);
 		wiki.Db_mgr().Save_mgr().Data_update(bookmarks_page, new_data);
-	}	private Bry_fmtr bookmarks_add_fmtr = Bry_fmtr.new_("* [[~{wiki_key}:~{page_name}]]\n", "wiki_key", "page_name"); byte[] Bry_data_bookmarks = Bry_.new_a7("Data:Bookmarks");
+	}	private BryFmtr bookmarks_add_fmtr = BryFmtr.New("* [[~{wiki_key}:~{page_name}]]\n", "wiki_key", "page_name"); byte[] Bry_data_bookmarks = BryUtl.NewA7("Data:Bookmarks");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {			
 		if		(ctx.Match(k, Invk_available_from_bulk))		Available_from_bulk(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_available_from_fsys))		Available_from_fsys();
 		else if	(ctx.Match(k, Invk_msgs))						return this.Msg_mgr();
 		else if	(ctx.Match(k, Invk_lang))						return lang;
-		else if	(ctx.Match(k, Invk_bookmarks_add_fmt_))			bookmarks_add_fmtr.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_bookmarks_add_fmt_))			bookmarks_add_fmtr.FmtSet(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_wiki))						return this.Wiki();	// NOTE: mass parse relies on this being this.Wiki(), not wiki
 		else if	(ctx.Match(k, Invk_history))					return history_mgr;
 		else if	(ctx.Match(k, Invk_fsys))						return fsys_mgr;
@@ -124,8 +124,8 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		for (int i = 0; i < dirs_len; i++) {
 			Io_url dir = dirs[i];
 			String name = dir.NameOnly();
-			if (String_.Eq(name, gplx.xowa.bldrs.cmds.utils.Xob_core_batch_utl.Dir_dump)) continue;	// ignore "#dump"
-			byte[] dir_name_as_bry = Bry_.new_u8(name);
+			if (StringUtl.Eq(name, gplx.xowa.bldrs.cmds.utils.Xob_core_batch_utl.Dir_dump)) continue;	// ignore "#dump"
+			byte[] dir_name_as_bry = BryUtl.NewU8(name);
 			Xow_xwiki_itm xwiki = Available_add(usr_wiki, dir_name_as_bry);
 			if (xwiki != null)			// Add_full can return null if adding invalid lang; should not apply here, but guard against null ref
 				xwiki.Offline_(true);	// mark xwiki as offline; needed for available wikis sidebar; DATE:2014-09-21
@@ -133,7 +133,7 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		}
 	}
 	private void Available_from_bulk(byte[] raw) {
-		byte[][] wikis = Bry_split_.Split(raw, AsciiByte.Nl);
+		byte[][] wikis = BrySplit.Split(raw, AsciiByte.Nl);
 		Xowe_wiki usr_wiki = Wiki();
 		int wikis_len = wikis.length;
 		for (int i = 0; i < wikis_len; i++)

@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
 public class Php_tkn_comment extends Php_tkn_base {
 	public Php_tkn_comment(int src_bgn, int src_end, byte comment_tid) {this.Src_rng_(src_bgn, src_end); this.comment_tid = comment_tid;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_comment;}
 	public byte Comment_tid() {return comment_tid;} private byte comment_tid;
 
-	public void To_bfr(Bry_bfr bfr, byte[] src, boolean trim) {
+	public void To_bfr(BryWtr bfr, byte[] src, boolean trim) {
 		int bgn = this.Src_bgn();
 		int end = this.Src_end();
 		switch (comment_tid) {
@@ -37,10 +39,10 @@ public class Php_tkn_comment extends Php_tkn_base {
 				break;
 		}
 		if (trim) {
-			bgn = Bry_find_.Find_fwd_while_not_ws(src, bgn, end);
-			end = Bry_find_.Find_bwd__skip_ws(src, end, bgn);
+			bgn = BryFind.FindFwdWhileNotWs(src, bgn, end);
+			end = BryFind.FindBwdSkipWs(src, end, bgn);
 		}
-		bfr.Add_mid(src, bgn, end);
+		bfr.AddMid(src, bgn, end);
 	}
 	public static final byte Tid_null = 0, Tid_mult = 1, Tid_slash = 2, Tid_hash = 3;
 }

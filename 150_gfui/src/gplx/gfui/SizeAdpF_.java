@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
+package gplx.gfui;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class SizeAdpF_ {
-	public static final SizeAdpF Null = new_(Int_.Min_value, Int_.Min_value);
+	public static final SizeAdpF Null = new_(IntUtl.MinValue, IntUtl.MinValue);
 	public static final SizeAdpF Zero = new_(0, 0);
 	public static final SizeAdpF Parser = new SizeAdpF(0, 0);
 	public static SizeAdpF as_(Object obj) {return obj instanceof SizeAdpF ? (SizeAdpF)obj : null;}
@@ -23,10 +27,10 @@ public class SizeAdpF_ {
 	public static SizeAdpF coerce_(Object obj) {SizeAdpF rv = as_(obj); return rv == null ? parse((String)obj) : rv;}
 	public static SizeAdpF parse(String s) {
 		try {
-			String[] ary = String_.Split(s, ","); if (ary.length != 2) throw Err_.new_wo_type("SizeAdf should only have 2 numbers separated by 1 comma");
-			float val1 = Float_.parse(ary[0]);
-			float val2 = Float_.parse(ary[1]);
+			String[] ary = StringUtl.Split(s, ","); if (ary.length != 2) throw ErrUtl.NewArgs("SizeAdf should only have 2 numbers separated by 1 comma");
+			float val1 = FloatUtl.Parse(ary[0]);
+			float val2 = FloatUtl.Parse(ary[1]);
 			return new_(val1, val2);
-		}	catch (Exception e) {throw Err_.new_parse_exc(e, SizeAdpF.class, s);}
+		}	catch (Exception e) {throw ErrUtl.NewParse(e, SizeAdpF.class, s);}
 	}
 }

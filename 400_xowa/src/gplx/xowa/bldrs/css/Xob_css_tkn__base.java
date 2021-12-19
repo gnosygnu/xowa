@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*;
+package gplx.xowa.bldrs.css;
 import gplx.core.envs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 abstract class Xob_css_tkn__base {
 	public void Init(int tid, int pos_bgn, int pos_end) {
 		this.tid = tid; this.pos_bgn = pos_bgn; this.pos_end = pos_end;
@@ -24,7 +27,7 @@ abstract class Xob_css_tkn__base {
 	public int Pos_bgn() {return pos_bgn;} protected int pos_bgn;
 	public int Pos_end() {return pos_end;} protected int pos_end;
 	public void Process(Xob_mirror_mgr mgr) {}
-	public abstract int Write(Bry_bfr bfr, byte[] src);
+	public abstract int Write(BryWtr bfr, byte[] src);
 	public static final int Tid_warn = 1, Tid_base64 = 2, Tid_url = 3, Tid_import = 4;
 }
 class Xob_css_tkn__warn extends Xob_css_tkn__base {
@@ -32,20 +35,20 @@ class Xob_css_tkn__warn extends Xob_css_tkn__base {
 	@Override public void Process(Xob_mirror_mgr mgr) {
 		mgr.Usr_dlg().Warn_many("", "", fail_msg); 
 	}
-	@Override public int Write(Bry_bfr bfr, byte[] src) {
-		bfr.Add_mid(src, pos_bgn, pos_end);
+	@Override public int Write(BryWtr bfr, byte[] src) {
+		bfr.AddMid(src, pos_bgn, pos_end);
 		return pos_end;
 	}
 	public static Xob_css_tkn__warn new_(int pos_bgn, int pos_end, String fmt, Object... fmt_args) {
 		Xob_css_tkn__warn rv = new Xob_css_tkn__warn();
 		rv.Init(Tid_warn, pos_bgn, pos_end);
-		rv.fail_msg = String_.Format(fmt, fmt_args);
+		rv.fail_msg = StringUtl.Format(fmt, fmt_args);
 		return rv;
 	}
 }
 class Xob_css_tkn__base64 extends Xob_css_tkn__base {
-	@Override public int Write(Bry_bfr bfr, byte[] src) {
-		bfr.Add_mid(src, pos_bgn, pos_end);
+	@Override public int Write(BryWtr bfr, byte[] src) {
+		bfr.AddMid(src, pos_bgn, pos_end);
 		return pos_end;
 	}
 	public static Xob_css_tkn__base64 new_(int pos_bgn, int pos_end) {
@@ -59,13 +62,13 @@ class Xob_css_tkn__url extends Xob_css_tkn__base {
 	public byte[] Src_url() {return src_url;} private byte[] src_url;
 	public byte[] Trg_url() {return trg_url;} private byte[] trg_url;
 	@Override public void Process(Xob_mirror_mgr mgr) {
-		mgr.File_hash().AddIfDupeUse1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_file, String_.new_u8(src_url), trg_url));
+		mgr.File_hash().AddIfDupeUse1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_file, StringUtl.NewU8(src_url), trg_url));
 	}
-	@Override public int Write(Bry_bfr bfr, byte[] src) {
+	@Override public int Write(BryWtr bfr, byte[] src) {
 		byte quote = quote_byte; if (quote == AsciiByte.Null) quote = AsciiByte.Apos;
-		bfr.Add_str_a7(" url(");							// EX: ' url('
-		bfr.Add_byte(quote).Add(trg_url).Add_byte(quote);	// EX: '"a.png"'
-		bfr.Add_byte(AsciiByte.ParenEnd);					// EX: ')'
+		bfr.AddStrA7(" url(");							// EX: ' url('
+		bfr.AddByte(quote).Add(trg_url).AddByte(quote);	// EX: '"a.png"'
+		bfr.AddByte(AsciiByte.ParenEnd);					// EX: ')'
 		return pos_end;
 	}
 	public static Xob_css_tkn__url new_(int pos_bgn, int pos_end, byte[] src_url, byte quote_byte) {
@@ -76,7 +79,7 @@ class Xob_css_tkn__url extends Xob_css_tkn__base {
 	}
 	public static byte[] To_fsys(byte[] src) {
 		if (!Op_sys.Cur().Tid_is_wnt()) return src;
-		src = Bry_.Copy(src); // NOTE: must call ByteAry.Copy else url_actl will change *inside* bry
+		src = BryUtl.Copy(src); // NOTE: must call ByteAry.Copy else url_actl will change *inside* bry
 		int len = src.length;
 		for (int i = 0; i < len; ++i) {
 			byte b = src[i];
@@ -101,11 +104,11 @@ class Xob_css_tkn__import extends Xob_css_tkn__base {
 	@Override public void Process(Xob_mirror_mgr mgr) {
 		mgr.Code_add(src_url);
 	}
-	@Override public int Write(Bry_bfr bfr, byte[] src) {
+	@Override public int Write(BryWtr bfr, byte[] src) {
 		byte quote = quote_byte; if (quote == AsciiByte.Null) quote = AsciiByte.Apos;
-		bfr.Add_str_a7(" @import url(");					// EX: ' @import url('
-		bfr.Add_byte(quote).Add(trg_url).Add_byte(quote);	// EX: '"a.png"'
-		bfr.Add_byte(AsciiByte.ParenEnd);					// EX: ')'
+		bfr.AddStrA7(" @import url(");					// EX: ' @import url('
+		bfr.AddByte(quote).Add(trg_url).AddByte(quote);	// EX: '"a.png"'
+		bfr.AddByte(AsciiByte.ParenEnd);					// EX: ')'
 		return pos_end;
 	}
 	public static Xob_css_tkn__import new_(int pos_bgn, int pos_end, byte[] src_url, byte[] trg_url, byte quote_byte) {

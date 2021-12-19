@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lists; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lists;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm_;
 public class Xop_list_wkr_ {
 	public static byte[] MakeSymAry(byte[] curSymAry, int curSymLen) {
 		byte[] rv = new byte[curSymLen];
@@ -29,7 +32,7 @@ public class Xop_list_wkr_ {
 			case AsciiByte.Hash:
 			case AsciiByte.Semic:		return b;
 			case AsciiByte.Colon:		return AsciiByte.Semic;
-			default:					throw Err_.new_unhandled(b);
+			default:					throw ErrUtl.NewUnhandled(b);
 		}
 	}
 	public static void Close_list_if_present(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int bgn_pos, int cur_pos) {// close all list tkns on stack; EX: ***\n should close all 3 stars; used to only close 1

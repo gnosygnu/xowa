@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,17 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.criterias; import gplx.*;
-import gplx.core.texts.*; /*RegxPatn_cls_like*/
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.core.criterias;
+import gplx.core.texts.RegxPatn_cls_like;
+import gplx.core.texts.RegxPatn_cls_like_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
 public class Criteria_ {
-	public static final Criteria All		= new Criteria_const(true);
-	public static final Criteria None	= new Criteria_const(false);
+	public static final Criteria All        = new Criteria_const(true);
+	public static final Criteria None    = new Criteria_const(false);
 	public static Criteria Not(Criteria arg) {return new Criteria_not(arg);}
 	public static Criteria And(Criteria lhs, Criteria rhs) {return new Criteria_and(lhs, rhs);}
 	public static Criteria And_many(Criteria... ary) {
-		int len = ArrayUtl.Len(ary); if (len == 0) throw Err_.new_wo_type("cannot AND 0 criterias;");
+		int len = ArrayUtl.Len(ary); if (len == 0) throw ErrUtl.NewArgs("cannot AND 0 criterias;");
 		Criteria rv = ary[0];
 		for (int i = 1; i < len; i++)
 			rv = And(rv, ary[i]);
@@ -31,7 +33,7 @@ public class Criteria_ {
 	}
 	public static Criteria Or(Criteria lhs, Criteria rhs) {return new Criteria_or(lhs, rhs);}
 	public static Criteria Or_many(Criteria... ary) {
-		int len = ArrayUtl.Len(ary); if (len == 0) throw Err_.new_wo_type("cannot OR 0 criterias;");
+		int len = ArrayUtl.Len(ary); if (len == 0) throw ErrUtl.NewArgs("cannot OR 0 criterias;");
 		Criteria rv = ary[0];
 		for (int i = 1; i < len; i++)
 			rv = Or(rv, ary[i]);

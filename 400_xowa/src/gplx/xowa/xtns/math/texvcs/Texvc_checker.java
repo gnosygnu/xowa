@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
+package gplx.xowa.xtns.math.texvcs;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
 public class Texvc_checker {
 	private final List_adp func_stack = List_adp_.New();
@@ -58,6 +60,6 @@ public class Texvc_checker {
 //						break;
 //				}
 		}
-		List_adp_.Pop_last(func_stack);
+		List_adp_.PopLast(func_stack);
 	}
 }

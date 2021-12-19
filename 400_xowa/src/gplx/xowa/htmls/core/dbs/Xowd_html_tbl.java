@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.dbs; import gplx.*;
+package gplx.xowa.htmls.core.dbs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.htmls.*;
 import gplx.dbs.*; import gplx.core.brys.*;
 public class Xowd_html_tbl implements Db_tbl {
@@ -73,7 +76,7 @@ public class Xowd_html_tbl implements Db_tbl {
 	}
 	public void Update_page_id(int old_id, int new_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.html: update page_id started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
-		conn.Stmt_update(tbl_name, String_.Ary(fld_page_id), fld_page_id).Val_int(fld_page_id, new_id).Crt_int(fld_page_id, old_id).Exec_update();
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld_page_id), fld_page_id).Val_int(fld_page_id, new_id).Crt_int(fld_page_id, old_id).Exec_update();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.html: update page_id done");
 	}
 	public boolean Select_by_page(Xoh_page hpg) {
@@ -117,7 +120,7 @@ public class Xowd_html_tbl implements Db_tbl {
 	}
 	public void Fill_stmt(Db_stmt stmt, int head_flag, int body_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, byte[] body) {
 		stmt.Val_int(fld_head_flag, head_flag).Val_int(fld_body_flag, body_flag)
-			.Val_bry_as_str(fld_display_ttl, Bry_.Coalesce_to_empty(display_ttl)).Val_bry_as_str(fld_content_sub, Bry_.Coalesce_to_empty(content_sub)).Val_bry_as_str(fld_sidebar_div, Bry_.Coalesce_to_empty(sidebar_div)).Val_bry(fld_body, body);
+			.Val_bry_as_str(fld_display_ttl, BryUtl.CoalesceToEmpty(display_ttl)).Val_bry_as_str(fld_content_sub, BryUtl.CoalesceToEmpty(content_sub)).Val_bry_as_str(fld_sidebar_div, BryUtl.CoalesceToEmpty(sidebar_div)).Val_bry(fld_body, body);
 	}
 	public static Int_flag_bldr Make_body_flag_bldr() {return new Int_flag_bldr().Pow_ary_bld_(3, 2);}	// 8 different zip types; 4 different hzip types
 }

@@ -13,20 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.mgrs;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.IntUtl;
+import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Split_page_loader {
 	private final int rows_to_read;
 	private final Xowd_page_tbl tbl; private final Db_stmt stmt;
-	private int score_max = Int_.Max_value;
+	private int score_max = IntUtl.MaxValue;
 	public Split_page_loader(Xow_wiki wiki, int rows_to_read) {
 		this.rows_to_read = rows_to_read;
 		this.tbl = wiki.Data__core_mgr().Tbl__page();
 		tbl.Conn().Meta_idx_assert("page", "score__len", Dbmeta_idx_fld.Dsc("page_score"), Dbmeta_idx_fld.Dsc("page_len"));
 		this.stmt = tbl.Conn().Stmt_sql("SELECT * FROM page WHERE page_namespace=? AND page_score < ? ORDER BY page_score DESC, page_len DESC");	// ANSI.Y
 	}
-	public void Init_ns(int ns_id) {score_max = Int_.Max_value;}
+	public void Init_ns(int ns_id) {score_max = IntUtl.MaxValue;}
 	public boolean Load_pages(Split_ctx ctx, List_adp list, Split_wkr[] wkrs, int ns_id) {
 		boolean reading = true;
 		list.Clear();

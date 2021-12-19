@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.xtns.graphs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 import gplx.xowa.htmls.heads.*;
 import gplx.langs.jsons.*;
@@ -25,10 +30,10 @@ public class Graph_xnde implements Xox_xnde {
 		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_graph, src, xnde);
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		// cleanup json
-		byte[] json = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		byte[] json = BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+		BryWtr tmp_bfr = BryWtr.New();
 		json = Json_fmtr.clean(tmp_bfr, json);
 
 		// swap out fsys_root; ISSUE#:553; DATE:2019-09-25
@@ -48,22 +53,22 @@ public class Graph_xnde implements Xox_xnde {
 			return;
 		}
 
-		int version = jdoc.Get_val_as_int_or(Bry_.new_a7("version"), 2);
+		int version = jdoc.Get_val_as_int_or(BryUtl.NewA7("version"), 2);
 		itm_graph.Version_(wpg.Url(), version);
 
 		// add to bfr
 		bfr.Add(Html__div_lhs_bgn);
-		bfr.Add_int_fixed(version, 1);
+		bfr.AddIntFixed(version, 1);
 		if (json_save_mgr.Root_dir_found())
-			bfr.Add_byte_space().Add(Graph_json_load_mgr.HDUMP_ATR);
+			bfr.AddByteSpace().Add(Graph_json_load_mgr.HDUMP_ATR);
 		bfr.Add(Html__div_lhs_end);
 		bfr.Add(json);
 		bfr.Add(Html__div_rhs);
 	}
 	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
 	private static final byte[]
-	  Html__div_lhs_bgn = Bry_.new_a7("<div class='mw-graph' xo-graph-version=")
-	, Html__div_lhs_end = Bry_.new_a7(">")
-	, Html__div_rhs     = Bry_.new_a7("</div>\n")
+	  Html__div_lhs_bgn = BryUtl.NewA7("<div class='mw-graph' xo-graph-version=")
+	, Html__div_lhs_end = BryUtl.NewA7(">")
+	, Html__div_rhs     = BryUtl.NewA7("</div>\n")
 	;
 }

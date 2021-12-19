@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scores;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Score_html_tst {
@@ -22,7 +22,7 @@ public class Score_html_tst {
 	@Before public void init() {
 		fxt.Clear();
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		String wtxt = fxt.Basic__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Basic__html(BoolUtl.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Basic__html(BoolUtl.N), fxt.Basic__html(BoolUtl.Y));

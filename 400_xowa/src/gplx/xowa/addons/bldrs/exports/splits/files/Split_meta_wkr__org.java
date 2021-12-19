@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.splits.files;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_attach_itm;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.Db_stmt_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.bldrs.exports.splits.Split_ctx;
 import gplx.xowa.addons.bldrs.exports.splits.metas.Split_meta_wkr_base;
 import gplx.xowa.addons.bldrs.exports.splits.metas.Split_page_list_type_;
@@ -45,7 +45,7 @@ class Split_meta_wkr__org extends Split_meta_wkr_base {
 	@Override public void On_nth_rls(Split_ctx ctx, Db_conn trg_conn) {this.stmt = Db_stmt_.Rls(stmt);}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
 		attach_mgr.Conn_links_(new Db_attach_itm("atr_db", atr_conn));
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		( "SELECT  o.orig_ttl, o.orig_repo, o.orig_status, o.orig_ext, o.orig_w, o.orig_h, o.orig_redirect, fir.page_id"
 		, "FROM    <atr_db>orig_reg o"
 		, "        JOIN <atr_db>fsdb_fil f ON o.orig_ttl = f.fil_name"
@@ -60,6 +60,6 @@ class Split_meta_wkr__org extends Split_meta_wkr_base {
 	@Override protected void Save_itm(Split_ctx ctx, Split_rslt_mgr rslt_mgr, Object itm_obj) {
 		Xof_orig_itm itm = (Xof_orig_itm)itm_obj;
 		tbl.Insert(stmt, itm.Repo(), itm.Ttl(), itm.Ext().Id(), itm.W(), itm.H(), itm.Redirect());
-		rslt_wkr.On__nth__itm(itm.Db_row_size(), String_.new_u8(itm.Ttl()), itm.Repo());
+		rslt_wkr.On__nth__itm(itm.Db_row_size(), StringUtl.NewU8(itm.Ttl()), itm.Repo());
 	}
 }

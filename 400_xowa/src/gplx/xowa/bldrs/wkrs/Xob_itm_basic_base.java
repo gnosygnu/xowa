@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wkrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.xowa.*; import gplx.xowa.bldrs.*;
 public abstract class Xob_itm_basic_base implements Gfo_invk {
 	protected Xoae_app app; protected Xob_bldr bldr; protected Xowe_wiki wiki; protected Gfo_usr_dlg usr_dlg;
 	public void Cmd_ctor(Xob_bldr bldr, Xowe_wiki wiki) {

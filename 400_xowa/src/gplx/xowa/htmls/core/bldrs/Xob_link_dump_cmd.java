@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.core.brys.*; import gplx.dbs.*;
+package gplx.xowa.htmls.core.bldrs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
+import gplx.dbs.*;
 public class Xob_link_dump_cmd {
 	private Xob_link_dump_tbl tbl; private int src_page_id; private Io_url page_db_url;
 	public void Init_by_wiki(Xowe_wiki wiki) {
@@ -31,7 +36,7 @@ public class Xob_link_dump_cmd {
 			tbl.Create_idx_1();
 			Db_conn conn = tbl.Conn();
 			new Db_attach_mgr(conn,  new Db_attach_itm("page_db", page_db_url))
-				.Exec_sql_w_msg("update trg_page_id", String_.Concat_lines_nl_skip_last
+				.Exec_sql_w_msg("update trg_page_id", StringUtl.ConcatLinesNlSkipLast
 				( "REPLACE INTO link_dump"
 				, "SELECT  r.uid"
 				, ",       r.src_page_id"
@@ -47,7 +52,7 @@ public class Xob_link_dump_cmd {
 			tbl.Create_idx_2();
 			conn.Env_vacuum();
 		} catch (Exception e) {
-                Tfds.Dbg(Err_.Message_gplx_full(e));
+                GfoTstr.Debug(ErrUtl.ToStrFull(e));
 		}
 	}
 }

@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.controls.windows; import gplx.gfui.*;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
 import org.junit.*; import gplx.gfui.controls.elems.*;
 public class GfuiFocusOrderer_tst {
 	@Before public void setup() {
@@ -67,7 +71,7 @@ public class GfuiFocusOrderer_tst {
 	GfuiElem sub_(GfuiElem owner, int i) {return owner.SubElems().Get_at(i);}
 	void ini_Subs(GfuiElem owner, List_adp list, PointAdp... points) {
 		for (int i = 0; i < points.length; i++) {
-			GfuiElem sub = GfuiElem_.sub_(Int_.To_str(i), owner);
+			GfuiElem sub = GfuiElem_.sub_(IntUtl.ToStr(i), owner);
 			sub.Pos_(points[i]);
 			sub.UnderElem().Core().Focus_index_set(i);
 			list.Add(sub);
@@ -76,10 +80,10 @@ public class GfuiFocusOrderer_tst {
 	void tst_FocusIndxs(GfuiElem owner, List_adp list, int... expd) {
 		int[] actl = new int[list.Len()];
 		for (int i = 0; i < actl.length; i++) {
-			GfuiElem sub = (GfuiElem)list.Get_at(i);
+			GfuiElem sub = (GfuiElem)list.GetAt(i);
 			actl[i] = sub.UnderElem().Core().Focus_index();
 		}
-		Tfds.Eq_ary(expd, actl);
+		GfoTstr.EqAry(expd, actl);
 	}
 	GfuiElem owner; List_adp list;
 }

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.cbks; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.cbks;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xog_cbk_trg {
 	Xog_cbk_trg(byte tid, byte[] page_ttl, String page_guid) {
 		this.tid = tid;
@@ -26,7 +28,7 @@ public class Xog_cbk_trg {
 
 	public static final byte Tid__cbk_enabled = 0, Tid__specific_page = 1, Tid__page_guid = 2;
 
-	public static final Xog_cbk_trg Any = new Xog_cbk_trg(Tid__cbk_enabled, null, String_.Empty);
-	public static Xog_cbk_trg New_by_page(byte[] page_ttl)  {return new Xog_cbk_trg(Tid__specific_page, page_ttl   , String_.Empty);}
-	public static Xog_cbk_trg New_by_guid(String page_guid) {return new Xog_cbk_trg(Tid__page_guid    , Bry_.Empty , page_guid);}
+	public static final Xog_cbk_trg Any = new Xog_cbk_trg(Tid__cbk_enabled, null, StringUtl.Empty);
+	public static Xog_cbk_trg New_by_page(byte[] page_ttl)  {return new Xog_cbk_trg(Tid__specific_page, page_ttl   , StringUtl.Empty);}
+	public static Xog_cbk_trg New_by_guid(String page_guid) {return new Xog_cbk_trg(Tid__page_guid    , BryUtl.Empty , page_guid);}
 }

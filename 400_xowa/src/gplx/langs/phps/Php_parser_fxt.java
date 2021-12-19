@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
+package gplx.langs.phps;
 import gplx.core.tests.*; import gplx.core.log_msgs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 class Php_parser_fxt {
 	Php_tkn_factory tkn_factory = new Php_tkn_factory();
 	Php_parser parser = new Php_parser();
@@ -53,7 +59,7 @@ class Php_parser_fxt {
 	public Php_itm_kv_chkr   itm_kv_int(String k, int v) 						{return new Php_itm_kv_chkr().Key_(k).Val_(itm_int(v));}
 	public Php_itm_kv_chkr   itm_kv_itm(String k, Php_itm_chkr_base v) 			{return new Php_itm_kv_chkr().Key_(k).Val_(v);}
 	public void tst_tkns(String raw, Php_tkn_chkr_base... expd) {
-		byte[] raw_bry = Bry_.new_u8(raw);
+		byte[] raw_bry = BryUtl.NewU8(raw);
 		parser.Parse_tkns(raw_bry, tkn_wkr);
 		Php_tkn[] actl = (Php_tkn[])tkn_wkr.List().ToAry(Php_tkn.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
@@ -61,7 +67,7 @@ class Php_parser_fxt {
 		log_mgr_chkr.tst(tst_mgr, tkn_wkr.Msg_log());
 	}
 	public void tst_lines(String raw, Php_line_assign_chkr... expd) {
-		byte[] raw_bry = Bry_.new_u8(raw);
+		byte[] raw_bry = BryUtl.NewU8(raw);
 		parser.Parse_tkns(raw_bry, line_wkr);
 		Php_line[] actl = (Php_line[])line_wkr.List().ToAry(Php_line.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
@@ -70,12 +76,12 @@ class Php_parser_fxt {
 	}
 	public void Test__string__quotes(String raw, String expd) {
 		line_wkr.Clear();
-		byte[] raw_bry = Bry_.new_u8("$var =\"" + raw +"\";");
+		byte[] raw_bry = BryUtl.NewU8("$var =\"" + raw +"\";");
 		parser.Parse_tkns(raw_bry, line_wkr);
 		Php_line[] actl_lines = (Php_line[])line_wkr.List().ToAry(Php_line.class);
 		Php_line_assign actl_line = (Php_line_assign)actl_lines[0];
 		Php_itm_quote actl = (Php_itm_quote)actl_line.Val();
-		Tfds.Eq_str(expd, String_.new_u8(actl.Val_obj_bry()));
+		GfoTstr.Eq(expd, StringUtl.NewU8(actl.Val_obj_bry()));
 	}
 }
 abstract class Php_tkn_chkr_base implements Tst_chkr {
@@ -143,7 +149,7 @@ class Php_tkn_var_chkr extends Php_tkn_chkr_base {
 		Php_tkn_var actl = (Php_tkn_var)actl_obj;
 		int rv = 0;
 		byte[] raw_bry = (byte[])mgr.Vars_get_by_key("raw_bry"); 
-		rv += mgr.Tst_val(var_name == null, path, "var_name", var_name, String_.new_u8(actl.Var_name(raw_bry))); 
+		rv += mgr.Tst_val(var_name == null, path, "var_name", var_name, StringUtl.NewU8(actl.Var_name(raw_bry)));
 		return rv;
 	}
 }
@@ -151,12 +157,12 @@ class Php_tkn_num_chkr extends Php_tkn_chkr_base {
 	public Php_tkn_num_chkr(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
 	@Override public Class<?> TypeOf() {return Php_tkn_num.class;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_num;}
-	public Php_tkn_num_chkr Num_val_int_(int v) {this.num_val_int = v; return this;} private int num_val_int = Int_.Min_value;
+	public Php_tkn_num_chkr Num_val_int_(int v) {this.num_val_int = v; return this;} private int num_val_int = IntUtl.MinValue;
 	@Override public int Chk_tkn(Tst_mgr mgr, String path, Php_tkn actl_obj) {
 		Php_tkn_num actl = (Php_tkn_num)actl_obj;
 		int rv = 0;
 		byte[] raw_bry = (byte[])mgr.Vars_get_by_key("raw_bry"); 
-		rv += mgr.Tst_val(num_val_int == Int_.Min_value, path, "num_val_int", num_val_int, actl.Num_val_int(raw_bry)); 
+		rv += mgr.Tst_val(num_val_int == IntUtl.MinValue, path, "num_val_int", num_val_int, actl.Num_val_int(raw_bry));
 		return rv;
 	}
 }
@@ -179,7 +185,7 @@ class Php_line_assign_chkr implements Tst_chkr {
 	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Php_line_assign actl = (Php_line_assign)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(key == null, path, "key", key, String_.new_u8(actl.Key().Val_obj_bry()));
+		rv += mgr.Tst_val(key == null, path, "key", key, StringUtl.NewU8(actl.Key().Val_obj_bry()));
 		if (subs != null) rv += mgr.Tst_sub_ary(subs, actl.Key_subs(), "subs", rv);
 		rv += mgr.Tst_sub_obj(val, actl.Val(), "val", rv);
 		return rv;
@@ -221,7 +227,7 @@ class Php_itm_txt_chkr extends Php_itm_chkr_base {
 	@Override public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {
 		Php_itm_var actl = (Php_itm_var)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, String_.new_u8(actl.Val_obj_bry()));
+		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, StringUtl.NewU8(actl.Val_obj_bry()));
 		return rv;
 	}
 }
@@ -232,7 +238,7 @@ class Php_itm_quote_chkr extends Php_itm_chkr_base {
 	@Override public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {
 		Php_itm_quote actl = (Php_itm_quote)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, String_.new_u8(actl.Val_obj_bry()));
+		rv += mgr.Tst_val(false, path, "val_obj_str", val_obj_str, StringUtl.NewU8(actl.Val_obj_bry()));
 		return rv;
 	}
 }
@@ -260,13 +266,13 @@ class Php_itm_kv_chkr extends Php_itm_chkr_base {
 	@Override public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {
 		Php_itm_kv actl = (Php_itm_kv)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(false, path, "key", key, String_.new_u8(actl.Key().Val_obj_bry()));
+		rv += mgr.Tst_val(false, path, "key", key, StringUtl.NewU8(actl.Key().Val_obj_bry()));
 		rv += mgr.Tst_sub_obj(val, actl.Val(), path, rv);
 		return rv;
 	}
 }
 class Gfo_msg_log_chkr implements Tst_chkr {
-	List_adp itms = List_adp_.New(); 
+	List_adp itms = List_adp_.New();
 	public Class<?> TypeOf() {return Gfo_msg_log.class;}
 	public void Clear() {itms.Clear();}
 	public void Add_itm(Gfo_msg_itm itm, int bgn, int end) {

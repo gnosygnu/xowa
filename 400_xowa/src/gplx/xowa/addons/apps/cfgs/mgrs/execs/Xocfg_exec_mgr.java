@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.mgrs.execs; import gplx.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.execs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xocfg_exec_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public void Add(Gfo_invk invk, String... cmds) {

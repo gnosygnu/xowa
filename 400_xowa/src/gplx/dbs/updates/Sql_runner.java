@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.updates; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.updates; import gplx.dbs.*;
 import gplx.dbs.stmts.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 /*
 sql =
 UPDATE  page
@@ -31,9 +34,9 @@ public class Sql_runner {
 //	public Db_stmt_arg[] Sql_args() {return sql_args;} public void Sql_args_(Db_stmt_arg[] v) {sql_args = v;} private Db_stmt_arg[] sql_args;
 	public String Msg() {return msg;} public void Msg_(String v) {msg = v;} private String msg;
 	public String Fill_next(String state) {
-		String[] vals = String_.Split(state, "|");
-		int val_lo = Int_.Parse(vals[0]);
-		int interval = Int_.Parse(vals[1]);
+		String[] vals = StringUtl.Split(state, "|");
+		int val_lo = IntUtl.Parse(vals[0]);
+		int interval = IntUtl.Parse(vals[1]);
 		int val_hi = val_lo + interval;
 
 		Db_stmt_arg arg = list.Get_at(0);
@@ -41,7 +44,7 @@ public class Sql_runner {
 		arg = list.Get_at(1);
 		arg.Val = val_hi;
 
-		return String_.Concat_with_str("|", Int_.To_str(val_hi), vals[1]);
+		return StringUtl.ConcatWith("|", IntUtl.ToStr(val_hi), vals[1]);
 	}
 	public void Run() {
 		Db_stmt stmt = conn.Stmt_sql(sql_fmt);

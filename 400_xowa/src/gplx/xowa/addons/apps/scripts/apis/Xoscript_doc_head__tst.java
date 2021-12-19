@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.addons.apps.scripts.apis;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.addons.apps.scripts.*;
+import org.junit.*;
 public class Xoscript_doc_head__tst {
 	private final Xoscript_doc_head__fxt fxt = new Xoscript_doc_head__fxt();
 	@Before public void init() {
@@ -49,15 +54,15 @@ class Xoscript_doc_head__fxt {
 	private final Xoscript_page spg;
 	private Xoscript_doc_sect_base sect;
 	public Xoscript_doc_head__fxt() {
-		Bry_bfr rv = Bry_bfr_.New();
+		BryWtr rv = BryWtr.New();
 		Xoscript_env env = new Xoscript_env(new gplx.core.scripts.Gfo_script_engine__noop(), Io_url_.new_any_("mem/wiki/test_wiki/bin/script/"));
 		Xoscript_url url = new Xoscript_url("test_wiki", "test_page");
 		spg = new Xoscript_page(rv, env, url);
 	}
 	public void Init__sect(String sect_name) {
-		if		(String_.Eq(sect_name, "head"))
+		if		(StringUtl.Eq(sect_name, "head"))
 			sect = spg.doc().head();
-		else if (String_.Eq(sect_name, "tail"))
+		else if (StringUtl.Eq(sect_name, "tail"))
 			sect = spg.doc().tail();
 	}
 	public void Exec__doc__html(String html) {spg.doc().html(html);}
@@ -67,6 +72,6 @@ class Xoscript_doc_head__fxt {
 	public void Exec__add_html(String pos, String html) {sect.add_html(pos, html);}
 	public void Exec__add_tag(String pos, String tag, String body, Object... head_atrs) {sect.add_tag(pos, tag, body, head_atrs);}
 	public void Test__html(String... expd) {
-		Gftest.Eq__ary__lines(String_.Concat_lines_nl_skip_last(expd), spg.doc().html(), "html");
+		GfoTstr.EqLines(StringUtl.ConcatLinesNlSkipLast(expd), spg.doc().html(), "html");
 	}
 }

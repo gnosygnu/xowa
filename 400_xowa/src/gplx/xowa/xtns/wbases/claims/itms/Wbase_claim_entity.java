@@ -14,12 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims.itms;
-
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_entity_type_;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
@@ -35,7 +34,7 @@ public class Wbase_claim_entity extends Wbase_claim_base {
 		this.numericIdBry = numericIdBry;
 		// NOTE: form and sense claims do not have `numeric-id`; DATE:2020-07-27
 		if (numericIdBry != null)
-			this.numericId = Bry_.To_int(numericIdBry);
+			this.numericId = BryUtl.ToInt(numericIdBry);
 		// NOTE: item, property, lexeme do not have an id (Make_claims calls don't pass them)
 		this.id = id == null ? ToId(entityType, numericIdBry) : id;
 	}
@@ -48,13 +47,13 @@ public class Wbase_claim_entity extends Wbase_claim_base {
 	public String           Entity_tid_str()    {return Wbase_claim_entity_type_.Reg.Get_str_or_fail(entityType);}
 	public byte[]           Entity_tid_bry()    {return Wbase_claim_entity_type_.Reg.Get_bry_or_fail(entityType);}
 	public byte[]           Page_ttl_db()       {return To_xid__db(entityType, numericIdBry);}
-	public byte[]           Page_ttl_gui()      {return Bry_.Add(ToTtlPrefix(entityType), numericIdBry);}
+	public byte[]           Page_ttl_gui()      {return BryUtl.Add(ToTtlPrefix(entityType), numericIdBry);}
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_entity(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), this.Entity_tid_str(), Int_.To_str(numericId), String_.new_u8(id));
+		return StringUtl.ConcatWith("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), this.Entity_tid_str(), IntUtl.ToStr(numericId), StringUtl.NewU8(id));
 	}
 
-	public static byte[] To_xid__db(byte tid, byte[] bry) {return Bry_.Add(ToTtlPrefix(tid), bry);}	// EX: 'item,2' -> Q2; 'property,2' -> Property:P2
+	public static byte[] To_xid__db(byte tid, byte[] bry) {return BryUtl.Add(ToTtlPrefix(tid), bry);}	// EX: 'item,2' -> Q2; 'property,2' -> Property:P2
 	private static byte[] ToTtlPrefix(byte entityType) {
 		switch (entityType) {
 			case Wbase_claim_entity_type_.Tid__item:
@@ -64,27 +63,27 @@ public class Wbase_claim_entity extends Wbase_claim_base {
 			case Wbase_claim_entity_type_.Tid__lexeme:
 				return TTL_PREFIX_LID;
 			default:
-				throw Err_.new_unhandled_default(entityType);
+				throw ErrUtl.NewUnhandled(entityType);
 		}
 	}
 	private static byte[] ToId(byte entityType, byte[] numericId) {
 		switch (entityType) {
 			case Wbase_claim_entity_type_.Tid__item:
-				return Bry_.Add(AsciiByte.Ltr_Q, numericId);
+				return BryUtl.Add(AsciiByte.Ltr_Q, numericId);
 			case Wbase_claim_entity_type_.Tid__property:
-				return Bry_.Add(AsciiByte.Ltr_P, numericId);
+				return BryUtl.Add(AsciiByte.Ltr_P, numericId);
 			case Wbase_claim_entity_type_.Tid__lexeme:
-				return Bry_.Add(AsciiByte.Ltr_L, numericId);
+				return BryUtl.Add(AsciiByte.Ltr_L, numericId);
 			case Wbase_claim_entity_type_.Tid__form:
 			case Wbase_claim_entity_type_.Tid__sense:
 			default:
-				throw Err_.new_unhandled_default(entityType);
+				throw ErrUtl.NewUnhandled(entityType);
 		}
 	}
 	private static final byte[]
-	  TTL_PREFIX_QID      = Bry_.new_a7("Q") // NOTE: use uppercase Q for writing html; DATE:2015-06-12
-	, TTL_PREFIX_PID      = Bry_.new_a7("Property:P")
-	, TTL_PREFIX_LID      = Bry_.new_a7("Lexeme:L")
+	  TTL_PREFIX_QID      = BryUtl.NewA7("Q") // NOTE: use uppercase Q for writing html; DATE:2015-06-12
+	, TTL_PREFIX_PID      = BryUtl.NewA7("Property:P")
+	, TTL_PREFIX_LID      = BryUtl.NewA7("Lexeme:L")
 	// TOMBSTONE: TTL_PREFIX_QID_OLD  = Bry_.new_a7("q") // NOTE: for historical reasons this is standardized as lowercase q not Q; DATE:2015-06-12
 	;
 }

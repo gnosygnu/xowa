@@ -13,10 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.types.basics.utls.IntUtl;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
-import gplx.xowa.addons.bldrs.files.dbs.*;
 import gplx.xowa.parsers.logs.*;
 class Xomp_make_merger__xnde extends Xomp_make_merger__base {
 	private Xop_log_basic_tbl trg_tbl__log_basic_temp;
@@ -38,7 +37,7 @@ class Xomp_make_merger__xnde extends Xomp_make_merger__base {
 	@Override protected int Compare__hook(Object lhsObj, Object rhsObj) {
 		Xop_log_basic_row lhs = (Xop_log_basic_row)lhsObj;
 		Xop_log_basic_row rhs = (Xop_log_basic_row)rhsObj;
-		return Int_.Compare(lhs.Page_id, rhs.Page_id);
+		return IntUtl.Compare(lhs.Page_id, rhs.Page_id);
 	}
 }
 class Xop_log_basic_row {

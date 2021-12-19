@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.frameworks.tests.TfdsTstr_fxt;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
 class GfmlParse_fxt {
 	public GfmlNde_mok nde_() {return GfmlNde_mok.new_();}
 	public GfmlTkn_mok tkn_grp_ary_(String... ary) {return GfmlTkn_mok.new_().Subs_(GfmlTkn_mok.Xto_bry(ary));}
@@ -58,15 +64,15 @@ class GfmlParse_fxt {
 			UsrMsg_mok actlUmm = UsrMsg_mok.new_(actlUm);
 			tstr.Eq_str(expdUm.Main(), actlUmm.Main(), "main");
 			for (int j = 0; j < expdUm.Args().Len(); j++) {
-				Keyval expdKv = (Keyval)expdUm.Args().Get_at(j);
-				Keyval actlKv = (Keyval)actlUmm.Args().GetByOrNull(expdKv.Key());
-				Object actlVal = actlKv == null ? String_.Null_mark : actlKv.Val();
-				tstr.Eq_str(expdKv.Val(), actlVal, expdKv.Key());
+				KeyVal expdKv = (KeyVal)expdUm.Args().GetAt(j);
+				KeyVal actlKv = (KeyVal)actlUmm.Args().GetByOrNull(expdKv.KeyToStr());
+				Object actlVal = actlKv == null ? StringUtl.NullMark : actlKv.Val();
+				tstr.Eq_str(expdKv.Val(), actlVal, expdKv.KeyToStr());
 			}
 			for (int j = 0; j < expdUm.Required().Len(); j++) {
-				String expdKv = (String)expdUm.Required().Get_at(j);
-				Keyval actlKv = (Keyval)actlUmm.Args().GetByOrNull(expdKv);
-				Object actlVal = actlKv == null ? String_.Null_mark : actlKv.Val();
+				String expdKv = (String)expdUm.Required().GetAt(j);
+				KeyVal actlKv = (KeyVal)actlUmm.Args().GetByOrNull(expdKv);
+				Object actlVal = actlKv == null ? StringUtl.NullMark : actlKv.Val();
 				Object actlValV = actlKv == null ? "<<REQD>>" : actlKv.Val();
 				tstr.Eq_str(actlValV, actlVal, expdKv);
 			}

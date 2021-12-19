@@ -14,18 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.swts;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_evt_mgr_owner;
-import gplx.Keyval_hash;
-import gplx.String_;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyValHash;
 import gplx.core.envs.Op_sys;
 import gplx.gfui.controls.gxws.GxwComboBox;
 import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.standards.GfuiComboBox;
 import gplx.gfui.draws.ColorAdp;
 import gplx.gfui.kits.core.Swt_kit;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
@@ -43,8 +43,8 @@ import org.eclipse.swt.widgets.Text;
 public class Swt_combo_ctrl extends Swt_text_w_border implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner {	// REF: https://www.eclipse.org/forums/index.php/t/351029/; http://git.eclipse.org/c/platform/eclipse.platform.swt.git/tree/examples/org.eclipse.swt.snippets/src/org/eclipse/swt/snippets/Snippet320.java
 	private final Text swt_text;
 	private final Swt_combo_list list;
-	public Swt_combo_ctrl(Swt_kit kit, Swt_control owner, Color color, Keyval_hash ctorArgs) {
-		super(kit, owner, color, new Keyval_hash());
+	public Swt_combo_ctrl(Swt_kit kit, Swt_control owner, Color color, KeyValHash ctorArgs) {
+		super(kit, owner, color, new KeyValHash());
 		Display display = owner.Under_control().getDisplay();
 		Shell shell = owner.Under_control().getShell();
 		this.swt_text = super.Under_text();
@@ -76,7 +76,7 @@ public class Swt_combo_ctrl extends Swt_text_w_border implements GxwElem, GxwCom
 	@Override public String Text_fallback() 						{return text_fallback;} private String text_fallback = "";// preserve original-text when using cursor keys in list-box
 	@Override public void Text_fallback_(String v) 					{text_fallback = v;}
 	public void Text_fallback_restore() {
-		if (String_.Len_eq_0(text_fallback)) return; // handle escape pressed after dropdown is visible, but down / up not pressed
+		if (StringUtl.IsNullOrEmpty(text_fallback)) return; // handle escape pressed after dropdown is visible, but down / up not pressed
 		this.Text_(text_fallback);
 		this.text_fallback = "";
 	}
@@ -93,7 +93,7 @@ public class Swt_combo_ctrl extends Swt_text_w_border implements GxwElem, GxwCom
 	public String Text() {return swt_text.getText();} public void Text_(String v) {swt_text.setText(v);}
 	public void Sel_all() {
 		String text_text = swt_text.getText();
-		this.Sel_(0, String_.Len(text_text));
+		this.Sel_(0, StringUtl.Len(text_text));
 	}
 	public void Items__backcolor_(ColorAdp v) {list.Under_table_as_swt().setBackground(kit.New_color(v));}
 	public void Items__forecolor_(ColorAdp v) {list.Under_table_as_swt().setForeground(kit.New_color(v));}
@@ -117,7 +117,7 @@ class Swt_combo_list {
 	public TableItem[] Items() {return table.getItems();}
 	public TableItem Sel_itm(int i) {return table.getSelection()[i];}
 	public void Items_text_(int idx, String v) {table.getItem(idx).setText(v);}
-	public String[] Items_str_ary() {return items_str_ary;} private String[] items_str_ary = String_.Ary_empty;
+	public String[] Items_str_ary() {return items_str_ary;} private String[] items_str_ary = StringUtl.AryEmpty;
 	public void Items_(String[] new_ary) {
 		int new_len = new_ary.length;
 		if (new_len == 0) Visible_(BoolUtl.N);	// if new_ary is empty, then hide list box; else, brief flicker as items are removed
@@ -137,7 +137,7 @@ class Swt_combo_list {
 				item = new TableItem(table, SWT.NONE);
 			String cur_text = item.getText();
 			String new_text = new_ary[i];
-			if (!String_.Eq(cur_text, new_text) && new_text != null) {
+			if (!StringUtl.Eq(cur_text, new_text) && new_text != null) {
 				item.setText(new_text);
 			}
 		}

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
@@ -67,7 +72,7 @@ class Pglnk_tempdb_mgr {
 
 		// do insert; write prog
 		dump_insert.Clear().Val_int(dump_src_id, src_id).Val_int(dump_trg_ns, trg_ns).Val_bry_as_str(dump_trg_ttl, trg_ttl).Exec_insert();
-		if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
+		if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", IntUtl.ToStrFmt(rows, "#,##0"));
 	}
 	private void Dump__insert_end() {
 		// clean-up insert_stmt
@@ -78,8 +83,8 @@ class Pglnk_tempdb_mgr {
 		// move rows from dump to temp
 		new Db_attach_mgr(conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()))
 			.Exec_sql_w_msg
-			( String_.Format("transferring from dump to temp: row={0}", Int_.To_str_fmt(rows, "#,##0"))
-			, String_.Concat_lines_nl_skip_last
+			( StringUtl.Format("transferring from dump to temp: row={0}", IntUtl.ToStrFmt(rows, "#,##0"))
+			, StringUtl.ConcatLinesNlSkipLast
 			( "INSERT INTO pagelink_temp (src_id, trg_id, trg_count)"
 			, "SELECT  pl.src_id"
 			, ",       p.page_id"
@@ -106,7 +111,7 @@ class Pglnk_tempdb_mgr {
 
 		// move rows from temp to live; drop temp tbl
 		conn.Exec_sql_concat_w_msg
-			( String_.Format("creating live tbl: row={0}", Int_.To_str_fmt(rows, "#,##0"))
+			( StringUtl.Format("creating live tbl: row={0}", IntUtl.ToStrFmt(rows, "#,##0"))
 			, "INSERT INTO page_link (src_id, trg_id, trg_count)"
 			, "SELECT  pl.src_id"
 			, ",       pl.trg_id"

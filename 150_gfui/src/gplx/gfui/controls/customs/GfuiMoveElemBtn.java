@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.GfoMsg;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Keyval_hash;
-import gplx.List_adp;
-import gplx.List_adp_;
+package gplx.gfui.controls.customs; import gplx.frameworks.invks.GfoMsg;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.commons.KeyValHash;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.gfui.PointAdp;
 import gplx.gfui.PointAdp_;
 import gplx.gfui.SizeAdp;
@@ -38,8 +38,8 @@ import gplx.gfui.ipts.IptKey_;
 import gplx.gfui.ipts.IptMouseBtn_;
 import gplx.gfui.ipts.IptMouseMove;
 import gplx.gfui.layouts.GftGrid;
-public class GfuiMoveElemBtn extends GfuiBtn { 	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+public class GfuiMoveElemBtn extends GfuiBtn { 	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.Text_("*");
 		this.TipText_("move/resize");

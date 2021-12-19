@@ -13,10 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.mgrs; import gplx.*;
+package gplx.xowa.addons.bldrs.exports.splits.mgrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Split_cfg implements Gfo_invk {
 	public boolean				Force_rebuild() {return force_rebuild;} private boolean force_rebuild;
-	public long				Trg_max() {return trg_max;} private long trg_max = 32 * Io_mgr.Len_mb;
+	public long				Trg_max() {return trg_max;} private long trg_max = 32 * IoConsts.LenMB;
 	public Split_ns_itm[]	Ns_itms() {return ns_itms;} private Split_ns_itm[] ns_itms;
 	public int				Loader_rows() {return loader_rows;} private int loader_rows = 10000;
 	public Split_type_cfg	Text() {return text;} private final Split_type_cfg text = new Split_type_cfg("text", 1000);
@@ -32,7 +40,7 @@ public class Split_cfg implements Gfo_invk {
 	}
 	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk__ns_ids_))			this.Ns_itms_(Int_ary_.Parse(m.ReadStr("v"), "|"));
+		if		(ctx.Match(k, Invk__ns_ids_))			this.Ns_itms_(IntAryUtl.Parse(m.ReadStr("v"), "|"));
 		else if	(ctx.Match(k, Invk__loader_rows_))		this.loader_rows = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk__force_rebuild_))	this.force_rebuild = m.ReadBool("v");
 		else if	(ctx.Match(k, Invk__trg_max_))			this.trg_max = m.ReadLong("v");

@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.specials.svcs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.langs.jsons.*; import gplx.xowa.htmls.bridges.*;
+package gplx.xowa.addons.apps.updates.specials.svcs;
+import gplx.langs.jsons.Json_nde;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.htmls.bridges.Bridge_cmd_itm;
+import gplx.xowa.htmls.bridges.Bridge_cmd_mgr;
 public class Xoa_update_bridge implements Bridge_cmd_itm {
 	private Xoa_app app;
 	public void Init_by_app(Xoa_app app) {
@@ -30,7 +35,7 @@ public class Xoa_update_bridge implements Bridge_cmd_itm {
 		switch (proc_id) {
 			case Proc__install:		svc.Install(args.Get_as_str("version"));break;
 			case Proc__skip:		svc.Skip(args.Get_as_str("version")); break;
-			default:				throw Err_.new_unhandled_default(proc_id);
+			default:				throw ErrUtl.NewUnhandled(proc_id);
 		}
 		return "";
 	}
@@ -41,6 +46,6 @@ public class Xoa_update_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("skip"						, Proc__skip)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("app.updater");
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = BryUtl.NewA7("app.updater");
         public static final Xoa_update_bridge Prototype = new Xoa_update_bridge(); Xoa_update_bridge() {}
 }

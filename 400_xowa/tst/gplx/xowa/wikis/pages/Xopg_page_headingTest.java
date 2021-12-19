@@ -15,10 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.pages.htmls.Xopg_html_data;
@@ -40,9 +39,9 @@ class Xopg_page_headingTstr {
     }
 
     public void Test(String expd, String ttlDb, String ttlTxt, String lang) {
-        heading.Init(wiki, true, new Xopg_html_data(), Bry_.new_u8(ttlDb), Bry_.new_u8(ttlTxt), Bry_.new_u8(lang));
-        Bry_bfr bfr = Bry_bfr_.New();
-        heading.Bfr_arg__add(bfr);
-        GfoTstr.EqStr(expd, bfr.To_str_and_clear());
+        heading.Init(wiki, true, new Xopg_html_data(), BryUtl.NewU8(ttlDb), BryUtl.NewU8(ttlTxt), BryUtl.NewU8(lang));
+        BryWtr bfr = BryWtr.New();
+        heading.AddToBfr(bfr);
+        GfoTstr.Eq(expd, bfr.ToStrAndClear());
     }
 }

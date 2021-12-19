@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers;
 
-import gplx.Bry_bfr;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
@@ -41,8 +41,8 @@ public class Xop_parser_ {
 		parser.Parse_wtxt_to_wdom(root, ctx, ctx.Tkn_mkr(), wtxt, Xop_parser_.Doc_bgn_bos);
 
 		// write html
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
 		wiki.Html_mgr().Html_wtr().Write_doc(bfr, ctx, hctx, wtxt, root);
-		return bfr.To_bry_and_rls();
+		return bfr.ToBryAndRls();
 	}
 }

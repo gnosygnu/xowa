@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs.cmds; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
-import gplx.core.srls.*; import gplx.core.brys.fmtrs.*;
+package gplx.dbs.diffs.cmds; import gplx.dbs.*; import gplx.dbs.diffs.*;
+import gplx.core.srls.*; import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.dbs.metas.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 interface Gfdb_diff_cmd {
 	void Merge_undo();
 	void Merge_exec();		
@@ -42,7 +48,7 @@ class Gfo_srl_mgr_rdr__db {
 		for (int i = 0; i < crt_len; ++i) {
 			Dbmeta_dat_itm crt = crt_mgr.Get_at(i);
 			switch (crt.Tid) {
-				case DbmetaFldType.TidInt: select.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
+				case DbmetaFldType.TidInt: select.Crt_int(crt.Key, IntUtl.Cast(crt.Val)); break;
 			}				
 		}
 		Db_rdr rdr = select.Exec_select__rls_manual();
@@ -63,7 +69,7 @@ class Gfo_srl_mgr_rdr__db {
 		for (int i = 0; i < crt_len; ++i) {
 			Dbmeta_dat_itm crt = crt_mgr.Get_at(i);
 			switch (crt.Tid) {
-				case DbmetaFldType.TidInt: delete.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
+				case DbmetaFldType.TidInt: delete.Crt_int(crt.Key, IntUtl.Cast(crt.Val)); break;
 			}				
 		}
 		delete.Exec_delete();
@@ -99,7 +105,7 @@ class Gfdb_diff_cmd__fld__create {
 		wtr.Set_int		("type_len_2"	, cur.Type().Len2());
 		wtr.Set_bool	("primary"		, cur.Primary());
 		wtr.Set_int		("nullable"		, cur.Nullable());
-		wtr.Set_str		("dflt"			, Object_.Xto_str_or(cur.DefaultVal(), null));
+		wtr.Set_str		("dflt"			, ObjectUtl.ToStrOr(cur.DefaultVal(), null));
 		wtr.Itm_end();
 	}
 	public void Load(Gfo_srl_ctx ctx, Gfo_srl_itm owner) {
@@ -232,47 +238,47 @@ class Gfdb_diff_cmd__insert {
 	}
 }
 class Gfdb_diff_cmd_sql_bldr {
-	private final Bry_fmtr fmtr = Bry_fmtr.new_();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
-	public void Bld_insert(Bry_bfr bfr, String tbl_name, String[] keys, String[] vals, int rng_bgn, int rng_end) {
-		fmtr.Fmt_(Insert__fmt).Keys_(Insert__keys);
-		fmtr.Bld_bfr_many(bfr, tbl_name, Bld_flds(tmp_bfr, ", ", "d.", keys, vals), Bld_join(keys), rng_bgn, rng_end);
+	private final BryFmtr fmtr = BryFmtr.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
+	public void Bld_insert(BryWtr bfr, String tbl_name, String[] keys, String[] vals, int rng_bgn, int rng_end) {
+		fmtr.FmtSet(Insert__fmt).KeysSet(Insert__keys);
+		fmtr.BldToBfrMany(bfr, tbl_name, Bld_flds(tmp_bfr, ", ", "d.", keys, vals), Bld_join(keys), rng_bgn, rng_end);
 	}
-	public void Bld_update(Bry_bfr bfr, String tbl_name, String[] keys, String[] vals, int rng_bgn, int rng_end) {
-		fmtr.Fmt_(Update__fmt).Keys_(Update__keys);
-		fmtr.Bld_bfr_many(bfr, tbl_name, Bld_flds(tmp_bfr, ", ", "d.", keys, vals), Bld_join(keys), rng_bgn, rng_end);
+	public void Bld_update(BryWtr bfr, String tbl_name, String[] keys, String[] vals, int rng_bgn, int rng_end) {
+		fmtr.FmtSet(Update__fmt).KeysSet(Update__keys);
+		fmtr.BldToBfrMany(bfr, tbl_name, Bld_flds(tmp_bfr, ", ", "d.", keys, vals), Bld_join(keys), rng_bgn, rng_end);
 	}
-	public void Bld_delete(Bry_bfr bfr, String tbl_name, String[] keys, int rng_bgn, int rng_end) {
-		fmtr.Fmt_(Delete__fmt).Keys_(Delete__keys);
-		fmtr.Bld_bfr_many(bfr, tbl_name, Bld_flds(tmp_bfr, " || '|' || ", "", keys, String_.Ary_empty), Bld_flds(tmp_bfr, " || '|' || ", "k.", keys, String_.Ary_empty), Bld_join(keys), rng_bgn, rng_end);
+	public void Bld_delete(BryWtr bfr, String tbl_name, String[] keys, int rng_bgn, int rng_end) {
+		fmtr.FmtSet(Delete__fmt).KeysSet(Delete__keys);
+		fmtr.BldToBfrMany(bfr, tbl_name, Bld_flds(tmp_bfr, " || '|' || ", "", keys, StringUtl.AryEmpty), Bld_flds(tmp_bfr, " || '|' || ", "k.", keys, StringUtl.AryEmpty), Bld_join(keys), rng_bgn, rng_end);
 	}
-	private static String Bld_flds(Bry_bfr tmp_bfr, String dlm, String alias, String[] keys, String[] vals) {
+	private static String Bld_flds(BryWtr tmp_bfr, String dlm, String alias, String[] keys, String[] vals) {
 		int keys_len = keys.length;
 		for (int i = 0; i < keys_len; ++i) {
 			String key = keys[i];
-			if (i != 0) tmp_bfr.Add_str_a7(dlm);
-			tmp_bfr.Add_str_a7(alias).Add_str_a7(key);
+			if (i != 0) tmp_bfr.AddStrA7(dlm);
+			tmp_bfr.AddStrA7(alias).AddStrA7(key);
 		}
 		int flds_len = vals.length;
 		for (int i = 0; i < flds_len; ++i) {
 			String val = vals[i];
-			tmp_bfr.Add_str_a7(dlm);
-			tmp_bfr.Add_str_a7(alias).Add_str_a7(val);
+			tmp_bfr.AddStrA7(dlm);
+			tmp_bfr.AddStrA7(alias).AddStrA7(val);
 		}
-		return tmp_bfr.To_str_and_clear();
+		return tmp_bfr.ToStrAndClear();
 	}
 	private String Bld_join(String[] keys) {
 		int len = keys.length;
 		for (int i = 0; i < len; ++i) {
 			String key = keys[i];
-			tmp_bfr.Add_str_a7(i == 0 ? " ON " : " AND ");
-			tmp_bfr.Add_str_a7("k.").Add_str_a7(key).Add_str_a7(" = ");
-			tmp_bfr.Add_str_a7("d.").Add_str_a7(key);
+			tmp_bfr.AddStrA7(i == 0 ? " ON " : " AND ");
+			tmp_bfr.AddStrA7("k.").AddStrA7(key).AddStrA7(" = ");
+			tmp_bfr.AddStrA7("d.").AddStrA7(key);
 		}
-		return tmp_bfr.To_str_and_clear();
+		return tmp_bfr.ToStrAndClear();
 	}
-	private static final String[] Insert__keys = String_.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
-	private static final String Insert__fmt = String_.Concat_lines_nl_skip_last
+	private static final String[] Insert__keys = StringUtl.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
+	private static final String Insert__fmt = StringUtl.ConcatLinesNlSkipLast
 	( "INSERT  INTO db_curr.~{tbl}"
 	, "SELECT  ~{flds}"
 	, "FROM    db_temp.~{tbl}_pkey k"
@@ -280,8 +286,8 @@ class Gfdb_diff_cmd_sql_bldr {
 	, "WHERE   k.diff_type = 1"
 	, "AND     k.diff_uid BETWEEN ~{rng_bgn} AND ~{rng_end};"
 	);
-	private static final String[] Update__keys = String_.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
-	private static final String Update__fmt = String_.Concat_lines_nl_skip_last
+	private static final String[] Update__keys = StringUtl.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
+	private static final String Update__fmt = StringUtl.ConcatLinesNlSkipLast
 	( "REPLACE INTO db_curr.~{tbl}" 
 	, "SELECT  ~{flds}"
 	, "FROM    db_temp.~{tbl}_pkey k"
@@ -289,8 +295,8 @@ class Gfdb_diff_cmd_sql_bldr {
 	, "WHERE   k.diff_type = 2"
 	, "AND     k.diff_uid BETWEEN ~{rng_bgn} AND ~{rng_end};"
 	);
-	private static final String[] Delete__keys = String_.Ary("tbl", "pkey_where", "pkey_select", "join", "rng_bgn", "rng_end");
-	private static final String Delete__fmt = String_.Concat_lines_nl_skip_last
+	private static final String[] Delete__keys = StringUtl.Ary("tbl", "pkey_where", "pkey_select", "join", "rng_bgn", "rng_end");
+	private static final String Delete__fmt = StringUtl.ConcatLinesNlSkipLast
 	( "DELETE  db_curr.~{tbl}"
 	, "WHERE   ~{pkey_where} IN"
 	, "(       SELECT  ~{pkey_select}"

@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.cmds; import gplx.*;
+package gplx.xowa.guis.cmds;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 public class Xog_cmd_itm_ {
 	private static final Ordered_hash regy = Ordered_hash_.New();	// NOTE: must be defined at top
 	public static final String
@@ -161,7 +165,7 @@ public class Xog_cmd_itm_ {
 	, Key_xtns_scribunto_engine_lua_							= new_dflt_(Xog_ctg_itm_.Tid_xtns			, "xowa.xtns.scribunto.engine_lua_")
 	, Key_xtns_scribunto_engine_luaj_							= new_dflt_(Xog_ctg_itm_.Tid_xtns			, "xowa.xtns.scribunto.engine_luaj_")
 	;
-	private static String new_dflt_(int ctg, String key)				{return new_text_(ctg, key, "app.api." + String_.Mid(key, 5) + ";");}		// 5 to skip "xowa."
+	private static String new_dflt_(int ctg, String key)				{return new_text_(ctg, key, "app.api." + StringUtl.Mid(key, 5) + ";");}		// 5 to skip "xowa."
 	private static String new_page_(int ctg, String key, String page)	{return new_text_(ctg, key, "app.api.nav.goto(\"" + page + "\");");}
 	private static String new_text_(int ctg, String key, String text)	{
 		Xog_cmd_ctg ctg_itm = Xog_ctg_itm_.Ary[ctg];
@@ -169,15 +173,15 @@ public class Xog_cmd_itm_ {
 		return key;
 	}
 	public static int Regy_len() {return regy.Len();}
-	public static Xog_cmd_itm Regy_get_at(int i) {return (Xog_cmd_itm)regy.Get_at(i);}
+	public static Xog_cmd_itm Regy_get_at(int i) {return (Xog_cmd_itm)regy.GetAt(i);}
 	public static Xog_cmd_itm Regy_get_or_null(String key) {return (Xog_cmd_itm)regy.GetByOrNull(key);}
 	public static void Regy_add(Xog_cmd_itm itm) {regy.Add(itm.Key(), itm);}
 	public static final byte[]
-	  Msg_pre_api		= Bry_.new_a7("api-")
-	, Msg_pre_ctg		= Bry_.new_a7("api.ctg-")
-	, Msg_suf_name		= Bry_.new_a7("-name")
-	, Msg_suf_tip		= Bry_.new_a7("-tip")
-	, Msg_suf_letter	= Bry_.new_a7("-letter")
-	, Msg_suf_image		= Bry_.new_a7("-image")
+	  Msg_pre_api		= BryUtl.NewA7("api-")
+	, Msg_pre_ctg		= BryUtl.NewA7("api.ctg-")
+	, Msg_suf_name		= BryUtl.NewA7("-name")
+	, Msg_suf_tip		= BryUtl.NewA7("-tip")
+	, Msg_suf_letter	= BryUtl.NewA7("-letter")
+	, Msg_suf_image		= BryUtl.NewA7("-image")
 	;
 }

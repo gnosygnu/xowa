@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xomp_make_cmd_cfg implements Gfo_invk {
 	public Hash_adp Mode() {return mode;} private Hash_adp mode = Hash_adp_.New().AddAndMore("html", "html").AddAndMore("lnki", "lnki").AddAndMore("stat", "stat").AddAndMore("hxtn", "hxtn");
 	public boolean Delete_html_dbs() {return delete_html_dbs;} private boolean delete_html_dbs = true;

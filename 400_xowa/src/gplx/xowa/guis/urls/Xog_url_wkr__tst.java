@@ -13,15 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.guis.urls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
 public class Xog_url_wkr__tst {
 	private final Xog_url_wkr__fxt fxt = new Xog_url_wkr__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Exec__parse("/wiki/A?k1=B%26C");
 		fxt.Test__raw("/wiki/A?k1=B%26C");
 	}
-	@Test  public void Anch_early() {	// de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages
+	@Test public void Anch_early() {	// de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages
 		fxt.Exec__parse("/wiki/A?pagefrom=%23%3A7p#mw-pages");
 		fxt.Test__qarg("?pagefrom=#:7p");
 		fxt.Test__anch("mw-pages");
@@ -37,10 +41,10 @@ class Xog_url_wkr__fxt {
 		wkr.Init(wiki);
 	}
 	public void Exec__parse(String href) {
-		this.url = wiki.Utl__url_parser().Parse(Bry_.new_u8(href));
+		this.url = wiki.Utl__url_parser().Parse(BryUtl.NewU8(href));
 		this.url = wkr.Exec_url(url);
 	}
-	public void Test__raw(String expd)	{Gftest.Eq__str(expd, String_.new_u8(url.Raw()));}
-	public void Test__qarg(String expd) {Gftest.Eq__str(expd, String_.new_u8(url.Qargs_mgr().To_bry()));}
-	public void Test__anch(String expd) {Gftest.Eq__str(expd, String_.new_u8(url.Anch_bry()));}
+	public void Test__raw(String expd)	{GfoTstr.Eq(expd, StringUtl.NewU8(url.Raw()));}
+	public void Test__qarg(String expd) {GfoTstr.Eq(expd, StringUtl.NewU8(url.Qargs_mgr().To_bry()));}
+	public void Test__anch(String expd) {GfoTstr.Eq(expd, StringUtl.NewU8(url.Anch_bry()));}
 }

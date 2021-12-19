@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+package gplx.xowa.xtns.scribunto.engines.luaj;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.envs.*;
 import org.luaj.vm2.*; import org.luaj.vm2.lib.*; import org.luaj.vm2.lib.jse.*;
-import gplx.xowa.xtns.scribunto.engines.process.*;
 public class Luaj_server implements Scrib_server {
 	private final Luaj_server_func_recv func_recv;
 	private final Luaj_server_func_dbg func_dbg;
@@ -38,7 +40,7 @@ public class Luaj_server implements Scrib_server {
 		luaj_globals.set("dbg", func_dbg);
 		String root_str = init_args[2];
 		if (Op_sys.Cur().Tid_is_wnt())
-			root_str = String_.Replace(root_str, Op_sys.Wnt.Fsys_dir_spr_str(), Op_sys.Lnx.Fsys_dir_spr_str());
+			root_str = StringUtl.Replace(root_str, Op_sys.Wnt.Fsys_dir_spr_str(), Op_sys.Lnx.Fsys_dir_spr_str());
 		this.main_fil_val = LuaValue.valueOf(root_str + "engines/Luaj/mw_main.lua");
 		LuaValue package_val = luaj_globals.get("package");
 		package_val.rawset("path", LuaValue.valueOf(root_str + "engines/Luaj/?.lua;" + root_str + "engines/LuaCommon/lualib/?.lua"));
@@ -64,9 +66,9 @@ public class Luaj_server implements Scrib_server {
 	public int Server_timeout() {return server_timeout;} public Scrib_server Server_timeout_(int v) {server_timeout = v; return this;} private int server_timeout;
 	public int Server_timeout_polling() {return server_timeout_polling;} public Scrib_server Server_timeout_polling_(int v) {server_timeout_polling = v; return this;} private int server_timeout_polling;
 	public int Server_timeout_busy_wait() {return server_timeout_busy_wait;} public Scrib_server Server_timeout_busy_wait_(int v) {server_timeout_busy_wait = v; return this;} private int server_timeout_busy_wait;
-	public byte[] Server_comm(byte[] cmd, Object[] cmd_objs) {return Bry_.Empty;}
+	public byte[] Server_comm(byte[] cmd, Object[] cmd_objs) {return BryUtl.Empty;}
 	public void Server_send(byte[] cmd, Object[] cmd_objs) {}
-	public byte[] Server_recv() {return Bry_.Empty;}
+	public byte[] Server_recv() {return BryUtl.Empty;}
 	public void Term() {this.Init(init_args);}
 	private static final LuaValue
 	  Val_server_recv 		= LuaValue.valueOf("server_recv")

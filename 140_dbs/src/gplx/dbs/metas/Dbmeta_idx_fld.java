@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.metas;
+import gplx.types.basics.utls.StringUtl;
 public class Dbmeta_idx_fld {
 	public Dbmeta_idx_fld(String name, int sort_tid) {this.Name = name; this.Sort_tid = sort_tid;}
 	public String Name;
 	public int Sort_tid;
 	public boolean Eq(Dbmeta_idx_fld comp) {
-		return	String_.Eq(Name, comp.Name)
+		return	StringUtl.Eq(Name, comp.Name)
 			&&	Sort_tid == comp.Sort_tid;
 	}
 

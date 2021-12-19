@@ -13,15 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.tests.*;
-import gplx.core.btries.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
-
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,10 +23,10 @@ import org.junit.Test;
 public class Dbx_strtotime_tst {
 //	private final Dbx_strtotime_fxt fxt = new Dbx_strtotime_fxt();
 	@Before	public void setup()	  {
-		Datetime_now.Manual_(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));
+		GfoDateNow.ManualSet(GfoDateUtl.New(2012, 1, 2, 3, 4, 5, 6));
 	}
 	@After public void teardown() {
-		Datetime_now.Manual_n_();
+		GfoDateNow.ManualSetN();
 	}
 
 	// REF.PHP:https://github.com/php/php-src/blob/master/ext/date/tests/strtotime.phpt

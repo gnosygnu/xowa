@@ -13,14 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws;
 import java.awt.AWTKeyStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusEvent;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.AbstractAction;
@@ -35,7 +34,8 @@ import javax.swing.text.Document;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
-
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.GfuiAlign;
 import gplx.gfui.GfuiAlign_;
 import gplx.gfui.PointAdp;
@@ -44,8 +44,10 @@ import gplx.gfui.RectAdp;
 import gplx.gfui.SizeAdp;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.draws.*;
-import gplx.gfui.ipts.*; import gplx.gfui.controls.windows.*;
+import gplx.gfui.ipts.*;
 import gplx.gfui.layouts.swts.*;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.errs.ErrUtl;
 public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 	public JTextArea Inner() {return txt_box;} GxwTextBox_lang txt_box;
 	public GxwCore_base Core() {return core;} GxwCore_base core; 
@@ -56,7 +58,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 		else if (c.getRGB() == Color.WHITE.getRGB()) 	txt_box.setCaretColor(Color.BLACK);		
 		super.setBackground(c);
 	}
-	public void ScrollTillCaretIsVisible() {throw Err_.new_unimplemented();}
+	public void ScrollTillCaretIsVisible() {throw ErrUtl.NewUnimplemented();}
 	public void Margins_set(int left, int top, int right, int bot) {
 		if (left == 0 && right == 0) {
 			txt_box.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -96,7 +98,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 //		        UIManager.put(key, fontDefinition);
 //		    }
 //		}
-	}	@gplx.Internal protected GxwTextMemo_lang() {}
+	}	public GxwTextMemo_lang() {}
 	void InitUndoMgr() {
 		final UndoManager undo = new UndoManager();
 		Document doc = txt_box.getDocument();
@@ -158,7 +160,7 @@ public class GxwTextMemo_lang extends JScrollPane implements GxwTextMemo {
 		return 40;
 //		return this.getStyledDocument(). .getLineCount();
 	}
-	public int ScreenCount() {return Int_.DivAndRoundUp(this.LinesTotal(), this.LinesPerScreen());}
+	public int ScreenCount() {return IntUtl.DivAndRoundUp(this.LinesTotal(), this.LinesPerScreen());}
 	public int LineLength(int lineIndex) {return LineLength(this, lineIndex);}
 	public int CharIndexOfFirst() {
 		int firstLineIndex = LineIndexOfFirst();

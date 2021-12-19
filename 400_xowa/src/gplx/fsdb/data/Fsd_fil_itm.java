@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
+package gplx.fsdb.data;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public class Fsd_fil_itm {
 	public Fsd_fil_itm		(int mnt_id, int dir_id, int fil_id, int xtn_id, int ext_id, byte[] name, long size, String modified_on, String hash_md5, int bin_db_id) {
 		this.mnt_id = mnt_id; this.dir_id = dir_id; this.fil_id = fil_id; this.xtn_id = xtn_id; this.ext_id = ext_id;
@@ -39,7 +40,7 @@ public class Fsd_fil_itm {
 	;
 
 	public static final Fsd_fil_itm Null = null;
-	public static byte[] Gen_cache_key(Bry_bfr bfr, int dir_id, byte[] name) {
-		return bfr.Add_int_variable(dir_id).Add_byte_pipe().Add(name).To_bry_and_clear();
+	public static byte[] Gen_cache_key(BryWtr bfr, int dir_id, byte[] name) {
+		return bfr.AddIntVariable(dir_id).AddBytePipe().Add(name).ToBryAndClear();
 	}
 }

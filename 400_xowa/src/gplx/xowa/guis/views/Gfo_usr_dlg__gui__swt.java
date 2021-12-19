@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.views;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg__gui;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.lists.rings.*;
-import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.standards.*;
+import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.standards.*;
 public class Gfo_usr_dlg__gui__swt implements Gfo_usr_dlg__gui, Gfo_invk {
 	private final GfuiInvkCmd cmd_sync; private final GfuiTextBox prog_box, info_box;
 	private boolean show_warn, show_note;
@@ -35,7 +43,7 @@ public class Gfo_usr_dlg__gui__swt implements Gfo_usr_dlg__gui, Gfo_invk {
 		Gfo_invk_.Invk_by_msg(cmd_sync, invk, m);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_write_prog))			{String v = m.ReadStr("v"); prog_box.Text_(v); prog_box.Redraw(); if (!String_.Eq(v, "")) prog_msgs.Push(v);}
+		if		(ctx.Match(k, Invk_write_prog))			{String v = m.ReadStr("v"); prog_box.Text_(v); prog_box.Redraw(); if (!StringUtl.Eq(v, "")) prog_msgs.Push(v);}
 		else if	(ctx.Match(k, Invk_write_note))			{Info_box_write(m.ReadStr("v"), false); info_box.Redraw();}
 		else if	(ctx.Match(k, Invk_write_warn))			{Info_box_write(m.ReadStr("v"), true); info_box.ForeColor_(ColorAdp_.White); info_box.BackColor_(ColorAdp_.Red); info_box.Redraw();}
 		else if	(ctx.Match(k, Cfg__show_warn))			show_warn = m.ReadYn("v");

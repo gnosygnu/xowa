@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Json_doc_wtr_tst {
 	private final Json_doc_wtr_fxt fxt = new Json_doc_wtr_fxt();
@@ -47,12 +47,12 @@ class Json_doc_wtr_fxt {
 	public Json_doc_wtr Exec__Kv_simple(String key, String val) {
 		Json_doc_wtr doc_wtr = new Json_doc_wtr();
 		doc_wtr.Nde_bgn();
-		doc_wtr.Kv(BoolUtl.N, Bry_.new_u8(key), Bry_.new_u8(val));
+		doc_wtr.Kv(BoolUtl.N, BryUtl.NewU8(key), BryUtl.NewU8(val));
 		doc_wtr.Nde_end();
 		return doc_wtr;
 	}
 	public void Test__Bld_as_str(Json_doc_wtr doc_wtr, String expd) {
-		Gftest.Eq__ary__lines(expd, doc_wtr.Bld_as_str());
+		GfoTstr.EqLines(expd, doc_wtr.Bld_as_str());
 	}
 	public String Exec__Concat_apos(String... ary) {
 		return Json_doc.Make_str_by_apos(ary);
@@ -60,9 +60,9 @@ class Json_doc_wtr_fxt {
 	public void Test__string__quotes(String raw, String expd) {
 		Json_doc_wtr doc_wtr = new Json_doc_wtr();
 		doc_wtr.Opt_unicode_y_();
-		doc_wtr.Str(Bry_.new_u8(raw));
+		doc_wtr.Str(BryUtl.NewU8(raw));
 		String actl = doc_wtr.Bld_as_str();
-		actl = String_.Mid(actl, 1, String_.Len(actl) - 1);
-		Gftest.Eq__str(expd, actl);
+		actl = StringUtl.Mid(actl, 1, StringUtl.Len(actl) - 1);
+		GfoTstr.Eq(expd, actl);
 	}
 }

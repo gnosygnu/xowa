@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.brys;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Bit_ {
 	public static String ToBitStr(int val) {
     		boolean[] bits = new boolean[8];
@@ -27,13 +29,13 @@ public class Bit_ {
 		byte[] rv = new byte[8];
     		for (int i = 0; i < 8; i++)
 		rv[i] = bits[i] ? AsciiByte.Num1 : AsciiByte.Num0;
-    		return String_.new_a7(rv);
+    		return StringUtl.NewA7(rv);
 	}
 	public static int Get_flag(int i) {return Int_flag_bldr_.Base2_ary[i];}
 	public static int Shift_lhs(int val, int shift) {return val << shift;}
 	public static int Shift_rhs(int val, int shift) {return val >> shift;}
 	public static int Shift_lhs_to_int(int[] shift_ary, int... val_ary) {
-		int val_len = val_ary.length; if (val_len > shift_ary.length) throw Err_.new_wo_type("vals must be less than shifts", "vals", val_len, "shifts", shift_ary.length);
+		int val_len = val_ary.length; if (val_len > shift_ary.length) throw ErrUtl.NewArgs("vals must be less than shifts", "vals", val_len, "shifts", shift_ary.length);
 		int rv = 0;
 		for (int i = 0; i < val_len; ++i) {
 			int val = val_ary[i];

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
-import gplx.xowa.wikis.domains.*;
+package gplx.xowa.bldrs.setups.upgrades;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 public class Xoa_upgrade_mgr {
 	public static void Check(Xoae_app app) {
 		Upgrade_history(app);

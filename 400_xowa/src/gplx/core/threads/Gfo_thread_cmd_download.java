@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*;
+package gplx.core.threads;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.kits.core.Gfui_dlg_msg_;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.BryFmtrEvalMgrUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtrEvalMgr;
+import gplx.types.errs.ErrUtl;
 public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 	public Gfo_thread_cmd Ctor(Gfo_usr_dlg usr_dlg, Gfui_kit kit) {this.usr_dlg = usr_dlg; this.kit = kit; xrg.Prog_dlg_(usr_dlg); return this;}
 	public Gfo_thread_cmd_download Init(String prog_fmt_hdr, String src, Io_url trg) {
@@ -24,7 +35,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 		return this;
 	}	String src; protected Gfui_kit kit; Gfo_usr_dlg usr_dlg; Io_url trg;
 	public Gfo_invk Owner() {return owner;} public Gfo_thread_cmd_download Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
-	public Bry_fmtr_eval_mgr Url_eval_mgr() {return url_eval_mgr;} public Gfo_thread_cmd_download Url_eval_mgr_(Bry_fmtr_eval_mgr v) {url_eval_mgr = v; return this;} Bry_fmtr_eval_mgr url_eval_mgr;
+	public BryFmtrEvalMgr Url_eval_mgr() {return url_eval_mgr;} public Gfo_thread_cmd_download Url_eval_mgr_(BryFmtrEvalMgr v) {url_eval_mgr = v; return this;} BryFmtrEvalMgr url_eval_mgr;
 	public void Cmd_ctor() {}
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public String Async_key() {return KEY;}
@@ -37,7 +48,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 				case Gfui_dlg_msg_.Btn_yes:		Io_mgr.Instance.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
-				default:						throw Err_.new_unhandled(rslt);
+				default:						throw ErrUtl.NewUnhandled(rslt);
 			}
 		}
 		usr_dlg.Prog_many(GRP_KEY, "download.bgn", "contacting web server: '~{0}'", src);	// update progress; some servers (like WMF dump servers) are slow to respond
@@ -63,7 +74,7 @@ public class Gfo_thread_cmd_download implements Gfo_thread_cmd {
 		if		(ctx.Match(k, Invk_async_bgn))				Download();
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_src_))					src = m.ReadStr("v");
-		else if	(ctx.Match(k, Invk_trg_))					trg = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_trg_))					trg = BryFmtrEvalMgrUtl.Eval_url(url_eval_mgr, m.ReadBry("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_async_bgn = "async_bgn", Invk_owner = "owner", Invk_src_ = "src_", Invk_trg_ = "trg_";

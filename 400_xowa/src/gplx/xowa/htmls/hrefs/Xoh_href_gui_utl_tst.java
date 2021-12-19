@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.hrefs;
 
-import gplx.Tfds;
-import gplx.core.primitives.String_obj_ref;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.wrappers.StringRef;
 import gplx.xowa.guis.views.Xog_html_itm;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,16 +63,16 @@ class Xoh_href_gui_utl_fxt {
 	public String Cur_wiki() {return cur_wiki;} public Xoh_href_gui_utl_fxt Cur_wiki_(String v) {cur_wiki = v; return this;} private String cur_wiki;
 	public String Cur_page() {return cur_page;} public Xoh_href_gui_utl_fxt Cur_page_(String v) {cur_page = v; return this;} private String cur_page;
 	public void Test_extract_text(String text_str, String expd) {
-		Tfds.Eq(expd, Xoh_href_gui_utl.Html_extract_text(cur_wiki, cur_page, text_str));
+		GfoTstr.EqObj(expd, Xoh_href_gui_utl.Html_extract_text(cur_wiki, cur_page, text_str));
 	}
-	private String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
+	private StringRef scroll_top = StringRef.NewNull(), node_path = StringRef.NewNull();
 	public void Test_Html_window_vpos_parse(String raw, String expd_scroll_top, String expd_node_path) {
-		scroll_top.Val_null_(); node_path.Val_null_();
+		scroll_top.ValSetNull(); node_path.ValSetNull();
 		Xog_html_itm.Html_window_vpos_parse(raw, scroll_top, node_path);
-		Tfds.Eq(expd_scroll_top, scroll_top.Val(), expd_scroll_top);
-		Tfds.Eq(expd_node_path, node_path.Val(), expd_node_path);
+		GfoTstr.EqObj(expd_scroll_top, scroll_top.Val(), expd_scroll_top);
+		GfoTstr.EqObj(expd_node_path, node_path.Val(), expd_node_path);
 	}
 	public void Test_standardize_xowa_link(String raw, String expd) {
-		Tfds.Eq_str(expd, Xoh_href_gui_utl.Standardize_xowa_link(raw), "standardize");
+		GfoTstr.Eq(expd, Xoh_href_gui_utl.Standardize_xowa_link(raw), "standardize");
 	}
 }

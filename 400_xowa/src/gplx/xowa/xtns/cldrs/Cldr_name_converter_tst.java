@@ -13,17 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.xtns.cldrs;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import org.junit.Test;
 public class Cldr_name_converter_tst {
 	private final Cldr_name_converter_fxt fxt = new Cldr_name_converter_fxt();
-	@Test  public void Extract_key_or_fail() {
+	@Test public void Extract_key_or_fail() {
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.php"	, "En");
 		fxt.Test__Extract_key_or_fail("CldrNameEn.php"	, null);
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.txt"	, null);
 	}
-	@Test  public void Parse_fil() {
-		Cldr_name_file file = fxt.Exec__Parse_fil("En", String_.Concat_lines_nl
+	@Test public void Parse_fil() {
+		Cldr_name_file file = fxt.Exec__Parse_fil("En", StringUtl.ConcatLinesNl
 		( "$languageNames = ["
 		, "  'aa' => 'Afar',"
 		, "  'mic' => 'Mi\\'kmaq',"
@@ -52,7 +60,7 @@ public class Cldr_name_converter_tst {
 		));
 		Assert__parse_fil(file);
 
-		String expd = String_.Concat_lines_nl
+		String expd = StringUtl.ConcatLinesNl
 		( "{"
 		, "  \"languageNames\":"
 		, "  {"
@@ -89,28 +97,28 @@ public class Cldr_name_converter_tst {
 	}
 	private void Assert__parse_fil(Cldr_name_file file) {
 		fxt.Test__node(file.Language_names()
-			, Keyval_.new_("aa", "Afar")
-			, Keyval_.new_("mic", "Mi'kmaq")
-			, Keyval_.new_("zza", "Zaza")
+			, KeyVal.NewStr("aa", "Afar")
+			, KeyVal.NewStr("mic", "Mi'kmaq")
+			, KeyVal.NewStr("zza", "Zaza")
 		);
 		fxt.Test__node(file.Currency_names()
-			, Keyval_.new_("ADP", "Andorran Peseta")
-			, Keyval_.new_("ZWR", "Zimbabwean Dollar (2008)")
+			, KeyVal.NewStr("ADP", "Andorran Peseta")
+			, KeyVal.NewStr("ZWR", "Zimbabwean Dollar (2008)")
 		);
 		fxt.Test__node(file.Currency_symbols()
-			, Keyval_.new_("JPY", "¥")
-			, Keyval_.new_("USD", "$")
+			, KeyVal.NewStr("JPY", "¥")
+			, KeyVal.NewStr("USD", "$")
 		);
 		fxt.Test__node(file.Country_names()
-			, Keyval_.new_("AC", "Ascension Island")
-			, Keyval_.new_("ZW", "Zimbabwe")
+			, KeyVal.NewStr("AC", "Ascension Island")
+			, KeyVal.NewStr("ZW", "Zimbabwe")
 		);
 		fxt.Test__node(file.Time_units()
-			, Keyval_.new_("century-one", "{0} century")
-			, Keyval_.new_("year-short-past-other", "{0} yr. ago")
+			, KeyVal.NewStr("century-one", "{0} century")
+			, KeyVal.NewStr("year-short-past-other", "{0} yr. ago")
 		);
 	}
-//		@Test  public void Smoke() {
+//		@Test public void Smoke() {
 //			Cldr_name_converter bldr = new Cldr_name_converter();
 //			bldr.Convert(Io_url_.new_dir_("C:\\000\\100_bin\\200_server\\200_http\\100_apache\\100_v2.4\\htdocs\\mediawiki\\v1.29.1\\extensions\\cldr\\CldrNames\\"), Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\xtns\\cldr\\"));
 //		}
@@ -128,38 +136,37 @@ class Cldr_name_converter_fxt {
 			actl = bldr.Extract_key_or_fail(fil_name);
 		}
 		catch (Exception exc) {
-			Err_.Noop(exc);
 			actl = null;
 		}
 		if (expd == null && actl == null) {
 		}
 		else if (expd == null) {
-			Tfds.Fail("expecting null; got " + actl);
+			GfoTstr.Fail("expecting null; got " + actl);
 		}
 		else if (actl == null) {
-			Tfds.Fail("got null; expected " + expd);
+			GfoTstr.Fail("got null; expected " + expd);
 		}
 		else {
-			Gftest.Eq__str(expd, actl);
+			GfoTstr.Eq(expd, actl);
 		}
 	}
 	public Cldr_name_file[] Exec__Parse_dir() {
 		return bldr.Parse_dir(Io_url_.new_fil_(dir_name));
 	}
 	public Cldr_name_file Exec__Parse_fil(String key, String src) {
-		return bldr.Parse_fil(key, Bry_.new_u8(src));
+		return bldr.Parse_fil(key, BryUtl.NewU8(src));
 	}
 	public Cldr_name_file Exec__Parse_json(String key, String json) {
 		Cldr_name_loader loader = new Cldr_name_loader(Io_url_.mem_dir_("mem/Cldr"));
-		return loader.Parse(key, Bry_.new_u8(json));
+		return loader.Parse(key, BryUtl.NewU8(json));
 	}
 //
-	public void Test__node(Ordered_hash hash, Keyval... expd) {
-		Keyval[] actl = (Keyval[])hash.To_ary(Keyval.class);
-		Gftest.Eq__ary__lines(Keyval_.Ary_to_str(expd), Keyval_.Ary_to_str(actl), "cldr_names_comp_failed");
+	public void Test__node(Ordered_hash hash, KeyVal... expd) {
+		KeyVal[] actl = (KeyVal[])hash.ToAry(KeyVal.class);
+		GfoTstr.EqLines(KeyValUtl.AryToStr(expd), KeyValUtl.AryToStr(actl), "cldr_names_comp_failed");
 	}
 	public void Test__To_json(Cldr_name_file file, String expd) {
 		String actl = bldr.To_json(file);
-		Gftest.Eq__ary__lines(expd, actl, "json_failed");
+		GfoTstr.EqLines(expd, actl, "json_failed");
 	}
 }

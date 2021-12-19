@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
+package gplx.xowa.htmls.modules.popups;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xopg_popup_mgr {
-	public Ordered_hash Itms() {return itms;} private Ordered_hash itms = Ordered_hash_.New(); 
+	public Ordered_hash Itms() {return itms;} private Ordered_hash itms = Ordered_hash_.New();
 	public void Clear() {
 		itms.Clear();
 	}

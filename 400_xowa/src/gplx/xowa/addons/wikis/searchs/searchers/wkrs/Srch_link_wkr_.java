@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.searchers.wkrs;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Bry_split_;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_row;
 import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_tbl;
@@ -60,7 +60,7 @@ class Srch_link_wkr_ {
 		// ands need to do more db_lookup for rng words and identify the sql_root
 		Srch_crt_itm rv = null;
 		Srch_word_tbl word_tbl = ctx.Tbl__word;
-		int count_min = Int_.Max_value;
+		int count_min = IntUtl.MaxValue;
 		for (int i = 0; i < words_len; ++i) {
 			Srch_crt_itm sub = words_ary[i];
 			int sub_count = Find_sql_root__ands(ctx, word_tbl, sub);
@@ -73,7 +73,7 @@ class Srch_link_wkr_ {
 	}
 	private static Srch_word_row[] Find_sql_root__quoted(Srch_search_ctx ctx, byte[] raw) {
 		List_adp tmp_list = List_adp_.New();
-		byte[][] ary = Bry_split_.Split(raw, AsciiByte.Space, BoolUtl.Y); // TODO_OLD: splitting by space is simplistic; should call Srch2_split_words
+		byte[][] ary = BrySplit.Split(raw, AsciiByte.Space, BoolUtl.Y); // TODO_OLD: splitting by space is simplistic; should call Srch2_split_words
 		int words_len = ary.length;
 		for (int i = 0; i < words_len; ++i) {
 			byte[] word = ary[i];
@@ -86,10 +86,10 @@ class Srch_link_wkr_ {
 		return rows;
 	}
 	private static int Find_sql_root__ands(Srch_search_ctx ctx, Srch_word_tbl word_tbl, Srch_crt_itm sub) {
-		if (sub.Tid == Srch_crt_itm.Tid__not) return Int_.Max_value;
-		int cached_count = ctx.Cache__word_counts.Get_as_int_or(sub.Raw, Int_.Min_value);
-		if (cached_count != Int_.Min_value) return cached_count;
-		int rv = Int_.Max_value;
+		if (sub.Tid == Srch_crt_itm.Tid__not) return IntUtl.MaxValue;
+		int cached_count = ctx.Cache__word_counts.Get_as_int_or(sub.Raw, IntUtl.MinValue);
+		if (cached_count != IntUtl.MinValue) return cached_count;
+		int rv = IntUtl.MaxValue;
 		if (sub.Sql_data.Tid == Srch_crt_sql.Tid__eq) {
 			Srch_word_row word = word_tbl.Select_or_empty(sub.Raw);
 			if (word != Srch_word_row.Empty) rv = word.Link_count;
@@ -116,7 +116,7 @@ class Srch_link_wkr_ {
 				for (int i = 0; i < len; ++i) {
 					byte[] word = ttl_words[i];
 					if (node.Sql_data.Pattern == null) {
-						if (Bry_.Eq(word, raw)) return true;
+						if (BryLni.Eq(word, raw)) return true;
 					}
 					else {
 						if (node.Sql_data.Pattern.Match(word)) return true;
@@ -124,7 +124,7 @@ class Srch_link_wkr_ {
 				}
 				return false;
 			}
-			case Srch_crt_itm.Tid__word_quote:		return Bry_find_.Find_fwd(ttl_lower, raw) != Bry_find_.Not_found;// note that raw does not have quotes; EX: "B*" -> B*
+			case Srch_crt_itm.Tid__word_quote:		return BryFind.FindFwd(ttl_lower, raw) != BryFind.NotFound;// note that raw does not have quotes; EX: "B*" -> B*
 			case Srch_crt_itm.Tid__not:			return !Matches(subs[0], ttl_lower, ttl_words);
 			case Srch_crt_itm.Tid__or: {
 				for (int i = 0; i < subs_len; ++i) {
@@ -142,7 +142,7 @@ class Srch_link_wkr_ {
 				}
 				return true;
 			case Srch_crt_itm.Tid__invalid:			return false;
-			default: throw Err_.new_unhandled(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 }
@@ -150,7 +150,7 @@ class Srch_word_row_sorter__link_count implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Srch_word_row lhs = (Srch_word_row)lhsObj;
 		Srch_word_row rhs = (Srch_word_row)rhsObj;
-		return -Int_.Compare(lhs.Link_count, rhs.Link_count);
+		return -IntUtl.Compare(lhs.Link_count, rhs.Link_count);
 	}
         public static final Srch_word_row_sorter__link_count Desc = new Srch_word_row_sorter__link_count(); Srch_word_row_sorter__link_count() {}
 }

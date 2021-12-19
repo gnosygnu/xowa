@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*;
+package gplx.core.threads;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Gfo_thread_grp implements Gfo_invk {
 	private final Object thread_lock = new Object();
 	private final List_adp list = List_adp_.New();
@@ -35,7 +44,7 @@ public class Gfo_thread_grp implements Gfo_invk {
 			if (active_cur == active_max) break;		// already at limit; return
 			Gfo_thread_itm itm = null;
 			synchronized (thread_lock) {
-				itm = (Gfo_thread_itm)List_adp_.Pop_first(list);
+				itm = (Gfo_thread_itm)List_adp_.PopFirst(list);
 				++active_cur;
 			}
 			Thread_adp_.Start_by_msg(itm.Thread__name(), this, GfoMsg_.new_cast_(Invk_run_wkr).Add("v", itm));
@@ -45,7 +54,7 @@ public class Gfo_thread_grp implements Gfo_invk {
 		synchronized (thread_lock) {
 			int len = list.Len();
 			for (int i = 0; i < len; ++i) {
-				Gfo_thread_itm itm = (Gfo_thread_itm)list.Get_at(i);
+				Gfo_thread_itm itm = (Gfo_thread_itm)list.GetAt(i);
 				itm.Thread__stop();
 			}
 			active_cur = 0;
@@ -57,13 +66,13 @@ public class Gfo_thread_grp implements Gfo_invk {
 			List_adp deleted = List_adp_.New();
 			int len = list.Len();
 			for (int i = 0; i < len; ++i) {
-				Gfo_thread_itm itm = (Gfo_thread_itm)list.Get_at(i);
+				Gfo_thread_itm itm = (Gfo_thread_itm)list.GetAt(i);
 				if (itm.Thread__can_delete(key))
 					deleted.Add(itm);
 			}
 			len = deleted.Len();
 			for (int i = 0; i < len; ++i) {
-				Gfo_thread_itm itm = (Gfo_thread_itm)deleted.Get_at(i);
+				Gfo_thread_itm itm = (Gfo_thread_itm)deleted.GetAt(i);
 				itm.Thread__stop();
 				list.Del(itm);
 			}
@@ -71,7 +80,7 @@ public class Gfo_thread_grp implements Gfo_invk {
 	}
 	private void Run_wkr(Gfo_thread_itm itm) {
 		try		{itm.Thread__exec();}
-		catch	(Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", itm.Thread__name(), Err_.Message_gplx_log(e));}
+		catch	(Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", itm.Thread__name(), ErrUtl.ToStrLog(e));}
 		finally {
 			synchronized (thread_lock) {
 				--active_cur;

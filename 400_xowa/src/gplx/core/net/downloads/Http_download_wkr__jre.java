@@ -13,10 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net.downloads; import gplx.*; import gplx.core.*; import gplx.core.net.*;
-import java.io.*;
-import java.net.*;
-import gplx.core.progs.*;
+package gplx.core.net.downloads;
+import gplx.libs.files.Io_mgr;
+import gplx.core.progs.Gfo_prog_ui;
+import gplx.core.progs.Gfo_prog_ui_;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.LongUtl;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 public class Http_download_wkr__jre extends Http_download_wkr__base {
 		public Http_download_wkr Make_new() {return new Http_download_wkr__jre();}
     @Override public byte Exec_hook(Gfo_prog_ui prog_ui, String src_url, Io_url trg_url, long downloaded) {
@@ -30,7 +41,7 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         File trg_fil = new File(trg_url.Xto_api());
         FileOutputStream trg_stream = null;
         try     {trg_stream = new FileOutputStream(trg_fil.getPath(), prog_resumed);}	// pass true for append
-        catch   (FileNotFoundException e) {throw Err_.new_wo_type("write failed; permission error?", "trg", trg_url, "err", e.toString());}
+        catch   (FileNotFoundException e) {throw ErrUtl.NewArgs("write failed; permission error?", "trg", trg_url, "err", e.toString());}
          
         // open src stream
         InputStream src_stream = null;
@@ -39,14 +50,14 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
         catch   (MalformedURLException e) {
 			try {if (trg_stream != null) trg_stream.close();}
 			catch (IOException e1) {}
-        	throw Err_.new_wo_type("bad url", "src", src_url, "err" + e.toString());
+        	throw ErrUtl.NewArgs("bad url", "src", src_url, "err" + e.toString());
         }
         HttpURLConnection src_conn = null;
         try {
         	// open connection
             src_conn = (HttpURLConnection)src_url_itm.openConnection();
             if (prog_resumed)
-            	src_conn.addRequestProperty("Range", "bytes=" + Long_.To_str(prog_data_cur) + "-");
+            	src_conn.addRequestProperty("Range", "bytes=" + LongUtl.ToStr(prog_data_cur) + "-");
             src_conn.setReadTimeout(10000);	// explicitly set timeout; NOTE:needed on Mac OS X, else error never thrown; DATE:2016-09-03
             src_conn.connect();
             
@@ -60,21 +71,21 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
                         Io_mgr.Instance.DeleteFil(this.Trg_url());
                         Io_mgr.Instance.DeleteFil(this.Checkpoint_url());
                     }
-	                throw Err_.new_wo_type("server returned non-partial response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
+	                throw ErrUtl.NewArgs("server returned non-partial response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
 	            }
             }
             else {
 	            if (response_code != HttpURLConnection.HTTP_OK) {
 	    			try {if (trg_stream != null) trg_stream.close();}
 	    			catch (IOException e1) {}
-	                throw Err_.new_wo_type("server returned non-OK response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
+	                throw ErrUtl.NewArgs("server returned non-OK response code", "src", src_url, "code", src_conn.getResponseCode(), "msg", src_conn.getResponseMessage());
 	            }
             }
             src_stream = src_conn.getInputStream();
         } catch (Exception e) {
 			try {if (trg_stream != null) trg_stream.close();}
 			catch (IOException e1) {}
-            throw Err_.new_wo_type(Err__server_connection_failed, "src", src_url, "err", e.toString());
+            throw ErrUtl.NewArgs(Err__server_connection_failed, "src", src_url, "err", e.toString());
         }
 
         // do downloading
@@ -91,7 +102,7 @@ public class Http_download_wkr__jre extends Http_download_wkr__base {
                 if (prog_ui.Prog_notify_and_chk_if_suspended(prog_data_cur, prog_data_end)) return Gfo_prog_ui_.Status__suspended;
             }
         } catch (Exception e) {
-            throw Err_.new_wo_type(Err__server_download_failed, "src", src_url, "trg_url", trg_url, "err", e.toString());
+            throw ErrUtl.NewArgs(Err__server_download_failed, "src", src_url, "trg_url", trg_url, "err", e.toString());
         }
         finally {
             try {

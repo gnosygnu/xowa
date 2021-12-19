@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads.poolables; import gplx.*;
-import gplx.core.memorys.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.core.threads.poolables;
+import gplx.core.memorys.Gfo_memory_itm;
+import gplx.core.memorys.Gfo_memory_mgr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.errs.ErrUtl;
 public class Gfo_poolable_mgr implements Gfo_memory_itm {
 	private final Object thread_lock = new Object();
 	private final Gfo_poolable_itm prototype; private final Object[] make_args;
@@ -38,11 +40,11 @@ public class Gfo_poolable_mgr implements Gfo_memory_itm {
 	public Gfo_poolable_itm Get_fast() {
 		Gfo_poolable_itm rv = null;
 		int pool_idx = -1;
-		if (free_len > 0) {	// free_itms in pool; use it
+		if (free_len > 0) {    // free_itms in pool; use it
 			pool_idx = free_ary[--free_len];
 			rv = pool[pool_idx];
 		}
-		else {				// nothing in pool; take next
+		else {                // nothing in pool; take next
 			if (pool_nxt == pool_len)
 				Expand_pool();
 			pool_idx = pool_nxt++;
@@ -56,17 +58,17 @@ public class Gfo_poolable_mgr implements Gfo_memory_itm {
 	}
 	public void Rls_safe(int idx) {synchronized (thread_lock) {Rls_fast(idx);}}
 	public void Rls_fast(int idx) {
-		if (idx == -1) throw Err_.new_wo_type("rls called on poolable that was not created by pool_mgr");
+		if (idx == -1) throw ErrUtl.NewArgs("rls called on poolable that was not created by pool_mgr");
 		int pool_idx = pool_nxt - 1;
-		if (idx == pool_idx)				// in-sequence; decrement count
+		if (idx == pool_idx)                // in-sequence; decrement count
 			if (free_len == 0)
 				this.pool_nxt = pool_idx;
-			else {							// idx == pool_idx; assume entire pool released, but out of order
+			else {                            // idx == pool_idx; assume entire pool released, but out of order
 				for (int i = 0; i < free_len; ++i)
 					free_ary[i] = 0;
 				free_len = 0;
 			}
-		else {								// out-of-sequence
+		else {                                // out-of-sequence
 			free_ary[free_len] = idx;
 			++free_len;
 		}
@@ -84,10 +86,10 @@ public class Gfo_poolable_mgr implements Gfo_memory_itm {
 		ArrayUtl.CopyTo(free_ary, 0, new_free, 0, free_len);
 		this.free_ary = new_free;
 	}
-	@gplx.Internal protected int[] Free_ary() {return free_ary;} private int[] free_ary; private int free_len;
-	@gplx.Internal protected int Free_len() {return free_len;}
-	@gplx.Internal protected int Pool_len() {return pool_len;}
-	@gplx.Internal protected int Pool_nxt() {return pool_nxt;}
+	public int[] Free_ary() {return free_ary;} private int[] free_ary; private int free_len;
+	public int Free_len() {return free_len;}
+	public int Pool_len() {return pool_len;}
+	public int Pool_nxt() {return pool_nxt;}
 
 	public static Gfo_poolable_mgr New_rlsable(Gfo_poolable_itm prototype, Object[] make_args, int init_pool_len, int pool_max) {
 		Gfo_poolable_mgr rv = new Gfo_poolable_mgr(prototype, make_args, init_pool_len, pool_max);

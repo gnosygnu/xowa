@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.repos;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.domains.*;
 public class Xow_repo_mgr_ {
@@ -49,5 +51,5 @@ public class Xow_repo_mgr_ {
 			}
 		}
 	}
-	private static byte[] File_repo_xowa_null = Bry_.new_a7("xowa_repo_null");
+	private static byte[] File_repo_xowa_null = BryUtl.NewA7("xowa_repo_null");
 }

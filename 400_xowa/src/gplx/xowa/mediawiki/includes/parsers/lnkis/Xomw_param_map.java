@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*;
+package gplx.xowa.mediawiki.includes.parsers.lnkis;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xomw_param_map {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public final Xomw_params_frame          Frame   = new Xomw_params_frame();
@@ -21,7 +24,7 @@ public class Xomw_param_map {
 	public final Xomw_params_horizAlign     HorizAlign = new Xomw_params_horizAlign();
 	public final Xomw_params_vertAlign      VertAlign = new Xomw_params_vertAlign();
 	public int Len() {return hash.Len();}
-	public Xomw_param_itm Get_at(int i) {return (Xomw_param_itm)hash.Get_at(i);}
+	public Xomw_param_itm Get_at(int i) {return (Xomw_param_itm)hash.GetAt(i);}
 	public Xomw_param_itm Get_by(byte[] name) {
 		return (Xomw_param_itm)hash.GetByOrNull(name);
 	}
@@ -38,7 +41,7 @@ public class Xomw_param_map {
 		int len = hash.Len();
 		byte[][] rv = new byte[len][];
 		for (int i = 0; i < len; i++) {
-			rv[i] = ((Xomw_param_itm)hash.Get_at(i)).magic;
+			rv[i] = ((Xomw_param_itm)hash.GetAt(i)).magic;
 		}
 		return rv;
 	}
@@ -50,7 +53,7 @@ public class Xomw_param_map {
 		Xomw_param_map rv = new Xomw_param_map();
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Xomw_param_itm itm = (Xomw_param_itm)hash.Get_at(i);
+			Xomw_param_itm itm = (Xomw_param_itm)hash.GetAt(i);
 			rv.Add(itm.magic, itm.type_uid, itm.name);
 		}
 		rv.Frame.Copy_to(this.Frame);
@@ -68,8 +71,8 @@ class Xomw_param_list {
 	public static Xomw_param_list New(int type_uid, String type, String... names) {
 		Xomw_param_list rv = new Xomw_param_list();
 		rv.type_uid = type_uid;
-		rv.type = Bry_.new_u8(type);
-		rv.names = Bry_.Ary(names);
+		rv.type = BryUtl.NewU8(type);
+		rv.names = BryUtl.Ary(names);
 		return rv;
 	}
 }

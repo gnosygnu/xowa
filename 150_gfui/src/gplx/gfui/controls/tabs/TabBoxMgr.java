@@ -13,12 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.tabs; import gplx.*;
+package gplx.gfui.controls.tabs;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class TabBoxMgr implements Gfo_evt_mgr_owner {
 	public Gfo_evt_mgr Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} Gfo_evt_mgr evt_mgr;
 	public int Count() {return itms.Len();}
 	public TabPnlItm Get_by(String k) {return (TabPnlItm)itms.GetByOrNull(k);}
-	public TabPnlItm Get_at(int i) {return (TabPnlItm)itms.Get_at(i);}
+	public TabPnlItm Get_at(int i) {return (TabPnlItm)itms.GetAt(i);}
 	public TabPnlItm CurTab() {return curTab;} TabPnlItm curTab;
 	public TabPnlItm Add(String key, String name) {
 		TabPnlItm itm = TabPnlItm.new_(this, key).Name_(name).Idx_(itms.Len());
@@ -37,19 +41,19 @@ public class TabBoxMgr implements Gfo_evt_mgr_owner {
 				this.Select(i);
 		}
 	}
-	public void Select(int i) {Select((TabPnlItm)itms.Get_at(i));}
-	@gplx.Internal protected void Move_to(int src, int trg) {itms.Move_to(src, trg);}
-	@gplx.Internal protected void Reorder(int bgn) {
+	public void Select(int i) {Select((TabPnlItm)itms.GetAt(i));}
+	public void Move_to(int src, int trg) {itms.MoveTo(src, trg);}
+	public void Reorder(int bgn) {
 		for (int i = bgn; i < itms.Len(); i++) {
-			TabPnlItm itm = (TabPnlItm)itms.Get_at(i);
+			TabPnlItm itm = (TabPnlItm)itms.GetAt(i);
 			itm.Idx_(i);
 		}
 	}
-	@gplx.Internal protected void Select(TabPnlItm newTab) {
+	public void Select(TabPnlItm newTab) {
 		TabPnlItm oldTab = curTab;
 		curTab = newTab;
 		TabBoxEvt_tabSelect.Send(this, oldTab, newTab);
 	}		
 	Ordered_hash itms = Ordered_hash_.New();
-	@gplx.Internal protected static TabBoxMgr new_() {return new TabBoxMgr();} TabBoxMgr() {}
+	public static TabBoxMgr new_() {return new TabBoxMgr();} TabBoxMgr() {}
 }

@@ -13,11 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.xtns.wbases.dbs.*;
-import gplx.xowa.apps.gfs.*; 
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.dbs;
+import gplx.frameworks.objects.Cancelable;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.xowa.*;
+import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.xtns.wbases.dbs.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.wikis.data.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	private final Xodb_mgr_sql db_mgr;
 	private Wbase_pid_tbl pid_tbl;
@@ -28,7 +38,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		Xow_db_file db_core = wiki.Data__core_mgr().Db__core();
 		byte[] main_page = null, bldr_version = null, siteinfo_misc = null, siteinfo_mainpage = null;
-		DateAdp modified_latest = null;
+		GfoDate modified_latest = null;
 		// load from xowa_cfg
 		gplx.dbs.cfgs.Db_cfg_hash prop_hash = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_as_hash(Xowd_cfg_key_.Grp__wiki_init);
 		int len = prop_hash.Len();
@@ -36,13 +46,13 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 			gplx.dbs.cfgs.Db_cfg_itm prop = prop_hash.Get_at(i);
 			String prop_key = prop.Key();
 			try {
-				if      (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__main_page))         main_page = Bry_.new_u8(prop.Val());
-				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__bldr_version))      bldr_version = Bry_.new_u8(prop.Val());
-				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__siteinfo_misc))     siteinfo_misc = Bry_.new_u8(prop.Val());
-				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__siteinfo_mainpage)) siteinfo_mainpage = Bry_.new_u8(prop.Val());
-				else if (String_.Eq(prop_key, Xowd_cfg_key_.Key__init__modified_latest))   modified_latest = DateAdp_.parse_gplx(prop.Val());
+				if      (StringUtl.Eq(prop_key, Xowd_cfg_key_.Key__init__main_page))         main_page = BryUtl.NewU8(prop.Val());
+				else if (StringUtl.Eq(prop_key, Xowd_cfg_key_.Key__init__bldr_version))      bldr_version = BryUtl.NewU8(prop.Val());
+				else if (StringUtl.Eq(prop_key, Xowd_cfg_key_.Key__init__siteinfo_misc))     siteinfo_misc = BryUtl.NewU8(prop.Val());
+				else if (StringUtl.Eq(prop_key, Xowd_cfg_key_.Key__init__siteinfo_mainpage)) siteinfo_mainpage = BryUtl.NewU8(prop.Val());
+				else if (StringUtl.Eq(prop_key, Xowd_cfg_key_.Key__init__modified_latest))   modified_latest = GfoDateUtl.ParseGplx(prop.Val());
 			} catch (Exception exc) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to set prop; key=~{0} val=~{1} err=~{2}", prop_key, prop.Val(), Err_.Message_gplx_log(exc));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to set prop; key=~{0} val=~{1} err=~{2}", prop_key, prop.Val(), ErrUtl.ToStrLog(exc));
 			}
 		}
 
@@ -66,7 +76,7 @@ public class Xodb_load_mgr_sql implements Xodb_load_mgr {
 	}
 	public boolean Load_by_id	(Xowd_page_itm rv, int id) {return db_mgr.Core_data_mgr().Tbl__page().Select_by_id(rv, id);}
 	public void Load_by_ids(Cancelable cancelable, List_adp rv, int bgn, int end) {db_mgr.Core_data_mgr().Tbl__page().Select_in__id(cancelable, false, true, rv, bgn, end);}
-	public void Load_ttls_for_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
+	public void Load_ttls_for_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, IntRef rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		db_mgr.Core_data_mgr().Tbl__page().Select_for_special_all_pages(cancelable, rslt_list, rslt_nxt, rslt_prv, rslt_count, ns, key, max_results, min_page_len, browse_len, include_redirects, fetch_prv_item);
 	}
 	public void Load_ttls_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {

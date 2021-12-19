@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.cache.localisation; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.cache.*;
+package gplx.xowa.mediawiki.includes.cache.localisation;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.mediawiki.*;
 // MW.SRC:1.33
 import gplx.xowa.mediawiki.xml.*;
 import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.*;
@@ -254,7 +257,7 @@ public class XomwLocalisationCache {
 //				this.loadItem(code, key);
 		}
 
-		if (String_.Eq(key, "fallback") && XophpArray.isset(this.shallowFallbacks, code)) {
+		if (StringUtl.Eq(key, "fallback") && XophpArray.isset(this.shallowFallbacks, code)) {
 			return this.shallowFallbacks.Get_by(code);
 		}
 
@@ -635,7 +638,7 @@ public class XomwLocalisationCache {
 		String xml = XophpIo_.file_get_contents(fileName);
 		if (!XophpString_.is_true(xml)) {
 			if (gplx.core.envs.Env_.Mode_testing()) {
-				xml = String_.Concat_lines_nl
+				xml = StringUtl.ConcatLinesNl
 					( "<pluralRules locales=\"en\"><pluralRule count=\"one\">i = 1 and v = 0</pluralRule></pluralRules>"
 					);
 			}
@@ -657,7 +660,7 @@ public class XomwLocalisationCache {
 			for (int j = 0; j < elements_len; j++) {
 				XophpDOMNode elt = ruleElements.item(j);
 				String ruleType = elt.getAttribute("count");
-				if (String_.Eq(ruleType, "other")) {
+				if (StringUtl.Eq(ruleType, "other")) {
 					// Don"t record "other" rules, which have an empty condition
 					continue;
 				}

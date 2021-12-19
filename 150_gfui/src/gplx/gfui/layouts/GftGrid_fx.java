@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.layouts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.layouts;
+import gplx.gfui.DirInt;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 class GftGrid_fx {
 	public GftItem Owner() {return owner;} GftItem owner;
 	public GftGrid_fx Clear() {
@@ -25,11 +31,11 @@ class GftGrid_fx {
 	}
 	public GftGrid_fx ini_AddItms(int num) {
 		for (int i = 0; i < num; i++)
-			itms.Add(new GftItem_mok());//.Key_("key" + Int_.To_str(i)));
+			itms.Add(new GftItem_mok());//.Key_("key" + IntUtl.To_str(i)));
 		return this;
 	}
 	public GftGrid_fx ini_ItmWidth(int i, int width) {
-		GftItem itm = (GftItem)itms.Get_at(i);
+		GftItem itm = (GftItem)itms.GetAt(i);
 		itm.Gft_w_(width);
 		return this;
 	}
@@ -41,7 +47,7 @@ class GftGrid_fx {
 		return this;
 	}
 	public GftGrid_fx ini_Lyt(int num) {
-		curGrid = (GftGrid)grid.SubLyts().Get_at(num);
+		curGrid = (GftGrid)grid.SubLyts().GetAt(num);
 		return this;
 	}
 	public GftGrid_fx ini_BandDir(DirInt dir) {curGrid.Bands_dir_(dir); return this;}
@@ -68,18 +74,18 @@ class GftGrid_fx {
 		int len = end - bgn + 1;
 		int[] actl = new int[len];
 		for (int i = 0; i < len; i++) {
-			GftItem itm = (GftItem)itms.Get_at(i + bgn);
+			GftItem itm = (GftItem)itms.GetAt(i + bgn);
 			actl[i] = GetVal(itm, name);
 		}
-		Tfds.Eq_ary(expd, actl, name);
+		GfoTstr.EqAry(expd, actl, name);
 		return this;
 	}
 	int GetVal(GftItem item, String name) {
-		if		(String_.Eq(name, "x")) return item.Gft_x();
-		else if	(String_.Eq(name, "y")) return item.Gft_y();
-		else if	(String_.Eq(name, "w")) return item.Gft_w();
-		else if	(String_.Eq(name, "h")) return item.Gft_h();
-		else throw Err_.new_unhandled(name);
+		if		(StringUtl.Eq(name, "x")) return item.Gft_x();
+		else if	(StringUtl.Eq(name, "y")) return item.Gft_y();
+		else if	(StringUtl.Eq(name, "w")) return item.Gft_w();
+		else if	(StringUtl.Eq(name, "h")) return item.Gft_h();
+		else throw ErrUtl.NewUnhandled(name);
 	}
 	static int[] rng_(int expdVal, int len) {
 		int[] rv = new int[len];

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.htmls.clses;
 import gplx.langs.htmls.*;
 import gplx.langs.htmls.docs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfh_class_parser_ {
 	public static void Parse(Gfh_tag tag, Gfh_class_parser_wkr wkr) {
 		Gfh_atr atr = tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__class);

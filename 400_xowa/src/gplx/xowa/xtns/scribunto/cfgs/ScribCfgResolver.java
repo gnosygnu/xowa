@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.cfgs;
 
-import gplx.Ordered_hash;
-import gplx.String_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.jsons.Json_ary;
 import gplx.langs.jsons.Json_itm_str;
 import gplx.langs.jsons.Json_nde;
@@ -41,7 +41,7 @@ class ScribCfgResolverUtil {
                 byte[] subKey = subKeys.Get_at(keyIdx).Data_bry();
                 ScribCfgResolver subScope = (ScribCfgResolver)hash.GetByOrNull(subKey);
                 if (subScope == null) {
-                    subScope = proto.CloneNew(String_.new_u8(subKey));
+                    subScope = proto.CloneNew(StringUtl.NewU8(subKey));
                     hash.Add(subKey, subScope);
                 }
                 subScope.FallbackSet(subArgs);

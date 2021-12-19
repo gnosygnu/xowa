@@ -13,14 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs; import gplx.*;
+package gplx.xowa.addons.bldrs.centrals.dbs;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
 public class Xobc_task_step_hash {
 	private final Ordered_hash tasks_hash = Ordered_hash_.New();
 	private final Ordered_hash steps_hash = Ordered_hash_.New();
 	public int Tasks__len() {return tasks_hash.Len();}
-	public int Tasks__get_at(int i) {return Int_.Cast(tasks_hash.Get_at(i));}
+	public int Tasks__get_at(int i) {return IntUtl.Cast(tasks_hash.GetAt(i));}
 	public int Steps__len() {return steps_hash.Len();}
-	public int Steps__get_at(int i) {return Int_.Cast(steps_hash.Get_at(i));}
+	public int Steps__get_at(int i) {return IntUtl.Cast(steps_hash.GetAt(i));}
 	public void Clear() {tasks_hash.Clear(); steps_hash.Clear();}
 	public void Add(int task_id, int step_id) {
 		tasks_hash.AddIfDupeUseNth(task_id, task_id);

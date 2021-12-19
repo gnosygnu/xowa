@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import java.io.File;
+package gplx.gfui.controls.customs;
 import java.awt.FileDialog;
 
 import javax.swing.JFrame;
-import gplx.gfui.controls.elems.*; import gplx.gfui.controls.windows.*;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 public class GfuiIoDialogUtl {
 		public static Io_url SelectDir() {return SelectDir(Io_url_.Empty);}
 	public static Io_url SelectDir(Io_url startingDir) {		

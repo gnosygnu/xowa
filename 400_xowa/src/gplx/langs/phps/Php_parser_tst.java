@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Php_parser_tst {		
 	@Before public void init() {fxt.Clear();} private final Php_parser_fxt fxt = new Php_parser_fxt();
@@ -35,7 +36,7 @@ public class Php_parser_tst {
 	@Test public void Quote_escape()		{fxt.tst_tkns("'a\\'b'", fxt.tkn_quote_apos(0, 6));}
 	@Test public void Brack()				{fxt.tst_tkns("['a']", fxt.tkn_generic(0, 1, Php_tkn_.Tid_brack_bgn), fxt.tkn_quote_apos(1, 4), fxt.tkn_generic(4, 5, Php_tkn_.Tid_brack_end));}
 	@Test public void Line_ws()			{fxt.tst_lines("\r\n$a = false;", fxt.line_assign("a", fxt.itm_bool_false()));}
-	@Test public void Line_brack()			{fxt.tst_lines("$a['b'] = 'c';", fxt.line_assign_subs("a", String_.Ary("b"), fxt.itm_quote("c")));}
+	@Test public void Line_brack()			{fxt.tst_lines("$a['b'] = 'c';", fxt.line_assign_subs("a", StringUtl.Ary("b"), fxt.itm_quote("c")));}
 	@Test public void Line_assign_false()	{fxt.tst_lines("$a = false;", fxt.line_assign("a", fxt.itm_bool_false()));}
 	@Test public void Line_assign_quote_charcode() {fxt.tst_lines("$a = 'bc';", fxt.line_assign("a", fxt.itm_quote("bc")));}
 	@Test public void Line_assign_mult()	{fxt.tst_lines("$a = 'b';\n$c='d';", fxt.line_assign("a", fxt.itm_quote("b")), fxt.line_assign("c", fxt.itm_quote("d")));}

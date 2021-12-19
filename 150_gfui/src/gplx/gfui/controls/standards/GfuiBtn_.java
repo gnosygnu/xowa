@@ -13,11 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.imgs.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+package gplx.gfui.controls.standards;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.gfui.*; import gplx.gfui.controls.*;
+import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+import gplx.types.commons.KeyValHash;
+import gplx.types.errs.ErrUtl;
 public class GfuiBtn_ {
 	public static GfuiBtn as_(Object obj) {return obj instanceof GfuiBtn ? (GfuiBtn)obj : null;}
-	public static GfuiBtn cast(Object obj) {try {return (GfuiBtn)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiBtn.class, obj);}}
+	public static GfuiBtn cast(Object obj) {try {return (GfuiBtn)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, GfuiBtn.class, obj);}}
 
 	public static GfuiBtn msg_(String key, GfuiElem owner, GfoMsg msg) {
 		GfuiBtn rv = new_(key); rv.Owner_(owner);
@@ -29,7 +35,7 @@ public class GfuiBtn_ {
 		rv.Click_invk(Gfo_invk_cmd.New_by_key(invk, m));
 		return rv;
 	}
-	public static GfuiBtn kit_(Gfui_kit kit, String key, GxwElem elm, Keyval_hash ctorArgs) {
+	public static GfuiBtn kit_(Gfui_kit kit, String key, GxwElem elm, KeyValHash ctorArgs) {
 		GfuiBtn rv = new GfuiBtn();
 		rv.ctor_kit_GfuiElemBase(kit, key, elm, ctorArgs);
 		return rv;
@@ -40,7 +46,7 @@ public class GfuiBtn_ {
 		rv.Key_of_GfuiElem_(key);
 		return rv;
 	}
-	@gplx.Internal protected static void FocusBorderRect_set(GfuiBorderMgr borderMgr, GfuiElem elem) {
+	public static void FocusBorderRect_set(GfuiBorderMgr borderMgr, GfuiElem elem) {
 		borderMgr.Bounds_sync(RectAdp_.new_(3, 3, elem.Width() - 6, elem.Height() - 6));
 	}
 }

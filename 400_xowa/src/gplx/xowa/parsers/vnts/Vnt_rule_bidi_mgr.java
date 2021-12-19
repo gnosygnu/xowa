@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*;
+package gplx.xowa.parsers.vnts;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 class Vnt_rule_bidi_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int Len() {return hash.Len();}
 	public boolean Has_none() {return hash.Len() == 0;}
 	public void Clear() {hash.Clear();}
-	public Vnt_rule_bidi_itm Get_at(int i)		{return (Vnt_rule_bidi_itm)hash.Get_at(i);}
+	public Vnt_rule_bidi_itm Get_at(int i)		{return (Vnt_rule_bidi_itm)hash.GetAt(i);}
 	public Vnt_rule_bidi_itm Get_by(byte[] k)	{return (Vnt_rule_bidi_itm)hash.GetByOrNull(k);}
 	public byte[] Get_text_by_ary_or_null(byte[]... ary) {
 		int len = ary.length;
@@ -37,7 +40,7 @@ class Vnt_rule_bidi_mgr {
 		return rv == null ? null : rv.Text();
 	}
 	public byte[] Get_text_at(int i) {
-		Vnt_rule_bidi_itm itm = (Vnt_rule_bidi_itm)hash.Get_at(i);
+		Vnt_rule_bidi_itm itm = (Vnt_rule_bidi_itm)hash.GetAt(i);
 		return itm == null ? null : itm.Text();
 	}
 	public void Set(byte[] vnt, byte[] text) {
@@ -49,12 +52,12 @@ class Vnt_rule_bidi_mgr {
 		else
 			itm.Text_(text);
 	}
-	public void To_bry__dbg(Bry_bfr bfr) {
+	public void To_bry__dbg(BryWtr bfr) {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			if (i != 0)	bfr.Add_byte_nl();
-			Vnt_rule_bidi_itm itm = (Vnt_rule_bidi_itm)hash.Get_at(i);
-			bfr.Add(itm.Vnt()).Add_byte_colon().Add(itm.Text());
+			if (i != 0)	bfr.AddByteNl();
+			Vnt_rule_bidi_itm itm = (Vnt_rule_bidi_itm)hash.GetAt(i);
+			bfr.Add(itm.Vnt()).AddByteColon().Add(itm.Text());
 		}
 	}
 }

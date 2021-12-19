@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
 import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
@@ -27,7 +30,7 @@ public class XomwLinkHolderArray {
 //		public $interwikis = [];
 	// private int size = 0;
 
-	private final Bry_bfr tmp = Bry_bfr_.New();
+	private final BryWtr tmp = BryWtr.New();
 	private final Xomw_atr_mgr extraAtrs = new Xomw_atr_mgr();
 	private final Xomw_qry_mgr query = new Xomw_qry_mgr();
 	/**
@@ -127,7 +130,7 @@ public class XomwLinkHolderArray {
 //			this.tempIdOffset = $idOffset = this.parent->nextLinkID();
 //			$maxId = 0;
 //
-//			# Renumber @gplx.Internal protected links
+//			# Renumber public links
 //			foreach ( $other->internals as $ns => $nsLinks ) {
 //				foreach ( $nsLinks as $key => $entry ) {
 //					$newKey = $idOffset + $key;
@@ -229,19 +232,19 @@ public class XomwLinkHolderArray {
 	* @param String $prefix [optional]
 	* @return String
 	*/
-	public void makeHolder(Bry_bfr bfr, XomwTitleOld nt, byte[] text, byte[][] query, byte[] trail, byte[] prefix) {
+	public void makeHolder(BryWtr bfr, XomwTitleOld nt, byte[] text, byte[][] query, byte[] trail, byte[] prefix) {
 		if (nt == null) {
 			// Fail gracefully
-			bfr.Add_str_a7("<!-- ERROR -->").Add(prefix).Add(text).Add(trail);
+			bfr.AddStrA7("<!-- ERROR -->").Add(prefix).Add(text).Add(trail);
 		}
 		else {
 			// Separate the link trail from the rest of the link
 //				list( $inside, $trail ) = Linker::splitTrail( $trail );
-			byte[] inside = Bry_.Empty;
+			byte[] inside = BryUtl.Empty;
 
 			XomwLinkHolderItem entry = new XomwLinkHolderItem
 				( nt
-				, tmp.Add_bry_many(prefix, text, inside).To_bry_and_clear()
+				, tmp.AddBryMany(prefix, text, inside).ToBryAndClear()
 				, query);
 
 			if (nt.isExternal()) {
@@ -253,7 +256,7 @@ public class XomwLinkHolderArray {
 			else {
 				int key = this.parent.nextLinkID();
 				this.internals.Add(key, entry);
-				bfr.Add(Bry__link__bgn).Add_int_variable(key).Add(Gfh_tag_.Comm_end).Add(trail);	// "<!--LINK $ns:$key-->{$trail}";
+				bfr.Add(Bry__link__bgn).AddIntVariable(key).Add(Gfh_tag_.Comm_end).Add(trail);	// "<!--LINK $ns:$key-->{$trail}";
 			}
 		}
 	}
@@ -269,11 +272,11 @@ public class XomwLinkHolderArray {
 	}
 	public byte[] replace(XomwParserBfr pbfr, byte[] text) {
 		boolean rv = this.replace(pbfr.Init(text));
-		return rv ? pbfr.Trg().To_bry_and_clear() : pbfr.Src().To_bry_and_clear();
+		return rv ? pbfr.Trg().ToBryAndClear() : pbfr.Src().ToBryAndClear();
 	}
 
 	/**
-	* Replace @gplx.Internal protected links
+	* Replace public links
 	* @param String $text
 	*/
 	private boolean replaceInternal(XomwParserBfr pbfr) {
@@ -369,24 +372,24 @@ public class XomwLinkHolderArray {
 //			}
 
 		// Construct search and replace arrays
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 		pbfr.Switch();
 
 		int cur = src_bgn;
 		int prv = 0;
 		while (true) {
-			int link_bgn = Bry_find_.Find_fwd(src, Bry__link__bgn, cur, src_end);
-			if (link_bgn == Bry_find_.Not_found) {
-				bfr.Add_mid(src, prv, src_end);
+			int link_bgn = BryFind.FindFwd(src, Bry__link__bgn, cur, src_end);
+			if (link_bgn == BryFind.NotFound) {
+				bfr.AddMid(src, prv, src_end);
 				break;
 			}
 			int key_bgn = link_bgn + Bry__link__bgn.length;
-			int key_end = Bry_find_.Find_fwd_while_num(src, key_bgn, src_end);
-			int link_key = Bry_.To_int_or(src, key_bgn, key_end, -1);
+			int key_end = BryFind.FindFwdWhileNum(src, key_bgn, src_end);
+			int link_key = BryUtl.ToIntOr(src, key_bgn, key_end, -1);
 			XomwLinkHolderItem item = internals.Get_by(link_key);
 
 //					$pdbk = $entry['pdbk'];
@@ -423,8 +426,8 @@ public class XomwLinkHolderArray {
 //					$replacePairs[$searchkey] = $link;
 //				}
 //			}
-			bfr.Add_mid(src, prv, link_bgn);
-			linkRenderer.makePreloadedLink(bfr, item.Title(), item.Text(), Bry_.Empty, extraAtrs, query.Clear());
+			bfr.AddMid(src, prv, link_bgn);
+			linkRenderer.makePreloadedLink(bfr, item.Title(), item.Text(), BryUtl.Empty, extraAtrs, query.Clear());
 			cur = key_end + Gfh_tag_.Comm_end_len;
 			prv = cur;
 		}
@@ -743,10 +746,10 @@ public class XomwLinkHolderArray {
 //		}
 	public void Test__add(XomwTitleOld ttl, byte[] capt) {
 		int key = parent.nextLinkID();
-		XomwLinkHolderItem item = new XomwLinkHolderItem(ttl, capt, Bry_.Ary_empty);
+		XomwLinkHolderItem item = new XomwLinkHolderItem(ttl, capt, BryUtl.AryEmpty);
 		internals.Add(key, item);
 	}
-	private static final byte[] Bry__link__bgn = Bry_.new_a7("<!--LINK ");
+	private static final byte[] Bry__link__bgn = BryUtl.NewA7("<!--LINK ");
 }
 class XomwLinkHolderList {
 	private int ary_len = 0, ary_max = 128;

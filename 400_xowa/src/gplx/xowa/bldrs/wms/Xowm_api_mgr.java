@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wms;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.net.*;
 public class Xowm_api_mgr {
 	public static byte[] Call_by_qarg(Gfo_usr_dlg usr_dlg, Gfo_inet_conn inet_conn, String domain_str, String api_args) {return Call_by_url(usr_dlg, inet_conn, domain_str, Bld_api_url(domain_str, api_args));}
@@ -23,5 +25,5 @@ public class Xowm_api_mgr {
 		byte[] rslt = inet_conn.Download_as_bytes_or_null(url); if (rslt == null) usr_dlg.Warn_many("", "", "wm.api:wmf api returned nothing; api=~{0}", url);
 		return rslt;
 	}
-	public static String Bld_api_url(String wiki, String args) {return String_.Concat("https://", wiki, "/w/api.php?", args);}	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
+	public static String Bld_api_url(String wiki, String args) {return StringUtl.Concat("https://", wiki, "/w/api.php?", args);}	// EX: https://en.wikipedia.org/w/api.php?action=query&meta=siteinfo&siprop=namespaces
 }

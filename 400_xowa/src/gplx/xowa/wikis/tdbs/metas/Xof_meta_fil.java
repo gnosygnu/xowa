@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*;
+package gplx.xowa.wikis.tdbs.metas;
 import gplx.core.flds.*;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xof_meta_fil {
 	private final Ordered_hash itms = Ordered_hash_.New_bry();
 	public Xof_meta_fil(Xof_meta_mgr meta_mgr, byte[] md5) {this.meta_mgr = meta_mgr; this.md5 = md5;}
@@ -33,7 +39,7 @@ public class Xof_meta_fil {
 	public void Save(Gfo_fld_wtr wtr) {
 		int itms_len = itms.Len();
 		for (int i = 0; i < itms_len; i++) {
-			Xof_meta_itm itm = (Xof_meta_itm)itms.Get_at(i);
+			Xof_meta_itm itm = (Xof_meta_itm)itms.GetAt(i);
 			itm.Save(wtr);
 		}
 	}
@@ -41,7 +47,7 @@ public class Xof_meta_fil {
 		itms.Clear();
 		int bry_len = rdr.Data().length;
 		while (rdr.Pos() < bry_len) {
-			Xof_meta_itm itm = new Xof_meta_itm(this, Bry_.Empty);
+			Xof_meta_itm itm = new Xof_meta_itm(this, BryUtl.Empty);
 			itm.Load(rdr, parser);
 			itms.Add(itm.Ttl(), itm);
 		}
@@ -50,10 +56,10 @@ public class Xof_meta_fil {
 	public static Io_url Bld_url(Io_url root, byte[] md5, int depth) {
 		Bld_url_bfr.Add(root.RawBry());
 		for (int i = 0; i < depth - 1; i++)
-			Bld_url_bfr.Add_byte(md5[i]).Add_byte(root.Info().DirSpr_byte());
+			Bld_url_bfr.AddByte(md5[i]).AddByte(root.Info().DirSpr_byte());
 		for (int i = 0; i < depth; i++)
-			Bld_url_bfr.Add_byte(md5[i]);
+			Bld_url_bfr.AddByte(md5[i]);
 		Bld_url_bfr.Add(Bry_url_ext);
-		return Io_url_.new_fil_(Bld_url_bfr.To_str_and_clear());
-	}	private static final byte[] Bry_url_ext = Bry_.new_a7(".csv"); static Bry_bfr Bld_url_bfr = Bry_bfr_.New_w_size(260);	// 260 is max path of url
+		return Io_url_.new_fil_(Bld_url_bfr.ToStrAndClear());
+	}	private static final byte[] Bry_url_ext = BryUtl.NewA7(".csv"); static BryWtr Bld_url_bfr = BryWtr.NewWithSize(260);	// 260 is max path of url
 }

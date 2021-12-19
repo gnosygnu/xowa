@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*;
-import gplx.dbs.*;
+package gplx.xowa.files.caches;
+import gplx.dbs.Db_cmd_mode;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.Db_stmt_bldr;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.errs.ErrUtl;
 class Xofc_dir_tbl implements Rls_able {
 	private String tbl_name = "file_cache_dir"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_id, fld_name;
@@ -48,13 +60,13 @@ class Xofc_dir_tbl implements Rls_able {
 				case Db_cmd_mode.Tid_update:	stmt.Clear()							.Val_bry_as_str(fld_name, itm.Name()).Crt_int(fld_id, itm.Id()).Exec_update(); break;
 				case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_id, itm.Id()).Exec_delete(); break;
 				case Db_cmd_mode.Tid_ignore:	break;
-				default:						throw Err_.new_unhandled(itm.Cmd_mode());
+				default:						throw ErrUtl.NewUnhandled(itm.Cmd_mode());
 			}
 			itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 			return null;
 		} catch (Exception e) {
 			stmt_bldr.Rls(); // rls bldr, else bad stmt will lead to other failures
-			return Err_.Message_gplx_full(e);
+			return ErrUtl.ToStrFull(e);
 		}
 	}
 	public void Cleanup() {

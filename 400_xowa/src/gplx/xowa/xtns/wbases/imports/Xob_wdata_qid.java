@@ -15,12 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Gfo_invk;
-import gplx.Ordered_hash;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_parser;
@@ -56,7 +55,7 @@ public class Xob_wdata_qid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 	public void Page_wkr__run(Xowd_page_itm page) {
 		if (page.Ns_id() != Xow_ns_.Tid__main) return;	// qid pages are only in the Main Srch_rslt_cbk
 		Json_doc jdoc = parser.Parse(page.Text()); 
-		if (jdoc == null) {bldr.Usr_dlg().Warn_many("", "", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_u8(page.Ttl_page_db())); return;}
+		if (jdoc == null) {bldr.Usr_dlg().Warn_many("", "", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), StringUtl.NewU8(page.Ttl_page_db())); return;}
 		this.Qid__run(jdoc);
 	}
 	public void Page_wkr__run_cleanup() {}
@@ -74,16 +73,16 @@ public class Xob_wdata_qid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 		synchronized (thread_lock) {
 			Wdata_doc_parser wdoc_parser = app.Wiki_mgr().Wdata_mgr().Wdoc_parser(jdoc);
 			byte[] qid = wdoc_parser.Parse_qid(jdoc);
-			Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+			BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 			Ordered_hash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
 			int sitelinks_len = sitelinks.Len(); if (sitelinks_len == 0) return;	// no subs; return;
 			for (int i = 0; i < sitelinks_len; i++) { // iterate sitelinks
-				Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.Get_at(i);
+				Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.GetAt(i);
 				byte[] sitelink_site = sitelink.Site(), sitelink_ttl = sitelink.Name();
 				ns_parser.Find(ns_parser_rslt, sitelink_site, sitelink_ttl);
 				int sitelink_ns = ns_parser_rslt.Ns_id();
 				if (sitelink_ns != Xow_ns_.Tid__main)	// ttl not in main; chop off ns portion; EX:Aide:French_title -> French_title
-					sitelink_ttl = Bry_.Mid(sitelink_ttl, ns_parser_rslt.Ttl_bgn(), sitelink_ttl.length);
+					sitelink_ttl = BryLni.Mid(sitelink_ttl, ns_parser_rslt.Ttl_bgn(), sitelink_ttl.length);
 				sitelink_ttl = wiki.Lang().Case_mgr().Case_build_1st_upper(tmp_bfr, sitelink_ttl, 0, sitelink_ttl.length);
 				tbl.Insert_cmd_by_batch(sitelink.Site(), sitelink_ns, Xoa_ttl.Replace_spaces(sitelink_ttl), qid);	// NOTE: always convert spaces to underscores; EX: "A B" -> "A_B" DATE:2015-04-21
 			}

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.texts; import gplx.*; import gplx.core.*;
+package gplx.core.texts;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class StringTableBldr_tst {
 	@Before public void setup() {
 		bldr = StringTableBldr.new_();
-	}	StringTableBldr bldr;
+	}   StringTableBldr bldr;
 	@Test public void TwoCols() {
 		bldr.Add("a", "aa")
 			.Add("bb", "b");
@@ -51,7 +53,7 @@ public class StringTableBldr_tst {
 			);
 	}
 	void tst_XtoStr(String... expdLines) {
-		String expd = String_.Concat_with_obj(String_.CrLf, (Object[])expdLines);
-		Tfds.Eq(expd, bldr.To_str());
+		String expd = StringUtl.ConcatWithObj(StringUtl.CrLf, (Object[])expdLines);
+		GfoTstr.EqObj(expd, bldr.To_str());
 	}
 }

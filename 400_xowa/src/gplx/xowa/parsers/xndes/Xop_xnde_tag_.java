@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.xndes;
 
-import gplx.Bry_;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.langs.Xol_lang_stub_;
 
 public class Xop_xnde_tag_ {
 	public static final int Bgn_mode__normal = 0, Bgn_mode__inline = 1;
 	public static final int End_mode__normal = 0, End_mode__inline = 1, End_mode__escape = 2; // escape is for hr which does not support </hr>
-	public static final byte[] Bry__onlyinclude = Bry_.new_a7("<onlyinclude"); // 2020-12-17|ISSUE#:825|Match for `<` + `onlyinclude` to fix false match; NOTE: is only used in one place
-	public static final byte[] Bry__end_tag_bgn = Bry_.new_a7("</");
+	public static final byte[] Bry__onlyinclude = BryUtl.NewA7("<onlyinclude"); // 2020-12-17|ISSUE#:825|Match for `<` + `onlyinclude` to fix false match; NOTE: is only used in one place
+	public static final byte[] Bry__end_tag_bgn = BryUtl.NewA7("</");
 	public static final int
   Tid__null = -1
 , Tid__b = 0

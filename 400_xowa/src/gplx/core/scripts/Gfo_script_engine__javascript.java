@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.scripts; import gplx.*; import gplx.core.*;
+package gplx.core.scripts;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -29,7 +33,7 @@ public class Gfo_script_engine__javascript implements Gfo_script_engine {
 		try {engine.eval(Io_mgr.Instance.LoadFilStr(url));}
 		catch (Exception e) {			
 			System.out.println(e.getMessage());
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to load_script; url=~{0} err=~{1}", url, Err_.Message_lang(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to load_script; url=~{0} err=~{1}", url, ErrUtl.Message(e));
 		}
 	}
 	public void Put_object(String key, Object val) {
@@ -39,7 +43,7 @@ public class Gfo_script_engine__javascript implements Gfo_script_engine {
 		try {return engine.get(obj_name);}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to get object; obj_name=~{0} err=~{1}", obj_name, Err_.Message_lang(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to get object; obj_name=~{0} err=~{1}", obj_name, ErrUtl.Message(e));
 			return null;
 		}
 	}
@@ -47,7 +51,7 @@ public class Gfo_script_engine__javascript implements Gfo_script_engine {
 		try {return engine.eval(script);}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to eval; script=~{0} err=~{1}", script, Err_.Message_lang(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to eval; script=~{0} err=~{1}", script, ErrUtl.Message(e));
 			return null;
 		}
 	}
@@ -55,7 +59,7 @@ public class Gfo_script_engine__javascript implements Gfo_script_engine {
 		try {return invk.invokeMethod(obj, func, args);}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to invoke method; method=~{0} err=~{1}", func, Err_.Message_lang(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to invoke method; method=~{0} err=~{1}", func, ErrUtl.Message(e));
 			return null;
 		}
 	}
@@ -63,7 +67,7 @@ public class Gfo_script_engine__javascript implements Gfo_script_engine {
 		try {return invk.invokeFunction(func, args);}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to invoke method; method=~{0} err=~{1}", func, Err_.Message_lang(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to invoke method; method=~{0} err=~{1}", func, ErrUtl.Message(e));
 			return null;
 		}
 	}

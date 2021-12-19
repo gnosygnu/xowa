@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.steps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.steps;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.gfobjs.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*;
 public class Xobc_step_itm {
@@ -34,7 +35,7 @@ public class Xobc_step_itm {
 		int len = cmds.length;
 		for (int i = 0; i < len; ++i) {
 			Xobc_cmd_itm cmd = cmds[i];
-			if (String_.Eq(cmd.Cmd_type(), fallback_id)) {
+			if (StringUtl.Eq(cmd.Cmd_type(), fallback_id)) {
 				fallback_idx = cmd.Cmd_id();
 				break;
 			}

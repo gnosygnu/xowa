@@ -13,16 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.js; import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.GfoMsg_;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_invk_cmd;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Math_;
-import gplx.String_;
+package gplx.xowa.addons.apps.updates.js;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.MathUtl;
+import gplx.core.envs.SystemUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.gfobjs.Gfobj_nde;
 import gplx.core.progs.Gfo_prog_ui;
 import gplx.core.progs.Gfo_prog_ui_;
@@ -49,12 +51,12 @@ public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
 	}
 	public void Exec() {
 		try {
-			this.time_prv = gplx.core.envs.System_.Ticks();
+			this.time_prv = SystemUtl.Ticks();
 			this.Exec_run();
 			done_cbk.Exec_by_ctx(GfsCtx.Instance, GfoMsg_.new_cast_("m").Add("v", this));
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to run task; task=~{0} err=~{1}", task_type, Err_.Message_gplx_log(e));
-			cbk_mgr.Send_notify(cbk_trg, String_.Format("failed to run task: task={0} err={1}", task_type, Err_.Message_lang(e)));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to run task; task=~{0} err=~{1}", task_type, ErrUtl.ToStrLog(e));
+			cbk_mgr.Send_notify(cbk_trg, StringUtl.Format("failed to run task: task={0} err={1}", task_type, ErrUtl.Message(e)));
 			if (fail_cbk != null)
 				fail_cbk.Exec();
 		}
@@ -77,12 +79,12 @@ public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
 	public void			Prog_notify_by_msg(String msg) {}
 	public boolean			Prog_notify_and_chk_if_suspended(long new_data_cur, long new_data_end) {
 		if (status == Gfo_prog_ui_.Status__suspended) return true;	// task paused by ui; exit now;
-		long time_cur = gplx.core.envs.System_.Ticks();
+		long time_cur = SystemUtl.Ticks();
 		if (time_cur < time_prv + notify_delay) return false;		// message came too soon. ignore it
 
 		// update rate
 		double rate_now = (rate_list.Add(new_data_cur - data_cur, (time_cur - time_prv))) * 1000;
-		double delta = Math_.Abs_double((rate_now - rate_cur) / rate_cur);
+		double delta = MathUtl.AbsAsDouble((rate_now - rate_cur) / rate_cur);
 		if (	rate_cur == 0					// rate not set
 			||	delta > delta_threshold) {		// rate_now is at least 25% different than rate_prv
 			if (delta > delta_threshold * 2)	// rate_now is > 50% different

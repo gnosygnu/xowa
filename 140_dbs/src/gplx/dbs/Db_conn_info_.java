@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.noops.*; import gplx.dbs.engines.mems.*; import gplx.dbs.engines.sqlite.*; import gplx.dbs.engines.tdbs.*;
-import gplx.dbs.engines.mysql.*; import gplx.dbs.engines.postgres.*;
+package gplx.dbs;
+import gplx.dbs.engines.mems.Mem_conn_info;
+import gplx.dbs.engines.mysql.Mysql_conn_info;
+import gplx.dbs.engines.noops.Noop_conn_info;
+import gplx.dbs.engines.postgres.Postgres_conn_info;
+import gplx.dbs.engines.sqlite.Sqlite_conn_info;
+import gplx.dbs.engines.tdbs.Tdb_conn_info;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyValHash;
+import gplx.types.errs.ErrUtl;
 public class Db_conn_info_ {
 	public static final Db_conn_info Null			= Noop_conn_info.Instance;
 	public static final Db_conn_info Test			= Mysql_conn_info.new_("127.0.0.1", "unit_tests", "root", "mysql7760");
@@ -25,9 +36,9 @@ public class Db_conn_info_ {
 	public static Db_conn_info mem_(String db)			{return Mem_conn_info.new_(db);}
 	public static final String Key_tdb = Tdb_conn_info.Tid_const;
 	public static Io_url To_url(Db_conn_info cs) {
-		if		(String_.Eq(cs.Key(), Sqlite_conn_info.Key_const))		return ((Sqlite_conn_info)cs).Url();
-		else if (String_.Eq(cs.Key(), Mem_conn_info.Instance.Key()))	return Io_url_.mem_fil_("mem/" + ((Mem_conn_info)cs).Database());
-		else throw Err_.new_unhandled_default(cs.Key());
+		if		(StringUtl.Eq(cs.Key(), Sqlite_conn_info.Key_const))		return ((Sqlite_conn_info)cs).Url();
+		else if (StringUtl.Eq(cs.Key(), Mem_conn_info.Instance.Key()))	return Io_url_.mem_fil_("mem/" + ((Mem_conn_info)cs).Database());
+		else throw ErrUtl.NewUnhandled(cs.Key());
 	}
 }
 class Db_conn_info_pool {
@@ -39,13 +50,13 @@ class Db_conn_info_pool {
 	public Db_conn_info_pool Add(Db_conn_info itm) {regy.AddIfDupeUseNth(itm.Key(), itm); return this;}
 	public Db_conn_info Parse(String raw) {// assume each pair has format of: name=val;
 		try {
-			Keyval_hash hash = new Keyval_hash();
-			String[] terms = String_.Split(raw, ";");
+			KeyValHash hash = new KeyValHash();
+			String[] terms = StringUtl.Split(raw, ";");
 			String url_tid = "";
 			for (String term : terms) {
-				if (String_.Len(term) == 0) continue;
-				String[] kv = String_.Split(term, "=");
-				if (String_.Eq(kv[0], "gplx_key"))
+				if (StringUtl.Len(term) == 0) continue;
+				String[] kv = StringUtl.Split(term, "=");
+				if (StringUtl.Eq(kv[0], "gplx_key"))
 					url_tid = kv[1]; // NOTE: do not add to GfoMsg; will not be part of ApiStr
 				else
 					hash.Add(kv[0], kv[1]);
@@ -53,19 +64,19 @@ class Db_conn_info_pool {
 			Db_conn_info prototype = (Db_conn_info)regy.GetByOrNull(url_tid);
 			return prototype.New_self(raw, hash);
 		}
-		catch(Exception exc) {throw Err_.new_parse_exc(exc, Db_conn_info.class, raw);}
+		catch(Exception exc) {throw ErrUtl.NewParse(exc, Db_conn_info.class, raw);}
 	}
 	public Db_conn_info Parse_or_sqlite_or_fail(String raw) {// assume each pair has format of: name=val;
-		Keyval_hash hash = new Keyval_hash();
-		String[] kvps = String_.Split(raw, ";");
+		KeyValHash hash = new KeyValHash();
+		String[] kvps = StringUtl.Split(raw, ";");
 		String cs_tid = null;
 		int kvps_len = kvps.length; 
 		for (int i = 0; i < kvps_len; ++i) {
 			String kvp_str = kvps[i];
-			if (String_.Len(kvp_str) == 0) continue;	// ignore empty; EX: "data source=/db.sqlite;;"
-			String[] kvp = String_.Split(kvp_str, "=");
+			if (StringUtl.Len(kvp_str) == 0) continue;	// ignore empty; EX: "data source=/db.sqlite;;"
+			String[] kvp = StringUtl.Split(kvp_str, "=");
 			String key = kvp[0], val = kvp[1];
-			if (String_.Eq(key, "gplx_key"))
+			if (StringUtl.Eq(key, "gplx_key"))
 				cs_tid = val;	// NOTE: do not add to GfoMsg; will not be part of ApiStr
 			else
 				hash.Add(key, val);
@@ -73,7 +84,7 @@ class Db_conn_info_pool {
 		if (cs_tid == null) {	// gplx_key not found; try url as sqlite; EX: "/db.sqlite"
 			Io_url sqlite_url = null;
 			try {sqlite_url = Io_url_.new_any_(raw);}
-			catch (Exception exc) {throw Err_.new_exc(exc, "dbs", "invalid connection String", "raw", raw);}
+			catch (Exception exc) {throw ErrUtl.NewArgs(exc, "invalid connection String", "raw", raw);}
 			hash.Clear();
 			cs_tid = Sqlite_conn_info.Key_const;
 			hash.Add(Sqlite_conn_info.Cs__data_source, sqlite_url.Raw());

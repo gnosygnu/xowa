@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.gallery;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 import gplx.dbs.cfgs.*; import gplx.xowa.parsers.logs.*; 
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.fsdb.*;
@@ -26,12 +35,12 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public int					Itm_h_actl()				{return itm_h_actl;} private int itm_h_actl = Null;
 	public int					Itms_per_row()				{return itms_per_row;} private int itms_per_row = Null;
 	public int					Itms_len()					{return itms.Len();} private final List_adp itms = List_adp_.New();
-	public Gallery_itm			Itms_get_at(int i)			{return (Gallery_itm)itms.Get_at(i);}
-	public byte[]				Atr_style()					{return atr_style;} private byte[] atr_style = Bry_.Empty;
-	public byte[]				Atr_cls()					{return atr_cls;} private byte[] atr_cls = Bry_.Empty;
+	public Gallery_itm			Itms_get_at(int i)			{return (Gallery_itm)itms.GetAt(i);}
+	public byte[]				Atr_style()					{return atr_style;} private byte[] atr_style = BryUtl.Empty;
+	public byte[]				Atr_cls()					{return atr_cls;} private byte[] atr_cls = BryUtl.Empty;
 	public List_adp				Atrs_other()				{return atrs_other;} private List_adp atrs_other;
 	public boolean				Show_filename()				{return show_filename;} private boolean show_filename = false;
-	public byte[]				Mgr_caption()				{return mgr_caption;} private byte[] mgr_caption = Bry_.Empty;
+	public byte[]				Mgr_caption()				{return mgr_caption;} private byte[] mgr_caption = BryUtl.Empty;
 	public Gallery_mgr_base		Gallery_mgr()				{return gallery_mgr;} private Gallery_mgr_base gallery_mgr;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, byte xatr_id) {
 		switch (xatr_id) {
@@ -67,14 +76,14 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 			if (Gallery_mgr_base_.Mode_is_packed(this.mode))
 				ctx.Page().Xtn_gallery_packed_exists_y_();
 		} catch (Exception exc) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_u8(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx_full(exc));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", StringUtl.NewU8(src, xnde.Src_bgn(), xnde.Src_end()), ErrUtl.ToStrFull(exc));
 		}
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);			// cancel pre for <gallery>; DATE:2014-03-11
 		boolean log_wkr_enabled = Log_wkr != Xop_log_basic_wkr.Null; if (log_wkr_enabled) Log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_gallery, src, xnde);
 	}	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		try		{Gallery_mgr_wtr.Write_mgr(bfr, gallery_mgr, ctx.Wiki(), ctx.Page(), ctx, hctx, src, this);}
-		catch	(Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", String_.new_u8(src, xnde.Src_bgn(), xnde.Src_end()), Err_.Message_gplx_log(e));}
+		catch	(Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write gallery; src=~{0} err=~{1}", StringUtl.NewU8(src, xnde.Src_bgn(), xnde.Src_end()), ErrUtl.ToStrLog(e));}
 	}
 	private void Init_xnde_by_atrs(Xowe_wiki wiki) {
 		Db_cfg_hash cfg_grp = wiki.File_mgr().Cfg_get(Xof_fsdb_mgr_cfg.Grp_xowa);
@@ -91,7 +100,7 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		if (itm_w_actl == Gallery_xnde.Null) itm_w_actl = Gallery_xnde.Default;
 		if (itm_h_actl == Gallery_xnde.Null) itm_h_actl = Gallery_xnde.Default;
 		gallery_mgr.Init(this.Itm_w_actl(), this.Itm_h_actl(), itms_per_row);
-		if (Bry_.Eq(wiki.Domain_itm().Domain_bry(), gplx.xowa.wikis.domains.Xow_domain_itm_.Bry__commons)) {	// HACK.CFG: for commons, hardcode itms per row as 8; DATE:2016-06-30
+		if (BryLni.Eq(wiki.Domain_itm().Domain_bry(), gplx.xowa.wikis.domains.Xow_domain_itm_.Bry__commons)) {	// HACK.CFG: for commons, hardcode itms per row as 8; DATE:2016-06-30
 			itms_per_row = 8;
 		}
 	}

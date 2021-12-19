@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
-import gplx.core.primitives.*;
+package gplx.xowa.bldrs.filters.dansguardians;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.IntRef;
 class Dg_file {
 	public Dg_file(int id, String rel_path, Dg_rule[] lines) {this.id = id; this.rel_path = rel_path; this.lines = lines;}
 	public int Id() {return id;} private final int id;
@@ -30,7 +34,7 @@ class Dg_rule {// EX: < wikipedia ><-30>
 			int words_len = words.length;
 			for (int i = 0; i < words_len; ++i) {
 				Dg_word word = words[i];
-				word_idx_hash.Add_bry_obj(word.Raw(), Int_obj_ref.New(i));
+				word_idx_hash.Add_bry_obj(word.Raw(), IntRef.New(i));
 			}
 		}
 	}
@@ -58,25 +62,25 @@ class Dg_rule {// EX: < wikipedia ><-30>
 class Dg_word {
 	public Dg_word(byte[] raw) {this.raw = raw;}
 	public byte[] Raw() {return raw;} private final byte[] raw;
-	public static String Ary_concat(Dg_word[] ary, Bry_bfr bfr, byte dlm) {
-		if (ary == null) return String_.Empty;
+	public static String Ary_concat(Dg_word[] ary, BryWtr bfr, byte dlm) {
+		if (ary == null) return StringUtl.Empty;
 		int len = ary.length;
-		if (len == 0) return String_.Empty;
-		bfr.Add_byte_apos();
+		if (len == 0) return StringUtl.Empty;
+		bfr.AddByteApos();
 		for (int i = 0; i < len; ++i) {
 			Dg_word itm = ary[i];
-			if (i != 0) bfr.Add_byte(dlm);
+			if (i != 0) bfr.AddByte(dlm);
 			bfr.Add(itm.Raw());
 		}
-		bfr.Add_byte_apos();
-		return bfr.To_str_and_clear();
+		bfr.AddByteApos();
+		return bfr.ToStrAndClear();
 	}
 	public static Dg_word[] Ary_new_by_str_ary(String[] ary) {
 		int ary_len = ary.length;
 		Dg_word[] rv = new Dg_word[ary_len];
 		for (int i = 0; i < ary_len; ++i) {
 			String raw = ary[i];
-			rv[i] = new Dg_word(Bry_.new_u8(raw));
+			rv[i] = new Dg_word(BryUtl.NewU8(raw));
 		}
 		return rv;
 	}

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,28 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios.streams; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
+package gplx.core.ios.streams;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 public class IoStream_ {
 	public static final IoStream Null = new IoStream_null();
-	public static IoStream				mem_txt_(Io_url url, String v)	{return IoStream_mem.rdr_txt_(url, v);}
-	public static IoStream				ary_(byte[] v)					{return IoStream_mem.rdr_ary_(Io_url_.Empty, v);}
+	public static IoStream                mem_txt_(Io_url url, String v)    {return IoStream_mem.rdr_txt_(url, v);}
+	public static IoStream                ary_(byte[] v)                    {return IoStream_mem.rdr_ary_(Io_url_.Empty, v);}
 	public static final byte Mode_rdr = 0, Mode_wtr_create = 1, Mode_wtr_append = 2, Mode_wtr_update = 3;
-	public static IoStream				stream_rdr_()					{return new IoStream_stream_rdr();}
-	public static IoStream				stream_input_(Io_url url)		{return new IoStream_stream_rdr().UnderRdr_(input_stream_(url));}
-	public static Object				input_stream_(Io_url url)		{
+	public static IoStream                stream_rdr_()                    {return new IoStream_stream_rdr();}
+	public static IoStream                stream_input_(Io_url url)        {return new IoStream_stream_rdr().UnderRdr_(input_stream_(url));}
+	public static Object                input_stream_(Io_url url)        {
 				try {
 			return new java.io.FileInputStream(url.Raw());
-		} catch (Exception e) {throw Err_.new_wo_type("file not found", "url", url.Raw());}
+		} catch (Exception e) {throw ErrUtl.NewArgs("file not found", "url", url.Raw());}
 			}
 }
 class IoStream_null implements IoStream {

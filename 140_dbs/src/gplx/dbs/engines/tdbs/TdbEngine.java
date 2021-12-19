@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.qrys.bats.*;
 import gplx.dbs.wkrs.SqlWkrMgr;
-
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.errs.ErrUtl;
 public class TdbEngine implements Db_engine {
 	public String Tid() {return Tdb_conn_info.Tid_const;}
 	public Db_conn_info			Conn_info() {return conn_info;} private Db_conn_info conn_info;
@@ -46,7 +51,7 @@ public class TdbEngine implements Db_engine {
 		return wkr.Exec(this, qry);
 	}
 	public Db_stmt	Stmt_by_qry(Db_qry qry) {return new Db_stmt_sql().Parse(qry, sql_wtr.ToSqlStr(qry, true));}
-	public Object	Stmt_by_sql(String sql) {throw Err_.new_unimplemented();}
+	public Object	Stmt_by_sql(String sql) {throw ErrUtl.NewUnimplemented();}
 	public Db_rdr	Exec_as_rdr__rls_manual(Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public Db_rdr	Exec_as_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {return Db_rdr_.Empty;}
 	public DataRdr	New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
@@ -61,10 +66,10 @@ public class TdbEngine implements Db_engine {
 	public void FlushTbl(TdbTable tbl) {
 		saveMgr.SaveFile(db, tbl.File());
 	}
-	public void	Meta_tbl_create(Dbmeta_tbl_itm meta) {throw Err_.new_unimplemented();}
-	public void Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {throw Err_.new_unimplemented();}
-	public void	Meta_idx_delete(String idx) {throw Err_.new_unimplemented();}
-	public void				Meta_fld_append(String tbl, DbmetaFldItm fld) {throw Err_.new_unimplemented();}
+	public void	Meta_tbl_create(Dbmeta_tbl_itm meta) {throw ErrUtl.NewUnimplemented();}
+	public void Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {throw ErrUtl.NewUnimplemented();}
+	public void	Meta_idx_delete(String idx) {throw ErrUtl.NewUnimplemented();}
+	public void				Meta_fld_append(String tbl, DbmetaFldItm fld) {throw ErrUtl.NewUnimplemented();}
 	public void				Meta_tbl_delete(String tbl)						{}
 	public boolean				Meta_tbl_exists(String name)					{return false;}
 	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}
@@ -85,7 +90,7 @@ public class TdbEngine implements Db_engine {
 		wkrs.Add(Db_qry_.Tid_flush, TdbFlushWkr.new_());
 	}
 	public static TdbEngine as_(Object obj) {return obj instanceof TdbEngine ? (TdbEngine)obj : null;}
-	public static TdbEngine cast(Object obj) {try {return (TdbEngine)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbEngine.class, obj);}}
+	public static TdbEngine cast(Object obj) {try {return (TdbEngine)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, TdbEngine.class, obj);}}
 }
 interface Db_qryWkr {
 	Object Exec(Db_engine engine, Db_qry cmd);

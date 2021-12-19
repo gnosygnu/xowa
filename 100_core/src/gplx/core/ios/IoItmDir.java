@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
+package gplx.core.ios;
 import gplx.core.criterias.*;
+import gplx.frameworks.objects.New;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class IoItmDir extends IoItm_base {
 	public boolean Exists() {return exists;} public void Exists_set(boolean v) {exists = v;} private boolean exists = true;
 	@Override public int TypeId() {return Type_Dir;} @Override public boolean Type_dir() {return true;} @Override public boolean Type_fil() {return false;} public static final int Type_Dir = 1;
 	public boolean ReadOnly() {return readOnly;} public IoItmDir ReadOnly_(boolean val) {this.readOnly = val; return this;} private boolean readOnly;
-	@gplx.New public IoItmDir XtnProps_set(String key, Object val) {return (IoItmDir)super.XtnProps_set(key, val);}
+	@New public IoItmDir XtnProps_set(String key, Object val) {return (IoItmDir)super.XtnProps_set(key, val);}
 	public IoItmList SubDirs() {return subDirs;} IoItmList subDirs;
 	public IoItmList SubFils() {return subFils;} IoItmList subFils;
 	public IoItmHash XtoIoItmList(Criteria crt) {
@@ -29,27 +32,27 @@ public class IoItmDir extends IoItm_base {
 	}
 	Io_url[] XtoIoUrlAry() {
 		IoItmHash list = this.XtoIoItmList(Criteria_.All);
-//#plat_wce			list.Sort(); // NOTE: on wce, subFils retrieved in unexpected order; createTime vs pathString
+//#plat_wce            list.Sort(); // NOTE: on wce, subFils retrieved in unexpected order; createTime vs pathString
 		int count = list.Len();
 		Io_url[] rv = new Io_url[count];
 		for (int i = 0; i < count; i++)
-			rv[i] = list.Get_at(i).Url();
+			rv[i] = list.GetAt(i).Url();
 		return rv;
 	}
 	public IoItmDir FetchDeepOrNull(Io_url findDirUrl) {
-		String dirSpr = this.Url().Info().DirSpr(); int dirSprLen = String_.Len(dirSpr);
+		String dirSpr = this.Url().Info().DirSpr(); int dirSprLen = StringUtl.Len(dirSpr);
 		String currDirStr = this.Url().Raw();
 		String findDirStr = findDirUrl.Raw();
-		if (!String_.Has_at_bgn(findDirStr, currDirStr)) return null;	// findUrl must start with currUrl;
-		String findName = String_.DelEnd(currDirStr, dirSprLen);	// seed findName for String_.MidByLen below;
-		IoItmDir curDir = this;			
+		if (!StringUtl.HasAtBgn(findDirStr, currDirStr)) return null;    // findUrl must start with currUrl;
+		String findName = StringUtl.DelEnd(currDirStr, dirSprLen);    // seed findName for String_.MidByLen below;
+		IoItmDir curDir = this;            
 		while (true) {
-			findDirStr = String_.DelBgn(findDirStr, String_.Len(findName) + dirSprLen);	// NOTE: findName will never have trailingDirSpr; subDirs.Get_by() takes NameOnly; ex: "dir" not "dir\"
-			int nextDirSprPos = String_.FindFwd(findDirStr, dirSpr); if (nextDirSprPos == String_.Find_none) nextDirSprPos = String_.Len(findDirStr);
-			findName = String_.MidByLen(findDirStr, 0, nextDirSprPos);
-			if (String_.Eq(findDirStr, "")) return curDir;	// findDirStr completely removed; all parts match; return curDir
+			findDirStr = StringUtl.DelBgn(findDirStr, StringUtl.Len(findName) + dirSprLen);    // NOTE: findName will never have trailingDirSpr; subDirs.Get_by() takes NameOnly; ex: "dir" not "dir\"
+			int nextDirSprPos = StringUtl.FindFwd(findDirStr, dirSpr); if (nextDirSprPos == StringUtl.FindNone) nextDirSprPos = StringUtl.Len(findDirStr);
+			findName = StringUtl.MidByLen(findDirStr, 0, nextDirSprPos);
+			if (StringUtl.Eq(findDirStr, "")) return curDir;    // findDirStr completely removed; all parts match; return curDir
 			curDir = IoItmDir_.as_(curDir.subDirs.GetByOrNull(findName)); // try to find dir
-			if (curDir == null) return null;	// dir not found; exit; NOTE: if dir found, loop restarts; with curDir as either findDir, or owner of findDir
+			if (curDir == null) return null;    // dir not found; exit; NOTE: if dir found, loop restarts; with curDir as either findDir, or owner of findDir
 		}
 	}
 	void XtoItmList_recur(IoItmHash list, IoItmDir curDir, Criteria dirCrt) {
@@ -63,7 +66,7 @@ public class IoItmDir extends IoItm_base {
 			XtoItmList_recur(list, subDir, dirCrt);
 		}
 	}
-	@gplx.Internal protected IoItmDir(boolean caseSensitive) {
+	public IoItmDir(boolean caseSensitive) {
 		subDirs = IoItmList.new_(this, caseSensitive);
 		subFils = IoItmList.new_(this, caseSensitive);
 	}

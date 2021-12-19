@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.addons.bldrs.files.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.fsdb.meta.*;
@@ -43,7 +45,7 @@ public class Xobldr__xfer_regy__update_downloaded extends Xob_cmd__base implemen
 		// insert thm into fsdb_regy
 		String insert_sql_fsdb_thm 
 			= wiki.File_mgr().Fsdb_mgr().Mnt_mgr().Mnts__get_main().Cfg_mgr().Schema_thm_page()
-			? String_.Format(Xob_fsdb_regy_tbl_.Insert_fsdb_thm, fsdb_thm_tbl)
+			? StringUtl.Format(Xob_fsdb_regy_tbl_.Insert_fsdb_thm, fsdb_thm_tbl)
 			: Xob_fsdb_regy_tbl_.Insert_fsdb_thm_v0
 			;
 		make_conn.Exec_sql(insert_sql_fsdb_thm);

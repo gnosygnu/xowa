@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.graphs;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.tests.Gfo_test_itm;
 import gplx.core.tests.Gfo_test_lnr_base;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 import gplx.xowa.htmls.core.makes.tests.Xoh_make_fxt;
@@ -40,7 +40,7 @@ class Graph_html_fxt {
 	public Graph_html_fxt Hdump_n_() {return Hdump_(BoolUtl.N);}
 	public Graph_html_fxt Hdump_y_() {return Hdump_(BoolUtl.Y);}
 	private Graph_html_fxt Hdump_(boolean v) {
-		this.hdump_atr = v ? " " + String_.new_u8(Graph_json_load_mgr.HDUMP_ATR) : "";
+		this.hdump_atr = v ? " " + StringUtl.NewU8(Graph_json_load_mgr.HDUMP_ATR) : "";
 		return this;
 	}
 	public void Test__hview(String wtxt, String expd) {
@@ -67,7 +67,7 @@ class Graph_html_fxt {
 		hdump_wkr.Test_lnr_(hdump_wkr_lnr);
 
 		hdump_wkr_lnr.Expd().Add(Gfo_test_itm.New__expd().Add("is_commons", true).Add("is_orig", true).Add("ttl", "A.png"));
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<graph>"
 		, "{"
 		, "   \"version\":2,"
@@ -79,7 +79,7 @@ class Graph_html_fxt {
 	}
 	public String Wikirawupload__html(boolean dir_has_value) {
 		String dir = Dir_str(dir_has_value);
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<div class='mw-graph' xo-graph-version=2" + hdump_atr + ">"
 		, "{"
 		, "   \"version\":2,"
@@ -90,7 +90,7 @@ class Graph_html_fxt {
 		);
 	}
 	public String Literal_XOWA_ROOT__wtxt() {
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<graph>"
 		, "{"
 		, "   \"version\":2,"
@@ -102,7 +102,7 @@ class Graph_html_fxt {
 	}
 	public String Literal_XOWA_ROOT__html(boolean dir_has_value) {
 		String xowa_root = dir_has_value ? "{XOWA_ROOT}" : "{XOWA_ROOT}{XOWA_ROOT}";
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<div class='mw-graph' xo-graph-version=2" + hdump_atr + ">"
 		, "{"
 		, "   \"version\":2,"

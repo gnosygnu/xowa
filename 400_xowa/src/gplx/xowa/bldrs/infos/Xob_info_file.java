@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.infos; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*;
+package gplx.xowa.bldrs.infos;
+import gplx.types.commons.GfoGuid;
+import gplx.types.commons.GfoGuidUtl;
+import gplx.dbs.cfgs.*;
 public class Xob_info_file {
-	public Xob_info_file(int id, String type, String ns_ids, int part_id, Guid_adp guid, int schema_version, String core_file_name, String orig_file_name) {
+	public Xob_info_file(int id, String type, String ns_ids, int part_id, GfoGuid guid, int schema_version, String core_file_name, String orig_file_name) {
 		this.id = id; this.type = type; this.ns_ids = ns_ids; this.part_id = part_id; this.guid = guid;
 		this.schema_version = schema_version; this.core_file_name = core_file_name; this.orig_file_name = orig_file_name;
 	}
@@ -24,7 +26,7 @@ public class Xob_info_file {
 	public String Type() {return type;} private final String type;
 	public String Ns_ids() {return ns_ids;} private final String ns_ids;
 	public int Part_id() {return part_id;} private final int part_id;
-	public Guid_adp Guid() {return guid;} private final Guid_adp guid;
+	public GfoGuid Guid() {return guid;} private final GfoGuid guid;
 	public int Schema_version() {return schema_version;} private final int schema_version;
 	public String Core_file_name() {return core_file_name;} private final String core_file_name;
 	public String Orig_file_name() {return orig_file_name;} private final String orig_file_name;
@@ -47,7 +49,7 @@ public class Xob_info_file {
 		, hash.Get_by(Cfg_key__type				).To_str_or("unknown")
 		, hash.Get_by(Cfg_key__ns_ids			).To_str_or("")
 		, hash.Get_by(Cfg_key__part_id			).To_int_or(-1)
-		, hash.Get_by(Cfg_key__guid				).To_guid_or(Guid_adp_.Empty)
+		, hash.Get_by(Cfg_key__guid				).To_guid_or(GfoGuidUtl.Empty)
 		, hash.Get_by(Cfg_key__schema_version	).To_int_or(2)
 		, hash.Get_by(Cfg_key__core_file_name	).To_str_or("")
 		, hash.Get_by(Cfg_key__orig_file_name	).To_str_or("")

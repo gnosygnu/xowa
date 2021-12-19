@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_bfr;
+import gplx.types.custom.brys.wtrs.BryWtr;
 
 public class Json_itm_bool extends Json_itm_base {
 	private boolean data;
@@ -27,7 +27,7 @@ public class Json_itm_bool extends Json_itm_base {
 	public boolean Data_as_bool() {return data;}
 	@Override public Object Data() {return data;}
 	@Override public byte[] Data_bry() {return data ? Json_itm_.Bry__true : Json_itm_.Bry__false;}
-	@Override public void Print_as_json(Bry_bfr bfr, int depth) {bfr.Add(data ? Json_itm_.Bry__true: Json_itm_.Bry__false);}
+	@Override public void Print_as_json(BryWtr bfr, int depth) {bfr.Add(data ? Json_itm_.Bry__true: Json_itm_.Bry__false);}
 
 	public static final Json_itm_bool Bool_n = new Json_itm_bool(false), Bool_y = new Json_itm_bool(true);
 	public static final Json_itm_bool Get(boolean v) {return v ? Bool_y : Bool_n;}

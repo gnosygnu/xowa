@@ -14,11 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.domains;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Xow_domain_itm_tst {
 	private final Xow_domain_fxt fxt = new Xow_domain_fxt();
@@ -44,17 +43,17 @@ public class Xow_domain_itm_tst {
 }
 class Xow_domain_fxt {
 	public void Test_parse(String domain, String expd_orig_lang, String expd_actl_lang, int expd_tid) {
-		Xow_domain_itm actl = Xow_domain_itm_.parse(Bry_.new_a7(domain));
-		Tfds.Eq_str(expd_orig_lang, String_.new_a7((actl.Lang_orig_key())));
-		Tfds.Eq_str(expd_actl_lang, String_.new_a7((actl.Lang_actl_key())));
-		Tfds.Eq_int(expd_tid, actl.Domain_type_id());
+		Xow_domain_itm actl = Xow_domain_itm_.parse(BryUtl.NewA7(domain));
+		GfoTstr.Eq(expd_orig_lang, StringUtl.NewA7((actl.Lang_orig_key())));
+		GfoTstr.Eq(expd_actl_lang, StringUtl.NewA7((actl.Lang_actl_key())));
+		GfoTstr.Eq(expd_tid, actl.Domain_type_id());
 	}
 	public void Test__match_lang_y(String lang_code, String... domains) {Test__match_lang(BoolUtl.Y, lang_code, domains);}
 	public void Test__match_lang(boolean expd, String lang_key_str, String[] domains) {
 		int len = domains.length;
 		for (int i = 0; i < len; ++i) {
-			Xow_domain_itm domain = Xow_domain_itm_.parse(Bry_.new_u8(domains[i]));
-			Gftest.Eq__bool(expd, Xow_domain_itm_.Match_lang(domain, lang_key_str), lang_key_str + "|" + domains[i]);
+			Xow_domain_itm domain = Xow_domain_itm_.parse(BryUtl.NewU8(domains[i]));
+			GfoTstr.Eq(expd, Xow_domain_itm_.Match_lang(domain, lang_key_str), lang_key_str + "|" + domains[i]);
 		}
 	}
 }

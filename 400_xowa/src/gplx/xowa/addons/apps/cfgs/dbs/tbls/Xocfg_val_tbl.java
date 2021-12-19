@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*;
+package gplx.xowa.addons.apps.cfgs.dbs.tbls;
 import gplx.dbs.*; import gplx.dbs.utls.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class Xocfg_val_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__itm_key, fld__itm_ctx, fld__itm_val, fld__itm_date;
@@ -35,7 +38,7 @@ public class Xocfg_val_tbl implements Db_tbl {
 		));
 	}
 	public void Upsert(String ctx, String key, String val, String date) {
-		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__itm_key, fld__itm_ctx), key, ctx, val, date);
+		Db_tbl__crud_.Upsert(conn, tbl_name, flds, StringUtl.Ary(fld__itm_key, fld__itm_ctx), key, ctx, val, date);
 	}
 	public void Delete(String ctx, String key) {
 		conn.Stmt_delete(tbl_name, fld__itm_key, fld__itm_ctx).Crt_str(fld__itm_key, key).Crt_str(fld__itm_ctx, ctx).Exec_delete();

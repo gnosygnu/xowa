@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.tdbs.metas;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
 import gplx.xowa.*;
 import org.junit.*;
 import gplx.core.primitives.*;
@@ -69,13 +74,13 @@ class Xof_file_regy_fxt {
 		regy_mgr.Clear();
 		regy_mgr.Depth_(2);
 	}
-	public Xof_file_regy_fxt Save_fil(String url, String... data) {Io_mgr.Instance.SaveFilStr(Io_url_.mem_fil_(url), String_.Concat_lines_nl(data)); return this;}
+	public Xof_file_regy_fxt Save_fil(String url, String... data) {Io_mgr.Instance.SaveFilStr(Io_url_.mem_fil_(url), StringUtl.ConcatLinesNl(data)); return this;}
 	public Xof_file_regy_fxt Set(String name_str, int w, int h, boolean orig_exists, String... thumbs) {
-		byte[] name = Bry_.new_u8(name_str);		
+		byte[] name = BryUtl.NewU8(name_str);
 		byte[] md5 = md5_(name);
 		Xof_meta_itm itm = regy_mgr.Get_itm_or_new(name, md5);
 		itm.Vrtl_repo_(Xof_meta_itm.Repo_same);	// all tests above assume this is main
-		itm.Update_all(Bry_.Empty, w, h, orig_exists ? Xof_meta_itm.Exists_y : Xof_meta_itm.Exists_unknown, To_ary(thumbs));
+		itm.Update_all(BryUtl.Empty, w, h, orig_exists ? Xof_meta_itm.Exists_y : Xof_meta_itm.Exists_unknown, To_ary(thumbs));
 		return this;
 	}
 	Xof_meta_thumb[] To_ary(String[] ary) {
@@ -90,7 +95,7 @@ class Xof_file_regy_fxt {
 	}
 	public Xof_file_regy_fxt tst_Save(String url_str, String... expd_ary) {
 		regy_mgr.Save();
-		Tfds.Eq_ary_str(expd_ary, Io_mgr.Instance.LoadFilStr_args(Io_url_.new_fil_(url_str)).ExecAsStrAryLnx());
+		GfoTstr.EqLines(expd_ary, Io_mgr.Instance.LoadFilStr_args(Io_url_.new_fil_(url_str)).ExecAsStrAryLnx());
 		return this;
 	}
 }

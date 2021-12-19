@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.fmts.fmtrs.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.domains.*;
 public class Wdata_hwtr_msgs {
@@ -83,17 +85,17 @@ public class Wdata_hwtr_msgs {
 		geo_unit_minute							= brys[offset +  5];
 		geo_unit_second							= brys[offset +  6];
 		geo_meters								= brys[offset +  7];
-		Bry_fmtr fmtr = Bry_fmtr.new_( slink_tbl_hdr_fmt, "wiki_type");
-		Bry_bfr bfr = Bry_bfr_.New_w_size(64);
-		slink_tbl_hdr_w = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wikipedia));
-		slink_tbl_hdr_d = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wiktionary));
-		slink_tbl_hdr_s = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wikisource));
-		slink_tbl_hdr_v = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wikivoyage));
-		slink_tbl_hdr_q = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wikiquote));
-		slink_tbl_hdr_b = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wikibooks));
-		slink_tbl_hdr_u = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wikiversity));
-		slink_tbl_hdr_n = fmtr.Bld_bry_many(bfr, Name_(Xow_domain_tid_.Bry__wikinews));
-		slink_tbl_hdr_x = fmtr.Bld_bry_many(bfr, slink_tbl_hdr_fmt_other);
+		BryFmtr fmtr = BryFmtr.New( slink_tbl_hdr_fmt, "wiki_type");
+		BryWtr bfr = BryWtr.NewWithSize(64);
+		slink_tbl_hdr_w = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wikipedia));
+		slink_tbl_hdr_d = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wiktionary));
+		slink_tbl_hdr_s = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wikisource));
+		slink_tbl_hdr_v = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wikivoyage));
+		slink_tbl_hdr_q = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wikiquote));
+		slink_tbl_hdr_b = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wikibooks));
+		slink_tbl_hdr_u = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wikiversity));
+		slink_tbl_hdr_n = fmtr.BldToBryMany(bfr, Name_(Xow_domain_tid_.Bry__wikinews));
+		slink_tbl_hdr_x = fmtr.BldToBryMany(bfr, slink_tbl_hdr_fmt_other);
 	}
 	public byte[][] Ary() {return ary;} private final byte[][] ary;
 	public int Month_bgn_idx() {return month_bgn_idx;} private final int month_bgn_idx;
@@ -169,7 +171,7 @@ public class Wdata_hwtr_msgs {
 	public byte[] Geo_unit_second() {return geo_unit_second;} private final byte[] geo_unit_second;
 	public byte[] Geo_meters() {return geo_meters;} private final byte[] geo_meters;
 	public static Wdata_hwtr_msgs new_en_() {
-		byte[][] brys = Bry_.Ary
+		byte[][] brys = BryUtl.Ary
 		( "hide", "show", "Contents"
 		, "Also known as:", "No aliases defined."
 		, "Language", "Code"
@@ -223,5 +225,5 @@ public class Wdata_hwtr_msgs {
 			rv[i] = msg_mgr.Val_by_key_obj(ids[i]);	// TOMBSTONE: do not call "Gfh_utl.Escape_html_as_bry" else "<sup>jul</sup>" will be rendered literally; PAGE:wd:Q2 DATE:2016-11-10
 		return rv;
 	}
-	private static byte[] Name_(byte[] v) {return Bry_.Ucase__1st(Bry_.Copy(v));}
+	private static byte[] Name_(byte[] v) {return BryUtl.Ucase1st(BryUtl.Copy(v));}
 }

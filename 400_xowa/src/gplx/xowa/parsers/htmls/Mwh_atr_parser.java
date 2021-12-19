@@ -13,21 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.parsers.xndes.*;	// for brys: <nowiki>, <noinclude>, <includeonly>, <onlyinclude>
+package gplx.xowa.parsers.htmls;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryRef;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
 public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATTRIBS_REGEX
 	private static final byte Area__invalid = 0, Area__atr_limbo = 1, Area__key = 2, Area__eql_limbo = 3, Area__val_limbo = 4, Area__val_quote = 5, Area__val_naked = 6;
 	private final Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_a7();		// ASCII:xnde_atrs
 	private final Mwh_atr_mgr atr_mgr = new Mwh_atr_mgr(16);
-	private final Bry_bfr key_bfr = Bry_bfr_.New(), val_bfr = Bry_bfr_.New();
+	private final BryWtr key_bfr = BryWtr.New(), val_bfr = BryWtr.New();
 	private byte area = Area__atr_limbo;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eql_pos = -1, val_bgn = -1, val_end = -1;
 	private byte qte_byte = AsciiByte.Null;
 	private boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false, qte_closed = false;
 	private int nde_uid, nde_tid;
-	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.New_empty();
+	public BryRef Bry_obj() {return bry_ref;} private final BryRef bry_ref = BryRef.NewEmpty();
 	public int Nde_end_tid() {return nde_end_tid;} private int nde_end_tid;
 	public int Parse(Mwh_atr_wkr wkr, int nde_uid, int nde_tid, byte[] src, int src_bgn, int src_end) {
 		this.nde_uid = nde_uid; this.nde_tid = nde_tid;
@@ -48,12 +56,12 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						if (qte_closed)
 							Make(src, src_end);
 						else {				// dangling; EX: "a='b c=d"
-							int reset_pos = Bry_find_.Find_fwd(src, AsciiByte.Space, val_bgn, src_end);	// try to find 1st space within quote; EX:"a='b c=d" should try to reset at c=d
-							boolean reset_found = reset_pos != Bry_find_.Not_found;
+							int reset_pos = BryFind.FindFwd(src, AsciiByte.Space, val_bgn, src_end);	// try to find 1st space within quote; EX:"a='b c=d" should try to reset at c=d
+							boolean reset_found = reset_pos != BryFind.NotFound;
 							area = Area__invalid; val_end = reset_found ? reset_pos : src_end;
 							Make(src, val_end);	// create invalid atr
 							if (reset_found) {	// space found; resume from text after space; EX: "a='b c=d"; PAGE:en.w:Aubervilliers DATE:2014-06-25
-								pos = Bry_find_.Find_fwd_while_not_ws(src, reset_pos, src_end);	// skip ws
+								pos = BryFind.FindFwdWhileNotWs(src, reset_pos, src_end);	// skip ws
 								atr_bgn = -1;
 								area = Area__atr_limbo;
 								continue;
@@ -73,8 +81,8 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 			}
 
 			byte b = src[pos];
-			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
-			if (b == AsciiByte.Null) throw Err_.new_wo_type("null byte is invalid in byte array; src=", "src", String_.new_u8(src, src_bgn, src_end));
+			int b_len = Utf8Utl.LenOfCharBy1stByte(b);
+			if (b == AsciiByte.Null) throw ErrUtl.NewArgs("null byte is invalid in byte array; src=", "src", StringUtl.NewU8(src, src_bgn, src_end));
 			if (b_len > 1) {
 				b = AsciiByte.Null; // NOTE: hacky, but if there is a Byte_ascii.Null, then it will have a b_len of 1
 			}
@@ -119,7 +127,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						// angle_bgn -> check for <nowiki>
 						case AsciiByte.AngleBgn:		// handle "<nowiki>"
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
-							if (gt_pos == Bry_find_.Not_found) {
+							if (gt_pos == BryFind.NotFound) {
 								area = Area__invalid; if (atr_bgn == -1) atr_bgn = pos;
 							}
 							else
@@ -147,10 +155,10 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
 						case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
 						case AsciiByte.Colon: case AsciiByte.Underline: case AsciiByte.Dash: case AsciiByte.Dot:
-							if (key_bfr_on) key_bfr.Add_byte(b);
+							if (key_bfr_on) key_bfr.AddByte(b);
 							break;
 						case AsciiByte.Null:
-							if (key_bfr_on) key_bfr.Add_mid(src, pos, pos + b_len);
+							if (key_bfr_on) key_bfr.AddMid(src, pos, pos + b_len);
 							break;
 						// ws -> end key
 						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
@@ -165,10 +173,10 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						// angle_bgn -> check for <nowiki>
 						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
-							if (gt_pos == Bry_find_.Not_found)	// "<" should not be in key; EX: "ke<y"
+							if (gt_pos == BryFind.NotFound)	// "<" should not be in key; EX: "ke<y"
 								area = Area__invalid;
 							else {
-								if (!key_bfr_on) {key_bfr.Add_mid(src, key_bgn, pos); key_bfr_on = true;}
+								if (!key_bfr_on) {key_bfr.AddMid(src, key_bgn, pos); key_bfr_on = true;}
 								pos = gt_pos;	// note that there is ++pos below and loop will continue at gt_pos + 1 (next character after)
 							}
 							break;
@@ -252,7 +260,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						// angle_bgn -> check for <nowiki>
 						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
-							if (gt_pos == Bry_find_.Not_found)
+							if (gt_pos == BryFind.NotFound)
 								area = Area__invalid;	// NOTE: valid in MW; making invalid now until finding counter-example
 							else
 								pos = gt_pos;	// note that there is ++pos below and loop will continue at gt_pos + 1 (next character after)
@@ -276,7 +284,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 								}
 								else {					// quote is just char; EX: title="1 o'clock" or title='The "C" way'
 									prv_is_ws = false;
-									if (val_bfr_on) val_bfr.Add_byte(b);
+									if (val_bfr_on) val_bfr.AddByte(b);
 								}
 							}
 							break;
@@ -287,24 +295,24 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 								if (atr_bgn == -1) atr_bgn = pos;	// NOTE: process ws just like Area__atr_limbo
 							}
 							else {
-								if (!val_bfr_on) {val_bfr.Add_mid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
+								if (!val_bfr_on) {val_bfr.AddMid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
 								if (prv_is_ws) {}	// noop; only allow one ws at a time; EX: "a  b" -> "a b"; "a\n\nb" -> "a b"
 								else {
-									prv_is_ws = true; val_bfr.Add_byte(AsciiByte.Space);
+									prv_is_ws = true; val_bfr.AddByte(AsciiByte.Space);
 								}
 							}
 							break;
 						// angle_bgn -> check for <nowiki>; EX: <span title='ab<nowiki>c</nowiki>de'>
 						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
-							if (gt_pos == Bry_find_.Not_found) {	
+							if (gt_pos == BryFind.NotFound) {
 								// area = Area__invalid;	// "<" inside quote is invalid; EX: <span title='a<b'>c</span>
-								if (val_bfr_on) val_bfr.Add_byte(b);
+								if (val_bfr_on) val_bfr.AddByte(b);
 							}
 							else {
 								if (qte_closed) {}
 								else {
-									if (!val_bfr_on) {val_bfr.Add_mid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
+									if (!val_bfr_on) {val_bfr.AddMid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
 								}
 								pos = gt_pos;	// note that there is ++pos below and loop will continue at gt_pos + 1 (next character after)
 							}
@@ -316,7 +324,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 								area = Area__invalid;
 							else {
 								prv_is_ws = false;
-								if (val_bfr_on) val_bfr.Add_mid(src, pos, pos + b_len);
+								if (val_bfr_on) val_bfr.AddMid(src, pos, pos + b_len);
 							}
 							break;
 					}
@@ -343,20 +351,20 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						case AsciiByte.Question: case AsciiByte.At:
 						case AsciiByte.BrackBgn: case AsciiByte.BrackEnd: case AsciiByte.Pow: case AsciiByte.Underline: case AsciiByte.Tick:
 						case AsciiByte.CurlyBgn: case AsciiByte.CurlyEnd: case AsciiByte.Pipe: case AsciiByte.Tilde:
-							if (val_bfr_on) val_bfr.Add_byte(b);
+							if (val_bfr_on) val_bfr.AddByte(b);
 							break;
 						case AsciiByte.Null:
-							if (val_bfr_on) val_bfr.Add_mid(src, pos, pos + b_len);
+							if (val_bfr_on) val_bfr.AddMid(src, pos, pos + b_len);
 							break;
 						// case Byte_ascii.Angle_end: NOTE: valid in MW; making invalid now until finding counter-example
 						// angle_bgn -> check for <nowiki>; EX: a=b<nowiki>c</nowiki>d
 						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
-							if (gt_pos == Bry_find_.Not_found) {
+							if (gt_pos == BryFind.NotFound) {
 								area = Area__invalid;	// NOTE: valid in MW; making invalid now until finding counter-example
 							}
 							else {
-								if (!val_bfr_on) {val_bfr.Add_mid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
+								if (!val_bfr_on) {val_bfr.AddMid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
 								pos = gt_pos;	// note that there is ++pos below and loop will continue at gt_pos + 1 (next character after)								
 							}
 							break;
@@ -414,7 +422,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 		boolean atr_valid = true;
 		if (area == Area__invalid) {
 			atr_valid = false;
-			key_bry = Bry_.Empty;
+			key_bry = BryUtl.Empty;
 			key_bfr.Clear();
 			if (val_bgn == -1) val_bgn = atr_bgn;
 			val_bfr.Clear();
@@ -426,8 +434,8 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				if (key_end == -1) key_end = val_end;		// NOTE: key_end == -1 when eos; EX: "a" would have key_bgn = 0; key_end = -1; val_end = 1 DATE:2014-07-03
 				val_bgn = val_end = -1;
 			}
-			key_bry = key_bfr_on ? key_bfr.To_bry_and_clear() : Bry_.Mid(src, key_bgn, key_end);	// always make key_bry; needed for repeated_atrs as well as key_tid
-			if (val_bfr_on) val_bry = val_bfr.To_bry_and_clear();
+			key_bry = key_bfr_on ? key_bfr.ToBryAndClear() : BryLni.Mid(src, key_bgn, key_end);	// always make key_bry; needed for repeated_atrs as well as key_tid
+			if (val_bfr_on) val_bry = val_bfr.ToBryAndClear();
 		}
 		int qte_tid = Mwh_atr_itm_.Mask__qte__none;
 		if (qte_byte != AsciiByte.Null)
@@ -450,26 +458,26 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 		key_bfr_on = val_bfr_on = ws_is_before_val = qte_closed = false;
 	}
 	public int Xnde_find_gt_find(byte[] src, int pos, int end) {
-		bry_ref.Val_(Bry_.Empty);
+		bry_ref.ValSet(BryUtl.Empty);
 		byte b = src[pos];
 		if (b == AsciiByte.Slash && pos + 1 < end) {	// if </ move pos to after /
 			++pos;
 			b = src[pos];
 		}
-		int gt_pos = Bry_find_.Find_fwd(src, AsciiByte.Gt, pos, end); if (gt_pos == Bry_find_.Not_found) return Bry_find_.Not_found;
-		byte[] bry = (byte[])xnde_hash.Get_by_mid(src, pos, gt_pos); if (bry == null) return Bry_find_.Not_found;
-		bry_ref.Val_(bry);
+		int gt_pos = BryFind.FindFwd(src, AsciiByte.Gt, pos, end); if (gt_pos == BryFind.NotFound) return BryFind.NotFound;
+		byte[] bry = (byte[])xnde_hash.Get_by_mid(src, pos, gt_pos); if (bry == null) return BryFind.NotFound;
+		bry_ref.ValSet(bry);
 		return bry.length + pos;
 	}
 	private int Xnde_find_gt(byte[] src, int lt_pos, int end) {
-		int pos = lt_pos + 1; if (pos == end) return Bry_find_.Not_found;
+		int pos = lt_pos + 1; if (pos == end) return BryFind.NotFound;
 		byte b = src[pos];
 		if (b == AsciiByte.Slash && pos + 1 < end) {
 			++pos;
 			b = src[pos];
 		}
 		int match_pos = Xnde_find_gt_find(src, pos, end);
-		if (match_pos == Bry_find_.Not_found) {return Bry_find_.Not_found;}
+		if (match_pos == BryFind.NotFound) {return BryFind.NotFound;}
 		boolean slash_found = false;
 		for (int i = match_pos; i < end; i++) {
 			b = src[i];
@@ -478,14 +486,14 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Tab: // skip any ws
 					break;
 				case AsciiByte.Slash:
-					if (slash_found)		{return Bry_find_.Not_found;}	// only allow one slash
+					if (slash_found)		{return BryFind.NotFound;}	// only allow one slash
 					else					slash_found = true;
 					break;
 				default:
-					return Bry_find_.Not_found;
+					return BryFind.NotFound;
 			}
 		}
-		return Bry_find_.Not_found;
+		return BryFind.NotFound;
 	}
 	private static final Hash_adp_bry xnde_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_bry(Xop_xnde_tag_.Tag__nowiki.Name_bry())

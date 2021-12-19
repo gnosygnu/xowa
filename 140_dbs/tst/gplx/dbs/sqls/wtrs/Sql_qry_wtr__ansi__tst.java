@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
+package gplx.dbs.sqls.wtrs; import gplx.dbs.*; import gplx.dbs.sqls.*;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 import gplx.core.criterias.*;
 public class Sql_qry_wtr__ansi__tst {
@@ -93,5 +94,5 @@ public class Sql_qry_wtr__ansi__tst {
 			);
 	}
 	void tst_XtoSql(Db_qry cmd, String expd)				{tst_XtoSql(cmd, expd, false);}
-	void tst_XtoSql(Db_qry cmd, String expd, boolean prepare)	{Tfds.Eq(expd, sqlWtr.ToSqlStr(cmd, prepare));}
+	void tst_XtoSql(Db_qry cmd, String expd, boolean prepare)	{GfoTstr.EqObj(expd, sqlWtr.ToSqlStr(cmd, prepare));}
 }

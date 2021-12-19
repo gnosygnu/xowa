@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.filerepo; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.mediawiki.includes.*;
-import gplx.xowa.mediawiki.includes.filerepo.file.*;
+package gplx.xowa.mediawiki.includes.filerepo;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.xowa.mediawiki.includes.XomwTitleOld;
+import gplx.xowa.mediawiki.includes.filerepo.file.XomwFile;
 /*	TODO.XO:
 	* getZoneUrl
 */
@@ -363,7 +365,7 @@ public class XomwFileRepo {
 //			}
 //
 //			return "mwstore://backendName/{container}{super}";
-		return Bry_.Empty;
+		return BryUtl.Empty;
 	}
 
 //		/**
@@ -674,11 +676,11 @@ public class XomwFileRepo {
 	*/
 	public static byte[] getHashPathForLevel(byte[] name, int levels) {
 		if (levels == 0) {
-			return Bry_.Empty;
+			return BryUtl.Empty;
 		} else {
 			byte[] hash = gplx.xowa.files.Xof_file_wkr_.Md5(name);
 			// XO.MW: assume 2
-			if (levels != 2) throw Err_.new_wo_type("levels must be 2", "levels", levels);
+			if (levels != 2) throw ErrUtl.NewArgs("levels must be 2", "levels", levels);
 			byte[] path = new byte[5];
 			path[0] = path[2] = hash[0];
 			path[3] = hash[1];

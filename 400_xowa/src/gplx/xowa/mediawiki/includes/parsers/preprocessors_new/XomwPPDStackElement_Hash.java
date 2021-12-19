@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
 // MW.SRC:1.33
 class XomwPPDStackElement_Hash extends XomwPPDStackElement {
 	public XomwPPDStackElement_Hash(XomwPPDPart partClass, String open, String close, XophpArray parts, int count, boolean lineStart, int startPos) {super(partClass, open, close, parts, count, lineStart, startPos);
@@ -28,7 +30,7 @@ class XomwPPDStackElement_Hash extends XomwPPDStackElement {
 	public XophpArray breakSyntax() {return breakSyntax(0);}
 	public XophpArray breakSyntax(int openingCount) {
 		XophpArray accum;
-		if (String_.Eq(this.open, "\n")) {
+		if (StringUtl.Eq(this.open, "\n")) {
 			accum = XophpArray.array_merge(XophpArray.New(this.savedPrefix), XophpArray.New(((XomwPPDPart)this.parts.Get_at(0)).output));
 		} else {
 			if (XophpInt_.is_false(openingCount)) {

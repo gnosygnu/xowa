@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.miscs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_comm_lxr_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -24,21 +26,21 @@ public class Xop_comm_lxr_tst {
 		fxt.Init_log_(Xop_comm_log.Eos).Test_parse_page_all_str("<!-- ", "");
 	}
 	@Test public void Ws_end() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "<!-- b --> "
 		, "c"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "c"
 		));
 	}
 	@Test public void Ws_bgn_end() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, " <!-- b --> "
 		, "c"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "c"
 		));
@@ -51,11 +53,11 @@ public class Xop_comm_lxr_tst {
 	}
 	@Test public void Comment_can_cause_pre() {// PURPOSE: assert that comment causes pre; DATE:2014-02-18
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, " <!-- b -->c"
 		, "d"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<p>a"
 		, "</p>"
 		, ""
@@ -70,11 +72,11 @@ public class Xop_comm_lxr_tst {
 	}
 	@Test public void Ws_bgn_needs_nl() {	// PURPOSE: do not strip new line unles *entire* line is comment
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, " <!-- b -->"
 		, "c"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<p>a"
 		, "c"
 		, "</p>"
@@ -84,12 +86,12 @@ public class Xop_comm_lxr_tst {
 	}
 	@Test public void Ws_strip_nl() {	// PURPOSE: handle multiple "<!-- -->\n"; was only trimming 1st; DATE:2014-02-24
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "<!-- -->"
 		, "<!-- -->"
 		, "b"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<p>a"
 		, "b"
 		, "</p>"
@@ -99,12 +101,12 @@ public class Xop_comm_lxr_tst {
 	}
 	@Test public void Comment_should_not_gobble_paras() {// ISSUE#:437 DATE:2019-04-27
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, ""
 		, "<!-- z --> "
 		, "b"
-		), String_.Concat_lines_nl_skip_last // was <p>a\nb\<p>
+		), StringUtl.ConcatLinesNlSkipLast // was <p>a\nb\<p>
 		( "<p>a"
 		, "</p>"
 		, ""

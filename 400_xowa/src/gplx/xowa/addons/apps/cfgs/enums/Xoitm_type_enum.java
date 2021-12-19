@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.enums;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xoitm_type_enum {
 	public static final int
 	  Tid__bool			= 0
@@ -31,14 +31,14 @@ public class Xoitm_type_enum {
 	;
 
 	public static int To_uid(String v) {
-		if		(String_.Eq(v, BoolUtl.ClsValName))			return Tid__bool;
-		else if	(String_.Eq(v, Int_.Cls_val_name))			return Tid__int;
-		else if	(String_.Eq(v, String_.Cls_val_name))		return Tid__str;
-		else if	(String_.Eq(v, "memo"))						return Tid__memo;
-		else if	(String_.Eq(v, "btn"))						return Tid__btn;
-		else if	(String_.Eq(v, "io.cmd"))					return Tid__io_cmd;
-		else if	(String_.Eq(v, "gui.binding"))				return Tid__gui_binding;
-		else if (String_.Has_at_bgn(v, "list:"))			return Tid__list;
-		else												throw Err_.new_wo_type("unknown cfg type enum; v=" + v);
+		if		(StringUtl.Eq(v, BoolUtl.ClsValName))			return Tid__bool;
+		else if	(StringUtl.Eq(v, IntUtl.ClsValName))			return Tid__int;
+		else if	(StringUtl.Eq(v, StringUtl.ClsValName))		return Tid__str;
+		else if	(StringUtl.Eq(v, "memo"))						return Tid__memo;
+		else if	(StringUtl.Eq(v, "btn"))						return Tid__btn;
+		else if	(StringUtl.Eq(v, "io.cmd"))					return Tid__io_cmd;
+		else if	(StringUtl.Eq(v, "gui.binding"))				return Tid__gui_binding;
+		else if (StringUtl.HasAtBgn(v, "list:"))			return Tid__list;
+		else												throw ErrUtl.NewArgs("unknown cfg type enum; v=" + v);
 	}
 }

@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_bfr;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 
 public class Json_kv extends Json_itm_base {
 	public Json_kv(Json_itm key, Json_itm val) {this.key = key; this.val = val;}
@@ -31,9 +31,9 @@ public class Json_kv extends Json_itm_base {
 	public boolean Key_eq(byte[] comp) {return ((Json_itm_str)key).Data_eq(comp);}
 	@Override public Object Data() {return null;}
 	@Override public byte[] Data_bry() {return null;}
-	@Override public void Print_as_json(Bry_bfr bfr, int depth) {
+	@Override public void Print_as_json(BryWtr bfr, int depth) {
 		key.Print_as_json(bfr, depth);
-		bfr.Add_byte(AsciiByte.Colon);
+		bfr.AddByte(AsciiByte.Colon);
 		val.Print_as_json(bfr, depth);
 	}
 	public static final Json_kv[] Ary_empty = new Json_kv[0];

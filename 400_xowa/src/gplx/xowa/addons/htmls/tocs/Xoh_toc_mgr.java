@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
+package gplx.xowa.addons.htmls.tocs;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*;
+import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xoh_toc_mgr {
 	private final Ordered_hash itms = Ordered_hash_.New_bry();
 	private final Xoh_toc_wkr__lvl lvl_wkr = new Xoh_toc_wkr__lvl();
@@ -44,11 +49,11 @@ public class Xoh_toc_mgr {
 		itms.Add(itm.Anch(), itm);
 		return itm;
 	}
-	public void To_html(Bry_bfr rv, Xoh_wtr_ctx hctx, boolean toc_mode_is_pgbnr) {htmlr.To_html(rv, hctx, itms, toc_mode_is_pgbnr);}
+	public void To_html(BryWtr rv, Xoh_wtr_ctx hctx, boolean toc_mode_is_pgbnr) {htmlr.To_html(rv, hctx, itms, toc_mode_is_pgbnr);}
 	public byte[] Test__to_html() {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		htmlr.Test__to_html(bfr, itms);
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 	public static boolean Enabled = true;	// TEST
 }

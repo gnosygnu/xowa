@@ -15,14 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.Io_url;
-import gplx.String_;
-
-public interface Mustache_tkn_itm { 
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+public interface Mustache_tkn_itm {
 	int Tid();
 	String Key();
 	Mustache_tkn_itm[] Subs_ary();
@@ -34,16 +33,16 @@ class Mustache_tkn_itm_ {// for types, see http://mustache.github.io/mustache.5.
 	public static final Mustache_tkn_itm[] Ary_empty = new Mustache_tkn_itm[0];
 }
 abstract class Mustache_tkn_base implements Mustache_tkn_itm {
-	public Mustache_tkn_base(int tid, byte[] key_bry) {this.tid = tid; this.key = String_.new_u8(key_bry);}
+	public Mustache_tkn_base(int tid, byte[] key_bry) {this.tid = tid; this.key = StringUtl.NewU8(key_bry);}
 	public int Tid() {return tid;} private final int tid;
 	public String Key() {return key;} private final String key;
 	public Mustache_tkn_itm[] Subs_ary() {return Mustache_tkn_itm_.Ary_empty;}
-	public void Subs_ary_(Mustache_tkn_itm[] v) {throw Err_.new_unsupported();}	// fail if trying to set and not overridden
-	public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx)	{throw Err_.new_unsupported();}	// should be abstract
+	public void Subs_ary_(Mustache_tkn_itm[] v) {throw ErrUtl.NewUnsupported();}	// fail if trying to set and not overridden
+	public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx)	{throw ErrUtl.NewUnsupported();}	// should be abstract
 }
 class Mustache_tkn_root extends Mustache_tkn_base { // EX: {{variable}} -> &lt;a&gt;
 	private Mustache_tkn_itm[] subs_ary;
-	public Mustache_tkn_root() {super(Mustache_tkn_itm_.Tid__root, Bry_.Empty);}
+	public Mustache_tkn_root() {super(Mustache_tkn_itm_.Tid__root, BryUtl.Empty);}
 	@Override public Mustache_tkn_itm[] Subs_ary() {return subs_ary;}
 	@Override public void Subs_ary_(Mustache_tkn_itm[] v) {subs_ary = v;}
 	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {
@@ -56,7 +55,7 @@ class Mustache_tkn_root extends Mustache_tkn_base { // EX: {{variable}} -> &lt;a
 }
 class Mustache_tkn_text extends Mustache_tkn_base {	// EX: text -> text
 	private final byte[] src; private final int src_bgn, src_end; 
-	public Mustache_tkn_text(byte[] src, int src_bgn, int src_end) {super(Mustache_tkn_itm_.Tid__text, Bry_.Empty);
+	public Mustache_tkn_text(byte[] src, int src_bgn, int src_end) {super(Mustache_tkn_itm_.Tid__text, BryUtl.Empty);
 		this.src = src;
 		this.src_bgn = src_bgn;
 		this.src_end = src_end;
@@ -66,7 +65,7 @@ class Mustache_tkn_text extends Mustache_tkn_base {	// EX: text -> text
 	}
 }
 class Mustache_tkn_comment extends Mustache_tkn_base { // EX: {{!section}}comment{{/section}} ->
-	public Mustache_tkn_comment() {super(Mustache_tkn_itm_.Tid__comment, Bry_.Empty);}
+	public Mustache_tkn_comment() {super(Mustache_tkn_itm_.Tid__comment, BryUtl.Empty);}
 	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {}
 }
 class Mustache_tkn_variable extends Mustache_tkn_base { // EX: {{variable}} -> &lt;a&gt;
@@ -115,7 +114,7 @@ class Mustache_tkn_partial extends Mustache_tkn_base { // EX: {{>a}} -> abc (def
 	public Mustache_tkn_partial(byte[] key, Io_url dir) {
 		super(Mustache_tkn_itm_.Tid__partial, key);
 		Mustache_tkn_parser parser = new Mustache_tkn_parser(dir);
-		template_root = parser.Parse(String_.new_a7(Bry_.Trim_bgn(key, AsciiByte.Space, 0)));
+		template_root = parser.Parse(StringUtl.NewA7(BryUtl.TrimBgn(key, AsciiByte.Space, 0)));
 	}
 	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {
 		template_root.Render(bfr, ctx);

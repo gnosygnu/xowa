@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.Err_;
-import gplx.Type_ids_;
-import gplx.objects.strings.StringUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.errs.ErrUtl;
 public class DbmetaFldType {
 	public DbmetaFldType(int tid, String name, int len1, int len2) {
 		this.tid = tid;
@@ -74,24 +74,24 @@ public class DbmetaFldType {
 			case DbmetaFldType.TidBry:          return ItmBry;
 			case DbmetaFldType.TidDate:         return ItmDate;
 			case DbmetaFldType.TidDecimal:      // return Itm__decimal(len1);
-			default:                            throw Err_.new_unhandled(tid);
+			default:                            throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public static int GetTypeIdByObj(Object o) {
-		int type_id = Type_ids_.To_id_by_obj(o);
+		int type_id = TypeIds.ToIdByObj(o);
 		switch (type_id) {
-			case Type_ids_.Id__bool:               return DbmetaFldType.TidBool;
-			case Type_ids_.Id__byte:               return DbmetaFldType.TidByte;
-			case Type_ids_.Id__short:              return DbmetaFldType.TidShort;
-			case Type_ids_.Id__int:                return DbmetaFldType.TidInt;
-			case Type_ids_.Id__long:               return DbmetaFldType.TidLong;
-			case Type_ids_.Id__float:              return DbmetaFldType.TidFloat;
-			case Type_ids_.Id__double:             return DbmetaFldType.TidDouble;
-			case Type_ids_.Id__str:                return DbmetaFldType.TidStr;
-			case Type_ids_.Id__bry:                return DbmetaFldType.TidBry;
-			case Type_ids_.Id__date:               return DbmetaFldType.TidDate;
-			case Type_ids_.Id__decimal:            return DbmetaFldType.TidDecimal;
-			default:                               throw Err_.new_unhandled_default(type_id);
+			case TypeIds.IdBool:               return DbmetaFldType.TidBool;
+			case TypeIds.IdByte:               return DbmetaFldType.TidByte;
+			case TypeIds.IdShort:              return DbmetaFldType.TidShort;
+			case TypeIds.IdInt:                return DbmetaFldType.TidInt;
+			case TypeIds.IdLong:               return DbmetaFldType.TidLong;
+			case TypeIds.IdFloat:              return DbmetaFldType.TidFloat;
+			case TypeIds.IdDouble:             return DbmetaFldType.TidDouble;
+			case TypeIds.IdStr:                return DbmetaFldType.TidStr;
+			case TypeIds.IdBry:                return DbmetaFldType.TidBry;
+			case TypeIds.IdDate:               return DbmetaFldType.TidDate;
+			case TypeIds.IdDecimal:            return DbmetaFldType.TidDecimal;
+			default:                               throw ErrUtl.NewUnhandled(type_id);
 		}
 	}
 }

@@ -13,11 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import org.junit.*;
-import gplx.core.intls.*; import gplx.core.log_msgs.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.specials.*;
+package gplx.xowa.langs.bldrs;
+import gplx.libs.files.Io_mgr;
+import gplx.core.log_msgs.Gfo_msg_log;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.msgs.Xol_msg_itm;
+import gplx.xowa.langs.specials.Xol_specials_itm;
+import gplx.xowa.parsers.lnkis.Xop_lnki_arg_parser;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_;
+import org.junit.Before;
+import org.junit.Test;
 public class Xol_mw_lang_parser_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_mw_lang_parser_fxt fxt = new Xol_mw_lang_parser_fxt();
 	@Test public void Core_keywords() {
@@ -40,11 +61,11 @@ public class Xol_mw_lang_parser_tst {
 			;
 	}
 	@Test public void Core_keywords_func_currentmonth() {
-		Datetime_now.Manual_y_();
+		GfoDateNow.ManualSetY();
 		fxt.Parse_core("$magicWords = array('currentmonth' => array(0, 'MOISACTUEL'));")
 			.Tst_parse("{{MOISACTUEL}}", "01")
 			;
-		Datetime_now.Manual_n_();
+		GfoDateNow.ManualSetN();
 	}
 	@Test public void Core_keywords_func_ns() {
 		fxt.Parse_core("$magicWords = array('ns' => array(0, 'ESPACEN'));")
@@ -86,7 +107,7 @@ public class Xol_mw_lang_parser_tst {
 	}
 	@Test public void Fallback() {
 		fxt.Parse_core("$fallback = 'zh-hans';");
-		Tfds.Eq("zh-hans", String_.new_u8(fxt.Lang().Fallback_bry()));
+		GfoTstr.EqObj("zh-hans", StringUtl.NewU8(fxt.Lang().Fallback_bry()));
 	}
 	@Test public void Separator_transform_table() {
 		fxt.Parse_core("$separatorTransformTable = array( ',' => '.', '.' => ',' );");
@@ -112,7 +133,7 @@ public class Xol_mw_lang_parser_tst {
 		, ");"
 		);
 		fxt.Run_bld_all();
-		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", String_.Concat_lines_nl
+		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", StringUtl.ConcatLinesNl
 		( "numbers {"
 		, "  digits {"
 		, "    clear;"
@@ -138,7 +159,7 @@ public class Xol_mw_lang_parser_tst {
 		, ");"
 		);
 		fxt.Run_bld_all();
-		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", String_.Concat_lines_nl
+		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", StringUtl.ConcatLinesNl
 		( "numbers {"
 		, "  digit_grouping_pattern = '##,##,###';"
 		, "}"
@@ -146,7 +167,7 @@ public class Xol_mw_lang_parser_tst {
 		, ";"
 		));
 	}
-	@Test  public void Bld() {
+	@Test public void Bld() {
 		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_php/MessagesFr.php"
 		, "$fallback = 'zh-hans';"
 		, "$rtl = true;"
@@ -178,7 +199,7 @@ public class Xol_mw_lang_parser_tst {
 		, "}"
 		);
 		fxt.Run_bld_all();
-		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", String_.Concat_lines_nl
+		fxt.Tst_file("mem/xowa/bin/any/xowa/cfg/lang/core/fr.gfs", StringUtl.ConcatLinesNl
 		( "this"
 		, ".fallback_load('zh-hans')"
 		, ".dir_rtl_('y')"
@@ -215,9 +236,9 @@ public class Xol_mw_lang_parser_tst {
 		, ";"
 		));
 	}
-	@Test  public void Dir_ltr() {
+	@Test public void Dir_ltr() {
 		fxt.Parse_core("$rtl = 'true';");
-		Tfds.Eq(false, fxt.Lang().Dir_ltr());
+		GfoTstr.EqObj(false, fxt.Lang().Dir_ltr());
 	}
 	@Test public void Core_keywords__only_1() {	// PURPOSE: some magic words don't specify case-match; EX: Disambiguator.php; DATE:2013-12-24
 		fxt.Parse_core("$magicWords = array('toc' => array('a1'));")
@@ -237,43 +258,43 @@ public class Xol_mw_lang_parser_tst {
 }
 class Xol_mw_lang_parser_fxt {
 	Xoae_app app; Xowe_wiki wiki; private Xop_fxt fxt;
-	Xol_mw_lang_parser parser = new Xol_mw_lang_parser(Gfo_msg_log.Test()); Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	Xol_mw_lang_parser parser = new Xol_mw_lang_parser(Gfo_msg_log.Test()); BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	public void Clear() {
 		if (app == null) {
 			app = Xoa_app_fxt.Make__app__edit();
 		}
 		app.Lang_mgr().Clear();// NOTE: always clear the lang
-		lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7("fr"));
+		lang = app.Lang_mgr().Get_by_or_new(BryUtl.NewA7("fr"));
 		wiki = Xoa_app_fxt.Make__wiki__edit(app, "en.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 		lang.Kwd_mgr().Clear(); lang.Msg_mgr().Clear();	// NOTE: clear kwds and msgs else they will be printed to file; this line must go last b/c various xtns will fill in kwds dynamically
 	}
 	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
-	public void Num_fmt_tst(String raw, String expd) {Tfds.Eq(expd, String_.new_u8(lang.Num_mgr().Format_num(Bry_.new_u8(raw))));}
+	public void Num_fmt_tst(String raw, String expd) {GfoTstr.EqObj(expd, StringUtl.NewU8(lang.Num_mgr().Format_num(BryUtl.NewU8(raw))));}
 	public void Run_bld_all() {parser.Bld_all(app.Lang_mgr(), app.Fsys_mgr());}
 	public void Save_file(String path, String... lines) {
-		Io_mgr.Instance.SaveFilStr(Io_url_.mem_fil_(path), String_.Concat_lines_nl(lines));
+		Io_mgr.Instance.SaveFilStr(Io_url_.mem_fil_(path), StringUtl.ConcatLinesNl(lines));
 	}
 	public void Tst_file(String path, String expd) {
 		Io_url url = Io_url_.mem_fil_(path);
 		String actl = Io_mgr.Instance.LoadFilStr(url);
-		Tfds.Eq_str_lines(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 	}
 	public Xol_mw_lang_parser_fxt Parse_core(String raw)				{parser.Parse_core(raw, lang, tmp_bfr, Xol_lang_transform_null.Instance); return this;}
 	public Xol_mw_lang_parser_fxt Parse_xtn (String raw)				{parser.Parse_xtn(raw, Io_url_.Empty, app.Lang_mgr(), tmp_bfr, false, Xol_lang_transform_null.Instance); lang.Evt_lang_changed(); return this;}
 	public Xol_mw_lang_parser_fxt Tst_keyword(int id, boolean case_sensitive, String... words) {
-		Xol_kwd_grp lst = lang.Kwd_mgr().Get_at(id); if (lst == null) throw Err_.new_wo_type("list should not be null");
-		Tfds.Eq(case_sensitive, lst.Case_match());
+		Xol_kwd_grp lst = lang.Kwd_mgr().Get_at(id); if (lst == null) throw ErrUtl.NewArgs("list should not be null");
+		GfoTstr.EqObj(case_sensitive, lst.Case_match());
 		int actl_len = lst.Itms().length;
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++)
-			actl[i] = String_.new_u8(lst.Itms()[i].Val());
-		Tfds.Eq_ary_str(words, actl);
+			actl[i] = StringUtl.NewU8(lst.Itms()[i].Val());
+		GfoTstr.EqLines(words, actl);
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Tst_keyword_img(String key_str, byte tid) {
-		byte[] key = Bry_.new_u8(key_str);
-		Tfds.Eq(tid, lang.Lnki_arg_parser().Identify_tid(key, 0, key.length));
+		byte[] key = BryUtl.NewU8(key_str);
+		GfoTstr.EqObj(tid, lang.Lnki_arg_parser().Identify_tid(key, 0, key.length));
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Tst_parse(String raw, String expd) {
@@ -282,22 +303,22 @@ class Xol_mw_lang_parser_fxt {
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Tst_ns_lkp(String key_str, int id) {
-		byte[] key = Bry_.new_u8(key_str);
+		byte[] key = BryUtl.NewU8(key_str);
 		Xow_ns ns = (Xow_ns)wiki.Ns_mgr().Names_get_or_null(key, 0, key.length);
 		int actl = ns == null ? Xow_ns_.Tid__null : ns.Id();
-		Tfds.Eq(id, actl);
+		GfoTstr.EqObj(id, actl);
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Test_specialPageAliases(String special, String... expd_aliases) {
-		Xol_specials_itm actl_aliases = lang.Specials_mgr().Get_by_key(Bry_.new_u8(special));
-		Tfds.Eq_ary_str(expd_aliases, To_str_ary(actl_aliases));
+		Xol_specials_itm actl_aliases = lang.Specials_mgr().Get_by_key(BryUtl.NewU8(special));
+		GfoTstr.EqLines(expd_aliases, To_str_ary(actl_aliases));
 		return this;
 	}
 	private String[] To_str_ary(Xol_specials_itm itm) {
 		int len = itm.Aliases().length;
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = String_.new_u8((byte[])itm.Aliases()[i]);
+			rv[i] = StringUtl.NewU8((byte[])itm.Aliases()[i]);
 		}
 		return rv;
 	}
@@ -306,10 +327,10 @@ class Xol_mw_lang_parser_fxt {
 		return this;
 	}
 	public Xol_mw_lang_parser_fxt Tst_message(String key, int id, String val, boolean fmt) {
-		Xol_msg_itm itm = lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_a7(key));
-		Tfds.Eq(id, itm.Id());
-		Tfds.Eq(val, String_.new_u8(itm.Val()));
-		Tfds.Eq(fmt, itm.Has_fmt_arg());
+		Xol_msg_itm itm = lang.Msg_mgr().Itm_by_key_or_new(BryUtl.NewA7(key));
+		GfoTstr.EqObj(id, itm.Id());
+		GfoTstr.EqObj(val, StringUtl.NewU8(itm.Val()));
+		GfoTstr.EqObj(fmt, itm.Has_fmt_arg());
 		return this;
 	}
 }

@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.langs.gfs;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.arrays.IntAryUtl;
 public class Gfs_nde {
-	public byte[] Name_bry(byte[] src) {return name == null ? Bry_.Mid(src, name_bgn, name_end) : name;}
+	public byte[] Name_bry(byte[] src) {return name == null ? BryLni.Mid(src, name_bgn, name_end) : name;}
 	public byte[] Name() {return name;} public Gfs_nde Name_(byte[] v) {name = v; return this;} private byte[] name;
 	public int Name_bgn() {return name_bgn;} private int name_bgn = -1;
 	public int Name_end() {return name_end;} private int name_end = -1;
@@ -45,7 +47,7 @@ public class Gfs_nde {
 		subs[subs_len] = nde;
 		subs_len = new_len;
 		return this;
-	}	Gfs_nde[] subs = Gfs_nde.Ary_empty; int subs_max; int[] subs_pos_ary = Int_ary_.Empty;
+	}	Gfs_nde[] subs = Gfs_nde.Ary_empty; int subs_max; int[] subs_pos_ary = IntAryUtl.Empty;
 	public Gfs_nde Subs_get_at(int i) {return subs[i];}
 	public Gfs_nde[] Subs_to_ary() {
 		Gfs_nde[] rv = new Gfs_nde[subs_len];
@@ -72,7 +74,7 @@ public class Gfs_nde {
 		args[args_len] = nde;
 		args_len = new_len;
 		return this;
-	}	Gfs_nde[] args = Gfs_nde.Ary_empty; int args_max; int[] args_pos_ary = Int_ary_.Empty;
+	}	Gfs_nde[] args = Gfs_nde.Ary_empty; int args_max; int[] args_pos_ary = IntAryUtl.Empty;
 	public Gfs_nde[] Atrs_to_ary() {
 		Gfs_nde[] rv = new Gfs_nde[args_len];
 		for (int i = 0; i < args_len; i++)

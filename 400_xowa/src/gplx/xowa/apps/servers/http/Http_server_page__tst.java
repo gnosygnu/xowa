@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.servers.http;
-import gplx.Bry_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import org.junit.Test;
 public class Http_server_page__tst {
 	private final Http_server_page__fxt fxt = new Http_server_page__fxt();
-	@Test  public void Xwiki() {
+	@Test public void Xwiki() {
 		fxt.Init__xwiki("en.wikipedia.org", "it", "it.wikipedia.org");
 		fxt.Test__make_url(false, "en.wikipedia.org", "it:Roma", "");
 		fxt.Test__redirect("it.wikipedia.org/wiki/Roma");
@@ -36,15 +36,15 @@ class Http_server_page__fxt {
 		this.page = new Http_server_page(fxt.App());
 	}
 	public void Init__xwiki(String wiki, String abrv, String domain) {
-		Xowe_wiki xwiki_wiki = fxt.App().Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki));
+		Xowe_wiki xwiki_wiki = fxt.App().Wiki_mgr().Get_by_or_make(BryUtl.NewU8(wiki));
 		xwiki_wiki.Xwiki_mgr().Add_by_atrs(abrv, domain);
 		xwiki_wiki.Installed_by_test_(BoolUtl.Y);
 	}
 	public void Test__make_url(boolean expd, String wiki_domain, String ttl_bry_arg, String qarg) {
-		boolean actl = page.Make_url(Bry_.new_u8(wiki_domain), Bry_.new_u8(ttl_bry_arg), Bry_.new_u8(qarg));
-		Gftest.Eq__bool(expd, actl);
+		boolean actl = page.Make_url(BryUtl.NewU8(wiki_domain), BryUtl.NewU8(ttl_bry_arg), BryUtl.NewU8(qarg));
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test__redirect(String expd) {
-		Gftest.Eq__str(expd, page.Redirect());
+		GfoTstr.Eq(expd, page.Redirect());
 	}
 }

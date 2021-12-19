@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.qrys;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.DateAdp;
-import gplx.Decimal_adp;
-import gplx.Err_;
-import gplx.String_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.stores.DataRdr;
 import gplx.core.stores.DataRdr_;
 import gplx.dbs.Db_qry;
@@ -28,7 +28,7 @@ import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.engines.Db_engine;
-import gplx.objects.lists.GfoListBase;
+import gplx.types.commons.lists.GfoListBase;
 
 import java.sql.PreparedStatement;
 
@@ -63,7 +63,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "byte", "val", v, "sql", sql);
 		}
 		return this;
 	}
@@ -78,7 +78,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "int", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "int", "val", v, "sql", sql);
 		}
 		return this;
 	}
@@ -92,7 +92,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "long", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "long", "val", v, "sql", sql);
 		}
 		return this;
 	}
@@ -106,7 +106,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "float", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "float", "val", v, "sql", sql);
 		}
 		return this;
 	}
@@ -120,21 +120,21 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "double", "val", v, "sql", sql);
 		}
 		return this;
 	}
-	public Db_stmt Crt_decimal(String k, Decimal_adp v)	{return Add_decimal(BoolUtl.Y, k, v);}
-	public Db_stmt Val_decimal(String k, Decimal_adp v)	{return Add_decimal(BoolUtl.N, k, v);}
-	public Db_stmt Val_decimal(Decimal_adp v)			{return Add_decimal(BoolUtl.N, Key_na, v);}
-	private Db_stmt Add_decimal(boolean where, String k, Decimal_adp v) {
+	public Db_stmt Crt_decimal(String k, GfoDecimal v)	{return Add_decimal(BoolUtl.Y, k, v);}
+	public Db_stmt Val_decimal(String k, GfoDecimal v)	{return Add_decimal(BoolUtl.N, k, v);}
+	public Db_stmt Val_decimal(GfoDecimal v)			{return Add_decimal(BoolUtl.N, Key_na, v);}
+	private Db_stmt Add_decimal(boolean where, String k, GfoDecimal v) {
 		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
-			stmt.setBigDecimal(++val_idx, v.Under_as_native());
+			stmt.setBigDecimal(++val_idx, v.UnderAsNative());
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "decimal", "val", v, "sql", sql);
 		}
 		return this;
 	}
@@ -148,14 +148,14 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "byte[]", v.length, sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "byte[]", v.length, sql);
 		}
 		return this;
 	}
 	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(BoolUtl.Y, k, v);}
 	public Db_stmt Val_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(BoolUtl.N, k, v);}
 	public Db_stmt Val_bry_as_str(byte[] v)				{return Add_bry_as_str(BoolUtl.N, Key_na, v);}
-	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_u8(v));}
+	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, StringUtl.NewU8(v));}
 	public Db_stmt Crt_str(String k, String v)	{return Add_str(BoolUtl.Y, k, v);}
 	public Db_stmt Val_str(String k, String v)	{return Add_str(BoolUtl.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(BoolUtl.N, Key_na, v);}
@@ -166,20 +166,20 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "String", "val", v, "sql", sql);
 		}
 		return this;
 	}
-	public Db_stmt Crt_date(String k, DateAdp v)	{return Add_date(BoolUtl.Y, k, v);}
-	public Db_stmt Val_date(String k, DateAdp v)	{return Add_date(BoolUtl.N, k, v);}
-	protected Db_stmt Add_date(boolean where, String k, DateAdp v) {
+	public Db_stmt Crt_date(String k, GfoDate v)	{return Add_date(BoolUtl.Y, k, v);}
+	public Db_stmt Val_date(String k, GfoDate v)	{return Add_date(BoolUtl.N, k, v);}
+	protected Db_stmt Add_date(boolean where, String k, GfoDate v) {
 		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
-			stmt.setTimestamp(++val_idx, new java.sql.Timestamp(v.UnderDateTime().getTime().getTime()));
+			stmt.setTimestamp(++val_idx, new java.sql.Timestamp(v.UnderCalendar().getTime().getTime()));
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "date", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "date", "val", v, "sql", sql);
 		}
 		return this;
 	}
@@ -192,7 +192,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			paramList.Add(v);
 		} catch (Exception e) {
 			this.Rls();
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "text", "val", v, "sql", sql);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "text", "val", v, "sql", sql);
 		}
 		return this;
 	}
@@ -201,7 +201,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			stmt.setBinaryStream(++val_idx, (java.io.InputStream)v.Under(), (int)rdr_len);
 		} catch (Exception e) {
 			// DATE:2021-07-16: shouldn't there be a this.Rls()?
-			throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);
+			throw ErrUtl.NewArgs(e, "failed to add value", "type", "rdr", "val", v);
 		}
 		return this;
 	}
@@ -211,7 +211,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			String sqlStr = ToSqlStr();
 			this.Rls();
 			Reset_stmt();
-			throw Err_.new_exc(e, "db_stmt", "insert failed", "url", engine.Conn_info().Db_api(), "sql", sqlStr);
+			throw ErrUtl.NewArgs(e, "insert failed", "url", engine.Conn_info().Db_api(), "sql", sqlStr);
 		}
 	}
 	public int Exec_update() {
@@ -220,7 +220,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			String sqlStr = ToSqlStr();
 			this.Rls();
 			Reset_stmt();
-			throw Err_.new_exc(e, "db_stmt", "update failed", "url", engine.Conn_info().Db_api(), "sql", sqlStr);
+			throw ErrUtl.NewArgs(e, "update failed", "url", engine.Conn_info().Db_api(), "sql", sqlStr);
 		}
 	}
 	public int Exec_delete() {
@@ -229,7 +229,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			String sqlStr = ToSqlStr();
 			this.Rls();
 			Reset_stmt();
-			throw Err_.new_exc(e, "db_stmt", "delete failed", "url", engine.Conn_info().Db_api(), "sql", sqlStr);
+			throw ErrUtl.NewArgs(e, "delete failed", "url", engine.Conn_info().Db_api(), "sql", sqlStr);
 		}
 	}
 	public DataRdr Exec_select() {
@@ -238,7 +238,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		} catch (Exception e) {
 			String sqlStr = ToSqlStr();
 			// DATE:2021-07-16: this needs a this.Rls() / Reset_stmt
-			throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sqlStr);
+			throw ErrUtl.NewArgs(e, "failed to exec prepared statement", "sql", sqlStr);
 		}
 	}
 	public Db_rdr Exec_select__rls_auto() {
@@ -247,7 +247,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		} catch (Exception e) {
 			String sqlStr = ToSqlStr();
 			// DATE:2021-07-16: this needs a this.Rls() / Reset_stmt
-			throw Err_.new_exc(e, "db", "select failed", "sql", sqlStr);
+			throw ErrUtl.NewArgs(e, "select failed", "sql", sqlStr);
 		}
 	}
 	public Db_rdr Exec_select__rls_manual() {
@@ -256,7 +256,7 @@ public class Db_stmt_cmd implements Db_stmt {
 		} catch (Exception e) {
 			String sqlStr = ToSqlStr();
 			// DATE:2021-07-16: this needs a this.Rls() / Reset_stmt
-			throw Err_.new_exc(e, "db", "select failed", "sql", sqlStr);
+			throw ErrUtl.NewArgs(e, "select failed", "sql", sqlStr);
 		}
 	}
 	public Object Exec_select_val() {
@@ -265,14 +265,14 @@ public class Db_stmt_cmd implements Db_stmt {
 		} catch (Exception e) {
 			String sqlStr = ToSqlStr();
 			// DATE:2021-07-16: this needs a this.Rls() / Reset_stmt
-			throw Err_.new_exc(e, "db", "failed to exec prepared statement", "sql", sqlStr);
+			throw ErrUtl.NewArgs(e, "failed to exec prepared statement", "sql", sqlStr);
 		}
 	}
 	public Db_stmt Clear() {
 		val_idx = 0;
 		paramList.Clear();
 		try {stmt.clearBatch();}	
-		catch (Exception e) {throw Err_.new_exc(e, "db", "failed to clear parameters", "sql", sql);}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to clear parameters", "sql", sql);}
 		return this;
 	}
 	public void Rls() {
@@ -283,7 +283,7 @@ public class Db_stmt_cmd implements Db_stmt {
 			stmt.close();									
 			stmt = null;
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "db", "failed to close command", "sql", sql);}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to close command", "sql", sql);}
 	}
 	public String ToSqlStr() {
 		return Db_val_type.ToSqlStr(sql, paramList);

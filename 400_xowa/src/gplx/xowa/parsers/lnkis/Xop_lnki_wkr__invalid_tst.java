@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkis;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
-import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.ttls.*;
 public class Xop_lnki_wkr__invalid_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Ignore_invalid_url_encodings() { // PURPOSE: if url encoding is invalid, still render lnki as <a>; EX: fr.w:Bordetella;
@@ -35,7 +36,7 @@ public class Xop_lnki_wkr__invalid_tst {
 		fxt.Test_parse_page_all_str_and_chk("[[a<b>c</b>|d]]"	, "[[a<b>c</b>|d]]", Xop_lnki_log.Invalid_ttl);
 	}
 	@Test public void Tblw_tb() {	// PURPOSE: reparse should be forced at tblw.tb; DATE:2014-04-03
-		fxt.Test_parse_page_all_str_and_chk("[[a\n{||b]]", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str_and_chk("[[a\n{||b]]", StringUtl.ConcatLinesNlSkipLast
 		( "[[a"
 		, "<table>|b]]"
 		, "</table>"
@@ -43,7 +44,7 @@ public class Xop_lnki_wkr__invalid_tst {
 		), Xop_lnki_log.Invalid_ttl);
 	}
 	@Test public void Tblw_tr() {	// PURPOSE: reparse should be forced at tblw.tr; DATE:2014-04-03
-		fxt.Test_parse_page_all_str_and_chk("[[a\n|-b]]", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str_and_chk("[[a\n|-b]]", StringUtl.ConcatLinesNlSkipLast
 		( "[[a"
 		, "|-b]]"
 		), Xop_lnki_log.Invalid_ttl);
@@ -62,13 +63,13 @@ public class Xop_lnki_wkr__invalid_tst {
 //		}
 	@Test public void Module() {	// PURPOSE: handle lnki_wkr parsing Module text (shouldn't happen); apos, tblw, lnki, and nl will cause parser to fail; also handles scan-bwd; EX:Module:Taxobox; DATE:2013-11-10
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 		( " [[''"
 		, " [["
 		, "  |"	// NOTE: this is actually a tblw_ws_tkn ("\n   |") not a pipe_tkn
 		, "]]"
 		)
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<pre>[[</i>"	// NOTE: should be <i> but scan_bwd can't undo previous apos
 		, "[["
 		, " |"

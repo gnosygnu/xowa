@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.revs;
 import gplx.langs.jsons.*;
+import gplx.types.errs.ErrUtl;
 class Xowm_json_parser__page extends Json_parser__list_nde__base {
 	private Wmapi_itm__pge pge;
 	private Xowm_json_parser__rev rev_nde_parser = new Xowm_json_parser__rev();
@@ -29,7 +30,7 @@ class Xowm_json_parser__page extends Json_parser__list_nde__base {
 	}
 	@Override protected void Parse_hook_nde(Json_nde sub, Json_kv[] atrs) {
 		int page_id = Kv__int(atrs, 0);
-		Json_ary revs_ary = atrs[3].Val_as_ary(); if (revs_ary.Len() == 0) throw Err_.new_("rev.parser", "no revisions found", sub.Doc().Src());
+		Json_ary revs_ary = atrs[3].Val_as_ary(); if (revs_ary.Len() == 0) throw ErrUtl.NewArgs("no revisions found", sub.Doc().Src());
 		Json_nde rev_nde = revs_ary.Get_at_as_nde(0);
 		pge.Init_id(page_id);
 		pge.Init_ttl(Kv__int(atrs, 1), Kv__bry(atrs, 2));

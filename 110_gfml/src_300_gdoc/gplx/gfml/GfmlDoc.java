@@ -13,21 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class GfmlDoc {
 	public GfmlNde				RootNde() {return rootNde;} GfmlNde rootNde;
-	@gplx.Internal protected List_adp			UsrMsgs() {return usrMsgs;} List_adp usrMsgs = List_adp_.New();
-	@gplx.Internal protected GfmlLxrRegy		LxrRegy() {return lxrRegy;} GfmlLxrRegy lxrRegy = new GfmlLxrRegy();
-	@gplx.Internal protected GfmlBldrCmdRegy	CmdRegy() {return cmdRegy;} GfmlBldrCmdRegy cmdRegy = GfmlBldrCmdRegy.new_();
-	@gplx.Internal protected GfmlPragmaMgr		PragmaMgr() {return pragmaMgr;} GfmlPragmaMgr pragmaMgr = GfmlPragmaMgr.new_();
-	@gplx.Internal protected GfmlLxr			RootLxr() {return rootLxr;} GfmlLxr rootLxr;
-	@gplx.Internal protected void RootLxr_set(GfmlLxr v) {rootLxr = v;}
-	@gplx.Internal protected void Clear() {
+	public List_adp UsrMsgs() {return usrMsgs;} List_adp usrMsgs = List_adp_.New();
+	public GfmlLxrRegy		LxrRegy() {return lxrRegy;} GfmlLxrRegy lxrRegy = new GfmlLxrRegy();
+	public GfmlBldrCmdRegy	CmdRegy() {return cmdRegy;} GfmlBldrCmdRegy cmdRegy = GfmlBldrCmdRegy.new_();
+	public GfmlPragmaMgr		PragmaMgr() {return pragmaMgr;} GfmlPragmaMgr pragmaMgr = GfmlPragmaMgr.new_();
+	public GfmlLxr			RootLxr() {return rootLxr;} GfmlLxr rootLxr;
+	public void RootLxr_set(GfmlLxr v) {rootLxr = v;}
+	public void Clear() {
 		usrMsgs.Clear();
 		rootNde = GfmlNde.named_(GfmlTkn_.cmd_("tkn.gfml.root_tkn", GfmlBldrCmd_pendingTkns_add.Instance), GfmlType_.Null);
 		rootNde.DocPos_(GfmlDocPos_.Root);
 	}
-	@gplx.Internal protected static GfmlDoc new_() {
+	public static GfmlDoc new_() {
 		GfmlDoc rv = new GfmlDoc();
 		rv.Clear();
 		return rv;

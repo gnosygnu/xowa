@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.registrys.infos; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.registrys.*;
+package gplx.xowa.addons.wikis.registrys.infos;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.users.data.*; 
 class Xow_info_html extends Xow_special_wtr__base {
@@ -27,7 +34,7 @@ class Xow_info_html extends Xow_special_wtr__base {
 		Xoud_site_row site_itm = app.User().User_db_mgr().Site_mgr().Select_by_domain(wiki_domain);
 		if (site_itm == null) return null;	// handle deleted wikis
 		String wiki_dir = site_itm.Path();
-		if (String_.Eq(site_itm.Date(), "")) {
+		if (StringUtl.Eq(site_itm.Date(), "")) {
 			Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_n(wiki_domain);
 			wiki.Init_by_wiki();	// force init to load Modified_latest
 			site_itm.Date_(wiki.Props().Modified_latest__yyyy_MM_dd());
@@ -46,7 +53,7 @@ class Xow_info_html extends Xow_special_wtr__base {
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xow_info.css")));
 	}
 	@Override protected void Handle_invalid(Xoa_app app, Xoa_page page, Xow_special_page special) {
-		new Xopage_html_data(special.Special__meta().Display_ttl(), Bry_.Add(wiki_domain, Bry_.new_a7(" has been deleted"))).Apply(page);
+		new Xopage_html_data(special.Special__meta().Display_ttl(), BryUtl.Add(wiki_domain, BryUtl.NewA7(" has been deleted"))).Apply(page);
 	}
 
 	private static String Calc_file_size(Io_url dir) {
@@ -57,6 +64,6 @@ class Xow_info_html extends Xow_special_wtr__base {
 			Io_url url = urls[i];
 			size += Io_mgr.Instance.QueryFil(url).Size();
 		}
-		return gplx.core.ios.Io_size_.To_str_new(Bry_bfr_.New(), size, 2);
+		return gplx.core.ios.Io_size_.To_str_new(BryWtr.New(), size, 2);
 	}
 }

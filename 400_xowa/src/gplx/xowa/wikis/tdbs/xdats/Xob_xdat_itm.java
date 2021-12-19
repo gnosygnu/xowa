@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.xdats;
+import gplx.types.basics.utls.BryLni;
 public class Xob_xdat_itm {
 	public byte[] Src() {return src;} public Xob_xdat_itm Src_(byte[] v) {src = v; return this;} private byte[] src;
 	public int Itm_bgn() {return itm_bgn;} public Xob_xdat_itm Itm_bgn_(int v) {itm_bgn = v; return this;} private int itm_bgn = -1;
@@ -23,5 +24,5 @@ public class Xob_xdat_itm {
 	public boolean Found_exact() {return found_exact;} private boolean found_exact;
 	public Xob_xdat_itm Found_exact_y_() {found_exact = true; return this;}
 	public boolean Missing() {return itm_bgn == -1;}
-	public byte[] Itm_bry() {return Bry_.Mid(src, itm_bgn, itm_end);}
+	public byte[] Itm_bry() {return BryLni.Mid(src, itm_bgn, itm_end);}
 }

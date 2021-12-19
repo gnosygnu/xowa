@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.resumes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
-import gplx.dbs.*; import gplx.dbs.utls.*;
+package gplx.xowa.addons.bldrs.mass_parses.resumes;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_resume_mgr {
 	public void Exec(Xowe_wiki wiki) {
@@ -34,7 +37,7 @@ class Xomp_resume_mgr {
 			Xomp_wkr_db wkr_db = Xomp_wkr_db.New(mgr_db.Dir(), i);
 			attach_mgr.Conn_links_(new Db_attach_itm("wkr_db", wkr_db.Conn()));
 			String sql = Db_sql_.Make_by_fmt
-			( String_.Ary
+			( StringUtl.Ary
 			( "UPDATE  xomp_page"
 			, "SET     page_status = 1"
 			, ",       xomp_wkr_id = {0}"

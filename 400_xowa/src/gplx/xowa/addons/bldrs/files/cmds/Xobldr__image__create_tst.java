@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import org.junit.*; import gplx.core.ios.*; import gplx.xowa.files.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
+import gplx.xowa.files.*;
 public class Xobldr__image__create_tst {
 	private Xobldr__image__create_fxt fxt = new Xobldr__image__create_fxt();
 	@Test public void Basic()					{fxt.Init_("A.png"	, Xof_media_type.Name_bitmap	, Xof_ext_.Bry_png, 220, 110)		.Test(Xof_ext_.Id_png);}	// A.png -> png
@@ -36,14 +40,14 @@ class Xobldr__image__create_fxt {
 		H_(h);
 		return this;
 	}
-	public Xobldr__image__create_fxt Name_(String v) {name = Bry_.new_a7(v); return this;}
-	public Xobldr__image__create_fxt Media_type_(String v) {media_type = Bry_.new_a7(v); return this;}
+	public Xobldr__image__create_fxt Name_(String v) {name = BryUtl.NewA7(v); return this;}
+	public Xobldr__image__create_fxt Media_type_(String v) {media_type = BryUtl.NewA7(v); return this;}
 	public Xobldr__image__create_fxt Minor_mime_(byte[] v) {minor_mime = v; return this;}
-	public Xobldr__image__create_fxt Minor_mime_(String v) {return Minor_mime_(Bry_.new_a7(v));}
+	public Xobldr__image__create_fxt Minor_mime_(String v) {return Minor_mime_(BryUtl.NewA7(v));}
 	public Xobldr__image__create_fxt W_(int v) {w = v; return this;}
 	public Xobldr__image__create_fxt H_(int v) {h = v; return this;}
 	public Xobldr__image__create_fxt Test(int expd) {
-		Tfds.Eq(expd, Xobldr__image__create.Calc_ext_id(Gfo_usr_dlg_.Noop, name, media_type, minor_mime, w, h));
+		GfoTstr.EqObj(expd, Xobldr__image__create.Calc_ext_id(Gfo_usr_dlg_.Noop, name, media_type, minor_mime, w, h));
 		return this;
 	}
 }

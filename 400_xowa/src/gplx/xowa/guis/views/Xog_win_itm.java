@@ -14,17 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.views;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_itm;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg;
-import gplx.GfsCtx;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.envs.Env_;
 import gplx.core.threads.Thread_adp;
 import gplx.core.threads.Thread_adp_;
@@ -38,8 +39,8 @@ import gplx.gfui.draws.FontAdp;
 import gplx.gfui.kits.core.Gfui_kit;
 import gplx.gfui.layouts.swts.Swt_layout_data__grid;
 import gplx.gfui.layouts.swts.Swt_layout_mgr__grid;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoa_url_;
@@ -164,10 +165,10 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 	private void Win__link_clicked(String anchor_raw) {
 		String url = url_box.Text();
-		int pos = String_.FindFwd(url, gplx.langs.htmls.Gfh_tag_.Anchor_str);
-		if (pos != Bry_find_.Not_found) url = String_.Mid(url, 0, pos);
+		int pos = StringUtl.FindFwd(url, gplx.langs.htmls.Gfh_tag_.Anchor_str);
+		if (pos != BryFind.NotFound) url = StringUtl.Mid(url, 0, pos);
 		String anchor_str = Parse_evt_location_changing(anchor_raw);
-		byte[] anchor_bry = Bry_.new_u8(anchor_str);
+		byte[] anchor_bry = BryUtl.NewU8(anchor_str);
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page();
 		if (anchor_str != null) {									// link has anchor
 			url_box.Text_(url + "#" + anchor_str);					// update url box
@@ -176,7 +177,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			page.Url().Anch_bry_(anchor_bry);						// update url
 		}
 		tab.History_mgr().Add(page);
-		app.Usere().History_mgr().Add(page.Wiki().App(), page.Url(), page.Ttl(), Bry_.Add_w_dlm(AsciiByte.Hash, page.Url().Page_bry(), anchor_bry));
+		app.Usere().History_mgr().Add(page.Wiki().App(), page.Url(), page.Ttl(), BryUtl.AddWithDlm(AsciiByte.Hash, page.Url().Page_bry(), anchor_bry));
 	}
 	public void App__exit() {
 		kit.Kit_term();	// NOTE: Kit_term calls shell.close() which in turn is hooked up to app.Term_cbk() event; DATE:2014-09-09
@@ -186,10 +187,10 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		app.Gfs_mgr().Run_str(snippet);
 	}
 	private static String Parse_evt_location_changing(String v) { // EX: about:blank#anchor -> anchor
-		int pos = String_.FindFwd(v, gplx.langs.htmls.Gfh_tag_.Anchor_str);
-		return pos == Bry_find_.Not_found
+		int pos = StringUtl.FindFwd(v, gplx.langs.htmls.Gfh_tag_.Anchor_str);
+		return pos == BryFind.NotFound
 			? null
-			: String_.Mid(v, pos + 1);
+			: StringUtl.Mid(v, pos + 1);
 	}
 	public void Page__mode_edit_() {	// only called from by link
 		// HACK: when "edit" is clicked, always reload page from database; handles rarely-reproducible issue of "edit-after-rename" causing older versions to show up
@@ -215,14 +216,14 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		Xog_tab_itm_read_mgr.Show_page(tab, page, false);
 		// Exec_page_refresh(); // commented out; causes lnke to show as [2] instead of [1] when saving page; EX: [http://a.org b] DATE:2014-04-24
 	}
-	public void Page__navigate_by_search()   {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Search_box_fmtr().Bld_str_many(search_box.Text()));}
-	public void Page__navigate_by_allpages() {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Allpages_box_fmtr().Bld_str_many(allpages_box.Text()));}
+	public void Page__navigate_by_search()   {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Search_box_fmtr().BldToStrMany(search_box.Text()));}
+	public void Page__navigate_by_allpages() {Page__navigate_by_url_bar(app.Gui_mgr().Win_cfg().Allpages_box_fmtr().BldToStrMany(allpages_box.Text()));}
 	public void Page__navigate_by_url_bar(String href) {
 		Xog_tab_itm tab = tab_mgr.Active_tab_assert();
 		Xoa_url url = tab.Wiki().Utl__url_parser().Parse_by_urlbar_or_null(href); if (url == null) return;
 		tab.Show_url_bgn(url);
 	}
-	private void Page__navigate_by_href(Xog_tab_itm tab, String href) {	// NOTE: different from Navigate_by_url_bar in that it handles "file:///" and other @gplx.Internal protected formats; EX: "/site/", "about:blank"; etc..
+	private void Page__navigate_by_href(Xog_tab_itm tab, String href) {	// NOTE: different from Navigate_by_url_bar in that it handles "file:///" and other public formats; EX: "/site/", "about:blank"; etc..
 		Xoa_url url = Xog_url_wkr.Exec_url(this, href);
 		if (url != Xog_url_wkr.Rslt_handled)
 			tab.Show_url_bgn(url);
@@ -243,7 +244,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 				new_page = new_page.Wikie().Page_mgr().Load_page(new_page.Url(), new_page.Ttl(), tab);
 		}
 		byte history_nav_type = fwd ? Xog_history_stack.Nav_fwd : Xog_history_stack.Nav_bwd;
-		boolean new_page_is_same = Bry_.Eq(cur_page.Ttl().Full_txt_by_orig(), new_page.Ttl().Full_txt_by_orig());
+		boolean new_page_is_same = BryLni.Eq(cur_page.Ttl().Full_txt_by_orig(), new_page.Ttl().Full_txt_by_orig());
 		Xog_tab_itm_read_mgr.Show_page(tab, new_page, true, new_page_is_same, false, history_nav_type);
 		Page__async__bgn(tab);
 	}
@@ -312,17 +313,17 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 	public byte[] App__retrieve_by_url(String url_str, String output_str) {
 		synchronized (App__retrieve__lock) {
-			boolean output_html = String_.Eq(output_str, "html");
+			boolean output_html = StringUtl.Eq(output_str, "html");
 
 			// parse url according to rules of home_wiki; 
 			Xowe_wiki home_wiki = app.Usere().Wiki();
-			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return Bry_.Empty;
+			Xoa_url url = home_wiki.Utl__url_parser().Parse_by_urlbar_or_null(url_str); if (url == null) return BryUtl.Empty;
 
 			// get wiki from url
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());
 
 			// parse url again, but this time according to rules of actual wiki
-			url = wiki.Utl__url_parser().Parse(Bry_.new_u8(url_str));
+			url = wiki.Utl__url_parser().Parse(BryUtl.NewU8(url_str));
 
 			// get title
 			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.Page_bry());
@@ -333,7 +334,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 
 			// get page
 			Xoae_page new_page = wiki.Page_mgr().Load_page(url, ttl, tab);
-			if (new_page.Db().Page().Exists_n()) {return Bry_.Empty;}
+			if (new_page.Db().Page().Exists_n()) {return BryUtl.Empty;}
 
 			// update tab-specific vars
 			tab.Page_(new_page);
@@ -424,9 +425,9 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 	public static String Remove_redirect_if_exists(String text) {
 		// remove redirect target; EX: "A -> B" -> "A"
-		int redirect_pos = String_.FindFwd(text, gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_row.Str__redirect__text);
-		if (redirect_pos != Bry_find_.Not_found) {
-			text = String_.Mid(text, 0, redirect_pos);
+		int redirect_pos = StringUtl.FindFwd(text, gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_row.Str__redirect__text);
+		if (redirect_pos != BryFind.NotFound) {
+			text = StringUtl.Mid(text, 0, redirect_pos);
 		}
 		return text;
 	}
@@ -441,7 +442,7 @@ class Xog_url_box__selection_changed implements Gfo_evt_itm {
 		text = Xog_win_itm.Remove_redirect_if_exists(text);
 		// always move cursor to end; emulates firefox url_bar behavior
 		url_box.Text_(text);
-		url_box.Sel_(String_.Len(text), String_.Len(text));
+		url_box.Sel_(StringUtl.Len(text), StringUtl.Len(text));
 	}
 	private void On_selection_accepted() {
 		app.Api_root().Nav().Goto(url_box.Text());

@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.qrys; import gplx.dbs.*;
 import gplx.core.criterias.*; import gplx.dbs.sqls.*;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.KeyValHash;
 public class Db_qry_update implements Db_arg_owner {
 	public int			Tid() {return Db_qry_.Tid_update;}
 	public boolean ReturnsRdr() {return false;}
@@ -24,14 +28,14 @@ public class Db_qry_update implements Db_arg_owner {
 	public String[]		Cols_for_update() {return cols_for_update;} private String[] cols_for_update;
 	public Criteria		Where() {return where;} public Db_qry_update Where_(Criteria crt) {where = crt; return this;} private Criteria where;
 	public Db_arg_owner From_(String tbl) {base_table = tbl; return this;}
-	public Keyval_hash Args() {return args;} private final Keyval_hash args = new Keyval_hash();
+	public KeyValHash Args() {return args;} private final KeyValHash args = new KeyValHash();
 	public Db_arg_owner Val_byte(String k, byte v)				{return Val_obj_type(k, v, Db_val_type.Tid_byte);}
 	public Db_arg_owner Val_int(String k, int v)				{return Val_obj_type(k, v, Db_val_type.Tid_int32);}
 	public Db_arg_owner Val_long(String k, long v)				{return Val_obj_type(k, v, Db_val_type.Tid_int64);}
-	public Db_arg_owner Val_decimal(String k, Decimal_adp v)	{return Val_obj_type(k, v.Under(), Db_val_type.Tid_decimal);}
+	public Db_arg_owner Val_decimal(String k, GfoDecimal v)	{return Val_obj_type(k, v.Under(), Db_val_type.Tid_decimal);}
 	public Db_arg_owner Val_str(String k, String v)				{return Val_obj_type(k, v, Db_val_type.Tid_varchar);}
-	public Db_arg_owner Val_str_by_bry(String k, byte[] v)		{return Val_obj_type(k, String_.new_u8(v), Db_val_type.Tid_varchar);}
-	public Db_arg_owner Val_date(String k, DateAdp v)			{return Val_obj_type(k, v, Db_val_type.Tid_date);}
+	public Db_arg_owner Val_str_by_bry(String k, byte[] v)		{return Val_obj_type(k, StringUtl.NewU8(v), Db_val_type.Tid_varchar);}
+	public Db_arg_owner Val_date(String k, GfoDate v)			{return Val_obj_type(k, v, Db_val_type.Tid_date);}
 	public Db_arg_owner Val_blob(String k, byte[] v)			{return Val_obj_type(k, v, Db_val_type.Tid_bry);}
 	public Db_arg_owner Val_obj(String k, Object v)				{return Val_obj_type(k, v, Db_val_type.Tid_null);}
 	public Db_arg_owner Val_obj_type(String key, Object val, byte val_tid) {

@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls; import gplx.*; import gplx.gfui.*;
-import gplx.gfui.draws.*; import gplx.gfui.gfxs.*;
-import gplx.core.strings.*;
+package gplx.gfui.controls;
+import gplx.gfui.GfuiBorderEdge;
+import gplx.gfui.RectAdp;
+import gplx.gfui.RectAdp_;
+import gplx.gfui.draws.ColorAdp;
+import gplx.gfui.draws.PenAdp;
+import gplx.gfui.draws.PenAdp_;
+import gplx.gfui.gfxs.GfxAdp;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.commons.String_bldr_;
+import gplx.types.errs.ErrUtl;
 public class GfuiBorderMgr {
 	public PenAdp All() {return all;}		public GfuiBorderMgr All_(PenAdp v) {SyncPens(true); all = v; return this;} PenAdp all;
 	public PenAdp Left() {return left;}		public GfuiBorderMgr Left_(PenAdp v) {SyncPens(false); left = v; return this;} PenAdp left;
@@ -39,7 +47,7 @@ public class GfuiBorderMgr {
 			this.None_();
 		else {
 			Object[] ary = (Object[])o;
-			this.Edge_set(GfuiBorderEdge.All, PenAdp_.new_((ColorAdp)ary[1], Float_.cast(ary[0])));
+			this.Edge_set(GfuiBorderEdge.All, PenAdp_.new_((ColorAdp)ary[1], FloatUtl.Cast(ary[0])));
 		}
 	}
 	public void Edge_set(GfuiBorderEdge edge, PenAdp pen) {
@@ -49,7 +57,7 @@ public class GfuiBorderMgr {
 		else if (val == GfuiBorderEdge.Right.Val())		{right = pen; return;}
 		else if (val == GfuiBorderEdge.Top.Val())		{top = pen; return;}
 		else if (val == GfuiBorderEdge.Bot.Val())		{bot = pen; return;}
-		else throw Err_.new_unhandled(edge);
+		else throw ErrUtl.NewUnhandled(edge);
 	}
 	void SyncPens(boolean isAll) {
 		if (isAll) {
@@ -62,7 +70,7 @@ public class GfuiBorderMgr {
 			all = null;
 		}
 	}
-	public String To_str() {return String_bldr_.new_().Add_kv_obj("all", all).Add_kv_obj("left", left).Add_kv_obj("right", right).Add_kv_obj("top", top).Add_kv_obj("bot", bot).To_str();}
+	public String To_str() {return String_bldr_.new_().AddKvObj("all", all).AddKvObj("left", left).AddKvObj("right", right).AddKvObj("top", top).AddKvObj("bot", bot).ToStr();}
 	@Override public String toString() {return To_str();}
 	public static GfuiBorderMgr new_() {return new GfuiBorderMgr();} GfuiBorderMgr() {}
 }

@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines;
 
-import gplx.Gfo_usr_dlg;
-import gplx.Io_url;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_url;
 import gplx.core.stores.DataRdr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_info;

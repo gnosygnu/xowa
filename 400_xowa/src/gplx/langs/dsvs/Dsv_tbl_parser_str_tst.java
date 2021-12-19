@@ -13,12 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*;
-import org.junit.*;
+package gplx.langs.dsvs;
+import gplx.frameworks.objects.ToStrAble;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.Test;
 public class Dsv_tbl_parser_str_tst {
 	private Dsv_mok_fxt fxt = new Dsv_mok_fxt();
 	@Test public void Basic() {
-		fxt	.Test_load(String_.Concat_lines_nl_skip_last
+		fxt	.Test_load(StringUtl.ConcatLinesNlSkipLast
 		( "a|A"
 		, "b|B"
 		)
@@ -28,7 +34,7 @@ public class Dsv_tbl_parser_str_tst {
 		);
 	}
 	@Test public void Blank_lines() {
-		fxt	.Test_load(String_.Concat_lines_nl_skip_last
+		fxt	.Test_load(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "a|A"
 		, ""
@@ -41,7 +47,7 @@ public class Dsv_tbl_parser_str_tst {
 		);
 	}
 	@Test public void Incomplete_row() {
-		fxt	.Test_load(String_.Concat_lines_nl_skip_last
+		fxt	.Test_load(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "b"
 		, ""
@@ -52,7 +58,7 @@ public class Dsv_tbl_parser_str_tst {
 		);
 	}
 	@Test public void Incomplete_row_2() {	// PURPOSE: handle multiple incomplete cells
-		fxt	.Test_load(String_.Concat_lines_nl_skip_last
+		fxt	.Test_load(StringUtl.ConcatLinesNlSkipLast
 		( "a|")
 		, fxt.mgr_str_(3)
 		, fxt.itm_str_("a", "")
@@ -60,7 +66,7 @@ public class Dsv_tbl_parser_str_tst {
 	}
 }
 abstract class Mok_mgr_base extends Dsv_wkr_base {
-	public abstract To_str_able[] Itms();
+	public abstract ToStrAble[] Itms();
 }
 class Dsv_mok_fxt {
 	private Dsv_tbl_parser tbl_parser = new Dsv_tbl_parser();
@@ -72,15 +78,15 @@ class Dsv_mok_fxt {
 	public Mok_mgr_base mgr_str_(int len) {return new Mok_str_mgr(len);}
 	public Mok_str_itm itm_str_(String... flds) {return new Mok_str_itm(flds);}
 	public Mok_int_itm itm_int_(String fld_0, int fld_1, int fld_2) {return new Mok_int_itm(fld_0, fld_1, fld_2);}
-	public void Test_load(String src, Mok_mgr_base mgr, To_str_able... expd) {
-		mgr.Load_by_bry(Bry_.new_u8(src));
-		Tfds.Eq_ary_str(expd, mgr.Itms());
+	public void Test_load(String src, Mok_mgr_base mgr, ToStrAble... expd) {
+		mgr.Load_by_bry(BryUtl.NewU8(src));
+		GfoTstr.EqAryObjAry(expd, mgr.Itms());
 	}
 }
-class Mok_str_itm implements To_str_able {
+class Mok_str_itm implements ToStrAble {
 	private String[] flds;
 	public Mok_str_itm(String[] flds) {this.flds = flds;}
-	public String To_str() {return String_.Concat_with_str("|", flds);}
+	public String ToStr() {return StringUtl.ConcatWith("|", flds);}
 }
 class Mok_str_mgr extends Mok_mgr_base {
 	private int flds_len;
@@ -88,10 +94,10 @@ class Mok_str_mgr extends Mok_mgr_base {
 		this.flds_len = flds_len;
 	}
 	public void Clear() {itms.Clear();}
-	@Override public To_str_able[] Itms() {return (To_str_able[])itms.ToAry(To_str_able.class);} private List_adp itms = List_adp_.New();
+	@Override public ToStrAble[] Itms() {return (ToStrAble[])itms.ToAry(ToStrAble.class);} private List_adp itms = List_adp_.New();
 	private List_adp flds = List_adp_.New();
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
-		flds.Add(String_.new_u8(src, bgn, end));
+		flds.Add(StringUtl.NewU8(src, bgn, end));
 		return true;
 	}
 	@Override public Dsv_fld_parser[] Fld_parsers() {

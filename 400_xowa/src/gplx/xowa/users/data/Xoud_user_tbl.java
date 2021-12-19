@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*;
+package gplx.xowa.users.data;
 import gplx.dbs.*;
+import gplx.types.basics.utls.IntUtl;
 class Xoud_user_mgr {
 	private Xoud_user_tbl tbl = new Xoud_user_tbl();
 	public void Conn_(Db_conn conn, boolean created) {tbl.Conn_(conn, created);}
 	public int Get_id_or_new(String name) {
 		int rv = tbl.Select_id_by_name(name);
-		if (rv == Int_.Min_value) {
+		if (rv == IntUtl.MinValue) {
 			rv = tbl.Select_id_next();
 			tbl.Insert(rv, name);
 		}
@@ -50,7 +51,7 @@ class Xoud_user_tbl {
 	public int Select_id_by_name(String name) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_name).Crt_str(fld_name, name).Exec_select__rls_auto();
 		try {
-			return rdr.Move_next() ? rdr.Read_int(fld_id) : Int_.Min_value;
+			return rdr.Move_next() ? rdr.Read_int(fld_id) : IntUtl.MinValue;
 		}
 		finally {rdr.Rls();}
 	}

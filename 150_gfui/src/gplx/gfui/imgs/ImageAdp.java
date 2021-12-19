@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.imgs; import gplx.*; import gplx.gfui.*;
-import java.awt.Image;
+package gplx.gfui.imgs;
+import gplx.frameworks.objects.Rls_able;
+import gplx.gfui.*;
 import gplx.gfui.kits.core.*;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 public interface ImageAdp extends Rls_able {
 	Gfui_kit Kit();
 	SizeAdp Size();

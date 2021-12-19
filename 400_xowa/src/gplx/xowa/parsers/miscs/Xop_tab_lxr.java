@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.miscs;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 public class Xop_tab_lxr implements Xop_lxr {
@@ -23,7 +24,7 @@ public class Xop_tab_lxr implements Xop_lxr {
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, AsciiByte.Tab);
+		cur_pos = BryFind.FindFwdWhile(src, cur_pos, src_len, AsciiByte.Tab);
 		src[bgn_pos] = AsciiByte.Tab; // HACK: SEE:NOTE_1:tabs
 		for (int i = bgn_pos + 1; i < cur_pos; i++)	
 			src[i] = AsciiByte.Space;

@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.volumes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
-import gplx.core.brys.*;
-import gplx.dbs.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;	
+package gplx.xowa.addons.bldrs.volumes;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
+import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Volume_prep_cmd extends Xob_cmd__base {
 	private Io_url prep_url, make_url;
 	public Volume_prep_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
@@ -24,10 +28,10 @@ public class Volume_prep_cmd extends Xob_cmd__base {
 		Volume_prep_itm[] page_itms = new Volume_prep_rdr().Parse(prep_url);
 		Volume_prep_mgr prep_mgr = new Volume_prep_mgr(new Volume_page_loader__wiki(wiki));
 		Volume_make_itm[] make_itms = prep_mgr.Calc_makes(page_itms);
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		for (Volume_make_itm make_itm : make_itms) {
-			make_itm.To_bfr(bfr);
-			bfr.Add_byte_nl();
+			make_itm.AddToBfr(bfr);
+			bfr.AddByteNl();
 		}
 		Io_mgr.Instance.SaveFilBfr(make_url, bfr);
 	}

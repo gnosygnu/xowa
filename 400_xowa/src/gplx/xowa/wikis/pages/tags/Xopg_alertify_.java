@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.wikis.pages.tags;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
 import gplx.xowa.guis.cbks.*; import gplx.core.gfobjs.*;
 public class Xopg_alertify_ {
 	public static void Add_tags(Xopg_tag_mgr head_tags, Io_url http_root) {
@@ -27,6 +29,6 @@ public class Xopg_alertify_ {
 		wkr.Send_json("xo.alertify.log_by_str", Gfobj_nde.New().Add_str("msg", msg));
 	}
 	public static void Exec_log(Xog_json_wkr wkr, String msg, int wait) {
-		wkr.Send_json("xo.alertify.log_by_str", Gfobj_nde.New().Add_str("msg", msg).Add_str("wait", Int_.To_str(wait * 1000)));
+		wkr.Send_json("xo.alertify.log_by_str", Gfobj_nde.New().Add_str("msg", msg).Add_str("wait", IntUtl.ToStr(wait * 1000)));
 	}
 }

@@ -13,18 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.bulks; import gplx.*; import gplx.dbs.*;
-import gplx.dbs.metas.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.dbs.bulks;
+import gplx.dbs.Db_attach_itm;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.metas.Dbmeta_fld_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Db_tbl_copy {
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
 	public void Copy_many(Db_conn src_conn, Db_conn trg_conn, String... tbl_names) {
 		for (String tbl_name : tbl_names)
 			Copy_one(src_conn, trg_conn, tbl_name, tbl_name);
 	}
 	public void Copy_one(Db_conn src_conn, Db_conn trg_conn, String src_tbl, String trg_tbl) {
-		Dbmeta_tbl_itm tbl = src_conn.Meta_mgr().Get_by(src_tbl); if (tbl == null) throw Err_.new_wo_type("tbl does not exist", "tbl_name", src_tbl);
+		Dbmeta_tbl_itm tbl = src_conn.Meta_mgr().Get_by(src_tbl); if (tbl == null) throw ErrUtl.NewArgs("tbl does not exist", "tbl_name", src_tbl);
 		trg_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New(trg_tbl, tbl.Flds().To_ary(), tbl.Idxs().To_ary()));
 
 		// do copy
@@ -34,22 +41,22 @@ public class Db_tbl_copy {
 	public String Bld_sql(Dbmeta_tbl_itm tbl, String src_tbl, String trg_tbl) {
 		Dbmeta_fld_mgr flds = tbl.Flds();
 		int flds_len = flds.Len();
-		bfr.Add_str_a7("INSERT INTO ").Add_str_a7(trg_tbl).Add_byte_nl();
-		bfr.Add_byte(AsciiByte.ParenBgn);
+		bfr.AddStrA7("INSERT INTO ").AddStrA7(trg_tbl).AddByteNl();
+		bfr.AddByte(AsciiByte.ParenBgn);
 		for (int i = 0; i < flds_len; ++i) {
 			DbmetaFldItm fld = flds.Get_at(i);
-			if (i != 0) bfr.Add_str_a7(", ");
-			bfr.Add_str_a7(fld.Name());
+			if (i != 0) bfr.AddStrA7(", ");
+			bfr.AddStrA7(fld.Name());
 		}
-		bfr.Add_byte(AsciiByte.ParenEnd).Add_byte_nl();
-		bfr.Add_str_a7("SELECT").Add_byte_nl().Add_byte_space();
+		bfr.AddByte(AsciiByte.ParenEnd).AddByteNl();
+		bfr.AddStrA7("SELECT").AddByteNl().AddByteSpace();
 		for (int i = 0; i < flds_len; ++i) {
 			DbmetaFldItm fld = flds.Get_at(i);
-			if (i != 0) bfr.Add_str_a7(", ");
-			bfr.Add_str_a7(fld.Name());
+			if (i != 0) bfr.AddStrA7(", ");
+			bfr.AddStrA7(fld.Name());
 		}
-		bfr.Add_byte_nl();
-		bfr.Add_str_a7("FROM <src_db>").Add_str_a7(src_tbl);
-		return bfr.To_str_and_clear();
+		bfr.AddByteNl();
+		bfr.AddStrA7("FROM <src_db>").AddStrA7(src_tbl);
+		return bfr.ToStrAndClear();
 	}
 }

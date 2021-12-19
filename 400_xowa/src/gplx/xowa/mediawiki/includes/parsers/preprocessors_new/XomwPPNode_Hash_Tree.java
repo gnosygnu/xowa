@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.custom.brys.wtrs.HtmlBryBfr;
 import gplx.xowa.mediawiki.*;
 // MW.FILE:Preprocessor_Hash
 /**
@@ -64,7 +69,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 		XophpArray list = this.store.Get_at_ary(index);
 		this.name = list.Get_at_str(0);
 		Object rawChildrenObj = list.Get_at(1);
-		if (XophpType_.To_type_id(rawChildrenObj) == Type_ids_.Id__array) {
+		if (XophpType_.To_type_id(rawChildrenObj) == TypeIds.IdArray) {
 			this.rawChildren = (XophpArray)rawChildrenObj;
 		}
 		else {
@@ -93,7 +98,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 		else if (type.is_array()) {
 			XophpArray descriptor_array = (XophpArray)descriptor;
 			String name = (String)(descriptor_array.Get_by(NAME));
-			if (String_.CharAt(name, 0) == '@') {
+			if (StringUtl.CharAt(name, 0) == '@') {
 				return new XomwPPNode_Hash_Attr(store, index);
 			}
 			else {
@@ -112,17 +117,17 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 		String inner = "";
 		String attribs = "";
 		for (XomwPPNode node = this.getFirstChild(); node != null; node = node.getNextSibling()) {
-			if (Type_.Eq_by_obj(node, XomwPPNode_Hash_Attr.class)) {
+			if (ClassUtl.EqByObj(XomwPPNode_Hash_Attr.class, node)) {
 				XomwPPNode_Hash_Attr node_attr = (XomwPPNode_Hash_Attr)node;
-				attribs += " " + node_attr.name + "=\"" + String_.new_u8(Bry_.Escape_html(Bry_.new_u8(node_attr.value))) + "\"";
+				attribs += " " + node_attr.name + "=\"" + StringUtl.NewU8(HtmlBryBfr.EscapeHtml(BryUtl.NewU8(node_attr.value))) + "\"";
 			} else {
 				inner += node.toString();
 			}
 		}
-		if (String_.Eq(inner, "") && String_.Eq(name, "name")) {
+		if (StringUtl.Eq(inner, "") && StringUtl.Eq(name, "name")) {
 			return "<" + this.name + attribs + " />";
 		} else {
-			if (String_.Eq(name, "equals")) {
+			if (StringUtl.Eq(name, "equals")) {
 				return inner;
 			}
 			else {
@@ -183,7 +188,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 		for (int idx = 0; idx < rawChildren_len; idx++) {
 			XophpArrayItm itm = this.rawChildren.Get_at_itm(idx);
 			Object child = itm.Val();
-			if (XophpType_.is_array(child) && String_.Eq(((XophpArray)child).Get_at_str(XomwPPNode_Hash_Tree.NAME), name)) {
+			if (XophpType_.is_array(child) && StringUtl.Eq(((XophpArray)child).Get_at_str(XomwPPNode_Hash_Tree.NAME), name)) {
 				children.Add(XomwPPNode_Hash_Tree.factory(this.rawChildren, itm.KeyAsInt()));
 			}
 		}
@@ -191,7 +196,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 	}
 
 	/**
-	* Get the raw child array. For @gplx.Internal protected use.
+	* Get the raw child array. For public use.
 	* @return array
 	*/
 	public XophpArray getRawChildren() {
@@ -234,7 +239,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 	}
 
 	/**
-	* Like splitArg() but for a raw child array. For @gplx.Internal protected use only.
+	* Like splitArg() but for a raw child array. For public use only.
 	*/
 	public static XophpArray splitRawArg(XophpArray children) {
 		XophpArray bits = XophpArray.New();
@@ -247,15 +252,15 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 			}
 			XophpArray child = (XophpArray)childObj;
 			int i = itm.KeyAsInt();
-			if (String_.Eq(child.Get_at_str(XomwPPNode_Hash_Tree.NAME), "name")) {
+			if (StringUtl.Eq(child.Get_at_str(XomwPPNode_Hash_Tree.NAME), "name")) {
 				bits.Set("name", new XomwPPNode_Hash_Tree(children, i));
 				if (XophpObject_.isset_obj(child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at_ary(0).Get_at(XomwPPNode_Hash_Tree.NAME))
-					&& String_.Eq(child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at_ary(0).Get_at_str(XomwPPNode_Hash_Tree.NAME), "@index")
+					&& StringUtl.Eq(child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at_ary(0).Get_at_str(XomwPPNode_Hash_Tree.NAME), "@index")
 				) {
 					bits.Set("index", child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at_ary(0).Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at(0));
 				}
 			}
-			else if (String_.Eq(child.Get_at_str(XomwPPNode_Hash_Tree.NAME), "value")) {
+			else if (StringUtl.Eq(child.Get_at_str(XomwPPNode_Hash_Tree.NAME), "value")) {
 				bits.Set("value", new XomwPPNode_Hash_Tree(children, i));
 			}
 		}
@@ -281,7 +286,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 	}
 
 	/**
-	* Like splitExt() but for a raw child array. For @gplx.Internal protected use only.
+	* Like splitExt() but for a raw child array. For public use only.
 	*/
 	public static XophpArray splitRawExt(XophpArray children) {
 		XophpArray bits = XophpArray.New();
@@ -293,16 +298,16 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 			}
 			XophpArray child = (XophpArray)childObj;
 			String childName = child.Get_at_str(XomwPPNode_Hash_Tree.NAME);
-			if (String_.Eq(childName, "name")) {
+			if (StringUtl.Eq(childName, "name")) {
 				bits.Add("name", new XomwPPNode_Hash_Tree(children, i));
 			}
-			else if (String_.Eq(childName, "attr")) {
+			else if (StringUtl.Eq(childName, "attr")) {
 				bits.Add("attr", new XomwPPNode_Hash_Tree(children, i));
 			}
-			else if (String_.Eq(childName, "inner")) {
+			else if (StringUtl.Eq(childName, "inner")) {
 				bits.Add("inner", new XomwPPNode_Hash_Tree(children, i));
 			}
-			else if (String_.Eq(childName, "close")) {
+			else if (StringUtl.Eq(childName, "close")) {
 				bits.Add("close", new XomwPPNode_Hash_Tree(children, i));
 			}
 		}
@@ -319,14 +324,14 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 	* @return array
 	*/
 	@Override public XophpArray splitHeading() {
-		if (!String_.Eq(this.name, "h")) {
+		if (!StringUtl.Eq(this.name, "h")) {
 			throw new XomwMWException("Invalid h node passed to " + "splitHeading");
 		}
 		return XomwPPNode_Hash_Tree.splitRawHeading(this.rawChildren);
 	}
 
 	/**
-	* Like splitHeading() but for a raw child array. For @gplx.Internal protected use only.
+	* Like splitHeading() but for a raw child array. For public use only.
 	*/
 	public static XophpArray splitRawHeading(XophpArray children) {
 		XophpArray bits = XophpArray.New();
@@ -339,9 +344,9 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 			XophpArray child = (XophpArray)childObj;
 			String childName = child.Get_at_str(XomwPPNode_Hash_Tree.NAME);
 			XophpArray childChildren = child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN);
-			if (String_.Eq(childName, "@i")) {
+			if (StringUtl.Eq(childName, "@i")) {
 				bits.Add("i", childChildren.Get_at(0));
-			} else if (String_.Eq(childName, "@level")) {
+			} else if (StringUtl.Eq(childName, "@level")) {
 				bits.Add("level", childChildren.Get_at(0));
 			}
 		}
@@ -362,7 +367,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 	}
 
 	/**
-	* Like splitTemplate() but for a raw child array. For @gplx.Internal protected use only.
+	* Like splitTemplate() but for a raw child array. For public use only.
 	*/
 	public static XophpArray splitRawTemplate(XophpArray children) {
 		XophpArray parts = XophpArray.New();
@@ -376,11 +381,11 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 			XophpArray child = (XophpArray)childObj;
 			String childName = child.Get_at_str(XomwPPNode_Hash_Tree.NAME);
 			XophpArray childChildren = child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN);
-			if (String_.Eq(childName, "title")) {
+			if (StringUtl.Eq(childName, "title")) {
 				bits.Add("title", new XomwPPNode_Hash_Tree(childChildren, i));
-			} else if (String_.Eq(childName, "part")) {
+			} else if (StringUtl.Eq(childName, "part")) {
 				parts.Add(new XomwPPNode_Hash_Tree(childChildren, i));
-			} else if (String_.Eq(childName, "@lineStart")) {
+			} else if (StringUtl.Eq(childName, "@lineStart")) {
 				bits.Add("lineStart", "1");
 			}
 		}

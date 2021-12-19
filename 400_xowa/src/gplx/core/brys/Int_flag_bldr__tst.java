@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 import org.junit.*;
 public class Int_flag_bldr__tst {
 	private final Int_flag_bldr__fxt fxt = new Int_flag_bldr__fxt();
@@ -52,21 +55,21 @@ public class Int_flag_bldr__tst {
 }
 class Int_flag_bldr__fxt {
 	public int[] Make__ary(int... v) {return v;}
-	public void Test__bld_pow_ary(int[] seg_ary, int[] expd) {Tfds.Eq_ary_str(expd, Int_flag_bldr_.Bld_pow_ary(seg_ary));}
+	public void Test__bld_pow_ary(int[] seg_ary, int[] expd) {GfoTstr.EqAry(expd, Int_flag_bldr_.Bld_pow_ary(seg_ary));}
 	public void Test__to_int(int[] seg_ary, int[] val_ary, int expd) {
 		int[] pow_ary = Int_flag_bldr_.Bld_pow_ary(seg_ary);
-		Tfds.Eq(expd, Int_flag_bldr_.To_int(pow_ary, val_ary));
+		GfoTstr.EqObj(expd, Int_flag_bldr_.To_int(pow_ary, val_ary));
 		int[] actl_val_ary = Int_flag_bldr_.To_int_ary(pow_ary, expd);
-		Tfds.Eq_ary(val_ary, actl_val_ary);
+		GfoTstr.EqAry(val_ary, actl_val_ary);
 	}
 	public void Test__to_int_ary(int[] seg_ary, int val, int[] expd) {
 		int[] pow_ary = Int_flag_bldr_.Bld_pow_ary(seg_ary);
-		Tfds.Eq_ary_str(expd, Int_flag_bldr_.To_int_ary(pow_ary, val));
+		GfoTstr.EqAry(expd, Int_flag_bldr_.To_int_ary(pow_ary, val));
 	}
 	public void Test__to_int_date_short(String date_str, int expd) {
-		DateAdp date = DateAdp_.parse_fmt(date_str, "yyyyMMdd HHmm");
-		int date_int = Int_flag_bldr_.To_int_date_short(date.XtoSegAry());
-		Tfds.Eq(expd, date_int);
-		Tfds.Eq(date_str, Int_flag_bldr_.To_date_short(date_int).XtoStr_fmt("yyyyMMdd HHmm"));
+		GfoDate date = GfoDateUtl.ParseFmt(date_str, "yyyyMMdd HHmm");
+		int date_int = Int_flag_bldr_.To_int_date_short(date.ToSegAry());
+		GfoTstr.EqObj(expd, date_int);
+		GfoTstr.EqObj(date_str, Int_flag_bldr_.To_date_short(date_int).ToStrFmt("yyyyMMdd HHmm"));
 	}
 }

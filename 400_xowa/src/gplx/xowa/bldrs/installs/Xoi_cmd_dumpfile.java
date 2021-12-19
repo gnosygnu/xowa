@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.installs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.core.threads.*;
 class Xoi_cmd_dumpfile {
 	public byte[] Domain() {return domain;} private byte[] domain;
@@ -24,18 +30,18 @@ class Xoi_cmd_dumpfile {
 	public Xoi_cmd_dumpfile Parse_msg(GfoMsg m) {
 		Io_url dump_url = m.ReadIoUrl("url");
 		domain = m.ReadBry("domain");
-		if (Bry_.Len_eq_0(domain)) domain = Bry_.new_u8(dump_url.OwnerDir().NameOnly());
-		bz2_unzip = String_.Eq(m.ReadStr("args"), "unzip");
+		if (BryUtl.IsNullOrEmpty(domain)) domain = BryUtl.NewU8(dump_url.OwnerDir().NameOnly());
+		bz2_unzip = StringUtl.Eq(m.ReadStr("args"), "unzip");
 		String dump_ext = dump_url.Ext();
-		if		(String_.Eq(dump_ext, ".bz2")) {
+		if		(StringUtl.Eq(dump_ext, ".bz2")) {
 			bz2_url = dump_url;
 			if (bz2_unzip) {
 				xml_url = bz2_url.GenNewExt("");	// remove .bz2 extension (new file path should be .xml)
-				if (!String_.Eq(xml_url.Ext(), ".xml"))
+				if (!StringUtl.Eq(xml_url.Ext(), ".xml"))
 					xml_url = xml_url.GenNewExt(".xml");
 			}
 		}
-		else if	(String_.Eq(dump_ext, ".xml")) {	// user selected xml file; 
+		else if	(StringUtl.Eq(dump_ext, ".xml")) {	// user selected xml file;
 			bz2_url = null;
 			xml_url = dump_url;
 			bz2_unzip = false;	// ignore unzip arge
@@ -53,6 +59,6 @@ class Xoi_cmd_dumpfile {
 			wiki.Import_cfg().Src_fil_bz2_(bz2_url);
 		else
 			wiki.Import_cfg().Src_fil_xml_(xml_url);
-		return cmd_mgr.Dump_add_many_custom(String_.new_u8(domain), "", "", true);
+		return cmd_mgr.Dump_add_many_custom(StringUtl.NewU8(domain), "", "", true);
 	}
 }

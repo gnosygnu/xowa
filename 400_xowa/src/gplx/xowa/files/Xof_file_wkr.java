@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.files.imgs.*;
@@ -25,7 +33,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final Xoa_page hpg; private final List_adp imgs;
 	public Xof_file_wkr(Xof_orig_mgr orig_mgr, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xou_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xoa_page hpg, List_adp imgs) {
 		this.orig_mgr = orig_mgr; this.bin_mgr = bin_mgr; this.mnt_mgr = mnt_mgr; this.cache_mgr = cache_mgr;
-		this.usr_dlg = Gfo_usr_dlg_.Instance; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;			
+		this.usr_dlg = Gfo_usr_dlg_.Instance; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;
 		this.hpg = hpg; this.imgs = imgs;
 	}
 	public String			Thread__name() {return "xowa.load_imgs";}
@@ -33,7 +41,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	public void Thread__exec() {
 		int len = imgs.Len();
 		for (int i = 0; i < len; ++i)
-			Exec_by_fsdb((Xof_fsdb_itm)imgs.Get_at(i));
+			Exec_by_fsdb((Xof_fsdb_itm)imgs.GetAt(i));
 		Xoa_app_.Usr_dlg().Prog_none("", "", "");
 	}
 	private void Exec_by_fsdb(Xof_fsdb_itm fsdb) {
@@ -44,7 +52,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			Eval_orig(orig, fsdb, url_bldr, repo_mgr, img_size);
 			Show_img(fsdb, usr_dlg, bin_mgr, mnt_mgr, cache_mgr, repo_mgr, js_wkr, img_size, url_bldr, hpg);
 		} catch (Exception e) {
-			usr_dlg.Warn_many("", "", "file.unknown: err=~{0}", Err_.Message_gplx_full(e));
+			usr_dlg.Warn_many("", "", "file.unknown: err=~{0}", ErrUtl.ToStrFull(e));
 		}
 	}
 	public static boolean Show_img(Xof_fsdb_itm fsdb, Gfo_usr_dlg usr_dlg, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xou_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xof_img_size img_size, Xof_url_bldr url_bldr, Xoa_page page) {
@@ -85,7 +93,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			if (cache_mgr != null) cache_mgr.Update(fsdb);	// cache_mgr null during tests;
 			return true;
 		} catch (Exception e) {
-			usr_dlg.Warn_many("", "", "file.unknown: err=~{0}", Err_.Message_gplx_full(e));
+			usr_dlg.Warn_many("", "", "file.unknown: err=~{0}", ErrUtl.ToStrFull(e));
 			return false;
 		}
 	}
@@ -112,7 +120,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	public static void Eval_orig(Xof_orig_itm orig, Xof_fsdb_itm fsdb, Xof_url_bldr url_bldr, Xow_repo_mgr repo_mgr, Xof_img_size img_size) {
 		fsdb.Orig_exists_y_();
 		byte repo_id = orig.Repo();
-		Xof_repo_itm repo_itm = repo_mgr.Get_trg_by_id_or_null(repo_id, fsdb.Lnki_ttl(), Bry_.Empty);
+		Xof_repo_itm repo_itm = repo_mgr.Get_trg_by_id_or_null(repo_id, fsdb.Lnki_ttl(), BryUtl.Empty);
 		if (repo_itm == null) return;
 		fsdb.Init_at_orig(repo_id, repo_itm.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
 		fsdb.Init_at_html(fsdb.Lnki_exec_tid(), img_size, repo_itm, url_bldr);
@@ -129,7 +137,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 			bin_updater.Save_bin(mnt_itm, atr_fil, bin_fil, itm, rdr, rdr_len);
 		}
 		catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", itm.Orig_ttl(), html_url.Raw(), Err_.Message_gplx_full(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to save file: ttl=~{0} url=~{1} err=~{2}", itm.Orig_ttl(), html_url.Raw(), ErrUtl.ToStrFull(e));
 		}
 		finally {rdr.Rls();}
 	}

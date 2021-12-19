@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.vnts;
-import gplx.Bry_bfr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
 class Vnt_flag_code_mgr {
 	private final boolean[] ary = new boolean[Ary_len]; private final static int Ary_len = Vnt_flag_code_.Tid__max;
 	public int Count() {return count;} private int count = 0;
@@ -45,11 +45,11 @@ class Vnt_flag_code_mgr {
 		this.Limit(tid);
 		return true;
 	}
-	public void To_bfr__dbg(Bry_bfr bfr) {
+	public void To_bfr__dbg(BryWtr bfr) {
 		for (int i = 0; i < Ary_len; ++i) {
 			if (ary[i]) {
-				if (bfr.Len_gt_0()) bfr.Add_byte_semic();
-				bfr.Add_str_a7(Vnt_flag_code_.To_str(i));
+				if (bfr.HasSome()) bfr.AddByteSemic();
+				bfr.AddStrA7(Vnt_flag_code_.To_str(i));
 			}
 		}
 	}

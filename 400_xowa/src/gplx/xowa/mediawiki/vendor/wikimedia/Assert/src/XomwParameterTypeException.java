@@ -16,8 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 
 package gplx.xowa.mediawiki.vendor.wikimedia.Assert.src;
 
-import gplx.String_;
-
+import gplx.types.basics.utls.StringUtl;
 // MW.SRC:1.33.1
 /**
  * Exception indicating that a parameter type assertion failed.
@@ -44,7 +43,7 @@ public class XomwParameterTypeException extends XomwParameterAssertionException 
         //    throw new ParameterTypeException( 'parameterType', 'string' );
         //}
 
-        super(parameterName, String_.Format("must be a {0}", parameterType));
+        super(parameterName, StringUtl.Format("must be a {0}", parameterType));
 
         this.parameterType = parameterType;
     }

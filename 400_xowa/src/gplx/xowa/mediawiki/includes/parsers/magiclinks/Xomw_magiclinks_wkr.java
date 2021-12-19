@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.magiclinks; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.parsers.magiclinks;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
@@ -47,8 +55,8 @@ public class Xomw_magiclinks_wkr {
 			.To_ary();
 
 		if (Tag__anch__rhs == null) {
-			synchronized (Type_.Type_by_obj(this)) {
-				Tag__anch__rhs = Bry_.new_a7("</a>");
+			synchronized (ClassUtl.TypeByObj(this)) {
+				Tag__anch__rhs = BryUtl.NewA7("</a>");
 				regex_link_interrupt = new Xomw_regex_link_interrupt();
 			}
 		}
@@ -69,11 +77,11 @@ public class Xomw_magiclinks_wkr {
 	// magic external links.
 	public void doMagicLinks(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 
 		int cur = src_bgn;
 		int prv = cur;
@@ -96,7 +104,7 @@ public class Xomw_magiclinks_wkr {
 		while (true) {
 			if (cur == src_end) {
 				if (dirty)
-					bfr.Add_mid(src, prv, src_end);
+					bfr.AddMid(src, prv, src_end);
 				break;
 			}
 
@@ -109,7 +117,7 @@ public class Xomw_magiclinks_wkr {
 			}
 
 			// looks like magiclink; do additional processing
-			byte regex_tid = ((Byte_obj_val)o).Val();
+			byte regex_tid = ((ByteVal)o).Val();
 			int hook_bgn = cur;
 			int hook_end = trv.Pos();
 			int tmp_pos = hook_end;
@@ -134,9 +142,9 @@ public class Xomw_magiclinks_wkr {
 						if (regex_valid) {
 							// find </a>
 							tmp_pos++;
-							int anch_end = Bry_find_.Find_fwd(src, Tag__anch__rhs, tmp_pos, src_end);
+							int anch_end = BryFind.FindFwd(src, Tag__anch__rhs, tmp_pos, src_end);
 							// </a> not found -> invalid
-							if (anch_end == Bry_find_.Not_found) {
+							if (anch_end == BryFind.NotFound) {
 								regex_valid = false;
 							}
 							// </a> found -> valid; set cur to after "</a>"
@@ -151,9 +159,9 @@ public class Xomw_magiclinks_wkr {
 					break;
 				case Regex__elem: // (<.*?>) |                    // m[2]: Skip stuff inside
 					// just find ">"
-					tmp_pos = Bry_find_.Find_fwd(src, AsciiByte.AngleEnd, tmp_pos, src_end);
+					tmp_pos = BryFind.FindFwd(src, AsciiByte.AngleEnd, tmp_pos, src_end);
 					// > not found -> invalid
-					if (tmp_pos == Bry_find_.Not_found) {
+					if (tmp_pos == BryFind.NotFound) {
 						regex_valid = false;
 					}
 					// > found -> valid; set cur to after ">"
@@ -189,8 +197,8 @@ public class Xomw_magiclinks_wkr {
 				if (regex_tid == Regex__free) {
 					this.page_title = pctx.Page_title().getPrefixedDBkey();
                         dirty = true;
-					bfr.Add_mid(src, prv, hook_bgn);
-					byte[] url = Bry_.Mid(src, hook_bgn, cur);
+					bfr.AddMid(src, prv, hook_bgn);
+					byte[] url = BryLni.Mid(src, hook_bgn, cur);
 					int num_post_proto = cur - hook_end; // get length of url without proto; EX: "http://a.org" should be 5 ("a.org")
                         this.Make_free_external_link(bfr, url, num_post_proto);
 					prv = cur;
@@ -206,24 +214,24 @@ public class Xomw_magiclinks_wkr {
 	}
 
 	// Make a free external link, given a user-supplied URL
-	public void Make_free_external_link(Bry_bfr bfr, byte[] url, int num_post_proto) {
-		byte[] trail = Bry_.Empty;
+	public void Make_free_external_link(BryWtr bfr, byte[] url, int num_post_proto) {
+		byte[] trail = BryUtl.Empty;
 
 		// The characters '<' and '>' (which were escaped by
 		// removeHTMLtags()) should not be included in
 		// URLs, per RFC 2396.
 		// Make &nbsp; terminate a URL as well (bug T84937)
 		int separator_bgn = regex_link_interrupt.Find(trv, url, 0, url.length);
-		if (separator_bgn != Bry_find_.Not_found) {
-			trail = Bry_.Mid(url, separator_bgn);
-			url = Bry_.Mid(url, 0, separator_bgn);
+		if (separator_bgn != BryFind.NotFound) {
+			trail = BryLni.Mid(url, separator_bgn);
+			url = BryLni.Mid(url, 0, separator_bgn);
 		}
 
 		// Move trailing punctuation to $trail
 		int url_len = url.length;
 		// If there is no left bracket, then consider right brackets fair game too
 		// XO.MW: if (strpos($url, '(') === false) {$sep .= ')';}
-		url_separators[AsciiByte.ParenEnd] = Bry_find_.Find_fwd(url, AsciiByte.ParenBgn, 0, url_len) == Bry_find_.Not_found;
+		url_separators[AsciiByte.ParenEnd] = BryFind.FindFwd(url, AsciiByte.ParenBgn, 0, url_len) == BryFind.NotFound;
 		
 		int num_sep_chars = XophpString_.strspn_bwd__ary(url, url_separators, url_len, -1);
 		// Don't break a trailing HTML entity by moving the ; into $trail
@@ -242,14 +250,14 @@ public class Xomw_magiclinks_wkr {
 		}
 
 		if (num_sep_chars > 0) {
-			trail = Bry_.Add(XophpString_.substr(url, -num_sep_chars), trail);
+			trail = BryUtl.Add(XophpString_.substr(url, -num_sep_chars), trail);
 			url = XophpString_.substr(url, 0, -num_sep_chars);
 		}
 
 		// Verify that we still have a real URL after trail removal, and
 		// not just lone protocol
 		if (trail.length >= num_post_proto) {
-			bfr.Add_bry_many(url, trail);
+			bfr.AddBryMany(url, trail);
 			return;
 		}
 
@@ -262,7 +270,7 @@ public class Xomw_magiclinks_wkr {
 			// Not an image, make a link
 			linker.makeExternalLink(bfr, url
 				, url	// $this->getConverterLanguage()->markNoConversion($url, true),
-				, true, Bry_.new_a7("free")
+				, true, BryUtl.NewA7("free")
 				, parser.getExternalLinkAttribs(atrs)
 				, page_title);
 
@@ -286,7 +294,7 @@ class Xomw_regex_html_entity {
 		int numbers = 0;
 		int letters = 0;
 		while (cur >= src_end) {
-			int b_bgn = gplx.core.intls.Utf8_.Get_prv_char_pos0_old(src, cur);
+			int b_bgn = Utf8Utl.GetPrvCharPos0Old(src, cur);
 			switch (src[b_bgn]) {
 				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
 				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
@@ -357,11 +365,11 @@ class Xomw_regex_link_interrupt {
 			byte b = src[pos];
 			Object bgn_obj = bgn_trie.Match_at_w_b0(trv, b, src, pos, src_end);
 			if (bgn_obj == null) {
-				pos += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+				pos += Utf8Utl.LenOfCharBy1stByte(b);
 				continue;
 			}
 
-			byte bgn_tid = ((Byte_obj_val)bgn_obj).Val();
+			byte bgn_tid = ((ByteVal)bgn_obj).Val();
 			int end_pos = trv.Pos();
 			boolean valid = false;
 			switch (bgn_tid) {
@@ -372,13 +380,13 @@ class Xomw_regex_link_interrupt {
 				case Bgn__hex:
 				case Bgn__dec:
 					// match rest of sequence from above; EX: "3c;", "60;" etc.
-					end_pos = Bry_find_.Find_fwd_while(src, end_pos, src_end, AsciiByte.Num0);
-					Object end_obj = end_trie.Match_at(trv, src, end_pos, src_end);
+					end_pos = BryFind.FindFwdWhile(src, end_pos, src_end, AsciiByte.Num0);
+					Object end_obj = end_trie.MatchAt(trv, src, end_pos, src_end);
 					if (end_obj != null) {
 						// make sure that hex-dec matches; EX: "&#x60;" and "&#3c;" are invalid
-						byte end_tid = ((Byte_obj_val)end_obj).Val();
-						if (   bgn_tid == Bgn__hex && Int_.Between(end_tid, End__hex__lt, End__hex__nbsp)
-							|| bgn_tid == Bgn__dec && Int_.Between(end_tid, End__dec__lt, End__dec__nbsp)
+						byte end_tid = ((ByteVal)end_obj).Val();
+						if (   bgn_tid == Bgn__hex && IntUtl.Between(end_tid, End__hex__lt, End__hex__nbsp)
+							|| bgn_tid == Bgn__dec && IntUtl.Between(end_tid, End__dec__lt, End__dec__nbsp)
 							)
 						return pos;
 					}
@@ -387,9 +395,9 @@ class Xomw_regex_link_interrupt {
 			if (valid)
 				return pos;
 			else
-				pos += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+				pos += Utf8Utl.LenOfCharBy1stByte(b);
 		}
-		return Bry_find_.Not_found;
+		return BryFind.NotFound;
 	}
 //		/**
 //		* Replace special strings like "ISBN xxx" and "RFC xxx" with
@@ -486,7 +494,7 @@ class Xomw_regex_link_interrupt {
 //					SpecialPage::getTitleFor('Booksources', $num),
 //					"ISBN $isbn",
 //					[
-//						'class' => '@gplx.Internal protected mw-magiclink-isbn',
+//						'class' => 'public mw-magiclink-isbn',
 //						'title' => false // suppress title attribute
 //					]
 //				);

@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.media; import gplx.*;
+package gplx.xowa.mediawiki.includes.media;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
 import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
@@ -130,7 +133,7 @@ public abstract class XomwMediaTransformOutput {
 	*
 	* @return String
 	*/
-	public abstract void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_params_mto options);
+	public abstract void toHtml(BryWtr bfr, BryWtr tmp, Xomw_params_mto options);
 
 //		/**
 //		* This will be overridden to return true in error classes
@@ -240,7 +243,7 @@ public abstract class XomwMediaTransformOutput {
 	* @return array
 	*/
 	public void getDescLinkAttribs(List_adp attribs, byte[] title, List_adp prms) {
-		byte[] query = Bry_.Empty;
+		byte[] query = BryUtl.Empty;
 //			if ( is_array( prms ) ) {
 //				$query = prms;
 //			} else {
@@ -267,7 +270,7 @@ public abstract class XomwMediaTransformOutput {
 
 	// Wrap some XHTML text in an anchor tag with the given attributes
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	protected void Link_wrap(Bry_bfr bfr, List_adp link_attribs, byte[] contents) {
+	protected void Link_wrap(BryWtr bfr, List_adp link_attribs, byte[] contents) {
 		if (link_attribs != null) {
 			XomwXml.Tags(bfr, Gfh_tag_.Bry__a, link_attribs, contents);
 		}
@@ -275,5 +278,5 @@ public abstract class XomwMediaTransformOutput {
 			bfr.Add(contents);
 		}
 	}
-	private static final byte[] Bry__class__image = Bry_.new_a7("image");
+	private static final byte[] Bry__class__image = BryUtl.NewA7("image");
 }

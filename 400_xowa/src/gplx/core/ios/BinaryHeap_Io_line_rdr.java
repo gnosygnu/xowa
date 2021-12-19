@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
 class BinaryHeap_Io_line_rdr {
 	public BinaryHeap_Io_line_rdr(ComparerAble comparer) {this.comparer = comparer;} ComparerAble comparer;
 	Io_line_rdr[] ary = Ary_empty; int ary_len = 0, ary_max = 0;

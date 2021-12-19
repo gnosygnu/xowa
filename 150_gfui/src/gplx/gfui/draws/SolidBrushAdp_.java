@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.draws; import gplx.*;
+package gplx.gfui.draws;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.errs.ErrUtl;
 public class SolidBrushAdp_ {
 	public static SolidBrushAdp as_(Object obj) {return obj instanceof SolidBrushAdp ? (SolidBrushAdp)obj : null;}
-	public static SolidBrushAdp cast(Object obj) {try {return (SolidBrushAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, SolidBrushAdp.class, obj);}}
+	public static SolidBrushAdp cast(Object obj) {try {return (SolidBrushAdp)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, SolidBrushAdp.class, obj);}}
 	public static final SolidBrushAdp Black = new_(ColorAdp_.Black);
 	public static final SolidBrushAdp White = new_(ColorAdp_.White);
 	public static final SolidBrushAdp Null = new_(ColorAdp_.Null);

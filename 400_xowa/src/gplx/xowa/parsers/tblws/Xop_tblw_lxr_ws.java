@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tblws;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.parsers.*;
 public class Xop_tblw_lxr_ws {
 	public static int Make(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte wlxr_type, boolean called_from_pre) {
 		int rv = Xop_tblw_lxr.Handle_bang(wlxr_type, ctx, ctx.Tkn_mkr(), root, src, src_len, bgn_pos, cur_pos);
@@ -58,7 +60,7 @@ public class Xop_tblw_lxr_ws {
 		}
 		return ctx.Tblw().Make_tkn_bgn(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, false, wlxr_type, Xop_tblw_wkr.Called_from_general, -1, -1);
 	}
-	public static final byte[] Hook_tb = Bry_.new_a7("{|"), Hook_te = Bry_.new_a7("|}"), Hook_tr = Bry_.new_a7("|-")
-		, Hook_th = Bry_.new_a7("!"), Hook_tc = Bry_.new_a7("|+");
+	public static final byte[] Hook_tb = BryUtl.NewA7("{|"), Hook_te = BryUtl.NewA7("|}"), Hook_tr = BryUtl.NewA7("|-")
+		, Hook_th = BryUtl.NewA7("!"), Hook_tc = BryUtl.NewA7("|+");
 	public static final int Tblw_ws_cell_pipe = -1;
 }

@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.wikis.nss.*;
 public class Xot_invk_wkr__missing__tst {		
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Missing() {
@@ -38,7 +41,7 @@ public class Xot_invk_wkr__missing__tst {
 	@Test public void Missing_foreign() {
 		Xow_ns ns = fxt.Wiki().Ns_mgr().Ns_template();
 		byte[] old_ns = ns.Name_db();
-		ns.Name_bry_(Bry_.new_a7("Template_foreign"));
+		ns.Name_bry_(BryUtl.NewA7("Template_foreign"));
 		fxt.Test_parse_tmpl_str("{{Missing}}", "[[:Template_foreign:Missing]]");
 		ns.Name_bry_(old_ns);
 	}

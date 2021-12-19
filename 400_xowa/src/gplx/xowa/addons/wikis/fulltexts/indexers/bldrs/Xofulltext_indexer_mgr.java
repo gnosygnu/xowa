@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.indexers.*;
+package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.htmls.*;
 import gplx.xowa.wikis.data.*;
-import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.svcs.*;
 public class Xofulltext_indexer_mgr {
 	public void Exec(Xowe_wiki wiki, Xofulltext_indexer_ui ui, Xofulltext_indexer_args args) {
@@ -77,10 +80,10 @@ public class Xofulltext_indexer_mgr {
 					if ((++count % 10000) == 0) {
 						Gfo_usr_dlg_.Instance.Prog_many("", "", "indexing page: ~{0}", count);
 						if (ui != null)
-							ui.Send_prog(Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": indexing page: " + count);
+							ui.Send_prog(GfoDateNow.Get().ToStrFmt_yyyy_MM_dd_HH_mm_ss() + ": indexing page: " + count);
 					}
 				} catch (Exception e) {
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "err: ~{0}", Err_.Message_gplx_log(e));
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "err: ~{0}", ErrUtl.ToStrLog(e));
 				}
 			}
 		}

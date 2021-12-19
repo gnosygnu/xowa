@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.js; import gplx.*;
+package gplx.xowa.addons.apps.updates.js;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.guis.cbks.*;
 public class Xojs_wkr__replace extends Xojs_wkr__base {
 	private final Io_url src_dir, trg_dir;
@@ -24,7 +33,7 @@ public class Xojs_wkr__replace extends Xojs_wkr__base {
 		this.src_fils = Io_mgr.Instance.QueryDir_args(src_dir).Recur_().ExecAsUrlAry();
 		this.Prog_data_end_(src_fils.length);
 	}
-	public Keyval[] Failed() {return failed;} private Keyval[] failed = Keyval_.Ary_empty;
+	public KeyVal[] Failed() {return failed;} private KeyVal[] failed = KeyValUtl.AryEmpty;
 	@Override protected void Exec_run() {
 		List_adp failed_list = List_adp_.New();
 
@@ -38,14 +47,14 @@ public class Xojs_wkr__replace extends Xojs_wkr__base {
 				Io_mgr.Instance.DeleteFil(trg_fil);	// delete first; will fail if file is in use
 				Io_mgr.Instance.MoveFil_args(src_fil, trg_fil, true).Exec(); // replace with src file
 			} catch (Exception exc) {
-				Gfo_usr_dlg_.Instance.Log_many("failed to delete and move file; file=~{0} msg=~{1}", trg_fil.Raw(), Err_.Message_gplx_log(exc));
-				failed_list.Add(Keyval_.new_(src_fil.Raw(), trg_fil.Raw()));
+				Gfo_usr_dlg_.Instance.Log_many("failed to delete and move file; file=~{0} msg=~{1}", trg_fil.Raw(), ErrUtl.ToStrLog(exc));
+				failed_list.Add(KeyVal.NewStr(src_fil.Raw(), trg_fil.Raw()));
 				
 				// try {Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);}	// try to copy file anyway
 				// catch (Exception exc2) {Gfo_usr_dlg_.Instance.Log_many("failed to fopy file; file=~{0} msg=~{1}", trg_fil.Raw(), Err_.Message_gplx_log(exc2));}
 			}
 		}
 
-		this.failed = (Keyval[])failed_list.ToAryAndClear(Keyval.class);
+		this.failed = (KeyVal[])failed_list.ToAryAndClear(KeyVal.class);
 	}
 }

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
+package gplx.fsdb.meta; import gplx.fsdb.*;
 import gplx.core.ios.streams.*; import gplx.dbs.*;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Fsm_bin_mgr {
 	private final Fsdb_db_mgr core_mgr; private final int mnt_id; private final Fsm_bin_tbl tbl;
 	private final Ordered_hash db_hash = Ordered_hash_.New();
@@ -34,7 +36,7 @@ public class Fsm_bin_mgr {
 	}
 	public int Dbs__len()							{return db_hash.Len();}
 	public Fsm_bin_fil Dbs__get_nth()				{return nth_db;}
-	public Fsm_bin_fil Dbs__get_at(int i)			{return (Fsm_bin_fil)db_hash.Get_at(i);}
+	public Fsm_bin_fil Dbs__get_at(int i)			{return (Fsm_bin_fil)db_hash.GetAt(i);}
 	public Fsm_bin_fil Dbs__get_by_or_null(int i)	{return (Fsm_bin_fil)db_hash.GetByOrNull(i);}
 	public Fsm_bin_fil Dbs__make(String file_name) {return Dbs__make(db_hash.Len(), file_name);}
 	public Fsm_bin_fil Dbs__make(int id, String file_name) {

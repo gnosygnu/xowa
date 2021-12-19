@@ -13,10 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.dbs.*; import gplx.core.ios.*; import gplx.xowa.files.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sql_dumps.*;
-import gplx.xowa.addons.bldrs.files.dbs.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_stmt;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.files.dbs.Xob_image_tbl;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_db_file;
+import gplx.xowa.bldrs.Xob_page_wkr_cmd;
+import gplx.xowa.bldrs.sql_dumps.Xosql_dump_cbk;
+import gplx.xowa.bldrs.sql_dumps.Xosql_dump_parser;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wkrs.Xob_itm_dump_base;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_media_type;
+import gplx.xowa.files.Xof_mime_minor_;
 public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk, Xosql_dump_cbk {
 	private Xosql_dump_parser parser;
 	private Db_conn conn = null; private Db_stmt stmt = null;
@@ -35,7 +58,7 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 		Init_dump(BLDR_CMD_KEY);
 		if (src_fil == null) {
 			src_fil = Xob_page_wkr_cmd.Find_fil_by(wiki.Fsys_mgr().Root_dir(), "*-image.sql");
-			if (src_fil == null) throw Err_.new_wo_type(".sql file not found in dir", "dir", wiki.Fsys_mgr().Root_dir());
+			if (src_fil == null) throw ErrUtl.NewArgs(".sql file not found in dir", "dir", wiki.Fsys_mgr().Root_dir());
 		}
 		parser.Src_fil_(src_fil);
 		this.conn = Xob_db_file.New__wiki_image(wiki.Fsys_mgr().Root_dir()).Conn();
@@ -51,14 +74,14 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 	}
 	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		switch (fld_idx) {
-			case Fld_img_name: 			cur_ttl			= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld_img_size: 			cur_size		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
-			case Fld_img_width:			cur_width		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
-			case Fld_img_height:		cur_height		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
-			case Fld_img_bits: 			cur_bits		= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
-			case Fld_img_media_type:	cur_media_type	= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld_img_minor_mime:	cur_minor_mime	= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld_img_timestamp:		cur_timestamp	= Bry_.Mid(src, val_bgn, val_end); break;
+			case Fld_img_name: 			cur_ttl			= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld_img_size: 			cur_size		= BryUtl.ToIntOr(src, val_bgn, val_end, -1); break;
+			case Fld_img_width:			cur_width		= BryUtl.ToIntOr(src, val_bgn, val_end, -1); break;
+			case Fld_img_height:		cur_height		= BryUtl.ToIntOr(src, val_bgn, val_end, -1); break;
+			case Fld_img_bits: 			cur_bits		= BryUtl.ToIntOr(src, val_bgn, val_end, -1); break;
+			case Fld_img_media_type:	cur_media_type	= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld_img_minor_mime:	cur_minor_mime	= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld_img_timestamp:		cur_timestamp	= BryLni.Mid(src, val_bgn, val_end); break;
 		}
 	}
 	public void On_row_done() {
@@ -66,7 +89,7 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 		tbl_image.Insert(stmt, cur_ttl, cur_media_type, cur_minor_mime, cur_size, cur_width, cur_height, cur_bits, cur_ext_id, cur_timestamp);
 		++commit_count;
 		if ((commit_count % 10000) == 0) {
-			usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, String_.new_u8(cur_ttl));
+			usr_dlg.Prog_many("", "", "committing: count=~{0} last=~{1}", commit_count, StringUtl.NewU8(cur_ttl));
 			conn.Txn_sav();
 		}
 	}
@@ -84,21 +107,21 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 	public static int Calc_ext_id(Gfo_usr_dlg usr_dlg, byte[] file, byte[] media_type, byte[] minor_mime, int w, int h) {
 		Xof_ext file_ext = Xof_ext_.new_by_ttl_(file);			int file_ext_id = file_ext.Id();
 		Xof_ext mime_ext = Xof_mime_minor_.ext_(minor_mime);	int mime_ext_id = mime_ext.Id();
-		int media_type_id = Xof_media_type.Xto_byte(String_.new_u8(media_type));
+		int media_type_id = Xof_media_type.Xto_byte(StringUtl.NewU8(media_type));
 		if (file_ext_id != mime_ext_id) {							// file_ext_id != mime_ext_id; EX: "A.png" actually has a minor_mime of "jpg"
 			boolean update = false, notify = true;
 			switch (file_ext_id) {
 				case Xof_ext_.Id_jpg: case Xof_ext_.Id_jpeg:
-					if (Int_.In(mime_ext_id, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg)) notify = false;	// skip: both jpg
+					if (IntUtl.In(mime_ext_id, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg)) notify = false;	// skip: both jpg
 					break;
 				case Xof_ext_.Id_tif: case Xof_ext_.Id_tiff:
-					if (Int_.In(mime_ext_id, Xof_ext_.Id_tif, Xof_ext_.Id_tiff)) notify = false;	// skip: both tif
+					if (IntUtl.In(mime_ext_id, Xof_ext_.Id_tif, Xof_ext_.Id_tiff)) notify = false;	// skip: both tif
 					break;
 				case Xof_ext_.Id_ogg: case Xof_ext_.Id_oga: case Xof_ext_.Id_ogv: case Xof_ext_.Id_opus:
-					if (Int_.In(mime_ext_id, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_ogv, Xof_ext_.Id_opus)) notify = false;	// skip: all media
+					if (IntUtl.In(mime_ext_id, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_ogv, Xof_ext_.Id_opus)) notify = false;	// skip: all media
 					break;
 				case Xof_ext_.Id_png:
-					if (Int_.In(mime_ext_id, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg))
+					if (IntUtl.In(mime_ext_id, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg))
 						update = true;
 					break;
 			}
@@ -106,7 +129,7 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 				file_ext_id = mime_ext_id;
 			else {
 				if (notify)
-					usr_dlg.Log_many("", "", "image.ext_calc.mismatch_exts: file=~{0} mime=~{1}", String_.new_u8(file), String_.new_u8(minor_mime));			
+					usr_dlg.Log_many("", "", "image.ext_calc.mismatch_exts: file=~{0} mime=~{1}", StringUtl.NewU8(file), StringUtl.NewU8(minor_mime));
 			}
 		}
 		if (    file_ext_id		== Xof_ext_.Id_ogg			// file_ext is ".ogg"
@@ -115,7 +138,7 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 			if (w > 0 && h > 0)								// some .ogg files are "VIDEO" but have 0 width, 0 height
 				file_ext_id = Xof_ext_.Id_ogv;				// manually specify ogv
 			else
-				usr_dlg.Log_many("", "", "image.ext_calc.ogg_video_with_null_size: media_type=~{0} minor_mime=~{1} w=~{2} h=~{3} file=~{4}", String_.new_u8(media_type), String_.new_u8(minor_mime), w, h, String_.new_u8(file));
+				usr_dlg.Log_many("", "", "image.ext_calc.ogg_video_with_null_size: media_type=~{0} minor_mime=~{1} w=~{2} h=~{3} file=~{4}", StringUtl.NewU8(media_type), StringUtl.NewU8(minor_mime), w, h, StringUtl.NewU8(file));
 		}
 		return file_ext_id;
 	}

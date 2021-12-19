@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.apis.xowa.addons.bldrs;
-import gplx.Bry_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
@@ -68,8 +68,8 @@ class Xopg_match_mgr__fxt {
 	private void Test__match(boolean expd, String... urls) {
 		for (int i = 0; i < urls.length; i++) {
 			String url = urls[i];				
-			boolean actl = match_mgr.Match(wiki, Bry_.new_u8(url));
-			Gftest.Eq__bool(expd, actl, "match failed", "expd", expd, "url", url);
+			boolean actl = match_mgr.Match(wiki, BryUtl.NewU8(url));
+			GfoTstr.Eq(expd, actl, "match failed", "expd", expd, "url", url);
 		}
 	}
 }

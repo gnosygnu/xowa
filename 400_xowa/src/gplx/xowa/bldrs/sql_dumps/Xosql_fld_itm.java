@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*;
-import gplx.objects.lists.CompareAble;
+package gplx.xowa.bldrs.sql_dumps;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
 class Xosql_fld_itm implements CompareAble {
 	public Xosql_fld_itm(int uid, byte[] key, int idx) {
 		this.uid = uid;
@@ -29,7 +33,7 @@ class Xosql_fld_itm implements CompareAble {
 
 	public int compareTo(Object obj) {
 		Xosql_fld_itm comp = (Xosql_fld_itm)obj;
-		return Int_.Compare(idx, comp.idx);
+		return IntUtl.Compare(idx, comp.idx);
 	}
 }
 class Xosql_fld_hash {
@@ -38,7 +42,7 @@ class Xosql_fld_hash {
 	public int Len() {return hash.Len();}
 	public Xosql_fld_itm Get_by_key(byte[] k)	{return (Xosql_fld_itm)hash.GetByOrNull(k);}
 	public Xosql_fld_itm Get_by_idx_or_null(int i) {
-		return i > -1 && i < hash_len ? (Xosql_fld_itm)hash.Get_at(i) : null;
+		return i > -1 && i < hash_len ? (Xosql_fld_itm)hash.GetAt(i) : null;
 	}
 	public void Add(Xosql_fld_itm itm)		{hash.Add(itm.Key(), itm); hash_len = hash.Len();}
 	public void Sort() {hash.Sort();}
@@ -46,7 +50,7 @@ class Xosql_fld_hash {
 		int len = keys.length;
 		Xosql_fld_hash rv = new Xosql_fld_hash();
 		for (int i = 0; i < len; ++i) {
-			Xosql_fld_itm itm = new Xosql_fld_itm(i, Bry_.new_u8(keys[i]), -1);
+			Xosql_fld_itm itm = new Xosql_fld_itm(i, BryUtl.NewU8(keys[i]), -1);
 			rv.Add(itm);
 		}
 		return rv;

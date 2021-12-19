@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_make_stat {
@@ -27,7 +31,7 @@ class Xomp_make_stat {
 		mgr_tbl.Stmt_new();
 
 		// loop wkrs
-		String sql = String_.Format("SELECT * FROM xomp_stats;");
+		String sql = StringUtl.Format("SELECT * FROM xomp_stats;");
 		int wkrs_len = mgr_db.Tbl__wkr().Select_count();
 		for (int i = 0; i < wkrs_len; ++i) {
 			int count = 0;
@@ -37,7 +41,7 @@ class Xomp_make_stat {
 				while (rdr.Move_next()) {
 					mgr_tbl.Insert_by_copy(rdr);
 					if (++count % 10000 == 0) {
-						Gfo_usr_dlg_.Instance.Prog_many("", "", "xomp.stat.insert: db=~{0} count=~{1}", Int_.To_str_pad_bgn_space(i, 3), Int_.To_str_pad_bgn_space(count, 8));
+						Gfo_usr_dlg_.Instance.Prog_many("", "", "xomp.stat.insert: db=~{0} count=~{1}", IntUtl.ToStrPadBgnSpace(i, 3), IntUtl.ToStrPadBgnSpace(count, 8));
 						mgr_conn.Txn_sav();
 					}
 				}

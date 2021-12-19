@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.searchers;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.objects.Cancelable;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_search_cmd implements Cancelable, Gfo_invk {
@@ -35,7 +42,7 @@ public class Srch_search_cmd implements Cancelable, Gfo_invk {
 			search_mgr.Search_async(this, qry, crt_mgr, rslt_cbk, rslts_list);	// NOTE: must handle any errors in async mode
 		}
 		catch(Exception e) {
-			Xoa_app_.Usr_dlg().Prog_many("", "", "error during search: err=~{0}", Err_.Message_gplx_log(e));
+			Xoa_app_.Usr_dlg().Prog_many("", "", "error during search: err=~{0}", ErrUtl.ToStrLog(e));
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

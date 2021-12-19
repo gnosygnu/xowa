@@ -13,16 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.core.brys.*; import gplx.core.ios.*; import gplx.core.net.*; import gplx.core.threads.*;
-import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
+package gplx.xowa;
+import gplx.core.ios.*; import gplx.core.net.*; import gplx.core.threads.*;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.langs.jsons.*;
+import gplx.libs.dlgs.Gfo_usr_dlg;
 import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.metas.*; import gplx.xowa.apps.apis.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.bldrs.css.*;
 import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;	
 import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
-import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.bridges.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
+import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.htmls.bridges.*;
+import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.xowa.langs.*; 
 import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.users.*;
@@ -53,7 +57,7 @@ public interface Xoa_app extends Gfo_invk {
 	Xoa_sitelink_mgr		Xwiki_mgr__sitelink_mgr();
 	Xow_xwiki_itm_parser	Xwiki_mgr__itm_parser();
 	boolean					Bldr__running(); void Bldr__running_(boolean v);
-	Gfo_usr_dlg				Usr_dlg();
+	Gfo_usr_dlg Usr_dlg();
 	Json_parser				Utl__json_parser();
 	Gfo_inet_conn			Utl__inet_conn();
 	Xoa_meta_mgr			Dbmeta_mgr();

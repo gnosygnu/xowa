@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.exports.merges;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 class Merge2_copy_wkr__lot {
 	private final Split_tbl tbl;
@@ -50,7 +54,7 @@ class Merge2_copy_wkr__lot {
 	}
 	private int[] Get_trg_dbs(Db_conn conn, String tbl_name) {
 		List_adp list = List_adp_.New();
-		Db_rdr rdr = conn.Stmt_sql(String_.Format("SELECT trg_db_id FROM {0} GROUP BY trg_db_id", tbl_name)).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_sql(StringUtl.Format("SELECT trg_db_id FROM {0} GROUP BY trg_db_id", tbl_name)).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				list.Add(rdr.Read_int("trg_db_id"));

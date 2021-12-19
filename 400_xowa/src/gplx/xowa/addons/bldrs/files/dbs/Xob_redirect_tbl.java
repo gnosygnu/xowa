@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.dbs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.bldrs.*;
@@ -73,7 +77,7 @@ public class Xob_redirect_tbl {
 	private static final String 
 	  Fld_src_id = "src_id", Fld_src_ttl = "src_ttl", Fld_trg_id = "trg_id", Fld_trg_ns = "trg_ns", Fld_trg_ttl = "trg_ttl", Fld_trg_anchor = "trg_anchor"
 	, Fld_trg_is_redirect = "trg_is_redirect", Fld_redirect_count = "redirect_count";
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = StringUtl.ConcatLinesNl
 	( "CREATE TABLE IF NOT EXISTS redirect"
 	, "( src_id            integer             NOT NULL       PRIMARY KEY"
 	, ", src_ttl           varchar(255)        NOT NULL"
@@ -94,7 +98,7 @@ public class Xob_redirect_tbl {
 //		  Sql_ddl__page_redirect_id		= "ALTER TABLE page ADD COLUMN page_redirect_id integer NOT NULL DEFAULT '-1'"
 //		;
 	private static final String
-	  Sql_get_page_data = String_.Concat_lines_nl			// get data from page table for initial redirect dump 
+	  Sql_get_page_data = StringUtl.ConcatLinesNl            // get data from page table for initial redirect dump
 	( "REPLACE INTO redirect "
 	, "SELECT  t.src_id"
 	, ",       t.src_ttl"
@@ -111,7 +115,7 @@ public class Xob_redirect_tbl {
 	, "          AND t.trg_is_redirect = 1  -- limit to redirects"
 	, ";"
 	)
-	, Sql_get_redirect_redirects = String_.Concat_lines_nl	// find redirects that are redirected
+	, Sql_get_redirect_redirects = StringUtl.ConcatLinesNl    // find redirects that are redirected
 	( "REPLACE INTO redirect"
 	, "SELECT  t.src_id"
 	, ",       t.src_ttl"
@@ -128,7 +132,7 @@ public class Xob_redirect_tbl {
 	, ";"
 	, ""
 	)
-	, Sql_get_redirect_page_data = String_.Concat_lines_nl	// get data from page table for redirected redirects
+	, Sql_get_redirect_page_data = StringUtl.ConcatLinesNl    // get data from page table for redirected redirects
 	( "REPLACE INTO redirect"
 	, "SELECT  t.src_id"
 	, ",       t.src_ttl"
@@ -144,7 +148,7 @@ public class Xob_redirect_tbl {
 	, "          AND t.trg_is_redirect = 1  -- limit to redirects"
 	, ";"
 	)
-	, Sql_update_redirect_id = String_.Concat_lines_nl_skip_last
+	, Sql_update_redirect_id = StringUtl.ConcatLinesNlSkipLast
 	( "REPLACE INTO"
 	, "        page_db.page (page_id, page_namespace, page_title, page_is_redirect, page_touched, page_len, page_random_int, page_text_db_id, page_html_db_id, page_redirect_id, page_score)"
 	, "SELECT  p.page_id"

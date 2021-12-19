@@ -13,22 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.types.basics.utls.MathUtl;
 public class XophpMath_ {
 	public static double round(double v, int places) {
 		if (places < 0) {	// -1 means round to 10; -2 means round to 100; etc..
-			int factor = (int)Math_.Pow(10, places * -1);
-			return ((int)(Math_.Round(v, 0) / factor)) * factor;	// EX: ((int)Round(123, 0) / 10) * 10: 123 -> 12.3 -> 12 -> 120
+			int factor = (int)MathUtl.Pow(10, places * -1);
+			return ((int)(MathUtl.Round(v, 0) / factor)) * factor;	// EX: ((int)Round(123, 0) / 10) * 10: 123 -> 12.3 -> 12 -> 120
 		}
 		else {
-			return Math_.Round(v, places);
+			return MathUtl.Round(v, places);
 		}
 	}
 	public static int min(int lhs, int rhs) {
-		return Math_.Min(lhs, rhs);
+		return MathUtl.Min(lhs, rhs);
 	}
 	public static int min_many(int... ary) {
-		int rv = Int_.Max_value;
+		int rv = IntUtl.MaxValue;
 		for (int itm : ary) {
 			if (itm < rv)
 				rv = itm;
@@ -36,7 +40,7 @@ public class XophpMath_ {
 		return rv;
 	}
 	public static int max_many(int... ary) {
-		int rv = Int_.Min_value;
+		int rv = IntUtl.MinValue;
 		for (int itm : ary) {
 			if (itm > rv)
 				rv = itm;
@@ -44,7 +48,7 @@ public class XophpMath_ {
 		return rv;
 	}
 	// REF.PHP:https://www.php.net/manual/en/function.fmod.php
-	public static Decimal_adp fmod_decimal(Decimal_adp lhs, Decimal_adp rhs) {return Decimal_adp_.double_(fmod(lhs.To_double(), rhs.To_double()));}
+	public static GfoDecimal fmod_decimal(GfoDecimal lhs, GfoDecimal rhs) {return GfoDecimalUtl.NewByDouble(fmod(lhs.ToDouble(), rhs.ToDouble()));}
 	public static double fmod(double lhs, double rhs) {
 		return (double)lhs % (double)rhs;
 	}

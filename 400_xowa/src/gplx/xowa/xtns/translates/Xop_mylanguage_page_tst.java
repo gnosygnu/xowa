@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.translates;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_mylanguage_page_tst {
 	@Before public void init() {fxt.Clear();} private Xop_mylanguage_page_fxt fxt = new Xop_mylanguage_page_fxt();
@@ -42,15 +46,15 @@ class Xop_mylanguage_page_fxt {
 		special_page = wiki.Special_mgr().Page_mylanguage();
 	}	private Xop_fxt parser_fxt; private Xoae_app app; private Xop_mylanguage_page special_page; private Xowe_wiki wiki;
 	public void Init_create_page(String page) {parser_fxt.Init_page_create(page, page);}
-	public void Init_cur_lang(String lang) {app.Sys_cfg().Lang_(Bry_.new_a7(lang));}
+	public void Init_cur_lang(String lang) {app.Sys_cfg().Lang_(BryUtl.NewA7(lang));}
 	public void Test_open(String link, String expd) {
 		Xoae_page page = parser_fxt.Ctx().Page();
-		Xoa_url url = app.User().Wikii().Utl__url_parser().Parse(Bry_.new_u8(link));
+		Xoa_url url = app.User().Wikii().Utl__url_parser().Parse(BryUtl.NewU8(link));
 		page.Url_(url);
-		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.new_a7(link));
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, BryUtl.NewA7(link));
 		page.Ttl_(ttl);
 		special_page.Special__gen(wiki, page, url, ttl);
-		Tfds.Eq(expd, String_.new_a7(page.Url().Page_bry()));
-		Tfds.Eq(expd, String_.new_a7(page.Db().Text().Text_bry()));
+		GfoTstr.EqObj(expd, StringUtl.NewA7(page.Url().Page_bry()));
+		GfoTstr.EqObj(expd, StringUtl.NewA7(page.Db().Text().Text_bry()));
 	}
 }

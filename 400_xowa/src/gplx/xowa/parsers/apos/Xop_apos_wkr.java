@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.apos; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.apos;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_ctx_wkr;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
 public class Xop_apos_wkr implements Xop_ctx_wkr {
 	private final List_adp stack = List_adp_.New();	// stores all apos tkns for page; needed to recalc tkn type if apos are dangling
 	private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
@@ -34,7 +43,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 		dat.State_clear();
 	}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, AsciiByte.Apos);
+		cur_pos = BryFind.FindFwdWhile(src, cur_pos, src_len, AsciiByte.Apos);
 		int apos_len = cur_pos - bgn_pos;
 		dat.Ident(ctx, src, apos_len, cur_pos);
 		Xop_apos_tkn apos_tkn = tkn_mkr.Apos(bgn_pos, cur_pos, apos_len, dat.Typ(), dat.Cmd(), dat.Lit_apos());
@@ -52,7 +61,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 				break; 
 		}
 		if (dat.Dual_cmd() != 0) {	// earlier dual tkn assumed to be <i><b>; </i> encountered so change dual to <b><i>
-			if (dual_tkn == null) throw Err_.new_wo_type("dual tkn is null");	// should never happen
+			if (dual_tkn == null) throw ErrUtl.NewArgs("dual tkn is null");	// should never happen
 			dual_tkn.Apos_cmd_(dat.Dual_cmd());
 			dual_tkn = null;
 		}
@@ -85,7 +94,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 		Xop_apos_tkn idxNeg1 = null, idxNeg2 = null, idxNone = null; // look at previous tkn for spaces; EX: "a '''" -> idxNeg1; " a'''" -> idxNeg2; "ab'''" -> idxNone
 	    int len = stack.Len(); 
 		for (int i = 0; i < len; ++i) {
-			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
+			Xop_apos_tkn apos = (Xop_apos_tkn)stack.GetAt(i);
 			if (apos.Apos_tid() != Xop_apos_tkn_.Typ_bold) continue;	// only look for bold
 			int tkn_bgn = apos.Src_bgn();
 			boolean idxNeg1Space = tkn_bgn > 0 && src[tkn_bgn - 1] == AsciiByte.Space;
@@ -101,7 +110,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 		// now recalc all cmds for stack
 		dat.State_clear();
 		for (int i = 0; i < len; i++) {
-			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
+			Xop_apos_tkn apos = (Xop_apos_tkn)stack.GetAt(i);
 			dat.Ident(ctx, src, apos.Apos_tid(), apos.Src_end());	// NOTE: apos.Typ() must map to apos_len
 			int newCmd = dat.Cmd();
 			if (newCmd == apos.Apos_cmd()) continue;

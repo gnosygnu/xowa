@@ -13,14 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.core;
 import gplx.gfui.imgs.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyVal;
 public class Mem_kit extends Gfui_kit_base {
 	@Override public byte Tid() {return Gfui_kit_.Mem_tid;}
 	@Override public String Key() {return "mem";}
 	@Override public GxwElemFactory_base Factory() {return factory;} private GxwElemFactory_cls_mock factory = new GxwElemFactory_cls_mock();
 	public void New_html_impl_prototype_(Gxw_html v) {html_impl_prototype = v;} private Gxw_html html_impl_prototype;
-	@Override public Gfui_html New_html(String key, GfuiElem owner, Keyval... args) {
+	@Override public Gfui_html New_html(String key, GfuiElem owner, KeyVal... args) {
 		if (html_impl_prototype == null)
 			return super.New_html(key, owner, args);
 		else {

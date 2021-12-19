@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes;
 
-import gplx.Gfo_usr_dlg_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.gflucene.core.Gflucene_analyzer_data;
 import gplx.gflucene.core.Gflucene_doc_data;
 import gplx.gflucene.core.Gflucene_index_data;
@@ -61,7 +61,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 		int needed_len = needed_end - needed_bgn;
 		int found = 0;
 		int threshold = 0;
-		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(String_.new_u8(args.search_text), 100);
+		Gflucene_searcher_qry searcher_data = new Gflucene_searcher_qry(StringUtl.NewU8(args.search_text), 100);
 		while (found < needed_len) {
 			if (args.Canceled()) return;
 
@@ -72,7 +72,7 @@ public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 			int temp_list_len = temp_list.Len();
 			for (int i = 0; i < temp_list_len; i++) {
 				if (args.Canceled()) return;
-				Gflucene_doc_data doc_data = (Gflucene_doc_data)temp_list.Get_at(i);
+				Gflucene_doc_data doc_data = (Gflucene_doc_data)temp_list.GetAt(i);
 				if (!page_list.Has(doc_data.page_id)) {
 					// load page
 					if (!page_tbl.Select_by_id(tmp_page_row, doc_data.page_id)) {

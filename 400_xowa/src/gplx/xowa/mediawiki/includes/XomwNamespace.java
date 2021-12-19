@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.mediawiki.*;
 public class XomwNamespace {
 //		/**
@@ -237,7 +240,7 @@ public class XomwNamespace {
 			int len = namespacesHash.Len();
 			for (int i = 0; i < len; i++) {
 				XomwNamespaceItem item = (XomwNamespaceItem)namespacesHash.GetAtOrNull(i);
-				xNamespaces.Add(Bry_.Lcase__all(item.name), item);	// NOTE: MW does "strtolower($text)"; canonical namespaces are always ascii
+				xNamespaces.Add(BryUtl.LcaseAll(item.name), item);	// NOTE: MW does "strtolower($text)"; canonical namespaces are always ascii
 			}
 		}
 		XomwNamespaceItem xNs = (XomwNamespaceItem)xNamespaces.GetByOrNull(name);

@@ -13,12 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.xtns.scores;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 public class Score_xtn_mgr extends Xox_mgr_base {
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("score");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = BryUtl.NewA7("score");
 	@Override public Xox_mgr Xtn_clone_new() {return new Score_xtn_mgr();}
-	public Bry_fmtr Html_img() {return html_img;} private Bry_fmtr html_img = Bry_fmtr.new_(String_.Concat_lines_nl
+	public BryFmtr Html_img() {return html_img;} private BryFmtr html_img = BryFmtr.New(StringUtl.ConcatLinesNl
 		(	""
 		,	"<p>"
 		,	"  <a id=\"~{a_id}\" href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">"
@@ -26,14 +31,14 @@ public class Score_xtn_mgr extends Xox_mgr_base {
 		,	"  </a>"
 		,	"</p>"
 		), "a_id", "a_href", "a_xowa_title", "img_id", "img_src", "img_alt");
-	public Bry_fmtr Html_txt() {return html_txt;} private Bry_fmtr html_txt = Bry_fmtr.new_(String_.Concat_lines_nl
+	public BryFmtr Html_txt() {return html_txt;} private BryFmtr html_txt = BryFmtr.New(StringUtl.ConcatLinesNl
 		(	""
 		,	"<div id=\"~{div_id}\" class=\"~{div_class}\">"
 		,	"  <pre style=\"overflow:auto\">~{code}"
 		,	"</pre>"
 		,	"</div>"
 		), "div_id", "div_class", "code");
-	public Bry_fmtr Lilypond_fmtr() {return lilypond_fmtr;} private Bry_fmtr lilypond_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
+	public BryFmtr Lilypond_fmtr() {return lilypond_fmtr;} private BryFmtr lilypond_fmtr = BryFmtr.New(StringUtl.ConcatLinesNl
 		(	"\\header {"
 		,	"  tagline = ##f"
 		,	"}"
@@ -58,11 +63,11 @@ public class Score_xtn_mgr extends Xox_mgr_base {
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_html_img))			return html_img.Fmt();
-		else if	(ctx.Match(k, Invk_html_img_))			html_img.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_html_img_))			html_img.FmtSet(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_html_txt))			return html_txt.Fmt();
-		else if	(ctx.Match(k, Invk_html_txt_))			html_txt.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_html_txt_))			html_txt.FmtSet(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_lilypond_fmt))		return lilypond_fmtr.Fmt();
-		else if	(ctx.Match(k, Invk_lilypond_fmt_))		lilypond_fmtr.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_lilypond_fmt_))		lilypond_fmtr.FmtSet(m.ReadBry("v"));
 		else if	(ctx.Match(k, Cfg__enabled))			Enabled_(m.ReadYn("v"));
 		else											return super.Invk(ctx, ikey, k, m);
 		return this;

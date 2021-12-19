@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.langs.htmls.encoders.*;
+package gplx.xowa.apps.servers.http;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
 import gplx.xowa.wikis.pages.*;
 public class Http_url_parser_tst {
 	private final Http_url_parser_fxt fxt = new Http_url_parser_fxt();
@@ -62,14 +63,14 @@ public class Http_url_parser_tst {
 */
 		// add qarg_ary and test for qarg;
 	}
-	@Test  public void Popup() {
+	@Test public void Popup() {
 		fxt.Test__parse
 		( "/en.wikipedia.org/wiki/Page_1?action=popup&popup_id=xo_2&popup_mode=more"
 		, fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1")
 			.Popup_(true).Popup_id_("xo_2").Popup_mode_("more")
 		);
 	}
-	@Test  public void Qarg__search() {
+	@Test public void Qarg__search() {
 		fxt.Test__parse
 		( "/en.wikipedia.org/wiki/Special:XowaSearch?search=earth&fulltext=y"
 		, fxt.Make().Wiki_("en.wikipedia.org").Page_("Special:XowaSearch")
@@ -81,7 +82,7 @@ class Http_url_parser_fxt {
 	public Http_url_parser Make() {return new Http_url_parser();}
 	public void Test__parse(String url, Http_url_parser expd) {
 		Http_url_parser actl = new Http_url_parser();
-		actl.Parse(url == null ? null : Bry_.new_u8(url));
-		Gftest.Eq__ary__lines(expd.To_str(), actl.To_str());
+		actl.Parse(url == null ? null : BryUtl.NewU8(url));
+		GfoTstr.EqLines(expd.To_str(), actl.To_str());
 	}
 }

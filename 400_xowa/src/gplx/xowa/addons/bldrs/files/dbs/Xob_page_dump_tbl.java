@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*;
+package gplx.xowa.addons.bldrs.files.dbs;
 import gplx.dbs.*;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class Xob_page_dump_tbl {
 	public final static String Tbl_name = "page_dump";
 	private final String fld_id, fld_title, fld_namespace, fld_is_redirect;
@@ -33,7 +35,7 @@ public class Xob_page_dump_tbl {
 			.Exec_sql_w_msg("text_db_prep.clone_page", Sql_insert_data, text_db_id);
 		conn.Meta_idx_create(Dbmeta_idx_itm.new_unique_by_tbl(Tbl_name, "main", fld_id, fld_namespace, fld_is_redirect, fld_title));
 	}
-	private static final String Sql_insert_data = String_.Concat_lines_nl
+	private static final String Sql_insert_data = StringUtl.ConcatLinesNl
 	( "INSERT INTO page_dump (page_id, page_title, page_namespace, page_is_redirect)"
 	, "SELECT  p.page_id"
 	, ",       p.page_title"

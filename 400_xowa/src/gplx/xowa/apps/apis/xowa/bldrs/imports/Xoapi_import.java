@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.bldrs.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.bldrs.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.apps.apis.xowa.bldrs.imports;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.core.ios.*;
+import gplx.frameworks.invks.GfsCtx;
 public class Xoapi_import implements Gfo_invk {
 	public long		Cat_link_db_max()		{return cat_link_db_max;}		private long cat_link_db_max		= Io_size_.To_long_by_int_mb(1500);		// 3.6 GB; v1
 	public String	User_name()				{return user_name;}				private String user_name			= "anonymous";

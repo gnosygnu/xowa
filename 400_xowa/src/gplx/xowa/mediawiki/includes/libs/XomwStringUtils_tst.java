@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.mediawiki.includes.libs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import org.junit.*;
 public class XomwStringUtils_tst {
 	private final XomwStringUtils_fxt fxt = new XomwStringUtils_fxt();
 	@Test public void Delimiter_explode() {
@@ -41,7 +46,7 @@ public class XomwStringUtils_tst {
 		// ignore asym_lhs
 		fxt.Test_replace_markup("a!!b<!!>!!>!!c"   , "!!", "||", "a||b<!!>||>||c");	// NOTE: should probably be "!!>!!>", but unmatched ">" are escaped to "&gt;"
 	}
-	@Test  public void delimiterReplace() {
+	@Test public void delimiterReplace() {
 		// basic
 		fxt.Test_delimiterReplace("/*", "*/", "a/*0*/c"         , "9", "a9c");
 		// overlapping; "/*/"
@@ -57,18 +62,18 @@ class XomwStringUtils_fxt {
 		List_adp tmp = List_adp_.New();
 		gplx.core.btries.Btrie_rv trv = new gplx.core.btries.Btrie_rv();
 
-		byte[][] actl = XomwStringUtils.delimiterExplode(tmp, trv, Bry_.new_u8(src_str));
-		Gftest.Eq__ary(expd, actl, "src=~{0}", src_str);
+		byte[][] actl = XomwStringUtils.delimiterExplode(tmp, trv, BryUtl.NewU8(src_str));
+		GfoTstr.EqLines(expd, actl, "src=~{0}", src_str);
 	}
 	public void Test_replace_markup(String src_str, String find, String repl, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
-		XomwStringUtils.replaceMarkup(src_bry, 0, src_bry.length, Bry_.new_a7(find), Bry_.new_a7(repl));
-		Gftest.Eq__str(expd, src_bry);
+		byte[] src_bry = BryUtl.NewU8(src_str);
+		XomwStringUtils.replaceMarkup(src_bry, 0, src_bry.length, BryUtl.NewA7(find), BryUtl.NewA7(repl));
+		GfoTstr.Eq(expd, src_bry);
 	}
 	// byte[] startDelim, byte[] endDelim, byte[] replace, byte[] subject
 	public void Test_delimiterReplace(String bgn, String end, String src, String repl, String expd) {
-		Bry_bfr bfr = Bry_bfr_.New();
-		XomwStringUtils.delimiterReplace(bfr, Bry_.new_u8(bgn), Bry_.new_u8(end), Bry_.new_u8(repl), Bry_.new_u8(src));
-		Gftest.Eq__str(expd, bfr.To_str_and_clear());
+		BryWtr bfr = BryWtr.New();
+		XomwStringUtils.delimiterReplace(bfr, BryUtl.NewU8(bgn), BryUtl.NewU8(end), BryUtl.NewU8(repl), BryUtl.NewU8(src));
+		GfoTstr.Eq(expd, bfr.ToStrAndClear());
 	}
 }

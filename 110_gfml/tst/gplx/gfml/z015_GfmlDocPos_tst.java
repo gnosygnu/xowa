@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.gfml;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class z015_GfmlDocPos_tst {
 	GfmlDocPos root = GfmlDocPos_.Root;
@@ -46,6 +47,6 @@ public class z015_GfmlDocPos_tst {
 		tst_CompareTo(lhs, rhs, CompareAbleUtl.Less);
 		tst_CompareTo(rhs, lhs, CompareAbleUtl.More);
 	}
-	void tst_Path(GfmlDocPos pos, String expdPath) {Tfds.Eq(expdPath, pos.Path());}
-	void tst_CompareTo(GfmlDocPos lhs, GfmlDocPos rhs, int expd) {Tfds.Eq(expd, lhs.compareTo(rhs));}
+	void tst_Path(GfmlDocPos pos, String expdPath) {GfoTstr.EqObj(expdPath, pos.Path());}
+	void tst_CompareTo(GfmlDocPos lhs, GfmlDocPos rhs, int expd) {GfoTstr.EqObj(expd, lhs.compareTo(rhs));}
 }

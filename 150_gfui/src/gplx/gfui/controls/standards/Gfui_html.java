@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.standards;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
 import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyValHash;
 public class Gfui_html extends GfuiElemBase {		
 	public void					Under_html_(Gxw_html v) {under = v;} private Gxw_html under;
 	public void					Html_doc_html_load_by_mem(String html)				{under.Html_doc_html_load_by_mem(html);}
@@ -34,7 +42,7 @@ public class Gfui_html extends GfuiElemBase {
 		this.Html_doc_html_load_by_mem(v);
 		return this;
 	}
-	public static Gfui_html kit_(Gfui_kit kit, String key, Gxw_html under, Keyval_hash ctorArgs) {
+	public static Gfui_html kit_(Gfui_kit kit, String key, Gxw_html under, KeyValHash ctorArgs) {
 		Gfui_html rv = new Gfui_html();
 		rv.ctor_kit_GfuiElemBase(kit, key, (GxwElem)under, ctorArgs);
 		rv.under = under;
@@ -54,7 +62,7 @@ public class Gfui_html extends GfuiElemBase {
 		String proc = (String)args[0];
 		GfoMsg rv = GfoMsg_.new_parse_(proc);
 		for (int i = 1; i < args.length; i++)
-			rv.Add(Int_.To_str(i), args[i]);	// NOTE: args[i] can be either String or String[]
+			rv.Add(IntUtl.ToStr(i), args[i]);	// NOTE: args[i] can be either String or String[]
 		return rv;
 	}
 

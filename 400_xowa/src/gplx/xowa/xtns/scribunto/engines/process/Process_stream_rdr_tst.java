@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import org.junit.*;
-import gplx.core.ios.streams.*;
+package gplx.xowa.xtns.scribunto.engines.process;
+import gplx.core.ios.streams.IoStream_mock;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Process_stream_rdr_tst {
 	@Before public void init() {fxt.Clear();} Scrib_lua_srl_fxt fxt = new Scrib_lua_srl_fxt();
 	@Test public void Body_basic() {
@@ -34,13 +40,13 @@ class Process_stream_rdr_fxt {
 	public Process_stream_rdr_fxt Init() {
 		if (process == null) {
 			bry_header = new byte[16];
-			bry_body = Bry_.Empty;
+			bry_body = BryUtl.Empty;
 			rdr = new IoStream_mock().Read_limit_(5);
 			process = new Process_stream_rdr(new byte[16], new byte[16]);
 		}
 		return this;
 	}	byte[] bry_header, bry_body; Process_stream_rdr process; IoStream_mock rdr;
-	public Process_stream_rdr_fxt Init_src_str_(String v) {this.src_bry = Bry_.new_a7(v); src_len = src_bry.length; expd_str = v; return this;} private byte[] src_bry;
+	public Process_stream_rdr_fxt Init_src_str_(String v) {this.src_bry = BryUtl.NewA7(v); src_len = src_bry.length; expd_str = v; return this;} private byte[] src_bry;
 	public Process_stream_rdr_fxt Init_src_len_(int v) {this.src_len = v; return this;} private int src_len;
 	public Process_stream_rdr_fxt Expd_str_(String v) {this.expd_str = v; return this;} private String expd_str;
 	public Process_stream_rdr_fxt Init_src_str_w_nl_(String v) {
@@ -53,26 +59,26 @@ class Process_stream_rdr_fxt {
 					++i;
 					b = src_bry[i];
 					switch (b) {
-						case AsciiByte.Backslash: 	bfr.Add_byte(AsciiByte.Backslash); break;
-						case AsciiByte.Ltr_n: 		bfr.Add_byte(AsciiByte.Nl); break;
-						case AsciiByte.Ltr_r: 		bfr.Add_byte(AsciiByte.Cr); break;
-						default: 					throw Err_.new_unhandled(b);
+						case AsciiByte.Backslash: 	bfr.AddByte(AsciiByte.Backslash); break;
+						case AsciiByte.Ltr_n: 		bfr.AddByte(AsciiByte.Nl); break;
+						case AsciiByte.Ltr_r: 		bfr.AddByte(AsciiByte.Cr); break;
+						default: 					throw ErrUtl.NewUnhandled(b);
 					}
 					break;
 				default:
-					bfr.Add_byte(b);
+					bfr.AddByte(b);
 					break;
 			}
 		}
-		expd_str = bfr.To_str_and_clear();
+		expd_str = bfr.ToStrAndClear();
 		return this;
-	} 	Bry_bfr bfr = Bry_bfr_.Reset(128);
+	} 	BryWtr bfr = BryWtr.NewAndReset(128);
 	public void Test_read_body() {
 		rdr.Data_bry_(src_bry);
 		byte[] bry_body = new byte[src_len];
 		rdr.Reset();
 		byte[] rv = process.Read_body(bry_body, src_len, rdr);
-		Tfds.Eq(expd_str, String_.new_a7(rv));
-		Tfds.Eq(src_bry.length, rdr.Data_bry_pos());
+		GfoTstr.EqObj(expd_str, StringUtl.NewA7(rv));
+		GfoTstr.EqObj(src_bry.length, rdr.Data_bry_pos());
 	}
 }

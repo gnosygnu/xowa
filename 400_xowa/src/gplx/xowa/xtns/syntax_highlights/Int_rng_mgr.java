@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.syntax_highlights; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.syntax_highlights;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public interface Int_rng_mgr {
 	boolean Match(int v);
 	boolean Parse(byte[] src);
@@ -30,13 +34,13 @@ class Int_rng_mgr_base implements Int_rng_mgr {
 	public boolean Match(int v) {
 		int len = itms.Len();
 		for (int i = 0; i < len; i++) {
-			Int_where itm = (Int_where)itms.Get_at(i);
+			Int_where itm = (Int_where)itms.GetAt(i);
 			if (itm.Match(v)) return true;
 		}
 		return false;
 	}
 	public boolean Parse(byte[] src) {
-		byte[][] lines = Bry_split_.Split(src, AsciiByte.Comma);
+		byte[][] lines = BrySplit.Split(src, AsciiByte.Comma);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			if (!Parse_line(lines[i])) {
@@ -58,14 +62,14 @@ class Int_rng_mgr_base implements Int_rng_mgr {
 					if (pos == -1) pos = i;
 					break;
 				case AsciiByte.Dash:
-					val_bgn = Bry_.To_int_or(src, pos, i, -1); if (val_bgn == -1) return false;
+					val_bgn = BryUtl.ToIntOr(src, pos, i, -1); if (val_bgn == -1) return false;
 					pos = -1;
 					break;
 				default:	// invalid char;
 					return false;
 			}
 		}
-		int val_end = Bry_.To_int_or(src, pos, src_len, -1); if (val_end == -1) return false;
+		int val_end = BryUtl.ToIntOr(src, pos, src_len, -1); if (val_end == -1) return false;
 		if (val_bgn == -1)
 			itms.Add(new Int_where_val(val_end));
 		else

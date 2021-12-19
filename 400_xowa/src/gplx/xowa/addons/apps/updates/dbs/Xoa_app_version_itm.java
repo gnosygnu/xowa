@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+package gplx.xowa.addons.apps.updates.dbs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app_;
 public class Xoa_app_version_itm {
 	public Xoa_app_version_itm(int id, String name, String date, int priority, String url, String summary, String details) {
 		this.id = id;
@@ -33,9 +36,9 @@ public class Xoa_app_version_itm {
 	public String Details() {return details;} private final String details;
 	public String Package_url() {
 		String folder = url;
-		if (String_.Len_eq_0(folder)) 
+		if (StringUtl.IsNullOrEmpty(folder))
 			folder = "https://github.com/gnosygnu/xowa/releases/releases/tag";
-		return String_.Format("{0}/v{1}/xowa_app_{2}_v{1}.zip", folder, name, Xoa_app_.Op_sys_str);
+		return StringUtl.Format("{0}/v{1}/xowa_app_{2}_v{1}.zip", folder, name, Xoa_app_.Op_sys_str);
 	}
 
 	public static final int Priority__major = 7, Priority__minor = 5, Priority__trivial = 3;
@@ -44,7 +47,7 @@ public class Xoa_app_version_itm {
 			case Priority__trivial: return "trivial";
 			case Priority__minor: return "minor";
 			case Priority__major: return "major";
-			default: throw Err_.new_unhandled_default(v);
+			default: throw ErrUtl.NewUnhandled(v);
 		}
 	}
 }

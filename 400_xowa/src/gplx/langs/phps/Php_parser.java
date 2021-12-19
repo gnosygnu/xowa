@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
+package gplx.langs.phps;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Php_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
 	private final Btrie_rv trv = new Btrie_rv();
@@ -58,7 +61,7 @@ public class Php_parser {
 		lxr.Lxr_ini(trie, parser_interrupts);
 		list.Add(lxr);
 	}
-	public void Parse_tkns(String src, Php_tkn_wkr tkn_wkr) {Parse_tkns(Bry_.new_u8(src), tkn_wkr);}
+	public void Parse_tkns(String src, Php_tkn_wkr tkn_wkr) {Parse_tkns(BryUtl.NewU8(src), tkn_wkr);}
 	public void Parse_tkns(byte[] src, Php_tkn_wkr tkn_wkr) {
 		this.src_len = src.length; this.tkn_wkr = tkn_wkr;
 		ctx.Src_(src);

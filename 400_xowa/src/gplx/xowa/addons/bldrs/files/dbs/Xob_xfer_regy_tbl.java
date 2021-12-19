@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.dbs;
 import gplx.core.stores.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
+import gplx.dbs.*;
+import gplx.dbs.engines.sqlite.*;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.bldrs.*;
 public class Xob_xfer_regy_tbl {
 	public static final String Tbl_name = "xfer_regy"
@@ -35,7 +38,7 @@ public class Xob_xfer_regy_tbl {
 	public static DataRdr Select(Db_conn conn, byte repo_id, byte[] ttl, int limit) {
 		Db_qry qry = Db_qry_.select_().Cols_all_()
 			.From_(Tbl_name)
-			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.New_mte(Fld_orig_repo, repo_id), Db_crt_.New_mt(Fld_lnki_ttl, String_.new_u8(ttl)), Db_crt_.New_eq(Fld_xfer_status, 0)))
+			.Where_(gplx.core.criterias.Criteria_.And_many(Db_crt_.New_mte(Fld_orig_repo, repo_id), Db_crt_.New_mt(Fld_lnki_ttl, StringUtl.NewU8(ttl)), Db_crt_.New_eq(Fld_xfer_status, 0)))
 			.Order_asc_many_(Fld_xfer_status, Fld_orig_repo, Fld_lnki_ttl, Fld_file_w)
 			.Limit_(limit)
 			;
@@ -44,7 +47,7 @@ public class Xob_xfer_regy_tbl {
 	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.Stmt_sql(Sql_select_clause);}
 	public static DataRdr Select_by_page_id(Db_stmt stmt, int page_id, int limit) {return stmt.Val_int(page_id).Val_int(limit).Exec_select();}
 	private static final String
-	  Sql_select_clause = String_.Concat_lines_nl
+	  Sql_select_clause = StringUtl.ConcatLinesNl
 		( "SELECT   *"
 		, "FROM     xfer_regy"
 		, "WHERE    xfer_status  =  0"
@@ -52,7 +55,7 @@ public class Xob_xfer_regy_tbl {
 		, "ORDER BY lnki_tier_id, lnki_page_id, lnki_id"
 		, "LIMIT    ?"
 		)
-	, Sql_select_total_pending = String_.Concat_lines_nl
+	, Sql_select_total_pending = StringUtl.ConcatLinesNl
 		( "SELECT   Count(*) AS CountAll"
 		, "FROM     xfer_regy"
 		, "WHERE    xfer_status  =  0"
@@ -75,7 +78,7 @@ public class Xob_xfer_regy_tbl {
 		rdr.Rls();
 		return rv;
 	}
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = StringUtl.ConcatLinesNl
 	(	"CREATE TABLE IF NOT EXISTS xfer_regy"
 	,	"( lnki_id             integer             NOT NULL			    PRIMARY KEY"
 	,	", lnki_tier_id        integer             NOT NULL"
@@ -97,7 +100,7 @@ public class Xob_xfer_regy_tbl {
 	,	", xfer_status         integer             NOT NULL"
 	,	");"
 	);
-	private static final String Sql_create_data_orig = String_.Concat_lines_nl
+	private static final String Sql_create_data_orig = StringUtl.ConcatLinesNl
 	( "INSERT INTO xfer_regy "
 	, "( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	, ", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
@@ -111,7 +114,7 @@ public class Xob_xfer_regy_tbl {
 	, "WHERE   file_is_orig = 1"
 	, "GROUP BY orig_repo, lnki_ttl, lnki_ext, orig_media_type, file_is_orig, orig_w, orig_h, lnki_time, lnki_page"
 	);
-	private static final String Sql_create_data_thumb = String_.Concat_lines_nl
+	private static final String Sql_create_data_thumb = StringUtl.ConcatLinesNl
 	( "INSERT INTO xfer_regy "
 	, "( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	, ", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"

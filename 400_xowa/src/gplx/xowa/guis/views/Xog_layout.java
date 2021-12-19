@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*; import gplx.xowa.guis.views.*;
+package gplx.xowa.guis.views;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 public class Xog_layout implements Gfo_invk {
 	public Xog_layout() {
 		go_bwd_btn.Owner_(this);
@@ -52,7 +57,7 @@ public class Xog_layout implements Gfo_invk {
 		Visible_(true, win.Find_box(), win.Find_bwd_btn(), win.Find_fwd_btn(), win.Find_close_btn());
 		GfuiTextBox find_box = win.Find_box();
 		find_box.Focus();
-		int text_len = String_.Len(find_box.Text());
+		int text_len = StringUtl.Len(find_box.Text());
 		if (text_len > 0) {	// if text exists, select it; GUI:Firefox
 			find_box.SelBgn_set(0);
 			find_box.SelLen_set(text_len);

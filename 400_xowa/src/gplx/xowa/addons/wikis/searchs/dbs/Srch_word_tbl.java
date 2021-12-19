@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*;
-import gplx.dbs.*;
+package gplx.xowa.addons.wikis.searchs.dbs; import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.DbmetaFldType;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.utls.IntUtl;
 public class Srch_word_tbl implements Rls_able {
 	public final String tbl_name;
 	public final DbmetaFldList flds = new DbmetaFldList();
@@ -27,7 +36,7 @@ public class Srch_word_tbl implements Rls_able {
 		this.fld_text				= flds.AddStr("word_text", 255);
 		this.fld_link_count			= flds.AddInt("link_count");
 		this.fld_link_count_score	= DbmetaFldItm.Make_or_null(conn, flds, tbl_name, DbmetaFldType.TidInt, 0, "link_count_score");
-		this.fld_link_score_min		= DbmetaFldItm.Make_or_null(conn, flds, tbl_name, DbmetaFldType.TidInt, Int_.Max_value__31, "link_score_min");
+		this.fld_link_score_min		= DbmetaFldItm.Make_or_null(conn, flds, tbl_name, DbmetaFldType.TidInt, IntUtl.MaxValue31, "link_score_min");
 		this.fld_link_score_max		= DbmetaFldItm.Make_or_null(conn, flds, tbl_name, DbmetaFldType.TidInt, 0, "link_score_max");
 		conn.Rls_reg(this);
 	}
@@ -64,7 +73,6 @@ public class Srch_word_tbl implements Rls_able {
 		if (fld_link_count_score != DbmetaFldItm.KeyNull) {
 			try {link_count_score = rdr.Read_int(fld_link_count_score);}
 			catch (Exception e) {// handle 2016-05 and earlier wikis which stored value as double instead of int
-				Err_.Noop(e);
 				link_count_score = (int)rdr.Read_double(fld_link_count_score);
 			}
 		}

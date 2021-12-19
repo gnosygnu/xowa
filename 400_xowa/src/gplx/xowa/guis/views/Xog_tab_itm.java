@@ -15,18 +15,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.views;
 
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BryFind;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.envs.Env_;
 import gplx.core.threads.Gfo_thread_wkr;
 import gplx.gfui.controls.elems.GfuiElem;
@@ -70,7 +70,7 @@ public class Xog_tab_itm implements Gfo_invk {
 	public void Make_html_box(int uid, Gfui_tab_itm tab_box, Xog_win_itm win, GfuiElem owner) {
 		this.tab_box = tab_box;
 		Xoae_app app = win.App(); Xoa_gui_mgr gui_mgr = win.Gui_mgr(); Gfui_kit kit = win.Kit();
-		Gfui_html html_box	= kit.New_html("html_box" + Int_.To_str(uid), owner);
+		Gfui_html html_box	= kit.New_html("html_box" + IntUtl.ToStr(uid), owner);
 		html_box.Html_js_enabled_(tab_mgr.Javascript_enabled());
 		html_box.Html_invk_src_(win);
 		html_itm.Html_box_(html_box);
@@ -80,7 +80,7 @@ public class Xog_tab_itm implements Gfo_invk {
 			if (app.Gui_mgr().Nightmode_mgr().Enabled()) {
 				html_box.Html_doc_html_load_by_url
 				( app.Usere().Fsys_mgr().App_temp_html_dir().GenSubFil("tab_new.html")
-				, String_.new_u8(gplx.xowa.specials.xowa.default_tab.Default_tab_page.DEFAULT_HTML_NIGHT)
+				, StringUtl.NewU8(gplx.xowa.specials.xowa.default_tab.Default_tab_page.DEFAULT_HTML_NIGHT)
 				);
 			}
 			else {
@@ -148,7 +148,7 @@ public class Xog_tab_itm implements Gfo_invk {
 	public void Tab_name_() {
 		byte[] tab_name = page.Html_data().Custom_tab_name();				// Custom_tab_name set by Special:Default_tab or variants; DATE:2015-10-05
 		if (tab_name == null) tab_name = page.Ttl().Full_txt();	// no custom_tab_name; use ttl's text
-		Tab_name_(String_.new_u8(tab_name));
+		Tab_name_(StringUtl.NewU8(tab_name));
 	}
 	public void Tab_name_(String tab_name) {
 		tab_name = Xog_tab_itm_.Tab_name_min(tab_name, tab_mgr.Btns__min_chars());
@@ -171,14 +171,14 @@ public class Xog_tab_itm implements Gfo_invk {
 		this.wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(url.Wiki_bry());	// NOTE: must go before wiki.Props().Main_page(); DATE:2016-08-02; NOTE: must load wiki; DATE:2015-07-22
 		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());				// NOTE: must go before ttl.Make; DATE:2016-07-31
 		Xoa_ttl ttl = wiki.Ttl_parse(url.Page_bry());
-		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
-		String new_tab_name = String_.new_u8(ttl.Full_txt());
+		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", StringUtl.NewU8(url.Raw())); return;}
+		String new_tab_name = StringUtl.NewU8(ttl.Full_txt());
 
 		// if clicking on anchor, just scroll; do not load page
 		if (	url.Anch_str() != null							// url has anchor
 			&&	url.Eq_page(page.Url())							// url has same page_name as existing page
 			&&	url.Qargs_ary().length == 0						// url has no args; needed for Category:A?from=b#mw-pages
-			&&	String_.Eq(new_tab_name, tab_data.Name())		// NOTE: name will be null / empty when starting app and last session had page with #anchor; EX:Main_Page#Links; DATE:2016-07-21
+			&&	StringUtl.Eq(new_tab_name, tab_data.Name())		// NOTE: name will be null / empty when starting app and last session had page with #anchor; EX:Main_Page#Links; DATE:2016-07-21
 			) {
 			html_itm.Scroll_page_by_id_gui(url.Anch_str());	
 			return;
@@ -189,11 +189,11 @@ public class Xog_tab_itm implements Gfo_invk {
 		usr_dlg.Gui_wkr().Clear();
 		if (url.Vnt_bry() != null) {
 			byte[] vnt = url.Vnt_bry();
-			if (!Bry_.Eq(vnt, wiki.Lang().Vnt_mgr().Cur_itm().Key()))
+			if (!BryLni.Eq(vnt, wiki.Lang().Vnt_mgr().Cur_itm().Key()))
 				wiki.Appe().Cfg().Set_bry_wiki(wiki, Xowe_wiki.Cfg__variant__current, vnt);
 		}
 		Tab_name_(new_tab_name);
-		usr_dlg.Prog_one("", "", "loading: ~{0}", String_.new_u8(ttl.Raw()));
+		usr_dlg.Prog_one("", "", "loading: ~{0}", StringUtl.NewU8(ttl.Raw()));
 
 		// DELETE: no longer seems needed; popups always disappear when navigating to new page; DATE:2018-11-11
 		// if (wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled())
@@ -221,19 +221,19 @@ public class Xog_tab_itm implements Gfo_invk {
 				else {
 					wkr.Page().Tab_data().Tab().Page_(page);	// NOTE: must set tab's page to current page, so that switching to it will update url bar; EX:pt.b:A"MANUAL_DE_PROCEDURI_.Sectiunea:""CONTABILITATE_SI_MANAGEMENT_FINANCIAR""" DATE:2015-09-17
 					if (page.Redirect_trail().Itms__len() > 0)
-						usr_dlg.Prog_many("", "", "could not find page in wiki: ~{0} (redirected from ~{1})", String_.new_u8(page.Url().Page_bry()), page.Redirect_trail().Itms__get_at_0th_or_null());
+						usr_dlg.Prog_many("", "", "could not find page in wiki: ~{0} (redirected from ~{1})", StringUtl.NewU8(page.Url().Page_bry()), page.Redirect_trail().Itms__get_at_0th_or_null());
 					else {
 						if (ttl.Ns().Id_is_file())
-							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[App/Wiki_types/Commons]]: ~{0}", String_.new_u8(url.Raw()));// HOME
+							usr_dlg.Prog_one("", "", "commons.wikimedia.org must be installed in order to view the file. See [[App/Wiki_types/Commons]]: ~{0}", StringUtl.NewU8(url.Raw()));// HOME
 						else
-							usr_dlg.Prog_one("", "", "could not find page in wiki: ~{0}", String_.new_u8(url.Raw()));
+							usr_dlg.Prog_one("", "", "could not find page in wiki: ~{0}", StringUtl.NewU8(url.Raw()));
 					}
 				}
 				app.Log_wtr().Queue_enabled_(false);
 				return;
 			}
 			// if (!page.Redirected()) page.Url_(url);	// NOTE: handle redirect from commons; COMMENTED: part of redirect rewrite; DATE:2016-07-05
-			if (page.Ttl().Anch_bgn() != Bry_find_.Not_found) page.Url().Anch_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
+			if (page.Ttl().Anch_bgn() != BryFind.NotFound) page.Url().Anch_bry_(page.Ttl().Anch_txt());	// NOTE: occurs when page is a redirect to an anchor; EX: w:Duck race -> Rubber duck#Races
 			history_mgr.Add(page);
 			Xog_tab_itm_read_mgr.Show_page(this, page, true);
 			if (app.Usere().History_mgr().Enabled()) {
@@ -281,7 +281,7 @@ public class Xog_tab_itm implements Gfo_invk {
 	public void Exec_notify(boolean pass, String msg) {
 		this.Html_box().Html_js_eval_proc_as_str("xowa.cmds.exec_by_str", "xowa.notify", "{\"text\":\"" + msg + "\",\"status\":\"" + (pass ? "success" : "error") + "\"}");
 	}
-	@gplx.Internal protected void Show_url_failed(Load_page_wkr wkr) {
+	public void Show_url_failed(Load_page_wkr wkr) {
 		try {
 			Xog_tab_itm_read_mgr.Show_page_err(win, this, wkr.Wiki(), wkr.Url(), wkr.Ttl(), wkr.Exec_err());
 		} finally {
@@ -304,7 +304,7 @@ class Load_files_wkr implements Gfo_thread_wkr {
 	public void Thread__exec() {
 		try {Xog_async_wkr.Async(tab);}
 		catch (Exception e) {
-			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().To_str(), Err_.Message_gplx_full(e));
+			tab.Tab_mgr().Win().App().Usr_dlg().Warn_many("error while running file wkr; page=~{0} err=~{1}", tab.Page().Url().To_str(), ErrUtl.ToStrFull(e));
 		}
 	}
 }

@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+package gplx.xowa.addons.apps.updates.dbs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.addons.apps.cfgs.*;
 public class Xoa_update_db_mgr_ {
@@ -31,9 +40,9 @@ public class Xoa_update_db_mgr_ {
 			if (exit_if_too_soon) {
 				Xocfg_mgr cfg = app.Cfg();
 				int inet_interval = cfg.Get_int_app_or(Cfg__inet_interval, 7);
-				DateAdp inet_date = cfg.Get_date_app_or(Cfg__inet_date, DateAdp_.MinValue);
-				if (Datetime_now.Get().Diff_days(inet_date) < inet_interval) return false;
-				cfg.Set_date_app(Cfg__inet_date, Datetime_now.Get());
+				GfoDate inet_date = cfg.Get_date_app_or(Cfg__inet_date, GfoDateUtl.MinValue);
+				if (GfoDateNow.Get().DiffDays(inet_date) < inet_interval) return false;
+				cfg.Set_date_app(Cfg__inet_date, GfoDateNow.Get());
 			}
 
 			// get online version
@@ -49,7 +58,7 @@ public class Xoa_update_db_mgr_ {
 			}
 			return true;
 		} catch (Exception exc) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "app_update:db download failed;err=~{0}", Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "app_update:db download failed;err=~{0}", ErrUtl.ToStrLog(exc));
 			return false;
 		}
 	}

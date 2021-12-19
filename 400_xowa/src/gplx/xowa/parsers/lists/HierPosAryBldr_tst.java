@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lists;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.arrays.IntAryUtl;
 import org.junit.*;
 public class HierPosAryBldr_tst {
 	@Before public void init() {bldr.Init();} HierPosAryBldr bldr = new HierPosAryBldr(256);
 	@Test public void Basic() {
-		tst_ary(Int_ary_.Empty);
+		tst_ary(IntAryUtl.Empty);
 	}
 	@Test public void Move_d() {
 		bldr.MoveDown();
@@ -59,5 +61,5 @@ public class HierPosAryBldr_tst {
 		bldr.MoveNext();
 		tst_ary(0, 1);
 	}
-	private void tst_ary(int... expd) {Tfds.Eq_ary(expd, bldr.XtoIntAry());}
+	private void tst_ary(int... expd) {GfoTstr.EqAry(expd, bldr.XtoIntAry());}
 }

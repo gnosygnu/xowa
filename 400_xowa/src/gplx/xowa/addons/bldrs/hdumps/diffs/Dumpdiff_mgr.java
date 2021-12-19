@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.hdumps.diffs;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.core.brys.Bry_diff_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
 class Dumpdiff_mgr {
@@ -48,7 +48,7 @@ class Dumpdiff_mgr {
 
 			// loop pages, compare, and log
 			for (int i = 0; i < list_len; ++i) {
-				Dumpdiff_page_itm page = (Dumpdiff_page_itm)list.Get_at(i);
+				Dumpdiff_page_itm page = (Dumpdiff_page_itm)list.GetAt(i);
 				int page_id = page.Page_id();
 				byte[] cur_html = cur_html_loader.Load(page_id, page.Cur_db_id());
 				byte[] prv_html = prv_html_loader.Load(page_id, page.Prv_db_id());
@@ -72,7 +72,7 @@ class Dumpdiff_mgr {
 			if (wiki_is_cur)
 				rv = dflt_wiki;
 			else
-				throw Err_.new_("", "prv_dir not specified");
+				throw ErrUtl.NewArgs("prv_dir not specified");
 		}
 		if (rv == null)
 			rv = gplx.xowa.addons.bldrs.mass_parses.parses.Xow_wiki_utl_.Clone_wiki(dflt_wiki, wiki_dir);

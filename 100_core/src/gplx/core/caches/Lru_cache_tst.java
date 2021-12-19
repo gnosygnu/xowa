@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.caches;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Lru_cache_tst {
 	private final Lru_cache_fxt fxt = new Lru_cache_fxt();
@@ -101,6 +101,6 @@ class Lru_cache_fxt {
 	}
 	private void Test__get(String key, String expd) {
 		Object actl = cache.Get_or_null(key);
-		Gftest.Eq__obj_or_null(expd, actl);
+		GfoTstr.EqObjToStr(expd, actl);
 	}
 }

@@ -13,10 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.langs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.names.*;
-public class Xoa_lang_mgr implements Gfo_invk {		
+public class Xoa_lang_mgr implements Gfo_invk {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	private final Xobc_utl_make_lang mw_converter;
 	public Xoa_lang_mgr(Xoa_app app, Xol_name_mgr name_mgr, Xoa_gfs_mgr gfs_mgr) {
@@ -32,7 +41,7 @@ public class Xoa_lang_mgr implements Gfo_invk {
 	public void						Clear() {hash.Clear();}
 	public int						Len() {return hash.Len();}
 	public void						Add(Xol_lang_itm itm)		{hash.Add(itm.Key_bry(), itm);}
-	public Io_url					Root_dir() {return root_dir;} private final Io_url root_dir;
+	public Io_url Root_dir() {return root_dir;} private final Io_url root_dir;
 	public Xol_lang_itm Get_by_or_null(byte[] key) {return (Xol_lang_itm)hash.GetByOrNull(key);} // check if exists
 	public Xol_lang_itm Get_by_or_load(byte[] key) { // main call
 		Xol_lang_itm rv = Get_by_or_null(key);
@@ -51,7 +60,7 @@ public class Xoa_lang_mgr implements Gfo_invk {
 		}
 		return rv;
 	}
-	public Xol_lang_itm Get_at(int i) {return (Xol_lang_itm)hash.Get_at(i);}   // called by Xol_mw_lang_parser
+	public Xol_lang_itm Get_at(int i) {return (Xol_lang_itm)hash.GetAt(i);}   // called by Xol_mw_lang_parser
 	public Xol_lang_itm Get_by_or_en(byte[] key) {	// called by Xowv_wiki to set .Lang() for DRD
 		Xol_lang_itm rv = Get_by_or_null(key);
 		return rv == null ? lang_en : rv;
@@ -61,5 +70,5 @@ public class Xoa_lang_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_mediawiki_converter))	return mw_converter;
 		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get", Invk_mediawiki_converter = "mediawiki_converter";
-	public static final byte[] Fallback_false = Bry_.new_a7("false");
+	public static final byte[] Fallback_false = BryUtl.NewA7("false");
 }

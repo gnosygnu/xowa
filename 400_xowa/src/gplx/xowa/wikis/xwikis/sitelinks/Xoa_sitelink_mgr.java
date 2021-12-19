@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.wikis.xwikis.sitelinks;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.xowa.*;
 import gplx.xowa.wikis.xwikis.sitelinks.htmls.*; import gplx.xowa.langs.*;
 public class Xoa_sitelink_mgr {
 	private final Xoa_sitelink_div_wtr div_wtr = new Xoa_sitelink_div_wtr();
@@ -40,7 +43,7 @@ public class Xoa_sitelink_mgr {
 		parser.Load_by_bry(src);
 		grp_mgr.Sort();	// sort again to put "Others" at bottom
 	}
-	public void Write_html(Bry_bfr bfr, Xowe_wiki wiki, List_adp slink_list, byte[] qid) {
+	public void Write_html(BryWtr bfr, Xowe_wiki wiki, List_adp slink_list, byte[] qid) {
 		div_wtr.Write(bfr, wiki, this, slink_list, qid);
 	}
 }

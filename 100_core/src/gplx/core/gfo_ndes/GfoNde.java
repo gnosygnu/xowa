@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,17 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfo_ndes; import gplx.*;
-import gplx.core.strings.*; import gplx.core.stores.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.core.gfo_ndes;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.core.stores.DataWtr;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ObjectUtl;
 public class GfoNde implements Gfo_invk {
 	public GfoFldList Flds() {return flds;} GfoFldList flds;
 	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.New();
 	public String Name() {return name;} public GfoNde Name_(String v) {name = v; return this;} private String name;
-	public Object ReadAt(int i)					{ChkIdx(i); return ary[i];}
-	public void WriteAt(int i, Object val)		{ChkIdx(i); ary[i] = val;}
-	public Object Read(String key)				{int i = IndexOfOrFail(key); return ary[i];}
-	public void Write(String key, Object val)	{int i = IndexOfOrFail(key); ary[i] = val;}
+	public Object ReadAt(int i)                    {ChkIdx(i); return ary[i];}
+	public void WriteAt(int i, Object val)        {ChkIdx(i); ary[i] = val;}
+	public Object Read(String key)                {int i = IndexOfOrFail(key); return ary[i];}
+	public void Write(String key, Object val)    {int i = IndexOfOrFail(key); ary[i] = val;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Read(k);}
 
 	public GfoNdeList Subs() {return subs;} GfoNdeList subs = GfoNdeList_.new_();
@@ -32,20 +41,20 @@ public class GfoNde implements Gfo_invk {
 	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < aryLen; i++) {
-			String key = i >= flds.Count()	? "<< NULL " + i + " >>" : flds.Get_at(i).Key();
-			String val = i >= aryLen		? "<< NULL " + i + " >>" : Object_.Xto_str_strict_or_null_mark(ary[i]);
+			String key = i >= flds.Count()    ? "<< NULL " + i + " >>" : flds.Get_at(i).Key();
+			String val = i >= aryLen        ? "<< NULL " + i + " >>" : ObjectUtl.ToStrOrNullMark(ary[i]);
 			sb.Add(key).Add("=").Add(val);
 		}
-		return sb.To_str();
+		return sb.ToStr();
 	}
 	int IndexOfOrFail(String key) {
 		int i = flds.Idx_of(key);
-		if ((i < 0 || i >= aryLen)) throw Err_.new_wo_type("field name not found", "name", key, "index", i, "count", this.Flds().Count());
+		if ((i < 0 || i >= aryLen)) throw ErrUtl.NewArgs("field name not found", "name", key, "index", i, "count", this.Flds().Count());
 		return i;
 	}
-	boolean ChkIdx(int i) {if (i < 0 || i >= aryLen) throw Err_.new_missing_idx(i, aryLen); return true;}
+	boolean ChkIdx(int i) {if (i < 0 || i >= aryLen) throw ErrUtl.NewMissingIdx(i, aryLen); return true;}
 	Object[] ary; int type; int aryLen;
-	@gplx.Internal protected GfoNde(int type, String name, GfoFldList flds, Object[] ary, GfoFldList subFlds, GfoNde[] subAry) {
+	public GfoNde(int type, String name, GfoFldList flds, Object[] ary, GfoFldList subFlds, GfoNde[] subAry) {
 		this.type = type; this.name = name; this.flds = flds; this.ary = ary; aryLen = ArrayUtl.Len(ary); this.subFlds = subFlds;
 		for (GfoNde sub : subAry)
 			subs.Add(sub);
@@ -58,7 +67,7 @@ public class GfoNde implements Gfo_invk {
 			wtr.WriteLeafEnd();
 		}
 		else {
-			if (nde.type == GfoNde_.Type_Node)			// never write node info for root
+			if (nde.type == GfoNde_.Type_Node)            // never write node info for root
 				wtr.WriteTableBgn(nde.Name(), nde.SubFlds());
 			for (int i = 0; i < nde.Subs().Count(); i++) {
 				GfoNde sub = nde.Subs().FetchAt_asGfoNde(i);

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.files.*;
+package gplx.xowa.addons.bldrs.files.dbs;
+import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.files.*;
 public class Xob_xfer_temp_tbl {
 	public static void Create_table(Db_conn p)		{Sqlite_engine_.Tbl_create_and_delete(p, Tbl_name, Tbl_sql);}
 	public static Db_stmt Insert_stmt(Db_conn p) {return Db_stmt_.new_insert_(p, Tbl_name, Fld_lnki_id, Fld_lnki_tier_id, Fld_lnki_page_id, Fld_orig_repo, Fld_orig_page_id, Fld_lnki_ttl, Fld_orig_redirect_src, Fld_lnki_ext, Fld_lnki_type, Fld_orig_media_type, Fld_file_is_orig, Fld_orig_w, Fld_orig_h, Fld_file_w, Fld_file_h, Fld_html_w, Fld_html_h, Fld_lnki_w, Fld_lnki_h, Fld_lnki_upright, Fld_lnki_time, Fld_lnki_page, Fld_lnki_count);}
@@ -56,7 +58,7 @@ public class Xob_xfer_temp_tbl {
 	, Fld_file_w = "file_w", Fld_file_h = "file_h", Fld_file_is_orig = "file_is_orig"
 	, Fld_html_w = "html_w", Fld_html_h = "html_h"
 	;
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = StringUtl.ConcatLinesNl
 	(	"CREATE TABLE IF NOT EXISTS xfer_temp"
 	,	"( lnki_id             integer             NOT NULL			    PRIMARY KEY"
 	,	", lnki_tier_id        integer             NOT NULL"

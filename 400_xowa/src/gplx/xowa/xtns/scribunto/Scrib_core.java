@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto;
-
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.Hash_adp_bry;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
 import gplx.core.envs.Env_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xow_wiki;
@@ -77,7 +77,7 @@ public class Scrib_core {
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
-	@gplx.Internal protected void Wiki_(Xowe_wiki v) {this.wiki = v;} // TEST:
+	public void Wiki_(Xowe_wiki v) {this.wiki = v;} // TEST:
 	public Xoae_page Page() {return page;} private Xoae_page page;
 	public byte[] Page_url() {return page_url;} private byte[] page_url;
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
@@ -131,13 +131,13 @@ public class Scrib_core {
 		this.page = page;
 		this.page_url = page.Url_bry_safe();
 		byte[] new_wiki = wiki.Domain_bry();
-		if (!Bry_.Eq(cur_wiki, new_wiki)) {
+		if (!BryLni.Eq(cur_wiki, new_wiki)) {
 			cur_wiki = new_wiki;
 			lib_site.Notify_wiki_changed();
 			lib_text.Notify_wiki_changed();
 		}
 		byte[] new_lang = wiki.Lang().Key_bry();
-		if (!Bry_.Eq(cur_lang, new_lang)) {
+		if (!BryLni.Eq(cur_lang, new_lang)) {
 			cur_lang = new_lang;
 			lib_message.Notify_lang_changed();
 			lib_language.Notify_lang_changed();
@@ -147,13 +147,13 @@ public class Scrib_core {
 		lib_wikibase.Notify_page_changed();
 		expensive_function_count = 0;
 	}	
-	public byte[] Cur_wiki() {return cur_wiki;} private byte[] cur_wiki = Bry_.Empty; 
-	public byte[] Cur_lang() {return cur_lang;} private byte[] cur_lang = Bry_.Empty;
+	public byte[] Cur_wiki() {return cur_wiki;} private byte[] cur_wiki = BryUtl.Empty;
+	public byte[] Cur_lang() {return cur_lang;} private byte[] cur_lang = BryUtl.Empty;
 	public void Increment_expensive_function_count() {
 		++expensive_function_count;
 		if (expensive_function_count > 255) {}
 	}
-	public Scrib_lua_mod RegisterInterface(Scrib_lib lib, Io_url url, Keyval... args) {
+	public Scrib_lua_mod RegisterInterface(Scrib_lib lib, Io_url url, KeyVal... args) {
 		this.RegisterLibrary(lib.Procs());
 		Scrib_lua_mod rv = this.LoadLibraryFromFile(url.NameAndExt(), Io_mgr.Instance.LoadFilStr(url));
 		Scrib_lua_proc setupInterface_func = rv.Fncs_get_by_key("setupInterface");
@@ -163,24 +163,24 @@ public class Scrib_core {
 	}
 	public void RegisterLibrary(Scrib_proc_mgr lib_proc_mgr) {
 		int len = lib_proc_mgr.Len();
-		Keyval[] functions_ary = new Keyval[len];
+		KeyVal[] functions_ary = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
 			Scrib_proc lib_proc = lib_proc_mgr.Get_at(i);
 			String lib_proc_key = lib_proc.Proc_key();
 			this.proc_mgr.Set(lib_proc_key, lib_proc);
-			functions_ary[i] = Keyval_.new_(lib_proc.Proc_name(), lib_proc_key);
+			functions_ary[i] = KeyVal.NewStr(lib_proc.Proc_name(), lib_proc_key);
 		}
 		engine.RegisterLibrary(functions_ary);
 	}
-	@gplx.Internal protected Scrib_lua_mod LoadLibraryFromFile(String name, String text) {
+	public Scrib_lua_mod LoadLibraryFromFile(String name, String text) {
 		int lib_id = engine.LoadString("@" + name, text).Id();	// NOTE: 'Prepending an "@" to the chunk name makes Lua think it is a filename'
-		Keyval[] values = engine.CallFunction(lib_id, Keyval_.Ary_empty);
+		KeyVal[] values = engine.CallFunction(lib_id, KeyValUtl.AryEmpty);
 		Scrib_lua_mod rv = new Scrib_lua_mod(this, name);
 		if (values.length > 0) {	// NOTE: values.length == 0 for "package.lua" (no fnc_ids returned);
-			Keyval[] fncs = Scrib_kv_utl_.Val_to_KeyVal_ary(values, 0);
+			KeyVal[] fncs = Scrib_kv_utl_.Val_to_KeyVal_ary(values, 0);
 			int len = fncs.length;
 			for (int i = 0; i < len; i++) {
-				Keyval itm = fncs[i];
+				KeyVal itm = fncs[i];
 				Scrib_lua_proc fnc = Scrib_lua_proc.cast_or_null_(itm.Val());
 				if (fnc != null) rv.Fncs_add(fnc);	// NOTE: some lua funcs will return INF; EX: stringLengthLimit
 			}
@@ -190,8 +190,8 @@ public class Scrib_core {
 	public Ordered_hash Frame_created_list() {return frame_created_list;} private Ordered_hash frame_created_list = Ordered_hash_.New();	// created by NewChildFrame
 	public Xot_invk Frame_current() {return frame_current;} private Xot_invk frame_current;
 	public Xot_invk Frame_parent() {return frame_parent;} private Xot_invk frame_parent;
-	@gplx.Internal protected void Frame_current_(Xot_invk v) {frame_current = v;} // TEST:
-	@gplx.Internal protected void Frame_parent_(Xot_invk v) {frame_parent = v;}	// TEST:
+	public void Frame_current_(Xot_invk v) {frame_current = v;} // TEST:
+	public void Frame_parent_(Xot_invk v) {frame_parent = v;}	// TEST:
 	public Xop_ctx Ctx() {return ctx;} private Xop_ctx ctx;
 	public byte[] Cur_src() {return cur_src;} private byte[] cur_src; // only used for error reporting
 	public void Invoke_init(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame) {	// TEST
@@ -199,7 +199,7 @@ public class Scrib_core {
 		lib_mw.Invoke_bgn(wiki, ctx, src);
 		this.frame_parent = parent_frame; this.frame_current = current_frame;
 	}
-	public void Invoke(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame, Bry_bfr bfr, byte[] mod_name, byte[] mod_text, byte[] fnc_name) {
+	public void Invoke(Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk parent_frame, Xot_invk current_frame, BryWtr bfr, byte[] mod_name, byte[] mod_text, byte[] fnc_name) {
 		// save current values for restoring later
 		Xot_invk old_frame_parent = this.frame_parent; Xot_invk old_frame_current = this.frame_current;
 		byte[] old_src = cur_src;
@@ -212,19 +212,19 @@ public class Scrib_core {
 
 		try {
 			Scrib_lua_mod mod = Mods_get_or_new(mod_name, mod_text);
-			Keyval[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), String_.new_u8(fnc_name));
-			Keyval[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
-			if (func_rslt == null || func_rslt.length < 2) throw Err_.new_wo_type("lua.error:function did not return a value", "fnc_name", String_.new_u8(fnc_name)); // must return at least 2 items for func_rslt[1] below; DATE:2014-09-22
+			KeyVal[] func_args = Scrib_kv_utl_.base1_many_(mod.Init_chunk_func(), StringUtl.NewU8(fnc_name));
+			KeyVal[] func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeModule"), func_args);			// call init_chunk to get proc dynamically; DATE:2014-07-12
+			if (func_rslt == null || func_rslt.length < 2) throw ErrUtl.NewArgs("lua.error:function did not return a value", "fnc_name", StringUtl.NewU8(fnc_name)); // must return at least 2 items for func_rslt[1] below; DATE:2014-09-22
 			Scrib_lua_proc proc = (Scrib_lua_proc)func_rslt[1].Val();												// note that init_chunk should have: [0]:true/false result; [1]:proc
 			func_args = Scrib_kv_utl_.base1_many_(proc);
 			func_rslt = engine.CallFunction(lib_mw.Mod().Fncs_get_id("executeFunction"), func_args);				// call function now
 			String rslt = Scrib_kv_utl_.Val_to_str(func_rslt, 0);													// rslt expects an array with 1 scalar value
-			bfr.Add_str_u8(rslt);
+			bfr.AddStrU8(rslt);
 			//byte[] rslt_bry = Bry_.new_u8(rslt);	// CHART
 			//gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx = ctx;
 			//bfr.Add(rslt_bry);
 			if (!Env_.Mode_testing())
-				engine.CleanupChunks(Keyval_.Ary(Keyval_.int_(proc.Id(), "")));										// cleanup chunk immediately; needed for heavy pages like en.d:water; DATE:2014-08-07
+				engine.CleanupChunks(KeyValUtl.Ary(KeyVal.NewInt(proc.Id(), "")));										// cleanup chunk immediately; needed for heavy pages like en.d:water; DATE:2014-08-07
 		}
 		finally {
 			lib_mw.Invoke_end();
@@ -238,8 +238,8 @@ public class Scrib_core {
 	private Scrib_lua_mod Mods_get_or_new(byte[] mod_name, byte[] mod_text) {
 		Scrib_lua_mod rv = (Scrib_lua_mod)mods.GetByOrNull(mod_name);
 		if (rv == null) {
-			rv = new Scrib_lua_mod(this, "Module:" + String_.new_u8(mod_name));
-			rv.LoadString(String_.new_u8(mod_text));
+			rv = new Scrib_lua_mod(this, "Module:" + StringUtl.NewU8(mod_name));
+			rv.LoadString(StringUtl.NewU8(mod_text));
 			mods.Add(mod_name, rv);
 		}
 		return rv;
@@ -249,9 +249,9 @@ public class Scrib_core {
 		try {
 			Xot_invk src_frame = frame_current;
 			if (src_frame != null)
-				excerpt = String_.new_u8(cur_src, src_frame.Src_bgn(), src_frame.Src_end());
-		} catch (Exception e) {Err_.Noop(e);}
-		throw Err_.new_wo_type(err, "ttl", page.Ttl().Page_db_as_str(), "excerpt", excerpt);
+				excerpt = StringUtl.NewU8(cur_src, src_frame.Src_bgn(), src_frame.Src_end());
+		} catch (Exception e) {}
+		throw ErrUtl.NewArgs(err, "ttl", page.Ttl().Page_db_as_str(), "excerpt", excerpt);
 	}
 	public static final String Frame_key_module = "current", Frame_key_template = "parent";
 	public static final int Base_1 = 1;

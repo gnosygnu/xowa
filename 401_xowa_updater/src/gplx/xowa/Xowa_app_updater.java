@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa;
-import gplx.Io_url_;
+import gplx.libs.files.Io_url_;
 import gplx.core.envs.*;
 public class Xowa_app_updater {
 	public static void main(String[] args) {

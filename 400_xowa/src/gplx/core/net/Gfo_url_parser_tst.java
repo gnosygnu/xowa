@@ -32,10 +32,10 @@ public class Gfo_url_parser_tst {
 	@Test public void Site__parts__1() {
 		tstr.Exec__parse("https://wikipedia").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__segs("wikipedia");
 	}
-	@Test  public void Site__slash__none() {
+	@Test public void Site__slash__none() {
 		tstr.Exec__parse("https:site").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__site("site");
 	}
-	@Test  public void Site__slash__eos() {
+	@Test public void Site__slash__eos() {
 		tstr.Exec__parse("https://en.wikipedia.org/").Test__protocol_tid(Gfo_protocol_itm.Tid_https).Test__site("en.wikipedia.org");
 	}
 	@Test public void Paths__1() {

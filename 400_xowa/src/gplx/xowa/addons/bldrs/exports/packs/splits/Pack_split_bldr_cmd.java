@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.splits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
+package gplx.xowa.addons.bldrs.exports.packs.splits;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.ios.IoConsts;
+import gplx.xowa.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Pack_split_bldr_cmd extends Xob_cmd__base {
-	private long pack_size_max = 30 * Io_mgr.Len_mb;
+	private long pack_size_max = 30 * IoConsts.LenMB;
 	public Pack_split_bldr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
 		new Pack_mgr().Exec(wiki, pack_size_max);

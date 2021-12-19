@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers;
-import gplx.Byte_;
-import gplx.String_;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.tests.Tst_chkr;
 import gplx.core.tests.Tst_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Xop_tkn_chkr_base implements Tst_chkr {
 	public Class<?> TypeOf() {return Xop_tkn_itm.class;}
-	public byte Tkn_tid() {return Byte_.Max_value_127;}
+	public byte Tkn_tid() {return ByteUtl.MaxValue127;}
 	public Xop_tkn_chkr_base TypeId_dynamic(int v) {typeId = Xop_tkn_itm_.Tid__names[v]; return this;} private String typeId = null;
 	public int Src_bgn() {return src_bgn;} private int src_bgn = -1;
 	public int Src_end() {return src_end;} private int src_end = -1;
@@ -47,7 +47,7 @@ public class Xop_tkn_chkr_base implements Tst_chkr {
 		err += mgr.Tst_val(src_bgn == -1, path, "src_bgn",  src_bgn, actl.Src_bgn());
 		err += mgr.Tst_val(src_end == -1, path, "src_end", src_end, actl.Src_end());
 		if (raw != null) {
-			String raw_actl = raw_src == null ? mgr.Vars_get_bry_as_str("raw_bry", actl.Src_bgn(), actl.Src_end()) : String_.Mid(raw_src, actl.Src_bgn(), actl.Src_end());
+			String raw_actl = raw_src == null ? mgr.Vars_get_bry_as_str("raw_bry", actl.Src_bgn(), actl.Src_end()) : StringUtl.Mid(raw_src, actl.Src_bgn(), actl.Src_end());
 			err += mgr.Tst_val(raw == null, path, "raw", raw, raw_actl);
 		}
 		return err;

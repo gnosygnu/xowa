@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.htmls.core.htmls.utls;
+import gplx.types.basics.utls.BryUtl;
 public class Xoh_img_path {
 	public static final byte[]
-	  Img_cancel = Bry_.new_a7("app.general/cancel.png")	// 32,32
-	, Img_go_bwd = Bry_.new_a7("app.general/go_bwd.png")
-	, Img_go_fwd = Bry_.new_a7("app.general/go_fwd.png")
-	, Img_search = Bry_.new_a7("app.window/32px/search_exec.png")
-	, Img_option = Bry_.new_a7("app.menu/tools/options.png")
+	  Img_cancel = BryUtl.NewA7("app.general/cancel.png")	// 32,32
+	, Img_go_bwd = BryUtl.NewA7("app.general/go_bwd.png")
+	, Img_go_fwd = BryUtl.NewA7("app.general/go_fwd.png")
+	, Img_search = BryUtl.NewA7("app.window/32px/search_exec.png")
+	, Img_option = BryUtl.NewA7("app.menu/tools/options.png")
 	;
 }

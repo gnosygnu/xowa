@@ -13,11 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*;
-import gplx.core.primitives.*;
+package gplx.core.threads;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.wrappers.BoolRef;
 public class Gfo_async_mgr implements Gfo_invk {
 	private List_adp queue = List_adp_.New();
-	private Bool_obj_ref running = Bool_obj_ref.n_();
+	private BoolRef running = BoolRef.NewN();
 	private Gfo_async_cmd_mkr cmd_mkr = new Gfo_async_cmd_mkr();
 	public void Queue(Gfo_invk invk, String invk_key, Object... args) {
 		Gfo_async_cmd_itm cmd = cmd_mkr.Get(invk, invk_key, args);
@@ -25,8 +31,8 @@ public class Gfo_async_mgr implements Gfo_invk {
 			queue.Add(cmd);
 		}
 		synchronized (running) {
-			if (running.Val_n()) {
-				running.Val_y_();
+			if (running.ValN()) {
+				running.ValSetY();
 				Thread_adp_.Start_by_key(Invk_run, this, Invk_run);
 			}
 		}
@@ -44,7 +50,7 @@ public class Gfo_async_mgr implements Gfo_invk {
 		}
 		finally {
 			synchronized (running) {
-				running.Val_n_();
+				running.ValSetN();
 			}
 		}
 	}

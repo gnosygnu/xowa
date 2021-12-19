@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.lists; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.htmls.bridges.*;
+package gplx.xowa.addons.wikis.directorys.specials.lists;
+import gplx.langs.jsons.Json_nde;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.htmls.bridges.Bridge_cmd_itm;
+import gplx.xowa.htmls.bridges.Bridge_cmd_mgr;
 public class Xowdir_list_bridge implements Bridge_cmd_itm {
 	private Xowdir_list_svc svc;
 	public void Init_by_app(Xoa_app app) {
@@ -28,7 +32,7 @@ public class Xowdir_list_bridge implements Bridge_cmd_itm {
 		Json_nde args = data.Get_kv(Bridge_cmd_mgr.Msg__args).Val_as_nde();
 		switch (proc_id) {
 			case Proc__import_wiki:         svc.Import_wiki(args); break;
-			default:                        throw Err_.new_unhandled_default(proc_id);
+			default:                        throw ErrUtl.NewUnhandled(proc_id);
 		}
 		return "";
 	}
@@ -38,6 +42,6 @@ public class Xowdir_list_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("import_wiki"					, Proc__import_wiki)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.list");
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = BryUtl.NewA7("wiki.directory.list");
         public static final Xowdir_list_bridge Prototype = new Xowdir_list_bridge(); Xowdir_list_bridge() {}
 }

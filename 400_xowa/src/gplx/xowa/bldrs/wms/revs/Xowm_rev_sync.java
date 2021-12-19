@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs.wms.revs;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*;
 class Xowm_rev_sync {
 	private final Ordered_hash cur_hash = Ordered_hash_.New_bry(), new_hash = Ordered_hash_.New_bry();
 	private final List_adp del_list = List_adp_.New();
@@ -69,7 +74,7 @@ class Xowm_rev_sync_utl {
 	public static void Remove_unchanged(Ordered_hash cur_hash, Ordered_hash new_hash, List_adp del_list, int bgn, int end) {
 		del_list.Clear();
 		for (int i = bgn; i < end; ++i) {
-			Wmapi_itm__pge new_itm = (Wmapi_itm__pge)new_hash.Get_at(i);
+			Wmapi_itm__pge new_itm = (Wmapi_itm__pge)new_hash.GetAt(i);
 			byte[] new_key = new_itm.Page_ttl();
 			Wmapi_itm__pge cur_itm = (Wmapi_itm__pge)cur_hash.GetByOrNull(new_key); if (cur_itm == null) continue;	// itm not found; ignore
 			if (new_itm.Eq_meta(cur_itm, 0))	// itm is same; add to deleted list
@@ -77,7 +82,7 @@ class Xowm_rev_sync_utl {
 		}
 		int len = del_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wmapi_itm__pge itm = (Wmapi_itm__pge)del_list.Get_at(i);
+			Wmapi_itm__pge itm = (Wmapi_itm__pge)del_list.GetAt(i);
 			new_hash.Del(itm.Page_ttl());
 		}
 	}

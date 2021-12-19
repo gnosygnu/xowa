@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.directorys.specials.items.bldrs;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_sql_;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.cfgs.Db_cfg_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_link_tbl;
 import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_props_mgr;
@@ -46,15 +46,15 @@ public class Xow_wiki_upgrade_ {
 	;
 	public static void Upgrade_wiki(Xoae_app app, byte[] domain, Io_url dir_url) {
 		// get conn
-		Io_url core_db_url = gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(dir_url, String_.new_u8(domain));
+		Io_url core_db_url = gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(dir_url, StringUtl.NewU8(domain));
 		if (core_db_url == null) {
-			throw Err_.new_wo_type("failed to find core_db for wiki; wiki=~{domain} dir=~{dir_url}", domain, dir_url);
+			throw ErrUtl.NewArgs("failed to find core_db for wiki; wiki=~{domain} dir=~{dir_url}", domain, dir_url);
 		}
 		Db_conn core_db_conn = Db_conn_bldr.Instance.Get_or_fail(core_db_url);
 
 		// verify json
 		Xowdir_wiki_props_mgr core_db_props = Xowdir_wiki_props_mgr_.New_xowa(app, core_db_url);
-		core_db_props.Verify(BoolUtl.N, String_.new_u8(domain), core_db_url);
+		core_db_props.Verify(BoolUtl.N, StringUtl.NewU8(domain), core_db_url);
 
 		// get cfg
 		Db_cfg_tbl cfg_tbl = Xowd_cfg_tbl_.Get_or_fail(core_db_conn);
@@ -75,7 +75,7 @@ public class Xow_wiki_upgrade_ {
 					core_db_conn.Meta_tbl_assert(new Xodb_cat_link_tbl(core_db_conn));
 				}
 			} catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:cat_link upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:cat_link upgrade failed; err=~{0}", ErrUtl.ToStrLog(e));
 			}
 
 			// page.cat_db_id: if page.cat_db_id doesn't exist, then add it
@@ -85,16 +85,16 @@ public class Xow_wiki_upgrade_ {
 					core_db_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, DbmetaFldItm.NewInt(Xowd_page_tbl.FLD__page_cat_db_id).DefaultValSet(-1));
 				}
 			} catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", ErrUtl.ToStrLog(e));
 			}
 
 			// BGN:check for page_ids < 1
 			// select from page_tbl for page_id < 1
-			Xow_db_mgr db_mgr = new Xow_db_mgr(dir_url, String_.new_u8(domain));
+			Xow_db_mgr db_mgr = new Xow_db_mgr(dir_url, StringUtl.NewU8(domain));
 			db_mgr.Init_by_load(core_db_url);
 			Xowd_page_tbl page_tbl = db_mgr.Db__core().Tbl__page();
 			List_adp page_ids_list = List_adp_.New();
-			Db_rdr page_rdr = page_tbl.Conn().Stmt_sql(Db_sql_.Make_by_fmt(String_.Ary("SELECT page_id FROM page WHERE page_id < 1"))).Exec_select__rls_auto();
+			Db_rdr page_rdr = page_tbl.Conn().Stmt_sql(Db_sql_.Make_by_fmt(StringUtl.Ary("SELECT page_id FROM page WHERE page_id < 1"))).Exec_select__rls_auto();
 			try {
 				while (page_rdr.Move_next()) {
 					page_ids_list.Add(page_rdr.Read_int("page_id"));
@@ -116,7 +116,7 @@ public class Xow_wiki_upgrade_ {
 						: max_page_id + 1;
 				}
 				for (int i = 0; i < page_ids_len; i++) {
-					int old_page_id = (int)page_ids_list.Get_at(i);
+					int old_page_id = (int)page_ids_list.GetAt(i);
 					int new_page_id = next_id + i;
 					Xopg_db_mgr.Update_page_id(db_mgr, old_page_id, new_page_id);
 				}

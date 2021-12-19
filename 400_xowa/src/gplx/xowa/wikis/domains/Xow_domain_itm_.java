@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.domains;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.langs.*;
 public class Xow_domain_itm_ {
 	public static final Xow_domain_itm[] Ary_empty = new Xow_domain_itm[0];
@@ -28,22 +33,22 @@ public class Xow_domain_itm_ {
 		int raw_len = raw.length;
 
 		// find 1st dot
-		int dot_0 = Bry_find_.Find_fwd(raw, AsciiByte.Dot, 0, raw_len);
+		int dot_0 = BryFind.FindFwd(raw, AsciiByte.Dot, 0, raw_len);
 
 		// 0 dots; check for "home"
-		if (dot_0 == Bry_find_.Not_found) {
-			return Bry_.Eq(raw, Xow_domain_tid_.Bry__home)
+		if (dot_0 == BryFind.NotFound) {
+			return BryLni.Eq(raw, Xow_domain_tid_.Bry__home)
 				? Xow_domain_uid_.To_domain(Xow_domain_uid_.Tid_xowa)
 				: new_other(raw);
 		}
 
 		// find 2nd dot
-		int dot_1 = Bry_find_.Find_fwd(raw, AsciiByte.Dot, dot_0 + 1, raw_len);
+		int dot_1 = BryFind.FindFwd(raw, AsciiByte.Dot, dot_0 + 1, raw_len);
 
 		// 1 dot only -> return "wikisource.org" or other
-		if (dot_1 == Bry_find_.Not_found) {
+		if (dot_1 == BryFind.NotFound) {
 			// wikisource.org
-			if (Bry_.Eq(raw, Xow_domain_itm_.Bry__wikisource_org)) {
+			if (BryLni.Eq(raw, Xow_domain_itm_.Bry__wikisource_org)) {
 				return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__wikisource_org, Xol_lang_stub_.Key__unknown);
 			}
 			else {
@@ -65,7 +70,7 @@ public class Xow_domain_itm_ {
 			// ~{lang}.~{type}.org
 			case Xow_domain_tid_.Tid__wikipedia: case Xow_domain_tid_.Tid__wiktionary: case Xow_domain_tid_.Tid__wikisource: case Xow_domain_tid_.Tid__wikibooks:
 			case Xow_domain_tid_.Tid__wikiversity: case Xow_domain_tid_.Tid__wikiquote: case Xow_domain_tid_.Tid__wikinews: case Xow_domain_tid_.Tid__wikivoyage:
-				byte[] lang_orig = Bry_.Mid(raw, 0, dot_0);
+				byte[] lang_orig = BryLni.Mid(raw, 0, dot_0);
 				byte[] lang_actl = Get_lang_code_for_mw_messages_file(lang_orig);
 				return Xow_domain_itm.new_(raw, seg_1_tid, lang_actl, lang_orig); // NOTE: seg_tids must match wiki_tids
 
@@ -90,7 +95,7 @@ public class Xow_domain_itm_ {
 					}
 					// seg_0 is a language; use language override; EX: "ar.wikimedia.org"
 					else
-						return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__wikimedia, lang_override, Bry_.Mid(raw, 0, dot_0));
+						return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__wikimedia, lang_override, BryLni.Mid(raw, 0, dot_0));
 				}
 
 				// seg_0 is a type
@@ -111,34 +116,34 @@ public class Xow_domain_itm_ {
 	}
 	public static boolean Match_lang(Xow_domain_itm domain, String match) {
 		// exit early if "*"
-		if (String_.Eq(match, Lang_key__all)) return true;
+		if (StringUtl.Eq(match, Lang_key__all)) return true;
 
 		// get lang
-		String cur = String_.new_u8(domain.Lang_actl_key());
+		String cur = StringUtl.NewU8(domain.Lang_actl_key());
 
 		// return true if direct match; EX: "en" <-> "en"; "de" <-> "de"
-		if (String_.Eq(cur, match)) return true;
+		if (StringUtl.Eq(cur, match)) return true;
 
 		// handle special cases
-		if		(String_.Eq(match, "en"))
-			return String_.In(domain.Domain_str(), "simple.wikipedia.org", "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
-		else if (String_.Eq(match, "zh"))
-			return String_.Eq(cur, "lzh");
+		if		(StringUtl.Eq(match, "en"))
+			return StringUtl.In(domain.Domain_str(), "simple.wikipedia.org", "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
+		else if (StringUtl.Eq(match, "zh"))
+			return StringUtl.Eq(cur, "lzh");
 		return false;
 	}
 	public static boolean Match_type(Xow_domain_itm domain, String match) {
 		// exit early if "*"
-		if (String_.Eq(match, Type_key__all)) return true;
+		if (StringUtl.Eq(match, Type_key__all)) return true;
 
 		// get lang
 		String cur = domain.Domain_type().Key_str();
 
 		// return true if direct match; EX: "wiki" <-> "wiki"; "wiktionary" <-> "wiktionary"
-		if (String_.Eq(cur, match)) return true;
+		if (StringUtl.Eq(cur, match)) return true;
 
 		// handle special cases
-		if		(String_.Eq(match, "wikimisc"))
-			return String_.In(domain.Domain_str(), "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
+		if		(StringUtl.Eq(match, "wikimisc"))
+			return StringUtl.In(domain.Domain_str(), "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
 		return false;
 	}
 	public static final String Lang_key__all = "*", Type_key__all = "*";
@@ -153,13 +158,13 @@ public class Xow_domain_itm_ {
 		return o == null ? lang : (byte[])o;
 	}
 	private static final Hash_adp_bry alt_domain__lang_by_subdomain = Hash_adp_bry.ci_a7()	// ASCII:lang_code
-	.Add_str_obj("simple"			, Bry_.new_a7("en"))
-	.Add_str_obj("zh-classical"		, Bry_.new_a7("lzh"))
-	.Add_str_obj("no"				, Bry_.new_a7("nb"))
+	.Add_str_obj("simple"			, BryUtl.NewA7("en"))
+	.Add_str_obj("zh-classical"		, BryUtl.NewA7("lzh"))
+	.Add_str_obj("no"				, BryUtl.NewA7("nb"))
 	;
 	private static final Hash_adp_bry alt_domain__subdomain_by_lang = Hash_adp_bry.ci_a7()	// ASCII:lang_code
-	.Add_str_obj("lzh"				, Bry_.new_a7("zh-classical"))
-	.Add_str_obj("nb"				, Bry_.new_a7("no"))
+	.Add_str_obj("lzh"				, BryUtl.NewA7("zh-classical"))
+	.Add_str_obj("nb"				, BryUtl.NewA7("no"))
 	;
 	public static final String
 	  Str__enwiki								= "en.wikipedia.org"
@@ -175,18 +180,18 @@ public class Xow_domain_itm_ {
 	, Str__home									= "home"
 	;
 	public static final byte[]
-	  Bry__enwiki								= Bry_.new_a7(Str__enwiki)
-	, Bry__species								= Bry_.new_a7(Str__species)
-	, Bry__commons								= Bry_.new_a7(Str__commons)
-	, Bry__wikidata								= Bry_.new_a7(Str__wikidata)
-	, Bry__mediawiki							= Bry_.new_a7(Str__mediawiki)
-	, Bry__meta									= Bry_.new_a7(Str__meta)
-	, Bry__incubator							= Bry_.new_a7(Str__incubator)
-	, Bry__wikimania							= Bry_.new_a7(Str__wikimania)
-	, Bry__wikisource_org						= Bry_.new_a7(Str__wikisource_org)
-	, Bry__wmforg								= Bry_.new_a7(Str__wmforg)
-	, Bry__home									= Bry_.new_a7(Str__home)
-	, Bry__simplewiki							= Bry_.new_a7("simple.wikipedia.org")
+	  Bry__enwiki								= BryUtl.NewA7(Str__enwiki)
+	, Bry__species								= BryUtl.NewA7(Str__species)
+	, Bry__commons								= BryUtl.NewA7(Str__commons)
+	, Bry__wikidata								= BryUtl.NewA7(Str__wikidata)
+	, Bry__mediawiki							= BryUtl.NewA7(Str__mediawiki)
+	, Bry__meta									= BryUtl.NewA7(Str__meta)
+	, Bry__incubator							= BryUtl.NewA7(Str__incubator)
+	, Bry__wikimania							= BryUtl.NewA7(Str__wikimania)
+	, Bry__wikisource_org						= BryUtl.NewA7(Str__wikisource_org)
+	, Bry__wmforg								= BryUtl.NewA7(Str__wmforg)
+	, Bry__home									= BryUtl.NewA7(Str__home)
+	, Bry__simplewiki							= BryUtl.NewA7("simple.wikipedia.org")
 	;
-	public static final byte[] Seg__org = Bry_.new_a7("org"), Seg__www = Bry_.new_a7("www");
+	public static final byte[] Seg__org = BryUtl.NewA7("org"), Seg__www = BryUtl.NewA7("www");
 }

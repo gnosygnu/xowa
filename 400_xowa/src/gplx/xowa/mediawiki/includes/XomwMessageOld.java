@@ -13,7 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.types.basics.encoders.HexUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.custom.brys.wtrs.HtmlBryBfr;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.mediawiki.includes.content.*;
 /**
@@ -238,8 +250,8 @@ public class XomwMessageOld {
 
 	public void CompilerAppeasement() {
 		this.key = null; this.keysToTry = null; this.message = null;
-		Tfds.Write(interfaceIsUserLang, language, key, keysToTry, format, useDatabase, title, message, listTypeMap, parameters);
-		Tfds.Write(FORMAT_BLOCK_PARSE, FORMAT_ESCAPED, FORMAT_PARSE, FORMAT_PLAIN, FORMAT_TEXT);
+		GfoTstr.Write(interfaceIsUserLang, language, key, keysToTry, format, useDatabase, title, message, listTypeMap, parameters);
+		GfoTstr.Write(FORMAT_BLOCK_PARSE, FORMAT_ESCAPED, FORMAT_PARSE, FORMAT_PLAIN, FORMAT_TEXT);
 		this.extractParam(null, null, 0);
 	}
 	public XomwMessageOld(byte[] textBry, XomwLanguage language) {
@@ -247,7 +259,7 @@ public class XomwMessageOld {
 		this.language = language;
 	}
 	public byte[] text() {return textBry;} private byte[] textBry;
-	public byte[] escaped() {throw Err_.new_unimplemented();}
+	public byte[] escaped() {throw ErrUtl.NewUnimplemented();}
 
 //		/**
 //		* @since 1.17
@@ -802,7 +814,7 @@ public class XomwMessageOld {
 //			}
 //
 //			return this.content;
-		throw Err_.new_unimplemented();
+		throw ErrUtl.NewUnimplemented();
 	}
 
 	/**
@@ -817,14 +829,14 @@ public class XomwMessageOld {
 	*/
 
 	// NOTE: causes issues in C# source; E2A7BC; http://www.fileformat.info/info/unicode/char/29fc/index.htm
-	private static final byte[] LeftPointingCurvedAngleBracket = gplx.core.encoders.Hex_utl_.Parse_hex_to_bry("E2A7BC");
+	private static final byte[] LeftPointingCurvedAngleBracket = HexUtl.ParseHexToBry("E2A7BC");
 	public byte[] toString(int format) {
 		if (format == FORMAT_NULL) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "toString import implicit.*; format=~{0} key=~{1}", format, key);
 			format = this.format;
 		}
 //			byte[] s = this.fetchMessage();
-		byte[] s = Bry_.Empty;
+		byte[] s = BryUtl.Empty;
 
 		if (s == null) {
 			// Err on the side of safety, ensure that the output
@@ -834,7 +846,7 @@ public class XomwMessageOld {
 			// LeftPointingCurvedAngleBracket is used instead of '<' to side-step any
 			// double-escaping issues.
 			// (Keep synchronised with mw.Message#toString in JS.)
-			return Bry_.Escape_html(Bry_.Add(LeftPointingCurvedAngleBracket, key, LeftPointingCurvedAngleBracket));
+			return HtmlBryBfr.EscapeHtml(BryUtl.Add(LeftPointingCurvedAngleBracket, key, LeftPointingCurvedAngleBracket));
 		}
 
 		// Replace $* with a list of parameters for &uselang=qqx.
@@ -1132,7 +1144,7 @@ public class XomwMessageOld {
 	* @return array Array with the parameter type (either "before" or "after") and the value.
 	*/
 	private void extractParam(XomwMessageVal rv, Object param, int format) {
-		if (Type_.Is_assignable_from_by_obj(param, XomwMessagePrm.class)) {
+		if (ClassUtl.IsAssignableFromByObj(param, XomwMessagePrm.class)) {
 			XomwMessagePrm prm = (XomwMessagePrm)param;
 			switch (prm.Tid()) {
 				case XomwMessagePrm.Tid__raw:
@@ -1169,7 +1181,7 @@ public class XomwMessageOld {
 						prm.toString();
 					Gfo_usr_dlg_.Instance.Warn_many("", "", warning);
 
-					rv.Set(PRM_TID_BEFORE, Bry_.new_a7("[INVALID]"));
+					rv.Set(PRM_TID_BEFORE, BryUtl.NewA7("[INVALID]"));
 					break;
 			}
 //			}
@@ -1372,7 +1384,7 @@ class XomwMessagePrm_raw extends XomwMessagePrm { 	public byte[] raw;
 	}
 }
 class XomwMessagePrm_num extends XomwMessagePrm { 	public int num;
-	public byte[] numAsBry() {return Int_.To_bry(num);}
+	public byte[] numAsBry() {return IntUtl.ToBry(num);}
 	public XomwMessagePrm_num(int num) {super(Tid__num);
 		this.num = num;
 	}

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.gallery;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*;
 import gplx.xowa.files.*;
 import gplx.xowa.parsers.lnkis.*;
 public abstract class Gallery_mgr_base {
@@ -48,10 +50,10 @@ public abstract class Gallery_mgr_base {
 		this.itms_per_row = itms_per_row;
 	}
 	public void Adjust_image_parameters(Xof_file_itm xfer_itm) {}	// REF.MW: Adjust the image parameters for a thumbnail. Used by a subclass to insert extra high resolution images.		
-	public void Wrap_gallery_text(Bry_bfr bfr, byte[] gallery_text, int thm_w, int thm_h) {
-		bfr	.Add_str_a7("\n      <div class=\"gallerytext\">")	// NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
+	public void Wrap_gallery_text(BryWtr bfr, byte[] gallery_text, int thm_w, int thm_h) {
+		bfr	.AddStrA7("\n      <div class=\"gallerytext\">")	// NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
 			.Add(gallery_text)
-			.Add_str_a7("\n      </div>");						// NOTE: prepend "\n"; will cause extra \n when caption exists, but needed when caption doesn't exists; EX: "<div class='caption'>    </div>"; \n puts
+			.AddStrA7("\n      </div>");						// NOTE: prepend "\n"; will cause extra \n when caption exists, but needed when caption doesn't exists; EX: "<div class='caption'>    </div>"; \n puts
 	}
 }
 class Gallery_mgr_traditional extends Gallery_mgr_base {

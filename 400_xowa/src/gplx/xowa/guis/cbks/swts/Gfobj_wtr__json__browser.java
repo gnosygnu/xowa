@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.cbks.swts;
-import gplx.Bry_;
-import gplx.Bry_bfr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.core.gfobjs.Gfobj_grp;
 import gplx.core.gfobjs.Gfobj_wtr__json;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Gfobj_wtr__json__browser extends Gfobj_wtr__json {		private final Object thread_lock = new Object();
-	private final Bry_bfr bfr;
+	private final BryWtr bfr;
 	public Gfobj_wtr__json__browser() {
 		this.Opt_ws_(BoolUtl.N).Opt_backslash_2x_(BoolUtl.Y);
 		this.bfr = this.Bfr();
@@ -30,7 +30,7 @@ public class Gfobj_wtr__json__browser extends Gfobj_wtr__json {		private final O
 	private String Write_as_func(boolean write_return, String func_name, Gfobj_grp root) {
 		synchronized (thread_lock) { // LOCK:needed else random http_server issues; DATE:2018-03-13
 			if (write_return) bfr.Add(Bry__func_bgn);	// NOTE: Android WebView fails if return is passed; EX: "return 'true'" works on SWT.Browser, but not WebView
-			bfr.Add_str_u8(func_name);
+			bfr.AddStrU8(func_name);
 			bfr.Add(Bry__args_bgn);
 			this.Write(root);
 			bfr.Add(Bry__args_end);
@@ -38,8 +38,8 @@ public class Gfobj_wtr__json__browser extends Gfobj_wtr__json {		private final O
 		}
 	}
 	private static final byte[]
-	  Bry__func_bgn	= Bry_.new_a7("return ")
-	, Bry__args_bgn = Bry_.new_a7("('")
-	, Bry__args_end = Bry_.new_a7("');")
+	  Bry__func_bgn	= BryUtl.NewA7("return ")
+	, Bry__args_bgn = BryUtl.NewA7("('")
+	, Bry__args_end = BryUtl.NewA7("');")
 	;
 }

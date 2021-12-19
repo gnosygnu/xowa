@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.fmtrs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.langs.gfs.*;
 public class Xoa_fmtr_itm_tst {
 	@Before public void init() {fxt.Clear();} private Xoa_fmtr_itm_fxt fxt = new Xoa_fmtr_itm_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init_src("app.wikis;");
 		fxt.Init_fmt("domain=~{<>domain;<>};");
 		fxt.Test_run("domain=en.wikipedia.org;");
@@ -32,9 +35,9 @@ class Xoa_fmtr_itm_fxt {
 		GfsCore.Instance.MsgParser_(gplx.langs.gfs.Gfs_msg_bldr.Instance);
 	}
 	public Xoa_fmtr_itm_fxt Init_src(String v) {itm.Src_(v); return this;}
-	public Xoa_fmtr_itm_fxt Init_fmt(String v) {itm.Fmt_(Bry_.new_a7(v)); return this;}
+	public Xoa_fmtr_itm_fxt Init_fmt(String v) {itm.Fmt_(BryUtl.NewA7(v)); return this;}
 	public void Test_run(String expd) {
 		String actl = itm.Run();
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 }

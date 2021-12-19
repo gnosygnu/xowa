@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*;
+package gplx.xowa.addons.wikis.searchs.searchers.rslts;
 import gplx.core.lists.hashs.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
 public class Srch_rslt_list {
 	private final Ordered_hash key_hash = Ordered_hash_.New_bry();
 	private final Hash_adp__int id_hash = new Hash_adp__int();
@@ -28,10 +32,10 @@ public class Srch_rslt_list {
 	public int				Len()								{return key_hash.Len();}
 	public boolean			Has(byte[] key)						{return key_hash.Has(key);}
 	public Srch_rslt_row	Get_by(byte[] key)					{return (Srch_rslt_row)key_hash.GetByOrNull(key);}
-	public Srch_rslt_row	Get_at(int i)						{return (Srch_rslt_row)key_hash.Get_at(i);}
+	public Srch_rslt_row	Get_at(int i)						{return (Srch_rslt_row)key_hash.GetAt(i);}
 	public void				Clear()								{key_hash.Clear(); id_hash.Clear();}
 	public void				Add(Srch_rslt_row row)				{key_hash.Add(row.Key, row);}
-	public void				Sort()								{key_hash.Sort_by(Srch_rslt_row_sorter.Score_dsc);}
+	public void				Sort()								{key_hash.SortBy(Srch_rslt_row_sorter.Score_dsc);}
 	public boolean				Ids__has(int id)					{return (Srch_rslt_row)id_hash.Get_by_or_null(id) != null;}
 	public Srch_rslt_row	Ids__get_or_null(int id)			{return (Srch_rslt_row)id_hash.Get_by_or_null(id);}
 	public void				Ids__add(int id, Srch_rslt_row r)	{id_hash.Add(id, r);}
@@ -55,9 +59,9 @@ class Srch_rslt_row_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Srch_rslt_row lhs = (Srch_rslt_row)lhsObj;
 		Srch_rslt_row rhs = (Srch_rslt_row)rhsObj;
-		int rv = -Int_.Compare(lhs.Page_score, rhs.Page_score);
+		int rv = -IntUtl.Compare(lhs.Page_score, rhs.Page_score);
 		if (rv != CompareAbleUtl.Same) return rv;
-		return Bry_.Compare(lhs.Page_ttl.Page_txt(), rhs.Page_ttl.Page_txt());
+		return BryUtl.Compare(lhs.Page_ttl.Page_txt(), rhs.Page_ttl.Page_txt());
 	}
 	public static final Srch_rslt_row_sorter Score_dsc = new Srch_rslt_row_sorter();
 }

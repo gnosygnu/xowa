@@ -14,10 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.htmls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.addons.htmls.tocs.Xoh_toc_mgr;
 import gplx.xowa.htmls.heads.Xoh_head_mgr;
@@ -48,8 +47,8 @@ public class Xopg_html_data {
 	public byte[]				Content_sub() {return content_sub;} public void Content_sub_(byte[] v) {content_sub = v;} private byte[] content_sub;
 	public Xopg_page_heading	Page_heading() {return page_heading;} private final Xopg_page_heading page_heading = new Xopg_page_heading();
 	public String				Bmk_pos() {return html_bmk_pos;} public void Bmk_pos_(String v) {html_bmk_pos = v;} private String html_bmk_pos;
-	public Bry_bfr				Portal_div_xtn() {return portal_div_xtn;} private Bry_bfr portal_div_xtn = Bry_bfr_.Reset(255);
-	public byte[]				Edit_preview_w_dbg() {return Bry_.Add(xtn_scribunto_dbg, edit_preview);} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = Bry_.Empty;
+	public BryWtr Portal_div_xtn() {return portal_div_xtn;} private BryWtr portal_div_xtn = BryWtr.NewAndReset(255);
+	public byte[]				Edit_preview_w_dbg() {return BryUtl.Add(xtn_scribunto_dbg, edit_preview);} public void Edit_preview_(byte[] v) {edit_preview = v;} private byte[] edit_preview = BryUtl.Empty;
 	public int					Lnke_autonumber_next() {return lnke_autonumber++;} private int lnke_autonumber = 1;
 	public int					Sect_uid() {return sect_uid;} private int sect_uid = -1; public int Sect_uid_next() {return ++sect_uid;}
 	public boolean              Cbk_enabled()  {return cbk_enabled;} private boolean cbk_enabled; public void Cbk_enabled_(boolean v) {this.cbk_enabled = v;}
@@ -68,8 +67,8 @@ public class Xopg_html_data {
 	public boolean				Xtn_gallery_packed_exists() {return xtn_gallery_packed_exists;} public void Xtn_gallery_packed_exists_y_() {xtn_gallery_packed_exists = true;} private boolean xtn_gallery_packed_exists;
 	public boolean				Xtn_imap_exists() {return xtn_imap_exists;} public void Xtn_imap_exists_y_() {xtn_imap_exists = true;} private boolean xtn_imap_exists;
 	public int					Xtn_imap_next_id() {return ++xtn_imap_next_id;} private int xtn_imap_next_id;	// NOTE: must keep separate imap_id b/c html_elem_id is not always set;
-	public byte[]				Xtn_search_text() {return xtn_search_txt;} public void Xtn_search_text_(byte[] v) {xtn_search_txt = v;} private byte[] xtn_search_txt = Bry_.Empty;
-	public byte[]				Xtn_scribunto_dbg() {return xtn_scribunto_dbg;} public void Xtn_scribunto_dbg_(byte[] v) {xtn_scribunto_dbg = Bry_.Add(xtn_scribunto_dbg, v);} private byte[] xtn_scribunto_dbg = Bry_.Empty;
+	public byte[]				Xtn_search_text() {return xtn_search_txt;} public void Xtn_search_text_(byte[] v) {xtn_search_txt = v;} private byte[] xtn_search_txt = BryUtl.Empty;
+	public byte[]				Xtn_scribunto_dbg() {return xtn_scribunto_dbg;} public void Xtn_scribunto_dbg_(byte[] v) {xtn_scribunto_dbg = BryUtl.Add(xtn_scribunto_dbg, v);} private byte[] xtn_scribunto_dbg = BryUtl.Empty;
 	public Pgbnr_itm			Xtn_pgbnr() {return xtn_pgbnr;} public void Xtn_pgbnr_(Pgbnr_itm v) {xtn_pgbnr = v;} private Pgbnr_itm xtn_pgbnr;
 	public Xoh_head_mgr			Head_mgr() {return module_mgr;} private Xoh_head_mgr module_mgr = new Xoh_head_mgr();
 	public boolean					Skip_parse() {return skip_parse;} public void Skip_parse_(boolean v) {skip_parse = v;} private boolean skip_parse;
@@ -92,8 +91,8 @@ public class Xopg_html_data {
 		xtn_gallery_packed_exists = false;
 		xtn_imap_next_id = 0; xtn_gallery_next_id = -1;
 		xtn_imap_exists = false;
-		xtn_search_txt = Bry_.Empty;
-		xtn_scribunto_dbg = Bry_.Empty;
+		xtn_search_txt = BryUtl.Empty;
+		xtn_scribunto_dbg = BryUtl.Empty;
 		xtn_pgbnr = null;
 		module_mgr.Clear();
 		custom_html = custom_tab_name = null;

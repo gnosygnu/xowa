@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*; import gplx.core.*;
+package gplx.core.tests;
+import gplx.types.basics.utls.ClassUtl;
 public interface Tst_chkr {
 	Class<?> TypeOf();
 	int Chk(Tst_mgr mgr, String path, Object actl);
@@ -21,8 +22,8 @@ public interface Tst_chkr {
 class Tst_chkr_null implements Tst_chkr {
 	public Class<?> TypeOf() {return Object.class;}
 	public int Chk(Tst_mgr mgr, String path, Object actl) {
-		mgr.Results().Add(Tst_itm.fail_("!=", path, "<cast type>", "<NULL TYPE>",  Type_.Name_by_obj(actl)));
-//			mgr.Results().Add(Tst_itm.fail_("!=", path, "<cast value>", "<NULL VAL>", Object_.Xto_str_strict_or_null(actl)));
+		mgr.Results().Add(Tst_itm.fail_("!=", path, "<cast type>", "<NULL TYPE>",  ClassUtl.NameByObj(actl)));
+//			mgr.Results().Add(Tst_itm.fail_("!=", path, "<cast value>", "<NULL VAL>", ObjectUtl.Xto_str_strict_or_null(actl)));
 		return 1;
 	}
 }

@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.ipts;
-import gplx.objects.primitives.BoolUtl;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.bits.Bitmask_;
 import gplx.core.envs.Op_sys;
 import gplx.core.primitives.EnmMgr;
-import gplx.core.primitives.Int_obj_ref;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.core.stores.DataRdr;
+import gplx.types.errs.ErrUtl;
 import java.awt.event.KeyEvent;
 public class IptKey_ {
 	public static final int KeyCode_Shift = 65536, KeyCode_Ctrl = 131072, KeyCode_Alt = 262144, KeyCode_Meta = 524288;
@@ -34,7 +34,7 @@ public class IptKey_ {
 	public static IptKey[] Ary(IptKey... ary) {return ary;}
 	public static final IptKey[] Ary_empty = new IptKey[0];
 	public static IptKey as_(Object obj) {return obj instanceof IptKey ? (IptKey)obj : null;}
-	public static IptKey cast(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptKey.class, obj);}}
+	public static IptKey cast(Object obj) {try {return (IptKey)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, IptKey.class, obj);}}
 	public static IptKey add_(IptKey... ary) {
 		if (ary.length == 0) return IptKey_.None;
 		int newVal = ary[0].Val();
@@ -44,12 +44,12 @@ public class IptKey_ {
 	}
 	public static IptKey api_(int val) {
 		IptKey rv = (IptKey)enm_mgr.Get(val);
-		return (rv == null) ? new_(val, "key_" + Int_.To_str(val)) : rv;
+		return (rv == null) ? new_(val, "key_" + IntUtl.ToStr(val)) : rv;
 	}
 	public static IptKey parse(String raw) {return get_or_new_(enm_mgr.GetVal(raw));}
 	public static IptKey rdr_or_(DataRdr rdr, String key, IptKey or) {
 		String val = rdr.ReadStrOr(key, ""); // NOTE: "" cannot be null, b/c nullRdr returns String.empty
-		return (String_.Eq(val, "")) ? or : parse(val);
+		return (StringUtl.Eq(val, "")) ? or : parse(val);
 	}
 	public static List_adp printableKeys2_(IptKey[] add, IptKey[] del) {
 		List_adp list = List_adp_.New();
@@ -84,7 +84,7 @@ public class IptKey_ {
 		return (rv == null) ? new_(val, enm_mgr.GetStr(val)) : rv;
 	}
 	static IptKey new_(int val, String name) {
-		IptKey rv = new IptKey(val, String_.Has_at_bgn(name, "key.") ? name : "key." + name);
+		IptKey rv = new IptKey(val, StringUtl.HasAtBgn(name, "key.") ? name : "key." + name);
 		enm_mgr.RegObj(val, name, rv);
 		return rv;
 	}
@@ -235,7 +235,7 @@ public class IptKey_ {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			IptKey key = ary[i];
-			hash.AddIfDupeUseNth(Int_obj_ref.New(key.Val()), key);
+			hash.AddIfDupeUseNth(IntRef.New(key.Val()), key);
 		}
 	}
 	public static String To_str(int orig_val) {
@@ -245,14 +245,14 @@ public class IptKey_ {
 		boolean mod_a = Bitmask_.Has_int(temp_val, IptKey_.Alt.Val());	 if (mod_a) {mod_str += "a"; temp_val = Bitmask_.Flip_int(BoolUtl.N, temp_val, IptKey_.Alt.Val());}
 		boolean mod_s = Bitmask_.Has_int(temp_val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; temp_val = Bitmask_.Flip_int(BoolUtl.N, temp_val, IptKey_.Shift.Val());}
 		boolean mod_m = Bitmask_.Has_int(temp_val, IptKey_.Meta.Val());	 if (mod_m) {mod_str += "m"; temp_val = Bitmask_.Flip_int(BoolUtl.N, temp_val, IptKey_.Meta.Val());}
-		if (String_.Len_gt_0(mod_str)) {
+		if (StringUtl.IsNotNullOrEmpty(mod_str)) {
 			rv = "mod." + mod_str;
 			// handle modifiers only, like "mod.cs"; else will be "mod.cs+key.#0"
             if (temp_val == 0) return rv;
 			rv += "+";
 		}
-		IptKey key = (IptKey)IptKey_.Ui_str_hash().GetByOrNull(Int_obj_ref.New(temp_val));
-		String key_str = key == null ? "key.#" + Int_.To_str(temp_val) : key.Key();
+		IptKey key = (IptKey)IptKey_.Ui_str_hash().GetByOrNull(IntRef.New(temp_val));
+		String key_str = key == null ? "key.#" + IntUtl.ToStr(temp_val) : key.Key();
 		// Tfds.Write(rv + key_str, orig_val, temp_val, mod_c, mod_a, mod_s);
 		return rv + key_str;
 	}

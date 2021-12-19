@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
 public class Db_mock_row {
 	public int Idx() {return idx;} public Db_mock_row Idx_(int val) {idx = val; return this;} int idx = -1;
 	public Db_mock_cell[] Dat() {return dat;} Db_mock_cell[] dat = null;

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.errs.ErrUtl;
 /*
 XOWA: the XOWA Offline Wiki Application
 Copyright (C) 2012-2017 gnosygnu@gmail.com
@@ -29,8 +30,6 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-import gplx.*;
-
 public class Dbx_strtotime {
 
 // inside parse.re
@@ -62,7 +61,7 @@ public class Dbx_strtotime {
 //			Dbx_scan_support.add_warning(in, Dbx_scan_support.TIMELIB_WARN_INVALID_DATE, "The parsed date was invalid");
 //		}
 		if (in.errors.error_count + in.errors.warning_count > 0) {
-			throw Err_.new_unhandled(0);
+			throw ErrUtl.NewUnhandled(0);
 		}
 		return in.time;
 	}

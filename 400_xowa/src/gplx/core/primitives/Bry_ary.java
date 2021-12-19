@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives;
+import gplx.types.basics.utls.BryUtl;
 public class Bry_ary {
 	private byte[][] ary; private int len, max;
 	public Bry_ary(int max) {
@@ -45,7 +46,7 @@ public class Bry_ary {
 	public void Set_at_last(byte[] v)   {ary[len - 1] = v;}
 	public void Set_at(int i, byte[] v) {ary[i] = v;}
 	public byte[][] To_ary(int rel) {
-		if (len == 0) return Bry_.Ary_empty;
+		if (len == 0) return BryUtl.AryEmpty;
 		int rv_len = len + rel;
 		byte[][] rv = new byte[rv_len][];
 		for (int i = 0;  i < rv_len; ++i)

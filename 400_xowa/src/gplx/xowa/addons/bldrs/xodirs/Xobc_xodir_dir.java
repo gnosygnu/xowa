@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.xodirs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.xodirs;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.mustaches.*;
 class Xobc_xodir_doc implements Mustache_doc_itm {
 	private final byte[] import_root, app_root_dir;
@@ -22,12 +23,12 @@ class Xobc_xodir_doc implements Mustache_doc_itm {
 		this.dirs = dirs; this.import_root = import_root; this.app_root_dir = app_root_dir;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "import_root"))	bfr.Add_bry(import_root);
-		else if	(String_.Eq(key, "app_root_dir"))	bfr.Add_bry(app_root_dir);
+		if		(StringUtl.Eq(key, "import_root"))	bfr.Add_bry(import_root);
+		else if	(StringUtl.Eq(key, "app_root_dir"))	bfr.Add_bry(app_root_dir);
 		return false;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "dirs"))			return dirs;
+		if		(StringUtl.Eq(key, "dirs"))			return dirs;
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }
@@ -38,12 +39,12 @@ public class Xobc_xodir_dir implements Mustache_doc_itm {
 		this.is_selected = is_selected; this.is_custom = is_custom; this.path = path;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "path"))			bfr.Add_bry(path);
+		if		(StringUtl.Eq(key, "path"))			bfr.Add_bry(path);
 		return false;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "is_selected"))	return Mustache_doc_itm_.Ary__bool(is_selected);
-		else if	(String_.Eq(key, "is_custom"))		return Mustache_doc_itm_.Ary__bool(is_custom);
+		if		(StringUtl.Eq(key, "is_selected"))	return Mustache_doc_itm_.Ary__bool(is_selected);
+		else if	(StringUtl.Eq(key, "is_custom"))		return Mustache_doc_itm_.Ary__bool(is_custom);
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }

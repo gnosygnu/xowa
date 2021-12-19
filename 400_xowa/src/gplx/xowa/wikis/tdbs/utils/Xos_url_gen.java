@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.utils;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.ios.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 public class Xos_url_gen implements Io_url_gen {
 	public Xos_url_gen(Io_url root) {this.root = root;} Io_url root; int idx = 0;
-	public byte[] Ext() {return ext;} public Xos_url_gen Ext_(byte[] v) {ext = v; return this;} private byte[] ext = Bry_.new_a7(".csv");
+	public byte[] Ext() {return ext;} public Xos_url_gen Ext_(byte[] v) {ext = v; return this;} private byte[] ext = BryUtl.NewA7(".csv");
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;
 	public Io_url Nxt_url() {cur_url = bld_fil_(root, idx++, ext); return cur_url;}
 	public Io_url[] Prv_urls() {
@@ -34,13 +38,13 @@ public class Xos_url_gen implements Io_url_gen {
 		int cur_mod = 100000000, cur_idx = idx;
 		while (cur_mod > 99) {
 			int val = cur_idx / cur_mod;
-			tmp_bfr.Add_int_fixed(val, 2).Add_byte(dir_spr);
+			tmp_bfr.AddIntFixed(val, 2).AddByte(dir_spr);
 			cur_idx -= (val * cur_mod);
 			cur_mod /= 100;
 		}
-		tmp_bfr.Add_int_fixed(idx, 10);
+		tmp_bfr.AddIntFixed(idx, 10);
 		tmp_bfr.Add(ext);
-		return Io_url_.new_fil_(tmp_bfr.To_str_and_clear());
+		return Io_url_.new_fil_(tmp_bfr.ToStrAndClear());
 	}
-	private static Bry_bfr tmp_bfr = Bry_bfr_.Reset(256);
+	private static BryWtr tmp_bfr = BryWtr.NewAndReset(256);
 }

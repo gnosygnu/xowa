@@ -5,7 +5,7 @@ import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_rdr_;
 import gplx.gfdbs.cores.GfdbCloseAble;
 import gplx.gfdbs.cores.GfdbItmFactory;
-import gplx.objects.lists.GfoListBase;
+import gplx.types.commons.lists.GfoListBase;
 
 public class GfdbSelectCmd<I> implements GfdbCloseAble, GfdbSelectList<I> {
 	private final Db_conn conn;

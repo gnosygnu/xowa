@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.meta;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.dbs.Db_conn;
 import gplx.dbs.cfgs.Db_cfg_hash;
 import gplx.dbs.cfgs.Db_cfg_tbl;
 import gplx.fsdb.Fsdb_db_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.Xof_patch_upright_tid_;
 import gplx.xowa.files.fsdb.Xof_fsdb_mgr_cfg;
 public class Fsm_mnt_mgr implements Gfo_invk {

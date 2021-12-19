@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.directorys.specials.lists;
-import gplx.Bry_;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_;
 import gplx.dbs.Db_conn_bldr;
 import gplx.langs.jsons.Json_nde;
 import gplx.langs.jsons.Json_wtr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_db_mgr;
@@ -71,9 +71,9 @@ class Xowdir_list_svc {
 		db_mgr.Tbl__wiki().Upsert(id, domain, core_db_url, new Xowdir_wiki_json(wiki_props.Name(), wiki_props.Main_page()).To_str(new Json_wtr()));
 
 		// add it to personal wikis
-		gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_factory.Load_personal((Xoae_app)app, Bry_.new_u8(domain), core_db_url.OwnerDir());
+		gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_factory.Load_personal((Xoae_app)app, BryUtl.NewU8(domain), core_db_url.OwnerDir());
 
 		// navigate to it
-		app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/wiki/" + String_.new_u8(cbk_trg.Page_ttl()));
+		app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/wiki/" + StringUtl.NewU8(cbk_trg.Page_ttl()));
 	}
 }

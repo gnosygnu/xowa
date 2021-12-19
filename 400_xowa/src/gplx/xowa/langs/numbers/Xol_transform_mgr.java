@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.numbers; import gplx.*;
+package gplx.xowa.langs.numbers;
 import gplx.core.btries.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
 public class Xol_transform_mgr implements Gfo_invk {
 	private Btrie_fast_mgr trie_k_to_v = Btrie_fast_mgr.cs();
 	private Btrie_fast_mgr trie_v_to_k = Btrie_fast_mgr.cs();
@@ -22,21 +31,21 @@ public class Xol_transform_mgr implements Gfo_invk {
 	private boolean empty = true;
 	public void Clear() {hash.Clear(); trie_k_to_v.Clear(); trie_v_to_k.Clear(); empty = true;}
 	public int Len() {return hash.Len();}
-	public Keyval Get_at(int i) {return (Keyval)hash.Get_at(i);}
+	public KeyVal Get_at(int i) {return (KeyVal)hash.GetAt(i);}
 	public byte[] Get_val_or_self(byte[] k) {	// NOTE: return self; note that MW defaults "." and "," to self, even though MessagesLa.php only specifies ","; i.e.: always return something for "."; DATE:2014-05-13
-		Keyval kv = (Keyval)hash.GetByOrNull(k);
+		KeyVal kv = (KeyVal)hash.GetByOrNull(k);
 		return kv == null ? k : (byte[])kv.Val();
 	}
 	public Xol_transform_mgr Set(byte[] k, byte[] v) {
 		trie_k_to_v.Add(k, v);
 		trie_v_to_k.Add(v, k);
-		Keyval kv = Keyval_.new_(String_.new_u8(k), v);
+		KeyVal kv = KeyVal.NewStr(StringUtl.NewU8(k), v);
 		hash.Del(k);
 		hash.Add(k, kv);
 		empty = false;
 		return this;
 	}
-	public byte[] Replace(Bry_bfr tmp_bfr, byte[] src, boolean k_to_v) {
+	public byte[] Replace(BryWtr tmp_bfr, byte[] src, boolean k_to_v) {
 		if (empty || src == null) return src;
 		int src_len = src.length; if (src_len == 0) return src;
 		Btrie_fast_mgr trie = k_to_v ? trie_k_to_v : trie_v_to_k;

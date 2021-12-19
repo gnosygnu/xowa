@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.msgs; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.langs.msgs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_msg_mgr implements Gfo_invk {
@@ -41,8 +48,8 @@ public class Xol_msg_mgr implements Gfo_invk {
 	}
 	public Xol_msg_itm Itm_by_key_or_new(String key, String val) {return Itm_by_key_or_new(key, val, false);}	// TEST:
 	public Xol_msg_itm Itm_by_key_or_new(String key, String val, boolean has_fmt_arg) {	// TEST:
-		Xol_msg_itm rv = Itm_by_key_or_new(Bry_.new_u8(key));
-		Xol_msg_itm_.update_val_(rv, Bry_.new_u8(val));
+		Xol_msg_itm rv = Itm_by_key_or_new(BryUtl.NewU8(key));
+		Xol_msg_itm_.update_val_(rv, BryUtl.NewU8(val));
 		return rv;
 	}
 	public Xol_msg_itm Itm_by_key_or_new(byte[] key) {
@@ -68,7 +75,7 @@ public class Xol_msg_mgr implements Gfo_invk {
 		if (itm.Has_tmpl_txt()) rv = wiki.Parser_mgr().Main().Expand_tmpl(rv);
 		return rv;
 	}
-	public byte[] Val_by_str_or_empty(String str) {return Val_by_bry_or(Bry_.new_u8(str), Bry_.Empty);}
+	public byte[] Val_by_str_or_empty(String str) {return Val_by_bry_or(BryUtl.NewU8(str), BryUtl.Empty);}
 	public byte[] Val_by_bry_or(byte[] bry, byte[] or) {
 		Xol_msg_itm itm = Itm_by_key_or_null(bry);
 		return itm == null ? or : itm.Val();

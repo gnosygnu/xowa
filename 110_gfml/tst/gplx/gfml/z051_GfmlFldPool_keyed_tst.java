@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import org.junit.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
+import org.junit.Before;
+import org.junit.Test;
 public class z051_GfmlFldPool_keyed_tst {
 	@Before public void setup() {
 		GfmlTypeMakr makr = GfmlTypeMakr.new_();
@@ -46,9 +48,9 @@ public class z051_GfmlFldPool_keyed_tst {
 		tst_Keyed_PopNext(fldPool, "z");
 		try {
 			tst_Keyed_PopNext(fldPool, GfmlItmKeys.NullKey);
-			Tfds.Fail("should have failed");
+			GfoTstr.Fail("should have failed");
 		}
-		catch (Exception exc) {Err_.Noop(exc);}
+		catch (Exception exc) {}
 	}
 	@Test public void PopByKey_PopNext() {
 		tst_Keyed_PopByKey(fldPool, "y", "y", "x", "z");
@@ -56,20 +58,20 @@ public class z051_GfmlFldPool_keyed_tst {
 	}
 	void tst_Keyed_PopByKey(GfmlFldPool fldPool, String key, String expdFldId, String... expdSubs) {
 		GfmlFld actlFld = fldPool.Keyed_PopByKey(key);
-		Tfds.Eq(expdFldId, actlFld.Name());
+		GfoTstr.EqObj(expdFldId, actlFld.Name());
 		String[] actlSubs = new String[fldPool.Keyd_Count()];
 		for (int i = 0; i < actlSubs.length; i++) {
 			actlSubs[i] = fldPool.Keyd_FetchAt(i).Name();
 		}
-		Tfds.Eq_ary(expdSubs, actlSubs);
+		GfoTstr.EqLines(expdSubs, actlSubs);
 	}
 	void tst_Keyed_PopNext(GfmlFldPool fldPool, String expdFldId, String... expdSubs) {
 		GfmlFld actlFld = fldPool.Keyed_PopNext();
-		Tfds.Eq(expdFldId, actlFld.Name());
+		GfoTstr.EqObj(expdFldId, actlFld.Name());
 		String[] actlSubs = new String[fldPool.Keyd_Count()];
 		for (int i = 0; i < actlSubs.length; i++) {
 			actlSubs[i] = fldPool.Keyd_FetchAt(i).Name();
 		}
-		Tfds.Eq_ary(expdSubs, actlSubs);
+		GfoTstr.EqLines(expdSubs, actlSubs);
 	}
 }

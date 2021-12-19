@@ -14,8 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.objects.strings.unicodes;
-import gplx.objects.errs.ErrUtl;
-import gplx.tests.GfoTstr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.strings.unicodes.Ustring;
+import gplx.types.basics.strings.unicodes.UstringUtl;
 import org.junit.Test;
 public class UstringUtlTest {
 	private final UstringTstr fxt = new UstringTstr();
@@ -58,8 +59,8 @@ class UstringTstr {
 		this.under = UstringUtl.NewCodepoints(src);
 	}
 	public void TestLen(int expdCodes, int expdChars) {
-		GfoTstr.EqInt(expdCodes, under.LenInData(), "codes");
-		GfoTstr.EqInt(expdChars, under.LenInChars(), "chars");
+		GfoTstr.Eq(expdCodes, under.LenInData(), "codes");
+		GfoTstr.Eq(expdChars, under.LenInChars(), "chars");
 	}
 	public void TestGetCode(int... expd) {
 		int actlLen = under.LenInData();
@@ -85,7 +86,6 @@ class UstringTstr {
 			}
 			catch (Exception exc) {
 				val = -1;
-				ErrUtl.Noop(exc);
 			}
 			actl[i] = val;
 		}
@@ -95,11 +95,11 @@ class UstringTstr {
 		Ustring src = UstringUtl.NewCodepoints(srcStr);
 		Ustring find = UstringUtl.NewCodepoints(findStr);
 		int actl = src.IndexOf(find, bgn);
-		GfoTstr.EqInt(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void TestSubstring(String srcStr, int bgn, int end, String expd) {
 		Ustring src = UstringUtl.NewCodepoints(srcStr);
 		String actl = src.Substring(bgn, end);
-		GfoTstr.EqStr(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 }

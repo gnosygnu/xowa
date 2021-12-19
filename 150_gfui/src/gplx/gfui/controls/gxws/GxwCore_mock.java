@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws; import gplx.gfui.*;
 import gplx.gfui.draws.*; import gplx.gfui.ipts.*;
 import gplx.gfui.layouts.swts.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class GxwCore_mock extends GxwCore_base {
 	@Override public int Width() {return size.Width();} @Override public void Width_set(int v) {size = SizeAdp_.new_(v, size.Height());}
 	@Override public int Height() {return size.Height();} @Override public void Height_set(int v) {size = SizeAdp_.new_(size.Width(), v);}

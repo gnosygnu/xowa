@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views.url_box_fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.guis.views.url_box_fmts;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
 import gplx.xowa.apps.urls.*;
 public class Xog_urlfmtr_mgr_tst {
 	private Xog_urlfmtr_mgr_fxt fxt = new Xog_urlfmtr_mgr_fxt();
@@ -53,10 +57,10 @@ class Xog_urlfmtr_mgr_fxt {
 		wiki.App().User().Wikii().Xwiki_mgr().Add_by_atrs("fr.wikibooks.org", "fr.wikibooks.org");
 	}
 	public void Init__init_by_parse(String... lines) {
-		mgr.Parse(Bry_.new_u8(String_.Concat_lines_nl_skip_last(lines)));
+		mgr.Parse(BryUtl.NewU8(StringUtl.ConcatLinesNlSkipLast(lines)));
 	}
 	public void Test__gen_or_null(String url_str, String expd) {
-		Xoa_url url = url_parser.Parse(Bry_.new_u8(url_str));
-		Gftest.Eq__str(expd, mgr.Gen(url));
+		Xoa_url url = url_parser.Parse(BryUtl.NewU8(url_str));
+		GfoTstr.Eq(expd, mgr.Gen(url));
 	}
 }

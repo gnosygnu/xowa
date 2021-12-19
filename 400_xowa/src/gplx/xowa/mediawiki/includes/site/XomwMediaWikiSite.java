@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.site;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.*;
 /**
 * Class representing a MediaWiki site.

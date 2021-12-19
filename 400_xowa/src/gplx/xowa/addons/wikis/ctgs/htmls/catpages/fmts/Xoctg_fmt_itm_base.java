@@ -13,13 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.core.intls.ucas.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts;
+import gplx.types.basics.encoders.HexUtl;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.xowa.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.core.intls.ucas.*;
 import gplx.xowa.users.history.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
-public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
+public abstract class Xoctg_fmt_itm_base implements BryBfrArg {
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private Xow_wiki wiki;
 	private Xoctg_catpage_grp grp;
 	private Uca_ltr_extractor ltr_extractor;
@@ -36,7 +43,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 		this.ltr_extractor = ltr_extractor;
 	}
 	public void Set_ltr_and_bgn(byte[] ltr_cur, int loop_bgn) {this.ltr_cur = ltr_cur; this.loop_bgn = loop_bgn;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		// init vars
 		Xoh_href_parser href_parser = wiki.App().Html__href_parser();
 		Xou_history_mgr history_mgr = wiki.App().User().History_mgr(); 
@@ -57,7 +64,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 
 			// reached end of ltr; exit
 			byte[] ltr_1st = ltr_extractor.Get_1st_ltr(itm_sortkey);
-			if (!Bry_.Has_at_bgn(ltr_1st, ltr_cur, 0, ltr_1st.length)) {
+			if (!BryUtl.HasAtBgn(ltr_1st, ltr_cur, 0, ltr_1st.length)) {
 				loop_end_idx = i;
 				loop_ends_at_col = i == col_end;
 				return;
@@ -72,18 +79,18 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 		loop_end_idx = grp_end;
 		loop_ends_at_col = true;
 	}
-	public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
+	public void Bld_html(BryWtr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
 		byte[] itm_full_ttl = Gfh_utl.Escape_html_as_bry(tmp_bfr, ttl.Full_txt());// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
 		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		byte[] itm_atr_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
-		Fmt__exists.Bld_many(bfr, itm_href, itm_atr_cls, itm_full_ttl, itm_full_ttl, gplx.core.encoders.Hex_utl_.Encode_bry(itm.Sortkey_binary()));
+		Fmt__exists.Bld_many(bfr, itm_href, itm_atr_cls, itm_full_ttl, itm_full_ttl, HexUtl.EncodeBry(itm.Sortkey_binary()));
 	}
-	private static final Bry_fmt
-	  Fmt__missing = Bry_fmt.Auto_nl_skip_last
+	private static final BryFmt
+	  Fmt__missing = BryFmt.Auto_nl_skip_last
 	( ""
 	, "            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #~{itm_id} might be talk/user page\">missing page (~{itm_id})</li>"
 	)
-	, Fmt__exists = Bry_fmt.Auto_nl_skip_last
+	, Fmt__exists = BryFmt.Auto_nl_skip_last
 	( ""
 	, "            <li><a href=\"~{itm_href}\"~{itm_atr_cls} title=\"~{itm_title}\">~{itm_text}</a></li>"	// <!--~{itm_sortkey}-->
 	)

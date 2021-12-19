@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs;
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {		
 	private String lang, name;
 	public Xoedit_grp(int id, String key, int sort) {
@@ -35,7 +39,7 @@ public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {
 		this.name = name;
 		this.help = help;
 	}
-	public Gfobj_nde To_nde(Bry_bfr tmp_bfr) {
+	public Gfobj_nde To_nde(BryWtr tmp_bfr) {
 		Gfobj_nde rv = Gfobj_nde.New();
 		rv.Add_int("id", id);
 		rv.Add_str("key", key);
@@ -53,15 +57,15 @@ public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {
 		return rv;
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
-		if		(String_.Eq(k, "id"))		bfr.Add_int(id);
-		else if	(String_.Eq(k, "key"))		bfr.Add_str_u8(key);
-		else if	(String_.Eq(k, "lang"))		bfr.Add_str_u8(name);
-		else if	(String_.Eq(k, "name"))		bfr.Add_str_u8(name);
-		else if	(String_.Eq(k, "help"))		bfr.Add_str_u8(help);
+		if		(StringUtl.Eq(k, "id"))		bfr.Add_int(id);
+		else if	(StringUtl.Eq(k, "key"))		bfr.Add_str_u8(key);
+		else if	(StringUtl.Eq(k, "lang"))		bfr.Add_str_u8(name);
+		else if	(StringUtl.Eq(k, "name"))		bfr.Add_str_u8(name);
+		else if	(StringUtl.Eq(k, "help"))		bfr.Add_str_u8(help);
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "itms"))		return itms;
+		if		(StringUtl.Eq(key, "itms"))		return itms;
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }

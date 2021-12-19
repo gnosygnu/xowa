@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wkrs;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.xowa.bldrs.*;
 import gplx.core.flds.*; import gplx.core.ios.*;
 public abstract class Xob_idx_base extends Xob_itm_basic_base implements Xob_cmd, Gfo_invk {
 	public abstract String Cmd_key();

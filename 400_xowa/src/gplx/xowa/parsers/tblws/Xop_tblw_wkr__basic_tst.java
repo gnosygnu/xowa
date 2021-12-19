@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tblws;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_tblw_wkr__basic_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -75,12 +77,12 @@ public class Xop_tblw_wkr__basic_tst {
 			)));
 	}
 	@Test public void Tb_td2() {	// PAGE:en.w:Hectare; {| class="wikitable" || style="border: 1px solid #FFFFFF;"
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|id='1' || class='a'"
 			,	"|-"
 			,	"|a"
 			,	"|}")
-			, String_.Concat_lines_nl_skip_last
+			, StringUtl.ConcatLinesNlSkipLast
 			(	"<table id='1' class='a'>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -98,13 +100,13 @@ public class Xop_tblw_wkr__basic_tst {
 			);
 	}
 	@Test public void Tr_dupe_xnde() {	// PURPOSE: redundant tr should not be dropped; see [[Jupiter]]
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|-"
 			,	"<tr><td>a</td></tr>"
 			,	"|-"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -116,11 +118,11 @@ public class Xop_tblw_wkr__basic_tst {
 			);
 	}
 	@Test public void Tr_dupe_xnde_2() {	// <td></th> causes problems
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"<tr><th>a</td></tr>"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th>a"
@@ -132,17 +134,17 @@ public class Xop_tblw_wkr__basic_tst {
 			);
 	}
 	@Test public void Bang_should_not_make_cell_td_1_bang() {	// PURPOSE: "| a! b" ! should not separate cell
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last("{|", "|-", "|a!b", "|}"),	String_.Concat_lines_nl_skip_last("<table>", "  <tr>", "    <td>a!b"	, "    </td>", "  </tr>", "</table>", ""));
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast("{|", "|-", "|a!b", "|}"),	StringUtl.ConcatLinesNlSkipLast("<table>", "  <tr>", "    <td>a!b"	, "    </td>", "  </tr>", "</table>", ""));
 	}
 	@Test public void Bang_should_not_make_cell_td_2_bang() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last("{|", "|-", "|a!!b", "|}"),	String_.Concat_lines_nl_skip_last("<table>", "  <tr>", "    <td>a!!b"	, "    </td>", "  </tr>", "</table>", ""));
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast("{|", "|-", "|a!!b", "|}"),	StringUtl.ConcatLinesNlSkipLast("<table>", "  <tr>", "    <td>a!!b"	, "    </td>", "  </tr>", "</table>", ""));
 	}
 	@Test public void Bang_should_not_make_cell_th_1_bang() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last("{|", "|-", "!a!b", "|}"),	String_.Concat_lines_nl_skip_last("<table>", "  <tr>", "    <th>a!b"	, "    </th>", "  </tr>", "</table>", ""));
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast("{|", "|-", "!a!b", "|}"),	StringUtl.ConcatLinesNlSkipLast("<table>", "  <tr>", "    <th>a!b"	, "    </th>", "  </tr>", "</table>", ""));
 	}
 	@Test public void Bang_should_not_make_cell_th_2_bang() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last("{|", "|-", "!a!!b", "|}")	
-			, String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast("{|", "|-", "!a!!b", "|}")
+			, StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th>a"
@@ -155,8 +157,8 @@ public class Xop_tblw_wkr__basic_tst {
 			));
 	}
 	@Test public void Bang_should_not_make_cell_th_mult_line() {	// FIX: make sure code does not disable subsequent bangs
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last("{|", "|-", "!a", "!b", "|}")	
-			, String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast("{|", "|-", "!a", "!b", "|}")
+			, StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th>a"
@@ -170,7 +172,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Fix_extra_cell() {	// PURPOSE: trim should not affect td; WP:Base32
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"!id='1'|a"
 			,	"|"
@@ -178,7 +180,7 @@ public class Xop_tblw_wkr__basic_tst {
 			,	"|-"
 			,	"|a1|| ||b1"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th id='1'>a"
@@ -204,7 +206,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Nl_td() {	// PURPOSE: <p> inside <td> does not get enclosed
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"<tr>"
 			,	"<td>"
@@ -216,7 +218,7 @@ public class Xop_tblw_wkr__basic_tst {
 			,	"</td>"
 			,	"</tr>"
 			,	"</table>"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -237,7 +239,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Trim_ws() {	// PURPOSE: trim should be done from both sides
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"<tr>"
 			,	"<td>"
@@ -249,7 +251,7 @@ public class Xop_tblw_wkr__basic_tst {
 			,	""
 			,	""
 			,	"</table>"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -264,7 +266,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Trim_ws_tr() {	// PURPOSE: trim should be done from both sides
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"<tr>"
 			,	"<td>"
@@ -279,7 +281,7 @@ public class Xop_tblw_wkr__basic_tst {
 			,	"</td>"
 			,	"</tr>"
 			,	"</table>"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -297,7 +299,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Trim_ws_td() {	// PURPOSE: trim should not affect td
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"<tr>"
 			,	"<td>"
@@ -309,7 +311,7 @@ public class Xop_tblw_wkr__basic_tst {
 			,	"</td>"
 			,	"</tr>"
 			,	"</table>"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -329,11 +331,11 @@ public class Xop_tblw_wkr__basic_tst {
 		fxt.Init_para_n_();
 	}
 	@Test public void No_wiki_3() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|style=<nowiki>'a[b]c'</nowiki>|d"
 			,	"|}"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td style='a[b]c'>d"
@@ -345,7 +347,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Trailing_tr_breaks_para_mode() {// PURPOSE.fix: empty trailing tr breaks para mode; EX:w:Sibelius
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|a"
 			,	"|-"	// causes lines below not to be put in paras
@@ -353,7 +355,7 @@ public class Xop_tblw_wkr__basic_tst {
 			,	"b"
 			,	""
 			,	"c"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -372,12 +374,12 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Blank_line_should_be_own_para() {// PURPOSE.fix: caption does not begin on own line; EX:w:Old St. Peter's Basilica
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|a"
 			,	"b"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -393,13 +395,13 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Blank_line_should_be_own_para_2() {// PURPOSE.fix: caption does not begin on own line; EX:w:Old St. Peter's Basilica
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|a"
 			,	"b"
 			,	"|-"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -414,7 +416,7 @@ public class Xop_tblw_wkr__basic_tst {
 		fxt.Init_para_n_();
 	}
 	@Test public void Bold_stops_at_table() {	// PURPOSE: do not allow unclosed bold to extend over tables;
-		fxt.Test_parse_page_all_str("'''<table><tr><td>a</td></tr></table>", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str("'''<table><tr><td>a</td></tr></table>", StringUtl.ConcatLinesNlSkipLast
 			(	"<b></b>"
 			,	"<table>"
 			,	"  <tr>"
@@ -427,7 +429,7 @@ public class Xop_tblw_wkr__basic_tst {
 		fxt.Init_defn_clear();
 	}
 	@Test public void Orphaned_tr_breaks_nested_tables() {	// PUPRPOSE: </tr> should not match <tr> outside scope; EX:w:Enthalpy_of_fusion; {{States of matter}}
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"<table>"
 		,	  "<tr>"
 		,	    "<td>"
@@ -440,7 +442,7 @@ public class Xop_tblw_wkr__basic_tst {
 		,	  "</tr>"
 		,	"</table>"
 		),
-		String_.Concat_lines_nl_skip_last
+		StringUtl.ConcatLinesNlSkipLast
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>"
@@ -457,12 +459,12 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Space_causes_extra_p() {// PURPOSE: "\n\s</td>" should be equivalent to "\n</td>"; EX: w:Earth
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table><tr><td>"
 			,	"b"
 			,	"<br/>c"
 			,	" </td></tr></table>"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -479,7 +481,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Br_should_not_be_ignored() {// PURPOSE: document <br />'s should not be ignored between tables; 20121226
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|-"
 			,	"|a"
@@ -489,7 +491,7 @@ public class Xop_tblw_wkr__basic_tst {
 			,	"|-"
 			,	"|b"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -510,12 +512,12 @@ public class Xop_tblw_wkr__basic_tst {
 		fxt.Init_para_n_();
 	}
 	@Test public void AutoClose_td_when_new_tr() {	// retain; needed for de.w:Main_Page; DATE:2013-12-09
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "{|"
 		, "==a=="
 		, "|}"
 		)
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<table>"
 		, ""
 		, "<h2>a</h2>"		// NOTE: malformed html matches MW
@@ -528,10 +530,10 @@ public class Xop_tblw_wkr__basic_tst {
 		));
 	}
 	@Test public void Auto_create_table() {// PURPOSE: <td> should create table; EX:w:Hatfield-McCoy_feud; DATE:20121226
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<td>a"
 			,	"</td>"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -542,7 +544,7 @@ public class Xop_tblw_wkr__basic_tst {
 			));
 	}
 	@Test public void List_and_orphaned_td2_should_not_create_tblw() {// PURPOSE: !! was creating table; DATE:2013-04-28
-		fxt.Test_parse_page_all_str("*a !! b", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str("*a !! b", StringUtl.ConcatLinesNlSkipLast
 			(	"<ul>"
 			,	"  <li>a !! b"
 			,	"  </li>"
@@ -550,12 +552,12 @@ public class Xop_tblw_wkr__basic_tst {
 			));
 	}
 	@Test public void Tr_trailing_dashes_should_be_stripped() {// PURPOSE: trailing dashes should be stripped; |--- -> |-; EX: |--style="x" was being ignored; DATE:2013-06-21
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|-----style='a'"
 			,	"|b"
 			,	"|}"
-			), String_.Concat_lines_nl
+			), StringUtl.ConcatLinesNl
 			(	"<table>"
 			,	"  <tr style='a'>"
 			,	"    <td>b"
@@ -565,13 +567,13 @@ public class Xop_tblw_wkr__basic_tst {
 			));
 	}
 	@Test public void Th_without_tr() {	// PURPOSE: !! without preceding ! should not create table-cell; DATE:2013-12-18
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|-"
 			,	"|"
 			,	"a!!b"
 			,	"|}"
-			), String_.Concat_lines_nl
+			), StringUtl.ConcatLinesNl
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -582,12 +584,12 @@ public class Xop_tblw_wkr__basic_tst {
 			));
 	}
 	@Test public void Td_at_eos() {// PURPOSE.fix: !! at eos fails; EX:es.s:Si_mis_manos_pudieran_deshojar; DATE:2014-02-11
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"{|"
 		,	"|-"
 		,	"| <poem>!!</poem>"	// note that "!!" is eos inside the <poem> src
 		,	"|}"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td> <div class=\"poem\">"
@@ -602,7 +604,7 @@ public class Xop_tblw_wkr__basic_tst {
 	}
 	@Test public void Tr_without_tb_should_start_tb() {// PURPOSE: orphaned tr should automatically start table; EX: pl.w:Portal:Technika; DATE:2014-02-13
 		fxt.Test_parse_page_all_str("<tr><td>a"
-		, String_.Concat_lines_nl
+		, StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>a"
@@ -612,14 +614,14 @@ public class Xop_tblw_wkr__basic_tst {
 		));
 	}
 	@Test public void Tblx_should_not_close_tblw() {// PURPOSE: </table> should not close {|; EX:fr.w:Exp%C3%A9dition_Endurance; DATE:2014-02-13
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"{|"
 		,	"|-"
 		,	"|"
 		,	"</table>"
 		,	"|}"
 		)		
-		, String_.Concat_lines_nl
+		, StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>"
@@ -629,7 +631,7 @@ public class Xop_tblw_wkr__basic_tst {
 		));
 	}
 	@Test public void Tblx_should_not_close_tblw_2() {// PURPOSE: </table> should close {|; ignore latter |}; EX:ru.q:Авель; DATE:2014-02-22
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"{|"
 		,	"|-"
 		,	"|a"
@@ -644,7 +646,7 @@ public class Xop_tblw_wkr__basic_tst {
 		,	"</table>"
 		,	"|}"
 		)
-		, String_.Concat_lines_nl
+		, StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>a"
@@ -666,14 +668,14 @@ public class Xop_tblw_wkr__basic_tst {
 		));
 	}
 	@Test public void Td_in_list_in_tblw_should_be_ignored() {// PURPOSE: || should be ignored if in list; EX:es.d:casa; DATE:2014-02-15
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"{|"
 		,	"|-"
 		,	"|"
 		,	"* a || b"
 		,	"|}"
 		)		
-		, String_.Concat_lines_nl
+		, StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>"
@@ -687,7 +689,7 @@ public class Xop_tblw_wkr__basic_tst {
 		));
 	}
 	@Test public void List_in_tblw() {// PURPOSE: list should close previous cell; EX: ru.d:Викисловарь:Условные_сокращения; DATE:2014-02-22
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"{|"
 		,	"|-"
 		,	"|"
@@ -696,7 +698,7 @@ public class Xop_tblw_wkr__basic_tst {
 		,	"|}"
 		,	"|}"
 		)		
-		, String_.Concat_lines_nl
+		, StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>"

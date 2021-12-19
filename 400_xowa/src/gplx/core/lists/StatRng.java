@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.core.lists;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.IntUtl;
 class StatRng_fxt {	// UNUSED:useful for stat processing
 	StatRng rng;
 	public StatRng_fxt ini_(int lo_ary_len, int hi_ary_len, int... slot_hi_ary) {
@@ -26,13 +28,13 @@ class StatRng_fxt {	// UNUSED:useful for stat processing
 			int val = vals[i];
 			rng.Assign(val, val);
 		}
-		Tfds.Eq(expd_count, rng.Count, "Count");
-		Tfds.Eq(expd_lo, rng.Lo, "Lo");
-		Tfds.Eq(expd_hi, rng.Hi, "Hi");
-		Tfds.Eq_float(expd_avg, rng.Avg());
-		Tfds.Eq_ary(expd_lo_ary, XtoIntAry(rng.Lo_ary), "Lo_ary");
-		Tfds.Eq_ary(expd_hi_ary, XtoIntAry(rng.Hi_ary), "Hi_ary");
-		Tfds.Eq_ary(expd_slots, XtoIntAry(rng.Slot_ary), "Slots");
+		GfoTstr.EqObj(expd_count, rng.Count, "Count");
+		GfoTstr.EqObj(expd_lo, rng.Lo, "Lo");
+		GfoTstr.EqObj(expd_hi, rng.Hi, "Hi");
+		GfoTstr.EqFloat(expd_avg, rng.Avg());
+		GfoTstr.EqAry(expd_lo_ary, XtoIntAry(rng.Lo_ary), "Lo_ary");
+		GfoTstr.EqAry(expd_hi_ary, XtoIntAry(rng.Hi_ary), "Hi_ary");
+		GfoTstr.EqAry(expd_slots, XtoIntAry(rng.Slot_ary), "Slots");
 		return this;
 	}
 	int[] XtoIntAry(StatItm[] ary) {
@@ -57,8 +59,8 @@ class StatRng_fxt {	// UNUSED:useful for stat processing
 }
 class StatRng {
 //		public String Key;
-	public int Lo = Int_.Max_value;
-	public int Hi = Int_.Min_value;
+	public int Lo = IntUtl.MaxValue;
+	public int Hi = IntUtl.MinValue;
 	public long Sum = 0;
 	public int Count = 0;
 	public float Avg() {return Sum  / Count;}
@@ -72,21 +74,21 @@ class StatRng {
 	public int Slot_ary_len;
 	public StatRng(int lo_ary_len, int hi_ary_len, int... slot_hi_ary) {
 		this.Lo_ary_len = lo_ary_len;
-		this.Lo_ary_bound = Int_.Max_value;
-		this.Lo_ary = NewBoundAry(lo_ary_len, Int_.Max_value);		
+		this.Lo_ary_bound = IntUtl.MaxValue;
+		this.Lo_ary = NewBoundAry(lo_ary_len, IntUtl.MaxValue);
 		this.Hi_ary_len = hi_ary_len;
-		this.Hi_ary_bound = Int_.Min_value;
-		this.Hi_ary = NewBoundAry(hi_ary_len, Int_.Min_value);
+		this.Hi_ary_bound = IntUtl.MinValue;
+		this.Hi_ary = NewBoundAry(hi_ary_len, IntUtl.MinValue);
 		if (slot_hi_ary != null && slot_hi_ary.length > 0) {
 			Slot_ary_len = slot_hi_ary.length + 1; // + 1 to hold max value
 			Slot_ary = new StatRng[Slot_ary_len];
-			int slot_lo = Int_.Min_value;
+			int slot_lo = IntUtl.MinValue;
 			for (int i = 0; i < Slot_ary_len - 1; i++) {
 				int slot_hi = slot_hi_ary[i];
 				Slot_ary[i] = NewSlot(slot_lo, slot_hi);
 				slot_lo = slot_hi;
 			}
-			Slot_ary[Slot_ary_len - 1] = NewSlot(slot_lo, Int_.Max_value);
+			Slot_ary[Slot_ary_len - 1] = NewSlot(slot_lo, IntUtl.MaxValue);
 		}
 	}
 	public void Assign(Object key, int val) {
@@ -103,21 +105,21 @@ class StatRng {
 			}
 		}
 		if (val < Lo_ary_bound) {
-			Lo_ary_bound = CalcCutoff(Lo_ary, CompareAbleUtl.More, Int_.Min_value, key, val);
+			Lo_ary_bound = CalcCutoff(Lo_ary, CompareAbleUtl.More, IntUtl.MinValue, key, val);
 		} 
 		if (val > Hi_ary_bound) {
-			Hi_ary_bound = CalcCutoff(Hi_ary, CompareAbleUtl.Less, Int_.Max_value, key, val);
+			Hi_ary_bound = CalcCutoff(Hi_ary, CompareAbleUtl.Less, IntUtl.MaxValue, key, val);
 		} 
 	}
 	int CalcCutoff(StatItm[] ary, int comp, int bgn_bound, Object key, int val) {
 		int new_bound = bgn_bound;
 		for (int i = 0; i < ary.length; i++) {
 			StatItm itm = ary[i];
-			if (Int_.Compare(itm.Val, val) == comp) {
+			if (IntUtl.Compare(itm.Val, val) == comp) {
 				itm = new StatItm(key, val);
 				ary[i] = itm;
 			}
-			if (Int_.Compare(itm.Val, new_bound) == comp) new_bound = itm.Val;
+			if (IntUtl.Compare(itm.Val, new_bound) == comp) new_bound = itm.Val;
 		}
 		return new_bound;
 	}

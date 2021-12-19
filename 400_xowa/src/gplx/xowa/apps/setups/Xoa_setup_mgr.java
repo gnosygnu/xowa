@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.setups; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.xowa.apps.setups;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.xowa.*;
 import gplx.xowa.apps.versions.*; import gplx.core.envs.*;
 public class Xoa_setup_mgr {
@@ -51,20 +57,20 @@ public class Xoa_setup_mgr {
 		String Cfg__os_script_list = "xowa.app.setup.os_script_list";
 		String op_sys_name = Xoa_app_.Op_sys_str;
 		String setup_completed = app.Cfg().Get_str_app_or(Cfg__os_script_list, "");
-		String[] plats_ary = String_.Split(setup_completed, ";");
+		String[] plats_ary = StringUtl.Split(setup_completed, ";");
 		int plats_ary_len = plats_ary.length;
 		for (int i = 0; i < plats_ary_len; i++) {
-			if (String_.Eq(plats_ary[i], op_sys_name)) return;
+			if (StringUtl.Eq(plats_ary[i], op_sys_name)) return;
 		}
 
 		// run script_fil
 		Io_url script_fil = app.Fsys_mgr().Root_dir().GenSubFil_nest("bin", op_sys_name, "xowa", "script", "setup_lua.sh");
 		String exe = "sh";
-		String arg = String_.Format("\"{0}\" \"{1}\"", script_fil.Raw(), app.Fsys_mgr().Root_dir());
+		String arg = StringUtl.Format("\"{0}\" \"{1}\"", script_fil.Raw(), app.Fsys_mgr().Root_dir());
 		boolean pass = false; String fail = "";
 		try {pass = new Process_adp().Exe_url_(Io_url_.new_fil_(exe)).Args_str_(arg).Run_wait_sync().Exit_code_pass();}
 		catch (Exception e) {
-			fail = Err_.Message_gplx_full(e);
+			fail = ErrUtl.ToStrFull(e);
 		}
 		if (!pass)
 			app.Usr_dlg().Prog_many("", "", "process exec failed: ~{0} ~{1} ~{2}", exe, arg, fail);

@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.ifs;
-import gplx.Bry_;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.envs.Env_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
@@ -25,7 +25,7 @@ import gplx.xowa.wikis.nss.Xow_ns_;
 public class Pfunc_ifexist_mgr {
 	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {
 		// validate ttl; return false if invalid
-		if (Bry_.Len_eq_0(raw_bry)) return false;	// return early; NOTE: {{autolink}} can pass in "" (see test)
+		if (BryUtl.IsNullOrEmpty(raw_bry)) return false;	// return early; NOTE: {{autolink}} can pass in "" (see test)
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, raw_bry); if (ttl == null) return false;
 
 		// try to get from cache

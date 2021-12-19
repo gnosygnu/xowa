@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.addons.gallerys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.addons.*;
+package gplx.xowa.htmls.core.wkrs.addons.gallerys;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.threads.poolables.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_gallery_data implements Xoh_data_itm {// NOTE: some galleries fail hzip; use Hook_bry to catch them; PAGE:en.d:a; DATE:2016-06-24
 	public int Tid()			{return Xoh_hzip_dict_.Tid__gallery;}
@@ -34,7 +36,7 @@ public class Xoh_gallery_data implements Xoh_data_itm {// NOTE: some galleries f
 		this.src_bgn = src_bgn;
 		this.src_end = src_end;
 	}
-	public static final byte[] Hook_bry = Bry_.new_a7(" class=\"gallery mw-gallery");
+	public static final byte[] Hook_bry = BryUtl.NewA7(" class=\"gallery mw-gallery");
 
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_gallery_data rv = new Xoh_gallery_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}

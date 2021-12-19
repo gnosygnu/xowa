@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.log_msgs; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
+package gplx.core.log_msgs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.*;
 public class Gfo_msg_root_tst {
 	Gfo_msg_root_fxt fxt = new Gfo_msg_root_fxt();
@@ -23,11 +24,11 @@ public class Gfo_msg_root_tst {
 		fxt.Clear().Expd_data_str_("failed a0 b0").Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");
 		fxt.Clear().Expd_data_str_("failed a1 b1").Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a1", "b1");
 	}
-//		@Test public void Item() {	// DISABLED: no longer registering items with owner;
-//			fxt.Clear().Expd_item_uid_(0).Expd_item_fmtr_arg_exists_(BoolUtl.Y).Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");
-//			fxt.Clear().Expd_item_uid_(1).Expd_item_fmtr_arg_exists_(BoolUtl.N).Tst_data_new_many("proj.cls.proc", "err_1", "failed");
-//			fxt.Clear().Expd_item_uid_(0).Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");	// make sure item_uid stays the same
-//		}
+//        @Test public void Item() {    // DISABLED: no longer registering items with owner;
+//            fxt.Clear().Expd_item_uid_(0).Expd_item_fmtr_arg_exists_(BoolUtl.Y).Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");
+//            fxt.Clear().Expd_item_uid_(1).Expd_item_fmtr_arg_exists_(BoolUtl.N).Tst_data_new_many("proj.cls.proc", "err_1", "failed");
+//            fxt.Clear().Expd_item_uid_(0).Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");    // make sure item_uid stays the same
+//        }
 	@Test public void Cache() {
 		fxt.Mgr().Data_ary_len_(2);
 		fxt.Clear().Expd_data_uid_(0).Tst_data_new_many("x", "err_0", "a");
@@ -54,8 +55,8 @@ class Gfo_msg_root_fxt {
 	public Gfo_msg_root_fxt Expd_item_fmtr_arg_exists_(boolean v) {this.expd_item_fmtr_arg_exists = v ? BoolUtl.YByte : BoolUtl.NByte; return this;} private byte expd_item_fmtr_arg_exists;
 	public void Tst_data_new_many(String path, String key, String fmt, Object... vals) {
 		Gfo_msg_data data = root.Data_new_many(Gfo_msg_itm_.Cmd_note, path, key, fmt, vals);
-		if (expd_item_uid != -1)	Tfds.Eq(expd_item_uid, data.Item().Uid());;
-		if (expd_item_fmtr_arg_exists != BoolUtl.NullByte) Tfds.Eq(BoolUtl.ByInt(expd_item_fmtr_arg_exists), data.Item().Fmtr().Fmt_args_exist());
-		if (expd_data_str != null)	Tfds.Eq(expd_data_str, data.Item().Gen_str_many(data.Vals()));
+		if (expd_item_uid != -1)    GfoTstr.EqObj(expd_item_uid, data.Item().Uid());;
+		if (expd_item_fmtr_arg_exists != BoolUtl.NullByte) GfoTstr.EqObj(BoolUtl.ByInt(expd_item_fmtr_arg_exists), data.Item().Fmtr().FmtArgsExist());
+		if (expd_data_str != null)    GfoTstr.EqObj(expd_data_str, data.Item().Gen_str_many(data.Vals()));
 	}
 }

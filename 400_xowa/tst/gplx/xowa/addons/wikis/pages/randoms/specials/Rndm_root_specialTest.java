@@ -15,14 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.pages.randoms.specials;
 
-import gplx.Bry_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.wkrs.randoms.TestRandomWkr;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_test_;
 import gplx.xowa.Xoa_ttl;
-import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xop_fxt;
@@ -64,8 +63,8 @@ class RandomRootTstr {
 			parserTstr.Init_page_create(page, page);
 
 			// add ttl.Root to the testRandomWkr
-			Xoa_ttl pageTtl = wiki.Ttl_parse(Bry_.new_u8(page));
-			testRandomWkr.AddRow(String_.new_u8(pageTtl.Root_txt()));
+			Xoa_ttl pageTtl = wiki.Ttl_parse(BryUtl.NewU8(page));
+			testRandomWkr.AddRow(StringUtl.NewU8(pageTtl.Root_txt()));
 		}
 	}
 	public void Test(String special_url, int expd_ns, String expd) {
@@ -74,13 +73,13 @@ class RandomRootTstr {
 		Xoae_page page = Test_special_open(wiki, special_page, special_url);
 
 		// test sql
-		Gftest.Eq__str("page_title", testRandomWkr.SelectRandomRowSelect());
-		Gftest.Eq__str("page p", testRandomWkr.SelectRandomRowFrom());
-		Gftest.Eq__str("p.page_namespace = " + expd_ns + " AND p.page_redirect_id = -1 AND p.page_title NOT LIKE '%/%'", testRandomWkr.SelectRandomRowWhere());
+		GfoTstr.Eq("page_title", testRandomWkr.SelectRandomRowSelect());
+		GfoTstr.Eq("page p", testRandomWkr.SelectRandomRowFrom());
+		GfoTstr.Eq("p.page_namespace = " + expd_ns + " AND p.page_redirect_id = -1 AND p.page_title NOT LIKE '%/%'", testRandomWkr.SelectRandomRowWhere());
 
 		// test page
-		Gftest.Eq__str(expd, page.Url().Page_bry());
-		Gftest.Eq__str("", page.Db().Text().Text_bry()); // ISSUE#:719:redirect should not load page else redirect info will get lost; EX:"Redirected from trg_ttl" instead of "Redirected from src_ttl"; PAGE:en.s; DATE:2020-05-13
+		GfoTstr.Eq(expd, page.Url().Page_bry());
+		GfoTstr.Eq("", page.Db().Text().Text_bry()); // ISSUE#:719:redirect should not load page else redirect info will get lost; EX:"Redirected from trg_ttl" instead of "Redirected from src_ttl"; PAGE:en.s; DATE:2020-05-13
 	}
 	public static Xoae_page Test_special_open(Xowe_wiki wiki, Xow_special_page special_page, String special_url) {
 		Xoae_page page = Init_page(wiki, special_url);
@@ -89,7 +88,7 @@ class RandomRootTstr {
 	}
 	private static Xoae_page Init_page(Xowe_wiki wiki, String url_str) {
 		// basic boot-strapping to make sure ctx.Page has .Url and .Ttl
-		byte[] url_bry = Bry_.new_u8(url_str);
+		byte[] url_bry = BryUtl.NewU8(url_str);
 		Xoae_page page = wiki.Parser_mgr().Ctx().Page();
 		page.Url_(wiki.Utl__url_parser().Parse(url_bry));
 		page.Ttl_(Xoa_ttl.Parse(wiki, url_bry));

@@ -13,90 +13,95 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http.hdocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*; import gplx.xowa.apps.servers.http.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.apps.servers.http.hdocs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.core.makes.*;
 public class Xoh_hdoc_wkr__http_server__tst {
 	private final Xoh_hdoc_wkr__http_server__fxt fxt = new Xoh_hdoc_wkr__http_server__fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
-	@Test  public void Wiki_quot() {
+	@Test public void Wiki_quot() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"/wiki/A\">abc</a>"
 		, "<a id=\"id1\" href=\"/en.wikipedia.org/wiki/A\">abc</a>"
 		);
 	}
-	@Test  public void Wiki_apos() {
+	@Test public void Wiki_apos() {
 		fxt.Test
 		( "<a id=\"id1\" href='/wiki/A'>abc</a>"
 		, "<a id=\"id1\" href='/en.wikipedia.org/wiki/A'>abc</a>"
 		);
 	}
-//		@Test  public void Lnki_caption() {
+//		@Test public void Lnki_caption() {
 //			fxt.Test
 //			( "<a id=\"id1\" href='/wiki/A'>abc <a href='/wiki/B'</a>lmn</a> xyz</a>"
 //			, "<a id=\"id1\" href='/en.wikipedia.org/wiki/A'>abc <a href='/en.wikipedia.org/wiki/B'</a>lmn</a> xyz</a>"
 //			);
 //		}
-	@Test  public void Xcmd() {
+	@Test public void Xcmd() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"xowa-cmd:a\">abc</a>"
 		, "<a id=\"id1\" href=\"/exec/a\">abc</a>"
 		);
 	}
-	@Test  public void Site() {
+	@Test public void Site() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"/site/en.wikipedia.org/wiki/Special:Search/A\">abc</a>"
 		, "<a id=\"id1\" href=\"/en.wikipedia.org/wiki/Special:Search/A\">abc</a>"
 		);
 	}
-	@Test  public void Action() { // NOTE: also used by Special:ItemByTitle; EX: "<form method=\"get\" action=\"//www.wikidata.org/wiki/Special:ItemByTitle\" name=\"itembytitle\" id=\"wb-itembytitle-form1\">"
+	@Test public void Action() { // NOTE: also used by Special:ItemByTitle; EX: "<form method=\"get\" action=\"//www.wikidata.org/wiki/Special:ItemByTitle\" name=\"itembytitle\" id=\"wb-itembytitle-form1\">"
 		fxt.Test
 		( "<form id=\"searchform\" action=\"/wiki/SearchUrl\">abc</form>"
 		, "<form id=\"searchform\" action=\"/en.wikipedia.org/wiki/SearchUrl\">abc</form>"
 		);
 	}
-	@Test  public void Fsys() {
+	@Test public void Fsys() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"file:///mem/xowa/file/A.png\">abc</a>"
 		, "<a id=\"id1\" href=\"/fsys/file/A.png\">abc</a>"
 		);
 	}
-	@Test  public void Fsys_bug() { // 2019-05 enwiki embedded build machine's path
+	@Test public void Fsys_bug() { // 2019-05 enwiki embedded build machine's path
 		fxt.Test
 		( "<a id=\"id1\" href=\"file:////home/lnxusr/xowa/file/A.png\">abc</a>"
 		, "<a id=\"id1\" href=\"/fsys/file/A.png\">abc</a>"
 		);
 	}
-	@Test  public void Fsys_img() {
+	@Test public void Fsys_img() {
 		fxt.Test
 		( "<a href='/wiki/File:A.jpg' class='image'><img src=\"file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png\">abc</img></a>"
 		, "<a href='/en.wikipedia.org/wiki/File:A.jpg' class='image'><img src=\"/fsys/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png\">abc</img></a>"
 		);
 	}
-	@Test  public void Fsys_div() {
+	@Test public void Fsys_div() {
 		fxt.Test
-		( String_.Concat_lines_nl
+		( StringUtl.ConcatLinesNl
 			( "<div class='thumb tleft'>"
 			, "  <div id='xowa_file_div_2' class='thumbinner' style='width:128px;'>"
 			, "    <a href='/wiki/File:A.jpg' class='image' xowa_title='A.jpg'><img id='xoimg_2' alt='' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png' width='128' height='100' class='thumbimage'></a> "
 			, "    <div class='thumbcaption'>"
 			, "      <div class='magnify'>"
-			, "        <a href='/wiki/File:A.jpg' class='@gplx.Internal protected' title='Enlarge'></a>"
+			, "        <a href='/wiki/File:A.jpg' class='@gplx.frameworks.objects.Internal protected' title='Enlarge'></a>"
 			, "      </div>"
 			, "      thumb_caption"
 			, "    </div>"
 			, "  </div>"
 			, "</div>"
 			)
-			, String_.Concat_lines_nl
+			, StringUtl.ConcatLinesNl
 			( "<div class='thumb tleft'>"
 			, "  <div id='xowa_file_div_2' class='thumbinner' style='width:128px;'>"
 			, "    <a href='/en.wikipedia.org/wiki/File:A.jpg' class='image' xowa_title='A.jpg'><img id='xoimg_2' alt='' src='/fsys/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png' width='128' height='100' class='thumbimage'></a> "
 			, "    <div class='thumbcaption'>"
 			, "      <div class='magnify'>"
-			, "        <a href='/en.wikipedia.org/wiki/File:A.jpg' class='@gplx.Internal protected' title='Enlarge'></a>"
+			, "        <a href='/en.wikipedia.org/wiki/File:A.jpg' class='@gplx.frameworks.objects.Internal protected' title='Enlarge'></a>"
 			, "      </div>"
 			, "      thumb_caption"
 			, "    </div>"
@@ -105,9 +110,9 @@ public class Xoh_hdoc_wkr__http_server__tst {
 			)
 		);
 	}
-	@Test  public void Fsys_gallery() {
+	@Test public void Fsys_gallery() {
 		fxt.Test
-		( String_.Concat_lines_nl_skip_last
+		( StringUtl.ConcatLinesNlSkipLast
 			( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
 			, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width:235px;\">"
 			, "    <div style=\"width:235px;\">"
@@ -137,7 +142,7 @@ public class Xoh_hdoc_wkr__http_server__tst {
 			, "  </li>"
 			, "</ul>"
 			)
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 			( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
 			, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width:235px;\">"
 			, "    <div style=\"width:235px;\">"
@@ -178,15 +183,15 @@ class Xoh_hdoc_wkr__http_server__fxt {
 		Xop_fxt fxt = Xop_fxt.New_app_html();
 		this.wiki = fxt.Wiki();
 		int page_id = 123;
-		byte[] page_ttl_bry = Bry_.new_u8("Test_Page");
+		byte[] page_ttl_bry = BryUtl.NewU8("Test_Page");
 		Xoa_url page_url = Xoa_url.New(wiki.Domain_bry(), page_ttl_bry);
 		Xoa_ttl page_ttl = wiki.Ttl_parse(page_ttl_bry);
 		this.hpg = new Xoh_page();
 		hpg.Ctor_by_hview(wiki, page_url, page_ttl, page_id);
 	}
 	public void Test(String src_str, String expd) {
-		byte[] src = Bry_.new_u8(src_str);
+		byte[] src = BryUtl.NewU8(src_str);
 		byte[] actl = hdoc_mgr.Parse(src, wiki, hpg);
-		Gftest.Eq__ary__lines(expd, String_.new_u8(actl));
+		GfoTstr.EqLines(expd, StringUtl.NewU8(actl));
 	}
 }

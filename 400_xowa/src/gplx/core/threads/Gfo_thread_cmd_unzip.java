@@ -13,9 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
-import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.bldrs.cmds.utils.*;
+package gplx.core.threads;
+import gplx.core.envs.Process_adp;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.kits.core.Gfui_dlg_msg_;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.BryFmtrEvalMgrUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtrEvalMgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.bldrs.cmds.utils.Xob_unzip_wkr;
 public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public Gfo_thread_cmd_unzip Init(Gfo_usr_dlg usr_dlg, Gfui_kit kit, Process_adp bzip2_process, Process_adp zip_process, Process_adp gz_process, Io_url src, Io_url trg) {
 		this.src = src; this.trg = trg; this.kit = kit; this.usr_dlg = usr_dlg;
@@ -26,7 +40,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public void Cmd_ctor() {}
 	public String Async_key() {return KEY;}
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
-	public Bry_fmtr_eval_mgr Url_eval_mgr() {return url_eval_mgr;} public Gfo_thread_cmd_unzip Url_eval_mgr_(Bry_fmtr_eval_mgr v) {url_eval_mgr = v; return this;} Bry_fmtr_eval_mgr url_eval_mgr;
+	public BryFmtrEvalMgr Url_eval_mgr() {return url_eval_mgr;} public Gfo_thread_cmd_unzip Url_eval_mgr_(BryFmtrEvalMgr v) {url_eval_mgr = v; return this;} BryFmtrEvalMgr url_eval_mgr;
 	public int Async_sleep_interval()	{return Gfo_thread_cmd_.Async_sleep_interval_1_second;}
 	public boolean Async_prog_enabled()	{return true;}
 	public void Async_prog_run(int async_sleep_sum) {
@@ -65,7 +79,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 			Io_url zip_dir = Io_url_.Empty;
 			for (int i = 0; i < dirs_len; i++) {
 				Io_url dir = dirs[i];
-				if (String_.Has_at_bgn(String_.Lower(dir.NameOnly()), String_.Lower(trg.NameOnly()))) {	// HACK: check that directory starts with archive name; DATE:2013-12-22
+				if (StringUtl.HasAtBgn(StringUtl.Lower(dir.NameOnly()), StringUtl.Lower(trg.NameOnly()))) {	// HACK: check that directory starts with archive name; DATE:2013-12-22
 					zip_dir = dir;
 					break;
 				}
@@ -74,17 +88,17 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 				kit.Ask_ok(GRP_KEY, "rename.fail", "unable to find directory: trg=~{0}", trg.Raw());
 				return false;
 			}
-			if (!String_.Eq(String_.Lower(zip_dir.Raw()), String_.Lower(trg.Raw())))	// HACK: inkscape is itself
+			if (!StringUtl.Eq(StringUtl.Lower(zip_dir.Raw()), StringUtl.Lower(trg.Raw())))	// HACK: inkscape is itself
 				Io_mgr.Instance.MoveDirDeep(zip_dir, trg);
 		}
 		switch (term_cmd_for_src) {
 			case Term_cmd_for_src_noop: break;
 			case Term_cmd_for_src_delete: Io_mgr.Instance.DeleteFil(src); break;
 			case Term_cmd_for_src_move:
-				if (term_cmd_for_src_url == Io_url_.Empty) throw Err_.new_wo_type("move specified, but no url");
+				if (term_cmd_for_src_url == Io_url_.Empty) throw ErrUtl.NewArgs("move specified, but no url");
 				Io_mgr.Instance.MoveFil_args(src, term_cmd_for_src_url, true).Exec();
 				break;
-			default: throw Err_.new_unhandled(term_cmd_for_src);
+			default: throw ErrUtl.NewUnhandled(term_cmd_for_src);
 		}
 		usr_dlg.Prog_many(GRP_KEY, "done", "");
 		return true;
@@ -95,8 +109,8 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	public Io_url Term_cmd_for_src_url() {return term_cmd_for_src_url;} public void Term_cmd_for_src_url_(Io_url v) {this.term_cmd_for_src_url = v;} Io_url term_cmd_for_src_url = Io_url_.Empty;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))					return owner;
-		else if	(ctx.Match(k, Invk_src_))					src = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_trg_))					trg = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_src_))					src = BryFmtrEvalMgrUtl.Eval_url(url_eval_mgr, m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_trg_))					trg = BryFmtrEvalMgrUtl.Eval_url(url_eval_mgr, m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_rename_dir_))			rename_dir = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_delete_trg_if_exists_))	delete_trg_if_exists = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_term_cmd_for_src_))		term_cmd_for_src = Term_cmd_for_src_parse_(m.ReadStr("v"));
@@ -104,10 +118,10 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 		return this;
 	}	private static final String Invk_owner = "owner", Invk_src_ = "src_", Invk_trg_ = "trg_", Invk_rename_dir_ = "rename_dir_", Invk_delete_trg_if_exists_ = "delete_trg_if_exists_", Invk_term_cmd_for_src_ = "term_cmd_for_src_";
 	private static byte Term_cmd_for_src_parse_(String s) {
-		if 		(String_.Eq(s, "noop")) 		return Term_cmd_for_src_noop;
-		else if (String_.Eq(s, "delete")) 		return Term_cmd_for_src_delete;
-		else if (String_.Eq(s, "move")) 		return Term_cmd_for_src_move;
-		else									throw Err_.new_unhandled(s);
+		if 		(StringUtl.Eq(s, "noop")) 		return Term_cmd_for_src_noop;
+		else if (StringUtl.Eq(s, "delete")) 		return Term_cmd_for_src_delete;
+		else if (StringUtl.Eq(s, "move")) 		return Term_cmd_for_src_move;
+		else									throw ErrUtl.NewUnhandled(s);
 	}
 	static final String GRP_KEY = "xowa.thread.file.unzip";
 	public static final String KEY = "file.unzip";

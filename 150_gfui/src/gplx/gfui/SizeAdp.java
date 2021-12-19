@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
+package gplx.gfui;
+import gplx.types.basics.utls.StringUtl;
 public class SizeAdp {
 	public int Width() {return width;} int width;
 	public int Height() {return height;} int height;
@@ -22,7 +23,7 @@ public class SizeAdp {
 	public		SizeAdp Op_add(SizeAdp s) {return SizeAdp_.new_(width + s.width, height + s.height);}
 	public		SizeAdp Op_subtract(int val) {return SizeAdp_.new_(width - val, height - val);}
 	public 		SizeAdp Op_subtract(int w, int h) {return SizeAdp_.new_(width - w, height - h);}
-	public String To_str() {return String_.Concat_any(width, ",", height);}
+	public String To_str() {return StringUtl.ConcatObjs(width, ",", height);}
 	public boolean Eq(Object o) {
 		SizeAdp comp = (SizeAdp)o; if (comp == null) return false;
 		return width == comp.width && height == comp.height;

@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.langs.msgs;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.parsers.tmpls.Xop_curly_bgn_lxr;
 // NOTE: some ids (Id_xowa_wikidata*) are needed for unit-tests; ISSUE#:348
 public class Xol_msg_itm_ {
 public static final int
@@ -255,23 +262,23 @@ public static final int
 , Id_hidden_categories = 234
 ;
 	public static final int Id__max = 235;
-	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, Bry_.new_u8(key), Bry_.new_u8(val));}
+	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, BryUtl.NewU8(key), BryUtl.NewU8(val));}
 	public static Xol_msg_itm new_(int id, byte[] key, byte[] val) {
 		Xol_msg_itm rv = new Xol_msg_itm(id, key);
 		update_val_(rv, val);
 		return rv;
 	}
-	private static final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp().Fail_when_invalid_escapes_(false);
-	private static final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private static final BryFmtr tmp_fmtr = BryFmtr.NewTmp().FailWhenInvalidEscapesSet(false);
+	private static final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	public static void update_val_(Xol_msg_itm itm, byte[] val) {
 		synchronized (tmp_fmtr) {	// LOCK:static-objs; DATE:2016-07-07
-			boolean has_fmt_arg = tmp_fmtr.Fmt_(val).Compile().Fmt_args_exist();
-			boolean has_tmpl_txt = Bry_find_.Find_fwd(val, Xop_curly_bgn_lxr.Hook, 0) != -1;
+			boolean has_fmt_arg = tmp_fmtr.FmtSet(val).Compile().FmtArgsExist();
+			boolean has_tmpl_txt = BryFind.FindFwd(val, Xop_curly_bgn_lxr.Hook, 0) != -1;
 			val = trie_space.Replace(tmp_bfr, val, 0, val.length);
 			itm.Atrs_set(val, has_fmt_arg, has_tmpl_txt);
 		}
 	}
-	public static final byte[] Bry_nbsp = Byte_.Ary_by_ints(194, 160);
+	public static final byte[] Bry_nbsp = ByteUtl.AryByInts(194, 160);
 	private static final Btrie_slim_mgr trie_space = Btrie_slim_mgr.cs()	// MW:cache/MessageCache.php|get|Fix for trailing whitespace, removed by textarea|DATE:2014-04-29
 		.Add_bry("&#32;"	, " ")
 		.Add_bry("&nbsp;"	, Bry_nbsp)
@@ -514,14 +521,14 @@ case Xol_msg_itm_.Id_xowa_wikidata_normal: return new_(Xol_msg_itm_.Id_xowa_wiki
 case Xol_msg_itm_.Id_xowa_wikidata_preferred: return new_(Xol_msg_itm_.Id_xowa_wikidata_preferred, "xowa-wikidata-preferred", "preferred");
 case Xol_msg_itm_.Id_xowa_wikidata_links_special: return new_(Xol_msg_itm_.Id_xowa_wikidata_links_special, "xowa-wikidata-links-special", "Links (special wikis)");
 case Xol_msg_itm_.Id_hidden_categories: return new_(Xol_msg_itm_.Id_ctg_tbl_hidden, "hidden-categories", "{{PLURAL:~{0}\u007CHidden category\u007CHidden categories}}");
-			default: throw Err_.new_unhandled(id);
+			default: throw ErrUtl.NewUnhandled(id);
 		}
 	}
-	public static byte[] eval_(Bry_bfr bfr, Xol_msg_itm tmp_msg_itm, byte[] val, Object... args) {
+	public static byte[] eval_(BryWtr bfr, Xol_msg_itm tmp_msg_itm, byte[] val, Object... args) {
 		synchronized (tmp_fmtr) {	// LOCK:static-objs; DATE:2016-07-07
 			val = gplx.xowa.apps.gfs.Gfs_php_converter.To_gfs(bfr, val);
 			update_val_(tmp_msg_itm, val);
-			return tmp_fmtr.Bld_bry_many(bfr, args);
+			return tmp_fmtr.BldToBryMany(bfr, args);
 		}
 	}
 }

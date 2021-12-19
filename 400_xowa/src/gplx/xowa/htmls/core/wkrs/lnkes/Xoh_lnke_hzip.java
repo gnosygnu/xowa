@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.xowa.wikis.ttls.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
+package gplx.xowa.htmls.core.wkrs.lnkes;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*; import gplx.core.threads.poolables.*;
+import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnke;}
 	public String Key() {return Xoh_hzip_dict_.Key__lnke;}
@@ -34,17 +38,17 @@ public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		if (title_exists)	bfr.Add_hzip_mid(src, data.Title_bgn(), data.Title_end());	// add title
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
-		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		int flag = rdr.ReadHzipInt(1); flag_bldr.Decode(flag);
 		boolean   title_exists		= flag_bldr.Get_as_bool(Flag__title_exists);
 		boolean   auto_exists		= flag_bldr.Get_as_bool(Flag__auto_exists);
 		boolean   capt_exists		= flag_bldr.Get_as_bool(Flag__capt_exists);
 		byte   lnke_tid			= flag_bldr.Get_as_byte(Flag__lnke_tid);
-		int href_bgn = rdr.Pos(); int href_end = rdr.Find_fwd_lr();
+		int href_bgn = rdr.Pos(); int href_end = rdr.FindFwdLr();
 		int auto_id = -1, capt_bgn = -1, capt_end = -1, title_bgn = -1, title_end = -1;
-		if (auto_exists) auto_id = rdr.Read_hzip_int(1);
-		if (capt_exists)	{capt_bgn = rdr.Pos(); capt_end = rdr.Find_fwd_lr();}
-		if (title_exists)	{title_bgn = rdr.Pos(); title_end = rdr.Find_fwd_lr();}
+		if (auto_exists) auto_id = rdr.ReadHzipInt(1);
+		if (capt_exists)	{capt_bgn = rdr.Pos(); capt_end = rdr.FindFwdLr();}
+		if (title_exists)	{title_bgn = rdr.Pos(); title_end = rdr.FindFwdLr();}
 		Xoh_lnke_data data = (Xoh_lnke_data)data_itm;
 		data.Init_by_decode(lnke_tid, auto_id, href_bgn, href_end, capt_bgn, capt_end, capt_exists, title_bgn, title_end);
 	}

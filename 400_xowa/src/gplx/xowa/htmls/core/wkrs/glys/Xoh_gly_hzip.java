@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
+package gplx.xowa.htmls.core.wkrs.glys;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
+import gplx.xowa.htmls.core.hzips.*;
+import gplx.xowa.files.*;
 import gplx.xowa.xtns.gallery.*;
 public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final Xoh_gly_grp_wtr grp_wtr = new Xoh_gly_grp_wtr();
@@ -55,7 +57,7 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			bfr.Add_hzip_int(1, itm_parser.Li_w());
 			bfr.Add_hzip_int(1, itm_parser.Div_1_w());
 			bfr.Add_hzip_int(1, itm_parser.Div_2_margin());
-			bfr.Add_byte((byte)(itm_parser.Capt_tid() + gplx.core.encoders.Base85_.A7_offset));
+			bfr.AddByte((byte)(itm_parser.Capt_tid() + gplx.core.encoders.Base85_.A7_offset));
 			bfr.Add_hzip_mid(src, itm_parser.Capt_bgn(), itm_parser.Capt_end());
 			Xoh_hzip_wkr hzip_wkr = hctx.Pool_mgr__hzip().Mw__img();
 			hzip_wkr.Encode1(bfr, hdoc_wkr, hctx, hpg, false, src, itm_parser.Img_data());
@@ -63,8 +65,8 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		}
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
-		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		int flag = rdr.ReadHzipInt(1); flag_bldr.Decode(flag);
 		boolean xnde_w_exists		= flag_bldr.Get_as_bool(Flag__xnde__w);
 		boolean xnde_h_exists		= flag_bldr.Get_as_bool(Flag__xnde__h);
 		boolean xnde_per_row_exists	= flag_bldr.Get_as_bool(Flag__xnde__per_row);
@@ -75,16 +77,16 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean xtra_style			= flag_bldr.Get_as_bool(Flag__ul__xtra_style);
 		byte    cls_tid				= flag_bldr.Get_as_byte(Flag__gly_tid);
 		byte[] cls_bry = Gallery_mgr_base_.To_bry(cls_tid);
-		int ul_style_max_w = rdr.Read_hzip_int(1); 
-		int xnde_w = xnde_w_exists ? rdr.Read_hzip_int(4) : -1;
-		int xnde_h = xnde_h_exists ? rdr.Read_hzip_int(4) : -1;
-		int xnde_per_row = xnde_per_row_exists ? rdr.Read_hzip_int(1) : -1;
-		int ul_style_w = ul_style_w_diff ? rdr.Read_hzip_int(1) : ul_style_max_w;
-		byte[] xtra_cls_bry = xtra_cls ? rdr.Read_bry_to(): null;
-		byte[] xtra_style_bry = xtra_style ? rdr.Read_bry_to(): null;
-		byte[] xtra_atr_bry = xtra_atr ? rdr.Read_bry_to(): null;
-		byte[] capt = capt_exists ? rdr.Read_bry_to(): null;
-		int li_len = rdr.Read_hzip_int(1);
+		int ul_style_max_w = rdr.ReadHzipInt(1);
+		int xnde_w = xnde_w_exists ? rdr.ReadHzipInt(4) : -1;
+		int xnde_h = xnde_h_exists ? rdr.ReadHzipInt(4) : -1;
+		int xnde_per_row = xnde_per_row_exists ? rdr.ReadHzipInt(1) : -1;
+		int ul_style_w = ul_style_w_diff ? rdr.ReadHzipInt(1) : ul_style_max_w;
+		byte[] xtra_cls_bry = xtra_cls ? rdr.ReadBryTo(): null;
+		byte[] xtra_style_bry = xtra_style ? rdr.ReadBryTo(): null;
+		byte[] xtra_atr_bry = xtra_atr ? rdr.ReadBryTo(): null;
+		byte[] capt = capt_exists ? rdr.ReadBryTo(): null;
+		int li_len = rdr.ReadHzipInt(1);
 		int uid = hctx.Uid__gly__nxt();
 		Xoh_gly_itm_wtr[] itm_ary = new Xoh_gly_itm_wtr[li_len];
 		int li_nth = li_len - 1;
@@ -92,11 +94,11 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			// init wtr for <li>
 			Xoh_gly_itm_wtr itm_wtr = new Xoh_gly_itm_wtr();
 			itm_ary[i] = itm_wtr;
-			int li_w = rdr.Read_hzip_int(1);
-			int div_1_w = rdr.Read_hzip_int(1);
-			int div_3_margin = rdr.Read_hzip_int(1);
-			byte capt_tid = (byte)(rdr.Read_byte() - gplx.core.encoders.Base85_.A7_offset);
-			byte[] capt_bry = rdr.Read_bry_to();
+			int li_w = rdr.ReadHzipInt(1);
+			int div_1_w = rdr.ReadHzipInt(1);
+			int div_3_margin = rdr.ReadHzipInt(1);
+			byte capt_tid = (byte)(rdr.ReadByte() - gplx.core.encoders.Base85_.A7_offset);
+			byte[] capt_bry = rdr.ReadBryTo();
 			Xoh_data_itm img_data = hctx.Pool_mgr__data().Get_by_tid(Xoh_hzip_dict_.Tid__img);
 			Xoh_hzip_wkr img_hzip = hctx.Pool_mgr__hzip().Mw__img();
 			img_hzip.Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, src_bgn, src_end, img_data);
@@ -114,7 +116,7 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			img_hzip.Pool__rls();
 		}
 		grp_wtr.Init(hctx.Mode_is_diff(), uid, xnde_w, xnde_h, xnde_per_row, cls_bry, ul_style_max_w, ul_style_w, xtra_cls_bry, xtra_style_bry, xtra_atr_bry, capt, itm_ary);
-		grp_wtr.Bfr_arg__add(bfr);
+		grp_wtr.AddToBfr(bfr);
 		hpg.Xtn__gallery_exists_y_();
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.indexers.*;
+package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.fulltexts.*;
 import gplx.gflucene.core.*;
 import gplx.gflucene.indexers.*;
 import gplx.xowa.addons.wikis.fulltexts.core.*;
@@ -39,7 +44,7 @@ public class Xofulltext_indexer_wkr {
 		}
 	}
 	public void Index(int page_id, int score, byte[] ttl, byte[] html) {
-		Gflucene_doc_data data = new Gflucene_doc_data(page_id, score, String_.new_u8(ttl), String_.new_u8(html));
+		Gflucene_doc_data data = new Gflucene_doc_data(page_id, score, StringUtl.NewU8(ttl), StringUtl.NewU8(html));
 		index_wtr.Exec(data);
 	}
 	public void Term() {

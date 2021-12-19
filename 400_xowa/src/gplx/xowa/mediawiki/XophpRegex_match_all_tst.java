@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.core.primitives.*;
+package gplx.xowa.mediawiki;
+import gplx.frameworks.tests.GfoTstr;
+import org.junit.*;
 import gplx.langs.regxs.*;
 public class XophpRegex_match_all_tst {
 	private final XophpRegex_match_all_fxt fxt = new XophpRegex_match_all_fxt();
-	@Test  public void Pattern_order() {
+	@Test public void Pattern_order() {
 		fxt.Test__preg_match_all
 			( XophpRegex_.Pattern("<[^>]+>(.*)</[^>]+>", XophpRegex_.MODIFIER_U)
 			, "<b>example: </b><div align=left>this is a test</div>"
@@ -29,7 +29,7 @@ public class XophpRegex_match_all_tst {
 			.Add_many(XophpArray.New("example: ", "this is a test"))
 			);
 	}
-//		@Test  public void Pattern_order_matches() {
+//		@Test public void Pattern_order_matches() {
 //			// PCRE does not allow duplicate named groups by default. PCRE 6.7 and later allow them if you turn on that option or use the mode modifier (?J). 
 //			fxt.Test__preg_match_all
 //				( XophpRegex_.Pattern("(?<match>foo)|(?<match>bar)", XophpRegex_.MODIFIER_U | XophpRegex_.MODIFIER_J) // (?J) changed to MODIFIER_J
@@ -40,7 +40,7 @@ public class XophpRegex_match_all_tst {
 //				  .Add(1, "example: ").Add(1, "this is a test")
 //				);
 //		}
-	@Test  public void Set_order() {
+	@Test public void Set_order() {
 		fxt.Test__preg_match_all
 			( XophpRegex_.Pattern("<[^>]+>(.*)</[^>]+>", XophpRegex_.MODIFIER_U)
 			, "<b>example: </b><div align=left>this is a test</div>"
@@ -50,7 +50,7 @@ public class XophpRegex_match_all_tst {
 			  .Add_many(XophpArray.New("<div align=left>this is a test</div>", "this is a test"))
 			);
 	}
-	@Test  public void Offset_capture() {
+	@Test public void Offset_capture() {
 		fxt.Test__preg_match_all
 			( XophpRegex_.Pattern("(foo)(bar)(baz)", XophpRegex_.MODIFIER_U)
 			, "foobarbaz"
@@ -73,7 +73,7 @@ class XophpRegex_match_all_fxt {
 		XophpArray actl = XophpArray.New();
 		XophpRegex_.preg_match_all(pattern, subject, actl, flags, offset);
 
-		Gftest.Eq__ary__lines(expd.Ary().To_str(), actl.To_str());
+		GfoTstr.EqLines(expd.Ary().To_str(), actl.To_str());
 	}
 }
 class XophpRegex_match_all_expd {

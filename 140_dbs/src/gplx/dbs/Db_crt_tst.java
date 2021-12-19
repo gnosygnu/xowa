@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
 import org.junit.*; import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class Db_crt_tst {
 	@Before public void setup() {
-		row = GfoNde_.vals_(GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance), Object_.Ary(1, "me"));
+		row = GfoNde_.vals_(GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance), ObjectUtl.Ary(1, "me"));
 	}
 	@Test public void EqualTest() {
 		crt = Db_crt_.New_eq("id", 1);
@@ -44,7 +46,7 @@ public class Db_crt_tst {
 
 	void tst_Match(boolean epxd, GfoNde row, Criteria crt) {
 		boolean actl = crt.Matches(row);
-		Tfds.Eq(epxd, actl);
+		GfoTstr.EqObj(epxd, actl);
 	}
 	GfoNde row; Criteria crt;
 }

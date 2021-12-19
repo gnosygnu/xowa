@@ -15,14 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.cases.Xol_case_cvt;
-import gplx.xowa.langs.cases.Xol_case_mgr;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_tkn_mkr;
 import gplx.xowa.wikis.nss.Xow_ns_;
@@ -46,7 +44,7 @@ public class Xot_defn_tmpl_ {
 		// DATE:2020-08-09: ISSUE#:784; apply to all non-main namespaces; PAGE:en.w:Wikipedia:Wikipedia_Signpost/2015-07-15/Op-ed
 		if (frame_ns != Xow_ns_.Tid__main) {
 			byte[] nsBry = wiki.Ns_mgr().Ids_get_or_null(frame_ns).Name_db_w_colon();
-			frame_ttl = Bry_.Add(nsBry, frame_ttl);
+			frame_ttl = BryUtl.Add(nsBry, frame_ttl);
 		}
 
 		rv.Frame_ttl_(frame_ttl);
@@ -71,11 +69,11 @@ public class Xot_defn_tmpl_ {
 	}
 	private static Arg_itm_tkn Make_itm(boolean val_tkn, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, Arg_itm_tkn orig, Xot_invk caller, Arg_nde_tkn orig_arg) {
 		int subs_len = orig.Subs_len();
-		Bry_bfr arg_bfr = Bry_bfr_.New();
+		BryWtr arg_bfr = BryWtr.New();
 		for (int i = 0; i < subs_len; i++)
 			orig.Subs_get(i).Tmpl_evaluate(ctx, src, caller, arg_bfr);
 		Arg_itm_tkn rv = tkn_mkr.ArgItm(-1, -1);	// NOTE: was -1, 0; DATE:2013-04-10
-		byte[] rv_ary = orig_arg.KeyTkn_exists() && val_tkn ? arg_bfr.To_bry_and_clear_and_trim() : arg_bfr.To_bry_and_clear();	// // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY; PAGE:en.w:Coord in Chernobyl disaster, Sahara
+		byte[] rv_ary = orig_arg.KeyTkn_exists() && val_tkn ? arg_bfr.ToBryAndClearAndTrim() : arg_bfr.ToBryAndClear();	// // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY; PAGE:en.w:Coord in Chernobyl disaster, Sahara
 		rv.Dat_ary_(rv_ary);
 		return rv;
 	}

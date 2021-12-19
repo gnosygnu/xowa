@@ -13,14 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wiki_cfgs; import gplx.*;
-import gplx.core.log_msgs.*;
-import gplx.langs.phps.*;
-import gplx.objects.primitives.BoolUtl;
-import gplx.xowa.langs.bldrs.*;
+package gplx.xowa.bldrs.wiki_cfgs;
+import gplx.core.log_msgs.Gfo_msg_log;
+import gplx.langs.phps.Php_evaluator;
+import gplx.langs.phps.Php_itm;
+import gplx.langs.phps.Php_itm_;
+import gplx.langs.phps.Php_itm_ary;
+import gplx.langs.phps.Php_itm_int;
+import gplx.langs.phps.Php_itm_kv;
+import gplx.langs.phps.Php_line;
+import gplx.langs.phps.Php_line_assign;
+import gplx.langs.phps.Php_parser;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.langs.bldrs.Xol_mw_lang_parser;
 class Xob_subpage_parser {
 	public Xob_subpage_wiki[] Parse(byte[] src) {
-		src = Bry_.Add(Bry_.new_a7("$a = array("), src, Bry_.new_a7(");"));
+		src = BryUtl.Add(BryUtl.NewA7("$a = array("), src, BryUtl.NewA7(");"));
 		List_adp wikis_list = List_adp_.New();
 		try {
 			Php_parser php_parser = new Php_parser();
@@ -40,7 +53,7 @@ class Xob_subpage_parser {
 			}
 		}
 		catch (Exception e) {
-			throw Err_.new_exc(e, "xo", "parse failed", "src", String_.new_u8(src));
+			throw ErrUtl.NewArgs(e, "parse failed", "src", StringUtl.NewU8(src));
 		}
 		return (Xob_subpage_wiki[])wikis_list.ToAry(Xob_subpage_wiki.class);
 	}
@@ -63,7 +76,7 @@ class Xob_subpage_parser {
 			case Php_itm_.Tid_var:
 				return Xol_mw_lang_parser.Id_by_mw_name(((Php_itm)itm).Val_obj_bry());
 			default:
-				throw Err_.new_unhandled(itm.Itm_tid());
+				throw ErrUtl.NewUnhandled(itm.Itm_tid());
 		}
 	}
 	private boolean Parse_ns_enabled(Php_itm itm) {
@@ -75,7 +88,7 @@ class Xob_subpage_parser {
 			case Php_itm_.Tid_bool_true:
 				return true;
 			default:
-				throw Err_.new_unhandled(itm.Itm_tid());
+				throw ErrUtl.NewUnhandled(itm.Itm_tid());
 		}
 	}
 }

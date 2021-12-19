@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.langs.jsons.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.commons.KeyVal;
+import gplx.xowa.xtns.scribunto.*;
+import org.junit.*;
 public class Scrib_lib_text_tst {
 	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib_text lib;
 	@Before public void init() {
@@ -23,13 +27,13 @@ public class Scrib_lib_text_tst {
 		lib.Init();
 	}
 	@Test public void Unstrip() {
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_text.Invk_unstrip, Object_.Ary("a"), "a");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_text.Invk_unstrip, ObjectUtl.Ary("a"), "a");
 	}
 	@Test public void UnstripNoWiki() {
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_text.Invk_unstripNoWiki, Object_.Ary("a<nowiki>b</nowiki>c"), "abc");
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_text.Invk_unstripNoWiki, ObjectUtl.Ary("a<nowiki>b</nowiki>c"), "abc");
 	}
 	@Test public void GetEntityTable() {
-		Keyval[] actl = fxt.Test_scrib_proc_rv_as_kv_ary(lib, Scrib_lib_text.Invk_getEntityTable, Object_.Ary());
-		Tfds.Eq(1510, actl.length);	// large result; only test # of entries
+		KeyVal[] actl = fxt.Test_scrib_proc_rv_as_kv_ary(lib, Scrib_lib_text.Invk_getEntityTable, ObjectUtl.Ary());
+		GfoTstr.EqObj(1510, actl.length);	// large result; only test # of entries
 	}
 }

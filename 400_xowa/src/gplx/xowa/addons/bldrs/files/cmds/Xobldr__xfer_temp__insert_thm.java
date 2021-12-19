@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.files.dbs.*; import gplx.core.stores.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.addons.bldrs.files.utls.*;
 import gplx.xowa.files.*;
@@ -24,7 +29,7 @@ public class Xobldr__xfer_temp__insert_thm extends Xob_cmd__base {
 		Xob_xfer_temp_tbl.Create_table(conn);
 		Db_stmt trg_stmt = Xob_xfer_temp_tbl.Insert_stmt(conn);
 		conn.Txn_bgn("bldr__xfer_temp_thumb");
-		DataRdr rdr = conn.Exec_sql_as_old_rdr(String_.Concat_lines_nl
+		DataRdr rdr = conn.Exec_sql_as_old_rdr(StringUtl.ConcatLinesNl
 		( "SELECT  l.lnki_id"
 		, ",       l.lnki_tier_id"
 		, ",       l.lnki_page_id"
@@ -54,11 +59,11 @@ public class Xobldr__xfer_temp__insert_thm extends Xob_cmd__base {
 		));
 		Xob_xfer_temp_itm temp_itm = new Xob_xfer_temp_itm();
 		Xof_img_size img_size = new Xof_img_size();
-		byte[] cur_ttl = Bry_.Empty; byte cur_repo = Byte_.Max_value_127;
+		byte[] cur_ttl = BryUtl.Empty; byte cur_repo = ByteUtl.MaxValue127;
 		while (rdr.MoveNextPeer()) {
 			temp_itm.Clear();
 			temp_itm.Load(rdr);
-			if (Bry_.Eq(cur_ttl, temp_itm.Orig_file_ttl())) {	// same ttl; DATE:2015-03-22
+			if (BryLni.Eq(cur_ttl, temp_itm.Orig_file_ttl())) {	// same ttl; DATE:2015-03-22
 				if (temp_itm.Orig_repo() != cur_repo)			// if repo is different, ignore 2nd; handles images in both repos; take 1st only (which should be local)
 					continue;
 			}

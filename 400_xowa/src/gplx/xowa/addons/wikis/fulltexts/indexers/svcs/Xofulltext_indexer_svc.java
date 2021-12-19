@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.indexers.svcs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.fulltexts.indexers.svcs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.objects.Cancelable_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*;
 import gplx.xowa.addons.wikis.fulltexts.*;
 import gplx.langs.jsons.*;
@@ -36,13 +46,13 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 	}
 	private void Index(Xofulltext_indexer_args args) {
 		// loop wikis
-		byte[][] domain_ary = Bry_split_.Split(args.wikis, AsciiByte.Pipe);
+		byte[][] domain_ary = BrySplit.Split(args.wikis, AsciiByte.Pipe);
 		for (byte[] domain : domain_ary) {
 			// get wiki
 			Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_n(domain);
 			if (!Io_mgr.Instance.ExistsDir(wiki.Fsys_mgr().Root_dir())) {
 				app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.fulltext_indexer.status__note__recv", gplx.core.gfobjs.Gfobj_nde.New()
-					.Add_str("note", Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": wiki does not exist: " + String_.new_u8(domain)));
+					.Add_str("note", GfoDateNow.Get().ToStrFmt_yyyy_MM_dd_HH_mm_ss() + ": wiki does not exist: " + StringUtl.NewU8(domain)));
 				continue;
 			}
 
@@ -51,20 +61,20 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 			Io_url search_dir = Xosearch_fulltext_addon.Get_index_dir(wiki);
 			if (Io_mgr.Instance.ExistsDir(search_dir)) {
 				app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.fulltext_indexer.status__note__recv", gplx.core.gfobjs.Gfobj_nde.New()
-					.Add_str("note", Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": search dir already exists; please delete it manually before reindexing; dir=" + search_dir.Xto_api()));
+					.Add_str("note", GfoDateNow.Get().ToStrFmt_yyyy_MM_dd_HH_mm_ss() + ": search dir already exists; please delete it manually before reindexing; dir=" + search_dir.Xto_api()));
 				continue;
 			}
 
 			// notify bgn
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.fulltext_indexer.status__note__recv", gplx.core.gfobjs.Gfobj_nde.New()
-				.Add_str("note", Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": wiki index started: " + String_.new_u8(domain)));
+				.Add_str("note", GfoDateNow.Get().ToStrFmt_yyyy_MM_dd_HH_mm_ss() + ": wiki index started: " + StringUtl.NewU8(domain)));
 
 			// run index
 			new Xofulltext_indexer_mgr().Exec((Xowe_wiki)wiki, new Xofulltext_indexer_ui(app.Gui__cbk_mgr(), cbk_trg), args);
 
 			// notify end
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.fulltext_indexer.status__note__recv", gplx.core.gfobjs.Gfobj_nde.New()
-				.Add_str("note", Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss() + ": wiki index ended: " + String_.new_u8(domain)));
+				.Add_str("note", GfoDateNow.Get().ToStrFmt_yyyy_MM_dd_HH_mm_ss() + ": wiki index ended: " + StringUtl.NewU8(domain)));
 		}
 	}
 

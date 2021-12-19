@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges;
+import gplx.core.envs.SystemUtl;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.logs.Gfo_log_;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 public class Merge2_mgr {
 	public final Merge_ctx ctx;
@@ -41,7 +48,7 @@ public class Merge2_mgr {
 		// fails b/c no Main_Page; Gfo_invk_.Invk_by_msg(wiki.App().Gui__tab_mgr(), gplx.xowa.guis.tabs.Xog_tab_mgr_.Invk__new_tab, GfoMsg_.new_cast_("").Add("focus", true).Add("site", wiki.Domain_str()).Add("page", String_.new_u8(wiki.Props().Main_page())));
 	}
 	public void Merge_data(Xow_wiki wiki, Io_url src_url, int idx_cur) {
-		long all_time_bgn = gplx.core.envs.System_.Ticks();
+		long all_time_bgn = SystemUtl.Ticks();
 		wiki.Init_by_wiki();
 		Db_conn src_conn = Db_conn_bldr.Instance.Get_or_autocreate(false, src_url);
 		ctx.Init(wiki, src_conn);
@@ -50,14 +57,14 @@ public class Merge2_mgr {
 		int hash_len = wkr_hash.Len();
 		for (int i = 0; i < hash_len; ++i) {
 			if (prog_wkr.Canceled()) break;
-			Merge2_wkr wkr = (Merge2_wkr)wkr_hash.Get_at(i);
+			Merge2_wkr wkr = (Merge2_wkr)wkr_hash.GetAt(i);
 			// if (prog_wkr.Checkpoint__skip_wkr(src_url, wkr.Tbl_name())) continue;
-			long wkr_time_bgn = gplx.core.envs.System_.Ticks();
+			long wkr_time_bgn = SystemUtl.Ticks();
 			wkr.Merge_data(ctx, prog_wkr);
-			Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|" + wkr.Tbl().Tbl_name() + "|" + gplx.core.envs.System_.Ticks__elapsed_in_frac(wkr_time_bgn));
+			Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|" + wkr.Tbl().Tbl_name() + "|" + SystemUtl.Ticks__elapsed_in_frac(wkr_time_bgn));
 		}
 		if (ctx.Heap__copy_to_wiki()) ctx.Heap__increment_nxt();
-		Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|-1|" + gplx.core.envs.System_.Ticks__elapsed_in_frac(all_time_bgn));
+		Gfo_log_.Instance.Info("merge.wkr.done", "data", src_url.NameAndExt() + "|-1|" + SystemUtl.Ticks__elapsed_in_frac(all_time_bgn));
 		src_conn.Rls_conn();	// NOTE: must close conn else pack_conn will stay open
 	}
 	private static Ordered_hash Make_wkrs(Merge2_wkr... wkrs) {

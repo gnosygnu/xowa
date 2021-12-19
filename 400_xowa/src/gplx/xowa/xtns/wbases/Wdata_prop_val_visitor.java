@@ -14,21 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases;
-
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Decimal_adp;
-import gplx.Decimal_adp_;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Math_;
-import gplx.String_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.MathUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.langs.Xol_lang_itm_;
@@ -50,15 +49,15 @@ import gplx.xowa.xtns.wbases.hwtrs.Wdata_lbl_itm;
 import gplx.xowa.xtns.wbases.hwtrs.Wdata_lbl_mgr;
 
 public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.UNSAFE; callers must do synchronized
-	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr;
+	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private BryWtr bfr;
 	private Xol_lang_itm lang;
-	private final Bry_bfr tmp_time_bfr = Bry_bfr_.Reset(255); private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
+	private final BryWtr tmp_time_bfr = BryWtr.NewAndReset(255); private final BryFmtr tmp_time_fmtr = BryFmtr.New();
 	private Wdata_hwtr_msgs msgs;
 	private boolean mode_is_statements;
 	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {
 		this.app = app; this.wdata_mgr = wdata_mgr;
 	}
-	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key, boolean mode_is_statements) {
+	public void Init(BryWtr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key, boolean mode_is_statements) {
 		// init some member variables; 
 		this.bfr = bfr; this.msgs = msgs;
 		this.lang = app.Lang_mgr().Get_by_or_null(lang_key);
@@ -66,22 +65,22 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 		this.mode_is_statements = mode_is_statements;
 	}
 	public void Visit_str(Wbase_claim_string itm) {Write_str(bfr, itm.Val_bry());}
-	public static void Write_str(Bry_bfr bfr, byte[] bry) {bfr.Add(bry);}
+	public static void Write_str(BryWtr bfr, byte[] bry) {bfr.Add(bry);}
 	public void Visit_time(Wbase_claim_time itm) {
-		Write_time(bfr, tmp_time_bfr, tmp_time_fmtr, msgs, Bry_.Empty, -1, itm.Time_as_date());	// for now, don't bother passing ttl; only used for error msg; DATE:2015-08-03
+		Write_time(bfr, tmp_time_bfr, tmp_time_fmtr, msgs, BryUtl.Empty, -1, itm.Time_as_date());	// for now, don't bother passing ttl; only used for error msg; DATE:2015-08-03
 	}
-	public static void Write_time(Bry_bfr bfr, Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, Wdata_hwtr_msgs msgs, byte[] page_url, int pid, Wbase_date date) {
+	public static void Write_time(BryWtr bfr, BryWtr tmp_bfr, BryFmtr tmp_fmtr, Wdata_hwtr_msgs msgs, byte[] page_url, int pid, Wbase_date date) {
 		try {
 			Wbase_date_.To_bfr(bfr, tmp_fmtr, tmp_bfr, msgs, date);
-			if (date.Calendar_is_julian()) bfr.Add_byte_space().Add(msgs.Time_julian());
+			if (date.Calendar_is_julian()) bfr.AddByteSpace().Add(msgs.Time_julian());
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write time; ttl=~{0} pid=~{1} err=~{2}", page_url, pid, Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write time; ttl=~{0} pid=~{1} err=~{2}", page_url, pid, ErrUtl.ToStrLog(e));
 		}
 	}
 	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm)	{Write_langtext(bfr, itm.Text());}
-	public static void Write_langtext(Bry_bfr bfr, byte[] text) {bfr.Add(text);}			// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
+	public static void Write_langtext(BryWtr bfr, byte[] text) {bfr.Add(text);}			// phrase only; PAGE:en.w:Alberta; EX: {{#property:motto}} -> "Fortis et libre"; DATE:2014-08-28
 	public void Visit_entity(Wbase_claim_entity itm) {Write_entity(bfr, wdata_mgr, lang.Key_bry(), itm.Page_ttl_db(), mode_is_statements);}
-	public static void Write_entity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, byte[] lang_key, byte[] entity_ttl_db, boolean mode_is_statements) {
+	public static void Write_entity(BryWtr bfr, Wdata_wiki_mgr wdata_mgr, byte[] lang_key, byte[] entity_ttl_db, boolean mode_is_statements) {
 		// get entity
 		Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(entity_ttl_db);
 
@@ -93,7 +92,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 		byte[] label = entity_doc.Get_label_bry_or_null(lang_key);
 
 		// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19
-		if (label == null && !Bry_.Eq(lang_key, Xol_lang_itm_.Key_en))
+		if (label == null && !BryLni.Eq(lang_key, Xol_lang_itm_.Key_en))
 			label = entity_doc.Get_label_bry_or_null(Xol_lang_itm_.Key_en);
 
 		// if label is still not found, don't add null reference
@@ -110,11 +109,11 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 		}
 	}
 	public void Visit_quantity(Wbase_claim_quantity itm) {Write_quantity(bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());}
-	public static void Write_quantity(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] val_bry, byte[] lo_bry, byte[] hi_bry, byte[] unit) {
+	public static void Write_quantity(BryWtr bfr, Wdata_wiki_mgr wdata_mgr, Xol_lang_itm lang, byte[] val_bry, byte[] lo_bry, byte[] hi_bry, byte[] unit) {
 		// get val, lo, hi; NOTE: must handle large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02; NOTE: must handle decimals; PAGE:en.w:Malinao,_Aklan; DATE:2016-11-08
-		Decimal_adp val = Decimal__parse_or(val_bry, null); if (val == null) throw Err_.new_wo_type("wbase:quanity val can not be null");
-		Decimal_adp lo = Decimal__parse_or(lo_bry, val);
-		Decimal_adp hi = Decimal__parse_or(hi_bry, val);
+		GfoDecimal val = Decimal__parse_or(val_bry, null); if (val == null) throw ErrUtl.NewArgs("wbase:quanity val can not be null");
+		GfoDecimal lo = Decimal__parse_or(lo_bry, val);
+		GfoDecimal hi = Decimal__parse_or(hi_bry, val);
 
 		// 2021-02-14|ISSUE#:839|Only print value without ± if lo and hi are null; PAGE:en.w:2019_FIVB_Volleyball_Women%27s_Challenger_Cup#Pool_A;
 		// TOMBSTONE: if (lo.Eq(hi) && hi.Eq(val))
@@ -122,8 +121,8 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			bfr.Add(lang.Num_mgr().Format_num_by_decimal(val));			// amount; EX: 1,234
 		else {
 			Wdata_hwtr_msgs msgs = wdata_mgr.Hwtr_mgr().Msgs();
-			Decimal_adp lo_dif = val.Subtract(lo);
-			Decimal_adp hi_dif = hi.Subtract(val);
+			GfoDecimal lo_dif = val.Subtract(lo);
+			GfoDecimal hi_dif = hi.Subtract(val);
 			if (lo_dif.Eq(hi_dif)) {	// lo_dif, hi_dif are same; print val±dif
 				bfr.Add(lang.Num_mgr().Format_num_by_decimal(val));		// amount;	EX: 1,234
 				bfr.Add(msgs.Sym_plusminus());							// symbol:	EX: ±
@@ -131,17 +130,17 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			}
 			else {					// lo_dif, hi_dif are diff; print lo - hi; this may not be what MW does
 				bfr.Add(lang.Num_mgr().Format_num_by_decimal(lo));		// lo;		EX: 1,230
-				bfr.Add_byte(AsciiByte.Dash);							// dash:	EX: -
+				bfr.AddByte(AsciiByte.Dash);							// dash:	EX: -
 				bfr.Add(lang.Num_mgr().Format_num_by_decimal(hi));		// hi;		EX: 1,238
 			}
 		}
 
 		// output unit
-		int unit_qid_bgn = unit == null ? Bry_find_.Not_found : Bry_find_.Find_fwd(unit, Wikidata_url);
-		if (unit_qid_bgn == Bry_find_.Not_found) {}			// entity missing; output nothing; EX:"unit":"1"; PAGE:en.w:Malinao,_Aklan DATE:2016-11-08																
+		int unit_qid_bgn = unit == null ? BryFind.NotFound : BryFind.FindFwd(unit, Wikidata_url);
+		if (unit_qid_bgn == BryFind.NotFound) {}			// entity missing; output nothing; EX:"unit":"1"; PAGE:en.w:Malinao,_Aklan DATE:2016-11-08
 		else {												// entity exists; EX:"http://www.wikidata.org/entity/Q11573" (meter)
-			bfr.Add_byte_space();
-			byte[] xid = Bry_.Mid(unit, Wikidata_url.length);
+			bfr.AddByteSpace();
+			byte[] xid = BryLni.Mid(unit, Wikidata_url.length);
 			Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(xid);
 			if (entity_doc != null) {
 				Wdata_langtext_itm label = entity_doc.Get_label_itm_or_null(lang);
@@ -150,51 +149,51 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			}
 		}
 	}
-	private static Decimal_adp Decimal__parse_or(byte[] bry, Decimal_adp or) {	// handle missing lbound / ubound; DATE:2016-12-03
-		return bry == null ? or : Decimal_adp_.parse(String_.new_u8(Normalize_for_decimal(bry)));
+	private static GfoDecimal Decimal__parse_or(byte[] bry, GfoDecimal or) {	// handle missing lbound / ubound; DATE:2016-12-03
+		return bry == null ? or : GfoDecimalUtl.Parse(StringUtl.NewU8(Normalize_for_decimal(bry)));
 	}
 	public static byte[] Normalize_for_decimal(byte[] bry) { // remove leading "+" and any commas; was Bry_.To_long_or(val_bry, Byte_ascii.Comma_bry, 0, val_bry.length, 0)
 		if (bry == null) return null;
-		Bry_bfr bfr = null;
+		BryWtr bfr = null;
 		int len = bry.length;
 		for (int i = 0; i < len; i++) {
 			byte b = bry[i];
 			switch (b) {
 				case AsciiByte.Plus:
 					if (i == 0) {
-						if (bfr == null) bfr = Bry_bfr_.New();
+						if (bfr == null) bfr = BryWtr.New();
 					}
 					else {
-						throw Err_.new_wo_type("invalid decimal format; plus must be at start of String", "raw", bry);
+						throw ErrUtl.NewArgs("invalid decimal format; plus must be at start of String", "raw", bry);
 					}
 					break;
 				case AsciiByte.Comma:
 					if (bfr == null) {
-						bfr = Bry_bfr_.New();
-						bfr.Add_mid(bry, 0, i);
+						bfr = BryWtr.New();
+						bfr.AddMid(bry, 0, i);
 					}
 					break;
 				default:
 					if (bfr != null)
-						bfr.Add_byte(b);
+						bfr.AddByte(b);
 					break;
 			}
 		}
-		return bfr == null ? bry : bfr.To_bry_and_clear();
+		return bfr == null ? bry : bfr.ToBryAndClear();
 	}
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(BoolUtl.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
-	public static void Write_geo(boolean wikidata_page, Bry_bfr bfr, Wdata_lbl_mgr lbl_mgr, Wdata_hwtr_msgs msgs, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
+	public static void Write_geo(boolean wikidata_page, BryWtr bfr, Wdata_lbl_mgr lbl_mgr, Wdata_hwtr_msgs msgs, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
 		// 2020-09-06|ISSUE#:792|rewrite based on https://en.wikipedia.org/w/index.php?title=Module:Wd&action=edit; REF.MW: https://github.com/DataValues/Geo/blob/master/src/Formatters/LatLongFormatter.php
 		// normalize precision
-		double precision = Double_.parse_or(String_.new_a7(prc), Double_.NaN);
-		if (Double_.IsNaN(precision) || precision <= 0) { // "null" or "0" should be 1; PAGE:ru.w:Лысково_(Калужская_область) DATE:2016-11-24
+		double precision = DoubleUtl.ParseOr(StringUtl.NewA7(prc), DoubleUtl.NaN);
+		if (DoubleUtl.IsNaN(precision) || precision <= 0) { // "null" or "0" should be 1; PAGE:ru.w:Лысково_(Калужская_область) DATE:2016-11-24
 			precision = PRECISION_1_OVER_3600;
 		}
 
-		double latitude = Double_.parse_or(String_.new_a7(lat), Double_.NaN);
-		double longitude = Double_.parse_or(String_.new_a7(lng), Double_.NaN);
-		latitude = Math_.Floor(latitude / precision + 0.5) * precision;
-		longitude = Math_.Floor(longitude / precision + 0.5) * precision;
+		double latitude = DoubleUtl.ParseOr(StringUtl.NewA7(lat), DoubleUtl.NaN);
+		double longitude = DoubleUtl.ParseOr(StringUtl.NewA7(lng), DoubleUtl.NaN);
+		latitude = MathUtl.Floor(latitude / precision + 0.5) * precision;
+		longitude = MathUtl.Floor(longitude / precision + 0.5) * precision;
 
 		if (precision >= 1 - (PRECISION_1_OVER_60) && precision < 1) {
 			precision = 1;
@@ -214,22 +213,22 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			unitsPerDegree = 3600;
 		}
 
-		int numDigits = (int)Math_.Ceil(-Math.log10(((double)(unitsPerDegree) * precision)));
+		int numDigits = (int)MathUtl.Ceil(-Math.log10(((double)(unitsPerDegree) * precision)));
 		numDigits += 4; // +4 b/c Map_dd2dms_func.Deg_to_dms needs 4 places to evaluate MS while fracs are evaulated as numDigits
 
 		// write lat / lng
-		Map_dd2dms_func.Deg_to_dms(bfr, BoolUtl.Y, BoolUtl.N, Bry_.new_a7(Double_.To_str(latitude)), numDigits);
-		bfr.Add_byte_comma().Add_byte_space();
-		Map_dd2dms_func.Deg_to_dms(bfr, BoolUtl.Y, BoolUtl.Y, Bry_.new_a7(Double_.To_str(longitude)), numDigits);
+		Map_dd2dms_func.Deg_to_dms(bfr, BoolUtl.Y, BoolUtl.N, BryUtl.NewA7(DoubleUtl.ToStr(latitude)), numDigits);
+		bfr.AddByteComma().AddByteSpace();
+		Map_dd2dms_func.Deg_to_dms(bfr, BoolUtl.Y, BoolUtl.Y, BryUtl.NewA7(DoubleUtl.ToStr(longitude)), numDigits);
 
 		// write globe
 		if (wikidata_page) {
 			byte[] glb_ttl = Wdata_lbl_itm.Extract_ttl(glb);
 			if (glb_ttl != null) {
 				byte[] glb_lbl = lbl_mgr.Get_text__ttl(glb_ttl, glb);
-				bfr.Add_byte_space().Add_byte(AsciiByte.ParenBgn);
+				bfr.AddByteSpace().AddByte(AsciiByte.ParenBgn);
 				Wdata_hwtr_mgr.Write_link_wikidata(bfr, glb_ttl, glb_lbl);
-				bfr.Add_byte(AsciiByte.ParenEnd);
+				bfr.AddByte(AsciiByte.ParenEnd);
 			}
 		}
 	}
@@ -238,6 +237,6 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 	  , PRECISION_1_OVER_60 = 1d / 60d
 	;
 
-	private static final byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
+	private static final byte[] Wikidata_url = BryUtl.NewA7("http://www.wikidata.org/entity/");
 	public void Visit_system(Wbase_claim_value itm) {}
 }

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.htmls.core.htmls.tidy;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*;
 import gplx.xowa.htmls.core.htmls.tidy.vnus.*;
 import nu.validator.htmlparser.common.XmlViolationPolicy;
 import nu.validator.htmlparser.sax.HtmlParser;
@@ -24,10 +26,9 @@ import java.io.IOException;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.ContentHandler;
-import gplx.core.envs.*;
 class Xoh_tidy_wkr__vnu implements Xoh_tidy_wkr {
-		private byte[] depurate(Bry_bfr tidy_bfr, boolean compat) throws SAXException, IOException {
-		byte[] input = tidy_bfr.To_bry_and_clear();
+		private byte[] depurate(BryWtr tidy_bfr, boolean compat) throws SAXException, IOException {
+		byte[] input = tidy_bfr.ToBryAndClear();
 		InputStream stream = new ByteArrayInputStream(input);
 		InputSource source = new InputSource(stream);
 		ByteArrayOutputStream sink = new ByteArrayOutputStream();
@@ -45,7 +46,7 @@ class Xoh_tidy_wkr__vnu implements Xoh_tidy_wkr {
 	}
 	public void Indent_(boolean v) {
 					}
-	public void Exec_tidy(Bry_bfr bfr, byte[] page_url) {
+	public void Exec_tidy(BryWtr bfr, byte[] page_url) {
 				try {
 			bfr.Add(depurate(bfr, true));
 		} 

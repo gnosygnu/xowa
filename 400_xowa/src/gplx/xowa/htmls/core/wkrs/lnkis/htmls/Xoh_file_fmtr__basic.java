@@ -14,13 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_fmt;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.htmls.Gfh_atr_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.files.Xof_file_itm;
@@ -29,16 +28,16 @@ import gplx.xowa.htmls.core.wkrs.bfr_args.Bfr_arg__hatr_id;
 import gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_cls_;
 public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 	private final Xoh_arg_img_core img_atrs = new Xoh_arg_img_core__basic(); 
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(128);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(128);
 	private final Bfr_arg__hatr_id div2_id_atr = Bfr_arg__hatr_id.New_id("xowa_file_div_"), play_id_atr = Bfr_arg__hatr_id.New_id("xowa_file_play_");
 
-	public void Add_media(Bry_bfr bfr, boolean mode_is_hdump, byte[] a_href, byte[] a_title, byte[] a_html) {
-		if (mode_is_hdump) a_href = Bry_.Empty;
+	public void Add_media(BryWtr bfr, boolean mode_is_hdump, byte[] a_href, byte[] a_title, byte[] a_html) {
+		if (mode_is_hdump) a_href = BryUtl.Empty;
 		fmtr_full_media.Bld_many(bfr, a_href, a_title, a_html);
 	}
-	private final Bry_fmt fmtr_full_media = Bry_fmt.Auto("<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}</a>"); // changed from '~{html}\n</a>' due to extra whitespace; ISSUE#:703; PAGE:en.w:Poland; DATE:2020-04-10
+	private final BryFmt fmtr_full_media = BryFmt.Auto("<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}</a>"); // changed from '~{html}\n</a>' due to extra whitespace; ISSUE#:703; PAGE:en.w:Poland; DATE:2020-04-10
 
-	public void Add_full_img(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
+	public void Add_full_img(BryWtr bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
 	, byte[] a_href, boolean a_href_is_file, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 	, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
 	) {
@@ -47,7 +46,7 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 		byte[] img_cls_atr = Xoh_img_cls_.To_html(img_cls, img_cls_other);
 
 		// fmt
-		if (Bry_.Len_eq_0(a_href))	// empty link should not create anchor; EX:[[File:A.png|link=|abc]]; PAGE:en.w:List_of_counties_in_New_York; DATE:2016-01-10
+		if (BryUtl.IsNullOrEmpty(a_href))	// empty link should not create anchor; EX:[[File:A.png|link=|abc]]; PAGE:en.w:List_of_counties_in_New_York; DATE:2016-01-10
 			fmtr_full_img__anch_n.Bld_many(bfr
 			, uid, img_alt, img_atrs, img_cls_atr);
 		else
@@ -55,11 +54,11 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 			, a_href, Xoh_lnki_consts.A_cls_to_bry(a_cls), Xoh_lnki_consts.A_rel_to_bry(a_rel), a_title, a_xowa_title
 			, uid, img_alt, img_atrs, img_cls_atr);
 	}
-	private final Bry_fmt fmtr_full_img__anch_y = Bry_fmt.Auto
+	private final BryFmt fmtr_full_img__anch_y = BryFmt.Auto
 	( "<a href=\"~{a_href}\"~{a_class}~{a_rel}~{a_title} xowa_title=\"~{a_xowa_title}\">"
 	+ "<img id=\"xoimg_~{uid}\" alt=\"~{img_alt}\"~{img_core}~{img_class} /></a>"
 	);
-	private final Bry_fmt fmtr_full_img__anch_n = Bry_fmt.Auto
+	private final BryFmt fmtr_full_img__anch_n = BryFmt.Auto
 	( "<img id=\"xoimg_~{uid}\" alt=\"~{img_alt}\"~{img_core}~{img_class} />");
 
 	public byte[] Bld_thumb_part_img(Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid, byte[] lnki_ttl, byte[] a_href, byte[] img_src, byte[] img_alt) {
@@ -68,13 +67,13 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 			, Xoh_lnki_consts.Tid_a_rel_none, a_title_atr
 			, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_ttl)	// NOTE: must use lnki_ttl, not xfer_itm.Lnki_ttl(); 1st observes case-sensitivity; EX:"a.ogv"; PAGE:de.d:fappieren DATE:2016-06-23
 			, xfer_itm.Html_w(), xfer_itm.Html_h(), img_src, img_alt, Xoh_img_cls_.Tid__none, null);
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
-	public void Add_thumb_core(Bry_bfr bfr, boolean mode_is_hdump, byte[] div1_halign, int div2_id, int div2_width, byte[] div2_content) {
+	public void Add_thumb_core(BryWtr bfr, boolean mode_is_hdump, byte[] div1_halign, int div2_id, int div2_width, byte[] div2_content) {
 		div2_id_atr.Set(mode_is_hdump ? Bfr_arg__hatr_id.Id__ignore : div2_id);
 		fmtr_thumb_core.Bld_many(bfr, div1_halign, div2_id_atr, div2_width, div2_content);
 	}
-	private final Bry_fmt fmtr_thumb_core = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last	// REF.MW: Linker.php|makeImageLink2
+	private final BryFmt fmtr_thumb_core = BryFmt.Auto(StringUtl.ConcatLinesNlSkipLast    // REF.MW: Linker.php|makeImageLink2
 	( "<div class=\"thumb t~{div1_halign}\">"
 	, "  <div~{div2_id} class=\"thumbinner\" style=\"width:~{div2_width}px;\">"
 	,     "~{div3_content}"
@@ -83,54 +82,54 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 	, ""
 	));
 	public byte[] Bld_thumb_part_caption(byte[] magnify_btn, byte[] caption) {return fmtr_thumb_part_caption.Bld_many_to_bry(tmp_bfr, magnify_btn, caption);}
-	private final Bry_fmt fmtr_thumb_part_caption = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
+	private final BryFmt fmtr_thumb_part_caption = BryFmt.Auto(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "    <div class=\"thumbcaption\">~{magnify_btn}~{caption}"
 	, "    </div>"
 	));
 
 	public byte[] Bld_thumb_file_image(byte[] thumb_image, byte[] caption, byte[] alt) {return fmtr_thumb_file_image.Bld_many_to_bry(tmp_bfr, thumb_image, caption, alt);}
-	private final Bry_fmt fmtr_thumb_file_image = Bry_fmt.Auto("    ~{thumb_image}~{caption}~{alt}");
+	private final BryFmt fmtr_thumb_file_image = BryFmt.Auto("    ~{thumb_image}~{caption}~{alt}");
 
 	public byte[] Bld_thumb_file_audio(byte[] caption, byte[] alt, byte[] play_btn, byte[] info_btn) {return fmtr_thumb_file_audio.Bld_many_to_bry(tmp_bfr, play_btn, info_btn, caption, alt);}
-	private Bry_fmt fmtr_thumb_file_audio = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
+	private BryFmt fmtr_thumb_file_audio = BryFmt.Auto(StringUtl.ConcatLinesNlSkipLast
 	( "    <div class=\"xowa_media_div\">~{play_btn}~{info_btn}"
 	, "    </div>~{caption}~{alt}"
 	));
 
 	public byte[] Bld_thumb_file_video(byte[] caption, byte[] alt, byte[] play_btn, byte[] vid_img) {return fmtr_thumb_file_video.Bld_many_to_bry(tmp_bfr, vid_img, play_btn, caption, alt);}
-	private final Bry_fmt fmtr_thumb_file_video = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
+	private final BryFmt fmtr_thumb_file_video = BryFmt.Auto(StringUtl.ConcatLinesNlSkipLast
 	( "    <div class=\"xowa_media_div\">"
 	, "      <div>~{vid_img}"
 	, "      </div>~{play_btn}"
 	, "    </div>~{caption}~{alt}"
 	));
 
-	public Bry_fmt Fmt_thumb_part_alt() {return fmt__thumb_part_alt;} private final Bry_fmt fmt__thumb_part_alt = Bry_fmt.Auto
-	(String_.Concat_lines_nl_skip_last
+	public BryFmt Fmt_thumb_part_alt() {return fmt__thumb_part_alt;} private final BryFmt fmt__thumb_part_alt = BryFmt.Auto
+	(StringUtl.ConcatLinesNlSkipLast
 	( ""
-	, "    <div class=\"" + String_.new_a7(Bry__xowa_alt_text) + "\">"
+	, "    <div class=\"" + StringUtl.NewA7(Bry__xowa_alt_text) + "\">"
 	, "    <hr/>"
 	, "    <div class=\"thumbcaption\">~{html}"
 	, "    </div>"
 	, "    </div>"
 	));
-	public static final byte[] Bry__xowa_alt_text = Bry_.new_a7("xowa_alt_text");
+	public static final byte[] Bry__xowa_alt_text = BryUtl.NewA7("xowa_alt_text");
 
 	public byte[] Bld_thumb_part_magnify(byte[] a_href, byte[] a_title) {
 		return fmtr_thumb_part_magnify.Bld_many_to_bry(tmp_bfr, a_href, a_title);
 	}
-	private final Bry_fmt fmtr_thumb_part_magnify = Bry_fmt.Auto("\n<div class=\"magnify\"><a href=\"~{a_href}\" class=\"internal\" title=\"~{a_title}\"></a></div>");
+	private final BryFmt fmtr_thumb_part_magnify = BryFmt.Auto("\n<div class=\"magnify\"><a href=\"~{a_href}\" class=\"internal\" title=\"~{a_title}\"></a></div>");
 
 	public byte[] Bld_thumb_part_info(byte[] a_href) {
 		return fmtr_thumb_part_info.Bld_many_to_bry(tmp_bfr, a_href);
 	}
-	private final Bry_fmt fmtr_thumb_part_info = Bry_fmt.Auto("\n<div><a href=\"~{a_href}\" class=\"xowa_media_info\" title=\"About this file\"></a></div>");
+	private final BryFmt fmtr_thumb_part_info = BryFmt.Auto("\n<div><a href=\"~{a_href}\" class=\"xowa_media_info\" title=\"About this file\"></a></div>");
 
 	public byte[] Bld_thumb_part_play(boolean mode_is_hdump, int uid, byte[] a_href, byte[] a_xowa_title, int a_width, int a_max_width) {
 		if (mode_is_hdump) {
 			play_id_atr.Set(Bfr_arg__hatr_id.Id__ignore);
-			a_href = Bry_.Empty;
+			a_href = BryUtl.Empty;
 			if (a_max_width == -1) {
 				a_width = 218; a_max_width = 220;	// NOTE: hardcode widths; hdump will get actual file with from fsdb
 			}
@@ -139,7 +138,7 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 			play_id_atr.Set(uid);
 		return fmtr_thumb_part_play.Bld_many_to_bry(tmp_bfr, play_id_atr, a_href, a_xowa_title, a_width, a_max_width);
 	}
-	private final Bry_fmt fmtr_thumb_part_play = Bry_fmt.Auto
+	private final BryFmt fmtr_thumb_part_play = BryFmt.Auto
 	("\n<div><a~{id} href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\" class=\"xowa_media_play\" style=\"width:~{a_width}px;max-width:~{a_max_width}px;\" alt=\"Play sound\"></a></div>");
 
 	public static byte[] Escape_xowa_title(byte[] lnki_ttl) {

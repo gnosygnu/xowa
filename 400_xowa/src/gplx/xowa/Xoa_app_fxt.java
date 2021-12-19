@@ -13,13 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa;
 import gplx.core.envs.*;
 import gplx.gfui.kits.core.*;
 import gplx.langs.gfs.*;
 import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.dlgs.Gfo_usr_dlg__log_base;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.xowa.bldrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.names.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.domains.*;
@@ -34,7 +41,7 @@ public class Xoa_app_fxt {
 	}
 	public static Xoae_app Make__app__edit(String op_sys, Io_url root_dir) {
 		Io_url user_dir = root_dir.GenSubDir_nest("user", "test_user");
-		Gfo_usr_dlg__log_base.Instance.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));			
+		Gfo_usr_dlg__log_base.Instance.Log_dir_(user_dir.GenSubDir_nest("tmp", "current"));
 		Xoae_app app = new Xoae_app(Gfo_usr_dlg_.Test(), Xoa_app_mode.Itm_cmd, root_dir, root_dir.GenSubDir("wiki"), root_dir.GenSubDir("file"), user_dir, root_dir.GenSubDir_nest("user", "anonymous", "wiki"), op_sys);
 		GfsCore.Instance.Clear();							// NOTE: must clear
 		GfsCore.Instance.AddCmd(app, Xoae_app.Invk_app);	// NOTE: must add app to GfsCore; app.Gfs_mgr() always adds current app to GfsCore; note this causes old test to leave behind GfsCore for new test
@@ -56,7 +63,7 @@ public class Xoa_app_fxt {
 	}
 	public static Xowv_wiki Make__wiki__view(Xoa_app app) {return Make__wiki__view(app, "en.wikipedia.org");}
 	public static Xowv_wiki Make__wiki__view(Xoa_app app, String domain_str) {
-		byte[] domain_bry = Bry_.new_u8(domain_str);
+		byte[] domain_bry = BryUtl.NewU8(domain_str);
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(domain_str);
 		Xowv_wiki rv = new Xowv_wiki((Xoav_app)app, domain_bry, wiki_dir);
 		((Xoav_wiki_mgr)app.Wiki_mgri()).Add(rv);
@@ -71,7 +78,7 @@ public class Xoa_app_fxt {
 	public static Xowe_wiki Make__wiki__edit(Xoae_app app, String key) {return Make__wiki__edit(app, key, app.Lang_mgr().Lang_en());}
 	public static Xowe_wiki Make__wiki__edit(Xoae_app app, String key, Xol_lang_itm lang) {
 		Io_url wiki_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(key);
-		Xowe_wiki rv = new Xowe_wiki(app, lang, Xow_ns_mgr_.default_(lang.Case_mgr()), Xow_domain_itm_.parse(Bry_.new_u8(key)), wiki_dir);
+		Xowe_wiki rv = new Xowe_wiki(app, lang, Xow_ns_mgr_.default_(lang.Case_mgr()), Xow_domain_itm_.parse(BryUtl.NewU8(key)), wiki_dir);
 		rv.File_mgr().Dbmeta_mgr().Depth_(2);					// TEST: written for 2 depth
 		rv.Props().Main_page_(Xoa_page_.Main_page_bry);		// TEST: default to Main Page (nothing tests loading Main Page from wiki.gfs)			
 		rv.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__main).Subpages_enabled_(true);
@@ -81,18 +88,18 @@ public class Xoa_app_fxt {
 	public static void repo_(Xoae_app app, Xowe_wiki wiki) {
 		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/wiki/repo/src/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/wiki/repo/trg/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
-		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:wiki"), Bry_.new_a7("trg:wiki"));
+		wiki.File_mgr().Repo_mgr().Add_repo(BryUtl.NewA7("src:wiki"), BryUtl.NewA7("trg:wiki"));
 		app.File_mgr().Repo_mgr().Set("src:c", "mem/wiki/repo/src/", "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		app.File_mgr().Repo_mgr().Set("trg:c", "mem/wiki/repo/trg/", "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
-		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:c"), Bry_.new_a7("trg:c"));
+		wiki.File_mgr().Repo_mgr().Add_repo(BryUtl.NewA7("src:c"), BryUtl.NewA7("trg:c"));
 	}
 	public static void repo2_(Xoae_app app, Xowe_wiki wiki) {
 		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/http/en.wikipedia.org/"				, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/xowa/file/en.wikipedia.org/"			, wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
-		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:wiki"), Bry_.new_a7("trg:wiki"));
+		wiki.File_mgr().Repo_mgr().Add_repo(BryUtl.NewA7("src:wiki"), BryUtl.NewA7("trg:wiki"));
 		app.File_mgr().Repo_mgr().Set("src:comm", "mem/http/commons.wikimedia.org/"			, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		app.File_mgr().Repo_mgr().Set("trg:comm", "mem/xowa/file/commons.wikimedia.org/"	, "commons.wikimedia.org").Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
-		wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src:comm"), Bry_.new_a7("trg:comm"));
+		wiki.File_mgr().Repo_mgr().Add_repo(BryUtl.NewA7("src:comm"), BryUtl.NewA7("trg:comm"));
 	}
 	public static void Init_gui(Xoae_app app, Xowe_wiki wiki) {
 		app.Gui_mgr().Browser_win().Init_by_kit(Mem_kit.Instance);
@@ -100,7 +107,7 @@ public class Xoa_app_fxt {
 	}
 	public static Xob_bldr bldr_(Xoae_app app) {
 		Xob_bldr rv = new Xob_bldr(app);
-		rv.Sort_mem_len_(Io_mgr.Len_kb).Dump_fil_len_(Io_mgr.Len_kb).Make_fil_len_(Io_mgr.Len_kb);
+		rv.Sort_mem_len_(IoConsts.LenKB).Dump_fil_len_(IoConsts.LenKB).Make_fil_len_(IoConsts.LenKB);
 		return rv;
 	}
 	public static final Io_url Root_dir = Op_sys.Cur().Tid_is_lnx() ? Io_url_.new_dir_("/xowa/") : Io_url_.new_dir_("C:\\xowa\\");

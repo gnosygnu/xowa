@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import org.junit.*; import gplx.core.strings.*;
+package gplx.xowa.langs.parsers;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.xowa.*; import gplx.xowa.langs.*;
+import org.junit.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.wikis.nss.*;
@@ -22,7 +32,7 @@ public class Xol_lang_srl_tst {
 	private Xol_lang_srl_fxt fxt = new Xol_lang_srl_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test public void Ns_names() {
-		String raw = String_.Concat_lines_nl
+		String raw = StringUtl.ConcatLinesNl
 			(	"ns_names"
 			,	"  .load_text("
 			,	"<:['"
@@ -37,7 +47,7 @@ public class Xol_lang_srl_tst {
 		fxt.Run_save_ns_grp(grp, Xol_lang_itm.Invk_ns_names, raw);
 	}
 	@Test public void Ns_aliases() {
-		String raw = String_.Concat_lines_nl
+		String raw = StringUtl.ConcatLinesNl
 			(	"ns_aliases"
 			,	"  .load_text("
 			,	"<:['"
@@ -52,7 +62,7 @@ public class Xol_lang_srl_tst {
 		fxt.Run_save_ns_grp(grp, Xol_lang_itm.Invk_ns_aliases, raw);
 	}
 	@Test public void Kwds() {
-		String raw = String_.Concat_lines_nl	// NOTE: notoc must go before toc because ID order
+		String raw = StringUtl.ConcatLinesNl    // NOTE: notoc must go before toc because ID order
 			(	"keywords"
 			,	"  .load_text("
 			,	"<:['"
@@ -67,7 +77,7 @@ public class Xol_lang_srl_tst {
 		fxt.Run_save_kwd_mgr(kwd_mgr, Xol_lang_itm.Invk_keywords, raw);
 	}
 	@Test public void Specials() {
-		String raw = String_.Concat_lines_nl	// NOTE: notoc must go before toc because ID order
+		String raw = StringUtl.ConcatLinesNl    // NOTE: notoc must go before toc because ID order
 			(	"specials"
 			,	"  .clear"
 			,	"  .load_text("
@@ -83,7 +93,7 @@ public class Xol_lang_srl_tst {
 		fxt.Run_save_specials_mgr(specials_mgr, Xol_lang_itm.Invk_specials, raw);
 	}
 	@Test public void Kwds_blank_line() {	// PURPOSE.fix: extra blank line negates entire entry
-		String raw = String_.Concat_lines_nl
+		String raw = StringUtl.ConcatLinesNl
 			(	"keywords"
 			,	"  .load_text("
 			,	"<:['"
@@ -97,7 +107,7 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_keywords(kwd_mgr, fxt.kwd_("toc", false, "table_of_contents", "toc_y"));	// make sure 2 items (and not 0)
 	}
 	@Test public void Msgs() {
-		String raw = String_.Concat_lines_nl
+		String raw = StringUtl.ConcatLinesNl
 			(	"messages"
 			,	"  .load_text("
 			,	"<:['"
@@ -112,7 +122,7 @@ public class Xol_lang_srl_tst {
 		fxt.Run_save_msg_mgr(msg_mgr, Xol_lang_itm.Invk_messages, raw);
 	}
 	@Test public void Fallback() {
-		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "zh-hans"), String_.Concat_lines_nl
+		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "zh-hans"), StringUtl.ConcatLinesNl
 			(	"this"
 			,	".keywords"
 			,	"  .load_text("
@@ -134,7 +144,7 @@ public class Xol_lang_srl_tst {
 			,	").lang"
 			,	";"
 			));
-		String raw = String_.Concat_lines_nl	// NOTE: notoc must go before toc because ID order
+		String raw = StringUtl.ConcatLinesNl    // NOTE: notoc must go before toc because ID order
 			(	"fallback_load('zh-hans')"
 			,	".keywords"
 			,	"  .load_text("
@@ -164,10 +174,10 @@ public class Xol_lang_srl_tst {
 	@Test public void Fallback_circular() {	// PURPOSE: pt and pt-br cite each other as fallback in Messages*.php; DATE:2013-02-18
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt")		, "fallback_load('pt-br');");
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt-br")	, "fallback_load('pt');");
-		fxt.App().Lang_mgr().Get_by_or_load(Bry_.new_a7("pt")); // fails if test-suite gets stuck
+		fxt.App().Lang_mgr().Get_by_or_load(BryUtl.NewA7("pt")); // fails if test-suite gets stuck
 	}
 	@Test public void Num_fmt() {
-		String raw = String_.Concat_lines_nl
+		String raw = StringUtl.ConcatLinesNl
 		( "numbers {"
 		, "  separators {"
 		, "    clear;"
@@ -185,7 +195,7 @@ public class Xol_lang_srl_tst {
 			.Init_separators(",", "'")
 			.Init_separators(".", ",")
 			;
-		fxt.Run_save_num_mgr(fxt.Lang().Num_mgr(), String_.Concat_lines_nl
+		fxt.Run_save_num_mgr(fxt.Lang().Num_mgr(), StringUtl.ConcatLinesNl
 		( "numbers {"
 		, "  separators {"
 		, "    clear;"
@@ -199,21 +209,21 @@ public class Xol_lang_srl_tst {
 class Xol_lang_srl_fxt {
 	public void Clear() {
 		app = Xoa_app_fxt.Make__app__edit();
-		lang = Xol_lang_itm.New(app.Lang_mgr(), Bry_.new_a7("fr"));
+		lang = Xol_lang_itm.New(app.Lang_mgr(), BryUtl.NewA7("fr"));
 		Xoa_gfs_mgr.Msg_parser_init();	// required by fallback_load
 	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr();
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
-	public Xow_ns ns_(int id, String s) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, Bry_.new_u8(s), false);}
-	public Xol_specials_itm special_(String key, String... words) {return new Xol_specials_itm(Bry_.new_u8(key), Bry_.Ary(words));}
+	public Xow_ns ns_(int id, String s) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, BryUtl.NewU8(s), false);}
+	public Xol_specials_itm special_(String key, String... words) {return new Xol_specials_itm(BryUtl.NewU8(key), BryUtl.Ary(words));}
 	public Xol_kwd_grp kwd_(String key, boolean case_match, String... words) {
-		Xol_kwd_grp rv = new Xol_kwd_grp(Bry_.new_u8(key));
-		rv.Srl_load(case_match, Bry_.Ary(words));
+		Xol_kwd_grp rv = new Xol_kwd_grp(BryUtl.NewU8(key));
+		rv.Srl_load(case_match, BryUtl.Ary(words));
 		return rv;
 	}
 	public Xol_msg_itm msg_(String key, String val) {
-		Xol_msg_itm rv = lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_u8(key));
-		rv.Atrs_set(Bry_.new_u8(val), false, false);
+		Xol_msg_itm rv = lang.Msg_mgr().Itm_by_key_or_new(BryUtl.NewU8(key));
+		rv.Atrs_set(BryUtl.NewU8(val), false, false);
 		return rv;
 	}
 	public Xol_lang_srl_fxt Init_clear() {
@@ -221,7 +231,7 @@ class Xol_lang_srl_fxt {
 		return this;
 	}
 	public Xol_lang_srl_fxt Init_separators(String k, String v) {
-		lang.Num_mgr().Separators_mgr().Set(Bry_.new_u8(k), Bry_.new_u8(v));
+		lang.Num_mgr().Separators_mgr().Set(BryUtl.NewU8(k), BryUtl.NewU8(v));
 		return this;
 	}
 	public void Invk(String raw) {
@@ -231,37 +241,37 @@ class Xol_lang_srl_fxt {
 		app.Gfs_mgr().Run_str_for(lang, raw);
 	}
 	public void Tst_ns_grp(Xol_ns_grp grp, Xow_ns... expd_ns) {
-		Tfds.Eq_str_lines(Xto_str(expd_ns), Xto_str(To_ary(grp)));
+		GfoTstr.EqLines(Xto_str(expd_ns), Xto_str(To_ary(grp)));
 	}
 	public void Run_save_ns_grp(Xol_ns_grp grp, String invk, String raw) {
 		Xol_lang_srl.Save_ns_grps(bldr, grp, invk);
-		Tfds.Eq_str_lines("." + raw, bldr.Bfr().To_str_and_clear());
+		GfoTstr.EqLines("." + raw, bldr.Bfr().ToStrAndClear());
 	}
 	public void Run_save_kwd_mgr(Xol_kwd_mgr kwd_mgr, String invk, String raw) {
 		Xol_lang_srl.Save_keywords(bldr, kwd_mgr);
-		Tfds.Eq_str_lines("." + raw, bldr.Bfr().To_str_and_clear());
+		GfoTstr.EqLines("." + raw, bldr.Bfr().ToStrAndClear());
 	}
 	public void Run_save_msg_mgr(Xol_msg_mgr msg_mgr, String invk, String raw) {
 		Xol_lang_srl.Save_messages(bldr, msg_mgr, true);
-		Tfds.Eq_str_lines("." + raw, bldr.Bfr().To_str_and_clear());
+		GfoTstr.EqLines("." + raw, bldr.Bfr().ToStrAndClear());
 	}
 	public void Run_save_num_mgr(Xol_num_mgr num_mgr, String raw) {
 		Xol_lang_srl.Save_num_mgr(bldr, num_mgr);
-		Tfds.Eq_str_lines(raw, bldr.Bfr().To_str_and_clear());
+		GfoTstr.EqLines(raw, bldr.Bfr().ToStrAndClear());
 	}
 	public void Run_save_specials_mgr(Xol_specials_mgr specials_mgr, String invk, String raw) {
 		Xol_lang_srl.Save_specials(bldr, specials_mgr);
-		Tfds.Eq_str_lines("." + raw, bldr.Bfr().To_str_and_clear());
+		GfoTstr.EqLines("." + raw, bldr.Bfr().ToStrAndClear());
 	}
-	public void Tst_num_fmt(String raw, String expd) {Tfds.Eq(expd, String_.new_u8(lang.Num_mgr().Format_num(Bry_.new_u8(raw))));}
+	public void Tst_num_fmt(String raw, String expd) {GfoTstr.EqObj(expd, StringUtl.NewU8(lang.Num_mgr().Format_num(BryUtl.NewU8(raw))));}
 	public void Tst_keywords(Xol_kwd_mgr kwd_mgr, Xol_kwd_grp... ary) {
-		Tfds.Eq_str_lines(Xto_str(ary), Xto_str(To_ary(kwd_mgr)));
+		GfoTstr.EqLines(Xto_str(ary), Xto_str(To_ary(kwd_mgr)));
 	}
 	public void Tst_messages(Xol_msg_mgr msg_mgr, Xol_msg_itm... ary) {
-		Tfds.Eq_str_lines(Xto_str(ary), Xto_str(To_ary(msg_mgr)));
+		GfoTstr.EqLines(Xto_str(ary), Xto_str(To_ary(msg_mgr)));
 	}
 	public void Tst_specials(Xol_specials_mgr specials_mgr, Xol_specials_itm... expd) {
-		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(To_ary(specials_mgr)));
+		GfoTstr.EqLines(Xto_str(expd), Xto_str(To_ary(specials_mgr)));
 	}
 	private String Xto_str(Xol_specials_itm[] ary) {
 		int len = ary.length;			
@@ -271,10 +281,10 @@ class Xol_lang_srl_fxt {
 			int aliases_len = itm.Aliases().length;
 			for (int j = 0; j < aliases_len; j++) {
 				if (j != 0) sb.Add("~");
-				sb.Add(itm.Aliases()[j]).Add_char_nl();
+				sb.Add(itm.Aliases()[j]).AddCharNl();
 			}
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 	private Xol_specials_itm[] To_ary(Xol_specials_mgr specials_mgr) {
 		int len = specials_mgr.Len();
@@ -287,9 +297,9 @@ class Xol_lang_srl_fxt {
 		int len = ary.length;			
 		for (int i = 0; i < len; i++) {
 			Xow_ns ns = ary[i];
-			sb.Add(ns.Id()).Add("|").Add(ns.Name_db_str()).Add_char_nl();
+			sb.Add(ns.Id()).Add("|").Add(ns.Name_db_str()).AddCharNl();
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 	Xow_ns[] To_ary(Xol_ns_grp ary) {
 		int len = ary.Len();			
@@ -318,9 +328,9 @@ class Xol_lang_srl_fxt {
 			for (int j = 0; j < itms_len; j++) {
 				sb.Add(itms[i].Val()).Add(";");
 			}
-			sb.Add_char_nl();
+			sb.AddCharNl();
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 	Xol_msg_itm[] To_ary(Xol_msg_mgr msg_mgr) {
 		int len = msg_mgr.Itms_max();
@@ -336,9 +346,9 @@ class Xol_lang_srl_fxt {
 		int len = ary.length;			
 		for (int i = 0; i < len; i++) {
 			Xol_msg_itm itm = ary[i];
-			sb.Add(itm.Key()).Add("|").Add(itm.Val()).Add_char_nl();
+			sb.Add(itm.Key()).Add("|").Add(itm.Val()).AddCharNl();
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 	private static String_bldr sb = String_bldr_.new_();
 }

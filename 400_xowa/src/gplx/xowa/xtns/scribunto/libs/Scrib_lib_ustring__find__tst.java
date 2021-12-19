@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-import gplx.Object_;
-import gplx.String_;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.consoles.Console_adp__sys;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
 import gplx.xowa.xtns.scribunto.Scrib_lib;
 import gplx.xowa.xtns.scribunto.engines.mocks.Mock_scrib_fxt;
@@ -33,10 +33,10 @@ public class Scrib_lib_ustring__find__tst {
 		fxt.Test__find("abcd"          , ""     ,  2, BoolUtl.Y, "2;1"); // empty find should return values; EX:w:Fool's_mate; DATE:2014-03-04
 		fxt.Test__find("a€b"           , "€"    ,  1, BoolUtl.Y, "2;2"); // find is bytes=3
 	}
-	@Test  public void Plain_u8() {
+	@Test public void Plain_u8() {
 		fxt.Test__find("𤭢-a-"         , "-"    ,  3, BoolUtl.Y, "4;4"); // starts at cp=3 which should be a, not 1st dash; ISSUE#:506; DATE:2019-06-30
 	}
-	@Test  public void Bgn__negative() {
+	@Test public void Bgn__negative() {
 		fxt.Test__find("abab"          , "b"    , -1, BoolUtl.Y, "4;4"); // search from back of String
 		fxt.Test__find("abab"          , "b"    , -9, BoolUtl.Y, "2;2"); // do not throw error if negative index > text.length; ISSUE#:366; DATE:2019-02-23
 		fxt.Test__find("𤭢"            , "𤭢"   , -1, BoolUtl.Y, "1;1"); // fails if "" b/c it would have counted -1 as -1 char instead of -1 codepoint
@@ -48,10 +48,10 @@ public class Scrib_lib_ustring__find__tst {
 		fxt.Test__find("𤭢𤭢b𤭢𤭢b"    , "b"       ,  2, BoolUtl.N, "3;3"); // bytes=4
 		fxt.Test__find("abcd"          , "b"       ,  1, BoolUtl.N, "2;2"); // basic
 		fxt.Test__find("abad"          , "a"       ,  2, BoolUtl.N, "3;3"); // bgn
-		fxt.Test__find("abcd"          , "x"       ,  1, BoolUtl.N, String_.Null_mark);  // no-match
+		fxt.Test__find("abcd"          , "x"       ,  1, BoolUtl.N, StringUtl.NullMark);  // no-match
 		fxt.Test__find("abcd"          , ""        ,  2, BoolUtl.N, "2;1"); // empty regx should return values; regx; EX:w:Fool's_mate; DATE:2014-03-04
 	}
-	@Test  public void Regx__int() { // PURPOSE: allow int find; PAGE:ro.w:Innsbruck DATE:2015-09-12
+	@Test public void Regx__int() { // PURPOSE: allow int find; PAGE:ro.w:Innsbruck DATE:2015-09-12
 		fxt.Test__find(123             , "2"       ,  1, BoolUtl.N, "2;2");
 	}
 	@Test public void Regx__groups() {
@@ -61,7 +61,7 @@ public class Scrib_lib_ustring__find__tst {
 	@Test public void Regx__caret() {
 		fxt.Test__find("abcd"          , "^(c)"    ,  3, BoolUtl.N, "3;3;c");	// ^ should be converted to \G; regx; EX:cs.n:Category:1._září_2008; DATE:2014-05-07
 	}
-	@Test  public void Regx__return_is_int() {
+	@Test public void Regx__return_is_int() {
 		fxt.Test__find("a"             , "()"      ,  2, BoolUtl.N, "2;1;2");
 	}
 	@Test public void Surrogate__find__value() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
@@ -95,7 +95,7 @@ class Scrib_lib_ustring__find__fxt {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_find, Scrib_kv_utl_.base1_many_(text, regx, bgn, plain), expd);
 	}
 	private String Bld_test_string(Object text, String regx, int bgn, boolean plain, String expd) {
-		String invk = "{{" + String_.Format("#invoke:Sandbox/Gnosygnu|ustring_find|{0}|{1}|{2}|{3}", Object_.Xto_str_strict_or_empty(text), regx, bgn, plain ? BoolUtl.TrueStr : BoolUtl.FalseStr) + "}}";
+		String invk = "{{" + StringUtl.Format("#invoke:Sandbox/Gnosygnu|ustring_find|{0}|{1}|{2}|{3}", ObjectUtl.ToStrOrEmpty(text), regx, bgn, plain ? BoolUtl.TrueStr : BoolUtl.FalseStr) + "}}";
 		return fxt.Parser_fxt().Make__test_string(invk, expd);
 	}
 }

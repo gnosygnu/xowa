@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.addons.wikis.directorys.dbs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
 public class Xowdir_wiki_props {
 	public Xowdir_wiki_props() {}
 	public Xowdir_wiki_props(String domain, String name, String main_page) {
@@ -32,11 +34,11 @@ public class Xowdir_wiki_props {
 	}
 
 	public void Set(String key, String val) {
-		if      (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__domain))      this.domain = val;
-		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__name))        this.name = val;
-		else if (String_.Eq(key, Xowd_cfg_key_.Key__init__main_page))   this.main_page = val;
-		else throw Err_.new_unhandled_default(key);
+		if      (StringUtl.Eq(key, Xowd_cfg_key_.Key__wiki__core__domain))      this.domain = val;
+		else if (StringUtl.Eq(key, Xowd_cfg_key_.Key__wiki__core__name))        this.name = val;
+		else if (StringUtl.Eq(key, Xowd_cfg_key_.Key__init__main_page))   this.main_page = val;
+		else throw ErrUtl.NewUnhandled(key);
 	}
 
-	public String To_str() {return String_.Concat(domain, "|", name, "|", main_page );}
+	public String To_str() {return StringUtl.Concat(domain, "|", name, "|", main_page );}
 }

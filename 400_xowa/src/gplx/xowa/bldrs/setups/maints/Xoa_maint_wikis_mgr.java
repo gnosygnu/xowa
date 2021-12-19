@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs.setups.maints;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*;
 public class Xoa_maint_wikis_mgr implements Gfo_invk {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoa_maint_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public int Len() {return hash.Len();}
 	public Xowe_wiki Get_at(int i) {
 		if (init) Init();
-		byte[] domain = (byte[])hash.Get_at(i);
+		byte[] domain = (byte[])hash.GetAt(i);
 		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(domain);
 		wiki.Init_assert();
 		return wiki;
@@ -29,7 +36,7 @@ public class Xoa_maint_wikis_mgr implements Gfo_invk {
 	public void Init() {
 		int len = this.Len();
 		for (int i = 0; i < len; i++) {
-			byte[] domain = (byte[])hash.Get_at(i);
+			byte[] domain = (byte[])hash.GetAt(i);
 			Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(domain);
 			wiki.Init_assert();
 		}

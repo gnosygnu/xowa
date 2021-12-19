@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.vendor.*; import gplx.xowa.mediawiki.vendor.wikimedia.*; import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.*;
-import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.Converter.*;
+package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.mediawiki.XomwLog_;
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpFloat_;
+import gplx.xowa.mediawiki.XophpInt_;
+import gplx.xowa.mediawiki.XophpMath_;
+import gplx.xowa.mediawiki.XophpRegex_;
+import gplx.xowa.mediawiki.XophpString_;
 // MW.SRC:1.33.1
 public class XomwEvaluator {
 	/**
@@ -75,24 +85,24 @@ public class XomwEvaluator {
 		XophpArray operandSymbols = null;			
 		if (!XophpArray.isset(m, 3)) {
 			operandSymbols = XophpArray.New()
-				.Add("n", Decimal_adp_.int_(XophpInt_.intval(m.Get_at_str(1))))
-				.Add("i", Decimal_adp_.int_(XophpInt_.intval(m.Get_at_str(1))))
-				.Add("v", Decimal_adp_.Zero)
-				.Add("w", Decimal_adp_.Zero)
-				.Add("f", Decimal_adp_.Zero)
-				.Add("t", Decimal_adp_.Zero)
+				.Add("n", GfoDecimalUtl.NewByInt(XophpInt_.intval(m.Get_at_str(1))))
+				.Add("i", GfoDecimalUtl.NewByInt(XophpInt_.intval(m.Get_at_str(1))))
+				.Add("v", GfoDecimalUtl.Zero)
+				.Add("w", GfoDecimalUtl.Zero)
+				.Add("f", GfoDecimalUtl.Zero)
+				.Add("t", GfoDecimalUtl.Zero)
 			;
 		} else {
 			String absValStr = m.Get_at_str(1);
 			String intStr = m.Get_at_str(2);
 			String fracStr = m.Get_at_str(3);
 			operandSymbols = XophpArray.New()
-				.Add("n", Decimal_adp_.double_(XophpFloat_.floatval(absValStr)))
-				.Add("i", Decimal_adp_.int_(XophpInt_.intval(intStr)))
-				.Add("v", Decimal_adp_.int_(XophpString_.strlen(fracStr)))
-				.Add("w", Decimal_adp_.int_(XophpString_.strlen(XophpString_.rtrim(fracStr, "0"))))
-				.Add("f", Decimal_adp_.int_(XophpInt_.intval(fracStr)))
-				.Add("t", Decimal_adp_.int_(XophpInt_.intval(XophpString_.rtrim(fracStr, "0"))))
+				.Add("n", GfoDecimalUtl.NewByDouble(XophpFloat_.floatval(absValStr)))
+				.Add("i", GfoDecimalUtl.NewByInt(XophpInt_.intval(intStr)))
+				.Add("v", GfoDecimalUtl.NewByInt(XophpString_.strlen(fracStr)))
+				.Add("w", GfoDecimalUtl.NewByInt(XophpString_.strlen(XophpString_.rtrim(fracStr, "0"))))
+				.Add("f", GfoDecimalUtl.NewByInt(XophpInt_.intval(fracStr)))
+				.Add("t", GfoDecimalUtl.NewByInt(XophpInt_.intval(XophpString_.rtrim(fracStr, "0"))))
 			;
 		}
 
@@ -109,9 +119,9 @@ public class XomwEvaluator {
 			for (String token : tokens) {
 				int ord = XophpString_.ord(token);
 				if (XophpArray.isset(operandSymbols, token)) {
-					stack.Add(XomwStackItem.New__number((Decimal_adp)operandSymbols.Get_by(token)));
+					stack.Add(XomwStackItem.New__number((GfoDecimal)operandSymbols.Get_by(token)));
 				} else if (ord >= zero && ord <= nine) {
-					stack.Add(XomwStackItem.New__number(Decimal_adp_.int_(XophpInt_.intval(token))));
+					stack.Add(XomwStackItem.New__number(GfoDecimalUtl.NewByInt(XophpInt_.intval(token))));
 				} else {
 					XomwStackItem right = (XomwStackItem)XophpArray.array_pop(stack);
 					XomwStackItem left = (XomwStackItem)XophpArray.array_pop(stack);
@@ -145,38 +155,38 @@ public class XomwEvaluator {
 				right = XomwStackItem.New__range(new XomwRange(right.As_num(), null));
 			}
 		}
-		if (String_.Eq(token, "or")) {
+		if (StringUtl.Eq(token, "or")) {
 			return XomwStackItem.New__bool(left.As_bool() || right.As_bool());
 		}
-		else if (String_.Eq(token, "and")) {
+		else if (StringUtl.Eq(token, "and")) {
 			return XomwStackItem.New__bool(left.As_bool() && right.As_bool());
 		}
-		else if (String_.Eq(token, "is")) {
+		else if (StringUtl.Eq(token, "is")) {
 			return XomwStackItem.New__bool(left.As_bool() == right.As_bool());
 		}
-		else if (String_.Eq(token, "is-not")) {
+		else if (StringUtl.Eq(token, "is-not")) {
 			return XomwStackItem.New__bool(left.As_bool() != right.As_bool());
 		}
-		else if (String_.Eq(token, "in")) {
+		else if (StringUtl.Eq(token, "in")) {
 			return XomwStackItem.New__bool(right.As_range().isNumberIn(left.As_num()));
 		}
-		else if (String_.Eq(token, "not-in")) {
+		else if (StringUtl.Eq(token, "not-in")) {
 			return XomwStackItem.New__bool(!right.As_range().isNumberIn(left.As_num()));
 		}
-		else if (String_.Eq(token, "within")) {
+		else if (StringUtl.Eq(token, "within")) {
 			return XomwStackItem.New__bool(right.As_range().isNumberWithin(left.As_num()));
 		}
-		else if (String_.Eq(token, "not-within")) {
+		else if (StringUtl.Eq(token, "not-within")) {
 			return XomwStackItem.New__bool(!right.As_range().isNumberWithin(left.As_num()));
 		}
-		else if (String_.Eq(token, "mod")) {
+		else if (StringUtl.Eq(token, "mod")) {
 			if (left.Tid() == XomwStackItem.Tid__number) {
 				return XomwStackItem.New__number(XophpMath_.fmod_decimal(left.As_num(), right.As_num()));
 			}
 
 			return XomwStackItem.New__number(XophpMath_.fmod_decimal(left.As_num(), right.As_num()));
 		}
-		else if (String_.Eq(token, ",")) {
+		else if (StringUtl.Eq(token, ",")) {
 			XomwRange range = null;
 			if (left.Tid() == XomwStackItem.Tid__range) {
 				range = left.As_range();
@@ -187,7 +197,7 @@ public class XomwEvaluator {
 
 			return XomwStackItem.New__range(range);
 		}
-		else if (String_.Eq(token, "..")) {
+		else if (StringUtl.Eq(token, "..")) {
 			return XomwStackItem.New__range(new XomwRange(left.As_num(), right.As_num()));
 		}
 		else {
@@ -196,7 +206,7 @@ public class XomwEvaluator {
 	}
 }
 class XomwStackItem {
-	XomwStackItem(int tid, boolean val__bool, Decimal_adp val__number, XomwRange val__range) {
+	XomwStackItem(int tid, boolean val__bool, GfoDecimal val__number, XomwRange val__range) {
 		this.tid = tid;
 		this.val__bool = val__bool;
 		this.val__number = val__number;
@@ -207,10 +217,10 @@ class XomwStackItem {
 		if (tid != Tid__bool) Fail_bc_wrong_type(Tid__bool);
 		return val__bool;
 	} private final boolean val__bool;
-	public Decimal_adp As_num() {
+	public GfoDecimal As_num() {
 		if (tid != Tid__number) Fail_bc_wrong_type(Tid__number);
 		return val__number;
-	} private final Decimal_adp val__number;
+	} private final GfoDecimal val__number;
 	public XomwRange As_range() {
 		if (tid != Tid__range) Fail_bc_wrong_type(Tid__range);
 		return val__range;
@@ -220,7 +230,7 @@ class XomwStackItem {
 			case Tid__bool: return val__bool;
 			case Tid__number: return val__number;
 			case Tid__range: return val__range;
-			default: throw Err_.new_unhandled_default(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	
@@ -232,12 +242,12 @@ class XomwStackItem {
 			case Tid__bool: return "boolean";
 			case Tid__number: return "number";
 			case Tid__range: return "range";
-			default: throw Err_.new_unhandled_default(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 
 	public static XomwStackItem New__bool(boolean v)          {return new XomwStackItem(Tid__bool, v, null, null);}
-	public static XomwStackItem New__number(Decimal_adp v) {return new XomwStackItem(Tid__number, false, v, null);}
+	public static XomwStackItem New__number(GfoDecimal v) {return new XomwStackItem(Tid__number, false, v, null);}
 	public static XomwStackItem New__range(XomwRange v)    {return new XomwStackItem(Tid__range, false, null, v);}
 	public static final int
 	  Tid__bool = 0

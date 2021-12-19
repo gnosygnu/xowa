@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios.streams; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
+package gplx.core.ios.streams;
+import gplx.core.ios.*;
+import gplx.libs.ios.IoConsts;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.errs.ErrUtl;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,11 +42,11 @@ public class IoStream_base implements IoStream {
 	public long Pos() {return pos;} long pos;
 	public long Len() {return length;} long length;
 	public int Read(byte[] array, int offset, int count) {
-		try 	{
+		try     {
 			int rv = under.read(array, offset, count);
-			return rv == -1 ? 0 : rv;	// NOTE: fis returns -1 if nothing read; .NET returned 0; Hash will fail if -1 returned (will try to create array of 0 length)
-		}	// NOTE: fis keeps track of offset, only need to pass in array (20110606: this NOTE no longer seems to make sense; deprecate)
-		catch 	(IOException e) {throw Err_.new_exc(e, "io", "file read failed", "url", url);}
+			return rv == -1 ? 0 : rv;    // NOTE: fis returns -1 if nothing read; .NET returned 0; Hash will fail if -1 returned (will try to create array of 0 length)
+		}   // NOTE: fis keeps track of offset, only need to pass in array (20110606: this NOTE no longer seems to make sense; deprecate)
+		catch     (IOException e) {throw ErrUtl.NewArgs(e, "file read failed", "url", url);}
 	}
 	public long Seek(long seek_pos) {
 		try {
@@ -48,13 +54,13 @@ public class IoStream_base implements IoStream {
 			pos = under.getFilePointer();
 			return pos;
 		}
-		catch 	(IOException e) {throw Err_.new_exc(e, "io", "seek failed", "url", url);}
+		catch     (IOException e) {throw ErrUtl.NewArgs(e, "seek failed", "url", url);}
 	}
-	public void Write(byte[] array, int offset, int count) {bfr.Add_mid(array, offset, offset + count); this.Flush();} Bry_bfr bfr = Bry_bfr_.Reset(16);
+	public void Write(byte[] array, int offset, int count) {bfr.AddMid(array, offset, offset + count); this.Flush();} BryWtr bfr = BryWtr.NewAndReset(16);
 	public void Write_and_flush(byte[] bry, int bgn, int end) {
-//		ConsoleAdp._.WriteLine(bry.length +" " + bgn + " " + end);
+//        ConsoleAdp._.WriteLine(bry.length +" " + bgn + " " + end);
 		Flush();// flush anything already in buffer
-		int buffer_len = Io_mgr.Len_kb * 16;
+		int buffer_len = IoConsts.LenKB * 16;
 		byte[] buffer = new byte[buffer_len];
 		int buffer_bgn = bgn; boolean loop = true;
 		while (loop) {
@@ -66,33 +72,33 @@ public class IoStream_base implements IoStream {
 			}
 			for (int i = 0; i < buffer_len; i++)
 				buffer[i] = bry[i + buffer_bgn];
-			try 	{under.write(buffer, 0, buffer_len);}
-			catch 	(IOException e) {throw Err_.new_exc(e, "io", "write failed", "url", url);}
+			try     {under.write(buffer, 0, buffer_len);}
+			catch     (IOException e) {throw ErrUtl.NewArgs(e, "write failed", "url", url);}
 			buffer_bgn = buffer_end;
 		}
-//		this.Rls();
-//		OutputStream output_stream = null;
-//		try 	{
-//			output_stream = new FileOutputStream(url.Xto_api());
-//			bry = ByteAry_.Mid(bry, bgn, end);
-//			output_stream.write(bry, 0, bry.length);
-//		}
-//		catch 	(IOException e) {throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "write failed").Add("url", url);}
-//		finally {
-//		    if (output_stream != null) {
-//		    	try {output_stream.close();}
-//		    	catch (IOException ignore) {}			
-//		    }
-//		}
+//        this.Rls();
+//        OutputStream output_stream = null;
+//        try     {
+//            output_stream = new FileOutputStream(url.Xto_api());
+//            bry = ByteAry_.Mid(bry, bgn, end);
+//            output_stream.write(bry, 0, bry.length);
+//        }
+//        catch     (IOException e) {throw Err_.err_key_(e, IoEngineArgs._.Err_IoException, "write failed").Add("url", url);}
+//        finally {
+//            if (output_stream != null) {
+//                try {output_stream.close();}
+//                catch (IOException ignore) {}            
+//            }
+//        }
 	}
 	public void Flush() {
 		try {
 			if (mode_is_append) under.seek(under.length());
-//			else				under.seek(0);
+//            else                under.seek(0);
 		}
-		catch 	(IOException e) {throw Err_.new_exc(e, "io", "seek failed", "url", url);}
-		try {under.write(bfr.Bfr(), 0, bfr.Len());}
-		catch 	(IOException e) {throw Err_.new_exc(e, "io", "write failed", "url", url);}
+		catch     (IOException e) {throw ErrUtl.NewArgs(e, "seek failed", "url", url);}
+		try {under.write(bfr.Bry(), 0, bfr.Len());}
+		catch     (IOException e) {throw ErrUtl.NewArgs(e, "write failed", "url", url);}
 		bfr.Clear();
 	}
 	public void Rls() {
@@ -106,7 +112,7 @@ public class IoStream_base implements IoStream {
 		rv.mode = (byte)mode;
 		File file = new File(url.Xto_api());
 		String ctor_mode = "";
-		switch (mode) {	// mode; SEE:NOTE_1
+		switch (mode) {    // mode; SEE:NOTE_1
 			case IoStream_.Mode_wtr_append:
 				rv.mode_is_append = mode == IoStream_.Mode_wtr_append;
 				ctor_mode = "rws";
@@ -119,17 +125,17 @@ public class IoStream_base implements IoStream {
 				break;
 		}
 		try {rv.under = new RandomAccessFile(file, ctor_mode);} 
-		catch (FileNotFoundException e) {throw Err_.new_exc(e, "io", "file open failed", "url", url);}
+		catch (FileNotFoundException e) {throw ErrUtl.NewArgs(e, "file open failed", "url", url);}
 		if (mode == IoStream_.Mode_wtr_create) {
 			try {rv.under.setLength(0);}
-			catch (IOException e) {throw Err_.new_exc(e, "io", "file truncate failed", "url", url);}
+			catch (IOException e) {throw ErrUtl.NewArgs(e, "file truncate failed", "url", url);}
 		}
 		rv.length = file.length();
 		return rv;
 	}
 	public static IoStream_base new_(Object stream) {
 		IoStream_base rv = new IoStream_base();
-//		rv.stream = (System.IO.Stream)stream;
+//        rv.stream = (System.IO.Stream)stream;
 		rv.url = Io_url_.Empty;
 		return rv;
 	}

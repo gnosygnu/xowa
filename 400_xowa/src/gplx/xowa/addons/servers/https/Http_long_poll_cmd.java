@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.servers.https; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.servers.https;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
 	private final List_adp msgs = List_adp_.New();
@@ -36,18 +41,18 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 		long cur_timeout = data.Get_as_long_or("timeout", 5000);
 		synchronized (msgs) {
 			this.prv_guid = cur_guid;
-			this.prv_start = System_.Ticks();
+			this.prv_start = SystemUtl.Ticks();
 			this.prv_timeout = cur_timeout;
 		}
 
 		// check if already active; if so, return;
 		while (true) {
 			synchronized (msgs) {
-				if (!String_.Eq(cur_guid, prv_guid))
-					return String_.Format("long-poll ignored: new long-poll arrived: prv={0} cur={1}", prv_guid, cur_guid);
+				if (!StringUtl.Eq(cur_guid, prv_guid))
+					return StringUtl.Format("long-poll ignored: new long-poll arrived: prv={0} cur={1}", prv_guid, cur_guid);
 
-				if (System_.Ticks__elapsed_in_frac(prv_start) > prv_timeout)
-					return String_.Format("long-poll ignored: old long-poll timed-out: guid={0}", cur_guid);
+				if (SystemUtl.Ticks__elapsed_in_frac(prv_start) > prv_timeout)
+					return StringUtl.Format("long-poll ignored: old long-poll timed-out: guid={0}", cur_guid);
 			}
 
 			// get msgs in queue
@@ -71,10 +76,10 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 		synchronized (msgs) {
 			rv = msgs.ToStrAryAndClear();
 		}
-		return String_.Concat_lines_nl(rv);
+		return StringUtl.ConcatLinesNl(rv);
 	}
 
-	public byte[] Key() {return BRIDGE_KEY;} private static final byte[] BRIDGE_KEY = Bry_.new_a7("long_poll");
+	public byte[] Key() {return BRIDGE_KEY;} private static final byte[] BRIDGE_KEY = BryUtl.NewA7("long_poll");
         public static final Http_long_poll_cmd Instance = new Http_long_poll_cmd(); Http_long_poll_cmd() {}
 
 	private static final int 

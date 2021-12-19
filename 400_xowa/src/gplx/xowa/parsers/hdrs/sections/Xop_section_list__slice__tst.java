@@ -13,11 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.xowa.htmls.core.htmls.tidy.*;
+package gplx.xowa.parsers.hdrs.sections;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xop_section_list__slice__tst {
 	private final Xop_section_list__fxt fxt = new Xop_section_list__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -41,7 +46,7 @@ public class Xop_section_list__slice__tst {
 		, "Para 3"
 		);
 	}
-	@Test  public void Covering() {
+	@Test public void Covering() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -66,7 +71,7 @@ public class Xop_section_list__slice__tst {
 		, "Para 1b"
 		);
 	}
-	@Test  public void Xml() {
+	@Test public void Xml() {
 		fxt.Exec__parse
 		( "== <i>Hdr 1</i> =="
 		, "Para 1"
@@ -74,12 +79,12 @@ public class Xop_section_list__slice__tst {
 		, "== Hdr 2 =="
 		, "Para 2"
 		);
-		fxt.Test__slice_bry_or_null("Hdr_1", String_.Concat_lines_nl_skip_last
+		fxt.Test__slice_bry_or_null("Hdr_1", StringUtl.ConcatLinesNlSkipLast
 		( "== <i>Hdr 1</i> =="
 		, "Para 1"
 		));
 	}
-	@Test  public void Math() {
+	@Test public void Math() {
 		fxt.Exec__parse
 		( "== <math>\\delta</math> =="
 		, "Para 1"
@@ -87,12 +92,12 @@ public class Xop_section_list__slice__tst {
 		, "== Hdr 2 =="
 		, "Para 2"
 		);
-		fxt.Test__slice_bry_or_null("\\delta", String_.Concat_lines_nl_skip_last // ISSUE#:462; DATE:2019-05-12
+		fxt.Test__slice_bry_or_null("\\delta", StringUtl.ConcatLinesNlSkipLast // ISSUE#:462; DATE:2019-05-12
 		( "== <math>\\delta</math> =="
 		, "Para 1"
 		));
 	}
-	@Test  public void Template() {
+	@Test public void Template() {
 		fxt.Init__template("mock", "''{{{1}}}''");
 		fxt.Exec__parse
 		( "== {{mock|a}} =="
@@ -101,12 +106,12 @@ public class Xop_section_list__slice__tst {
 		, "== Hdr 2 =="
 		, "Para 2"
 		);
-		fxt.Test__slice_bry_or_null("a", String_.Concat_lines_nl_skip_last
+		fxt.Test__slice_bry_or_null("a", StringUtl.ConcatLinesNlSkipLast
 		( "== {{mock|a}} =="
 		, "Para 1"
 		));
 	}
-	@Test  public void Lead() {
+	@Test public void Lead() {
 		fxt.Exec__parse
 		( "lead text"
 		, ""
@@ -118,7 +123,7 @@ public class Xop_section_list__slice__tst {
 		, "lead text"
 		);
 	}
-	@Test  public void Lead__none() {
+	@Test public void Lead__none() {
 		fxt.Exec__parse
 		( ""
 		, "== Hdr 1 =="
@@ -127,7 +132,7 @@ public class Xop_section_list__slice__tst {
 		);
 		fxt.Test__slice_bry_or_null("");
 	}
-	@Test  public void Lead__eos() {
+	@Test public void Lead__eos() {
 		fxt.Exec__parse
 		( "lead text"
 		, ""
@@ -146,15 +151,15 @@ class Xop_section_list__fxt {
 	private final Xop_fxt parser_fxt = new Xop_fxt();
 	public void Init__template(String page, String text) {parser_fxt.Init_defn_add(page, text);}
 	public void Exec__parse(String... lines) {
-		list.Parse(parser_fxt.Wiki(), Xow_tidy_mgr_interface_.Noop, Xoa_url.Test(), Bry_.new_u8(String_.Concat_lines_nl_skip_last(lines)));
+		list.Parse(parser_fxt.Wiki(), Xow_tidy_mgr_interface_.Noop, Xoa_url.Test(), BryUtl.NewU8(StringUtl.ConcatLinesNlSkipLast(lines)));
 	}
 	public void Test__slice_bry_or_null(String key, String... lines) {
-		String expd = String_.Concat_lines_nl_skip_last(lines);
-		byte[] actl = list.Slice_bry_or_null(Bry_.new_u8(key));
-		Gftest.Eq__ary__lines(expd, actl, key);
+		String expd = StringUtl.ConcatLinesNlSkipLast(lines);
+		byte[] actl = list.Slice_bry_or_null(BryUtl.NewU8(key));
+		GfoTstr.EqLines(expd, actl, key);
 	}
 	public void Test__merge_bry_or_null(String key, String edit, String expd) {
-		byte[] actl = list.Merge_bry_or_null(Bry_.new_u8(key), Bry_.new_u8(edit));
-		Gftest.Eq__ary__lines(expd, actl, key);
+		byte[] actl = list.Merge_bry_or_null(BryUtl.NewU8(key), BryUtl.NewU8(edit));
+		GfoTstr.EqLines(expd, actl, key);
 	}
 }

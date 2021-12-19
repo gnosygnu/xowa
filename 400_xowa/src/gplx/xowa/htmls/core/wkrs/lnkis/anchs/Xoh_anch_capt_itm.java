@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.anchs;
-import gplx.core.brys.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.basics.constants.AsciiByte;
 public class Xoh_anch_capt_itm {
 	public int		Cs0_tid() {return cs0_tid;} private int cs0_tid;
 	public int		Split_pos() {return split_pos;} private int split_pos;
-	public byte Parse(Bry_rdr owner_rdr, boolean ns_name_exists, byte[] href_bry, int href_bgn, int href_end, byte[] capt_bry, int capt_bgn, int capt_end) {
+	public byte Parse(BryRdr owner_rdr, boolean ns_name_exists, byte[] href_bry, int href_bgn, int href_end, byte[] capt_bry, int capt_bgn, int capt_end) {
 		this.cs0_tid = Cs0__exact; this.split_pos = -1; 
 		// do compare
 		int href_len = href_end - href_bgn;

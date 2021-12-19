@@ -15,10 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Mustache_render_ctx {
 	private final List_adp stack = List_adp_.New();
 	private Mustache_doc_itm cur;
@@ -50,7 +49,7 @@ public class Mustache_render_ctx {
 				if (stack_pos == -1) // nothing else in stack
 					break;
 				else
-					itm = ((Mustache_stack_itm)stack.Get_at(stack_pos)).cur;
+					itm = ((Mustache_stack_itm)stack.GetAt(stack_pos)).cur;
 			}
 		}
 		return rv;

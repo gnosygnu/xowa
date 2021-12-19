@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*;
-import gplx.core.strings.*;
+package gplx.gfui.controls.gxws;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -36,6 +38,15 @@ import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import gplx.gfui.draws.*;
 import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class GxwTextHtml_lang extends JScrollPane implements GxwTextHtml {
 	@Override public GxwCore_base Core() {return core;} GxwCore_host core;
 	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host; editor.Host_set(host);} GxwCbkHost host;
@@ -62,7 +73,7 @@ public class GxwTextHtml_lang extends JScrollPane implements GxwTextHtml {
 		editor.Html_enabled(v);
 	}
 	public GxwTextHtml_editor Editor() {return editor;} GxwTextHtml_editor editor;
-	public void ScrollTillCaretIsVisible() {throw Err_.new_unimplemented();}
+	public void ScrollTillCaretIsVisible() {throw ErrUtl.NewUnimplemented();}
 	public GxwTextHtml_lang ctor() {
 		editor = new GxwTextHtml_editor().ctor();
 		core = new GxwCore_host(GxwCore_lang.new_(this), editor.core);
@@ -72,7 +83,7 @@ public class GxwTextHtml_lang extends JScrollPane implements GxwTextHtml {
 		this.setBorder(null);
 		return this;
 	}
-	public Keyval[] Html_sel_atrs() {return editor.Html_sel_atrs();}
+	public KeyVal[] Html_sel_atrs() {return editor.Html_sel_atrs();}
 	public String Html_doc_html() {return editor.Html_doc_html();}
 	public void Html_css_set(String s) {editor.Html_css_set(s);}
 	@Override public void Margins_set(int left, int top, int right, int bot) {}
@@ -128,22 +139,22 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 //		this.setEditorKit(v ? new StyledEditorKit() : new DefaultEditorKit());
 		this.setEditorKit(v ? htmlKit : styledKit);
 	}
-	public void ScrollTillCaretIsVisible() {throw Err_.new_unimplemented();}
+	public void ScrollTillCaretIsVisible() {throw ErrUtl.NewUnimplemented();}
 	public void Html_css_set(String s) {
 		StyleSheet styleSheet = htmlKit.getStyleSheet();
 		styleSheet.addRule(s);
 	}
 	public String Html_print() {
 		String_bldr sb = String_bldr_.new_();
-		sb.Add("selBgn=").Add(Int_.To_str(Html_sel_bgn())).Add_char_crlf();
-		sb.Add("selEnd=").Add(Int_.To_str(Html_sel_end())).Add_char_crlf();
-		sb.Add("selTxt=").Add(Html_sel_text()).Add_char_crlf();
-		Keyval[] atrs = Html_sel_atrs();
+		sb.Add("selBgn=").Add(IntUtl.ToStr(Html_sel_bgn())).AddCharCrlf();
+		sb.Add("selEnd=").Add(IntUtl.ToStr(Html_sel_end())).AddCharCrlf();
+		sb.Add("selTxt=").Add(Html_sel_text()).AddCharCrlf();
+		KeyVal[] atrs = Html_sel_atrs();
 		for (int i = 0; i < atrs.length; i++) {
-			Keyval atr = atrs[i];
-			sb.Add(atr.Key() + "=").Add(atr.Val_to_str_or_null()).Add_char_crlf();
+			KeyVal atr = atrs[i];
+			sb.Add(atr.KeyToStr() + "=").Add(atr.ValToStrOrNull()).AddCharCrlf();
 		}
-		return sb.To_str();
+		return sb.ToStr();
 	}
 	Element Html_sel_elm() {
 		HTMLDocument doc = (HTMLDocument)this.getDocument();
@@ -163,14 +174,14 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 	public String Html_doc_html() {
 		Document doc = this.getDocument();
 		try {return this.getDocument().getText(0, doc.getLength());}
-		catch (Exception e) {throw Err_.new_exc(e, "ui", "Html_doc_html");}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "Html_doc_html");}
 	}
 	public String Html_sel_text() {
 		Element elm = Html_sel_elm();
 		int sel_bgn = elm.getStartOffset();
 		int sel_end = elm.getEndOffset();
 		try {return this.getDocument().getText(sel_bgn, sel_end - sel_bgn);}
-		catch (Exception e) {throw Err_.new_exc(e, "ui", "Html_sel_text");}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "Html_sel_text");}
 	}
 	static void Html_sel_atrs(AttributeSet atrs, List_adp list, String ownerKey, String dlm) {
 		if (atrs == null) return;
@@ -184,15 +195,15 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 			if (atr_val instanceof javax.swing.text.AttributeSet)
 				Html_sel_atrs((AttributeSet)atr_val, list, itm_key, dlm);
 			else
-				list.Add(Keyval_.new_(itm_key, atr_val));
+				list.Add(KeyVal.NewStr(itm_key, atr_val));
 		}
 	}
-	public Keyval[] Html_sel_atrs() {
-		if (String_.Eq(this.getContentType(), "text/plain")) return Keyval_.Ary_empty;
-		Element elm = Html_sel_elm(); if (elm == null) return Keyval_.Ary_empty;
+	public KeyVal[] Html_sel_atrs() {
+		if (StringUtl.Eq(this.getContentType(), "text/plain")) return KeyValUtl.AryEmpty;
+		Element elm = Html_sel_elm(); if (elm == null) return KeyValUtl.AryEmpty;
 		List_adp sel_atrs_list = List_adp_.New();
 		Html_sel_atrs(elm.getAttributes(), sel_atrs_list, null, ".");
-		return (Keyval[])sel_atrs_list.ToAry(Keyval.class);
+		return (KeyVal[])sel_atrs_list.ToAry(KeyVal.class);
 	}
 
 	@Override public void processKeyEvent(KeyEvent e) 					{

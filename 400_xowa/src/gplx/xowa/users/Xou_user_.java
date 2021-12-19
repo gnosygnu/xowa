@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.wikis.*;
+package gplx.xowa.users;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*;
 class Xou_user_ {
@@ -33,16 +39,16 @@ class Xou_user_ {
 	}
 	public static void Bookmarks_make(Xoae_app app, Xowe_wiki home_wiki) {
 		app.Usr_dlg().Log_many(GRP_KEY, "bookmarks.create", "creating bookmarks page");
-		home_wiki.Db_mgr().Save_mgr().Data_create(home_wiki, Xoa_ttl.Parse(home_wiki, Bry_.new_a7("Data:Bookmarks")), Bry_.new_a7(Bookmarks_text));
+		home_wiki.Db_mgr().Save_mgr().Data_create(home_wiki, Xoa_ttl.Parse(home_wiki, BryUtl.NewA7("Data:Bookmarks")), BryUtl.NewA7(Bookmarks_text));
 	}
-	public static final String User_system_cfg_text = String_.Concat_lines_nl
+	public static final String User_system_cfg_text = StringUtl.ConcatLinesNl
 	( "app.scripts.txns.get('user.prefs.general').version_('" + Xoa_app_.Version + "').bgn();"
 	, "app.files.download.enabled_('y');"	// default to true; DATE:2015-01-05
 	, "app.files.math.enabled_('y');"
 	, "app.files.math.renderer_('mathjax');"
 	, "app.scripts.txns.get('user.prefs.general').end();\n"
 	);
-	public static final String Bookmarks_text = String_.Concat_lines_nl
+	public static final String Bookmarks_text = StringUtl.ConcatLinesNl
 	( "Bookmarks are added automatically to the bottom of the page. All other text is not modified."
 	, ""
 	, "Please delete bookmarks by editing this page."

@@ -13,18 +13,36 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.langs.phps.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.xtns.cldrs;
+import gplx.langs.jsons.Json_doc_wtr;
+import gplx.langs.phps.Php_evaluator;
+import gplx.langs.phps.Php_itm_ary;
+import gplx.langs.phps.Php_itm_kv;
+import gplx.langs.phps.Php_line;
+import gplx.langs.phps.Php_line_assign;
+import gplx.langs.phps.Php_parser;
+import gplx.langs.phps.Php_text_itm_parser;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteRef;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 class Cldr_name_converter {
 	private final Php_parser parser = new Php_parser();
 	private final Php_evaluator eval = new Php_evaluator(new gplx.core.log_msgs.Gfo_msg_log("test"));
 	private final Php_text_itm_parser text_itm_parser = new Php_text_itm_parser().Quote_is_single_(true);
 	private final Json_doc_wtr doc_wtr = new Json_doc_wtr();
 	private final List_adp tmp_list = List_adp_.New();
-	private final Byte_obj_ref tmp_result = Byte_obj_ref.zero_();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final ByteRef tmp_result = ByteRef.NewZero();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public void Convert(Io_url src, Io_url trg) {
 		Cldr_name_file[] fils = Parse_dir(src);
 		for (Cldr_name_file fil : fils) {
@@ -43,8 +61,8 @@ class Cldr_name_converter {
 		return (Cldr_name_file[])rv.ToAryAndClear(Cldr_name_file.class);
 	}
 	public String Extract_key_or_fail(String fil_name) {
-		if (!String_.Has_at_bgn(fil_name, File_CldrNames) || !String_.Has_at_end(fil_name, ".php")) throw Err_.new_wo_type("file name must have a format of CldrNamesLANG.php", "fil_name", fil_name);
-		return String_.Mid(fil_name, String_.Len(File_CldrNames), String_.Len(fil_name) - String_.Len(".php"));
+		if (!StringUtl.HasAtBgn(fil_name, File_CldrNames) || !StringUtl.HasAtEnd(fil_name, ".php")) throw ErrUtl.NewArgs("file name must have a format of CldrNamesLANG.php", "fil_name", fil_name);
+		return StringUtl.Mid(fil_name, StringUtl.Len(File_CldrNames), StringUtl.Len(fil_name) - StringUtl.Len(".php"));
 	}
 	public Cldr_name_file Parse_fil(String key, byte[] src) {
 		Cldr_name_file file = new Cldr_name_file(key);
@@ -54,15 +72,15 @@ class Cldr_name_converter {
 		for (int i = 0; i < lines_len; i++) {
 			Php_line line = lines[i];
 			Php_line_assign assign_line = (Php_line_assign)line;
-			String assign_key = String_.new_u8(assign_line.Key().Val_obj_bry());
+			String assign_key = StringUtl.NewU8(assign_line.Key().Val_obj_bry());
 			
 			Ordered_hash hash = null;
-			if		(String_.Eq(assign_key, Node_languageNames))	hash = file.Language_names();
-			else if	(String_.Eq(assign_key, Node_currencyNames))	hash = file.Currency_names();
-			else if	(String_.Eq(assign_key, Node_currencySymbols))	hash = file.Currency_symbols();
-			else if	(String_.Eq(assign_key, Node_countryNames))		hash = file.Country_names();
-			else if	(String_.Eq(assign_key, Node_timeUnits))		hash = file.Time_units();
-			else throw Err_.new_unhandled_default(assign_key);
+			if		(StringUtl.Eq(assign_key, Node_languageNames))	hash = file.Language_names();
+			else if	(StringUtl.Eq(assign_key, Node_currencyNames))	hash = file.Currency_names();
+			else if	(StringUtl.Eq(assign_key, Node_currencySymbols))	hash = file.Currency_symbols();
+			else if	(StringUtl.Eq(assign_key, Node_countryNames))		hash = file.Country_names();
+			else if	(StringUtl.Eq(assign_key, Node_timeUnits))		hash = file.Time_units();
+			else throw ErrUtl.NewUnhandled(assign_key);
 			Parse_assign_line(key, assign_key, assign_line, hash);
 		}
 		eval.Clear();
@@ -73,14 +91,14 @@ class Cldr_name_converter {
 		int ary_len = ary.Subs_len();
 		for (int i = 0; i < ary_len; i++) {
 			Php_itm_kv kv = (Php_itm_kv)ary.Subs_get(i);
-			String key_str = String_.new_u8(kv.Key().Val_obj_bry());
-			String val_str = String_.new_u8(text_itm_parser.Parse_as_bry(tmp_list, kv.Val().Val_obj_bry(), tmp_result, tmp_bfr));
-			if (hash.Has(key_str)) throw Err_.new_wo_type("key already exists", "lang", lang_key, "type", assign_key, "key", key_str);
-			hash.Add(key_str, Keyval_.new_(key_str, val_str)); 
+			String key_str = StringUtl.NewU8(kv.Key().Val_obj_bry());
+			String val_str = StringUtl.NewU8(text_itm_parser.Parse_as_bry(tmp_list, kv.Val().Val_obj_bry(), tmp_result, tmp_bfr));
+			if (hash.Has(key_str)) throw ErrUtl.NewArgs("key already exists", "lang", lang_key, "type", assign_key, "key", key_str);
+			hash.Add(key_str, KeyVal.NewStr(key_str, val_str));
 		}
 	}
 	public String To_json(Cldr_name_file name_file) {
-		Int_obj_ref written = Int_obj_ref.New_zero();
+		IntRef written = IntRef.NewZero();
 		doc_wtr.Nde_bgn();
 		To_json(written, Node_languageNames		, name_file.Language_names());
 		To_json(written, Node_currencyNames		, name_file.Currency_names());
@@ -90,17 +108,17 @@ class Cldr_name_converter {
 		doc_wtr.Nde_end();
 		return doc_wtr.Bld_as_str();
 	}
-	private void To_json(Int_obj_ref written, String node_name, Ordered_hash hash) {
+	private void To_json(IntRef written, String node_name, Ordered_hash hash) {
 		int len = hash.Len();
 		if (len == 0) return;
 		doc_wtr.Key(written.Val() != 0, node_name);
 		doc_wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
-			Keyval kv = (Keyval)hash.Get_at(i);
-			doc_wtr.Kv(i != 0, Bry_.new_u8(kv.Key()), Bry_.new_u8(kv.Val_to_str_or_null()));
+			KeyVal kv = (KeyVal)hash.GetAt(i);
+			doc_wtr.Kv(i != 0, BryUtl.NewU8(kv.KeyToStr()), BryUtl.NewU8(kv.ValToStrOrNull()));
 		}
 		doc_wtr.Nde_end();
-		written.Val_add_post();
+		written.ValAddPost();
 	}
 	public static final String 
 	  File_CldrNames		= "CldrNames"

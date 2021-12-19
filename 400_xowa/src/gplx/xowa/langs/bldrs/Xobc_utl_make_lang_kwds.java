@@ -14,21 +14,22 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.bldrs;
-import gplx.Bry_;
-import gplx.Bry_split_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.langs.Xoa_lang_mgr;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.langs.Xol_lang_stub;
@@ -53,11 +54,11 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 		if (!Hash_itm_applies(trailing_colons, lang_key, kwd_key, kwd_word)) {
 			int kwd_last = rv.length - 1;
 			if (kwd_last > 0 && rv[kwd_last] == AsciiByte.Colon)
-				rv = Bry_.Mid(rv, 0, rv.length - 1);
+				rv = BryLni.Mid(rv, 0, rv.length - 1);
 		}
 		if (Hash_itm_applies(prepend_hash, lang_key, kwd_key, kwd_word)) {
 			if (rv.length > 0 && rv[0] != AsciiByte.Hash)
-				rv = Bry_.Add(AsciiByte.Hash, rv);
+				rv = BryUtl.Add(AsciiByte.Hash, rv);
 		}
 		return rv;
 	}
@@ -66,18 +67,18 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 		Ordered_hash tmp = Ordered_hash_.New_bry();
 		int hash_len = hash.Len();
 		for (int i = 0; i < hash_len; i++) {
-			Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.Get_at(i); 
+			Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.GetAt(i);
 			Xol_lang_itm lang = lang_mgr.Get_by_or_null(cfg_lang.Key_bry()); if (lang == null) continue;
 			int cfg_grp_len = cfg_lang.Grps().length;
 			for (int j = 0; j < cfg_grp_len; j++) {					
 				Xobcl_kwd_row cfg_grp = cfg_lang.Grps()[j];
 				int kwd_id = Xol_kwd_grp_.Id_by_bry(cfg_grp.Key());
-				if (kwd_id == -1) throw Err_.new_wo_type("could not find kwd for key", "key", String_.new_u8(cfg_grp.Key()));
+				if (kwd_id == -1) throw ErrUtl.NewArgs("could not find kwd for key", "key", StringUtl.NewU8(cfg_grp.Key()));
 				Xol_kwd_grp kwd_grp = lang.Kwd_mgr().Get_at(kwd_id);
 				tmp.Clear();
 				if (kwd_grp == null) {
 					kwd_grp = lang.Kwd_mgr().Get_or_new(kwd_id);
-					kwd_grp.Srl_load(BoolUtl.N, Bry_.Ary_empty);	// ASSUME: kwd explicitly added, but does not exist in language; default to !case_match
+					kwd_grp.Srl_load(BoolUtl.N, BryUtl.AryEmpty);	// ASSUME: kwd explicitly added, but does not exist in language; default to !case_match
 				}
 
 				for (Xol_kwd_itm itm : kwd_grp.Itms())
@@ -90,7 +91,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 						if (!tmp.Has(itm)) tmp.Add(itm, itm);
 					}
 				}
-				byte[][] words = (byte[][])tmp.To_ary(byte[].class);
+				byte[][] words = (byte[][])tmp.ToAry(byte[].class);
 				kwd_grp.Srl_load(kwd_grp.Case_match(), words);
 			}
 		}
@@ -119,9 +120,9 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 				grp.Merge(itms);
 		}
 	}
-	@gplx.Internal protected static Xobcl_kwd_row[] Parse(byte[] src) {
+	public static Xobcl_kwd_row[] Parse(byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;
-		byte[] cur_key = Bry_.Empty;
+		byte[] cur_key = BryUtl.Empty;
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		List_adp rv = List_adp_.New(); int fld_idx = 0;
 		while (true) {
@@ -136,7 +137,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 				case AsciiByte.Nl:
 					if (pos - fld_bgn > 0 || fld_idx == 1) {
 						byte[] cur_val = csv_parser.Load(src, fld_bgn, pos);
-						Xobcl_kwd_row row = new Xobcl_kwd_row(cur_key, Bry_split_.Split(cur_val, AsciiByte.Tilde));
+						Xobcl_kwd_row row = new Xobcl_kwd_row(cur_key, BrySplit.Split(cur_val, AsciiByte.Tilde));
 						rv.Add(row);
 					}
 					fld_bgn = pos + 1;

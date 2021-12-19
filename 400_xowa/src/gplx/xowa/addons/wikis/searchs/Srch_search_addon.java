@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.addons.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api {

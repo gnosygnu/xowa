@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.numbers; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.langs.numbers;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 class Xol_num_mgr__commafy_5 extends Xol_num_mgr { 	@Override public byte[] Commafy(byte[] num) {
-		if (Bry_.Len_eq_0(num)) return num;	// bounds check
+		if (BryUtl.IsNullOrEmpty(num)) return num;	// bounds check
 		int num_len = num.length;
 		int num_bgn = 0;
 		byte b = num[num_bgn];
@@ -25,13 +27,13 @@ class Xol_num_mgr__commafy_5 extends Xol_num_mgr { 	@Override public byte[] Comm
 			b = num[++num_bgn];				// skip negative sign
 		}
 		if (AsciiByte.IsNum(b)) {			// check for preg_match( '/^-?\d{1,4}(\.\d+)?$/', $_ )
-			int num_end = Bry_find_.Find_fwd_while_num(num, num_bgn, num_len);
+			int num_end = BryFind.FindFwdWhileNum(num, num_bgn, num_len);
 			if (num_end - num_bgn < 5) {	// 1-4 digits
 				if (num_end == num_len) return num; // no decimal; exit
 				b = num[num_end];
 				if (	b == AsciiByte.Dot
 					&&	num_end != num_len - 1) {	// if dot at end, then no match on above regx; fall-thru to below
-					num_end = Bry_find_.Find_fwd_while_num(num, num_end + 1, num_len);
+					num_end = BryFind.FindFwdWhileNum(num, num_end + 1, num_len);
 					if (num_end == num_len) return num;	// only numbers after dot; matches regx;
 				}
 			}

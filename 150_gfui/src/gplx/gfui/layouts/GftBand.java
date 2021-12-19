@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.layouts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.layouts; import gplx.gfui.*;
 import gplx.gfui.controls.elems.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class GftBand {
 	public String Key() {return key;} public GftBand Key_(String v) {key = v; return this;} private String key;
 	public int Idx() {return idx;} public GftBand Idx_(int v) {idx = v; return this;} int idx;
@@ -43,21 +45,21 @@ public class GftBand {
 		y = grid.Bands_dir().GetValByDir(y - h, y);
 		int availX = owner.Gft_w();
 		for (int i = 0; i < cells.Len(); i++) {
-			GftCell cell = (GftCell)cells.Get_at(i);
+			GftCell cell = (GftCell)cells.GetAt(i);
 			if (cell.Len0().Key() == GftSizeCalc_abs.KEY) {
 				GftSizeCalc_abs calc = (GftSizeCalc_abs)cell.Len0();
 				availX -= calc.Val();
 			}
 			else if (cell.Len0().Key() == GftSizeCalc_var.KEY) {
 				if (i >= items.Len()) continue;
-				GftItem item = (GftItem)items.Get_at(i);
+				GftItem item = (GftItem)items.GetAt(i);
 				GfuiElem elem = GfuiElem_.as_(item);
 				availX -= elem == null ? item.Gft_w() : elem.Width();
 			}
 		}
 		for (int i = 0; i < items.Len(); i++) {
-			GftItem item = (GftItem)items.Get_at(i);
-			GftCell cell = i >= cells.Len() ? cell_dfl : (GftCell)cells.Get_at(i);
+			GftItem item = (GftItem)items.GetAt(i);
+			GftCell cell = i >= cells.Len() ? cell_dfl : (GftCell)cells.GetAt(i);
 			int w = cell.Len0().Calc(grid, this, owner, item, availX);
 			item.Gft_rect_(RectAdp_.new_(x, y, w, h));
 //				Tfds.Write(item.Key_of_GfuiElem(), w, h, x, y);
@@ -70,7 +72,7 @@ public class GftBand {
 		rv.grid = grid;
 		rv.key = key; rv.idx = idx; rv.cell_dfl = cell_dfl.Clone(); rv.len1 = this.len1.Clone();
 		for (int i = 0; i < cells.Len(); i++) {
-			GftCell cell = (GftCell)cells.Get_at(i);
+			GftCell cell = (GftCell)cells.GetAt(i);
 			rv.cells.Add(cell.Clone());
 		}
 		return rv;

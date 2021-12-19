@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*; import gplx.core.stores.*;
 public class z082_GfmlDataWtrOpts_tst {
 	@Before public void setup() {
@@ -31,7 +33,7 @@ public class z082_GfmlDataWtrOpts_tst {
 		wtr.WriteNodeBgn("nde1");
 		wtr.WriteNodeBgn("nde2");
 		wtr.WriteNodeEnd();
-		tst_XtoStr(wtr, String_.Concat_lines_crlf
+		tst_XtoStr(wtr, StringUtl.ConcatLinesCrlf
 			(	"root:{"
 			,	"	nde1:{"
 			,	"		nde2:;"
@@ -43,10 +45,10 @@ public class z082_GfmlDataWtrOpts_tst {
 		wtr.InitWtr(GfmlDataWtrOpts.Key_const, GfmlDataWtrOpts.new_().IgnoreNullNamesOn_());
 		wtr.WriteNodeBgn("");
 		wtr.WriteData("key1", "data1");
-		tst_XtoStr(wtr, String_.Concat("root:{key1='data1';}"));			
+		tst_XtoStr(wtr, StringUtl.Concat("root:{key1='data1';}"));
 	}
 	void tst_XtoStr(DataWtr wtr, String expd) {
 		String actl = wtr.To_str();
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 }

@@ -13,12 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfobjs; import gplx.*;
+package gplx.core.gfobjs;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.errs.ErrUtl;
 public class Gfobj_nde implements Gfobj_grp {
 	private Ordered_hash subs;
 	public byte				Grp_tid()									{return Gfobj_grp_.Grp_tid__nde;}
 	public int				Len()										{return subs == null ? 0 : subs.Len();}
-	public Gfobj_fld		Get_at(int i)								{return subs == null ? null : (Gfobj_fld)subs.Get_at(i);}
+	public Gfobj_fld		Get_at(int i)								{return subs == null ? null : (Gfobj_fld)subs.GetAt(i);}
 	public Gfobj_fld		Get_by(String k)							{return subs == null ? null : (Gfobj_fld)subs.GetByOrNull(k);}
 	public Gfobj_ary		Get_ary(String k)							{return ((Gfobj_fld_ary)Get_by(k)).As_ary();}
 	public Gfobj_nde		Get_nde(int i)								{return ((Gfobj_fld_nde)Get_at(i)).As_nde();}
@@ -28,19 +33,19 @@ public class Gfobj_nde implements Gfobj_grp {
 		switch (fld.Fld_tid()) {
 			case Gfobj_fld_.Fld_tid__long: return ((Gfobj_fld_long)fld).As_long();
 			case Gfobj_fld_.Fld_tid__int : return ((Gfobj_fld_int )fld).As_int();
-			default: throw Err_.new_unhandled_default(fld.Fld_tid());
+			default: throw ErrUtl.NewUnhandled(fld.Fld_tid());
 		}
 	}
 	public int				Get_int(String k) {
 		Gfobj_fld fld = Get_by(k); 
 		switch (fld.Fld_tid()) {
 			case Gfobj_fld_.Fld_tid__int : return ((Gfobj_fld_int )fld).As_int();
-			default: throw Err_.new_unhandled_default(fld.Fld_tid());
+			default: throw ErrUtl.NewUnhandled(fld.Fld_tid());
 		}
 	}
 	public byte				Get_byte(String k) {return (byte)Get_int(k);}
 	public String			Get_str(String k)							{return ((Gfobj_fld_str)Get_by(k)).As_str();}
-	public Io_url			Get_url(String k)							{return Io_url_.new_any_(((Gfobj_fld_str)Get_by(k)).As_str());}
+	public Io_url Get_url(String k)							{return Io_url_.new_any_(((Gfobj_fld_str)Get_by(k)).As_str());}
 	public Gfobj_nde		Add_fld(Gfobj_fld fld)						{if (subs == null) subs = Ordered_hash_.New(); subs.Add(fld.Key(), fld); return this;}
 	public Gfobj_nde		Add_bool(String key, boolean val)				{return Add_fld(new Gfobj_fld_bool(key, val));}
 	public Gfobj_nde		Add_byte(String key, byte val)				{return Add_fld(new Gfobj_fld_int(key, val));}

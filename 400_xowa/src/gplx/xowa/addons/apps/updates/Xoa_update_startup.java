@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.updates;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
-import gplx.Io_url;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
@@ -28,7 +28,7 @@ public class Xoa_update_startup {
 		try {
 			// set default to this version
 			Xocfg_mgr cfg = app.Cfg();
-			cfg.Dflt_mgr().Add(Cfg__version_cutoff, Int_.To_str(Xoa_app_.Version_id));
+			cfg.Dflt_mgr().Add(Cfg__version_cutoff, IntUtl.ToStr(Xoa_app_.Version_id));
 
 			// exit if disabled
 			if (!cfg.Get_bool_app_or(Cfg__enabled, true)) return false;
@@ -41,7 +41,7 @@ public class Xoa_update_startup {
 			int version_cutoff = cfg.Get_int_app_or(Cfg__version_cutoff, Xoa_app_.Version_id);
 			return Xoa_update_db_mgr_.Select(db_url, version_cutoff).length > 0;
 		} catch (Exception exc) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "starup:fatal error while looking up app-update-reminder; err=~{0}", Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "starup:fatal error while looking up app-update-reminder; err=~{0}", ErrUtl.ToStrLog(exc));
 			return false;
 		}
 	}

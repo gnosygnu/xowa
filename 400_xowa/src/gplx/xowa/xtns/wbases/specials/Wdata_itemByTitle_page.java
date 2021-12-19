@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.core.brys.fmtrs.*;
+package gplx.xowa.xtns.wbases.specials;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.xowa.xtns.wbases.*;
+import gplx.core.net.qargs.*; import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.specials.*;
-import gplx.xowa.apps.urls.*;
 public class Wdata_itemByTitle_page implements Xow_special_page {
 	private Gfo_qarg_mgr_old arg_hash = new Gfo_qarg_mgr_old();
-	private static final byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
-	public Bry_fmtr Html_fmtr() {return html_fmtr;}
+	private static final byte[] Arg_site = BryUtl.NewA7("site"), Arg_page = BryUtl.NewA7("page");
+	public BryFmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
 	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__item_by_title;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
@@ -29,42 +36,42 @@ public class Wdata_itemByTitle_page implements Xow_special_page {
 		// Special:ItemByTitle/enwiki/Earth -> www.wikidata.org/wiki/Q2
 		Gfo_usr_dlg usr_dlg = wiki.Appe().Usr_dlg();
 		byte[] site_bry = cfg.Site_default();
-		byte[] page_bry = Bry_.Empty;
+		byte[] page_bry = BryUtl.Empty;
 		byte[] raw_bry = ttl.Full_txt_wo_qarg(); 					// EX: enwiki/Earth
 		int args_len = url.Qargs_ary().length;
 		if (args_len > 0) {
 			arg_hash.Load(url.Qargs_ary());
-			site_bry = arg_hash.Get_val_bry_or(Arg_site, Bry_.Empty);
-			page_bry = arg_hash.Get_val_bry_or(Arg_page, Bry_.Empty);
+			site_bry = arg_hash.Get_val_bry_or(Arg_site, BryUtl.Empty);
+			page_bry = arg_hash.Get_val_bry_or(Arg_page, BryUtl.Empty);
 		}
-		int site_bgn = Bry_find_.Find_fwd(raw_bry, Xoa_ttl.Subpage_spr);
-		if (site_bgn != Bry_find_.Not_found) {						// leaf arg is available
-			int page_bgn = Bry_find_.Find_fwd(raw_bry, Xoa_ttl.Subpage_spr, site_bgn + 1);			
+		int site_bgn = BryFind.FindFwd(raw_bry, Xoa_ttl.Subpage_spr);
+		if (site_bgn != BryFind.NotFound) {						// leaf arg is available
+			int page_bgn = BryFind.FindFwd(raw_bry, Xoa_ttl.Subpage_spr, site_bgn + 1);
 			int raw_bry_len = raw_bry.length;
-			if (page_bgn != Bry_find_.Not_found && page_bgn < raw_bry_len) {	// pipe is found and not last char (EX: "enwiki/" is invalid
-				site_bry = Bry_.Mid(raw_bry, site_bgn + 1, page_bgn);
-				page_bry = Bry_.Mid(raw_bry, page_bgn + 1, raw_bry_len);
+			if (page_bgn != BryFind.NotFound && page_bgn < raw_bry_len) {	// pipe is found and not last char (EX: "enwiki/" is invalid
+				site_bry = BryLni.Mid(raw_bry, site_bgn + 1, page_bgn);
+				page_bry = BryLni.Mid(raw_bry, page_bgn + 1, raw_bry_len);
 			}
 		}
 		Xoae_app app = wiki.Appe();
-		if (Bry_.Len_gt_0(site_bry) && Bry_.Len_gt_0(page_bry))
+		if (BryUtl.IsNotNullOrEmpty(site_bry) && BryUtl.IsNotNullOrEmpty(page_bry))
 			if (Navigate(usr_dlg, app, app.Wiki_mgr().Wdata_mgr(), page, site_bry, page_bry)) return;
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
-		html_fmtr.Bld_bfr_many(tmp_bfr, "Search for items by site and title", "Site", site_bry, "Page", page_bry, "Search");
-		page.Db().Text().Text_bry_(tmp_bfr.To_bry_and_rls());
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetK004();
+		html_fmtr.BldToBfrMany(tmp_bfr, "Search for items by site and title", "Site", site_bry, "Page", page_bry, "Search");
+		page.Db().Text().Text_bry_(tmp_bfr.ToBryAndRls());
 		page.Html_data().Html_restricted_n_();		// [[Special:]] pages allow all HTML
 	}
 	private static boolean Navigate(Gfo_usr_dlg usr_dlg, Xoae_app app, Wdata_wiki_mgr wdata_mgr, Xoae_page page, byte[] site_bry, byte[] page_bry) {
 		page_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(page_bry);		// NOTE: space is converted to + on postback to url; decode
-		byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(site_bry); 		if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", String_.new_u8(site_bry)); return false;}
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(wiki_domain);			if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", String_.new_u8(wiki_domain)); return false;}
-		Xoa_ttl wdata_ttl = Xoa_ttl.Parse(wiki, page_bry);						if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", String_.new_u8(page_bry)); return false;}
-		Wdata_doc doc = wdata_mgr.Doc_mgr.Get_by_ttl_or_null(wiki, wdata_ttl); 	if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", String_.new_u8(wdata_ttl.Raw())); return false;}		
+		byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(site_bry); 		if (wiki_domain == null) {usr_dlg.Warn_many("", "", "site_bry parse failed; site_bry:~{0}", StringUtl.NewU8(site_bry)); return false;}
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(wiki_domain);			if (wiki == null) {usr_dlg.Warn_many("", "", "wiki_domain does not exist; wiki_domain:~{0}", StringUtl.NewU8(wiki_domain)); return false;}
+		Xoa_ttl wdata_ttl = Xoa_ttl.Parse(wiki, page_bry);						if (wdata_ttl == null) {usr_dlg.Warn_many("", "", "ttl is invalid; ttl:~{0}", StringUtl.NewU8(page_bry)); return false;}
+		Wdata_doc doc = wdata_mgr.Doc_mgr.Get_by_ttl_or_null(wiki, wdata_ttl); 	if (doc == null) {usr_dlg.Warn_many("", "", "ttl cannot be found in wikidata; ttl:~{0}", StringUtl.NewU8(wdata_ttl.Raw())); return false;}
 		byte[] qid_bry = doc.Qid();
-		wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (page.Db().Page().Exists_n()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", String_.new_u8(qid_bry)); return false;}
+		wdata_mgr.Wdata_wiki().Data_mgr().Redirect(page, qid_bry); 	if (page.Db().Page().Exists_n()) {usr_dlg.Warn_many("", "", "qid cannot be found in wikidata; qid:~{0}", StringUtl.NewU8(qid_bry)); return false;}
 		return true;
 	}
-	private static Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
+	private static BryFmtr html_fmtr = BryFmtr.New(StringUtl.ConcatLinesNl
 	(	"<div id=\"mw-content-text\">"
 	,	"<form method=\"get\" action=\"//www.wikidata.org/wiki/Special:ItemByTitle\" name=\"itembytitle\" id=\"wb-itembytitle-form1\">"
 	,	"<fieldset>"

@@ -13,23 +13,58 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.core.envs.*;
-import gplx.gfui.draws.*;
-import gplx.xowa.langs.cases.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.grammars.*; import gplx.xowa.langs.genders.*; import gplx.xowa.langs.plurals.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.durations.*; import gplx.xowa.langs.lnki_trails.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.commas.*;
-import gplx.xowa.apps.gfs.*; import gplx.xowa.apps.fsys.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.lst.*;
-import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.guis.langs.*;
-import gplx.xowa.mediawiki.languages.*;
+package gplx.xowa.langs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.core.envs.Env_;
+import gplx.gfui.draws.FontStyleAdp_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
+import gplx.xowa.apps.gfs.Xoa_gfs_mgr;
+import gplx.xowa.guis.langs.Xol_font_info;
+import gplx.xowa.langs.bldrs.Xol_ns_grp;
+import gplx.xowa.langs.cases.Xol_case_mgr;
+import gplx.xowa.langs.cases.Xol_case_mgr_;
+import gplx.xowa.langs.commas.Xol_comma_wkr;
+import gplx.xowa.langs.commas.Xol_comma_wkr__add;
+import gplx.xowa.langs.durations.Xol_duration_mgr;
+import gplx.xowa.langs.funcs.Xol_func_regy;
+import gplx.xowa.langs.genders.Xol_gender;
+import gplx.xowa.langs.genders.Xol_gender_;
+import gplx.xowa.langs.grammars.Xol_grammar;
+import gplx.xowa.langs.grammars.Xol_grammar_;
+import gplx.xowa.langs.kwds.Xol_kwd_mgr;
+import gplx.xowa.langs.lnki_trails.Xol_lnki_trail_mgr;
+import gplx.xowa.langs.msgs.Xol_msg_mgr;
+import gplx.xowa.langs.numbers.Xol_num_mgr;
+import gplx.xowa.langs.numbers.Xol_num_mgr_;
+import gplx.xowa.langs.plurals.Xol_plural;
+import gplx.xowa.langs.plurals.Xol_plural_;
+import gplx.xowa.langs.specials.Xol_specials_mgr;
+import gplx.xowa.langs.vnts.Xol_vnt_mgr;
+import gplx.xowa.langs.vnts.converts.Xol_convert_regy;
+import gplx.xowa.mediawiki.languages.XomwLanguage;
+import gplx.xowa.parsers.lnkis.Xop_lnki_align_h_;
+import gplx.xowa.parsers.lnkis.Xop_lnki_arg_parser;
+import gplx.xowa.wikis.nss.Xow_ns_canonical_;
+import gplx.xowa.xtns.lst.Lst_section_nde;
 public class Xol_lang_itm implements Gfo_invk {
 	private boolean loaded = false;
 	private final Object thread_lock = new Object();
 	public Xol_lang_itm(Xoa_lang_mgr lang_mgr, byte[] key_bry) {
-		this.lang_mgr = lang_mgr; this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry);
-		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(key_bry); if (lang_itm == null) throw Err_.new_wo_type("unknown lang_key", "key", String_.new_u8(key_bry));
+		this.lang_mgr = lang_mgr; this.key_bry = key_bry; this.key_str = StringUtl.NewU8(key_bry);
+		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(key_bry); if (lang_itm == null) throw ErrUtl.NewArgs("unknown lang_key", "key", StringUtl.NewU8(key_bry));
 		this.lang_id = lang_itm.Id();	
 		this.mw_lang = new XomwLanguage(this);
 		this.func_regy = new Xol_func_regy(lang_mgr, this);
@@ -68,7 +103,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		fallback_bry_ary = Fallbacy_bry_ary__bld(v);
 		try {
 			for (byte[] key : fallback_bry_ary) {
-				String val = String_.new_u8(key);
+				String val = StringUtl.NewU8(key);
 				// NOTE: dupes can happen, b/c fallback works by loading current language, and then loading each fallback's langs to cur language;
 				// EX:
 				// * lang.Load_lang("gl") calls lang.Fallback_bry_ with "pt" (the fallback_lang) and "en" (the default lang)
@@ -76,12 +111,12 @@ public class Xol_lang_itm implements Gfo_invk {
 				fallback_hash.AddIfDupeUse1st(val, val);
 			}
 		} catch (Exception exc) {
-			String cur_fallbacks = String_.AryXtoStr((String[])fallback_hash.To_ary(String.class));
-			throw Err_.new_wo_type(String_.Format("failed to add fallback_bry_ary; lang={0} cur_fallbacks={1} new_fallbacks={2} err={3}", key_str, cur_fallbacks, v, Err_.Message_gplx_log(exc)));
+			String cur_fallbacks = StringUtl.AryToStr((String[])fallback_hash.ToAry(String.class));
+			throw ErrUtl.NewArgs(StringUtl.Format("failed to add fallback_bry_ary; lang={0} cur_fallbacks={1} new_fallbacks={2} err={3}", key_str, cur_fallbacks, v, ErrUtl.ToStrLog(exc)));
 		}
 		return this;
 	}	private byte[] fallback_bry;
-	public byte[][]				Fallback_bry_ary() {return fallback_bry_ary;} private byte[][] fallback_bry_ary = Bry_.Ary_empty;
+	public byte[][]				Fallback_bry_ary() {return fallback_bry_ary;} private byte[][] fallback_bry_ary = BryUtl.AryEmpty;
 	public Ordered_hash			Fallback_hash() {return fallback_hash;} private final Ordered_hash fallback_hash = Ordered_hash_.New();
 	public boolean					Dir_ltr() {return dir_ltr;} private boolean dir_ltr = true;
 	public void					Dir_ltr_(boolean v) {
@@ -121,7 +156,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_fallback_load))			Exec_fallback_load(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_numbers))				return num_mgr;
 		else if	(ctx.Match(k, Invk_link_trail))				return lnki_trail_mgr;
-		else if	(ctx.Match(k, Invk_x_axis_end))				return String_.new_u8(X_axis_end());
+		else if	(ctx.Match(k, Invk_x_axis_end))				return StringUtl.NewU8(X_axis_end());
 		else if	(ctx.Match(k, Invk_this))					return this;
 		else if	(ctx.Match(k, Xoae_app.Invk_app))			return lang_mgr.Gfs_mgr().Root_invk();
 		else												return Gfo_invk_.Rv_unhandled;
@@ -143,7 +178,7 @@ public class Xol_lang_itm implements Gfo_invk {
 				fallback_dupes_regy.Clear();
 				boolean lang_is_en = lang_id == Xol_lang_stub_.Id_en;
 				if (!lang_is_en) Xol_lang_itm_.Lang_init(this);
-				msg_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
+				msg_mgr.Itm_by_key_or_new(BryUtl.NewA7("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
 				Load_lang(key_bry);
 				ns_aliases.Ary_add_(Xow_ns_canonical_.Ary);	// NOTE: always add English canonical as aliases to all languages
 				this.Evt_lang_changed();
@@ -154,28 +189,28 @@ public class Xol_lang_itm implements Gfo_invk {
 	private void Exec_fallback_load(byte[] fallback_lang) {
 		Fallback_bry_(fallback_lang);
 		if (fallback_dupes_regy.Has(fallback_lang)) return;			// fallback_lang loaded; avoid recursive loop; EX: zh with fallback of zh-hans which has fallback of zh
-		if (Bry_.Eq(fallback_lang, Xoa_lang_mgr.Fallback_false)) return;	// fallback_lang is "none" exit
+		if (BryLni.Eq(fallback_lang, Xoa_lang_mgr.Fallback_false)) return;	// fallback_lang is "none" exit
 		fallback_dupes_regy.Add(fallback_lang, fallback_lang);
 		Load_lang(fallback_lang);
 		fallback_dupes_regy.Del(fallback_lang);
 	}
 	private void Load_lang(byte[] v) {
 		Xoa_gfs_mgr gfs_mgr = lang_mgr.Gfs_mgr(); Xoa_fsys_mgr app_fsys_mgr = gfs_mgr.App_fsys_mgr();
-		gfs_mgr.Run_url_for(this, Xol_lang_itm_.xo_lang_fil_(app_fsys_mgr, String_.new_a7(v)));
+		gfs_mgr.Run_url_for(this, Xol_lang_itm_.xo_lang_fil_(app_fsys_mgr, StringUtl.NewA7(v)));
 		gfs_mgr.Run_url_for(gfs_mgr.Root_invk(), Xol_convert_regy.Bld_url(app_fsys_mgr, key_str));
 	}
 	private static final byte[]
-	  Dir_bry_ltr = Bry_.new_a7("ltr"), Dir_bry_rtl = Bry_.new_a7("rtl")
-	, X_axis_end_right = Bry_.new_a7("right"), X_axis_end_left = Bry_.new_a7("left")
+	  Dir_bry_ltr = BryUtl.NewA7("ltr"), Dir_bry_rtl = BryUtl.NewA7("rtl")
+	, X_axis_end_right = BryUtl.NewA7("right"), X_axis_end_left = BryUtl.NewA7("left")
 	;
 	public static final int Tid_lower = 1, Tid_upper = 2;
 	private static byte[][] Fallbacy_bry_ary__bld(byte[] v) {
-		byte[][] rv = Bry_split_.Split(v, AsciiByte.Comma, true); // gan -> 'gan-hant, zh-hant, zh-hans'
+		byte[][] rv = BrySplit.Split(v, AsciiByte.Comma, true); // gan -> 'gan-hant, zh-hant, zh-hans'
 		boolean en_needed = true;
 		int rv_len = rv.length;
 		for (int i = 0; i < rv_len; i++) {
 			byte[] itm = rv[i];
-			if (Bry_.Eq(itm, Xol_lang_itm_.Key_en)) {
+			if (BryLni.Eq(itm, Xol_lang_itm_.Key_en)) {
 				en_needed = false;
 				break;
 			}

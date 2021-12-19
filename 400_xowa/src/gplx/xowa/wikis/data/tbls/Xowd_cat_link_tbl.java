@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis.data.tbls;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
 public class Xowd_cat_link_tbl implements Db_tbl {		
 	private final DbmetaFldList flds = new DbmetaFldList();
@@ -51,7 +54,7 @@ public class Xowd_cat_link_tbl implements Db_tbl {
 	}
 	public void Delete_all() {conn.Stmt_delete(tbl_name, DbmetaFldItm.StrAryEmpty).Exec_delete();}
 	public int Select_by_type(List_adp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
-		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_u8(arg_sortkey);
+		String arg_sortkey_str = arg_sortkey == null ? "" : StringUtl.NewU8(arg_sortkey);
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 
 			? Db_crt_.New_mte(fld_sortkey, arg_sortkey_str)			// from:  sortkey >= 'val'
 			: Db_crt_.New_lte(fld_sortkey, arg_sortkey_str);		// until: sortkey <= 'val'

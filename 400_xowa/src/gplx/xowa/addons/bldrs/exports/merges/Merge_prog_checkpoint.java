@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.bldrs.exports.merges;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class Merge_prog_checkpoint {
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	private final Io_url url;
 	private String resume_fil;
 	private int resume_wkr = -1;
@@ -25,7 +31,7 @@ public class Merge_prog_checkpoint {
 	public int Resume_db() {return resume_db;}
 	public boolean Skip_fil(Io_url fil) {
 		if (resume_fil == null) return false;	// not resume; do not skip
-		boolean rv = String_.Eq(fil.NameAndExt(), resume_fil);
+		boolean rv = StringUtl.Eq(fil.NameAndExt(), resume_fil);
 		if (rv) resume_fil = null;				// null out for next call
 		return !rv;
 	}
@@ -37,19 +43,19 @@ public class Merge_prog_checkpoint {
 	}
 	public int Load() {
 		byte[] bry = Io_mgr.Instance.LoadFilBryOrNull(url); if (bry == null) return 0;
-		byte[][] parts = Bry_split_.Split(bry, AsciiByte.Pipe);
-		this.resume_fil = String_.new_u8(parts[0]);
-		this.resume_wkr = Bry_.To_int(parts[1]);
-		this.resume_db = Bry_.To_int(parts[2]);
-		return Bry_.To_int(parts[3]);
+		byte[][] parts = BrySplit.Split(bry, AsciiByte.Pipe);
+		this.resume_fil = StringUtl.NewU8(parts[0]);
+		this.resume_wkr = BryUtl.ToInt(parts[1]);
+		this.resume_db = BryUtl.ToInt(parts[2]);
+		return BryUtl.ToInt(parts[3]);
 	}
 	public void Save(Io_url fil, byte wkr_tid, int db_id, int prog_count) {	// EX: file.xowa|0|4|1234
 		if (fil == null) return;
-		bfr.Add_str_u8(fil.NameAndExt()).Add_byte_pipe();
-		bfr.Add_int_variable(wkr_tid).Add_byte_pipe();
-		bfr.Add_int_variable(db_id).Add_byte_pipe();
-		bfr.Add_int_variable(prog_count);
-		Io_mgr.Instance.SaveFilBry(url, bfr.To_bry_and_clear());
+		bfr.AddStrU8(fil.NameAndExt()).AddBytePipe();
+		bfr.AddIntVariable(wkr_tid).AddBytePipe();
+		bfr.AddIntVariable(db_id).AddBytePipe();
+		bfr.AddIntVariable(prog_count);
+		Io_mgr.Instance.SaveFilBry(url, bfr.ToBryAndClear());
 	}
 	public void Delete() {
 		resume_fil = null;

@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.algos.gnu_crypto; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
+package gplx.core.security.algos.gnu_crypto;
 import gnu.crypto.hash.Haval;
+import gplx.core.security.algos.Hash_algo;
+import gplx.core.security.algos.Hash_algo_factory;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Gnu_haval_factory implements Hash_algo_factory {
 	public Hash_algo New_hash_algo(String key) {
 		return new Gnu_haval_algo(this, key);
@@ -22,23 +27,23 @@ public class Gnu_haval_factory implements Hash_algo_factory {
 
 	public Haval New_Haval(String key) {
 		// parse key for size; EX: "128" in "haval128,3"
-		int size = Int_.Parse_or(String_.Mid(key, 5, 8), -1);
+		int size = IntUtl.ParseOr(StringUtl.Mid(key, 5, 8), -1);
 		switch (size) {
 			case 128: size = Haval.HAVAL_128_BIT; break;
 			case 160: size = Haval.HAVAL_160_BIT; break;
 			case 192: size = Haval.HAVAL_192_BIT; break;
 			case 224: size = Haval.HAVAL_224_BIT; break;
 			case 256: size = Haval.HAVAL_256_BIT; break;
-			default: throw Err_.new_unhandled_default(size);
+			default: throw ErrUtl.NewUnhandled(size);
 		}
 
 		// parse key for round; EX: "3" in "haval128,3"
-		int round = Int_.Parse_or(String_.Mid(key, 9, 10), -1);
+		int round = IntUtl.ParseOr(StringUtl.Mid(key, 9, 10), -1);
 		switch (round) {
 			case 3: round = Haval.HAVAL_3_ROUND; break;
 			case 4: round = Haval.HAVAL_4_ROUND; break;
 			case 5: round = Haval.HAVAL_5_ROUND; break;
-			default: throw Err_.new_unhandled_default(round);
+			default: throw ErrUtl.NewUnhandled(round);
 		}
 		return new Haval(size, round);
 	}

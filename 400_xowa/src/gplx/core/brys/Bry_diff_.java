@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.brys;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Bry_diff_ {
 	public static byte[][] Diff_1st_line(byte[] lhs, byte[] rhs) {return Diff_1st(lhs, 0, lhs.length, rhs, 0, rhs.length, AsciiByte.NlBry, AsciiByte.AngleBgnBry, 255);}
 	public static byte[][] Diff_1st(byte[] lhs, int lhs_bgn, int lhs_end, byte[] rhs, int rhs_bgn, int rhs_end, byte[] stop, byte[] show, int diff_max) {
@@ -29,7 +33,7 @@ public class Bry_diff_ {
 			if (lhs_byte != rhs_byte) {lhs_idx = rhs_idx = i; break;}		// diff; stop iterating
 		}
 		if (lhs_idx == -1 && rhs_idx == -1) {
-			switch (Int_.Compare(lhs_len, rhs_len)) {
+			switch (IntUtl.Compare(lhs_len, rhs_len)) {
 				case CompareAbleUtl.Same: return null;
 				case CompareAbleUtl.Less: lhs_idx = rhs_idx = lhs_len; break;
 				case CompareAbleUtl.More: lhs_idx = rhs_idx = rhs_len; break;
@@ -41,12 +45,12 @@ public class Bry_diff_ {
 	}
 	private static byte[] Get_1st(byte[] stop, byte[] show, byte[] src, int bgn, int end, int diff_max) {
 		if (bgn == end) return Bry__eos;
-		int prv_show = Bry_find_.Find_bwd(src, show, bgn		, 0); if (prv_show == Bry_find_.Not_found) prv_show = 0;
-		int prv_stop = Bry_find_.Find_bwd(src, stop, bgn		, 0); prv_stop = (prv_stop == Bry_find_.Not_found) ? 0 : prv_stop + 1;
+		int prv_show = BryFind.FindBwd(src, show, bgn		, 0); if (prv_show == BryFind.NotFound) prv_show = 0;
+		int prv_stop = BryFind.FindBwd(src, stop, bgn		, 0); prv_stop = (prv_stop == BryFind.NotFound) ? 0 : prv_stop + 1;
 		int prv = prv_show > prv_stop ? prv_show : prv_stop;
-		int nxt = Bry_find_.Find_fwd(src, stop, bgn		, end);	if (nxt == Bry_find_.Not_found) nxt = end;
+		int nxt = BryFind.FindFwd(src, stop, bgn		, end);	if (nxt == BryFind.NotFound) nxt = end;
 		if (nxt - prv > 255) nxt = prv + diff_max;
-		return Bry_.Mid(src, prv, nxt);
+		return BryLni.Mid(src, prv, nxt);
 	}
-	private static final byte[] Bry__eos = Bry_.new_a7("<<EOS>>");
+	private static final byte[] Bry__eos = BryUtl.NewA7("<<EOS>>");
 }

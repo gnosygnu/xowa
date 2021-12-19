@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_xnde_wkr__text_block_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -32,11 +34,11 @@ public class Xop_xnde_wkr__text_block_tst {
 	}
 	@Test public void Source_pre() {	// PURPOSE: handle pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "  <source>"
 		, "  a"
 		, "  </source>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "  <div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		, "  a"
 		, "</pre></div>"
@@ -63,11 +65,11 @@ public class Xop_xnde_wkr__text_block_tst {
 	}
 	@Test public void Pre_and_space() {// PURPOSE: make sure pre does not careate <p></p> around it; also, make sure " a" is preserved; DATE:2014-02-20
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<pre>"
 		, " a"
 		, "</pre>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<pre>"
 		, " a"
 		, "</pre>"

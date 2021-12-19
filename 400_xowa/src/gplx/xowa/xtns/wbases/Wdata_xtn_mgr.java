@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*;
+package gplx.xowa.xtns.wbases;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.bldrs.*;
-import gplx.xowa.wikis.*;
 import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
 public class Wdata_xtn_mgr extends Xox_mgr_base {
 	private WikibaseLanguageIndependentLuaBindings lua_bindings;
@@ -38,5 +39,5 @@ public class Wdata_xtn_mgr extends Xox_mgr_base {
 		Io_url url = app.Fsys_mgr().Bin_xtns_dir().GenSubFil_nest(nest_paths);
 		Xob_i18n_parser.Load_msgs(false, wiki.Lang(), url);
 	}
-	private static final String XTN_KEY_STR = "Wikibase"; public static final byte[] XTN_KEY = Bry_.new_a7(XTN_KEY_STR);
+	private static final String XTN_KEY_STR = "Wikibase"; public static final byte[] XTN_KEY = BryUtl.NewA7(XTN_KEY_STR);
 }

@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.caches;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Io_mgr;
-import gplx.Rls_able;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.frameworks.objects.Rls_able;
 import gplx.core.caches.Gfo_cache_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
 public class Xow_ifexist_cache {
 	private final Xowe_wiki wiki;
 	private final Xow_page_cache page_cache;
-	private final Gfo_cache_mgr cache_mgr = new Gfo_cache_mgr().Max_size_(64 * Io_mgr.Len_mb).Reduce_by_(32 * Io_mgr.Len_mb);
+	private final Gfo_cache_mgr cache_mgr = new Gfo_cache_mgr().Max_size_(64 * IoConsts.LenMB).Reduce_by_(32 * IoConsts.LenMB);
 	private final Hash_adp ns_loaded_hash = Hash_adp_.New();
 	public Xow_ifexist_cache(Xowe_wiki wiki, Xow_page_cache page_cache) {
 		this.wiki = wiki;

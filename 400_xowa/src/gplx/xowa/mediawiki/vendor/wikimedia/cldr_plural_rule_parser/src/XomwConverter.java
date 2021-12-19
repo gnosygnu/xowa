@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.vendor.*; import gplx.xowa.mediawiki.vendor.wikimedia.*; import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.*;
+package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.Converter.*;
 import gplx.langs.regxs.*;
 // MW.SRC:1.33.1
@@ -135,7 +141,7 @@ public class XomwConverter {
 			// rule String will alternate between operator and operand tokens.
 			expectOperator = !expectOperator;
 
-			if (Type_.Is_assignable_from_by_obj(token, XomwExpression.class)) {
+			if (ClassUtl.IsAssignableFromByObj(token, XomwExpression.class)) {
 				// Operand
 				if (expectOperator) {
 					token.error("unexpected operand");
@@ -149,7 +155,7 @@ public class XomwConverter {
 				}
 				// Resolve higher precedence levels
 				XomwOperator lastOp = (XomwOperator)XophpArray.end(this.operators);
-				while (lastOp != null && Int_.Cast(XomwConverter.precedence.Get_by(((XomwOperator)token).name)) <= Int_.Cast(XomwConverter.precedence.Get_by(((XomwOperator)lastOp).name))) {
+				while (lastOp != null && IntUtl.Cast(XomwConverter.precedence.Get_by(((XomwOperator)token).name)) <= IntUtl.Cast(XomwConverter.precedence.Get_by(((XomwOperator)lastOp).name))) {
 					this.doOperation(lastOp, this.operands);
 					XophpArray.array_pop(this.operators);
 					lastOp = (XomwOperator)XophpArray.end(this.operators);
@@ -173,7 +179,7 @@ public class XomwConverter {
 		}
 
 		XomwExpression value = (XomwExpression)this.operands.Get_at(0);
-		if (!String_.Eq(value.type, "boolean")) {
+		if (!StringUtl.Eq(value.type, "boolean")) {
 			this.error("the result must have a boolean type");
 		}
 
@@ -209,7 +215,7 @@ public class XomwConverter {
 
 		// Two-character operators
 		String op2 = XophpString_.substr(this.rule, this.pos, 2);
-		if (String_.Eq(op2, "..") || String_.Eq(op2, "!=")) {
+		if (StringUtl.Eq(op2, "..") || StringUtl.Eq(op2, "!=")) {
 			XomwFragment token = this.newOperator(op2, this.pos, 2);
 			this.pos += 2;
 
@@ -217,8 +223,8 @@ public class XomwConverter {
 		}
 
 		// Single-character operators
-		String op1 = Char_.To_str(String_.CharAt(this.rule, this.pos));
-		if (String_.Eq(op1, ",") || String_.Eq(op1, "=") || String_.Eq(op1, "%")) {
+		String op1 = CharUtl.ToStr(StringUtl.CharAt(this.rule, this.pos));
+		if (StringUtl.Eq(op1, ",") || StringUtl.Eq(op1, "=") || StringUtl.Eq(op1, "%")) {
 			XomwFragment token = this.newOperator(op1, this.pos, 1);
 			this.pos++;
 
@@ -228,12 +234,12 @@ public class XomwConverter {
 		// Word
 		XophpArray m = XophpArray.New();
 		if (!XophpRegex_.preg_match_bool(XomwConverter.WORD_REGEX, this.rule, m, 0, this.pos)) {
-			this.error("unexpected character \"" + String_.CharAt(this.rule, this.pos) + "\"");
+			this.error("unexpected character \"" + StringUtl.CharAt(this.rule, this.pos) + "\"");
 		}
 		String word1 = XophpString_.strtolower(m.Get_at_str(0));
 		String word2 = "";
 		int nextTokenPos = this.pos + XophpString_.strlen(word1);
-		if (String_.Eq(word1, "not") || String_.Eq(word1, "is")) {
+		if (StringUtl.Eq(word1, "not") || StringUtl.Eq(word1, "is")) {
 			// Look ahead one word
 			nextTokenPos += XophpString_.strspn(this.rule, XomwConverter.WHITESPACE_CLASS, nextTokenPos);
 			m = XophpArray.New();
@@ -246,7 +252,7 @@ public class XomwConverter {
 		}
 
 		// Two-word operators like "is not" take precedence over single-word operators like "is"
-		if (String_.Eq(word2, "")) {
+		if (StringUtl.Eq(word2, "")) {
 			String bothWords = word1 + "-" + word2;
 			if (XophpArray.isset(XomwConverter.precedence, bothWords)) {
 				XomwFragment token = this.newOperator(bothWords, this.pos, nextTokenPos - this.pos);
@@ -265,7 +271,7 @@ public class XomwConverter {
 		}
 
 		// The single-character operand symbols
-		if (XophpString_.strpos(XomwConverter.OPERAND_SYMBOLS, word1) != String_.Pos_neg1) {
+		if (XophpString_.strpos(XomwConverter.OPERAND_SYMBOLS, word1) != StringUtl.PosNeg1) {
 			XomwFragment token = this.newNumber(word1, this.pos);
 			this.pos++;
 
@@ -273,7 +279,7 @@ public class XomwConverter {
 		}
 
 		// Samples
-		if (String_.Eq(word1, "@integer") || String_.Eq(word1, "@decimal")) {
+		if (StringUtl.Eq(word1, "@integer") || StringUtl.Eq(word1, "@decimal")) {
 			// Samples are like comments, they have no effect on rule evaluation.
 			// They run from the first sample indicator to the end of the String.
 			this.pos = this.end;

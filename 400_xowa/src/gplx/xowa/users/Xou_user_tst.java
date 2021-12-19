@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users;
-import gplx.Io_mgr;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.Yn;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
@@ -26,7 +26,7 @@ import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
 import org.junit.Test;
 public class Xou_user_tst {
 	private final Xou_user_fxt fxt = new Xou_user_fxt();
-	@Test  public void Available_from_fsys() {
+	@Test public void Available_from_fsys() {
 		Io_mgr.Instance.CreateDir(fxt.App().Fsys_mgr().Wiki_dir().GenSubDir("en.wikipedia.org"));
 		fxt.App().Usere().Available_from_fsys();
 		fxt.Test_xwikis
@@ -37,15 +37,15 @@ public class Xou_user_tst {
 }
 class Xou_user_fxt {
 	public Xoae_app App() {return app;} private Xoae_app app = Xoa_app_fxt.Make__app__edit();
-	public String Make_xwiki(boolean offline, String name) {return String_.Concat_with_str("|", Yn.To_str(offline), name);}
+	public String Make_xwiki(boolean offline, String name) {return StringUtl.ConcatWith("|", Yn.To_str(offline), name);}
 	public void Test_xwikis(String... expd) {
 		Xow_xwiki_mgr xwiki_mgr = app.Usere().Wiki().Xwiki_mgr();
 		int len = xwiki_mgr.Len();
 		String[] actl = new String[len];
 		for (int i = 0; i < len; ++i) {
 			Xow_xwiki_itm xwiki_itm = xwiki_mgr.Get_at(i);
-			actl[i] = Make_xwiki(xwiki_itm.Offline(), String_.new_u8(xwiki_itm.Domain_name()));
+			actl[i] = Make_xwiki(xwiki_itm.Offline(), StringUtl.NewU8(xwiki_itm.Domain_name()));
 		}
-            Tfds.Eq_ary_str(expd, actl);
+            GfoTstr.EqLines(expd, actl);
 	}
 }

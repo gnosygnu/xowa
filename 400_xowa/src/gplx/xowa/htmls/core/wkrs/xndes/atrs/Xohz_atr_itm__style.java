@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*;
+package gplx.xowa.htmls.core.wkrs.xndes.atrs;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*;
@@ -47,18 +51,18 @@ class Xohz_atr_itm__style implements Xohz_atr_itm {	// EX: style='width:20em;'
 			bfr.Add_hzip_bry(hitm.Val());
 		}
 	}
-	public void Dec_all(Xoh_hdoc_ctx hctx, Bry_rdr rdr, Int_flag_bldr flag_bldr, Bry_bfr bfr) {
+	public void Dec_all(Xoh_hdoc_ctx hctx, BryRdr rdr, Int_flag_bldr flag_bldr, BryWtr bfr) {
 		boolean exists = flag_bldr.Get_as_bool(flag_idx);
 		if (!exists) return;
 		Xohz_atr_itm_.Dec__add__quote_bgn(bfr, key);
-		int len = rdr.Read_hzip_int(1);
+		int len = rdr.ReadHzipInt(1);
 		for (int i = 0; i < len; ++i) {
-			int key_uid = rdr.Read_hzip_int(1);
+			int key_uid = rdr.ReadHzipInt(1);
 			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.GetByOrNull(key_uid);
 			bfr.Add(zatr.Key());
 			int val_bgn = rdr.Pos();
-			int val_end = rdr.Find_fwd_lr();
-			bfr.Add_mid(rdr.Src(), val_bgn, val_end);
+			int val_end = rdr.FindFwdLr();
+			bfr.AddMid(rdr.Src(), val_bgn, val_end);
 		}
 //			int val_id = rdr.Read_hzip_int(val_id_len);
 //			Xoh_xnde_dict_itm itm = hctx.Hzip__xnde__dict().Get().Get_by_id_or_null(val_id);

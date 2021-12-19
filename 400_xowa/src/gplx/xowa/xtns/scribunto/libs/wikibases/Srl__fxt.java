@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.scribunto.libs.wikibases;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.xowa.xtns.scribunto.libs.*;
 import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.stores.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Srl__fxt {
@@ -49,36 +56,36 @@ public class Srl__fxt {
 	public Srl__fxt Init_prop(Wbase_claim_base prop) {wdoc_bldr.Add_claims(prop); return this;}
 	public Srl__fxt Test(String... expd) {return Test(false, expd);}
 	public Srl__fxt Test(boolean base0, String... expd) {
-		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc_bldr.Xto_wdoc(), header_enabled, base0, Bry_.new_u8("Test_page"));
-		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
+		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc_bldr.Xto_wdoc(), header_enabled, base0, BryUtl.NewU8("Test_page"));
+		GfoTstr.EqLines(expd, StringUtl.SplitLinesNl(Xto_str(actl)));
 		return this;
 	}
 	public Srl__fxt Test(Wdata_doc wdoc, String... expd) {return Test(false, wdoc, expd);}
 	public Srl__fxt Test(boolean base0, Wdata_doc wdoc, String... expd) {
-		Keyval[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, header_enabled, base0, Bry_.new_u8("Test_page"));
-		Tfds.Eq_ary_str(expd, String_.SplitLines_nl(Xto_str(actl)));
+		KeyVal[] actl = Scrib_lib_wikibase_srl.Srl(prop_mgr, wdoc, header_enabled, base0, BryUtl.NewU8("Test_page"));
+		GfoTstr.EqLines(expd, StringUtl.SplitLinesNl(Xto_str(actl)));
 		return this;
 	}
-	private String Xto_str(Keyval[] ary) {
-		Bry_bfr bfr = Bry_bfr_.New();
+	private String Xto_str(KeyVal[] ary) {
+		BryWtr bfr = BryWtr.New();
 		Xto_str(bfr, ary, 0);
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
-	private void Xto_str(Bry_bfr bfr, Keyval[] ary, int depth) {
+	private void Xto_str(BryWtr bfr, KeyVal[] ary, int depth) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			Keyval kv = ary[i];
+			KeyVal kv = ary[i];
 			Xto_str(bfr, kv, depth);
 		}
 	}
-	private void Xto_str(Bry_bfr bfr, Keyval kv, int depth) {
-		bfr.Add_byte_repeat(AsciiByte.Space, depth * 2);
-		bfr.Add_str_u8(kv.Key()).Add_byte(AsciiByte.Colon);
+	private void Xto_str(BryWtr bfr, KeyVal kv, int depth) {
+		bfr.AddByteRepeat(AsciiByte.Space, depth * 2);
+		bfr.AddStrU8(kv.KeyToStr()).AddByte(AsciiByte.Colon);
 		Object kv_val = kv.Val();
-		if		(kv_val == null) 							{bfr.Add_str_a7("null").Add_byte_nl(); return;}
+		if		(kv_val == null) 							{bfr.AddStrA7("null").AddByteNl(); return;}
 		Class<?> kv_val_cls = kv_val.getClass();
-		if 	(Type_.Eq(kv_val_cls, Keyval[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (Keyval[])kv_val, depth + 1);}
-		else if (Type_.Eq(kv_val_cls, Keyval[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (Keyval)kv_val, depth + 1);}
-		else bfr.Add_byte(AsciiByte.Apos).Add_str_u8(Object_.Xto_str_strict_or_empty(kv_val)).Add_byte(AsciiByte.Apos).Add_byte_nl();
+		if 	(ClassUtl.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.AddByteNl(); Xto_str(bfr, (KeyVal[])kv_val, depth + 1);}
+		else if (ClassUtl.Eq(kv_val_cls, KeyVal[].class)) 	{bfr.AddByteNl(); Xto_str(bfr, (KeyVal)kv_val, depth + 1);}
+		else bfr.AddByte(AsciiByte.Apos).AddStrU8(ObjectUtl.ToStrOrEmpty(kv_val)).AddByte(AsciiByte.Apos).AddByteNl();
 	}
 }

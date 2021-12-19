@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.claims.itms.times;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
 public class Wbase_data_itm {
 	public Wbase_data_itm(int val_int, String val_str, byte[] val_bry) {
 		this.val_int = val_int;
@@ -24,6 +26,6 @@ public class Wbase_data_itm {
 	public String Val_str() {return val_str;} private final String val_str;
 	public byte[] Val_bry() {return val_bry;} private final byte[] val_bry;
 
-	public static Wbase_data_itm New_int(int val)		{return new Wbase_data_itm(val, Int_.To_str(val), Int_.To_bry(val));}
-	public static Wbase_data_itm New_str(String val)	{return new Wbase_data_itm( -1, val, Bry_.new_u8(val));}
+	public static Wbase_data_itm New_int(int val)		{return new Wbase_data_itm(val, IntUtl.ToStr(val), IntUtl.ToBry(val));}
+	public static Wbase_data_itm New_str(String val)	{return new Wbase_data_itm( -1, val, BryUtl.NewU8(val));}
 }

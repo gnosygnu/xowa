@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net.qargs; import gplx.*; import gplx.core.*; import gplx.core.net.*;
+package gplx.core.net.qargs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Gfo_qarg_mgr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Gfo_qarg_mgr Init(Gfo_qarg_itm[] args) {
@@ -25,34 +30,34 @@ public class Gfo_qarg_mgr {
 		}
 		return this;
 	}
-	public byte[] Read_bry_or_fail(String key)		{return Read_bry_or_fail(Bry_.new_u8(key));}
-	public byte[] Read_bry_or_fail(byte[] key)		{byte[] rv = Read_bry_or_null(key); if (rv == null) Fail_when_missing(String_.new_u8(key)); return rv;}
-	public byte[] Read_bry_or_empty(byte[] key)		{return Read_bry_or(key, Bry_.Empty);}
-	public byte[] Read_bry_or_null(String key)		{return Read_bry_or(Bry_.new_u8(key), null);}
+	public byte[] Read_bry_or_fail(String key)		{return Read_bry_or_fail(BryUtl.NewU8(key));}
+	public byte[] Read_bry_or_fail(byte[] key)		{byte[] rv = Read_bry_or_null(key); if (rv == null) Fail_when_missing(StringUtl.NewU8(key)); return rv;}
+	public byte[] Read_bry_or_empty(byte[] key)		{return Read_bry_or(key, BryUtl.Empty);}
+	public byte[] Read_bry_or_null(String key)		{return Read_bry_or(BryUtl.NewU8(key), null);}
 	public byte[] Read_bry_or_null(byte[] key)		{return Read_bry_or(key, null);}
-	public byte[] Read_bry_or(String key, byte[] or) {return Read_bry_or(Bry_.new_u8(key), or);}
+	public byte[] Read_bry_or(String key, byte[] or) {return Read_bry_or(BryUtl.NewU8(key), or);}
 	public byte[] Read_bry_or(byte[] key, byte[] or) {
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by_bry(key);
 		return arg == null ? or : arg.Val_bry();
 	}
-	public String Read_str_or_fail(String key) {String rv = Read_str_or_null(Bry_.new_u8(key)); if (rv == null) Fail_when_missing(key); return rv;}
-	public String Read_str_or_null(String key) {return Read_str_or_null(Bry_.new_u8(key));}
+	public String Read_str_or_fail(String key) {String rv = Read_str_or_null(BryUtl.NewU8(key)); if (rv == null) Fail_when_missing(key); return rv;}
+	public String Read_str_or_null(String key) {return Read_str_or_null(BryUtl.NewU8(key));}
 	public String Read_str_or_null(byte[] key) {return Read_str_or(key, null);}
-	public String Read_str_or(String key, String or) {return Read_str_or(Bry_.new_u8(key), or);}
+	public String Read_str_or(String key, String or) {return Read_str_or(BryUtl.NewU8(key), or);}
 	public String Read_str_or(byte[] key, String or) {
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by_bry(key);
-		return arg == null ? or : String_.new_u8(arg.Val_bry());
+		return arg == null ? or : StringUtl.NewU8(arg.Val_bry());
 	}
-	public int Read_int_or(String key, int or) {return Read_int_or(Bry_.new_u8(key), or);}
+	public int Read_int_or(String key, int or) {return Read_int_or(BryUtl.NewU8(key), or);}
 	public int Read_int_or(byte[] key, int or) {
 		byte[] val = Read_bry_or(key, null);
-		return val == null ? or : Int_.Parse_or(String_.new_a7(val), or);
+		return val == null ? or : IntUtl.ParseOr(StringUtl.NewA7(val), or);
 	}
 	public int Read_enm_as_int_or(Gfo_qarg_enum_itm enm, int or) {
 		Gfo_qarg_itm arg = (Gfo_qarg_itm)hash.Get_by_bry(enm.Key());
 		return arg == null ? or : enm.Get_as_int_or(arg.Val_bry(), or);
 	}
-	private void Fail_when_missing(String key) {throw Err_.new_("", "url_arg missing", "key", key);}
+	private void Fail_when_missing(String key) {throw ErrUtl.NewArgs("url_arg missing", "key", key);}
 	// if (url_args.Read_enm(Enm_cmd.Itm) == Enm_cmd.Tid__add) {}
 
 //		public int Read_enm_or_neg1(byte[] key) {

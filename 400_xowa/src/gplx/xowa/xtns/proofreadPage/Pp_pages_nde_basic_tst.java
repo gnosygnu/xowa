@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.proofreadPage;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.apps.cfgs.*;
 public class Pp_pages_nde_basic_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -28,7 +32,7 @@ public class Pp_pages_nde_basic_tst {
 	}
 	@Test public void Basic() {
 		fxt.Init_page_create("Page:A/1", "abc");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", StringUtl.ConcatLinesNl
 		(	"<p>abc&#32;"
 		,	"</p>"
 		,	""
@@ -38,7 +42,7 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/1", "a");
 		fxt.Init_page_create("Page:A/2", "b");
 		fxt.Init_page_create("Page:A/3", "c");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", StringUtl.ConcatLinesNl
 		(	"<p>a&#32;b&#32;c&#32;"
 		,	"</p>"
 		,	""
@@ -48,35 +52,35 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/1", "a<section begin=\"sect_0\"/>b");
 		fxt.Init_page_create("Page:A/2", "cd");
 		fxt.Init_page_create("Page:A/3", "e<section end=\"sect_2\"/>f");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 fromsection='sect_0' tosection='sect_2' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 fromsection='sect_0' tosection='sect_2' />", StringUtl.ConcatLinesNl
 		(	"<p>b&#32;cd&#32;e&#32;"
 		,	"</p>"
 		));
 	}
 	@Test public void Section__onlyinclude() {
 		fxt.Init_page_create("Page:A/1", "a<section begin='sect_0'/>b<section end='sect_0'/>c");
-		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 onlysection='sect_0' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 onlysection='sect_0' />", StringUtl.ConcatLinesNl
 		(	"<p>b&#32;"
 		,	"</p>"
 		));
 	}
 	@Test public void Section__onlyinclude_ignores_from_to() {
 		fxt.Init_page_create("Page:A/1", "<section begin='sect_a'/>a<section end='sect_a'/><section begin='sect_b'/>b<section end='sect_b'/><section begin='sect_c'/>c<section end='sect_c'/>");
-		fxt.Test_parse_page_wiki_str("<pages from=1 index='A' onlysection='sect_b' fromsection='sect_a' tosection='sect_c' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages from=1 index='A' onlysection='sect_b' fromsection='sect_a' tosection='sect_c' />", StringUtl.ConcatLinesNl
 		(	"<p>b&#32;"
 		,	"</p>"
 		));
 	}
 	@Test public void Section__null() {// PURPOSE:if fromsection / tosection is null, assume all; ISSUE#:650 DATE:2020-01-11
 		fxt.Init_page_create("Page:A/1", "a<section begin='sect_0'/>b<section end='sect_0'/>c");
-		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 />", StringUtl.ConcatLinesNl
 		(	"<p>abc&#32;"
 		,	"</p>"
 		));
 	}
 	@Test public void Section__empty() {// PURPOSE:if fromsection / tosection is empty, assume all; ISSUE#:650 DATE:2020-01-11
 		fxt.Init_page_create("Page:A/1", "a<section begin='sect_0'/>b<section end='sect_0'/>c");
-		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 fromsection='' tosection=''/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 fromsection='' tosection=''/>", StringUtl.ConcatLinesNl
 		(	"<p>abc&#32;"
 		,	"</p>"
 		));
@@ -85,7 +89,7 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/1", "<noinclude>a</noinclude>{|\n|b\n|}");
 		fxt.Init_page_create("Page:A/2", "<noinclude>c</noinclude>''d''");
 		fxt.Init_page_create("Page:A/3", "<noinclude>e</noinclude>f");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", StringUtl.ConcatLinesNlSkipLast
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>b"
@@ -103,7 +107,7 @@ public class Pp_pages_nde_basic_tst {
 	}
 	@Test public void Subpage() {	// PURPOSE: [[/Page]] should be relative to current page; EX: Flatland and [[/First World]]; DATE:2013-04-29
 		fxt.Init_page_create("Page:A/1", "[[/Sub1|Sub 1]]");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", StringUtl.ConcatLinesNl
 		(	"<p><a href=\"/wiki/Test_page/Sub1\">Sub 1</a>&#32;"	// NOTE: / is relative to Page_name (in this case Test_page)
 		,	"</p>"
 		));
@@ -118,7 +122,7 @@ public class Pp_pages_nde_basic_tst {
 	}
 	@Test public void Page_has_nl() {	// PURPOSE: parse "to" page, even if it has \n at end; PAGE:en.s:1911_Encyclop�dia_Britannica/Boissier,_Marie_Louis_Antoine_Gaston DATE:2015-04-29
 		fxt.Init_page_create("Page:A/1", "abc");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to='1\n' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to='1\n' />", StringUtl.ConcatLinesNl
 		(	"<p>abc&#32;"
 		,	"</p>"
 		,	""
@@ -126,16 +130,16 @@ public class Pp_pages_nde_basic_tst {
 	}
 	@Test public void Indicator() {	// PURPOSE: handle indicators; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
 		fxt.Init_page_create("Page:A/1", "<indicator name='b'>b</indicator>page_1");
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<indicator name='a'>a</indicator>"
 		, "<pages index=\"A\" from=1 to='1\' />"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<p>page_1&#32;"	// make sure Page:A/1 is transcribed
 		,	"</p>"
 		,	""
 		));
-		Tfds.Eq(1, fxt.Page().Html_data().Indicators().Count());		// only 1 indicator, not 2
-		Tfds.Eq(true, fxt.Page().Html_data().Indicators().Has("a"));	// indicator should be from wikitext, not <page>
+		GfoTstr.EqObj(1, fxt.Page().Html_data().Indicators().Count());		// only 1 indicator, not 2
+		GfoTstr.EqObj(true, fxt.Page().Html_data().Indicators().Has("a"));	// indicator should be from wikitext, not <page>
 	}
 	// FUTURE: handle null from / to; will probably require emulating MW; REF.MW: https://github.com/wikimedia/mediawiki-extensions-ProofreadPage/blob/master/includes/Parser/PagequalityTagParser.php
 	//@Test public void Fromto__null() {// PURPOSE:if from / to is null, assume all; ISSUE#:657 DATE:2020-01-19
@@ -151,7 +155,7 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/1", "A");
 		fxt.Init_page_create("Page:A/2", "B");
 		fxt.Init_page_create("Page:A/3", "C");
-		fxt.Test_parse_page_wiki_str("<pages index='A' from='' to='' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' from='' to='' />", StringUtl.ConcatLinesNl
 		(	"<p>&#32;A&#32;B&#32;C&#32;"
 		,	"</p>"
 		));
@@ -160,7 +164,7 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/1", "A");
 		fxt.Init_page_create("Page:A/2", "B");
 		fxt.Init_page_create("Page:A/3", "C");
-		fxt.Test_parse_page_wiki_str("<pages index='A' from='' to='' include=2/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' from='' to='' include=2/>", StringUtl.ConcatLinesNl
 		(	"<p>B&#32;"
 		,	"</p>"
 		));
@@ -169,7 +173,7 @@ public class Pp_pages_nde_basic_tst {
 		fxt.Init_page_create("Page:A/1", "A");
 		fxt.Init_page_create("Page:A/2", "B");
 		fxt.Init_page_create("Page:A/3", "C");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to 3 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to 3 />", StringUtl.ConcatLinesNl
 		(	"<p>A&#32;B&#32;C&#32;" // fails if &lt;pages index=&quot;A&quot; from=1 to 3 /&gt;
 		,	"</p>"
 		,	""

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgUtl;
+import gplx.types.basics.utls.IntUtl;
 class Pxd_itm_meridian extends Pxd_itm_base implements Pxd_itm_prototype {
 	private final boolean pm;
 	public Pxd_itm_meridian(int ary_idx, boolean pm) {this.Ctor(ary_idx); this.pm = pm;}
@@ -79,7 +80,7 @@ class Pxd_itm_meridian extends Pxd_itm_base implements Pxd_itm_prototype {
 
 				// invalid digit; fail
 				if (hour == 0 || hour > 12) {
-					return Fail(state, "Invalid digit for meridian: "  + Int_.To_str(hour));
+					return Fail(state, "Invalid digit for meridian: "  + IntUtl.ToStr(hour));
 				}
 				else {
 					// update hour
@@ -107,7 +108,7 @@ class Pxd_itm_meridian extends Pxd_itm_base implements Pxd_itm_prototype {
 	}
 	private boolean Fail(Pxd_parser state, String err) {
 		// MW just throws "Invalid time."; add extra description message for debugging purposes
-		state.Err_set(Pft_func_time_log.Invalid_time, Bfr_arg_.New_bry(err));
+		state.Err_set(Pft_func_time_log.Invalid_time, BryBfrArgUtl.NewBry(err));
 		return false;
 	}
 }

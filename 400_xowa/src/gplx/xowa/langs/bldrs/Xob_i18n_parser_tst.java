@@ -13,13 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.bldrs;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import org.junit.*;
-import gplx.core.intls.*;
 public class Xob_i18n_parser_tst {
 	@Before public void init() {fxt.Clear();} private Xob_i18n_parser_fxt fxt = new Xob_i18n_parser_fxt();
 	@Test public void Basic() {
-		fxt.Test_xto_gfs(String_.Concat_lines_nl_skip_last
+		fxt.Test_xto_gfs(StringUtl.ConcatLinesNlSkipLast
 		( "{"
 		, "    \"@metadata\": {"
 		, "        \"authors\": []"
@@ -28,7 +34,7 @@ public class Xob_i18n_parser_tst {
 		, "\"key_2\": \"val_2\","
 		, "\"key_3\": \"val $1\","
 		, "}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "this.messages.load_text("
 		, "<:['"
 		, "key_1|val_1"
@@ -46,8 +52,8 @@ class Xob_i18n_parser_fxt {
 	public void Clear() {
 	}
 	public void Test_xto_gfs(String raw, String expd) {
-		byte[] actl = Xob_i18n_parser.Xto_gfs(Bry_.new_u8(raw));
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+		byte[] actl = Xob_i18n_parser.Xto_gfs(BryUtl.NewU8(raw));
+		GfoTstr.EqLines(expd, StringUtl.NewU8(actl));
 	}
 	public void Test_load_msgs_dir(String dir_str) {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

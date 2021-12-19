@@ -13,15 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.numbers; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.langs.numbers;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.core.btries.*;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.ByteVal;
 public class Xol_num_fmtr_base implements Gfo_invk {
 	private final Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs(); private final Btrie_rv trv = new Btrie_rv();
 	private Xol_num_grp[] grp_ary = Xol_num_grp.Ary_empty; int grp_ary_len;
 	private Gfo_num_fmt_wkr[] cache; int cache_len = 16;
-	private Bry_bfr tmp = Bry_bfr_.New();
+	private BryWtr tmp = BryWtr.New();
 	public boolean Standard() {return standard;} private boolean standard = true;
 	public byte[] Dec_dlm() {return dec_dlm;} public Xol_num_fmtr_base Dec_dlm_(byte[] v) {this.dec_dlm = v; dlm_trie.Add_bry_byte(v, Raw_tid_dec); return this;} private byte[] dec_dlm = Dec_dlm_default;
 	private byte[] grp_dlm;
@@ -31,30 +39,30 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 			byte b = src[i];
 			Object o = dlm_trie.Match_at(trv, src, i, src_len);
 			if (o == null)
-				tmp.Add_byte(b);
+				tmp.AddByte(b);
 			else {
-				byte dlm_tid = ((Byte_obj_val)o).Val();
+				byte dlm_tid = ((ByteVal)o).Val();
 				int dlm_match_pos = trv.Pos();
 				switch (dlm_tid) {
 					case Raw_tid_dec: 
 						if (tid == Tid_raw)
-							tmp.Add_byte(AsciiByte.Dot);	// NOTE: dec_dlm is always outputted as dot, not regional dec_spr; EX: for dewiki, 12,34 -> 12.34
+							tmp.AddByte(AsciiByte.Dot);	// NOTE: dec_dlm is always outputted as dot, not regional dec_spr; EX: for dewiki, 12,34 -> 12.34
 						else
 							tmp.Add(dec_dlm);
 						break; 
 					case Raw_tid_grp: {
 						if (tid == Tid_raw) {}	// never add grp_sep for raw
 						else					// add raw grp_spr
-							tmp.Add_mid(src, i, dlm_match_pos);
+							tmp.AddMid(src, i, dlm_match_pos);
 						break;
 					}
 				}
 				i = dlm_match_pos - 1; // NOTE: handle multi-byte delims
 			}
 		}
-		return tmp.To_bry_and_clear();
+		return tmp.ToBryAndClear();
 	}
-	public byte[] Fmt(int val) {return Fmt(Bry_.new_a7(Int_.To_str(val)));}
+	public byte[] Fmt(int val) {return Fmt(BryUtl.NewA7(IntUtl.ToStr(val)));}
 	public byte[] Fmt(byte[] src) {	// SEE: DOC_1:Fmt
 		int src_len = src.length;
 		int num_bgn = -1, dec_pos = -1;
@@ -68,7 +76,7 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 							num_bgn = i;	// set num_bgn
 					}
 					else					// decimal seen; add rest of src literally
-						tmp.Add_byte(b);
+						tmp.AddByte(b);
 					break;
 				default:					// non-number; includes alpha chars, as well as ".", "," and other potential separators
 					if (num_bgn != -1) {	// number started; format group; EX: 1234. -> 1,234.
@@ -87,7 +95,7 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 					if (b == AsciiByte.Comma)
 						tmp.Add(grp_dlm);
 					else
-						tmp.Add_byte(b);
+						tmp.AddByte(b);
 					break;
 			}
 		}
@@ -95,7 +103,7 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 			Gfo_num_fmt_wkr wkr = Get_or_new(src_len - num_bgn);
 			wkr.Fmt(src, num_bgn, src_len, tmp);
 		}
-		return tmp.To_bry_and_clear();
+		return tmp.ToBryAndClear();
 	}
 	private Gfo_num_fmt_wkr Get_or_new(int src_len) {
 		Gfo_num_fmt_wkr rv = null;
@@ -146,8 +154,8 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 	public static final byte Tid_format = 0, Tid_raw = 1, Tid_nosep = 2;
 }
 class Gfo_num_fmt_wkr {
-	public void Fmt(byte[] src, int bgn, int end, Bry_bfr bb) {
-		if (itm_max == 0) {bb.Add_mid(src, bgn, end); return;}; // NOTE: small numbers (<=3) will have a 0-len ary
+	public void Fmt(byte[] src, int bgn, int end, BryWtr bb) {
+		if (itm_max == 0) {bb.AddMid(src, bgn, end); return;}; // NOTE: small numbers (<=3) will have a 0-len ary
 		int cur_idx = itm_max - 1;
 		Gfo_num_fmt_bldr cur = itm_ary[cur_idx];
 		int cur_pos = cur.Pos();
@@ -157,7 +165,7 @@ class Gfo_num_fmt_wkr {
 				if (cur_idx > 0) cur = itm_ary[--cur_idx];
 				cur_pos = cur.Pos();
 			}
-			bb.Add_byte(src[i]);
+			bb.AddByte(src[i]);
 		}
 	}
 	public Gfo_num_fmt_wkr(Xol_num_grp[] grp_ary, int grp_ary_len, int src_len) {
@@ -179,16 +187,16 @@ class Gfo_num_fmt_wkr {
 }
 interface Gfo_num_fmt_bldr {
 	int Pos();
-	void Gen(Bry_bfr bb);
+	void Gen(BryWtr bb);
 }
 class Gfo_num_fmt_bldr_one implements Gfo_num_fmt_bldr {
 	public int Pos() {return pos;} private int pos;
-	public void Gen(Bry_bfr bb) {bb.Add_byte(b);}
+	public void Gen(BryWtr bb) {bb.AddByte(b);}
 	public Gfo_num_fmt_bldr_one(int pos, byte b) {this.pos = pos; this.b = b;} private byte b;
 }
 class Gfo_num_fmt_bldr_many implements Gfo_num_fmt_bldr {
 	public int Pos() {return pos;} private int pos;
-	public void Gen(Bry_bfr bb) {bb.Add(ary);}
+	public void Gen(BryWtr bb) {bb.Add(ary);}
 	public Gfo_num_fmt_bldr_many(int pos, byte[] ary) {this.pos = pos; this.ary = ary;} private byte[] ary;
 }
 /*

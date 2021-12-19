@@ -15,13 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Decimal_adp;
-import gplx.Decimal_adp_;
-import gplx.Tfds;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.GfoDecimalUtl;
 import org.junit.Test;
 
 public class Json_parser_tst {
@@ -35,9 +33,9 @@ public class Json_parser_tst {
 	@Test public void Str_esc_quote()          {fxt.Test_parse_obj("{'k0':'a\\\"b'}"          , "a\"b");}
 	@Test public void Str_encoded_basic()      {fxt.Test_parse_obj("{'k0':'a\\u0021b'}"       , "a!b");}
 	@Test public void Str_encoded_surrogate()  {fxt.Test_parse_obj("{'k0':'a\\ud83c\\udf0eb'}", "a🌎b");} // check for UTF surrogate-pairs; symbol is earth globe americas (U+1F30E); ISSUE#:487; DATE:2019-06-02
-	@Test public void Num_dec()                {fxt.Test_parse_dec("{'k0':1.23}"              , Decimal_adp_.parse("1.23"));}
+	@Test public void Num_dec()                {fxt.Test_parse_dec("{'k0':1.23}"              , GfoDecimalUtl.Parse("1.23"));}
 	@Test public void Num_exp()                {fxt.Test_parse_obj("{'k0':1e+2}"              , 100);}
-	@Test public void Num_mix()                {fxt.Test_parse_dec("{'k0':-1.23e-1}"          , Decimal_adp_.parse("-1.23e-1"));}
+	@Test public void Num_mix()                {fxt.Test_parse_dec("{'k0':-1.23e-1}"          , GfoDecimalUtl.Parse("-1.23e-1"));}
 	@Test public void Str_many()               {fxt.Test_parse("{'k0':'v0','k1':'v1','k2':'v2'}"     , fxt.Init_nde().Add_many(fxt.Init_kv("k0", "v0"), fxt.Init_kv("k1", "v1"), fxt.Init_kv("k2", "v2")));}
 	@Test public void Ary_empty()              {fxt.Test_parse("{'k0':[]}"                           , fxt.Init_nde().Add_many(fxt.Init_kv_ary_int("k0")));}
 	@Test public void Ary_int()                {fxt.Test_parse("{'k0':[1,2,3]}"                      , fxt.Init_nde().Add_many(fxt.Init_kv_ary_int("k0", 1, 2, 3)));}
@@ -51,7 +49,7 @@ public class Json_parser_tst {
 }
 class Json_parser_fxt {
 	private final Json_parser parser = new Json_parser();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	public Json_itm Init_int(int v)                     {return Json_itm_int.NewByVal(v);}
 	public Json_itm Init_str(String v)                  {return Json_itm_str.NewByVal(v);}
 	public Json_ary Init_ary()                          {return Json_ary.NewByVal();}
@@ -76,25 +74,25 @@ class Json_parser_fxt {
 		return new Json_kv(Init_str(k), ary);
 	}
 	public void Test_parse(String raw_str, Json_itm... expd_ary) {
-		byte[] raw = Bry_.new_u8(Json_doc.Make_str_by_apos(raw_str));
+		byte[] raw = BryUtl.NewU8(Json_doc.Make_str_by_apos(raw_str));
 		Json_doc doc = parser.Parse(raw);
 		doc.Root_grp().Print_as_json(tmp_bfr, 0);
-		String actl = tmp_bfr.To_str_and_clear();
+		String actl = tmp_bfr.ToStrAndClear();
 		String expd = Xto_str(raw, doc, expd_ary, 0, expd_ary.length);
-		Tfds.Eq_str_lines(expd, actl, actl);
+		GfoTstr.EqLines(expd, actl, actl);
 	}
 	public void Test_parse_obj(String raw_str, Object expd) {
 		Json_kv kv = Parse_and_get_kv0(raw_str);
 		Object actl = kv.Val().Data();	 // NOTE: Data_bry is escaped val; EX: a\"b has DataBry of a"b
-		Gftest.Eq__obj_or_null(expd, actl);
+		GfoTstr.EqObjToStr(expd, actl);
 	}
-	public void Test_parse_dec(String raw_str, Decimal_adp expd) {
+	public void Test_parse_dec(String raw_str, GfoDecimal expd) {
 		Json_kv kv = Parse_and_get_kv0(raw_str);
 		Json_itm_decimal decimal_itm = (Json_itm_decimal)kv.Val();
-		Gftest.Eq__bool(true, decimal_itm.Data_as_decimal().Eq(expd));
+		GfoTstr.Eq(true, decimal_itm.Data_as_decimal().Eq(expd));
 	}
 	private Json_kv Parse_and_get_kv0(String raw_str) {
-		byte[] raw = Bry_.new_u8(Json_doc.Make_str_by_apos(raw_str));
+		byte[] raw = BryUtl.NewU8(Json_doc.Make_str_by_apos(raw_str));
 		Json_doc doc = parser.Parse(raw);
 		return Json_kv.Cast(doc.Root_nde().Get_at(0));	// assume root has kv as first sub; EX: {"a":"b"}
 	}
@@ -103,6 +101,6 @@ class Json_parser_fxt {
 			Json_itm itm = ary[i];
 			itm.Print_as_json(tmp_bfr, 0);
 		}
-		return tmp_bfr.To_str_and_clear();
+		return tmp_bfr.ToStrAndClear();
 	}
 }

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.threads.*; import gplx.dbs.*; import gplx.dbs.metas.updates.*; import gplx.dbs.metas.*;
+package gplx.xowa.users.data;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
+import gplx.dbs.*;
 import gplx.xowa.files.caches.*;
 import gplx.xowa.users.cfgs.*; import gplx.xowa.users.bmks.*; import gplx.xowa.users.history.*;
 public class Xou_db_mgr {

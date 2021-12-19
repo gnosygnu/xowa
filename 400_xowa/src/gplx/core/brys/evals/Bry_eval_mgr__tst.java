@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys.evals; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.core.brys.evals;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import org.junit.*;
 public class Bry_eval_mgr__tst {
 	private final Bry_eval_mgr__fxt fxt = new Bry_eval_mgr__fxt();
 	@Test 	public void Text()				{fxt.Test__eval("abc"												, "abc");}
@@ -30,20 +34,20 @@ public class Bry_eval_mgr__tst {
 class Bry_eval_mgr__fxt {
 	private final Bry_eval_mgr mgr = Bry_eval_mgr.Dflt().Add_many(new Bry_eval_wkr__test(), new Bry_eval_wkr__concat());
 	public Bry_eval_mgr__fxt Test__eval(String raw, String expd) {
-		Gftest.Eq__bry(Bry_.new_u8(expd), mgr.Eval(Bry_.new_u8(raw)));
+		GfoTstr.Eq(BryUtl.NewU8(expd), mgr.Eval(BryUtl.NewU8(raw)));
 		return this;
 	}
 }
 class Bry_eval_wkr__test implements Bry_eval_wkr {
 	public String Key() {return "test";}
-	public void Resolve(Bry_bfr rv, byte[] src, int src_bgn, int src_end) {
-		rv.Add_str_a7("test");
+	public void Resolve(BryWtr rv, byte[] src, int src_bgn, int src_end) {
+		rv.AddStrA7("test");
 	}
 }
 class Bry_eval_wkr__concat implements Bry_eval_wkr {
 	public String Key() {return "concat";}
-	public void Resolve(Bry_bfr rv, byte[] src, int src_bgn, int src_end) {
-		byte[][] ary = Bry_split_.Split(src, src_bgn, src_end, AsciiByte.Pipe, false);
+	public void Resolve(BryWtr rv, byte[] src, int src_bgn, int src_end) {
+		byte[][] ary = BrySplit.Split(src, src_bgn, src_end, AsciiByte.Pipe, false);
 		for (byte[] itm : ary) {
 			rv.Add(itm);
 		}

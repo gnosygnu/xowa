@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
+package gplx.gfui;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class Gfui_bnd_parser_tst {
 	@Before public void init() {fxt.Clear();} private Gfui_bnd_parser_fxt fxt = new Gfui_bnd_parser_fxt();
@@ -54,9 +55,9 @@ class Gfui_bnd_parser_fxt {
 		parser = Gfui_bnd_parser.new_en_();
 	}
 	public void Test__to_norm(String key, String expd) {
-		Tfds.Eq(expd, parser.Xto_norm(key));
+		GfoTstr.EqObj(expd, parser.Xto_norm(key));
 	}
 	public void Test__to_gfui(String key, String expd) {
-		Tfds.Eq(expd, parser.Xto_gfui(key));
+		GfoTstr.EqObj(expd, parser.Xto_gfui(key));
 	}
 }

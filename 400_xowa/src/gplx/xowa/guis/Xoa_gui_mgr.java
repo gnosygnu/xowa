@@ -14,23 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_itm;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_cmd;
-import gplx.Gfo_log_;
-import gplx.Gfo_log_bfr;
-import gplx.GfsCtx;
-import gplx.Io_url;
-import gplx.Keyval_;
-import gplx.Rls_able;
-import gplx.Rls_able_;
-import gplx.String_;
-import gplx.core.brys.fmtrs.Bry_fmtr_eval_mgr_;
 import gplx.core.envs.Op_sys;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.objects.Rls_able;
+import gplx.frameworks.objects.Rls_able_;
 import gplx.gfui.RectAdp;
 import gplx.gfui.RectAdp_;
 import gplx.gfui.controls.standards.GfuiTextBox;
@@ -42,7 +35,14 @@ import gplx.gfui.kits.core.Gfui_kit_;
 import gplx.gfui.kits.core.Swt_kit;
 import gplx.gfui.layouts.swts.Swt_layout_data__grid;
 import gplx.gfui.layouts.swts.Swt_layout_mgr__grid;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.BryFmtrEvalMgrUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.logs.Gfo_log_;
+import gplx.libs.logs.Gfo_log_bfr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.apps.cfgs.Xocfg_win;
 import gplx.xowa.guis.bnds.Xog_bnd_mgr;
@@ -93,9 +93,9 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 			, 100));
 
 		// create text
-		GfuiTextBox memo_txt = kit.New_text_box("memo_txt", memo_win, Keyval_.new_(GfuiTextBox_.Ctor_Memo, true));
+		GfuiTextBox memo_txt = kit.New_text_box("memo_txt", memo_win, KeyVal.NewStr(GfuiTextBox_.Ctor_Memo, true));
 		memo_txt.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(BoolUtl.Y).Grab_excess_h_(BoolUtl.Y).Align_w__fill_().Align_h__fill_());
-		memo_txt.Text_(String_.Concat_lines_nl(browser_win.Usr_dlg().Gui_wkr().Prog_msgs().Xto_str_ary()));
+		memo_txt.Text_(StringUtl.ConcatLinesNl(browser_win.Usr_dlg().Gui_wkr().Prog_msgs().Xto_str_ary()));
 
 		// show and focus
 		memo_win.Show();
@@ -141,7 +141,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		else if	(ctx.Match(k, Invk_kit_))							this.kit = Gfui_kit_.Get_by_key(m.ReadStrOr("v", Gfui_kit_.Swt().Key()));
 		else if	(ctx.Match(k, Invk_run))							Run(Rls_able_.Null);
 		else if	(ctx.Match(k, Invk_browser_type))					kit.Cfg_set("HtmlBox", "BrowserType", Swt_kit.Cfg_Html_BrowserType_parse(m.ReadStr("v")));
-		else if	(ctx.Match(k, Invk_xul_runner_path_))				kit.Cfg_set("HtmlBox", "XulRunnerPath", Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("v")).Xto_api());
+		else if	(ctx.Match(k, Invk_xul_runner_path_))				kit.Cfg_set("HtmlBox", "XulRunnerPath", BryFmtrEvalMgrUtl.Eval_url(app.Url_cmd_eval(), m.ReadBry("v")).Xto_api());
 		else if	(ctx.Match(k, Invk_bnds))							return bnd_mgr;
 		else if	(ctx.Match(k, Invk_bindings))						return ipt_cfgs;
 		else if	(ctx.MatchIn(k, Invk_main_win, Invk_browser_win))	return browser_win;
@@ -152,7 +152,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 		else if	(ctx.Match(k, Invk_cmds))							return cmd_mgr;
 		else if	(ctx.Match(k, Invk_url_macros))						return url_macro_mgr;
 		else if	(ctx.Match(k, Xoue_user.Evt_lang_changed))			Lang_changed((Xol_lang_itm)m.ReadObj("v", null));
-		else throw Err_.new_unhandled(k);
+		else throw ErrUtl.NewUnhandled(k);
 		return this;
 	}
 	private static final String 
@@ -173,8 +173,8 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 			splash_win.Rls();
 			kit.Kit_run();	// NOTE: enters thread-loop
 		} catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "run_failed: ~{0} ~{1}", log_bfr.Xto_str(), Err_.Message_gplx_full(e));
-			if (app.Gui_mgr().Kit() != null) app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_full(e));
+			app.Usr_dlg().Warn_many("", "", "run_failed: ~{0} ~{1}", log_bfr.Xto_str(), ErrUtl.ToStrFull(e));
+			if (app.Gui_mgr().Kit() != null) app.Gui_mgr().Kit().Ask_ok("", "", ErrUtl.ToStrFull(e));
 		}
 	}
 	private void layout_Init() {

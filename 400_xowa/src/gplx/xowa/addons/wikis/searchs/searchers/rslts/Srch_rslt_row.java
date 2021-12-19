@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.searchs.searchers.rslts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 public class Srch_rslt_row {
 	public Srch_rslt_row(byte[] key, byte[] wiki_bry, Xoa_ttl page_ttl, int page_ns, byte[] page_ttl_wo_ns, int page_id, int page_len, int page_score, int page_redirect_id) {
@@ -57,19 +59,19 @@ public class Srch_rslt_row {
 				= display_type == Srch_rslt_row.Display_type__url_bar
 				? Bry__redirect__text
 				: Bry__redirect__html;
-			return Bry_.Add(rv, redirect_dlm, Page_redirect_ttl);
+			return BryUtl.Add(rv, redirect_dlm, Page_redirect_ttl);
 		}
 	}
 
-	public static byte[] Bld_key(byte[] wiki_domain, int page_id) {return Bry_.Add(wiki_domain, AsciiByte.PipeBry, Int_.To_bry(page_id));}
+	public static byte[] Bld_key(byte[] wiki_domain, int page_id) {return BryUtl.Add(wiki_domain, AsciiByte.PipeBry, IntUtl.ToBry(page_id));}
 	public static Srch_rslt_row New(byte[] wiki_bry, Xoa_ttl page_ttl, int page_id, int page_len, int page_score, int redirect_id) {
 		return new Srch_rslt_row(Bld_key(wiki_bry, page_id), wiki_bry, page_ttl, page_ttl.Ns().Id(), page_ttl.Page_db(), page_id, page_len, page_score, redirect_id);
 	}
 	public static final int Page_redirect_id_null = gplx.xowa.wikis.data.tbls.Xowd_page_itm.Redirect_id_null;
 	public static final String Str__redirect__text = "  ->  ";
 	private static final byte[]
-	  Bry__redirect__html = Bry_.new_u8(" → ")	// 8592; 8594
-	, Bry__redirect__text = Bry_.new_a7(Str__redirect__text);
+	  Bry__redirect__html = BryUtl.NewU8(" → ")	// 8592; 8594
+	, Bry__redirect__text = BryUtl.NewA7(Str__redirect__text);
 	public static final int
 	  Display_type__url_bar      = 1
 	, Display_type__suggest      = 2

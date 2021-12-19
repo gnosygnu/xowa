@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.*;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_root_wkr;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.controls.windows.GfuiWin;
 import gplx.gfui.imgs.ImageAdp;
@@ -23,11 +26,8 @@ import gplx.gfui.kits.core.Gfui_mnu_grp;
 import gplx.gfui.kits.core.Gfui_mnu_itm;
 import gplx.gfui.kits.core.Gfui_mnu_itm_;
 import gplx.gfui.kits.core.Swt_kit;
-
+import gplx.types.errs.ErrUtl;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.events.MenuDetectEvent;
-import org.eclipse.swt.events.MenuDetectListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Decorations;
@@ -152,7 +152,7 @@ class Swt_popup_itm implements Gfui_mnu_itm {
 			case SWT.CASCADE: 	this.tid = Gfui_mnu_itm_.Tid_grp; break;
 			case SWT.CHECK:		this.tid = Gfui_mnu_itm_.Tid_chk; break;
 			case SWT.RADIO: 	this.tid = Gfui_mnu_itm_.Tid_rdo; break;
-			default:			throw Err_.new_unhandled(swt_type);
+			default:			throw ErrUtl.NewUnhandled(swt_type);
 		}
 	}
 	@Override public int Tid() {return tid;} private int tid;
@@ -187,7 +187,7 @@ class Swt_lnr__menu_btn_cmd implements Listener {
 	public Swt_lnr__menu_btn_cmd(Gfo_invk invk, String cmd) {this.invk = invk; this.cmd = cmd;} Gfo_invk invk; String cmd;
 	public void handleEvent(Event ev) {
 		try {Gfo_invk_.Invk_by_key(invk, cmd);}
-		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", cmd, Err_.Message_gplx_full(e));}
+		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", cmd, ErrUtl.ToStrFull(e));}
 	}	
 }
 class Swt_lnr__menu_btn_msg implements Listener {
@@ -198,7 +198,7 @@ class Swt_lnr__menu_btn_msg implements Listener {
 			msg.Args_reset();
 			root_wkr.Run_str_for(invk, msg);
 		}
-		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
+		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), ErrUtl.ToStrFull(e));}
 	}	
 }
 class Swt_lnr__menu_chk_msg implements Listener {
@@ -214,6 +214,6 @@ class Swt_lnr__menu_chk_msg implements Listener {
 			msg.Args_reset();
 			root_wkr.Run_str_for(invk, msg);
 		}
-		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), Err_.Message_gplx_full(e));}
+		catch (Exception e) {Swt_kit.Instance.Ask_ok("", "", "error while invoking command: cmd=~{0} err=~{1}", msg.Key(), ErrUtl.ToStrFull(e));}
 	}	
 }

@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.dbs; import gplx.*;
+package gplx.xowa.xtns.wbases.dbs;
 import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Xowb_prop_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
@@ -48,7 +52,7 @@ public class Xowb_prop_tbl implements Db_tbl {
 	}
 	private void Select_all__add(Ordered_hash hash, Db_rdr rdr) {
 		// read data
-		String pid = String_.Upper(rdr.Read_str(fld__wbp_pid));	// convert "p123" to "P123"; note (a) Scrib.v2 calls as "P123"; (b) db stores as "p123"; (c) XO loads as "P123"; DATE:2016-12-03
+		String pid = StringUtl.Upper(rdr.Read_str(fld__wbp_pid));	// convert "p123" to "P123"; note (a) Scrib.v2 calls as "P123"; (b) db stores as "p123"; (c) XO loads as "P123"; DATE:2016-12-03
 		byte datatype_id = (byte)rdr.Read_int(fld__wbp_datatype);
 
 		// convert id to key

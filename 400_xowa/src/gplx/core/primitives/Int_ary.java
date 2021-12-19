@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives;
+import gplx.types.errs.ErrUtl;
 public class Int_ary {
 	private int[] ary; private int len, max;
 	public Int_ary(int max) {
@@ -30,7 +31,7 @@ public class Int_ary {
 	public int Len() {return len;}
 	public int Get_at_or_fail(int i) {
 		if (i > -1 && i < len) return ary[i];
-		else throw Err_.new_("core.int_ary", "index is invalid", "i", i, "len", len);
+		else throw ErrUtl.NewArgs("index is invalid", "i", i, "len", len);
 	}
 	public void Add(int v) {
 		if (len == max) {
@@ -45,7 +46,7 @@ public class Int_ary {
 		++len;
 	}
 	public int Pop_or_fail() {
-		if (len == 0) throw Err_.new_("core.int_ary", "stack is empty");
+		if (len == 0) throw ErrUtl.NewArgs("stack is empty");
 		return Pop_or(-1);
 	}
 	public int Pop_or(int or) {

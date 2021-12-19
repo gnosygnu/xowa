@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*;
+package gplx.xowa.wikis.data.tbls;
 import gplx.core.criterias.*;
 import gplx.dbs.*;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
 class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
 	private Ordered_hash hash; private int in_ns;
 	@Override protected int Interval() {return 64;}	// NOTE: 96+ overflows; EX: w:Space_Liability_Convention; DATE:2013-10-24
@@ -25,12 +27,12 @@ class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
 		Criteria[] crt_ary = new Criteria[len];
 		String fld_ns = tbl.Fld_page_ns(); String fld_ttl = tbl.Fld_page_title();
 		for (int i = 0; i < len; i++)
-			crt_ary[i] = Criteria_.And(Db_crt_.New_eq(fld_ns, in_ns), Db_crt_.New_eq(fld_ttl, Bry_.Empty));
+			crt_ary[i] = Criteria_.And(Db_crt_.New_eq(fld_ns, in_ns), Db_crt_.New_eq(fld_ttl, BryUtl.Empty));
 		return Criteria_.Or_many(crt_ary);
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)hash.Get_at(i);
+			Xowd_page_itm page = (Xowd_page_itm)hash.GetAt(i);
 			stmt.Val_int(in_ns);
 			stmt.Val_bry_as_str(page.Ttl_page_db());
 		}

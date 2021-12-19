@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
+package gplx.xowa.addons.wikis.directorys.specials.items.bldrs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.wikis.dbs.*;
 public class Xow_wiki_factory {
 	public static Xowe_wiki Load_personal(Xoae_app app, byte[] domain, Io_url dir_url) {
@@ -38,13 +42,13 @@ public class Xow_wiki_factory {
 		save_mgr.Update_modified_on_enabled_(true);
 
 		// register it for the url-bar; EX: test.me.org/wiki/Main_Page
-		app.User().Wikii().Xwiki_mgr().Add_by_atrs_offline(String_.new_u8(domain), String_.new_u8(domain));
+		app.User().Wikii().Xwiki_mgr().Add_by_atrs_offline(StringUtl.NewU8(domain), StringUtl.NewU8(domain));
 
 		// add an xwiki to xowa.home
 		rv.Xwiki_mgr().Add_by_atrs("xowa.home", "home");
 
 		// HACK: remove CC copyright message; should change to option
-		rv.Msg_mgr().Get_or_make(Bry_.new_a7("wikimedia-copyright")).Atrs_set(Bry_.Empty, false, false);
+		rv.Msg_mgr().Get_or_make(BryUtl.NewA7("wikimedia-copyright")).Atrs_set(BryUtl.Empty, false, false);
 		return rv;
 	}
 }

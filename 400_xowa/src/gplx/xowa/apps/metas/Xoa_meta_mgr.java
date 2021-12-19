@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.metas;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.wms.sites.*;
 public class Xoa_meta_mgr {

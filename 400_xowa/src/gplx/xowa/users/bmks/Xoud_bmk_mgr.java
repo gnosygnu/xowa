@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users.bmks;
-import gplx.Bry_;
+import gplx.types.basics.utls.BryUtl;
 import gplx.dbs.Db_conn;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 public class Xoud_bmk_mgr {		
@@ -29,7 +29,7 @@ public class Xoud_bmk_mgr {
 		if (!conn.Meta_tbl_exists(tbl__itm.Tbl_name())) tbl__itm.Create_tbl();
 	}
 	public void Itms__add(int owner, Xoa_url url) {
-		tbl__itm.Insert(owner, tbl__itm.Select_sort_next(owner), Xoa_ttl.Replace_unders(url.Page_bry()), url.Wiki_bry(), url.To_bry(BoolUtl.Y, BoolUtl.Y), Bry_.Empty);
+		tbl__itm.Insert(owner, tbl__itm.Select_sort_next(owner), Xoa_ttl.Replace_unders(url.Page_bry()), url.Wiki_bry(), url.To_bry(BoolUtl.Y, BoolUtl.Y), BryUtl.Empty);
 	}
 	public static final int Owner_root = -1;
 }

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.origs;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.xowa.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 class Xof_wiki_finder {	// UNUSED
@@ -38,7 +40,7 @@ class Xof_wiki_finder {	// UNUSED
 		Xowe_wiki wiki = null;
 		if (Find_page__by_wiki(db_page, wiki_0, ns_id, ttl_bry)) {
 			wiki = wiki_0;
-			itm.Orig_repo_id_(Byte_.Zero);
+			itm.Orig_repo_id_(ByteUtl.Zero);
 		}
 		else {
 			if (Find_page__by_wiki(db_page, wiki_1, ns_id, ttl_bry)) {

@@ -14,19 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.parsers;
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.Bry_split_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Int_;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.ComparerAble;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.commons.lists.ComparerAble;
 import gplx.xowa.langs.cases.Xol_case_mgr;
 public class Srch_highlight_mgr {
 	private final Xol_case_mgr	case_mgr;
-	private final Bry_bfr		tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(32);
 	private	Srch_highlight_itm[]	srch_lc_itms;
 	private int						srch_words_len;
 	public Srch_highlight_mgr(Xol_case_mgr case_mgr) {this.case_mgr = case_mgr;}
@@ -34,7 +33,7 @@ public class Srch_highlight_mgr {
 		synchronized (tmp_bfr) {
 			// build array of search_words
 			byte[] srch_lc_bry = case_mgr.Case_build_lower(srch_mc_bry);
-			byte[][] srch_lc_ary = Bry_split_.Split(srch_lc_bry, AsciiByte.Space, BoolUtl.Y);
+			byte[][] srch_lc_ary = BrySplit.Split(srch_lc_bry, AsciiByte.Space, BoolUtl.Y);
 			this.srch_words_len = srch_lc_ary.length;
 			this.srch_lc_itms = new Srch_highlight_itm[srch_words_len];
 			for (int i = 0; i < srch_words_len; ++i) {
@@ -49,8 +48,8 @@ public class Srch_highlight_mgr {
 	}
 	public byte[] Highlight(byte[] page_mc_bry) {
 		synchronized (tmp_bfr) {
-			byte[][]	page_mc_words = Bry_split_.Split(page_mc_bry, AsciiByte.Space, BoolUtl.Y);
-			byte[][]	page_lc_words = Bry_split_.Split(case_mgr.Case_build_lower(page_mc_bry), AsciiByte.Space, BoolUtl.Y);
+			byte[][]	page_mc_words = BrySplit.Split(page_mc_bry, AsciiByte.Space, BoolUtl.Y);
+			byte[][]	page_lc_words = BrySplit.Split(case_mgr.Case_build_lower(page_mc_bry), AsciiByte.Space, BoolUtl.Y);
 			int			page_words_len = page_lc_words.length;
 			boolean[]		page_words_done = new boolean[page_words_len];
 
@@ -62,10 +61,10 @@ public class Srch_highlight_mgr {
 				// loop over page_title words; EX: page_raw="A B C" -> "a", "b", "c"
 				for (int j = 0; j < page_words_len; ++j) {
 					byte[] page_lc_word = page_lc_words[j];
-					int find_pos = Bry_find_.Find_fwd(page_lc_word, srch_lc_word);
+					int find_pos = BryFind.FindFwd(page_lc_word, srch_lc_word);
 
 					// skip: search is not in page; EX: page_raw="D e"; should not happen, but exit now else Array out of bounds exception below
-					if (find_pos == Bry_find_.Not_found) continue;
+					if (find_pos == BryFind.NotFound) continue;
 
 					// skip: find_pos is not BOS and prv byte is not dash or paren; EX: "Za" should be skipped; "-a" and "(a" should not
 					if (find_pos > 0) {
@@ -86,12 +85,12 @@ public class Srch_highlight_mgr {
 
 					// build new word; EX: "<strong>A</strong>"
 					tmp_bfr.Clear();
-					tmp_bfr.Add_mid(page_mc_word, 0, find_pos);
+					tmp_bfr.AddMid(page_mc_word, 0, find_pos);
 					tmp_bfr.Add(gplx.langs.htmls.Gfh_tag_.Strong_lhs);
-					tmp_bfr.Add_mid(page_mc_word, find_pos, find_pos + srch_lc_word_len);
+					tmp_bfr.AddMid(page_mc_word, find_pos, find_pos + srch_lc_word_len);
 					tmp_bfr.Add(gplx.langs.htmls.Gfh_tag_.Strong_rhs);
-					tmp_bfr.Add_mid(page_mc_word, find_pos + srch_lc_word_len, page_mc_word.length);
-					byte[] repl = tmp_bfr.To_bry_and_clear();
+					tmp_bfr.AddMid(page_mc_word, find_pos + srch_lc_word_len, page_mc_word.length);
+					byte[] repl = tmp_bfr.ToBryAndClear();
 
 					// overwrite page_title word
 					page_mc_words[j] = repl;
@@ -100,10 +99,10 @@ public class Srch_highlight_mgr {
 
 			// rebuild page_words ary
 			for (int i = 0; i < page_words_len; ++i) {
-				if (i != 0) tmp_bfr.Add_byte_space();	// NOTE: this assumes one space separating titles which is true for all MW titles
+				if (i != 0) tmp_bfr.AddByteSpace();	// NOTE: this assumes one space separating titles which is true for all MW titles
 				tmp_bfr.Add(page_mc_words[i]);
 			}
-			return tmp_bfr.To_bry_and_clear();
+			return tmp_bfr.ToBryAndClear();
 		}
 	}
 }
@@ -117,7 +116,7 @@ class Srch_highlight_bry_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Srch_highlight_itm lhs = (Srch_highlight_itm)lhsObj;
 		Srch_highlight_itm rhs = (Srch_highlight_itm)rhsObj;
-		return -Int_.Compare(lhs.Word_len, rhs.Word_len);	// - for descending
+		return -IntUtl.Compare(lhs.Word_len, rhs.Word_len);	// - for descending
 	}
         public static final Srch_highlight_bry_sorter Instance = new Srch_highlight_bry_sorter(); Srch_highlight_bry_sorter() {}
 }

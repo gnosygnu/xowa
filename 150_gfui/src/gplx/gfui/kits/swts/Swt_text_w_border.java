@@ -13,26 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.kits.core.Swt_kit;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwTextFld;
 import gplx.gfui.controls.standards.GfuiTextBox_;
 import gplx.gfui.draws.ColorAdp;
-
+import gplx.types.commons.KeyValHash;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.TraverseEvent;
 import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class Swt_text_w_border implements GxwTextFld, Swt_control {
@@ -40,7 +37,7 @@ public class Swt_text_w_border implements GxwTextFld, Swt_control {
 	private Composite text_host;
 	private Composite text_margin;
 	private Text text_elem;
-	public Swt_text_w_border(Swt_kit kit, Swt_control owner_control, Color color, Keyval_hash ctorArgs) {
+	public Swt_text_w_border(Swt_kit kit, Swt_control owner_control, Color color, KeyValHash ctorArgs) {
 		this.kit = kit;
 		Composite owner = owner_control.Under_composite();
 		int text_elem_style = ctorArgs.Has(GfuiTextBox_.Ctor_Memo) ? SWT.MULTI | SWT.WRAP | SWT.V_SCROLL : SWT.FLAT;

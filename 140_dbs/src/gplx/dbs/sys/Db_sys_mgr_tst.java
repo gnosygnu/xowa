@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sys; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.sys; import gplx.dbs.*;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class Db_sys_mgr_tst {
 	private final Db_sys_mgr_fxt fxt = new Db_sys_mgr_fxt();
@@ -28,5 +29,5 @@ class Db_sys_mgr_fxt {
 		Db_conn conn = Db_conn_pool.Instance.Get_or_new(Db_conn_info_.mem_("test"));
 		sys_mgr = new Db_sys_mgr(conn);
 	}
-	public void Test__autonum_next(String key, int expd) {Tfds.Eq_int(expd, sys_mgr.Autonum_next(key));}
+	public void Test__autonum_next(String key, int expd) {GfoTstr.Eq(expd, sys_mgr.Autonum_next(key));}
 }

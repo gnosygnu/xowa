@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
+import gplx.types.commons.GfoDate;
+import gplx.libs.files.Io_url;
 public interface Db_rdr {
 	boolean		Move_next();
 	byte[]		Read_bry(String k);
@@ -25,7 +27,7 @@ public interface Db_rdr {
 	long 		Read_long(String k);
 	float		Read_float(String k);
 	double		Read_double(String k);
-	DateAdp		Read_date_by_str(String k);
+	GfoDate Read_date_by_str(String k);
 	boolean		Read_bool_by_byte(String k);
 	int			Fld_len();
 	Object 		Read_obj(String k);

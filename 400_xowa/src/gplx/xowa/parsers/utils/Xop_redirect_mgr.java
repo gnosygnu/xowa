@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.utils;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
@@ -39,7 +44,7 @@ public class Xop_redirect_mgr {
 	}
 	public Xoa_ttl Extract_redirect(byte[] src, int src_len) {	// NOTE: this proc is called by every page. be careful of changes; DATE:2014-07-05
 		if (src_len == 0) return Redirect_null_ttl;
-		int bgn = Bry_find_.Find_fwd_while_not_ws(src, 0, src_len);
+		int bgn = BryFind.FindFwdWhileNotWs(src, 0, src_len);
 		if (bgn == src_len) return Redirect_null_ttl; // article is entirely whitespace
 		int kwd_end = Xop_redirect_mgr_.Get_kwd_end_or_end(src, bgn, src_len);
 		if (kwd_end == src_len) return Redirect_null_ttl;
@@ -47,24 +52,24 @@ public class Xop_redirect_mgr {
 		Object redirect_itm = redirect_hash.Get_by_mid(src, bgn, kwd_end);
 		if (redirect_itm == null)		return Redirect_null_ttl; // not a redirect kwd
 		int ttl_bgn = Xop_redirect_mgr_.Get_ttl_bgn_or_neg1(src, kwd_end, src_len);
-		if (ttl_bgn == Bry_find_.Not_found)	return Redirect_null_ttl;
+		if (ttl_bgn == BryFind.NotFound)	return Redirect_null_ttl;
 		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
-		int ttl_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn); if (ttl_end == Bry_find_.Not_found)	return Redirect_null_ttl;
-		int pipe_pos = Bry_find_.Find_fwd(src, AsciiByte.Pipe, ttl_bgn);
-		if (	pipe_pos != Bry_find_.Not_found	// if pipe exists; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
+		int ttl_end = BryFind.FindFwd(src, Xop_tkn_.Lnki_end, ttl_bgn); if (ttl_end == BryFind.NotFound)	return Redirect_null_ttl;
+		int pipe_pos = BryFind.FindFwd(src, AsciiByte.Pipe, ttl_bgn);
+		if (	pipe_pos != BryFind.NotFound    // if pipe exists; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
 			&&	pipe_pos < ttl_end)				// and pipe is before ]]; do not take pipe from next lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
 			ttl_end = pipe_pos;					// end ttl at pipe
-		byte[] redirect_bry = Bry_.Mid(src, ttl_bgn, ttl_end);
+		byte[] redirect_bry = BryLni.Mid(src, ttl_bgn, ttl_end);
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
 		return Xoa_ttl.Parse(wiki, redirect_bry);
 	}
 	public static final Xoa_ttl Extract_redirect_is_null = null;
 	public static final int Redirect_max_allowed = 4;
 	public static final Xoa_ttl	Redirect_null_ttl = null;
-	public static final byte[]	Redirect_null_bry = Bry_.Empty;
-	private static final byte[] Redirect_bry = Bry_.new_a7("#REDIRECT ");
+	public static final byte[]	Redirect_null_bry = BryUtl.Empty;
+	private static final byte[] Redirect_bry = BryUtl.NewA7("#REDIRECT ");
 	public static byte[] Make_redirect_text(byte[] redirect_to_ttl) {
-		return Bry_.Add
+		return BryUtl.Add
 			(	Redirect_bry				// "#REDIRECT "
 			,	Xop_tkn_.Lnki_bgn			// "[["
 			,	redirect_to_ttl				// "Page"
@@ -73,8 +78,8 @@ public class Xop_redirect_mgr {
 	}
 	public static byte[] Bld_redirect_msg(Xoae_app app, Xowe_wiki wiki, Xopg_redirect_mgr redirect_mgr) {
 		// NOTE: this assumes that redirect_mgr only has redirect_src, not redirect_trg; note that #REDIRECT [[A]] only adds redirect_src, whereas special redirects add redirect_trg; DATE:2016-07-31
-		int len = redirect_mgr.Itms__len(); if (len == 0) return Bry_.Empty;
-		Bry_bfr redirect_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		int len = redirect_mgr.Itms__len(); if (len == 0) return BryUtl.Empty;
+		BryWtr redirect_bfr = wiki.Utl__bfr_mkr().GetB512();
 		boolean dirty = false;
 		for (int i = 0; i < len; i++) {
 			Xopg_redirect_itm redirect_itm = redirect_mgr.Itms__get_at(i);
@@ -87,31 +92,31 @@ public class Xop_redirect_mgr {
 				.Add(redirect_itm.Ttl().Full_db_url())      // 'PageA'
 				.Add(Bry_redirect_arg)						// ?redirect=no
 				.Add(Gfh_bldr_.Bry__cls__nth)               // '" class="'
-				.Add_str_a7("mw-redirect")                  // mw-redirect // NOTE:MW does this differently, but for now, manually add; REF.MW:https://github.com/wikimedia/mediawiki/blob/82311f8c2c79bc469cae14e17546fd79d3541b76/includes/linker/LinkRenderer.php#L479
+				.AddStrA7("mw-redirect")                  // mw-redirect // NOTE:MW does this differently, but for now, manually add; REF.MW:https://github.com/wikimedia/mediawiki/blob/82311f8c2c79bc469cae14e17546fd79d3541b76/includes/linker/LinkRenderer.php#L479
 				.Add(Gfh_bldr_.Bry__title__nth)				// '" title="'
 				.Add(display_ttl)							// 'PageA'
 				.Add(Gfh_bldr_.Bry__lhs_end_head_w_quote)	// '">'
 				.Add(display_ttl)							// 'PageA'
 				.Add(Gfh_bldr_.Bry__a_rhs);					// </a>
 		}
-		if (!dirty) return Bry_.Empty; // ignore Special:Redirects else Special:Random will always show "redirected from"; DATE:2016-07-05
+		if (!dirty) return BryUtl.Empty; // ignore Special:Redirects else Special:Random will always show "redirected from"; DATE:2016-07-05
 
 		// build redirectedfrom span; NOTE: same implementation as MW; ISSUE#:642; DATE:2020-01-14; REF.MW:https://github.com/wikimedia/mediawiki/blob/master/includes/page/Article.php#L1115-L1117
-		Bry_bfr fmt_bfr = wiki.Utl__bfr_mkr().Get_b512();
-		fmt_bfr.Add_str_a7("<span class=\"mw-redirectedfrom\">");
-		byte[] redirectedfrom_val = wiki.Msg_mgr().Val_by_key_args(Key_redirectedfrom, redirect_bfr.To_bry());
+		BryWtr fmt_bfr = wiki.Utl__bfr_mkr().GetB512();
+		fmt_bfr.AddStrA7("<span class=\"mw-redirectedfrom\">");
+		byte[] redirectedfrom_val = wiki.Msg_mgr().Val_by_key_args(Key_redirectedfrom, redirect_bfr.ToBry());
 		fmt_bfr.Add(redirectedfrom_val);
-		fmt_bfr.Add_str_a7("</span>");
+		fmt_bfr.AddStrA7("</span>");
 
 		// release bfrs
-		redirect_bfr.Clear().Mkr_rls();
-		fmt_bfr.Mkr_rls();
-		return fmt_bfr.To_bry_and_clear();
+		redirect_bfr.Clear().MkrRls();
+		fmt_bfr.MkrRls();
+		return fmt_bfr.ToBryAndClear();
 	}
 	private static byte[]
-	  Bry_redirect_dlm = Bry_.new_a7(" <--- ")
-	, Bry_redirect_arg = Bry_.new_a7("?redirect=no")
-	, Key_redirectedfrom = Bry_.new_a7("redirectedfrom")
+	  Bry_redirect_dlm = BryUtl.NewA7(" <--- ")
+	, Bry_redirect_arg = BryUtl.NewA7("?redirect=no")
+	, Key_redirectedfrom = BryUtl.NewA7("redirectedfrom")
 	;
 }
 class Xop_redirect_mgr_ {
@@ -136,16 +141,16 @@ class Xop_redirect_mgr_ {
 					if (colon_null)
 						colon_null = false;
 					else
-						return Bry_find_.Not_found;
+						return BryFind.NotFound;
 					break;
 				default:
 					break;
 				case AsciiByte.BrackBgn:
 					int nxt_pos = i + 1;
-					if (nxt_pos >= end) return Bry_find_.Not_found;	// [ at eos
-					return src[nxt_pos] == AsciiByte.BrackBgn ? i : Bry_find_.Not_found;
+					if (nxt_pos >= end) return BryFind.NotFound;	// [ at eos
+					return src[nxt_pos] == AsciiByte.BrackBgn ? i : BryFind.NotFound;
 			}
 		}
-		return Bry_find_.Not_found;
+		return BryFind.NotFound;
 	}
 }

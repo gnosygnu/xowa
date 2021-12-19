@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.syncs.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*;
+package gplx.xowa.addons.wikis.pages.syncs.core;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.xowa.*;
 import gplx.xowa.files.downloads.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.htmls.*; import gplx.langs.htmls.docs.*;
-import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.txts.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.htmls.core.dbs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.htmls.*;
 import gplx.xowa.addons.wikis.pages.syncs.wmapis.*;
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
 public class Xosync_update_mgr {
@@ -52,7 +54,7 @@ public class Xosync_update_mgr {
 			// insert into page_tbl
 			page_tbl.Insert_bgn();
 			try {
-				page_tbl.Insert_cmd_by_batch(data.Page_id(), ns_id, page_ttl.Page_db(), false, Datetime_now.Get()
+				page_tbl.Insert_cmd_by_batch(data.Page_id(), ns_id, page_ttl.Page_db(), false, GfoDateNow.Get()
 						, html_bry.length, next_random_id, -1, html_db.Id(), -1);
 			} finally {
 				page_tbl.Insert_end();
@@ -60,7 +62,7 @@ public class Xosync_update_mgr {
 		}
 
 		// save html
-		Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: saving html; page=~{0} html_len=~{1}", page_ttl.Full_db(), Bry_.Len(html_bry));
+		Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: saving html; page=~{0} html_len=~{1}", page_ttl.Full_db(), BryUtl.Len(html_bry));
 		html_tbl_mgr.Save_html(wiki, html_db, data.Page_id(), data.Revn_id(), html_bry);
 
 		// download files

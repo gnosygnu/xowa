@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*;
+package gplx.dbs.engines.mems;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Mem_qry_set {
 	private final List_adp rows = List_adp_.New();
 	public int Len() {return rows.Len();}
-	public Mem_row Get_at(int i) {return (Mem_row)rows.Get_at(i);}
+	public Mem_row Get_at(int i) {return (Mem_row)rows.GetAt(i);}
 	public void Add(Mem_row row) {rows.Add(row);}
 }

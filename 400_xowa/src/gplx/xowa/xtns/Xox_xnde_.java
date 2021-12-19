@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.xowa.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.xndes.*;
 import gplx.langs.htmls.docs.*;
 public class Xox_xnde_ {
@@ -31,7 +35,7 @@ public class Xox_xnde_ {
 		int len = rv.length;
 		for (int i = 0; i < len; ++i) {
 			Mwh_atr_itm xatr = rv[i]; if (xatr.Invalid()) continue;
-			byte xatr_tid = hash.Get_as_byte_or(xatr.Key_bry(), Byte_.Max_value_127);
+			byte xatr_tid = hash.Get_as_byte_or(xatr.Key_bry(), ByteUtl.MaxValue127);
 			owner.Xatr__set(wiki, src, xatr, xatr_tid);
 		}
 		return rv;
@@ -44,6 +48,6 @@ public class Xox_xnde_ {
 	public static byte[] Extract_body_or_null(byte[] src, Xop_xnde_tkn xnde) {
 		int body_bgn = xnde.Tag_open_end();
 		int body_end = xnde.Tag_close_bgn();
-		return body_bgn != -1 && body_end > body_bgn ? Bry_.Mid(src, body_bgn, body_end) : null;
+		return body_bgn != -1 && body_end > body_bgn ? BryLni.Mid(src, body_bgn, body_end) : null;
 	}
 }

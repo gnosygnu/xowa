@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.tdbs.hives;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
 import gplx.xowa.*;
 import gplx.xowa.wikis.tdbs.*;
 import gplx.core.ios.zips.*;
@@ -57,7 +62,7 @@ public class Xob_hive_mgr {
 			int rows_len = xdat_file.Count();
 			for (; row_idx < rows_len; row_idx++) {
 				xdat_file.GetAt(xdat_itm, row_idx);
-				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(BryLni.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 				++count;
 				nxt_itm = ttl_itm;
@@ -92,7 +97,7 @@ public class Xob_hive_mgr {
 				row_idx = xdat_file.Count() - 1;
 			for (; row_idx > -1; row_idx--) {
 				xdat_file.GetAt(xdat_itm, row_idx);
-				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(BryLni.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 //				list.Add(ttl_itm);
 				++count;
@@ -162,7 +167,7 @@ public class Xob_hive_mgr {
 			first = false;
 			for (; row_idx < rows_len; row_idx++) {
 				xdat.GetAt(xdat_itm, row_idx);
-				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(Bry_.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
+				Xowd_page_itm ttl_itm = Xotdb_page_itm_.Txt_ttl_load(BryLni.Mid(xdat_itm.Src(), xdat_itm.Itm_bgn(), xdat_itm.Itm_end()));
 				if (!include_redirects && ttl_itm.Redirected()) continue;
 				list.Add(ttl_itm);
 				if (++count == total) {loop = false; break;}
@@ -190,9 +195,9 @@ public class Xob_hive_mgr {
 		Xob_xdat_file xdat_fil = new Xob_xdat_file();
 		if (xdat_bry.length > 0)	// if file is not empty, load it and parse it
 			xdat_fil.Parse(xdat_bry, xdat_bry.length, xdat_url);
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetM001();
 		xdat_fil.Insert(tmp_bfr, row);
 		xdat_fil.Save(xdat_url);
-		tmp_bfr.Mkr_rls();
+		tmp_bfr.MkrRls();
 	}	private Xob_xdat_file xdat = new Xob_xdat_file(); Io_zip_mgr zip_mgr = Io_zip_mgr_base.Instance;
 }

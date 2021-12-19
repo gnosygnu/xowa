@@ -14,14 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.caches;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Ordered_hash;
-import gplx.Rls_able;
-import gplx.String_;
 import gplx.dbs.Db_cmd_mode;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
@@ -32,7 +24,15 @@ import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.objects.Rls_able;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.files.Xof_lnki_page;
 import gplx.xowa.files.Xof_lnki_time;
 public class Xou_cache_tbl implements Rls_able {
@@ -47,7 +47,7 @@ public class Xou_cache_tbl implements Rls_able {
 	public String Tbl_name() {return tbl_name;}
 	public String Fld_orig_ttl() {return fld_orig_ttl;}
 	private final Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_stmt;
-	private final Bry_bfr lnki_key_bfr = Bry_bfr_.Reset(255);
+	private final BryWtr lnki_key_bfr = BryWtr.NewAndReset(255);
 	public Db_conn Conn() {return conn;}
 	public Xou_cache_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -91,7 +91,7 @@ public class Xou_cache_tbl implements Rls_able {
 		conn.Meta_tbl_create(meta);
 	}
 	public Xou_cache_itm Select_one(byte[] lnki_wiki_abrv, byte[] lnki_ttl, int lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, int user_thumb_w) {
-		if (select_stmt == null) select_stmt = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w));
+		if (select_stmt == null) select_stmt = conn.Stmt_select(tbl_name, flds, StringUtl.Ary(fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w));
 		Db_rdr rdr = select_stmt.Clear()
 			.Crt_bry_as_str	(fld_lnki_wiki_abrv	, lnki_wiki_abrv)
 			.Crt_bry_as_str	(fld_lnki_ttl		, lnki_ttl)
@@ -106,7 +106,7 @@ public class Xou_cache_tbl implements Rls_able {
 		try {return rdr.Move_next() ? new_itm(rdr) : Xou_cache_itm.Null;}
 		finally {rdr.Rls();}
 	}
-	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
+	public void Select_all(BryWtr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		try {
@@ -130,12 +130,12 @@ public class Xou_cache_tbl implements Rls_able {
 				case Db_cmd_mode.Tid_update:	stmt.Clear();									Db_save_val(stmt, itm); Db_save_crt(stmt, itm, BoolUtl.N); stmt.Exec_update(); break;
 				case Db_cmd_mode.Tid_delete:	stmt.Clear(); Db_save_crt(stmt, itm, BoolUtl.N);	stmt.Exec_delete();	break;
 				case Db_cmd_mode.Tid_ignore:	break;
-				default:						throw Err_.new_unhandled(itm.Db_state());
+				default:						throw ErrUtl.NewUnhandled(itm.Db_state());
 			}
 			itm.Db_state_(Db_cmd_mode.Tid_ignore);
-		} catch (Exception e) {stmt_bldr.Rls(); throw Err_.new_exc(e, "xo", "db_save failed");}
+		} catch (Exception e) {stmt_bldr.Rls(); throw ErrUtl.NewArgs(e, "db_save failed");}
 	}
-	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_manual();}
+	public Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_manual();}
 	private void Db_save_crt(Db_stmt stmt, Xou_cache_itm itm, boolean insert) {
 		if (insert) {
 			stmt.Val_bry_as_str		(fld_lnki_wiki_abrv		, itm.Lnki_wiki_abrv())
@@ -164,7 +164,7 @@ public class Xou_cache_tbl implements Rls_able {
 	}
 	private void Db_save_val(Db_stmt stmt, Xou_cache_itm itm) {
 		byte[] orig_ttl = itm.Orig_ttl(), lnki_ttl = itm.Lnki_ttl();
-		if (Bry_.Eq(orig_ttl, lnki_ttl)) orig_ttl = Bry_.Empty;	// PERF:only store redirects in orig_ttl; DATE:2015-05-14
+		if (BryLni.Eq(orig_ttl, lnki_ttl)) orig_ttl = BryUtl.Empty;	// PERF:only store redirects in orig_ttl; DATE:2015-05-14
 		stmt.Val_int			(fld_orig_repo			, itm.Orig_repo_id())
 			.Val_bry_as_str		(fld_orig_ttl			, orig_ttl)
 			.Val_int			(fld_orig_ext			, itm.Orig_ext_id())

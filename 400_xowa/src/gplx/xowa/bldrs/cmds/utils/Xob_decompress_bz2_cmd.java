@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.ios.*; import gplx.core.threads.*; import gplx.core.envs.*;
+package gplx.xowa.bldrs.cmds.utils;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.core.threads.*; import gplx.core.envs.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_decompress_bz2_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public Xob_decompress_bz2_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}		

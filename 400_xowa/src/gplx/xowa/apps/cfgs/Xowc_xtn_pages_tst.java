@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.apps.cfgs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import org.junit.*;
+import gplx.xowa.wikis.nss.*;
 public class Xowc_xtn_pages_tst {
 	@Before public void init() {fxt.Clear();} private Xowc_xtn_pages_fxt fxt = new Xowc_xtn_pages_fxt();
 	@Test public void Init() {
@@ -44,17 +48,17 @@ class Xowc_xtn_pages_fxt {
 		return this;
 	} 
 	public void Init_names(String page_name, String page_talk_name, String index_name, String index_talk_name) {
-		cfg_pages.Ns_names_(Bry_.new_a7(page_name), Bry_.new_a7(page_talk_name), Bry_.new_a7(index_name), Bry_.new_a7(index_talk_name));
+		cfg_pages.Ns_names_(BryUtl.NewA7(page_name), BryUtl.NewA7(page_talk_name), BryUtl.NewA7(index_name), BryUtl.NewA7(index_talk_name));
 	}
 	public void Exec_init() {
 		ns_mgr.Init_w_defaults();	// init ns_msg
 		cfg_pages.Init(ns_mgr);		// init cfg
 	}
 	public void Test_ns_ids(int page_id, int page_talk_id, int index_id, int index_talk_id) {
-		Tfds.Eq(page_id			, cfg_pages.Ns_page_id());
-		Tfds.Eq(page_talk_id	, cfg_pages.Ns_page_talk_id());
-		Tfds.Eq(index_id		, cfg_pages.Ns_index_id());
-		Tfds.Eq(index_talk_id	, cfg_pages.Ns_index_talk_id());
+		GfoTstr.EqObj(page_id			, cfg_pages.Ns_page_id());
+		GfoTstr.EqObj(page_talk_id	, cfg_pages.Ns_page_talk_id());
+		GfoTstr.EqObj(index_id		, cfg_pages.Ns_index_id());
+		GfoTstr.EqObj(index_talk_id	, cfg_pages.Ns_index_talk_id());
 	}
 	public void Test_ns_canonical(String page_name, String page_talk_name, String index_name, String index_talk_name) {
 		Test_ns_canonical_itm(page_name			, cfg_pages.Ns_page_id());
@@ -63,8 +67,8 @@ class Xowc_xtn_pages_fxt {
 		Test_ns_canonical_itm(index_talk_name 	, cfg_pages.Ns_index_talk_id());
 	}
 	private void Test_ns_canonical_itm(String name, int expd_ns_id) {
-		Xow_ns ns = ns_mgr.Names_get_or_null(Bry_.new_a7(name));
-		int actl_ns_id = ns == null ? Int_.Min_value : ns.Id();
-		Tfds.Eq(expd_ns_id, actl_ns_id);
+		Xow_ns ns = ns_mgr.Names_get_or_null(BryUtl.NewA7(name));
+		int actl_ns_id = ns == null ? IntUtl.MinValue : ns.Id();
+		GfoTstr.EqObj(expd_ns_id, actl_ns_id);
 	}
 }

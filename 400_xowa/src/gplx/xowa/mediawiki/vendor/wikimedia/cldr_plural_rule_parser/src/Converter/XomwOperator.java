@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.Converter; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.vendor.*; import gplx.xowa.mediawiki.vendor.wikimedia.*; import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.*; import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.*;
+package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.Converter;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
+import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.*;
 // MW.SRC:1.33.1
 /**
 * Helper for Converter.
@@ -93,9 +96,9 @@ public class XomwOperator extends XomwFragment { 	/** @var String The name */
 	public XomwExpression operate(XomwExpression left, XomwExpression right) {
 		String typeSpec = XomwOperator.opTypes.Get_by_str(this.name);
 
-		String leftType = XomwOperator.typeSpecMap.Get_by_str(String_.CharAt(typeSpec, 0));
-		String rightType = XomwOperator.typeSpecMap.Get_by_str(String_.CharAt(typeSpec, 1));
-		String resultType = XomwOperator.typeSpecMap.Get_by_str(String_.CharAt(typeSpec, 2));
+		String leftType = XomwOperator.typeSpecMap.Get_by_str(StringUtl.CharAt(typeSpec, 0));
+		String rightType = XomwOperator.typeSpecMap.Get_by_str(StringUtl.CharAt(typeSpec, 1));
+		String resultType = XomwOperator.typeSpecMap.Get_by_str(StringUtl.CharAt(typeSpec, 2));
 
 		int start = XophpMath_.min_many(this.pos, left.pos, right.pos);
 		int end = XophpMath_.max_many(this.end, left.end, right.end);

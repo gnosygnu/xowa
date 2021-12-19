@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*;
+package gplx.xowa.wikis.xwikis.sitelinks;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xoa_sitelink_itm_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	private final Xoa_sitelink_grp default_grp;
@@ -21,12 +24,12 @@ public class Xoa_sitelink_itm_mgr {
 	public int Len() {return hash.Len();}
 	public void Clear() {hash.Clear();}
 	public void Add(Xoa_sitelink_itm itm)			{hash.Add(itm.Key(), itm);}
-	public Xoa_sitelink_itm Get_at(int idx)			{return (Xoa_sitelink_itm)hash.Get_at(idx);}
+	public Xoa_sitelink_itm Get_at(int idx)			{return (Xoa_sitelink_itm)hash.GetAt(idx);}
 	public Xoa_sitelink_itm Get_by(byte[] key)		{return (Xoa_sitelink_itm)hash.GetByOrNull(key);}
 	public Xoa_sitelink_itm Get_by_or_new(byte[] key) {
 		Xoa_sitelink_itm rv = (Xoa_sitelink_itm)hash.GetByOrNull(key);
 		if (rv == null) {
-			rv = new Xoa_sitelink_itm(default_grp, key, Bry_.Empty);
+			rv = new Xoa_sitelink_itm(default_grp, key, BryUtl.Empty);
 			hash.Add(key, rv);
 		}
 		return rv;

@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgUtl;
 class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype { // handle "next", "prev", "this"; EX: "next year"
 	private final int adj;
 	public Pxd_itm_unit_relative(int adj, int ary_idx) {
@@ -29,7 +29,7 @@ class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype { 
 		// find next token: EX: year, month, Sunday, Monday, etc.
 		Pxd_itm itm = Pxd_itm_.Find_fwd__non_ws(state.Tkns(), this.Ary_idx() + 1);
 		if (itm == null) {
-			state.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_int(adj));
+			state.Err_set(Pft_func_time_log.Invalid_date, BryBfrArgUtl.NewInt(adj));
 			return false;
 		}
 
@@ -45,7 +45,7 @@ class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype { 
 				day_tkn.Relative_adj_(adj);
 				break;
 			default:
-				state.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_int(adj));
+				state.Err_set(Pft_func_time_log.Invalid_date, BryBfrArgUtl.NewInt(adj));
 				return false;
 		}
 		return true;

@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.core; import gplx.*;
+package gplx.xowa.bldrs.filters.core;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Hash_adp_bry;
 public class Xob_ttl_filter_mgr {
 	private boolean exclude_is_empty = true, include_is_empty = true;
 	private final Xob_ttl_filter_mgr_srl srl = new Xob_ttl_filter_mgr_srl();
@@ -27,7 +31,7 @@ public class Xob_ttl_filter_mgr {
 	public boolean Match_exclude(byte[] src) {return exclude_is_empty ? false : exclude_hash.Has(src);}
 	public void Load(boolean exclude, Io_url url) {
 		byte[] src = Io_mgr.Instance.LoadFilBry_loose(url);
-		if (Bry_.Len_gt_0(src)) Load(exclude, src);
+		if (BryUtl.IsNotNullOrEmpty(src)) Load(exclude, src);
 	}
 	public void Load(boolean exclude, byte[] src) {
 		Hash_adp_bry hash = exclude ? exclude_hash : include_hash;

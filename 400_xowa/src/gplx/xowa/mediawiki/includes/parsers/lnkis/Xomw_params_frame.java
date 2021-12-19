@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.parsers.lnkis;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.*;
 public class Xomw_params_frame {
 	public byte[] align = null;
@@ -79,6 +80,6 @@ public class Xomw_params_frame {
 		this.desc_query = src.desc_query;
 	}
 	public static byte[] Cls_add(byte[] lhs, byte[] rhs) {
-		return Bry_.Len_eq_0(lhs) ? rhs : Bry_.Add(lhs, AsciiByte.SpaceBry, rhs);
+		return BryUtl.IsNullOrEmpty(lhs) ? rhs : BryUtl.Add(lhs, AsciiByte.SpaceBry, rhs);
 	}
 }

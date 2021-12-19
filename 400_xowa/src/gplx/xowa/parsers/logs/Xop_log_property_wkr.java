@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.logs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Xop_log_property_wkr implements Gfo_invk {
@@ -32,14 +40,14 @@ public class Xop_log_property_wkr implements Gfo_invk {
 	public boolean Eval_bgn(Xoae_page page, byte[] prop) {return include_all || include_props.Has(prop);}
 	public void Eval_end(Xoae_page page, byte[] prop, long invoke_time_bgn) {
 		if (log_enabled && stmt != null) {
-			int eval_time = (int)(System_.Ticks() - invoke_time_bgn);
+			int eval_time = (int)(SystemUtl.Ticks() - invoke_time_bgn);
 			Xob_log_property_temp_tbl.Insert(stmt, page.Ttl().Rest_txt(), prop, eval_time);
 		}
 	}
 	private void Include_props_add(String[] v) {
 		int len = v.length;
 		for (int i = 0; i < len; i++) {
-			byte[] bry = Bry_.new_u8(v[i]);
+			byte[] bry = BryUtl.NewU8(v[i]);
 			include_props.Add_bry_bry(bry);
 		}
 		include_all = false;	// set include_all to false, since specific items added
@@ -63,7 +71,7 @@ class Xob_log_property_temp_tbl {
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "log_property_temp", Fld_prop_page_ttl = "prop_page_ttl", Fld_prop_prop_name = "prop_prop_name", Fld_prop_eval_time = "prop_eval_time";
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = StringUtl.ConcatLinesNl
 		(	"CREATE TABLE IF NOT EXISTS log_property_temp"
 		,	"( prop_id                  integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
 		,	", prop_page_ttl            varchar(255)        NOT NULL"

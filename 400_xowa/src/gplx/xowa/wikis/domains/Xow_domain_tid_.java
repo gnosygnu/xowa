@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.domains;
-import gplx.Bry_;
-import gplx.Hash_adp_bry;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.BoolUtl;
 public class Xow_domain_tid_ {
 	public static final int //  SERIALIZED.NONE (ASSUMPTION); DATE:2019-07-31
 	  Tid__null					=  0
@@ -64,25 +64,25 @@ public class Xow_domain_tid_ {
 	, Str__other				= "other"
 	;
 	public static final byte[]
-	  Bry__wikipedia			= Bry_.new_a7(Str__wikipedia)
-	, Bry__wiktionary			= Bry_.new_a7(Str__wiktionary)
-	, Bry__wikisource			= Bry_.new_a7(Str__wikisource)
-	, Bry__wikivoyage			= Bry_.new_a7(Str__wikivoyage)
-	, Bry__wikiquote			= Bry_.new_a7(Str__wikiquote)
-	, Bry__wikibooks			= Bry_.new_a7(Str__wikibooks)
-	, Bry__wikiversity			= Bry_.new_a7(Str__wikiversity)
-	, Bry__wikinews				= Bry_.new_a7(Str__wikinews)
-	, Bry__wikimedia			= Bry_.new_a7(Str__wikimedia)
-	, Bry__species				= Bry_.new_a7(Str__species)
-	, Bry__commons				= Bry_.new_a7(Str__commons)
-	, Bry__wikidata				= Bry_.new_a7(Str__wikidata)
-	, Bry__mediawiki			= Bry_.new_a7(Str__mediawiki)
-	, Bry__meta					= Bry_.new_a7(Str__meta)
-	, Bry__incubator			= Bry_.new_a7(Str__incubator)
-	, Bry__wikimania            = Bry_.new_a7(Str__wikimania)
-	, Bry__wmforg				= Bry_.new_a7(Str__wmforg)
-	, Bry__home					= Bry_.new_a7(Str__home)
-	, Bry__other				= Bry_.new_a7(Str__other)
+	  Bry__wikipedia			= BryUtl.NewA7(Str__wikipedia)
+	, Bry__wiktionary			= BryUtl.NewA7(Str__wiktionary)
+	, Bry__wikisource			= BryUtl.NewA7(Str__wikisource)
+	, Bry__wikivoyage			= BryUtl.NewA7(Str__wikivoyage)
+	, Bry__wikiquote			= BryUtl.NewA7(Str__wikiquote)
+	, Bry__wikibooks			= BryUtl.NewA7(Str__wikibooks)
+	, Bry__wikiversity			= BryUtl.NewA7(Str__wikiversity)
+	, Bry__wikinews				= BryUtl.NewA7(Str__wikinews)
+	, Bry__wikimedia			= BryUtl.NewA7(Str__wikimedia)
+	, Bry__species				= BryUtl.NewA7(Str__species)
+	, Bry__commons				= BryUtl.NewA7(Str__commons)
+	, Bry__wikidata				= BryUtl.NewA7(Str__wikidata)
+	, Bry__mediawiki			= BryUtl.NewA7(Str__mediawiki)
+	, Bry__meta					= BryUtl.NewA7(Str__meta)
+	, Bry__incubator			= BryUtl.NewA7(Str__incubator)
+	, Bry__wikimania            = BryUtl.NewA7(Str__wikimania)
+	, Bry__wmforg				= BryUtl.NewA7(Str__wmforg)
+	, Bry__home					= BryUtl.NewA7(Str__home)
+	, Bry__other				= BryUtl.NewA7(Str__other)
 	;
 	private static final Xow_domain_tid[] ary = new Xow_domain_tid[Tid___len];
 	private static final Hash_adp_bry type_regy = Hash_adp_bry.ci_a7();	// LOC:must go before new_()
@@ -110,8 +110,8 @@ public class Xow_domain_tid_ {
 	, Itm__other				= new_(BoolUtl.N	, Xow_domain_tid.Src__mw	, Tid__other			, Bry__other			, ""			, "")
 	;
 	private static Xow_domain_tid new_(boolean multi_lang, int src, int tid, byte[] key_bry, String abrv_xo_str, String domain_bry) {
-		byte[] abrv_xo_bry = Bry_.new_u8(abrv_xo_str);
-		Xow_domain_tid rv = new Xow_domain_tid(multi_lang, src, tid, key_bry, abrv_xo_bry, Bry_.new_u8(domain_bry));
+		byte[] abrv_xo_bry = BryUtl.NewU8(abrv_xo_str);
+		Xow_domain_tid rv = new Xow_domain_tid(multi_lang, src, tid, key_bry, abrv_xo_bry, BryUtl.NewU8(domain_bry));
 		ary[tid] = rv;
 		type_regy.Add(key_bry, rv);
 		abrv_regy.Add(abrv_xo_bry, rv);

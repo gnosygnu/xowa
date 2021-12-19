@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.data;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.cfgs.Db_cfg_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Xow_db_file_schema_props {
 	Xow_db_file_schema_props(boolean search__word__page_count_exists, boolean wbase__qid__src_ttl_has_spaces) {
 		this.search__word__page_count_exists = search__word__page_count_exists;
@@ -27,7 +27,7 @@ public class Xow_db_file_schema_props {
 	public static Xow_db_file_schema_props make_() {return new Xow_db_file_schema_props(BoolUtl.Y, BoolUtl.N);}
 	public static Xow_db_file_schema_props load_(Db_cfg_tbl cfg_tbl, int tid, String version) {
 		boolean search__word__page_count_exists = cfg_tbl.Select_yn_or(Grp, Key__col_search_word_page_count, BoolUtl.N);
-		boolean wbase__qid__src_ttl_has_spaces = String_.In(version, "2.4.2.1", "2.4.3.1", "2.4.3.2");
+		boolean wbase__qid__src_ttl_has_spaces = StringUtl.In(version, "2.4.2.1", "2.4.3.1", "2.4.3.2");
 		return new Xow_db_file_schema_props(search__word__page_count_exists, wbase__qid__src_ttl_has_spaces);
 	}
 	public static final String Grp = Xowd_cfg_key_.Grp__wiki_schema;

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*;
+package gplx.xowa.files.origs;
+import gplx.frameworks.objects.Cancelable;
+import gplx.frameworks.objects.Cancelable_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xof_orig_tbl implements Db_tbl {
@@ -60,7 +65,7 @@ public class Xof_orig_tbl implements Db_tbl {
 		.Exec_insert();
 	}
 	public void Update(byte repo, byte[] ttl, int ext, int w, int h, byte[] redirect) {
-		Db_stmt stmt = conn.Stmt_update_exclude(tbl_name, flds, String_.Ary(fld_repo, fld_ttl));
+		Db_stmt stmt = conn.Stmt_update_exclude(tbl_name, flds, StringUtl.Ary(fld_repo, fld_ttl));
 		stmt.Clear()
 			.Val_byte(fld_status, Status_found)
 			.Val_int(fld_ext, ext).Val_int(fld_w, w).Val_int(fld_h, h).Val_bry_as_str(fld_redirect, redirect)
@@ -95,7 +100,7 @@ class Xof_orig_tbl__in_wkr extends Db_in_wkr__base {
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Xof_fsdb_itm fsdb_itm = (Xof_fsdb_itm)itms.Get_at(i);
+			Xof_fsdb_itm fsdb_itm = (Xof_fsdb_itm)itms.GetAt(i);
 			stmt.Crt_bry_as_str(fld_ttl, fsdb_itm.Lnki_ttl());
 		}
 	}

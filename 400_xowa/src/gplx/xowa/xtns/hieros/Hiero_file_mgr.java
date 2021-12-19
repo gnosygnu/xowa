@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*;
+package gplx.xowa.xtns.hieros;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.langs.dsvs.*;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 class Hiero_file_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private Hiero_file_srl srl;
 	public Hiero_file_mgr() {srl = new Hiero_file_srl(this);}
 	public int Len() {return hash.Len();}
-	public Hiero_file_itm Get_at(int i) {return (Hiero_file_itm)hash.Get_at(i);}
+	public Hiero_file_itm Get_at(int i) {return (Hiero_file_itm)hash.GetAt(i);}
 	public void Add(byte[] key, int file_w, int file_h) {hash.Add(key, new Hiero_file_itm(key, file_w, file_h));}
 	public void Clear() {hash.Clear();}
 	public Hiero_file_itm Get_by_key(byte[] key) {return (Hiero_file_itm)hash.GetByOrNull(key);}
@@ -43,7 +50,7 @@ class Hiero_file_srl extends Dsv_wkr_base {
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Int_parser, Dsv_fld_parser_.Int_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {
-			case 0: key = Bry_.Mid(src, bgn, end); return true;
+			case 0: key = BryLni.Mid(src, bgn, end); return true;
 			default: return false;
 		}
 	}

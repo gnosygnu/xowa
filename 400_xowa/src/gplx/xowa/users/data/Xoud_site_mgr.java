@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*; import gplx.xowa.users.data.*;
+package gplx.xowa.users.data;
+import gplx.types.basics.utls.BryUtl;
+import gplx.dbs.*;
 public class Xoud_site_mgr {
 	private Xoud_site_tbl tbl;
 	private final Xoud_id_mgr id_mgr;
@@ -27,7 +28,7 @@ public class Xoud_site_mgr {
 	public Xoud_site_row	Select_by_domain(byte[] domain) {return tbl.Select_by_domain(domain);}
 	public void				Delete_by_domain(byte[] domain) {tbl.Delete_by_domain(domain);}
 	public void Import(String domain, String name, String path, String date, String xtn) {	// insert or update wiki
-		Xoud_site_row itm = tbl.Select_by_domain(Bry_.new_u8(domain));
+		Xoud_site_row itm = tbl.Select_by_domain(BryUtl.NewU8(domain));
 		if (itm == null)
 			tbl.Insert(id_mgr.Get_next_and_save("xowa.user.site"), 0, domain, name, path, date, xtn);
 		else

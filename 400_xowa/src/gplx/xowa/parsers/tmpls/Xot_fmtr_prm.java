@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.*;
 public class Xot_fmtr_prm implements Xot_fmtr {
 	public Xot_fmtr_prm Caller_(Xot_invk v)		{this.caller = v; return this;} private Xot_invk caller;
 	public Xot_fmtr_prm NewLineArgs_(boolean v)	{this.newLineArgs = v; return this;} private boolean newLineArgs = false;
 	public void Reg_ary(Xop_ctx ctx, byte[] src, boolean tmpl_static, int src_bgn, int src_end, int subs_len, Xop_tkn_itm[] subs) {
-		if (tmpl_static && src_bgn != -1) trg.Add_mid(src, src_bgn, src_end);	// HACK: fails for {{IPA-de|l|lang|De-Ludwig_van_Beethoven.ogg}}
+		if (tmpl_static && src_bgn != -1) trg.AddMid(src, src_bgn, src_end);	// HACK: fails for {{IPA-de|l|lang|De-Ludwig_van_Beethoven.ogg}}
 		for (int i = 0; i < subs_len; i++)
 			subs[i].Tmpl_fmt(ctx, src, this);
 	}
@@ -28,9 +29,9 @@ public class Xot_fmtr_prm implements Xot_fmtr {
 		if (caller == null) {	// raw mode
 			trg.Add(Bry_bgn);
 			if (prm_idx == -1)	{if (prm_key != null) trg.Add(prm_key);}
-			else				trg.Add_int_variable(prm_idx);
+			else				trg.AddIntVariable(prm_idx);
 			if (dflt_tkn != null) {
-				trg.Add_byte(AsciiByte.Pipe);
+				trg.AddByte(AsciiByte.Pipe);
 				dflt_tkn.Tmpl_fmt(ctx, src, this);
 			}
 			trg.Add(Bry_end);
@@ -43,27 +44,27 @@ public class Xot_fmtr_prm implements Xot_fmtr {
 		++depth;
 		name_tkn.Tmpl_fmt(ctx, src, this);
 		for (int i = 0; i < args_len; i++) {
-			if (depth == 1 && newLineArgs) trg.Add_byte_nl();
-			trg.Add_byte(AsciiByte.Pipe);
+			if (depth == 1 && newLineArgs) trg.AddByteNl();
+			trg.AddByte(AsciiByte.Pipe);
 			args[i].Tmpl_fmt(ctx, src, this);
 		}
 		--depth;
 		trg.Add(Xop_curly_end_lxr.Hook);
 	}
-	public void Write(byte b) {trg.Add_byte(b);}
+	public void Write(byte b) {trg.AddByte(b);}
 	public void Reg_arg(Xop_ctx ctx, byte[] src, int arg_idx, Arg_nde_tkn self_tkn) {
 		self_tkn.Key_tkn().Tmpl_fmt(ctx, src, this);
 		if (self_tkn.KeyTkn_exists()) {
 			if (arg_idx == 0) {
 				if (self_tkn.Eq_tkn().Tkn_tid() == Xop_tkn_itm_.Tid_colon)
-					trg.Add_byte(AsciiByte.Colon);
+					trg.AddByte(AsciiByte.Colon);
 			}
 			else
-				trg.Add_byte(AsciiByte.Eq);
+				trg.AddByte(AsciiByte.Eq);
 		}
 		self_tkn.Val_tkn().Tmpl_fmt(ctx, src, this);
 	}
-	public void Print(Bry_bfr bb) {bb.Add_bfr_and_preserve(trg); trg.Clear(); depth = 0;}
-	Bry_bfr trg = Bry_bfr_.New(); int depth = 0;
+	public void Print(BryWtr bb) {bb.AddBfrAndPreserve(trg); trg.Clear(); depth = 0;}
+	BryWtr trg = BryWtr.New(); int depth = 0;
 	public static final Xot_fmtr_prm Instance = new Xot_fmtr_prm();
 }

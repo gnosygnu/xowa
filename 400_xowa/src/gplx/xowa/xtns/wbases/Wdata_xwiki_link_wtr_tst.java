@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.wbases;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*; import gplx.langs.jsons.*;
 import gplx.xowa.wikis.domains.*;
 public class Wdata_xwiki_link_wtr_tst {
@@ -24,14 +26,14 @@ public class Wdata_xwiki_link_wtr_tst {
 		fxt.Init__docs__add(fxt.Wdoc_bldr("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_wdoc());
 		fxt.Test_xwiki_links("Q1_en", "Q1_fr", "Q1_de");
 	}
-	@Test  public void No_external_lang_links__de() {
+	@Test public void No_external_lang_links__de() {
 		fxt.Init_xwikis_add("fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Tid__wikipedia, "Q1_en", "Q1");
 		fxt.Init__docs__add(fxt.Wdoc_bldr("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_wdoc());
 		fxt.Init_external_links_mgr_add("de");
 		fxt.Test_xwiki_links("Q1_en", "Q1_de");
 		fxt.Init_external_links_mgr_clear();
-		fxt.Test_parse_langs("{{noexternallanglinks:de}}", String_.Concat_lines_nl
+		fxt.Test_parse_langs("{{noexternallanglinks:de}}", StringUtl.ConcatLinesNl
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 1)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
@@ -47,10 +49,10 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Links_w_name_fmt() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
+	@Test public void Links_w_name_fmt() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Tid__wikipedia, "Q1_en", "Q1");
-		Json_doc jdoc = fxt.App().Utl__json_parser().Parse(String_.Concat_lines_nl
+		Json_doc jdoc = fxt.App().Utl__json_parser().Parse(StringUtl.ConcatLinesNl
 		( "{ \"entity\":\"q1\""
 		, ", \"links\":"
 		, "  { \"dewiki\":\"q1_de\""
@@ -58,14 +60,14 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "  }"
 		, "}"
 		));
-		Wdata_doc wdata_doc = new Wdata_doc(fxt.App().Wiki_mgr().Wdata_mgr(), jdoc, Bry_.new_a7("Q1"));
+		Wdata_doc wdata_doc = new Wdata_doc(fxt.App().Wiki_mgr().Wdata_mgr(), jdoc, BryUtl.NewA7("Q1"));
 		fxt.Init__docs__add(wdata_doc);
 		fxt.Test_xwiki_links("Q1_en", "q1_de", "q1_fr");
 	}
-	@Test  public void Same_lang_but_different_domains() {	// PURPOSE: if two entries for same lang, but one is in different domain, use the one for the current wiki  DATE:2014-06-21
+	@Test public void Same_lang_but_different_domains() {	// PURPOSE: if two entries for same lang, but one is in different domain, use the one for the current wiki  DATE:2014-06-21
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Tid__wikipedia, "Q1_en", "Q1");
-		Json_doc jdoc = fxt.App().Utl__json_parser().Parse(String_.Concat_lines_nl
+		Json_doc jdoc = fxt.App().Utl__json_parser().Parse(StringUtl.ConcatLinesNl
 		( "{ \"entity\":\"q1\""
 		, ", \"links\":"
 		, "  { \"dewiki\":\"q1_de\""
@@ -74,11 +76,11 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "  }"
 		, "}"
 		));
-		Wdata_doc wdata_doc = new Wdata_doc(fxt.App().Wiki_mgr().Wdata_mgr(), jdoc, Bry_.new_a7("Q1"));
+		Wdata_doc wdata_doc = new Wdata_doc(fxt.App().Wiki_mgr().Wdata_mgr(), jdoc, BryUtl.NewA7("Q1"));
 		fxt.Init__docs__add(wdata_doc);
 		fxt.Test_xwiki_links("Q1_en", "q1_de", "q1_fr");
 	}
-	@Test  public void Badges() {
+	@Test public void Badges() {
 		fxt.Init_xwikis_add("de", "fr", "pl");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Tid__wikipedia, "Q1_en", "Q1");
 		fxt.Init__docs__add
@@ -88,7 +90,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		.Add_sitelink("frwiki", "Q1_fr", "Q17437798")
 		.Add_sitelink("plwiki", "Q1_pl", "Q17559452")
 		.Xto_wdoc());
-		fxt.Test_parse_langs("", String_.Concat_lines_nl
+		fxt.Test_parse_langs("", StringUtl.ConcatLinesNl
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 3)  (<a href=\"/site/www.wikidata.org/wiki/Q1\">wikidata</a>)</h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
@@ -104,7 +106,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "</div>"
 		));
 	}
-//		@Test  public void No_wikidata_link() {
+//		@Test public void No_wikidata_link() {
 //			fxt.Init_xwikis_add("fr", "de");
 //			fxt.Test_parse_langs("[[fr:A]]", String_.Concat_lines_nl
 //			( "<div id=\"xowa-lang\">"
@@ -117,7 +119,7 @@ public class Wdata_xwiki_link_wtr_tst {
 //			, "</div>"
 //			));
 //		}
-//		@Test  public void No_external_lang_links__sort() {
+//		@Test public void No_external_lang_links__sort() {
 //			fxt.Init_xwikis_add("de", "fr");
 //			fxt.Init_qids_add("en", Xow_domain_tid_.Tid__wikipedia, "Q1_en", "Q1");
 //			fxt.Init__docs__add("Q1", fxt.page_bldr_("Q1").Add_sitelink("enwiki", "Q1_en").Add_sitelink("frwiki", "Q1_fr").Add_sitelink("dewiki", "Q1_de").Xto_page_doc());

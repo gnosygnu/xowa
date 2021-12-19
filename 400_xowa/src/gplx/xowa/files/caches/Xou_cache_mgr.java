@@ -13,17 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.files.caches;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
 import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
 public class Xou_cache_mgr implements Gfo_invk {
 	private long fsys_size_cur = 0;
-	private long fsys_size_min = Io_mgr.Len_mb * 75;
-	private long fsys_size_max = Io_mgr.Len_mb * 100;
-	private final Xoa_wiki_mgr wiki_mgr; private final Xou_cache_tbl cache_tbl; private final Db_cfg_tbl cfg_tbl; private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(512);
+	private long fsys_size_min = IoConsts.LenMB * 75;
+	private long fsys_size_max = IoConsts.LenMB * 100;
+	private final Xoa_wiki_mgr wiki_mgr; private final Xou_cache_tbl cache_tbl; private final Db_cfg_tbl cfg_tbl; private final BryWtr tmp_bfr = BryWtr.NewAndReset(512);
 	private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Object thread_lock = new Object();
 	private final Io_url cache_dir; private boolean db_load_needed = true;
 	public Xou_cache_mgr(Xoa_wiki_mgr wiki_mgr, Io_url cache_dir, Xou_db_file db_file) {
@@ -60,7 +80,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 					, fsdb.Orig_repo_id(), fsdb.Orig_ttl(), fsdb.Orig_ext().Id(), fsdb.Orig_w(), fsdb.Orig_h()
 					, fsdb.Html_w(), fsdb.Html_h(), fsdb.Lnki_time(), fsdb.Lnki_page()
 					, fsdb.File_is_orig(), fsdb.File_w(), fsdb.Lnki_time(), fsdb.Lnki_page(), fsdb.File_size()
-					, 1, Datetime_now.Get().Timestamp_unix())
+					, 1, GfoDateNow.Get().TimestampUnix())
 					;
 				hash.Add(itm.Lnki_key(), itm);
 				fsys_size_cur += itm.File_size();
@@ -81,7 +101,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 		this.Db_save();
 		if (fsys_size_cur > fsys_size_max) this.Reduce(fsys_size_min);
 	}
-	@gplx.Internal protected void Clear() {
+	public void Clear() {
 		db_load_needed = true;
 		fsys_size_cur = 0;
 		hash.Clear();
@@ -93,12 +113,12 @@ public class Xou_cache_mgr implements Gfo_invk {
 				conn.Txn_bgn("user__file_cache__save");
 				int len = hash.Len();
 				for (int i = 0; i < len; ++i) {
-					Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
+					Xou_cache_itm itm = (Xou_cache_itm)hash.GetAt(i);
 					cache_tbl.Db_save(itm);
 				}
 				conn.Txn_end();
 			}
-			catch (Exception e) {conn.Txn_cxl(); throw Err_.new_exc(e, "cache", "unknown error while saving cache; err=~{0}", Err_.Message_gplx_log(e));}
+			catch (Exception e) {conn.Txn_cxl(); throw ErrUtl.NewArgs(e, "unknown error while saving cache; err=~{0}", ErrUtl.ToStrLog(e));}
 		}
 	}
 	public void Reduce(long reduce_to) {
@@ -109,7 +129,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 				Ordered_hash grp_hash = Ordered_hash_.New();				// aggregate by file path; needed when same commons file used by two wikis
 				int len = hash.Len();
 				for (int i = 0; i < len; ++i) {
-					Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
+					Xou_cache_itm itm = (Xou_cache_itm)hash.GetAt(i);
 					Io_url itm_url = Calc_url(itm);
 					itm.File_url_(itm_url);
 					Xou_cache_grp grp = (Xou_cache_grp)grp_hash.GetByOrNull(itm_url.Raw());
@@ -119,12 +139,12 @@ public class Xou_cache_mgr implements Gfo_invk {
 					}
 					grp.Add(itm);
 				}
-				grp_hash.Sort_by(Xou_cache_grp_sorter.Instance);				// sorts by cache_time desc
+				grp_hash.SortBy(Xou_cache_grp_sorter.Instance);				// sorts by cache_time desc
 				len = grp_hash.Len();
 				long fsys_size_calc = 0, fsys_size_temp = 0;
 				List_adp deleted = List_adp_.New();
 				for (int i = 0; i < len; ++i) {							// iterate and find items to delete
-					Xou_cache_grp grp = (Xou_cache_grp)grp_hash.Get_at(i);
+					Xou_cache_grp grp = (Xou_cache_grp)grp_hash.GetAt(i);
 					fsys_size_temp = fsys_size_calc + grp.File_size();
 					if (	fsys_size_temp > reduce_to					// fsys_size_cur exceeded; mark itm for deletion
 						||	fsys_size_temp == -1						// fsys_size sometimes -1; note -1 b/c file is missing; should fix, but for now, consider -1 size deleted; DATE:2015-08-05
@@ -137,21 +157,21 @@ public class Xou_cache_mgr implements Gfo_invk {
 				Db_conn conn = cache_tbl.Conn();
 				conn.Txn_bgn("user__file_cache__delete");
 				for (int i = 0; i < len; i++) {							// iterate and delete
-					Xou_cache_grp grp = (Xou_cache_grp)deleted.Get_at(i);
+					Xou_cache_grp grp = (Xou_cache_grp)deleted.GetAt(i);
 					grp.Delete(hash, cache_tbl);
 					fsys_size_cur -= grp.File_size();
 				}
 				conn.Txn_end();
 				Io_mgr.Instance.Delete_dir_empty(cache_dir);
 			}
-			catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_full(e)); return;}
+			catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "failed to compress cache: err=~{0}", ErrUtl.ToStrFull(e)); return;}
 		}
 		Xoa_app_.Usr_dlg().Note_many("", "", "cache compress done");
 	}
 	private Io_url Calc_url(Xou_cache_itm cache) {
 		byte[] wiki_domain = Xow_abrv_xo_.To_itm(cache.Lnki_wiki_abrv()).Domain_bry();
 		Xow_wiki wiki = wiki_mgr.Get_by_or_make_init_y(wiki_domain); if (wiki == null) return Io_url_.Empty;	// wiki is not available; should only happen in read-only mode; DATE:2015-05-23
-		Xof_repo_itm trg_repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(cache.Orig_repo_id(), cache.Lnki_ttl(), Bry_.Empty);
+		Xof_repo_itm trg_repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(cache.Orig_repo_id(), cache.Lnki_ttl(), BryUtl.Empty);
 		if (trg_repo == null) return Io_url_.Empty;
 		byte[] orig_ttl = cache.Orig_ttl();
 		byte[] orig_md5 = cache.Orig_ttl_md5();
@@ -165,8 +185,8 @@ public class Xou_cache_mgr implements Gfo_invk {
 	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Cfg__fsys_size_min))			this.fsys_size_min = m.ReadLong("v") * Io_mgr.Len_mb;
-		else if	(ctx.Match(k, Cfg__fsys_size_max))			this.fsys_size_max = m.ReadLong("v") * Io_mgr.Len_mb;
+		if		(ctx.Match(k, Cfg__fsys_size_min))			this.fsys_size_min = m.ReadLong("v") * IoConsts.LenMB;
+		else if	(ctx.Match(k, Cfg__fsys_size_max))			this.fsys_size_max = m.ReadLong("v") * IoConsts.LenMB;
 		else if	(ctx.Match(k, Val__fsys_info))				return this.Info_str();
 		else if	(ctx.Match(k, Run__fsys_reduce_to_min))		{this.Reduce(fsys_size_min);}
 		else if	(ctx.Match(k, Run__fsys_clear))				{this.Reduce(0);}
@@ -183,29 +203,29 @@ public class Xou_cache_mgr implements Gfo_invk {
 	public void Fsys_size_(long min, long max) {fsys_size_min = min; fsys_size_max = max;}	// TEST:
 	private String Info_str() {
 		this.Page_bgn();
-		Bry_bfr bfr = Bry_bfr_.New_w_size(255);
-		Keyval[] ary = this.Info_kvs();
+		BryWtr bfr = BryWtr.NewWithSize(255);
+		KeyVal[] ary = this.Info_kvs();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			Keyval kv = ary[i];
-			bfr.Add_str_a7(kv.Key()).Add_str_a7(": ").Add_str_u8(kv.Val_to_str_or_empty()).Add_byte_nl();
+			KeyVal kv = ary[i];
+			bfr.AddStrA7(kv.KeyToStr()).AddStrA7(": ").AddStrU8(kv.ValToStrOrEmpty()).AddByteNl();
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
-	private Keyval[] Info_kvs() {
-		long view_date = Long_.Max_value;
+	private KeyVal[] Info_kvs() {
+		long view_date = LongUtl.MaxValue;
 		long fsys_size = 0;
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
+			Xou_cache_itm itm = (Xou_cache_itm)hash.GetAt(i);
 			fsys_size += itm.File_size();
 			if (itm.View_date() < view_date) view_date = itm.View_date();
 		}
-		return Keyval_.Ary
-		( Keyval_.new_("cache folder", cache_dir.Xto_api())
-		, Keyval_.new_("space used", gplx.core.ios.Io_size_.To_str(fsys_size))
-		, Keyval_.new_("file count", len)
-		, Keyval_.new_("oldest file", view_date == Long_.Max_value ? "" : DateAdp_.unixtime_utc_seconds_(view_date).XtoStr_fmt_iso_8561())
+		return KeyValUtl.Ary
+		( KeyVal.NewStr("cache folder", cache_dir.Xto_api())
+		, KeyVal.NewStr("space used", gplx.core.ios.Io_size_.To_str(fsys_size))
+		, KeyVal.NewStr("file count", len)
+		, KeyVal.NewStr("oldest file", view_date == LongUtl.MaxValue ? "" : GfoDateUtl.NewUnixtimeUtcSeconds(view_date).ToStrFmtIso8561())
 		);
 	}
 }
@@ -225,7 +245,7 @@ class Xou_cache_grp {
 		int len = list.Len();
 		boolean deleted = false;
 		for (int i = 0; i < len; ++i) {
-			Xou_cache_itm itm = (Xou_cache_itm)list.Get_at(i);
+			Xou_cache_itm itm = (Xou_cache_itm)list.GetAt(i);
 			cache_hash.Del(itm.Lnki_key());
 			itm.Db_state_(Db_cmd_mode.Tid_delete);
 			cache_tbl.Db_save(itm);
@@ -240,13 +260,13 @@ class Xou_cache_grp {
 			}
 		}
 	}
-	public Xou_cache_itm Get_at(int i) {return (Xou_cache_itm)list.Get_at(i);}
+	public Xou_cache_itm Get_at(int i) {return (Xou_cache_itm)list.GetAt(i);}
 }
 class Xou_cache_grp_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xou_cache_grp lhs = (Xou_cache_grp)lhsObj;
 		Xou_cache_grp rhs = (Xou_cache_grp)rhsObj;
-		return -Long_.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
+		return -LongUtl.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
 	}
 	public static final Xou_cache_grp_sorter Instance = new Xou_cache_grp_sorter(); Xou_cache_grp_sorter() {}
 }

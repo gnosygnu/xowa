@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xow_wiki;
 public class Xof_cfg_download implements Gfo_invk {
 	public Xof_cfg_download() {
 		this.enabled = true;					// changed to true; DATE:2016-12-19; OLD: CFG: set to false b/c some tests only do parsing [[File:A.png]] and repos are not set up
@@ -35,10 +42,10 @@ public class Xof_cfg_download implements Gfo_invk {
 		return this;
 	}	private static final String Invk_redownload = "redownload", Invk_redownload_ = "redownload_", Invk_redownload_toggle = "redownload_toggle";
 	byte Redownload_parse_(String s) {
-		if		(String_.Eq(s, "none"))		return Redownload_none;
-		else if	(String_.Eq(s, "missing"))	return Redownload_missing;
-		else if	(String_.Eq(s, "all"))		return Redownload_all;
-		else								throw Err_.new_unhandled(s);
+		if		(StringUtl.Eq(s, "none"))		return Redownload_none;
+		else if	(StringUtl.Eq(s, "missing"))	return Redownload_missing;
+		else if	(StringUtl.Eq(s, "all"))		return Redownload_all;
+		else								throw ErrUtl.NewUnhandled(s);
 	}
 	public static final byte Redownload_none = 0, Redownload_missing = 1, Redownload_all = 2; 
 	String Redownload_to_str_(byte v) {
@@ -46,7 +53,7 @@ public class Xof_cfg_download implements Gfo_invk {
 			case Redownload_none:		return "none";
 			case Redownload_missing:	return "missing";
 			case Redownload_all:		return "all";
-			default:					throw Err_.new_unhandled(v);
+			default:					throw ErrUtl.NewUnhandled(v);
 		}
 	}
 	private static final String Cfg__retrieval_enabled = "xowa.files.retrieval_enabled";

@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
 import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class Db_attach_mgr {
 	private Db_conn main_conn; private Io_url main_conn_url;
 	private final Ordered_hash links_hash = Ordered_hash_.New();
@@ -41,14 +49,14 @@ public class Db_attach_mgr {
 	public void Attach() {
 		int len = attach_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Db_attach_itm itm = (Db_attach_itm)attach_list.Get_at(i);
+			Db_attach_itm itm = (Db_attach_itm)attach_list.GetAt(i);
 			main_conn.Env_db_attach(itm.Key, itm.Url);
 		}
 	}
 	public void Detach() {
 		int len = attach_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Db_attach_itm itm = (Db_attach_itm)attach_list.Get_at(i);
+			Db_attach_itm itm = (Db_attach_itm)attach_list.GetAt(i);
 			main_conn.Env_db_detach(itm.Key);
 		}
 		attach_list.Clear();	// clear list so multiple detachs don't fail
@@ -57,16 +65,16 @@ public class Db_attach_mgr {
 		attach_list.Clear();
 		int hash_len = links_hash.Len();
 		for (int i = 0; i < hash_len; ++i) {
-			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.Get_at(i);
+			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.GetAt(i);
 			String tkn = "<" + attach_itm.Key + ">";
-			if (String_.Has(sql, tkn)) {
+			if (StringUtl.Has(sql, tkn)) {
 				Io_url attach_url = attach_itm.Url;
 				String repl = "";
 				if (!attach_url.Eq(main_conn_url)) {
 					repl = attach_itm.Key + ".";
 					attach_list.Add(attach_itm);
 				}
-				sql = String_.Replace(sql, tkn, repl);
+				sql = StringUtl.Replace(sql, tkn, repl);
 			}
 		}
 		attached_sql = sql;
@@ -78,7 +86,7 @@ public class Db_attach_mgr {
 		return this;
 	}
 	public Db_attach_mgr Exec_sql(String sql, Object... args) {
-		String attach_sql = String_.Format(Resolve_sql(sql), args);
+		String attach_sql = StringUtl.Format(Resolve_sql(sql), args);
 		this.Attach();
 		try {main_conn.Exec_sql(attach_sql);}
 		finally {this.Detach();}
@@ -89,7 +97,7 @@ public class Db_attach_mgr {
 		int rv_len = attach_list.Len();
 		String[] rv = new String[rv_len];
 		for (int i = 0; i < rv_len; ++i) {
-			Db_attach_itm itm = (Db_attach_itm)attach_list.Get_at(i);
+			Db_attach_itm itm = (Db_attach_itm)attach_list.GetAt(i);
 			rv[i] = itm.Key;
 		}
 		return rv;
@@ -100,10 +108,10 @@ public class Db_attach_mgr {
 		List_adp from_tbls = from_itm.Tbls;
 		int from_tbls_len = from_tbls.Len();
 		for (int i = 0; i < from_tbls_len; ++i) {
-			Sql_tbl_itm from_tbl = (Sql_tbl_itm)from_tbls.Get_at(i);
+			Sql_tbl_itm from_tbl = (Sql_tbl_itm)from_tbls.GetAt(i);
 			String from_tbl_db = from_tbl.Db;
-			if (String_.Eq(Sql_tbl_itm.Db__null, from_tbl_db)) continue;	// tbl does not have db defined; only "tbl" not "db.tbl"; skip
-			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.GetByOrNull(from_tbl_db); if (attach_itm == null) throw Err_.new_("dbs", "qry defines an unknown database for attach_wkr", "from_tbl_db", from_tbl_db, "sql", qry.ToSqlExec(sql_wtr));
+			if (StringUtl.Eq(Sql_tbl_itm.Db__null, from_tbl_db)) continue;	// tbl does not have db defined; only "tbl" not "db.tbl"; skip
+			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.GetByOrNull(from_tbl_db); if (attach_itm == null) throw ErrUtl.NewArgs("qry defines an unknown database for attach_wkr", "from_tbl_db", from_tbl_db, "sql", qry.ToSqlExec(sql_wtr));
 			if (attach_itm.Url.Eq(main_conn_url)) // attach_db same as conn; blank db, so "tbl", not "db.tbl"
 				from_tbl.Db_enabled = false;
 			else
@@ -112,7 +120,7 @@ public class Db_attach_mgr {
 		attached_sql = sql_wtr.ToSqlStr(qry, true);
 		this.Attach();
 		for (int i = 0; i < from_tbls_len; ++i) {	// reverse blanking from above
-			Sql_tbl_itm from_tbl = (Sql_tbl_itm)from_tbls.Get_at(i);
+			Sql_tbl_itm from_tbl = (Sql_tbl_itm)from_tbls.GetAt(i);
 			from_tbl.Db_enabled = true;
 		}
 		return main_conn.Stmt_sql(attached_sql);

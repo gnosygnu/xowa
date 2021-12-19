@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.repos.*;
 import gplx.xowa.parsers.lnkis.*;
@@ -48,7 +49,7 @@ public class Xof_fsdb_itm_fxt {
 	}
 	public Xof_fsdb_itm_fxt Lnki__en_w(String lnki_ttl_str) {
 		this.wiki_abrv = Abrv__en_w;
-		this.lnki_ttl = Bry_.new_u8(lnki_ttl_str);
+		this.lnki_ttl = BryUtl.NewU8(lnki_ttl_str);
 		return this;
 	}
 	public Xof_fsdb_itm_fxt Orig__commons__lnki() {
@@ -75,5 +76,5 @@ public class Xof_fsdb_itm_fxt {
 		rv.Init_at_orig(orig_repo_id, orig_repo_name, orig_ttl, orig_ext, orig_w, orig_h, orig_redirect);
 		return rv;
 	}
-	private final static byte[] Abrv__en_w = Bry_.new_a7("en.w");
+	private final static byte[] Abrv__en_w = BryUtl.NewA7("en.w");
 }

@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines; import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
-import gplx.Keyval;
+package gplx.dbs.engines;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.KeyVal;
 import gplx.core.stores.DataRdr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_info;
@@ -42,7 +43,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 public abstract class Db_engine_sql_base implements Db_engine {
-	@gplx.Internal protected void Ctor(Db_conn_info conn_info) {this.conn_info = conn_info;}
+	public void Ctor(Db_conn_info conn_info) {this.conn_info = conn_info;}
 	public abstract String		Tid();
 	public Db_conn_info			Conn_info() {return conn_info;} protected Db_conn_info conn_info;
 	public Db_conn_props_mgr	Props() {return props;} private final Db_conn_props_mgr props = new Db_conn_props_mgr();
@@ -72,7 +73,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Statement cmd = New_stmt_exec(sql);	
 			return cmd.executeUpdate(sql);			
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:exec failed", "url", conn_info.Db_api(), "sql", sql);}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "db.engine:exec failed", "url", conn_info.Db_api(), "sql", sql);}
 	}
 	private DataRdr Exec_as_rdr(String sql) {
 		try {
@@ -81,7 +82,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			ResultSet rdr = cmd.getResultSet();	
 			return New_rdr(rdr, sql);
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "db", "db.engine:rdr failed", "url", conn_info.Db_api(), "sql", sql);}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "db.engine:rdr failed", "url", conn_info.Db_api(), "sql", sql);}
 	}
 	public void Meta_tbl_create(Dbmeta_tbl_itm tbl) {Exec_as_int(tbl.To_sql_create(this.Sql_wtr()));				this.Meta_mgr().Load_all();}
 	public void Meta_tbl_delete(String tbl)			{Exec_as_int(this.Sql_wtr().Schema_wtr().Bld_drop_tbl(tbl));	this.Meta_mgr().Load_all();}
@@ -104,7 +105,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 			Gfo_usr_dlg_.Instance.Plog_many("", "", "column added to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
 		}
 		catch (Exception e) {	// catch error if column already added to table
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), Err_.Message_gplx_full(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "column not added to table: db=~{0} tbl=~{1} fld=~{2} err=~{3}", conn_info.Database(), tbl, fld.Name(), ErrUtl.ToStrFull(e));
 		}
 		this.Meta_mgr().Load_all();
 	}
@@ -121,7 +122,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		rv.Ctor(stmt, (ResultSet)rdr, sql);	
 		return rv;
 	}
-	@gplx.Internal protected abstract Connection Conn_make();	
+	public abstract Connection Conn_make();	
 	private		void Batch_mgr__conn_bgn() {batch_mgr.Conn_bgn().Run(this);}
 	private		void Batch_mgr__conn_end() {batch_mgr.Conn_end().Run(this);}
 	private void Conn_assert() {
@@ -134,32 +135,32 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		if (connection == null) return;	// connection never opened; just exit
 		this.Batch_mgr__conn_end();
 		try 	{connection.close();}
-		catch 	(Exception e) {throw Err_.new_exc(e, "db", "Conn_term failed", "url", conn_info.Raw());}
+		catch 	(Exception e) {throw ErrUtl.NewArgs(e, "Conn_term failed", "url", conn_info.Raw());}
 		connection = null;
 	}
 	@Override public Object Stmt_by_sql(String sql) {
 		if (connection == null) Conn_assert();
 		try 	{return connection.prepareStatement(sql);}
 		catch 	(Exception e) {
-			throw Err_.new_exc(e, "db", "New_stmt_prep failed", "sql", sql);
+			throw ErrUtl.NewArgs(e, "New_stmt_prep failed", "sql", sql);
 			}
 	}
 	private Statement New_stmt_exec(String sql) {
 		if (connection == null) Conn_assert();
 		try 	{return connection.createStatement();}
-		catch 	(Exception e) {throw Err_.new_exc(e, "db", "New_stmt_exec failed", "sql", sql);}
+		catch 	(Exception e) {throw ErrUtl.NewArgs(e, "New_stmt_exec failed", "sql", sql);}
 	}
 	protected Connection Conn_make_by_url(String url, String uid, String pwd) {
 		try {return DriverManager.getConnection(url, uid, pwd);}
-		catch (SQLException e) {throw Err_.new_exc(e, "db", "connection open failed", "info", Conn_info().Raw());}
+		catch (SQLException e) {throw ErrUtl.NewArgs(e, "connection open failed", "info", Conn_info().Raw());}
 	}
-	protected Connection Conn__new_by_url_and_props(String url, Keyval... props) {
+	protected Connection Conn__new_by_url_and_props(String url, KeyVal... props) {
 		try {
 			java.util.Properties properties = new java.util.Properties();
-			for (Keyval prop : props)
-				properties.setProperty(prop.Key(), prop.Val_to_str_or_empty());
+			for (KeyVal prop : props)
+				properties.setProperty(prop.KeyToStr(), prop.ValToStrOrEmpty());
 			return DriverManager.getConnection(url, properties);
 		}
-		catch (SQLException e) {throw Err_.new_exc(e, "db", "connection open failed", "info", Conn_info().Raw());}
+		catch (SQLException e) {throw ErrUtl.NewArgs(e, "connection open failed", "info", Conn_info().Raw());}
 	}
 	}

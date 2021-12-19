@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.data;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Xow_db_layout {
 	Xow_db_layout(int tid) {this.tid = tid;}
 	public int Tid()					{return tid;} private final int tid;
@@ -25,7 +27,7 @@ public class Xow_db_layout {
 			case Xow_db_layout.Tid__all:		return Key__all;
 			case Xow_db_layout.Tid__few:		return Key__few;
 			case Xow_db_layout.Tid__lot:		return Key__lot;
-			default: 							throw Err_.new_unimplemented();
+			default: 							throw ErrUtl.NewUnimplemented();
 		}
 	}
 
@@ -37,9 +39,9 @@ public class Xow_db_layout {
 	, Itm_lot = new Xow_db_layout(Tid__lot)
 	;
 	public static Xow_db_layout Get_by_name(String v) {
-		if		(String_.Eq(v, Key__all))	return Itm_all;
-		else if	(String_.Eq(v, Key__few))	return Itm_few;
-		else if	(String_.Eq(v, Key__lot))	return Itm_lot;
-		else								throw Err_.new_unimplemented();
+		if		(StringUtl.Eq(v, Key__all))	return Itm_all;
+		else if	(StringUtl.Eq(v, Key__few))	return Itm_few;
+		else if	(StringUtl.Eq(v, Key__lot))	return Itm_lot;
+		else								throw ErrUtl.NewUnimplemented();
 	}
 }

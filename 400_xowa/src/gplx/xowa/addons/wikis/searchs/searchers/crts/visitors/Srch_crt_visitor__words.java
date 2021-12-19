@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.crts.visitors; import gplx.*;
-import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
+package gplx.xowa.addons.wikis.searchs.searchers.crts.visitors;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_itm;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_mgr;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_visitor;
 public class Srch_crt_visitor__words implements Srch_crt_visitor {
 	private final List_adp words_list = List_adp_.New();
 	public byte Words_tid() {return words_tid;} private byte words_tid;
@@ -55,7 +60,7 @@ public class Srch_crt_visitor__words implements Srch_crt_visitor {
 				words_list.Add(itm);
 				break;
 			case Srch_crt_itm.Tid__invalid:		break;			// should not happen
-			default:								throw Err_.new_unhandled_default(itm.Tid);
+			default:								throw ErrUtl.NewUnhandled(itm.Tid);
 		}
 	}
 }

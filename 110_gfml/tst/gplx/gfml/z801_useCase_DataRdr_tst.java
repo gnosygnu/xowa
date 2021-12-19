@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import org.junit.*;
-import gplx.core.stores.*;
+package gplx.gfml;
+import gplx.core.stores.DataRdr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import org.junit.Test;
 public class z801_useCase_DataRdr_tst {
 	String raw;
 	@Test public void Subs_byName() {
-		raw = String_.Concat
+		raw = StringUtl.Concat
 			(	"_type:{"
 			,	"	item {"
 			,	"		point {"
@@ -39,7 +42,7 @@ public class z801_useCase_DataRdr_tst {
 	}
 //		@Test 
 	public void Subs_byName3() {
-		raw = String_.Concat
+		raw = StringUtl.Concat
 			(	"_type:{"
 			,	"	item {"
 			,	"		key"
@@ -56,12 +59,12 @@ public class z801_useCase_DataRdr_tst {
 		subRdr = rdr.Subs_byName_moveFirst("point");
 		fx_rdr.tst_Atrs(subRdr, kv_("x", "1"), kv_("y", "2"));
 	}
-	Keyval kv_(String key, Object val) {return Keyval_.new_(key, val);}
+	KeyVal kv_(String key, Object val) {return KeyVal.NewStr(key, val);}
 	DataRdr_Fxt fx_rdr = DataRdr_Fxt.Instance;
 	DataRdr rdr, subRdr;
 }
 class DataRdr_Fxt {
-	@gplx.Internal protected DataRdr run_Subs_at(DataRdr rdr, int i) {
+	public DataRdr run_Subs_at(DataRdr rdr, int i) {
 		DataRdr rv = rdr.Subs();
 		int count = -1;
 		while (count++ < i) {
@@ -69,11 +72,11 @@ class DataRdr_Fxt {
 		}
 		return rv;
 	}
-	@gplx.Internal protected void tst_Atrs(DataRdr rdr, Keyval... expdAry) {
-		Keyval[] actlAry = new Keyval[rdr.FieldCount()];
+	public void tst_Atrs(DataRdr rdr, KeyVal... expdAry) {
+		KeyVal[] actlAry = new KeyVal[rdr.FieldCount()];
 		for (int i = 0; i < actlAry.length; i++)
 			actlAry[i] = rdr.KeyValAt(i);
-		Tfds.Eq_ary_str(expdAry, actlAry);
+		GfoTstr.EqAryObjAry(expdAry, actlAry);
 	}
 	public static final DataRdr_Fxt Instance = new DataRdr_Fxt(); DataRdr_Fxt() {}
 }

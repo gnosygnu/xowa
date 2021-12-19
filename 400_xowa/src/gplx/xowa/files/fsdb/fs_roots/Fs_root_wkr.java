@@ -14,18 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.fsdb.fs_roots;
-import gplx.Bry_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.core.envs.SystemUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.cfgs.Db_cfg_tbl;
 import gplx.gfui.SizeAdp;
 import gplx.gfui.SizeAdp_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.files.Xof_ext;
 import gplx.xowa.files.Xof_ext_;
 import gplx.xowa.files.imgs.Xof_img_wkr_query_img_size;
@@ -36,7 +37,7 @@ class Fs_root_wkr {
 	private Db_conn conn; private Db_cfg_tbl cfg_tbl;
 	private Orig_fil_tbl orig_tbl;
 	private int fil_id_next = 0;
-	private long scan_time_prv = gplx.core.envs.System_.Ticks();
+	private long scan_time_prv = SystemUtl.Ticks();
 	public Orig_fil_tbl Orig_tbl() {return orig_tbl;}
 	public void Init(Xof_img_wkr_query_img_size img_size_wkr, Io_url orig_dir) {
 		this.img_size_wkr = img_size_wkr;
@@ -52,11 +53,11 @@ class Fs_root_wkr {
 				rv = Get_from_fs(lnki_ttl);
 				if (rv == null) {
 					// HACK: if failed and not much time has passed, try rescanning the entire fs again; need to change to filesystem watcher
-					if (gplx.core.envs.System_.Ticks__elapsed_in_sec(scan_time_prv) > 2) {	// NOTE: 2 seconds chosen just to make sure this doesn't fire multiple times during one page load
+					if (SystemUtl.Ticks__elapsed_in_sec(scan_time_prv) > 2) {	// NOTE: 2 seconds chosen just to make sure this doesn't fire multiple times during one page load
 						Gfo_usr_dlg_.Instance.Warn_many("", "", "fs.dir:file not found; title=~{0}", lnki_ttl);
 						fs_fil_mgr = Init_fs_fil_mgr();
 						rv = Get_from_fs(lnki_ttl);
-						scan_time_prv = gplx.core.envs.System_.Ticks();
+						scan_time_prv = SystemUtl.Ticks();
 					}
 					if (rv == null)
 						return Orig_fil_row.Null;
@@ -92,12 +93,12 @@ class Fs_root_wkr {
 		int fils_len = fils.length;
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];
-			byte[] fil_name_bry = Bry_.new_u8(fil.NameAndExt());
+			byte[] fil_name_bry = BryUtl.NewU8(fil.NameAndExt());
 
 			String orig_change_type = null;
 			// if url has space, replace it with underscore
-			if (Bry_.Has(fil_name_bry, AsciiByte.Space)) {
-				fil_name_bry = Bry_.Replace(fil_name_bry, AsciiByte.Space, AsciiByte.Underline);
+			if (BryUtl.Has(fil_name_bry, AsciiByte.Space)) {
+				fil_name_bry = BryUtl.Replace(fil_name_bry, AsciiByte.Space, AsciiByte.Underline);
 				orig_change_type = "space_to_underscore";
 			}
 
@@ -111,7 +112,7 @@ class Fs_root_wkr {
 
 			// if changed above, rename it and log it
 			if (orig_change_type != null) {
-				Io_url new_url = fil.GenNewNameAndExt(String_.new_u8(fil_name_bry));
+				Io_url new_url = fil.GenNewNameAndExt(StringUtl.NewU8(fil_name_bry));
 				Io_mgr.Instance.MoveFil_args(fil, new_url, true).Exec();
 				Io_mgr.Instance.AppendFilStr(orig_changes_log, orig_change_type + "|" + fil.Raw() + "\n");
 				fil = new_url;

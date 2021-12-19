@@ -13,29 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*;
+package gplx.xowa.bldrs;
 import gplx.core.ios.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
 import gplx.xowa.wikis.tdbs.*;
 class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 	public Io_sort_filCmd_reg() {}
 	public void Bfr_add(Io_line_rdr stream) {
 		++itm_count;
 		int key_bgn = stream.Key_pos_bgn(), key_end = stream.Key_pos_end();
-		Bry_.Copy_to(stream.Bfr(), key_bgn, key_end, prv_key, 0); prv_key_len = key_end - key_bgn; 
+		BryLni.CopyTo(stream.Bfr(), key_bgn, key_end, prv_key, 0); prv_key_len = key_end - key_bgn;
 	}	byte[] prv_key = new byte[1024]; int prv_key_len = 0;
 	public void Fil_bgn(Io_line_rdr stream) {
-		bfr.Add_int_variable(fil_idx++).Add_byte(AsciiByte.Pipe);
-		bfr.Add_mid(stream.Bfr(), stream.Key_pos_bgn(), stream.Key_pos_end()).Add_byte(AsciiByte.Pipe);
+		bfr.AddIntVariable(fil_idx++).AddByte(AsciiByte.Pipe);
+		bfr.AddMid(stream.Bfr(), stream.Key_pos_bgn(), stream.Key_pos_end()).AddByte(AsciiByte.Pipe);
 	}	
 	public void Fil_end() {
-		bfr.Add_mid(prv_key, 0, prv_key_len).Add_byte(AsciiByte.Pipe)
-			.Add_int_variable(itm_count).Add_byte(AsciiByte.Nl);
+		bfr.AddMid(prv_key, 0, prv_key_len).AddByte(AsciiByte.Pipe)
+			.AddIntVariable(itm_count).AddByte(AsciiByte.Nl);
 		itm_count = 0;
 	}
 	public void Flush(Io_url fil) {
-		Io_mgr.Instance.SaveFilBry(fil, bfr.Bfr(), bfr.Len());
-	}	private Bry_bfr bfr = Bry_bfr_.New(); int fil_idx = 0; int itm_count = 0;
+		Io_mgr.Instance.SaveFilBry(fil, bfr.Bry(), bfr.Len());
+	}	private BryWtr bfr = BryWtr.New(); int fil_idx = 0; int itm_count = 0;
 }
 class Io_url_gen_nest implements gplx.core.ios.Io_url_gen {
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;
@@ -48,5 +53,5 @@ class Io_url_gen_nest implements gplx.core.ios.Io_url_gen {
 		return rv;
 	}
 	public void Del_all() {if (Io_mgr.Instance.ExistsDir(root_dir)) Io_mgr.Instance.DeleteDirDeep(root_dir);}
-	public Io_url_gen_nest(Io_url root_dir, String ext) {this.root_dir = root_dir; this.ext = Bry_.new_u8(ext);} Io_url root_dir; byte[] ext; int fil_idx;
+	public Io_url_gen_nest(Io_url root_dir, String ext) {this.root_dir = root_dir; this.ext = BryUtl.NewU8(ext);} Io_url root_dir; byte[] ext; int fil_idx;
 }

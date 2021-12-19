@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
+package gplx.xowa.xtns.math.texvcs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import org.junit.*; import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
 public class Texvc_parser_tst {
 	private final Texvc_parser_fxt fxt = new Texvc_parser_fxt();
@@ -83,7 +86,7 @@ class Texvc_tkn_mkr_fxt {
 		this.root = new Texvc_root();
 	}
 	public void Clear() {
-		root.Init_as_root(ctx.Tkn_mkr(), Bry_.Empty, 0, 8);
+		root.Init_as_root(ctx.Tkn_mkr(), BryUtl.Empty, 0, 8);
 	}
 	private Texvc_tkn leaf(int tid, int bgn, int end) {
 		int uid = root.Regy__add(tid, tid, bgn, end, null);
@@ -113,7 +116,7 @@ class Texvc_tkn_mkr_fxt {
 	}
 }
 class Texvc_parser_fxt {
-	protected final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	protected final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	private final Texvc_parser parser = new Texvc_parser();
 	private final Texvc_root actl_root;
 	private final Texvc_ctx ctx;
@@ -125,15 +128,15 @@ class Texvc_parser_fxt {
 	public Texvc_tkn_mkr_fxt Mkr() {return mkr_fxt;} private final Texvc_tkn_mkr_fxt mkr_fxt;
 	public void Clear() {
 		mkr_fxt.Clear();
-		actl_root.Init_as_root(ctx.Tkn_mkr(), Bry_.Empty, 0, 8);
+		actl_root.Init_as_root(ctx.Tkn_mkr(), BryUtl.Empty, 0, 8);
 	}
 	public Texvc_root Exec_parse(byte[] src_bry) {
 		parser.Parse(ctx, actl_root, src_bry);
 		return actl_root;
 	}
 	public void Test_parse(String src_str, Texvc_tkn... expd_tkns) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		Exec_parse(src_bry);
-		Tfds.Eq_str_lines(Texvc_tkn_.Print_dbg_str(tmp_bfr, expd_tkns), actl_root.Print_dbg_str(tmp_bfr), src_str);
+		GfoTstr.EqLines(Texvc_tkn_.Print_dbg_str(tmp_bfr, expd_tkns), actl_root.Print_dbg_str(tmp_bfr), src_str);
 	}
 }

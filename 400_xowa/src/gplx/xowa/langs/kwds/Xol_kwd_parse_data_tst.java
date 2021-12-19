@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.kwds; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import org.junit.*; import gplx.core.primitives.*;
+package gplx.xowa.langs.kwds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteRef;
+import org.junit.*;
 public class Xol_kwd_parse_data_tst {
 	@Before public void init() {Clear();}
 	@Test public void Basic()			{Key_("upright" ).Tst_strip("upright");}
@@ -27,10 +32,10 @@ public class Xol_kwd_parse_data_tst {
 	}
 	Xol_kwd_parse_data_tst Key_(String v) {this.key = v; return this;} private String key;
 	Xol_kwd_parse_data_tst Tst_strip(String v) {
-		Bry_bfr tmp = Bry_bfr_.New();
-		Byte_obj_ref rslt = Byte_obj_ref.zero_();
-		byte[] actl = Xol_kwd_parse_data.Strip(tmp, Bry_.new_a7(v), rslt);
-		Tfds.Eq(key, String_.new_a7(actl));
+		BryWtr tmp = BryWtr.New();
+		ByteRef rslt = ByteRef.NewZero();
+		byte[] actl = Xol_kwd_parse_data.Strip(tmp, BryUtl.NewA7(v), rslt);
+		GfoTstr.EqObj(key, StringUtl.NewA7(actl));
 		return this;
 	}
 }

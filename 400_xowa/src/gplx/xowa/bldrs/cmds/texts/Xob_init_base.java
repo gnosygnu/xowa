@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds.texts;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.bldrs.Xob_bldr;
 import gplx.xowa.bldrs.cmds.texts.xmls.Xob_siteinfo_parser_;

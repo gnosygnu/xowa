@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.drds;
-import gplx.Bry_;
-import gplx.Io_mgr;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_test_;
 import gplx.xowa.Xoa_url;
@@ -36,7 +36,7 @@ public class Xod_app_tst {
 //			tstr.Data_mgr().Html__insert(1, "abc");
 //			tstr.Test__get("A", tstr.Make_page(1, "A", "2015-10-19T00:01:02Z", tstr.Make_section(0, 2, "", "", "abc")));
 //		}
-	@Test  public void To_page_db() {
+	@Test public void To_page_db() {
 		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/A"			, "A");
 		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/A:B"		, "A:B");
 		tstr.Test__to_page_url("http://en.wikipedia.org/wiki/Help:A"	, "Help:A");
@@ -61,13 +61,13 @@ class Xod_app_tstr {
 	}
 	public void Test__get(String ttl, Xod_page_itm expd) {
 		Xow_wiki wiki = drd_provider.Wikis__get_by_domain("en.wikipedia.org");
-		Xoa_url page_url = wiki.Utl__url_parser().Parse(Bry_.new_u8(ttl));
+		Xoa_url page_url = wiki.Utl__url_parser().Parse(BryUtl.NewU8(ttl));
 		Xod_page_itm itm = drd_provider.Wiki__get_by_url(wiki, page_url);
-		Tfds.Eq(expd.To_str(), itm.To_str());
+		GfoTstr.EqObj(expd.To_str(), itm.To_str());
 	}
 	public void Test__to_page_url(String raw, String expd) {
 		// // canonical url has spaces as well as %-encoding; PAGE:en.w:List_of_Fire_Emblem:Shadow_Dragon_characters
-		Tfds.Eq_bry(Bry_.new_u8(expd), Xod_app.To_page_url(wiki, raw));
+		GfoTstr.Eq(BryUtl.NewU8(expd), Xod_app.To_page_url(wiki, raw));
 	}
 	public Xod_page_itm Make_page(int page_id, String ttl, String modified_on, Xoh_section_itm... section_ary) {
 		Xod_page_itm rv = new Xod_page_itm();
@@ -79,5 +79,5 @@ class Xod_app_tstr {
 		}			
 		return rv;
 	}
-	public Xoh_section_itm Make_section(int id, int level, String anchor, String heading, String content) {return new Xoh_section_itm(id, level, Bry_.new_u8(anchor), Bry_.new_u8(heading)).Content_(Bry_.new_u8(content));}
+	public Xoh_section_itm Make_section(int id, int level, String anchor, String heading, String content) {return new Xoh_section_itm(id, level, BryUtl.NewU8(anchor), BryUtl.NewU8(heading)).Content_(BryUtl.NewU8(content));}
 }

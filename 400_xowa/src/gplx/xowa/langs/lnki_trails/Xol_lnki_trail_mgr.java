@@ -13,18 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.lnki_trails; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*;
+package gplx.xowa.langs.lnki_trails;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.StringUtl;
 public class Xol_lnki_trail_mgr implements Gfo_invk {
 	public void Clear() {trie.Clear();}
 	public int Count() {return trie.Count();}
 	public Btrie_slim_mgr Trie() {return trie;} private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	public void Add(byte[] v) {trie.Add_obj(v, v);}
+	public void Add(byte[] v) {trie.AddObj(v, v);}
 	public void Del(byte[] v) {trie.Del(v);}
 	private void Add(String... ary) {
 		for (String itm_str : ary) {
-			byte[] itm = Bry_.new_u8(itm_str);
-			trie.Add_obj(itm, itm);
+			byte[] itm = BryUtl.NewU8(itm_str);
+			trie.AddObj(itm, itm);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -39,7 +48,7 @@ public class Xol_lnki_trail_mgr implements Gfo_invk {
 	public void Add_bulk(byte[] src) {
 		int pos = 0, src_len = src.length;
 		while (true) {
-			byte[] itm = gplx.core.intls.Utf8_.Get_char_at_pos_as_bry(src, pos);
+			byte[] itm = Utf8Utl.GetCharAtPosAsBry(src, pos);
 			Add(itm);
 			pos += itm.length;
 			if (pos >= src_len) break;
@@ -48,8 +57,8 @@ public class Xol_lnki_trail_mgr implements Gfo_invk {
 	private void Add_many(GfoMsg m) {
 		int len = m.Args_count();
 		for (int i = 0; i < len; i++) {
-			Keyval kv = m.Args_getAt(i);
-			Add(kv.Val_to_str_or_empty());
+			KeyVal kv = m.Args_getAt(i);
+			Add(kv.ValToStrOrEmpty());
 		}
 	}
 	private void Add_range(GfoMsg m) {
@@ -64,7 +73,7 @@ public class Xol_lnki_trail_mgr implements Gfo_invk {
 	}
 	byte Add_rng_extract(GfoMsg m, String key) {
 		byte[] bry = m.ReadBry(key);
-		if (bry.length != 1) throw Err_.new_wo_type("argument must be ascii character", "key", key, "bry", String_.new_u8(bry));
+		if (bry.length != 1) throw ErrUtl.NewArgs("argument must be ascii character", "key", key, "bry", StringUtl.NewU8(bry));
 		return bry[0];
 	}
 }

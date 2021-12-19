@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.content;
 
-import gplx.Err_;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.mediawiki.includes.XomwMagicWord;
 import gplx.xowa.mediawiki.includes.XomwTitleOld;
 import gplx.xowa.mediawiki.includes.exception.XomwMWException;
@@ -149,7 +149,7 @@ public abstract class XomwAbstractContent implements XomwContent {
 	*/
 	public String serialize(String format) {
 		// return this.getContentHandler().serializeContent(this, format);
-		throw Err_.new_unimplemented();
+		throw ErrUtl.NewUnimplemented();
 	}
 
 	/**
@@ -277,7 +277,7 @@ public abstract class XomwAbstractContent implements XomwContent {
 //			}
 //
 //			return (XomwTitleOld[])titles.To_ary_and_clear(typeof(XomwTitleOld));
-		throw Err_.new_unimplemented();
+		throw ErrUtl.NewUnimplemented();
 	}
 
 //		/**

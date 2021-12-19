@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.urls;
-import gplx.Bry_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_url;
 import org.junit.Test;
 public class Xoa_url__basic__tst {
@@ -27,8 +27,8 @@ public class Xoa_url__basic__tst {
 	}
 }
 class Xoa_url_fxt extends Xow_url_parser_fxt { 	public void Test_eq_page(boolean expd, String lhs_str, String rhs_str) {
-		Xoa_url lhs_url = parser.Parse(Bry_.new_u8(lhs_str));
-		Xoa_url rhs_url = parser.Parse(Bry_.new_u8(rhs_str));
-		Tfds.Eq_bool(expd, lhs_url.Eq_page(rhs_url), "Eq_page");
+		Xoa_url lhs_url = parser.Parse(BryUtl.NewU8(lhs_str));
+		Xoa_url rhs_url = parser.Parse(BryUtl.NewU8(rhs_str));
+		GfoTstr.Eq(expd, lhs_url.Eq_page(rhs_url), "Eq_page");
 	}
 }

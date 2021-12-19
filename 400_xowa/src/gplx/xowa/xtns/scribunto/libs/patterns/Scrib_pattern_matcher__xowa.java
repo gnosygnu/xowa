@@ -15,13 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs.patterns;
 
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.regxs.Regx_group;
 import gplx.langs.regxs.Regx_match;
-import gplx.objects.strings.unicodes.Ustring;
-import gplx.objects.strings.unicodes.UstringUtl;
+import gplx.types.basics.strings.unicodes.Ustring;
+import gplx.types.basics.strings.unicodes.UstringUtl;
 import gplx.xowa.xtns.scribunto.libs.Scrib_lib_ustring_gsub_mgr;
 import gplx.xowa.xtns.scribunto.libs.Scrib_regx_converter;
 import org.luaj.vm2.lib.Match_state;
@@ -63,7 +62,7 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 		final boolean pat_is_anchored = pat_len > 0 && pat.GetData(0) == '^';
 
 		// get match vars
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		Str_find_mgr__xowa match_mgr = new Str_find_mgr__xowa(src_ucs, pat, bgn_as_codes, false, false);
 		Match_state ms = new Match_state(match_mgr);
 		
@@ -83,7 +82,7 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 				Regx_group[] groups = Make_groups(src_ucs, match_mgr.Captures_ary());
 				Regx_match match = new Regx_match(true, src_pos, res, groups);
 				if (!gsub_mgr.Exec_repl_itm(tmp_bfr, regx_converter, match)) {
-					tmp_bfr.Add_str_u8(src_ucs.Substring(match.Find_bgn(), match.Find_end()));					
+					tmp_bfr.AddStrU8(src_ucs.Substring(match.Find_bgn(), match.Find_end()));
 				}
 					
 				gsub_mgr.Repl_count__add();
@@ -95,7 +94,7 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 			// no match; add current byte
 			else if (src_pos < src_len) {
 				// lbuf.append( (byte) src.Get_data( src_pos++ ) );
-				tmp_bfr.Add_u8_int(src_ucs.GetData(src_pos++));
+				tmp_bfr.AddU8Int(src_ucs.GetData(src_pos++));
 			}
 			else
 				break;
@@ -107,8 +106,8 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 				break; 
 		}
 
-		tmp_bfr.Add_str_u8(src_ucs.Substring(src_pos, src_len));
-		return tmp_bfr.To_str_and_clear();
+		tmp_bfr.AddStrU8(src_ucs.Substring(src_pos, src_len));
+		return tmp_bfr.ToStrAndClear();
 	}
 
 	private Regx_group[] Make_groups(Ustring src_ucs, int[] captures) {
@@ -124,7 +123,7 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 			// FOOTNOTE:REGX_GROUP
 			int bgn_in_chars = src_ucs.MapDataToChar(capture_bgn);
 			int end_in_chars = src_ucs.MapDataToChar(capture_end);
- 			String val = String_.Mid(src_ucs.Src(), bgn_in_chars, end_in_chars);
+ 			String val = StringUtl.Mid(src_ucs.Src(), bgn_in_chars, end_in_chars);
 			groups[i / 2] = new Regx_group(true, capture_bgn, capture_end, val);
 		}
 		return groups;

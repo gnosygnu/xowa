@@ -13,19 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.poems; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.poems;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Poem_nde_tst {
 	@Before public void init() {fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Lines() {	// NOTE: first \n (poem\n) and last \n (\n</poem>)ignored
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, "a"
 		, "b"
 		, "c"
 		, "d"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "a<br/>"
@@ -37,14 +39,14 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Nbsp_basic() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, "a 1"
 		, "  b 1"
 		, "c 1"
 		, "  d 1"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "a 1<br/>"
@@ -56,14 +58,14 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Nbsp_line_0() {// PURPOSE: indent on 1st line caused page_break
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, "  a"
 		, "  b"
 		, "  c"
 		, "  d"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "&#160;&#160;a<br/>"
@@ -75,14 +77,14 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Nbsp_blank_lines() {// PURPOSE: check blank lines; PAGE:none
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, "  a"
 		, "  "
 		, "  "
 		, "  b"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "&#160;&#160;a<br/>"
@@ -94,7 +96,7 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Comment() {
-		fxt.Test_parse_page_wiki_str("<poem>a<!-- b --> c</poem>", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("<poem>a<!-- b --> c</poem>", StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "a c"
@@ -105,12 +107,12 @@ public class Poem_nde_tst {
 	@Test public void Xtn() {	// NOTE: behavior as per MW: DATE:2014-03-03
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_print", "{{{1}}}");
-		fxt.Init_defn_add("test_outer", String_.Concat_lines_nl_skip_last
+		fxt.Init_defn_add("test_outer", StringUtl.ConcatLinesNlSkipLast
 		( "{{test_print|a <poem>b}}c</poem>}}"
 		));
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "{{test_outer}}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "a <div class=\"poem\">"
 		, "<p>"
 		, "b}}c"
@@ -120,7 +122,7 @@ public class Poem_nde_tst {
 		fxt.Init_defn_clear();
 	}
 	@Test public void Err_empty_line() {// PURPOSE: one \n caused poem to fail
-		fxt.Test_parse_page_wiki_str("<poem>\n</poem>", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("<poem>\n</poem>", StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, ""
@@ -129,18 +131,18 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Err_dangling_comment() {// PURPOSE: ArrayIndexOutOfBoundsError if poem has <references/> and ends with <!--; PAGE:en.s:The Hebrew Nation did not write it; DATE:2015-01-31
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, "<references/>"
 		, "<!--"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "&lt;poem&gt;"
 		));
 	}
 	@Test public void Ref() {	// PURPOSE: <ref> inside poem was not showing up; DATE:2014-01-17
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>a<ref>b</ref></poem>"
-		, "<references/>"), String_.Concat_lines_nl_skip_last
+		, "<references/>"), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "a<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"
@@ -161,7 +163,7 @@ public class Poem_nde_tst {
 	}
 	@Test public void Template_parse() {	// PURPOSE: <poem> inside template was not evaluating args; EX:en.s:The_Canterville_Ghost; DATE:2014-03-03
 		fxt.Init_page_create("Template:A", "<poem>{{{1}}}</poem>");
-		fxt.Test_parse_page_all_str("{{A|b}}", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str("{{A|b}}", StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "b"	// was {{{1}}}
@@ -170,7 +172,7 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Nested() {	// PURPOSE: handled nested poems; EX:en.s:The_Canterville_Ghost; DATE:2014-03-03
-		fxt.Test_parse_page_all_str("a<poem>b<poem>c</poem>d</poem>e", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str("a<poem>b<poem>c</poem>d</poem>e", StringUtl.ConcatLinesNlSkipLast
 		( "a<div class=\"poem\">"
 		, "<p>"
 		, "b<div class=\"poem\">"
@@ -183,12 +185,12 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Indent_line_0() {	// PURPOSE: handle colon on 1st line; PAGE:en.w:Mary_Wollstonecraft DATE:2014-10-19
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, ":a"
 		, ":b"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'>a</span><br/>"
@@ -198,13 +200,13 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Indent_many() {	// PURPOSE: handle colon on 2nd line; PAGE:vi.s:Văn_Côi_thánh_nguyệt_tán_tụng_thi_ca DATE:2014-10-15
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, "a"
 		, ":b"
 		, "::c"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "a<br/>"
@@ -215,13 +217,13 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void Indent_blank() {	// PURPOSE: check blank lines; PAGE:none DATE:2014-10-19
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, ":a"
 		, ":"
 		, ":b"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "<span class='mw-poem-indented' style='display: inline-block; margin-left: 1em;'>a</span><br/>"
@@ -232,14 +234,14 @@ public class Poem_nde_tst {
 		));
 	}
 	@Test public void List_does_not_end() {// PURPOSE: list does not end with "\ntext"; PAGE:vi.s:Dương_Từ_Hà_Mậu_(dị_bản_mới); li.s:Sint_Servaes_legende/Nuuj_fergmènter DATE:2014-10-19
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "<poem>"
 		, "a"
 		, "*b"
 		, "**c"
 		, "d"
 		, "</poem>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "a<br/>"
@@ -260,7 +262,7 @@ public class Poem_nde_tst {
 		fxt.Init_xtn_pages();
 		fxt.Init_page_create("Page:A/1", "<poem>a\nb\n");
 		fxt.Init_page_create("Page:A/2", "<poem>c\nd\n");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=2 />", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=2 />", StringUtl.ConcatLinesNlSkipLast
 		( "<p><div class=\"poem\">"
 		, "<p>"
 		, "a<br/>"

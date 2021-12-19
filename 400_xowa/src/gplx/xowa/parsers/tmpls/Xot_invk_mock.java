@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls;
-import gplx.Bry_;
-import gplx.Int_;
-import gplx.Keyval;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.Type_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Xot_invk_mock implements Xot_invk {
 	Xot_invk_mock(byte defn_tid, int idx_adj, byte[] frame_ttl) {
 		this.defn_tid = defn_tid; this.idx_adj = idx_adj; this.frame_ttl = frame_ttl;
@@ -35,14 +35,14 @@ public class Xot_invk_mock implements Xot_invk {
 	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
 	public Arg_nde_tkn Name_tkn() {return Arg_nde_tkn.Null;}
 	public int Args_len() {return args.Len() + idx_adj;} private Ordered_hash args = Ordered_hash_.New_bry();
-	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)args.Get_at(i - idx_adj);}
+	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)args.GetAt(i - idx_adj);}
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {// DUPE:MW_ARG_RETRIEVE
 		int cur = 0, list_len = args.Len();
 		if (idx >= list_len) return null;
 		for (int i = 0; i < list_len; i++) {	// iterate over list to find nth *non-keyd* arg; SEE:NOTE_1
-			Arg_nde_tkn nde = (Arg_nde_tkn)args.Get_at(i);
+			Arg_nde_tkn nde = (Arg_nde_tkn)args.GetAt(i);
 			if (nde.KeyTkn_exists()) {
-				int key_int = Bry_.To_int_or(nde.Key_tkn().Dat_ary(), -1);
+				int key_int = BryUtl.ToIntOr(nde.Key_tkn().Dat_ary(), -1);
 				if (key_int == -1)
 					continue;
 				else {	// key is numeric
@@ -57,28 +57,28 @@ public class Xot_invk_mock implements Xot_invk {
 			if ((cur + idx_adj) == idx) return nde;
 			else ++cur;
 		}
-		return Args_get_by_key(src, Bry_.To_a7_bry(idx + 1, 1));
+		return Args_get_by_key(src, BryUtl.ToA7Bry(idx + 1, 1));
 	}
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.GetByOrNull(key);}
-	public static Xot_invk_mock new_(byte defn_tid, byte[] frame_ttl, Keyval... args)		{return new_(defn_tid, 1, frame_ttl, args);}
-	public static Xot_invk_mock new_(byte[] frame_ttl, Keyval... args)					{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
-	public static Xot_invk_mock preprocess_(byte[] frame_ttl, Keyval... args)				{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
-	public static Xot_invk_mock test_(byte[] frame_ttl, Keyval... args)					{return new_(Xot_defn_.Tid_null, 0, frame_ttl, args);}
-	public static Xot_invk_mock new_(byte defn_tid, int idx_adj, byte[] frame_ttl, Keyval... args) {
+	public static Xot_invk_mock new_(byte defn_tid, byte[] frame_ttl, KeyVal... args)		{return new_(defn_tid, 1, frame_ttl, args);}
+	public static Xot_invk_mock new_(byte[] frame_ttl, KeyVal... args)					{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
+	public static Xot_invk_mock preprocess_(byte[] frame_ttl, KeyVal... args)				{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
+	public static Xot_invk_mock test_(byte[] frame_ttl, KeyVal... args)					{return new_(Xot_defn_.Tid_null, 0, frame_ttl, args);}
+	public static Xot_invk_mock new_(byte defn_tid, int idx_adj, byte[] frame_ttl, KeyVal... args) {
 		Xot_invk_mock rv = new Xot_invk_mock(defn_tid, idx_adj, frame_ttl);
 		int len = args.length;
 		for (int i = 0; i < len; i++) {
-			Keyval kv = args[i];
+			KeyVal kv = args[i];
 
 			// handle null kv; PAGE:en.w:Abziri DATE:2017-11-29
 			if (kv == null) continue;
 
-			String kv_key_str = kv.Key();
-			Object kv_key_obj = kv.Key_as_obj();
+			String kv_key_str = kv.KeyToStr();
+			Object kv_key_obj = kv.KeyAsObj();
 			Arg_nde_tkn_mock nde_tkn = null;
-			if		(Type_.Eq_by_obj(kv_key_obj, Int_.Cls_ref_type))					// key is int; EX: 1 => val
-				nde_tkn = new Arg_nde_tkn_mock(null, kv.Val_to_str_or_empty());			// add w/o key
-			else if	(Type_.Eq_by_obj(kv.Val(), BoolUtl.ClsRefType)) {					// val is boolean; EX: key => true || key => false
+			if		(ClassUtl.EqByObj(IntUtl.ClsRefType, kv_key_obj))					// key is int; EX: 1 => val
+				nde_tkn = new Arg_nde_tkn_mock(null, kv.ValToStrOrEmpty());			// add w/o key
+			else if	(ClassUtl.EqByObj(BoolUtl.ClsRefType, kv.Val())) {					// val is boolean; EX: key => true || key => false
 				boolean kv_val_bool = BoolUtl.Cast(kv.Val());
 				if (kv_val_bool)
 					nde_tkn = new Arg_nde_tkn_mock(kv_key_str, "1");					// true => 1 (PHP behavior)
@@ -86,12 +86,12 @@ public class Xot_invk_mock implements Xot_invk {
 					continue;															// false => "" (PHP behavior), but dropped from list (emulate MW behavior) wherein Parser.php!argSubstitution silently drops keyVals with value of false; "if ( $text === false && $Object === false )"; DATE:2014-01-02
 			}
 			else																		// regular nde
-				nde_tkn = new Arg_nde_tkn_mock(kv_key_str, kv.Val_to_str_or_empty());	// add regular key, val strings
-			rv.args.AddIfDupeUseNth(Bry_.new_u8(kv_key_str), nde_tkn);
+				nde_tkn = new Arg_nde_tkn_mock(kv_key_str, kv.ValToStrOrEmpty());	// add regular key, val strings
+			rv.args.AddIfDupeUseNth(BryUtl.NewU8(kv_key_str), nde_tkn);
 		}
 		return rv;
 	}
-	public static final Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1, Bry_.Empty);
+	public static final Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1, BryUtl.Empty);
 }
 /*
 NOTE_1: Xot_invk_mock is being used as a container for two functions

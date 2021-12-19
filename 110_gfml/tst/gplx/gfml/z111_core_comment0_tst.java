@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class z111_core_comment0_tst {
 	GfmlParse_fxt fx = GfmlParse_fxt.new_();
@@ -25,18 +26,18 @@ public class z111_core_comment0_tst {
 			);
 	}
 	@Test public void Basic() {
-		fx.tst_Doc("//a" + String_.Lf);
-		fx.tst_Tkn("//a" + String_.Lf
-			, fx.tkn_grp_ary_("//", "a", String_.Lf)
+		fx.tst_Doc("//a" + StringUtl.Nl);
+		fx.tst_Tkn("//a" + StringUtl.Nl
+			, fx.tkn_grp_ary_("//", "a", StringUtl.Nl)
 			);
 	}
 	@Test public void Data() {
-		fx.tst_Doc("a;//b" + String_.Lf, fx.nde_().Atru_("a"));
-		fx.tst_Tkn("a;//b" + String_.Lf
+		fx.tst_Doc("a;//b" + StringUtl.Nl, fx.nde_().Atru_("a"));
+		fx.tst_Tkn("a;//b" + StringUtl.Nl
 			,	fx.tkn_grp_
 			(		fx.tkn_grp_ary_("a")
 			,		fx.tkn_itm_(";"))
-			,	fx.tkn_grp_ary_("//", "b", String_.Lf)
+			,	fx.tkn_grp_ary_("//", "b", StringUtl.Nl)
 			);
 	}
 //		@Test public void DanglingBgn() {

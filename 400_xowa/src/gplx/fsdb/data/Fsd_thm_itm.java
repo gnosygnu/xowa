@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+package gplx.fsdb.data;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.IntUtl;
 public class Fsd_thm_itm {
 	public void Ctor(int mnt_id, int dir_id, int fil_id, int thm_id, int bin_db_id, int w, int h, double time, int page, long size, String modified, String hash) {
 		this.mnt_id = mnt_id; this.dir_id = dir_id; this.fil_id = fil_id; this.thm_id = thm_id; this.bin_db_id = bin_db_id;
@@ -60,9 +62,9 @@ class Fsdb_thm_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Fsd_thm_itm lhs = (Fsd_thm_itm)lhsObj;
 		Fsd_thm_itm rhs = (Fsd_thm_itm)rhsObj;
-		int comp =	Int_.Compare	(lhs.W()	, rhs.W());		if (comp != CompareAbleUtl.Same) return -comp;	// sort by decreasing width
-			comp =	Double_.Compare	(lhs.Time()	, rhs.Time());	if (comp != CompareAbleUtl.Same) return  comp;	// sort by increasing time
-		return		Int_.Compare	(lhs.Page()	, rhs.Page());													// sort by increasing page
+		int comp =	IntUtl.Compare	(lhs.W()	, rhs.W());		if (comp != CompareAbleUtl.Same) return -comp;	// sort by decreasing width
+			comp =	DoubleUtl.Compare	(lhs.Time()	, rhs.Time());	if (comp != CompareAbleUtl.Same) return  comp;	// sort by increasing time
+		return		IntUtl.Compare	(lhs.Page()	, rhs.Page());													// sort by increasing page
 	}
 	public static final Fsdb_thm_itm_sorter Instance = new Fsdb_thm_itm_sorter(); Fsdb_thm_itm_sorter() {}
 }

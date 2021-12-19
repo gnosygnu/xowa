@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.mgrs;
+import gplx.frameworks.objects.Cancelable_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.core.threads.*; import gplx.core.threads.utils.*;
 import gplx.core.caches.*; import gplx.xowa.wikis.caches.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.wkrs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*;
@@ -40,8 +48,8 @@ public class Xomp_parse_mgr {
 		Xomp_prog_mgr prog_mgr = new Xomp_prog_mgr();
 		prog_mgr.Init(page_cache, page_pool_loader.Get_pending_count(), cfg.Progress_interval(), cfg.Perf_interval(), mgr_db.Url().GenNewNameAndExt("xomp.perf.csv"));
 
-		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
-		Xow_ifexist_cache ifexist_cache = new Xow_ifexist_cache(wiki, page_cache).Cache_sizes_(Int_.Max_value, Int_.Max_value);
+		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(IntUtl.MaxValue).Reduce_by_(IntUtl.MaxValue);
+		Xow_ifexist_cache ifexist_cache = new Xow_ifexist_cache(wiki, page_cache).Cache_sizes_(IntUtl.MaxValue, IntUtl.MaxValue);
 		if (cfg.Load_ifexists_ns() != null) Load_ifexists_ns(wiki, ifexist_cache, cfg.Load_ifexists_ns());
 
 		Xof_orig_wkr__img_links file_orig_wkr = new Xof_orig_wkr__img_links(wiki);
@@ -61,7 +69,7 @@ public class Xomp_parse_mgr {
 		Xomp_parse_wkr[] wkrs = new Xomp_parse_wkr[wkr_len];
 
 		// init ns_ord_mgr
-		Xomp_ns_ord_mgr ns_ord_mgr = new Xomp_ns_ord_mgr(Int_ary_.Parse(mgr_db.Tbl__cfg().Select_str("", Xomp_parse_wkr.Cfg__ns_ids), "|"));
+		Xomp_ns_ord_mgr ns_ord_mgr = new Xomp_ns_ord_mgr(IntAryUtl.Parse(mgr_db.Tbl__cfg().Select_str("", Xomp_parse_wkr.Cfg__ns_ids), "|"));
 
 		// init indexer
 		Xofulltext_indexer_wkr indexer = cfg.Indexer_enabled() ? new Xofulltext_indexer_wkr() : null;
@@ -83,7 +91,7 @@ public class Xomp_parse_mgr {
 		// start threads; done separately from init b/c thread issues
 		for (int i = 0; i < wkr_len; ++i) {
 			Xomp_parse_wkr wkr = wkrs[i];
-			Thread_adp_.Start_by_key("xomp." + Int_.To_str_fmt(i, "000"), Cancelable_.Never, wkr, Xomp_parse_wkr.Invk__exec);
+			Thread_adp_.Start_by_key("xomp." + IntUtl.ToStrFmt(i, "000"), Cancelable_.Never, wkr, Xomp_parse_wkr.Invk__exec);
 		}
 
 		// wait until wkrs are done
@@ -93,30 +101,30 @@ public class Xomp_parse_mgr {
 		wiki.Appe().Wiki_mgr().Wdata_mgr().Doc_mgr.Cleanup();
 
 		// print stats
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		for (int i = 0; i < wkr_len; ++i) {
 			wkrs[i].Bld_stats(bfr);
 		}
-		Gfo_usr_dlg_.Instance.Note_many("", "", bfr.To_str_and_clear());
+		Gfo_usr_dlg_.Instance.Note_many("", "", bfr.ToStrAndClear());
 	}
 	private static void Load_ifexists_ns(Xow_wiki wiki, Xow_ifexist_cache cache, String ns_list) {
 		// expand "*" to all
-		if (String_.Eq(ns_list, "*")) {
-			Bry_bfr bfr = Bry_bfr_.New();
+		if (StringUtl.Eq(ns_list, "*")) {
+			BryWtr bfr = BryWtr.New();
 			gplx.xowa.wikis.nss.Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 			int len = ns_mgr.Ids_len();
 			for (int i = 0; i < len; i++) {
 				gplx.xowa.wikis.nss.Xow_ns ns = ns_mgr.Ids_get_at(i);
 				if (ns.Id() >= 0) {	// skip Media / Special
-					if (bfr.Len() != 0) bfr.Add_byte_comma();
-					bfr.Add_int_variable(ns.Id());
+					if (bfr.Len() != 0) bfr.AddByteComma();
+					bfr.AddIntVariable(ns.Id());
 				}
 			}
-			ns_list = bfr.To_str_and_clear();
+			ns_list = bfr.ToStrAndClear();
 		}
 		// load all titles
 		gplx.xowa.wikis.data.tbls.Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page();
-		String sql = gplx.dbs.Db_sql_.Make_by_fmt(String_.Ary
+		String sql = gplx.dbs.Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  {0}, {1}"
 		, "FROM    {2}"
 		, "WHERE   {0} IN ({3})"
@@ -138,7 +146,7 @@ public class Xomp_parse_mgr {
 		} finally {rdr.Rls();}
 		
 		// mark ns
-		int[] ns_ids = Int_ary_.Parse(ns_list, ",");
+		int[] ns_ids = IntAryUtl.Parse(ns_list, ",");
 		cache.Mark_ns_loaded(ns_ids);
 	}
 }

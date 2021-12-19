@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*;
-import gplx.langs.gfs.*;
+package gplx.xowa.addons.apps.cfgs.specials.maints.services;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.langs.gfs.Gfs_msg_bldr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 class Xocfg_maint_parser {
 	public Xocfg_maint_nde[] Parse(String raw) {
 		GfoMsg root = Gfs_msg_bldr.Instance.ParseToMsg(raw);
@@ -30,7 +36,7 @@ class Xocfg_maint_parser {
 	private Xocfg_maint_nde Parse_nde(GfoMsg msg) {
 		Ordered_hash hash = To_atr_hash(msg);
 		// get common atrs
-		int id			= Int_.Parse(Get_atr_as_str_or_fail(hash, "id_"));
+		int id			= IntUtl.Parse(Get_atr_as_str_or_fail(hash, "id_"));
 		String owner	= Get_atr_as_str_or_fail(hash, "owner_");
 		String key		= Get_atr_as_str_or_fail(hash, "key_");
 		String name		= Get_atr_as_str_or_fail(hash, "name_");
@@ -38,18 +44,18 @@ class Xocfg_maint_parser {
 
 		// create
 		String nde_type = msg.Key();
-		if (String_.Eq(nde_type, "grp")) {
+		if (StringUtl.Eq(nde_type, "grp")) {
 			return new Xocfg_maint_grp(owner, id, key, name, help);
 		}
-		else if (String_.Eq(nde_type, "itm")) {
-			String scope		= Get_atr_as_str_or(hash, "scope_", ""); if (String_.Eq(scope, "")) scope = "wiki";
+		else if (StringUtl.Eq(nde_type, "itm")) {
+			String scope		= Get_atr_as_str_or(hash, "scope_", ""); if (StringUtl.Eq(scope, "")) scope = "wiki";
 			String type			= Get_atr_as_str_or_fail(hash, "type_");
 			String dflt			= Get_atr_as_str_or_fail(hash, "dflt_");
 			String html_atrs	= Get_atr_as_str_or(hash, "html_atrs_", "");
 			String html_cls		= Get_atr_as_str_or(hash, "html_cls_", "");
 			return new Xocfg_maint_itm(owner, id, key, name, help, scope, type, dflt, html_atrs, html_cls);
 		}
-		else throw Err_.new_wo_type("xo.cfg_maint:unknown type", "type", nde_type);
+		else throw ErrUtl.NewArgs("xo.cfg_maint:unknown type", "type", nde_type);
 	}
 	private static Ordered_hash To_atr_hash(GfoMsg msg) {
 		Ordered_hash rv = Ordered_hash_.New();
@@ -62,7 +68,7 @@ class Xocfg_maint_parser {
 	}
 	private static String Get_atr_as_str_or_fail(Ordered_hash hash, String key) {			
 		String rv = Get_atr_as_str_or(hash, key, null);
-		if (rv == null) throw Err_.new_wo_type("xo.cfg_maint:missing key", "key", key);
+		if (rv == null) throw ErrUtl.NewArgs("xo.cfg_maint:missing key", "key", key);
 		return rv;
 	}
 	private static String Get_atr_as_str_or(Ordered_hash hash, String key, String or) {

@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.filters.dansguardians;
-import gplx.Bry_;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.dbs.Db_conn_bldr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Dg_match_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Dg_match_mgr_fxt fxt = new Dg_match_mgr_fxt();
-	@Test  public void One() {
+	@Test public void One() {
 		fxt.Init_line(100, "a");
 		fxt.Test_match_many_y("a", "ab", "ba", "abc");
 		fxt.Test_match_many_n("b");
@@ -42,7 +42,7 @@ class Dg_match_mgr_fxt {
 		rule_list.Clear();
 	}
 	public void Init_line(int score, String... words) {
-		Dg_rule line = new Dg_rule(-1, -1, -1, Dg_rule.Tid_rule, Bry_.new_a7("key"), score, Dg_word.Ary_new_by_str_ary(words));
+		Dg_rule line = new Dg_rule(-1, -1, -1, Dg_rule.Tid_rule, BryUtl.NewA7("key"), score, Dg_word.Ary_new_by_str_ary(words));
 		rule_list.Add(line);
 	}
 	public void Test_match_many_y(String... words) {Test_match_many(BoolUtl.Y, words);}
@@ -56,10 +56,10 @@ class Dg_match_mgr_fxt {
 		match_mgr.Clear();
 		int rule_list_len = rule_list.Len();
 		for (int j = 0; j < rule_list_len; ++j) {
-			Dg_rule rule = (Dg_rule)rule_list.Get_at(j);
+			Dg_rule rule = (Dg_rule)rule_list.GetAt(j);
 			match_mgr.Init_by_rule(rule);
 		}
-		byte[] word_bry = Bry_.new_u8(word_str);
-		Tfds.Eq(expd, match_mgr.Match(1, 101, 0, Bry_.Empty, Bry_.Empty, null, word_bry), (expd ? "pass:" : "fail:") + word_str);
+		byte[] word_bry = BryUtl.NewU8(word_str);
+		GfoTstr.EqObj(expd, match_mgr.Match(1, 101, 0, BryUtl.Empty, BryUtl.Empty, null, word_bry), (expd ? "pass:" : "fail:") + word_str);
 	}
 }

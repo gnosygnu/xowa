@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 public class GfmlAtr implements GfmlItm {
 	public int		ObjType() {return GfmlObj_.Type_atr;}
 	public GfmlTkn	KeyTkn() {return keyTkn;} GfmlTkn keyTkn; public String Key() {return keyTkn.Val();}
@@ -21,10 +22,10 @@ public class GfmlAtr implements GfmlItm {
 	public GfmlType Type() {return type;} GfmlType type; 
 	public boolean		KeyedSubObj() {return true;}
 	public int		SubObjs_Count()			{return subObjs.Len();}
-	public GfmlObj	SubObjs_GetAt(int i)	{return (GfmlObj)subObjs.Get_at(i);} GfmlObjList subObjs = GfmlObjList.new_();	// PERF?: make capacity 3 instead of 8
+	public GfmlObj	SubObjs_GetAt(int i)	{return (GfmlObj)subObjs.GetAt(i);} GfmlObjList subObjs = GfmlObjList.new_();	// PERF?: make capacity 3 instead of 8
 	public void		SubObjs_Add(GfmlObj o)	{subObjs.Add(o);}
-	public String	To_str() {return String_.Concat(this.Key(), "=", this.DatTkn().Val());}
-	@gplx.Internal protected void	Key_set(String v) {keyTkn = GfmlTkn_.val_(v);}	// used for 1 test
+	public String ToStr() {return StringUtl.Concat(this.Key(), "=", this.DatTkn().Val());}
+	public void	Key_set(String v) {keyTkn = GfmlTkn_.val_(v);}	// used for 1 test
 
 	public static GfmlAtr as_(Object obj) {return obj instanceof GfmlAtr ? (GfmlAtr)obj : null;}
 	public static GfmlAtr string_(GfmlTkn keyTkn, GfmlTkn datTkn)				{return new_(keyTkn, datTkn, GfmlType_.String);}
@@ -48,7 +49,7 @@ public class GfmlAtr implements GfmlItm {
 	}
 	int GetTknIdx(GfmlTkn t) {
 		for (int i = 0; i < subObjs.Len(); i++) {
-			GfmlObj obj = (GfmlObj)subObjs.Get_at(i);
+			GfmlObj obj = (GfmlObj)subObjs.GetAt(i);
 			if (obj == t) return  i;
 		}
 		return -1;
@@ -58,15 +59,15 @@ public class GfmlAtr implements GfmlItm {
 		if (oldTkn.SubTkns().length > 0) {
 			GfmlTkn bgn = oldTkn.SubTkns()[0];
 			GfmlTkn end = oldTkn.SubTkns()[oldTkn.SubTkns().length - 1];				
-			newStr = String_.Replace(newStr, bgn.Raw(), bgn.Raw() + bgn.Raw());
+			newStr = StringUtl.Replace(newStr, bgn.Raw(), bgn.Raw() + bgn.Raw());
 			if (bgn.Raw() != end.Raw())
-				newStr = String_.Replace(newStr, end.Raw(), end.Raw() + end.Raw());				
+				newStr = StringUtl.Replace(newStr, end.Raw(), end.Raw() + end.Raw());
 			return GfmlTkn_.composite_(oldTkn.TknType(), GfmlTknAry_.ary_(bgn, GfmlTkn_.raw_(newStr), end));
 		}
 		else {
-			boolean hasQuote = String_.Has(newStr, "'");
+			boolean hasQuote = StringUtl.Has(newStr, "'");
 			if (hasQuote)
-				return GfmlTkn_.composite_("composite", GfmlTknAry_.ary_(GfmlTkn_.new_("'", ""), GfmlTkn_.raw_(String_.Replace(newStr, "'", "''")), GfmlTkn_.new_("'", "")));
+				return GfmlTkn_.composite_("composite", GfmlTknAry_.ary_(GfmlTkn_.new_("'", ""), GfmlTkn_.raw_(StringUtl.Replace(newStr, "'", "''")), GfmlTkn_.new_("'", "")));
 			else
 				return GfmlTkn_.raw_(newStr);
 		}

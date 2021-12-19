@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.mediawiki.XophpStdClass;
 public class JCObjContent extends JCContent { //		/**
 //		* @var boolean if false, prevents multiple fields from having identical names that differ
 //		*   only by casing
@@ -254,7 +256,7 @@ public class JCObjContent extends JCContent { //		/**
 //		* @param JCValue $jcv
 //		* @param mixed $validators
 //		* @throws \Exception
-//		* @@gplx.Internal protected param JCValue $status
+//		* @public param JCValue $status
 //		* @return boolean
 //		*/
 //		private function testRecursive( array $path, array $fldPath, JCValue $jcv, $validators ) {
@@ -471,7 +473,7 @@ public class JCObjContent extends JCContent { //		/**
 					return null;
 			}
 		}
-		if (Type_.Eq_by_obj(data, JCValue.class)) {
+		if (ClassUtl.EqByObj(JCValue.class, data)) {
 			return (JCValue)data;
 		} else {
 //				return new JCValue(JCValue.UNCHECKED, data);
@@ -480,15 +482,15 @@ public class JCObjContent extends JCContent { //		/**
 	}
 	private Object getFieldByItem(int fldInt, String fldStr, Object data) {
 		if (fldInt == -1 && fldStr == null) {
-			throw Err_.new_wo_type("Field must be either int or String");
+			throw ErrUtl.NewArgs("Field must be either int or String");
 		}
 		
-		if (Type_.Eq_by_obj(data, JCValue.class)) {
+		if (ClassUtl.EqByObj(JCValue.class, data)) {
 			data = ((JCValue)data).getValue();
 		}
 		int typeId = XomwTypeUtl.To_type_id(data);
-		boolean isObject = typeId == Type_ids_.Id__obj;
-		boolean isArray = typeId == Type_ids_.Id__array;
+		boolean isObject = typeId == TypeIds.IdObj;
+		boolean isArray = typeId == TypeIds.IdArray;
 		if (fldStr != null ? !(isObject || isArray) : !isArray) {
 			return null;
 		}

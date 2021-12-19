@@ -13,7 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.helps.logs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.apps.helps.logs;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyVal;
+import gplx.xowa.*;
 import gplx.xowa.specials.*;
 import gplx.core.net.qargs.*;
 import gplx.core.net.emails.*;
@@ -35,7 +45,7 @@ public class Xolog_special implements Xow_special_page {
 		boolean redirect = true, redirect_to_same_file = false;;
 		switch (cmd_tid) {
 			case Enm_cmd.Tid__view:			redirect = false; break;
-			case Enm_cmd.Tid__email:		redirect_to_same_file = true; Gfo_email_mgr_.Instance.Send("gnosygnu+xowa_xologs@gmail.com", "XOWA Log", String_.new_u8(log_doc.Log_data())); break;
+			case Enm_cmd.Tid__email:		redirect_to_same_file = true; Gfo_email_mgr_.Instance.Send("gnosygnu+xowa_xologs@gmail.com", "XOWA Log", StringUtl.NewU8(log_doc.Log_data())); break;
 			case Enm_cmd.Tid__delete_one:	Io_mgr.Instance.DeleteFil(Xolog_file_utl.To_url_by_file(log_dir, log_doc.Log_file())); break;
 			case Enm_cmd.Tid__delete_all:	Io_mgr.Instance.DeleteDirDeep(log_dir); break;
 		}
@@ -68,17 +78,17 @@ public class Xolog_special implements Xow_special_page {
 class Xoa_url_args_bldr {
 	private final List_adp list = List_adp_.New();
 	public Xoa_url_args_bldr Add(String key, Object val) {
-		list.Add(Keyval_.new_(key, val));
+		list.Add(KeyVal.NewStr(key, val));
 		return this;
 	}
-	public Keyval[] To_ary() {return (Keyval[])list.ToAryAndClear(Keyval.class);}
+	public KeyVal[] To_ary() {return (KeyVal[])list.ToAryAndClear(KeyVal.class);}
 }
 class Xolog_file_utl {// yyyyMMdd_HHmmss.log
 	private static final String Gui__date_fmt = "yyyy-MM-dd HH:mm:ss";
 	public static String To_name(Io_url url) {return To_name(url.NameOnly());}
 	public static String To_name(String file) {
-		DateAdp date = DateAdp_.parse_fmt(file, Gfo_log_.File__fmt);
-		return date.XtoStr_fmt(Gui__date_fmt);
+		GfoDate date = GfoDateUtl.ParseFmt(file, Gfo_log_.File__fmt);
+		return date.ToStrFmt(Gui__date_fmt);
 	}
 	public static Io_url To_url_by_file(Io_url dir, String file) {
 		return dir.GenSubFil(file + Gfo_log_.File__ext);

@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages;
-import gplx.Bry_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.wikis.pages.htmls.Xopg_html_data;
 import gplx.xowa.wikis.pages.tags.Xopg_tag_mgr;
@@ -46,5 +46,5 @@ public class Xopage_html_data {
 		html_data.Js_enabled_(js_enabled);
 	}
 
-	public static Xopage_html_data err_(String msg) {return new Xopage_html_data(Bry_.Empty, Bry_.new_u8(msg));}
+	public static Xopage_html_data err_(String msg) {return new Xopage_html_data(BryUtl.Empty, BryUtl.NewU8(msg));}
 }

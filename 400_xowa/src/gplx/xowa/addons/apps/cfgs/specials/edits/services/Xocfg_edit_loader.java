@@ -14,17 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.services;
-
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_sql_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app;
 import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_usr;
@@ -61,20 +59,20 @@ public class Xocfg_edit_loader {
 
 		// get root_itm
 		Xocfg_grp_row grp_meta = db_app.Tbl__grp().Select_by_key_or_null(grp_key);
-		if (grp_meta == null) throw Err_.new_wo_type("cfg:grp not found", "grp", grp_key);
+		if (grp_meta == null) throw ErrUtl.NewArgs("cfg:grp not found", "grp", grp_key);
 		Xoedit_grp owner = new Xoedit_grp(grp_meta.Id(), grp_meta.Key(), 0);
 		grp_temp.Add(grp_meta.Id(), owner);
 		grp_list.Add(owner);
 
 		// load tree by selecting subs until no more grps
 		while (grp_temp.Len() > 0) {
-			owner = (Xoedit_grp)grp_temp.Get_at(0);
+			owner = (Xoedit_grp)grp_temp.GetAt(0);
 			grp_temp.Del(owner.Id());
 			Load_subs(grp_list, itm_list, grp_temp, owner);
 		}
 
 		// load itms and i18n
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		Load_itm_meta(tmp_bfr, itm_list);
 		Load_itm_data(tmp_bfr, itm_list, ctx);
 		Load_i18n(grp_list, itm_list, lang);
@@ -86,7 +84,7 @@ public class Xocfg_edit_loader {
 	}
 	private Xoedit_nav_mgr Load_nav_mgr(String grp_key) {
 		// get grp_id
-		String sql = Db_sql_.Make_by_fmt(String_.Ary
+		String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  grp_id"
 		, "FROM    cfg_grp"
 		, "WHERE   grp_key = '{0}'"
@@ -98,7 +96,7 @@ public class Xocfg_edit_loader {
 		finally {rdr.Rls();}
 
 		// get owner_id
-		sql = Db_sql_.Make_by_fmt(String_.Ary
+		sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  map_src"
 		, "FROM    cfg_map"
 		, "WHERE   map_trg = {0}"
@@ -123,7 +121,7 @@ public class Xocfg_edit_loader {
 		finally {rdr.Rls();}
 
 		// get peers
-		sql = Db_sql_.Make_by_fmt(String_.Ary
+		sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  m.map_trg"
 		, ",       m.map_sort"
 		, ",       t.nde_name"
@@ -141,7 +139,7 @@ public class Xocfg_edit_loader {
 			while (rdr.Move_next()) {
 				String nav_key = rdr.Read_str("grp_key");
 				String nav_text = rdr.Read_str("nde_name");
-				list.Add(new Xoedit_nav_itm(String_.Eq(grp_key, nav_key), nav_key, nav_text));
+				list.Add(new Xoedit_nav_itm(StringUtl.Eq(grp_key, nav_key), nav_key, nav_text));
 			}
 		}
 		finally {
@@ -150,7 +148,7 @@ public class Xocfg_edit_loader {
 		return new Xoedit_nav_mgr((Xoedit_nav_itm[])list.ToAryAndClear(Xoedit_nav_itm.class));
 	}
 	private void Load_subs(Xoedit_nde_hash grp_list, Xoedit_nde_hash itm_list, Ordered_hash grp_temp, Xoedit_grp owner) {
-		String sql = Db_sql_.Make_by_fmt(String_.Ary
+		String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  m.map_trg"
 		, ",       m.map_sort"
 		, ",       Coalesce(g.grp_key, i.itm_key) AS key"
@@ -180,10 +178,10 @@ public class Xocfg_edit_loader {
 		}
 		owner.Itms_((Xoedit_itm[])itms_list.ToAryAndClear(Xoedit_itm.class));
 	}
-	private void Load_itm_meta(Bry_bfr tmp_bfr, Xoedit_nde_hash itm_list) {
+	private void Load_itm_meta(BryWtr tmp_bfr, Xoedit_nde_hash itm_list) {
 		Xogui_nde_iter iter = Xogui_nde_iter.New_sql(itm_list);
 		while (iter.Move_next()) {
-			String sql = Db_sql_.Make_by_fmt(String_.Ary
+			String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 			( "SELECT  *"
 			, "FROM    cfg_itm i"
 			, "WHERE   i.itm_key IN ({0})"
@@ -199,7 +197,7 @@ public class Xocfg_edit_loader {
 			}
 		}
 	}
-	private void Load_itm_data(Bry_bfr tmp_bfr, Xoedit_nde_hash itm_list, String... ctxs) {
+	private void Load_itm_data(BryWtr tmp_bfr, Xoedit_nde_hash itm_list, String... ctxs) {
 		Xoedit_nde_hash cur_regy = new Xoedit_nde_hash().Merge(itm_list);
 
 		// loop ctxs where later ctxs are more general defaults; EX: ["en.w", "en.*", "*.w", "app"]
@@ -209,7 +207,7 @@ public class Xocfg_edit_loader {
 			Xogui_nde_iter cur_iter = Xogui_nde_iter.New_sql(cur_regy);
 			while (cur_iter.Move_next()) {
 				// get all data by ids and ctx
-				String sql = Db_sql_.Make_by_fmt(String_.Ary
+				String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 				( "SELECT  v.itm_key"
 				, ",       v.itm_ctx"
 				, ",       v.itm_val"
@@ -248,7 +246,7 @@ public class Xocfg_edit_loader {
 			Xogui_nde_iter cur_iter = Xogui_nde_iter.New_sql(cur_regy);
 			while (cur_iter.Move_next()) {
 				// get all i18n for itms and lang
-				String sql = Db_sql_.Make_by_fmt(String_.Ary
+				String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 				( "SELECT  t.nde_id"
 				, ",       t.nde_name"
 				, ",       t.nde_help"

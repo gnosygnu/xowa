@@ -13,16 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
 import gplx.dbs.qrys.*; import gplx.core.gfo_ndes.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValList;
 public class Db_qry_fxt {
-	public static void Insert_kvo(Db_conn conn, String tblName, Keyval_list kvList) {
+	public static void Insert_kvo(Db_conn conn, String tblName, KeyValList kvList) {
 		Db_qry_insert qry = Db_qry_.insert_(tblName);
-		for (int i = 0; i < kvList.Count(); i++) {
-			Keyval kv = kvList.Get_at(i);
-			qry.Val_obj(kv.Key(), kv.Val());
+		for (int i = 0; i < kvList.Len(); i++) {
+			KeyVal kv = kvList.GetAt(i);
+			qry.Val_obj(kv.KeyToStr(), kv.Val());
 		}
 		qry.Exec_qry(conn);
 	}
@@ -48,20 +52,20 @@ public class Db_qry_fxt {
 			for (int j = 0; j < fldLen; j++) {
 				Db_mock_cell expdDat = expdRow.Dat()[j];
 				Object actlVal = expdDat.Fld() == null ? actlNde.ReadAt(j) : actlNde.Read(expdDat.Fld());
-				Tfds.Eq(expdDat.Val(), actlVal);
+				GfoTstr.EqObj(expdDat.Val(), actlVal);
 			}
 		}
 	}
-	public static String Db__print_tbl_as_str(Bry_bfr bfr, Db_conn conn, String tbl, String... cols) {
+	public static String Db__print_tbl_as_str(BryWtr bfr, Db_conn conn, String tbl, String... cols) {
 		int cols_len = cols.length;
 		Db_rdr rdr = conn.Stmt_select(tbl, cols).Exec_select__rls_auto();
 		while (rdr.Move_next()) {
 			for (int i = 0; i < cols_len; ++i) {
-				bfr.Add_obj(rdr.Read_at(i));
-				bfr.Add_byte(i == cols_len - 1 ? AsciiByte.Nl : AsciiByte.Pipe);
+				bfr.AddObj(rdr.Read_at(i));
+				bfr.AddByte(i == cols_len - 1 ? AsciiByte.Nl : AsciiByte.Pipe);
 			}
 		}
 		rdr.Rls();
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 }

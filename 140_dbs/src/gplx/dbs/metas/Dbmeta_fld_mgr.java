@@ -13,16 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.metas; import gplx.dbs.*;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Dbmeta_fld_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public int				Len()					{return hash.Len();}
 	public void				Clear()					{hash.Clear();}
 	public void				Add(DbmetaFldItm itm)	{hash.Add(itm.Name(), itm);}
 	public boolean				Has(String name)		{return hash.Has(name);}
-	public DbmetaFldItm Get_at(int idx)			{return (DbmetaFldItm)hash.Get_at(idx);}
+	public DbmetaFldItm Get_at(int idx)			{return (DbmetaFldItm)hash.GetAt(idx);}
 	public DbmetaFldItm Get_by(String name)		{return (DbmetaFldItm)hash.GetByOrNull(name);}
-	public DbmetaFldItm[]	To_ary()				{return hash.Len() == 0 ? DbmetaFldItm.AryEmpty : (DbmetaFldItm[])hash.To_ary(DbmetaFldItm.class);}
+	public DbmetaFldItm[]	To_ary()				{return hash.Len() == 0 ? DbmetaFldItm.AryEmpty : (DbmetaFldItm[])hash.ToAry(DbmetaFldItm.class);}
 	public DbmetaFldList To_fld_list() {
 		DbmetaFldList rv = new DbmetaFldList();
 		int len = hash.Len();

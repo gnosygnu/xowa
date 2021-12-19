@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.datas.imports; import gplx.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.datas.imports;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
 import gplx.dbs.*;
 public class Xobc_import_step_tbl implements Db_tbl {
@@ -64,7 +67,7 @@ public class Xobc_import_step_tbl implements Db_tbl {
 	}
 	public void Select_tasks_steps(Xobc_task_step_hash task_step_hash, Xobc_step_map_tbl step_map_tbl, byte[] wiki_abrv, String wiki_date) {
 		task_step_hash.Clear();
-		Db_rdr rdr = conn.Stmt_sql(String_.Concat_lines_nl_skip_last
+		Db_rdr rdr = conn.Stmt_sql(StringUtl.ConcatLinesNlSkipLast
 		( "SELECT  DISTINCT sm.task_id, sm.step_id"
 		, "FROM    " + tbl_name + " imps"
 		, "        JOIN " + step_map_tbl.Tbl_name() + " sm ON sm.step_id = imps.step_id"
@@ -83,7 +86,7 @@ public class Xobc_import_step_tbl implements Db_tbl {
 	}
 	public Xobc_import_step_itm[] Select_by_task_id(int task_id) {
 		List_adp list = List_adp_.New();
-		Db_rdr rdr = conn.Stmt_sql(Db_sql_.Make_by_fmt(String_.Ary
+		Db_rdr rdr = conn.Stmt_sql(Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  s.*"
 		, "FROM    import_step s"
 		, "        JOIN step_map sm ON s.step_id = sm.step_id"

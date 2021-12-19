@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.hieros;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Hiero_parser_tst {
 	@Before public void init() {fxt.Reset();} private Hiero_parser_fxt fxt = new Hiero_parser_fxt();
@@ -36,9 +39,9 @@ class Hiero_parser_fxt {
 	}
 	public String[] block_(String... v) {return v;}
 	public void Test_parse(String raw, String[]... expd) {
-		byte[] raw_bry = Bry_.new_a7(raw);
+		byte[] raw_bry = BryUtl.NewA7(raw);
 		Hiero_block[] actl = parser.Parse(raw_bry, 0, raw_bry.length);
-		Tfds.Eq_ary(String_.Ary_flatten(expd), String_.Ary_flatten(Xto_str(actl)));
+		GfoTstr.EqLines(StringUtl.AryFlatten(expd), StringUtl.AryFlatten(Xto_str(actl)));
 	}
 	private String[][] Xto_str(Hiero_block[] ary) {
 		int len = ary.length;
@@ -49,7 +52,7 @@ class Hiero_parser_fxt {
 			String[] rv_sub = new String[itm_len];
 			rv[i] = rv_sub;
 			for (int j = 0; j < itm_len; j++) {
-				rv_sub[j] = String_.new_u8(itm.Get_at(j));
+				rv_sub[j] = StringUtl.NewU8(itm.Get_at(j));
 			}
 		}
 		return rv;

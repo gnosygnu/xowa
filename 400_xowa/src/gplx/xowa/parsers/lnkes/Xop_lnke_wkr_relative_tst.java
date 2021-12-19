@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_lnke_wkr_relative_tst {
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
@@ -33,8 +35,8 @@ public class Xop_lnke_wkr_relative_tst {
 		fxt.Init_xwiki_add_user_("en.wikipedia.org");
 		fxt.Test__parse__wtxt_to_html("[//en.wikipedia.org/wiki/Category:A A]", "<a href='/site/en.wikipedia.org/wiki/Category:A'>A</a>");
 	}
-	@Test  public void Relurl() {
-		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("en.wikipedia.org"), Bry_.new_a7("en.wikipedia.org"));
+	@Test public void Relurl() {
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(BryUtl.NewA7("en.wikipedia.org"), BryUtl.NewA7("en.wikipedia.org"));
 		fxt.Test__parse__wtxt_to_html("[[//en.wikipedia.org/ a]]", "[<a href='/site/en.wikipedia.org/wiki/'>a</a>]");
 	}
 }

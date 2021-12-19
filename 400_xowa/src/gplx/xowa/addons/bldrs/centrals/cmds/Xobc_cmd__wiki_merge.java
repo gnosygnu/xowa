@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.bldrs.centrals.cmds;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*; import gplx.xowa.addons.bldrs.exports.merges.*;
 public class Xobc_cmd__wiki_merge extends Xobc_cmd__base {
 	private final String wiki_domain;
@@ -37,7 +40,7 @@ public class Xobc_cmd__wiki_merge extends Xobc_cmd__base {
 	@Override public String Cmd_name() {return "merge";}
 	@Override public boolean Cmd_suspendable() {return true;}
 	@Override protected void Cmd_exec_hook(Xobc_cmd_ctx ctx) {
-		Xow_wiki wiki = ctx.App().Wiki_mgri().Make(Bry_.new_u8(wiki_domain), ctx.App().Fsys_mgr().Wiki_dir().GenSubDir(wiki_domain));
+		Xow_wiki wiki = ctx.App().Wiki_mgri().Make(BryUtl.NewU8(wiki_domain), ctx.App().Fsys_mgr().Wiki_dir().GenSubDir(wiki_domain));
 		Io_url[] fils = Io_mgr.Instance.QueryDir_fils(src_dir);
 		for (Io_url fil : fils) {
 			if (prog_wkr.Checkpoint__skip_fil(fil)) continue;

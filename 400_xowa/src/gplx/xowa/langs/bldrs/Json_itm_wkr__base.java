@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.primitives.*; import gplx.langs.jsons.*; import gplx.langs.phps.*; import gplx.langs.gfs.*;
-import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.parsers.*;
+package gplx.xowa.langs.bldrs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.langs.jsons.*; import gplx.langs.phps.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.wrappers.ByteRef;
 interface Json_itm_wkr {
 	void Read_kv_sub(byte[] key, byte[] val);
 }
@@ -24,7 +27,7 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 	private Json_parser json_parser = new Json_parser();
 	private Php_text_itm_parser php_quote_parser = new Php_text_itm_parser().Quote_is_single_(true);	// assume values are equivalent to php single quote; DATE:2014-08-06
 	public void Exec(byte[] src) {
-		List_adp tmp_list = List_adp_.New(); Byte_obj_ref tmp_result = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr_.Reset(16); 
+		List_adp tmp_list = List_adp_.New(); ByteRef tmp_result = ByteRef.NewZero(); BryWtr tmp_bfr = BryWtr.NewAndReset(16);
 		Json_doc jdoc = json_parser.Parse(src);
 		this.Exec_bgn();
 		Json_nde root = jdoc.Root_nde();
@@ -47,5 +50,5 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 	public void Exec_bgn() {}
 	public void Exec_end() {}
 	public abstract void Read_kv_sub(byte[] key, byte[] val);
-	private static final byte[] Name_metadata = Bry_.new_a7("@metadata");
+	private static final byte[] Name_metadata = BryUtl.NewA7("@metadata");
 }

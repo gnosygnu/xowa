@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
@@ -22,7 +25,7 @@ public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 	private Xow_wiki wiki;
 	private int qry_id;
 	private int page_id;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public int found;
 	private boolean show_all_matches;
 	public byte[] Page_ttl() {return page_ttl;} private byte[] page_ttl;
@@ -41,32 +44,32 @@ public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 		if (snip_bgn < 0)
 			snip_bgn = 0;
 		else {
-			snip_bgn = Bry_find_.Find_bwd_ws(src, snip_bgn, 0) + 1;
+			snip_bgn = BryFind.FindBwdWs(src, snip_bgn, 0) + 1;
 		}
 		int snip_end = hook_end + 50;
 		if (snip_end >= src.length)
 			snip_end = src.length;
 		else {
-			snip_end = Bry_find_.Find_fwd_until_ws(src, snip_end, src.length);
-			if (snip_end == Bry_find_.Not_found) { // when snip_end == src.length
+			snip_end = BryFind.FindFwdUntilWs(src, snip_end, src.length);
+			if (snip_end == BryFind.NotFound) { // when snip_end == src.length
 				snip_end = src.length;
 			}
 		}
 
 		// build snip
 		Add_snip(tmp_bfr, src, snip_bgn, hook_bgn);
-		tmp_bfr.Add_str_a7("<span class='snip_highlight'>");
+		tmp_bfr.AddStrA7("<span class='snip_highlight'>");
 		Add_snip(tmp_bfr, src, hook_bgn, hook_end);
-		tmp_bfr.Add_str_a7("</span>");
+		tmp_bfr.AddStrA7("</span>");
 		Add_snip(tmp_bfr, src, hook_end, snip_end);
 
 		// send notification
-		byte[] line_html = tmp_bfr.To_bry_and_clear();
+		byte[] line_html = tmp_bfr.ToBryAndClear();
 		ui.Send_line_add(true, show_all_matches, qry_id, wiki.Domain_bry(), page_id, found, line_html);
 		found++;
 	}
-	private static final byte[] Angle_bgn_escaped = Bry_.new_a7("&lt;");
-	private void Add_snip(Bry_bfr bfr, byte[] src, int bgn, int end) {
+	private static final byte[] Angle_bgn_escaped = BryUtl.NewA7("&lt;");
+	private void Add_snip(BryWtr bfr, byte[] src, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
@@ -77,7 +80,7 @@ public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 					bfr.Add(gplx.langs.htmls.Gfh_tag_.Br_inl);
 					break;
 				default:
-					bfr.Add_byte(b);
+					bfr.AddByte(b);
 					break;
 			}
 		}

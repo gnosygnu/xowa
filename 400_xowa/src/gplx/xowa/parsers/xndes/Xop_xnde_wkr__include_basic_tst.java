@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_xnde_wkr__include_basic_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -39,7 +41,7 @@ public class Xop_xnde_wkr__include_basic_tst {
 	@Test public void Wiki_onlyinclude()	{fxt.Test_parse_page_all_str("a<onlyinclude>b</onlyinclude>c"								, "abc");}
 	@Test public void Wiki_oi_io()			{fxt.Test_parse_page_all_str("a<onlyinclude>b<includeonly>c</includeonly>d</onlyinclude>e"	, "abde");}
 	@Test public void Wiki_oi_io_tblw() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<onlyinclude>"
 			,	"{|"
 			,	"|-"
@@ -48,7 +50,7 @@ public class Xop_xnde_wkr__include_basic_tst {
 			,	"|-"
 			,	"|b"
 			,	"|}"
-			),	String_.Concat_lines_nl_skip_last
+			),	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.apos;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 import gplx.xowa.parsers.lists.*;
 public class Xop_apos_wkr_tst {
@@ -117,11 +119,11 @@ public class Xop_apos_wkr_tst {
 	@Test public void Apos_broken_by_tblw_th() {	// DATE:2013-04-24
 		fxt.Test_parse_page_all_str("A ''[[b!!]]'' c", "A <i><a href=\"/wiki/B!!\">b!!</a></i> c");
 	}
-	@Test  public void Nowiki() {	// PAGE:en.w:Wiki; DATE:2013-05-13
+	@Test public void Nowiki() {	// PAGE:en.w:Wiki; DATE:2013-05-13
 		fxt.Test_parse_page_all_str("<nowiki>''a''</nowiki>", "''a''");
 	}
 	@Test public void Lnki_multi_line() {	// PURPOSE: handle apos within multi-line lnki caption; DATE:2013-11-10
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"[[A|b '' c"
 		,	"d '' e ]]"
 		)

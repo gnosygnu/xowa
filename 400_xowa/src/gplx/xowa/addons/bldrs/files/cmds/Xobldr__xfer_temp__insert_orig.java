@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.files.cmds;
-import gplx.Bry_;
-import gplx.GfoMsg;
-import gplx.GfsCtx;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.stores.DataRdr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_stmt;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.bldrs.files.dbs.Xob_lnki_regy_tbl;
 import gplx.xowa.addons.bldrs.files.dbs.Xob_orig_regy_tbl;
@@ -39,7 +39,7 @@ import gplx.xowa.files.exts.Xof_rule_itm;
 import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
 import gplx.xowa.parsers.lnkis.Xop_lnki_type;
 public class Xobldr__xfer_temp__insert_orig extends Xob_cmd__base {
-	private byte[] ext_rules_key = Bry_.Empty;
+	private byte[] ext_rules_key = BryUtl.Empty;
 	public Xobldr__xfer_temp__insert_orig(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
 		Db_conn conn = Xob_db_file.New__file_make(wiki.Fsys_mgr().Root_dir()).Conn();
@@ -59,7 +59,7 @@ public class Xobldr__xfer_temp__insert_orig extends Xob_cmd__base {
 			if (orig_page_id == -1) continue;	// no orig found; ignore
 			String join_ttl = rdr.ReadStr(Xob_orig_regy_tbl.Fld_orig_file_ttl);
 			String redirect_src = rdr.ReadStr(Xob_orig_regy_tbl.Fld_lnki_ttl);
-			if (String_.Eq(join_ttl, redirect_src))	// lnki_ttl is same as redirect_src; not a redirect
+			if (StringUtl.Eq(join_ttl, redirect_src))	// lnki_ttl is same as redirect_src; not a redirect
 				redirect_src = "";
 			int orig_w = rdr.ReadIntOr(Xob_orig_regy_tbl.Fld_orig_w, -1);
 			int orig_h = rdr.ReadIntOr(Xob_orig_regy_tbl.Fld_orig_h, -1);
@@ -92,7 +92,7 @@ public class Xobldr__xfer_temp__insert_orig extends Xob_cmd__base {
 		return rv;
 	}
 	private static final String
-		Sql_select_clause = String_.Concat_lines_nl
+		Sql_select_clause = StringUtl.ConcatLinesNl
 	(	"SELECT  DISTINCT"
 	,   "        l.lnki_id"
 //		,	",       lnki_ttl"

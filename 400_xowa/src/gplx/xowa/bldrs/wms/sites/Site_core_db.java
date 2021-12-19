@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wms.sites;
-import gplx.Io_url;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.Db_conn_bldr_data;
 import gplx.dbs.Db_tbl;
 import gplx.dbs.Db_tbl_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.wikis.domains.Xow_abrv_xo_;
 import gplx.xowa.wikis.domains.Xow_domain_itm;
 import gplx.xowa.wikis.nss.Xow_ns_case_;
@@ -130,7 +130,7 @@ public class Site_core_db {
 		tbl__interwikimap.Select(domain_itm.Abrv_xo(), hash);
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i)  {
-			Site_interwikimap_itm itm = (Site_interwikimap_itm)hash.Get_at(i);
+			Site_interwikimap_itm itm = (Site_interwikimap_itm)hash.GetAt(i);
 			Xow_xwiki_itm xwiki_itm = Xow_xwiki_itm_bldr.Instance.Bld_mw(domain_itm, itm.Prefix, itm.Url, null);
 			xwiki_mgr.Add_itm(xwiki_itm);
 		}
@@ -139,8 +139,8 @@ public class Site_core_db {
 		rv.Clear();
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			Site_namespace_itm itm = (Site_namespace_itm)hash.Get_at(i);
-			byte case_match = Xow_ns_case_.To_tid(String_.new_u8(itm.Case_tid()));
+			Site_namespace_itm itm = (Site_namespace_itm)hash.GetAt(i);
+			byte case_match = Xow_ns_case_.To_tid(StringUtl.NewU8(itm.Case_tid()));
 			rv.Add_new(itm.Id(), itm.Localized(), case_match, BoolUtl.N);
 		}
 	}

@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.funcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
-import gplx.core.btries.*;
+package gplx.xowa.xtns.math.texvcs.funcs;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.xtns.math.texvcs.tkns.*;
 public class Texvc_func_itm {
 	private Texvc_tkn tkn; private boolean tkn_check = true;
@@ -29,7 +29,7 @@ public class Texvc_func_itm {
 		return tkn;
 	}
 	public int Singleton_id() {return id + Texvc_tkn_.Tid_len;}
-	public byte[] Manual() {return manual;} public Texvc_func_itm Manual_(String v) {manual = Bry_.new_a7(v); return this;} private byte[] manual;
+	public byte[] Manual() {return manual;} public Texvc_func_itm Manual_(String v) {manual = BryUtl.NewA7(v); return this;} private byte[] manual;
 	public boolean Literal() {return literal;} public Texvc_func_itm Literal_() {this.literal = true; return this;} private boolean literal;
 	public boolean Big() {return big;} public Texvc_func_itm Big_() {this.big = true; return this;} private boolean big;
 	public boolean Delimiter() {return delimiter;} public Texvc_func_itm Delimiter_() {this.delimiter = true; return this;} private boolean delimiter;

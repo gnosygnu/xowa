@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class Xoctg_catpage_mgr__navlink__tst {
 	@Test public void Navlink__basic() {
 		fxt.Init_itms__pages("A2", "A3", "A4");
 		fxt.Init__next_sortkey_(Xoa_ctg_mgr.Tid__page, "A5");
-		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", StringUtl.ConcatLinesNl
 		( ""
 		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A2%0AA2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 3</a>)"
 		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A5#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 3</a>)"
@@ -33,7 +33,7 @@ public class Xoctg_catpage_mgr__navlink__tst {
 	@Test public void Navlink__encoded() {	// escape quotes and spaces; DATE:2016-01-11
 		fxt.Init_itms__pages("A\" 2", "A\" 3", "A\" 4");
 		fxt.Init__next_sortkey_(Xoa_ctg_mgr.Tid__page, "A\" 5");
-		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", StringUtl.ConcatLinesNl
 		( ""
 		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A%22+2%0AA%22+2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 3</a>)"
 		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A%22+5#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 3</a>)"
@@ -43,7 +43,7 @@ public class Xoctg_catpage_mgr__navlink__tst {
 		fxt.Init_itms__pages("A2", "A3", "A4");
 		fxt.Init__prev_hide_y_(Xoa_ctg_mgr.Tid__page);
 		fxt.Init__next_sortkey_(Xoa_ctg_mgr.Tid__page, "A5");
-		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", StringUtl.ConcatLinesNl
 		( ""
 		, "(previous 3)"
 		, "(<a href=\"/wiki/Category:Ctg_1?pagefrom=A5#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">next 3</a>)"
@@ -51,7 +51,7 @@ public class Xoctg_catpage_mgr__navlink__tst {
 	}
 	@Test public void Navlink__eos() {
 		fxt.Init_itms__pages("A2", "A3", "A4");
-		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", String_.Concat_lines_nl
+		fxt.Test__navlink(BoolUtl.Y, "Category:Ctg_1", StringUtl.ConcatLinesNl
 		( ""
 		, "(<a href=\"/wiki/Category:Ctg_1?pageuntil=A2%0AA2#mw-pages\" class=\"xowa_nav\" title=\"Category:Ctg_1\">previous 3</a>)"
 		, "(next 3)"

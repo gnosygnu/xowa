@@ -14,20 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.origs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.Xof_exec_tid;
 import gplx.xowa.files.Xof_ext_;
 import gplx.xowa.files.Xof_fsdb_itm;
@@ -40,11 +39,11 @@ import org.junit.Before;
 import org.junit.Test;
 public class Xof_orig_tbl_tst {
 	@Before public void init() {fxt.Clear();} private Xof_orig_tbl_fxt fxt = new Xof_orig_tbl_fxt();
-	@Test  public void Select_in() {
+	@Test public void Select_in() {
 		Xof_orig_itm itm_1 = fxt.Exec_insert("A.png", 220, 330);
 		fxt.Exec_insert("B.png", 220, 330);
 		Xof_orig_itm itm_3 = fxt.Exec_insert("C.png", 220, 330);
-		fxt.Test_select_in(String_.Ary("A.png", "C.png"), itm_1, itm_3);
+		fxt.Test_select_in(StringUtl.Ary("A.png", "C.png"), itm_1, itm_3);
 	}
 }
 class Xof_orig_tbl_fxt {
@@ -57,8 +56,8 @@ class Xof_orig_tbl_fxt {
 		tbl.Create_tbl();
 	}
 	public Xof_orig_itm Exec_insert(String ttl, int w, int h) {
-		byte[] ttl_bry = Bry_.new_u8(ttl);
-		Xof_orig_itm rv = new Xof_orig_itm(Xof_orig_itm.Repo_comm, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, Bry_.Empty);
+		byte[] ttl_bry = BryUtl.NewU8(ttl);
+		Xof_orig_itm rv = new Xof_orig_itm(Xof_orig_itm.Repo_comm, ttl_bry, Xof_ext_.new_by_ttl_(ttl_bry).Id(), w, h, BryUtl.Empty);
 		tbl.Insert(rv.Repo(), rv.Ttl(), rv.Ext_id(), rv.W(), rv.H(), rv.Redirect());
 		return rv;
 	}
@@ -69,26 +68,26 @@ class Xof_orig_tbl_fxt {
 		for (int i = 0; i < itms_len; ++i) {
 			String itm = itms[i];
 			Xof_fsdb_itm fsdb_itm = new Xof_fsdb_itm();
-			fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7("en.w"), Bry_.new_u8(itm), Xop_lnki_type.Id_none, Xof_img_size.Upright_null, Xof_img_size.Null, Xof_img_size.Null, Xof_lnki_time.Null, Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
+			fsdb_itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, BryUtl.NewA7("en.w"), BryUtl.NewU8(itm), Xop_lnki_type.Id_none, Xof_img_size.Upright_null, Xof_img_size.Null, Xof_img_size.Null, Xof_lnki_time.Null, Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
 			list.Add(fsdb_itm);
 		}
 		tbl.Select_by_list(rv, list);
-		Tfds.Eq_str_lines(To_str_ary(expd), To_str_ary((Xof_orig_itm[])rv.To_ary(Xof_orig_itm.class)));
+		GfoTstr.EqLines(To_str_ary(expd), To_str_ary((Xof_orig_itm[])rv.ToAry(Xof_orig_itm.class)));
 	}
 	private static String To_str_ary(Xof_orig_itm... ary) {
-		Bry_bfr bfr = Bry_bfr_.Reset(255);
+		BryWtr bfr = BryWtr.NewAndReset(255);
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xof_orig_itm itm = ary[i];
-			bfr	.Add_byte(itm.Repo()).Add_byte_pipe()
-				.Add(itm.Ttl()).Add_byte_pipe()
-				.Add_int_variable(itm.Ext_id()).Add_byte_pipe()
-				.Add_int_variable(itm.W()).Add_byte_pipe()
-				.Add_int_variable(itm.H()).Add_byte_pipe()
-				.Add(itm.Redirect()).Add_byte_pipe()
+			bfr	.AddByte(itm.Repo()).AddBytePipe()
+				.Add(itm.Ttl()).AddBytePipe()
+				.AddIntVariable(itm.Ext_id()).AddBytePipe()
+				.AddIntVariable(itm.W()).AddBytePipe()
+				.AddIntVariable(itm.H()).AddBytePipe()
+				.Add(itm.Redirect()).AddBytePipe()
 				;
-			bfr.Add_byte_nl();
+			bfr.AddByteNl();
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 }

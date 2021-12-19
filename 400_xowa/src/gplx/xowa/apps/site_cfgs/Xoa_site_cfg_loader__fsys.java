@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.site_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.apps.fsys.*;
+package gplx.xowa.apps.site_cfgs;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 class Xoa_site_cfg_loader__fsys implements Xoa_site_cfg_loader {
 	private final Io_url site_cfg_dir;
 	public Xoa_site_cfg_loader__fsys(Io_url site_cfg_dir) {this.site_cfg_dir = site_cfg_dir;}

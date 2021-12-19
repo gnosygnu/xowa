@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.addons.wikis.directorys.dbs;
+import gplx.langs.jsons.Json_parser;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
 public interface Xowdir_wiki_props_mgr {
 	void                Wiki_cfg__upsert(String key, String val);
 	String              Wiki_cfg__select_or(String key, String or);
@@ -53,13 +61,13 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 		return val;
 	}
 	private String Fix(Xowdir_wiki_props props, boolean mode_is_import, Io_url core_db_url, String key) {
-		if (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__domain)) {
+		if (StringUtl.Eq(key, Xowd_cfg_key_.Key__wiki__core__domain)) {
 			String rv = core_db_url.NameOnly();
-			if (String_.Has_at_end(rv, "-core"))
-				rv = String_.Mid(rv, 0, String_.Len(rv) - 5);
+			if (StringUtl.HasAtEnd(rv, "-core"))
+				rv = StringUtl.Mid(rv, 0, StringUtl.Len(rv) - 5);
 			return rv;
 		}
-		else if (String_.Eq(key, Xowd_cfg_key_.Key__wiki__core__name)) {
+		else if (StringUtl.Eq(key, Xowd_cfg_key_.Key__wiki__core__name)) {
 			if (mode_is_import)
 				return props.Domain();	// NOTE: must be called after domain
 			else {
@@ -67,10 +75,10 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 				return wiki_json.Name();
 			}
 		}
-		else if (String_.Eq(key, Xowd_cfg_key_.Key__init__main_page)) {
+		else if (StringUtl.Eq(key, Xowd_cfg_key_.Key__init__main_page)) {
 			return Xoa_page_.Main_page_str;
 		}
-		else throw Err_.new_unhandled_default(key);
+		else throw ErrUtl.NewUnhandled(key);
 	}
 }
 class Xowdir_wiki_props_mgr__mock extends Xowdir_wiki_props_mgr__base {

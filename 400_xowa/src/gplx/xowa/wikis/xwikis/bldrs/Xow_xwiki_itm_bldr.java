@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.wikis.xwikis.bldrs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.wikis.xwikis.*;
 import gplx.core.net.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_bldr {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private final Gfo_url_parser url_parser = new Gfo_url_parser();
 	public Xow_xwiki_itm Bld_mw(Xow_domain_itm cur_domain, byte[] key, byte[] mw_url, byte[] domain_name) {return Bld_xo(cur_domain, key, Gfs_php_converter.To_gfs(tmp_bfr, mw_url), domain_name);} // EX: "//commons.wikimedia.org/wiki/Category:$1" -> "//commons.wikimedia.org/wiki/Category:~{0}"
 	public Xow_xwiki_itm Bld_xo(Xow_domain_itm cur_domain, byte[] key, byte[] xo_url, byte[] domain_name) {
@@ -43,9 +47,9 @@ public class Xow_xwiki_itm_bldr {
 		return new Xow_xwiki_itm(key, xo_url, lang_id, domain_itm.Domain_type_id(), domain_bry, domain_name, cur_domain.Abrv_wm());
 	}
 	private static final Hash_adp_bry domain_name_hash = Hash_adp_bry.cs()
-	.Add_str_obj("commons.wikimedia.org"	, Bry_.new_a7("Wikimedia Commons"))
-	.Add_str_obj("www.dmoz.org"				, Bry_.new_a7("DMOZ"))
+	.Add_str_obj("commons.wikimedia.org"	, BryUtl.NewA7("Wikimedia Commons"))
+	.Add_str_obj("www.dmoz.org"				, BryUtl.NewA7("DMOZ"))
 	;
-	private static final byte[] Bry__domain_name__wikipedia = Bry_.new_a7("Wikipedia");
+	private static final byte[] Bry__domain_name__wikipedia = BryUtl.NewA7("Wikipedia");
         public static final Xow_xwiki_itm_bldr Instance = new Xow_xwiki_itm_bldr(); Xow_xwiki_itm_bldr() {}
 }

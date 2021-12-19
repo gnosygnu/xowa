@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Char_bfr {
 	private char[] ary;
 	private int ary_len;
@@ -37,9 +39,9 @@ public class Char_bfr {
 		ary_len += val_len;
 		return this;
 	}
-	public Char_bfr Add_bry(byte[] val) {return Add_str(String_.new_u8(val));}
+	public Char_bfr Add_bry(byte[] val) {return Add_str(StringUtl.NewU8(val));}
 	public Char_bfr Add_str(String val) {
-		int val_len = String_.Len(val);
+		int val_len = StringUtl.Len(val);
 		if (ary_len + val_len > ary_max) Resize((ary_max + val_len) * 2);
 		Copy_to(val, 0, val_len, ary, ary_len);
 		ary_len += val_len;
@@ -50,13 +52,13 @@ public class Char_bfr {
 		ary = Resize(ary, 0, new_max);
 	}
 	public String To_str_and_clear() {
-		String rv = String_.new_charAry_(ary, 0, ary_len);
+		String rv = StringUtl.NewCharAry(ary, 0, ary_len);
 		ary_len = 0;
 		ary_max = ary_max_reset;
 		return rv;
 	}
 	public byte[] To_bry_and_clear() {
-		return Bry_.new_u8(To_str_and_clear());
+		return BryUtl.NewU8(To_str_and_clear());
 	}
 	private static char[] Resize(char[] src, int src_bgn, int trg_len) {
 		char[] trg = new char[trg_len];
@@ -72,6 +74,6 @@ public class Char_bfr {
 	private static void Copy_to(String src, int src_bgn, int src_end, char[] trg, int trg_bgn) {
 		int trg_adj = trg_bgn - src_bgn;
 		for (int i = src_bgn; i < src_end; i++)
-			trg[i + trg_adj] = String_.CharAt(src, i);
+			trg[i + trg_adj] = StringUtl.CharAt(src, i);
 	}
 }

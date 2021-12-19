@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.envs;
-import gplx.Char_;
-import gplx.Err_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Op_sys {
 	Op_sys(byte tid, byte sub_tid, String os_name, byte bitness, String nl_str, byte fsys_dir_spr_byte, boolean fsys_case_match) {
-		this.tid = tid; this.sub_tid = sub_tid; this.os_name = os_name; this.bitness = bitness; this.nl_str = nl_str; this.fsys_dir_spr_byte = fsys_dir_spr_byte;  this.fsys_dir_spr_str = Char_.To_str((char)fsys_dir_spr_byte); this.fsys_case_match = fsys_case_match;
+		this.tid = tid; this.sub_tid = sub_tid; this.os_name = os_name; this.bitness = bitness; this.nl_str = nl_str; this.fsys_dir_spr_byte = fsys_dir_spr_byte;  this.fsys_dir_spr_str = CharUtl.ToStr((char)fsys_dir_spr_byte); this.fsys_case_match = fsys_case_match;
 	}
 	public byte Tid() {return tid;} private final byte tid;
 	public byte Sub_tid() {return sub_tid;} private final byte sub_tid;
@@ -31,9 +31,9 @@ public class Op_sys {
 	public String Nl_str() {return nl_str;} private final String nl_str;
 	public String Fsys_dir_spr_str() {return fsys_dir_spr_str;} private final String fsys_dir_spr_str;
 	public byte Fsys_dir_spr_byte() {return fsys_dir_spr_byte;} private final byte fsys_dir_spr_byte;
-	public String Fsys_http_frag_to_url_str(String raw) {return fsys_dir_spr_byte == AsciiByte.Slash ? raw : String_.Replace(raw, Lnx.Fsys_dir_spr_str(), fsys_dir_spr_str);}
+	public String Fsys_http_frag_to_url_str(String raw) {return fsys_dir_spr_byte == AsciiByte.Slash ? raw : StringUtl.Replace(raw, Lnx.Fsys_dir_spr_str(), fsys_dir_spr_str);}
 	public boolean Fsys_case_match() {return fsys_case_match;} private final boolean fsys_case_match;
-	public String Fsys_case_match_str(String s) {return String_.CaseNormalize(fsys_case_match, s);}
+	public String Fsys_case_match_str(String s) {return StringUtl.CaseNormalize(fsys_case_match, s);}
 	public boolean Tid_is_wnt() {return tid == Tid_wnt;}
 	public boolean Tid_is_lnx() {return tid == Tid_lnx;}
 	public boolean Tid_is_osx() {return tid == Tid_osx;}
@@ -51,48 +51,48 @@ public class Op_sys {
 	public static final Op_sys Wnt = new_wnt_(Sub_tid_unknown, Bitness_32);
 	public static Op_sys Cur() {return cur_op_sys;} static Op_sys cur_op_sys = new_auto_identify_();
 	public static String Fsys_path_to_lnx(String v) {
-		return cur_op_sys.Tid_is_wnt() ? String_.Replace(v, Wnt.fsys_dir_spr_str, Lnx.fsys_dir_spr_str) : v; 
+		return cur_op_sys.Tid_is_wnt() ? StringUtl.Replace(v, Wnt.fsys_dir_spr_str, Lnx.fsys_dir_spr_str) : v;
 	}
 	public static String Fsys_path_to_wnt(String v) {
-		return cur_op_sys.Tid_is_wnt() ? String_.Replace(v, Lnx.fsys_dir_spr_str, Wnt.fsys_dir_spr_str) : v; 
+		return cur_op_sys.Tid_is_wnt() ? StringUtl.Replace(v, Lnx.fsys_dir_spr_str, Wnt.fsys_dir_spr_str) : v;
 	}
-	private static Op_sys new_wnt_(byte bitness, byte sub_tid)						{return new Op_sys(Tid_wnt	, sub_tid			, "windows", bitness, "\r\n", Dir_spr__wnt	, BoolUtl.N);}
-	private static Op_sys new_unx_flavor_(byte tid, String os_name, byte bitness)	{return new Op_sys(tid		, Sub_tid_unknown	, os_name  , bitness, "\n"  , Dir_spr__lnx	, BoolUtl.Y);}
+	private static Op_sys new_wnt_(byte bitness, byte sub_tid)                        {return new Op_sys(Tid_wnt    , sub_tid            , "windows", bitness, "\r\n", Dir_spr__wnt    , BoolUtl.N);}
+	private static Op_sys new_unx_flavor_(byte tid, String os_name, byte bitness)    {return new Op_sys(tid        , Sub_tid_unknown    , os_name  , bitness, "\n"  , Dir_spr__lnx    , BoolUtl.Y);}
 	public static void Cur_(int tid) {
 		switch (tid) {
 			case Tid_wnt: cur_op_sys = Wnt; break;
 			case Tid_lnx: cur_op_sys = Lnx; break;
 			case Tid_osx: cur_op_sys = Osx; break;
 			case Tid_drd: cur_op_sys = Drd; break;
-			default: throw Err_.new_unhandled_default(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 	} 
 		static final String GRP_KEY = "gplx.op_sys";
-//	public static Op_sys Cur_() {cur_op_sys = new_auto_identify_(); return cur_op_sys;}
+//    public static Op_sys Cur_() {cur_op_sys = new_auto_identify_(); return cur_op_sys;}
 	static Op_sys new_auto_identify_() {
 		String os_name = "";
 		try {
 		String bitness_str = System.getProperty("sun.arch.data.model"); if (bitness_str == null) return Drd;
 		bitness_str = bitness_str.toLowerCase();
 		byte bitness_byte = Bitness_32;
-		if		(String_.Eq(bitness_str, "32")) 		bitness_byte = Bitness_32;
-		else if	(String_.Eq(bitness_str, "64")) 		bitness_byte = Bitness_64;
-		else 											throw Err_.new_wo_type("unknown bitness; expecting 32 or 64; System.getProperty(\"bit.level\")", "val", bitness_str);
+		if        (StringUtl.Eq(bitness_str, "32"))         bitness_byte = Bitness_32;
+		else if    (StringUtl.Eq(bitness_str, "64"))         bitness_byte = Bitness_64;
+		else                                             throw ErrUtl.NewArgs("unknown bitness; expecting 32 or 64; System.getProperty(\"bit.level\")", "val", bitness_str);
 		
 		os_name = System.getProperty("os.name").toLowerCase();
 		String os_arch = System.getProperty("os.arch").toLowerCase();
-		if (String_.Eq(os_arch, "arm"))	return new_unx_flavor_(Tid_arm, os_name, bitness_byte);	// EX:arm; DATE:2016-09-23;"arm" and "32"		
-		if 		(String_.Has_at_bgn(os_name, "win")) {
+		if (StringUtl.Eq(os_arch, "arm"))    return new_unx_flavor_(Tid_arm, os_name, bitness_byte);    // EX:arm; DATE:2016-09-23;"arm" and "32"
+		if         (StringUtl.HasAtBgn(os_name, "win")) {
 			String os_version = System.getProperty("os.version").toLowerCase();//  "Windows 7".equals(osName) && "6.1".equals(osVersion);
 			byte sub_tid = Sub_tid_unknown;
-			if 		(String_.Eq(os_name, "windows xp") && String_.Eq(os_version, "5.1"))	sub_tid = Sub_tid_win_xp;
-			else if (String_.Eq(os_name, "windows 7")  && String_.Eq(os_version, "6.1"))	sub_tid = Sub_tid_win_7;
-			else if (String_.Eq(os_name, "windows 8"))										sub_tid = Sub_tid_win_8;
+			if         (StringUtl.Eq(os_name, "windows xp") && StringUtl.Eq(os_version, "5.1"))    sub_tid = Sub_tid_win_xp;
+			else if (StringUtl.Eq(os_name, "windows 7")  && StringUtl.Eq(os_version, "6.1"))    sub_tid = Sub_tid_win_7;
+			else if (StringUtl.Eq(os_name, "windows 8"))                                        sub_tid = Sub_tid_win_8;
 			return new_wnt_(bitness_byte, sub_tid);
 		}
-		else if	(String_.Eq(os_name, "linux")) 			return new_unx_flavor_(Tid_lnx, os_name, bitness_byte);
-		else if	(String_.Has_at_bgn(os_name, "mac")) 	return new_unx_flavor_(Tid_osx, os_name, bitness_byte);	// EX:Mac OS X
-		else											throw Err_.new_wo_type("unknown os_name; expecting windows, linux, mac; System.getProperty(\"os.name\")", "val", os_name);
+		else if    (StringUtl.Eq(os_name, "linux"))             return new_unx_flavor_(Tid_lnx, os_name, bitness_byte);
+		else if    (StringUtl.HasAtBgn(os_name, "mac"))     return new_unx_flavor_(Tid_osx, os_name, bitness_byte);    // EX:Mac OS X
+		else                                            throw ErrUtl.NewArgs("unknown os_name; expecting windows, linux, mac; System.getProperty(\"os.name\")", "val", os_name);
 		} catch (Exception exc) {Drd.os_name = os_name; return Drd;}
 	}
 	public static void Cur_is_drd_() {cur_op_sys = Drd;}

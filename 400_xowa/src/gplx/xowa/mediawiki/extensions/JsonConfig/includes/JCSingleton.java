@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.xowa.mediawiki.*;
 public class JCSingleton {
 //		/**
@@ -334,7 +340,7 @@ public class JCSingleton {
 		// Producing an artificial String key by appending (namespaceID . ':' . titleDbKey)
 		// seems wasteful and redundant, plus most of the time there will be just a single
 		// namespace declared, so this structure seems efficient and easy enough.
-		String mapCacheLruKey = String_.Concat(wiki, "|", ns);
+		String mapCacheLruKey = StringUtl.Concat(wiki, "|", ns);
 		Ordered_hash cache = (Ordered_hash)mapCacheLru.GetByOrNull(mapCacheLruKey);
 		if (cache == null) {
 			cache = Ordered_hash_.New();
@@ -355,7 +361,7 @@ public class JCSingleton {
 		JCContent content = getContentFromLocalCache(wiki, ns, page);
 
 		if (content == null) {
-			byte[] content_bry = store.Get_wtxt(Bry_.new_u8(wiki), Bry_.new_u8(page));
+			byte[] content_bry = store.Get_wtxt(BryUtl.NewU8(wiki), BryUtl.NewU8(page));
 			if (content_bry != null) {
 				JCContentHandler handler = new JCContentHandler();
 				handler.__construct(JCTabularContent.Model_id, this);
@@ -401,7 +407,7 @@ public class JCSingleton {
 //		}
 //
 //		/**
-//		* Mostly for debugging purposes, this function returns initialized @gplx.Internal protected JsonConfig settings
+//		* Mostly for debugging purposes, this function returns initialized public JsonConfig settings
 //		* @return array[] map of namespaceIDs to list of configurations
 //		*/
 //		public static function getTitleMap() {
@@ -423,7 +429,7 @@ public class JCSingleton {
 		String clz = null;
 		if (configModels.Has(modelId)) {
 			Object val = configModels.Get_by(modelId);
-			if (Type_.Type_by_obj(val) == XophpArray.class) {
+			if (ClassUtl.TypeByObj(val) == XophpArray.class) {
 				XophpArray val_as_ary = (XophpArray)val;
 				if (val_as_ary.Has("class")) {
 					Gfo_usr_dlg_.Instance.Warn_many("", "", "JsonConfig: Invalid +$wgJsonConfigModels['modelId'] array " + "value, 'cl"+ "ass' not found");

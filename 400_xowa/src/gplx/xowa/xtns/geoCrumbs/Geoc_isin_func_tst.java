@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.geoCrumbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.geoCrumbs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Geoc_isin_func_tst {
 	@Before public void init()				{fxt.Reset();} private Geoc_isin_func_fxt fxt = new Geoc_isin_func_fxt();
@@ -28,6 +31,6 @@ class Geoc_isin_func_fxt {
 	}
 	public void Test_parse(String raw, String expd) {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, "");
-		Tfds.Eq(expd, String_.new_u8(fxt.Page().Html_data().Content_sub()));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(fxt.Page().Html_data().Content_sub()));
 	}
 }

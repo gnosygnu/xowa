@@ -13,14 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.Wikibase.client.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.*;
+package gplx.xowa.mediawiki.extensions.Wikibase.client.includes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
 public class Wbase_settings {
 	private static final Hash_adp_bry hash = Hash_adp_bry.cs();
-	public byte[] getSetting(String key) {return getSetting(Bry_.new_u8(key));}
+	public byte[] getSetting(String key) {return getSetting(BryUtl.NewU8(key));}
 	public byte[] getSetting(byte[] key) {
 		return (byte[])hash.Get_by_bry(key);
 	}
-	public void setSetting(String key, String val) {setSetting(Bry_.new_u8(key), Bry_.new_u8(val));}
+	public void setSetting(String key, String val) {setSetting(BryUtl.NewU8(key), BryUtl.NewU8(val));}
 	public void setSetting(byte[] key, byte[] val) {
 		hash.Add(key, val);
 	}

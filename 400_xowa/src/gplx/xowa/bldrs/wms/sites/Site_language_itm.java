@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-class Site_language_itm implements To_str_able {
+package gplx.xowa.bldrs.wms.sites;
+import gplx.frameworks.objects.ToStrAble;
+import gplx.types.basics.utls.StringUtl;
+class Site_language_itm implements ToStrAble {
 	public Site_language_itm(byte[] code, byte[] bcp47, byte[] name) {
 		this.code = code;
 		this.bcp47 = bcp47;
@@ -23,5 +25,5 @@ class Site_language_itm implements To_str_able {
 	public byte[] Code() {return code;} private final byte[] code;
 	public byte[] Bcp47() {return bcp47;} private final byte[] bcp47;
 	public byte[] Name() {return name;} private final byte[] name;
-	public String To_str() {return String_.Concat_with_obj("|", code, bcp47, name);}
+	public String ToStr() {return StringUtl.ConcatWithObj("|", code, bcp47, name);}
 }

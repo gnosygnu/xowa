@@ -3,7 +3,7 @@ package gplx.gfdbs.cores.cfgs;
 import gplx.gfdbs.cores.txns.GfdbTxnSub;
 import gplx.gfdbs.cores.wkrs.GfdbListWkr;
 import gplx.gfdbs.cores.wkrs.GfdbListWkrUtl;
-import gplx.objects.lists.GfoIndexedList;
+import gplx.types.commons.lists.GfoIndexedList;
 
 public class GfdbIdMgr implements GfdbTxnSub {
 	private final GfoIndexedList<String, GfdbCfgItm> regy = new GfoIndexedList<>();

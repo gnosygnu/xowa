@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.searchers.crts;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
 public class Srch_crt_itm {
 	public Srch_crt_itm(int idx, int tid, Srch_crt_itm[] subs, byte[] raw, Srch_crt_sql raw_data) {
 		this.Idx = idx; this.Tid = tid; this.Subs = subs;

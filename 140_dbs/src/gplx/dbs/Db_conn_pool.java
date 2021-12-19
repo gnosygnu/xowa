@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.*;
-import gplx.dbs.qrys.bats.*;
+package gplx.dbs;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.dbs.engines.Db_engine;
+import gplx.dbs.qrys.bats.Db_batch_mgr;
+import gplx.types.errs.ErrUtl;
 public class Db_conn_pool {	// PURPOSE: cache one connection per connection_string
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public Db_batch_mgr Batch_mgr() {return batch_mgr;} private final Db_batch_mgr batch_mgr = new Db_batch_mgr();
@@ -24,7 +29,7 @@ public class Db_conn_pool {	// PURPOSE: cache one connection per connection_stri
 	public Db_conn Get_or_new(Db_conn_info url) {
 		Db_conn rv = (Db_conn)hash.GetByOrNull(url.Db_api());
 		if (rv == null) {
-			Db_engine prime = (Db_engine)prime_hash.GetByOrNull(url.Key()); if (prime == null) Err_.new_wo_type("db engine prototype not found", "key", url.Key());
+			Db_engine prime = (Db_engine)prime_hash.GetByOrNull(url.Key()); if (prime == null) ErrUtl.NewArgs("db engine prototype not found", "key", url.Key());
 			Db_engine clone = prime.New_clone(url);
 			rv = new Db_conn(clone);
 			clone.Batch_mgr().Copy(clone.Tid(), batch_mgr);
@@ -39,7 +44,7 @@ public class Db_conn_pool {	// PURPOSE: cache one connection per connection_stri
 		int len = hash.Len();
 		Db_conn[] rls_ary = new Db_conn[len];
 		for (int i = 0; i < len; ++i)
-			rls_ary[i] = (Db_conn)hash.Get_at(i);
+			rls_ary[i] = (Db_conn)hash.GetAt(i);
 		for (int i = 0; i < len; ++i)
 			rls_ary[i].Rls_conn();
 		hash.Clear();

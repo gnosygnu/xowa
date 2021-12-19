@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.constants.AsciiByte;
 public class XomwMagicWordSynonym {
 	public final byte[] magic_name;
 	public final boolean case_match;
@@ -28,10 +29,10 @@ public class XomwMagicWordSynonym {
 		this.arg1_tid = Get_arg1_tid(text);
 		switch (arg1_tid) {
 			case Arg1__bgn:
-				text_wo_arg1 = Bry_.Mid(text, 2);
+				text_wo_arg1 = BryLni.Mid(text, 2);
 				break;
 			case Arg1__end:
-				text_wo_arg1 = Bry_.Mid(text, 0, text.length - 2);
+				text_wo_arg1 = BryLni.Mid(text, 0, text.length - 2);
 				break;
 			default:
 				text_wo_arg1 = text;

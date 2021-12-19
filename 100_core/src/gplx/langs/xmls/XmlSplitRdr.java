@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.xmls;
 import gplx.core.ios.streams.*;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.libs.files.Io_url;
 public class XmlSplitRdr {
 	public byte[] CurAry() {return curAry;} private byte[] curAry;
 	public long CurSum() {return curSum;} long curSum;
 	public int CurRead() {return curRead;} int curRead;
-	public boolean Done() {return done;} private boolean done;		
+	public boolean Done() {return done;} private boolean done;        
 	public XmlSplitRdr InitAll_(Io_url url) {
 		stream = Io_mgr.Instance.OpenStreamRead(url);
 		curLen = stream.Len();
@@ -37,13 +40,13 @@ public class XmlSplitRdr {
 		curRead = 0;
 		done = false;
 		return this;
-	}	IoStream stream; long curLen;
+	}   IoStream stream; long curLen;
 	public void Read() {
 		curRead = stream.ReadAry(curAry);
 		curSum += curRead;
 		done = curSum == curLen;
 		if (done && curRead != curAry.length) // on last pass, readAry may have garbage at end, remove
-			curAry = Bry_.Resize(curAry, curRead);
+			curAry = BryLni.Resize(curAry, curRead);
 	}
 	public void Rls() {stream.Rls();}
 }

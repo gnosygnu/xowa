@@ -13,11 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.htmls; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.addons.bldrs.exports.splits.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
-import gplx.xowa.htmls.core.dbs.*;
+package gplx.xowa.addons.bldrs.exports.splits.htmls;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.bldrs.exports.splits.Split_ctx;
+import gplx.xowa.addons.bldrs.exports.splits.Split_wkr;
+import gplx.xowa.addons.bldrs.exports.splits.rslts.Split_rslt_mgr;
+import gplx.xowa.htmls.core.dbs.Xowd_html_row;
+import gplx.xowa.htmls.core.dbs.Xowd_html_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
 public class Split_wkr__html implements Split_wkr {
 	private Xoh_src_tbl_mgr src_tbl_mgr;
 	private Xowd_html_tbl tbl; private Db_stmt stmt;
@@ -43,7 +51,7 @@ public class Split_wkr__html implements Split_wkr {
 		if (page.Redirected()) return;	// redirects won't have html
 		int html_db_id = page.Html_db_id(); if (html_db_id == -1) return;	// ignore pages that don't generate html; EX: Mediawiki:Commons.css
 		Xoh_page_tbl_itm src_itm = src_tbl_mgr.Get_or_load(html_db_id);
-		if (!src_itm.Html_tbl().Select_as_row(trg_itm, page_id)) throw Err_.new_wo_type("could not find html", "page_id", page_id);
+		if (!src_itm.Html_tbl().Select_as_row(trg_itm, page_id)) throw ErrUtl.NewArgs("could not find html", "page_id", page_id);
 		byte[] body = trg_itm.Body();
 		int body_len = body.length;
 		byte[] display_ttl = trg_itm.Display_ttl();

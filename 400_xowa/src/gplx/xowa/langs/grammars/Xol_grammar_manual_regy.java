@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.grammars;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
 public class Xol_grammar_manual_regy {
 	private Hash_adp_bry[] ary = new Hash_adp_bry[Xol_grammar_.Tid__max];
 	public byte[] Itms_get(byte type_tid, byte[] word) {
@@ -26,7 +28,7 @@ public class Xol_grammar_manual_regy {
 			hash = Hash_adp_bry.ci_a7();	// ASCII:currently only being used for Wikiuutiset; DATE:2014-07-07
 			ary[type_tid] = hash;
 		}
-		hash.Add_str_obj(orig, Bry_.new_a7(repl));
+		hash.Add_str_obj(orig, BryUtl.NewA7(repl));
 		return this;
 	}
 }

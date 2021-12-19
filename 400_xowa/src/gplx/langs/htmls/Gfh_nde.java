@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.htmls;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Gfh_nde {
 	public Gfh_nde(byte[] src, boolean tag_tid_is_inline, int tag_lhs_bgn, int tag_lhs_end, int tag_rhs_bgn, int tag_rhs_end, int name_bgn, int name_end, int[] cur_atrs, int atrs_idx) {
 		this.src = src;
@@ -28,7 +33,7 @@ public class Gfh_nde {
 		}
 	}
 	public byte[] Src() {return src;} private byte[] src;
-	public int[] Atrs() {return atrs;} private int[] atrs = Int_ary_.Empty;
+	public int[] Atrs() {return atrs;} private int[] atrs = IntAryUtl.Empty;
 	public int Atrs_len() {return atrs_len;} private int atrs_len;
 	public boolean Tag_tid_is_inline() {return tag_tid_is_inline;} private boolean tag_tid_is_inline;
 	public int Tag_lhs_bgn() {return tag_lhs_bgn;} public Gfh_nde Tag_lhs_bgn_(int v) {tag_lhs_bgn = v; return this;} private int tag_lhs_bgn;
@@ -38,48 +43,48 @@ public class Gfh_nde {
 	public int Name_bgn() {return name_bgn;} public Gfh_nde Name_bgn_(int v) {name_bgn = v; return this;} private int name_bgn;
 	public int Name_end() {return name_end;} public Gfh_nde Name_end_(int v) {name_end = v; return this;} private int name_end;
 	public void Clear() {tag_lhs_bgn = tag_rhs_bgn = -1;}
-	public String Atrs_val_by_key_str(String find_key_str) {return String_.new_u8(Atrs_val_by_key_bry(Bry_.new_u8(find_key_str)));}
+	public String Atrs_val_by_key_str(String find_key_str) {return StringUtl.NewU8(Atrs_val_by_key_bry(BryUtl.NewU8(find_key_str)));}
 	public byte[] Atrs_val_by_key_bry(byte[] find_key_bry) {
 		for (int i = 0; i < atrs_len; i ++) {
 			int atrs_idx = i * 5;
 			int atr_key_bgn = atrs[atrs_idx + 1];
 			int atr_key_end = atrs[atrs_idx + 2];
-			if (Bry_.Match(src, atr_key_bgn, atr_key_end, find_key_bry))
+			if (BryLni.Eq(src, atr_key_bgn, atr_key_end, find_key_bry))
 				return Atrs_vals_by_pos(src, atrs[atrs_idx + 0], atrs[atrs_idx + 3], atrs[atrs_idx + 4]);
 		}
 		return null;
 	}
 	byte[] Atrs_vals_by_pos(byte[] src, int quote_byte, int bgn, int end) {
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		boolean dirty = false;
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
 				case AsciiByte.Backslash:
-					if (!dirty) {dirty = true; tmp_bfr.Add_mid(src, bgn, i);}
+					if (!dirty) {dirty = true; tmp_bfr.AddMid(src, bgn, i);}
 					++i;
-					tmp_bfr.Add_byte(src[i]);
+					tmp_bfr.AddByte(src[i]);
 					break;
 				default:
 					if (b == quote_byte) {
 						byte next_byte = src[i + 1];
 						if (next_byte == b) {
-							if (!dirty) {dirty = true; tmp_bfr.Add_mid(src, bgn, i);}
+							if (!dirty) {dirty = true; tmp_bfr.AddMid(src, bgn, i);}
 							++i;
-							tmp_bfr.Add_byte(src[i]);							
+							tmp_bfr.AddByte(src[i]);
 						}
 					}
 					else {
 						if (dirty)
-							tmp_bfr.Add_byte(b);
+							tmp_bfr.AddByte(b);
 					}
 					break;
 			}
 		}
-		return dirty ? tmp_bfr.To_bry_and_clear() : Bry_.Mid(src, bgn, end);
+		return dirty ? tmp_bfr.ToBryAndClear() : BryLni.Mid(src, bgn, end);
 	}
 	public byte[] Data(byte[] src) {
-		return Bry_.Mid(src, tag_lhs_end, tag_rhs_bgn);
+		return BryLni.Mid(src, tag_lhs_end, tag_rhs_bgn);
 	}
 }
 //	class Xoh_atr {

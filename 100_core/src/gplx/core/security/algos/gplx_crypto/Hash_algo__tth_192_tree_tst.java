@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.algos.gplx_crypto; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
+package gplx.core.security.algos.gplx_crypto;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class Hash_algo__tth_192_tree_tst {
 	@Test public void CalcRecursiveHalves() {
@@ -42,11 +43,11 @@ public class Hash_algo__tth_192_tree_tst {
 	void tst_CalcWorkUnits(int length, int expd) {
 		Hash_algo__tth_192 algo = new Hash_algo__tth_192(); algo.BlockSize_set(10);
 		int actl = algo.CalcWorkUnits(length);
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 	void tst_CalcRecursiveHalves(int val, int expd) {
 		int actl = CalcRecursiveHalvesMock(val);
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 	int CalcRecursiveHalvesMock(int val) {
 		if (val <= 1) return 0;

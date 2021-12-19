@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.imgs.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.cmds.*;
+package gplx.xowa.guis.views;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.xowa.*;
+import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.imgs.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.guis.langs.*;
 public class Xog_win_itm_ {
 	public static void Show_win(Xog_win_itm win) {
@@ -46,12 +48,12 @@ public class Xog_win_itm_ {
 		return kit.New_btn(id, win);
 	}
 	public static GfuiComboBox new_cbo(Xoae_app app, Gfui_kit kit, GfuiElem win, FontAdp ui_font, String id, boolean border_on) {
-		GfuiComboBox rv = kit.New_combo(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
+		GfuiComboBox rv = kit.New_combo(id, win, KeyVal.NewStr(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
 		return rv;
 	}
 	public static GfuiTextBox new_txt(Xoae_app app, Gfui_kit kit, GfuiElem win, FontAdp ui_font, String id, boolean border_on) {
-		GfuiTextBox rv = kit.New_text_box(id, win, Keyval_.new_(GfuiTextBox.CFG_border_on_, border_on));
+		GfuiTextBox rv = kit.New_text_box(id, win, KeyVal.NewStr(GfuiTextBox.CFG_border_on_, border_on));
 		rv.TextMgr().Font_(ui_font);
 		return rv;
 	}
@@ -71,7 +73,7 @@ public class Xog_win_itm_ {
 			win.Tab_mgr().Tab_mgr().TextMgr().Font_(new_font);
 		}
 	}
-	public static String new_tiptext(Xoae_app app, int id) {return String_.new_u8(app.Usere().Lang().Msg_mgr().Val_by_id(app.Usere().Wiki(), id));}
+	public static String new_tiptext(Xoae_app app, int id) {return StringUtl.NewU8(app.Usere().Lang().Msg_mgr().Val_by_id(app.Usere().Wiki(), id));}
 	public static final int 
 	  Toolbar_grp_h = 24
 	, Toolbar_txt_w = 160

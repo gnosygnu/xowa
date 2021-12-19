@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.pages.randoms.dbs;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
 public class Rndm_qry_tbl implements Rls_able {
 	private final String tbl_name = "rndm_qry"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_qry_idx, fld_rng_end, fld_qry_key, fld_qry_data, fld_qry_name;

@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.servers.https.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.servers.*; import gplx.xowa.addons.servers.https.*;
+package gplx.xowa.addons.servers.https.utils;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
-import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.wikis.caches.*;
 import gplx.xowa.guis.cbks.*;
 public class Xoa_util_svc {
@@ -37,7 +39,7 @@ public class Xoa_util_svc {
 		// get wiki
 		Xow_wiki wiki_base = app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry);
 		if (!wiki_base.Type_is_edit()) {
-			throw Err_.new_unimplemented();
+			throw ErrUtl.NewUnimplemented();
 		}
 		Xowe_wiki wiki = (Xowe_wiki)wiki_base;
 

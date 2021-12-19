@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*;
+package gplx.xowa.xtns.math;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 class Xomath_subst_mgr {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final Bry_bfr tmp = Bry_bfr_.New();
+	private final BryWtr tmp = BryWtr.New();
 	private boolean init = false;
 	public byte[] Subst(byte[] src) {
 		if (!init) Init();
@@ -30,7 +32,7 @@ class Xomath_subst_mgr {
 			byte b = src[i];
 			Object o = trie.Match_bgn_w_byte(b, src, i, src_len);
 			if (o == null)	// regular char; add to bfr
-				tmp.Add_byte(b);
+				tmp.AddByte(b);
 			else {			// subst itm's trg for src
 				Xomath_subst_itm itm = (Xomath_subst_itm)o;
 				int itm_src_len = itm.Src_len();
@@ -47,7 +49,7 @@ class Xomath_subst_mgr {
 							break;
 						default:
 							if (itm.Whole_word()) {
-								tmp.Add_byte(b);	// itm does not match; ignore; EX: \alpha is itm, but cur text is \alpham
+								tmp.AddByte(b);	// itm does not match; ignore; EX: \alpha is itm, but cur text is \alpham
 								continue;
 							}
 							else
@@ -64,9 +66,9 @@ class Xomath_subst_mgr {
 
 		// add closing dollar-sign tokens for inserted_dollars
 		for (int i = 0; i < inserted_dollars; i++)
-			tmp.Add_byte(AsciiByte.Dollar);
+			tmp.AddByte(AsciiByte.Dollar);
 
-		return tmp.To_bry_and_clear_and_trim();
+		return tmp.ToBryAndClearAndTrim();
 	}
 	private Xomath_subst_mgr Init() {
 		if (init) return this;
@@ -170,9 +172,9 @@ class Xomath_subst_mgr {
 	}
 	private void Reg(String src_str, String trg_str) {Reg(src_str, trg_str, false, true);}
 	private void Reg(String src_str, String trg_str, boolean dollar_sign, boolean whole_word) {
-		byte[] src_bry = Bry_.new_a7(src_str);
-		Xomath_subst_itm itm = new Xomath_subst_itm(src_bry, Bry_.new_a7(trg_str), dollar_sign, whole_word);
-		trie.Add_obj(src_bry, itm);
+		byte[] src_bry = BryUtl.NewA7(src_str);
+		Xomath_subst_itm itm = new Xomath_subst_itm(src_bry, BryUtl.NewA7(trg_str), dollar_sign, whole_word);
+		trie.AddObj(src_bry, itm);
 	}
 }
 class Xomath_subst_itm {

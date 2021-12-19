@@ -13,12 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.parsers.logs.*;
-import gplx.xowa.xtns.scribunto.engines.*;
+package gplx.xowa.xtns.scribunto;
+import gplx.types.errs.Err;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.logs.Xop_log_invoke_wkr;
+import gplx.xowa.xtns.Xox_mgr;
+import gplx.xowa.xtns.Xox_mgr_base;
+import gplx.xowa.xtns.scribunto.engines.Scrib_engine_type;
 public class Scrib_xtn_mgr extends Xox_mgr_base {
 	private Xowe_wiki wiki;
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("scribunto");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = BryUtl.NewA7("scribunto");
 	@Override public void Xtn_ctor_by_app(Xoae_app app) {this.app = app;} private Xoae_app app;
 	@Override public Xox_mgr Xtn_clone_new() {return new Scrib_xtn_mgr();}
 	public Scrib_lib_mgr Lib_mgr() {return lib_mgr;} private Scrib_lib_mgr lib_mgr = new Scrib_lib_mgr();
@@ -54,8 +64,8 @@ public class Scrib_xtn_mgr extends Xox_mgr_base {
 		if (invoke_wkr == null) invoke_wkr = app.Log_mgr().Make_wkr_invoke();
 		return invoke_wkr;
 	}
-	public static Err err_(String fmt, Object... args)						{return Err_.new_wo_type(fmt, args).Trace_ignore_add_1_();}
-	public static Err err_(Exception e, String msg, Object... args)	{return Err_.new_exc(e, "xo", msg, args).Trace_ignore_add_1_();}
+	public static Err err_(String fmt, Object... args)						{return ErrUtl.NewArgs(fmt, args);}
+	public static Err err_(Exception e, String msg, Object... args)	{return ErrUtl.NewArgs(e, msg, args);}
 	private static final String 
 	  Cfg__enabled					= "xowa.addon.scribunto.enabled"
 	, Cfg__engine					= "xowa.addon.scribunto.engine"

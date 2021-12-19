@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.fsdb.fs_roots;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.core.primitives.String_obj_ref;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.wrappers.StringRef;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.files.Xof_exec_tid;
 import gplx.xowa.files.Xof_ext;
@@ -32,7 +32,7 @@ class Fs_root_mgr {
 	private final Fs_root_wkr wkr = new Fs_root_wkr();
 	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	private final Xof_img_size img_size = new Xof_img_size();
-	private final String_obj_ref tmp_resize_result = String_obj_ref.null_();
+	private final StringRef tmp_resize_result = StringRef.NewNull();
 	private Xof_repo_itm repo;
 	private Io_url orig_dir;
 	public Fs_root_mgr(Xowe_wiki wiki) {

@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
-import gplx.Object_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class XophpObject__tst {
 	private final XophpObject__fxt fxt = new XophpObject__fxt();
@@ -42,6 +42,6 @@ class XophpObject__fxt {
 	public void Test_empty_obj_n(Object o) {Test_empty_obj(BoolUtl.N, o);}
 	public void Test_empty_obj_y(Object o) {Test_empty_obj(BoolUtl.Y, o);}
 	public void Test_empty_obj(boolean expd, Object o) {
-		Gftest.Eq__bool(expd, XophpObject_.empty_obj(o), Object_.Xto_str_strict_or_empty(o));
+		GfoTstr.Eq(expd, XophpObject_.empty_obj(o), ObjectUtl.ToStrOrEmpty(o));
 	}
 }

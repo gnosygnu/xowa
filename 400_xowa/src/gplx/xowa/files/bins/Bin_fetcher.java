@@ -13,25 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*;
+package gplx.xowa.files.bins;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.custom.brys.wtrs.BryRef;
 interface Bin_fetcher {
 	boolean Save_as_url(Io_url trg);
-	boolean Save_as_bry(Bry_obj_ref bry);
+	boolean Save_as_bry(BryRef bry);
 }
 class Bin_fetcher_fsys implements Bin_fetcher {
 	public void Init_src_url(Io_url src) {this.src = src;} private Io_url src;
 	public boolean Save_as_url(Io_url trg) {
 		try {Io_mgr.Instance.CopyFil(src, trg, true); return true;}
-		catch (Exception exc) {Err_.Noop(exc); return false;}
+		catch (Exception exc) {return false;}
 	}
-	public boolean Save_as_bry(Bry_obj_ref bry_ref) {
+	public boolean Save_as_bry(BryRef bry_ref) {
 		try {
 			byte[] bry = Io_mgr.Instance.LoadFilBry(src);
-			bry_ref.Val_(bry);
+			bry_ref.ValSet(bry);
 			return true;
 		}
-		catch (Exception exc) {Err_.Noop(exc); return false;}
+		catch (Exception exc) {return false;}
 	}
 }
 class Bin_fetcher_http implements Bin_fetcher {
@@ -40,13 +43,13 @@ class Bin_fetcher_http implements Bin_fetcher {
 	public boolean Save_as_url(Io_url trg) {
 		return download.Src_(src).Trg_(trg).Exec();
 	}
-	public boolean Save_as_bry(Bry_obj_ref bry_ref) {
+	public boolean Save_as_bry(BryRef bry_ref) {
 		try {
 			byte[] rv = download.Exec_as_bry(src);
-			bry_ref.Val_(rv);
+			bry_ref.ValSet(rv);
 			return true;
 		}
-		catch (Exception exc) {Err_.Noop(exc); return false;}
+		catch (Exception exc) {return false;}
 	}
 }
 class Bin_fetcher_fsdb {

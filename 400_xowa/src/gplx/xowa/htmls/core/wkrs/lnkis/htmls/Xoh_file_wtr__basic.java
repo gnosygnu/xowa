@@ -14,18 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.core.bits.Bitmask_;
 import gplx.langs.htmls.Gfh_tag_;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoae_page;
@@ -56,7 +56,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 	private final Xoh_file_fmtr__basic fmtr__basic = new Xoh_file_fmtr__basic(), fmtr__hdump = new Xoh_file_fmtr__hdump();
 	private final Xoh_lnki_text_fmtr alt_fmtr, caption_fmtr;
 	private final Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(32);
 	private Xoae_page page; private byte[] msg_file_enlarge;
 	private Xoh_file_fmtr__basic html_fmtr;		
 	private boolean alt_in_caption = true, alt_defaults_to_caption = true;
@@ -75,14 +75,14 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		this.html_fmtr = hctx.Mode_is_hdump() ? fmtr__hdump : fmtr__basic;
 		if (msg_file_enlarge == null) this.msg_file_enlarge = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_file_enlarge);
 	}
-	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, byte[] img_alt) {
+	public void Write_file(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer_itm, byte[] img_alt) {
 		// init
 		int uid = xfer_itm.Html_uid();
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
 
 		// lnki_ttl; note if orig exists and orig_ttl is different, use it; PAGE:en.w:Switzerland; EX:[[File:Wappen_Schwyz_matt.svg]] which has redirect of Wappen_des_Kantons_Schwyz.svg; DATE:2016-08-11
 		Xoa_ttl lnki_ttl = lnki.Ttl();
-		if (xfer_itm.Orig_exists() && !Bry_.Eq(xfer_itm.Orig_ttl(), xfer_itm.Lnki_ttl()))
+		if (xfer_itm.Orig_exists() && !BryLni.Eq(xfer_itm.Orig_ttl(), xfer_itm.Lnki_ttl()))
 			lnki_ttl = wiki.Ttl_parse(Xow_ns_.Tid__file, xfer_itm.Orig_ttl());
 		byte[] lnki_ttl_bry = lnki_ttl.Page_txt();
 		byte[] lnki_href = wiki.Html__href_wtr().Build_to_bry(wiki, lnki_ttl);
@@ -114,7 +114,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 			&&	!orig_ext.Id_is_media()								// file is media; never suppress; src needs to be available for "click" on play; note that most media will be missing (not downloaded)
 			&&	lnki.Ns_id() != Xow_ns_.Tid__media					// ns is media; never suppress; "src" will use only orig_src; DATE:2014-01-30
 			) {						
-			img_orig_src = img_view_src = Bry_.Empty;				// null out src
+			img_orig_src = img_view_src = BryUtl.Empty;				// null out src
 		}
 
 		// main html build
@@ -155,10 +155,10 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 			}
 		}
 	}
-	private void Write_file_audio(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl) {
+	private void Write_file_audio(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl) {
 		// init
 		int play_btn_width = Get_play_btn_width(lnki.W());
-		byte[] info_btn = lnki.Media_icon() ? html_fmtr.Bld_thumb_part_info(lnki_href) : Bry_.Empty;
+		byte[] info_btn = lnki.Media_icon() ? html_fmtr.Bld_thumb_part_info(lnki_href) : BryUtl.Empty;
 
 		// bld audio_div
 		byte[] audio_div = html_fmtr.Bld_thumb_file_audio
@@ -173,14 +173,14 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		else
 			bfr.Add(audio_div);
 	}
-	private void Write_file_video(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl, byte[] img_view_src, Xof_file_itm xfer_itm) {
+	private void Write_file_video(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl, byte[] img_view_src, Xof_file_itm xfer_itm) {
 		// init
 		int play_btn_width = Get_play_btn_width(xfer_itm.Html_w());
 		boolean video_is_thumb = Xop_lnki_type.Id_defaults_to_thumb(lnki.Lnki_type());
 		xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);
 
 		// bld caption / alt
-		byte[] caption_html = Bry_.Empty, alt_html = Bry_.Empty;
+		byte[] caption_html = BryUtl.Empty, alt_html = BryUtl.Empty;
 		if (video_is_thumb) {
 			caption_html = Bld_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href);
 			alt_html = Bld_alt(BoolUtl.Y, ctx, hctx, src, lnki);
@@ -197,7 +197,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		else
 			bfr.Add(video_div);
 	}
-	private void Write_file_image(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl, byte[] img_view_src, Xof_file_itm xfer_itm
+	private void Write_file_image(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl, byte[] img_view_src, Xof_file_itm xfer_itm
 		, boolean lnki_is_thumbable, int lnki_halign, Xof_ext orig_ext) {
 		// if centered, add <div class="center">; applies to both thumb and full
 		if (lnki_halign == Xop_lnki_align_h_.Center) bfr.Add(Div_center_bgn);
@@ -205,29 +205,29 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		// bld anch_ttl; EX: title="A.png"
 		byte[] anch_ttl = html_wtr.Cfg().Lnki__title()
 			? Bld_anch_title(tmp_bfr, src, lnki, lnki_ttl)	// NOTE: Bld_anch_title should only be called if there is no caption, else refs may not show; DATE:2014-03-05
-			: Bry_.Empty;
+			: BryUtl.Empty;
 
 		// get fmtr; note conditional is for imap, which has its own img_fmtr to put in 'imagemap=""'
 		Xoh_file_fmtr img_fmtr = lnki.Lnki_file_wkr(); if (img_fmtr == null) img_fmtr = html_fmtr;
 
 		// main image build
 		if (lnki_is_thumbable) {	// is "thumb"
-			if (bfr.Len() > 0) bfr.Add_byte_nl();
+			if (bfr.Len() > 0) bfr.AddByteNl();
 
 			// write image_div
-			byte[] alt_html = alt_in_caption ? Bld_alt(BoolUtl.Y, ctx, hctx, src, lnki) : Bry_.Empty;
+			byte[] alt_html = alt_in_caption ? Bld_alt(BoolUtl.Y, ctx, hctx, src, lnki) : BryUtl.Empty;
 			img_fmtr.Add_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, lnki_href, BoolUtl.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anch_ttl
 				, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt
 				, xfer_itm.File_exists() ? Xoh_img_cls_.Tid__thumbimage : Xoh_img_cls_.Tid__none
 				, Xoh_img_cls_.Bry__none);
-			byte[] thumb = tmp_bfr.To_bry_and_clear();
+			byte[] thumb = tmp_bfr.ToBryAndClear();
 			html_fmtr.Add_thumb_core(bfr, hctx.Mode_is_hdump(), lnki_halign_bry, uid, div_width
 				, html_fmtr.Bld_thumb_file_image(thumb, Bld_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href), alt_html)
 				);
 		}
 		else {	// is full
 			if	(	alt_defaults_to_caption
-				&& 	Bry_.Len_eq_0(alt)					// NOTE: if no alt, always use caption for alt; DATE:2013-07-22
+				&& 	BryUtl.IsNullOrEmpty(alt)					// NOTE: if no alt, always use caption for alt; DATE:2013-07-22
 				&& 	!lnki.Alt_exists()					// unless blank alt exists; EX: [[File:A.png|a|alt=]] should have alt of "", not "a" 
 				) {
 				alt = Bld_caption(ctx, Xoh_wtr_ctx.Alt, src, lnki);
@@ -236,9 +236,9 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 			// open "<div class=float>"
 			boolean div_align_exists = false;
 			switch (lnki.Align_h()) {
-				case Xop_lnki_align_h_.Left:	bfr.Add(Div_float_left)	.Add_byte_nl();	div_align_exists = true; break;
-				case Xop_lnki_align_h_.Right:	bfr.Add(Div_float_right).Add_byte_nl();	div_align_exists = true; break;
-				case Xop_lnki_align_h_.None:	bfr.Add(Div_float_none)	.Add_byte_nl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.Left:	bfr.Add(Div_float_left)	.AddByteNl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.Right:	bfr.Add(Div_float_right).AddByteNl();	div_align_exists = true; break;
+				case Xop_lnki_align_h_.None:	bfr.Add(Div_float_none)	.AddByteNl();	div_align_exists = true; break;
 			}
 
 			// init vars
@@ -252,7 +252,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 				// over-ride other vars based on link arg; below should be cleaned up
 				Arg_itm_tkn link_tkn = lnki_link_tkn.Val_tkn();
 				byte[] link_arg = Xoa_ttl.Replace_spaces(link_tkn.Dat_to_bry(src));	// replace spaces with unders, else "/wiki/File:A b.ogg" instead of "A_b.ogg"; DATE:2015-11-27
-				if (Bry_.Has_at_bgn(link_arg, Xop_tkn_.Anchor_byte)) link_arg = Bry_.Add(ctx.Page().Ttl().Page_db(), link_arg);
+				if (BryUtl.HasAtBgn(link_arg, Xop_tkn_.Anchor_byte)) link_arg = BryUtl.Add(ctx.Page().Ttl().Page_db(), link_arg);
 				byte[] link_arg_html = tmp_link_parser.Parse(tmp_bfr, tmp_url, wiki, link_arg, lnki_href);
 				byte[] xowa_title_bry = tmp_link_parser.Html_xowa_ttl();			// NOTE: xowa_title_bry will be link arg; [[File:A.png|link=file:///A.ogg]] -> A.ogg x> A.png
 				boolean a_href_is_file = true;
@@ -272,32 +272,32 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 	}
 	private byte[] Bld_caption_div(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, int uid, byte[] img_orig_src, byte[] lnki_href) {
 		byte[] caption = Bld_caption(ctx, hctx, src, lnki);
-		byte[] magnify_btn = lnki.Media_icon() ? html_fmtr.Bld_thumb_part_magnify(lnki_href, msg_file_enlarge) : Bry_.Empty;
+		byte[] magnify_btn = lnki.Media_icon() ? html_fmtr.Bld_thumb_part_magnify(lnki_href, msg_file_enlarge) : BryUtl.Empty;
 		return html_fmtr.Bld_thumb_part_caption(magnify_btn, caption);
 	}
 	private byte[] Bld_caption(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		return lnki.Caption_exists() 
 			? caption_fmtr.To_bry(ctx, hctx, src, lnki.Caption_val_tkn(), BoolUtl.N, Xoh_lnki_text_fmtr.Null__fmt)
-			: Bry_.Empty;
+			: BryUtl.Empty;
 	}
-	private byte[] Bld_anch_title(Bry_bfr bfr, byte[] src, Xop_lnki_tkn lnki, byte[] lnki_ttl) {
+	private byte[] Bld_anch_title(BryWtr bfr, byte[] src, Xop_lnki_tkn lnki, byte[] lnki_ttl) {
 		if		(	Bitmask_.Has_int(lnki.Lnki_type(), Xop_lnki_type.Id_thumb)
 				||	Bitmask_.Has_int(lnki.Lnki_type(), Xop_lnki_type.Id_frame)			// If the image is a thumb, do not add a title / alt, even if a caption is available
 				)
-			return Bry_.Empty;
+			return BryUtl.Empty;
 		else if	(	Bitmask_.Has_int(lnki.Lnki_type(), Xop_lnki_type.Id_frameless)) {	// If the image is frameless, add the caption as a title / alt. If no caption is available, do not add a title / alt
 		}
 		Xop_tkn_itm capt_tkn = lnki.Caption_tkn();
-		if (capt_tkn == Xop_tkn_null.Null_tkn) return Bry_.Empty; // no caption; return empty; NOTE: do not use lnki as caption; DATE:2013-12-31
+		if (capt_tkn == Xop_tkn_null.Null_tkn) return BryUtl.Empty; // no caption; return empty; NOTE: do not use lnki as caption; DATE:2013-12-31
 
 		// build title="text"
 		bfr.Add(Atr_title);
 		Xoh_lnki_title_bldr.Add(bfr, src, capt_tkn);
-		bfr.Add_byte(AsciiByte.Quote);
-		return bfr.To_bry_and_clear();
+		bfr.AddByte(AsciiByte.Quote);
+		return bfr.ToBryAndClear();
 	}
 	public byte[] Bld_alt(boolean html, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
-		if (!lnki.Alt_exists()) return Bry_.Empty;
+		if (!lnki.Alt_exists()) return BryUtl.Empty;
 		return html 
 			? alt_fmtr.To_bry(ctx, hctx, src, lnki.Alt_tkn().Val_tkn(), BoolUtl.Y, html_fmtr.Fmt_thumb_part_alt())
 			: alt_fmtr.To_bry(ctx, hctx, src, lnki.Alt_tkn().Val_tkn(), BoolUtl.N, Xoh_lnki_text_fmtr.Null__fmt);
@@ -321,10 +321,10 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 	;
 
 	private static final byte[]
-	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")
-	, Div_float_none			= Bry_.new_a7("<div class=\"floatnone\">")
-	, Div_float_left			= Bry_.new_a7("<div class=\"floatleft\">")
-	, Div_float_right			= Bry_.new_a7("<div class=\"floatright\">")
-	, Atr_title					= Bry_.new_a7(" title=\"")
+	  Div_center_bgn			= BryUtl.NewA7("<div class=\"center\">")
+	, Div_float_none			= BryUtl.NewA7("<div class=\"floatnone\">")
+	, Div_float_left			= BryUtl.NewA7("<div class=\"floatleft\">")
+	, Div_float_right			= BryUtl.NewA7("<div class=\"floatright\">")
+	, Atr_title					= BryUtl.NewA7(" title=\"")
 	;
 }

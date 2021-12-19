@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.specials;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*;
 public abstract class Xow_special_wtr__base {
 	public void Bld_page_by_mustache(Xoa_app app, Xoa_page page, Xow_special_page special) {
@@ -30,7 +35,7 @@ public abstract class Xow_special_wtr__base {
 	}
 	protected byte[] Bld_html_body(Io_url addon_dir, gplx.langs.mustaches.Mustache_doc_itm itm) {
 		byte[] tmpl = Io_mgr.Instance.LoadFilBry(this.Get_mustache_fil(addon_dir));
-		return gplx.langs.mustaches.Mustache_wtr_.Write_to_bry(Bry_bfr_.New(), tmpl, itm);
+		return gplx.langs.mustaches.Mustache_wtr_.Write_to_bry(BryWtr.New(), tmpl, itm);
 	}
 
 	protected abstract Io_url Get_addon_dir(Xoa_app app);
@@ -38,6 +43,6 @@ public abstract class Xow_special_wtr__base {
 	protected abstract Mustache_doc_itm	Bld_mustache_root(Xoa_app app);
 	protected abstract void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data data);
 	protected void Handle_invalid(Xoa_app app, Xoa_page page, Xow_special_page special) {
-		new Xopage_html_data(special.Special__meta().Display_ttl(), Bry_.new_a7("Not available")).Apply(page);
+		new Xopage_html_data(special.Special__meta().Display_ttl(), BryUtl.NewA7("Not available")).Apply(page);
 	}
 }

@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views.nightmodes; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+package gplx.xowa.guis.views.nightmodes;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
+import gplx.xowa.guis.views.*;
 import gplx.gfui.controls.elems.*; import gplx.gfui.draws.*;
-import gplx.xowa.specials.xowa.default_tab.*;
 public class Xog_nightmode_mgr implements Gfo_invk {
 	private Xoae_app app;
 	private boolean enabled;
@@ -144,7 +152,7 @@ public class Xog_nightmode_mgr implements Gfo_invk {
 		try {
 			return val == null ? or : ColorAdp_.parse_hex_("#00" + val);	// parse_hex requires leading "#00"
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to parse color; key=~{0} val=~{1} err=~{2}", key, val, Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to parse color; key=~{0} val=~{1} err=~{2}", key, val, ErrUtl.ToStrLog(e));
 			return or;
 		}
 	}

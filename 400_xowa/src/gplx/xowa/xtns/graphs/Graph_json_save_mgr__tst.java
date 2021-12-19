@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.graphs;
-import gplx.Bry_;
-import gplx.String_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.tests.Gfo_test_err_mgr;
 import gplx.core.tests.Gfo_test_itm;
 import gplx.core.tests.Gfo_test_lnr_base;
 import gplx.core.tests.Gfo_test_lnr_itm_cbk;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.files.Xof_file_itm;
@@ -86,14 +86,14 @@ class Graph_json_save_mgr__fxt {
 			fxt.Ctx().Lnki().File_logger_(file_logger);
 
 			// run it
-			byte[] src_as_bry = Bry_.new_u8(src);
+			byte[] src_as_bry = BryUtl.NewU8(src);
 			byte[] actl = json_parser.Save(fxt.Page(), fxt.Ctx(), fxt.Wiki().Domain_bry(), fxt.Page().Ttl().Page_db_as_str(), src_as_bry, 0, src_as_bry.length);
 
 			// verify errs
 			err_mgr.Test();
 
 			// verify output
-			Gftest.Eq__str(expd, actl);
+			GfoTstr.Eq(expd, actl);
 
 			// verify files
 			Graph_save_mgr_itm_cbk cbk = new Graph_save_mgr_itm_cbk(fxt, file_logger);
@@ -113,9 +113,9 @@ class Graph_save_mgr_itm_cbk implements Gfo_test_lnr_itm_cbk {
 	}
 	public void Test_itm(int i, int len, Gfo_test_itm expd_itm, Gfo_test_itm actl_itm) {
 		Xof_file_itm file_itm = fxt.Page().File_queue().Get_at(i);
-		Gftest.Eq__str(String_.new_u8(file_itm.Lnki_ttl()), actl_itm.Get_str("ttl"));
+		GfoTstr.Eq(StringUtl.NewU8(file_itm.Lnki_ttl()), actl_itm.Get_str("ttl"));
 
-		Gfo_test_itm file_logger_itm = (Gfo_test_itm)file_logger.Actl().Get_at(i);
+		Gfo_test_itm file_logger_itm = (Gfo_test_itm)file_logger.Actl().GetAt(i);
 		file_logger_itm.Test_bry("ttl_bry", file_itm.Lnki_ttl());
 	}
 }

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.htmls;
+import gplx.types.basics.utls.BryUtl;
 public class Gfh_atr_itm {
 	public Gfh_atr_itm(byte[] key, byte[] val) {
 		this.key = key;
@@ -21,6 +22,6 @@ public class Gfh_atr_itm {
 	}
 	public byte[] Key() {return key;} private final byte[] key;
 	public byte[] Val() {return val;} private final byte[] val;
-	public static Gfh_atr_itm New(byte[] key, String val) {return new Gfh_atr_itm(key, Bry_.new_u8(val));}
+	public static Gfh_atr_itm New(byte[] key, String val) {return new Gfh_atr_itm(key, BryUtl.NewU8(val));}
 	public static Gfh_atr_itm New(byte[] key, byte[] val) {return new Gfh_atr_itm(key, val);}
 }

@@ -1,6 +1,6 @@
 package gplx.xowa.mediawiki.includes.libs.services;
 
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
@@ -19,55 +19,55 @@ public class XomwServiceContainerTest {
         container.applyWiring(wiring.NewWirings("test1", "test2"));
 
         // hasService -> checks if instantiator exists
-        Gftest.Eq__bool_y(container.hasService("test1"));
-        Gftest.Eq__bool_n(container.hasService("test9"));
+        GfoTstr.EqBoolY(container.hasService("test1"));
+        GfoTstr.EqBoolN(container.hasService("test9"));
 
         // getServiceNames -> gets list of instantiators
-        Gftest.Eq__str(XophpArray.<String>New("test1", "test2").To_str(), container.getServiceNames().To_str());
+        GfoTstr.Eq(XophpArray.<String>New("test1", "test2").To_str(), container.getServiceNames().To_str());
 
         // getService -> creates service
         XomwServiceExample service = (XomwServiceExample)container.getService("test1");
-        Gftest.Eq__str("test1", service.Name());
-        Gftest.Eq__int(0, service.InstanceNumber());
-        Gftest.Eq__obj_or_null(extraInstantiatorArg, service.ExtraInstantiatorArg());
+        GfoTstr.Eq("test1", service.Name());
+        GfoTstr.Eq(0, service.InstanceNumber());
+        GfoTstr.EqObjToStr(extraInstantiatorArg, service.ExtraInstantiatorArg());
 
         // getService again -> retrieves service
         service = (XomwServiceExample)container.getService("test1");
-        Gftest.Eq__int(0, service.InstanceNumber());
+        GfoTstr.Eq(0, service.InstanceNumber());
 
         // resetService + getService -> recreates service
         container.resetService("test1");
         service = (XomwServiceExample)container.getService("test1");
-        Gftest.Eq__int(1, service.InstanceNumber());
+        GfoTstr.Eq(1, service.InstanceNumber());
 
         // peekService -> returns service if created
         service = (XomwServiceExample)container.peekService("test1");
-        Gftest.Eq__int(1, service.InstanceNumber());
+        GfoTstr.Eq(1, service.InstanceNumber());
 
         // peekService -> returns null if not created
-        Gftest.Eq__obj_or_null(null, (XomwServiceExample)container.peekService("test2"));
+        GfoTstr.EqObjToStr(null, (XomwServiceExample)container.peekService("test2"));
 
         // disableService -> disables service
         container.disableService("test1");
 
         // isServiceDisabled -> checks disabled state
-        Gftest.Eq__bool_y(container.isServiceDisabled("test1"));
-        Gftest.Eq__bool_n(container.isServiceDisabled("test2"));
+        GfoTstr.EqBoolY(container.isServiceDisabled("test1"));
+        GfoTstr.EqBoolN(container.isServiceDisabled("test2"));
 
         // resetService -> also reenables service
         container.resetService("test1");
-        Gftest.Eq__bool_n(container.isServiceDisabled("test1"));
+        GfoTstr.EqBoolN(container.isServiceDisabled("test1"));
 
         // redefineService -> redefines instantiator if not called
         container.redefineService("test2", wiring.NewCallback("test2a"));
         service = (XomwServiceExample)container.getService("test2");
-        Gftest.Eq__str("test2a", service.Name());
+        GfoTstr.Eq("test2a", service.Name());
 
         // addServiceManipulator -> adds extra callback
         container.resetService("test2");
         container.addServiceManipulator("test2", manipulator.NewCallback("manip1"));
         service = (XomwServiceExample)container.getService("test2");
-        Gftest.Eq__str("manip1", service.Name());
+        GfoTstr.Eq("manip1", service.Name());
 
         // destroy ->
 

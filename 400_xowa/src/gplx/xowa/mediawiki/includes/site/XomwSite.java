@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.site; import gplx.*;
+package gplx.xowa.mediawiki.includes.site;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.exception.*;
 /**
@@ -288,7 +294,7 @@ public class XomwSite {
 
 		// Malformed URL
 		if (protocol == null) {
-			throw new XomwMWException(String_.Format("failed to parse URL '{0}'", path));
+			throw new XomwMWException(StringUtl.Format("failed to parse URL '{0}'", path));
 		}
 
 		// No schema
@@ -372,7 +378,7 @@ public class XomwSite {
 		}
 
 		if (pageName != null) {
-			url = String_.new_u8(XophpString_.str_replace(Bry_.new_a7("$1"), XophpEncode_.rawurlencode(Bry_.new_u8(pageName)), Bry_.new_u8(url)));
+			url = StringUtl.NewU8(XophpString_.str_replace(BryUtl.NewA7("$1"), XophpEncode_.rawurlencode(BryUtl.NewU8(pageName)), BryUtl.NewU8(url)));
 		}
 
 		return url;
@@ -462,7 +468,7 @@ public class XomwSite {
 	}
 
 	/**
-	* Returns the set @gplx.Internal protected identifier for the site.
+	* Returns the set public identifier for the site.
 	*
 	* @since 1.21
 	*
@@ -473,7 +479,7 @@ public class XomwSite {
 	}
 
 	/**
-	* Sets the @gplx.Internal protected identifier for the site.
+	* Sets the public identifier for the site.
 	* This typically is a primary key in a db table.
 	*
 	* @since 1.21
@@ -638,7 +644,7 @@ public class XomwSite {
 	*/
 	public static XomwSite newForType(String siteType) {
 		String type = (String)XomwDefaultSettings.wgSiteTypes.GetByOrNull(siteType);
-		if (String_.Eq(type, XomwDefaultSettings.wgSiteTypes__MediaWikiSite)) {
+		if (StringUtl.Eq(type, XomwDefaultSettings.wgSiteTypes__MediaWikiSite)) {
 			return new XomwMediaWikiSite();
 		}
 

@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.proofreadPage;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.apps.cfgs.*;
 public class Pp_pages_nde_hdr_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -23,7 +26,7 @@ public class Pp_pages_nde_hdr_tst {
 		fxt.Wiki().Cache_mgr().Page_cache().Free_mem(true);
 		fxt.Wiki().Db_mgr().Load_mgr().Clear(); // must clear; otherwise fails b/c files get deleted, but wiki.data_mgr caches the Xowd_regy_mgr (the .reg file) in memory;
 		fxt.Wiki().Ns_mgr().Add_new(Xowc_xtn_pages.Ns_page_id_default, "Page").Add_new(Xowc_xtn_pages.Ns_index_id_default, "Index").Init();
-		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", String_.Concat
+		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", StringUtl.Concat
 		( "{{#if:{{{value|}}}|value={{{value}}};|value=nil;}}"
 		, "{{#if:{{{current|}}}|current={{{current}}};|}}"
 		, "{{#if:{{{prev|}}}|prev={{{prev}}};|}}"
@@ -37,7 +40,7 @@ public class Pp_pages_nde_hdr_tst {
 	@Test public void Default_to_toc() {	// PURPOSE: default header to "toc" if no "from", "to", "include"; DATE:2014-01-27
 		fxt.Init_page_create("Index:A", "");
 		// only index supplied; add header='toc'
-		fxt.Test_parse_page_wiki_str("<pages index='A'/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A'/>", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;"
 		,	"</p>"
 		,	""
@@ -47,7 +50,7 @@ public class Pp_pages_nde_hdr_tst {
 
 		fxt.Init_page_create("Page:A/1", "A/1");
 		// from specified; don't add toc
-		fxt.Test_parse_page_wiki_str("<pages index='A' from='1'/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' from='1'/>", StringUtl.ConcatLinesNl
 		(	"<p>A/1&#32;"
 		,	"</p>"
 		));
@@ -57,7 +60,7 @@ public class Pp_pages_nde_hdr_tst {
 		fxt.Init_page_create("Page:A/1", "a1");
 		fxt.Init_page_create("Page:A/2", "a2");
 		fxt.Init_page_create("Page:A/3", "a3");
-		fxt.Test_parse_page_wiki_str("<pages index='A' from=2 to=2 header='toc'/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' from=2 to=2 header='toc'/>", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;from=2;to=2;"
 		,	"</p>"
 		,	""
@@ -66,14 +69,14 @@ public class Pp_pages_nde_hdr_tst {
 		));
 	}
 	@Test public void Mainspace_toc() {	// PURPOSE: Mainspace links should be sent to toc; DATE:2014-01-27
-		fxt.Init_page_create("Index:A" , String_.Concat_lines_nl_skip_last
+		fxt.Init_page_create("Index:A" , StringUtl.ConcatLinesNlSkipLast
 		( "[[Page/1]]"
 		, "[[Page/2]]"
 		, "[[Page/3]]"
 		));
 		// next only
 		fxt.Page_ttl_("Page/1");
-		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' />", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/1</a>;next=<a href=\"/wiki/Page/2\">Page/2</a>;"
 		,	"</p>"
 		,	""
@@ -83,7 +86,7 @@ public class Pp_pages_nde_hdr_tst {
 
 		// next and prev
 		fxt.Page_ttl_("Page/2");
-		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' />", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/2</a>;prev=<a href=\"/wiki/Page/1\">Page/1</a>;next=<a href=\"/wiki/Page/3\">Page/3</a>;"
 		,	"</p>"
 		,	""
@@ -93,7 +96,7 @@ public class Pp_pages_nde_hdr_tst {
 
 		// prev only
 		fxt.Page_ttl_("Page/3");
-		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' />", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/3</a>;prev=<a href=\"/wiki/Page/2\">Page/2</a>;"
 		,	"</p>"
 		,	""
@@ -103,7 +106,7 @@ public class Pp_pages_nde_hdr_tst {
 
 		// override current only;
 		fxt.Page_ttl_("Page/2");
-		fxt.Test_parse_page_wiki_str("<pages index='A' current='custom_cur'/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' current='custom_cur'/>", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;current=custom_cur;prev=<a href=\"/wiki/Page/1\">Page/1</a>;next=<a href=\"/wiki/Page/3\">Page/3</a>;"
 		,	"</p>"
 		,	""
@@ -112,7 +115,7 @@ public class Pp_pages_nde_hdr_tst {
 		));
 
 		// override current, prev, next
-		fxt.Test_parse_page_wiki_str("<pages index='A' current='custom_cur' prev='custom_prv' next='custom_nxt'/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' current='custom_cur' prev='custom_prv' next='custom_nxt'/>", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;current=custom_cur;prev=custom_prv;next=custom_nxt;"
 		,	"</p>"
 		,	""
@@ -121,14 +124,14 @@ public class Pp_pages_nde_hdr_tst {
 		));
 	}
 	@Test public void Mainspace_caption() {	// PURPOSE: extract caption; DATE:2014-01-27
-		fxt.Init_page_create("Index:A" , String_.Concat_lines_nl_skip_last
+		fxt.Init_page_create("Index:A" , StringUtl.ConcatLinesNlSkipLast
 		( "[[Page/1|Caption_1]]"
 		, "[[Page/2]]"
 		, "[[Page/3]]"
 		));
 
 		fxt.Page_ttl_("Page/2");
-		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' />", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/2</a>;prev=<a href=\"/wiki/Page/1\">Caption_1</a>;next=<a href=\"/wiki/Page/3\">Page/3</a>;"
 		,	"</p>"
 		,	""
@@ -138,13 +141,13 @@ public class Pp_pages_nde_hdr_tst {
 	}
 	@Test public void Xwiki() {	// PURPOSE: Mainspace links should be sent to toc; DATE:2014-01-27
 		fxt.Init_xwiki_add_wiki_and_user_("commons", "commons.wikimedia.org");
-		fxt.Init_page_create("Index:A" , String_.Concat_lines_nl_skip_last
+		fxt.Init_page_create("Index:A" , StringUtl.ConcatLinesNlSkipLast
 		( "[[Page/1]]"
 		, "[[:commons:File:A.png]]"
 		));
 		// next only
 		fxt.Page_ttl_("Page/1");
-		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' />", StringUtl.ConcatLinesNl
 		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/1</a>;next=<a href=\"/site/commons.wikimedia.org/wiki/File:A.png\">File:A.png</a>;"
 		,	"</p>"
 		,	""
@@ -154,14 +157,14 @@ public class Pp_pages_nde_hdr_tst {
 	}
 	@Test public void Header_is_0() {// PURPOSE: if header is PHP false, ignore; ISSUE#:622 DATE:2019-11-28
 		// fails if TOC is included ("value=0")
-		fxt.Test_parse_page_wiki_str("<pages index='A' include=1 header=0/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' include=1 header=0/>", StringUtl.ConcatLinesNl
 		(	"<p>&#32;"
 		,	"</p>"
 		));
 	}
 	@Test public void Unknown_args() { // PURPOSE:unknown args should be captured; ISSUE#:635; DATE:2020-01-19
 		Io_mgr.Instance.InitEngine_mem(); // NOTE: Init_page_update doesn't actually update, so for now, just reset file_system
-		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", String_.Concat
+		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", StringUtl.Concat
 		( "{{#if:{{{value|}}}|value={{{value}}};|value=nil;}}"
 		, "{{#if:{{{current|}}}|current={{{current}}};|}}"
 		, "{{#if:{{{prev|}}}|prev={{{prev}}};|}}"
@@ -173,7 +176,7 @@ public class Pp_pages_nde_hdr_tst {
 		, "\n\n"
 		));
 		fxt.Init_page_create("Template:Template1", "{{{arg1|missing}}}-xyz");
-		fxt.Test__parse__tmpl_to_html("<pages index=\"A\" from=1 to=1 header=1 arg1=abc/>", String_.Concat_lines_nl
+		fxt.Test__parse__tmpl_to_html("<pages index=\"A\" from=1 to=1 header=1 arg1=abc/>", StringUtl.ConcatLinesNl
 		(	"<p>value=1;from=1;to=1;abc-xyz" // fails if "abc-xyz" is missing
 		,	"</p>"
 		,	""

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.core.lists;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.errs.ErrUtl;
+import org.junit.Test;
 public class Queue_adp_tst {
 	private final Queue_adp_fxt fxt = new Queue_adp_fxt();
 	@Test public void Empty() {
@@ -23,10 +25,9 @@ public class Queue_adp_tst {
 			fxt.Test__dequeue(null, -1);
 			pass = false;
 		} catch (Exception e) {
-			Err_.Noop(e);
 			return;
 		}
-		if (pass) throw Err_.new_wo_type("empty should have failed");
+		if (pass) throw ErrUtl.NewArgs("empty should have failed");
 	}
 	@Test public void Add_1() {
 		fxt.Exec__enqueue("a");
@@ -53,7 +54,7 @@ class Queue_adp_fxt {
 	private final Queue_adp queue = new Queue_adp();
 	public void Exec__enqueue(String s) {queue.Enqueue(s);}
 	public void Test__dequeue(String expd_data, int expd_len) {
-		Gftest.Eq__str(expd_data, (String)queue.Dequeue());
-		Gftest.Eq__int(expd_len , queue.Count());
+		GfoTstr.Eq(expd_data, (String)queue.Dequeue());
+		GfoTstr.Eq(expd_len , queue.Count());
 	}
 }

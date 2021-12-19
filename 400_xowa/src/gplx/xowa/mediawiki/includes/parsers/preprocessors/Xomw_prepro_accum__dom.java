@@ -13,22 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public class Xomw_prepro_accum__dom implements Xomw_prepro_accum {
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public Xomw_prepro_accum__dom(String val) {
 		this.Add_str_literal(val);
 	}
 	public Xomw_prepro_accum__dom Add_str_literal(String val) {
-		bfr.Add_str_u8(val);
+		bfr.AddStrU8(val);
 		return this;
 	}
-	public Bry_bfr Bfr() {return bfr;}
-	public byte[] Bfr_bry() {return bfr.Bfr();}
+	public BryWtr Bfr() {return bfr;}
+	public byte[] Bfr_bry() {return bfr.Bry();}
 	public int Len() {return bfr.Len();}
 	public void Clear() {bfr.Clear();}
 	public Xomw_prepro_accum__dom Add_str_escaped(byte[] src, int bgn, int end) {
-		bfr.Add_bry_escape_html(src, bgn, end);
+		bfr.AddBryEscapeHtml(src, bgn, end);
 		return this;
 	}
 	public Xomw_prepro_accum__dom Add_bry(byte[] val) {
@@ -36,17 +37,17 @@ public class Xomw_prepro_accum__dom implements Xomw_prepro_accum {
 		return this;
 	}
 	public Xomw_prepro_accum__dom Add_bry(byte[] val, int bgn, int end) {
-		bfr.Add_mid(val, bgn, end);
+		bfr.AddMid(val, bgn, end);
 		return this;
 	}
 	public void Del_at_end(int count) {
-		bfr.Del_by(count);
+		bfr.DelBy(count);
 	}
 	public String To_str() {
-		return bfr.To_str();
+		return bfr.ToStr();
 	}
 	public byte[] To_bry() {
-		return bfr.To_bry();
+		return bfr.ToBry();
 	}
 
 	public static final Xomw_prepro_accum__dom Instance = new Xomw_prepro_accum__dom("");

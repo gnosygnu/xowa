@@ -13,15 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*;
-import gplx.core.btries.*; import gplx.langs.htmls.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.hieros;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.errs.ErrUtl;
 class Hiero_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private final Btrie_rv trv = new Btrie_rv();
 	private List_adp blocks = List_adp_.New();
 	private Hiero_block cur_block;
-	private Bry_bfr cur_tkn = Bry_bfr_.Reset(16);
+	private BryWtr cur_tkn = BryWtr.NewAndReset(16);
 	public Hiero_block[] Parse(byte[] src, int bgn, int end) {
 		synchronized (blocks) { // TS:needed b/c blocks, cur_block, etc are member vars DATE:2017-05-26
 			blocks.Clear();
@@ -41,8 +49,8 @@ class Hiero_parser {
 					int new_pos = trv.Pos();
 					switch (itm.Tid()) {
 						case Hiero_parser_itm.Tid_comment:
-							int end_comm = Bry_find_.Find_fwd(src, Gfh_tag_.Comm_end, new_pos, end);
-							if (end_comm == Bry_find_.Not_found)	// --> not found; for now, ignore <!--
+							int end_comm = BryFind.FindFwd(src, Gfh_tag_.Comm_end, new_pos, end);
+							if (end_comm == BryFind.NotFound)	// --> not found; for now, ignore <!--
 								pos = new_pos;
 							else
 								pos = end_comm + Gfh_tag_.Comm_end_len;
@@ -59,7 +67,7 @@ class Hiero_parser {
 						case Hiero_parser_itm.Tid_tkn_spr:
 							New_token(itm);
 							break;
-						default: throw Err_.new_unhandled(itm.Tid());	// should never happen
+						default: throw ErrUtl.NewUnhandled(itm.Tid());	// should never happen
 					}
 					pos = new_pos;
 				}
@@ -76,8 +84,8 @@ class Hiero_parser {
 		}
 	}
 	private void New_token(Hiero_parser_itm itm) {
-		if (cur_tkn.Len_gt_0())
-			cur_block.Add(cur_tkn.To_bry_and_clear());
+		if (cur_tkn.HasSome())
+			cur_block.Add(cur_tkn.ToBryAndClear());
 		if (itm != null)
 			cur_block.Add(itm.Key());
 	}
@@ -87,21 +95,21 @@ class Hiero_parser {
 	}
 	private void Dot() {
 		if (cur_tkn.Eq(AsciiByte.Dot)) {		// is "."
-			cur_tkn.Add_byte(AsciiByte.Dot);	// make ".."
+			cur_tkn.AddByte(AsciiByte.Dot);	// make ".."
 			this.New_block();
 		}
 		else {
 			this.New_block();
-			cur_tkn.Add_byte(AsciiByte.Dot);	// make "."; note that New_block clears tkn
+			cur_tkn.AddByte(AsciiByte.Dot);	// make "."; note that New_block clears tkn
 		}
 	}
 	private void New_char(byte b) {
 		if (b == AsciiByte.Dot) {				// is "."; NOTE: never occurs; should always hit dot block; transcribed literally from MW
 			this.New_block();
-			this.cur_tkn.Add_byte(b);			// $this->token = $char;
+			this.cur_tkn.AddByte(b);			// $this->token = $char;
 		}
 		else
-			this.cur_tkn.Add_byte(b);			// $this->token .= $char;
+			this.cur_tkn.AddByte(b);			// $this->token .= $char;
 	}
 	public void Init() {
 		Init_itms(Hiero_parser_itm.Tid_block_spr, " ", "-", "\t", "\n", "\r");
@@ -114,9 +122,9 @@ class Hiero_parser {
 		int keys_len = keys.length;
 		for (int i = 0; i < keys_len; i++) {
 			String key_str = keys[i];
-			byte[] key_bry = Bry_.new_u8(key_str);
+			byte[] key_bry = BryUtl.NewU8(key_str);
 			Hiero_parser_itm itm = new Hiero_parser_itm(tid, key_bry);
-			trie.Add_obj(key_bry, itm);
+			trie.AddObj(key_bry, itm);
 		}
 	}
 }
@@ -129,6 +137,6 @@ class Hiero_parser_itm {
 class Hiero_block {
 	private List_adp list = List_adp_.New();
 	public int Len() {return list.Len();}
-	public byte[] Get_at(int i) {return (byte[])list.Get_at(i);}
+	public byte[] Get_at(int i) {return (byte[])list.GetAt(i);}
 	public void Add(byte[] v) {list.Add(v);}
 }

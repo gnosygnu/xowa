@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.utils;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xop_fxt;
@@ -75,24 +75,24 @@ class Xop_redirect_mgr_fxt {
 		fxt.Init_page_create(tmpl_ttl_str, tmpl_wtxt_str);								// create redirect_src
 		fxt.Init_page_create(redirect_ttl, "test");										// create redirect_trg
 		fxt.Test_parse_page_tmpl_tkn("{{" + tmpl_ttl_str + "}}");						// parse {{redirect_src}}
-		Xoa_ttl tmpl_ttl = Xoa_ttl.Parse(fxt.Wiki(), Bry_.new_u8(tmpl_ttl_str));
+		Xoa_ttl tmpl_ttl = Xoa_ttl.Parse(fxt.Wiki(), BryUtl.NewU8(tmpl_ttl_str));
 		Xot_defn_tmpl defn_tmpl = (Xot_defn_tmpl)fxt.Wiki().Cache_mgr().Defn_cache().Get_by_key(tmpl_ttl.Page_db());	// get defn (which parse should have created)
-		Tfds.Eq(expd_frame_ttl, String_.new_u8(defn_tmpl.Frame_ttl()));				// check frame_ttl
+		GfoTstr.EqObj(expd_frame_ttl, StringUtl.NewU8(defn_tmpl.Frame_ttl()));				// check frame_ttl
 	}
 	public void Test_redirect(String raw_str, String expd_str) {
 		Xop_redirect_mgr redirect_mgr = fxt.Ctx().Wiki().Redirect_mgr();
 		redirect_mgr.Clear();
-		byte[] raw_bry = Bry_.new_u8(raw_str);
+		byte[] raw_bry = BryUtl.NewU8(raw_str);
 		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(raw_bry);
-		byte[] actl_bry = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt();
-		Tfds.Eq(expd_str, String_.new_u8(actl_bry));
+		byte[] actl_bry = actl_ttl == null ? BryUtl.Empty : actl_ttl.Full_txt();
+		GfoTstr.EqObj(expd_str, StringUtl.NewU8(actl_bry));
 	}
 	public void Test__redirected_html(String page_str, String expd_str) {
 		gplx.xowa.wikis.pages.redirects.Xopg_redirect_mgr redirect_mgr = new gplx.xowa.wikis.pages.redirects.Xopg_redirect_mgr();
-		Xoa_ttl ttl = fxt.Wiki().Ttl_parse(Bry_.new_u8(page_str));
+		Xoa_ttl ttl = fxt.Wiki().Ttl_parse(BryUtl.NewU8(page_str));
 		Xoa_url url = Xoa_url.New(fxt.Wiki(), ttl);
-		redirect_mgr.Itms__add__article(url, ttl, Bry_.Empty);
+		redirect_mgr.Itms__add__article(url, ttl, BryUtl.Empty);
 		byte[] actl_bry = Xop_redirect_mgr.Bld_redirect_msg(fxt.App(), fxt.Wiki(), redirect_mgr);
-		Tfds.Eq_str(expd_str, String_.new_u8(actl_bry));
+		GfoTstr.Eq(expd_str, StringUtl.NewU8(actl_bry));
 	}
 }

@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.wms.apis.revisions; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.wms.*; import gplx.xowa.apps.wms.apis.*;
+package gplx.xowa.apps.wms.apis.revisions;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDate;
+import gplx.xowa.*;
+import gplx.xowa.apps.wms.apis.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.files.downloads.*;
 public abstract class Xowm_revision_base {
 }
 class Xowm_revision_wmf extends Xowm_revision_base {
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	private final Json_parser json_parser = new Json_parser();
 	public Xowm_revn_data Get_revn_or_null(Xof_download_wkr download_wkr, Xow_wiki wiki, Xoa_ttl page_ttl) {
 		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) return null;
@@ -38,14 +43,14 @@ class Xowm_revision_wmf extends Xowm_revision_base {
 //			page.Page_fetcher_(this);
 //			wiki.Parser_mgr().Parse(page, true);
 	}
-	private byte[] Download(Bry_bfr bfr, Xof_download_wkr download_wkr, byte[] wiki_domain, byte[] ttl_full_db) {
+	private byte[] Download(BryWtr bfr, Xof_download_wkr download_wkr, byte[] wiki_domain, byte[] ttl_full_db) {
 		// build api; EX: "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=ids|timestamp|content&titles=Main%20Page
 		Xowm_api_bldr.Bld_bgn(bfr, wiki_domain);
-		bfr.Add_str_a7("action=query&prop=revisions&rvprop=ids|timestamp|content&titles=");
+		bfr.AddStrA7("action=query&prop=revisions&rvprop=ids|timestamp|content&titles=");
 		bfr.Add(ttl_full_db);
 
 		// download bry
-		return download_wkr.Download_xrg().Exec_as_bry(bfr.To_str_and_clear());
+		return download_wkr.Download_xrg().Exec_as_bry(bfr.ToStrAndClear());
 	}
 	private Xowm_revn_data Parse_json(byte[] wiki_domain, byte[] json) {
 		Json_doc jdoc = json_parser.Parse(json);
@@ -60,11 +65,11 @@ class Xowm_revision_wmf extends Xowm_revision_base {
 		// get revn_data
 		Json_nde revn_nde = page_nde.Get_as_nde("revisions");
 		int revn_id = revn_nde.Get_as_int("revid");
-		DateAdp revn_time = revn_nde.Get_as_date_by_utc("timestamp");
+		GfoDate revn_time = revn_nde.Get_as_date_by_utc("timestamp");
 		byte[] revn_text = revn_nde.Get_as_bry("*");
 		return new Xowm_revn_data(wiki_domain, page_id, page_ns, page_ttl, revn_id, revn_time, revn_text);
 	}
-	private final byte[] Path__query = Bry_.new_a7("query"), Path__pages = Bry_.new_a7("pages");
+	private final byte[] Path__query = BryUtl.NewA7("query"), Path__pages = BryUtl.NewA7("pages");
 }
 /*
 {

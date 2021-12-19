@@ -14,12 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.htmls.utls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.langs.htmls.Gfh_utl;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xow_wiki;
@@ -28,7 +27,7 @@ import gplx.xowa.htmls.hrefs.Xoh_href_;
 import gplx.xowa.htmls.hrefs.Xoh_href_wtr;
 public class Xoh_lnki_bldr {
 	private final Xoa_app app; private final Xoh_href_wtr href_wtr; private final byte[] img_root_dir;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	private byte[] href, title, id, caption;
 	private byte[] img_rel_path; private int img_w, img_h; private boolean img_pos_is_left;
 	public Xoh_lnki_bldr(Xoa_app app, Xoh_href_wtr href_wtr) {
@@ -45,11 +44,11 @@ public class Xoh_lnki_bldr {
 	public Xoh_lnki_bldr Href_(Xow_wiki wiki, byte[] bry) {return Href_(wiki.Domain_bry(), wiki.Ttl_parse(bry));}
 	public Xoh_lnki_bldr Href_(byte[] domain_bry, Xoa_ttl ttl) {
 		href_wtr.Build_to_bfr(tmp_bfr, app, Xoh_wtr_ctx.Popup, domain_bry, ttl);
-		this.href = tmp_bfr.To_bry_and_clear();
+		this.href = tmp_bfr.ToBryAndClear();
 		return this;
 	}
 	public Xoh_lnki_bldr Href_wo_escape_(byte[] domain_bry, byte[] v) {
-		this.href = Bry_.Add(Xoh_href_.Bry__site, domain_bry, Xoh_href_.Bry__wiki, v);
+		this.href = BryUtl.Add(Xoh_href_.Bry__site, domain_bry, Xoh_href_.Bry__wiki, v);
 		return this;
 	}
 	public Xoh_lnki_bldr Title_(byte[] title) {
@@ -71,26 +70,26 @@ public class Xoh_lnki_bldr {
 	public Xoh_lnki_bldr Caption_direct_(byte[] v) {this.caption = v; return this;}
 	public byte[] Bld_to_bry() {
 		Bld(tmp_bfr);
-		byte[] rv = tmp_bfr.To_bry_and_clear();
+		byte[] rv = tmp_bfr.ToBryAndClear();
 		this.Clear();
 		return rv;
 	}
-	public void Bld(Bry_bfr bfr) {
-		bfr.Add_str_a7("<a href='").Add(href);
+	public void Bld(BryWtr bfr) {
+		bfr.AddStrA7("<a href='").Add(href);
 		if (title != null)
-			bfr.Add_str_a7("' title='").Add(title);
+			bfr.AddStrA7("' title='").Add(title);
 		if (id != null)
-			bfr.Add_str_a7("' id='").Add(id);
-		bfr.Add_str_a7("'>");
+			bfr.AddStrA7("' id='").Add(id);
+		bfr.AddStrA7("'>");
 		if ( img_pos_is_left && img_rel_path != null)
 			Bld_img(bfr);
 		if (caption != null)
 			bfr.Add(caption);
 		if (!img_pos_is_left && img_rel_path != null)
 			Bld_img(bfr);
-		bfr.Add_str_a7("</a>");
+		bfr.AddStrA7("</a>");
 	}
-	private void Bld_img(Bry_bfr bfr) {
-		bfr.Add_str_a7("<img src='").Add(img_root_dir).Add(img_rel_path).Add_str_a7("' width='").Add_int_variable(img_w).Add_str_a7("' height='").Add_int_variable(img_h).Add_str_a7("'/>");
+	private void Bld_img(BryWtr bfr) {
+		bfr.AddStrA7("<img src='").Add(img_root_dir).Add(img_rel_path).AddStrA7("' width='").AddIntVariable(img_w).AddStrA7("' height='").AddIntVariable(img_h).AddStrA7("'/>");
 	}
 }

@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.aria2; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.aria2;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.bldrs.wms.dumps.*;
 public class Aria2_lib_mgr implements Gfo_invk {
 	public Process_adp Lib() {return lib;} private Process_adp lib = new Process_adp();
 	public void Init_by_app(Xoae_app app) {
 		Xoa_fsys_eval cmd_eval = app.Url_cmd_eval();
-		Process_adp.ini_(this, app.Usr_dlg(), lib, cmd_eval, Process_adp.Run_mode_sync_block, Int_.Max_value
+		Process_adp.ini_(this, app.Usr_dlg(), lib, cmd_eval, Process_adp.Run_mode_sync_block, IntUtl.MaxValue
 		, "~{<>bin_plat_dir<>}aria2" + Op_sys.Cur().Fsys_dir_spr_str() +  "aria2c"
 		, Lib_args_fmt
 		, "wiki_abrv", "wiki_date", "wiki_type");
@@ -36,7 +43,7 @@ public class Aria2_lib_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 	}
 	private static final String Invk_lib = "lib";
-	private static final String Lib_args_fmt = String_.Concat
+	private static final String Lib_args_fmt = StringUtl.Concat
 	( "--max-connection-per-server=2"
 	, " --max-concurrent-downloads=20"
 	, " --split=4"

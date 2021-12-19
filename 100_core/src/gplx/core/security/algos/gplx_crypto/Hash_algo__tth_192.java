@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,26 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.algos.gplx_crypto; import gplx.*;
+package gplx.core.security.algos.gplx_crypto;
 import gplx.core.security.algos.*;
 import gplx.core.consoles.*; import gplx.core.ios.streams.*; /*IoStream*/
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
 public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 	public String Key() {return KEY;} public static final String KEY = "tth192";
 	public Hash_algo Clone_hash_algo() {return new Hash_algo__tth_192();}
 	public int BlockSize() {return blockSize;} public void BlockSize_set(int v) {blockSize = v;} int blockSize = 1024;
-	public void Update_digest(byte[] src, int bgn, int end) {throw Err_.new_unimplemented();}
-	public byte[] To_hash_bry() {throw Err_.new_unimplemented();}
+	public void Update_digest(byte[] src, int bgn, int end) {throw ErrUtl.NewUnimplemented();}
+	public byte[] To_hash_bry() {throw ErrUtl.NewUnimplemented();}
 	public String Calc_hash_w_prog_as_str(IoStream stream, Console_adp dialog) {
 		int leafCount = (int)(stream.Len() / blockSize);
 		HashDlgWtr dialogWtr = HashDlgWtr_.Current;
 		dialogWtr.Bgn(dialog, stream.Url(), CalcWorkUnits(stream.Len()));
-		if (stream.Len() % blockSize > 0)	// if stream.length is not multiple of blockSize, add another leaf to hold leftover bytes
-			leafCount++;						
-		else if (stream.Len() == 0)		// if stream.length == 0, still allocate one leaf
+		if (stream.Len() % blockSize > 0)    // if stream.length is not multiple of blockSize, add another leaf to hold leftover bytes
+			leafCount++;                        
+		else if (stream.Len() == 0)        // if stream.length == 0, still allocate one leaf
 			leafCount = 1;
 
-		hashMain = new byte[(leafCount / 2) + 1][];	// / 2 b/c HashAllBytes looks at pairs of slots; + 1 to avoid truncation
+		hashMain = new byte[(leafCount / 2) + 1][];    // / 2 b/c HashAllBytes looks at pairs of slots; + 1 to avoid truncation
 		hashMainCount = 0;
 		HashAllBytes(dialogWtr, stream, leafCount);
 		byte[] rv = HashAllHashes(dialogWtr);
@@ -44,7 +48,7 @@ public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 
 		int dataSize = stream.Read(blockA, 0, blockSize); // if (dataSize < BlockSize) return (CalcHash_leaf(ShrinkArray(blockA, dataSize))); // TODO_OLD: reinstate?
 		dataSize = stream.Read(blockB, 0, blockSize);
-		if (dataSize < blockSize) blockB = ShrinkArray(blockB, dataSize);	// shrink array to match data size (occurs at end of stream, when lastBytesCount < BlockSize)
+		if (dataSize < blockSize) blockB = ShrinkArray(blockB, dataSize);    // shrink array to match data size (occurs at end of stream, when lastBytesCount < BlockSize)
 		return CalcHash_branch(CalcHash_leaf(blockA, 0), CalcHash_leaf(blockB, 1));
 	}
 	void HashAllBytes(HashDlgWtr dialogWtr, IoStream stream, int leafCount) {
@@ -54,10 +58,10 @@ public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 			hashMain[hashMainCount++] = CalcHash_next(stream);
 			dialogWtr.Do(2);
 		}
-		if (leafCount % 2 == 1) {												// odd number of leaves => hash last leaf (since it was never in a pair)
+		if (leafCount % 2 == 1) {                                                // odd number of leaves => hash last leaf (since it was never in a pair)
 			byte[] block = new byte[blockSize];
 			int dataSize = stream.Read(block, 0 , blockSize);
-			if (dataSize < blockSize) block = ShrinkArray(block,dataSize);		// shrink array to match data size (occurs at end of stream, when lastBytesCount < BlockSize)
+			if (dataSize < blockSize) block = ShrinkArray(block,dataSize);        // shrink array to match data size (occurs at end of stream, when lastBytesCount < BlockSize)
 
 			hashMain[hashMainCount++] = CalcHash_leaf(block, 0);
 			dialogWtr.Do(1);
@@ -66,29 +70,29 @@ public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 	}
 	byte[] HashAllHashes(HashDlgWtr dialogWtr) {
 		int currIdx = 0, lastIdx = hashMainCount - 1, reuseIdx = 0;
-		while (currIdx < lastIdx) {											// calc till 1 is left;
-			while (currIdx < lastIdx) {										// calc till 1 is left; EX: 8 slots; loop1 calcs 8; makes 4; loop0 restarts; loop1 calcs 4; makes 2; etc..
+		while (currIdx < lastIdx) {                                            // calc till 1 is left;
+			while (currIdx < lastIdx) {                                        // calc till 1 is left; EX: 8 slots; loop1 calcs 8; makes 4; loop0 restarts; loop1 calcs 4; makes 2; etc..
 				byte[] hashA = hashMain[currIdx++];
-				byte[] hashB = hashMain[currIdx++];						
+				byte[] hashB = hashMain[currIdx++];                        
 				hashMain[reuseIdx++] = CalcHash_branch(hashA, hashB);
 				dialogWtr.Do(2);
-			}				
-			if (currIdx == lastIdx)											// NOTE: currIdx == lastIdx only when odd number of leaves
+			}
+			if (currIdx == lastIdx)                                            // NOTE: currIdx == lastIdx only when odd number of leaves
 				hashMain[reuseIdx++] = hashMain[currIdx++];
-//				for (int j = reuseIdx; j < lastIdx; j++)						// PERF: free unused slots (may not be necessary)
-//					hashMain[j] = null;
+//                for (int j = reuseIdx; j < lastIdx; j++)                        // PERF: free unused slots (may not be necessary)
+//                    hashMain[j] = null;
 			lastIdx = reuseIdx - 1;
 			currIdx = 0;
 			reuseIdx = 0;
 		};
 		dialogWtr.End();
-  			return (byte[])hashMain[lastIdx];									// return last hash as root hash
+			return (byte[])hashMain[lastIdx];                                    // return last hash as root hash
 	}
 	byte[] CalcHash_branch(byte[] blockA, byte[] blockB) {
 		// gen array: [0x01] + [blockA] + [blockB]
 		if (branchRv == null || branchRv.length != blockA.length + blockB.length + 1)
 			branchRv = new byte[blockA.length + blockB.length + 1];
-		branchRv[0] = 0x01;		// branch hash mark.
+		branchRv[0] = 0x01;        // branch hash mark.
 		ArrayUtl.CopyTo(blockA, branchRv, 1);
 		ArrayUtl.CopyTo(blockB, branchRv, blockA.length + 1);
 		return CalcHash(branchRv);
@@ -109,7 +113,7 @@ public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 			rv = leaf1;
 		}
 
-		rv[0] = 0x00;		// leaf hash mark.
+		rv[0] = 0x00;        // leaf hash mark.
 		ArrayUtl.CopyTo(raw, rv, 1);
 		return CalcHash(rv);
 	}
@@ -128,7 +132,7 @@ public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 		int phase1 = leafCount;
 		if (leafCount == 0) phase1 = 1;
 		else if (streamLength % blockSize != 0) phase1++;
-		int phase2 = phase1 <= 1 ? 0 : phase1 - 1;	// see note
+		int phase2 = phase1 <= 1 ? 0 : phase1 - 1;    // see note
 		return phase1 + phase2;
 	}
 	Tiger192 algo = new Tiger192();
@@ -160,19 +164,19 @@ class HashDlgWtrDefault implements HashDlgWtr {
 		current += increment;
 		int percentage = (current * 100) / total;
 		if (percentage <= lastPercentage) return;
-		dialog.Write_tmp(String_.LimitToFirst(p, dialog.Chars_per_line_max()) + Int_.To_str(percentage) + "%");
-		lastPercentage = percentage;			
+		dialog.Write_tmp(StringUtl.LimitToFirst(p, dialog.Chars_per_line_max()) + IntUtl.ToStr(percentage) + "%");
+		lastPercentage = percentage;            
 	}
 	public void End() {}
 	public void Fail(IoStream stream) {
-		//			stream.Dispose();
+		//            stream.Dispose();
 	}
 	Console_adp dialog;
 	public static HashDlgWtrDefault new_() {return new HashDlgWtrDefault();}
 }
 class Tiger192 extends BaseHash {
 	public void Initialize() {
-		this.resetContext();		
+		this.resetContext();        
 	}
 	public byte[] ComputeHash(byte[] input) {
 		this.update(input, 0, input.length);
@@ -200,13 +204,13 @@ class Tiger192 extends BaseHash {
 
 	protected byte[] getResult() {
 		return new byte[] {
-			(byte) a		  , (byte)(a >>>  8), (byte)(a >>> 16),
+			(byte) a          , (byte)(a >>>  8), (byte)(a >>> 16),
 			(byte)(a >>> 24), (byte)(a >>> 32), (byte)(a >>> 40),
 			(byte)(a >>> 48), (byte)(a >>> 56),
-			(byte) b		  , (byte)(b >>>  8), (byte)(b >>> 16),
+			(byte) b          , (byte)(b >>>  8), (byte)(b >>> 16),
 			(byte)(b >>> 24), (byte)(b >>> 32), (byte)(b >>> 40),
 			(byte)(b >>> 48), (byte)(b >>> 56),
-			(byte) c		  , (byte)(c >>>  8), (byte)(c >>> 16),
+			(byte) c          , (byte)(c >>>  8), (byte)(c >>> 16),
 			(byte)(c >>> 24), (byte)(c >>> 32), (byte)(c >>> 40),
 			(byte)(c >>> 48), (byte)(c >>> 56)
 		};
@@ -220,35 +224,35 @@ class Tiger192 extends BaseHash {
 	protected void transform(byte[] in, int offset) {
 		long x0, x1, x2, x3, x4, x5, x6, x7;
 
-		x0 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x0 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset++] & 0xFF) << 56);
-		x1 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x1 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset++] & 0xFF) << 56);
-		x2 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x2 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset++] & 0xFF) << 56);
-		x3 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x3 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset++] & 0xFF) << 56);
-		x4 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x4 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset++] & 0xFF) << 56);
-		x5 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x5 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset++] & 0xFF) << 56);
-		x6 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x6 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset++] & 0xFF) << 56);
-		x7 = ((long) in[offset++] & 0xFF)		  | ((long)(in[offset++] & 0xFF) <<  8)
+		x7 = ((long) in[offset++] & 0xFF)          | ((long)(in[offset++] & 0xFF) <<  8)
 			| ((long)(in[offset++] & 0xFF) << 16) | ((long)(in[offset++] & 0xFF) << 24)
 			| ((long)(in[offset++] & 0xFF) << 32) | ((long)(in[offset++] & 0xFF) << 40)
 			| ((long)(in[offset++] & 0xFF) << 48) | ((long)(in[offset  ] & 0xFF) << 56);
@@ -259,51 +263,51 @@ class Tiger192 extends BaseHash {
 		// pass(aa, bb, cc, 5) ::=
 		cc ^= x0;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 5;
 		aa ^= x1;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 5;
 		bb ^= x2;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 5;
 		cc ^= x3;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 5;
 		aa ^= x4;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 5;
 		bb ^= x5;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 5;
 		cc ^= x6;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 5;
 		aa ^= x7;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 5;
 
 		// key_schedule ::=
@@ -327,51 +331,51 @@ class Tiger192 extends BaseHash {
 		// pass(cc, aa, bb, 7) ::=
 		bb ^= x0;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 7;
 		cc ^= x1;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 7;
 		aa ^= x2;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 7;
 		bb ^= x3;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 7;
 		cc ^= x4;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 7;
 		aa ^= x5;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 7;
 		bb ^= x6;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 7;
 		cc ^= x7;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 7;
 
 		// key_schedule ::=
@@ -395,51 +399,51 @@ class Tiger192 extends BaseHash {
 		// pass(bb,cc,aa,9) ::=
 		aa ^= x0;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 9;
 		bb ^= x1;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 9;
 		cc ^= x2;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 9;
 		aa ^= x3;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 9;
 		bb ^= x4;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 9;
 		cc ^= x5;
 		aa -= T1[(int) cc & 0xff] ^ T2[(int)(cc >> 16) & 0xff]
-			 ^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
+				^ T3[(int)(cc >> 32) & 0xff] ^ T4[(int)(cc >> 48) & 0xff];
 		bb += T4[(int)(cc >>  8) & 0xff] ^ T3[(int)(cc >> 24) & 0xff]
-			 ^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
+				^ T2[(int)(cc >> 40) & 0xff] ^ T1[(int)(cc >> 56) & 0xff];
 		bb *= 9;
 		aa ^= x6;
 		bb -= T1[(int) aa & 0xff] ^ T2[(int)(aa >> 16) & 0xff]
-			 ^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
+				^ T3[(int)(aa >> 32) & 0xff] ^ T4[(int)(aa >> 48) & 0xff];
 		cc += T4[(int)(aa >>  8) & 0xff] ^ T3[(int)(aa >> 24) & 0xff]
-			 ^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
+				^ T2[(int)(aa >> 40) & 0xff] ^ T1[(int)(aa >> 56) & 0xff];
 		cc *= 9;
 		bb ^= x7;
 		cc -= T1[(int) bb & 0xff] ^ T2[(int)(bb >> 16) & 0xff]
-			 ^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
+				^ T3[(int)(bb >> 32) & 0xff] ^ T4[(int)(bb >> 48) & 0xff];
 		aa += T4[(int)(bb >>  8) & 0xff] ^ T3[(int)(bb >> 24) & 0xff]
-			 ^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
+				^ T2[(int)(bb >> 40) & 0xff] ^ T1[(int)(bb >> 56) & 0xff];
 		aa *= 9;
 
 		// feedforward ::=
@@ -728,17 +732,17 @@ class Tiger192 extends BaseHash {
 		0xBF6C70E5F776CBB1L, 0x411218F2EF552BEDL, 0xCB0C0708705A36A3L, 0xE74D14754F986044L,
 		0xCD56D9430EA8280EL, 0xC12591D7535F5065L, 0xC83223F1720AEF96L, 0xC3A0396F7363A51FL
 	};
-	protected static Boolean valid;		// The cached self-test result.
+	protected static Boolean valid;        // The cached self-test result.
 	
-	protected long a, b, c;	// The context.
+	protected long a, b, c;    // The context.
 
 	public Tiger192() {super("tiger192", HASH_SIZE, BLOCK_SIZE);}
 
 	/**
-	 * Private copying constructor for cloning.
-	 *
-	 * @param that The instance being cloned.
-	 */
+		* Private copying constructor for cloning.
+		*
+		* @param that The instance being cloned.
+		*/
 	private Tiger192(Tiger192 that) {
 		this();
 		this.a = that.a;
@@ -838,12 +842,12 @@ abstract class BaseHash {
 	// -------------------------------------------------------------------------
 
 	/**
-	 * <p>Trivial constructor for use by concrete subclasses.</p>
-	 *
-	 * @param name the canonical name prefix of this instance.
-	 * @param hashSize the block size of the output in bytes.
-	 * @param blockSize the block size of the internal transform.
-	 */
+		* <p>Trivial constructor for use by concrete subclasses.</p>
+		*
+		* @param name the canonical name prefix of this instance.
+		* @param hashSize the block size of the output in bytes.
+		* @param blockSize the block size of the internal transform.
+		*/
 	protected BaseHash(String name, int hashSize, int blockSize) {
 		super();
 
@@ -929,31 +933,31 @@ abstract class BaseHash {
 	public abstract Object clone();
 
 	/**
-	 * <p>Returns the byte array to use as padding before completing a hash
-	 * operation.</p>
-	 *
-	 * @return the bytes to pad the remaining bytes in the buffer before
-	 * completing a hash operation.
-	 */
+		* <p>Returns the byte array to use as padding before completing a hash
+		* operation.</p>
+		*
+		* @return the bytes to pad the remaining bytes in the buffer before
+		* completing a hash operation.
+		*/
 	protected abstract byte[] padBuffer();
 
 	/**
-	 * <p>Constructs the result from the contents of the current context.</p>
-	 *
-	 * @return the output of the completed hash operation.
-	 */
+		* <p>Constructs the result from the contents of the current context.</p>
+		*
+		* @return the output of the completed hash operation.
+		*/
 	protected abstract byte[] getResult();
 
 	/** Resets the instance for future re-use. */
 	protected abstract void resetContext();
 
 	/**
-	 * <p>The block digest transformation per se.</p>
-	 *
-	 * @param in the <i>blockSize</i> long block, as an array of bytes to digest.
-	 * @param offset the index where the data to digest is located within the
-	 * input buffer.
-	 */
+		* <p>The block digest transformation per se.</p>
+		*
+		* @param in the <i>blockSize</i> long block, as an array of bytes to digest.
+		* @param offset the index where the data to digest is located within the
+		* input buffer.
+		*/
 	protected abstract void transform(byte[] in, int offset);
 }
 
@@ -1000,7 +1004,7 @@ abstract class BaseHash {
 //do so, delete this exception statement from your version.
 //----------------------------------------------------------------------------
 /**
- * <p>A base abstract class to facilitate hash implementations.</p>
- *
- * @version $Revision: 1.8 $
- */
+	* <p>A base abstract class to facilitate hash implementations.</p>
+	*
+	* @version $Revision: 1.8 $
+	*/

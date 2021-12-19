@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.history;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xog_history_stack_tst {		
 	@Before public void init() {fxt.Clear();} private Xog_history_stack_fxt fxt = new Xog_history_stack_fxt();
@@ -47,14 +51,14 @@ class Xog_history_stack_fxt {
 	}	private Xoae_app app; private Xowe_wiki wiki; private Xog_history_stack stack = new Xog_history_stack();
 	public Xog_history_stack_fxt Test_cur(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
-		String actl = page == null ? null : String_.new_u8(page.Page());
-		Tfds.Eq(expd, actl, "cur");
+		String actl = page == null ? null : StringUtl.NewU8(page.Page());
+		GfoTstr.EqObj(expd, actl, "cur");
 		return this;
 	}
 	public Xog_history_stack_fxt Test_cur_qargs(String expd) {
 		Xog_history_itm page = stack.Cur_itm();
-		String actl = page == null ? null : String_.new_u8(page.Qarg());
-		Tfds.Eq(expd, actl, "cur_qargs");
+		String actl = page == null ? null : StringUtl.NewU8(page.Qarg());
+		GfoTstr.EqObj(expd, actl, "cur_qargs");
 		return this;
 	}
 	public Xog_history_stack_fxt Exec_go_bwd() {stack.Go_bwd(); return this;}
@@ -68,16 +72,16 @@ class Xog_history_stack_fxt {
 		return this;
 	}
 	public Xog_history_stack_fxt Exec_add_one(String ttl_str, String arg_str) {
-		byte[] ttl_bry = Bry_.new_u8(ttl_str);
+		byte[] ttl_bry = BryUtl.NewU8(ttl_str);
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 		Xoae_page page = Xoae_page.New_test(wiki, ttl);
 		byte[] url_bry = ttl_bry;
-		if (arg_str != null) url_bry = Bry_.Add(url_bry, Bry_.new_u8(arg_str));			
+		if (arg_str != null) url_bry = BryUtl.Add(url_bry, BryUtl.NewU8(arg_str));
 		Xoa_url url = app.User().Wikii().Utl__url_parser().Parse(url_bry);
 		page.Url_(url);  // set url b/c history_mgr.Add uses url
 		stack.Add(Xog_history_mgr.new_(page));
 		return this;
 	}
-	public Xog_history_stack_fxt Test_pos(int expd) {Tfds.Eq(expd, stack.Cur_pos(), "pos"); return this;}
-	public Xog_history_stack_fxt Test_len(int expd) {Tfds.Eq(expd, stack.Len(), "len"); return this;}
+	public Xog_history_stack_fxt Test_pos(int expd) {GfoTstr.EqObj(expd, stack.Cur_pos(), "pos"); return this;}
+	public Xog_history_stack_fxt Test_len(int expd) {GfoTstr.EqObj(expd, stack.Len(), "len"); return this;}
 }

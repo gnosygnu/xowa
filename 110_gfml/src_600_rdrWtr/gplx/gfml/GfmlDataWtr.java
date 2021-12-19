@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
 import gplx.core.lists.*; /*StackAdp*/ import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
 public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {
-		if (!String_.Eq(key, GfmlDataWtrOpts.Key_const)) return;
+		if (!StringUtl.Eq(key, GfmlDataWtrOpts.Key_const)) return;
 		GfmlDataWtrOpts layout = GfmlDataWtrOpts.cast(val);
 		keyedSpr = layout.KeyedSpr();
 		indentNodes = layout.IndentNodes();
@@ -37,14 +39,14 @@ public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 		if (stack.Count() != 1					// not root
 			&& nde.SubHnds().Count() == 0) {	// first subNde
 			AddTkn_nullVal("{");
-			if (indentNodes) AddTkn_nullVal(String_.CrLf);
+			if (indentNodes) AddTkn_nullVal(StringUtl.CrLf);
 		}
-		if (indentNodes) AddTkn_nullVal(String_.Repeat("\t", stack.Count() - 1));
+		if (indentNodes) AddTkn_nullVal(StringUtl.Repeat("\t", stack.Count() - 1));
 		GfmlTkn nameTkn = null;
-		if (ignoreNullNames && String_.Eq(nodeName, ""))
+		if (ignoreNullNames && StringUtl.Eq(nodeName, ""))
 			nameTkn = GfmlTkn_.Null;
 		else {
-			nameTkn = AddTkn_raw(String_.Eq(nodeName, "") ? "%" : nodeName);
+			nameTkn = AddTkn_raw(StringUtl.Eq(nodeName, "") ? "%" : nodeName);
 			AddTkn_nullVal(":");
 		}
 		nde = GfmlNde.named_(nameTkn, GfmlType_.new_any_());
@@ -54,10 +56,10 @@ public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 		if (nde.SubHnds().Count() == 0)
 			AddTkn_nullVal(";");
 		else {
-			if (indentNodes) AddTkn_nullVal(String_.Repeat("\t", stack.Count() - 1));
+			if (indentNodes) AddTkn_nullVal(StringUtl.Repeat("\t", stack.Count() - 1));
 			AddTkn_nullVal("}");
 		}
-		if (indentNodes) AddTkn_nullVal(String_.CrLf);
+		if (indentNodes) AddTkn_nullVal(StringUtl.CrLf);
 		GfmlNde finishedNde = nde;
 		nde = GfmlNde.as_(stack.Pop());
 		nde.SubObjs_Add(finishedNde);
@@ -78,8 +80,8 @@ public class GfmlDataWtr extends DataWtr_base implements DataWtr {
 	}
 	String To_str(Object obj) {
 		if (obj == null) return "''";
-		String s = Object_.Xto_str_strict_or_empty(obj);
-		return String_.Concat("'", String_.Replace(s, "'", "''"), "'");
+		String s = ObjectUtl.ToStrOrEmpty(obj);
+		return StringUtl.Concat("'", StringUtl.Replace(s, "'", "''"), "'");
 	}
 	GfmlTkn AddTkn_raw(String raw) {return AddTkn(raw, raw);}
 	GfmlTkn AddTkn_nullVal(String raw) {return AddTkn(raw, GfmlTkn_.NullVal);}

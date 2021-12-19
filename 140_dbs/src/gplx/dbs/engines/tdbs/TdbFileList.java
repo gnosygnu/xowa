@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs;
 import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*; import gplx.core.stores.*;
-import gplx.core.lists.*; /*Ordered_hash_base*/ import gplx.langs.dsvs.*; /*DsvStoreLayout*/
+import gplx.langs.dsvs.*; /*DsvStoreLayout*/
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.Ordered_hash_base;
 public class TdbFileList extends Ordered_hash_base {
 	public TdbFile Get_by_or_fail(int id) {return TdbFile.as_(Get_by_or_fail_base(id));}
 	public void Add(TdbFile src) {Add_base(src.Id(), src);}
@@ -29,7 +32,7 @@ public class TdbFileList extends Ordered_hash_base {
 		return rv;
 	}	TdbFileList() {}
 
-	@gplx.Internal protected void DataObj_Wtr(DataWtr wtr) {
+	public void DataObj_Wtr(DataWtr wtr) {
 		wtr.InitWtr(DsvStoreLayout.Key_const, layout);
 		wtr.WriteTableBgn(StoreTblName, FldList);
 		for (Object filObj : this) {
@@ -42,7 +45,7 @@ public class TdbFileList extends Ordered_hash_base {
 		}
 		wtr.WriteNodeEnd();
 	}
-	@gplx.Internal protected void DataObj_Rdr(DataRdr rdr) {
+	public void DataObj_Rdr(DataRdr rdr) {
 		layout = TdbStores.FetchLayout(rdr);
 		this.Clear();
 		DataRdr subRdr = rdr.Subs();

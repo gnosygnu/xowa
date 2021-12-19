@@ -13,15 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*; import gplx.xowa.*;
+package gplx.xowa;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url;
 import gplx.core.envs.*;
+import gplx.types.errs.ErrUtl;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 public class Xoa_manifest_view extends JFrame implements Gfo_invk {
 	private final Xoa_manifest_wkr wkr;
 	private String run_xowa_cmd;
@@ -88,7 +92,7 @@ public class Xoa_manifest_view extends JFrame implements Gfo_invk {
 	public void Run_xowa() {
 		this.Append("running: " + run_xowa_cmd);
 		Runtime_.Exec(run_xowa_cmd);
-		System_.Exit();
+		SystemUtl.Exit();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__run_xowa)) Run_xowa();
@@ -106,7 +110,7 @@ class Swing_mouse_adapter extends MouseAdapter {
 	@Override public void mouseClicked(MouseEvent ev) {
 		try {cmd.Exec();}
 		catch (Exception e) {
-			System.out.println(Err_.Message_gplx_full(e));
+			System.out.println(ErrUtl.ToStrFull(e));
 		}
 	}
 }

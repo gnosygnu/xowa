@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
+package gplx.xowa.bldrs.wms.sites;
 import gplx.dbs.*;
+import gplx.types.basics.lists.Ordered_hash;
 class Site_extension_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_type, fld_name, fld_namemsg, fld_description, fld_descriptionmsg, fld_author, fld_url, fld_version
@@ -83,7 +84,7 @@ class Site_extension_tbl implements Db_tbl {
 		stmt_delete.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_delete();
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Site_extension_itm itm = (Site_extension_itm)list.Get_at(i);
+			Site_extension_itm itm = (Site_extension_itm)list.GetAt(i);
 			Insert(site_abrv, itm.Type(), itm.Name(), itm.Namemsg(), itm.Description(), itm.Descriptionmsg(), itm.Author(), itm.Url(), itm.Version()
 				, itm.Vcs_system(), itm.Vcs_version(), itm.Vcs_url(), itm.Vcs_date(), itm.License_name(), itm.License(), itm.Credits());
 		}

@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.pfuncs;
-import gplx.Bry_bfr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.langs.kwds.Xol_kwd_grp_;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.tmpls.Xot_invk;
@@ -24,7 +24,7 @@ import gplx.xowa.xtns.pfuncs.Pf_func_base;
 public class Wdata_pf_property extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_property;}
 	@Override public Pf_func New(int id, byte[] name) {return new Wdata_pf_property().Name_(name);}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// EX: {{#property:p123|}}
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// EX: {{#property:p123|}}
 		synchronized (this) { // LOCK: must synchronized b/c bfr will later be set as member variable in .Resolve_to_bfr; DATE:2016-07-06
 			Wbase_statement_mgr_.Get_wbase_data(bfr, ctx, caller, self, src, this, BoolUtl.N);
 		}

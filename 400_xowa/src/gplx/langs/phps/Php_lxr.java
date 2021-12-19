@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
+package gplx.langs.phps;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 interface Php_lxr {
 	int Lxr_tid();
 	void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts);
@@ -35,7 +37,7 @@ abstract class Php_lxr_base implements Php_lxr {
 class Php_lxr_declaration extends Php_lxr_base {
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_declaration;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add_obj(Bry_declaration, this);
+		trie.AddObj(Bry_declaration, this);
 		parser_interrupts[AsciiByte.Lt] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -58,7 +60,7 @@ class Php_lxr_declaration extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Declaration(bgn, cur));
 		return cur;		
 	}
-	private static final byte[] Bry_declaration = Bry_.new_a7("<?php");
+	private static final byte[] Bry_declaration = BryUtl.NewA7("<?php");
 }
 class Php_lxr_ws extends Php_lxr_base {
 	public Php_lxr_ws(byte ws_tid) {
@@ -74,7 +76,7 @@ class Php_lxr_ws extends Php_lxr_base {
 	public byte[] Ws_bry() {return ws_bry;} private byte[] ws_bry;
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_ws;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add_obj(ws_bry, this);
+		trie.AddObj(ws_bry, this);
 		parser_interrupts[ws_bry[0]] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -94,7 +96,7 @@ class Php_lxr_ws extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Ws(bgn, cur, ws_tid));
 		return cur;
 	}
-	public static final byte[] Bry_ws_space = Bry_.new_a7(" "), Bry_ws_nl = Bry_.new_a7("\n"), Bry_ws_tab = Bry_.new_a7("\t"), Bry_ws_cr = Bry_.new_a7("\r");
+	public static final byte[] Bry_ws_space = BryUtl.NewA7(" "), Bry_ws_nl = BryUtl.NewA7("\n"), Bry_ws_tab = BryUtl.NewA7("\t"), Bry_ws_cr = BryUtl.NewA7("\r");
 }
 class Php_lxr_comment extends Php_lxr_base {
 	public Php_lxr_comment(byte comment_tid) {
@@ -107,7 +109,7 @@ class Php_lxr_comment extends Php_lxr_base {
 	}
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_comment;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add_obj(comment_bgn, this);
+		trie.AddObj(comment_bgn, this);
 		parser_interrupts[AsciiByte.Slash] = Php_parser_interrupt.Char;
 		parser_interrupts[AsciiByte.Hash] = Php_parser_interrupt.Char;
 	}
@@ -115,8 +117,8 @@ class Php_lxr_comment extends Php_lxr_base {
 	public byte[] Comment_bgn() {return comment_bgn;} private byte[] comment_bgn;
 	public byte[] Comment_end() {return comment_end;} private byte[] comment_end;
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
-		int end = Bry_find_.Find_fwd(src, comment_end, bgn);
-		if (end == Bry_find_.Not_found) {
+		int end = BryFind.FindFwd(src, comment_end, bgn);
+		if (end == BryFind.NotFound) {
 			tkn_wkr.Msg_many(src, bgn, cur, Php_lxr_comment.Dangling_comment, comment_tid, comment_end);
 			cur = src_len;	// NOTE: terminating sequence not found; assume rest of src is comment
 		}
@@ -126,13 +128,13 @@ class Php_lxr_comment extends Php_lxr_base {
 		return cur;
 	}
 	public static final Gfo_msg_itm Dangling_comment = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_comment", "dangling_comment");
-	public static final byte[] Bry_bgn_mult = Bry_.new_a7("/*"), Bry_bgn_slash = Bry_.new_a7("//"), Bry_bgn_hash = Bry_.new_a7("#")
-		, Bry_end_mult = Bry_.new_a7("*/"), Bry_end_nl = Bry_.new_a7("\n");
+	public static final byte[] Bry_bgn_mult = BryUtl.NewA7("/*"), Bry_bgn_slash = BryUtl.NewA7("//"), Bry_bgn_hash = BryUtl.NewA7("#")
+		, Bry_end_mult = BryUtl.NewA7("*/"), Bry_end_nl = BryUtl.NewA7("\n");
 }
 class Php_lxr_var extends Php_lxr_base {
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_var;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add_obj(Bry_var, this);
+		trie.AddObj(Bry_var, this);
 		parser_interrupts[AsciiByte.Dollar] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -164,13 +166,13 @@ class Php_lxr_var extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Var(bgn, cur));
 		return cur;		
 	}
-	private static final byte[] Bry_var = Bry_.new_a7("$");
+	private static final byte[] Bry_var = BryUtl.NewA7("$");
 }
 class Php_lxr_sym extends Php_lxr_base {
-	public Php_lxr_sym(String hook_str, byte tkn_tid) {this.hook = Bry_.new_a7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
+	public Php_lxr_sym(String hook_str, byte tkn_tid) {this.hook = BryUtl.NewA7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_sym;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add_obj(hook, this);
+		trie.AddObj(hook, this);
 		parser_interrupts[hook[0]] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
@@ -188,7 +190,7 @@ class Php_lxr_quote extends Php_lxr_base {
 	}
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_quote;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
-		trie.Add_obj(quote_bry, this);
+		trie.AddObj(quote_bry, this);
 		parser_interrupts[quote_tid] = Php_parser_interrupt.Char;
 	}
 	public byte Quote_tid() {return quote_tid;} private byte quote_tid;
@@ -196,8 +198,8 @@ class Php_lxr_quote extends Php_lxr_base {
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		int end = -1;
 		while (true) {
-			end = Bry_find_.Find_fwd(src, quote_bry, cur); 
-			if (end == Bry_find_.Not_found) {
+			end = BryFind.FindFwd(src, quote_bry, cur);
+			if (end == BryFind.NotFound) {
 				tkn_wkr.Msg_many(src, bgn, cur, Php_lxr_quote.Dangling_quote, quote_tid, quote_bry);
 				cur = src_len;	// NOTE: terminating sequence not found; assume rest of src is comment
 				break;
@@ -227,12 +229,12 @@ class Php_lxr_quote extends Php_lxr_base {
 		return cur;
 	}
 	public static final Gfo_msg_itm Dangling_quote = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_quote", "dangling_quote");
-	public static final byte[] Quote_bry_single = Bry_.new_a7("'"), Quote_bry_double = Bry_.new_a7("\"");
+	public static final byte[] Quote_bry_single = BryUtl.NewA7("'"), Quote_bry_double = BryUtl.NewA7("\"");
 }
 class Php_lxr_keyword extends Php_lxr_base {
-	public Php_lxr_keyword(String hook_str, byte tkn_tid) {this.hook = Bry_.new_a7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
+	public Php_lxr_keyword(String hook_str, byte tkn_tid) {this.hook = BryUtl.NewA7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_keyword;}
-	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {trie.Add_obj(hook, this);}
+	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {trie.AddObj(hook, this);}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		if (cur < src_len) {
 			byte next_byte = src[cur];
@@ -259,7 +261,7 @@ class Php_lxr_num extends Php_lxr_base {
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_keyword;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
 		for (int i = 0; i < 10; i++)
-			trie.Add_obj(new byte[] {(byte)(i + AsciiByte.Num0)}, this);
+			trie.AddObj(new byte[] {(byte)(i + AsciiByte.Num0)}, this);
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		boolean loop = true;

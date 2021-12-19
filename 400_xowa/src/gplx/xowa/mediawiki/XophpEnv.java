@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class XophpEnv {		
 	public XophpClassBldrs ClassBldrs() {return classBldrs;} private final XophpClassBldrs classBldrs = new XophpClassBldrs();
 	public Ordered_hash Singletons() {return singletons;} private final Ordered_hash singletons = Ordered_hash_.New();

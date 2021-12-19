@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.guis;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.core.net.*;
 import gplx.xowa.guis.history.*;
@@ -36,7 +41,7 @@ class Xogv_page_load_wkr implements Gfo_thread_wkr, Gfo_invk {
 		Xowv_wiki wiki = (Xowv_wiki)wiki_mgr.Get_by_or_null(wiki_domain);
 		if (wiki == null) return Xoh_page.New_missing();	// wiki does not exist; happens with xwiki; PAGE:s.w:Photon; EX:[[wikt:transmit]]; DATE:2015-04-27
 		Xoa_ttl ttl = wiki.Ttl_parse(page_bry);
-		Gfo_url url = url_parser.Parse(Bry_.Add(wiki_domain, AsciiByte.SlashBry, page_bry, qarg_bry));
+		Gfo_url url = url_parser.Parse(BryUtl.Add(wiki_domain, AsciiByte.SlashBry, page_bry, qarg_bry));
 		Xoh_page rv = new Xoh_page();
 		wiki.Pages_get(rv, url, ttl);
 		return rv;

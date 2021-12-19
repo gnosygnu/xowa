@@ -13,15 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.apps.servers.http;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.core.net.*; import gplx.core.net.qargs.*;
 import gplx.xowa.wikis.pages.*;
 class Http_url_parser {
-	public byte[] Wiki() {return wiki;} public Http_url_parser Wiki_(String v) {this.wiki = Bry_.new_u8(v); return this;} private byte[] wiki;
-	public byte[] Page() {return page;} public Http_url_parser Page_(String v) {this.page = Bry_.new_u8(v); return this;} private byte[] page;
-	public byte[] Qarg() {return qarg;} public Http_url_parser Qarg_(String v) {this.qarg = Bry_.new_u8(v); return this;} private byte[] qarg;
+	public byte[] Wiki() {return wiki;} public Http_url_parser Wiki_(String v) {this.wiki = BryUtl.NewU8(v); return this;} private byte[] wiki;
+	public byte[] Page() {return page;} public Http_url_parser Page_(String v) {this.page = BryUtl.NewU8(v); return this;} private byte[] page;
+	public byte[] Qarg() {return qarg;} public Http_url_parser Qarg_(String v) {this.qarg = BryUtl.NewU8(v); return this;} private byte[] qarg;
 	public byte Action() {return action;} public Http_url_parser Action_(byte v) {this.action = v; return this;} private byte action;
 	public String Popup_mode() {return popup_mode;} public Http_url_parser Popup_mode_(String v) {this.popup_mode = v; return this;} private String popup_mode;
 	public boolean Popup() {return popup;} public Http_url_parser Popup_(boolean v) {this.popup = v; return this;} private boolean popup;
@@ -29,18 +36,18 @@ class Http_url_parser {
 	public String Err_msg() {return err_msg;} public Http_url_parser Err_msg_(String v) {this.err_msg = v; return this;} private String err_msg;
 
 	public String To_str() {
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_a7("wiki=").Add_safe(wiki).Add_byte_nl();
-		bfr.Add_str_a7("page=").Add_safe(page).Add_byte_nl();
-		bfr.Add_str_a7("qarg=").Add_safe(qarg).Add_byte_nl();
-		bfr.Add_str_a7("action=").Add_byte_variable(action).Add_byte_nl();
-		bfr.Add_str_a7("popup=").Add_yn(popup).Add_byte_nl();
+		BryWtr bfr = BryWtr.New();
+		bfr.AddStrA7("wiki=").AddSafe(wiki).AddByteNl();
+		bfr.AddStrA7("page=").AddSafe(page).AddByteNl();
+		bfr.AddStrA7("qarg=").AddSafe(qarg).AddByteNl();
+		bfr.AddStrA7("action=").AddByteVariable(action).AddByteNl();
+		bfr.AddStrA7("popup=").AddYn(popup).AddByteNl();
 		if (popup_id != null)
-			bfr.Add_str_a7("popup_id=").Add_str_u8(popup_id).Add_byte_nl();
+			bfr.AddStrA7("popup_id=").AddStrU8(popup_id).AddByteNl();
 		if (popup_mode != null)
-			bfr.Add_str_a7("popup_mode=").Add_str_u8(popup_mode).Add_byte_nl();
-		bfr.Add_str_a7("err_msg=").Add_str_u8_null(err_msg).Add_byte_nl();
-		return bfr.To_str_and_clear();
+			bfr.AddStrA7("popup_mode=").AddStrU8(popup_mode).AddByteNl();
+		bfr.AddStrA7("err_msg=").AddStrU8Null(err_msg).AddByteNl();
+		return bfr.ToStrAndClear();
 	}
 
 	// Parse urls of form "/wiki_name/wiki/Page_name?action=val"
@@ -69,55 +76,55 @@ class Http_url_parser {
 			}
 			// page and subs; EX: wiki_name/wiki/Page/A/B/C
 			else if (segs_len > 3) {
-				Bry_bfr bfr = Bry_bfr_.New();
+				BryWtr bfr = BryWtr.New();
 				for (int i = 2; i < segs_len; i++) {
-					if (i != 2) bfr.Add_byte_slash();
+					if (i != 2) bfr.AddByteSlash();
 					bfr.Add(segs[i]);
 				}
-				this.page = bfr.To_bry_and_clear();
+				this.page = bfr.ToBryAndClear();
 			}
 
 			// get qargs
 			Gfo_qarg_itm[] qargs = url_obj.Qargs();
 			int qargs_len = qargs.length;
-			Bry_bfr qarg_bfr = Bry_bfr_.New();
+			BryWtr qarg_bfr = BryWtr.New();
 			for (int i = 0; i < qargs_len; i++) {
 				Gfo_qarg_itm qarg_itm = qargs[i];
 				byte[] qarg_key = qarg_itm.Key_bry();
 				byte[] qarg_val = qarg_itm.Val_bry();
-				int qarg_tid = qarg_keys.Get_as_int_or(qarg_key, Byte_.Max_value_127);
+				int qarg_tid = qarg_keys.Get_as_int_or(qarg_key, ByteUtl.MaxValue127);
 
 				switch (qarg_tid) {
 					case Tid__action:
-						if      (Bry_.Eq(qarg_val, Xoa_url_.Qarg__action__read))
+						if      (BryLni.Eq(qarg_val, Xoa_url_.Qarg__action__read))
 							this.action = Xopg_view_mode_.Tid__read;
-						else if (Bry_.Eq(qarg_val, Xoa_url_.Qarg__action__edit))
+						else if (BryLni.Eq(qarg_val, Xoa_url_.Qarg__action__edit))
 							this.action = Xopg_view_mode_.Tid__edit;
-						else if (Bry_.Eq(qarg_val, Xoa_url_.Qarg__action__html))
+						else if (BryLni.Eq(qarg_val, Xoa_url_.Qarg__action__html))
 							this.action = Xopg_view_mode_.Tid__html;
-						else if (Bry_.Eq(qarg_val, Qarg__action__popup))
+						else if (BryLni.Eq(qarg_val, Qarg__action__popup))
 							this.popup = true;
 						break;
 					case Tid__popup_id:
-						this.popup_id = String_.new_u8(qarg_val);
+						this.popup_id = StringUtl.NewU8(qarg_val);
 						break;
 					case Tid__popup_mode:
-						this.popup_mode = String_.new_u8(qarg_val);
+						this.popup_mode = StringUtl.NewU8(qarg_val);
 						break;
 					default:
-						qarg_bfr.Add_byte(qarg_bfr.Len_eq_0() ? AsciiByte.Question : AsciiByte.Amp);
+						qarg_bfr.AddByte(qarg_bfr.HasNone() ? AsciiByte.Question : AsciiByte.Amp);
 						qarg_bfr.Add(qarg_key);
-						qarg_bfr.Add_byte_eq();
+						qarg_bfr.AddByteEq();
 						qarg_bfr.Add(qarg_val);
 						break;
 				}
 			}
-			if (qarg_bfr.Len_gt_0())
-				qarg = qarg_bfr.To_bry_and_clear();
+			if (qarg_bfr.HasSome())
+				qarg = qarg_bfr.ToBryAndClear();
 			return true;
 		}
 		catch (Exception e) {
-			this.err_msg = Err_.Message_gplx_log(e);
+			this.err_msg = ErrUtl.ToStrLog(e);
 			return false;
 		}
 	}
@@ -126,7 +133,7 @@ class Http_url_parser {
 		this.page = null;
 		this.err_msg = err_msg;
 		if (url != null)
-			this.err_msg += "; url=" + String_.new_u8(url);
+			this.err_msg += "; url=" + StringUtl.NewU8(url);
 		return false;
 	}
 	private static final byte
@@ -135,9 +142,9 @@ class Http_url_parser {
 	, Tid__popup_mode = 3
 	;
 	private static final byte[]
-	  Qarg__action__popup = Bry_.new_a7("popup")
-	, Qarg__popup_id      = Bry_.new_a7("popup_id")
-	, Qarg__popup_mode    = Bry_.new_a7("popup_mode")
+	  Qarg__action__popup = BryUtl.NewA7("popup")
+	, Qarg__popup_id      = BryUtl.NewA7("popup_id")
+	, Qarg__popup_mode    = BryUtl.NewA7("popup_mode")
 	;
 	private static final Hash_adp_bry qarg_keys = Hash_adp_bry.ci_a7()
 		.Add_bry_int(Xoa_url_.Qarg__action, Tid__action)

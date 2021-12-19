@@ -13,13 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*;
-import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.searchs.searchers.crts;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.errs.ErrUtl;
 class Srch_crt_scanner {
 	private final List_adp tkns = List_adp_.New(); private byte[] src; private int src_len, pos, txt_bgn;
 	private final Srch_crt_scanner_syms trie_bldr; private final Btrie_slim_mgr trie; private final Btrie_rv trv = new Btrie_rv();
-	private final Bry_bfr word_bfr = Bry_bfr_.New(); private boolean word_is_dirty;
+	private final BryWtr word_bfr = BryWtr.New(); private boolean word_is_dirty;
 	public Srch_crt_scanner(Srch_crt_scanner_syms trie_bldr) {
 		this.trie_bldr = trie_bldr;
 		this.trie = trie_bldr.Trie();
@@ -29,10 +38,10 @@ class Srch_crt_scanner {
 		tkns.Clear(); pos = 0; txt_bgn = -1; 
 		while (pos < src_len) {
 			byte cur_b = src[pos];
-			byte cur_tid = trie.Match_byte_or(trv, cur_b, src, pos, src_len, Byte_.Max_value_127);
-			if (cur_tid == Byte_.Max_value_127) {					// text character
+			byte cur_tid = trie.Match_byte_or(trv, cur_b, src, pos, src_len, ByteUtl.MaxValue127);
+			if (cur_tid == ByteUtl.MaxValue127) {					// text character
 				if (txt_bgn == -1) txt_bgn = pos;					// 1st character not set; set it
-				if (word_is_dirty) word_bfr.Add_byte(cur_b);
+				if (word_is_dirty) word_bfr.AddByte(cur_b);
 				++pos;
 			}	
 			else {													// \ \s " - & | ( )
@@ -56,27 +65,27 @@ class Srch_crt_scanner {
 						} else {									// word has started; transfer existing word to bfr;
 							if (!word_is_dirty) { 
 								word_is_dirty = true;
-								word_bfr.Add_mid(src, txt_bgn, pos);
+								word_bfr.AddMid(src, txt_bgn, pos);
 							}
 						}
 						pos = nxt_pos;								// skip "\"
 						if (pos < src_len) {
-                            word_bfr.Add_byte(src[pos]);			// add next char literally
+                            word_bfr.AddByte(src[pos]);			// add next char literally
 							++pos;
 						}
 						break;
 					case Srch_crt_tkn.Tid__space:					// discard spaces
-						pos = Bry_find_.Find_fwd_while(src, pos, src_len, trie_bldr.Space());
+						pos = BryFind.FindFwdWhile(src, pos, src_len, trie_bldr.Space());
 						break;
 					case Srch_crt_tkn.Tid__quote:					// find end quote and add as word
 						int quote_bgn = pos + 1;
-						int quote_end = Int_.Min_value;
+						int quote_end = IntUtl.MinValue;
 						int tmp_pos = quote_bgn;
 						while (true) {
-							quote_end = Bry_find_.Find_fwd(src, trie_bldr.Quote(), tmp_pos, src_len);
-							if (quote_end == Bry_find_.Not_found) {	// no end-quote found; use space
-								quote_end = Bry_find_.Find_fwd(src, trie_bldr.Space(), quote_bgn, src_len);
-								if (quote_end == Bry_find_.Not_found) quote_end = src_len;	// no space found; use EOS
+							quote_end = BryFind.FindFwd(src, trie_bldr.Quote(), tmp_pos, src_len);
+							if (quote_end == BryFind.NotFound) {	// no end-quote found; use space
+								quote_end = BryFind.FindFwd(src, trie_bldr.Space(), quote_bgn, src_len);
+								if (quote_end == BryFind.NotFound) quote_end = src_len;	// no space found; use EOS
 							}
 							else {									// end-quote found; check if it's doubled
 								int double_pos = quote_end + 1;
@@ -85,7 +94,7 @@ class Srch_crt_scanner {
 									if (!word_is_dirty) {
 										word_is_dirty = true;
 									}
-									word_bfr.Add_mid(src, tmp_pos, double_pos);
+									word_bfr.AddMid(src, tmp_pos, double_pos);
 									tmp_pos = double_pos + 1;
 									continue;
 								}
@@ -93,7 +102,7 @@ class Srch_crt_scanner {
 							break;
 						}
 						if (word_is_dirty)
-							word_bfr.Add_mid(src, tmp_pos, quote_end);
+							word_bfr.AddMid(src, tmp_pos, quote_end);
 						Add_word(Srch_crt_tkn.Tid__word_w_quote, quote_bgn, quote_end);
 						pos = quote_end + 1;						// +1 to place after quote
 						break;
@@ -103,10 +112,10 @@ class Srch_crt_scanner {
 						break;
 					case Srch_crt_tkn.Tid__paren_bgn: case Srch_crt_tkn.Tid__paren_end:
 					case Srch_crt_tkn.Tid__and: case Srch_crt_tkn.Tid__or:
-						tkns.Add(New_tkn(cur_tid, Bry_.Mid(src, pos, pos_end)));
+						tkns.Add(New_tkn(cur_tid, BryLni.Mid(src, pos, pos_end)));
 						pos = pos_end;
 						break;
-					default: throw Err_.new_unhandled_default(cur_tid);
+					default: throw ErrUtl.NewUnhandled(cur_tid);
 				}
 			}
 		}
@@ -120,12 +129,12 @@ class Srch_crt_scanner {
 		byte[] word_bry = null;
 		if (word_is_dirty) {
 			word_is_dirty = false;
-			if (word_bfr.Len_eq_0()) return;
-			word_bry = word_bfr.To_bry_and_clear();
+			if (word_bfr.HasNone()) return;
+			word_bry = word_bfr.ToBryAndClear();
 		}
 		else {
 			if (src_end - src_bgn == 0) return;
-			word_bry = Bry_.Mid(src, src_bgn, src_end);
+			word_bry = BryLni.Mid(src, src_bgn, src_end);
 		}
 		tkns.Add(New_tkn(tid, word_bry));
 		txt_bgn = -1;

@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.postgres; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.postgres; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.stores.*;
 import gplx.dbs.sqls.*; import gplx.dbs.metas.*;
 import gplx.dbs.wkrs.SqlWkrMgr;
-
+import gplx.types.errs.ErrUtl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -31,8 +31,8 @@ public class Postgres_engine extends Db_engine_sql_base {
 		return rv;
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Db_data_rdr_.new_(rdr, commandText);}
-	@Override public Dbmeta_tbl_mgr Meta_mgr() {throw Err_.new_unimplemented();}
-		@gplx.Internal @Override protected Connection Conn_make() {
+	@Override public Dbmeta_tbl_mgr Meta_mgr() {throw ErrUtl.NewUnimplemented();}
+		@Override public Connection Conn_make() {
 		Postgres_conn_info conn_info_as_postgres = (Postgres_conn_info)conn_info;
 		return Conn_make_by_url("jdbc:" + conn_info_as_postgres.Key() + "://localhost/" + conn_info_as_postgres.Database(), conn_info_as_postgres.Uid(), conn_info_as_postgres.Pwd());
 	}

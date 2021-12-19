@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,17 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*; import gplx.core.*;
+package gplx.core.stores;
 import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValList;
+import gplx.types.errs.ErrUtl;
 public class GfoNdeRdr_ {
-	public static GfoNdeRdr kvs_(Keyval_list kvList) {
+	public static GfoNdeRdr kvs_(KeyValList kvList) {
 		GfoFldList flds = GfoFldList_.new_();
-		int pairsLen = kvList.Count();
+		int pairsLen = kvList.Len();
 		Object[] vals = new Object[pairsLen];
 		for (int i = 0; i < pairsLen; i++) {
-			Keyval pair = kvList.Get_at(i);
-			flds.Add(pair.Key(), StringClassXtn.Instance);
-			vals[i] = pair.Val_to_str_or_empty();
+			KeyVal pair = kvList.GetAt(i);
+			flds.Add(pair.KeyToStr(), StringClassXtn.Instance);
+			vals[i] = pair.ValToStrOrEmpty();
 		}
 		GfoNde nde = GfoNde_.vals_(flds, vals);
 		return root_(nde, true);
@@ -43,5 +46,5 @@ public class GfoNdeRdr_ {
 		return rv;
 	}
 	public static GfoNdeRdr as_(Object obj) {return obj instanceof GfoNdeRdr ? (GfoNdeRdr)obj : null;}
-	public static GfoNdeRdr cast(Object obj) {try {return (GfoNdeRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfoNdeRdr.class, obj);}}
+	public static GfoNdeRdr cast(Object obj) {try {return (GfoNdeRdr)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, GfoNdeRdr.class, obj);}}
 }

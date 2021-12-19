@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+package gplx.core.ios;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.Ordered_hash_base;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class IoItmList extends Ordered_hash_base {
 	public boolean Has(Io_url url) {return Has_base(MakeKey(url));}
 	public void Add(IoItm_base itm) {
@@ -35,7 +38,7 @@ public class IoItmList extends Ordered_hash_base {
 			rv[i] = IoItm_base_.as_(i).Url();
 		return rv;
 	}
-	@Override public void Sort() {Sort_by(IoItmBase_comparer_nest.Instance);}
+	@Override public void Sort() {SortBy(IoItmBase_comparer_nest.Instance);}
 	@Override protected Object Fetch_base(Object keyObj) {
 		String key = MakeKey((String)keyObj);
 		return super.Fetch_base(key);
@@ -49,27 +52,27 @@ public class IoItmList extends Ordered_hash_base {
 		return MakeKey(itmName);
 	}
 	String MakeKey(String s) {
-		return caseSensitive ? s : String_.Lower(s);
+		return caseSensitive ? s : StringUtl.Lower(s);
 	}
 	IoItmDir ownerDir; boolean caseSensitive;
-	@gplx.Internal protected static IoItmList new_(IoItmDir v, boolean caseSensitive) {
+	public static IoItmList new_(IoItmDir v, boolean caseSensitive) {
 		IoItmList rv = new IoItmList();
 		rv.ownerDir = v; rv.caseSensitive = caseSensitive;
 		return rv;
 	}
-	@gplx.Internal protected static IoItmList list_(boolean caseSensitive) {return new_(null, caseSensitive);}
+	public static IoItmList list_(boolean caseSensitive) {return new_(null, caseSensitive);}
 }
 class IoItmBase_comparer_nest implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		IoItm_base lhsItm = (IoItm_base)lhsObj, rhsItm = (IoItm_base)rhsObj;
 		Io_url lhsUrl = lhsItm.Url(), rhsUrl = rhsItm.Url();
-		return String_.Eq(lhsUrl.OwnerDir().Raw(), rhsUrl.OwnerDir().Raw())								// is same dir
-			? CompareAbleUtl.Compare_obj(lhsUrl.NameAndExt(), rhsUrl.NameAndExt())	// same dir: compare name
-			: CompareAbleUtl.Compare_obj(DepthOf(lhsItm), DepthOf(rhsItm));			// diff dir: compare by depth; ex: c:\fil.txt < c:\dir\fil.txt
+		return StringUtl.Eq(lhsUrl.OwnerDir().Raw(), rhsUrl.OwnerDir().Raw())                                // is same dir
+			? CompareAbleUtl.Compare_obj(lhsUrl.NameAndExt(), rhsUrl.NameAndExt())    // same dir: compare name
+			: CompareAbleUtl.Compare_obj(DepthOf(lhsItm), DepthOf(rhsItm));            // diff dir: compare by depth; ex: c:\fil.txt < c:\dir\fil.txt
 	}
 	int DepthOf(IoItm_base itm) {
 		Io_url url = itm.Url();
-		return String_.Count(url.OwnerDir().Raw(), url.Info().DirSpr()); // use OwnerDir, else dir.Raw will return extra dirSeparator
+		return StringUtl.Count(url.OwnerDir().Raw(), url.Info().DirSpr()); // use OwnerDir, else dir.Raw will return extra dirSeparator
 	}
 	public static final IoItmBase_comparer_nest Instance = new IoItmBase_comparer_nest(); IoItmBase_comparer_nest() {}
 }

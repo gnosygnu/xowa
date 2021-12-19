@@ -13,9 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*;
-import gplx.xowa.files.*;
-import gplx.dbs.*;
+package gplx.xowa.files.caches;
+import gplx.dbs.Db_cmd_mode;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.Db_stmt_bldr;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.frameworks.objects.Rls_able;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
 class Xofc_fil_tbl implements Rls_able {
 	private String tbl_name = "file_cache_fil"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_uid, fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_page, fld_ext, fld_size, fld_cache_time;
@@ -67,13 +85,13 @@ class Xofc_fil_tbl implements Rls_able {
 				case Db_cmd_mode.Tid_update:	stmt.Clear();								Db_save_modify(stmt, itm); stmt.Crt_int(fld_uid, itm.Uid()).Exec_update(); break;
 				case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_uid, itm.Uid()); stmt.Exec_delete();	break;
 				case Db_cmd_mode.Tid_ignore:	break;
-				default:						throw Err_.new_unhandled(itm.Cmd_mode());
+				default:						throw ErrUtl.NewUnhandled(itm.Cmd_mode());
 			}
 			itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 			return null;
 		} catch (Exception e) {
 			stmt_bldr.Rls();	// null out bldr, else bad stmt will lead to other failures
-			return Err_.Message_gplx_full(e);
+			return ErrUtl.ToStrFull(e);
 		}
 	}
 	private void Db_save_modify(Db_stmt stmt, Xofc_fil_itm itm) {
@@ -90,7 +108,7 @@ class Xofc_fil_tbl implements Rls_able {
 			;
 	}
 	public Xofc_fil_itm Select_one_v1(int dir_id, byte[] fil_name, boolean fil_is_orig, int fil_w, int fil_h, double fil_thumbtime) {
-		if (select_itm_stmt == null) select_itm_stmt = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time));
+		if (select_itm_stmt == null) select_itm_stmt = conn.Stmt_select(tbl_name, flds, StringUtl.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time));
 		Db_rdr rdr = select_itm_stmt.Clear()
 			.Crt_int(fld_dir_id, dir_id)
 			.Crt_bry_as_str(fld_name, fil_name)
@@ -105,7 +123,7 @@ class Xofc_fil_tbl implements Rls_able {
 		finally {rdr.Rls();}
 	}
 	public Xofc_fil_itm Select_one_v2(int dir_id, byte[] name, boolean is_orig, int w, double time, int page) {
-		if (select_itm_v2_stmt == null) select_itm_v2_stmt = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_time, fld_page));
+		if (select_itm_v2_stmt == null) select_itm_v2_stmt = conn.Stmt_select(tbl_name, flds, StringUtl.Ary(fld_dir_id, fld_name, fld_is_orig, fld_w, fld_time, fld_page));
 		Db_rdr rdr = select_itm_v2_stmt.Clear()
 			.Crt_int(fld_dir_id, dir_id)
 			.Crt_bry_as_str(fld_name, name)
@@ -119,7 +137,7 @@ class Xofc_fil_tbl implements Rls_able {
 		}
 		finally {rdr.Rls();}
 	}
-	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
+	public void Select_all(BryWtr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		try {
@@ -127,7 +145,7 @@ class Xofc_fil_tbl implements Rls_able {
 				Xofc_fil_itm fil_itm = new_itm(rdr);
 				byte[] key = fil_itm.Gen_hash_key_v1(fil_key_bldr);
 				if (hash.Has(key))		// NOTE: need to check for uniqueness else dupe file will cause select to fail; shouldn't happen, but somehow did; DATE:2013-12-28
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "cache had duplicate itm: key=~{0}", String_.new_u8(key));
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "cache had duplicate itm: key=~{0}", StringUtl.NewU8(key));
 				else
 					hash.Add(key, fil_itm);
 			}
@@ -140,7 +158,7 @@ class Xofc_fil_tbl implements Rls_able {
 		( rdr.Read_int(fld_uid)
 		, rdr.Read_int(fld_dir_id)
 		, rdr.Read_bry_by_str(fld_name)
-		, rdr.Read_byte(fld_is_orig) != Byte_.Zero
+		, rdr.Read_byte(fld_is_orig) != ByteUtl.Zero
 		, rdr.Read_int(fld_w)
 		, rdr.Read_int(fld_h)
 		, Xof_lnki_time.Db_load_int(rdr, fld_time)

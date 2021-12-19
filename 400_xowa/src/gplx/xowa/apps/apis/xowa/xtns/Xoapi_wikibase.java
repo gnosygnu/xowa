@@ -13,17 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.xtns; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.apps.apis.xowa.xtns;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 public class Xoapi_wikibase implements Gfo_invk, Gfo_evt_mgr_owner {
 	public Xoapi_wikibase() {
 		evt_mgr = new Gfo_evt_mgr(this);
 	}
 	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private Gfo_evt_mgr evt_mgr;
-	public byte[][] Core_langs() {return core_langs;} private byte[][] core_langs = Bry_.Ary("en");
-	public byte[][] Sort_langs() {return sort_langs;} private byte[][] sort_langs = Bry_.Ary("en", "de", "es", "fr", "it", "nl", "pl", "ru", "sv");
-	public byte[] Link_wikis() {return link_wikis;} private byte[] link_wikis = Bry_.new_a7("enwiki");
+	public byte[][] Core_langs() {return core_langs;} private byte[][] core_langs = BryUtl.Ary("en");
+	public byte[][] Sort_langs() {return sort_langs;} private byte[][] sort_langs = BryUtl.Ary("en", "de", "es", "fr", "it", "nl", "pl", "ru", "sv");
+	public byte[] Link_wikis() {return link_wikis;} private byte[] link_wikis = BryUtl.NewA7("enwiki");
 	public void Init_by_app(Xoae_app app) {
 		app.Cfg().Bind_many_app(this, Cfg__core_langs, Cfg__link_wikis, Cfg__sort_langs);
 	}

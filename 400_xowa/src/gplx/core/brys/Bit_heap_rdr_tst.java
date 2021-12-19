@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.brys;
-import gplx.Bry_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Bit_heap_rdr_tst {
 	private final Bit_heap_rdr_fxt fxt = new Bit_heap_rdr_fxt();
-	@Test  public void Get_bool() {
+	@Test public void Get_bool() {
 		fxt.Load(255);
 		fxt.Test__get_bool(BoolUtl.Y).Test__cur(127, 1, 0);
 		fxt.Test__get_bool(BoolUtl.Y).Test__cur( 63, 2, 0);
@@ -37,7 +37,7 @@ public class Bit_heap_rdr_tst {
 		fxt.Test__get_bool(BoolUtl.Y).Test__cur(  1, 2, 0);
 		fxt.Test__get_bool(BoolUtl.Y).Test__cur(  0, 3, 0);
 	}
-	@Test  public void Get_byte() {
+	@Test public void Get_byte() {
 		fxt.Load(255).Test__get_byte(2, 3).Test__cur(63, 2, 0);
 		fxt.Load(255, 3);
 		fxt.Test__get_byte(7, 127);
@@ -46,7 +46,7 @@ public class Bit_heap_rdr_tst {
 		fxt.Test__get_bool(false);
 		fxt.Test__get_byte(3, 5);
 	}
-	@Test  public void Get_int_hzip() {
+	@Test public void Get_int_hzip() {
 		fxt.Load(100).Test__get_int_hzip(1, 100).Test__cur(0, 0, 1);
 		fxt.Load(253, 1, 44).Test__get_int_hzip(1, 300).Test__cur(0, 0, 3);
 		fxt.Load(0, 100).Test__get_int_hzip(2, 100).Test__cur(0, 0, 2);
@@ -56,26 +56,26 @@ public class Bit_heap_rdr_tst {
 class Bit_heap_rdr_fxt {
 	private final Bit_heap_rdr heap = new Bit_heap_rdr();
 	public Bit_heap_rdr_fxt Load(int... src) {
-		byte[] bry = Bry_.New_by_ints(src);
+		byte[] bry = BryUtl.NewByInts(src);
 		heap.Load(bry, 0, bry.length);
 		return this;
 	}
 	public Bit_heap_rdr_fxt Test__get_bool(boolean expd) {
-		Tfds.Eq_bool(expd, heap.Get_bool());
+		GfoTstr.Eq(expd, heap.Get_bool());
 		return this;
 	}
 	public Bit_heap_rdr_fxt Test__get_byte(int bits, int expd) {
-		Tfds.Eq_byte((byte)expd, heap.Get_byte(bits));
+		GfoTstr.EqByte((byte)expd, heap.Get_byte(bits));
 		return this;
 	}
 	public Bit_heap_rdr_fxt Test__get_int_hzip(int reqd, int expd) {
-		Tfds.Eq_int(expd, heap.Get_int_hzip(reqd));
+		GfoTstr.Eq(expd, heap.Get_int_hzip(reqd));
 		return this;
 	}
 	public Bit_heap_rdr_fxt Test__cur(int cur_val, int cur_bits, int cur_pos) {
-		Tfds.Eq_int(cur_val, heap.Cur_val(), "val");
-		Tfds.Eq_int(cur_bits, heap.Cur_bits(), "bits");
-		Tfds.Eq_int(cur_pos, heap.Cur_pos(), "pos");
+		GfoTstr.Eq(cur_val, heap.Cur_val(), "val");
+		GfoTstr.Eq(cur_bits, heap.Cur_bits(), "bits");
+		GfoTstr.Eq(cur_pos, heap.Cur_pos(), "pos");
 		return this;
 	}
 }

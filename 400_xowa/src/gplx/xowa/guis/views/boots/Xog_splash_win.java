@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+package gplx.xowa.guis.views.boots;
+import gplx.frameworks.objects.Rls_able;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
 import java.awt.*;
-import java.awt.event.*;
 public class Xog_splash_win implements Rls_able {
 		private SplashScreen splash;
 	private Graphics2D graphics; private boolean graphics_init = true;

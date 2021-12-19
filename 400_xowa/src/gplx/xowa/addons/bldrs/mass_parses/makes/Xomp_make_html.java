@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.brys.*;
 import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_make_html {
@@ -37,14 +41,14 @@ class Xomp_make_html {
 		Xowd_html_row src_row = new Xowd_html_row();
 
 		// loop xomp|page and generate html dbs
-		String sql = String_.Format("SELECT * FROM xomp_page WHERE html_len != 0 ORDER BY xomp_uid;");	// NOTE: html_len == 0 when page failed
+		String sql = StringUtl.Format("SELECT * FROM xomp_page WHERE html_len != 0 ORDER BY xomp_uid;");	// NOTE: html_len == 0 when page failed
 		int count = 0;
 		Db_rdr rdr = mgr_conn.Stmt_sql(sql).Exec_select__rls_auto();	// ANSI.Y
 		try {
 			while (rdr.Move_next()) {
 				Make_page(html_db_rdr, rdr, html_db_wtr, src_row);
 				if (++count % 10000 == 0)
-					Gfo_usr_dlg_.Instance.Prog_many("", "", "xomp.html.insert: db=~{0} count=~{1}", Int_.To_str_pad_bgn_space(html_db_wtr.Cur_db_id(), 3), Int_.To_str_pad_bgn_space(count, 8));
+					Gfo_usr_dlg_.Instance.Prog_many("", "", "xomp.html.insert: db=~{0} count=~{1}", IntUtl.ToStrPadBgnSpace(html_db_wtr.Cur_db_id(), 3), IntUtl.ToStrPadBgnSpace(count, 8));
 			}
 		} finally {rdr.Rls();}
 

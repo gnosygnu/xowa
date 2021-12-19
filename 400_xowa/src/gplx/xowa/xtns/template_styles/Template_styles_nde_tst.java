@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.template_styles;
 
-import gplx.String_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xop_fxt;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class Template_styles_nde_tst {
 		fxt.Init_page("Module:Test1.css", css_red);
 		fxt.Init_page("Module:Test2.css", css_blue);
 		fxt.Test_parse
-		( String_.Concat_lines_nl
+		( StringUtl.ConcatLinesNl
 		(   "<templatestyles src='Module:Test1.css'/>"
 		,   "<templatestyles src='Module:Test2.css'/>"
 		)
@@ -71,12 +71,12 @@ public class Template_styles_nde_tst {
 		String css = fxt.Make_css_color("red");
 		fxt.Init_page("Module:Test.css", css);
 		fxt.Test_parse
-		( String_.Concat_lines_nl
+		( StringUtl.ConcatLinesNl
 		(  "<templatestyles src='Module:Test.css'/>"
 		, "<templatestyles src='Module:Test.css'/>"
 		)
 		, ""
-		, String_.Concat_lines_nl
+		, StringUtl.ConcatLinesNl
 		( fxt.Make_style(0, css))
 		);
 	}
@@ -94,8 +94,8 @@ public class Template_styles_nde_tst {
 		fxt.Init_page("Template:Test.css", css);
 		fxt.Parser_fxt().Init_para_y_();
 		fxt.Test_parse
-		( String_.Concat_lines_nl_skip_last("<templatestyles src='Test.css'/>", "a")
-		, String_.Concat_lines_nl_skip_last("", "<p>a", "</p>")
+		( StringUtl.ConcatLinesNlSkipLast("<templatestyles src='Test.css'/>", "a")
+		, StringUtl.ConcatLinesNlSkipLast("", "<p>a", "</p>")
 		, fxt.Make_style(0, css)
 		);
 		fxt.Parser_fxt().Init_para_n_();
@@ -170,6 +170,6 @@ class Template_styles_nde_fxt {
 	}
 	public void Test_parse(String src, String expd_html, String expd_head) {
 		parser_fxt.Test__parse__tmpl_to_html(src, expd_html);
-		Gftest.Eq__ary__lines(expd_head, parser_fxt.Page().Html_data().Head_mgr().Itm__css_dynamic().Get_and_clear());
+		GfoTstr.EqLines(expd_head, parser_fxt.Page().Html_data().Head_mgr().Itm__css_dynamic().Get_and_clear());
 	}
 }

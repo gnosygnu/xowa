@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.gfui.*;
-import gplx.core.threads.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
+package gplx.xowa.bldrs.installs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
+import gplx.core.threads.*;
 import gplx.xowa.bldrs.wms.dumps.*;
 class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_thread_cmd {	private Xoi_setup_mgr install_mgr; private String wiki_key, dump_date, dump_type;
 	public Xoi_cmd_wiki_download Ctor_download_(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date, String dump_type) {
@@ -37,7 +40,7 @@ class Xoi_cmd_wiki_download extends Gfo_thread_cmd_download implements Gfo_threa
 			app.Usr_dlg().Note_many("", "", "url: ~{0}", dump_file.File_url());
 		else {
 			if (!Dump_servers_offline_msg_shown) {
-				app.Gui_mgr().Kit().Ask_ok("", "", "all dump servers are offline: ~{0}", String_.AryXtoStr(server_urls));
+				app.Gui_mgr().Kit().Ask_ok("", "", "all dump servers are offline: ~{0}", StringUtl.AryToStr(server_urls));
 				Dump_servers_offline_msg_shown = true;
 			}
 		}

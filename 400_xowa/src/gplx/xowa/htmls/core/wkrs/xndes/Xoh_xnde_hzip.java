@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.xowa.wikis.ttls.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.xndes.tags.*;
+package gplx.xowa.htmls.core.wkrs.xndes;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.threads.poolables.*;
+import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.xndes.tags.*;
 public class Xoh_xnde_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public String Key() {return Xoh_hzip_dict_.Key__xnde;}
 	public byte[] Hook() {return hook;} private byte[] hook;
@@ -24,12 +28,12 @@ public class Xoh_xnde_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_xnde_parser parser = (Xoh_xnde_parser)data_obj;
 		Xohz_tag tag = hctx.Hzip__xnde__regy().Get_by_key(parser.Name_bry());
 		bfr.Add(hook);
-		bfr.Add_byte((byte)tag.Uid());
+		bfr.AddByte((byte)tag.Uid());
 		tag.Encode(hctx, bfr, src, parser);
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
-		byte uid = rdr.Read_byte();
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		byte uid = rdr.ReadByte();
 		Xohz_tag tag = hctx.Hzip__xnde__regy().Get_by_uid(uid);
 		tag.Decode(hctx, bfr, rdr, src, src_bgn, src_end);
 	}

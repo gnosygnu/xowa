@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.apps.fmtrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 public class Xoa_fmtr_itm implements Gfo_invk {
 	public Xoa_fmtr_itm(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public String Src() {return src;} public Xoa_fmtr_itm Src_(String v) {this.src = v; return this;} private String src;
@@ -25,21 +35,21 @@ public class Xoa_fmtr_itm implements Gfo_invk {
 	}
 	public String Run() {
 		Gfo_invk src_invk = (Gfo_invk)app.Gfs_mgr().Run_str(src);
-		int len = Int_.Cast(Gfo_invk_.Invk_by_key(src_invk, Invk_len));
-		Bry_bfr bfr = Bry_bfr_.New();
+		int len = IntUtl.Cast(Gfo_invk_.Invk_by_key(src_invk, Invk_len));
+		BryWtr bfr = BryWtr.New();
 		Bfmtr_eval_invk eval_mgr = new Bfmtr_eval_invk(app);
-		Bry_fmtr fmtr = Bry_fmtr.new_bry_(fmt).Eval_mgr_(eval_mgr);  
+		BryFmtr fmtr = BryFmtr.NewBry(fmt).EvalMgrSet(eval_mgr);
 		for (int i = 0; i < len; i++) {
 			Gfo_invk itm_invk = (Gfo_invk)Gfo_invk_.Invk_by_val(src_invk, Invk_get_at, i);
 			eval_mgr.Invk_(itm_invk);
-			fmtr.Bld_bfr(bfr, Bry_.Ary_empty);
+			fmtr.BldToBfr(bfr, BryUtl.AryEmpty);
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src))					return src;
 		else if	(ctx.Match(k, Invk_src_)) 					src = m.ReadStr("v"); 
-		else if	(ctx.Match(k, Invk_fmt)) 					return String_.new_u8(fmt);
+		else if	(ctx.Match(k, Invk_fmt)) 					return StringUtl.NewU8(fmt);
 		else if	(ctx.Match(k, Invk_fmt_)) 					fmt = m.ReadBry("v"); 
 		else if	(ctx.Match(k, Invk_sorter)) 				return this.Sorter();
 		else if	(ctx.Match(k, Invk_run)) 					return Run(); 
@@ -53,12 +63,12 @@ public class Xoa_fmtr_itm implements Gfo_invk {
 	, Invk_sorter = "sorter"
 	;
 }
-class Bfmtr_eval_invk implements Bry_fmtr_eval_mgr {
+class Bfmtr_eval_invk implements BryFmtrEvalMgr {
 	public Bfmtr_eval_invk(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public Bfmtr_eval_invk Invk_(Gfo_invk invk) {this.invk = invk; return this;} private Gfo_invk invk;
-	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
+	public boolean Enabled() {return enabled;} public void EnabledSet(boolean v) {enabled = v;} private boolean enabled = true;
 	public byte[] Eval(byte[] cmd) {
-		Object rslt = app.Gfs_mgr().Run_str_for(invk, String_.new_u8(cmd));
-		return Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(rslt));
+		Object rslt = app.Gfs_mgr().Run_str_for(invk, StringUtl.NewU8(cmd));
+		return BryUtl.NewU8(ObjectUtl.ToStrOrNullMark(rslt));
 	}
 }

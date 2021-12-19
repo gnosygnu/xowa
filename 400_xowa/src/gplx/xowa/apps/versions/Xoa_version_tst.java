@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.versions; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.xowa.apps.versions;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class Xoa_version_tst {
 	@Before public void init() {fxt.Clear();} private Xoa_version_fxt fxt = new Xoa_version_fxt();
@@ -31,6 +32,6 @@ public class Xoa_version_tst {
 class Xoa_version_fxt {
 	public void Clear() {}
 	public void Test_compare(String lhs, String rhs, int expd) {
-		Tfds.Eq(expd, Xoa_version_.Compare(lhs, rhs), lhs + "|" + rhs);
+		GfoTstr.EqObj(expd, Xoa_version_.Compare(lhs, rhs), lhs + "|" + rhs);
 	}
 }

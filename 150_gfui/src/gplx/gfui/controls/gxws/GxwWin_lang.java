@@ -13,29 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import javax.swing.JDesktopPane;
+package gplx.gfui.controls.gxws;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.*;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JWindow;
-
+import gplx.types.commons.KeyValHash;
+import gplx.types.errs.ErrUtl;
 import org.eclipse.swt.widgets.Display;
 
 import java.awt.AWTEvent;
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.Window;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -58,7 +53,7 @@ public class GxwWin_lang extends JFrame implements GxwWin, WindowListener  {
 		icon = i;
 		this.setIconImage(i.XtoImage());
 	}
-	public void OpenedCmd_set(Gfo_invk_cmd v) {whenLoadedCmd = v;} Gfo_invk_cmd whenLoadedCmd = Gfo_invk_cmd.Noop;	
+	public void OpenedCmd_set(Gfo_invk_cmd v) {whenLoadedCmd = v;} Gfo_invk_cmd whenLoadedCmd = Gfo_invk_cmd.Noop;
 	public GxwCore_base Core() {return ctrlMgr;} GxwCore_base ctrlMgr;
 	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host = GxwCbkHost_.Null;
 	public String TextVal() {return this.getTitle();} public void TextVal_set(String v) {this.setTitle(v);}
@@ -251,17 +246,17 @@ class GxwElemFactory_swt extends GxwElemFactory_base {
 	public GxwWin win_app_() {
 		return new Swt_win(display);
 	}
-	public GxwWin win_tool_(Keyval_hash ctorArgs)	{
+	public GxwWin win_tool_(KeyValHash ctorArgs)	{
 		return null;
 	}
-	public GxwWin win_toaster_(Keyval_hash ctorArgs)	{
+	public GxwWin win_toaster_(KeyValHash ctorArgs)	{
 		return null;
 	}
 	public GxwElem lbl_() {return null;}
 	public GxwTextFld text_fld_() {return null;}
 	public GxwTextFld text_memo_() {return null;}
 	public GxwTextHtml text_html_() {return null;}
-	public GxwCheckListBox checkListBox_(Keyval_hash ctorArgs) {throw Err_.new_unimplemented();}
+	public GxwCheckListBox checkListBox_(KeyValHash ctorArgs) {throw ErrUtl.NewUnimplemented();}
 	public GxwComboBox comboBox_() {return null;}
 	public GxwListBox listBox_() {return null;}
 }

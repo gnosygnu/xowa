@@ -15,14 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.htmls.sidebars;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_mgr;
-import gplx.List_adp;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.libs.ios.IoConsts;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xop_fxt;
@@ -166,24 +165,24 @@ public class Xoh_sidebar_mgr_tst {
 	private static final String Null_str = "";
 }
 class Xoh_sidebar_mgr_fxt {
-	private Xoae_app app; private Xowe_wiki wiki; private Xoh_sidebar_mgr sidebar_mgr; private Bry_bfr bfr;
+	private Xoae_app app; private Xowe_wiki wiki; private Xoh_sidebar_mgr sidebar_mgr; private BryWtr bfr;
 	public Xoh_sidebar_mgr_fxt Clear() {
 		app = Xoa_app_fxt.Make__app__edit();
 		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		sidebar_mgr = wiki.Html_mgr().Portal_mgr().Sidebar_mgr();
-		bfr = Bry_bfr_.Reset(Io_mgr.Len_kb);
+		bfr = BryWtr.NewAndReset(IoConsts.LenKB);
 		Init__popups_enabled(false);
 		return this;
 	}
 	public Xowe_wiki Wiki() {return wiki;}
 	public Xoh_sidebar_itm Make__grp(String text, String title, Xoh_sidebar_itm... itms) {
-		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(BoolUtl.N, Bry_.new_a7(text), Bry_.new_a7(text), null);
-		rv.Init_by_title_and_accesskey(Bry_.new_a7(title), null, null);
+		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(BoolUtl.N, BryUtl.NewA7(text), BryUtl.NewA7(text), null);
+		rv.Init_by_title_and_accesskey(BryUtl.NewA7(title), null, null);
 		return rv;
 	}
 	public Xoh_sidebar_itm Make__itm(String text, String title, String accesskey, String href) {
-		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(BoolUtl.Y, Bry_.new_a7(text), Bry_.new_a7(text), Bry_.new_a7(href));
-		rv.Init_by_title_and_accesskey(Bry_.new_a7(title), Bry_.new_a7(accesskey), null);
+		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(BoolUtl.Y, BryUtl.NewA7(text), BryUtl.NewA7(text), BryUtl.NewA7(href));
+		rv.Init_by_title_and_accesskey(BryUtl.NewA7(title), BryUtl.NewA7(accesskey), null);
 		return rv;
 	}
 	public Xoh_sidebar_mgr_fxt Init__popups_enabled(boolean v) {
@@ -204,48 +203,48 @@ class Xoh_sidebar_mgr_fxt {
 	}
 	public Xoh_sidebar_mgr_fxt Init_msg(String key, String val) {
 		Xol_msg_mgr msg_mgr = wiki.Lang().Msg_mgr();
-		Xol_msg_itm msg_itm = msg_mgr.Itm_by_key_or_new(Bry_.new_a7(key));
-		msg_itm.Atrs_set(Bry_.new_a7(val), false, String_.Has(val, "{{"));
+		Xol_msg_itm msg_itm = msg_mgr.Itm_by_key_or_new(BryUtl.NewA7(key));
+		msg_itm.Atrs_set(BryUtl.NewA7(val), false, StringUtl.Has(val, "{{"));
 		return this;
 	}
 	public void Exec__make(String... raw) {
-		sidebar_mgr.Make(bfr, Bry_.new_u8(String_.Concat_lines_nl_skip_last(raw)));
+		sidebar_mgr.Make(bfr, BryUtl.NewU8(StringUtl.ConcatLinesNlSkipLast(raw)));
 	}
 	public void Test__objs(Xoh_sidebar_itm... expd) {
-		Tfds.Eq_str_lines(To_str_by_itms(expd), To_str_by_mgr(sidebar_mgr));
+		GfoTstr.EqLines(To_str_by_itms(expd), To_str_by_mgr(sidebar_mgr));
 	}
 	public void Test__objs(String raw, Xoh_sidebar_itm... expd) {
-		Tfds.Eq_str_lines(To_str_by_itms(expd), To_str_by_mgr(sidebar_mgr));
+		GfoTstr.EqLines(To_str_by_itms(expd), To_str_by_mgr(sidebar_mgr));
 	}
 	public void Test__html(String... expd) {
-		Tfds.Eq_str_lines(String_.Concat_lines_nl_skip_last(expd), String_.new_u8(sidebar_mgr.Html_bry()));
+		GfoTstr.EqLines(StringUtl.ConcatLinesNlSkipLast(expd), StringUtl.NewU8(sidebar_mgr.Html_bry()));
 	}
 	private static String To_str_by_mgr(Xoh_sidebar_mgr mgr) {
 		List_adp grps = mgr.Grps();
 		int len = grps.Len();
 		Xoh_sidebar_itm[] ary = new Xoh_sidebar_itm[len];
 		for (int i = 0; i < len; i++)
-			ary[i] = (Xoh_sidebar_itm)grps.Get_at(i);
+			ary[i] = (Xoh_sidebar_itm)grps.GetAt(i);
 		return To_str_by_itms(ary);
 	}
 	
 	private static String To_str_by_itms(Xoh_sidebar_itm[] ary) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++)
 			To_str_by_itm(bfr, ary[i]);
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
-	private static void To_str_by_itm(Bry_bfr bfr, Xoh_sidebar_itm cur) {
+	private static void To_str_by_itm(BryWtr bfr, Xoh_sidebar_itm cur) {
 		boolean tid_is_itm = cur.Tid_is_itm();
-		bfr.Add_str_a7(tid_is_itm ? "itm|" : "grp|");
-		bfr.Add(cur.Text()).Add_byte_pipe();
-		bfr.Add(cur.Title()).Add_byte_pipe();
+		bfr.AddStrA7(tid_is_itm ? "itm|" : "grp|");
+		bfr.Add(cur.Text()).AddBytePipe();
+		bfr.Add(cur.Title()).AddBytePipe();
 		if (tid_is_itm) {
-			bfr.Add(cur.Accesskey()).Add_byte_pipe();
-			bfr.Add(cur.Href()).Add_byte_pipe();
+			bfr.Add(cur.Accesskey()).AddBytePipe();
+			bfr.Add(cur.Href()).AddBytePipe();
 		}
-		bfr.Add_byte_nl();
+		bfr.AddByteNl();
 
 		int len = cur.Subs__len();
 		for (int i = 0; i< len; ++i)

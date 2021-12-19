@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.progs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.progs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.*; import gplx.core.envs.*;
 public class Xoa_prog_mgr implements Gfo_invk {
 	private Xoa_app app;
@@ -53,7 +61,7 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		, Cfg__lilypond, Cfg__abc2ly, Cfg__trim_img, Cfg__midi_to_ogg
 		);
 	}
-	private Process_adp App_by_ext_key(String ext)		{return apps_by_ext[Xof_ext_.Get_id_by_ext_(Bry_.new_a7(ext))];}
+	private Process_adp App_by_ext_key(String ext)		{return apps_by_ext[Xof_ext_.Get_id_by_ext_(BryUtl.NewA7(ext))];}
 	public Process_adp App_query_img_size()				{return app_query_img_size;}			private Process_adp app_query_img_size = new Process_adp();
 	public Process_adp App_resize_img()					{return app_resize_img;}				private Process_adp app_resize_img = new Process_adp();
 	public Process_adp App_convert_svg_to_png()			{return app_convert_svg_to_png;}		private Process_adp app_convert_svg_to_png = new Process_adp();
@@ -70,31 +78,31 @@ public class Xoa_prog_mgr implements Gfo_invk {
 	public Process_adp App_abc2ly()						{return app_abc2ly;}					private Process_adp app_abc2ly = new Process_adp();
 	public Process_adp App_trim_img()					{return app_trim_img;}					private Process_adp app_trim_img = new Process_adp();
 	public Process_adp App_convert_midi_to_ogg()		{return app_midi_to_ogg;}		private Process_adp app_midi_to_ogg = new Process_adp();
-	public Process_adp App_by_ext(String ext)			{return App_by_ext_key(String_.Mid(ext, 1));}	// ignore 1st . in ext; EX: ".png" -> "png"
+	public Process_adp App_by_ext(String ext)			{return App_by_ext_key(StringUtl.Mid(ext, 1));}	// ignore 1st . in ext; EX: ".png" -> "png"
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_convert_tex_to_dvi))			return app_convert_tex_to_dvi;
 		else if	(ctx.Match(k, Invk_convert_dvi_to_png))			return app_convert_dvi_to_png;
 
-		else if (String_.Eq(k, Cfg__web))						{Init_cmd(m.ReadStr("v"), app_web);}
-		else if (String_.Eq(k, Cfg__media))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_ogv, Xof_ext_.Id_webm, Xof_ext_.Id_flac, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_mid, Xof_ext_.Id_wav, Xof_ext_.Id_opus);}
-		else if (String_.Eq(k, Cfg__image))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_png, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg, Xof_ext_.Id_gif, Xof_ext_.Id_tif, Xof_ext_.Id_tiff, Xof_ext_.Id_bmp);}
-		else if (String_.Eq(k, Cfg__svg))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_svg);}
-		else if (String_.Eq(k, Cfg__pdf))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_pdf);}
-		else if (String_.Eq(k, Cfg__djvu))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_djvu);}
-		else if (String_.Eq(k, Cfg__gz))						{Init_cmd(m.ReadStr("v"), app_decompress_gz);}
-		else if (String_.Eq(k, Cfg__bz2))						{Init_cmd(m.ReadStr("v"), app_decompress_bz2);}
-		else if (String_.Eq(k, Cfg__bz2__stdout_cmd))			{Init_cmd(m.ReadStr("v"), app_decompress_bz2_by_stdout);}
-		else if	(String_.Eq(k, Cfg__query_size))				{Init_cmd(m.ReadStr("v"), app_query_img_size);}
-		else if	(String_.Eq(k, Cfg__resize_img))				{Init_cmd(m.ReadStr("v"), app_resize_img);}
-		else if	(String_.Eq(k, Cfg__convert_svg_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_svg_to_png);}
-		else if	(String_.Eq(k, Cfg__convert_djvu_to_tiff))		{Init_cmd(m.ReadStr("v"), app_convert_djvu_to_tiff);}
-		else if	(String_.Eq(k, Cfg__convert_tex_to_dvi))		{Init_cmd(m.ReadStr("v"), app_convert_tex_to_dvi);}
-		else if	(String_.Eq(k, Cfg__convert_dvi_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_dvi_to_png);}
-		else if (String_.Eq(k, Cfg__lua))						{Init_cmd(m.ReadStr("v"), app_lua); gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all((Xoae_app)app);}
-		else if (String_.Eq(k, Cfg__lilypond))					{Init_cmd(m.ReadStr("v"), app_lilypond);}
-		else if (String_.Eq(k, Cfg__abc2ly))					{Init_cmd(m.ReadStr("v"), app_abc2ly);}
-		else if (String_.Eq(k, Cfg__trim_img))					{Init_cmd(m.ReadStr("v"), app_trim_img);}
-		else if (String_.Eq(k, Cfg__midi_to_ogg))				{Init_cmd(m.ReadStr("v"), app_midi_to_ogg);}
+		else if (StringUtl.Eq(k, Cfg__web))						{Init_cmd(m.ReadStr("v"), app_web);}
+		else if (StringUtl.Eq(k, Cfg__media))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_ogv, Xof_ext_.Id_webm, Xof_ext_.Id_flac, Xof_ext_.Id_ogg, Xof_ext_.Id_oga, Xof_ext_.Id_mid, Xof_ext_.Id_wav, Xof_ext_.Id_opus);}
+		else if (StringUtl.Eq(k, Cfg__image))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_png, Xof_ext_.Id_jpg, Xof_ext_.Id_jpeg, Xof_ext_.Id_gif, Xof_ext_.Id_tif, Xof_ext_.Id_tiff, Xof_ext_.Id_bmp);}
+		else if (StringUtl.Eq(k, Cfg__svg))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_svg);}
+		else if (StringUtl.Eq(k, Cfg__pdf))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_pdf);}
+		else if (StringUtl.Eq(k, Cfg__djvu))						{Init_cmd(m.ReadStr("v"), Xof_ext_.Id_djvu);}
+		else if (StringUtl.Eq(k, Cfg__gz))						{Init_cmd(m.ReadStr("v"), app_decompress_gz);}
+		else if (StringUtl.Eq(k, Cfg__bz2))						{Init_cmd(m.ReadStr("v"), app_decompress_bz2);}
+		else if (StringUtl.Eq(k, Cfg__bz2__stdout_cmd))			{Init_cmd(m.ReadStr("v"), app_decompress_bz2_by_stdout);}
+		else if	(StringUtl.Eq(k, Cfg__query_size))				{Init_cmd(m.ReadStr("v"), app_query_img_size);}
+		else if	(StringUtl.Eq(k, Cfg__resize_img))				{Init_cmd(m.ReadStr("v"), app_resize_img);}
+		else if	(StringUtl.Eq(k, Cfg__convert_svg_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_svg_to_png);}
+		else if	(StringUtl.Eq(k, Cfg__convert_djvu_to_tiff))		{Init_cmd(m.ReadStr("v"), app_convert_djvu_to_tiff);}
+		else if	(StringUtl.Eq(k, Cfg__convert_tex_to_dvi))		{Init_cmd(m.ReadStr("v"), app_convert_tex_to_dvi);}
+		else if	(StringUtl.Eq(k, Cfg__convert_dvi_to_png))		{Init_cmd(m.ReadStr("v"), app_convert_dvi_to_png);}
+		else if (StringUtl.Eq(k, Cfg__lua))						{Init_cmd(m.ReadStr("v"), app_lua); gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all((Xoae_app)app);}
+		else if (StringUtl.Eq(k, Cfg__lilypond))					{Init_cmd(m.ReadStr("v"), app_lilypond);}
+		else if (StringUtl.Eq(k, Cfg__abc2ly))					{Init_cmd(m.ReadStr("v"), app_abc2ly);}
+		else if (StringUtl.Eq(k, Cfg__trim_img))					{Init_cmd(m.ReadStr("v"), app_trim_img);}
+		else if (StringUtl.Eq(k, Cfg__midi_to_ogg))				{Init_cmd(m.ReadStr("v"), app_midi_to_ogg);}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -109,8 +117,8 @@ public class Xoa_prog_mgr implements Gfo_invk {
 		}
 	}
 	public void Exec_view_web(byte[] url) {
-		String url_str = String_.new_u8(url);
-		url_str = String_.Replace(url_str, "\"", "\"\""); // escape quotes; DATE:2013-03-31
+		String url_str = StringUtl.NewU8(url);
+		url_str = StringUtl.Replace(url_str, "\"", "\"\""); // escape quotes; DATE:2013-03-31
 		url_str = Process_adp.Escape_ampersands_if_process_is_cmd(Op_sys.Cur().Tid_is_wnt(), app_web.Exe_url().Raw(), url_str);	// escape ampersands; DATE:2014-05-20
 		app_web.Run(url_str);
 	}

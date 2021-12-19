@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
+package gplx.xowa.xtns.imaps.itms;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
 public class Imap_part_ {
 	public static final byte 
 	  Tid_invalid		= 0
@@ -26,10 +28,10 @@ public class Imap_part_ {
 	, Tid_shape_poly	= 7
 	;
 	public static final byte[] 
-	  Key_dflt				= Bry_.new_a7("default")
-	, Key_shape_rect		= Bry_.new_a7("rect")
-	, Key_shape_circle		= Bry_.new_a7("circle")
-	, Key_shape_poly		= Bry_.new_a7("poly")
+	  Key_dflt				= BryUtl.NewA7("default")
+	, Key_shape_rect		= BryUtl.NewA7("rect")
+	, Key_shape_circle		= BryUtl.NewA7("circle")
+	, Key_shape_poly		= BryUtl.NewA7("poly")
 	;
 
 	public static byte[] To_shape_key(byte v) {
@@ -37,7 +39,7 @@ public class Imap_part_ {
 			case Tid_shape_rect		: return Key_shape_rect;
 			case Tid_shape_circle	: return Key_shape_circle;
 			case Tid_shape_poly		: return Key_shape_poly;
-			default					: throw Err_.new_unhandled(v);
+			default					: throw ErrUtl.NewUnhandled(v);
 		}
 	}
 }

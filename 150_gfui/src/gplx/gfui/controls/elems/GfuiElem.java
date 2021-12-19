@@ -13,10 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.elems; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.draws.*; import gplx.gfui.gfxs.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.imgs.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.*; import gplx.gfui.controls.windows.*;
+package gplx.gfui.controls.elems;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.gfui.*; import gplx.gfui.controls.*;
+import gplx.gfui.draws.*; import gplx.gfui.gfxs.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*;
+import gplx.gfui.controls.gxws.*;
+import gplx.gfui.controls.windows.*;
 import gplx.gfui.layouts.swts.*;
 import gplx.core.interfaces.*;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.types.commons.KeyValHash;
 public interface GfuiElem extends Gfo_invk, GxwCbkHost, IptBndsOwner, GftItem, Gfo_evt_itm {
 	//% Layout
 	int X(); GfuiElem X_(int val);
@@ -72,7 +79,7 @@ public interface GfuiElem extends Gfo_invk, GxwCbkHost, IptBndsOwner, GftItem, G
 
 	//% Infrastructure
 	GxwElem UnderElem();
-	GxwElem UnderElem_make(Keyval_hash ctorArgs);
-	void ctor_GfuiBox_base(Keyval_hash ctorArgs);
+	GxwElem UnderElem_make(KeyValHash ctorArgs);
+	void ctor_GfuiBox_base(KeyValHash ctorArgs);
 	void Invoke(Gfo_invk_cmd cmd);
 }

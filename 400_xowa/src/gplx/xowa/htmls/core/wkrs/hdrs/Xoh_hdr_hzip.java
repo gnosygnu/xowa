@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.xowa.wikis.ttls.*;
+package gplx.xowa.htmls.core.wkrs.hdrs;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*; import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_hdr_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public int Tid() {return Xoh_hzip_dict_.Tid__hdr;}
@@ -34,17 +38,17 @@ public class Xoh_hdr_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
-		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		int flag = rdr.ReadHzipInt(1); flag_bldr.Decode(flag);
 		boolean capt_rhs_exists		= flag_bldr.Get_as_bool(Flag__capt_rhs_exists);
 		boolean anch_is_diff			= flag_bldr.Get_as_bool(Flag__anch_is_diff);
 		byte hdr_level				= flag_bldr.Get_as_byte(Flag__hdr_level);
 
-		int capt_bgn = rdr.Pos(); int capt_end = rdr.Find_fwd_lr();
+		int capt_bgn = rdr.Pos(); int capt_end = rdr.FindFwdLr();
 		int anch_bgn = -1, anch_end = -1;
-		if (anch_is_diff) {anch_bgn = rdr.Pos(); anch_end = rdr.Find_fwd_lr();}
+		if (anch_is_diff) {anch_bgn = rdr.Pos(); anch_end = rdr.FindFwdLr();}
 		int capt_rhs_bgn = -1, capt_rhs_end = -1;
-		if (capt_rhs_exists) {capt_rhs_bgn = rdr.Pos(); capt_rhs_end = rdr.Find_fwd_lr();}
+		if (capt_rhs_exists) {capt_rhs_bgn = rdr.Pos(); capt_rhs_end = rdr.FindFwdLr();}
 
 		Xoh_hdr_data data = (Xoh_hdr_data)data_itm;
 		data.Init_by_decode(hdr_level, anch_is_diff, anch_bgn, anch_end, capt_bgn, capt_end, capt_rhs_bgn, capt_rhs_end);

@@ -13,16 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.xmls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Gfo_xml_wtr_tst {
 	private final Gfo_xml_wtr_fxt fxt = new Gfo_xml_wtr_fxt();
 	@Before public void init() {}
-	@Test  public void Root() {
+	@Test public void Root() {
 		fxt.Wtr().Nde_lhs("a").Nde_rhs();
 		fxt.Test_bld("<a>", "</a>");
 	}
-	@Test  public void Nest() {
+	@Test public void Nest() {
 		fxt.Wtr()
 			.Nde_lhs("a")
 			.	Nde_lhs("a_a")
@@ -40,7 +42,7 @@ public class Gfo_xml_wtr_tst {
 		, "</a>"
 		);
 	}
-	@Test  public void Atrs() {
+	@Test public void Atrs() {
 		fxt.Wtr()
 			.Nde_lhs_bgn_itm("a")
 			.Atr_kv_str_a7("b", "b1")
@@ -49,7 +51,7 @@ public class Gfo_xml_wtr_tst {
 		;
 		fxt.Test_bld("<a b='b1'></a>");
 	}
-	@Test  public void Atrs_escape() {
+	@Test public void Atrs_escape() {
 		fxt.Wtr()
 			.Nde_lhs_bgn_itm("a")
 			.Atr_kv_str_a7("b", "'\"<>&")
@@ -58,13 +60,13 @@ public class Gfo_xml_wtr_tst {
 		;
 		fxt.Test_bld("<a b='&apos;\"<>&'></a>");
 	}
-	@Test  public void Nde_txt() {
+	@Test public void Nde_txt() {
 		fxt.Wtr()
 			.Nde_txt_str("a", "a123")
 		;
 		fxt.Test_bld("<a>a123</a>");
 	}
-	@Test  public void Nde_txt_escape() {
+	@Test public void Nde_txt_escape() {
 		fxt.Wtr()
 			.Nde_txt_str("a", "'\"<>&x")
 		;
@@ -74,6 +76,6 @@ public class Gfo_xml_wtr_tst {
 class Gfo_xml_wtr_fxt {		
 	public Gfo_xml_wtr Wtr() {return wtr;} private final Gfo_xml_wtr wtr = new Gfo_xml_wtr();
 	public void Test_bld(String... lines) {
-		Tfds.Eq_str_lines(String_.Concat_lines_nl_skip_last(lines), wtr.Bld_str());
+		GfoTstr.EqLines(StringUtl.ConcatLinesNlSkipLast(lines), wtr.Bld_str());
 	}
 }

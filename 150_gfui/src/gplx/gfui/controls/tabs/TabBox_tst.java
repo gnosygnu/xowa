@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.tabs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import org.junit.*; import gplx.gfui.controls.tabs.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+package gplx.gfui.controls.tabs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.IntUtl;
+import org.junit.*;
+import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 public class TabBox_tst {
 //		@Before public void setup() {
 //			fx = TabBoxFxt.new_();
@@ -55,7 +62,7 @@ public class TabBox_tst {
 }
 class GfuiElemFxt {
 	public GfuiElem UnderElem() {return underElem;} GfuiElem underElem;
-	@gplx.Internal protected GfuiElemFxt tst_X(int expd) {Tfds.Eq(expd, underElem.X()); return this;}
+	public GfuiElemFxt tst_X(int expd) {GfoTstr.EqObj(expd, underElem.X()); return this;}
 	public static GfuiElemFxt new_(GfuiElem elem) {
 		GfuiElemFxt rv = new GfuiElemFxt();
 		rv.underElem = elem;
@@ -63,42 +70,42 @@ class GfuiElemFxt {
 	}	GfuiElemFxt() {}
 }
 class TabBoxFxt implements Gfo_invk {
-	@gplx.Internal protected TabBox TabBox() {return tabBox;}
-	@gplx.Internal protected TabBoxFxt Make(int count) {
+	public TabBox TabBox() {return tabBox;}
+	public TabBoxFxt Make(int count) {
 		for (int i = 0; i < tabBox.Tabs_Count(); i++)
 			tabBox.Tabs_DelAt(0);
 		for (int i = 0; i < count; i++)
-			tabBox.Tabs_Add(Int_.To_str(i), Int_.To_str(i));
+			tabBox.Tabs_Add(IntUtl.ToStr(i), IntUtl.ToStr(i));
 		return this;
 	}
-	@gplx.Internal protected TabBoxFxt Del_at(int index) {tabBox.Tabs_DelAt(index); return this;}
-//		@gplx.Internal protected TabBoxFxt Select(int index) {tabBox.Tabs_Select(index); return this;}
-	@gplx.Internal protected GfuiElemFxt FetchBtnAt(int index) {
+	public TabBoxFxt Del_at(int index) {tabBox.Tabs_DelAt(index); return this;}
+//		public TabBoxFxt Select(int index) {tabBox.Tabs_Select(index); return this;}
+	public GfuiElemFxt FetchBtnAt(int index) {
 		GfuiBtn btn = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(index);
 		GfuiElemFxt fx_elem = GfuiElemFxt.new_(btn);
 		return fx_elem;
 	}
-//		@gplx.Internal protected TabBoxFxt tst_BtnX(int idx, int expdX) {
+//		public TabBoxFxt tst_BtnX(int idx, int expdX) {
 //			Tfds.Eq(expdX, tabBox.SubBtnArea().Get_at(idx).X());
 //			return this;
 //		}
-	@gplx.Internal protected TabBoxFxt tst_Selected(String expd) {
+	public TabBoxFxt tst_Selected(String expd) {
 		TabPnlItm curTab = tabBox.Tabs_SelectedItm();			
 		GfuiBtn btn = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(curTab.Idx());
-		Tfds.Eq(expd, btn.Text());
+		GfoTstr.EqObj(expd, btn.Text());
 		return this;
 	}
-	@gplx.Internal protected TabBoxFxt tst_Btns(String... expd) {
+	public TabBoxFxt tst_Btns(String... expd) {
 		String[] actl = new String[tabBox.Tabs_Count() ];
 		for (int i = 0; i < tabBox.Tabs_Count() ; i++) {
 			GfuiBtn button = (GfuiBtn)tabBox.BtnBox().SubElems().Get_at(i);
 			actl[i] = button.TextMgr().Val();
 		}
-		Tfds.Eq_ary(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 		return this;
 	}
-//		@gplx.Internal protected TabBoxFxt tst_Raised(boolean expd) {Tfds.Eq(expd, received != null); return this;}
-//		@gplx.Internal protected TabBoxFxt Reorder(int i, int delta) {
+//		public TabBoxFxt tst_Raised(boolean expd) {Tfds.Eq(expd, received != null); return this;}
+//		public TabBoxFxt Reorder(int i, int delta) {
 //			tabBox.Width_(240);	// needed for lytMgr
 //			TabBnd_reorderTab reorderBnd = TabBnd_reorderTab.Instance;
 //			received = null;
@@ -106,7 +113,7 @@ class TabBoxFxt implements Gfo_invk {
 //			reorderBnd.MoveTab(pnl.SubTabBtn(), delta);
 //			return this;
 //		}
-//		@gplx.Internal protected TabBoxFxt tst_FocusOrder() {
+//		public TabBoxFxt tst_FocusOrder() {
 //			for (int i = 0; i < tabBox.SubBtnArea().SubZones().Get_at(0).Count(); i++) {
 //				GfuiElem subBtn = (GfuiElem)tabBox.SubBtnArea().SubZones().Get_at(0).Get_at(i);
 //				Tfds.Eq(i, subBtn.UnderElem().Core().Focus_index());

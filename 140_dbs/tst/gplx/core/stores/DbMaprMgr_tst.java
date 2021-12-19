@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*;
+package gplx.core.stores;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.commons.KeyValList;
 import org.junit.*;
 import gplx.dbs.*; /*Db_conn_info*/
 public class DbMaprMgr_tst {
@@ -42,21 +44,21 @@ public class DbMaprMgr_tst {
 	}	DbMaprMgr mgr; DbMaprWtr wtr; Db_conn conn; MockDisc disc; MockTitle title; MockChapter chapter; MockStream audio, subtitle; SrlMgr rdr;
 	@Test public void PurgeObjTree() {
 		disc = MockDisc.new_().Id_(1);
-		Db_qry_fxt.Insert_kvo(conn, "mock_discs", Keyval_list.New_with_one("disc_id", 1));
+		Db_qry_fxt.Insert_kvo(conn, "mock_discs", KeyValList.NewWithOne("disc_id", 1));
 		DbMaprWtrUtl.PurgeObjTree(disc, mgr, conn);
-		Tfds.Eq(0, Db_qry_fxt.SelectAll_count(conn, "mock_discs"));
+		GfoTstr.EqObj(0, Db_qry_fxt.SelectAll_count(conn, "mock_discs"));
 	}
 	@Test public void PurgeObjTree_deep() {
 		disc = MockDisc.new_().Id_(1);
-		Db_qry_fxt.Insert_kvo(conn, "mock_discs", Keyval_list.New_with_one("disc_id", 1));
-		Db_qry_fxt.Insert_kvo(conn, "mock_titles", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 1));
-		Db_qry_fxt.Insert_kvo(conn, "mock_chapters", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 2).Add("chapter_id", 3));
-		Db_qry_fxt.Insert_kvo(conn, "mock_chapters", Keyval_list.New_with_one("disc_id", 2).Add("title_id", 2).Add("chapter_id", 3));
+		Db_qry_fxt.Insert_kvo(conn, "mock_discs", KeyValList.NewWithOne("disc_id", 1));
+		Db_qry_fxt.Insert_kvo(conn, "mock_titles", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 1));
+		Db_qry_fxt.Insert_kvo(conn, "mock_chapters", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 2).Add("chapter_id", 3));
+		Db_qry_fxt.Insert_kvo(conn, "mock_chapters", KeyValList.NewWithOne("disc_id", 2).Add("title_id", 2).Add("chapter_id", 3));
 		DbMaprWtrUtl.PurgeObjTree(disc, mgr, conn);
 
-		Tfds.Eq(0, Db_qry_fxt.SelectAll_count(conn, "mock_discs"));
-		Tfds.Eq(0, Db_qry_fxt.SelectAll_count(conn, "mock_titles"));
-		Tfds.Eq(1, Db_qry_fxt.SelectAll_count(conn, "mock_chapters"));	// ignore chapter with disc_id=2
+		GfoTstr.EqObj(0, Db_qry_fxt.SelectAll_count(conn, "mock_discs"));
+		GfoTstr.EqObj(0, Db_qry_fxt.SelectAll_count(conn, "mock_titles"));
+		GfoTstr.EqObj(1, Db_qry_fxt.SelectAll_count(conn, "mock_chapters"));	// ignore chapter with disc_id=2
 	}
 	@Test public void Save_root() {
 		disc = MockDisc.new_().Id_(1).Name_("disc");
@@ -90,45 +92,45 @@ public class DbMaprMgr_tst {
 	}
 	@Test public void Load_root() {
 		rdr = rdr_();
-		Db_qry_fxt.Insert_kvo(conn, "mock_discs", Keyval_list.New_with_one("disc_id", 1).Add("disc_name", "name"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_discs", KeyValList.NewWithOne("disc_id", 1).Add("disc_name", "name"));
 		disc = (MockDisc)rdr.StoreRoot(MockDisc.Instance, null);
 
-		Tfds.Eq(1, disc.Id());
-		Tfds.Eq("name", disc.Name());
-		Tfds.Eq(0, disc.Titles().Len());
+		GfoTstr.EqObj(1, disc.Id());
+		GfoTstr.EqObj("name", disc.Name());
+		GfoTstr.EqObj(0, disc.Titles().Len());
 	}
 	@Test public void Load_subs() {
 		rdr = rdr_();
-		Db_qry_fxt.Insert_kvo(conn, "mock_discs", Keyval_list.New_with_one("disc_id", 1).Add("disc_name", "name"));
-		Db_qry_fxt.Insert_kvo(conn, "mock_titles", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 1).Add("title_name", "title1"));
-		Db_qry_fxt.Insert_kvo(conn, "mock_titles", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 2).Add("title_name", "title2"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_discs", KeyValList.NewWithOne("disc_id", 1).Add("disc_name", "name"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_titles", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 1).Add("title_name", "title1"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_titles", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 2).Add("title_name", "title2"));
 		disc = (MockDisc)rdr.StoreRoot(MockDisc.Instance, null);
 
-		Tfds.Eq(1, disc.Id());
-		Tfds.Eq("name", disc.Name());
-		Tfds.Eq(2, disc.Titles().Len());
-		Tfds.Eq("title1", ((MockTitle)disc.Titles().Get_at(0)).Name());
-		Tfds.Eq("title2", ((MockTitle)disc.Titles().Get_at(1)).Name());
+		GfoTstr.EqObj(1, disc.Id());
+		GfoTstr.EqObj("name", disc.Name());
+		GfoTstr.EqObj(2, disc.Titles().Len());
+		GfoTstr.EqObj("title1", ((MockTitle)disc.Titles().GetAt(0)).Name());
+		GfoTstr.EqObj("title2", ((MockTitle)disc.Titles().GetAt(1)).Name());
 	}
 	@Test public void Load_deep() {
 		rdr = rdr_();
-		Db_qry_fxt.Insert_kvo(conn, "mock_discs", Keyval_list.New_with_one("disc_id", 1).Add("disc_name", "name"));
-		Db_qry_fxt.Insert_kvo(conn, "mock_titles", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 1).Add("title_name", "title1"));
-		Db_qry_fxt.Insert_kvo(conn, "mock_chapters", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 1).Add("chapter_id", 3).Add("chapter_name", "chapter1"));
-		Db_qry_fxt.Insert_kvo(conn, "mock_streams", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 1).Add("stream_id", 4).Add("stream_type", 0).Add("stream_name", "audio1"));
-		Db_qry_fxt.Insert_kvo(conn, "mock_streams", Keyval_list.New_with_one("disc_id", 1).Add("title_id", 1).Add("stream_id", 5).Add("stream_type", 1).Add("stream_name", "subtitle1"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_discs", KeyValList.NewWithOne("disc_id", 1).Add("disc_name", "name"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_titles", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 1).Add("title_name", "title1"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_chapters", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 1).Add("chapter_id", 3).Add("chapter_name", "chapter1"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_streams", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 1).Add("stream_id", 4).Add("stream_type", 0).Add("stream_name", "audio1"));
+		Db_qry_fxt.Insert_kvo(conn, "mock_streams", KeyValList.NewWithOne("disc_id", 1).Add("title_id", 1).Add("stream_id", 5).Add("stream_type", 1).Add("stream_name", "subtitle1"));
 		disc = (MockDisc)rdr.StoreRoot(MockDisc.Instance, null);
 
-		Tfds.Eq(1, disc.Id());
-		Tfds.Eq("name", disc.Name());
-		Tfds.Eq(1, disc.Titles().Len());
-		MockTitle t = ((MockTitle)disc.Titles().Get_at(0));
-		Tfds.Eq("title1", t.Name());
-		Tfds.Eq("chapter1", ((MockChapter)t.Chapters().Get_at(0)).Name());
-		Tfds.Eq(1, t.Audios().Len());
-		Tfds.Eq(1, t.Subtitles().Len());
-		Tfds.Eq("audio1", ((MockStream)t.Audios().Get_at(0)).Name());
-		Tfds.Eq("subtitle1", ((MockStream)t.Subtitles().Get_at(0)).Name());
+		GfoTstr.EqObj(1, disc.Id());
+		GfoTstr.EqObj("name", disc.Name());
+		GfoTstr.EqObj(1, disc.Titles().Len());
+		MockTitle t = ((MockTitle)disc.Titles().GetAt(0));
+		GfoTstr.EqObj("title1", t.Name());
+		GfoTstr.EqObj("chapter1", ((MockChapter)t.Chapters().GetAt(0)).Name());
+		GfoTstr.EqObj(1, t.Audios().Len());
+		GfoTstr.EqObj(1, t.Subtitles().Len());
+		GfoTstr.EqObj("audio1", ((MockStream)t.Audios().GetAt(0)).Name());
+		GfoTstr.EqObj("subtitle1", ((MockStream)t.Subtitles().GetAt(0)).Name());
 	}
 	DbMaprRdr rdr_() {
 		DbMaprRdr rv = DbMaprRdr.new_(Db_conn_info_.Test, Db_crt_.New_eq("disc_id", 1));

@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Guid_adp;
-import gplx.Guid_adp_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoGuid;
+import gplx.types.commons.GfoGuidUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.Xoa_page_;
 import gplx.xowa.Xoa_ttl;
@@ -50,10 +50,10 @@ public class Xoh_page implements Xoa_page {
 	public Xopg_wtxt_data			Wtxt()				{return wtxt;}				private final Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
 	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final Xopg_hdump_data hdump = new Xopg_hdump_data();
 	public Xol_lang_itm				Lang()				{return lang;}				private Xol_lang_itm lang;
-	private Guid_adp page_guid;
-	public Guid_adp Page_guid() {
+	private GfoGuid page_guid;
+	public GfoGuid Page_guid() {
 		if (page_guid == null) {
-			page_guid = Guid_adp_.New();
+			page_guid = GfoGuidUtl.New();
 		}
 		return page_guid;
 	}
@@ -74,7 +74,7 @@ public class Xoh_page implements Xoa_page {
 	// util
 	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
-	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
+	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = BryUtl.Empty;	// drd:web_browser
 	public byte[]					Url_bry_safe()		{return Xoa_page_.Url_bry_safe(page_url, wiki, page_ttl);}
 	public void Ctor_by_hview(Xow_wiki wiki, Xoa_url page_url, Xoa_ttl page_ttl, int page_id) {
 		this.wiki = wiki; this.page_url = page_url; this.page_ttl = page_ttl; this.page_id = page_id; 
@@ -83,7 +83,7 @@ public class Xoh_page implements Xoa_page {
 		html.Redlink_list().Disabled_(page_ttl.Ns().Id_is_module());	// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
 		html.Toc_mgr().Init(gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface_.Noop, page_url, wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val());
 	}
-	public Xoh_page Ctor_by_hdiff(Bry_bfr tmp_bfr, Xoae_page page, byte[] toc_label) {
+	public Xoh_page Ctor_by_hdiff(BryWtr tmp_bfr, Xoae_page page, byte[] toc_label) {
 		this.wiki = page.Wiki(); this.page_url = page.Url(); this.page_ttl = page.Ttl(); this.page_id = page.Db().Page().Id();			
 		this.lang = wiki.Lang();
 
@@ -113,7 +113,7 @@ public class Xoh_page implements Xoa_page {
 		hdump.Clear();
 		db.Clear();
 
-		display_ttl = content_sub = sidebar_div = Bry_.Empty;
+		display_ttl = content_sub = sidebar_div = BryUtl.Empty;
 		head_mgr.Clear(); commons_mgr.Clear();
 		section_mgr.Clear(); img_mgr.Clear();
 		props.Clear();

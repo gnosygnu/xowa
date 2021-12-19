@@ -13,7 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.drds.ios.media_scanners; import gplx.*;
+package gplx.xowa.drds.ios.media_scanners;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public abstract class Xod_media_scanner__base implements Xod_media_scanner {
 	private final List_adp list = List_adp_.New();
 	public Xod_media_scanner__base() {
@@ -24,7 +35,7 @@ public abstract class Xod_media_scanner__base implements Xod_media_scanner {
 	public Xod_media_scanner Add(Io_url url) {list.Add(url.Xto_api()); return this;}
 	public void Scan() {
 		String[] urls = list.ToStrAryAndClear();
-		Gfo_log_.Instance.Info("xo.io:media scan", "urls", String_.Concat_with_str(":", urls));
+		Gfo_log_.Instance.Info("xo.io:media scan", "urls", StringUtl.ConcatWith(":", urls));
 		this.Scan__hook(urls);
 	}
 	protected abstract void Scan__hook(String[] urls);

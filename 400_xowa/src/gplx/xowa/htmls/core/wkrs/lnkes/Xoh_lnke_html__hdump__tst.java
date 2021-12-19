@@ -22,7 +22,7 @@ public class Xoh_lnke_html__hdump__tst {
 	, Html__auto		= "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external autonumber\">[1]</a>"
 	, Html__text		= "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external text\">a</a>"
 	;
-	@Test  public void Free()		{fxt.Test__html("http://a.org"				, Html__free);}
-	@Test  public void Auto()		{fxt.Test__html("[http://a.org]"			, Html__auto);}
-	@Test  public void Text()		{fxt.Test__html("[http://a.org a]"			, Html__text);}
+	@Test public void Free()		{fxt.Test__html("http://a.org"				, Html__free);}
+	@Test public void Auto()		{fxt.Test__html("[http://a.org]"			, Html__auto);}
+	@Test public void Text()		{fxt.Test__html("[http://a.org a]"			, Html__text);}
 }

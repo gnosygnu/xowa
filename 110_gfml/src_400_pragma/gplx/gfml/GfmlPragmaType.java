@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.lists.*;
+package gplx.gfml;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 class GfmlPragmaType implements GfmlPragma {
 	public String KeyOfPragma() {return pragmaKey;} private String pragmaKey = "_type";
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
@@ -46,7 +49,7 @@ class GfmlPragmaType implements GfmlPragma {
 		return makr.Xto_bry();
 	}
 	public static final String CacheLog_key = "log:type";
-	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
+	public static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
 		for (Object typeObj : list) {
 			GfmlType type = (GfmlType)typeObj;
 			if (regy.Has(type.Key()))
@@ -58,7 +61,7 @@ class GfmlPragmaType implements GfmlPragma {
 class GfmlPragmaType_endCmd implements GfmlBldrCmd {
 	public String Key() {return "cmd.gfml.type.end";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {ExecList(bldr.TypeMgr().TypeRegy(), list, replaced);}
-	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
+	public static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
 		for (Object typeObj : list) {
 			GfmlType type = (GfmlType)typeObj;
 			regy.Del(type);

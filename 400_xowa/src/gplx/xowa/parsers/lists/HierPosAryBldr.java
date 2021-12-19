@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.strings.*;
+package gplx.xowa.parsers.lists;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class HierPosAryBldr {
 	int[] ary; int aryIdx = -1; int root = -1;
 	public HierPosAryBldr(int ary_max)	{ary = new int[ary_max]; this.Init();}
@@ -44,7 +47,7 @@ public class HierPosAryBldr {
 	}
 	public boolean Dirty() {return aryIdx > -1 || root > 0;}
 	public int[] XtoIntAry() {
-		if (aryIdx == -1) return Int_ary_.Empty;
+		if (aryIdx == -1) return IntAryUtl.Empty;
 		int[] rv = new int[aryIdx + 1];
 		for (int i = 0; i < aryIdx + 1; i++)
 			rv[i] = ary[i];
@@ -53,7 +56,7 @@ public class HierPosAryBldr {
 	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < aryIdx; i++)
-			sb.Add_spr_unless_first(Int_.To_str(ary[i]), " ", i);
-		return sb.To_str();
+			sb.AddSprUnlessFirst(IntUtl.ToStr(ary[i]), " ", i);
+		return sb.ToStr();
 	}
 }

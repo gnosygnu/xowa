@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.GfoMsg;
-import gplx.GfsCtx;
-import gplx.Keyval_hash;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.commons.KeyValHash;
 import gplx.gfui.SizeAdp;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
@@ -28,24 +28,21 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
 public class Swt_btn_no_border implements GxwElem, Swt_control {
 	private ImageAdp btn_img; private Composite box_grp; private Label box_btn;
-	public Swt_btn_no_border(Swt_control owner_control, Keyval_hash ctorArgs) {
+	public Swt_btn_no_border(Swt_control owner_control, KeyValHash ctorArgs) {
 		Composite owner = owner_control.Under_composite();		
 		Make_btn_no_border(owner.getDisplay(), owner.getShell(), owner);
 		this.core = new Swt_core__dual(box_grp, box_btn, 2, 2);
 		box_btn.addKeyListener(new Swt_lnr_key(this));
 		box_btn.addMouseListener(new Swt_lnr_mouse(this));
-		box_btn.setCursor((Cursor)ctorArgs.Get_val_or_null("cursor"));
+		box_btn.setCursor((Cursor)ctorArgs.GetByValOrNull("cursor"));
 	}
 	@Override public Control Under_control() {return box_grp;}
 	@Override public Composite Under_composite() {return box_grp;}

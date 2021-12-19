@@ -17,7 +17,7 @@ package gplx.xowa.xtns.templateData; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*;
 public class Xtn_templateData_nde_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_all_str("<templateData>{\"description\":\"test\"}</templateData>", "<pre style=\"overflow:auto\">{&quot;description&quot;:&quot;test&quot;}</pre>");
 	}
 }

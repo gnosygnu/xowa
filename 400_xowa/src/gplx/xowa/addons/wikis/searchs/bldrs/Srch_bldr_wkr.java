@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.bldrs;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.bldrs.Xob_bldr;
 import gplx.xowa.bldrs.Xob_cmd_keys;
@@ -33,7 +33,7 @@ public class Srch_bldr_wkr implements Xob_page_wkr {
 	}
 	public void Page_wkr__run(gplx.xowa.wikis.data.tbls.Xowd_page_itm page) {
 		try {temp_tbl_wkr.Exec_by_wkr(page.Id(), page.Ttl_page_db());}
-		catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "search:error: page=~{0} err=~{1}", page.Ttl_page_db(), Err_.Message_gplx_full(e));}
+		catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "search:error: page=~{0} err=~{1}", page.Ttl_page_db(), ErrUtl.ToStrFull(e));}
 	}
 	public void Page_wkr__run_cleanup() {}
 	public void Page_wkr__end() {

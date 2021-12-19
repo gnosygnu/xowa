@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoa_wiki_regy {
 	private Xoae_app app;
@@ -26,9 +32,9 @@ public class Xoa_wiki_regy {
 		init_needed = true;
 	}
 	public boolean Url_is_invalid_domain(Xoa_url url) {
-		if (!Bry_.Eq(url.Page_bry(), Xoa_page_.Main_page_bry)) return false;		// page is not "Main_Page"; assume not an invalid domain str; EX: "uk/wiki/Main_Page"
-		if (	 Bry_.Eq(Xow_domain_tid_.Bry__home, url.Wiki_bry())				// wiki is "home"
-			&&	!Bry_.Eq(Xow_domain_tid_.Bry__home, url.Raw()))					// raw is "home"; should be "home/wiki/Main_Page"; DATE:2014-02-09
+		if (!BryLni.Eq(url.Page_bry(), Xoa_page_.Main_page_bry)) return false;		// page is not "Main_Page"; assume not an invalid domain str; EX: "uk/wiki/Main_Page"
+		if (	 BryLni.Eq(Xow_domain_tid_.Bry__home, url.Wiki_bry())				// wiki is "home"
+			&&	!BryLni.Eq(Xow_domain_tid_.Bry__home, url.Raw()))					// raw is "home"; should be "home/wiki/Main_Page"; DATE:2014-02-09
 			return false;															// special case to handle "home" which should mean "home" in any wiki, but "home/wiki/Main_Page" in home wiki
 		return !this.Has(url.Wiki_bry());
 	}
@@ -38,7 +44,7 @@ public class Xoa_wiki_regy {
 		int wiki_dirs_len = wiki_dirs.length;
 		for (int i = 0; i < wiki_dirs_len; i++) {
 			Io_url wiki_dir = wiki_dirs[i];
-			byte[] domain_bry = Bry_.new_u8(wiki_dir.NameOnly());
+			byte[] domain_bry = BryUtl.NewU8(wiki_dir.NameOnly());
 			hash.Add(domain_bry, domain_bry);
 		}
 	}

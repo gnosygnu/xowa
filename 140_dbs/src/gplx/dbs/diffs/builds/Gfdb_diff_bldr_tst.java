@@ -13,41 +13,47 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs.builds; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
+package gplx.dbs.diffs.builds; import gplx.dbs.*; import gplx.dbs.diffs.*;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Gfdb_diff_bldr_tst {
 	private final Gfdb_diff_bldr_fxt fxt = new Gfdb_diff_bldr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Same() {
-		fxt.Init__tbl__old(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
-		fxt.Init__tbl__cur(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
+	@Test public void Same() {
+		fxt.Init__tbl__old(ObjectUtl.Ary(1, "A")	, ObjectUtl.Ary(2, "B"));
+		fxt.Init__tbl__cur(ObjectUtl.Ary(1, "A")	, ObjectUtl.Ary(2, "B"));
 		fxt.Test__bld();
 	}
-	@Test  public void Update() {
-		fxt.Init__tbl__old(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
-		fxt.Init__tbl__cur(Object_.Ary(1, "A1")	, Object_.Ary(2, "B1"));
+	@Test public void Update() {
+		fxt.Init__tbl__old(ObjectUtl.Ary(1, "A")	, ObjectUtl.Ary(2, "B"));
+		fxt.Init__tbl__cur(ObjectUtl.Ary(1, "A1")	, ObjectUtl.Ary(2, "B1"));
 		fxt.Test__bld("U|1|A1", "U|2|B1");
 	}
-	@Test  public void Insert() {
-		fxt.Init__tbl__old(Object_.Ary(1, "A"));
-		fxt.Init__tbl__cur(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
+	@Test public void Insert() {
+		fxt.Init__tbl__old(ObjectUtl.Ary(1, "A"));
+		fxt.Init__tbl__cur(ObjectUtl.Ary(1, "A")	, ObjectUtl.Ary(2, "B"));
 		fxt.Test__bld("I|2|B");
 	}
-	@Test  public void Delete() {
-		fxt.Init__tbl__old(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
-		fxt.Init__tbl__cur(Object_.Ary(1, "A"));
+	@Test public void Delete() {
+		fxt.Init__tbl__old(ObjectUtl.Ary(1, "A")	, ObjectUtl.Ary(2, "B"));
+		fxt.Init__tbl__cur(ObjectUtl.Ary(1, "A"));
 		fxt.Test__bld("D|2");
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init__tbl__old
-		( Object_.Ary(1, "A")
-		, Object_.Ary(2, "B")
-		, Object_.Ary(3, "C")
+		( ObjectUtl.Ary(1, "A")
+		, ObjectUtl.Ary(2, "B")
+		, ObjectUtl.Ary(3, "C")
 		);
 		fxt.Init__tbl__cur
-		( Object_.Ary(1, "A")
-		, Object_.Ary(2, "B1")
-		, Object_.Ary(4, "D")
+		( ObjectUtl.Ary(1, "A")
+		, ObjectUtl.Ary(2, "B1")
+		, ObjectUtl.Ary(4, "D")
 		);			
 		fxt.Test__bld("U|2|B1", "D|3", "I|4|D");
 	}
@@ -76,12 +82,12 @@ class Gfdb_diff_bldr_fxt {
 	public void Init__tbl__cur(Object[]... rows) {Db_conn_utl.Tbl__new(new_conn, "tbl", flds_ary, rows);}
 	public void Test__bld(String... expd) {
 		bldr.Compare(ctx, tbl, old_conn, new_conn);
-		Tfds.Eq_ary_str(expd, wkr.To_str_ary());
+		GfoTstr.EqLines(expd, wkr.To_str_ary());
 	}
 }
 class Gfdb_diff_wkr__test implements Gfdb_diff_wkr {
 	private final List_adp list = List_adp_.New();
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	private Db_rdr old_rdr, new_rdr;
 	public void Init_rdrs(Gdif_bldr_ctx ctx, Gfdb_diff_tbl tbl, Db_rdr old_rdr, Db_rdr new_rdr) {
 		this.old_rdr = old_rdr; this.new_rdr = new_rdr;
@@ -90,15 +96,15 @@ class Gfdb_diff_wkr__test implements Gfdb_diff_wkr {
 	public void Handle_same() {
 		String old_val = old_rdr.Read_str("val");
 		String new_val = new_rdr.Read_str("val");
-		if (!String_.Eq(old_val, new_val))
-			list.Add(bfr.Add_str_a7("U").Add_byte_pipe().Add_obj(old_rdr.Read_obj("id")).Add_byte_pipe().Add_str_a7(new_val).To_str_and_clear());
+		if (!StringUtl.Eq(old_val, new_val))
+			list.Add(bfr.AddStrA7("U").AddBytePipe().AddObj(old_rdr.Read_obj("id")).AddBytePipe().AddStrA7(new_val).ToStrAndClear());
 	}
 	public void Handle_old_missing() {
 		String new_val = new_rdr.Read_str("val");
-		list.Add(bfr.Add_str_a7("I").Add_byte_pipe().Add_obj(new_rdr.Read_obj("id")).Add_byte_pipe().Add_str_a7(new_val).To_str_and_clear());
+		list.Add(bfr.AddStrA7("I").AddBytePipe().AddObj(new_rdr.Read_obj("id")).AddBytePipe().AddStrA7(new_val).ToStrAndClear());
 	}
 	public void Handle_new_missing() {
-		list.Add(bfr.Add_str_a7("D").Add_byte_pipe().Add_obj(old_rdr.Read_obj("id")).To_str_and_clear());
+		list.Add(bfr.AddStrA7("D").AddBytePipe().AddObj(old_rdr.Read_obj("id")).ToStrAndClear());
 	}
 	public String[] To_str_ary() {return list.ToStrAryAndClear();}
 }

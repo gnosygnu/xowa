@@ -13,14 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.data;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoGuid;
+import gplx.types.commons.GfoGuidUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
 import gplx.xowa.wikis.data.site_stats.*;
-import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
+import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.addons.wikis.htmls.css.dbs.*;
 import gplx.xowa.xtns.wbases.dbs.*;
 public class Xow_db_file {
-	Xow_db_file(Db_cfg_tbl cfg_tbl, Xowd_core_db_props props, Xob_info_session info_session, Xob_info_file info_file, Xow_db_file_schema_props schema_props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid, Db_conn conn, byte cmd_mode) {
+	Xow_db_file(Db_cfg_tbl cfg_tbl, Xowd_core_db_props props, Xob_info_session info_session, Xob_info_file info_file, Xow_db_file_schema_props schema_props, int id, byte tid, Io_url url, String ns_ids, int part_id, GfoGuid guid, Db_conn conn, byte cmd_mode) {
 		this.id = id; this.tid = tid; this.url = url; this.ns_ids = ns_ids; this.part_id = part_id; this.guid = guid; this.db_props = props;
 		this.conn = conn; this.cmd_mode = cmd_mode;
 		boolean schema_is_1 = props.Schema_is_1();
@@ -46,9 +51,9 @@ public class Xow_db_file {
 	public Io_url						Url()				{return url;}				private final Io_url url;
 	public Xowd_core_db_props			Db_props()			{return db_props;}			private final Xowd_core_db_props db_props;
 	public String						Ns_ids()			{return ns_ids;}			private final String ns_ids;
-	public int							Ns_id_or_fail()		{return Int_.Parse(ns_ids);}
+	public int							Ns_id_or_fail()		{return IntUtl.Parse(ns_ids);}
 	public int							Part_id()			{return part_id;}			private final int part_id;
-	public Guid_adp						Guid()				{return guid;}				private final Guid_adp guid;
+	public GfoGuid Guid()				{return guid;}				private final GfoGuid guid;
 	public byte							Cmd_mode()			{return cmd_mode;}			public Xow_db_file Cmd_mode_(byte v) {cmd_mode = v; return this;}		private byte cmd_mode;
 	public long							File_len()			{return file_len;}			public Xow_db_file File_len_add(int v) {file_len += v; return this;}	private long file_len;
 	public long							File_max()			{return file_max;}			public Xow_db_file File_max_(long v) {file_max = v; return this;}		private long file_max;
@@ -88,14 +93,14 @@ public class Xow_db_file {
 
 	public static final Xow_db_file Null = null;
 	public static Xow_db_file Make(Xob_info_session info_session, Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, String core_file_name, Db_conn conn) {
-		Guid_adp guid = Guid_adp_.New();
+		GfoGuid guid = GfoGuidUtl.New();
 		Xob_info_file info_file = new Xob_info_file(id, Xow_db_file_.To_key(tid), ns_ids, part_id, guid, props.Schema(), core_file_name, url.NameAndExt());
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		Xow_db_file rv = new Xow_db_file(cfg_tbl, props, info_session, info_file, Xow_db_file_schema_props.make_(), id, tid, url, ns_ids, part_id, guid, conn, Db_cmd_mode.Tid_create);
 		cfg_tbl.Create_tbl();	// always create cfg in each db
 		return rv;
 	}
-	public static Xow_db_file Load(Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, Guid_adp guid) {
+	public static Xow_db_file Load(Xowd_core_db_props props, int id, byte tid, Io_url url, String ns_ids, int part_id, GfoGuid guid) {
 		Db_conn conn = Db_conn_bldr.Instance.Get(url);
 		if (conn == null) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "wiki.db:missing db; tid=~{0} url=~{1}", Xow_db_file_.To_key(tid), url.Raw());

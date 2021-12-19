@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.boots; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.apps.boots;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.dlgs.Gfo_usr_dlg__log;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.core.consoles.*;  import gplx.core.envs.*;
 import gplx.dbs.*;
@@ -29,7 +40,7 @@ public class Xoa_boot_mgr {
 				Run_app(arg_mgr);
 		}
 		catch (Exception e) {
-			String err_str = Err_.Message_gplx_full(e);
+			String err_str = ErrUtl.ToStrFull(e);
 			log_wtr.Log_to_err(err_str);
 			Console_adp__sys.Instance.Write_str_w_nl(err_str);
 			if (log_wtr.Log_dir() == null) log_wtr.Log_dir_(Env_.AppUrl().OwnerDir().GenSubFil("xowa.log"));
@@ -45,7 +56,7 @@ public class Xoa_boot_mgr {
 		// init env
 		GfuiEnv_.Init_swt(args, Xoa_app_.class); 
 		Io_url jar_url = Env_.AppUrl();
-		Xoa_app_.Build_date = Io_mgr.Instance.QueryFil(jar_url).ModifiedTime().XtoUtc().XtoStr_fmt(Xoa_app_.Build_date_fmt);
+		Xoa_app_.Build_date = Io_mgr.Instance.QueryFil(jar_url).ModifiedTime().ToUtc().ToStrFmt(Xoa_app_.Build_date_fmt);
 		log_wtr.Log_to_session_fmt("env.init: jar_url=~{0}; build_date=~{1}", jar_url.NameAndExt(), Xoa_app_.Build_date);
 		log_wtr.Log_to_session_fmt("env.init: op_sys=~{0}", Op_sys.Cur().To_str());
 	}
@@ -56,7 +67,7 @@ public class Xoa_boot_mgr {
 			// pull vars from command-line args
 			Io_url root_dir = arg_mgr.Fsys__root_dir();
 			Xoa_app_.Op_sys_str = arg_mgr.Fsys__bin_dir();
-			Xoa_app_.User_agent = String_.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys_str);
+			Xoa_app_.User_agent = StringUtl.Format("XOWA/{0} ({1}) [gnosygnu@gmail.com]", Xoa_app_.Version, Xoa_app_.Op_sys_str);
 
 			// prep splash window
 			Xoa_app_mode app_type = arg_mgr.App_type();
@@ -90,17 +101,17 @@ public class Xoa_boot_mgr {
 				// prep http-server
 				gplx.xowa.apps.servers.http.Http_server_mgr server_mgr = app.Http_server();
 				server_mgr.Port_(arg_mgr.Http__port(), false);
-				server_mgr.Home_(Bry_.new_u8(arg_mgr.Http__home_page()));
+				server_mgr.Home_(BryUtl.NewU8(arg_mgr.Http__home_page()));
 				server_mgr.Wkr_pool().Init(arg_mgr.Http__max_clients(), arg_mgr.Http__max_clients_timeout());
 
 				// add safelisted Special pages
 				String special_pages_safelist = arg_mgr.Http__special_pages_safelist();
 				if (special_pages_safelist != null) {
-					byte[][] special_pages = Bry_split_.Split(Bry_.new_u8(special_pages_safelist), AsciiByte.Pipe);
+					byte[][] special_pages = BrySplit.Split(BryUtl.NewU8(special_pages_safelist), AsciiByte.Pipe);
 
 					// --http_server.special_pages_safelist "" should mean ignore all
 					if (special_pages.length == 0) {
-						special_pages = new byte[][] {Bry_.Empty};
+						special_pages = new byte[][] {BryUtl.Empty};
 					}
 					for (byte[] special_page : special_pages) {
 						app.Special_regy().Safelist_pages().AddAsKeyAndVal(special_page);
@@ -110,7 +121,7 @@ public class Xoa_boot_mgr {
 				Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("app.boot:app.init");
 				app.Init_by_app();
 			}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0}", Err_.Message_gplx_full(e));}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "app init failed: ~{0}", ErrUtl.ToStrFull(e));}
 			app.Usr_dlg().Log_wkr_(app.Log_wtr());	// NOTE: log_wtr must be set for cmd-line (else process will fail);
 
 			// run gfs; prefs.gfs and app.gfs
@@ -118,9 +129,9 @@ public class Xoa_boot_mgr {
 			Io_url cmd_file = arg_mgr.Cmd__file();
 			try {app.Gfs_mgr().Run_url(cmd_file);}
 			catch (Exception e) {
-				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1}", cmd_file.Raw(), Err_.Message_gplx_full(e));
+				usr_dlg.Warn_many("", "", "script file failed: ~{0} ~{1}", cmd_file.Raw(), ErrUtl.ToStrFull(e));
 				if (app_type_is_gui)
-					GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));
+					GfuiEnv_.ShowMsg(ErrUtl.ToStrFull(e));
 			}
 
 			// launch
@@ -132,7 +143,7 @@ public class Xoa_boot_mgr {
 				String cmd_text = arg_mgr.Cmd__text();
 				if (cmd_text != null) {
 					gplx.xowa.apps.servers.Gxw_html_server.Init_gui_for_server(app, null); // NOTE: must init kit else "app.shell.fetch_page" will fail; DATE:2015-04-30
-					Console_adp__sys.Instance.Write_str_w_nl_utf8(Object_.Xto_str_strict_or_empty(app.Gfs_mgr().Run_str(cmd_text)));
+					Console_adp__sys.Instance.Write_str_w_nl_utf8(ObjectUtl.ToStrOrEmpty(app.Gfs_mgr().Run_str(cmd_text)));
 				}
 				if (app_type_is_gui)
 					app.Gui_mgr().Run(splash_win);
@@ -140,15 +151,15 @@ public class Xoa_boot_mgr {
 					gplx.xowa.xtns.scribunto.Scrib_core_mgr.Term_all(app);
 			}
 		}
-		catch (Exception e) {usr_dlg.Warn_many("", "", "app launch failed: ~{0}", Err_.Message_gplx_full(e));}
+		catch (Exception e) {usr_dlg.Warn_many("", "", "app launch failed: ~{0}", ErrUtl.ToStrFull(e));}
 		finally {
 			if (app != null && app_type_is_gui)	// only cancel if app_type_is_gui is true; (force cmd_line to end process)
 				app.Setup_mgr().Cmd_mgr().Canceled_y_();
 		}
 	}
 	private static byte[] System_lang() {
-		String lang_code = System_.Prop__user_language();
-		byte[] lang_code_bry = Bry_.new_a7(lang_code);
+		String lang_code = SystemUtl.Prop__user_language();
+		byte[] lang_code_bry = BryUtl.NewA7(lang_code);
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(lang_code_bry);
 		return lang_itm == null ? Xol_lang_itm_.Key_en : lang_itm.Key();
 	}

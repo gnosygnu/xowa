@@ -14,15 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.hwtrs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.apps.apis.xowa.html.Xoapi_toggle_mgr;
 import gplx.xowa.apps.apis.xowa.xtns.Xoapi_wikibase;
 import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
@@ -36,8 +35,8 @@ import org.junit.Before;
 import org.junit.Test;
 public class Wdata_hwtr_mgr_tst {
 	@Before public void init() {fxt.init();} private Wdata_hwtr_mgr_fxt fxt = new Wdata_hwtr_mgr_fxt();
-	@Test  public void Stub() {}
-//		@Test  public void Write_label() {
+	@Test public void Stub() {}
+//		@Test public void Write_label() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_label("en", "en_label")
 //			.Add_label("de", "de_label").Xto_wdoc(), String_.Concat_lines_nl_skip_last
@@ -60,7 +59,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test  public void Write_descr() {
+//		@Test public void Write_descr() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_description("en", "en_descr")
 //			.Add_description("de", "de_descr").Xto_wdoc(), String_.Concat_lines_nl_skip_last
@@ -83,7 +82,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test  public void Write_alias() {
+//		@Test public void Write_alias() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_alias("en", "en_1", "en_2")
 //			.Add_alias("de", "de_1").Xto_wdoc(), String_.Concat_lines_nl_skip_last
@@ -106,7 +105,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test  public void Write_slink_tbl_one() {
+//		@Test public void Write_slink_tbl_one() {
 //			fxt
 //			.Init_resolved_qid(1, "featured article").Init_resolved_qid(2, "good article")
 //			.Test_doc(fxt.Wdoc_bldr()			
@@ -177,7 +176,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "  </div>"
 //			));
 //		}
-//		@Test  public void Write_slink_tbl_many() {
+//		@Test public void Write_slink_tbl_many() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_sitelink("enwiki"		, "Earth")
 //			.Add_sitelink("enwiktionary", "Earth")
@@ -248,7 +247,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</p>"
 //			));
 //		}
-//		@Test  public void Write_claim() {
+//		@Test public void Write_claim() {
 //			Wdata_wiki_mgr_fxt mkr = fxt.Wdata_fxt();			
 //			fxt
 //			.Init_resolved_pid(1, "prop_1")
@@ -279,7 +278,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test  public void Write_json() {
+//		@Test public void Write_json() {
 //			Json_doc jdoc = Json_doc.new_apos_("{ 'node':['val_0', 'val_1'] }");
 //			Wdata_doc wdoc = new Wdata_doc(Bry_.Empty, null, jdoc);
 //			fxt.Test_json(wdoc, String_.Concat_lines_nl_skip_last
@@ -313,27 +312,27 @@ class Wdata_hwtr_mgr_fxt {
 		doc_hwtr.Lbl_mgr().Clear();
 	}
 	public Wdata_doc_bldr Wdoc_bldr() {return wdoc_bldr;} private Wdata_doc_bldr wdoc_bldr = new Wdata_doc_bldr();
-	public Wdata_hwtr_mgr_fxt Init_resolved_pid(int pid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(BoolUtl.Y, pid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
-	public Wdata_hwtr_mgr_fxt Init_resolved_qid(int qid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(BoolUtl.N, qid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
+	public Wdata_hwtr_mgr_fxt Init_resolved_pid(int pid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(BoolUtl.Y, pid), new Wdata_langtext_itm(BryUtl.NewA7("en"), BryUtl.NewA7(lbl))); return this;}
+	public Wdata_hwtr_mgr_fxt Init_resolved_qid(int qid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(BoolUtl.N, qid), new Wdata_langtext_itm(BryUtl.NewA7("en"), BryUtl.NewA7(lbl))); return this;}
 	public void Test_doc(Wdata_doc wdoc, String expd) {
 		doc_hwtr.Init_by_wdoc(wdoc);
 		byte[] actl = doc_hwtr.Write(wdoc);
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+		GfoTstr.EqLines(expd, StringUtl.NewU8(actl));
 	}
 	public void Test_claim_val(Wbase_claim_base claim, String expd) {			
 		doc_hwtr.Init_by_wdoc(wdoc_bldr.Add_claims(claim).Xto_wdoc());
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(tmp_bfr, wdata_fxt.Wdata_mgr(), doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr(), wdata_fxt.Wiki().Lang(), Bry_.Empty);
+		BryWtr tmp_bfr = BryWtr.New();
+		Wdata_visitor__html_wtr html_wtr = new Wdata_visitor__html_wtr().Init(tmp_bfr, wdata_fxt.Wdata_mgr(), doc_hwtr.Msgs(), doc_hwtr.Lbl_mgr(), wdata_fxt.Wiki().Lang(), BryUtl.Empty);
 		claim.Welcome(html_wtr);
-		byte[] actl = tmp_bfr.To_bry_and_clear();
-		Tfds.Eq(expd, String_.new_u8(actl));
+		byte[] actl = tmp_bfr.ToBryAndClear();
+		GfoTstr.EqObj(expd, StringUtl.NewU8(actl));
 	}
 	public void Test_json(Wdata_doc wdoc, String expd) {
 		Wdata_fmtr__json fmtr_json = doc_hwtr.Fmtr_json();
 		fmtr_json.Init_by_wdoc(wdoc.Jdoc());
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		fmtr_json.Bfr_arg__add(tmp_bfr);
-		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
+		BryWtr tmp_bfr = BryWtr.New();
+		fmtr_json.AddToBfr(tmp_bfr);
+		GfoTstr.EqLines(expd, tmp_bfr.ToStrAndClear());
 	}
 }
 class Wdata_lbl_wkr__test implements Wdata_lbl_wkr {

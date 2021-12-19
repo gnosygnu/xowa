@@ -13,31 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.xowa.parsers.vnts.*;
+package gplx.xowa.langs.vnts;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xol_vnt_regy_fxt {		
 	private final Xol_vnt_regy mgr = new_chinese();
-	public String[] Make_lang_chain_cn() {return String_.Ary("zh-cn", "zh-hans", "zh-hant", "zh");}
+	public String[] Make_lang_chain_cn() {return StringUtl.Ary("zh-cn", "zh-hans", "zh-hant", "zh");}
 	public void Test_match_any(boolean expd, String[] lang_chain, String[]... vnt_chain_ary) {
 		int len = vnt_chain_ary.length;
-		int lang_flag = mgr.Mask__calc(Bry_.Ary(lang_chain));
+		int lang_flag = mgr.Mask__calc(BryUtl.Ary(lang_chain));
 		for (int i = 0; i < len; ++i) {
 			String[] vnt_chain = vnt_chain_ary[i];	// EX: -{zh;zh-hans;zh-hant}-
-			int vnt_flag = mgr.Mask__calc(Bry_.Ary(vnt_chain));
-			Tfds.Eq(expd, mgr.Mask__match_any(vnt_flag, lang_flag), String_.Concat_with_str(";", vnt_chain) + "<>" + String_.Concat_with_str(";", lang_chain));
+			int vnt_flag = mgr.Mask__calc(BryUtl.Ary(vnt_chain));
+			GfoTstr.EqObj(expd, mgr.Mask__match_any(vnt_flag, lang_flag), StringUtl.ConcatWith(";", vnt_chain) + "<>" + StringUtl.ConcatWith(";", lang_chain));
 		}
 	}
 	public void Test_calc(String[] ary, int expd) {
-		Tfds.Eq(expd, mgr.Mask__calc(Bry_.Ary(ary)));
+		GfoTstr.EqObj(expd, mgr.Mask__calc(BryUtl.Ary(ary)));
 	}
 	public static void Init__vnt_mgr(Xol_vnt_mgr vnt_mgr, int cur_idx, String[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			Xol_vnt_itm itm = vnt_mgr.Regy__get_or_new(Bry_.new_a7(ary[i]));
-			vnt_mgr.Lang().Lang_mgr().Get_by_or_load(itm.Key()).Fallback_bry_(Bry_.new_a7("zh-hans,zh-hant"));
+			Xol_vnt_itm itm = vnt_mgr.Regy__get_or_new(BryUtl.NewA7(ary[i]));
+			vnt_mgr.Lang().Lang_mgr().Get_by_or_load(itm.Key()).Fallback_bry_(BryUtl.NewA7("zh-hans,zh-hant"));
 		}
 		vnt_mgr.Init_end();
-		vnt_mgr.Cur_itm_(Bry_.new_a7(ary[cur_idx]));
+		vnt_mgr.Cur_itm_(BryUtl.NewA7(ary[cur_idx]));
 	}
 	public static Xol_vnt_regy new_chinese() {	// REF.MW:/languages/classes/LanguageZh.php|LanguageZh|__construct
 		Xol_vnt_regy rv = new Xol_vnt_regy();
@@ -53,8 +55,8 @@ public class Xol_vnt_regy_fxt {
 		return rv;
 	}
 	private static void new_chinese_vnt(Xol_vnt_regy regy, String key, int dir, String... fallbacks) {
-		byte[] key_bry = Bry_.new_u8(key);
-		Xol_vnt_itm itm = regy.Add(key_bry, Bry_.Ucase__all(key_bry));
-		itm.Init(dir, Bry_.Ary(fallbacks));
+		byte[] key_bry = BryUtl.NewU8(key);
+		Xol_vnt_itm itm = regy.Add(key_bry, BryUtl.UcaseAll(key_bry));
+		itm.Init(dir, BryUtl.Ary(fallbacks));
 	}
 }

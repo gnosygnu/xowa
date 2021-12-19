@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.regxs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.regxs;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfo_pattern {
 	private final Gfo_pattern_itm[] itms; private final int itms_len;
 	private final Gfo_pattern_ctx ctx = new Gfo_pattern_ctx();
@@ -37,7 +38,7 @@ public class Gfo_pattern {
 		return ctx.Rslt_pass() && val_pos == val_len;
 	}
 	public static Gfo_pattern[] Parse_to_ary(byte[] raw) {
-		byte[][] patterns = Bry_split_.Split(raw, AsciiByte.Semic, true);
+		byte[][] patterns = BrySplit.Split(raw, AsciiByte.Semic, true);
 		int patterns_len = patterns.length;
 		Gfo_pattern[] rv = new Gfo_pattern[patterns_len];
 		for (int i = 0; i < patterns_len; ++i) {

@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.htmls.bridges.*;
+package gplx.xowa.addons.bldrs.centrals;
+import gplx.langs.jsons.Json_nde;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.htmls.bridges.Bridge_cmd_itm;
+import gplx.xowa.htmls.bridges.Bridge_cmd_mgr;
 public class Xobc_task_bridge implements Bridge_cmd_itm {
 	private Xoa_app app;
 	public void Init_by_app(Xoa_app app) {this.app = app;}
@@ -36,7 +40,7 @@ public class Xobc_task_bridge implements Bridge_cmd_itm {
 			case Proc__redo_cur:				task_mgr.Work_mgr().Redo_cur(); break;
 			case Proc__filter_todo:				task_mgr.Filter_todo(args.Get_as_str("lang_key"), args.Get_as_str("type_key")); break;
 			case Proc__download_db:				gplx.xowa.addons.bldrs.centrals.dbs.Xobc_data_db_upgrader.Check_for_updates(task_mgr); break;
-			default: throw Err_.new_unhandled_default(proc_id);
+			default: throw ErrUtl.NewUnhandled(proc_id);
 		}
 		return "";
 	}
@@ -58,6 +62,6 @@ public class Xobc_task_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("del_todo"					, Proc__del_todo)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("builder_central.exec");
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = BryUtl.NewA7("builder_central.exec");
         public static final Xobc_task_bridge Prototype = new Xobc_task_bridge(); Xobc_task_bridge() {}
 }

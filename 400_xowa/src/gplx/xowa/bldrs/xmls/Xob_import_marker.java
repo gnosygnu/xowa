@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*;
-import gplx.gfui.kits.core.*; import gplx.xowa.bldrs.cmds.utils.*;
+package gplx.xowa.bldrs.xmls;
+import gplx.gfui.kits.core.Gfui_dlg_msg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.cmds.utils.Xob_cleanup_cmd;
 public class Xob_import_marker {
 	private final Hash_adp_bry in_progress_hash = Hash_adp_bry.cs();
 	public void Bgn(Xowe_wiki wiki) {
@@ -32,13 +41,13 @@ public class Xob_import_marker {
 		if (!Io_mgr.Instance.ExistsFil(url)) return true;
 		Xoae_app app = wiki.Appe();
 		app.Usr_dlg().Log_many("", "", "import.marker: marker found: url=~{0}", url.Raw());
-		byte[] incompete_msg_bry = app.Usere().Msg_mgr().Val_by_key_args(Bry_.new_a7("api-xowa.import.core.incomplete"), wiki.Domain_str());
-		int rslt = app.Gui_mgr().Kit().Ask_yes_no_cancel("", "", String_.new_u8(incompete_msg_bry));
+		byte[] incompete_msg_bry = app.Usere().Msg_mgr().Val_by_key_args(BryUtl.NewA7("api-xowa.import.core.incomplete"), wiki.Domain_str());
+		int rslt = app.Gui_mgr().Kit().Ask_yes_no_cancel("", "", StringUtl.NewU8(incompete_msg_bry));
 		switch (rslt) {
 			case Gfui_dlg_msg_.Btn_yes:		Xob_cleanup_cmd.Delete_wiki_sql(wiki); End(wiki); return false;	// delete wiki
 			case Gfui_dlg_msg_.Btn_no:		End(wiki); return true;		// delete marker
 			case Gfui_dlg_msg_.Btn_cancel:	return true;				// noop
-			default:						throw Err_.new_unhandled(rslt);
+			default:						throw ErrUtl.NewUnhandled(rslt);
 		}
 	}
 	private static Io_url url_(Xowe_wiki wiki) {

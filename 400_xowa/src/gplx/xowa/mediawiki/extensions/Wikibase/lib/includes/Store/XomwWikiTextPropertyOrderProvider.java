@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.lib.*; import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.*;
+package gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
 import gplx.langs.regxs.*;
 // REF.WBASE:2020-01-19
 /**
@@ -55,7 +57,7 @@ abstract class XomwWikiTextPropertyOrderProvider implements XomwPropertyOrderPro
 	* @return String[]
 	*/
 	private XophpArray parseList(String pageContent) {
-		pageContent = XophpRegex_.preg_replace(parseList_replace_regx, String_.Empty, pageContent);
+		pageContent = XophpRegex_.preg_replace(parseList_replace_regx, StringUtl.Empty, pageContent);
 
 		XophpArray orderedPropertiesMatches = XophpArray.New();
 		XophpRegex_.preg_match_all(

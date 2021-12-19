@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.percentiles; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.percentiles; import gplx.dbs.*;
+import gplx.frameworks.objects.Cancelable;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
 public abstract class Percentile_select_base {	// SELECT * FROM x ORDER BY y LIMIT 10;
 	protected Cancelable cxl;
 	protected Percentile_rng rng;
@@ -46,7 +49,7 @@ public abstract class Percentile_select_base {	// SELECT * FROM x ORDER BY y LIM
 			}
 		}
 		catch (Exception exc) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "error during percentile; err=~{0}", Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "error during percentile; err=~{0}", ErrUtl.ToStrLog(exc));
 		}
 		finally {
 			rdr = Rdr__term(rdr);

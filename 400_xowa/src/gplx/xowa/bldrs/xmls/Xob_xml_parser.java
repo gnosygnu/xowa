@@ -13,12 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*;
-import gplx.core.btries.*; import gplx.core.ios.*; import gplx.core.times.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.bldrs.xmls;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.ios.Io_buffer_rdr;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateParser;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
 public class Xob_xml_parser {
-	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr_.New(); DateAdp_parser date_parser = DateAdp_parser.new_();
+	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); BryWtr data_bfr = BryWtr.New(); GfoDateParser dateParser = new GfoDateParser();
 	public Xob_xml_parser Tag_len_max_(int v) {tag_len_max = v; return this;} private int tag_len_max = 255; // max size of any (a) xml tag, (b) int or (c) date; everything else goes into a data_bfr
 	public Xob_xml_parser Data_bfr_len_(int v) {data_bfr.Resize(v); return this;} // PERF: resize data_bfr once to large size, rather than grow incremently to it
 	public Xob_xml_parser Trie_tab_del_() {trie.Del(Xob_xml_parser_.Bry_tab); return this;}
@@ -43,11 +53,11 @@ public class Xob_xml_parser {
 				fil.Bfr_load_from(refill_pos);		// refill src from pos; 
 				src_len = fil.Bfr_len();
 			}
-			if (pos >= src_len) return Bry_find_.Not_found;	// no more src left; should only happen at end of file
+			if (pos >= src_len) return BryFind.NotFound;	// no more src left; should only happen at end of file
 			byte b = src[pos];
 			Object o = trie.Match_bgn_w_byte(b, src, pos, src_len);
 			if (o == null) {								// text_data; not an xml_nde (<id>), xml_escape (&lt;), or tab
-				if (data_bfr_add) data_bfr.Add_byte(b);		// add to src if data_bfr_add is on (only happens for <title>, <text>)
+				if (data_bfr_add) data_bfr.AddByte(b);		// add to src if data_bfr_add is on (only happens for <title>, <text>)
 				++pos;
 			}
 			else {											// is xml_nde, xml_escape, or tab
@@ -59,31 +69,31 @@ public class Xob_xml_parser {
 					case Xob_xml_parser_.Id_id_bgn:			if (page_id_needed) data_bgn = pos; break;	// only flag if first <id>; note that 1st <id> always belongs to <page>;
 					case Xob_xml_parser_.Id_id_end:	
 						if (page_id_needed) {
-							int page_id = Bry_.To_int_or(src, data_bgn, hook_bgn, -1); if (page_id == -1) usr_dlg.Warn_many(GRP_KEY, "page_id_invalid", "page_id_is_invalid: ~{0}", String_.new_u8(src, data_bgn, hook_bgn));
+							int page_id = BryUtl.ToIntOr(src, data_bgn, hook_bgn, -1); if (page_id == -1) usr_dlg.Warn_many(GRP_KEY, "page_id_invalid", "page_id_is_invalid: ~{0}", StringUtl.NewU8(src, data_bgn, hook_bgn));
 							rv.Id_(page_id);
 							page_id_needed = false;		// turn off for other <id> tags (<contributor>; <revision>)
 						}
 						break;
 					case Xob_xml_parser_.Id_timestamp_bgn:  data_bgn = pos; break;
 					case Xob_xml_parser_.Id_timestamp_end:
-						date_parser.Parse_iso8651_like(modified_on_ary, src, data_bgn, hook_bgn);
-						rv.Modified_on_(DateAdp_.seg_(modified_on_ary));
+						dateParser.ParseIso8651Like(modified_on_ary, src, data_bgn, hook_bgn);
+						rv.Modified_on_(GfoDateUtl.NewBySegs(modified_on_ary));
 						break;
 					case Xob_xml_parser_.Id_title_bgn:		if (title_needed) data_bfr_add = true; break;
 					case Xob_xml_parser_.Id_text_bgn:		data_bfr_add = true; break;
 					case Xob_xml_parser_.Id_title_end:
 						if (title_needed) {
 							data_bfr_add = false;
-							byte[] ttl = data_bfr.To_bry_and_clear();
-							Bry_.Replace_reuse(ttl, AsciiByte.Space, AsciiByte.Underline);
+							byte[] ttl = data_bfr.ToBryAndClear();
+							BryUtl.ReplaceReuse(ttl, AsciiByte.Space, AsciiByte.Underline);
 							rv.Ttl_(ttl, ns_mgr);
 							title_needed = false;
 						}
 						break;
-					case Xob_xml_parser_.Id_text_end:		data_bfr_add = false; rv.Text_(data_bfr.To_bry_and_clear()); break;
+					case Xob_xml_parser_.Id_text_end:		data_bfr_add = false; rv.Text_(data_bfr.ToBryAndClear()); break;
 					case Xob_xml_parser_.Id_amp: case Xob_xml_parser_.Id_quot: case Xob_xml_parser_.Id_lt: case Xob_xml_parser_.Id_gt:
 					case Xob_xml_parser_.Id_cr_nl: case Xob_xml_parser_.Id_cr:
-						if (data_bfr_add) data_bfr.Add_byte(itm.Subst_byte());
+						if (data_bfr_add) data_bfr.AddByte(itm.Subst_byte());
 						break;
 					case Xob_xml_parser_.Id_tab: 
 						if (data_bfr_add) data_bfr.Add(itm.Subst_ary());	// NOTE: tab can exist in xml; see en.wiktionary.org_20120109: "<page>\n    <title>Thread:User talk:Yair rand/newentrywiz.js/quiashed</title>\n    <id>2578382</id>\n<DiscussionThreading>\n\t<ThreadSubject>
@@ -106,7 +116,7 @@ public class Xob_xml_parser {
 					case Xob_xml_parser_.Id_id_bgn_frag: case Xob_xml_parser_.Id_timestamp_bgn_frag:
 						data_bgn = pos; /*warn*/
 						break;
-					default:								throw Err_.new_unhandled(itm.Tid());	// shouldn't happen
+					default:								throw ErrUtl.NewUnhandled(itm.Tid());	// shouldn't happen
 				}
 			}
 		}

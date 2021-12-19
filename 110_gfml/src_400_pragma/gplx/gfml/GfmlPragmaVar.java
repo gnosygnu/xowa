@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 class GfmlPragmaVar implements GfmlPragma {
 	public String KeyOfPragma() {return pragmaKey;} public void PragmaKey_set(String v) {pragmaKey = v;} private String pragmaKey = "_var";
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
@@ -21,7 +25,7 @@ class GfmlPragmaVar implements GfmlPragma {
 		ExecList(bldr.Vars(), list);
 		bldr.Doc().PragmaMgr().EndCmds_add(bldr.CurNdeFrame().CurDocPos().NewUp(), GfmlPragmaVar_scopeEndCmd.new_(list));
 	}
-	@gplx.Internal protected List_adp Compile(GfmlNde pragmaNde) {
+	public List_adp Compile(GfmlNde pragmaNde) {
 		List_adp list = List_adp_.New();
 		for (int i = 0; i < pragmaNde.SubHnds().Count(); i++) {
 			GfmlNde subNde = (GfmlNde)pragmaNde.SubHnds().Get_at(i);
@@ -30,7 +34,7 @@ class GfmlPragmaVar implements GfmlPragma {
 		}
 		return list;
 	}
-	@gplx.Internal protected GfmlVarItm CompileItmNde(GfmlNde subNde) {
+	public GfmlVarItm CompileItmNde(GfmlNde subNde) {
 		String key = subNde.SubKeys().FetchDataOrFail("key");
 		GfmlAtr valAtr = (GfmlAtr)subNde.SubKeys().Get_by("val");
 		String ctx = subNde.SubKeys().FetchDataOrNull("ctx"); if (ctx == null) ctx = GfmlVarCtx_.DefaultKey;
@@ -51,7 +55,7 @@ class GfmlPragmaVar implements GfmlPragma {
 	}
 	public static GfmlPragmaVar new_() {return new GfmlPragmaVar();} GfmlPragmaVar() {}
 	public static GfmlVarCtx FetchIfNew(GfmlVarCtx ctx, GfmlVarItm var, Hash_adp cache) {// reused in two procs
-		if (ctx == null || !String_.Eq(ctx.Key(), var.CtxKey()))
+		if (ctx == null || !StringUtl.Eq(ctx.Key(), var.CtxKey()))
 			ctx = GfmlVarCtx_.FetchFromCacheOrNew(cache, var.CtxKey());
 		return ctx;
 	}

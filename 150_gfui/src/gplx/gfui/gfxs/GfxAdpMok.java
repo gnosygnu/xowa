@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.gfxs; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.gfxs; import gplx.gfui.*;
 import gplx.gfui.draws.*; import gplx.gfui.imgs.*;
+import gplx.types.basics.utls.StringUtl;
 public class GfxAdpMok implements GfxAdp {
 	public GfxItmList SubItms() {return subItms;} GfxItmList subItms = new GfxItmList();
 	public void DrawStringXtn(String s, FontAdp font, SolidBrushAdp brush, float x, float y, float width, float height, GfxStringData sd) {
@@ -42,7 +43,7 @@ public class GfxAdpMok implements GfxAdp {
 	public void FillRect(SolidBrushAdp brush, int x, int y, int width, int height) {
 		// gfx.FillRect(brush, x, y, width, height);
 	}
-	public float[] MeasureStringXtn(String s, FontAdp font, GfxStringData str) {return new float[] {13 * String_.Len(s), 17};}
+	public float[] MeasureStringXtn(String s, FontAdp font, GfxStringData str) {return new float[] {13 * StringUtl.Len(s), 17};}
 	public void Rls() {}
 	public static GfxAdpMok new_() {return new GfxAdpMok();} GfxAdpMok() {}
 }

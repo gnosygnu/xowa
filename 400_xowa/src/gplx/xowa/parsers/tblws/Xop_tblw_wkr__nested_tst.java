@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tblws;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_tblw_wkr__nested_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Basic() {
-		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki(StringUtl.ConcatLinesNlSkipLast
 			( "{|"
 			,	"|-"
 			,		"|"
@@ -46,7 +48,7 @@ public class Xop_tblw_wkr__nested_tst {
 	}
 	@Test public void Leading_ws() {
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|id='a'"
 			,	"|-"
 			,	"|a"
@@ -58,7 +60,7 @@ public class Xop_tblw_wkr__nested_tst {
 			,	"  |}"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl_skip_last
+			, StringUtl.ConcatLinesNlSkipLast
 			(	"<table id='a'>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -81,13 +83,13 @@ public class Xop_tblw_wkr__nested_tst {
 		fxt.Init_para_n_();
 	}
 	@Test public void Tblx_tblw() {	// PURPOSE: if <table> followed by {|, ignore 2nd table; EX: en.b:Wikibooks:Featured_books; DATE:2014-02-08
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table cellpadding=\"0\">"
 			,	"{| cellspacing=\"0\""
 			,	"|a"
 			,	"|}"
 			,	"</table>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<table cellpadding=\"0\">"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -98,12 +100,12 @@ public class Xop_tblw_wkr__nested_tst {
 			));
 	}
 	@Test public void Caption_and_tblw() {	// TIDY: don't try to fix <caption><table> sequence; PAGE:es.w:Sevilla; DATE:2014-06-29
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			( "{|"
 			, 	"|+"
 			, 	"{|"
 			,	"|}"
-			, "|}"), String_.Concat_lines_nl_skip_last
+			, "|}"), StringUtl.ConcatLinesNlSkipLast
 			( "<table>"
 			, "  <caption>"
 			, "    <table>"
@@ -118,12 +120,12 @@ public class Xop_tblw_wkr__nested_tst {
 			));
 	}
 	@Test public void Tb_tr_tb() {	// PURPOSE: if <tr><table>, auto-create <tr><td>; EX:w:Paris; DATE:2014-03-18
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			( "{|"
 			, "|-"
 			, "{|"
 			, "|}"
-			, "|}"), String_.Concat_lines_nl_skip_last
+			, "|}"), StringUtl.ConcatLinesNlSkipLast
 			( "<table>"
 			, "  <tr>"
 			, "    <table>"
@@ -137,7 +139,7 @@ public class Xop_tblw_wkr__nested_tst {
 			, ""
 			));
 	}
-//		@Test  public void Nested_tbl_missing() {	// PURPOSE: nested table not rendering properly; EX:ar.s:; DATE:2014-03-18
+//		@Test public void Nested_tbl_missing() {	// PURPOSE: nested table not rendering properly; EX:ar.s:; DATE:2014-03-18
 //			fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 //				( "{|"
 //				, "|-"

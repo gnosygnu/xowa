@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.tocs; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_toc_hzip_tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
-	@Test  public void Basic() {				// EX: <div class='xo-toc'/>
+	@Test public void Basic() {				// EX: <div class='xo-toc'/>
 		fxt.Test__bicode("~)!", "<div class=\"xo-toc\"></div>");
 	}
 }

@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.xowa.addons.wikis.searchs.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
@@ -49,7 +55,7 @@ public class Adjustment_cmd implements Gfo_invk {
 		, DbmetaFldItm.NewInt("page_count")
 		));
 		Db_stmt summary_stmt = pl_conn.Stmt_insert("penalty_summary", "page_ns", "score_bgn", "score_end", "len_avg", "page_count");
-		Db_stmt detail_stmt = pl_conn.Stmt_update(page_rank_tbl, String_.Ary("page_id"), "page_score", "score_old", "len_avg");
+		Db_stmt detail_stmt = pl_conn.Stmt_update(page_rank_tbl, StringUtl.Ary("page_id"), "page_score", "score_old", "len_avg");
 
 		// iterate namespaces
 		pl_conn.Meta_idx_create("page_rank_temp", "adjustment", "page_namespace", "page_score");

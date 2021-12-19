@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.htmls.heads;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import gplx.xowa.apps.servers.http.*;
 public class Xoh_head_itm__server extends Xoh_head_itm__base {
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__server;}
@@ -27,6 +28,6 @@ public class Xoh_head_itm__server extends Xoh_head_itm__base {
 		wtr.Write_js_alias_kv	(Client_alias, Key__server_host	, client_data.Server_host());
 		wtr.Write_js_alias_kv	(Client_alias, Key__ip_address	, client_data.Ip_address());
 	}
-	private static final byte[] Client_key = Bry_.new_a7("xowa.client"), Client_alias = Bry_.new_a7("x_c");
-	private static final byte[] Key__server_host = Bry_.new_a7("server_host"), Key__ip_address = Bry_.new_a7("ip_address");
+	private static final byte[] Client_key = BryUtl.NewA7("xowa.client"), Client_alias = BryUtl.NewA7("x_c");
+	private static final byte[] Key__server_host = BryUtl.NewA7("server_host"), Key__ip_address = BryUtl.NewA7("ip_address");
 }

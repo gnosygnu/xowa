@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.randoms.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.randoms.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.wikis.pages.randoms.mgrs;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.commons.GfoRandomUtl;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.pages.randoms.dbs.*; import gplx.xowa.addons.wikis.pages.randoms.bldrs.*;
 public class Rndm_mgr {
 	public Rndm_mgr(Xow_wiki wiki) {
@@ -26,7 +28,7 @@ public class Rndm_mgr {
 		// 0|type:ns,ns_id:123,text:123|123
 		int rng_end = db_mgr.Tbl__qry().Select_rng_end(qry_idx);
 		Rndm_rng_itm rng_end_itm = db_mgr.Tbl__rng().Select_by_rng_idx_or_noop(qry_idx, rng_end);
-		int rndm_num = RandomAdp_.new_().Next(rng_end_itm.Seq_end());
+		int rndm_num = GfoRandomUtl.New().Next(rng_end_itm.Seq_end());
 		Rndm_rng_itm rng_itm = db_mgr.Tbl__rng().Select_by_rndm_num_or_noop(qry_idx, rndm_num);
 		int seq_idx = rndm_num - rng_itm.Seq_bgn();
 		int page_id = db_mgr.Tbl__seq().Select_or_neg_1(qry_idx, rng_itm.Rng_idx(), seq_idx);

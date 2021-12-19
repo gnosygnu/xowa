@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
-import gplx.langs.jsons.*;
+package gplx.core.gfobjs;
+import gplx.langs.jsons.Json_wtr;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.errs.ErrUtl;
 public class Gfobj_wtr__json {
 	private final Json_wtr wtr = new Json_wtr();
 	public Gfobj_wtr__json Opt_ws_(boolean v) {wtr.Opt_ws_(v); return this;}
 	public Gfobj_wtr__json Opt_backslash_2x_(boolean v) {wtr.Opt_backslash_2x_(v); return this;}
-	public Bry_bfr Bfr() {return wtr.Bfr();}
+	public BryWtr Bfr() {return wtr.Bfr();}
 	public String To_str() {return wtr.To_str_and_clear();}
 	public void Save(Io_url url) {
 		Io_mgr.Instance.SaveFilBry(url, wtr.To_bry_and_clear());
@@ -37,7 +42,7 @@ public class Gfobj_wtr__json {
 				wtr.Doc_ary_end();
 				break;
 			default:
-				throw Err_.new_unhandled_default(root.Grp_tid());
+				throw ErrUtl.NewUnhandled(root.Grp_tid());
 		}
 		return this;
 	}
@@ -58,7 +63,7 @@ public class Gfobj_wtr__json {
 			case Gfobj_fld_.Fld_tid__double:	wtr.Kv_double(itm.Key()	, ((Gfobj_fld_double)itm).As_double()); break;
 			case Gfobj_fld_.Fld_tid__nde:		wtr.Nde_bgn(itm.Key()); Write_nde(((Gfobj_fld_nde)itm).As_nde()); wtr.Nde_end();break;
 			case Gfobj_fld_.Fld_tid__ary:		wtr.Ary_bgn(itm.Key()); Write_ary(((Gfobj_fld_ary)itm).As_ary()); wtr.Ary_end();break;
-			default: throw Err_.new_unhandled_default(itm.Fld_tid());
+			default: throw ErrUtl.NewUnhandled(itm.Fld_tid());
 		}
 	}
 	private void Write_ary(Gfobj_ary ary) {
@@ -66,13 +71,13 @@ public class Gfobj_wtr__json {
 		Object[] ary_obj = ((Gfobj_ary)ary).Ary_obj();
 		for (int i = 0; i < len; ++i) {
 			Object sub_itm = ary_obj[i];
-			Class<?> sub_itm_type = Type_.Type_by_obj(sub_itm);
-			if		(Type_.Eq(sub_itm_type, Gfobj_ary.class)) {
+			Class<?> sub_itm_type = ClassUtl.TypeByObj(sub_itm);
+			if		(ClassUtl.Eq(sub_itm_type, Gfobj_ary.class)) {
 				wtr.Ary_bgn_ary();
 				Write_ary((Gfobj_ary)sub_itm);
 				wtr.Ary_end();
 			}
-			else if (Type_.Eq(sub_itm_type, Gfobj_nde.class)) {
+			else if (ClassUtl.Eq(sub_itm_type, Gfobj_nde.class)) {
 				wtr.Nde_bgn_ary();
 				Write_nde((Gfobj_nde)sub_itm);
 				wtr.Nde_end();

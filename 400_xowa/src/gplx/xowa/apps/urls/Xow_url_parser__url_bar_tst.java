@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.urls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xow_url_parser__url_bar_tst {
 	private final Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
@@ -38,7 +40,7 @@ public class Xow_url_parser__url_bar_tst {
 	}
 	@Test public void Main_page__zhw() {
 		Xowe_wiki zh_wiki = tstr.Prep_create_wiki("zh.wikipedia.org");
-		zh_wiki.Props().Main_page_(Bry_.new_a7("Zh_Main_Page"));
+		zh_wiki.Props().Main_page_(BryUtl.NewA7("Zh_Main_Page"));
 		tstr.Exec__parse_from_url_bar("zh.w:Main_Page")	.Test__page_is_main_n().Test__to_str("zh.wikipedia.org/wiki/Main_Page");
 		tstr.Exec__parse_from_url_bar("zh.w:")			.Test__page_is_main_y().Test__to_str("zh.wikipedia.org/wiki/Zh_Main_Page");
 		tstr.Exec__parse_from_url_bar("en.w:")			.Test__page_is_main_y().Test__to_str("en.wikipedia.org/wiki/Main_Page");		// old bug: still stuck at zh main page due to reused objects

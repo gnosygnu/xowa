@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+package gplx.langs.jsons;
+import gplx.types.basics.utls.TypeIds;
 public class Json_printer {
 	private final Json_parser parser = new Json_parser();
 	private final Json_wtr wtr = new Json_wtr();
@@ -44,7 +45,7 @@ public class Json_printer {
 		for (int i = 0; i < len; ++i) {
 			Json_kv kv = nde.Get_at_as_kv(i);
 			Object kv_val = wtr.Get_x(kv.Val());
-			wtr.Kv_obj(kv.Key_as_bry(), kv_val, Type_ids_.To_id_by_obj(kv_val));
+			wtr.Kv_obj(kv.Key_as_bry(), kv_val, TypeIds.ToIdByObj(kv_val));
 		}
 		wtr.Doc_nde_end();
 		return this;

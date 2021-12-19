@@ -13,16 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.layout.*;
-import org.eclipse.swt.widgets.*;
-
+package gplx.gfui.kits.swts;
+import gplx.gfui.PointAdp;
+import gplx.gfui.PointAdp_;
+import gplx.gfui.RectAdp;
+import gplx.gfui.RectAdp_;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.SizeAdp_;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwElem;
-import gplx.gfui.draws.*;
-import gplx.gfui.kits.*;
-import gplx.gfui.layouts.swts.*;
+import gplx.gfui.draws.ColorAdp;
+import gplx.gfui.draws.ColorAdp_;
+import gplx.gfui.draws.FontAdp;
+import gplx.gfui.draws.FontStyleAdp_;
+import gplx.gfui.layouts.swts.Swt_layout_data;
+import gplx.gfui.layouts.swts.Swt_layout_data__grid;
+import gplx.gfui.layouts.swts.Swt_layout_mgr;
+import gplx.gfui.layouts.swts.Swt_layout_mgr__grid;
+import gplx.types.errs.ErrUtl;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 
 abstract class Swt_core__base extends GxwCore_base {
 	private boolean focus_able;
@@ -62,13 +77,13 @@ abstract class Swt_core__base extends GxwCore_base {
 		this.layout_data = v;
 	}
 	@Override public void Controls_add(GxwElem sub)	{
-		if (!(sizeable instanceof Composite)) throw Err_.new_wo_type("cannot add sub to control");
+		if (!(sizeable instanceof Composite)) throw ErrUtl.NewArgs("cannot add sub to control");
 		Composite owner_as_composite = (Composite)sizeable;
 		Control sub_as_swt = ((Swt_control)sub).Under_control();
 		sub_as_swt.setParent(owner_as_composite);
 	}
 	@Override public void Controls_del(GxwElem sub)	{
-		if (!(sizeable instanceof Composite)) throw Err_.new_wo_type("cannot remove sub from control");
+		if (!(sizeable instanceof Composite)) throw ErrUtl.NewArgs("cannot remove sub from control");
 		Control sub_as_swt = ((Swt_control)sub).Under_control();
 		sub_as_swt.dispose();	// SWT: no way to officially remove sub from control; can only dispose
 	}

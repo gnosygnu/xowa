@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.List_adp;
-import gplx.List_adp_;
+package gplx.gfui.controls.customs; import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.core.interfaces.InjectAble;
 import gplx.gfui.PointAdp;
 import gplx.gfui.PointAdp_;
@@ -76,7 +76,7 @@ public class GfuiMoveElemBnd implements IptBnd, Gfo_invk, InjectAble {
 		PointAdp offset = PointAdp_.cast(hash.GetByOrNull(msg.EventArg()));
 		targetElem.Pos_(current.Op_add(offset));
 	}
-	@gplx.Internal protected void Key_set(String key) {this.key = key;} private String key;
+	public void Key_set(String key) {this.key = key;} private String key;
 	public Object Srl(GfoMsg owner) {return IptBnd_.Srl(owner, this);}
 
 	boolean moving = false;

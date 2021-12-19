@@ -13,10 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.core;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.imgs.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*; import gplx.gfui.controls.customs.*; import gplx.gfui.controls.windows.*;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValHash;
 public abstract class Gfui_kit_base implements Gfui_kit {
-	private Keyval_hash ctor_args = new Keyval_hash();
+	private KeyValHash ctor_args = new KeyValHash();
 	public abstract byte Tid();
 	public abstract String Key();
 	public abstract GxwElemFactory_base Factory();
@@ -35,53 +43,53 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 	public void Btn_img_(GfuiBtn btn, IconAdp v) {}
 	public GfuiInvkCmd New_cmd_sync(Gfo_invk invk) {return new Gfui_kit_cmd_sync(invk);}
 	public GfuiInvkCmd New_cmd_async(Gfo_invk invk) {return new Gfui_kit_cmd_async(invk);}
-	public GfuiWin New_win_app(String key, Keyval... args) {
+	public GfuiWin New_win_app(String key, KeyVal... args) {
 		GfuiWin rv = GfuiWin_.kit_(this, key, this.Factory().win_app_(), ctor_args);
 		main_win = rv;
 		return rv;
 	}
-	public GfuiWin New_win_utl(String key, GfuiWin owner, Keyval... args) {return GfuiWin_.kit_(this, key, this.Factory().win_tool_(ctor_args), ctor_args);}
-	public Gfui_html New_html(String key, GfuiElem owner, Keyval... args) {
+	public GfuiWin New_win_utl(String key, GfuiWin owner, KeyVal... args) {return GfuiWin_.kit_(this, key, this.Factory().win_tool_(ctor_args), ctor_args);}
+	public Gfui_html New_html(String key, GfuiElem owner, KeyVal... args) {
 		Gfui_html rv = Gfui_html.kit_(this, key, this.New_html_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, Keyval... args) {
+	public Gfui_tab_mgr New_tab_mgr(String key, GfuiElem owner, KeyVal... args) {
 		Gfui_tab_mgr rv = Gfui_tab_mgr.kit_(this, key, this.New_tab_mgr_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public Gfui_tab_itm New_tab_itm(String key, Gfui_tab_mgr owner, Keyval... args) {
+	public Gfui_tab_itm New_tab_itm(String key, Gfui_tab_mgr owner, KeyVal... args) {
 		Gfui_tab_itm rv = Gfui_tab_itm.kit_(this, key, this.New_tab_itm_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public Gfui_grp New_grp(String key, GfuiElem owner, Keyval... args) {
+	public Gfui_grp New_grp(String key, GfuiElem owner, KeyVal... args) {
 		Gfui_grp rv = Gfui_grp.kit_(this, key, this.New_grp_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public GfuiTextBox New_text_box(String key, GfuiElem owner, Keyval... args) {
+	public GfuiTextBox New_text_box(String key, GfuiElem owner, KeyVal... args) {
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, this.Factory().text_fld_(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public GfuiBtn New_btn(String key, GfuiElem owner, Keyval... args) {
+	public GfuiBtn New_btn(String key, GfuiElem owner, KeyVal... args) {
 		GfuiBtn rv = GfuiBtn_.kit_(this, key, New_btn_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public GfuiComboBox New_combo(String key, GfuiElem owner, Keyval... args) {
+	public GfuiComboBox New_combo(String key, GfuiElem owner, KeyVal... args) {
 		GfuiComboBox rv = GfuiComboBox.kit_(this, key, New_combo_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public GfuiLbl New_lbl(String key, GfuiElem owner, Keyval... args) {
+	public GfuiLbl New_lbl(String key, GfuiElem owner, KeyVal... args) {
 		GfuiLbl rv = GfuiLbl_.kit_(this, key, New_btn_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	public GfuiStatusBox New_status_box(String key, GfuiElem owner, Keyval... args) {
+	public GfuiStatusBox New_status_box(String key, GfuiElem owner, KeyVal... args) {
 		GfuiStatusBox rv = GfuiStatusBox_.kit_(this, key, this.Factory().text_memo_());
 		owner.SubElems().Add(rv);
 		return rv;

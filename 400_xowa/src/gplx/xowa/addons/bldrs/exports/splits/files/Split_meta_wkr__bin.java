@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.splits.files;
-import gplx.Bry_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
@@ -27,7 +27,7 @@ import gplx.fsdb.data.Fsd_bin_itm;
 import gplx.fsdb.data.Fsd_bin_tbl;
 import gplx.fsdb.meta.Fsm_bin_fil;
 import gplx.fsdb.meta.Fsm_bin_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.bldrs.exports.splits.Split_ctx;
 import gplx.xowa.addons.bldrs.exports.splits.metas.Split_meta_wkr_base;
 import gplx.xowa.addons.bldrs.exports.splits.metas.Split_page_list_type_;
@@ -53,7 +53,7 @@ class Split_meta_wkr__bin extends Split_meta_wkr_base {
 		trg_conn.Meta_idx_create(tbl.Tbl_name(), "blob" , "trg_db_id", "blob_len", "bin_owner_id");
 	}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		( "SELECT  img_type"
 		, ",       -1 AS owner_id"
 		, ",       fil_id AS bin_id"
@@ -87,12 +87,12 @@ class Split_meta_wkr__bin extends Split_meta_wkr_base {
 		Fsm_bin_fil src_db	= bin_mgr.Dbs__get_at(itm.Bin_db_id());
 		int bin_id = itm.Bin_id();
 		Fsd_bin_itm src_itm	= src_db.Select_as_itm(bin_id);
-		byte[] bin_data = src_itm.Bin_data(); if (bin_data == null) bin_data = Bry_.Empty; // NOTE: bin_data can be NULL
+		byte[] bin_data = src_itm.Bin_data(); if (bin_data == null) bin_data = BryUtl.Empty; // NOTE: bin_data can be NULL
 		int blob_len = bin_data.length;	
 		String bin_data_url = src_itm.Bin_data_url();
 
 		// calc db_idx based on db_size
-		int db_row_size = Fsd_bin_itm.Db_row_size_fixed + blob_len + String_.Len(bin_data_url);
+		int db_row_size = Fsd_bin_itm.Db_row_size_fixed + blob_len + StringUtl.Len(bin_data_url);
 		int trg_db_id = ctx.File_size_calc().Size_cur_add_(db_row_size);
 
 		// do insert

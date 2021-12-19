@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors;
+import gplx.frameworks.objects.New;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.includes.exception.*;
 import gplx.core.bits.*;
 /**
@@ -46,7 +52,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* Recursion depth of this frame, top = 0
 	* Note that this is NOT the same as expansion depth in expand()
 	*/
-	@gplx.New public int depth;
+	@New public int depth;
 
 	private boolean volatile_bool;
 	private int ttl;
@@ -88,7 +94,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 		}
 		if (XophpObject_.is_true(argsObj)) {
 			XophpArray args = null;
-			if (Type_.Eq_by_obj(argsObj, XomwPPNode_Hash_Array.class)) {
+			if (ClassUtl.EqByObj(XomwPPNode_Hash_Array.class, argsObj)) {
 				args = ((XomwPPNode_Hash_Array)argsObj).value;
 			} else if (!XophpArray.is_array(argsObj)) {
 				throw XomwMWException.New_by_method(XomwPPFrame_Hash.class, "newChild", ": args must be array or PPNode_Hash_Array");
@@ -115,7 +121,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					XophpArray.unset(namedArgs, index);
 				} else {
 					// Named parameter
-					String name = String_.Trim(this.expand(bits.Get_by("name"), XomwPPFrame.STRIP_COMMENTS));
+					String name = StringUtl.Trim(this.expand(bits.Get_by("name"), XomwPPFrame.STRIP_COMMENTS));
 					if (XophpArray.isset(namedArgs, name) || XophpArray.isset(numberedArgs, name)) {
 					//	this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
 					//		wfEscapeWikiText(this.title),
@@ -195,7 +201,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					contextNode = iteratorNodeArray.Get_at(index);
 					index++;
 				}
-			} else if (Type_.Eq_by_obj(iteratorNode, XomwPPNode_Hash_Array.class)) {
+			} else if (ClassUtl.EqByObj(XomwPPNode_Hash_Array.class, iteratorNode)) {
 				XomwPPNode_Hash_Array iteratorNodeHashArray = (XomwPPNode_Hash_Array)iteratorNode;
 				if (index >= iteratorNodeHashArray.getLength()) {
 					// All done with this iterator
@@ -220,13 +226,13 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				// nothing to do
 			} else if (XophpString_.is_string(contextNode)) {
 				outItm += (String)contextNode;
-			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Array.class)) {
+			} else if (ClassUtl.EqByObj(XomwPPNode_Hash_Array.class, contextNode)) {
 				newIterator = contextNode;
-			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Attr.class)) {
+			} else if (ClassUtl.EqByObj(XomwPPNode_Hash_Attr.class, contextNode)) {
 				// No output
-			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Text.class)) {
+			} else if (ClassUtl.EqByObj(XomwPPNode_Hash_Text.class, contextNode)) {
 				outItm += ((XomwPPNode_Hash_Text)contextNode).value;
-			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Tree.class)) {
+			} else if (ClassUtl.EqByObj(XomwPPNode_Hash_Tree.class, contextNode)) {
 				XomwPPNode_Hash_Tree contextNodeHashTree = (XomwPPNode_Hash_Tree)contextNode;
 				contextName = contextNodeHashTree.name;
 				contextChildren = contextNodeHashTree.getRawChildren();
@@ -246,9 +252,9 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			// Handle node descriptor array or tree Object
 			if (!XophpString_.is_true(contextName)) {
 				// Not a node, already handled above
-			} else if (String_.CharAt(contextName, 0) == '@') {
+			} else if (StringUtl.CharAt(contextName, 0) == '@') {
 				// Attribute: no output
-			} else if (String_.Eq(contextName, "template")) {
+			} else if (StringUtl.Eq(contextName, "template")) {
 				// Double-brace expansion
 				XophpArray bits = XomwPPNode_Hash_Tree.splitRawTemplate(contextChildren);
 				if (Bitmask_.Has_int(flags, XomwPPFrame.NO_TEMPLATES)) {
@@ -259,13 +265,13 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					);
 				} else {
 					XophpArray ret = this.parser.braceSubstitution(bits, this);
-					if (XophpArray.isset(ret, Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
-						newIterator = ret.Get_by(Object_.Cls_val_name);
+					if (XophpArray.isset(ret, ObjectUtl.ClsValName)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+						newIterator = ret.Get_by(ObjectUtl.ClsValName);
 					} else {
 						outItm += ret.Get_by_str("text");
 					}
 				}
-			} else if (String_.Eq(contextName, "tplarg")) {
+			} else if (StringUtl.Eq(contextName, "tplarg")) {
 				// Triple-brace expansion
 				XophpArray bits = XomwPPNode_Hash_Tree.splitRawTemplate(contextChildren);
 				if (Bitmask_.Has_int(flags, XomwPPFrame.NO_ARGS)) {
@@ -276,13 +282,13 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					);
 				} else {
 					XophpArray ret = this.parser.argSubstitution(bits, this);
-					if (XophpArray.isset(ret, Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+					if (XophpArray.isset(ret, ObjectUtl.ClsValName)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
 						newIterator = ret.Get_by("Object");
 					} else {
 						outItm += ret.Get_by_str("text");
 					}
 				}
-			} else if (String_.Eq(contextName, "comment")) {
+			} else if (StringUtl.Eq(contextName, "comment")) {
 				// HTML-style comment
 				// Remove it in HTML, pre+remove and STRIP_COMMENTS modes
 				// Not in RECOVER_COMMENTS mode (msgnw) though.
@@ -301,7 +307,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					// Recover the literal comment in RECOVER_COMMENTS and pre+no-remove
 					outItm += contextChildren.Get_at_str(0);
 				}
-			} else if (String_.Eq(contextName, "ignore")) {
+			} else if (StringUtl.Eq(contextName, "ignore")) {
 				// Output suppression used by <includeonly> etc.
 				// OT_WIKI will only respect <ignore> in substed templates.
 				// The other output types respect it unless NO_IGNORE is set.
@@ -314,7 +320,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				} else {
 					// outItm .= '';
 				}
-			} else if (String_.Eq(contextName, "ext")) {
+			} else if (StringUtl.Eq(contextName, "ext")) {
 				// Extension tag
 				XophpArray bits = XomwPPNode_Hash_Tree.splitRawExt(contextChildren)
 					.Add("attr", null).Add("inner", null).Add("close", null);
@@ -335,7 +341,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				} else {
 					outItm += this.parser.extensionSubstitution(bits, this);
 				}
-			} else if (String_.Eq(contextName, "h")) {
+			} else if (StringUtl.Eq(contextName, "h")) {
 				// Heading
 				if (this.parser.ot.Has("html")) {
 					// Expand immediately and insert heading index marker
@@ -344,7 +350,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					String titleText = this.title.getPrefixedDBkeyStr();
 					this.parser.mHeadings.Add(titleText, bits.Get_by("i"));
 					int serial = XophpArray.count(this.parser.mHeadings) - 1;
-					String marker = XomwParser.MARKER_PREFIX + "-h-" + Int_.To_str(serial) + "-" + XomwParser.MARKER_SUFFIX;
+					String marker = XomwParser.MARKER_PREFIX + "-h-" + IntUtl.ToStr(serial) + "-" + XomwParser.MARKER_SUFFIX;
 					s = XophpString_.substr(s, 0, bits.Get_by_int("level")) + marker + XophpString_.substr(s, bits.Get_by_int("level"));
 					this.parser.mStripState.addGeneral(marker, "");
 					outItm += s;
@@ -424,7 +430,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 		String s = "";
 		for (Object rootObj : args) {
 			XophpArray root = null;
-			if (Type_.Eq_by_obj(root, XomwPPNode_Hash_Array.class)) {
+			if (ClassUtl.EqByObj(XomwPPNode_Hash_Array.class, root)) {
 				root = ((XomwPPNode_Hash_Array)rootObj).value;
 			}
 			if (!XophpArray.is_array(rootObj)) {
@@ -458,7 +464,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 
 		for (Object rootObj : args) {
 			XophpArray root = null;
-			if (Type_.Eq_by_obj(root, XomwPPNode_Hash_Array.class)) {
+			if (ClassUtl.EqByObj(XomwPPNode_Hash_Array.class, root)) {
 				root = ((XomwPPNode_Hash_Array)rootObj).value;
 			}
 			if (!XophpArray.is_array(rootObj)) {
@@ -493,7 +499,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 
 		for (Object rootObj : args) {
 			XophpArray root = null;
-			if (Type_.Eq_by_obj(rootObj, XomwPPNode_Hash_Array.class)) {
+			if (ClassUtl.EqByObj(XomwPPNode_Hash_Array.class, rootObj)) {
 				root = ((XomwPPNode_Hash_Array)rootObj).value;
 			}
 			if (!XophpArray.is_array(rootObj)) {
@@ -622,7 +628,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @param int ttl
 	*/
 	@Override public void setTTL(int val) {
-		if (this.ttl == Int_.Null || val < this.ttl) {
+		if (this.ttl == IntUtl.Null || val < this.ttl) {
 			this.ttl = val;
 		}
 	}

@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.addons; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
+package gplx.xowa.bldrs.setups.addons;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.core.ios.zips.*; import gplx.core.envs.*;
 import gplx.xowa.apps.fsys.*;
 public class Xoi_firefox_installer implements Gfo_invk {
@@ -44,15 +52,15 @@ public class Xoi_firefox_installer implements Gfo_invk {
 		Io_mgr.Instance.SaveFilStr(prefs_fil, prefs_str);
 	}
 	public static String Pref_update(String src, String key, String val) {		
-		String find = String_.Format("pref(\"{0}\"", key); // EX: 'pref("key"'
-		int bgn = String_.FindFwd(src, find);								// look for 'pref...'
-		if (bgn == String_.Find_none) return src;	// key not found; return;
-		int end = String_.FindFwd(src, "\n", bgn + String_.Len(find));	// look for '\n'; note that this will trim any comments; EX: pref("key", "val"); // comment will be lost
-		if (end == String_.Find_none) return src;	// nl not found; return;
-		String repl = String_.Format("{0}, \"{1}\");", find, val);	// EX: 'pref("key", "val");'
-		return 		String_.Mid(src, 0, bgn)
+		String find = StringUtl.Format("pref(\"{0}\"", key); // EX: 'pref("key"'
+		int bgn = StringUtl.FindFwd(src, find);								// look for 'pref...'
+		if (bgn == StringUtl.FindNone) return src;	// key not found; return;
+		int end = StringUtl.FindFwd(src, "\n", bgn + StringUtl.Len(find));	// look for '\n'; note that this will trim any comments; EX: pref("key", "val"); // comment will be lost
+		if (end == StringUtl.FindNone) return src;	// nl not found; return;
+		String repl = StringUtl.Format("{0}, \"{1}\");", find, val);	// EX: 'pref("key", "val");'
+		return 		StringUtl.Mid(src, 0, bgn)
 				+	repl
-				+	String_.Mid(src, end);
+				+	StringUtl.Mid(src, end);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_install)) 		Install_via_process();

@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis.xwikis;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.net.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.xowa.wikis.xwikis.interwikis.*;
@@ -29,12 +35,12 @@ public class Xow_xwiki_mgr {
 	public int	Len() {return list.Len();}
 	public void Clear() {hash.Clear(); list.Clear();}
 	public void Sort_by_key() {list.Sort();}
-	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.Get_at(i);}
+	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.GetAt(i);}
 	public Xow_xwiki_itm Get_by_key(byte[] key)						{return (Xow_xwiki_itm)hash.Get_by_bry(key);}
 	public Xow_xwiki_itm Get_by_mid(byte[] src, int bgn, int end)	{return (Xow_xwiki_itm)hash.Get_by_mid(src, bgn, end);}
 
 	public Xow_xwiki_itm Add_by_atrs_offline(String key, String domain) {
-		return Add_by_atrs(Bry_.new_a7(key), Bry_.new_a7(domain), null)
+		return Add_by_atrs(BryUtl.NewA7(key), BryUtl.NewA7(domain), null)
 			.Offline_(true);// NOTE: need to mark offline in order to show in left sidebar
 	}
 	public Xow_xwiki_itm Add_by_site_interwikimap(byte[] key, byte[] domain_bry, byte[] url_xo, byte[] url_wm) {
@@ -42,7 +48,7 @@ public class Xow_xwiki_mgr {
 		return this.Add_by_atrs(key, domain_bry, url_xo);
 	}
 
-	public Xow_xwiki_itm Add_by_atrs(String key, String domain)		{return Add_by_atrs(Bry_.new_a7(key), Bry_.new_a7(domain), null);}
+	public Xow_xwiki_itm Add_by_atrs(String key, String domain)		{return Add_by_atrs(BryUtl.NewA7(key), BryUtl.NewA7(domain), null);}
 	public Xow_xwiki_itm Add_by_atrs(byte[] key, byte[] domain)		{return Add_by_atrs(key, domain, null);}
 	public Xow_xwiki_itm Add_by_atrs(byte[] key, byte[] domain_bry, byte[] url_fmt) {
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
@@ -52,13 +58,13 @@ public class Xow_xwiki_mgr {
 	}
 	public void Add_by_sitelink_mgr() {Add_by_sitelink_mgr(wiki.Domain_tid());}
 	public void Add_by_sitelink_mgr(int domain_tid) {
-		String wiki_tid_name_str = String_.new_u8(Xow_domain_tid_.Get_type_as_bry(domain_tid));
+		String wiki_tid_name_str = StringUtl.NewU8(Xow_domain_tid_.Get_type_as_bry(domain_tid));
 		Xoa_sitelink_itm_mgr itm_mgr = wiki.App().Xwiki_mgr__sitelink_mgr().Itm_mgr();
 		int len = itm_mgr.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoa_sitelink_itm itm = (Xoa_sitelink_itm)itm_mgr.Get_at(i);
 			byte[] itm_key = itm.Key();	// EX: "fr" as in "[[fr:]]"
-			byte[] domain_bry = Bry_.new_u8(String_.Format("{0}.{1}.org", String_.new_u8(itm_key), wiki_tid_name_str)); // EX: fr.wikipedia.org
+			byte[] domain_bry = BryUtl.NewU8(StringUtl.Format("{0}.{1}.org", StringUtl.NewU8(itm_key), wiki_tid_name_str)); // EX: fr.wikipedia.org
 			Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
 			byte[] abrv_wm = domain_itm == null ? null : domain_itm.Abrv_wm();
 			Xow_xwiki_itm xwiki = Xow_xwiki_itm.new_(itm_key, Bld_url_fmt(domain_bry), domain_itm.Lang_actl_uid(), domain_tid, domain_bry, abrv_wm);
@@ -73,7 +79,7 @@ public class Xow_xwiki_mgr {
 			Ordered_hash xwiki_list = itm_parser.Xwiki_list();
 			int len = xwiki_list.Len();
 			for (int i = 0; i < len; ++i) {
-				Xow_xwiki_itm itm = (Xow_xwiki_itm)xwiki_list.Get_at(i);
+				Xow_xwiki_itm itm = (Xow_xwiki_itm)xwiki_list.GetAt(i);
 				Add_itm(itm);
 			}
 		}
@@ -97,6 +103,6 @@ public class Xow_xwiki_mgr {
 		Gfo_url url = url_parser.Parse(url_fmt, 0, url_fmt.length);
 		return url.Segs__get_at_1st();
 	}
-	public static byte[] Bld_url_fmt(byte[] domain_bry) {return Bry_.Add(gplx.core.net.Gfo_protocol_itm.Itm_https.Text_bry(), domain_bry, Bry__url_fmt_end);}
-	private static final byte[] Bry__url_fmt_end = Bry_.new_a7("/wiki/~{0}");
+	public static byte[] Bld_url_fmt(byte[] domain_bry) {return BryUtl.Add(gplx.core.net.Gfo_protocol_itm.Itm_https.Text_bry(), domain_bry, Bry__url_fmt_end);}
+	private static final byte[] Bry__url_fmt_end = BryUtl.NewA7("/wiki/~{0}");
 }

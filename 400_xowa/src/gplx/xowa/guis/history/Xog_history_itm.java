@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.history; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.guis.history;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Xog_history_itm {
 	private final boolean redirect_force;
 	public Xog_history_itm(byte[] wiki, byte[] page, byte[] anch, byte[] qarg, boolean redirect_force, String bmk_pos) {
-		this.key = Bry_.Add_w_dlm(AsciiByte.Pipe, wiki, page, anch, qarg, redirect_force ? BoolUtl.YBry : BoolUtl.NBry);
+		this.key = BryUtl.AddWithDlm(AsciiByte.Pipe, wiki, page, anch, qarg, redirect_force ? BoolUtl.YBry : BoolUtl.NBry);
 		this.wiki = wiki; this.page = page; this.anch = anch; this.qarg = qarg;
 		this.redirect_force = redirect_force; this.bmk_pos = bmk_pos;
 	}
@@ -30,10 +32,10 @@ public class Xog_history_itm {
 	public byte[] Qarg() {return qarg;} private final byte[] qarg;
 	public String Bmk_pos() {return bmk_pos;} public void Bmk_pos_(String v) {bmk_pos = v;} private String bmk_pos;
 	public boolean Eq_wo_bmk_pos(Xog_history_itm comp) {
-		return	Bry_.Eq(wiki, comp.wiki)
-			&&	Bry_.Eq(page, comp.page)
-			&&	Bry_.Eq(anch, comp.anch)
-			&&	Bry_.Eq(qarg, comp.qarg)
+		return	BryLni.Eq(wiki, comp.wiki)
+			&&	BryLni.Eq(page, comp.page)
+			&&	BryLni.Eq(anch, comp.anch)
+			&&	BryLni.Eq(qarg, comp.qarg)
 			&&	redirect_force == comp.redirect_force
 			;
 	}

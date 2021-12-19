@@ -13,15 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts.converts; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.langs.parsers.*;
+package gplx.xowa.langs.vnts.converts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.langs.parsers.Xol_csv_parser;
 public class Xol_convert_grp implements Gfo_invk {// group of convert_itm by vnt; EX:  zh-hant {A -> A1; B -> B1}
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xol_convert_grp(byte[] key) {this.key = key;}
 	public byte[]				Key()							{return key;} private final byte[] key;
 	public int					Len()							{return hash.Len();}
-	public Xol_convert_itm		Get_at(int i)					{return (Xol_convert_itm)hash.Get_at(i);}
+	public Xol_convert_itm		Get_at(int i)					{return (Xol_convert_itm)hash.GetAt(i);}
 	public void					Add(byte[] src, byte[] trg)		{hash.AddIfDupeUseNth(src, new Xol_convert_itm(src, trg));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_add_bulk))			Add_bulk(this, m.ReadBry("v"));
@@ -31,7 +39,7 @@ public class Xol_convert_grp implements Gfo_invk {// group of convert_itm by vnt
 	private static void Add_bulk(Xol_convert_grp grp, byte[] raw) {
 		int len = raw.length;
 		int pos = 0, fld_bgn = 0, fld_idx = 0;
-		byte[] src = Bry_.Empty, trg = Bry_.Empty;
+		byte[] src = BryUtl.Empty, trg = BryUtl.Empty;
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == len;
@@ -40,7 +48,7 @@ public class Xol_convert_grp implements Gfo_invk {// group of convert_itm by vnt
 				case AsciiByte.Pipe:
 					switch (fld_idx) {
 						case 0:		src = csv_parser.Load(raw, fld_bgn, pos); break;
-						default:	throw Err_.new_unhandled(fld_idx);
+						default:	throw ErrUtl.NewUnhandled(fld_idx);
 					}
 					fld_bgn = pos + 1;
 					++fld_idx;

@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.caches;
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.Io_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.files.Xof_ext;
@@ -55,7 +55,7 @@ public class Xou_file_itm_finder {
 			}
 			repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(cache_itm.Orig_repo_id(), lnki_ttl, page_url);
 			if (repo == null) return false;	// unknown repo; shouldn't happen, but exit, else null ref
-			xfer.Init_at_orig((byte)cache_itm.Orig_repo_id(), repo.Wiki_domain(), cache_itm.Orig_ttl(), cache_itm.Orig_ext_itm(), cache_itm.Orig_w(), cache_itm.Orig_h(), Bry_.Empty);
+			xfer.Init_at_orig((byte)cache_itm.Orig_repo_id(), repo.Wiki_domain(), cache_itm.Orig_ttl(), cache_itm.Orig_ext_itm(), cache_itm.Orig_w(), cache_itm.Orig_h(), BryUtl.Empty);
 //				img_size.Html_size_calc(exec_tid, xfer.Lnki_w(), xfer.Lnki_h(), (byte)xfer.Lnki_type(), Xof_patch_upright_tid_.Tid_all, xfer.Lnki_upright(), cache_itm.Orig_ext_id(), cache_itm.Orig_w(), cache_itm.Orig_h(), Xof_img_size.Thumb_width_img);
 //				xfer.Init_at_gallery_end(img_size.Html_w(), img_size.Html_h(), url_bldr.To_url_trg(repo, cache_itm, BoolUtl.N), url_bldr.To_url_trg(repo, cache_itm, BoolUtl.Y));
 			xfer.Init_at_html(exec_tid, img_size, repo, url_bldr);
@@ -66,7 +66,7 @@ public class Xou_file_itm_finder {
 			else
 				return false;
 		} catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to find img: img=~{0} err=~{1}", lnki_ttl, Err_.Message_gplx_log(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to find img: img=~{0} err=~{1}", lnki_ttl, ErrUtl.ToStrLog(e));
 			return false;
 		}
 	}

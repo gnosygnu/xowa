@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.wikis.tdbs.hives;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
 public class Xowd_regy_mgr_ {
-	public static int FindSlot(ComparerAble comparer, Object[] ary, Object itm) {if (itm == null) throw Err_.new_null();
+	public static int FindSlot(ComparerAble comparer, Object[] ary, Object itm) {if (itm == null) throw ErrUtl.NewNull();
 		int aryLen = ary.length;
 		switch (aryLen) {
-			case 0: throw Err_.new_wo_type("ary cannot have 0 itms");
+			case 0: throw ErrUtl.NewArgs("ary cannot have 0 itms");
 			case 1: return 0;
 		}
 		int lo = -1, hi = aryLen - 1; // NOTE: -1 is necessary; see test

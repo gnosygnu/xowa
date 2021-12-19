@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.xowa.specials.mgrs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.*;
 import gplx.core.net.*;
 import gplx.xowa.htmls.*;
 import gplx.xowa.wikis.*;
@@ -33,10 +37,10 @@ public class Xosp_special_mgr {
 //			rv.Html_head_xtn_(rslt.Html_head());
 	}
 	public void Get_by_url1(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
-		int slash_pos = Bry_find_.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
-		byte[] special_name = slash_pos == Bry_find_.Not_found
+		int slash_pos = BryFind.FindFwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
+		byte[] special_name = slash_pos == BryFind.NotFound
 				? ttl.Base_txt_wo_qarg()							// no slash found; use base_txt; ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
-				: Bry_.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash found; use root page; EX: Special:ItemByTitle/enwiki/Earth
+				: BryLni.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash found; use root page; EX: Special:ItemByTitle/enwiki/Earth
 		Object o = hash.Get_by_bry(special_name);
 		if (o == null) {
 			Xol_specials_itm special_itm = wiki.Lang().Specials_mgr().Get_by_alias(special_name);

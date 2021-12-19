@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.dump_pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.dump_pages;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 import gplx.xowa.wikis.domains.*;
 public class Xowmf_wiki_dump_dirs_parser_tst {
@@ -22,7 +25,7 @@ public class Xowmf_wiki_dump_dirs_parser_tst {
 		fxt.Test_parse("<a href=\"20141230/\">20141230/</a><a href=\"20150118/\">20150118/</a>", "20141230", "20150118");
 	}
 	@Test public void Example() {	// http://dumps.wikimedia.org/jawiki/
-		fxt.Test_parse(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse(StringUtl.ConcatLinesNlSkipLast
 		( "<html>"
 		, "<head><title>Index of /jawiki/</title></head>"
 		, "<body bgcolor=\"white\">"
@@ -60,7 +63,7 @@ public class Xowmf_wiki_dump_dirs_parser_tst {
 class Xowmf_wiki_dump_dirs_parser_fxt {
 	public void Clear() {}
 	public void Test_parse(String src, String... expd_dates) {
-		String[] actl_dates = Xowmf_wiki_dump_dirs_parser.Parse(Xow_domain_itm_.Bry__enwiki, Bry_.new_u8(src));
-		Tfds.Eq_ary_str(expd_dates, actl_dates);
+		String[] actl_dates = Xowmf_wiki_dump_dirs_parser.Parse(Xow_domain_itm_.Bry__enwiki, BryUtl.NewU8(src));
+		GfoTstr.EqLines(expd_dates, actl_dates);
 	}
 }

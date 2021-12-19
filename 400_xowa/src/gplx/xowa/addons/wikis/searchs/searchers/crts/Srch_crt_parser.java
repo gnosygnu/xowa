@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*;
+package gplx.xowa.addons.wikis.searchs.searchers.crts;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 public class Srch_crt_parser {
 	private final Srch_crt_scanner scanner;
@@ -128,7 +130,7 @@ class Srch_crt_parser_frame {
 				return null;
 			case 1:
 				join_tid = Srch_crt_tkn.Tid__null;
-				return (Srch_crt_itm)subs.Get_at(0);
+				return (Srch_crt_itm)subs.GetAt(0);
 			default: 
 				Srch_crt_itm[] subs_ary = (Srch_crt_itm[])subs.ToAryAndClear(Srch_crt_itm.class);
 				Srch_crt_itm rv = Srch_crt_itm.New_join(join_tid, parser.Next_uid(), subs_ary);

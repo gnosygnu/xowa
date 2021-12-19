@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Int_;
-import gplx.Object_;
-import gplx.Tfds;
+package gplx.dbs.metas.parsers; import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.DbmetaFldType;
 import org.junit.Before;
@@ -48,8 +48,8 @@ class Dbmeta_parser__fld_fxt {
 	private final Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	public void Clear() {}
-	public DbmetaFldType Make_type(int tid_ansi) {return new DbmetaFldType(tid_ansi, null, Int_.Min_value, Int_.Min_value);}
-	public DbmetaFldType Make_type(int tid_ansi, int len_1) {return new DbmetaFldType(tid_ansi, null, len_1, Int_.Min_value);}
+	public DbmetaFldType Make_type(int tid_ansi) {return new DbmetaFldType(tid_ansi, null, IntUtl.MinValue, IntUtl.MinValue);}
+	public DbmetaFldType Make_type(int tid_ansi, int len_1) {return new DbmetaFldType(tid_ansi, null, len_1, IntUtl.MinValue);}
 	public DbmetaFldType Make_type(int tid_ansi, int len_1, int len_2) {return new DbmetaFldType(tid_ansi, null, len_1, len_2);}
 	public DbmetaFldItm Make_fld(String name, int tid_ansi, int nullable) {return Make_fld(name, tid_ansi, nullable, false, false, null);}
 	public DbmetaFldItm Make_fld(String name, int tid_ansi, int nullable, boolean autonumber, boolean primary_key) {return Make_fld(name, tid_ansi, nullable, false, false, null);}
@@ -62,18 +62,18 @@ class Dbmeta_parser__fld_fxt {
 		return rv;
 	}
 	public void Test_parse_type(String src, DbmetaFldType expd_type) {
-		rdr.Init_by_src(Bry_.new_u8(src));
+		rdr.InitBySrc(BryUtl.NewU8(src));
 		DbmetaFldType actl_type = fld_parser.Parse_type(rdr);
-		Tfds.Eq(expd_type.Tid()	, actl_type.Tid());
-		Tfds.Eq(expd_type.Len1()		, actl_type.Len1());
-		Tfds.Eq(expd_type.Len2()		, actl_type.Len2());
+		GfoTstr.EqObj(expd_type.Tid()	, actl_type.Tid());
+		GfoTstr.EqObj(expd_type.Len1()		, actl_type.Len1());
+		GfoTstr.EqObj(expd_type.Len2()		, actl_type.Len2());
 	}
 	public void Test_parse_fld(String src, DbmetaFldItm expd_fld) {
-		rdr.Init_by_src(Bry_.new_u8(src));
+		rdr.InitBySrc(BryUtl.NewU8(src));
 		DbmetaFldItm actl_fld = fld_parser.Parse_fld(rdr);
-		Tfds.Eq(expd_fld.Name()					, actl_fld.Name());
-		Tfds.Eq(expd_fld.Type().Tid()		, actl_fld.Type().Tid());
-		Tfds.Eq(expd_fld.Nullable()			, actl_fld.Nullable());
-		Tfds.Eq(Object_.Xto_str_strict_or_empty(expd_fld.DefaultVal()), Object_.Xto_str_strict_or_empty(actl_fld.DefaultVal()));
+		GfoTstr.EqObj(expd_fld.Name()					, actl_fld.Name());
+		GfoTstr.EqObj(expd_fld.Type().Tid()		, actl_fld.Type().Tid());
+		GfoTstr.EqObj(expd_fld.Nullable()			, actl_fld.Nullable());
+		GfoTstr.EqObj(ObjectUtl.ToStrOrEmpty(expd_fld.DefaultVal()), ObjectUtl.ToStrOrEmpty(actl_fld.DefaultVal()));
 	}
 }

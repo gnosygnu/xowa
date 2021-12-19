@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.wikis;
+import gplx.types.commons.GfoDate;
 class Xow_wiki_loader {
 	public void Load(String mount) {
 		/*
@@ -44,6 +45,6 @@ class Xou_wiki_part {
 	public String Domain() {return domain;} public void Domain_(String v) {domain = v;} private String domain;
 	public String Version() {return version;} public void Version_(String v) {version = v;} private String version;
 	public String Source() {return source;} public void Source_(String v) {source = v;} private String source;
-	public DateAdp Make_date() {return make_date;} public void Make_date_(DateAdp v) {make_date = v;} private DateAdp make_date;
+	public GfoDate Make_date() {return make_date;} public void Make_date_(GfoDate v) {make_date = v;} private GfoDate make_date;
 	public String Misc() {return misc;} public void Misc_(String v) {misc = v;} private String misc;
 }

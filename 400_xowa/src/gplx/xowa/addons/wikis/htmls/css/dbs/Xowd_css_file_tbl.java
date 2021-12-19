@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.htmls.css.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.htmls.css.dbs;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Xowd_css_file_tbl implements Rls_able {
 	private final String tbl_name = "css_file"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_css_id, fld_path, fld_data;

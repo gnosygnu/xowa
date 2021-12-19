@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.numbers;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.langs.*;
-import gplx.core.intls.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.names.*;
 public class Pf_formatnum_es_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_load(Bry_.new_a7("es"));
+		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_load(BryUtl.NewA7("es"));
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "es.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}

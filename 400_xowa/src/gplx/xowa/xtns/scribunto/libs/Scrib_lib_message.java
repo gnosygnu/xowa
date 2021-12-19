@@ -14,19 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Hash_adp_bry;
-import gplx.Io_url;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.String_;
-import gplx.core.primitives.Byte_obj_val;
+import gplx.langs.html.HtmlEntityCodes;
 import gplx.langs.htmls.Gfh_tag_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.apps.gfs.Gfs_php_converter;
@@ -59,59 +60,59 @@ public class Scrib_lib_message implements Scrib_lib {
 			case Proc_plain:									return Plain(args, rslt);
 			case Proc_check:									return Check(args, rslt);
 			case Proc_init_message_for_lang:					return Init_message_for_lang(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int Proc_plain = 0, Proc_check = 1, Proc_init_message_for_lang = 2;
 	public static final String Invk_plain = "plain", Invk_check = "check", Invk_init_message_for_lang = "init_message_for_lang";
-	private static final String[] Proc_names = String_.Ary(Invk_plain, Invk_check, Invk_init_message_for_lang);
-	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), Keyval_.Ary_empty);}
+	private static final String[] Proc_names = StringUtl.Ary(Invk_plain, Invk_check, Invk_init_message_for_lang);
+	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), KeyValUtl.AryEmpty);}
 	public boolean Plain(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte fmt_tid = Scrib_lib_message_data.Fmt_tid_plain;
-		Keyval[] data_kvary = args.Pull_kv_ary_safe(0);
+		KeyVal[] data_kvary = args.Pull_kv_ary_safe(0);
 		Scrib_lib_message_data msg_data = new Scrib_lib_message_data().Parse(data_kvary); 
-		return rslt.Init_obj(String_.new_u8(msg_data.Make_msg(core.Cur_lang(), core.Wiki(), core.Ctx(), true, fmt_tid)));
+		return rslt.Init_obj(StringUtl.NewU8(msg_data.Make_msg(core.Cur_lang(), core.Wiki(), core.Ctx(), true, fmt_tid)));
 	}
 	public boolean Check(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte chk_tid = Scrib_lib_message_data.parse_chk_(args.Pull_bry(0));
-		Keyval[] data_kvary = args.Pull_kv_ary_safe(1);
+		KeyVal[] data_kvary = args.Pull_kv_ary_safe(1);
 		Scrib_lib_message_data msg_data = new Scrib_lib_message_data().Parse(data_kvary);
 		return rslt.Init_obj(msg_data.Chk_msg(core.Cur_lang(), core.Wiki(), core.Ctx(), false, chk_tid));
 	}
-	public boolean Init_message_for_lang(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(Keyval_.new_("lang", core.Wiki().Lang().Key_str()));}
+	public boolean Init_message_for_lang(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(KeyVal.NewStr("lang", core.Wiki().Lang().Key_str()));}
 }
 class Scrib_lib_message_data {
 	public boolean Use_db() {return use_db;} private boolean use_db;
-	public byte[] Lang_key() {return lang_key;} private byte[] lang_key = Bry_.Empty;
+	public byte[] Lang_key() {return lang_key;} private byte[] lang_key = BryUtl.Empty;
 	public byte[] Title_bry() {return title_bry;} private byte[] title_bry;
 	public byte[] Msg_key() {return msg_key;} private byte[] msg_key;
 	public byte[] Raw_msg_key() {return raw_msg_key;} private byte[] raw_msg_key;
 	public Object[] Args() {return args;} Object[] args;
 	public Xoa_ttl Ttl() {return ttl;} public Scrib_lib_message_data Ttl_(Xoa_ttl v) {ttl = v; return this;}  Xoa_ttl ttl;
-	public Scrib_lib_message_data Parse(Keyval[] ary) {
+	public Scrib_lib_message_data Parse(KeyVal[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			Keyval kv = ary[i];
-			byte[] kv_key = Bry_.new_a7(kv.Key());
-			Object key_obj = key_hash.GetByOrNull(kv_key); if (key_obj == null) throw Err_.new_wo_type("msg_key is invalid", "key", kv_key);
-			byte key_tid = ((Byte_obj_val)key_obj).Val();
+			KeyVal kv = ary[i];
+			byte[] kv_key = BryUtl.NewA7(kv.KeyToStr());
+			Object key_obj = key_hash.GetByOrNull(kv_key); if (key_obj == null) throw ErrUtl.NewArgs("msg_key is invalid", "key", kv_key);
+			byte key_tid = ((ByteVal)key_obj).Val();
 			switch (key_tid) {
 				case Key_tid_keys:
-					Keyval[] keys_ary = (Keyval[])kv.Val();
-					msg_key = keys_ary[0].Val_to_bry();
+					KeyVal[] keys_ary = (KeyVal[])kv.Val();
+					msg_key = keys_ary[0].ValToBry();
 					break; 
-				case Key_tid_rawMessage:	raw_msg_key = kv.Val_to_bry(); break;
-				case Key_tid_lang:			lang_key = kv.Val_to_bry(); break;
+				case Key_tid_rawMessage:	raw_msg_key = kv.ValToBry(); break;
+				case Key_tid_lang:			lang_key = kv.ValToBry(); break;
 				case Key_tid_useDB:			use_db = BoolUtl.Cast(kv.Val()); break;
-				case Key_tid_title:			title_bry = kv.Val_to_bry(); break;
+				case Key_tid_title:			title_bry = kv.ValToBry(); break;
 				case Key_tid_params:
-					Keyval[] args_ary = (Keyval[])kv.Val();
+					KeyVal[] args_ary = (KeyVal[])kv.Val();
 					int args_ary_len = args_ary.length;
 					args = new String[args_ary_len];
 					for (int j = 0; j < args_ary_len; j++)
-						args[j] = args_ary[j].Val_to_str_or_empty();
+						args[j] = args_ary[j].ValToStrOrEmpty();
 					break; 
-				default:					throw Err_.new_unhandled(key_tid);
+				default:					throw ErrUtl.NewUnhandled(key_tid);
 			}
 		}
 		return this;
@@ -125,49 +126,49 @@ class Scrib_lib_message_data {
 				ttl = Xoa_ttl.Parse(wiki, data_ttl);
 		}
 		if (raw_msg_key != null) {
-			Xol_msg_itm raw_msg_itm = new Xol_msg_itm(-1, Bry_.Empty);
-			Bry_bfr tmp_bfr = Bry_bfr_.New(); // wiki.Utl__bfr_mkr().Get_b512();
+			Xol_msg_itm raw_msg_itm = new Xol_msg_itm(-1, BryUtl.Empty);
+			BryWtr tmp_bfr = BryWtr.New(); // wiki.Utl__bfr_mkr().Get_b512();
 			byte[] raw_msg_val = Gfs_php_converter.To_gfs(tmp_bfr, raw_msg_key);
 			Xol_msg_itm_.update_val_(raw_msg_itm, raw_msg_val);
 			byte[] raw_msg_rv = wiki.Msg_mgr().Val_by_itm(tmp_bfr, raw_msg_itm, args);
-			tmp_bfr.Mkr_rls();
+			tmp_bfr.MkrRls();
 			return raw_msg_rv;
 		}
-		if (msg_key == null) return Bry_.Empty;
+		if (msg_key == null) return BryUtl.Empty;
 		
-		if (Bry_.Eq(lang_key, cur_lang) || Bry_.Len_eq_0(lang_key))	// if lang_key == core_lang then use wiki.msg_mgr; also same if lang_key == blank (arg not given)
+		if (BryLni.Eq(lang_key, cur_lang) || BryUtl.IsNullOrEmpty(lang_key))	// if lang_key == core_lang then use wiki.msg_mgr; also same if lang_key == blank (arg not given)
 			return wiki.Msg_mgr().Val_by_key_args(msg_key, args);
 		else {
 			Xol_lang_itm lang = wiki.Appe().Lang_mgr().Get_by_or_load(lang_key);
-			Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_null(msg_key); if (msg_itm == null) return Bry_.Empty;
+			Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_null(msg_key); if (msg_itm == null) return BryUtl.Empty;
 			return msg_itm.Val();
 		}
 	}
 	public boolean Chk_msg(byte[] cur_lang, Xowe_wiki wiki, Xop_ctx ctx, boolean exec_params, byte chk_tid) {
 		byte[] msg_val = Fetch_msg(cur_lang, wiki, ctx, false);
 		switch (chk_tid) {
-			case Check_tid_exists		: return Bry_.Len_gt_0(msg_val);
-			case Check_tid_isBlank		: return Bry_.Len_eq_0(msg_val);	// REF.MW: $message === false || $message === ''
-			case Check_tid_isDisabled	: return Bry_.Len_eq_0(msg_val) || msg_val.length == 1 && msg_val[0] == AsciiByte.Dash;	// REF.MW: $message === false || $message === '' || $message === '-'
-			default						: throw Err_.new_unhandled(chk_tid);
+			case Check_tid_exists		: return BryUtl.IsNotNullOrEmpty(msg_val);
+			case Check_tid_isBlank		: return BryUtl.IsNullOrEmpty(msg_val);	// REF.MW: $message === false || $message === ''
+			case Check_tid_isDisabled	: return BryUtl.IsNullOrEmpty(msg_val) || msg_val.length == 1 && msg_val[0] == AsciiByte.Dash;	// REF.MW: $message === false || $message === '' || $message === '-'
+			default						: throw ErrUtl.NewUnhandled(chk_tid);
 		}
 	}
 	public byte[] Make_msg(byte[] cur_lang, Xowe_wiki wiki, Xop_ctx ctx, boolean exec_params, byte fmt_tid) {
 		byte[] msg_val = Fetch_msg(cur_lang, wiki, ctx, exec_params);
-		if (	Bry_.Len_eq_0(msg_val)	// msg_key returned empty/null msg_val; assume not found 
+		if (	BryUtl.IsNullOrEmpty(msg_val)	// msg_key returned empty/null msg_val; assume not found
 			&&	raw_msg_key == null		// ignore if raw_msg; note that raw_msg can generate empty String; EX:raw_msg={{empty}} -> ""; PAGE:it.w:L'Internazionale DATE:2015-02-25
 			) {	
-			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-			bfr.Add(gplx.langs.htmls.entitys.Gfh_entity_.Lt_bry).Add(msg_key).Add(gplx.langs.htmls.entitys.Gfh_entity_.Gt_bry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
-			return bfr.To_bry_and_rls();
+			BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
+			bfr.Add(HtmlEntityCodes.LtBry).Add(msg_key).Add(HtmlEntityCodes.GtBry);	// NOTE: Message.php has logic that says: if plain, "< >", else "&lt; &gt;"; for now, always use escaped
+			return bfr.ToBryAndRls();
 		}
 		switch (fmt_tid) {
 			case Fmt_tid_parse:
 			case Fmt_tid_text:			// NOTE: not sure what this does; seems to be a "lighter" parser
 				break;
 			case Fmt_tid_parseAsBlock:	// NOTE: MW passes msg_val through parser and strips <p> if tid==parse; XOWA does the opposite, so add <p> if parseAsBlock requested
-				Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-				msg_val = bfr.Add(Gfh_tag_.P_lhs).Add(msg_val).Add(Gfh_tag_.P_rhs).To_bry_and_rls();
+				BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
+				msg_val = bfr.Add(Gfh_tag_.P_lhs).Add(msg_val).Add(Gfh_tag_.P_rhs).ToBryAndRls();
 				break;
 			case Fmt_tid_escaped:
 				msg_val = gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(msg_val);
@@ -187,8 +188,8 @@ class Scrib_lib_message_data {
 	public static byte parse_chk_(byte[] key) {return parse_or_fail(check_hash, key, "invalid check arg: {0}");}
 	public static byte parse_or_fail(Hash_adp_bry hash, byte[] key, String fmt) {
 		Object o = hash.Get_by_bry(key);
-		if (o == null) throw Err_.new_wo_type(fmt, "key", String_.new_u8(key)).Trace_ignore_add_1_();
-		return ((Byte_obj_val)o).Val();
+		if (o == null) throw ErrUtl.NewArgs(fmt, "key", StringUtl.NewU8(key));
+		return ((ByteVal)o).Val();
 	}
 	public static final byte Fmt_tid_parse = 1, Fmt_tid_text = 2, Fmt_tid_plain = 3, Fmt_tid_escaped = 4, Fmt_tid_parseAsBlock = 5;
 	private static final Hash_adp_bry fmt_hash = Hash_adp_bry.ci_a7()

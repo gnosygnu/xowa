@@ -14,26 +14,27 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.proofreadPage;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Cancelable_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
-import gplx.Int_ary_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
-import gplx.core.primitives.Byte_obj_val;
+import gplx.langs.html.HtmlEntityCodes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.objects.Cancelable_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.core.primitives.Gfo_number_parser;
-import gplx.core.primitives.Int_obj_ref;
-import gplx.core.primitives.Int_obj_val;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.basics.wrappers.IntVal;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
@@ -69,7 +70,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private int step_int;
 	private byte[] include, exclude, step_bry, header, onlysection;
 	private byte[] toc_cur, toc_nxt, toc_prv;
-	private int ns_index_id = Int_.Min_value, ns_page_id = Int_.Min_value;
+	private int ns_index_id = IntUtl.MinValue, ns_page_id = IntUtl.MinValue;
 	private int bgn_page_int = -1, end_page_int = -1;
 	private Xow_ns ns_page;
 	private Xoa_ttl index_ttl;
@@ -89,14 +90,14 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (xatr.Val_bgn() == -1)
 			return;
 
-		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		ByteVal xatr_id = (ByteVal)xatr_id_obj;
 		byte[] val_bry = xatr.Val_as_bry();
 		switch (xatr_id.Val()) {
 			case Xatr_index_ttl:	index_ttl_bry	= val_bry; break;
 			case Xatr_bgn_page:		bgn_page_bry = val_bry; break;
 			case Xatr_end_page:		end_page_bry = val_bry; break;
-			case Xatr_bgn_sect:		if (Bry_.Len_gt_0(val_bry)) bgn_sect_bry = val_bry; break; // ignore empty-String; EX:fromsection=""; ISSUE#:650 DATE:2020-01-11
-			case Xatr_end_sect:		if (Bry_.Len_gt_0(val_bry)) end_sect_bry = val_bry; break; // ignore empty-String; EX:tosection=""; ISSUE#:650 DATE:2020-01-11
+			case Xatr_bgn_sect:		if (BryUtl.IsNotNullOrEmpty(val_bry)) bgn_sect_bry = val_bry; break; // ignore empty-String; EX:fromsection=""; ISSUE#:650 DATE:2020-01-11
+			case Xatr_end_sect:		if (BryUtl.IsNotNullOrEmpty(val_bry)) end_sect_bry = val_bry; break; // ignore empty-String; EX:tosection=""; ISSUE#:650 DATE:2020-01-11
 			case Xatr_include:		include			= val_bry; break;
 			case Xatr_exclude:		exclude			= val_bry; break;
 			case Xatr_step:			step_bry		= val_bry; break;
@@ -116,7 +117,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 
 		// set recursing flag
 		Xoae_page page = ctx.Page();
-		Bry_bfr full_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr full_bfr = wiki.Utl__bfr_mkr().GetM001();
 		try {
 			wiki.Parser_mgr().Lst__recursing_(true);
 			Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
@@ -126,11 +127,11 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
 		} finally {
 			wiki.Parser_mgr().Lst__recursing_(false);
-			full_bfr.Mkr_rls();
+			full_bfr.MkrRls();
 		}
 		page.Html_data().Indicators().Enabled_(BoolUtl.Y);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_literal)
 			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde);
 		else {
@@ -148,18 +149,18 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		end_page_bry = amp_mgr.Decode_as_bry(end_page_bry);
 		Xowc_xtn_pages cfg_pages = wiki.Cfg_parser().Xtns().Itm_pages();
 		if (cfg_pages.Init_needed()) cfg_pages.Init(wiki.Ns_mgr());
-		ns_index_id = cfg_pages.Ns_index_id(); if (ns_index_id == Int_.Min_value) return Fail_msg("wiki does not have an Index ns");
-		ns_page_id  = cfg_pages.Ns_page_id();  if (ns_page_id  == Int_.Min_value) return Fail_msg("wiki does not have a Page ns");	// occurs when <pages> used in a wiki without a "Page:" ns; EX: de.w:Help:Buchfunktion/Feedback
-		index_ttl = Xoa_ttl.Parse(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", String_.new_u8(index_ttl_bry));
+		ns_index_id = cfg_pages.Ns_index_id(); if (ns_index_id == IntUtl.MinValue) return Fail_msg("wiki does not have an Index ns");
+		ns_page_id  = cfg_pages.Ns_page_id();  if (ns_page_id  == IntUtl.MinValue) return Fail_msg("wiki does not have a Page ns");	// occurs when <pages> used in a wiki without a "Page:" ns; EX: de.w:Help:Buchfunktion/Feedback
+		index_ttl = Xoa_ttl.Parse(wiki, ns_index_id, index_ttl_bry); if (index_ttl == null) return Fail_args("index title is not valid: index={0}", StringUtl.NewU8(index_ttl_bry));
 		ns_page = wiki.Ns_mgr().Ids_get_or_null(ns_page_id);
 		if (onlysection != null)
 			bgn_sect_bry = end_sect_bry = null;
 		return true;
 	}
-	private byte[] Bld_wikitext(Bry_bfr full_bfr, Gfo_number_parser num_parser, Hash_adp_bry lst_page_regy) {
+	private byte[] Bld_wikitext(BryWtr full_bfr, Gfo_number_parser num_parser, Hash_adp_bry lst_page_regy) {
 		Pp_index_page index_page = Pp_index_parser.Parse(wiki, ctx, index_ttl, ns_page_id);
 		int index_page_ttls_len = index_page.Page_ttls().Len();
-		byte[] rv = Bry_.Empty;
+		byte[] rv = BryUtl.Empty;
 		if (bgn_page_bry != null || end_page_bry != null || include != null) {	// from, to, or include specified				
 			Xoa_ttl[] ttls = null;
 			if (	index_page.Pagelist_xndes().Len() > 0		// pagelist exists; don't get from args
@@ -167,7 +168,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				)												// NOTE: this simulates MW's if (empty($links)); REF.MW:ProofreadPageRenderer.php|renderPages
 				ttls = Get_ttls_from_xnde_args(num_parser);
 			else {
-				Int_obj_ref bgn_page_ref = Int_obj_ref.New_neg1(), end_page_ref = Int_obj_ref.New_neg1();
+				IntRef bgn_page_ref = IntRef.NewNeg1(), end_page_ref = IntRef.NewNeg1();
 				ttls = index_page.Get_ttls_rng(wiki, ns_page_id, bgn_page_bry, end_page_bry, bgn_page_ref, end_page_ref);
 				bgn_page_int = bgn_page_ref.Val();
 				end_page_int = end_page_ref.Val();
@@ -182,8 +183,8 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			rv = Bld_wikitext_for_header(full_bfr, index_page, rv);
 		}
 		return rv;
-	}	private static final byte[] Toc_bry = Bry_.new_a7("toc");
-	private byte[] Make_lnki(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
+	}	private static final byte[] Toc_bry = BryUtl.NewA7("toc");
+	private byte[] Make_lnki(BryWtr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] caption = Get_caption(full_bfr, index_page_src, lnki);
 		full_bfr.Add(Xop_tkn_.Lnki_bgn);
 		Xoa_ttl lnki_ttl = lnki.Ttl();
@@ -191,32 +192,32 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			full_bfr.Add(lnki_ttl.Full_db());
 		else										// xwiki; add entire ttl which also includes xwiki; PAGE:sv.s:Valda_dikter_(Bj�rck); EX:[[:Commons:File:Valda dikter (tredje upplagan).djvu|Commons]]; DATE:2014-07-14
 			full_bfr.Add(lnki_ttl.Raw());
-		full_bfr.Add_byte_pipe()
+		full_bfr.AddBytePipe()
 			.Add(caption)
 			.Add(Xop_tkn_.Lnki_end);
-		return full_bfr.To_bry_and_clear();
+		return full_bfr.ToBryAndClear();
 	}
-	private byte[] Get_caption(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
-		byte[] rv = Bry_.Empty;
+	private byte[] Get_caption(BryWtr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
+		byte[] rv = BryUtl.Empty;
 		try {
 			// NOTE: call "Lnki_wtr().Write_caption", not "Write_tkn_to_html" else XML in caption will be escaped; ISSUE#:624 DATE:2019-11-30
 			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(full_bfr, Xoh_wtr_ctx.Basic, index_page_src, lnki, lnki.Ttl());
-			rv = full_bfr.To_bry_and_clear();
+			rv = full_bfr.ToBryAndClear();
 		}
 		catch (Exception e) {
-			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", ctx.Page().Ttl().Full_db(), String_.new_u8(index_page_src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
+			wiki.Appe().Usr_dlg().Warn_many("", "", "failed to write caption: page=~{0} lnki=~{1} err=~{2}", ctx.Page().Ttl().Full_db(), StringUtl.NewU8(index_page_src, lnki.Src_bgn(), lnki.Src_end()), ErrUtl.ToStrFull(e));
 			rv = lnki.Ttl().Page_txt();
 		}
 		return rv;
 	}
-	private byte[] Bld_wikitext_for_header(Bry_bfr full_bfr, Pp_index_page index_page, byte[] rv) {
+	private byte[] Bld_wikitext_for_header(BryWtr full_bfr, Pp_index_page index_page, byte[] rv) {
 		List_adp main_lnkis = index_page.Main_lnkis();
 		int main_lnkis_len = main_lnkis.Len();
 		byte[] index_page_src = index_page.Src();
 		if (main_lnkis_len > 0) {
 			Xoa_ttl page_ttl = ctx.Page().Ttl();
 			for (int i = 0; i < main_lnkis_len; i++) {
-				Xop_lnki_tkn main_lnki = (Xop_lnki_tkn)main_lnkis.Get_at(i);
+				Xop_lnki_tkn main_lnki = (Xop_lnki_tkn)main_lnkis.GetAt(i);
 				if (page_ttl.Eq_full_db(main_lnki.Ttl())) {
 					Xoae_page old_page = ctx.Page();
 					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, ctx.Page());	// HACK: should not reuse html_wtr, but should be safe to use during parse (not html_gen)
@@ -224,10 +225,10 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 						toc_cur = Make_lnki(full_bfr, index_page_src, main_lnki);
 					if (toc_prv == null		// do not set if "prev" is specified
 						&& i > 0)
-						toc_prv = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.Get_at(i - 1));
+						toc_prv = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.GetAt(i - 1));
 					if (toc_nxt == null		// do not set if "next" is specified
 						&& i + 1 < main_lnkis_len)
-						toc_nxt = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.Get_at(i + 1));
+						toc_nxt = Make_lnki(full_bfr, index_page_src, (Xop_lnki_tkn)main_lnkis.GetAt(i + 1));
 					wiki.Html_mgr().Html_wtr().Init_by_page(ctx, Xoh_wtr_ctx.Basic, index_page_src, old_page);
 					break;
 				}
@@ -243,23 +244,23 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (toc_nxt != null)
 			full_bfr.Add(Bry_toc_nxt).Add(toc_nxt);						// |next=Page/3"
 		if (bgn_page_int != -1)
-			full_bfr.Add(Bry_page_bgn).Add_int_variable(bgn_page_int);	// |from=1"
+			full_bfr.Add(Bry_page_bgn).AddIntVariable(bgn_page_int);	// |from=1"
 		if (end_page_int != -1)
-			full_bfr.Add(Bry_page_end).Add_int_variable(end_page_int);	// |to=3"
+			full_bfr.Add(Bry_page_end).AddIntVariable(end_page_int);	// |to=3"
 		Add_args(full_bfr, index_page.Invk_args());
 		Add_args(full_bfr, unknown_xatrs);
 		full_bfr.Add(gplx.xowa.parsers.tmpls.Xop_curly_end_lxr.Hook);
 		full_bfr.Add(rv);
-		return full_bfr.To_bry_and_clear();
+		return full_bfr.ToBryAndClear();
 	}
-	private void Add_args(Bry_bfr full_bfr, List_adp invk_args) {
+	private void Add_args(BryWtr full_bfr, List_adp invk_args) {
 		int invk_args_len = invk_args.Len();
 		for (int i = 0; i < invk_args_len; i++) {
-			Pp_index_arg arg = (Pp_index_arg)invk_args.Get_at(i);
+			Pp_index_arg arg = (Pp_index_arg)invk_args.GetAt(i);
 			full_bfr
-				.Add_byte_pipe()		// |
+				.AddBytePipe()		// |
 				.Add(wiki.Lang().Case_mgr().Case_build_lower(arg.Key()))	// per MW, always lowercase key
-				.Add_byte_eq()			// =
+				.AddByteEq()			// =
 				.Add(arg.Val())
 				;
 		}
@@ -275,39 +276,39 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		return Get_ttls_from_xnde_args__ttls(list);
 	}
 	private List_adp Get_ttls_from_xnde_args__include(List_adp list) {
-		if (Bry_.Len_eq_0(include)) return list;	// include is blank; exit early;
-		int[] include_pages = Int_ary_.Parse_or(include, null);
+		if (BryUtl.IsNullOrEmpty(include)) return list;	// include is blank; exit early;
+		int[] include_pages = IntAryUtl.ParseOr(include, null);
 		if (include_pages == null) return list;	// ignore invalid include; DATE:2014-02-22
 		int include_pages_len = include_pages.length;
 		for (int i = 0; i < include_pages_len; i++)
-			list.Add(new Int_obj_val(include_pages[i]));
+			list.Add(new IntVal(include_pages[i]));
 		return list;
 	}
 	private List_adp Get_ttls_from_xnde_args__rng(Gfo_number_parser num_parser, List_adp list) {
 		// exit if "from" and "to" are blank but include is specified; ISSUE#:657 DATE:2020-01-19
-		if (   Bry_.Len_eq_0(bgn_page_bry)
-			&& Bry_.Len_eq_0(end_page_bry)
-			&& Bry_.Len_gt_0(include)
+		if (   BryUtl.IsNullOrEmpty(bgn_page_bry)
+			&& BryUtl.IsNullOrEmpty(end_page_bry)
+			&& BryUtl.IsNotNullOrEmpty(include)
 			)
 			return list;
 
 		bgn_page_int = 0;	// NOTE: default to 0 (1st page)
-		if (Bry_.Len_gt_0(bgn_page_bry)) {
+		if (BryUtl.IsNotNullOrEmpty(bgn_page_bry)) {
 			num_parser.Parse(bgn_page_bry);
 			if (num_parser.Has_err()) {
-				Fail_args("pages node does not have a valid 'from': from={0}", String_.new_u8(bgn_page_bry));
+				Fail_args("pages node does not have a valid 'from': from={0}", StringUtl.NewU8(bgn_page_bry));
 				return null;
 			}
 			else
 				bgn_page_int = num_parser.Rv_as_int();
 		}
 		end_page_int = 0;	
-		if (Bry_.Len_eq_0(end_page_bry)) 
+		if (BryUtl.IsNullOrEmpty(end_page_bry))
 			end_page_int = Get_max_page_idx(wiki, index_ttl);
 		else {
 			num_parser.Parse(end_page_bry);
 			if (num_parser.Has_err()) {
-				Fail_args("pages node does not have a valid 'to': to={0}", String_.new_u8(bgn_page_bry));
+				Fail_args("pages node does not have a valid 'to': to={0}", StringUtl.NewU8(bgn_page_bry));
 				return null;
 			}
 			else
@@ -318,39 +319,39 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			return null;
 		}
 		for (int i = bgn_page_int; i <= end_page_int; i++)
-			list.Add(new Int_obj_val(i));
+			list.Add(new IntVal(i));
 		return list;
 	}
 	private int Get_max_page_idx(Xowe_wiki wiki, Xoa_ttl index_ttl) {
 		List_adp rslt = List_adp_.New();
-		Int_obj_ref rslt_count = Int_obj_ref.New_zero();
-		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt, tmp_page, tmp_page, rslt_count, ns_page, index_ttl.Page_db(), Int_.Max_value, 0, Int_.Max_value, false, false);
+		IntRef rslt_count = IntRef.NewZero();
+		wiki.Db_mgr().Load_mgr().Load_ttls_for_all_pages(Cancelable_.Never, rslt, tmp_page, tmp_page, rslt_count, ns_page, index_ttl.Page_db(), IntUtl.MaxValue, 0, IntUtl.MaxValue, false, false);
 		int len = rslt_count.Val();
 		int page_leaf_max = 0;
 		for (int i = 0; i < len; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)rslt.Get_at(i);
+			Xowd_page_itm page = (Xowd_page_itm)rslt.GetAt(i);
 			Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, ns_page_id, page.Ttl_page_db());	if (page_ttl == null) continue;					// page_ttl is not valid; should never happen;
 			byte[] page_ttl_leaf = page_ttl.Leaf_txt();									if (page_ttl_leaf == null) continue;			// page is not leaf; should not happen
-			int page_leaf_val = Bry_.To_int_or(page_ttl_leaf, Int_.Min_value);			if (page_leaf_val == Int_.Min_value) continue;	// leaf is not int; ignore
+			int page_leaf_val = BryUtl.ToIntOr(page_ttl_leaf, IntUtl.MinValue);			if (page_leaf_val == IntUtl.MinValue) continue;	// leaf is not int; ignore
 			if (page_leaf_val > page_leaf_max) page_leaf_max = page_leaf_val;
 		}
 		return page_leaf_max;
 	}	private static Xowd_page_itm tmp_page = new Xowd_page_itm();	// tmp_page passed to Load_ttls_for_all_pages; values are never looked at, so use static instance
 	private List_adp Get_ttls_from_xnde_args__exclude(List_adp list) {
-		if (Bry_.Len_eq_0(exclude)) return list;	// exclude is blank; exit early;
-		int[] exclude_pages = Int_ary_.Parse_or(exclude, null);
+		if (BryUtl.IsNullOrEmpty(exclude)) return list;	// exclude is blank; exit early;
+		int[] exclude_pages = IntAryUtl.ParseOr(exclude, null);
 		if (exclude_pages == null) return list;	// ignore invalid exclude; DATE:2014-02-22
 		Hash_adp exclude_pages_hash = Hash_adp_.New();
 		int exclude_pages_len = exclude_pages.length;
 		for (int i = 0; i < exclude_pages_len; i++) {
-			Int_obj_val exclude_page = new Int_obj_val(exclude_pages[i]);
+			IntVal exclude_page = new IntVal(exclude_pages[i]);
 			if (!exclude_pages_hash.Has(exclude_page))
 				exclude_pages_hash.Add(exclude_page, exclude_page);
 		}
 		List_adp new_list = List_adp_.New();
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
-			Int_obj_val page = (Int_obj_val)list.Get_at(i);
+			IntVal page = (IntVal)list.GetAt(i);
 			if (exclude_pages_hash.Has(page)) continue;
 			new_list.Add(page);
 		}
@@ -360,16 +361,16 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		int list_len = list.Len(); if (list_len == 0) return Ttls_null;
 		Xoa_ttl[] rv = new Xoa_ttl[(list_len / step_int) + ((list_len % step_int == 0) ? 0 : 1)];
 		int rv_idx = 0;
-		Bry_bfr ttl_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr ttl_bfr = wiki.Utl__bfr_mkr().GetB512();
 		for (int i = 0; i < list_len; i += step_int) {
-			Int_obj_val page = (Int_obj_val)list.Get_at(i);
+			IntVal page = (IntVal)list.GetAt(i);
 			ttl_bfr.Add(ns_page.Name_db_w_colon())		// EX: 'Page:'
 				.Add(index_ttl_bry)						// EX: 'File.djvu'
-				.Add_byte(AsciiByte.Slash)				// EX: '/'
-				.Add_int_variable(page.Val());			// EX: '123'
-			rv[rv_idx++] = Xoa_ttl.Parse(wiki, ttl_bfr.To_bry_and_clear());
+				.AddByte(AsciiByte.Slash)				// EX: '/'
+				.AddIntVariable(page.Val());			// EX: '123'
+			rv[rv_idx++] = Xoa_ttl.Parse(wiki, ttl_bfr.ToBryAndClear());
 		}
-		ttl_bfr.Mkr_rls(); 
+		ttl_bfr.MkrRls();
 		return rv;
 	}
 	private boolean Chk_step() {
@@ -377,19 +378,19 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			step_int = 1;
 			return true;
 		}
-		step_int = Bry_.To_int_or(step_bry, Int_.Min_value);
+		step_int = BryUtl.ToIntOr(step_bry, IntUtl.MinValue);
 		if (step_int < 1 || step_int > 1000) {
-			Fail_args("pages node does not have a valid 'step': step={0}", String_.new_u8(step_bry));
+			Fail_args("pages node does not have a valid 'step': step={0}", StringUtl.NewU8(step_bry));
 			return false;
 		}
 		return true;
 	}
-	private byte[] Bld_wikitext_from_ttls(Bry_bfr full_bfr, Hash_adp_bry lst_page_regy, Xoa_ttl[] ary) {
+	private byte[] Bld_wikitext_from_ttls(BryWtr full_bfr, Hash_adp_bry lst_page_regy, Xoa_ttl[] ary) {
 		int ary_len = ary.length;
 		Xoa_ttl bgn_page_ttl = bgn_page_bry == null ? null : ary[0];
 		Xoa_ttl end_page_ttl = end_page_bry == null ? null : ary[ary_len - 1];
 		
-		Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr page_bfr = wiki.Utl__bfr_mkr().GetM001();
 		try {
 		for (int i = 0; i < ary_len; i++) {
 			Xoa_ttl ttl = ary[i];
@@ -414,17 +415,17 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(full_bfr);
 			Lst_pfunc_itm lst_itm = Lst_pfunc_itm.New_sect_or_null(ctx, ttl.Full_db());
 			if (lst_itm != null) Lst_pfunc_lst_.Sect_include(page_bfr, lst_itm.Sec_mgr(), lst_itm.Itm_src(), cur_sect_bgn, cur_sect_end);
-			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), BoolUtl.Y);
-			full_bfr.Add_bfr_and_clear(page_bfr);
-			full_bfr.Add(gplx.langs.htmls.entitys.Gfh_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
+			prepend_mgr.End(ctx, full_bfr, page_bfr.Bry(), page_bfr.Len(), BoolUtl.Y);
+			full_bfr.AddBfrAndClear(page_bfr);
+			full_bfr.Add(HtmlEntityCodes.SpaceBry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
 		}			
 		}
 		finally {
-			page_bfr.Mkr_rls();
+			page_bfr.MkrRls();
 		}
-		return full_bfr.To_bry_and_clear();
+		return full_bfr.ToBryAndClear();
 	}
-	private Xop_root_tkn Bld_root_nde(Bry_bfr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {
+	private Xop_root_tkn Bld_root_nde(BryWtr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {
 		Xop_ctx tmp_ctx = Xop_ctx.New__sub__reuse_lst(wiki, ctx, lst_page_regy);
 		tmp_ctx.Page().Ttl_(ctx.Page().Ttl());					// NOTE: must set tmp_ctx.Ttl to ctx.Ttl; EX: Flatland and First World; DATE:2013-04-29
 		tmp_ctx.Lnki().File_logger_(Xop_file_logger_.Noop);	// NOTE: set file_wkr to null, else items will be double-counted
@@ -435,36 +436,36 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		return rv;
 	}
 	private String Fail_msg_suffix() {
-		String excerpt = Bry_fmtr.Escape_tilde(String_.new_u8(Bry_.Mid_by_len_safe(src, xnde_tkn.Src_bgn(), 32)));
-		return String_.Format(" ttl={0} src={1}", String_.new_u8(cur_page_ttl.Full_db()), excerpt);
+		String excerpt = BryFmtr.EscapeTilde(StringUtl.NewU8(BryUtl.MidByLenSafe(src, xnde_tkn.Src_bgn(), 32)));
+		return StringUtl.Format(" ttl={0} src={1}", StringUtl.NewU8(cur_page_ttl.Full_db()), excerpt);
 	}
 	private String Fail_msg_basic(String msg) {return msg + ";" + Fail_msg_suffix();}
-	private String Fail_msg_custom(String fmt, Object... args) {return String_.Format(fmt, args) + Fail_msg_suffix();}
+	private String Fail_msg_custom(String fmt, Object... args) {return StringUtl.Format(fmt, args) + Fail_msg_suffix();}
 	private boolean Fail_msg(String msg) {
 		xtn_literal = true;
-		usr_dlg.Warn_many("", "", String_.Replace(Fail_msg_basic(msg), "\n", ""));
+		usr_dlg.Warn_many("", "", StringUtl.Replace(Fail_msg_basic(msg), "\n", ""));
 		return false;
 	}
 	private boolean Fail_args(String fmt, Object... args) {
 		xtn_literal = true;
-		usr_dlg.Warn_many("", "", String_.Replace(Fail_msg_custom(fmt, args), "\n", ""));
+		usr_dlg.Warn_many("", "", StringUtl.Replace(Fail_msg_custom(fmt, args), "\n", ""));
 		return false;
 	}
 
 	private static Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()	// NOTE: these do not seem to be i18n'd; no ProofreadPage.magic.php; ProofreadPage.i18n.php only has messages; ProofreadPage.body.php refers to names literally
-	.Add_str_obj("index"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_index_ttl))
-	.Add_str_obj("from"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_bgn_page))
-	.Add_str_obj("to"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_end_page))
-	.Add_str_obj("fromsection"	, Byte_obj_val.new_(Pp_pages_nde.Xatr_bgn_sect))
-	.Add_str_obj("tosection"	, Byte_obj_val.new_(Pp_pages_nde.Xatr_end_sect))
-	.Add_str_obj("include"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_include))
-	.Add_str_obj("exclude"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_exclude))
-	.Add_str_obj("onlysection"	, Byte_obj_val.new_(Pp_pages_nde.Xatr_onlysection))
-	.Add_str_obj("step"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_step))
-	.Add_str_obj("header"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_header))
-	.Add_str_obj("current"		, Byte_obj_val.new_(Pp_pages_nde.Xatr_toc_cur))
-	.Add_str_obj("prev"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_toc_prv))
-	.Add_str_obj("next"			, Byte_obj_val.new_(Pp_pages_nde.Xatr_toc_nxt))
+	.Add_str_obj("index"		, ByteVal.New(Pp_pages_nde.Xatr_index_ttl))
+	.Add_str_obj("from"			, ByteVal.New(Pp_pages_nde.Xatr_bgn_page))
+	.Add_str_obj("to"			, ByteVal.New(Pp_pages_nde.Xatr_end_page))
+	.Add_str_obj("fromsection"	, ByteVal.New(Pp_pages_nde.Xatr_bgn_sect))
+	.Add_str_obj("tosection"	, ByteVal.New(Pp_pages_nde.Xatr_end_sect))
+	.Add_str_obj("include"		, ByteVal.New(Pp_pages_nde.Xatr_include))
+	.Add_str_obj("exclude"		, ByteVal.New(Pp_pages_nde.Xatr_exclude))
+	.Add_str_obj("onlysection"	, ByteVal.New(Pp_pages_nde.Xatr_onlysection))
+	.Add_str_obj("step"			, ByteVal.New(Pp_pages_nde.Xatr_step))
+	.Add_str_obj("header"		, ByteVal.New(Pp_pages_nde.Xatr_header))
+	.Add_str_obj("current"		, ByteVal.New(Pp_pages_nde.Xatr_toc_cur))
+	.Add_str_obj("prev"			, ByteVal.New(Pp_pages_nde.Xatr_toc_prv))
+	.Add_str_obj("next"			, ByteVal.New(Pp_pages_nde.Xatr_toc_nxt))
 	;
 	public static final byte
 	  Xatr_index_ttl	=  0
@@ -482,13 +483,13 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	, Xatr_toc_nxt		= 12
 	;
 	private static final byte[]
-	  Bry_tmpl			= Bry_.new_a7("{{:MediaWiki:Proofreadpage_header_template")
-	, Bry_value			= Bry_.new_a7("|value=")
-	, Bry_toc_cur		= Bry_.new_a7("|current=")
-	, Bry_toc_prv		= Bry_.new_a7("|prev=")
-	, Bry_toc_nxt		= Bry_.new_a7("|next=")
-	, Bry_page_bgn		= Bry_.new_a7("|from=")
-	, Bry_page_end		= Bry_.new_a7("|to=")
+	  Bry_tmpl			= BryUtl.NewA7("{{:MediaWiki:Proofreadpage_header_template")
+	, Bry_value			= BryUtl.NewA7("|value=")
+	, Bry_toc_cur		= BryUtl.NewA7("|current=")
+	, Bry_toc_prv		= BryUtl.NewA7("|prev=")
+	, Bry_toc_nxt		= BryUtl.NewA7("|next=")
+	, Bry_page_bgn		= BryUtl.NewA7("|from=")
+	, Bry_page_end		= BryUtl.NewA7("|to=")
 	;
 	public static final Xoa_ttl[] Ttls_null = null;
 }	

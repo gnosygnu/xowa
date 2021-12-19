@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.utils_rankings.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.utils_rankings.bldrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Sqlite_percentile_cmd extends Xob_cmd__base implements Xob_cmd {
@@ -29,7 +36,7 @@ public class Sqlite_percentile_cmd extends Xob_cmd__base implements Xob_cmd {
 	@Override public void Cmd_run() {
 		wiki.Init_assert();
 		if (conn == null) {
-			if (db_rel_url == null) throw Err_.new_("bldr", "db_rel_url can not be empty; EX: 'xowa.page_rank.sqlite3'");
+			if (db_rel_url == null) throw ErrUtl.NewArgs("db_rel_url can not be empty; EX: 'xowa.page_rank.sqlite3'");
 			conn = Db_conn_bldr.Instance.Get_or_autocreate(false, wiki.Fsys_mgr().Root_dir().GenSubFil(db_rel_url));
 		}
 		Xoa_app_.Usr_dlg().Prog_many("", "", "creating temp_table: tbl=~{0}", tbl_name);
@@ -43,19 +50,19 @@ public class Sqlite_percentile_cmd extends Xob_cmd__base implements Xob_cmd {
 		));
 		Xoa_app_.Usr_dlg().Prog_many("", "", "filling temp_table: tbl=~{0} sql=~{1}", tbl_name, select_sql);
 		new Db_attach_mgr(conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Tbl__page().Conn()))
-			.Exec_sql(Bry_fmt.Make_str("INSERT INTO ~{tbl} (row_key, row_val) ~{select}", tbl_name, select_sql));
+			.Exec_sql(BryFmt.Make_str("INSERT INTO ~{tbl} (row_key, row_val) ~{select}", tbl_name, select_sql));
 		Xoa_app_.Usr_dlg().Prog_many("", "", "updating row_score: tbl=~{0}", tbl_name);
 		String score_max_as_str = DbmetaFldItm.ToDoubleStrByInt(score_max);
-		this.count = conn.Exec_select_as_int("SELECT Count(*) FROM " + tbl_name, -1); if (count == -1) throw Err_.new_("bldr", "failed to get count; tbl=~{0}", tbl_name);
+		this.count = conn.Exec_select_as_int("SELECT Count(*) FROM " + tbl_name, -1); if (count == -1) throw ErrUtl.NewArgs("failed to get count; tbl=~{0}", tbl_name);
 		String count_as_str = DbmetaFldItm.ToDoubleStrByInt(count);
-		conn.Exec_sql(Bry_fmt.Make_str("UPDATE ~{tbl} SET row_score = (row_rank * ~{score_max}) / ~{count}", tbl_name, score_max_as_str, count_as_str));
+		conn.Exec_sql(BryFmt.Make_str("UPDATE ~{tbl} SET row_score = (row_rank * ~{score_max}) / ~{count}", tbl_name, score_max_as_str, count_as_str));
 		Xoa_app_.Usr_dlg().Prog_many("", "", "resolving ties: tbl=~{0}", tbl_name);
 		conn.Meta_tbl_remake
 		( Dbmeta_tbl_itm.New(tbl_name + "_avg"
 		,	DbmetaFldItm.NewDouble("row_val").PrimarySetY()
 		,	DbmetaFldItm.NewDouble("row_score")
 		));
-		conn.Exec_sql(Bry_fmt.Make_str(String_.Concat_lines_nl_skip_last
+		conn.Exec_sql(BryFmt.Make_str(StringUtl.ConcatLinesNlSkipLast
 		( "INSERT INTO ~{tbl}_avg (row_val, row_score)"
 		, "SELECT   row_val"
 		, ",        (Avg(row_rank) * ~{score_max} / ~{count}) AS row_score"
@@ -63,7 +70,7 @@ public class Sqlite_percentile_cmd extends Xob_cmd__base implements Xob_cmd {
 		, "GROUP BY row_val"
 		, "HAVING   Count(row_val > 1)"
 		), tbl_name, score_max_as_str, count_as_str));
-		conn.Exec_sql(Bry_fmt.Make_str(String_.Concat_lines_nl_skip_last
+		conn.Exec_sql(BryFmt.Make_str(StringUtl.ConcatLinesNlSkipLast
 		( "UPDATE   ~{tbl}"
 		, "SET      row_score = (SELECT row_score FROM ~{tbl}_avg t2 WHERE t2.row_val = ~{tbl}.row_val)"
 		, "WHERE    row_val IN (SELECT row_val FROM ~{tbl}_avg t2)"

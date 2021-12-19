@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.Type_;
-import gplx.Type_ids_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpStdClass;
 public class JCValue {
@@ -78,7 +78,7 @@ public class JCValue {
 			case Value_tid__prim:
 				return value_as_prim;
 			default:
-				throw Err_.new_unhandled_default(value_tid);
+				throw ErrUtl.NewUnhandled(value_tid);
 		}
 	}
 
@@ -137,7 +137,7 @@ public class JCValue {
 	*/
 //		public String error($key = null, $fieldPath = null /*...*/)
 	public Object error(Object key, String... fieldPath) {
-		if (Type_.Type_by_obj(key) == BoolUtl.ClsRefType) {
+		if (ClassUtl.TypeByObj(key) == BoolUtl.ClsRefType) {
 			this.errorVal = BoolUtl.Cast(key);
 		}
 		else if (key != null) {
@@ -158,17 +158,17 @@ public class JCValue {
 	*/
 	public void setField(Object fld, Object o) {
 		int fld_type = To_type_id(fld);
-		if (value_tid == Value_tid__obj && fld_type == Type_ids_.Id__str) {
+		if (value_tid == Value_tid__obj && fld_type == TypeIds.IdStr) {
 			value_as_obj.Add_by_as_obj((String)fld, o);
 		}
-		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
-			if (fld_type == Type_ids_.Id__str)
+		else if (value_tid == Value_tid__ary && (fld_type == TypeIds.IdStr || fld_type == TypeIds.IdInt)) {
+			if (fld_type == TypeIds.IdStr)
 				value_as_ary.Add((String)fld, o);
 			else
-				value_as_ary.Add(Int_.Cast(fld), o);
+				value_as_ary.Add(IntUtl.Cast(fld), o);
 		}
 		else {
-			throw Err_.new_wo_type("Type mismatch for field " + fld);
+			throw ErrUtl.NewArgs("Type mismatch for field " + fld);
 		}
 	}
 
@@ -180,21 +180,21 @@ public class JCValue {
 	public Object deleteField(Object fld) {
 		int fld_type = To_type_id(fld);
 		Object tmp = null;
-		if (value_tid == Value_tid__obj && fld_type == Type_ids_.Id__str) {
+		if (value_tid == Value_tid__obj && fld_type == TypeIds.IdStr) {
 			String key = (String)fld;
 			tmp = value_as_obj.Get_by_as_obj(key);
 			value_as_obj.Del_by(key);
 		}
-		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
+		else if (value_tid == Value_tid__ary && (fld_type == TypeIds.IdStr || fld_type == TypeIds.IdInt)) {
 			tmp = value_as_ary.Get_by_obj(fld);
-			if (fld_type == Type_ids_.Id__str)
+			if (fld_type == TypeIds.IdStr)
 				XophpArray.unset(value_as_ary, (String)fld);
 			else
-				XophpArray.unset(value_as_ary, Int_.Cast(fld));
+				XophpArray.unset(value_as_ary, IntUtl.Cast(fld));
 			value.Del(fld);
 		}
 		else {
-			throw Err_.new_wo_type("Type mismatch for field " + fld);
+			throw ErrUtl.NewArgs("Type mismatch for field " + fld);
 		}
 		return tmp;
 	}
@@ -206,13 +206,13 @@ public class JCValue {
 	*/
 	public boolean fieldExists(Object fld) {
 		int fld_type = To_type_id(fld);
-		if (value_tid == Value_tid__obj && fld_type == Type_ids_.Id__str) {
+		if (value_tid == Value_tid__obj && fld_type == TypeIds.IdStr) {
 			return value_as_obj.Has((String)fld);
 		}
-		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
+		else if (value_tid == Value_tid__ary && (fld_type == TypeIds.IdStr || fld_type == TypeIds.IdInt)) {
 			return value_as_ary.Has_obj(fld);
 		}
-		throw Err_.new_wo_type("Type mismatch for field " + fld);
+		throw ErrUtl.NewArgs("Type mismatch for field " + fld);
 	}
 
 	/**
@@ -222,38 +222,38 @@ public class JCValue {
 	*/
 	public Object getField(Object fld) {
 		int fld_type = To_type_id(fld);
-		if (value_tid == Value_tid__obj && fld_type == Type_ids_.Id__str) {
+		if (value_tid == Value_tid__obj && fld_type == TypeIds.IdStr) {
 			return value_as_obj.Get_by_as_obj((String)fld);
 		}
-		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
+		else if (value_tid == Value_tid__ary && (fld_type == TypeIds.IdStr || fld_type == TypeIds.IdInt)) {
 			return value_as_ary.Get_by_obj(fld);
 		}
-		throw Err_.new_wo_type("Type mismatch for field " + fld);
+		throw ErrUtl.NewArgs("Type mismatch for field " + fld);
 	}
 
 	public static int To_type_id(Object o) {
-		Class<?> type = Type_.Type_by_obj(o);
-		if      (Type_.Eq(type, String.class))
-			return Type_ids_.Id__str;
-		else if (Type_.Eq(type, int.class))
-			return Type_ids_.Id__int;
+		Class<?> type = ClassUtl.TypeByObj(o);
+		if      (ClassUtl.Eq(type, String.class))
+			return TypeIds.IdStr;
+		else if (ClassUtl.Eq(type, int.class))
+			return TypeIds.IdInt;
 		else
-			return Type_ids_.Id__null;
+			return TypeIds.IdNull;
 	}
 }
 class XomwTypeUtl {
 	public static int To_type_id(Object o) {
 		if       (o == null)
-			return Type_ids_.Id__null;
-		Class<?> type = Type_.Type_by_obj(o);
-		if      (Type_.Eq(type, String.class))
-			return Type_ids_.Id__str;
-		else if (Type_.Eq(type, int.class))
-			return Type_ids_.Id__int;
-		else if (Type_.Is_array(type))
-			return Type_ids_.Id__array;
+			return TypeIds.IdNull;
+		Class<?> type = ClassUtl.TypeByObj(o);
+		if      (ClassUtl.Eq(type, String.class))
+			return TypeIds.IdStr;
+		else if (ClassUtl.Eq(type, int.class))
+			return TypeIds.IdInt;
+		else if (ClassUtl.IsArray(type))
+			return TypeIds.IdArray;
 		else
-			return Type_ids_.Id__obj;
+			return TypeIds.IdObj;
 
 	}
 }

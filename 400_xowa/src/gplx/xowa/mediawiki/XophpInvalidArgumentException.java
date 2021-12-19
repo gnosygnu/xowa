@@ -15,11 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 
-import gplx.Err;
-import gplx.String_;
-
+import gplx.types.errs.Err;
+import gplx.types.basics.utls.StringUtl;
 public class XophpInvalidArgumentException extends Err {
     public XophpInvalidArgumentException(String fmt, Object... args) {
-        super(true, "", "", String_.Format(fmt, args));
+        super(StringUtl.Format(fmt, args));
     }
 }

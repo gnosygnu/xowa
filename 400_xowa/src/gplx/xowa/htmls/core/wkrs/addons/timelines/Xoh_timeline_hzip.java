@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.addons.timelines; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.addons.timelines;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.threads.poolables.*;
+import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_timeline_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public int Tid()		{return Xoh_hzip_dict_.Tid__timeline;}
@@ -27,13 +31,13 @@ public class Xoh_timeline_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_timeline_data data = (Xoh_timeline_data)data_obj;
 
 		// just add the entire thing; not worth trying to compress "<pre class='xowa-timeline'>"
-		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+		bfr.AddMid(src, data.Src_bgn(), data.Src_end());
 
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		int timeline_bgn = src_bgn;
-		int timeline_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, src_bgn, src_end);
+		int timeline_end = BryFind.FindFwd(src, AsciiByte.Gt, src_bgn, src_end);
 		if (timeline_end == -1) {
 			Gfo_log_.Instance.Warn("hzip.timeline.end_not_found", "page", hpg.Url_bry_safe(), "src_bgn", src_bgn);
 			timeline_end = timeline_bgn;

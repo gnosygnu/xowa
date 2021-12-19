@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports.json; import gplx.*;
+package gplx.xowa.xtns.wbases.imports.json;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.criterias.*; import gplx.core.envs.*;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 class Io_stream_rdr_mgr {
-	public static Io_stream_rdr Get_rdr_or_null(Io_url src_fil, Io_url src_dir, Io_stream_unzip_mgr unzip_mgr, String... filter_ary) {			
+	public static Io_stream_rdr Get_rdr_or_null(Io_url src_fil, Io_url src_dir, Io_stream_unzip_mgr unzip_mgr, String... filter_ary) {
 		IoItmFil src_itm = null;
 		if (src_fil != null) src_itm = Io_mgr.Instance.QueryFil(src_fil);
 
@@ -46,7 +49,7 @@ class Io_stream_rdr_mgr {
 		IoItmHash itm_hash = Io_mgr.Instance.QueryDir_args(dir).ExecAsItmHash();
 		int len = itm_hash.Len();
 		for (int i = 0; i < len; ++i) {
-			IoItm_base itm = itm_hash.Get_at(i);
+			IoItm_base itm = itm_hash.GetAt(i);
 			for (int j = 0; j < match_ary_len; ++j) {
 				if (itm.Type_fil() && match_ary[j].Matches(itm.Url()))
 					rv = (IoItmFil)itm;	// NOTE: this will return the last match; useful for getting latest dump when multiple dumps are in one dir; (assuming latest should alphabetize last)
@@ -61,7 +64,7 @@ class Io_stream_unzip_mgr {
 	public Io_stream_unzip_mgr(boolean stdout_enabled, Process_adp stdout_process, String[] zip_exts) {
 		this.stdout_enabled = stdout_enabled; this.stdout_process = stdout_process; this.zip_exts = zip_exts;
 	}
-	public boolean Handles(Io_url url) {return String_.In(url.Ext(), zip_exts);}
+	public boolean Handles(Io_url url) {return StringUtl.In(url.Ext(), zip_exts);}
 	public Io_stream_rdr New_rdr(Io_url url) {
 		return stdout_enabled
 			? Io_stream_rdr_process.new_(stdout_process.Exe_url(), url, stdout_process.Xto_process_bldr_args(url.Raw()))

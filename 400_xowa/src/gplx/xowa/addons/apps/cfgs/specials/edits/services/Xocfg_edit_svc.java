@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.services;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
 import gplx.core.gfobjs.*;
-import gplx.xowa.guis.cbks.*; import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
+import gplx.xowa.guis.cbks.*;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
 import gplx.xowa.addons.apps.cfgs.specials.edits.pages.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*; import gplx.xowa.addons.apps.cfgs.enums.*;
 public class Xocfg_edit_svc {
 	private final Xoa_app app;
@@ -30,7 +35,7 @@ public class Xocfg_edit_svc {
 		String key = args.Get_as_str("key");
 		String val = args.Get_as_str("val");
 		String type = args.Get_as_str("type");
-		if (String_.Has_at_bgn(type, "gui.binding")) {
+		if (StringUtl.HasAtBgn(type, "gui.binding")) {
 			val = Xoitm_gui_binding.To_db_str(val);
 		}
 
@@ -38,13 +43,13 @@ public class Xocfg_edit_svc {
 		try {
 			app.Cfg().Set_str(ctx, key, val);
 		} catch (Exception exc) {				
-			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__fail", Gfobj_nde.New().Add_str("key", key).Add_str("new_val", args.Get_as_str("val")).Add_str("old_val", grp.Get(ctx)).Add_str("err", Err_.Message_lang(exc)));
+			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.update__fail", Gfobj_nde.New().Add_str("key", key).Add_str("new_val", args.Get_as_str("val")).Add_str("old_val", grp.Get(ctx)).Add_str("err", ErrUtl.Message(exc)));
 			return;
 		}
 
-		if (!String_.Eq(type, "btn") && String_.Eq(grp.Dflt(), val)) {
-			if (String_.Has_at_bgn(type, "gui.binding")) {
-				val = String_.Concat_with_str("|", gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_gui(val));
+		if (!StringUtl.Eq(type, "btn") && StringUtl.Eq(grp.Dflt(), val)) {
+			if (StringUtl.HasAtBgn(type, "gui.binding")) {
+				val = StringUtl.ConcatWith("|", gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_gui(val));
 			}
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.delete__recv", Gfobj_nde.New().Add_str("key", key).Add_str("type", type).Add_str("val", val));
 		}
@@ -57,8 +62,8 @@ public class Xocfg_edit_svc {
 		String type = args.Get_as_str("type");
 		app.Cfg().Del(ctx, key);
 		String val = app.Cfg().Get_str(ctx, key);
-		if (String_.Has_at_bgn(type, "gui.binding")) {
-			val = String_.Concat_with_str("|", gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_gui(val));
+		if (StringUtl.HasAtBgn(type, "gui.binding")) {
+			val = StringUtl.ConcatWith("|", gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_gui(val));
 		}
 		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.delete__recv", Gfobj_nde.New().Add_str("key", key).Add_str("val", val));
 	}
@@ -67,7 +72,7 @@ public class Xocfg_edit_svc {
 		String key = args.Get_as_str("key");
 		if (edit_loader == null) edit_loader = Xocfg_edit_loader.New(app);
 		Xoedit_root root = edit_loader.Load_root(key, ctx, "en");
-		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.select__recv", root.To_nde(Bry_bfr_.New()));
+		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.cfg_edit.select__recv", root.To_nde(BryWtr.New()));
 		app.Cfg().Set_str_app(Xocfg_edit_special.Cfg__previous_grp, key);
 	}
 }

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-public interface Xoh_arg_img_core extends gplx.core.brys.Bfr_arg {
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+public interface Xoh_arg_img_core extends BryBfrArg {
 	Xoh_arg_img_core Init(int uid, byte[] src, int w, int h);
 }

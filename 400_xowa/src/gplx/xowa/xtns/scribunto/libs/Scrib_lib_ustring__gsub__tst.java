@@ -14,19 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.core.tests.Gftest;
 import gplx.langs.regxs.Regx_adp_;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.commons.XoKeyvalUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
 import gplx.xowa.xtns.scribunto.Scrib_lib;
 import gplx.xowa.xtns.scribunto.engines.mocks.Mock_proc_stub;
@@ -58,7 +57,7 @@ public class Scrib_lib_ustring__gsub__tst {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(1, "[1]", "2", 1), "2;1"); // NOTE: text is integer (lua / php are type-less)
 	}
 	@Test public void Replace__none() {// PURPOSE: gsub with no replace argument should not fail; EX:d:'orse; DATE:2013-10-14
-		fxt.Test__proc__objs__flat(lib, Scrib_lib_ustring.Invk_gsub, Object_.Ary("text", "regx")						, "text");	// NOTE: repl, limit deliberately omitted
+		fxt.Test__proc__objs__flat(lib, Scrib_lib_ustring.Invk_gsub, ObjectUtl.Ary("text", "regx")						, "text");	// NOTE: repl, limit deliberately omitted
 	}
 	@Test public void Replace__int() {	// PURPOSE: do not fail if integer is passed in for @replace; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub("abcd", 1	 , -1, 1		, "abcd;0");
@@ -83,20 +82,20 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("1796¹", "([%d]+).*", 1, "%1", "1796;1");
 	}
 	@Test public void Replace__table() {
-		Exec_gsub("abcd", "[ac]"		, -1, Scrib_kv_utl_.flat_many_("a", "A", "c", "C")	, "AbCd;2");
-		Exec_gsub("abc" , "[ab]"		, -1, Scrib_kv_utl_.flat_many_("a", "A")			, "Abc;2");	// PURPOSE: match not in regex should still print itself; in this case [c] is not in tbl regex; DATE:2014-03-31
+		Exec_gsub("abcd", "[ac]"		, -1, KeyValUtl.Ary(KeyVal.NewStr("a", "A"), KeyVal.NewStr("c", "C"))	, "AbCd;2");
+		Exec_gsub("abc" , "[ab]"		, -1, KeyValUtl.Ary(KeyVal.NewStr("a", "A"))			, "Abc;2");	// PURPOSE: match not in regex should still print itself; in this case [c] is not in tbl regex; DATE:2014-03-31
 	}
 	@Test public void Replace__table__match() {// PURPOSE: replace using group, not found term; EX:"b" not "%b%" PAGE:en.w:Bannered_routes_of_U.S._Route_60; DATE:2014-08-15
-		Exec_gsub("a%b%c", "%%(%w+)%%"	, -1, Scrib_kv_utl_.flat_many_("b", "B")			, "aBc;1");
+		Exec_gsub("a%b%c", "%%(%w+)%%"	, -1, KeyValUtl.Ary(KeyVal.NewStr("b", "B"))			, "aBc;1");
 	}
 	@Test public void Replace__proc__recursive() {	// PURPOSE:handle recursive gsub calls; PAGE:en.d:כלב; DATE:2016-01-22
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Mock_proc__recursive proc_lvl2 = new Mock_proc__recursive(fxt, lib, bfr, 2, null);
 		Mock_proc__recursive proc_lvl1 = new Mock_proc__recursive(fxt, lib, bfr, 1, proc_lvl2);
 		Mock_proc__recursive proc_root = new Mock_proc__recursive(fxt, lib, bfr, 0, proc_lvl1);
 		fxt.Init__cbk(proc_root, proc_lvl1, proc_lvl2);
 		Exec_gsub("ab", ".", -1, proc_root.To_scrib_lua_proc(), "ab;2");	// fails if "ab;4"
-		Tfds.Eq_str("0;1;2;0;1;2;", bfr.To_str_and_clear());				// fails if "0;1;1;1"
+		GfoTstr.Eq("0;1;2;0;1;2;", bfr.ToStrAndClear());				// fails if "0;1;1;1"
 	}
 	@Test public void Replace__proc__number() {	// PURPOSE:handle replace-as-number in gproc; PAGE:en.d:seven; DATE:2016-04-27
 		Mock_proc__number proc = new Mock_proc__number(0);
@@ -137,15 +136,15 @@ public class Scrib_lib_ustring__gsub__tst {
 	}
 	@Test public void Regx__frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
 		Exec_gsub("a b c", "%f[%W]", 5, "()", "a() b() c();3");
-		Exec_gsub("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.Max_value, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
+		Exec_gsub("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", IntUtl.MaxValue, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
 	}
 	@Test public void Regx__frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
-		Tfds.Eq(BoolUtl.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
-		Tfds.Eq(BoolUtl.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
-		Tfds.Eq(BoolUtl.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
-		Tfds.Eq(BoolUtl.Y, Regx_adp_.Match("\0", "[\\W]"));	// \0 matched by !word_char
-		Tfds.Eq(BoolUtl.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
-		Tfds.Eq(BoolUtl.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
+		GfoTstr.EqObj(BoolUtl.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
+		GfoTstr.EqObj(BoolUtl.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
+		GfoTstr.EqObj(BoolUtl.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
+		GfoTstr.EqObj(BoolUtl.Y, Regx_adp_.Match("\0", "[\\W]"));	// \0 matched by !word_char
+		GfoTstr.EqObj(BoolUtl.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
+		GfoTstr.EqObj(BoolUtl.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
 	}
 	@Test public void Luacbk__basic() {
 		String text = "ad2f1e3z";
@@ -202,20 +201,20 @@ public class Scrib_lib_ustring__gsub__tst {
 		try {
 			fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(text, regx, repl, limit), expd);
 		} catch (Exception e) {
-			Gftest.Eq__bool(true, String_.Has(Err_.Message_gplx_log(e), expd));
+			GfoTstr.Eq(true, StringUtl.Has(ErrUtl.ToStrLog(e), expd));
 			return;
 		}
-		throw Err_.new_wo_type("expected failure");
+		throw ErrUtl.NewArgs("expected failure");
 	}
 }
 class Mock_proc__recursive extends Mock_proc_stub {	private final Mock_scrib_fxt fxt; private final Scrib_lib lib; private final Mock_proc__recursive inner;
-	private final Bry_bfr bfr;
-	public Mock_proc__recursive(Mock_scrib_fxt fxt, Scrib_lib lib, Bry_bfr bfr, int id, Mock_proc__recursive inner) {super(id, "recur");
+	private final BryWtr bfr;
+	public Mock_proc__recursive(Mock_scrib_fxt fxt, Scrib_lib lib, BryWtr bfr, int id, Mock_proc__recursive inner) {super(id, "recur");
 		this.fxt = fxt; this.lib = lib; this.inner = inner;
 		this.bfr = bfr;
 	}
-	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
-		bfr.Add_int_variable(this.Id()).Add_byte_semic();
+	@Override public KeyVal[] Exec_by_scrib(KeyVal[] args) {
+		bfr.AddIntVariable(this.Id()).AddByteSemic();
 		if (inner != null)
 			fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_("a", ".", inner.To_scrib_lua_proc(), -1), "a;1");
 		return args;
@@ -223,8 +222,8 @@ class Mock_proc__recursive extends Mock_proc_stub {	private final Mock_scrib_fxt
 }
 class Mock_proc__number extends Mock_proc_stub {	private int counter = 0;
 	public Mock_proc__number(int id) {super(id, "number");}
-	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
-		args[0].Val_(++counter);	// set replace-val to int
+	@Override public KeyVal[] Exec_by_scrib(KeyVal[] args) {
+		args[0].ValSet(++counter);	// set replace-val to int
 		return args;
 	}
 }
@@ -233,9 +232,9 @@ class Mock_proc__empty extends Mock_proc_stub {	private final String find, repl;
 		this.find = find;
 		this.repl = repl;
 	}
-	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
-		String text = args[0].Val_to_str_or_empty();
-		return String_.Eq(text, find) ? Keyval_.Ary(Keyval_.new_("0", repl)) : Keyval_.Ary_empty;
+	@Override public KeyVal[] Exec_by_scrib(KeyVal[] args) {
+		String text = args[0].ValToStrOrEmpty();
+		return StringUtl.Eq(text, find) ? KeyValUtl.Ary(KeyVal.NewStr("0", repl)) : KeyValUtl.AryEmpty;
 	}
 }
 class Mock_proc__verify_args extends Mock_proc_stub {	private final Object[][] expd_ary;
@@ -243,12 +242,12 @@ class Mock_proc__verify_args extends Mock_proc_stub {	private final Object[][] e
 	public Mock_proc__verify_args(int id, Object[]... expd_ary) {super(id, "number");
 		this.expd_ary = expd_ary;
 	}
-	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
+	@Override public KeyVal[] Exec_by_scrib(KeyVal[] args) {
 		Object[] expd_args = expd_ary[++expd_idx];
 		Object rv = expd_args[0];
 		expd_args = (Object[])ArrayUtl.Clone(expd_args, 1);
-		Object[] actl_args = Keyval_.Ary__to_objary__val(args);
-		Gftest.Eq__ary(expd_args, actl_args, "failed lua_cbk");
-		return Keyval_.Ary(Keyval_.int_(0, rv));
+		Object[] actl_args = XoKeyvalUtl.AryToObjAryVal(args);
+		GfoTstr.EqAryObjAry(expd_args, actl_args, "failed lua_cbk");
+		return KeyValUtl.Ary(KeyVal.NewInt(0, rv));
 	}
 }

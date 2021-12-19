@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.site_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.bldrs.wms.sites.*;
+package gplx.xowa.apps.site_cfgs;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.*;
 public class Xoa_site_cfg_mgr {
 	private final Xoa_site_cfg_loader__db loader__db = new Xoa_site_cfg_loader__db();
 	public Xoa_site_cfg_mgr(Xoa_app app) {
@@ -31,7 +33,7 @@ public class Xoa_site_cfg_mgr {
 	}
 	public Xoa_site_cfg_loader[]		Loader_ary() {return loader_ary;} private final Xoa_site_cfg_loader[] loader_ary;
 	public Xoa_site_cfg_itm__base[]		Itm_ary() {return itm_ary;} private final Xoa_site_cfg_itm__base[] itm_ary;
-	public Hash_adp_bry					Data_hash() {return data_hash;} private final Hash_adp_bry data_hash = Hash_adp_bry.cs();
+	public Hash_adp_bry Data_hash() {return data_hash;} private final Hash_adp_bry data_hash = Hash_adp_bry.cs();
 	public void Init_loader_bgn(Xow_wiki wiki) {
 		data_hash.Clear();	
 		int loader_len = loader_ary.length;
@@ -61,7 +63,7 @@ public class Xoa_site_cfg_mgr {
 					itm.Exec_csv(wiki, loader.Tid(), data);
 					break;
 				}
-			} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "error while loading site_cfg; wiki=~{0} itm=~{1} err=~{2}", wiki.Domain_str(), itm.Key_bry(), Err_.Message_gplx_log(e));}
+			} catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "error while loading site_cfg; wiki=~{0} itm=~{1} err=~{2}", wiki.Domain_str(), itm.Key_bry(), ErrUtl.ToStrLog(e));}
 		}
 	}
 }

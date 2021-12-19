@@ -13,12 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.bldrs.sql_dumps;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.*;
 public class Xosql_tbl_parser__tst {
 	private final Xosql_tbl_parser__fxt fxt = new Xosql_tbl_parser__fxt();
 	@Test public void Unique_key() {
-		fxt.Exec__parse(String_.Concat_lines_nl
+		fxt.Exec__parse(StringUtl.ConcatLinesNl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	
 		, "  `fld_2` int,"
@@ -34,29 +39,29 @@ public class Xosql_tbl_parser__tst {
 		fxt.Test__get("fld_3", -1);
 	}
 	@Test public void Primary_key() {
-		fxt.Test__extract(String_.Concat_lines_nl
+		fxt.Test__extract(StringUtl.ConcatLinesNl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	
 		, "  `fld_0` int,"
 		, "  PRIMARY KEY idx_0 (fld_2)"
 		, ") ENGINE;"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "  `fld_0` int,"
 		));
 	}
 	@Test public void Key() {
-		fxt.Test__extract(String_.Concat_lines_nl
+		fxt.Test__extract(StringUtl.ConcatLinesNl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	
 		, "  `fld_0` int,"
 		, "  KEY idx_0 (fld_2)"
 		, ") ENGINE;"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "  `fld_0` int,"
 		));
 	}
 	@Test public void Unique_key__key__primary_key() {
-		fxt.Test__extract(String_.Concat_lines_nl
+		fxt.Test__extract(StringUtl.ConcatLinesNl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	
 		, "  `fld_0` int,"
@@ -64,7 +69,7 @@ public class Xosql_tbl_parser__tst {
 		, "  KEY idx_0 (fld_2),"
 		, "  PRIMARY KEY idx_0 (fld_2),"
 		, ") ENGINE;"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "  `fld_0` int,"
 		));
 	}
@@ -72,13 +77,13 @@ public class Xosql_tbl_parser__tst {
 class Xosql_tbl_parser__fxt {
 	private final Xosql_tbl_parser parser = new Xosql_tbl_parser();
 	private Ordered_hash tbl_flds;
-	public void Exec__parse(String v) {this.tbl_flds = parser.Parse(Bry_.new_a7(v));}
-	public void Test__count(int expd) {Gftest.Eq__int(expd, tbl_flds.Len());}
+	public void Exec__parse(String v) {this.tbl_flds = parser.Parse(BryUtl.NewA7(v));}
+	public void Test__count(int expd) {GfoTstr.Eq(expd, tbl_flds.Len());}
 	public void Test__get(String key, int expd) {
-		Xosql_fld_itm actl_itm = (Xosql_fld_itm)tbl_flds.GetByOrNull(Bry_.new_u8(key));
-		Gftest.Eq__int(expd, actl_itm == null ? Bry_find_.Not_found : actl_itm.Idx());
+		Xosql_fld_itm actl_itm = (Xosql_fld_itm)tbl_flds.GetByOrNull(BryUtl.NewU8(key));
+		GfoTstr.Eq(expd, actl_itm == null ? BryFind.NotFound : actl_itm.Idx());
 	}
 	public void Test__extract(String raw, String expd) {
-		Gftest.Eq__ary__lines(expd, parser.Extract_flds(Bry_.new_u8(raw)), "extract");
+		GfoTstr.EqLines(expd, parser.Extract_flds(BryUtl.NewU8(raw)), "extract");
 	}
 }

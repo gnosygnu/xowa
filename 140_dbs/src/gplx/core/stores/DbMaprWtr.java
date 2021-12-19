@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*;
+package gplx.core.stores;
 import gplx.core.criterias.*; import gplx.core.gfo_ndes.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.ClassUtl;
 public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {}
 	@Override public Object StoreRoot(SrlObj root, String key) {
@@ -45,8 +50,8 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	void WriteContextFlds() {
 		int maprStackCount = mgr.MaprStack().Len() - 1; // -1 b/c current is added to stack
 		for (int i = 0; i < maprStackCount; i ++) {
-			DbMaprItm mapr = (DbMaprItm)mgr.MaprStack().Get_at(i);
-			SrlObj gobj = (SrlObj)mgr.OwnerStack().Get_at(i);
+			DbMaprItm mapr = (DbMaprItm)mgr.MaprStack().GetAt(i);
+			SrlObj gobj = (SrlObj)mgr.OwnerStack().GetAt(i);
 			for (Object argObj : mapr.ContextFlds()) {
 				DbMaprArg arg = (DbMaprArg)argObj;
 				Object argVal = Gfo_invk_.Invk_by_key((Gfo_invk)gobj, arg.ObjProp());
@@ -61,12 +66,12 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	}
 	@Override public void WriteData(String name, Object val) {
 		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().GetAtLast();
-		String fld = ""; try {fld = ownerMapr.Flds_get(name).DbFld();} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to fetch fld from mapr", "key", name);}
+		String fld = ""; try {fld = ownerMapr.Flds_get(name).DbFld();} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to fetch fld from mapr", "key", name);}
 		WriteDataVal(fld, val);
 	}
 	void WriteDataVal(String fld, Object val) {
 		if (insertCmd == null) insertCmd = Db_qry_.insert_(curTableName);
-		if (Type_.Eq_by_obj(val, String.class))
+		if (ClassUtl.EqByObj(String.class, val))
 			insertCmd.Val_obj_type(fld, val, Db_val_type.Tid_varchar);
 		else
 			insertCmd.Val_obj(fld, val);

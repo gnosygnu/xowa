@@ -13,20 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.GfoMsg_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.UsrDlg_;
-import gplx.UsrMsg;
+package gplx.gfui.ipts;
 import gplx.core.interfaces.SrlAble;
 import gplx.core.interfaces.SrlAble_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class IptBndMgr implements SrlAble {
 	public IptEventType EventsToFwd() {return eventsToFwd;}
 	public void EventsToFwd_set(IptEventType v) {eventsToFwd = v;} IptEventType eventsToFwd = IptEventType_.KeyDown;
@@ -38,7 +39,7 @@ public class IptBndMgr implements SrlAble {
 			if (IptEventType_.Has(bnd.EventTypes(), list.EventType()))
 				list.Add(bnd);
 		for (int i = 0; i < bnd.Ipts().Len(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
+			IptArg arg = (IptArg)bnd.Ipts().GetAt(i);
 			chainMgr.Add(arg);
 		}
 	}
@@ -46,7 +47,7 @@ public class IptBndMgr implements SrlAble {
 	public void Cfgs_delAll() {
 		List_adp del = List_adp_.New();
 		for (int i = 0; i < cfgs.Len(); i++) {
-			IptCfgPtr ptr = (IptCfgPtr)cfgs.Get_at(i);
+			IptCfgPtr ptr = (IptCfgPtr)cfgs.GetAt(i);
 			IptCfg cfg = IptCfgRegy.Instance.GetOrNew(ptr.CfgKey());
 			cfg.Owners_del(ptr.CfgKey());
 			for (IptBndHash list : regy) {
@@ -54,7 +55,7 @@ public class IptBndMgr implements SrlAble {
 					IptBndListItm itmList = list.Get_at(j);
 					for (int k = 0; k < itmList.Count(); k++) {
 						IptBnd bnd = itmList.Get_at(k);							
-						if (String_.Eq(ptr.BndKey(), bnd.Key())) {
+						if (StringUtl.Eq(ptr.BndKey(), bnd.Key())) {
 							list.Del(bnd);
 						}
 					}
@@ -63,7 +64,7 @@ public class IptBndMgr implements SrlAble {
 			del.Add(cfg);
 		}
 		for (int i = 0; i < del.Len(); i++) {
-			IptCfg cfg = (IptCfg)del.Get_at(i);
+			IptCfg cfg = (IptCfg)del.GetAt(i);
 			cfgs.Del(cfg);
 		}
 	}
@@ -74,7 +75,7 @@ public class IptBndMgr implements SrlAble {
 				IptBndListItm itmList = list.Get_at(j);
 				for (int i = 0; i < itmList.Count(); i++) {
 					IptBnd bnd = itmList.Get_at(i);
-					if (String_.Eq(key, bnd.Key())) {
+					if (StringUtl.Eq(key, bnd.Key())) {
 						old = bnd;
 						break;
 					}
@@ -105,14 +106,14 @@ public class IptBndMgr implements SrlAble {
 				for (int k = 0; k < bnds_len; k++) {
 					IptBnd itm_bnd = bnds.Get_at(k);
 					if (del_by_key) {
-						if (String_.Eq(del_key, itm_bnd.Key())) {
+						if (StringUtl.Eq(del_key, itm_bnd.Key())) {
 							deleted.Add(itm_bnd);
 						}
 					}
 					else {
 						if (itm_bnd.Ipts().Len() != 1) continue;	// only delete if bnd has 1 ipt; should only be called by xowa which does 1 bnd per ipt
-						IptArg itm_ipt = (IptArg)itm_bnd.Ipts().Get_at(0);
-						if (String_.Eq(del_key, itm_ipt.Key()))
+						IptArg itm_ipt = (IptArg)itm_bnd.Ipts().GetAt(0);
+						if (StringUtl.Eq(del_key, itm_ipt.Key()))
 							deleted.Add(itm_bnd);
 					}
 				}
@@ -120,7 +121,7 @@ public class IptBndMgr implements SrlAble {
 		}
 		int deleted_len = deleted.Len();
 		for (int i = 0; i < deleted_len; i++) {
-			IptBnd bnd = (IptBnd)deleted.Get_at(i);
+			IptBnd bnd = (IptBnd)deleted.GetAt(i);
 			this.Del(bnd);
 			bnd.Ipts().Clear();
 		}
@@ -132,19 +133,19 @@ public class IptBndMgr implements SrlAble {
 			}
 		}
 		for (int i = 0; i < bnd.Ipts().Len(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
+			IptArg arg = (IptArg)bnd.Ipts().GetAt(i);
 			chainMgr.Del(arg);
 		}
 	}
 	public boolean Process(IptEventData evData) {
 		IptBndHash list = regy[AryIdx(evData.EventType())];
 		String key = evData.EventArg().Key();
-		if (!String_.Eq(chainMgr.ActiveKey(), "")) key = chainMgr.ActiveKey() + key;
+		if (!StringUtl.Eq(chainMgr.ActiveKey(), "")) key = chainMgr.ActiveKey() + key;
 		IptBndListItm itm = list.Get_by(key);
 		String chainP = "";
 		if (evData.EventType() == IptEventType_.KeyDown) {
 			chainP = chainMgr.Process(evData.EventArg());
-			if (!String_.Eq(chainP, "") && itm == null)
+			if (!StringUtl.Eq(chainP, "") && itm == null)
 				UsrDlg_.Instance.Note("cancelled... {0}", chainP);
 		}
 		if (itm == null) {
@@ -155,7 +156,7 @@ public class IptBndMgr implements SrlAble {
 	public Object Srl(GfoMsg owner) {
 		GfoMsg m = GfoMsg_.srl_(owner, "mgr");
 		for (int i = 0; i < hash.Len(); i++)
-			((IptBnd)hash.Get_at(i)).Srl(m);
+			((IptBnd)hash.GetAt(i)).Srl(m);
 		return this;
 	}
 	IptArgChainMgr chainMgr = new IptArgChainMgr();
@@ -177,7 +178,7 @@ public class IptBndMgr implements SrlAble {
 		else if (v == IptEventType_.MouseMove.Val())	return 5;
 		else if (v == IptEventType_.MouseWheel.Val())	return 6;
 		else if (v == IptEventType_.MousePress.Val())	return 7;
-		else											throw Err_.new_unhandled(v);
+		else											throw ErrUtl.NewUnhandled(v);
 	}
 }
 class IptBndHash implements SrlAble {
@@ -185,12 +186,12 @@ class IptBndHash implements SrlAble {
 	public IptEventType EventType() {return eventType;} IptEventType eventType;
 	public int Count() {return hash.Len();}
 	public IptBndListItm Get_by(String key) {return wildcard_list == null ? (IptBndListItm)hash.GetByOrNull(key) : wildcard_list;}
-	public IptBndListItm Get_at(int i) {return (IptBndListItm)hash.Get_at(i);}
+	public IptBndListItm Get_at(int i) {return (IptBndListItm)hash.GetAt(i);}
 	public void Add(IptBnd bnd) {
 		for (int i = 0; i < bnd.Ipts().Len(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
+			IptArg arg = (IptArg)bnd.Ipts().GetAt(i);
 			if (!IptArg_.EventType_match(arg, eventType)) continue;	// bnd may have multiple ipts of different evTypes; only add bnd if evType matches
-			if (String_.Eq(arg.Key(), IptArg_.Wildcard_key)) {
+			if (StringUtl.Eq(arg.Key(), IptArg_.Wildcard_key)) {
 				if (wildcard_list == null) wildcard_list = new IptBndListItm(IptArg_.Wildcard_key);
 				wildcard_list.Add(bnd);
 			}
@@ -206,7 +207,7 @@ class IptBndHash implements SrlAble {
 	}
 	public void Del(IptBnd bnd) {
 		for (int i = 0; i < bnd.Ipts().Len(); i++) {
-			IptArg arg = (IptArg)bnd.Ipts().Get_at(i);
+			IptArg arg = (IptArg)bnd.Ipts().GetAt(i);
 			if (!IptArg_.EventType_match(arg, eventType)) continue;	// bnd may have multiple ipts of different evTypes; only add bnd if evType matches
 			hash.Del(arg.Key());
 		}
@@ -214,7 +215,7 @@ class IptBndHash implements SrlAble {
 	public Object Srl(GfoMsg owner) {
 		GfoMsg m = GfoMsg_.srl_(owner, "list").Add("eventType", eventType.Name());
 		for (int i = 0; i < hash.Len(); i++)
-			((IptBndListItm)hash.Get_at(i)).Srl(m);
+			((IptBndListItm)hash.GetAt(i)).Srl(m);
 		return this;
 	}
 	Ordered_hash hash = Ordered_hash_.New();
@@ -223,14 +224,14 @@ class IptBndHash implements SrlAble {
 class IptBndListItm implements SrlAble {
 	public String IptKey() {return iptKey;} private String iptKey;
 	public int Count() {return list.Len();}
-	public IptBnd Get_at(int i)  {return (IptBnd)list.Get_at(i);}
+	public IptBnd Get_at(int i)  {return (IptBnd)list.GetAt(i);}
 	public void Add(IptBnd bnd) {list.AddAt(0, bnd);}
 	public boolean Exec(IptEventData evData) {
 		for (int i = 0; i < list.Len(); i++) {
-			IptBnd bnd = (IptBnd)list.Get_at(i);
+			IptBnd bnd = (IptBnd)list.GetAt(i);
 			try {bnd.Exec(evData);}
 			catch (Exception exc) {
-				UsrDlg_.Instance.Stop(UsrMsg.new_("Error while processing event").Add("bnd", SrlAble_.To_str(bnd)).Add("exc", Err_.Message_lang(exc)));
+				UsrDlg_.Instance.Stop(UsrMsg.new_("Error while processing event").Add("bnd", SrlAble_.To_str(bnd)).Add("exc", ErrUtl.Message(exc)));
 				return false;
 			}
 			if (evData.CancelIteration) break;
@@ -240,7 +241,7 @@ class IptBndListItm implements SrlAble {
 	public Object Srl(GfoMsg owner) {
 		GfoMsg m = GfoMsg_.srl_(owner, "itm").Add("iptKey", iptKey);
 		for (int i = 0; i < list.Len(); i++)
-			((IptBnd)list.Get_at(i)).Srl(m);
+			((IptBnd)list.GetAt(i)).Srl(m);
 		return this;
 	}
 	List_adp list = List_adp_.New();

@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.regxs;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.core.strings.String_bldr;
-import gplx.core.strings.String_bldr_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Gfo_pattern_tst {
@@ -64,35 +64,35 @@ public class Gfo_pattern_tst {
 }
 class Gfo_pattern_itm_fxt {
 	public void Clear() {}
-	public Gfo_pattern pattern_(String raw) {return new Gfo_pattern(Bry_.new_u8(raw));}
+	public Gfo_pattern pattern_(String raw) {return new Gfo_pattern(BryUtl.NewU8(raw));}
 	public void Test_Match_y(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, BoolUtl.Y);}
 	public void Test_Match_n(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, BoolUtl.N);}
 	private void Test_Match(Gfo_pattern pattern, String[] itms, boolean expd) {
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			String itm = itms[i];
-			Tfds.Eq(expd, pattern.Match(Bry_.new_u8(itm)), "pattern={0} itm={1} expd={2}", String_.new_u8(pattern.Raw()), itm, expd);
+			GfoTstr.EqObj(expd, pattern.Match(BryUtl.NewU8(itm)), "pattern={0} itm={1} expd={2}", StringUtl.NewU8(pattern.Raw()), itm, expd);
 		}
 	}
 	public Gfo_pattern_itm_wild itm_wild_() {return Gfo_pattern_itm_wild.Instance;}
 	public Gfo_pattern_itm_text itm_text_(String raw) {
 		Gfo_pattern_itm_text rv = new Gfo_pattern_itm_text();
-		byte[] bry = Bry_.new_u8(raw);
+		byte[] bry = BryUtl.NewU8(raw);
 		rv.Compile(bry, 0, bry.length);
 		return rv;
 	}
 	public void Test_Compile(String raw, Gfo_pattern_itm... expd) {
-		Gfo_pattern_itm[] actl = Gfo_pattern_itm_.Compile(Bry_.new_u8(raw));
-		Tfds.Eq(Ary_xto_str(expd), Ary_xto_str(actl));
+		Gfo_pattern_itm[] actl = Gfo_pattern_itm_.Compile(BryUtl.NewU8(raw));
+		GfoTstr.EqObj(Ary_xto_str(expd), Ary_xto_str(actl));
 	}
 	private static String Ary_xto_str(Gfo_pattern_itm[] ary) {
 		int len = ary.length;
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < len; i++) {
-			if (i != 0) sb.Add_char_nl();
+			if (i != 0) sb.AddCharNl();
 			Gfo_pattern_itm itm = ary[i];
 			itm.Xto_str(sb);
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 }

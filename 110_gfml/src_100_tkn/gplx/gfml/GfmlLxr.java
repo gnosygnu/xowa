@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
 import gplx.core.texts.*; /*CharStream*/
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
 public interface GfmlLxr extends Gfo_evt_itm {
 	String Key();
 	String[] Hooks();

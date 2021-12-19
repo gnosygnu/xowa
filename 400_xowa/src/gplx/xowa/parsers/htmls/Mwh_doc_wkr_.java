@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.htmls;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.parsers.xndes.*;
 public class Mwh_doc_wkr_ {
 	public static Hash_adp_bry Nde_regy__mw() {

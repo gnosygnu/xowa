@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.mass_parses.parses;
-import gplx.Io_url;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.files.Xoa_repo_mgr;

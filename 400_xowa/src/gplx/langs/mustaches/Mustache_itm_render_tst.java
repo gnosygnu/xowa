@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.Bry_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Tfds;
-import gplx.core.primitives.Bool_obj_ref;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.wrappers.BoolRef;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_nde;
 import gplx.langs.jsons.Json_parser;
@@ -147,30 +147,30 @@ class Mustache_itm_render_fxt {
 	public Mustache_doc_itm__mock Make_mock(int id) {return new Mustache_doc_itm__mock(id);}
 	public void Init__root(Mustache_doc_itm__mock v) {this.root = v;}
 	public void Test__parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_a7(src_str);
+		byte[] src_bry = BryUtl.NewA7(src_str);
 		Mustache_tkn_itm actl_itm = parser.Parse(src_bry, 0, src_bry.length);
 		ctx.Init(root);
 		actl_itm.Render(bfr, ctx);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.To_str_and_clear());
 	}
 	public void Test__parse(String jdoc, String src_str, String expd) {
 		Json_nde jnde = Json_parser.ParseToJdoc(Json_doc.Make_str_by_apos(jdoc)).Root_nde();
        JsonMustacheNde nde = new JsonMustacheNde(jnde);
 
-		byte[] src_bry = Bry_.new_a7(src_str);
+		byte[] src_bry = BryUtl.NewA7(src_str);
 		Mustache_tkn_itm actl_itm = parser.Parse(src_bry, 0, src_bry.length);
 		ctx.Init(nde);
 		actl_itm.Render(bfr, ctx);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.To_str_and_clear());
 	}
 }
 class Mustache_doc_itm__mock implements Mustache_doc_itm {
 	private final Hash_adp hash_prop = Hash_adp_.New(), hash_bool = Hash_adp_.New(), hash_subs = Hash_adp_.New();
 	public Mustache_doc_itm__mock(int id) {this.id = id;}
 	public int id;
-	public Mustache_doc_itm__mock Add_prop(String key, String val)	{hash_prop.Add(key, Bry_.new_u8(val)); return this;}
-	public Mustache_doc_itm__mock Add_bool_y(String key)			{hash_bool.Add(key, Bool_obj_ref.y_()); return this;}
-	public Mustache_doc_itm__mock Add_bool_n(String key)			{hash_bool.Add(key, Bool_obj_ref.n_()); return this;}
+	public Mustache_doc_itm__mock Add_prop(String key, String val)	{hash_prop.Add(key, BryUtl.NewU8(val)); return this;}
+	public Mustache_doc_itm__mock Add_bool_y(String key)			{hash_bool.Add(key, BoolRef.NewY()); return this;}
+	public Mustache_doc_itm__mock Add_bool_n(String key)			{hash_bool.Add(key, BoolRef.NewN()); return this;}
 	public Mustache_doc_itm__mock Add_subs(String key, Mustache_doc_itm__mock... ary)	{hash_subs.Add(key, ary); return this;}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		byte[] rv = (byte[])hash_prop.GetByOrNull(key);
@@ -181,7 +181,7 @@ class Mustache_doc_itm__mock implements Mustache_doc_itm {
 	public Mustache_doc_itm[] Mustache__subs(String key) {
 		Object rv = hash_bool.GetByOrNull(key);
 		if (rv != null) {
-			boolean bool_val = ((Bool_obj_ref)rv).Val();
+			boolean bool_val = ((BoolRef)rv).Val();
 			return bool_val ? Mustache_doc_itm_.Ary__bool__y : Mustache_doc_itm_.Ary__bool__n;
 		}
 		return (Mustache_doc_itm__mock[])hash_subs.GetByOrNull(key);

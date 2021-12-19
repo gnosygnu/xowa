@@ -14,11 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.splits.rslts;
-import gplx.core.primitives.*; import gplx.dbs.*;
+import gplx.dbs.*;
+import gplx.types.basics.arrays.IntAry;
 public abstract class Split_rslt_wkr__int__base implements Split_rslt_wkr {
 	private Split_rslt_mgr rslt_mgr;
 	private Db_conn wkr_conn; private Db_stmt stmt; private int db_id;
-	private final Int_ary pkey_ary = new Int_ary(128);
+	private final IntAry pkey_ary = new IntAry(128);
 	private final String tbl_name, pkey_name;
 	public Split_rslt_wkr__int__base() {
 		this.tbl_name = Tbl_name();
@@ -51,7 +52,7 @@ public abstract class Split_rslt_wkr__int__base implements Split_rslt_wkr {
 		wkr_conn.Txn_bgn(tbl_name);
 		int len = pkey_ary.Len();			
 		for (int i = 0; i < len; ++i) {
-			stmt.Clear().Val_int("db_id", db_id).Val_int(pkey_name, pkey_ary.Get_at_or_fail(i)).Exec_insert();
+			stmt.Clear().Val_int("db_id", db_id).Val_int(pkey_name, pkey_ary.GetAt(i)).Exec_insert();
 		}
 		wkr_conn.Txn_end();
 		pkey_ary.Clear();

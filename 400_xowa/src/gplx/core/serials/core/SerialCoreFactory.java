@@ -1,16 +1,14 @@
 package gplx.core.serials.core;
-
-import gplx.Err_;
 import gplx.core.serials.binarys.BinaryLoadMgr;
 import gplx.core.serials.binarys.BinarySaveMgr;
 import gplx.core.texts.Base64Converter;
-
+import gplx.types.errs.ErrUtl;
 public class SerialCoreFactory {
     public static SerialSaveMgr NewSaveMgr(int coreVersion) {
         if (coreVersion == BinaryLoadMgr.CORE_VERSION) {
             return new BinarySaveMgr();
         }
-        throw Err_.new_unhandled_default(coreVersion);
+        throw ErrUtl.NewUnhandled(coreVersion);
     }
     public static SerialLoadMgr NewLoadMgr(byte[] data) {
         int coreVersion = Base64Converter.GetIndexInt((char)data[0]);
@@ -19,6 +17,6 @@ public class SerialCoreFactory {
             loadMgr.ReadHeader(data);
             return loadMgr;
         }
-        throw Err_.new_unhandled_default(coreVersion);
+        throw ErrUtl.NewUnhandled(coreVersion);
     }
 }

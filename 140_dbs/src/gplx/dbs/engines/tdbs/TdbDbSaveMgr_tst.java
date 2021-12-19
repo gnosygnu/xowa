@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import org.junit.*; import gplx.core.stores.*;
 import gplx.langs.dsvs.*; import gplx.core.type_xtns.*;
 public class TdbDbSaveMgr_tst {
@@ -23,7 +27,7 @@ public class TdbDbSaveMgr_tst {
 		wtr.Clear();
 	}	TdbDatabase db; TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_(); DataWtr wtr = DsvDataWtr_.new_();
 	@Test public void WriteDbFils() {
-		String expd = String_.Concat_lines_crlf
+		String expd = StringUtl.ConcatLinesCrlf
 			(	""	
 			,	""
 			,	"================================, ,\" \",//"
@@ -36,10 +40,10 @@ public class TdbDbSaveMgr_tst {
 			);
 		db.Files().DataObj_Wtr(wtr);
 		String actl = wtr.To_str();
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 	@Test public void WriteDbTbls() {
-		String expd = String_.Concat_lines_crlf
+		String expd = StringUtl.ConcatLinesCrlf
 			(	""
 			,	""
 			,	"================================, ,\" \",//"
@@ -51,10 +55,10 @@ public class TdbDbSaveMgr_tst {
 			);
 		db.Tables().DataObj_Wtr(wtr);
 		String actl = wtr.To_str();
-		Tfds.Eq(expd, actl);			
+		GfoTstr.EqObj(expd, actl);
 	}
 	@Test public void WriteTbl() {
-		String expd = String_.Concat_lines_crlf
+		String expd = StringUtl.ConcatLinesCrlf
 			(	""
 			,	""
 			,	"================================, ,\" \",//"
@@ -70,6 +74,6 @@ public class TdbDbSaveMgr_tst {
 
 		tbl.DataObj_Wtr(wtr);
 		String actl = wtr.To_str();
-		Tfds.Eq(expd, actl);			
+		GfoTstr.EqObj(expd, actl);
 	}
 }

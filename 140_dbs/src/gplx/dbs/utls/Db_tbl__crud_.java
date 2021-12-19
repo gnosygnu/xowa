@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.utls;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.DbmetaFldList;
 import gplx.dbs.stmts.Db_stmt_arg_list;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Db_tbl__crud_ {
 	public static boolean Upsert(Db_conn conn, String tbl_name, DbmetaFldList flds, String[] crt_cols, Object... objs) {
 		// init

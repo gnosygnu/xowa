@@ -14,21 +14,23 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.Hash_adp_bry;
-import gplx.Type_;
 import gplx.core.brys.Bry_tmp;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.encoders.Hex_utl_;
+import gplx.types.basics.encoders.HexUtl;
 import gplx.core.primitives.Bool_ary_bldr;
+import gplx.langs.html.HtmlEntityCodes;
 import gplx.langs.htmls.Gfh_atr_;
-import gplx.langs.htmls.entitys.Gfh_entity_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.encoders.XoHexUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.strings.unicodes.Utf16Utl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.xowa.mediawiki.XophpPreg_;
 import gplx.xowa.mediawiki.includes.libs.XomwStringUtils;
 import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
@@ -45,8 +47,8 @@ public class XomwSanitizer {
 	private final Xomw_regex_find_domain regex_find_domain = new Xomw_regex_find_domain();
 	private final Xomw_regex_ipv6_brack regex_ipv6_brack = new Xomw_regex_ipv6_brack();
 	private final Bry_tmp tmp_host = new Bry_tmp();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final Bry_bfr tmp_bfr_2 = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
+	private final BryWtr tmp_bfr_2 = BryWtr.New();
 	private final Btrie_rv trv = new Btrie_rv();
 	private final Xomw_regex_url_char_cbk__normalize normalize_cbk = new Xomw_regex_url_char_cbk__normalize();
 	private final Xomw_regex_url_char_cbk__decode decode_cbk = new Xomw_regex_url_char_cbk__decode();
@@ -55,7 +57,7 @@ public class XomwSanitizer {
 	private static Btrie_slim_mgr invalid_idn_trie;
 	public XomwSanitizer() {
 		if (regex_url_char == null) {
-			synchronized (Type_.Type_by_obj(this)) {
+			synchronized (ClassUtl.TypeByObj(this)) {
 				regex_url_char = new Xomw_regex_url_char();
 
 				// Characters that will be ignored in IDNs.
@@ -101,7 +103,7 @@ public class XomwSanitizer {
 
 				// assert static structs
 				if (html_entities == null) {
-					synchronized (Type_.Type_by_obj(this)) {
+					synchronized (ClassUtl.TypeByObj(this)) {
 						html_entities = Html_entities_new();
 					}
 				}
@@ -703,14 +705,14 @@ public class XomwSanitizer {
 
 			// if cls, merge; EX: src.cls="a" trg.cls="b" -> src.cls="a b"
 			byte[] atr_cls = Gfh_atr_.Bry__class;
-			if (Bry_.Eq(trg_atr.Key_bry(), atr_cls)) {
+			if (BryLni.Eq(trg_atr.Key_bry(), atr_cls)) {
 				Xomw_atr_itm src_atr = src.Get_by_or_null(atr_cls);
 				if (src_atr != null) {
 					// NOTE: need byte[]-creation is unavoidable b/c src_atr and trg_atr are non-null
 					mergeAttributesCombine(tmp_bfr, src_atr.Val(), AsciiByte.Space);
-					tmp_bfr.Add_byte_space();
+					tmp_bfr.AddByteSpace();
 					mergeAttributesCombine(tmp_bfr, trg_atr.Val(), AsciiByte.Space);
-					src_atr.Val_(tmp_bfr.To_bry_and_clear());
+					src_atr.Val_(tmp_bfr.ToBryAndClear());
 					continue;
 				}
 			}
@@ -721,14 +723,14 @@ public class XomwSanitizer {
 	// $classes = preg_split('/\s+/', "{$a['class']} {$b['class']}",
 	//					-1, PREG_SPLIT_NO_EMPTY);
 	//				$out['class'] = implode(' ', array_unique($classes));
-	private static void mergeAttributesCombine(Bry_bfr trg, byte[] src, byte sep) {
+	private static void mergeAttributesCombine(BryWtr trg, byte[] src, byte sep) {
 		int src_len = src.length;
 		for (int i = 0; i < src_len; i++) {
 			byte b = src[i];
 			if (b == sep) {
 				// gobble ws; EX: "a   b"
 				int space_bgn = i;
-				int space_end = Bry_find_.Find_fwd_while(src, i, src_len, sep);
+				int space_end = BryFind.FindFwdWhile(src, i, src_len, sep);
 				i = space_end - 1;	// -1 b/c i++ above
 
 				// ignore ws at BOS; EX: "  a"
@@ -738,7 +740,7 @@ public class XomwSanitizer {
 				if (space_end == src_len)
 					break;
 			}
-			trg.Add_byte(b);
+			trg.AddByte(b);
 		}
 	}
 
@@ -929,8 +931,8 @@ public class XomwSanitizer {
 	* @param boolean $sorted Whether to sort the attributes (default: false)
 	* @return String
 	*/
-	public void fixTagAttributes(Bry_bfr bfr, byte[] element, byte[] text) {
-		if (Bry_.Trim(text).length == 0) {
+	public void fixTagAttributes(BryWtr bfr, byte[] element, byte[] text) {
+		if (BryUtl.Trim(text).length == 0) {
 			return;
 		}
 
@@ -951,11 +953,11 @@ public class XomwSanitizer {
 			// $encValue = Sanitizer::safeEncodeAttribute($value);
 			// $attribs[] = "$encAttribute=\"$encValue\"";
 			Mwh_atr_itm itm = atr_bldr.Atrs__get_at(i);
-			bfr.Add_byte_space();	// "return count($attribs) ? ' ' . implode(' ', $attribs) : '';"
-			bfr.Add_bry_escape_html(itm.Key_bry(), itm.Key_bgn(), itm.Key_end());
-			bfr.Add_byte_eq().Add_byte_quote();
+			bfr.AddByteSpace();	// "return count($attribs) ? ' ' . implode(' ', $attribs) : '';"
+			bfr.AddBryEscapeHtml(itm.Key_bry(), itm.Key_bgn(), itm.Key_end());
+			bfr.AddByteEq().AddByteQuote();
 			bfr.Add(itm.Val_as_bry());	// TODO.XO:Sanitizer::encode
-			bfr.Add_byte_quote();
+			bfr.AddByteQuote();
 		}
 	}
 
@@ -964,7 +966,7 @@ public class XomwSanitizer {
 //		* @param String $text
 //		* @return String HTML-encoded text fragment
 //		*/
-	public static void encodeAttribute(Bry_bfr bfr, byte[] text) {
+	public static void encodeAttribute(BryWtr bfr, byte[] text) {
 		// XO.MW.PORTED: moved to Add_bry_escape_xml
 		// $encValue = htmlspecialchars($text, ENT_QUOTES);
 
@@ -976,7 +978,7 @@ public class XomwSanitizer {
 		//		"\r" => '&#13;',
 		//		"\t" => '&#9;',
 		//	]);
-		bfr.Add_bry_escape_xml(text, 0, text.length);
+		bfr.AddBryEscapeXml(text, 0, text.length);
 	}
 
 //		/**
@@ -1286,16 +1288,16 @@ public class XomwSanitizer {
 //		*/
 	public void normalizeCharReferences(XomwParserBfr pbfr) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 		pbfr.Switch();
 
 		normalizeCharReferences(bfr, BoolUtl.N, src, src_bgn, src_end);
 	}
-	public byte[] normalizeCharReferences(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end) {
+	public byte[] normalizeCharReferences(BryWtr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW.REGEX:
 		//	return preg_replace_callback(
 		//		self::CHAR_REFS_REGEX,
@@ -1374,7 +1376,7 @@ public class XomwSanitizer {
 //		* @param String $text
 //		* @return String
 //		*/
-	public byte[] decodeCharReferences(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end) {
+	public byte[] decodeCharReferences(BryWtr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW.REGEX
 		//	return preg_replace_callback(
 		//		self::CHAR_REFS_REGEX,
@@ -1692,8 +1694,8 @@ public class XomwSanitizer {
 	*/
 	public byte[] stripAllTags(byte[] text) {
 		// Actual <tags>
-		XomwStringUtils.delimiterReplace(tmp_bfr, AsciiByte.AngleBgnBry, AsciiByte.AngleEndBry, Bry_.Empty, text);
-		text = tmp_bfr.To_bry_and_clear();
+		XomwStringUtils.delimiterReplace(tmp_bfr, AsciiByte.AngleBgnBry, AsciiByte.AngleEndBry, BryUtl.Empty, text);
+		text = tmp_bfr.ToBryAndClear();
 
 		// Normalize &entities and whitespace
 		text = decodeCharReferences(null, false, text, 0, text.length);
@@ -1733,7 +1735,7 @@ public class XomwSanitizer {
 		// XO.MW.REGEX: $url = preg_replace_callback('/[\][<>"\\x00-\\x20\\x7F\|]/', [ __CLASS__, 'cleanUrlCallback' ], $url);
 		//   '[]<>"' | '00 -> 32' | 127
 		if (regex_clean_url.Escape(tmp_bfr, url, 0, url.length))
-			url = tmp_bfr.To_bry_and_clear();
+			url = tmp_bfr.ToBryAndClear();
 
 		// Validate hostname portion
 		// XO.MW.REGEX: if (preg_match('!^([^:]+:)(//[^/]+)?(.*)$!iD', $url, $matches))
@@ -1742,7 +1744,7 @@ public class XomwSanitizer {
 			// https://tools.ietf.org/html/rfc3454#section-3.1
 			// Strip them before further processing so blacklists and such work.
 			// XO.MW.MOVED: see invalid_idn_trie
-			XophpPreg_.replace(tmp_host.Init(url, regex_find_domain.host_bgn, regex_find_domain.host_end), tmp_bfr, invalid_idn_trie, trv, Bry_.Empty);
+			XophpPreg_.replace(tmp_host.Init(url, regex_find_domain.host_bgn, regex_find_domain.host_end), tmp_bfr, invalid_idn_trie, trv, BryUtl.Empty);
 			
 			// IPv6 host names are bracketed with [].  Url-decode these.
 			// if (substr_compare("//%5B", $host, 0, 5) === 0 &&
@@ -1752,17 +1754,17 @@ public class XomwSanitizer {
 			//    "//%5B" + ("hex-dec" | [:.]) + "%5D" + numbers
 			//    EX: [ABCD]:80:12
 			if (regex_ipv6_brack.Match(tmp_host.src, tmp_host.src_bgn, tmp_host.src_end)) {
-				tmp_bfr.Add_str_a7("//[").Add_mid(tmp_host.src, regex_ipv6_brack.host_bgn, regex_ipv6_brack.host_end)
-					.Add_byte(AsciiByte.BrackEnd).Add_mid(tmp_host.src, regex_ipv6_brack.segs_bgn, regex_ipv6_brack.segs_end);
+				tmp_bfr.AddStrA7("//[").AddMid(tmp_host.src, regex_ipv6_brack.host_bgn, regex_ipv6_brack.host_end)
+					.AddByte(AsciiByte.BrackEnd).AddMid(tmp_host.src, regex_ipv6_brack.segs_bgn, regex_ipv6_brack.segs_end);
 				tmp_host.Set_by_bfr(tmp_bfr);
 			}
 
 			// @todo FIXME: Validate hostnames here
 
-			tmp_bfr.Add_mid(url, regex_find_domain.prot_bgn, regex_find_domain.prot_end);
+			tmp_bfr.AddMid(url, regex_find_domain.prot_bgn, regex_find_domain.prot_end);
 			tmp_host.Add_to_bfr(tmp_bfr);
-			tmp_bfr.Add_mid(url, regex_find_domain.rest_bgn, regex_find_domain.rest_end);
-			return tmp_bfr.To_bry_and_clear();
+			tmp_bfr.AddMid(url, regex_find_domain.rest_bgn, regex_find_domain.rest_end);
+			return tmp_bfr.ToBryAndClear();
 		}
 		else {
 			return url;
@@ -1831,7 +1833,7 @@ public class XomwSanitizer {
 
 	public static Hash_adp_bry html_entities;
 	private static Hash_adp_bry Html_entities_new() {
-		Bry_bfr tmp = Bry_bfr_.New();
+		BryWtr tmp = BryWtr.New();
 		Hash_adp_bry rv = Hash_adp_bry.cs();
 
 		Html_entities_set(rv, Xomw_html_ent.Type__alias, 8207, "רלמ", "&rlm;");
@@ -2100,13 +2102,13 @@ public class XomwSanitizer {
 		Html_entities_set(rv, tmp, "zwnj"     , 8204);
 		return rv;
 	}
-	private static void Html_entities_set(Hash_adp_bry rv, Bry_bfr tmp, String name_str, int code) {
-		byte[] html_bry = tmp.Add_str_a7("&#").Add_int_variable(code).Add_byte_semic().To_bry_and_clear();
+	private static void Html_entities_set(Hash_adp_bry rv, BryWtr tmp, String name_str, int code) {
+		byte[] html_bry = tmp.AddStrA7("&#").AddIntVariable(code).AddByteSemic().ToBryAndClear();
 		Html_entities_set(rv, Xomw_html_ent.Type__entity, code, name_str, html_bry);
 	}
-	private static void Html_entities_set(Hash_adp_bry rv, byte type, int code, String name_str, String html_str) {Html_entities_set(rv, type, code, name_str, Bry_.new_u8(html_str));}
+	private static void Html_entities_set(Hash_adp_bry rv, byte type, int code, String name_str, String html_str) {Html_entities_set(rv, type, code, name_str, BryUtl.NewU8(html_str));}
 	private static void Html_entities_set(Hash_adp_bry rv, byte type, int code, String name_str, byte[] html_bry) {
-		byte[] name_bry = Bry_.new_u8(name_str);
+		byte[] name_bry = BryUtl.NewU8(name_str);
 		rv.AddIfDupeUse1st(name_bry, new Xomw_html_ent(type, code, name_bry, html_bry));	// Add_dupe needed b/c "lt" and co. are added early; ignore subsequent call
 	}
 }
@@ -2143,9 +2145,9 @@ class Xomw_regex_find_domain {
 
 		// find prot; EX: "https:"
 		prot_bgn = src_bgn;
-		prot_end = Bry_find_.Move_fwd(src, AsciiByte.Colon, prot_bgn, src_end);
+		prot_end = BryFind.MoveFwd(src, AsciiByte.Colon, prot_bgn, src_end);
 		// exit if not found
-		if (prot_end == Bry_find_.Not_found) return false;
+		if (prot_end == BryFind.NotFound) return false;
 
 		// find host: EX: "//a.org"
 		host_bgn = prot_end;
@@ -2156,9 +2158,9 @@ class Xomw_regex_find_domain {
 		if (  src[host_bgn    ] != AsciiByte.Slash
 			|| src[host_bgn + 1] != AsciiByte.Slash
 			) return false;
-		host_end = Bry_find_.Find_fwd(src, AsciiByte.Slash, double_slash_end, src_end);
+		host_end = BryFind.FindFwd(src, AsciiByte.Slash, double_slash_end, src_end);
 		// exit if not found
-		if (host_end == Bry_find_.Not_found) {
+		if (host_end == BryFind.NotFound) {
 			host_end = src_end;
 			rest_bgn = rest_end = -1;
 		}
@@ -2173,7 +2175,7 @@ class Xomw_regex_find_domain {
 }
 class Xomw_regex_escape_invalid {
 	// [\][<>"\\x00-\\x20\\x7F\|]
-	public boolean Escape(Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
+	public boolean Escape(BryWtr bfr, byte[] src, int src_bgn, int src_end) {
 		boolean dirty = false;
 		int cur = src_bgn;
 		int prv = cur;
@@ -2181,7 +2183,7 @@ class Xomw_regex_escape_invalid {
 			// eos
 			if (cur == src_end) {
 				if (dirty) {
-					bfr.Add_mid(src, prv, src_end);
+					bfr.AddMid(src, prv, src_end);
 				}
 				break;
 			}
@@ -2203,7 +2205,7 @@ class Xomw_regex_escape_invalid {
 					break;
 			}
 			if (match) {
-				bfr.Add_mid(src, prv, cur);
+				bfr.AddMid(src, prv, cur);
 				gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_urlencode.Encode(bfr, src, cur, cur + 1);
 				dirty = true;
 				cur++;
@@ -2221,8 +2223,8 @@ class Xomw_regex_ipv6_brack {
 	public int segs_bgn;
 	public int segs_end;
 	private final byte[]
-	  Bry__host_bgn = Bry_.new_a7("//%5B")
-	, Bry__host_end = Bry_.new_a7("%5D")
+	  Bry__host_bgn = BryUtl.NewA7("//%5B")
+	, Bry__host_end = BryUtl.NewA7("%5D")
 	;
 	public boolean Match(byte[] src, int src_bgn, int src_end) {
 		//	preg_match('!^//%5B([0-9A-Fa-f:.]+)%5D((:\d+)?)$!', $host, $matches)
@@ -2232,7 +2234,7 @@ class Xomw_regex_ipv6_brack {
 		//    EX: [ABCD]:80:12
 		host_bgn = src_bgn + Bry__host_bgn.length;
 		// exit if no match for "//%5B"
-		if (!Bry_.Match(src, src_bgn, host_bgn, Bry__host_bgn)) return false;
+		if (!BryLni.Eq(src, src_bgn, host_bgn, Bry__host_bgn)) return false;
 
 		// skip all [0-9A-Fa-f:.]
 		host_end = host_bgn;
@@ -2253,7 +2255,7 @@ class Xomw_regex_ipv6_brack {
 				case AsciiByte.Percent:
 					// matches "%5D"
 					segs_bgn = host_end + Bry__host_end.length;
-					if (  Bry_.Match(src, host_end, segs_bgn, Bry__host_end)
+					if (  BryLni.Eq(src, host_end, segs_bgn, Bry__host_end)
 						&& host_end - host_bgn > 0) // host can't be 0-len; EX: "//%5B%5D"
 						done = true;
 					// exit if no match
@@ -2277,7 +2279,7 @@ class Xomw_regex_ipv6_brack {
 			// check if ":"
 			if (src[segs_end] == AsciiByte.Colon) {
 				int num_bgn = segs_end + 1;
-				int num_end = Bry_find_.Find_fwd_while_num(src, num_bgn, src_end);
+				int num_end = BryFind.FindFwdWhileNum(src, num_bgn, src_end);
 				// exit if no nums found; EX:"[ABC]:80:"
 				if (num_end == num_bgn) {
 					return false;
@@ -2292,10 +2294,10 @@ class Xomw_regex_ipv6_brack {
 	}
 }
 interface Xomw_regex_url_char_cbk {
-	boolean When_ent(Bry_bfr bfr, byte[] name);
-	boolean When_dec(Bry_bfr bfr, byte[] name);
-	boolean When_hex(Bry_bfr bfr, byte[] name);
-	boolean When_amp(Bry_bfr bfr);
+	boolean When_ent(BryWtr bfr, byte[] name);
+	boolean When_dec(BryWtr bfr, byte[] name);
+	boolean When_hex(BryWtr bfr, byte[] name);
+	boolean When_amp(BryWtr bfr);
 }
 class Xomw_regex_url_char_cbk__normalize implements Xomw_regex_url_char_cbk {
 	// XO.MW.PORTED
@@ -2312,7 +2314,7 @@ class Xomw_regex_url_char_cbk__normalize implements Xomw_regex_url_char_cbk {
 	//	} else {
 	//		return $ret;
 	//	}
-	public boolean When_ent(Bry_bfr bfr, byte[] name) {  // XO.MW:normalizeEntity
+	public boolean When_ent(BryWtr bfr, byte[] name) {  // XO.MW:normalizeEntity
 		// If the named entity is defined in the HTML 4.0/XHTML 1.0 DTD,
 		// return the equivalent numeric entity reference (except for the core &lt;
 		// &gt; &amp; &quot;). If the entity is a MediaWiki-specific alias, returns
@@ -2320,7 +2322,7 @@ class Xomw_regex_url_char_cbk__normalize implements Xomw_regex_url_char_cbk {
 		// pseudo-entity source (eg &amp;foo;)
 		Object o = XomwSanitizer.html_entities.Get_by_bry(name);
 		if (o == null) {
-			bfr.Add_str_a7("&amp;").Add(name).Add_byte_semic();
+			bfr.AddStrA7("&amp;").Add(name).AddByteSemic();
 			return false;
 		}
 		else {
@@ -2329,26 +2331,26 @@ class Xomw_regex_url_char_cbk__normalize implements Xomw_regex_url_char_cbk {
 			return true;
 		}
 	}
-	public boolean When_dec(Bry_bfr bfr, byte[] name) {  // XO.MW:decCharReference
-		int point = Bry_.To_int_or(name, -1);
+	public boolean When_dec(BryWtr bfr, byte[] name) {  // XO.MW:decCharReference
+		int point = BryUtl.ToIntOr(name, -1);
 		if (XomwSanitizer.validateCodepoint(point)) {
-			bfr.Add_str_a7("&#").Add_int_variable(point).Add_byte_semic();
+			bfr.AddStrA7("&#").AddIntVariable(point).AddByteSemic();
 			return true;
 		}
 		return false;
 	}
-	public boolean When_hex(Bry_bfr bfr, byte[] name) {  // XO.MW:hexCharReference
-		int point = Hex_utl_.Parse_or(name, -1);
+	public boolean When_hex(BryWtr bfr, byte[] name) {  // XO.MW:hexCharReference
+		int point = HexUtl.ParseOr(name, -1);
 		if (XomwSanitizer.validateCodepoint(point)) {
-			bfr.Add_str_a7("&#x");
-			Hex_utl_.Write_bfr(bfr, BoolUtl.Y, point);	// sprintf('&#x%x;', $point)
-			bfr.Add_byte_semic();
+			bfr.AddStrA7("&#x");
+			XoHexUtl.WriteBfr(bfr, BoolUtl.Y, point);	// sprintf('&#x%x;', $point)
+			bfr.AddByteSemic();
 			return true;
 		}
 		return false;
 	}
-	public boolean When_amp(Bry_bfr bfr) {
-		bfr.Add(Gfh_entity_.Amp_bry);       // transform "&" to "&amp;"
+	public boolean When_amp(BryWtr bfr) {
+		bfr.Add(HtmlEntityCodes.AmpBry);       // transform "&" to "&amp;"
 		return true;
 	}
 }
@@ -2364,42 +2366,42 @@ class Xomw_regex_url_char_cbk__decode implements Xomw_regex_url_char_cbk {
 	//		# Last case should be an ampersand by itself
 	//		return $matches[0];
 	//	}
-	public boolean When_ent(Bry_bfr bfr, byte[] name) {// XO.MW:decodeEntity
+	public boolean When_ent(BryWtr bfr, byte[] name) {// XO.MW:decodeEntity
 		// If the named entity is defined in the HTML 4.0/XHTML 1.0 DTD,
 		// return the UTF-8 encoding of that character. Otherwise, returns
 		// pseudo-entity source (eg "&foo;")
 		Object o = XomwSanitizer.html_entities.Get_by_bry(name);
 		if (o == null) {
-			bfr.Add_byte(AsciiByte.Amp).Add(name).Add_byte_semic();
+			bfr.AddByte(AsciiByte.Amp).Add(name).AddByteSemic();
 		}
 		else {
 			Xomw_html_ent entity = (Xomw_html_ent)o;
-			bfr.Add(gplx.core.intls.Utf16_.Encode_int_to_bry(entity.code));
+			bfr.Add(Utf16Utl.EncodeIntToBry(entity.code));
 		}
 		return true;
 	}
-	public boolean When_dec(Bry_bfr bfr, byte[] name) {
-		return Decode_char(bfr, Bry_.To_int(name));
+	public boolean When_dec(BryWtr bfr, byte[] name) {
+		return Decode_char(bfr, BryUtl.ToInt(name));
 	}
-	public boolean When_hex(Bry_bfr bfr, byte[] name) {
-		return Decode_char(bfr, gplx.core.encoders.Hex_utl_.Parse_or(name, 0, name.length, -1));
+	public boolean When_hex(BryWtr bfr, byte[] name) {
+		return Decode_char(bfr, HexUtl.ParseOr(name, 0, name.length, -1));
 	}
-	public boolean When_amp(Bry_bfr bfr) {
-		bfr.Add_byte(AsciiByte.Amp);
+	public boolean When_amp(BryWtr bfr) {
+		bfr.AddByte(AsciiByte.Amp);
 		return true;
 	}
-	private boolean Decode_char(Bry_bfr bfr, int point) {// XO.MW:decodeChar
+	private boolean Decode_char(BryWtr bfr, int point) {// XO.MW:decodeChar
 		// Return UTF-8 String for a codepoint if that is a valid
 		// character reference, otherwise U+FFFD REPLACEMENT CHARACTER.
 		if (XomwSanitizer.validateCodepoint(point)) {
-			bfr.Add(gplx.core.intls.Utf16_.Encode_int_to_bry(point));
+			bfr.Add(Utf16Utl.EncodeIntToBry(point));
 		}
 		else {
 			bfr.Add(Utf8_replacement_char);
 		}
 		return true;
 	}
-	private static final byte[] Utf8_replacement_char = Bry_.New_by_ints(255, 253); // 0xfffd
+	private static final byte[] Utf8_replacement_char = BryUtl.NewByInts(255, 253); // 0xfffd
 }
 class Xomw_regex_url_char {
 	// Regular expression to match various types of character references in
@@ -2428,7 +2430,7 @@ class Xomw_regex_url_char {
 			}
 		}
 	}
-	public byte[] Replace_by_cbk(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end, Xomw_regex_url_char_cbk cbk) {
+	public byte[] Replace_by_cbk(BryWtr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end, Xomw_regex_url_char_cbk cbk) {
 		// XO.BRY_BFR
 		boolean dirty = false;
 		int cur = src_bgn;
@@ -2436,10 +2438,10 @@ class Xomw_regex_url_char {
 
 		while (true) {
 			// search for "&"
-			int find_bgn = Bry_find_.Find_fwd(src, AsciiByte.Amp, cur);
-			if (find_bgn == Bry_find_.Not_found) {	// "&" not found; exit
+			int find_bgn = BryFind.FindFwd(src, AsciiByte.Amp, cur);
+			if (find_bgn == BryFind.NotFound) {	// "&" not found; exit
 				if (dirty)
-					bfr.Add_mid(src, cur, src_end);
+					bfr.AddMid(src, cur, src_end);
 				break;
 			}
 			int ent_bgn = find_bgn + 1;	// +1 to skip &
@@ -2477,8 +2479,8 @@ class Xomw_regex_url_char {
 
 			// mark dirty; can optimize later by checking if "&lt;" already exists
 			dirty = true;
-			if (bfr == null) bfr = Bry_bfr_.New();
-			bfr.Add_mid(src, cur, find_bgn); // add everything before &
+			if (bfr == null) bfr = BryWtr.New();
+			bfr.AddMid(src, cur, find_bgn); // add everything before &
 
 			// invalid <- regex ended, but not at semic
 			if (b != AsciiByte.Semic) {
@@ -2488,7 +2490,7 @@ class Xomw_regex_url_char {
 			}
 
 			// do normalization
-			byte[] name = Bry_.Mid(src, ent_bgn, ent_end);
+			byte[] name = BryLni.Mid(src, ent_bgn, ent_end);
 			boolean ret = false;
 			if      (regex == Normalize__ent) {
 				cbk.When_ent(bfr, name);
@@ -2512,20 +2514,20 @@ class Xomw_regex_url_char {
 		// XO.BRY_BFR
 		if (dirty) {
 			if (called_by_bry)
-				return bfr.To_bry_and_clear();
+				return bfr.ToBryAndClear();
 			else
-				return Bry_.Empty;
+				return BryUtl.Empty;
 		}
 		else {
 			if (called_by_bry) {
 				if (src_bgn == 0 && src_end == src.length)
 					return src;
 				else
-					return Bry_.Mid(src, src_bgn, src_end);
+					return BryLni.Mid(src, src_bgn, src_end);
 			}
 			else {
 				if (lone_bfr)
-					bfr.Add_mid(src, src_bgn, src_end);
+					bfr.AddMid(src, src_bgn, src_end);
 				return null;
 			}
 		}

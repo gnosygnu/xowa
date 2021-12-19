@@ -14,11 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.xowa_cmds;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.htmls.Xoh_page_html_source_;
@@ -30,7 +29,7 @@ import org.junit.Before;
 import org.junit.Test;
 public class Xox_xowa_html_cmd_tst {
 	@Before public void init() {Xopg_tag_wtr.Loader_as_script_static = BoolUtl.N; fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
-	@Test  public void term() {Xopg_tag_wtr.Loader_as_script_static = BoolUtl.Y;}
+	@Test public void term() {Xopg_tag_wtr.Loader_as_script_static = BoolUtl.Y;}
 	@Test public void Head_end() {
 		fxt.Test_parse_w_skin
 		( "<xowa_html pos='head_end'>test</xowa_html>"
@@ -45,7 +44,7 @@ public class Xox_xowa_html_cmd_tst {
 	}
 }
 class Xox_xowa_html_cmd_fxt {
-	private Bry_bfr bfr = Bry_bfr_.Reset(16);
+	private BryWtr bfr = BryWtr.NewAndReset(16);
 	private final Xop_fxt fxt = new Xop_fxt();
 	private Xowe_wiki wiki; private Xow_html_mgr html_mgr;
 	public void Clear() {
@@ -53,14 +52,14 @@ class Xox_xowa_html_cmd_fxt {
 		html_mgr = wiki.Html_mgr();			
 		wiki.Sys_cfg().Xowa_cmd_enabled_(true);
 		fxt.Page().Html_data().Head_mgr().Itm__css().Enabled_(false);
-		html_mgr.Page_wtr_mgr().Page_read_fmtr().Fmt_("<html><head></head><body>~{page_data}</body></html>");
+		html_mgr.Page_wtr_mgr().Page_read_fmtr().FmtSet("<html><head></head><body>~{page_data}</body></html>");
 	}
 	public void Test_parse_w_skin(String raw, String expd) {
-		byte[] raw_bry = Bry_.new_u8(raw);
+		byte[] raw_bry = BryUtl.NewU8(raw);
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(raw_bry);
 		fxt.Page().Root_(root);
 		html_mgr.Html_wtr().Write_doc(bfr, fxt.Ctx(), raw_bry, root);
 		html_mgr.Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_page(bfr, fxt.Page(), fxt.Ctx(), Xoh_page_html_source_.Wtr);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 }

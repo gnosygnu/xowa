@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.xowa.files.*;
+package gplx.xowa.addons.bldrs.files.missing_origs.apis;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.files.Xof_ext_;
 public class Xowmf_imageinfo_item {
 	public byte[] Lnki_ttl() {return lnki_ttl;} private byte[] lnki_ttl;
 	public byte Orig_repo() {return orig_repo;} private byte orig_repo;
@@ -83,11 +87,11 @@ public class Xowmf_imageinfo_item {
 	}
 	public static byte[] Normalize_ttl(byte[] v) {
 		// remove "File:"
-		if (Bry_.Has_at_bgn(v, Xowmf_imageinfo_api.FILE_NS_PREFIX)) {
-			v = Bry_.Mid(v, Xowmf_imageinfo_api.FILE_NS_PREFIX.length);
+		if (BryUtl.HasAtBgn(v, Xowmf_imageinfo_api.FILE_NS_PREFIX)) {
+			v = BryLni.Mid(v, Xowmf_imageinfo_api.FILE_NS_PREFIX.length);
 		}
 		else {
-			throw Err_.new_wo_type("wmf_api does not start with 'File:'", "title", v);
+			throw ErrUtl.NewArgs("wmf_api does not start with 'File:'", "title", v);
 		}
 
 		// convert spaces to unders
@@ -98,11 +102,11 @@ public class Xowmf_imageinfo_item {
 	public static byte[] Normalize_minor_mime(byte[] src) {
 		// convert "image/svg+xml" to "svg+xml"
 		int src_len = src.length;
-		int slash_pos = Bry_find_.Find_fwd(src, AsciiByte.Slash, 0, src_len);
-		if (slash_pos == Bry_find_.Not_found) {
-			throw Err_.new_wo_type("wmf_api minor_mime does not have slash;", "minor_mime", src);
+		int slash_pos = BryFind.FindFwd(src, AsciiByte.Slash, 0, src_len);
+		if (slash_pos == BryFind.NotFound) {
+			throw ErrUtl.NewArgs("wmf_api minor_mime does not have slash;", "minor_mime", src);
 		}
-		return Bry_.Mid(src, slash_pos + 1, src_len);
+		return BryLni.Mid(src, slash_pos + 1, src_len);
 	}
 	public static byte[] Normalize_timestamp(byte[] src) {
 		// convert 2017-03-06T08:09:10Z to 20170306080910

@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.core.primitives.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.xtns.wbases.pfuncs;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Arg_itm_tkn;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xot_invk;
 public class Wdata_pf_property_data {
 	public Wdata_pf_property_data(byte[] of, byte[] q, byte[] from) {
 		this.Of = of; this.Q = q; this.From = from;
@@ -25,7 +33,7 @@ public class Wdata_pf_property_data {
 	public final byte[]		From;		// EX: "p2"
 
 	public static Wdata_pf_property_data Parse(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self) {
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+		BryWtr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().GetB512();
 		byte[] of = null, q = null, from = null;
 		int args_len = self.Args_len();
 		for (int i = 0; i < args_len; ++i) {
@@ -37,14 +45,14 @@ public class Wdata_pf_property_data {
 			if (key_bgn == key_end && key_bgn == -1) continue;	// null arg; ignore, else will throw warning below; EX: {{#property:p1|}}; DATE:2013-11-15
 
 			// trim ws; ISSUE#:361; DATE:2019-02-11
-			key_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, key_bgn, key_end);
-			key_end = Bry_find_.Find_bwd__while_space_or_tab(src, key_end, key_bgn);
+			key_bgn = BryFind.FindFwdWhileSpaceOrTab(src, key_bgn, key_end);
+			key_end = BryFind.FindBwdWhileSpaceOrTab(src, key_end, key_bgn);
 
 			// get key_tid
-			byte key_tid = atrs_hash.Get_as_byte_or(src, key_bgn, key_end, Byte_.Max_value_127);
+			byte key_tid = atrs_hash.Get_as_byte_or(src, key_bgn, key_end, ByteUtl.MaxValue127);
 			switch (key_tid) {
-				case Byte_.Max_value_127:
-					ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", String_.new_u8(ctx.Page().Ttl().Full_txt()), String_.new_u8(src, self.Src_bgn(), self.Src_end()));
+				case ByteUtl.MaxValue127:
+					ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", StringUtl.NewU8(ctx.Page().Ttl().Full_txt()), StringUtl.NewU8(src, self.Src_bgn(), self.Src_end()));
 					continue;
 				case Tid__id:	// same as "not-found", but don't warn; 
 					continue;
@@ -52,15 +60,15 @@ public class Wdata_pf_property_data {
 
 			// get val
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);	// NOTE: changed from self to caller; DATE:2016-03-16
-			byte[] val = tmp_bfr.To_bry_and_clear();
+			byte[] val = tmp_bfr.ToBryAndClear();
 			switch (key_tid) {
 				case Tid__of:		of = val; break;
 				case Tid__q:		q = val; break;
 				case Tid__from:		from = val; break;
-				default:			throw Err_.new_unhandled(key_tid);
+				default:			throw ErrUtl.NewUnhandled(key_tid);
 			}
 		}
-		tmp_bfr.Mkr_rls();	
+		tmp_bfr.MkrRls();
 		return new Wdata_pf_property_data(of, q, from);
 	}
 	private static final byte Tid__of = 0, Tid__q = 1, Tid__from = 2, Tid__id = 3;

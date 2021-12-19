@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 public class XomwParser_tst {
 	private final XomwParser_fxt fxt = new XomwParser_fxt();
 	@Test public void Basic() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "== heading_1 =="
 		, "para_1"
 		, "== heading_2 =="
@@ -35,7 +39,7 @@ public class XomwParser_tst {
 		, "[[A|abc]]"
 		, "https://c.org"
 		, "a »b« &#160;!important c"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<h2> heading_1 </h2>"
 		, "<p>para_1"
 		, "</p>"
@@ -67,17 +71,17 @@ class XomwParser_fxt {
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		this.parser = new XomwParser(XomwEnv.NewTestByApp(app));
 		parser.Init_by_wiki(wiki);
-		parser.Init_by_page(XomwTitleOld.newFromText(parser.Env(), Bry_.new_a7("Page_1")));
-		pctx.Init_by_page(XomwTitleOld.newFromText(parser.Env(), Bry_.new_a7("Page_1")));
+		parser.Init_by_page(XomwTitleOld.newFromText(parser.Env(), BryUtl.NewA7("Page_1")));
+		pctx.Init_by_page(XomwTitleOld.newFromText(parser.Env(), BryUtl.NewA7("Page_1")));
 	}
 	public void Test__parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		parser.internalParse(pbfr, pctx, src_bry);
 		parser.internalParseHalfParsed(pbfr, pctx, true, true);
-		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
+		GfoTstr.EqLines(expd, pbfr.Rslt().ToStrAndClear(), src_str);
 	}
 	public void Test__internalParse(String src_str, String expd) {
 		String actl = parser.internalParse(src_str, false, new XomwPPFrame_Hash(new XomwPreprocessor_Hash(parser)));
-		Tfds.Eq_str_lines(expd, actl, src_str);
+		GfoTstr.EqLines(expd, actl, src_str);
 	}
 }

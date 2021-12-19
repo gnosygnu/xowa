@@ -14,13 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.Int_;
-import gplx.Io_url;
-import gplx.Io_url_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.primitives.Int_2_ref;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.imgs.Xof_img_mode_;
 import gplx.xowa.files.repos.Xof_repo_itm;
 import gplx.xowa.guis.cbks.js.Js_img_wkr;
@@ -30,16 +31,16 @@ import gplx.xowa.wikis.tdbs.metas.Xof_meta_thumb;
 public class Xof_xfer_itm implements Xof_file_itm {
 	private Xof_url_bldr tmp_url_bldr = dflt_url_bldr;
 	public Xof_xfer_itm() {
-		lnki_type = orig_repo_id = Byte_.Max_value_127;
-		lnki_w = lnki_h = file_w = orig_w = orig_h = html_w = html_h = html_gallery_mgr_h = Int_.Neg1;
+		lnki_type = orig_repo_id = ByteUtl.MaxValue127;
+		lnki_w = lnki_h = file_w = orig_w = orig_h = html_w = html_h = html_gallery_mgr_h = IntUtl.Neg1;
 		orig_ext = null;
-		lnki_upright = Int_.Neg1; lnki_time = Xof_lnki_time.Null; lnki_page = Xof_lnki_page.Null;
+		lnki_upright = IntUtl.Neg1; lnki_time = Xof_lnki_time.Null; lnki_page = Xof_lnki_page.Null;
 		file_exists = false; file_is_orig = true;
 		orig_file_len = 0;	// NOTE: cannot be -1, or else will always download orig; see ext rule chk and (orig_file_len < 0)
 		orig_repo_name = orig_ttl = orig_redirect = null; lnki_ttl = null; orig_ttl_md5 = null;
 		html_orig_url = html_view_url = Io_url_.Empty;
 		meta_itm = null;
-		html_uid = Int_.Neg1; html_elem_tid = Xof_html_elem.Tid_none;
+		html_uid = IntUtl.Neg1; html_elem_tid = Xof_html_elem.Tid_none;
 	}
 	public int					Lnki_exec_tid()				{return lnki_exec_tid;} private int lnki_exec_tid;
 	public byte[]				Lnki_wiki_abrv()			{return lnki_wiki_abrv;} private byte[] lnki_wiki_abrv;
@@ -95,9 +96,9 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name;
 		this.orig_ttl = orig_ttl; this.orig_ttl_md5 = Xof_file_wkr_.Md5(orig_ttl);
 		this.orig_w = orig_w; this.orig_h = orig_h; this.orig_redirect = orig_redirect;
-		if		(Bry_.Len_gt_0(orig_redirect))				// redirect exists; EX: A.png redirected to B.png
+		if		(BryUtl.IsNotNullOrEmpty(orig_redirect))				// redirect exists; EX: A.png redirected to B.png
 			this.Orig_ttl_(orig_redirect);					// update fsdb with atrs of B.png
-		else if	(!Bry_.Eq(lnki_ttl, orig_ttl))				// ttls differ; EX: "A_.png" vs "A.png"
+		else if	(!BryLni.Eq(lnki_ttl, orig_ttl))				// ttls differ; EX: "A_.png" vs "A.png"
 			this.Orig_ttl_(orig_ttl);
 		else
 			this.Orig_ttl_(orig_ttl);
@@ -122,7 +123,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	}
 	public void Orig_ttl_and_redirect_(byte[] ttl, byte[] redirect) {
 		this.orig_redirect = redirect;
-		this.lnki_ttl = orig_redirect == Xop_redirect_mgr.Redirect_null_bry ? Bry_.Copy(ttl) : orig_redirect;
+		this.lnki_ttl = orig_redirect == Xop_redirect_mgr.Redirect_null_bry ? BryUtl.Copy(ttl) : orig_redirect;
 		this.lnki_ttl = Xof_file_wkr_.Md5_decoder.Decode(Xof_file_wkr_.Ttl_standardize(lnki_ttl));	// NOTE: this line is repeated in static method below
 		this.orig_ttl = lnki_ttl;
 		this.orig_ttl_md5 = Xof_file_wkr_.Md5_fast(lnki_ttl);	// NOTE: md5 is calculated off of url_decoded ttl; EX: A%2Cb is converted to A,b and then md5'd. note that A%2Cb still remains the title
@@ -136,9 +137,9 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public Xof_meta_itm			Dbmeta_itm() {return meta_itm;} private Xof_meta_itm meta_itm;
 	public void					Trg_repo_itm_(Xof_repo_itm v) {
 		trg_repo_itm = v;
-		trg_repo_root = trg_repo_itm == null ? Bry_.Empty : trg_repo_itm.Root_http();
+		trg_repo_root = trg_repo_itm == null ? BryUtl.Empty : trg_repo_itm.Root_http();
 	} private Xof_repo_itm trg_repo_itm;
-	public byte[]		Trg_repo_root() {return trg_repo_root;} private byte[] trg_repo_root = Bry_.Empty;	// HACK: needed for hdump
+	public byte[]		Trg_repo_root() {return trg_repo_root;} private byte[] trg_repo_root = BryUtl.Empty;	// HACK: needed for hdump
 	public void			Ctor_for_html(int exec_tid, int lnki_upright_patch, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
 		Calc_html_size(exec_tid, lnki_upright_patch, img_size);
 		this.html_view_url = url_bldr.To_url_trg(repo, this, file_is_orig);
@@ -227,7 +228,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 					int comp_height = calc_size.Val_1();
 					for (int i = 0; i < thumbs_len; i++) {
 						Xof_meta_thumb tmp_thumb = thumbs[i];
-						if (Int_.Between(tmp_thumb.Height(), comp_height - 1, comp_height + 1)) {
+						if (IntUtl.Between(tmp_thumb.Height(), comp_height - 1, comp_height + 1)) {
 							thumb = tmp_thumb;
 							break;
 						}

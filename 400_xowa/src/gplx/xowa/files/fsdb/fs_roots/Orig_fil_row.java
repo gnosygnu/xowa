@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+package gplx.xowa.files.fsdb.fs_roots;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 class Orig_fil_row {
 	Orig_fil_row(int uid, byte[] name, int ext_id, int w, int h, Io_url url) {
 		this.uid = uid;
@@ -37,7 +39,7 @@ class Orig_fil_row {
 
 	public static final Orig_fil_row Null = null;
 	public static Orig_fil_row New_by_db(int uid, byte[] name, int ext_id, int w, int h, Io_url dir) {
-		return new Orig_fil_row(uid, name, ext_id, w, h, dir.GenSubFil(String_.new_u8(name)));
+		return new Orig_fil_row(uid, name, ext_id, w, h, dir.GenSubFil(StringUtl.NewU8(name)));
 	}
 	public static Orig_fil_row New_by_fs(Io_url url, byte[] name, int ext_id) {
 		return new Orig_fil_row(0, name, ext_id, 0, 0, url);

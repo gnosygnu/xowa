@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs;
-import gplx.Bry_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.langs.htmls.Gfh_utl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.Xoa_page_;
@@ -63,7 +63,7 @@ public class Xoh_hzip_fxt {
 	}
 	public Xowe_wiki Init_wiki_alias(String alias, String domain) {
 		Xowe_wiki rv = Xoa_app_fxt.Make__wiki__edit(parser_fxt.App(), domain);
-		parser_fxt.Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_u8(alias), Bry_.new_u8(domain), null);
+		parser_fxt.Wiki().Xwiki_mgr().Add_by_atrs(BryUtl.NewU8(alias), BryUtl.NewU8(domain), null);
 		return rv;
 	}
 	public void Init__ns_alias__add(String alias, int ns_id) {
@@ -92,21 +92,21 @@ public class Xoh_hzip_fxt {
 		Test__decode__raw(hzip, html);
 	}
 	public void Test__encode__fail(String expd, String html) {
-		hzip_mgr.Encode(bfr, parser_fxt.Wiki(), hpg, Bry_.new_u8(html));
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		hzip_mgr.Encode(bfr, parser_fxt.Wiki(), hpg, BryUtl.NewU8(html));
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 	private void Test__encode__raw(String hzip, String html) {
 		Gfo_usr_dlg_.Test__show__init();
-		hzip_mgr.Encode(bfr, parser_fxt.Wiki(), hpg, Bry_.new_u8(html));
+		hzip_mgr.Encode(bfr, parser_fxt.Wiki(), hpg, BryUtl.NewU8(html));
 		Gfo_usr_dlg_.Test__show__term();
-		Tfds.Eq_str_lines(hzip, bfr.To_str_and_clear());
+		GfoTstr.EqLines(hzip, bfr.ToStrAndClear());
 	}
 	public void Test__decode__raw(String hzip, String html) {
 		Gfo_usr_dlg_.Test__show__init();
 		hpg.Section_mgr().Clear();
-		hzip_mgr.Decode(bfr, parser_fxt.Wiki(), hpg, Bry_.new_u8(hzip));
+		hzip_mgr.Decode(bfr, parser_fxt.Wiki(), hpg, BryUtl.NewU8(hzip));
 		Gfo_usr_dlg_.Test__show__term();
-		Tfds.Eq_str_lines(html, bfr.To_str_and_clear());
+		GfoTstr.EqLines(html, bfr.ToStrAndClear());
 	}
 	public void Exec_write_to_fsys(Io_url dir, String fil) {
 		try {
@@ -114,7 +114,7 @@ public class Xoh_hzip_fxt {
 			Gfo_usr_dlg_.Test__show__init();
 			hzip_mgr.Encode(bfr, parser_fxt.Wiki(), hpg, Io_mgr.Instance.LoadFilBry(dir.GenSubFil(fil)));
 			Gfo_usr_dlg_.Test__show__term();
-			byte[] actl = bfr.To_bry_and_clear();
+			byte[] actl = bfr.ToBryAndClear();
 			Io_mgr.Instance.SaveFilBry(dir.GenSubFil(fil).GenNewExt(".hzip.html"), actl);
 			Gfo_usr_dlg_.Test__show__init();
 			gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_hzip.Md5_depth = 4;
@@ -123,10 +123,10 @@ public class Xoh_hzip_fxt {
 			hzip_mgr.Hctx().Mode_is_diff_(BoolUtl.N);
 			gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_hzip.Md5_depth = 2;
 			Gfo_usr_dlg_.Test__show__term();
-			Io_mgr.Instance.SaveFilBry(dir.GenSubFil(fil).GenNewExt(".hzip.decode.html"), bfr.To_bry_and_clear());
+			Io_mgr.Instance.SaveFilBry(dir.GenSubFil(fil).GenNewExt(".hzip.decode.html"), bfr.ToBryAndClear());
 		} catch (Exception e) {
-			Tfds.Dbg(e);
+			GfoTstr.Debug(e);
 		}
 	}
-	public static String Escape(String v) {return String_.Replace(v, "~", "");}
+	public static String Escape(String v) {return StringUtl.Replace(v, "~", "");}
 }

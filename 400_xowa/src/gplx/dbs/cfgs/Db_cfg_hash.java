@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.cfgs; import gplx.*;
-public class Db_cfg_hash {		
+package gplx.dbs.cfgs;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.errs.ErrUtl;
+public class Db_cfg_hash {
 	private final String grp; private final Ordered_hash hash = Ordered_hash_.New();
 	public Db_cfg_hash(String grp) {this.grp = grp;}
 	public int			Len() {return hash.Len();}
-	public Db_cfg_itm	Get_at(int i) {return (Db_cfg_itm)hash.Get_at(i);}
+	public Db_cfg_itm	Get_at(int i) {return (Db_cfg_itm)hash.GetAt(i);}
 	public Db_cfg_itm	Get_by(String key) {
 		Db_cfg_itm rv = (Db_cfg_itm)hash.GetByOrNull(key);
 		return rv == null ? Db_cfg_itm.Empty : rv;
@@ -26,7 +29,7 @@ public class Db_cfg_hash {
 	public void Set(String key, String val) {hash.Del(key); Add(key, val);}
 	public void Add(Db_cfg_itm itm) {hash.Add(itm.Key(), itm);}
 	public void Add(String key, String val) {
-		if (hash.Has(key)) throw Err_.new_wo_type("itm exists", "grp", grp, "key", key);
+		if (hash.Has(key)) throw ErrUtl.NewArgs("itm exists", "grp", grp, "key", key);
 		Db_cfg_itm itm = new Db_cfg_itm(grp, key, val);
 		Add(itm);
 	}

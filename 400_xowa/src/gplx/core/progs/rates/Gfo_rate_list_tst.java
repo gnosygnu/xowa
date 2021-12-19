@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.progs.rates; import gplx.*; import gplx.core.*; import gplx.core.progs.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.core.progs.rates;
+import gplx.frameworks.tests.GfoTstr;
+import org.junit.*;
 public class Gfo_rate_list_tst {
 	private final Gfo_rate_list_fxt fxt = new Gfo_rate_list_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -28,7 +29,7 @@ class Gfo_rate_list_fxt {
 	public void Clear() {list.Clear();}
 	public Gfo_rate_list_fxt Add(long data, long time) {list.Add(data, time); return this;}
 	public void Test(double expd_rate, double expd_delta) {
-		Gftest.Eq__double(expd_rate	, list.Cur_rate()	, "cur_rate");
-		Gftest.Eq__double(expd_delta, list.Cur_delta()	, "cur_delta");
+		GfoTstr.EqDouble(expd_rate	, list.Cur_rate()	, "cur_rate");
+		GfoTstr.EqDouble(expd_delta, list.Cur_delta()	, "cur_delta");
 	}
 }

@@ -14,20 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.hzips;
-import gplx.Bry_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Gfo_decimal_parser_tst {
 	private final Gfo_decimal_parser_fxt fxt = new Gfo_decimal_parser_fxt();
-	@Test  public void Positive() {
+	@Test public void Positive() {
 		fxt.Test__parse("123"		, BoolUtl.Y,  0, 123);
 		fxt.Test__parse("12.3"		, BoolUtl.Y, -1, 123);
 		fxt.Test__parse("1.23"		, BoolUtl.Y, -2, 123);
 		fxt.Test__parse(".123"		, BoolUtl.Y, -3, 123);
 		fxt.Test__parse("0.123"		, BoolUtl.Y, -3, 123);
 	}
-	@Test  public void Negative() {
+	@Test public void Negative() {
 		fxt.Test__parse("-123"		, BoolUtl.N,  0, 123);
 		fxt.Test__parse("-12.3"		, BoolUtl.N, -1, 123);
 		fxt.Test__parse("-1.23"		, BoolUtl.N, -2, 123);
@@ -38,10 +38,10 @@ public class Gfo_decimal_parser_tst {
 class Gfo_decimal_parser_fxt {
 	private final Gfo_decimal_parser bicoder = new Gfo_decimal_parser();
 	public void Test__parse(String src_str, boolean expd_sign, int expd_exponent, long expd_number) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		bicoder.Parse(src_bry, 0, src_bry.length);
-		Tfds.Eq_bool(expd_sign, bicoder.Sign());
-		Tfds.Eq_int(expd_exponent, bicoder.Exponent());
-		Tfds.Eq_long(expd_number, bicoder.Number());
+		GfoTstr.Eq(expd_sign, bicoder.Sign());
+		GfoTstr.Eq(expd_exponent, bicoder.Exponent());
+		GfoTstr.EqLong(expd_number, bicoder.Number());
 	}
 }

@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.engines.luaj;
 
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.xtns.scribunto.Scrib_core;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
@@ -57,7 +57,7 @@ public class Luaj_engine implements Scrib_engine {
 
 		// check for error such as mistyping `dbg('a)`; ISSUE#:759 DATE:2020-07-15
 		String op = Luaj_value_.Get_val_as_str(rsp, "op");
-		if (String_.Eq(op, "error")) {
+		if (StringUtl.Eq(op, "error")) {
 		  String err = Luaj_value_.Get_val_as_str(rsp, "value");
 		  throw Scrib_xtn_mgr.err_(err);
 		}
@@ -66,14 +66,14 @@ public class Luaj_engine implements Scrib_engine {
 		LuaInteger proc_id = (LuaInteger)values_tbl.rawget(1);
 		return new Scrib_lua_proc(name, proc_id.v);
 	}
-	public void RegisterLibrary(Keyval[] functions) {
+	public void RegisterLibrary(KeyVal[] functions) {
 		LuaTable msg = LuaValue.tableOf();
 		msg.set("op", Val_registerLibrary);
 		msg.set("name", "mw_interface");
 		msg.set("functions", Luaj_value_.Obj_to_lua_val(server, functions));
 		server.Dispatch(msg);
 	}
-	public Keyval[] CallFunction(int id, Keyval[] args) {
+	public KeyVal[] CallFunction(int id, KeyVal[] args) {
 		int args_len = args.length;
 		LuaTable msg = LuaValue.tableOf();
 		msg.set("op", Val_callFunction);
@@ -82,49 +82,49 @@ public class Luaj_engine implements Scrib_engine {
 		msg.set("args", Luaj_value_.Obj_to_lua_val(server, args));
 		return this.Dispatch_as_kv_ary(msg);
 	}
-	public Keyval[] ExecuteModule(int mod_id) {
+	public KeyVal[] ExecuteModule(int mod_id) {
 		return this.CallFunction(core.Lib_mw().Mod().Fncs_get_id("executeModule"), Scrib_kv_utl_.base1_obj_(new Scrib_lua_proc("", mod_id)));
 	}
-	public void CleanupChunks(Keyval[] ids) {
+	public void CleanupChunks(KeyVal[] ids) {
 		LuaTable msg = LuaValue.tableOf();
 		msg.set("op", "cleanupChunks");
 		msg.set("ids", Luaj_value_.Obj_to_lua_val(server, ids));
 		this.Dispatch_as_kv_ary(msg);		
 	}
-	public Keyval[] Dispatch_as_kv_ary(LuaTable msg) {
+	public KeyVal[] Dispatch_as_kv_ary(LuaTable msg) {
 		while (true) {
 			LuaTable rsp = server.Dispatch(msg);
 			String op = Luaj_value_.Get_val_as_str(rsp, "op");
-			if		(String_.Eq(op, "return"))
+			if		(StringUtl.Eq(op, "return"))
 				return Luaj_value_.Get_val_as_kv_ary(server, rsp, "values");
-			else if (String_.Eq(op, "call"))
+			else if (StringUtl.Eq(op, "call"))
 				msg = Server_recv_call(rsp);
-			else if (String_.Eq(op, "error")) {
+			else if (StringUtl.Eq(op, "error")) {
 				String err = Luaj_value_.Get_val_as_str(rsp, "value");
 				core.Handle_error(err);
-				return Keyval_.Ary_empty;
+				return KeyValUtl.AryEmpty;
 			}
 			else
-				return Keyval_.Ary_empty;
+				return KeyValUtl.AryEmpty;
 		}		
 	}
 	public LuaTable Server_recv_call(LuaTable rsp) {
 		String proc_id = Luaj_value_.Get_val_as_str(rsp, "id");
-		Keyval[] args = Luaj_value_.Get_val_as_kv_ary(server, rsp, "args");
+		KeyVal[] args = Luaj_value_.Get_val_as_kv_ary(server, rsp, "args");
 		Scrib_proc proc = proc_mgr.Get_by_key(proc_id); if (proc == null) throw Scrib_xtn_mgr.err_("could not find proc with id of {0}", proc_id);
 		Scrib_proc_args proc_args = new Scrib_proc_args(args);
 		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
 		proc.Proc_exec(proc_args, proc_rslt);
 		String fail_msg = proc_rslt.Fail_msg();
 		if (fail_msg == null) { 
-			Keyval[] cbk_rslts = proc_rslt.Ary();
+			KeyVal[] cbk_rslts = proc_rslt.Ary();
 			return ReturnMessage(cbk_rslts);
 		}
 		else {
 			return ReturnFail(fail_msg);			
 		}
 	}
-	private LuaTable ReturnMessage(Keyval[] values) {
+	private LuaTable ReturnMessage(KeyVal[] values) {
 		LuaTable msg = LuaValue.tableOf();
 		msg.set("op", Val_returnMessage);
 		msg.set("nvalues", LuaValue.valueOf(values.length));

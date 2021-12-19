@@ -14,9 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.ifs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.langs.kwds.Xol_kwd_grp_;
 import gplx.xowa.langs.kwds.Xol_kwd_mgr;
 import gplx.xowa.parsers.Xop_ctx;
@@ -30,7 +31,7 @@ public class Pfunc_switch extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_switch;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_switch().Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
 //			synchronized (this) { // LOCK:DELETE; DATE:2016-07-06
 			int self_args_len = self.Args_len(); if (self_args_len == 0) return;	// no cases; return; effectively "empty"
 			byte[] argx = Eval_argx(ctx, src, caller, self);
@@ -38,7 +39,7 @@ public class Pfunc_switch extends Pf_func_base {
 			byte[] match = null;
 			Arg_itm_tkn dflt_val_tkn = null; byte[] dflt_val_bry = null;
 			Arg_nde_tkn last_keyless_arg = null;
-			Bry_bfr tmp = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+			BryWtr tmp = ctx.Wiki().Utl__bfr_mkr().GetB512();
 			Xol_kwd_mgr kwd_mgr = ctx.Lang().Kwd_mgr();
 			for (int i = 0; i < self_args_len; i++) {
 				Arg_nde_tkn arg = self.Args_get_by_idx(i);
@@ -69,7 +70,7 @@ public class Pfunc_switch extends Pf_func_base {
 						dflt_val_bry
 							= case_val_len == Dflt_keyword_len			// PERF: check if case_val = "|#default|"
 							? null										// PERF: set to null; don't create Bry_.Empty
-							: Bry_.Mid(case_val, Dflt_keyword_len, case_val_len)	// chop off "#default"; EX: {{#switch:a|b|#defaultabc}} -> "abc"
+							: BryLni.Mid(case_val, Dflt_keyword_len, case_val_len)	// chop off "#default"; EX: {{#switch:a|b|#defaultabc}} -> "abc"
 							;					
 					}
 				}
@@ -85,17 +86,17 @@ public class Pfunc_switch extends Pf_func_base {
 			}
 			if (match != null)
 				bfr.Add(match);
-			tmp.Mkr_rls();
+			tmp.MkrRls();
 //			}
 	}
-	private byte[] Get_or_eval(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb, Arg_itm_tkn itm, Bry_bfr tmp) {
+	private byte[] Get_or_eval(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, BryWtr bb, Arg_itm_tkn itm, BryWtr tmp) {
 		if (itm.Itm_static() == BoolUtl.YByte)
-			return Bry_.Trim(src, itm.Dat_bgn(), itm.Dat_end());
+			return BryUtl.Trim(src, itm.Dat_bgn(), itm.Dat_end());
 		else {
 			itm.Tmpl_evaluate(ctx, src, caller, tmp);
-			return tmp.To_bry_and_clear_and_trim();
+			return tmp.ToBryAndClearAndTrim();
 		}
 	}
-	public static final byte[] Dflt_keyword = Bry_.new_a7("#default");	// NOTE: technically should pull from messages, but would need to cache Dflt_keyword on wiki level; checked all Messages files, and no one overrides it; DATE:2014-05-29
+	public static final byte[] Dflt_keyword = BryUtl.NewA7("#default");	// NOTE: technically should pull from messages, but would need to cache Dflt_keyword on wiki level; checked all Messages files, and no one overrides it; DATE:2014-05-29
 	private static int Dflt_keyword_len = Dflt_keyword.length;
 }

@@ -13,19 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tblws;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_tblw_wkr__para_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test public void Para() {	// PURPOSE: para causing strange breaks; SEE:[[John F. Kennedy]] and "two Supreme Court appointments"
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"<p></p>"
 			,	"|a"
 			,	"<p></p>"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table><p></p>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -38,14 +40,14 @@ public class Xop_tblw_wkr__para_tst {
 			);
 	}
 	@Test public void Nl() {	// PURPOSE: para causing strange breaks; SEE:[[John F. Kennedy]] and "two Supreme Court appointments"
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|-"
 			,	"!a"
 			,	""
 			,	"|-"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th>a"
@@ -57,7 +59,7 @@ public class Xop_tblw_wkr__para_tst {
 			);
 	}
 	@Test public void Unnecessary_para() {	// PURPOSE: tblw causes unnecessary <p>; home/wiki/Dashboard/Image_databases; DATE:2014-02-20
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|-"
 			,	"|"
@@ -67,7 +69,7 @@ public class Xop_tblw_wkr__para_tst {
 			,	"c<br/>"
 			,	"d"
 			,	"|}"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -89,13 +91,13 @@ public class Xop_tblw_wkr__para_tst {
 			);
 	}
 	@Test public void Ws_leading() {	// PAGE:en.w:AGPLv3
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	" !a"
 			,	" !b"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl_skip_last
+			, StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th>a"
@@ -109,14 +111,14 @@ public class Xop_tblw_wkr__para_tst {
 			);
 	}
 	@Test public void Ws_th_2() {	// "\n\s!" should still be interpreted as tblw; s.w:Manchester; DATE:2014-02-14
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	"|-"
 			,	"|!style='color:red'|a"
 			,	" !style=\"color:blue\"|b"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl_skip_last
+			, StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -130,12 +132,12 @@ public class Xop_tblw_wkr__para_tst {
 			);
 	}
 	@Test public void Ws_th_3() {	// "\n\s!" and "!!" breaks tblw; ru.w:Храмы_Санкт-Петербурга (List of churches in St Petersburg); DATE:2014-02-20
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|"
 			,	" ! id='1' | a !! id='2' | b"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl_skip_last
+			, StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th id='1'> a "
@@ -152,14 +154,14 @@ public class Xop_tblw_wkr__para_tst {
 		fxt.Test_parse_page_wiki_str("a||b", "<p>a||b\n</p>");
 	}
 	@Test public void Para_on_tblw() {	// PURPOSE:table following link should automatically add para around link; PAGE:en.w:Template_engine_(web) DATE:2017-04-08
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		(	"[[A]] b"
 		,	"{|"
 		,	"|-"
 		,	"|c"
 		,	"|}"
 		)
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		(	"<p><a href=\"/wiki/A\">A</a> b" // NOTE: previously, <p> was not included; now added for TRAILING_TBLW fix; DATE:2017-04-08
 		,	"</p>"
 		,	"<table>"

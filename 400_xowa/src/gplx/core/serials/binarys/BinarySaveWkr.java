@@ -1,8 +1,7 @@
 package gplx.core.serials.binarys;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.core.serials.core.SerialSaveMgr;
 import gplx.core.serials.core.SerialSaveWkr;
 import gplx.core.texts.Base64Converter;
@@ -11,7 +10,7 @@ public class BinarySaveWkr implements SerialSaveWkr {
     private byte[] fldDlm;
     private byte[] rowDlm;
     private BinarySaveMgr mgr;
-    private final Bry_bfr bfr = Bry_bfr_.New();
+    private final BryWtr bfr = BryWtr.New();
 
     @Override
     public SerialSaveWkr Ctor(SerialSaveMgr mgrObj) {
@@ -29,8 +28,8 @@ public class BinarySaveWkr implements SerialSaveWkr {
     @Override
     public void SaveHdr(int dataVersion) {
         // EX: AA -> SerialCoreMgrID+DataVersionID
-        bfr.Add_byte((byte)Base64Converter.GetIndexChar(mgr.CoreVersion()));
-        bfr.Add_byte((byte)Base64Converter.GetIndexChar(dataVersion)).Add(rowDlm);
+        bfr.AddByte((byte)Base64Converter.GetIndexChar(mgr.CoreVersion()));
+        bfr.AddByte((byte)Base64Converter.GetIndexChar(dataVersion)).Add(rowDlm);
     }
 
     @Override
@@ -40,7 +39,7 @@ public class BinarySaveWkr implements SerialSaveWkr {
 
     @Override
     public void SaveStr(String val) {
-        this.SaveBry(Bry_.new_u8(val));
+        this.SaveBry(BryUtl.NewU8(val));
     }
 
     @Override
@@ -50,11 +49,11 @@ public class BinarySaveWkr implements SerialSaveWkr {
     }
 
     private void SaveInt(int val, byte[] dlm) {
-		bfr.Add_int_variable(val).Add(dlm);
+		bfr.AddIntVariable(val).Add(dlm);
     }
 
     @Override
 	public byte[] ToBry() {
-	    return bfr.To_bry();
+	    return bfr.ToBry();
 	}
 }

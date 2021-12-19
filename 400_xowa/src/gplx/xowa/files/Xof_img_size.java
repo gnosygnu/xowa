@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
 import gplx.core.bits.*;
+import gplx.types.basics.utls.MathUtl;
 import gplx.xowa.parsers.lnkis.*;
 public class Xof_img_size {
 	public int Html_w() {return html_w;} private int html_w;
@@ -90,15 +91,15 @@ public class Xof_img_size {
 	}
 	public static int Calc_w(int file_w, int file_h, int lnki_h) {		// REF.MW:media/MediaHandler.php|fitBoxWidth
 		double ideal_w = (double)file_w * (double)lnki_h / (double)file_h;
-		double ideal_w_ceil = Math_.Ceil(ideal_w);
-		return Math_.Round(ideal_w_ceil * file_h / file_w, 0) > lnki_h
-			? (int)Math_.Floor(ideal_w)
+		double ideal_w_ceil = MathUtl.Ceil(ideal_w);
+		return MathUtl.Round(ideal_w_ceil * file_h / file_w, 0) > lnki_h
+			? (int)MathUtl.Floor(ideal_w)
 			: (int)ideal_w_ceil;
 	}
 	public static int Scale_h(int file_w, int file_h, int lnki_w) {
 		return file_w == 0												// REF.MW:File.php|scaleHeight
 			? 0
-			: (int)Math_.Round(((double)lnki_w * file_h) / file_w, 0);	// NOTE: (double) needed else result will be int and fraction will be truncated
+			: (int)MathUtl.Round(((double)lnki_w * file_h) / file_w, 0);	// NOTE: (double) needed else result will be int and fraction will be truncated
 	}
 	public static int Upright_calc(int upright_patch_tid, double upright, int cur_w, int lnki_w, int lnki_h, byte lnki_type) {
 		boolean upright_patch_use_thumb_w = Xof_patch_upright_tid_.Split_use_thumb_w(upright_patch_tid);

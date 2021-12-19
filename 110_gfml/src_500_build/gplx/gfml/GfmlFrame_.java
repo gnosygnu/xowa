@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 class GfmlFrame_ {
 	public static GfmlFrame comment_() {return new GfmlFrame_comment();}
 	public static GfmlFrame quote_() {return new GfmlFrame_quote();}
@@ -28,7 +30,7 @@ abstract class GfmlFrame_base implements GfmlFrame {
 	public GfmlLxr Lxr() {return lxr;} GfmlLxr lxr;
 	public abstract int FrameType();
 	public int BgnPos() {return bgnPos;} public void BgnPos_set(int v) {bgnPos = v;} int bgnPos;
-	public GfmlObjList WaitingTkns() {return waitingTkns;} @gplx.Internal protected final GfmlObjList waitingTkns = GfmlObjList.new_();
+	public GfmlObjList WaitingTkns() {return waitingTkns;} public final GfmlObjList waitingTkns = GfmlObjList.new_();
 	public GfmlFrame MakeNew(GfmlLxr newLxr) {GfmlFrame_base rv = MakeNew_hook(); rv.ctor_(newLxr); return rv;}
 	public abstract void Build_end(GfmlBldr bldr, GfmlFrame ownerFrame);
 	protected abstract GfmlFrame_base MakeNew_hook();
@@ -65,9 +67,9 @@ class GfmlFrame_eval extends GfmlFrame_base {
 		return new GfmlVarTkn("tkn:eval", composite.SubTkns(), evalContext, varKey);
 	}
 	static String[] ExtractContextKey(String raw) {
-		String[] ary = String_.Split(raw, ".");
+		String[] ary = StringUtl.Split(raw, ".");
 		if (ary.length == 2) return ary; // NOOP: elems already assigned; context = ary[0]; key = ary[1];
-		if (ary.length > 2) throw Err_.new_wo_type("invalid context key for eval frame; should have 0 or 1 dlms", "key", raw);
+		if (ary.length > 2) throw ErrUtl.NewArgs("invalid context key for eval frame; should have 0 or 1 dlms", "key", raw);
 		String[] rv = new String[2];
 		rv[0] = GfmlVarCtx_.DefaultKey;
 		rv[1] = ary[0];
@@ -75,7 +77,7 @@ class GfmlFrame_eval extends GfmlFrame_base {
 	}
 }	
 class GfmlFrameUtl {
-	@gplx.Internal protected static void AddFrameTkn(GfmlFrame ownerFrame, GfmlTkn frameTkn) {
+	public static void AddFrameTkn(GfmlFrame ownerFrame, GfmlTkn frameTkn) {
 		GfmlFrame_nde nodeFrame = GfmlFrame_nde_.as_(ownerFrame);
 		if (nodeFrame != null)						// ownerFrame is node: set frameTkn as dataTkn
 			nodeFrame.DatTkn_set(frameTkn);

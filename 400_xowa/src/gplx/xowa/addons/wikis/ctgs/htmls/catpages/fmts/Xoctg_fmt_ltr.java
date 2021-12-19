@@ -13,12 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.xowa.langs.msgs.*; import gplx.core.intls.ucas.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
-public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C cont."
+public class Xoctg_fmt_ltr implements BryBfrArg {	// "A", "B", "C cont."
 	private final Xoctg_fmt_itm_base itm_fmt;
 	private Xoctg_catpage_grp grp;
 	private byte[] msg__list_continues;
@@ -32,14 +37,14 @@ public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C c
 		this.ltr_extractor = ltr_extractor;
 		itm_fmt.Init_from_ltr(wiki, grp, ltr_extractor);
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int itm_idx = 0;
 		int itm_end = grp.Itms__len();
 		int itms_len = itm_end - itm_idx; if (itms_len == 0) return;	// no items; exit
 
 		int col_idx = 0;			// col idx; EX: 3 cols; idx = 0, 1, 2
 		boolean start_new_col = true;
-		byte[] ltr_prv = Bry_.Empty;
+		byte[] ltr_prv = BryUtl.Empty;
 
 		// loop itms until no more itms
 		while (itm_idx < itm_end) {
@@ -49,8 +54,8 @@ public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C c
 			byte[] itm_sortkey = itm.Sortkey_handle();
 			// byte[] ltr_cur = gplx.core.intls.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
 			byte[] ltr_cur = ltr_extractor.Get_1st_ltr(itm_sortkey);
-			byte[] ltr_head = Bry_.Eq(ltr_prv, ltr_cur)
-				? Bry_.Add(ltr_prv, AsciiByte.SpaceBry, msg__list_continues)	// new col uses same ltr as last itm in old col; add "cont."; EX: "C cont."
+			byte[] ltr_head = BryLni.Eq(ltr_prv, ltr_cur)
+				? BryUtl.Add(ltr_prv, AsciiByte.SpaceBry, msg__list_continues)	// new col uses same ltr as last itm in old col; add "cont."; EX: "C cont."
 				: ltr_cur;	// else, just use ltr; EX: "C"				
 			ltr_prv = ltr_cur;
 
@@ -73,13 +78,13 @@ public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C c
 				Fmt__col_end.Bld_many(bfr);
 		}
 	}
-	private static final Bry_fmt
-	 Fmt__tbl = Bry_fmt.Auto_nl_skip_last
+	private static final BryFmt
+	 Fmt__tbl = BryFmt.Auto_nl_skip_last
 	( ""
 	, "          <h3>~{ltr_head}</h3>"	// EX: "A", "A cont."
 	, "          <ul>~{itms}"
 	, "          </ul>"
 	)
-	, Fmt__col_bgn = Bry_fmt.New("\n        <td style=\"width: ~{width}%;\">")
-	, Fmt__col_end = Bry_fmt.New("\n        </td>");
+	, Fmt__col_bgn = BryFmt.New("\n        <td style=\"width: ~{width}%;\">")
+	, Fmt__col_end = BryFmt.New("\n        </td>");
 }

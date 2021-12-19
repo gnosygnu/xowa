@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.primitives.*;
+package gplx.xowa.apps.servers.http;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.wrappers.IntRef;
 public class Http_server_wkr_pool {
-	private final Ordered_hash hash = Ordered_hash_.New(); private final Int_obj_ref hash_key = Int_obj_ref.New_neg1();
+	private final Ordered_hash hash = Ordered_hash_.New(); private final IntRef hash_key = IntRef.NewNeg1();
 	public boolean Enabled() {return max != 0;}
 	public int Max() {return max;} private int max;
 	public int Timeout() {return timeout;} private int timeout;
@@ -26,7 +28,7 @@ public class Http_server_wkr_pool {
 	public void Add(int uid) {
 		if (max == 0) return;	// disabled
 		synchronized (hash) {
-			Int_obj_ref wkr_key = Int_obj_ref.New(uid);
+			IntRef wkr_key = IntRef.New(uid);
 			hash.Add(wkr_key, wkr_key);
 			++len;
 		}
@@ -34,7 +36,7 @@ public class Http_server_wkr_pool {
 	public void Del(int uid) {
 		if (max == 0) return;	// disabled
 		synchronized (hash) {
-			hash.Del(hash_key.Val_(uid));
+			hash.Del(hash_key.ValSet(uid));
 			--len;
 		}
 	}

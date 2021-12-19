@@ -13,15 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import org.junit.*; import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.guis.views.*;
+package gplx.xowa.htmls.js;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.guis.views.Xog_tab_itm;
+import org.junit.Before;
+import org.junit.Test;
 public class Xoh_js_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_js_cbk_fxt fxt = new Xoh_js_cbk_fxt();
-	@Test  public void Get_title() {
+	@Test public void Get_title() {
 		fxt.Fxt().Init_page_create("exists");
-		fxt.Test_get_title("exists", "1" , "0" , Int_.To_str(Int_.Min_value), "Exists", "false", "0001-01-01 00:00:00", "0");
-		fxt.Test_get_title("absent", "0", "-1", Int_.To_str(Int_.Min_value), null	, "false", "0001-01-01 00:00:00", "0");
+		fxt.Test_get_title("exists", "1" , "0" , IntUtl.ToStr(IntUtl.MinValue), "Exists", "false", "0001-01-01 00:00:00", "0");
+		fxt.Test_get_title("absent", "0", "-1", IntUtl.ToStr(IntUtl.MinValue), null	, "false", "0001-01-01 00:00:00", "0");
 	}
 }
 class Xoh_js_cbk_fxt {
@@ -33,12 +46,12 @@ class Xoh_js_cbk_fxt {
 	public void Test_get_title(String ttl, Object... expd) {
 		Xoae_app app = fxt.App();
 		Xowe_wiki wiki = fxt.Wiki();
-		Xoae_page page = Xoae_page.New_test(wiki, Xoa_ttl.Parse(wiki, Bry_.new_a7("mock_page")));
+		Xoae_page page = Xoae_page.New_test(wiki, Xoa_ttl.Parse(wiki, BryUtl.NewA7("mock_page")));
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab();
 		tab.Page_(page);
 		Xoh_js_cbk exec = tab.Html_itm().Js_cbk();
 		GfoMsg msg = GfoMsg_.new_cast_(Xoh_js_cbk.Invk_get_titles_meta).Add("ttl", ttl);
 		String[][] actl = (String[][])Gfo_invk_.Invk_by_msg(exec, Xoh_js_cbk.Invk_get_titles_meta, msg);
-		Tfds.Eq_ary_str(expd, actl[0]);
+		GfoTstr.EqAryObjAry(expd, actl[0]);
 	}
 }

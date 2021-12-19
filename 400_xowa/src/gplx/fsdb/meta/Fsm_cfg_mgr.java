@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.meta;
-import gplx.Err_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.cfgs.Db_cfg_hash;
 import gplx.dbs.cfgs.Db_cfg_tbl;
 import gplx.fsdb.Fsdb_db_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Fsm_cfg_mgr {		
 	private final Db_cfg_tbl tbl; private final Hash_adp grp_hash = Hash_adp_.New();
 	public Fsm_cfg_mgr(Fsdb_db_mgr db_conn_mgr, Db_conn conn) {
@@ -29,7 +29,7 @@ public class Fsm_cfg_mgr {
 	}
 	public void Ctor_by_load() {
 		Db_cfg_hash hash		= Grps_get_or_load(Grp_core);
-		this.next_id			= hash.Get_by(Key_next_id).To_int_or(-1); if (next_id == -1) throw Err_.new_wo_type("next_id not found in cfg", "url", tbl.Conn().Conn_info().Db_api());
+		this.next_id			= hash.Get_by(Key_next_id).To_int_or(-1); if (next_id == -1) throw ErrUtl.NewArgs("next_id not found in cfg", "url", tbl.Conn().Conn_info().Db_api());
 		this.schema_thm_page	= hash.Get_by(Key_schema_thm_page).To_yn_or_n();
 		this.patch__next_id		= hash.Get_by(Key_patch__next_id).To_yn_or_n();
 		this.patch__page_gt_1	= hash.Get_by(Key_patch__page_gt_1).To_yn_or_n();

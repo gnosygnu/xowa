@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.joins; import gplx.*; import gplx.dbs.*;
-import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.core.stores.*;
+package gplx.dbs.joins; import gplx.dbs.*;
+import gplx.frameworks.tests.GfoTstr;
+import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*;
+import gplx.core.stores.*;
 public abstract class Joins_base_tst {
 	protected Db_conn conn;
 	@Before public void setup() {
@@ -34,9 +36,9 @@ public abstract class Joins_base_tst {
 
 		DataRdr rdr = conn.Exec_qry_as_old_rdr(select);
 		GfoNde table = GfoNde_.rdr_(rdr);
-		Tfds.Eq(table.Subs().Count(), 2);
-		Tfds.Eq(table.Subs().FetchAt_asGfoNde(0).Read("join_data"), "data0");
-		Tfds.Eq(table.Subs().FetchAt_asGfoNde(1).Read("join_data"), "data1");
+		GfoTstr.EqObj(table.Subs().Count(), 2);
+		GfoTstr.EqObj(table.Subs().FetchAt_asGfoNde(0).Read("join_data"), "data0");
+		GfoTstr.EqObj(table.Subs().FetchAt_asGfoNde(1).Read("join_data"), "data1");
 	}
 	protected abstract Db_conn provider_();
 }

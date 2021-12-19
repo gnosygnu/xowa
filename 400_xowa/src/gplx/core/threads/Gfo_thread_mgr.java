@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*;
+package gplx.core.threads;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Gfo_thread_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public Gfo_thread_grp Get_by_or_new(String k) {
@@ -27,7 +29,7 @@ public class Gfo_thread_mgr {
 	public void Stop_all() {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			Gfo_thread_grp grp = (Gfo_thread_grp)hash.Get_at(i);
+			Gfo_thread_grp grp = (Gfo_thread_grp)hash.GetAt(i);
 			grp.Stop_all();
 		}
 		hash.Clear();

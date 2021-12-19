@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors;
+import gplx.types.basics.utls.BryUtl;
 public class Xomw_prepro_rule {
 	public Xomw_prepro_rule(byte[] bgn, byte[] end, int min, int max, int[] names) {
 		this.bgn = bgn;
@@ -30,7 +31,7 @@ public class Xomw_prepro_rule {
 	public boolean Names_exist(int idx) {
 		return idx < names.length && names[idx] != Name__invalid;
 	}
-	private static final byte[] Name__tmpl_bry = Bry_.new_a7("template"), Name__targ_bry = Bry_.new_a7("tplarg");
+	private static final byte[] Name__tmpl_bry = BryUtl.NewA7("template"), Name__targ_bry = BryUtl.NewA7("tplarg");
 	public static final int Name__invalid = -1, Name__null = 0, Name__tmpl = 1, Name__targ = 2;
 	public static byte[] Name(int type) {
 		switch (type) {

@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.security.*; import gplx.core.security.algos.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.core.security.algos.Hash_algo;
+import gplx.core.security.algos.Hash_algo_factory__composite;
+import gplx.core.security.algos.Hash_algo_factory__php_;
+import gplx.core.security.algos.Hash_algo_utl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Scrib_lib_hash implements Scrib_lib {
 	public Scrib_lib_hash(Scrib_core core) {}
 	public String Key() {return "mw.hash";}
@@ -35,12 +47,12 @@ public class Scrib_lib_hash implements Scrib_lib {
 		switch (key) {
 			case Proc_listAlgorithms:                return ListAlgorithms(args, rslt);
 			case Proc_hashValue:                     return HashValue(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int Proc_listAlgorithms = 0, Proc_hashValue = 1;
 	public static final String Invk_listAlgorithms = "listAlgorithms", Invk_hashValue = "hashValue";
-	private static final String[] Proc_names = String_.Ary(Invk_listAlgorithms, Invk_hashValue);
+	private static final String[] Proc_names = StringUtl.Ary(Invk_listAlgorithms, Invk_hashValue);
 	public boolean ListAlgorithms(Scrib_proc_args args, Scrib_proc_rslt rslt) {// NOTE:listAlgorithms
 		return rslt.Init_many_kvs(algo_keys);
 	}
@@ -56,19 +68,19 @@ public class Scrib_lib_hash implements Scrib_lib {
 		// get algo or fail
 		Hash_algo algo = algo_factory.New_hash_algo(algo_key);
 		if (algo == null) {
-			throw Err_.new_wo_type("Hash_algo is unknown; key=" + algo_key);
+			throw ErrUtl.NewArgs("Hash_algo is unknown; key=" + algo_key);
 		}
-		return rslt.Init_obj(String_.new_u8(Hash_algo_utl.Calc_hash_as_bry(algo, val)));
+		return rslt.Init_obj(StringUtl.NewU8(Hash_algo_utl.Calc_hash_as_bry(algo, val)));
 	}
 	private static final Hash_algo_factory__composite algo_factory = Hash_algo_factory__php_.New();
-	private static final Keyval[] algo_keys = Make_algo_keys(algo_factory);
-	private static Keyval[] Make_algo_keys(Hash_algo_factory__composite factory) {
+	private static final KeyVal[] algo_keys = Make_algo_keys(algo_factory);
+	private static KeyVal[] Make_algo_keys(Hash_algo_factory__composite factory) {
 		String[] keys = factory.Algo_keys();
 		int len = keys.length;
-		Keyval[] rv = new Keyval[len];
+		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = Keyval_.int_(i + Scrib_core.Base_1, keys[i]);
+			rv[i] = KeyVal.NewInt(i + Scrib_core.Base_1, keys[i]);
 		}
-		return new Keyval[] {Keyval_.int_(Scrib_core.Base_1, rv)}; // NOTE: this hierarchy is needed for Scribunto; see also Scrib_proc_rslt.Init_bry_ary
+		return new KeyVal[] {KeyVal.NewInt(Scrib_core.Base_1, rv)}; // NOTE: this hierarchy is needed for Scribunto; see also Scrib_proc_rslt.Init_bry_ary
 	}
 }

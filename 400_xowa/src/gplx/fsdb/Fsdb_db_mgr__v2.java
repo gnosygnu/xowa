@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_url;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.cfgs.Db_cfg_tbl;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.origs.Xof_orig_tbl;
 import gplx.xowa.wikis.data.Xow_db_layout;
 public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {

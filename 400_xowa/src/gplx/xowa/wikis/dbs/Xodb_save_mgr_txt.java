@@ -13,14 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.dbs; import gplx.*;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.utils.*;
-import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
+package gplx.xowa.wikis.dbs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.utils.Xop_redirect_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.tdbs.Xotdb_dir_info_;
+import gplx.xowa.wikis.tdbs.Xotdb_fsys_mgr;
+import gplx.xowa.wikis.tdbs.Xotdb_page_itm_;
+import gplx.xowa.wikis.tdbs.hives.Xowd_hive_mgr;
+import gplx.xowa.wikis.tdbs.xdats.Xob_xdat_file;
+import gplx.xowa.wikis.tdbs.xdats.Xob_xdat_itm;
 public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	public Xodb_save_mgr_txt(Xowe_wiki wiki, Xodb_load_mgr_txt load_mgr) {
 		this.wiki = wiki;
@@ -36,27 +53,27 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xow_ns ns_itm = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
 		boolean found = load_mgr.Load_by_ttl(db_page, ns_itm, ttl_bry);
-		if (found) throw Err_.new_wo_type("create requested but title already exists", "ttl", String_.new_u8(ttl_bry));
+		if (found) throw ErrUtl.NewArgs("create requested but title already exists", "ttl", StringUtl.NewU8(ttl_bry));
 		int text_len = text.length;
-		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tmp = wiki.Utl__bfr_mkr().GetM001();
 		int page_id = page_id_next++;
 		int fil_idx = 0;
 		int ns_id = ttl.Ns().Id();
-		Xotdb_page_itm_.Txt_page_save(tmp, page_id, Datetime_now.Get(), ttl_bry, text, true);
+		Xotdb_page_itm_.Txt_page_save(tmp, page_id, GfoDateNow.Get(), ttl_bry, text, true);
 		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ns_id, fil_idx);
 		byte[] page_rdr_bry = Io_mgr.Instance.LoadFilBry(page_rdr_url);
 		Xob_xdat_file page_rdr = new Xob_xdat_file();
-		if (Bry_.Len_gt_0(page_rdr_bry)) page_rdr.Parse(page_rdr_bry, page_rdr_bry.length, page_rdr_url);
+		if (BryUtl.IsNotNullOrEmpty(page_rdr_bry)) page_rdr.Parse(page_rdr_bry, page_rdr_bry.length, page_rdr_url);
 		int row_idx = page_rdr.Count();
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
-		page_rdr.Insert(tmp_bfr, tmp.To_bry_and_clear());
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
+		page_rdr.Insert(tmp_bfr, tmp.ToBryAndClear());
 		this.Data_save(Xotdb_dir_info_.Tid_page, page_rdr, page_rdr_url, tmp_bfr);
-		tmp_bfr.Mkr_rls();
+		tmp_bfr.MkrRls();
 		
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text, text_len);
 		db_page.Init(page_id, ttl.Page_db(), redirect_ttl != null, text_len, fil_idx, row_idx);
 		Xotdb_page_itm_.Txt_ttl_save(tmp, db_page);
-		byte[] ttl_row_bry = tmp.To_bry_and_rls();
+		byte[] ttl_row_bry = tmp.ToBryAndRls();
 		Xowd_hive_mgr ttl_hive = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_ttl);
 		ttl_hive.Create(ttl.Ns(), ttl.Page_db(), ttl_row_bry, Bry_comparer_fld_last.Instance);
 		wiki.Db_mgr().Load_mgr().Clear();	// NOTE: need to clear cached regy_ary in load_mgr
@@ -74,7 +91,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		Xoa_ttl ttl = page.Ttl();
 		Xow_ns ns = ttl.Ns(); byte[] ttl_bry = ttl.Page_db();
 		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
-		if (!load_mgr.Load_by_ttl(db_page, ns, ttl_bry)) throw Err_.new_wo_type("update requested but title does not exist", "ttl", String_.new_u8(ttl_bry));
+		if (!load_mgr.Load_by_ttl(db_page, ns, ttl_bry)) throw ErrUtl.NewArgs("update requested but title does not exist", "ttl", StringUtl.NewU8(ttl_bry));
 		byte[] old_ttl = ttl_bry;
 		if (new_ttl != null) {
 			ttl_bry = new_ttl;
@@ -83,31 +100,31 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		// update page
 		Xob_xdat_file page_rdr = new Xob_xdat_file(); Xob_xdat_itm page_itm = new Xob_xdat_itm();
 		load_mgr.Load_page(tmp_page, db_page.Text_db_id(), db_page.Tdb_row_idx(), ns, true, page_rdr, page_itm);
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
 		if (text == null) text = tmp_page.Text(); 
 		int text_len = text.length;
-		DateAdp modified_on = tmp_page.Modified_on();
+		GfoDate modified_on = tmp_page.Modified_on();
 		if (update_modified_on_enabled) {
-			modified_on = Datetime_now.Get();
+			modified_on = GfoDateNow.Get();
 			page.Db().Page().Modified_on_(modified_on);
 		}
 		Xotdb_page_itm_.Txt_page_save(tmp_bfr, db_page.Id(), modified_on, ttl_bry, text, true);
-		page_rdr.Update(tmp_bfr, page_itm, tmp_bfr.To_bry_and_clear());
+		page_rdr.Update(tmp_bfr, page_itm, tmp_bfr.ToBryAndClear());
 		Io_url page_rdr_url = fsys_mgr.Url_ns_fil(Xotdb_dir_info_.Tid_page, ttl.Ns().Id(), db_page.Text_db_id());
 		this.Data_save(Xotdb_dir_info_.Tid_page, page_rdr, page_rdr_url, tmp_bfr);
-		tmp_bfr.Mkr_rls();
+		tmp_bfr.MkrRls();
 		// update ttl
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text, text_len);
 		db_page.Text_len_(text_len);
 		db_page.Redirected_(redirect_ttl != null);
-		Bry_bfr tmp = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr tmp = wiki.Utl__bfr_mkr().GetB512();
 		Xotdb_page_itm_.Txt_ttl_save(tmp, db_page);
-		byte[] ttl_row_bry = tmp.To_bry_and_clear();
-		tmp.Mkr_rls();
+		byte[] ttl_row_bry = tmp.ToBryAndClear();
+		tmp.MkrRls();
 		Xowd_hive_mgr ttl_hive = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_ttl);
 		ttl_hive.Update(ns, old_ttl, new_ttl, ttl_row_bry, Xotdb_page_itm_.Txt_ttl_pos, AsciiByte.Pipe, true, true);
 	}
-	private void Data_save(byte dir_tid, Xob_xdat_file xdat_file, Io_url url, Bry_bfr tmp_bfr) {
+	private void Data_save(byte dir_tid, Xob_xdat_file xdat_file, Io_url url, BryWtr tmp_bfr) {
 		xdat_file.Save(url);
 	}
 	private Xowd_page_itm tmp_page = new Xowd_page_itm(); 
@@ -116,9 +133,9 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 class Bry_comparer_fld_last implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		byte[] lhs = (byte[])lhsObj, rhs = (byte[])rhsObj;
-		int lhs_bgn = Bry_find_.Find_bwd(lhs, AsciiByte.Pipe); if (lhs_bgn == Bry_find_.Not_found) lhs_bgn = -1;
-		int rhs_bgn = Bry_find_.Find_bwd(rhs, AsciiByte.Pipe); if (rhs_bgn == Bry_find_.Not_found) rhs_bgn = -1;
-		return Bry_.Compare(lhs, lhs_bgn + 1, lhs.length, rhs, rhs_bgn + 1, rhs.length);
+		int lhs_bgn = BryFind.FindBwd(lhs, AsciiByte.Pipe); if (lhs_bgn == BryFind.NotFound) lhs_bgn = -1;
+		int rhs_bgn = BryFind.FindBwd(rhs, AsciiByte.Pipe); if (rhs_bgn == BryFind.NotFound) rhs_bgn = -1;
+		return BryUtl.Compare(lhs, lhs_bgn + 1, lhs.length, rhs, rhs_bgn + 1, rhs.length);
 	}
 	public static final Bry_comparer_fld_last Instance = new Bry_comparer_fld_last();
 }

@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.durations; import gplx.*;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.langs.durations;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.commons.KeyVal;
 public class Xol_duration_itm_ {
 	private static final Hash_adp_bry regy = Hash_adp_bry.ci_a7();	// ASCII:MW.consts
 	public static final byte
@@ -55,14 +61,14 @@ public class Xol_duration_itm_ {
 	, Itm_minutes
 	, Itm_seconds
 	};
-	public static Xol_duration_itm[] Xto_itm_ary(Keyval[] kv_ary) {
+	public static Xol_duration_itm[] Xto_itm_ary(KeyVal[] kv_ary) {
 		if (kv_ary == null) return Xol_duration_itm_.Ary_default;
 		List_adp rv = List_adp_.New();
 		int len = kv_ary.length;
 		for (int i = 0; i < len; i++) {
-			Keyval kv = kv_ary[i];
-			String name = kv.Val_to_str_or_empty();
-			Xol_duration_itm itm = (Xol_duration_itm)regy.GetByOrNull(Bry_.new_u8(name));
+			KeyVal kv = kv_ary[i];
+			String name = kv.ValToStrOrEmpty();
+			Xol_duration_itm itm = (Xol_duration_itm)regy.GetByOrNull(BryUtl.NewU8(name));
 			if (itm != null)
 				rv.Add(itm);
 		}
@@ -73,7 +79,7 @@ class Xol_duration_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xol_duration_itm lhs = (Xol_duration_itm)lhsObj;
 		Xol_duration_itm rhs = (Xol_duration_itm)rhsObj;
-		return -Long_.Compare(lhs.Seconds(), rhs.Seconds());	// - to sort from largest to smallest
+		return -LongUtl.Compare(lhs.Seconds(), rhs.Seconds());	// - to sort from largest to smallest
 	}
 	public static final Xol_duration_itm_sorter Instance = new Xol_duration_itm_sorter(); Xol_duration_itm_sorter() {}// TS.static
 }

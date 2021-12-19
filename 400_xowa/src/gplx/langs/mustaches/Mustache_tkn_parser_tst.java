@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
+package gplx.langs.mustaches;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
 import org.junit.*;
 public class Mustache_tkn_parser_tst {
 	private final Mustache_tkn_parser_fxt fxt = new Mustache_tkn_parser_fxt();
@@ -29,9 +31,9 @@ class Mustache_tkn_parser_fxt {
 	private final Mustache_render_ctx ctx = new Mustache_render_ctx();
 	private final Mustache_bfr bfr = Mustache_bfr.New();
 	public void Test_parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_a7(src_str);
+		byte[] src_bry = BryUtl.NewA7(src_str);
 		Mustache_tkn_itm actl_itm = parser.Parse(src_bry, 0, src_bry.length);
 		actl_itm.Render(bfr, ctx);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.To_str_and_clear());
 	}
 }

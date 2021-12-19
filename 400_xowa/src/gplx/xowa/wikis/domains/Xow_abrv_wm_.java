@@ -13,10 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.langs.*;
+package gplx.xowa.wikis.domains;
+import gplx.core.btries.Btrie_bwd_mgr;
+import gplx.core.btries.Btrie_rv;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.langs.Xol_lang_stub;
+import gplx.xowa.langs.Xol_lang_stub_;
 public class Xow_abrv_wm_ {
 	public static Xow_abrv_wm Parse_to_abrv_or_null(byte[] src) {	// EX: parse "enwiki" to abrv_itm
 		int src_len = src == null ? 0 : src.length;
@@ -38,7 +48,7 @@ public class Xow_abrv_wm_ {
 		if (o == null) return null;
 
 		// check domain type
-		int domain_type = ((Int_obj_ref)o).Val();
+		int domain_type = ((IntRef)o).Val();
 
 		// match start for lang
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_intl(src, 0, trv.Pos() + 1);
@@ -46,8 +56,8 @@ public class Xow_abrv_wm_ {
 	}
 	public static Xow_domain_itm Parse_to_domain_itm(byte[] src) {	// EX: parse "enwiki" to "en.wikipedia.org" itm
 		// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
-		if (Bry_.Has(src, AsciiByte.Underline))
-			src = Bry_.Replace_create(src, AsciiByte.Underline, AsciiByte.Dash);
+		if (BryUtl.Has(src, AsciiByte.Underline))
+			src = BryUtl.ReplaceCreate(src, AsciiByte.Underline, AsciiByte.Dash);
 
 		return Xow_domain_itm_.parse(Xow_abrv_wm_.Parse_to_domain_bry(src));
 	}
@@ -64,7 +74,7 @@ public class Xow_abrv_wm_ {
 			domain_type = rv.Domain_type();
 		}
 		else {
-			domain_type = ((Int_obj_ref)o).Val();
+			domain_type = ((IntRef)o).Val();
 		}
 		switch (domain_type) {
 			case Xow_domain_tid_.Tid__wmfblog:			return Xow_domain_itm_.Bry__wmforg;
@@ -86,11 +96,11 @@ public class Xow_abrv_wm_ {
 			case Xow_domain_tid_.Tid__wikivoyage:
 			case Xow_domain_tid_.Tid__wikimedia:
 				if (lang == null) {
-					lang = Bry_.Mid(src, 0, trv.Pos() + 1);	// en
-					if (Bry_.Has(lang, AsciiByte.Underline))	// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
-						lang = Bry_.Replace_create(lang, AsciiByte.Underline, AsciiByte.Dash);
+					lang = BryLni.Mid(src, 0, trv.Pos() + 1);	// en
+					if (BryUtl.Has(lang, AsciiByte.Underline))	// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
+						lang = BryUtl.ReplaceCreate(lang, AsciiByte.Underline, AsciiByte.Dash);
 				}
-				return Bry_.Add
+				return BryUtl.Add
 				( lang
 				, AsciiByte.DotBry                            // .
 				, Xow_domain_tid_.Get_type_as_bry(domain_type)	// wikipedia
@@ -100,7 +110,7 @@ public class Xow_abrv_wm_ {
 		}
 		return null;
 	}
-	public static void To_abrv(Bry_bfr bfr, byte[] lang_key, Int_obj_ref domain_type) {
+	public static void To_abrv(BryWtr bfr, byte[] lang_key, IntRef domain_type) {
 		byte[] suffix_bry = (byte[])int_hash.GetByOrNull(domain_type); if (suffix_bry == null) return;
 		switch (domain_type.Val()) {
 			case Xow_domain_tid_.Tid__commons:
@@ -118,7 +128,7 @@ public class Xow_abrv_wm_ {
 	}
 	public static byte[] To_abrv(Xow_domain_itm domain_itm) {
 		int tid = domain_itm.Domain_type_id();
-		byte[] suffix = (byte[])int_hash.GetByOrNull(Int_obj_ref.New(tid));
+		byte[] suffix = (byte[])int_hash.GetByOrNull(IntRef.New(tid));
 		if (suffix == null) // Tid__home and Tid__other (wikia)
 			return domain_itm.Domain_bry(); // return domain; needed for WikibaseLanguageIndependentLuaBindings; DATE:2019-11-23
 		switch (tid) {
@@ -139,8 +149,8 @@ public class Xow_abrv_wm_ {
 			case Xow_domain_tid_.Tid__wikiquote:
 			case Xow_domain_tid_.Tid__wikinews:
 			case Xow_domain_tid_.Tid__wikivoyage:
-			case Xow_domain_tid_.Tid__wikimedia:	return Bry_.Add(domain_itm.Lang_orig_key(), suffix);
-			default:								throw Err_.new_unhandled(tid);
+			case Xow_domain_tid_.Tid__wikimedia:	return BryUtl.Add(domain_itm.Lang_orig_key(), suffix);
+			default:								throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	private static final Btrie_bwd_mgr bry_trie = Init_trie();
@@ -169,9 +179,9 @@ public class Xow_abrv_wm_ {
 		return rv;
 	}
 	private static void Init_trie_itm(Btrie_bwd_mgr trie, Hash_adp hash, String str, int tid) {
-		Int_obj_ref itm = Int_obj_ref.New(tid);
+		IntRef itm = IntRef.New(tid);
 		trie.Add(str, itm);
-		hash.Add(itm, Bry_.new_u8(str));
+		hash.Add(itm, BryUtl.NewU8(str));
 	}
 }
 class Xow_abrv_wm_override {
@@ -199,9 +209,9 @@ class Xow_abrv_wm_override {
 		return rv;
 	}
 	private static void itm_hash__add(Hash_adp_bry hash, Hash_adp_bry lang_hash, String domain, String raw, String lang_domain, int lang_actl, int domain_type) {
-		byte[] abrv_bry = Bry_.new_u8(raw);
+		byte[] abrv_bry = BryUtl.NewU8(raw);
 		Xol_lang_stub lang_actl_itm = Xol_lang_stub_.Get_by_id(lang_actl);
-		Xow_abrv_wm itm = new Xow_abrv_wm(abrv_bry, Bry_.new_a7(lang_domain), lang_actl_itm, domain_type);
+		Xow_abrv_wm itm = new Xow_abrv_wm(abrv_bry, BryUtl.NewA7(lang_domain), lang_actl_itm, domain_type);
 		hash.Add_bry_obj(abrv_bry, itm);
 		lang_hash.Add_str_obj(domain, lang_actl_itm.Key());
 	}

@@ -13,10 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cksums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.core.ios.streams.*; import gplx.core.security.algos.*;
+package gplx.xowa.addons.bldrs.files.cksums;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.commons.GfoDateNow;
+import gplx.xowa.*;
+import gplx.core.security.algos.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.files.cksums.dbs.*;
-import gplx.xowa.files.*; import gplx.fsdb.*; import gplx.fsdb.data.*;
+import gplx.fsdb.data.*;
 public class Xocksum_calc_mgr {
 	public void Exec(Xowe_wiki wiki) {
 		// get conn variables
@@ -33,7 +40,7 @@ public class Xocksum_calc_mgr {
 		int count = 0;
 		Hash_algo md5_algo = Hash_algo_.New__md5();
 		List_adp updates = List_adp_.New();
-		String cur_date = Datetime_now.Get().XtoStr_gplx();
+		String cur_date = GfoDateNow.Get().ToStrGplx();
 		Db_stmt select_stmt = tbl.Select_samples_stmt(10000);
 		while (true) {
 			// get cksum_rows
@@ -46,11 +53,11 @@ public class Xocksum_calc_mgr {
 				byte[] bin_bry = Get_bin(wiki, row);
 				if (bin_bry == null) {
 					Gfo_usr_dlg_.Instance.Prog_many("", "", "null; fil_id=~{0} thm_id=~{1}", row.Fil_id(), row.Thm_id());
-					bin_bry = Bry_.Empty;
+					bin_bry = BryUtl.Empty;
 				}
 				row.Bin_size_(bin_bry.length);
 				byte[] md5 = Hash_algo_utl.Calc_hash_as_bry(md5_algo, bin_bry);
-				if (!Bry_.Eq(md5, row.Cksum_val())) {
+				if (!BryLni.Eq(md5, row.Cksum_val())) {
 					row.Cksum_val_(md5);
 					updates.Add(row);
 				}
@@ -60,7 +67,7 @@ public class Xocksum_calc_mgr {
 			conn.Txn_bgn("cksum_update");
 			len = updates.Len();
 			for (int i = 0; i < len; ++i) {
-				Xocksum_cksum_row row = (Xocksum_cksum_row)updates.Get_at(i);
+				Xocksum_cksum_row row = (Xocksum_cksum_row)updates.GetAt(i);
 				tbl.Update(row.Fil_id(), row.Thm_id(), row.Bin_db_id(), row.Bin_size(), row.Cksum_tid(), 0, row.Cksum_val(), cur_date);
 				if (++count % 2000 == 0) Gfo_usr_dlg_.Instance.Prog_many("", "", "updating; rows=~{0}", count);
 			}

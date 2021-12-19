@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.lnkis;
-import gplx.Byte_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.files.Xof_lnki_page;
 import gplx.xowa.files.Xof_lnki_time;
@@ -40,7 +40,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base implements gplx.xowa.wikis.pa
 	public int				Tail_end() {return tail_end;} public Xop_lnki_tkn Tail_end_(int v) {tail_end = v; return this;} private int tail_end = -1;
 	public byte				Border() {return border;} public Xop_lnki_tkn Border_(byte v) {border = v; return this;} private byte border = BoolUtl.NullByte;
 	public int				Align_h() {return align_h;} public Xop_lnki_tkn Align_h_(int v) {if (align_h == Xop_lnki_align_h_.Null) align_h = v; return this;} private int align_h = Xop_lnki_align_h_.Null;
-	public byte				Align_v() {return align_v;} public Xop_lnki_tkn Align_v_(byte v) {align_v = v; return this;} private byte align_v = Byte_.Max_value_127;
+	public byte				Align_v() {return align_v;} public Xop_lnki_tkn Align_v_(byte v) {align_v = v; return this;} private byte align_v = ByteUtl.MaxValue127;
 	public int				W() {return w;} public Xop_lnki_tkn W_(int v) {w = v; return this;} private int w = Width_null;
 	public int				H() {return h;} public Xop_lnki_tkn H_(int v) {h = v; return this;} private int h = Height_null;
 	public byte[]			Lnki_cls() {return lnki_cls;} public void Lnki_cls_(byte[] v) {lnki_cls = v;} private byte[] lnki_cls;

@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.translates;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_languages_xnde_tst {
 	@Before public void init() {
@@ -22,25 +25,25 @@ public class Xop_languages_xnde_tst {
 		fxt.Page_ttl_("Help:A");
 		fxt.Init_page_create("Help:A", "");				// create for AllPages 
 	} 	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void None() {
+	@Test public void None() {
 		fxt.Test_parse_page_all_str("<languages/>", "");	// empty
 	}
-	@Test  public void Many() {
+	@Test public void Many() {
 		fxt.Init_page_create("Help:A/de", "");
 		fxt.Init_page_create("Help:A/en", "");
 		fxt.Init_page_create("Help:A/fr", "");
 		fxt.Test_parse_page_all_str("<languages/>", Many_expd);
 	}
-	@Test  public void Many_english_implied() {
+	@Test public void Many_english_implied() {
 		fxt.Init_page_create("Help:A/de", "");
 		fxt.Init_page_create("Help:A/fr", "");
 		fxt.Test_parse_page_all_str("<languages/>", Many_expd);
 	}
-	@Test  public void Current_is_french() {
+	@Test public void Current_is_french() {
 		fxt.Init_page_create("Help:A/de", "");
 		fxt.Init_page_create("Help:A/fr", "");
 		fxt.Page_ttl_("Help:A/fr");
-		fxt.Test_parse_page_all_str("<languages/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str("<languages/>", StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tbody>"
 		,	"    <tr valign=\"top\">"
@@ -55,7 +58,7 @@ public class Xop_languages_xnde_tst {
 		,	"</table>"
 		));
 	}
-	private static final String Many_expd = String_.Concat_lines_nl
+	private static final String Many_expd = StringUtl.ConcatLinesNl
 		(	"<table>"
 		,	"  <tbody>"
 		,	"    <tr valign=\"top\">"

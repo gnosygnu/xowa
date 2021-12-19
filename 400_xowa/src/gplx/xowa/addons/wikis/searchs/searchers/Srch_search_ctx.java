@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.searchers;
+import gplx.frameworks.objects.Cancelable;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.*;
 import gplx.xowa.langs.cases.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
-import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.dbs.percentiles.*; import gplx.xowa.addons.wikis.searchs.searchers.wkrs.*;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.dbs.percentiles.*;
 import gplx.xowa.addons.wikis.searchs.parsers.*;
 public class Srch_search_ctx {
 	public Srch_search_ctx(Cancelable cxl, Xow_wiki wiki, Srch_search_addon addon

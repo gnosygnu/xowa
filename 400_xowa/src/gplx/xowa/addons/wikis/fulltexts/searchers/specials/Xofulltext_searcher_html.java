@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.specials; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.specials;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoGuid;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.core.net.qargs.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.addons.apps.cfgs.*;
@@ -21,12 +28,12 @@ import gplx.xowa.parsers.amps.*;
 import gplx.xowa.htmls.core.htmls.*;
 class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache_doc_itm {
 	private final Hash_adp props = Hash_adp_.New();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
-	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, Guid_adp page_guid, boolean lucene_exists) {
+	private final BryWtr tmp_bfr = BryWtr.New();
+	public Xofulltext_searcher_html(Xocfg_mgr cfg_mgr, Gfo_qarg_mgr url_args, Xow_wiki wiki, GfoGuid page_guid, boolean lucene_exists) {
 		String search_text = url_args.Read_str_or("search", ""); 
-		search_text = String_.Replace(search_text, "_", " "); // xofulltext_searcher.js chains multiple words with "_"; convert back to space
+		search_text = StringUtl.Replace(search_text, "_", " "); // xofulltext_searcher.js chains multiple words with "_"; convert back to space
 		props.Add("qarg_search", Xoh_html_wtr_escaper.Escape_str(Xop_amp_mgr.Instance, tmp_bfr, search_text));
-		props.Add("page_guid", page_guid.To_str());
+		props.Add("page_guid", page_guid.ToStr());
 		props.Add("cur_wiki", wiki.Domain_str());
 
 		// enabled

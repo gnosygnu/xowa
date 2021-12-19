@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.caches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.core.lists.caches;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import org.junit.*;
 public class Mru_cache_mgr_tst {
 	private final Mru_cache_mgr_fxt fxt = new Mru_cache_mgr_fxt();
 	@Before public void init() {
@@ -78,9 +80,9 @@ class Mru_cache_mgr_fxt {
 		int actl_len = actl_objs.length;
 		String[] actl = new String[actl_len];			
 		for (int i = 0; i < actl_len; i++) {
-			actl[i] = Object_.Xto_str_strict_or_null(((Mru_cache_itm)actl_objs[i]).Val());
+			actl[i] = ObjectUtl.ToStrOrNull(((Mru_cache_itm)actl_objs[i]).Val());
 		}
-		Gftest.Eq__ary(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 	}
 }
 class Mru_cache_time_mgr__mock implements Mru_cache_time_mgr {

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,181 +14,77 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.tests;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_split_;
-import gplx.Byte_;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.Long_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Type_ids_;
-import gplx.core.brys.Bry_bfr_able;
-import gplx.core.brys.Bry_bfr_able_;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
-public class Gftest {
-	private static final Bry_bfr bfr = Bry_bfr_.New();
-	public static void Fail(String msg_fmt, Object... msg_args) {
-		throw Err_.new_wo_type(String_.Format(msg_fmt, msg_args));
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.wtrs.BryBfrAble;
+import gplx.types.custom.brys.wtrs.BryBfrAbleUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.errs.ErrUtl;
+public class Gftest extends GfoTstr {
+	public static void EqAry(BryBfrAble[] expd_ary, BryBfrAble[] actl_ary) {Gftest.EqAry(expd_ary, actl_ary, null);}
+	private static void EqAry(BryBfrAble[] expd_ary, BryBfrAble[] actl_ary, String msg_fmt, Object... msg_args) {
+		Gftest.EqAryWkr(TypeIds.IdBry, BryBfrAbleUtl.ToBryAry(Gftest.bfr, expd_ary), BryBfrAbleUtl.ToBryAry(Gftest.bfr, actl_ary), msg_fmt, msg_args);
 	}
-	public static void Eq__ary(Object[] expd, Object[] actl, String msg_fmt, Object... msg_args)      {Eq__array(Type_ids_.Id__obj, expd, actl, msg_fmt, msg_args);}
-	public static void Eq__ary(boolean[] expd, boolean[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__bool, expd, actl, msg_fmt, msg_args);}
-	public static void Eq__ary(int[] expd, int[] actl)                                                      {Eq__array(Type_ids_.Id__int, expd, actl, "");}
-	public static void Eq__ary(int[] expd, int[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__int, expd, actl, msg_fmt, msg_args);}
-	public static void Eq__ary(long[] expd, long[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__long, expd, actl, msg_fmt, msg_args);}
-	public static void Eq__ary(byte[] expd, byte[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__byte, expd, actl, msg_fmt, msg_args);}
-	public static void Eq__ary__lines(String expd, String actl)												{Eq__ary__lines(expd, actl, "no_msg");}
-	public static void Eq__ary__lines(String expd, byte[] actl)												{Eq__ary__lines(expd, String_.new_u8(actl), "no_msg");}
-	public static void Eq__ary__lines(String expd, byte[] actl, String msg_fmt, Object... msg_args)	{Eq__ary__lines(expd, String_.new_u8(actl), msg_fmt, msg_args);}
-	public static void Eq__ary__lines(String expd, String actl, String msg_fmt, Object... msg_args)	{Eq__array(Type_ids_.Id__bry, Bry_split_.Split_lines(Bry_.new_u8_safe(expd)), Bry_split_.Split_lines(Bry_.new_u8_safe(actl)), msg_fmt, msg_args);}
-	public static void Eq__ary(String[] expd, String[] actl)												{Eq__array(Type_ids_.Id__bry, Bry_.Ary(expd), Bry_.Ary(actl), "no_msg");}
-	public static void Eq__ary(String[] expd, String[] actl, String msg_fmt, Object... msg_args)		{Eq__array(Type_ids_.Id__bry, Bry_.Ary(expd), Bry_.Ary(actl), msg_fmt, msg_args);}
-	public static void Eq__ary(String[] expd, byte[][] actl, String msg_fmt, Object... msg_args)		{Eq__array(Type_ids_.Id__bry, Bry_.Ary(expd), actl, msg_fmt, msg_args);}
-	public static void Eq__ary(byte[][] expd, byte[][] actl, String msg_fmt, Object... msg_args)		{Eq__array(Type_ids_.Id__bry, expd, actl, msg_fmt, msg_args);}
-	public static void Eq__ary(Bry_bfr_able[] expd_ary, Bry_bfr_able[] actl_ary) {Eq__ary(expd_ary, actl_ary, null);}
-	public static void Eq__ary(Bry_bfr_able[] expd_ary, Bry_bfr_able[] actl_ary, String msg_fmt, Object... msg_args) {
-		Eq__array(Type_ids_.Id__bry, Bry_bfr_able_.To_bry_ary(bfr, expd_ary), Bry_bfr_able_.To_bry_ary(bfr, actl_ary), msg_fmt, msg_args);
-	}
-	private static void Eq__array(int type_tid, Object expd_ary, Object actl_ary, String msg_fmt, Object... msg_args) {
+	private static void EqAryWkr(int type_tid, Object expd_ary, Object actl_ary, String msg_fmt, Object... msg_args) {
 		boolean[] failures = Calc__failures(type_tid, expd_ary, actl_ary);
 		if (failures != null) {
 			Write_fail_head(bfr, msg_fmt, msg_args);
 			Write_fail_ary(bfr, failures, type_tid, expd_ary, actl_ary);
-			throw Err_.new_wo_type(bfr.To_str_and_clear());
+			throw ErrUtl.NewArgs(bfr.ToStrAndClear());
 		}
 	}
-	public static void Eq__null(boolean expd, Object actl) {Eq__null(expd, actl, null);}
-	public static void Eq__null(boolean expd, Object actl, String msg_fmt, Object... msg_args) {
-		if (	expd	&& actl == null
-			||	!expd	&& actl != null
-			) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		String expd_str = expd ? "null" : "not null";
-		String actl_str = actl == null ? "null" : "not null";
-		bfr.Add_str_a7("expd: ").Add_str_a7(expd_str).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_str_a7(actl_str).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	public static void Eq__obj_or_null(Object expd, Object actl) {
-		if (expd == null) expd = Str__null;
-		if (actl == null) actl = Str__null;
-		Eq__str(Object_.Xto_str_or(expd, Str__null), Object_.Xto_str_or(actl, null), Str__null);
-	}
-	public static void Eq__bry(byte[] expd, String actl) {Eq__str(String_.new_u8(expd), actl, "no_msg");}
-	public static void Eq__str(String expd, byte[] actl, String msg_fmt, Object... msg_args) {Eq__str(expd, String_.new_u8(actl), msg_fmt, msg_args);}
-	public static void Eq__str(String expd, byte[] actl) {Eq__str(expd, String_.new_u8(actl), null);}
-	public static void Eq__str(String expd, String actl) {Eq__str(expd, actl, null);}
-	public static void Eq__str(String expd, String actl, String msg_fmt, Object... msg_args) {
-		if (String_.Eq(expd, actl)) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_str_u8_null(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_str_u8_null(actl).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	public static void Eq__bry(byte[] expd, byte[] actl) {Eq__bry(expd, actl, null);}
-	public static void Eq__bry(byte[] expd, byte[] actl, String msg_fmt, Object... msg_args) {
-		if (Bry_.Eq(expd, actl)) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_safe(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_safe(actl).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	public static void Eq__long(long expd, long actl) {Eq__long(expd, actl, null);}
-	public static void Eq__long(long expd, long actl, String msg_fmt, Object... msg_args) {
-		if (expd == actl) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_long_variable(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_long_variable(actl).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	public static void Eq__byte(byte expd, byte actl) {Eq__byte(expd, actl, null);}
-	public static void Eq__byte(byte expd, byte actl, String msg_fmt, Object... msg_args) {
-		if (expd == actl) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_byte_as_a7(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_byte_as_a7(actl).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	public static void Eq__int(int expd, int actl) {Eq__int(expd, actl, null);}
-	public static void Eq__int(int expd, int actl, String msg_fmt, Object... msg_args) {
-		if (expd == actl) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_int_variable(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_int_variable(actl).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	public static void Eq__bool_n(boolean actl)			{Eq__bool(BoolUtl.N, actl, null);}
-	public static void Eq__bool_y(boolean actl)			{Eq__bool(BoolUtl.Y, actl, null);}
-	public static void Eq__bool_y(boolean actl, String msg_fmt, Object... msg_args)	{Eq__bool(BoolUtl.Y, actl, msg_fmt, msg_args);}
-	public static void Eq__bool(boolean expd, boolean actl)	{Eq__bool(expd, actl, null);}
-	public static void Eq__bool(boolean expd, boolean actl, String msg_fmt, Object... msg_args) {
-		if (expd == actl) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_bool(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_bool(actl).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	public static void Eq__double(double expd, double actl) {Eq__double(expd, actl, null);}
-	public static void Eq__double(double expd, double actl, String msg_fmt, Object... msg_args) {
-		if (expd == actl) return;
-		Write_fail_head(bfr, msg_fmt, msg_args);
-		bfr.Add_str_a7("expd: ").Add_double(expd).Add_byte_nl();
-		bfr.Add_str_a7("actl: ").Add_double(actl).Add_byte_nl();
-		bfr.Add(Bry__line_end);
-		throw Err_.new_wo_type(bfr.To_str_and_clear());
-	}
-	private static void Write_fail_head(Bry_bfr bfr, String msg_fmt, Object[] msg_args) {
+	private static final BryWtr bfr = BryWtr.New();
+	private static void Write_fail_head(BryWtr bfr, String msg_fmt, Object[] msg_args) {
 		bfr.Add(Bry__line_bgn);
 		if (msg_fmt != null) {
-			bfr.Add_str_u8(String_.Format(msg_fmt, msg_args));
+			bfr.AddStrU8(StringUtl.Format(msg_fmt, msg_args));
 			bfr.Add(Bry__line_mid);
 		}
 	}
-	private static void Write_fail_ary(Bry_bfr bfr, boolean[] failures, int type_id, Object expd_ary, Object actl_ary) {	
+	private static void Write_fail_ary(BryWtr bfr, boolean[] failures, int type_id, Object expd_ary, Object actl_ary) {
 		int len = failures.length;
 		int expd_len = ArrayUtl.Len(expd_ary);
 		int actl_len = ArrayUtl.Len(actl_ary);
 		for (int i = 0; i < len; ++i) {
 			boolean failure = failures[i];
-			int pad_len = 5 - Int_.DigitCount(i);
-			bfr.Add_int_pad_bgn(AsciiByte.Num0, pad_len, i).Add_byte_colon().Add_byte_space();
+			int pad_len = 5 - IntUtl.CountDigits(i);
+			bfr.AddIntPadBgn(AsciiByte.Num0, pad_len, i).AddByteColon().AddByteSpace();
 			Write__itm(bfr, type_id, expd_ary, expd_len, i);
 			if (failure) {
-				bfr.Add(Bry__item__eq_n).Add_byte_repeat(AsciiByte.Space, pad_len - 1);
+				bfr.Add(Bry__item__eq_n).AddByteRepeat(AsciiByte.Space, pad_len - 1);
 				Write__itm(bfr, type_id, actl_ary, actl_len, i);
 			}
 		}
 		bfr.Add(Bry__line_end);
 	}
-	private static void Write__itm(Bry_bfr bfr, int type_id, Object ary, int len, int idx) {
+	private static void Write__itm(BryWtr bfr, int type_id, Object ary, int len, int idx) {
 		if (idx < len) {
 			Object val = ArrayUtl.GetAt(ary, idx);
 			switch (type_id) {
-				case Type_ids_.Id__bool:	bfr.Add_yn(BoolUtl.Cast(val)); break;
-				case Type_ids_.Id__bry:		bfr.Add_safe((byte[])val); break;
-				case Type_ids_.Id__long:	bfr.Add_long_variable(Long_.cast(val)); break;
-				case Type_ids_.Id__int:		bfr.Add_int_variable(Int_.Cast(val)); break;
-				case Type_ids_.Id__byte:	bfr.Add_int_variable((int)(Byte_.Cast(val))); break;
-				case Type_ids_.Id__obj:     bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(val)); break;
-				default:					throw Err_.new_unhandled_default(type_id);
+				case TypeIds.IdBool:    bfr.AddYn(BoolUtl.Cast(val)); break;
+				case TypeIds.IdBry:        bfr.AddSafe((byte[])val); break;
+				case TypeIds.IdLong:    bfr.AddLongVariable(LongUtl.Cast(val)); break;
+				case TypeIds.IdInt:        bfr.AddIntVariable(IntUtl.Cast(val)); break;
+				case TypeIds.IdByte:    bfr.AddIntVariable((int)(ByteUtl.Cast(val))); break;
+				case TypeIds.IdObj:     bfr.AddStrU8(ObjectUtl.ToStrOrNullMark(val)); break;
+				default:                    throw ErrUtl.NewUnhandled(type_id);
 			}
 		}
 		else
 			bfr.Add(Bry__null);
-		bfr.Add_byte_nl();
+		bfr.AddByteNl();
 	}
-	private static boolean[] Calc__failures(int tid, Object expd_ary, Object actl_ary) {	
+	private static boolean[] Calc__failures(int tid, Object expd_ary, Object actl_ary) {    
 		int expd_len = ArrayUtl.Len(expd_ary);
 		int actl_len = ArrayUtl.Len(actl_ary);
 		int max_len = expd_len > actl_len ? expd_len : actl_len; if (max_len == 0) return null;
@@ -197,16 +93,16 @@ public class Gftest {
 			Object expd_obj = i < expd_len ? ArrayUtl.GetAt(expd_ary, i) : null;
 			Object actl_obj = i < actl_len ? ArrayUtl.GetAt(actl_ary, i) : null;
 			boolean eq = false;
-			if		(expd_obj == null && actl_obj == null)	eq = true;
-			else if (expd_obj == null || actl_obj == null)	eq = false;
+			if        (expd_obj == null && actl_obj == null)    eq = true;
+			else if (expd_obj == null || actl_obj == null)    eq = false;
 			else {
 				switch (tid) {
-					case Type_ids_.Id__bool:		eq = BoolUtl.Cast(expd_obj) == BoolUtl.Cast(actl_obj); break;
-					case Type_ids_.Id__bry:			eq = Bry_.Eq((byte[])expd_obj, (byte[])actl_obj); break;
-					case Type_ids_.Id__long:		eq = Long_.cast(expd_obj) == Long_.cast(actl_obj); break;
-					case Type_ids_.Id__int:			eq = Int_.Cast(expd_obj) == Int_.Cast(actl_obj); break;
-					case Type_ids_.Id__byte:		eq = Byte_.Cast(expd_obj) == Byte_.Cast(actl_obj); break;
-					case Type_ids_.Id__obj:         eq = Object_.Eq(expd_obj, actl_obj); break;
+					case TypeIds.IdBool:        eq = BoolUtl.Cast(expd_obj) == BoolUtl.Cast(actl_obj); break;
+					case TypeIds.IdBry:            eq = BryLni.Eq((byte[])expd_obj, (byte[])actl_obj); break;
+					case TypeIds.IdLong:        eq = LongUtl.Cast(expd_obj) == LongUtl.Cast(actl_obj); break;
+					case TypeIds.IdInt:            eq = IntUtl.Cast(expd_obj) == IntUtl.Cast(actl_obj); break;
+					case TypeIds.IdByte:        eq = ByteUtl.Cast(expd_obj) == ByteUtl.Cast(actl_obj); break;
+					case TypeIds.IdObj:         eq = ObjectUtl.Eq(expd_obj, actl_obj); break;
 				}
 			}
 			if (!eq) {
@@ -219,22 +115,10 @@ public class Gftest {
 		return rv;
 	}
 	private static final String Str__null = "<<NULL>>";
-	private static final byte[] Bry__item__eq_n = Bry_.new_a7("!= ") // Bry__item__eq_y = Bry_.new_a7("== "),
-	, Bry__null = Bry_.new_a7(Str__null)
-	, Bry__line_bgn = Bry_.new_a7("\n************************************************************************************************\n")
-	, Bry__line_mid = Bry_.new_a7("\n------------------------------------------------------------------------------------------------\n")
-	, Bry__line_end = Bry_.new_a7(  "________________________________________________________________________________________________")
+	private static final byte[] Bry__item__eq_n = BryUtl.NewA7("!= ") // Bry__item__eq_y = Bry_.new_a7("== "),
+	, Bry__null = BryUtl.NewA7(Str__null)
+	, Bry__line_bgn = BryUtl.NewA7("\n************************************************************************************************\n")
+	, Bry__line_mid = BryUtl.NewA7("\n------------------------------------------------------------------------------------------------\n")
+	, Bry__line_end = BryUtl.NewA7(  "________________________________________________________________________________________________")
 	;
 }
-/*
-package ns;
-import org.junit.*; import gplx.core.tests.*;
-public class Cls1_tst {
-	private final Cls1_fxt fxt = new Cls1_fxt();
-	@Test 	public void Basic() {}
-}
-class Cls1_fxt {
-	private final Cls1 mgr = new Cls1();
-	public Cls1_fxt Test() {return this;}
-}
-*/

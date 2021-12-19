@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.modules.popups;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_split_;
-import gplx.Hash_adp_bry;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.langs.htmls.Gfh_atr_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.Xop_tkn_itm;
 import gplx.xowa.parsers.Xop_tkn_itm_;
 import gplx.xowa.parsers.htmls.Mwh_atr_itm;
@@ -37,7 +37,7 @@ public class Xow_popup_wrdx_mkr {
 		skip_space = false;
 		prv_tkn_seen = prv_tkn_added = null;
 	}
-	public void Process_tkn(Xow_popup_cfg cfg, Xow_popup_parser_data data, Bry_bfr wrdx_bfr, Xop_tkn_itm tkn, byte[] wtxt_bry, int wtxt_len) {
+	public void Process_tkn(Xow_popup_cfg cfg, Xow_popup_parser_data data, BryWtr wrdx_bfr, Xop_tkn_itm tkn, byte[] wtxt_bry, int wtxt_len) {
 		boolean add_tkn = true, add_subs = true; Xop_xnde_tkn xnde = null;
 		int tkn_src_bgn = tkn.Src_bgn(), tkn_src_end = tkn.Src_end();
 		prv_tkn_seen = tkn;
@@ -53,7 +53,7 @@ public class Xow_popup_wrdx_mkr {
 					&&	prv_tkn_seen != prv_tkn_added						// prv seen tkn was skipped
 					&& 	prv_tkn_added.Tkn_tid() == Xop_tkn_itm_.Tid_apos	// prv added tkn was apos
 					)
-					wrdx_bfr.Add_byte_space();								// prv && cur are apos, but something was skipped inbetween; add a space so that apos doesn't combine EX:''{{skip}}'' x> ''''; PAGE:en.w:Somalia; DATE:2014-07-02
+					wrdx_bfr.AddByteSpace();								// prv && cur are apos, but something was skipped inbetween; add a space so that apos doesn't combine EX:''{{skip}}'' x> ''''; PAGE:en.w:Somalia; DATE:2014-07-02
 				break;
 			case Xop_tkn_itm_.Tid_ignore:			// always skip ignores, particularly comments; PAGE:en.w:List_of_countries_by_GDP_(PPP); DATE:2014-07-01
 			case Xop_tkn_itm_.Tid_tblw_tb: case Xop_tkn_itm_.Tid_tblw_tc: case Xop_tkn_itm_.Tid_tblw_td:
@@ -79,7 +79,7 @@ public class Xow_popup_wrdx_mkr {
 						break;
 					case Xop_xnde_tag_.Tid__br:
 						add_tkn = false;				// never add_tkn Src_bgn / Src_end; note add_subs should still be true; PAGE:en.q:Earth; DATE:2014-06-30
-						if (wrdx_bfr.Len_eq_0())		// don't add <br/> to start of document; needed for Help:Options, but good to have everywhere; DATE:2014-06-22
+						if (wrdx_bfr.HasNone())		// don't add <br/> to start of document; needed for Help:Options, but good to have everywhere; DATE:2014-06-22
 							add_subs = false;
 						break;
 					default:
@@ -117,7 +117,7 @@ public class Xow_popup_wrdx_mkr {
 				break;
 			case Xop_tkn_itm_.Tid_space:
 				if (	skip_space					// previous tkn skipped add and set skip_space to true
-					&&	wrdx_bfr.Match_end_byt_nl_or_bos()	// only ignore space if it will cause pre; note that some <ref>s will have spaces that should be preserved; EX:"a<ref>b</ref> c"; PAGE:en.w:Mehmed_the_Conqueror; DATE:2014-06-18
+					&&	wrdx_bfr.MatchEndByteNlOrBos()	// only ignore space if it will cause pre; note that some <ref>s will have spaces that should be preserved; EX:"a<ref>b</ref> c"; PAGE:en.w:Mehmed_the_Conqueror; DATE:2014-06-18
 					)
 					add_tkn = false;							// skip ws
 				break;
@@ -138,12 +138,12 @@ public class Xow_popup_wrdx_mkr {
 				int wrdx_bfr_len = wrdx_bfr.Len();
 				if	(wrdx_bfr_len > 2) {					// bounds check
 					if (Wtxt_bfr_ends_w_2_nl(wrdx_bfr, wrdx_bfr_len))	// heuristic: 2 \n in bfr, and about to add a hdr tkn which starts with "\n"; delete last \n
-						wrdx_bfr.Del_by_1();
+						wrdx_bfr.DelBy1();
 				}
 				if (	tkn_src_end < wtxt_len				// bounds check
 					&&	wtxt_bry[tkn_src_end] == AsciiByte.Nl	// hdr_tkn will not include trailing "\n". add it; note that this behavior is by design. NOTE:hdr.trailing_nl; DATE:2014-06-17
 					) {
-					wrdx_bfr.Add_mid(wtxt_bry, tkn_src_bgn, tkn_src_end + 1);	// +1 to add the trailing \n
+					wrdx_bfr.AddMid(wtxt_bry, tkn_src_bgn, tkn_src_end + 1);	// +1 to add the trailing \n
 					add_tkn = false;
 				}
 				break;
@@ -154,16 +154,16 @@ public class Xow_popup_wrdx_mkr {
 		skip_space = false;	// always reset; only used once above for Tid_space; DATE:2014-06-17
 		if (add_tkn && xnde == null) {
 			if (tkn_src_end - tkn_src_bgn > 0) {	// handle paras which have src_bgn == src_end
-				wrdx_bfr.Add_mid(wtxt_bry, tkn_src_bgn, tkn_src_end);
+				wrdx_bfr.AddMid(wtxt_bry, tkn_src_bgn, tkn_src_end);
 				prv_tkn_added = tkn;
 			}
 		}
 		else	// tkn not added
 			skip_space = true;	// skip next space; note this is done with member variable to handle recursive iteration; DATE:2014-06-17
 		if (add_subs) {
-			if (xnde != null) wrdx_bfr.Add_mid(wtxt_bry, xnde.Tag_open_bgn(), xnde.Tag_open_end());		// add open tag; EX: "<span id=a>"
+			if (xnde != null) wrdx_bfr.AddMid(wtxt_bry, xnde.Tag_open_bgn(), xnde.Tag_open_end());		// add open tag; EX: "<span id=a>"
 			Process_subs(cfg, data, wrdx_bfr, tkn, wtxt_bry, wtxt_len, BoolUtl.Y);
-			if (xnde != null) wrdx_bfr.Add_mid(wtxt_bry, xnde.Tag_close_bgn(), xnde.Tag_close_end());	// add close tag; EX: "</span>"
+			if (xnde != null) wrdx_bfr.AddMid(wtxt_bry, xnde.Tag_close_bgn(), xnde.Tag_close_end());	// add close tag; EX: "</span>"
 		}
 		switch (tkn.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_hdr:
@@ -173,7 +173,7 @@ public class Xow_popup_wrdx_mkr {
 				break;
 		}
 	}
-	private void Process_subs(Xow_popup_cfg cfg, Xow_popup_parser_data data, Bry_bfr wrdx_bfr, Xop_tkn_itm tkn, byte[] wtxt_bry, int wtxt_len, boolean chk_words_found) {
+	private void Process_subs(Xow_popup_cfg cfg, Xow_popup_parser_data data, BryWtr wrdx_bfr, Xop_tkn_itm tkn, byte[] wtxt_bry, int wtxt_len, boolean chk_words_found) {
 		int subs_len = tkn.Subs_len();
 		for (int i = 0; i < subs_len; i++) {
 			Xop_tkn_itm sub = tkn.Subs_get(i);
@@ -186,7 +186,7 @@ public class Xow_popup_wrdx_mkr {
 		int atrs_len = atrs_ary.length;
 		for (int i = 0; i < atrs_len; i++) {
 			Mwh_atr_itm atr = atrs_ary[i];
-			if (	Bry_.Eq(atr.Key_bry(), Gfh_atr_.Bry__id)
+			if (	BryLni.Eq(atr.Key_bry(), Gfh_atr_.Bry__id)
 				&&	xnde_id_ignore_list.Get_by_bry(atr.Val_as_bry()) != null
 				) {
                     return true;
@@ -195,7 +195,7 @@ public class Xow_popup_wrdx_mkr {
 		return false;
 	}
 	public void Xnde_ignore_ids_(byte[] xnde_id_ignore_bry) {
-		byte[][] ary = Bry_split_.Split(xnde_id_ignore_bry, AsciiByte.Pipe);
+		byte[][] ary = BrySplit.Split(xnde_id_ignore_bry, AsciiByte.Pipe);
 		int ary_len = ary.length;
 		xnde_id_ignore_list.Clear();
 		for (int i = 0; i < ary_len; i++) {
@@ -204,8 +204,8 @@ public class Xow_popup_wrdx_mkr {
 			xnde_id_ignore_list.Add(bry, bry);
 		}
 	}
-	private boolean Wtxt_bfr_ends_w_2_nl(Bry_bfr wrdx_bfr, int wrdx_bfr_len) {
-		byte[] hdom_bfr_bry = wrdx_bfr.Bfr();
+	private boolean Wtxt_bfr_ends_w_2_nl(BryWtr wrdx_bfr, int wrdx_bfr_len) {
+		byte[] hdom_bfr_bry = wrdx_bfr.Bry();
 		return
 			(	hdom_bfr_bry[wrdx_bfr_len - 1] == AsciiByte.Nl	// prv 2 bytes are \n
 			&&	hdom_bfr_bry[wrdx_bfr_len - 2] == AsciiByte.Nl

@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.modules.popups.keeplists;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
@@ -27,14 +27,14 @@ import org.junit.Test;
 public class Xop_keeplist_wiki_tst {
 	@Before public void init() {fxt.Clear();} private Xop_keeplist_wiki_fxt fxt = new Xop_keeplist_wiki_fxt();
 	@Test public void Tmpl_keeplist() {
-		Xop_keeplist_wiki keeplist_wiki = fxt.keeplist_wiki_(String_.Concat_lines_nl
+		Xop_keeplist_wiki keeplist_wiki = fxt.keeplist_wiki_(StringUtl.ConcatLinesNl
 		( "enwiki|a*|abc*"
 		));
 		fxt.Test_Match_y(keeplist_wiki, "a", "ab");
 		fxt.Test_Match_n(keeplist_wiki, "abc", "abcd", "d");
 	}
 	@Test public void Tmpl_keeplist2() {
-		Xop_keeplist_wiki keeplist_wiki = fxt.keeplist_wiki_(String_.Concat_lines_nl
+		Xop_keeplist_wiki keeplist_wiki = fxt.keeplist_wiki_(StringUtl.ConcatLinesNl
 		( "enwiki|a*|abc*"
 		, "enwiki|b*|*xyz"
 		));
@@ -52,7 +52,7 @@ class Xop_keeplist_wiki_fxt {
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "enwiki");
 		Xow_popup_mgr popup_mgr = wiki.Html_mgr().Head_mgr().Popup_mgr();
 		popup_mgr.Init_by_wiki(wiki);
-		popup_mgr.Parser().Tmpl_keeplist_init_(Bry_.new_u8(raw));
+		popup_mgr.Parser().Tmpl_keeplist_init_(BryUtl.NewU8(raw));
 		Xop_keeplist_wiki rv = popup_mgr.Parser().Tmpl_keeplist();
 		return rv;
 	}
@@ -62,7 +62,7 @@ class Xop_keeplist_wiki_fxt {
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {
 			String itm = itms[i];
-			Tfds.Eq(expd, keeplist_wiki.Match(Bry_.new_u8(itm)), "itm={0} expd={1}", itm, expd);
+			GfoTstr.EqObj(expd, keeplist_wiki.Match(BryUtl.NewU8(itm)), "itm={0} expd={1}", itm, expd);
 		}
 	}
 }

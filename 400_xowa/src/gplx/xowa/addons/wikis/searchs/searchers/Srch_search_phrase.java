@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.searchers;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
 import gplx.core.btries.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_search_phrase {
@@ -32,7 +35,7 @@ public class Srch_search_phrase {
 		int orig_len = orig.length;
 		if (	orig_len > 0	// if "*" at end, remove and change to wildcard; needed for Special:Search which will send in "earth*" but "earth" needed for highlighting
 			&&	orig[orig_len - 1] == syms.Wild()) {
-			orig = Bry_.Mid(orig, 0, orig_len - 1);
+			orig = BryLni.Mid(orig, 0, orig_len - 1);
 			auto_wildcard = true;
 		}
 		byte[] lcase = case_mgr.Case_build_lower(orig);
@@ -46,8 +49,8 @@ public class Srch_search_phrase {
 		int fail_pos = -1;
 		for (int i = raw_len - 1; i > -1; --i) {
 			byte b = raw[i];
-			byte tid = trie.Match_byte_or(b, raw, i, i + 1, Byte_.Max_value_127);
-			if (tid == Byte_.Max_value_127) {	// unknown sym
+			byte tid = trie.Match_byte_or(b, raw, i, i + 1, ByteUtl.MaxValue127);
+			if (tid == ByteUtl.MaxValue127) {	// unknown sym
 				if		(b == syms.Wild()) {	// wildcard is not tokenized
 					fail_pos = i;
 					break;
@@ -119,7 +122,7 @@ public class Srch_search_phrase {
 
 		// add wildcard
 		if (insert_pos == raw_len - 1) 
-			return auto_wildcard ? Bry_.Add(raw, syms.Wild()) : raw;
+			return auto_wildcard ? BryUtl.Add(raw, syms.Wild()) : raw;
 		else {
 			byte[] rv = new byte[raw_len + 1];
 			int wildcard_pos = insert_pos + 1;

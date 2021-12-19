@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.itms; import gplx.*;
+package gplx.dbs.sqls.itms;
 import gplx.core.type_xtns.*;
-import gplx.objects.lists.CompareAbleUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 abstract class Sql_select_fld_func extends Sql_select_fld {		public Sql_select_fld_func(String tbl, String fld, String alias) {super(tbl, fld, alias);}
 	public abstract String XtoSql_functionName();
 	@Override public String To_fld_sql() {
-		return String_.Format("{0}({1}) AS {2}", XtoSql_functionName(), Fld, Alias);
+		return StringUtl.Format("{0}({1}) AS {2}", XtoSql_functionName(), Fld, Alias);
 	}
 }
 class Sql_select_fld_count extends Sql_select_fld_func {			public Sql_select_fld_count(String tbl, String fld, String alias) {super(tbl, fld, alias);}
@@ -27,15 +29,15 @@ class Sql_select_fld_count extends Sql_select_fld_func {			public Sql_select_fld
 	@Override public void GroupBy_type(ClassXtn type) {this.Val_type_(IntClassXtn.Instance);}
 	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {
 		if (groupByVal == null) return 1;
-		return Int_.Cast(groupByVal) + 1;
+		return IntUtl.Cast(groupByVal) + 1;
 	}
 }
 class Sql_select_fld_sum extends Sql_select_fld_func {			public Sql_select_fld_sum(String tbl, String fld, String alias) {super(tbl, fld, alias);}
 	@Override public String XtoSql_functionName() {return "SUM";}
 	@Override public void GroupBy_type(ClassXtn type) {this.Val_type_(IntClassXtn.Instance);}
 	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {
-		if (groupByVal == null) return Int_.Cast(curVal);
-		return Int_.Cast(groupByVal) + Int_.Cast(curVal);
+		if (groupByVal == null) return IntUtl.Cast(curVal);
+		return IntUtl.Cast(groupByVal) + IntUtl.Cast(curVal);
 	}
 }
 class Sql_select_fld_minMax extends Sql_select_fld_func {		private final int compareType;

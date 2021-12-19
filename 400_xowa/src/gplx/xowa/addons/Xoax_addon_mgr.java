@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons;
 
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.Type_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xow_wiki;
@@ -107,29 +107,29 @@ public class Xoax_addon_mgr {
 	public void Run_by_app(Xoa_app app) {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			Xoax_addon_itm addon = (Xoax_addon_itm)hash.Get_at(i);
+			Xoax_addon_itm addon = (Xoax_addon_itm)hash.GetAt(i);
 
 			// init
-			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__init.class)) {
+			if (ClassUtl.IsAssignableFromByObj(addon, Xoax_addon_itm__init.class)) {
 				Xoax_addon_itm__init addon_init = (Xoax_addon_itm__init)addon;
 				addon_init.Init_addon_by_app(app);
 				init_list.Add(addon_init);
 			}
 
 			// add bldr cmds
-			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__bldr.class)) {
+			if (ClassUtl.IsAssignableFromByObj(addon, Xoax_addon_itm__bldr.class)) {
 				Xoax_addon_itm__bldr addon_bldr = (Xoax_addon_itm__bldr)addon;
 				app.Bldr().Cmd_regy().Add_many(addon_bldr.Bldr_cmds());
 			}
 
 			// add special pages
-			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__special.class)) {
+			if (ClassUtl.IsAssignableFromByObj(addon, Xoax_addon_itm__special.class)) {
 				Xoax_addon_itm__special addon_sp = (Xoax_addon_itm__special)addon;
 				app.Special_regy().Add_many(addon_sp.Special_pages());
 			}
 
 			// add json mgrs
-			if (Type_.Is_assignable_from_by_obj(addon, Xoax_addon_itm__json.class)) {
+			if (ClassUtl.IsAssignableFromByObj(addon, Xoax_addon_itm__json.class)) {
 				Xoax_addon_itm__json addon_json = (Xoax_addon_itm__json)addon;
 				gplx.xowa.htmls.bridges.Bridge_cmd_itm[] json_cmds = addon_json.Json_cmds();
 				for (gplx.xowa.htmls.bridges.Bridge_cmd_itm json_cmd : json_cmds) {
@@ -148,7 +148,7 @@ public class Xoax_addon_mgr {
 
 		int len = init_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Xoax_addon_itm__init itm = (Xoax_addon_itm__init)init_list.Get_at(i);
+			Xoax_addon_itm__init itm = (Xoax_addon_itm__init)init_list.GetAt(i);
 			itm.Init_addon_by_wiki(wiki);
 		}
 	}

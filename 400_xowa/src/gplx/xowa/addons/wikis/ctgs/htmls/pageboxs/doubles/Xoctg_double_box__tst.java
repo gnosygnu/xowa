@@ -14,14 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_itm;
@@ -29,10 +28,10 @@ import org.junit.Before;
 import org.junit.Test;
 public class Xoctg_double_box__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_double_box__fxt fxt = new Xoctg_double_box__fxt();
-	@Test  public void Single() {
+	@Test public void Single() {
 		fxt.Init_ctg_hidden("Category:A");
 		fxt.Init_ctg_normal("Category:D");
-		fxt.Test_print_hidden(String_.Concat_lines_nl
+		fxt.Test_print_hidden(StringUtl.ConcatLinesNl
 		(	"<div id=\"catlinks\" class=\"catlinks\">"
 		,	  "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
 		,	    "<a href=\"/wiki/Special:Categories\" title=\"Special:Categories\">Category</a>:"
@@ -52,10 +51,10 @@ public class Xoctg_double_box__tst {
 		,	"</div>"
 		));
 	}
-	@Test  public void Plural() {
+	@Test public void Plural() {
 		fxt.Init_ctg_hidden("Category:A", "Category:B", "Category:C");
 		fxt.Init_ctg_normal("Category:D", "Category:E", "Category:F");
-		fxt.Test_print_hidden(String_.Concat_lines_nl
+		fxt.Test_print_hidden(StringUtl.ConcatLinesNl
 		(	"<div id=\"catlinks\" class=\"catlinks\">"
 		,	  "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"
 		,	    "<a href=\"/wiki/Special:Categories\" title=\"Special:Categories\">Categories</a>:"
@@ -102,16 +101,16 @@ class Xoctg_double_box__fxt {
 	public void Init_ctg(boolean hidden, String[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			Xoa_ttl ttl = fxt.Wiki().Ttl_parse(Bry_.new_u8(ary[i]));
+			Xoa_ttl ttl = fxt.Wiki().Ttl_parse(BryUtl.NewU8(ary[i]));
 			Xoctg_pagebox_itm itm = Xoctg_pagebox_itm.New_by_ttl(ttl);
 			itm.Load_by_cat_core(hidden, 0, 0, 0);
 			init_ctgs.AddMany(itm);
 		}
 	}
 	public void Test_print_hidden(String expd) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Xoctg_pagebox_itm[] ary = (Xoctg_pagebox_itm[])init_ctgs.ToAryAndClear(Xoctg_pagebox_itm.class);
 		hidden_wtr.Write_pagebox(bfr, ary);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 }

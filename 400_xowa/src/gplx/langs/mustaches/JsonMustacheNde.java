@@ -15,21 +15,21 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.jsons.Json_ary;
 import gplx.langs.jsons.Json_itm;
 import gplx.langs.jsons.Json_itm_;
 import gplx.langs.jsons.Json_kv;
 import gplx.langs.jsons.Json_nde;
-import gplx.objects.ObjectUtl;
+import gplx.types.basics.utls.ObjectUtl;
 
 public class JsonMustacheNde implements Mustache_doc_itm {
 	private final Json_nde nde;
 	public JsonMustacheNde(Json_nde nde) {this.nde = nde;}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		Json_itm itm = nde.Get_itm(Bry_.new_u8(key));
+		Json_itm itm = nde.Get_itm(BryUtl.NewU8(key));
 		if (itm == null) { // mustacheKey does not exist in current jsonNde
 			return false;
 		}
@@ -48,7 +48,7 @@ public class JsonMustacheNde implements Mustache_doc_itm {
 		}
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		Json_itm itm = nde.Get_itm(Bry_.new_u8(key));
+		Json_itm itm = nde.Get_itm(BryUtl.NewU8(key));
 		if (itm == null) { // mustacheKey does not exist in current jsonNde
 			return Mustache_doc_itm_.Ary__bool__n;
 		}
@@ -99,9 +99,9 @@ class JsonMustacheVal implements Mustache_doc_itm {
 		this.jsonVal = jsonVal;
 	}
 	public boolean Mustache__write(String mustacheKey, Mustache_bfr bfr) {
-		if (	(String_.Eq(mustacheKey, jsonKey))                                     // print if `{{match}}`; EX: `{{#prop}}{{prop}}{{/prop}}`
-			||	(String_.Eq(mustacheKey, Mustache_tkn_def.ItemString) && fromArray)) { // print if `{{.}}` and from array; EX: `{{#array}}{{.}}{{/array}}`
-			bfr.Add_bry(Bry_.new_u8(ObjectUtl.ToStr(jsonVal)));
+		if (	(StringUtl.Eq(mustacheKey, jsonKey))                                     // print if `{{match}}`; EX: `{{#prop}}{{prop}}{{/prop}}`
+			||	(StringUtl.Eq(mustacheKey, Mustache_tkn_def.ItemString) && fromArray)) { // print if `{{.}}` and from array; EX: `{{#array}}{{.}}{{/array}}`
+			bfr.Add_bry(BryUtl.NewU8(ObjectUtl.ToStr(jsonVal)));
 			return true;
 		}
 		else {

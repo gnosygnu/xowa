@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.core.btries.*;
 public class XomwMagicWordArray {
 	private Btrie_slim_mgr fwd_trie;
 	private Btrie_bwd_mgr  bwd_trie;
@@ -45,7 +48,7 @@ public class XomwMagicWordArray {
 					case XomwMagicWordSynonym.Arg1__nil:
 					case XomwMagicWordSynonym.Arg1__end:
 						if (fwd_trie == null) fwd_trie = word.case_match ? Btrie_slim_mgr.cs() : Btrie_slim_mgr.ci_u8();
-						fwd_trie.Add_obj(synonym.text_wo_arg1, synonym);
+						fwd_trie.AddObj(synonym.text_wo_arg1, synonym);
 						break;
 					case XomwMagicWordSynonym.Arg1__bgn:
 						if (bwd_trie == null) bwd_trie = Btrie_bwd_mgr.c__(word.case_match);
@@ -249,7 +252,7 @@ public class XomwMagicWordArray {
 
 		// check fwd; EX: "thumb=$1"
 		if (fwd_trie != null) {
-			Object o = fwd_trie.Match_at(trv, src, 0, src_end);
+			Object o = fwd_trie.MatchAt(trv, src, 0, src_end);
 			if (o != null) {
 				XomwMagicWordSynonym syn = ((XomwMagicWordSynonym)o);
 				name = syn.magic_name;
@@ -277,7 +280,7 @@ public class XomwMagicWordArray {
 		}
 
 		rv[0] = name;
-		rv[1] = val_end - val_bgn == 0 ? Bry_.Empty : Bry_.Mid(src, val_bgn, val_end);
+		rv[1] = val_end - val_bgn == 0 ? BryUtl.Empty : BryLni.Mid(src, val_bgn, val_end);
 	}
 
 //		/**

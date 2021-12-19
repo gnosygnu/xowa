@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 class GfmlPragmaDefault implements GfmlPragma {
 	public String KeyOfPragma() {return "_default";}
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
@@ -21,7 +25,7 @@ class GfmlPragmaDefault implements GfmlPragma {
 		GfmlDefaultPragma_bgnCmd.ExecList(bldr.TypeMgr().TypeRegy(), bldr.CurNdeFrame().CurDocPos(), list);
 //			bldr.PragmaMgr.EndCmds_add(GfmlDocPos_.up_(bldr.CurNdeFrame.DocPos), GfmlDefaultPragma_endCmd.new_(list));
 	}
-	@gplx.Internal protected List_adp Compile(GfmlNde pragmaNde) {
+	public List_adp Compile(GfmlNde pragmaNde) {
 		List_adp list = List_adp_.New();
 		for (int i = 0; i < pragmaNde.SubHnds().Count(); i++) {
 			GfmlNde subNde = (GfmlNde)pragmaNde.SubHnds().Get_at(i);
@@ -29,15 +33,15 @@ class GfmlPragmaDefault implements GfmlPragma {
 		}
 		return list;
 	}
-	@gplx.Internal protected void CompileSubNde(GfmlNde nde, List_adp list) {
-		String typeKey = nde.SubKeys().FetchDataOrNull("typeKey"); if (typeKey == null) throw Err_.new_missing_key("typeKey");
+	public void CompileSubNde(GfmlNde nde, List_adp list) {
+		String typeKey = nde.SubKeys().FetchDataOrNull("typeKey"); if (typeKey == null) throw ErrUtl.NewMissingKey("typeKey");
 		for (int i = 0; i < nde.SubHnds().Count(); i++) {
 			GfmlNde subNde = (GfmlNde)nde.SubHnds().Get_at(i);
 			GfmlDefaultItem item = CompileItem(subNde, typeKey);
 			list.Add(item);
 		}
 	}
-	@gplx.Internal protected GfmlDefaultItem CompileItem(GfmlNde nde, String typeKey) {
+	public GfmlDefaultItem CompileItem(GfmlNde nde, String typeKey) {
 		String key = nde.SubKeys().FetchDataOrFail("key");
 		GfmlTkn valTkn = nde.SubKeys().FetchDataTknOrNull("val");
 		return GfmlDefaultItem.new_(typeKey, key, valTkn);
@@ -55,7 +59,7 @@ class GfmlDefaultItem {
 	public String TypeKey() {return typeKey;} private String typeKey;
 	public String Key() {return key;} private String key;
 	public GfmlObj Val() {return val;} GfmlObj val;
-	public GfmlObj ValPrev() {return valPrev;} @gplx.Internal protected GfmlDefaultItem ValPrev_(GfmlObj tkn) {valPrev = tkn; return this;} GfmlObj valPrev;
+	public GfmlObj ValPrev() {return valPrev;} public GfmlDefaultItem ValPrev_(GfmlObj tkn) {valPrev = tkn; return this;} GfmlObj valPrev;
 	
 	public void Exec_bgn(GfmlType type) {
 		GfmlFld fld = type.SubFlds().Get_by(key);
@@ -88,13 +92,13 @@ class GfmlDefaultItem {
 class GfmlDefaultPragma_bgnCmd implements GfmlBldrCmd {
 	public String Key() {return "pragma:gfml.default.bgnCmd";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {ExecList(bldr.TypeMgr().TypeRegy(), bldr.CurNdeFrame().CurDocPos(), list);}
-	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, GfmlDocPos pos, List_adp list) {
+	public static void ExecList(GfmlTypRegy regy, GfmlDocPos pos, List_adp list) {
 		GfmlType type = GfmlType_.Null;
 		for (Object itemObj : list) {
 			GfmlDefaultItem item = (GfmlDefaultItem)itemObj;
-			if (!String_.Eq(item.TypeKey(), type.Key())) {
+			if (!StringUtl.Eq(item.TypeKey(), type.Key())) {
 				type = regy.FetchOrNull(item.TypeKey(), pos);
-				if (type == GfmlType_.Null) throw Err_.new_wo_type("default type must exist", "typeKey", item.TypeKey());
+				if (type == GfmlType_.Null) throw ErrUtl.NewArgs("default type must exist", "typeKey", item.TypeKey());
 			}
 			type = type.Clone().DocPos_(pos);
 			regy.Add(type);
@@ -115,9 +119,9 @@ class GfmlDefaultPragma_endCmd implements GfmlBldrCmd {
 		GfmlType type = GfmlType_.Null;
 		for (Object itemObj : list) {
 			GfmlDefaultItem item = (GfmlDefaultItem)itemObj;
-			if (!String_.Eq(item.TypeKey(), type.Key())) {
+			if (!StringUtl.Eq(item.TypeKey(), type.Key())) {
 				type = regy.FetchOrNull(item.TypeKey());
-				if (type == GfmlType_.Null) throw Err_.new_wo_type("fatal: default type must exist", "typeKey", item.TypeKey());
+				if (type == GfmlType_.Null) throw ErrUtl.NewArgs("fatal: default type must exist", "typeKey", item.TypeKey());
 			}
 			item.Exec_end(type);
 		}

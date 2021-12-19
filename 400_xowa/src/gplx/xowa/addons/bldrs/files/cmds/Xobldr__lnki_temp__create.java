@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.files.cmds;
-import gplx.Byte_;
-import gplx.GfoMsg;
-import gplx.GfsCtx;
-import gplx.Int_ary_;
-import gplx.String_;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.cfgs.Db_cfg_tbl;
 import gplx.fsdb.Fsdb_db_mgr__v2;
 import gplx.fsdb.Fsdb_db_mgr__v2_bldr;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoae_page;
@@ -68,7 +68,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	private final Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr(); private Vnt_convert_lang converter_lang;
 	public Xobldr__lnki_temp__create(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public byte Init_redirect()	{return BoolUtl.NByte;}	// lnki_temp does not look at redirect pages
-	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_ary_.New(Xow_ns_.Tid__main);
+	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = IntAryUtl.New(Xow_ns_.Tid__main);
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		cfg_tbl.Delete_all();
@@ -171,7 +171,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 //			if (converter_lang != null) converter_lang.Log__rls();
 		if (gen_hdump) hdump_bldr.Term();
 		String err_filter_mgr = invoke_wkr.Err_filter_mgr().Print();
-		if (String_.Len_gt_0(err_filter_mgr)) usr_dlg.Warn_many("", "", err_filter_mgr);
+		if (StringUtl.IsNotNullOrEmpty(err_filter_mgr)) usr_dlg.Warn_many("", "", err_filter_mgr);
 		wiki.Appe().Log_mgr().Txn_end();
 		tbl.Insert_end();
 	}
@@ -185,15 +185,15 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		byte[] ttl_commons = Xomp_lnki_temp_wkr.To_commons_ttl(ns_file_is_case_match_all, commons_wiki, ttl);
 		if (	Xof_lnki_page.Null_n(lnki_page) 				// page set
 			&&	Xof_lnki_time.Null_n(lnki_time))				// thumbtime set
-				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
+				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Page().Ttl().Page_db_as_str(), StringUtl.NewU8(ttl));
 		if (ns_id == Xow_ns_.Tid__media)
 			caller_tid = Xop_file_logger_.Tid__media;
-		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Db().Page().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki_type, caller_tid, lnki_w, lnki_h, lnki_upright, lnki_time, lnki_page);
+		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Db().Page().Id(), ttl, ttl_commons, ByteUtl.ByInt(ext.Id()), lnki_type, caller_tid, lnki_w, lnki_h, lnki_upright, lnki_time, lnki_page);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_xtn_ref_enabled_))			xtn_ref_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_ns_ids_))					ns_ids = Int_ary_.Parse(m.ReadStr("v"), "|");
+		else if	(ctx.Match(k, Invk_ns_ids_))					ns_ids = IntAryUtl.Parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_ns_ids_by_aliases))			ns_ids = Xobldr__lnki_temp__create_.Ns_ids_by_aliases(wiki, m.ReadStrAry("v", "|"));
 		else if	(ctx.Match(k, Invk_gen_html_))					gen_html = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__load_all_imglinks_))		load_all_imglinks = m.ReadYn("v");

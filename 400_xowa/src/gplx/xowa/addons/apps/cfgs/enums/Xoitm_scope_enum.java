@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.enums;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Xoitm_scope_enum {	// SERIALIZED
 	public static final int Tid__app = 1, Tid__wiki = 2;
 	public static int To_int(String raw) {
-		if		(String_.Eq(raw, "app"))	return Tid__app;
-		else if (String_.Eq(raw, "wiki"))	return Tid__wiki;
-		else								throw Err_.new_unhandled_default(raw);
+		if		(StringUtl.Eq(raw, "app"))	return Tid__app;
+		else if (StringUtl.Eq(raw, "wiki"))	return Tid__wiki;
+		else								throw ErrUtl.NewUnhandled(raw);
 	}
 }

@@ -13,41 +13,43 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
 import gplx.xowa.*;
 import gplx.xowa.langs.*;
 class Pft_fmt_itm_timezone_offset_4 implements Pft_fmt_itm {
 	private final boolean colon;
 	public Pft_fmt_itm_timezone_offset_4(boolean colon) {this.colon = colon;}
 	public int TypeId() {return Pft_fmt_itm_.Tid_timezone_offset_4;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
+	public void Fmt(BryWtr bfr, Xowe_wiki wiki, Xol_lang_itm lang, GfoDate date, Pft_func_formatdate_bldr bldr) {
 		// get tz_secs
-		int tz_secs = date.Timezone_offset();
+		int tz_secs = date.TimezoneOffset();
 
 		// add "+" or "-"
 		if (tz_secs < 0) {
-			bfr.Add_byte(AsciiByte.Dash);
+			bfr.AddByte(AsciiByte.Dash);
 			tz_secs *= -1;
 		}
 		else {
-			bfr.Add_byte(AsciiByte.Plus);
+			bfr.AddByte(AsciiByte.Plus);
 		}
 
 		// calc total mins
 		int tz_mins = tz_secs / 60;
 
 		// add bfr
-		bfr.Add_int_fixed((tz_mins / 60), 2);
+		bfr.AddIntFixed((tz_mins / 60), 2);
 		if (colon)
-			bfr.Add_byte(AsciiByte.Colon);
-		bfr.Add_int_fixed((tz_mins % 60), 2);
+			bfr.AddByte(AsciiByte.Colon);
+		bfr.AddIntFixed((tz_mins % 60), 2);
 	}
 }
 class Pft_fmt_itm_timezone_id implements Pft_fmt_itm {
 	public Pft_fmt_itm_timezone_id(boolean abrv) {}
 	public int TypeId() {return Pft_fmt_itm_.Tid_timezone_id_full;}
-	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
-		bfr.Add_str_a7(date.Timezone_id());
+	public void Fmt(BryWtr bfr, Xowe_wiki wiki, Xol_lang_itm lang, GfoDate date, Pft_func_formatdate_bldr bldr) {
+		bfr.AddStrA7(date.TimezoneId());
 	}
 }

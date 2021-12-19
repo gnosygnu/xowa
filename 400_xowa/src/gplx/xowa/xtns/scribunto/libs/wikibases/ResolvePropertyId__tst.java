@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
-import org.junit.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
-import gplx.xowa.xtns.wbases.claims.enums.*;
+package gplx.xowa.xtns.scribunto.libs.wikibases;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
+import org.junit.*; import gplx.xowa.xtns.wbases.*;
 public class ResolvePropertyId__tst {
 	private final ResolvePropertyId__fxt fxt = new ResolvePropertyId__fxt();
 	@Before public void init() {
@@ -51,6 +52,6 @@ class ResolvePropertyId__fxt {
 		wdata_fxt.Init_pids_add(lang_key, pid_name, pid);
 	}
 	public void Test__ResolvePropertyId(String arg, String expd) {
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_resolvePropertyId, Object_.Ary(arg), expd);
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_resolvePropertyId, ObjectUtl.Ary(arg), expd);
 	}
 }

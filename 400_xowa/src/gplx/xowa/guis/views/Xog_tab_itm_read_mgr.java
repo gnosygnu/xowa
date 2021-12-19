@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.threads.*;
-import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.history.*;
-import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.guis.views;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.gfui.controls.standards.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.history.*;
+import gplx.xowa.wikis.pages.*;
 import gplx.xowa.guis.views.url_box_fmts.*;
 public class Xog_tab_itm_read_mgr {
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}
@@ -27,11 +33,11 @@ public class Xog_tab_itm_read_mgr {
 		// set View_mode based on "action="; DATE:2018-11-03
 		byte[] action_val = new_page.Url().Qargs_mgr().Get_val_bry_or(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__read);
 		byte view_mode = Xopg_view_mode_.Tid__read;
-		if      (Bry_.Eq(action_val, Xoa_url_.Qarg__action__read))
+		if      (BryLni.Eq(action_val, Xoa_url_.Qarg__action__read))
 			view_mode = Xopg_view_mode_.Tid__read;
-		else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__edit))
+		else if (BryLni.Eq(action_val, Xoa_url_.Qarg__action__edit))
 			view_mode = Xopg_view_mode_.Tid__edit;
-		else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__html))
+		else if (BryLni.Eq(action_val, Xoa_url_.Qarg__action__html))
 			view_mode = Xopg_view_mode_.Tid__html;
 		tab.View_mode_(view_mode);
 
@@ -45,9 +51,9 @@ public class Xog_tab_itm_read_mgr {
 		Xowe_wiki wiki = new_page.Wikie();
 		try	{tab.Html_itm().Show(new_page);}
 		catch (Exception e) {
-			if (String_.Eq(Err_.Message_lang(e), "class org.eclipse.swt.SWTException Widget is disposed")) return; // ignore errors caused by user closing tab early; DATE:2014-07-26
+			if (StringUtl.Eq(ErrUtl.Message(e), "class org.eclipse.swt.SWTException Widget is disposed")) return; // ignore errors caused by user closing tab early; DATE:2014-07-26
 			if (show_is_err) {	// trying to show error page, but failed; don't show again, else recursion until out of memory; TODO_OLD:always load error page; no reason it should fail; WHEN:html_skin; DATE:2014-06-08
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().To_str(), Err_.Message_gplx_full(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error trying to load error page; page=~{0} err=~{1}" + new_page.Url().To_str(), ErrUtl.ToStrFull(e));
 				return;
 			}
 			else
@@ -74,7 +80,7 @@ public class Xog_tab_itm_read_mgr {
 		String url_str = "", win_str = Win_text_blank;
 		if (url != null && ttl != null) {
 			url_str = url.To_str();
-			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));
+			win_str = StringUtl.NewU8(BryUtl.Add(ttl.Full_txt(), Win_text_suffix_page));
 
 			// fmt to url if set
 			Xog_urlfmtr_mgr url_box_fmtr = win.Url_box_fmtr();
@@ -85,9 +91,9 @@ public class Xog_tab_itm_read_mgr {
 		win.Url_box().Text_(url_str);
 		win.Win_box().Text_(win_str);
 	}
-	private static final byte[] Win_text_suffix_page = Bry_.new_a7(" - XOWA"); private static final String Win_text_blank = "XOWA";
+	private static final byte[] Win_text_suffix_page = BryUtl.NewA7(" - XOWA"); private static final String Win_text_blank = "XOWA";
 	public static void Show_page_err(Xog_win_itm win, Xog_tab_itm tab, Xowe_wiki wiki, Xoa_url url, Xoa_ttl ttl, Exception e) {
-		String err_msg = String_.Format("page_load fail: page={0} err={1}", String_.new_u8(url.Raw()), Err_.Message_gplx_full(e));
+		String err_msg = StringUtl.Format("page_load fail: page={0} err={1}", StringUtl.NewU8(url.Raw()), ErrUtl.ToStrFull(e));
 		win.Usr_dlg().Warn_many("", "", err_msg);
 		win.App().Log_wtr().Queue_enabled_(false);
 		Xoae_page fail_page = wiki.Data_mgr().Load_page_by_ttl(ttl);

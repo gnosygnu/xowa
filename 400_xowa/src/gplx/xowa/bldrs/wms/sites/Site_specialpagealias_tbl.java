@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
+package gplx.xowa.bldrs.wms.sites;
 import gplx.dbs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
 class Site_specialpagealias_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_realname, fld_aliases;
@@ -44,7 +47,7 @@ class Site_specialpagealias_tbl implements Db_tbl {
 			while (rdr.Move_next()) {
 				Site_specialpagealias_itm itm = new Site_specialpagealias_itm
 				( rdr.Read_bry_by_str(fld_realname)
-				, Bry_split_.Split(rdr.Read_bry_by_str(fld_aliases), AsciiByte.PipeBry)
+				, BrySplit.Split(rdr.Read_bry_by_str(fld_aliases), AsciiByte.PipeBry)
 				);
 				list.Add(itm.Realname(), itm);
 			}
@@ -57,7 +60,7 @@ class Site_specialpagealias_tbl implements Db_tbl {
 		stmt_delete.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_delete();
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Site_specialpagealias_itm itm = (Site_specialpagealias_itm)list.Get_at(i);
+			Site_specialpagealias_itm itm = (Site_specialpagealias_itm)list.GetAt(i);
 			Insert(site_abrv, itm.Realname(), itm.Aliases());
 		}
 	}
@@ -65,7 +68,7 @@ class Site_specialpagealias_tbl implements Db_tbl {
 		stmt_insert.Clear()
 			.Val_bry_as_str(fld_site_abrv			, site_abrv)
 			.Val_bry_as_str(fld_realname			, realname)
-			.Val_bry_as_str(fld_aliases				, Bry_.Add_w_dlm(AsciiByte.PipeBry, aliases))
+			.Val_bry_as_str(fld_aliases				, BryUtl.AddWithDlm(AsciiByte.PipeBry, aliases))
 			.Exec_insert();
 	}
 }

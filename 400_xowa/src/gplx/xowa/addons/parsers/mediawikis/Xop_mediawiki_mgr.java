@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
+package gplx.xowa.addons.parsers.mediawikis;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.xowa.*;
 public class Xop_mediawiki_mgr {
 	private final Xoae_app app;
 	private boolean mode_is_prod;
@@ -25,7 +33,7 @@ public class Xop_mediawiki_mgr {
 		this.mode_is_prod = mode_is_prod;
 		if (mode_is_prod) {
 			gplx.dbs.Db_conn_bldr.Instance.Reg_default_sqlite();
-			gplx.core.envs.Env_.Init_swt(String_.Ary_empty, Type_.Type_by_obj(this));	// must call Init else unit_testing will be true
+			gplx.core.envs.Env_.Init_swt(StringUtl.AryEmpty, ClassUtl.TypeByObj(this));	// must call Init else unit_testing will be true
 		}
 		this.app = new Xoae_app(usr_dlg, gplx.xowa.apps.Xoa_app_mode.Itm_cmd
 		, root_dir
@@ -42,7 +50,7 @@ public class Xop_mediawiki_mgr {
 	}
 	public Xop_mediawiki_wkr Make(String domain_str) {return Make(domain_str, null);}
 	public Xop_mediawiki_wkr Make(String domain_str, Xop_mediawiki_loader loader) {
-		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Make(Bry_.new_u8(domain_str), app.Fsys_mgr().Wiki_dir().GenSubDir(domain_str));
+		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Make(BryUtl.NewU8(domain_str), app.Fsys_mgr().Wiki_dir().GenSubDir(domain_str));
 		if (mode_is_prod) {
 			wiki.Embeddable_enabled_(true); // must mark wiki as embeddable, else orig_mgr will load wkrs which will download images DATE:2017-10-23
 			wiki.Init_by_wiki();

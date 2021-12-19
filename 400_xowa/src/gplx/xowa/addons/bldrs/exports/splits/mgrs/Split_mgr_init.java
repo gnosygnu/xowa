@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.mgrs; import gplx.*;
+package gplx.xowa.addons.bldrs.exports.splits.mgrs;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 public class Split_mgr_init {
@@ -49,7 +51,7 @@ public class Split_mgr_init {
 		));
 		page_conn.Meta_idx_create("page", "page_uid", "page_namespace", "page_score", "page_len", "page_id");	// index page table; will drop below
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(wkr_conn, new Db_attach_itm("page_db", page_conn));
-		attach_mgr.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+		attach_mgr.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "INSERT INTO page_regy (page_ns_id, page_ns_ord, page_score, page_len, page_id)"
 		, "SELECT  p.page_namespace, nm.ns_ord, p.page_score, p.page_len, p.page_id"
 		, "FROM    <page_db>page p"
@@ -62,7 +64,7 @@ public class Split_mgr_init {
 	}
 
 	public static void Update_page_cols(Db_conn wkr_conn, String tbl_name) {
-		wkr_conn.Exec_sql(String_.Format(String_.Concat_lines_nl	// ANSI.Y
+		wkr_conn.Exec_sql(StringUtl.Format(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "UPDATE  {0}"
 		, "SET     page_id    = Coalesce((SELECT page_id    FROM page_regy pr WHERE pr.page_uid = {0}.page_uid), -1)"
 		, ",       page_ns    = Coalesce((SELECT page_ns_id FROM page_regy pr WHERE pr.page_uid = {0}.page_uid), -1)"

@@ -15,11 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class JsonDocBldr {
 	private final List_adp stack = List_adp_.New();
 	private final Json_doc doc = new Json_doc();
@@ -28,7 +27,7 @@ public class JsonDocBldr {
 	JsonDocBldr() {}
 	public JsonDocBldr Clear(boolean isRootNode) {
 		this.root = isRootNode ? Json_nde.NewByDoc(doc, 0) : Json_ary.NewByDoc(doc, 0, 0);
-		doc.Ctor(Bry_.Empty, root);
+		doc.Ctor(BryUtl.Empty, root);
 		this.cur = root;
 		stack.Clear();
 		return this;
@@ -47,12 +46,12 @@ public class JsonDocBldr {
 		return this;
 	}
 	public JsonDocBldr NdeEnd() {
-		this.cur = (Json_grp)List_adp_.Pop_last(stack);
+		this.cur = (Json_grp)List_adp_.PopLast(stack);
 		return this;
 	}
 	public JsonDocBldr KvBool(String key, boolean val) {return Kv(key, Json_itm_bool.Get(val));}
 	public JsonDocBldr KvInt(String key, int val)      {return Kv(key, Json_itm_int.NewByVal(val));}
-	public JsonDocBldr KvStr(String key, byte[] val)   {return Kv(key, Json_itm_str.NewByVal(String_.new_u8(val)));}
+	public JsonDocBldr KvStr(String key, byte[] val)   {return Kv(key, Json_itm_str.NewByVal(StringUtl.NewU8(val)));}
 	public JsonDocBldr KvStr(String key, String val)   {return Kv(key, Json_itm_str.NewByVal(val));}
 	private JsonDocBldr Kv(String key, Json_itm val) {
 		Json_kv rv = new Json_kv(Json_itm_str.NewByVal(key), val);

@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.maints.sql_execs.cbks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.maints.*; import gplx.xowa.addons.apps.maints.sql_execs.*;
+package gplx.xowa.addons.apps.maints.sql_execs.cbks;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.wtrs.HtmlBryBfr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
 import gplx.dbs.*; import gplx.xowa.specials.xowa.diags.*;
 /*	TODO.XO
@@ -37,21 +44,21 @@ class Xosql_exec_svc {
 
 		// get conn
 		Db_conn conn = null;
-		if (String_.Eq(domain, DOMAIN__APP)) {
-			if (String_.Eq(db, DB__USER)) {
+		if (StringUtl.Eq(domain, DOMAIN__APP)) {
+			if (StringUtl.Eq(db, DB__USER)) {
 				conn = app.User().User_db_mgr().Conn();
 			}
 		}
-		else if (String_.Eq(domain, DOMAIN__FILE)) {
+		else if (StringUtl.Eq(domain, DOMAIN__FILE)) {
 			conn = Db_conn_bldr.Instance.Get_or_fail(Io_url_.new_any_(db));
 		}
 		else {
-			Xow_wiki wiki = String_.Eq(domain, DOMAIN__HOME)
+			Xow_wiki wiki = StringUtl.Eq(domain, DOMAIN__HOME)
 				? wiki = app.User().Wikii()
-				: app.Wiki_mgri().Get_by_or_make_init_y(Bry_.new_u8(domain));
+				: app.Wiki_mgri().Get_by_or_make_init_y(BryUtl.NewU8(domain));
 			
 			// for now, only support core
-			if (String_.Eq(db, DB__CORE)) {
+			if (StringUtl.Eq(db, DB__CORE)) {
 				conn = wiki.Data__core_mgr().Db__core().Conn();
 			}
 		}
@@ -60,25 +67,25 @@ class Xosql_exec_svc {
 		try {
 			// run sql
 			// HACK: assume SQL starting with SELECT is a reader
-			if (String_.Has_at_bgn(sql, "SELECT ")) {
+			if (StringUtl.HasAtBgn(sql, "SELECT ")) {
 				// run select
-				Bry_bfr bfr = Bry_bfr_.New();
+				BryWtr bfr = BryWtr.New();
 				Object[][] rows = Db_rdr_utl.Load(conn, sql);
 				Db_rdr_utl.Write_to_bfr(bfr, rows);
-				results = bfr.To_str_and_clear();
+				results = bfr.ToStrAndClear();
 			}
 			else {
 				conn.Exec_sql(sql);
 				results = "executed";
 			}
 		} catch (Exception exc) {
-			results = Err_.Message_gplx_full(exc);
-			results = String_.Replace(results, "\t", "&nbsp;&nbsp;&nbsp;&nbsp;"); // tabs must be escaped, else "bad character in String literal"
+			results = ErrUtl.ToStrFull(exc);
+			results = StringUtl.Replace(results, "\t", "&nbsp;&nbsp;&nbsp;&nbsp;"); // tabs must be escaped, else "bad character in String literal"
 		}
 
 		// send results
 		app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.sql_exec.results__recv", gplx.core.gfobjs.Gfobj_nde.New()
-			.Add_bry("msg_text", Bry_.Escape_html(Bry_.new_u8(results))));	// escape html; EX: "<" -> "&lt;"
+			.Add_bry("msg_text", HtmlBryBfr.EscapeHtml(BryUtl.NewU8(results))));	// escape html; EX: "<" -> "&lt;"
 	}
 	private static final String 
 	  DOMAIN__APP  = "[xowa.app]"

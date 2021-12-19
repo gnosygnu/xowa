@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.bnds; import gplx.*;
+package gplx.xowa.guis.bnds;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xog_bnd_box {
 	private final Ordered_hash key_hash = Ordered_hash_.New();
 	private final Hash_adp cmd_hash = Hash_adp_.New();
@@ -24,7 +30,7 @@ public class Xog_bnd_box {
 	public int Tid() {return tid;} private final int tid;
 	public String Key() {return key;} private final String key;
 	public int Len() {return key_hash.Len();}
-	public Xog_bnd_itm Get_at(int i) {return (Xog_bnd_itm)key_hash.Get_at(i);}
+	public Xog_bnd_itm Get_at(int i) {return (Xog_bnd_itm)key_hash.GetAt(i);}
 	public void Add(Xog_bnd_itm itm) {
 		key_hash.AddIfDupeUseNth(itm.Key(), itm);	// Add_if_dupe_use_nth, else Xou_user_tst.Run fails; DATE:2014-05-15
 

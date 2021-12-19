@@ -13,11 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.wikis.pages.*;
+package gplx.xowa.htmls;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
 public class Xoh_page_wtr_mgr implements Gfo_invk {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255), html_bfr = Bry_bfr_.Reset(Io_mgr.Len_mb);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(255), html_bfr = BryWtr.NewAndReset(IoConsts.LenMB);
 	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr;
 	public Xoh_page_wtr_mgr(boolean html_capable) {
 		this.html_capable = html_capable;
@@ -28,19 +43,19 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	public boolean Html_capable() {return html_capable;} public Xoh_page_wtr_mgr Html_capable_(boolean v) {html_capable = v; return this;} private boolean html_capable;
 	public byte[] Css_common_bry() {return css_common_bry;} private byte[] css_common_bry;
 	public byte[] Css_wiki_bry() {return css_wiki_bry;} private byte[] css_wiki_bry;
-	public byte[] Css_night_bry(boolean nightmode_enabled) {return nightmode_enabled ? css_night_bry : Bry_.Empty;} private byte[] css_night_bry;
+	public byte[] Css_night_bry(boolean nightmode_enabled) {return nightmode_enabled ? css_night_bry : BryUtl.Empty;} private byte[] css_night_bry;
 	public boolean Scripting_enabled() {return scripting_enabled;} private boolean scripting_enabled;
-	public Bry_fmtr Page_read_fmtr() {return page_read_fmtr;} private Bry_fmtr page_read_fmtr = Bry_fmtr.new_("", Fmtr_keys);
-	public Bry_fmtr Page_edit_fmtr() {return page_edit_fmtr;} private Bry_fmtr page_edit_fmtr = Bry_fmtr.new_("", Fmtr_keys);
-	public Bry_fmtr Page_html_fmtr() {return page_html_fmtr;} private Bry_fmtr page_html_fmtr = Bry_fmtr.new_("", Fmtr_keys);
-	public byte[] Edit_rename_div_bry(Xoa_ttl ttl) {return div_edit_rename_fmtr.Bld_bry_many(tmp_bfr, ttl.Full_db());}
+	public BryFmtr Page_read_fmtr() {return page_read_fmtr;} private BryFmtr page_read_fmtr = BryFmtr.New("", Fmtr_keys);
+	public BryFmtr Page_edit_fmtr() {return page_edit_fmtr;} private BryFmtr page_edit_fmtr = BryFmtr.New("", Fmtr_keys);
+	public BryFmtr Page_html_fmtr() {return page_html_fmtr;} private BryFmtr page_html_fmtr = BryFmtr.New("", Fmtr_keys);
+	public byte[] Edit_rename_div_bry(Xoa_ttl ttl) {return div_edit_rename_fmtr.BldToBryMany(tmp_bfr, ttl.Full_db());}
 	public void Init_css_urls(Xoa_app app, String wiki_domain, Io_url css_common_url, Io_url css_wiki_url) {
 		this.css_common_bry = css_common_url.To_http_file_bry();
 		this.css_wiki_bry = css_wiki_url.To_http_file_bry();
 
 		// xowa_night.css;
-		Io_url css_night_url = app.Fsys_mgr().Url_finder().Find_by_css_or(wiki_domain, "xowa_night.css", String_.Ary("bin", "any", "xowa", "html", "css", "nightmode"), true);
-		this.css_night_bry = Bry_.new_u8("<link rel=\"stylesheet\" href=\"" + css_night_url.To_http_file_str() + "\" type=\"text/css\">");
+		Io_url css_night_url = app.Fsys_mgr().Url_finder().Find_by_css_or(wiki_domain, "xowa_night.css", StringUtl.Ary("bin", "any", "xowa", "html", "css", "nightmode"), true);
+		this.css_night_bry = BryUtl.NewU8("<link rel=\"stylesheet\" href=\"" + css_night_url.To_http_file_str() + "\" type=\"text/css\">");
 	}
 	public void Init_(boolean v) {init = v;} private boolean init = true;
 	public void Init_by_wiki(Xow_wiki wiki) {
@@ -52,31 +67,31 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 		Xowe_wiki wiki = page.Wikie();
 		if (init) {
 			init = false;
-			page_read_fmtr.Eval_mgr_(wiki.Eval_mgr());
-			page_edit_fmtr.Eval_mgr_(wiki.Eval_mgr());
-			page_html_fmtr.Eval_mgr_(wiki.Eval_mgr());
+			page_read_fmtr.EvalMgrSet(wiki.Eval_mgr());
+			page_edit_fmtr.EvalMgrSet(wiki.Eval_mgr());
+			page_html_fmtr.EvalMgrSet(wiki.Eval_mgr());
 		}
 		wtr.Write_page(html_bfr, page, wiki.Parser_mgr().Ctx(), page_html_source);
-		return html_bfr.To_bry_and_clear_and_rls();
+		return html_bfr.ToBryAndClearAndRls();
 	}
 	public Xoh_page_wtr_wkr Wkr(byte output_tid) {
 		switch (output_tid) {
 			case Xopg_view_mode_.Tid__edit: return edit_wtr;
 			case Xopg_view_mode_.Tid__html: return html_wtr;
 			case Xopg_view_mode_.Tid__read: return read_wtr;
-			default: throw Err_.new_unhandled(output_tid);
+			default: throw ErrUtl.NewUnhandled(output_tid);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_page_read_))						page_read_fmtr.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_page_edit_))						page_edit_fmtr.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_page_html_))						page_html_fmtr.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_xowa_div_edit_rename_))			div_edit_rename_fmtr.Fmt_(m.ReadBry("v"));
+		if		(ctx.Match(k, Invk_page_read_))						page_read_fmtr.FmtSet(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_page_edit_))						page_edit_fmtr.FmtSet(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_page_html_))						page_html_fmtr.FmtSet(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_xowa_div_edit_rename_))			div_edit_rename_fmtr.FmtSet(m.ReadBry("v"));
 		else if	(ctx.Match(k, Cfg__scripting_enabled))				scripting_enabled = m.ReadYn("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private Bry_fmtr div_edit_rename_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
+	private BryFmtr div_edit_rename_fmtr = BryFmtr.New(StringUtl.ConcatLinesNl
 	(	"  <input id='xowa_edit_rename_box' width='120' height='20' />" 
 	,	"  <a href='xowa-cmd:app.gui.main_win.page_edit_rename;' class='xowa_anchor_button' style='width:100px;max-width:1024px;'>" 
 	,	"    Rename page" 

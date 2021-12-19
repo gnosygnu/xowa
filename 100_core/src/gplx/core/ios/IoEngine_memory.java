@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
-import gplx.core.ios.streams.*; import gplx.core.ios.atrs.*;
+package gplx.core.ios;
+import gplx.core.ios.atrs.Io_itm_atr_req;
+import gplx.core.ios.streams.IoStream;
+import gplx.core.ios.streams.IoStream_;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.core.ios.streams.Io_stream_rdr_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.StringUtl;
 public class IoEngine_memory extends IoEngine_base {
 	@Override public String Key() {return key;} private String key = IoEngine_.MemKey;
 	@Override public boolean ExistsFil_api(Io_url url) {return FetchFil(url) != IoItmFil_mem.Null;}
@@ -29,7 +40,7 @@ public class IoEngine_memory extends IoEngine_base {
 	@Override public void XferFil(IoEngine_xrg_xferFil args) {utl.XferFil(this, args);}
 	@Override public void MoveFil(IoEngine_xrg_xferFil args) {
 		Io_url src = args.Src(), trg = args.Trg(); boolean overwrite = args.Overwrite();
-		if (String_.Eq(src.Xto_api(), trg.Xto_api())) throw Err_.new_wo_type("move failed; src is same as trg", "raw", src.Raw());
+		if (StringUtl.Eq(src.Xto_api(), trg.Xto_api())) throw ErrUtl.NewArgs("move failed; src is same as trg", "raw", src.Raw());
 		CheckTransferArgs("move", src, trg, overwrite);
 		if (overwrite) DeleteFil(trg);
 		IoItmFil_mem curFil = FetchFil(src); curFil.Name_(trg.NameAndExt());
@@ -45,9 +56,9 @@ public class IoEngine_memory extends IoEngine_base {
 		AddFilToDir(trg.OwnerDir(), curFil);
 	}
 	@Override public IoItmDir QueryDirDeep(IoEngine_xrg_queryDir args) {return utl.QueryDirDeep(this, args);}
-	@Override public void UpdateFilAttrib(Io_url url, IoItmAttrib atr)	{FetchFil(url).ReadOnly_(atr.ReadOnly());}
-	@Override public void UpdateFilModifiedTime(Io_url url, DateAdp modified)	{FetchFil(url).ModifiedTime_(modified);}
-	@Override public IoItmFil QueryFil(Io_url url)								{return FetchFil(url);}
+	@Override public void UpdateFilAttrib(Io_url url, IoItmAttrib atr)    {FetchFil(url).ReadOnly_(atr.ReadOnly());}
+	@Override public void UpdateFilModifiedTime(Io_url url, GfoDate modified)    {FetchFil(url).ModifiedTime_(modified);}
+	@Override public IoItmFil QueryFil(Io_url url)                                {return FetchFil(url);}
 	@Override public void SaveFilText_api(IoEngine_xrg_saveFilStr args) {
 		Io_url url = args.Url();
 		IoItmDir dir = FetchDir(url.OwnerDir());
@@ -61,20 +72,20 @@ public class IoEngine_memory extends IoEngine_base {
 		else
 			SaveFilStr(args.Url(), args.Text());
 	}
-	@Override public boolean Truncate_fil(Io_url url, long size) {throw Err_.new_unimplemented();}
+	@Override public boolean Truncate_fil(Io_url url, long size) {throw ErrUtl.NewUnimplemented();}
 	@Override public String LoadFilStr(IoEngine_xrg_loadFilStr args) {
 		return FetchFil(args.Url()).Text();
 	}
 	void SaveFilStr(Io_url url, String text) {
-		DateAdp time = Datetime_now.Get();
-		IoItmFil_mem fil = IoItmFil_mem.new_(url, String_.Len(text), time, text);
+		GfoDate time = GfoDateNow.Get();
+		IoItmFil_mem fil = IoItmFil_mem.new_(url, StringUtl.Len(text), time, text);
 		AddFilToDir(url.OwnerDir(), fil);
-	}		
+	}
 	void AppendFilStr(IoEngine_xrg_saveFilStr args) {
 		Io_url url = args.Url(); String text = args.Text();
 		if (ExistsFil_api(url)) {
 			IoItmFil_mem fil = FetchFil(url);
-			fil.ModifiedTime_(Datetime_now.Get());
+			fil.ModifiedTime_(GfoDateNow.Get());
 			fil.Text_set(fil.Text() + text);
 		}
 		else
@@ -88,25 +99,25 @@ public class IoEngine_memory extends IoEngine_base {
 	@Override public IoStream OpenStreamWrite(IoEngine_xrg_openWrite args) {
 		Io_url url = args.Url();
 		IoItmFil_mem fil = FetchFil(url);
-		if (fil == IoItmFil_mem.Null) {	// file doesn't exist; create new one
+		if (fil == IoItmFil_mem.Null) {    // file doesn't exist; create new one
 			SaveFilStr(url, "");
 			fil = FetchFil(url);
 		}
 		else {
 			if (args.Mode() == IoStream_.Mode_wtr_create)
-				fil.Text_set("");			// NOTE: clear text b/c it still has pointer to existing stream
+				fil.Text_set("");            // NOTE: clear text b/c it still has pointer to existing stream
 		}
 		return fil.Stream();
 	}
 
 	@Override public boolean ExistsDir(Io_url url) {return FetchDir(url) != null;}
 	@Override public void CreateDir(Io_url url) {
-		IoItmDir dir = FetchDir(url); if (dir != null) return;	// dir exists; exit
+		IoItmDir dir = FetchDir(url); if (dir != null) return;    // dir exists; exit
 		dir = IoItmDir_.top_(url);
 		dirs.Add(dir);
 		IoItmDir ownerDir = FetchDir(url.OwnerDir());
-		if (ownerDir == null && !url.OwnerDir().Eq(Io_url_.Empty)) {	// no owner dir && not "driveDir" -> create
-			CreateDir(url.OwnerDir());	// recursive
+		if (ownerDir == null && !url.OwnerDir().Eq(Io_url_.Empty)) {    // no owner dir && not "driveDir" -> create
+			CreateDir(url.OwnerDir());    // recursive
 			ownerDir = FetchDir(url.OwnerDir());
 		}
 		if (ownerDir != null)
@@ -120,9 +131,9 @@ public class IoEngine_memory extends IoEngine_base {
 	}
 	@Override public void XferDir(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool.Instance.Get_by(trg.Info().EngineKey()), trg, args);}
 	@Override public void MoveDirDeep(IoEngine_xrg_xferDir args) {Io_url trg = args.Trg(); utl.XferDir(this, args.Src(), IoEnginePool.Instance.Get_by(trg.Info().EngineKey()), trg, args);}
-	@Override public void MoveDir(Io_url src, Io_url trg) {if (ExistsDir(trg)) throw Err_.new_wo_type("trg already exists", "trg", trg);
+	@Override public void MoveDir(Io_url src, Io_url trg) {if (ExistsDir(trg)) throw ErrUtl.NewArgs("trg already exists", "trg", trg);
 		IoItmDir dir = FetchDir(src); dir.Name_(trg.NameAndExt());
-		for (Object filObj : dir.SubFils()) {			// move all subFiles
+		for (Object filObj : dir.SubFils()) {            // move all subFiles
 			IoItmFil fil = (IoItmFil)filObj;
 			fil.OwnerDir_set(dir);
 		}
@@ -131,7 +142,7 @@ public class IoEngine_memory extends IoEngine_base {
 	}
 	@Override public IoItmDir QueryDir(Io_url url) {
 		IoItmDir dir = FetchDir(url); 
-		IoItmDir rv = IoItmDir_.top_(url);		// always return copy b/c caller may add/del itms directly
+		IoItmDir rv = IoItmDir_.top_(url);        // always return copy b/c caller may add/del itms directly
 		if (dir == null) {
 			rv.Exists_set(false);
 			return rv;
@@ -168,8 +179,8 @@ public class IoEngine_memory extends IoEngine_base {
 		return rv;
 	}
 	void CheckTransferArgs(String op, Io_url src, Io_url trg, boolean overwrite) {
-		if (!ExistsFil_api(src)) throw Err_.new_wo_type("src does not exist", "src", src);
-		if (ExistsFil_api(trg) && !overwrite) throw Err_.new_invalid_op("trg already exists").Args_add("op", op, "overwrite", false, "src", src, "trg", trg);
+		if (!ExistsFil_api(src)) throw ErrUtl.NewArgs("src does not exist", "src", src);
+		if (ExistsFil_api(trg) && !overwrite) throw ErrUtl.NewInvalidOp("trg already exists").ArgsAdd("op", op).ArgsAdd("overwrite", false).ArgsAdd("src", src).ArgsAdd("trg", trg);
 	}
 	public void Clear() {dirs.Clear();}
 	@Override public boolean DownloadFil(IoEngine_xrg_downloadFil xrg) {
@@ -187,7 +198,7 @@ public class IoEngine_memory extends IoEngine_base {
 			xrg.Rslt_(IoEngine_xrg_downloadFil.Rslt_fail_file_not_found);
 			return Io_stream_rdr_.Noop;
 		}
-		byte[] bry = Bry_.new_u8(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
+		byte[] bry = BryUtl.NewU8(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
 		return Io_stream_rdr_.New__mem(bry);
 	}
 	@Override public Io_itm_atr_req Query_itm_atrs(Io_url url, Io_itm_atr_req req) {
@@ -196,9 +207,9 @@ public class IoEngine_memory extends IoEngine_base {
 
 	IoItmHash dirs = IoItmHash.new_();
 	IoEngineUtl utl = IoEngineUtl.new_();
-	@gplx.Internal protected static IoEngine_memory new_(String key) {
+	public static IoEngine_memory new_(String key) {
 		IoEngine_memory rv = new IoEngine_memory();
 		rv.key = key;
 		return rv;
-	}	IoEngine_memory() {}
+	}   IoEngine_memory() {}
 }

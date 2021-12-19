@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.lists.Ordered_hash;
 class GfmlTypeCompiler {
-	@gplx.Internal protected static GfmlType Compile(GfmlNde nde, GfmlType owner, GfmlTypRegy typeRegy, Ordered_hash results) {return Compile(nde, owner, true, typeRegy, results);}
+	public static GfmlType Compile(GfmlNde nde, GfmlType owner, GfmlTypRegy typeRegy, Ordered_hash results) {return Compile(nde, owner, true, typeRegy, results);}
 	static GfmlType Compile(GfmlNde nde, GfmlType owner, boolean isTopLevel, GfmlTypRegy typeRegy, Ordered_hash results) {
 		String name = nde.SubKeys().FetchDataOrFail("name");
 		String typeKey = FetchTypeKey(nde, owner, isTopLevel, name);
@@ -81,7 +82,7 @@ class GfmlTypeCompiler {
 		}
 		return rv;
 	}
-	@gplx.Internal protected static void AddDefaultAtrs(GfmlNde nde, GfmlType type, GfmlTypRegy regy) { 
+	public static void AddDefaultAtrs(GfmlNde nde, GfmlType type, GfmlTypRegy regy) { 
 		if (type.IsTypeAny()) return;
 		for (int i = 0; i < type.SubFlds().Count(); i++) {
 			GfmlFld subFld = (GfmlFld)type.SubFlds().Get_at(i);

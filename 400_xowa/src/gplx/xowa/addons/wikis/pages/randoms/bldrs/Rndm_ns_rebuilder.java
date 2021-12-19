@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.randoms.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.randoms.*;
+package gplx.xowa.addons.wikis.pages.randoms.bldrs;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.pages.randoms.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.addons.wikis.pages.randoms.dbs.*;
@@ -40,7 +44,7 @@ class Rndm_ns_rebuilder {
 			// read pages in ns where page_id > last_page_id
 			while (true) {
 				Gfo_log_.Instance.Prog("reading pages", "page_id", page_id_cur);
-				String sql = String_.Format("SELECT * FROM page WHERE page_namespace = {0} AND page_id > {1} ORDER BY page_id", ns.Id(), page_id_cur); // ANSI.Y
+				String sql = StringUtl.Format("SELECT * FROM page WHERE page_namespace = {0} AND page_id > {1} ORDER BY page_id", ns.Id(), page_id_cur); // ANSI.Y
 				int rdr_count = 0;
 				wkr.Exec_rng_bgn();
 				Db_rdr rdr = page_conn.Stmt_sql(sql).Exec_select__rls_auto();

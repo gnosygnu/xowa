@@ -14,20 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.GfsCtx;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.core.brys.Bry_bfr_mkr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.wtrs.BryBfrMkr;
 import gplx.core.ios.Io_stream_zip_mgr;
 import gplx.core.net.Gfo_url;
 import gplx.fsdb.Fsdb_db_mgr;
 import gplx.fsdb.Fsdb_db_mgr_;
 import gplx.fsdb.Fsdb_db_mgr__v2_bldr;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xow_wiki;
@@ -76,7 +76,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 
 		// domain vars
 		this.domain_bry = domain_bry;
-		this.domain_str = String_.new_u8(domain_bry); 
+		this.domain_str = StringUtl.NewU8(domain_bry);
 		this.domain_itm = Xow_domain_itm_.parse(domain_bry);
 		this.domain_tid = domain_itm.Domain_type_id();
 		this.domain_abrv = Xow_abrv_wm_.To_abrv(domain_itm);
@@ -126,7 +126,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xol_lang_itm					Lang() {return lang;} private final Xol_lang_itm lang;
 	public Xol_case_mgr					Case_mgr() {if (case_mgr == null) case_mgr = Xol_case_mgr_.U8(); return case_mgr;} private Xol_case_mgr case_mgr;
 	public Xowd_site_stats_mgr			Stats() {return stats;} private final Xowd_site_stats_mgr stats;
-	public Bry_bfr_mkr					Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public BryBfrMkr Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final BryBfrMkr utl__bry_bfr_mkr = new BryBfrMkr();
 	public Io_stream_zip_mgr			Utl__zip_mgr()		{return utl__zip_mgr;}		private final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
 	public Xow_url_parser				Utl__url_parser()	{return url__parser;}		private final Xow_url_parser url__parser;
 	public Xoax_addon_mgr				Addon_mgr() {return addon_mgr;} private final Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
@@ -138,7 +138,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public void Init_by_wiki() {
 		if (!init_needed) return;
 		init_needed = false;
-		if (String_.Eq(domain_str, "xowa")) return;					// HACK: ignore "xowa" for now; WHEN:converting xowa to sqlitedb
+		if (StringUtl.Eq(domain_str, "xowa")) return;					// HACK: ignore "xowa" for now; WHEN:converting xowa to sqlitedb
 		data_mgr__core_mgr = new Xow_db_mgr(fsys_mgr.Root_dir(), this.domain_str);
 		Xow_db_mgr.Init_by_load(this, gplx.xowa.wikis.data.Xow_db_file__core_.Find_core_fil_or_null(this));
 		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_mobile);	// must init after data_mgr
@@ -186,5 +186,5 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Xoa_ttl	Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.Parse(app.Utl_amp_mgr(), app.Utl_case_mgr(), xwiki_mgr, ns_mgr, src, src_bgn, src_end);}
 	public Xoa_ttl	Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.Parse(this, ns_id, ttl);}
 	public void Init_needed_y_() {this.init_needed = true;}
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {throw Err_.new_unimplemented_w_msg("implemented for Xoa_cfg_mgr");}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {throw ErrUtl.NewUnimplemented("implemented for Xoa_cfg_mgr");}
 }

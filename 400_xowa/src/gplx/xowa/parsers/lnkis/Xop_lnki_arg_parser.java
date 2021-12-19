@@ -13,19 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.envs.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.lnkis;
+import gplx.core.btries.*; import gplx.core.envs.*;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.wrappers.ByteRef;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*;
 public class Xop_lnki_arg_parser {
 	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
-	private final Bry_bfr int_bfr = Bry_bfr_.Reset(16);
+	private final BryWtr int_bfr = BryWtr.NewAndReset(16);
 	private final Btrie_bwd_mgr px_trie = Btrie_bwd_mgr.cs_(); private final Btrie_fast_mgr size_trie = Btrie_fast_mgr.cs();
 	private final Btrie_rv key_trie_rv = new Btrie_rv(), px_trie_rv = new Btrie_rv(), size_trie_rv = new Btrie_rv();
 	private int lnki_w, lnki_h;
 	public void Evt_lang_changed(Xol_lang_itm lang) {
-		Bry_bfr tmp_bfr = int_bfr;
-		Byte_obj_ref rslt = Byte_obj_ref.zero_();
+		BryWtr tmp_bfr = int_bfr;
+		ByteRef rslt = ByteRef.NewZero();
 		Xol_kwd_mgr mgr = lang.Kwd_mgr();
 		key_trie.Clear();
 		Xol_kwd_grp list = null;
@@ -62,11 +69,11 @@ public class Xop_lnki_arg_parser {
 	}
 	public byte Identify_tid(byte[] src, int bgn, int end) {
 		int len = end - bgn;
-		Byte_obj_val val = (Byte_obj_val)key_trie.Match_at(key_trie_rv, src, bgn, end);
+		ByteVal val = (ByteVal)key_trie.Match_at(key_trie_rv, src, bgn, end);
 		if (val != null && len == key_trie_rv.Pos() - bgn)		// check for false matches; EX: alternate= should not match alt=
 			return val.Val();									// match; return val;
 		Object bwd_obj = px_trie.Match_at(px_trie_rv, src, end - 1, bgn - 1);
-		if (bwd_obj != null && ((Byte_obj_val)bwd_obj).Val() == Tid_dim) { // ends with "px"; try to parse size
+		if (bwd_obj != null && ((ByteVal)bwd_obj).Val() == Tid_dim) { // ends with "px"; try to parse size
 			int_bfr.Clear();
 			int match_len = end -1 - px_trie_rv.Pos();
 			boolean mode_width = true;
@@ -78,23 +85,23 @@ public class Xop_lnki_arg_parser {
 					this.lnki_w = Xop_lnki_tkn.Width_null;	// NOTE: must null out width; EX: "123xTextpx"; PAGE:es.b:Alimentación_infantil; DATE:2015-07-10; NOTE: must be -1, not 0; DATE:2015-08-05
 					return Tid_caption;						// letter or other invalid character; return caption
 				}
-				Byte_obj_val v = (Byte_obj_val)o;
+				ByteVal v = (ByteVal)o;
 				switch (v.Val()) {	// NOTE: d0 - d9 handle non-english numbers; EX:fa.w and ۲۰۰px; DATE:2015-07-18
-					case Key_dim_d0:	int_bfr.Add_byte(AsciiByte.Num0); i += (size_trie_rv.Pos() - i) - 1; break;	// -1 b/c loop will ++i
-					case Key_dim_d1:	int_bfr.Add_byte(AsciiByte.Num1); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d2:	int_bfr.Add_byte(AsciiByte.Num2); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d3:	int_bfr.Add_byte(AsciiByte.Num3); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d4:	int_bfr.Add_byte(AsciiByte.Num4); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d5:	int_bfr.Add_byte(AsciiByte.Num5); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d6:	int_bfr.Add_byte(AsciiByte.Num6); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d7:	int_bfr.Add_byte(AsciiByte.Num7); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d8:	int_bfr.Add_byte(AsciiByte.Num8); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d9:	int_bfr.Add_byte(AsciiByte.Num9); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_num:	int_bfr.Add_byte(b); break;
+					case Key_dim_d0:	int_bfr.AddByte(AsciiByte.Num0); i += (size_trie_rv.Pos() - i) - 1; break;	// -1 b/c loop will ++i
+					case Key_dim_d1:	int_bfr.AddByte(AsciiByte.Num1); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d2:	int_bfr.AddByte(AsciiByte.Num2); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d3:	int_bfr.AddByte(AsciiByte.Num3); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d4:	int_bfr.AddByte(AsciiByte.Num4); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d5:	int_bfr.AddByte(AsciiByte.Num5); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d6:	int_bfr.AddByte(AsciiByte.Num6); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d7:	int_bfr.AddByte(AsciiByte.Num7); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d8:	int_bfr.AddByte(AsciiByte.Num8); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d9:	int_bfr.AddByte(AsciiByte.Num9); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_num:	int_bfr.AddByte(b); break;
 					case Key_space:		break;	// ignore space; EX: "100 px"
 					case Key_dim_px:	{		// 2nd px found; EX: "40pxpx"; "40px px"
 						int tmp_pos = size_trie_rv.Pos();
-						tmp_pos = Bry_find_.Find_fwd_while_space_or_tab(src, tmp_pos, itm_end);	// look for next ws pos; 
+						tmp_pos = BryFind.FindFwdWhileSpaceOrTab(src, tmp_pos, itm_end);	// look for next ws pos;
 						if (tmp_pos == itm_end)	// no non-ws found; tmp_pos == itm_end; allow itm; EX: "40pxpx"; "40px px"; DATE:2014-03-01
 							i = itm_end;
 						else					// non-ws found; consider as caption; EX: "20px20px"; "20pxpxpx"
@@ -103,7 +110,7 @@ public class Xop_lnki_arg_parser {
 					}
 					case Key_dim_x:		{
 						if (mode_width) {
-							this.lnki_w = int_bfr.To_int_and_clear(-1);
+							this.lnki_w = int_bfr.ToIntAndClear(-1);
 							mode_width = false;
 							break;
 						}
@@ -111,7 +118,7 @@ public class Xop_lnki_arg_parser {
 					}
 				}
 			}
-			int dim = int_bfr.To_int_and_clear(-1);
+			int dim = int_bfr.ToIntAndClear(-1);
 			if	(mode_width)	this.lnki_w = dim;
 			else				this.lnki_h = dim;
 			return Tid_dim;
@@ -119,32 +126,32 @@ public class Xop_lnki_arg_parser {
 		return Tid_caption;
 	}
 	private void Init_key_trie(byte[] key, byte v) {
-		Byte_obj_val val = Byte_obj_val.new_(v);
+		ByteVal val = ByteVal.New(v);
 		key_trie.Add(key, val);
 	}
-	private void Init_size_trie(Bry_bfr tmp_bfr, Xol_transform_mgr digit_mgr, Xol_kwd_grp list) {
+	private void Init_size_trie(BryWtr tmp_bfr, Xol_transform_mgr digit_mgr, Xol_kwd_grp list) {
 		if (list == null && Env_.Mode_testing()) return;	// TEST: allows partial parsing of $magicWords
 		size_trie.Clear(); px_trie.Clear();
 		for (int i = 0; i < 10; i++)
-			size_trie.Add((byte)(i + AsciiByte.Num0), Byte_obj_val.new_(Key_dim_num));
+			size_trie.Add((byte)(i + AsciiByte.Num0), ByteVal.New(Key_dim_num));
 		int len = digit_mgr.Len(); // NOTE: add non-english numbers; EX: ۲۰۰px; DATE:2015-07-18
 		for (int i = 0; i < len; ++i) {
-			Keyval kv = digit_mgr.Get_at(i);
-			int num = (byte)Int_.Parse_or(kv.Key(), -1); if (num == -1) continue; // ignore separators; EX: "," "." 
-			size_trie.Add((byte[])kv.Val(), Byte_obj_val.new_((byte)num));	// NOTE: num corresponds to dim_d0 -> d9 below
+			KeyVal kv = digit_mgr.Get_at(i);
+			int num = (byte)IntUtl.ParseOr(kv.KeyToStr(), -1); if (num == -1) continue; // ignore separators; EX: "," "."
+			size_trie.Add((byte[])kv.Val(), ByteVal.New((byte)num));	// NOTE: num corresponds to dim_d0 -> d9 below
 		}
-		size_trie.Add(AsciiByte.Space, Byte_obj_val.new_(Key_space));
-		size_trie.Add(X_bry, Byte_obj_val.new_(Key_dim_x));
+		size_trie.Add(AsciiByte.Space, ByteVal.New(Key_space));
+		size_trie.Add(X_bry, ByteVal.New(Key_dim_x));
 		Xol_kwd_itm[] words = list.Itms();
 		int words_len = words.length;
-		Byte_obj_ref rslt = Byte_obj_ref.zero_();
+		ByteRef rslt = ByteRef.NewZero();
 		for (int i = 0; i < words_len; i++) {
 			byte[] word_bry = Xol_kwd_parse_data.Strip(tmp_bfr, words[i].Val(), rslt);			
-			size_trie.Add(word_bry, Byte_obj_val.new_(Key_dim_px));
-			px_trie.Add(word_bry, Byte_obj_val.new_(Tid_dim));
+			size_trie.Add(word_bry, ByteVal.New(Key_dim_px));
+			px_trie.Add(word_bry, ByteVal.New(Tid_dim));
 		}
 	}	
-	public static final byte[] Bry_upright = Bry_.new_a7("upright"), Bry_thumbtime = Bry_.new_a7("thumbtime"), Bry_target = Bry_.new_a7("target");
+	public static final byte[] Bry_upright = BryUtl.NewA7("upright"), Bry_thumbtime = BryUtl.NewA7("thumbtime"), Bry_target = BryUtl.NewA7("target");
 	public static final byte
 	  Tid_unknown = 0, Tid_thumb = 1, Tid_left = 2, Tid_right = 3, Tid_none = 4, Tid_center = 5, Tid_frame = 6, Tid_frameless = 7, Tid_upright = 8, Tid_border = 9
 	, Tid_alt = 10, Tid_link = 11, Tid_baseline = 12, Tid_sub = 13, Tid_super = 14, Tid_top = 15, Tid_text_top = 16, Tid_middle = 17, Tid_bottom = 18, Tid_text_bottom = 19
@@ -155,7 +162,7 @@ public class Xop_lnki_arg_parser {
 	, Tid_class = 27
 	, Tid_target = 28
 	;
-	private static final byte[] X_bry = Bry_.new_a7("x");
+	private static final byte[] X_bry = BryUtl.NewA7("x");
 	private static final byte	// NOTE: d0 - d9 must match 0 - 9; DATE:2015-07-18
 	  Key_dim_d0 = 0, Key_dim_d1 = 1, Key_dim_d2 = 2, Key_dim_d3 = 3, Key_dim_d4 = 4
 	, Key_dim_d5 = 5, Key_dim_d6 = 6, Key_dim_d7 = 7, Key_dim_d8 = 8, Key_dim_d9 = 9

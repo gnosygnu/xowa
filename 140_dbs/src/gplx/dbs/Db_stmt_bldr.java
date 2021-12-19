@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Db_stmt_bldr {
 	private Db_conn conn; private Db_stmt create, update, delete;
 	private String tbl_name; private String[] flds_keys, flds_vals, flds_all;
@@ -21,7 +23,7 @@ public class Db_stmt_bldr {
 		Conn_(v, tbl_name, flds.ToStrAry(), flds.ToStrAryExclude(flds_keys), flds_keys);
 	}
 	public void Conn_(Db_conn v, String tbl_name, String[] flds_vals, String... flds_keys) {
-		Conn_(v, tbl_name, String_.Ary_add(flds_keys, flds_vals), flds_vals, flds_keys);
+		Conn_(v, tbl_name, StringUtl.AryAdd(flds_keys, flds_vals), flds_vals, flds_keys);
 	}
 	private void Conn_(Db_conn v, String tbl_name, String[] flds_all, String[] flds_vals, String... flds_keys) {
 		this.conn = v; this.tbl_name = tbl_name;
@@ -33,7 +35,7 @@ public class Db_stmt_bldr {
 			case Db_cmd_mode.Tid_update:	if (update == null) update = conn.Stmt_update(tbl_name, flds_keys, flds_vals);	return update;
 			case Db_cmd_mode.Tid_delete:	if (delete == null) delete = conn.Stmt_delete(tbl_name, flds_keys);				return delete;
 			case Db_cmd_mode.Tid_ignore:	return Db_stmt_.Null;
-			default:						throw Err_.new_unhandled(cmd_mode);
+			default:						throw ErrUtl.NewUnhandled(cmd_mode);
 		}
 	}
 	public void Batch_bgn() {conn.Txn_bgn(tbl_name);}

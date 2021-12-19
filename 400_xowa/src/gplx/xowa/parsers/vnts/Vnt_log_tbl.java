@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*;
+package gplx.xowa.parsers.vnts;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
 public class Vnt_log_tbl implements Rls_able {
 	private final String tbl_name = "log_vnt"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_uid, fld_page_id, fld_rule_idx

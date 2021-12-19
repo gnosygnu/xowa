@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
 import gplx.core.stores.*; /*DataRdr_base*/
+import gplx.types.basics.utls.StringUtl;
 public abstract class GfmlDataRdr_base extends DataRdr_base implements DataRdr {
 	@Override public String NameOfNode()			{return curNde.Hnd();}
 	@Override public int FieldCount()			{return curNde.SubKeys().Count();}
@@ -46,13 +47,13 @@ public abstract class GfmlDataRdr_base extends DataRdr_base implements DataRdr {
 			if (	sub.Type().IsTypeAny())		// isAnyType b/c match may not be exact; ex: type can be defined as item:key name; but actlNde may be item:key name size;
 				//||	sub.Type().IsTypeNull())
 				typeName = sub.Hnd();
-			if (String_.Eq(typeName, name))
+			if (StringUtl.Eq(typeName, name))
 				rv.list.Add(sub);
 		}
 		return rv;
 	}		
 	public void Rls() {}
-	public String To_str() {return curNde.To_str();}
-	@gplx.Internal protected void SetNode(GfmlNde curNde) {this.curNde = curNde; this.list = curNde.SubHnds();}
+	public String To_str() {return curNde.ToStr();}
+	public void SetNode(GfmlNde curNde) {this.curNde = curNde; this.list = curNde.SubHnds();}
 	GfmlNde curNde; GfmlItmHnds list; int pos = -1;
 }

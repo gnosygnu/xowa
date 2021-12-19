@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.langs.htmls.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.html.*;
-class Wdata_fmtr__langtext_tbl implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__langtext_tbl implements BryBfrArg {
 	private Wdata_toc_data toc_data; private Wdata_lang_sorter lang_sorter; private Xoapi_toggle_itm toggle_itm; private Wdata_fmtr__langtext_row fmtr_row;
 	private byte[] col_hdr_lang_name, col_hdr_lang_code, col_hdr_text; private int list_len;
 	public void Init_by_ctor(Wdata_toc_data toc_data, Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, String toggle_itm_key, Wdata_fmtr__langtext_row fmtr_row) {
@@ -34,14 +39,14 @@ class Wdata_fmtr__langtext_tbl implements gplx.core.brys.Bfr_arg {
 	public void Init_by_wdoc(Ordered_hash list) {
 		this.list_len = list.Len(); if (list_len == 0) return;
 		toc_data.Make(list_len);
-		list.Sort_by(lang_sorter);
+		list.SortBy(lang_sorter);
 		fmtr_row.Init_by_page(list);
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		if (list_len == 0) return;
-		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), col_hdr_lang_name, col_hdr_lang_code, col_hdr_text, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_row);
+		fmtr.BldToBfrMany(bfr, toc_data.Href(), toc_data.Text(), col_hdr_lang_name, col_hdr_lang_code, col_hdr_text, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_row);
 	}
-	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final BryFmtr fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "  <div class='wikibase-sitelinkgroupview'>"
 	, "    <div class='wikibase-sitelinkgroupview-heading-container'>"
@@ -55,21 +60,21 @@ class Wdata_fmtr__langtext_tbl implements gplx.core.brys.Bfr_arg {
 	), "hdr_href", "hdr_text", "hdr_lang_name", "hdr_lang_code", "hdr_page", "toggle_btn", "toggle_hdr", "rows"
 	);
 }
-interface Wdata_fmtr__langtext_row extends gplx.core.brys.Bfr_arg {
+interface Wdata_fmtr__langtext_row extends BryBfrArg {
 	void Init_by_page(Ordered_hash list);
 }
-class Wdata_fmtr__langtext_row_base implements gplx.core.brys.Bfr_arg, Wdata_fmtr__langtext_row {
+class Wdata_fmtr__langtext_row_base implements BryBfrArg, Wdata_fmtr__langtext_row {
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.Get_at(i);
+			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.GetAt(i);
 			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_intl(itm.Lang());
-			row_fmtr.Bld_bfr_many(bfr, itm.Lang(), Gfh_utl.Escape_html_as_bry(lang_itm.Canonical_name()), Gfh_utl.Escape_html_as_bry(itm.Text()));
+			row_fmtr.BldToBfrMany(bfr, itm.Lang(), Gfh_utl.Escape_html_as_bry(lang_itm.Canonical_name()), Gfh_utl.Escape_html_as_bry(itm.Text()));
 		}
 	}
-	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final BryFmtr row_fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "        <li class='wikibase-sitelinkview'>"
 	, "          <span class='wikibase-sitelinkview-siteid-container'>"
@@ -93,13 +98,13 @@ class Wdata_fmtr__langtext_row_base implements gplx.core.brys.Bfr_arg, Wdata_fmt
 //		, "              </span>"
 //		, "            </li>"
 }
-class Wdata_fmtr__alias_row implements gplx.core.brys.Bfr_arg, Wdata_fmtr__langtext_row {
+class Wdata_fmtr__alias_row implements BryBfrArg, Wdata_fmtr__langtext_row {
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wdata_alias_itm itm = (Wdata_alias_itm)list.Get_at(i);
+			Wdata_alias_itm itm = (Wdata_alias_itm)list.GetAt(i);
 			byte[][] vals_ary = itm.Vals();
 			int vals_len = vals_ary.length;
 			for (int j = 0; j < vals_len; ++j) {
@@ -109,14 +114,14 @@ class Wdata_fmtr__alias_row implements gplx.core.brys.Bfr_arg, Wdata_fmtr__langt
 				byte[] lang_code_style = lang_code_style_n;
 				if (j == 0) {
 					lang_code = lang_itm.Key();
-					lang_code_style = Bry_.Empty;
+					lang_code_style = BryUtl.Empty;
 				}
-				row_fmtr.Bld_bfr_many(bfr, lang_code, lang_code_style, Gfh_utl.Escape_html_as_bry(val));
+				row_fmtr.BldToBfrMany(bfr, lang_code, lang_code_style, Gfh_utl.Escape_html_as_bry(val));
 			}
 		}
 	}
-	private static final byte[] lang_code_style_n = Bry_.new_a7("border:1px solid white;background:none;");
-	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final byte[] lang_code_style_n = BryUtl.NewA7("border:1px solid white;background:none;");
+	private final BryFmtr row_fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "        <li class='wikibase-sitelinkview'>"
 	, "          <span class='wikibase-sitelinkview-siteid-container' style='~{lang_code_style}>"

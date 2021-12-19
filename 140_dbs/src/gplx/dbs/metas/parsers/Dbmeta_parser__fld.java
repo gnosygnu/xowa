@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.String_;
-import gplx.core.brys.Bry_rdr;
+package gplx.dbs.metas.parsers; import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.rdrs.BryRdr;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
 import gplx.dbs.DbmetaFldItm;
@@ -30,10 +30,10 @@ public class Dbmeta_parser__fld {
 	public DbmetaFldItm Parse_fld(Sql_bry_rdr rdr) {	// starts after "(" or ","; EX: "(fld1 int", ", fld2 int"; ends at ")"
 		byte[] name = rdr.Read_sql_identifier();
 		DbmetaFldType type = this.Parse_type(rdr);
-		DbmetaFldItm fld = new DbmetaFldItm(String_.new_u8(name), type);
-		byte[] src = rdr.Src(); int src_len = rdr.Src_end();
+		DbmetaFldItm fld = new DbmetaFldItm(StringUtl.NewU8(name), type);
+		byte[] src = rdr.Src(); int src_len = rdr.SrcEnd();
 		while (true) {
-			rdr.Skip_ws();
+			rdr.SkipWs();
 			if (rdr.Pos() == src_len) return fld;	// eos
 			switch (src[rdr.Pos()]) {
 				case AsciiByte.Comma:		return fld;
@@ -41,41 +41,41 @@ public class Dbmeta_parser__fld {
 				case AsciiByte.Dash:
 					int nxt_pos = rdr.Pos() + 1;
 					if (src[nxt_pos] == AsciiByte.Dash) {
-						nxt_pos = Bry_find_.Find_fwd(src, AsciiByte.Nl, nxt_pos);
-						rdr.Move_to(nxt_pos + 1);
+						nxt_pos = BryFind.FindFwd(src, AsciiByte.Nl, nxt_pos);
+						rdr.MoveTo(nxt_pos + 1);
 					}
 					else {
-						throw Err_.new_("sqls.dbs", "expected double dash for comment");
+						throw ErrUtl.NewArgs("expected double dash for comment");
 					}
 					return fld;
 			}
-			Dbmeta_fld_wkr__base type_wkr = (Dbmeta_fld_wkr__base)rdr.Chk_trie_as_obj(trv, fld_trie);
+			Dbmeta_fld_wkr__base type_wkr = (Dbmeta_fld_wkr__base)rdr.ChkTrieAsObj(trv, fld_trie);
 			switch (type_wkr.Tid()) {
 				case Dbmeta_fld_wkr__base.Tid_end_comma:
 				case Dbmeta_fld_wkr__base.Tid_end_paren:	return fld;
 				default:
-					rdr.Move_to(trv.Pos());
+					rdr.MoveTo(trv.Pos());
 					type_wkr.Match(rdr, fld);
 					break;
 			}
 		}
 	}
-	@gplx.Internal protected DbmetaFldType Parse_type(Bry_rdr rdr) {
-		rdr.Skip_ws();
-		Dbmeta_parser__fld_itm type_itm = (Dbmeta_parser__fld_itm)rdr.Chk_trie_as_obj(trv, type_trie);
-		rdr.Move_by(type_itm.Word().length);
+	public DbmetaFldType Parse_type(BryRdr rdr) {
+		rdr.SkipWs();
+		Dbmeta_parser__fld_itm type_itm = (Dbmeta_parser__fld_itm)rdr.ChkTrieAsObj(trv, type_trie);
+		rdr.MoveBy(type_itm.Word().length);
 		int paren_itms_count = type_itm.Paren_itms_count();
-		int len_1 = Int_.Min_value, len_2 = Int_.Min_value;
+		int len_1 = IntUtl.MinValue, len_2 = IntUtl.MinValue;
 		if (paren_itms_count > 0) {
-			rdr.Skip_ws().Chk(AsciiByte.ParenBgn);
-			len_1 = rdr.Skip_ws().Read_int_to_non_num(); if (len_1 == Int_.Min_value) rdr.Err_wkr().Fail("invalid fld len_1");
+			rdr.SkipWs().Chk(AsciiByte.ParenBgn);
+			len_1 = rdr.SkipWs().ReadIntToNonNum(); if (len_1 == IntUtl.MinValue) rdr.ErrWkr().Fail("invalid fld len_1");
 			if (paren_itms_count == 2) {
-				rdr.Skip_ws().Chk(AsciiByte.Comma);
-				len_2 = rdr.Skip_ws().Read_int_to_non_num(); if (len_2 == Int_.Min_value) rdr.Err_wkr().Fail("invalid fld len_2");
+				rdr.SkipWs().Chk(AsciiByte.Comma);
+				len_2 = rdr.SkipWs().ReadIntToNonNum(); if (len_2 == IntUtl.MinValue) rdr.ErrWkr().Fail("invalid fld len_2");
 			}
-			rdr.Skip_ws().Chk(AsciiByte.ParenEnd);
+			rdr.SkipWs().Chk(AsciiByte.ParenEnd);
 		}
-		return new DbmetaFldType(type_itm.Tid_ansi(), String_.new_u8(type_itm.Word()), len_1, len_2);
+		return new DbmetaFldType(type_itm.Tid_ansi(), StringUtl.NewU8(type_itm.Word()), len_1, len_2);
 	}
 	private static final Btrie_slim_mgr fld_trie = fld_trie_init
 	( Dbmeta_fld_wkr__nullable_null.Instance
@@ -122,9 +122,9 @@ class Dbmeta_parser__fld_itm {
 	public static void reg_many(Btrie_slim_mgr trie, int tid_ansi, int tid_sqlite, int paren_itms_count, String... names_str) {
 		int len = names_str.length;
 		for (int i = 0; i < len; ++i) {
-			byte[] name_bry = Bry_.new_a7(names_str[i]);
+			byte[] name_bry = BryUtl.NewA7(names_str[i]);
 			Dbmeta_parser__fld_itm itm = new Dbmeta_parser__fld_itm(tid_ansi, tid_sqlite, name_bry, paren_itms_count);
-			trie.Add_obj(name_bry, itm);
+			trie.AddObj(name_bry, itm);
 		}
 	}
 }

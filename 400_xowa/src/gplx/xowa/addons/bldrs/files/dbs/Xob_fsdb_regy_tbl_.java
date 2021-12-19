@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.dbs;
 import gplx.dbs.*;
+import gplx.types.basics.utls.StringUtl;
 public class Xob_fsdb_regy_tbl_ {
 	public static final String Tbl_name = "fsdb_regy";
-	public static final String Tbl_sql = String_.Concat_lines_nl
+	public static final String Tbl_sql = StringUtl.ConcatLinesNl
 	( "CREATE TABLE fsdb_regy "
 	, "( fsdb_id               integer             NOT NULL       PRIMARY KEY        AUTOINCREMENT"
 	, ", fsdb_name             varchar(255)        NOT NULL"
@@ -36,7 +37,7 @@ public class Xob_fsdb_regy_tbl_ {
 	);
 	public static final Db_idx_itm Idx_main = Db_idx_itm.sql_("CREATE INDEX fsdb_regy__main ON fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page);");
 	public static final String
-	  Insert_fsdb_fil = String_.Concat_lines_nl
+	  Insert_fsdb_fil = StringUtl.ConcatLinesNl
 	( "INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status, fsdb_fil_id, fsdb_thm_id, fsdb_deleted)"
 	, "SELECT  f.fil_name"
 	, ",       1"
@@ -55,7 +56,7 @@ public class Xob_fsdb_regy_tbl_ {
 	, "WHERE   f.fil_bin_db_id != -1"
 	, ";"
 	)
-	, Insert_fsdb_thm = String_.Concat_lines_nl
+	, Insert_fsdb_thm = StringUtl.ConcatLinesNl
 	( "INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status, fsdb_fil_id, fsdb_thm_id, fsdb_deleted)"
 	, "SELECT  f.fil_name"
 	, ",       0"
@@ -74,7 +75,7 @@ public class Xob_fsdb_regy_tbl_ {
 	, "        JOIN fsdb_db.fsdb_dir d ON f.fil_owner_id = d.dir_id"
 	, ";"
 	)
-	, Insert_fsdb_thm_v0 = String_.Concat_lines_nl
+	, Insert_fsdb_thm_v0 = StringUtl.ConcatLinesNl
 	( "INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status, fsdb_fil_id, fsdb_thm_id, fsdb_deleted)"
 	, "SELECT  f.fil_name"
 	, ",       0"
@@ -94,7 +95,7 @@ public class Xob_fsdb_regy_tbl_ {
 	, ";"
 	)
 	, Update_regy_nil = "UPDATE xfer_regy SET xfer_status = 0;"
-	, Update_regy_fil = String_.Concat_lines_nl
+	, Update_regy_fil = StringUtl.ConcatLinesNl
 	( "REPLACE INTO xfer_regy "
 	, "( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	, ", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
@@ -110,7 +111,7 @@ public class Xob_fsdb_regy_tbl_ {
 	, "AND     x.orig_repo = f.fsdb_repo"
 	, ";"
 	)
-	, Update_regy_thm = String_.Concat_lines_nl
+	, Update_regy_thm = StringUtl.ConcatLinesNl
 	( "REPLACE INTO xfer_regy "
 	, "( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	, ", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"

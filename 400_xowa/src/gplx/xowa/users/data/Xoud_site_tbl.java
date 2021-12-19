@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users.data;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Rls_able;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.frameworks.objects.Rls_able;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Xoud_site_tbl implements Rls_able {
 	public static final String Tbl_name = "user_site";
 	private final String tbl_name = Tbl_name; private final DbmetaFldList flds = new DbmetaFldList();

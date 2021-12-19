@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 public class Pxd_date_bldr {
 	private int[] seg_ary;
 	public Pxd_date_bldr(int year, int month, int day, int hour, int minute, int second, int frac) {
@@ -28,10 +30,10 @@ public class Pxd_date_bldr {
 
 	// relative workers will convert segs to date, add a relative unit, and then convert back to date
 	// note that the date conversion is necessary b/c Date class has logic to do things like "2017-12-31 +1 day" and rollover to next month / next year
-	public DateAdp To_date() {
-		return DateAdp_.seg_(seg_ary);
+	public GfoDate To_date() {
+		return GfoDateUtl.NewBySegs(seg_ary);
 	}
-	public void By_date(DateAdp v) {
-		this.seg_ary = v.XtoSegAry();
+	public void By_date(GfoDate v) {
+		this.seg_ary = v.ToSegAry();
 	}
 }

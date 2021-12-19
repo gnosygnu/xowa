@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.lnkis;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.core.brys.Bry_rdr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.rdrs.BryRdr;
 import gplx.core.brys.Int_flag_bldr;
 import gplx.core.threads.poolables.Gfo_poolable_itm;
 import gplx.core.threads.poolables.Gfo_poolable_mgr;
 import gplx.langs.htmls.Gfh_bldr_;
 import gplx.langs.htmls.Gfh_utl;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.htmls.Xoh_page;
 import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
@@ -43,7 +43,7 @@ import gplx.xowa.htmls.hrefs.Xoh_href_;
 import gplx.xowa.wikis.nss.Xow_ns;
 import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(32);
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnki;}
 	public String Key() {return Xoh_hzip_dict_.Key__lnki;}
 	public byte[] Hook() {return hook;} private byte[] hook;
@@ -82,8 +82,8 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		if (title_tid == Xoh_lnki_data.Title__diff)	bfr.Add_hzip_mid(src, data.Title_bgn(), data.Title_end());
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
-		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		int flag = rdr.ReadHzipInt(1); flag_bldr.Decode(flag);
 		byte cls_tid					= flag_bldr.Get_as_byte(Flag__cls_tid);
 		boolean title_missing_ns			= flag_bldr.Get_as_bool(Flag__title_missing_ns);
 		boolean ttl_is_main_page			= flag_bldr.Get_as_bool(Flag__ttl_is_main_page);
@@ -95,20 +95,20 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		int capt_cs0_tid				= flag_bldr.Get_as_int(Flag__capt_cs0_tid);
 		byte text_type					= flag_bldr.Get_as_byte(Flag__text_type);
 		// Tfds.Dbg(cls_tid, title_missing_ns, ttl_is_main_page, ns_custom_exists, title_tid, capt_has_ns, ns_is_not_main, href_type, capt_cs0_tid, text_type);
-		int site_bgn = -1, site_end = -1; if (href_type == Xoh_anch_href_data.Tid__site) {site_bgn = rdr.Pos(); site_end = rdr.Find_fwd_lr();}
+		int site_bgn = -1, site_end = -1; if (href_type == Xoh_anch_href_data.Tid__site) {site_bgn = rdr.Pos(); site_end = rdr.FindFwdLr();}
 		int ns_id = ns_is_not_main ? Xoh_lnki_dict_.Ns_decode(rdr) : Xow_ns_.Tid__main;
-		byte[] ns_custom_bry = ns_custom_exists ? rdr.Read_bry_to() : null;
-		int text_0_bgn = rdr.Pos(); int text_0_end = rdr.Find_fwd_lr();
+		byte[] ns_custom_bry = ns_custom_exists ? rdr.ReadBryTo() : null;
+		int text_0_bgn = rdr.Pos(); int text_0_end = rdr.FindFwdLr();
 		int text_1_bgn = -1, text_1_end = -1;
 		switch (text_type) {
 			case Xoh_anch_capt_itm.Tid__diff: case Xoh_anch_capt_itm.Tid__less: case Xoh_anch_capt_itm.Tid__more:
-				text_1_bgn = rdr.Pos(); text_1_end = rdr.Find_fwd_lr();
+				text_1_bgn = rdr.Pos(); text_1_end = rdr.FindFwdLr();
 				break;
 		}
-		byte[] title_bry = title_tid == Xoh_lnki_data.Title__diff ? rdr.Read_bry_to() : null;
+		byte[] title_bry = title_tid == Xoh_lnki_data.Title__diff ? rdr.ReadBryTo() : null;
 		byte[] href_bry = text_type == Xoh_anch_capt_itm.Tid__less 
-						? tmp_bfr.Add_mid(src, text_0_bgn, text_0_end).Add_mid(src, text_1_bgn, text_1_end).To_bry_and_clear()
-						: Bry_.Mid(src, text_0_bgn, text_0_end);
+						? tmp_bfr.AddMid(src, text_0_bgn, text_0_end).AddMid(src, text_1_bgn, text_1_end).ToBryAndClear()
+						: BryLni.Mid(src, text_0_bgn, text_0_end);
 		int html_uid = -1;
 		byte[] ns_bry = null;
 		switch (href_type) {
@@ -118,32 +118,32 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			case Xoh_anch_href_data.Tid__site:
 				if (ns_custom_exists) {
 					ns_bry = ns_custom_bry;
-					tmp_bfr.Add(Xoa_ttl.Replace_spaces(ns_bry)).Add_byte_colon();	// NOTE: Replace_spaces to handle ns_custom_bry like "Image talk"
+					tmp_bfr.Add(Xoa_ttl.Replace_spaces(ns_bry)).AddByteColon();	// NOTE: Replace_spaces to handle ns_custom_bry like "Image talk"
 				}
 				else {
 					if (ns_id == Xow_ns_.Tid__main) {
 						if (ttl_is_main_page)
-							href_bry = Bry_.Empty;
+							href_bry = BryUtl.Empty;
 					}
 					else {
 						Xow_ns ns = hctx.Wiki__ttl_parser().Ns_mgr().Ids_get_or_null(ns_id);
 						if (ns == null)
-							rdr.Err_wkr().Fail("invalid ns_id", "ns_id", ns_id, "href_bry", href_bry);	// add more args to troubleshoot random failure; DATE:2016-06-23
+							rdr.ErrWkr().Fail("invalid ns_id", "ns_id", ns_id, "href_bry", href_bry);	// add more args to troubleshoot random failure; DATE:2016-06-23
 						ns_bry = ns.Name_ui();
-						tmp_bfr.Add(ns.Name_db()).Add_byte_colon();
+						tmp_bfr.Add(ns.Name_db()).AddByteColon();
 					}
 				}
 				// Gfo_url_encoder encoder = href_type == Xoh_anch_href_data.Tid__wiki ? Gfo_url_encoder_.Href : Gfo_url_encoder_.Href_qarg;	// NOTE: lnki vs lnke will encode entities differently
 				int href_end = href_bry.length;
 				if (cls_tid == Xoh_anch_cls_.Tid__ctg_xnav)	{ // NOTE: for ctg_xnav, only encode title, not its query arguments; "?" x> "%3F" or "=" x> "%3D" or "sortkey=A B" -> "sortkey=A_B"; DATE:2015-12-28
-					href_end = Bry_find_.Find_fwd(href_bry, AsciiByte.Question, 0, href_end);
+					href_end = BryFind.FindFwd(href_bry, AsciiByte.Question, 0, href_end);
 				}
 				// encoder.Encode(tmp_bfr, href_bry, 0, href_end);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
 				// tmp_bfr.Add_mid(href_bry, 0, href_end);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
-				tmp_bfr.Add_mid_w_swap(href_bry, 0, href_end, AsciiByte.Space, AsciiByte.Underline);
+				tmp_bfr.AddMidWithSwap(href_bry, 0, href_end, AsciiByte.Space, AsciiByte.Underline);
 				if (cls_tid == Xoh_anch_cls_.Tid__ctg_xnav && href_end != -1)
-					tmp_bfr.Add_mid(href_bry, href_end, href_bry.length);
-				href_bry = tmp_bfr.To_bry_and_clear();
+					tmp_bfr.AddMid(href_bry, href_end, href_bry.length);
+				href_bry = tmp_bfr.ToBryAndClear();
 
 				// generate stub for redlink
 				html_uid = Xoh_hdoc_wkr__make.Lnki_redlink_reg(hpg, hctx, href_bry, html_uid);
@@ -161,7 +161,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					break;
 				case Xoh_lnki_data.Title__capt:
 					title_bry = !capt_has_ns && !title_missing_ns && ns_bry != null 
-						? Bry_.Add(ns_bry, AsciiByte.ColonBry, capt_bry)
+						? BryUtl.Add(ns_bry, AsciiByte.ColonBry, capt_bry)
 						: capt_bry;
 					break;
 			}
@@ -171,10 +171,10 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);
 		switch (href_type) {
 			case Xoh_anch_href_data.Tid__anch:
-				bfr.Add_byte(AsciiByte.Hash);							// "#"
+				bfr.AddByte(AsciiByte.Hash);							// "#"
 				break;
 			case Xoh_anch_href_data.Tid__site:
-				bfr.Add(Xoh_href_.Bry__site).Add_mid(src, site_bgn, site_end);
+				bfr.Add(Xoh_href_.Bry__site).AddMid(src, site_bgn, site_end);
 				bfr.Add(Xoh_href_.Bry__wiki);
 				break;
 			case Xoh_anch_href_data.Tid__wiki:
@@ -194,7 +194,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		if (cls_bry != null) bfr.Add(Gfh_bldr_.Bry__cls__nth).Add(cls_bry);
 		if (	!hctx.Mode_is_diff()										// do not add id during hzip_diff
 			&&	href_type != Xoh_anch_href_data.Tid__inet) {				// lnke should not get id
-			bfr.Add(Gfh_bldr_.Bry__id__nth).Add_str_a7(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix).Add_int_variable(html_uid);
+			bfr.Add(Gfh_bldr_.Bry__id__nth).AddStrA7(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix).AddIntVariable(html_uid);
 		}
 		if (	href_type != Xoh_anch_href_data.Tid__anch) {	// anchs never have title;
 			if (title_bry != null) {
@@ -223,35 +223,35 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	;
 }
 class Xoh_lnki_hzip_ {
-	public static byte[] Bld_capt(Bry_bfr tmp_bfr, byte href_type, byte text_type, boolean capt_has_ns, int capt_cs0, byte[] ns_bry, byte[] text_0_src, int text_0_bgn, int text_0_end, byte[] capt_src, int text_1_bgn, int text_1_end) {
+	public static byte[] Bld_capt(BryWtr tmp_bfr, byte href_type, byte text_type, boolean capt_has_ns, int capt_cs0, byte[] ns_bry, byte[] text_0_src, int text_0_bgn, int text_0_end, byte[] capt_src, int text_1_bgn, int text_1_end) {
 		if (	href_type == Xoh_anch_href_data.Tid__anch
 			&&	text_type != Xoh_anch_capt_itm.Tid__diff )
-			tmp_bfr.Add_byte(AsciiByte.Hash);
+			tmp_bfr.AddByte(AsciiByte.Hash);
 		if (capt_has_ns && ns_bry != null)
-			tmp_bfr.Add(ns_bry).Add_byte_colon();
+			tmp_bfr.Add(ns_bry).AddByteColon();
 		switch (text_type) {
 			case Xoh_anch_capt_itm.Tid__diff: break;
 			default:
 				switch (capt_cs0) {
 					case Xoh_anch_capt_itm.Cs0__exact: break;
-					case Xoh_anch_capt_itm.Cs0__lower: tmp_bfr.Add_byte(AsciiByte.CaseLower(text_0_src[text_0_bgn++]));break;
-					case Xoh_anch_capt_itm.Cs0__upper: tmp_bfr.Add_byte(AsciiByte.CaseUpper(text_0_src[text_0_bgn++]));break;
+					case Xoh_anch_capt_itm.Cs0__lower: tmp_bfr.AddByte(AsciiByte.CaseLower(text_0_src[text_0_bgn++]));break;
+					case Xoh_anch_capt_itm.Cs0__upper: tmp_bfr.AddByte(AsciiByte.CaseUpper(text_0_src[text_0_bgn++]));break;
 				}
 				break;
 		}
 		switch (text_type) {
 			case Xoh_anch_capt_itm.Tid__same:
 			case Xoh_anch_capt_itm.Tid__less:
-				tmp_bfr.Add_mid(text_0_src, text_0_bgn, text_0_end);
+				tmp_bfr.AddMid(text_0_src, text_0_bgn, text_0_end);
 				break;
 			case Xoh_anch_capt_itm.Tid__diff:
-				tmp_bfr.Add_mid(capt_src, text_1_bgn, text_1_end);
+				tmp_bfr.AddMid(capt_src, text_1_bgn, text_1_end);
 				break;
 			case Xoh_anch_capt_itm.Tid__more:
-				tmp_bfr.Add_mid(text_0_src, text_0_bgn, text_0_end);
-				tmp_bfr.Add_mid(capt_src, text_1_bgn, text_1_end);
+				tmp_bfr.AddMid(text_0_src, text_0_bgn, text_0_end);
+				tmp_bfr.AddMid(capt_src, text_1_bgn, text_1_end);
 				break;
 		}
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
 }

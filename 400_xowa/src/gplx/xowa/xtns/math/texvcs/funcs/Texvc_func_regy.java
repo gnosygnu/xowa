@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.funcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+package gplx.xowa.xtns.math.texvcs.funcs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.xtns.math.texvcs.tkns.*;
 public class Texvc_func_regy {
 	private final Texvc_func_itm[] ary = new Texvc_func_itm[Texvc_func_itm_.Id_len];
@@ -715,5 +717,5 @@ rv.Add(tkn_mkr, Make(Texvc_func_itm_.Id__begin, "begin").Args_(1).Tag_("scope_fu
 rv.Add(tkn_mkr, Make(Texvc_func_itm_.Id__end, "end").Args_(1).Tag_("scope_func"));
 		return rv;
 	}
-	private static Texvc_func_itm Make(int id, String key) {return new Texvc_func_itm(id, Bry_.new_a7(key));}	// NOTE: TEX func names are ASCII
+	private static Texvc_func_itm Make(int id, String key) {return new Texvc_func_itm(id, BryUtl.NewA7(key));}	// NOTE: TEX func names are ASCII
 }

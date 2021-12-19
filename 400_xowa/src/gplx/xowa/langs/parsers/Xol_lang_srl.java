@@ -13,12 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.parsers; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.langs.parsers;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.apps.gfs.Xoa_gfs_bldr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.bldrs.Xol_ns_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.kwds.Xol_kwd_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_mgr;
+import gplx.xowa.langs.msgs.Xol_msg_itm;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.langs.msgs.Xol_msg_mgr;
+import gplx.xowa.langs.numbers.Xol_num_mgr;
+import gplx.xowa.langs.numbers.Xol_transform_mgr;
+import gplx.xowa.langs.specials.Xol_specials_itm;
+import gplx.xowa.langs.specials.Xol_specials_mgr;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_case_;
 public class Xol_lang_srl {
 	public static Xow_ns[] Load_ns_grps(byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;
@@ -29,8 +52,8 @@ public class Xol_lang_srl {
 			byte b = last ? AsciiByte.Nl : src[pos];
 			switch (b) {
 				case AsciiByte.Pipe:
-					cur_id = Bry_.To_int_or(src, fld_bgn, pos, Int_.Min_value);
-					if (cur_id == Int_.Min_value) throw Err_.new_wo_type("invalid_id", "id", String_.new_u8(src, fld_bgn, pos));					
+					cur_id = BryUtl.ToIntOr(src, fld_bgn, pos, IntUtl.MinValue);
+					if (cur_id == IntUtl.MinValue) throw ErrUtl.NewArgs("invalid_id", "id", StringUtl.NewU8(src, fld_bgn, pos));
 					fld_bgn = pos + 1;
 					break;
 				case AsciiByte.Nl:
@@ -51,7 +74,7 @@ public class Xol_lang_srl {
 	}
 	public static void Load_keywords(Xol_kwd_mgr keyword_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0, fld_idx = 0;
-		boolean cur_cs = false; byte[] cur_key = Bry_.Empty;
+		boolean cur_cs = false; byte[] cur_key = BryUtl.Empty;
 		List_adp cur_words = List_adp_.New();
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
@@ -68,7 +91,7 @@ public class Xol_lang_srl {
 							switch (cs_byte) {
 								case AsciiByte.Num0: cur_cs = false; break;
 								case AsciiByte.Num1: cur_cs = true; break;
-								default: throw Err_.new_wo_type("case sensitive should be 0 or 1", "cs", Byte_.To_str(cs_byte)); 
+								default: throw ErrUtl.NewArgs("case sensitive should be 0 or 1", "cs", ByteUtl.ToStr(cs_byte));
 							}
 							break;
 					}
@@ -82,7 +105,7 @@ public class Xol_lang_srl {
 					break;
 				case AsciiByte.Nl:
 					if (cur_words.Len() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
-						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Err_.new_wo_type("key does not have id", "id", cur_id);
+						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw ErrUtl.NewArgs("key does not have id", "id", cur_id);
 						Xol_kwd_grp grp = keyword_mgr.Get_or_new(cur_id);
 						grp.Srl_load(cur_cs, (byte[][])cur_words.ToAry(byte[].class));
 					}
@@ -100,7 +123,7 @@ public class Xol_lang_srl {
 	}
 	public static void Load_messages(Xol_msg_mgr msg_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;
-		byte[] cur_key = Bry_.Empty;
+		byte[] cur_key = BryUtl.Empty;
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
@@ -126,7 +149,7 @@ public class Xol_lang_srl {
 	}
 	public static void Load_specials(Xol_specials_mgr special_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0;
-		byte[] cur_key = Bry_.Empty;
+		byte[] cur_key = BryUtl.Empty;
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
@@ -138,7 +161,7 @@ public class Xol_lang_srl {
 					break;
 				case AsciiByte.Nl:
 					byte[] cur_val_raw = csv_parser.Load(src, fld_bgn, pos);
-					byte[][] cur_vals = Bry_split_.Split(cur_val_raw, AsciiByte.Tilde);
+					byte[][] cur_vals = BrySplit.Split(cur_val_raw, AsciiByte.Tilde);
 					special_mgr.Add(cur_key, cur_vals);
 					fld_bgn = pos + 1;
 					break;
@@ -162,8 +185,8 @@ public class Xol_lang_srl {
 				bldr.Add_indent(1).Add_proc_init_one(Xol_num_mgr.Invk_separators).Add_curly_bgn_nl();							//   separators {
 				bldr.Add_indent(2).Add_proc_init_one(Xol_num_mgr.Invk_clear).Add_term_nl();										//     clear;
 				for (int i = 0; i < separators_len; i++) {
-					Keyval kv = separators_mgr.Get_at(i);
-					String k = kv.Key(), v = kv.Val_to_str_or_empty();
+					KeyVal kv = separators_mgr.Get_at(i);
+					String k = kv.KeyToStr(), v = kv.ValToStrOrEmpty();
 					bldr.Add_indent(2).Add_proc_init_many(Xol_transform_mgr.Invk_set).Add_parens_str_many(k, v).Add_term_nl();	//     set('k', 'v');
 				}
 				bldr.Add_indent(1).Add_curly_end_nl();																			//   }
@@ -172,8 +195,8 @@ public class Xol_lang_srl {
 				bldr.Add_indent(1).Add_proc_init_one(Xol_num_mgr.Invk_digits).Add_curly_bgn_nl();								//   digits {
 				bldr.Add_indent(2).Add_proc_init_one(Xol_num_mgr.Invk_clear).Add_term_nl();										//     clear;
 				for (int i = 0; i < digits_len; i++) {
-					Keyval kv = digits_mgr.Get_at(i);
-					String k = kv.Key(), v = kv.Val_to_str_or_empty();
+					KeyVal kv = digits_mgr.Get_at(i);
+					String k = kv.KeyToStr(), v = kv.ValToStrOrEmpty();
 					bldr.Add_indent(2).Add_proc_init_many(Xol_transform_mgr.Invk_set).Add_parens_str_many(k, v).Add_term_nl();	//     set('k', 'v');
 				}
 				bldr.Add_indent(1).Add_curly_end_nl();																			//   }
@@ -184,15 +207,15 @@ public class Xol_lang_srl {
 	public static void Save_ns_grps(Xoa_gfs_bldr bldr, Xol_ns_grp ns_grp, String proc_invk) {
 		int ns_grp_len = ns_grp.Len(); Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		if (ns_grp_len == 0) return;
-		Bry_bfr bfr = bldr.Bfr();
+		BryWtr bfr = bldr.Bfr();
 		bldr.Add_proc_cont_one(proc_invk).Add_nl();
 		bldr.Add_indent().Add_proc_cont_one(Invk_load_text).Add_paren_bgn().Add_nl();		//   .load_text(\n
 		bldr.Add_quote_xtn_bgn();															//	<~{\n'
 		for (int i = 0; i < ns_grp_len; i++) {
 			Xow_ns ns = ns_grp.Get_at(i);
-			bfr.Add_int_variable(ns.Id()).Add_byte_pipe();									// id|
+			bfr.AddIntVariable(ns.Id()).AddBytePipe();									// id|
 			csv_parser.Save(bfr, ns.Name_db());												// name
-			bfr.Add_byte_nl();																// \n
+			bfr.AddByteNl();																// \n
 		}
 		bldr.Add_quote_xtn_end();															// ']:>\n
 		bldr.Add_paren_end().Add_proc_cont_one(Invk_lang).Add_nl();							// ).lang\n
@@ -200,20 +223,20 @@ public class Xol_lang_srl {
 	public static void Save_specials(Xoa_gfs_bldr bldr, Xol_specials_mgr specials_mgr) {
 		int specials_len = specials_mgr.Len(); Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		if (specials_len == 0) return;
-		Bry_bfr bfr = bldr.Bfr();
+		BryWtr bfr = bldr.Bfr();
 		bldr.Add_proc_cont_one(Xol_lang_itm.Invk_specials).Add_nl();
 		bldr.Add_indent().Add_proc_cont_one(Xol_specials_mgr.Invk_clear).Add_nl();
 		bldr.Add_indent().Add_proc_cont_one(Invk_load_text).Add_paren_bgn().Add_nl();		//   .load_text(\n
 		bldr.Add_quote_xtn_bgn();															//	<~{\n'
 		for (int i = 0; i < specials_len; i++) {
 			Xol_specials_itm itm = specials_mgr.Get_at(i);
-			bfr.Add(itm.Special()).Add_byte_pipe();											// id|
+			bfr.Add(itm.Special()).AddBytePipe();											// id|
 			int aliases_len = itm.Aliases().length;
 			for (int j = 0; j < aliases_len; j++) {
-				if (j != 0) bfr.Add_byte(AsciiByte.Tilde);
+				if (j != 0) bfr.AddByte(AsciiByte.Tilde);
 				csv_parser.Save(bfr, itm.Aliases()[j]);										// name
 			}
-			bfr.Add_byte_nl();																// \n
+			bfr.AddByteNl();																// \n
 		}
 		bldr.Add_quote_xtn_end();															// ']:>\n
 		bldr.Add_paren_end().Add_proc_cont_one(Invk_lang).Add_nl();							// ).lang\n
@@ -226,20 +249,20 @@ public class Xol_lang_srl {
 			++count;
 		}
 		if (count == 0) return;
-		Bry_bfr bfr = bldr.Bfr();
+		BryWtr bfr = bldr.Bfr();
 		bldr.Add_proc_cont_one(Xol_lang_itm.Invk_keywords).Add_nl();							// .keywords\n
 		bldr.Add_indent().Add_proc_cont_one(Invk_load_text).Add_paren_bgn().Add_nl();		//   .load_text(\n
 		bldr.Add_quote_xtn_bgn();															//	<~{\n'
 		for (int i = 0; i < len; i++) {
 			Xol_kwd_grp grp = kwd_mgr.Get_at(i); if (grp == null) continue;					// some items may not be loaded/set by lang
 			csv_parser.Save(bfr, grp.Key());												// key
-			bfr.Add_byte_pipe();															// |
-			bfr.Add_int_bool(grp.Case_match()).Add_byte_pipe();								// 1|
+			bfr.AddBytePipe();															// |
+			bfr.AddIntBool(grp.Case_match()).AddBytePipe();								// 1|
 			int word_len = grp.Itms().length;
 			for (int j = 0; j < word_len; j++) {
 				Xol_kwd_itm word = grp.Itms()[j];
 				csv_parser.Save(bfr, word.Val());											// word
-				bfr.Add_byte(AsciiByte.Tilde);												// ~
+				bfr.AddByte(AsciiByte.Tilde);												// ~
 			}
 			bldr.Add_nl();																	// \n
 		}
@@ -255,7 +278,7 @@ public class Xol_lang_srl {
 			++count;
 		}
 		if (count == 0) return;
-		Bry_bfr bfr = bldr.Bfr();
+		BryWtr bfr = bldr.Bfr();
 		bldr.Add_proc_cont_one(Xol_lang_itm.Invk_messages).Add_nl();							// .keywords\n
 		bldr.Add_indent().Add_proc_cont_one(Invk_load_text).Add_paren_bgn().Add_nl();		//   .load_text(\n
 		bldr.Add_quote_xtn_bgn();															//	<~{\n'
@@ -263,9 +286,9 @@ public class Xol_lang_srl {
 			Xol_msg_itm itm = msg_mgr.Itm_by_id_or_null(i); if (itm == null) continue;		// some items may not be loaded/set by lang			
 			if (dirty && !itm.Dirty()) continue;	// TEST:
 			csv_parser.Save(bfr, itm.Key());												// key
-			bfr.Add_byte_pipe();															// |
+			bfr.AddBytePipe();															// |
 			csv_parser.Save(bfr, itm.Val());												// val
-			bfr.Add_byte_nl();																// \n
+			bfr.AddByteNl();																// \n
 		}
 		bldr.Add_quote_xtn_end();															// ']:>\n
 		bldr.Add_paren_end().Add_proc_cont_one(Invk_lang).Add_nl();							// ).lang\n

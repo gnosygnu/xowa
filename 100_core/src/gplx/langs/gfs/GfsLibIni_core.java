@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,15 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.DateAdp_;
-import gplx.GfoTemplateFactory;
-import gplx.Io_url_;
-import gplx.RandomAdp_;
+package gplx.langs.gfs;
 import gplx.core.gfo_regys.GfoRegy;
+import gplx.frameworks.templates.GfoTemplateFactory;
+import gplx.libs.files.Io_url_;
 public class GfsLibIni_core implements GfsLibIni {
 	public void Ini(GfsCore core) {
-		core.AddObj(DateAdp_.Gfs, "Date_");
-		core.AddObj(RandomAdp_.Gfs, "RandomAdp_");
 		core.AddObj(GfoTemplateFactory.Instance, "factory");
 		core.AddObj(GfoRegy.Instance, "GfoRegy_");
 		core.AddObj(GfsCore.Instance, "GfsCore_");
@@ -30,5 +27,5 @@ public class GfsLibIni_core implements GfsLibIni {
 
 		GfoRegy.Instance.Parsers().Add("Io_url", Io_url_.Parser);
 	}
-        public static final GfsLibIni_core Instance = new GfsLibIni_core(); GfsLibIni_core() {}
+		public static final GfsLibIni_core Instance = new GfsLibIni_core(); GfsLibIni_core() {}
 }

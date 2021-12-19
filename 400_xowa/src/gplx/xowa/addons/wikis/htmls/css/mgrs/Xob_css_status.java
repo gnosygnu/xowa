@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.htmls.css.mgrs;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.Datetime_now;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.bldrs.css.Xoa_css_extractor;
 import gplx.xowa.wikis.data.Xow_db_file_schema_props;
@@ -68,20 +68,20 @@ public class Xob_css_status {
 				rv.Update_tid_wmf_y_();		// v1_db and fs_missing; update from wmf; legacy behavior
 		}
 		if (rv.Fs_exists()) {
-			DateAdp fs_timestamp = Timestamp_load(css_dir);
-			DateAdp db_timestamp = Datetime_now.Get();
+			GfoDate fs_timestamp = Timestamp_load(css_dir);
+			GfoDate db_timestamp = GfoDateNow.Get();
 			if (db_timestamp.compareTo(fs_timestamp) == CompareAbleUtl.More)
 				rv.Update_tid_db_y_();		// v2_db and later_version; update from db
 			else
 				rv.Update_tid_none_y_();	// v2_db and current version; noop
 		}
 	}
-	public static void Timestamp_save(Io_url css_dir, DateAdp time) {
-		Io_mgr.Instance.SaveFilStr(css_dir.GenSubFil(Timestamp_filename), time.XtoStr_fmt_yyyyMMdd_HHmmss());
+	public static void Timestamp_save(Io_url css_dir, GfoDate time) {
+		Io_mgr.Instance.SaveFilStr(css_dir.GenSubFil(Timestamp_filename), time.ToStrFmt_yyyyMMdd_HHmmss());
 	}
-	public static DateAdp Timestamp_load(Io_url css_dir) {
+	public static GfoDate Timestamp_load(Io_url css_dir) {
 		String rv = Io_mgr.Instance.LoadFilStr(css_dir.GenSubFil(Timestamp_filename));
-		return rv == null ? DateAdp_.MinValue : DateAdp_.parse_iso8561_or(rv, DateAdp_.MinValue);
+		return rv == null ? GfoDateUtl.MinValue : GfoDateUtl.ParseIso8561Or(rv, GfoDateUtl.MinValue);
 	}
 	private static final String Timestamp_filename = "xowa.css.timestamp.txt";
 }

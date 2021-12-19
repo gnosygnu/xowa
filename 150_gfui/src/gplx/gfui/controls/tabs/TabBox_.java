@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.tabs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.tabs;
 import gplx.gfui.controls.elems.*;
+import gplx.types.errs.ErrUtl;
 public class TabBox_ {
 	public static TabBox as_(Object obj) {return obj instanceof TabBox ? (TabBox)obj : null;}
-	public static TabBox cast(Object obj) {try {return (TabBox)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TabBox.class, obj);}}
+	public static TabBox cast(Object obj) {try {return (TabBox)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, TabBox.class, obj);}}
 	public static TabBox new_() {
 		TabBox rv = new TabBox();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_false_());

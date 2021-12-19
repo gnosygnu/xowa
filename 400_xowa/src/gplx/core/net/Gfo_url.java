@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
+package gplx.core.net;
 import gplx.core.net.qargs.*;
+import gplx.types.basics.utls.BryUtl;
 public class Gfo_url {
 	private final int segs__len;
 	public Gfo_url(byte[] raw, byte protocol_tid, byte[] protocol_bry, byte[][] segs, Gfo_qarg_itm[] qargs, byte[] anch) {
@@ -34,5 +35,5 @@ public class Gfo_url {
 	public byte[]			Segs__get_at_1st()	{return segs__len > 0 ? segs[0] : null;}
 	public byte[]			Segs__get_at_nth()	{return segs__len > 1 ? segs[segs__len - 1] : null;}
 
-	public static final Gfo_url Empty = new Gfo_url(Bry_.Empty, Gfo_protocol_itm.Tid_unknown, Bry_.Empty, Bry_.Ary_empty, null, null);
+	public static final Gfo_url Empty = new Gfo_url(BryUtl.Empty, Gfo_protocol_itm.Tid_unknown, BryUtl.Empty, BryUtl.AryEmpty, null, null);
 }

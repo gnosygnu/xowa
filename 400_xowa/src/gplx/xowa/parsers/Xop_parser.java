@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.nss.*;
@@ -53,12 +56,12 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	}
 
 	public byte[] Parse_text_to_html(Xop_ctx ctx, byte[] src) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
 		Parse_text_to_html(bfr, ctx, ctx.Page(), false, src);
-		return bfr.To_bry_and_rls();
+		return bfr.ToBryAndRls();
 	}
-	public void Parse_text_to_html(Bry_bfr trg, Xop_ctx pctx, Xoae_page page, boolean para_enabled, byte[] src) {Parse_text_to_html(trg, pctx, page, Xoh_wtr_ctx.Basic, para_enabled, src);}
-	public void Parse_text_to_html(Bry_bfr trg, Xop_ctx pctx, Xoae_page page, Xoh_wtr_ctx hctx, boolean para_enabled, byte[] src) {
+	public void Parse_text_to_html(BryWtr trg, Xop_ctx pctx, Xoae_page page, boolean para_enabled, byte[] src) {Parse_text_to_html(trg, pctx, page, Xoh_wtr_ctx.Basic, para_enabled, src);}
+	public void Parse_text_to_html(BryWtr trg, Xop_ctx pctx, Xoae_page page, Xoh_wtr_ctx hctx, boolean para_enabled, byte[] src) {
 		Xop_ctx ctx = Xop_ctx.New__sub(wiki, pctx, page);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
@@ -81,7 +84,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		tmpl_props.OnlyInclude_exists = false; int subs_len = root.Subs_len();
 		for (int i = 0; i < subs_len; i++)
 			root.Subs_get(i).Tmpl_compile(ctx, src, tmpl_props);
-		boolean only_include_chk = Bry_find_.Find_fwd(src, Xop_xnde_tag_.Bry__onlyinclude, 0, src.length) != Bry_find_.Not_found;
+		boolean only_include_chk = BryFind.FindFwd(src, Xop_xnde_tag_.Bry__onlyinclude, 0, src.length) != BryFind.NotFound;
 		if (only_include_chk) tmpl_props.OnlyInclude_exists = true;
 		tmpl.Init_by_new(ns, name, src, root, tmpl_props.OnlyInclude_exists);
 	}
@@ -122,7 +125,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		ctx.Parse_tid_(parse_tid_old);
 	}
 	public int Parse_to_src_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, Btrie_fast_mgr trie, int pos, int len) {
-		if (Bry_.Len_eq_0(src)) return 0; // if empty array, return 0, else IndexError; PAGE:commons.wikimedia.org/wiki/File:England_in_the_UK_and_Europe.svg; ISSUE#:668; DATE:2020-02-17
+		if (BryUtl.IsNullOrEmpty(src)) return 0; // if empty array, return 0, else IndexError; PAGE:commons.wikimedia.org/wiki/File:England_in_the_UK_and_Europe.svg; ISSUE#:668; DATE:2020-02-17
 		byte b = pos == -1 ? AsciiByte.Nl : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		Btrie_rv trv = new Btrie_rv();

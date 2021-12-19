@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.flds; import gplx.*; import gplx.core.*;
+package gplx.core.flds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import org.junit.*;
-import gplx.core.ios.*;
 public class Gfo_fld_rdr_tst {
 	Gfo_fld_rdr_fxt fxt = new Gfo_fld_rdr_fxt();
 	@Test public void Read_int() 							{fxt.ini_xdat().Raw_("123|")			.tst_Read_int(123);}
@@ -37,18 +39,18 @@ public class Gfo_fld_rdr_tst {
 }
 class Gfo_fld_rdr_fxt {
 	Gfo_fld_rdr rdr = new Gfo_fld_rdr(); Gfo_fld_wtr wtr = Gfo_fld_wtr.xowa_();
-	public Gfo_fld_rdr_fxt Raw_(String v) {rdr.Data_(Bry_.new_u8(v)); return this;}
+	public Gfo_fld_rdr_fxt Raw_(String v) {rdr.Data_(BryUtl.NewU8(v)); return this;}
 	public Gfo_fld_rdr_fxt ini_xdat() 	{rdr.Ctor_xdat(); return this;}
 	public Gfo_fld_rdr_fxt ini_sql() 	{rdr.Ctor_sql(); return this;}
-	public Gfo_fld_rdr_fxt tst_Read_int(int expd) 					{Tfds.Eq(expd, rdr.Read_int()); return this;}
-	public Gfo_fld_rdr_fxt tst_Read_double(double expd) 			{Tfds.Eq(expd, rdr.Read_double()); return this;}
-	public Gfo_fld_rdr_fxt tst_Read_str_simple(String expd) 		{Tfds.Eq(expd, rdr.Read_str_simple()); return this;}
-	public Gfo_fld_rdr_fxt tst_Read_str_escape(String expd) 		{Tfds.Eq(expd, rdr.Read_str_escape()); return this;}
+	public Gfo_fld_rdr_fxt tst_Read_int(int expd) 					{GfoTstr.EqObj(expd, rdr.Read_int()); return this;}
+	public Gfo_fld_rdr_fxt tst_Read_double(double expd) 			{GfoTstr.EqObj(expd, rdr.Read_double()); return this;}
+	public Gfo_fld_rdr_fxt tst_Read_str_simple(String expd) 		{GfoTstr.EqObj(expd, rdr.Read_str_simple()); return this;}
+	public Gfo_fld_rdr_fxt tst_Read_str_escape(String expd) 		{GfoTstr.EqObj(expd, rdr.Read_str_escape()); return this;}
 	public Gfo_fld_rdr_fxt tst_Write_str_escape(String val, String expd) {
-		byte[] bry = Bry_.new_u8(val);
+		byte[] bry = BryUtl.NewU8(val);
 		wtr.Bfr_(bfr);
 		wtr.Write_bry_escape_fld(bry);
-		Tfds.Eq(expd, bfr.To_str());
+		GfoTstr.EqObj(expd, bfr.ToStr());
 		return this;
-	}	private Bry_bfr bfr = Bry_bfr_.New();
+	}	private BryWtr bfr = BryWtr.New();
 }

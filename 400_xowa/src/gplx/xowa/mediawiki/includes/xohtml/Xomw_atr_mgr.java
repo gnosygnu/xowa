@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.xohtml; import gplx.*;
+package gplx.xowa.mediawiki.includes.xohtml;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xomw_atr_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int                 Len()                    {return hash.Len();}
-	public Xomw_atr_itm        Get_at(int i)            {return (Xomw_atr_itm)hash.Get_at(i);}
+	public Xomw_atr_itm        Get_at(int i)            {return (Xomw_atr_itm)hash.GetAt(i);}
 	public Xomw_atr_itm        Get_by_or_null(byte[] k) {return (Xomw_atr_itm)hash.GetByOrNull(k);}
 	public Xomw_atr_mgr        Clear()                  {hash.Clear(); return this;}
 	public void                Del(byte[] key)          {hash.Del(key);}
@@ -52,19 +56,19 @@ public class Xomw_atr_mgr {
 	public Xomw_atr_mgr Add_many(String... kvs) {// TEST
 		int len = kvs.length;
 		for (int i = 0; i < len; i += 2) {
-			byte[] key = Bry_.new_u8(kvs[i]);
-			byte[] val = Bry_.new_u8(kvs[i + 1]);
+			byte[] key = BryUtl.NewU8(kvs[i]);
+			byte[] val = BryUtl.NewU8(kvs[i + 1]);
 			Add(key, val);
 		}
 		return this;
 	}
-	public String To_str(Bry_bfr tmp) { // TEST
+	public String To_str(BryWtr tmp) { // TEST
 		int len = this.Len();
 		for (int i = 0; i < len; i++) {
 			Xomw_atr_itm itm = this.Get_at(i);
-			tmp.Add(itm.Key_bry()).Add_byte_eq();
-			tmp.Add(itm.Val()).Add_byte_nl();
+			tmp.Add(itm.Key_bry()).AddByteEq();
+			tmp.Add(itm.Val()).AddByteNl();
 		}
-		return tmp.To_str_and_clear();
+		return tmp.ToStrAndClear();
 	}
 }

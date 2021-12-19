@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scores;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 import gplx.xowa.htmls.core.makes.tests.Xoh_make_fxt;
@@ -55,7 +55,7 @@ class Score_html_fxt {
 			img_id = "xoimg_0";
 			img_atrs = " alt=\"\"";
 		}
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		( ""
 		, "<div id=\"xowa_score_0_pre\" class=\"xowa-score-lilypond\">"
 		, "  <pre style=\"overflow:auto\">\\relative c&#39; { f d f a d f e d cis a cis e a g f e }"

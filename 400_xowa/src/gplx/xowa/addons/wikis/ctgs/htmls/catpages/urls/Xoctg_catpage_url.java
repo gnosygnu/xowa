@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls;
-import gplx.Bry_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
 public class Xoctg_catpage_url {
 	public Xoctg_catpage_url(byte[][] keys, boolean[] fwds) {this.keys = keys; this.fwds = fwds;}
@@ -29,7 +29,7 @@ public class Xoctg_catpage_url {
 		// for blank url, all fwds are true; EX: "Category:A" -> keys {"", "", ""}, fwds {true, true, true}
 		for (int i = 0; i < Xoa_ctg_mgr.Tid___max; ++i) {
 			fwds[i] = BoolUtl.Y;
-			keys[i] = Bry_.Empty;
+			keys[i] = BryUtl.Empty;
 		}
 		return new Xoctg_catpage_url(keys, fwds);
 	}

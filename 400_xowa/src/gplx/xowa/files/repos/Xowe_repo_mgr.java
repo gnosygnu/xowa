@@ -13,11 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.files.xfers.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.utils.*;
-import gplx.xowa.wikis.tdbs.metas.*;
+package gplx.xowa.files.repos;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xoa_repo_mgr;
+import gplx.xowa.files.Xof_file_wkr_;
+import gplx.xowa.files.Xof_xfer_itm;
+import gplx.xowa.files.xfers.Xof_xfer_mgr;
+import gplx.xowa.files.xfers.Xof_xfer_queue;
+import gplx.xowa.parsers.utils.Xop_redirect_mgr;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_itm;
 public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	private Xofw_file_finder_rslt tmp_rslt = new Xofw_file_finder_rslt();
 	private Xowe_wiki wiki; private final List_adp repos = List_adp_.New();
@@ -33,8 +51,8 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	public Xof_repo_pair Repos_get_by_wiki(byte[] wiki) {
 		int len = repos.Len();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
-			if (Bry_.Eq(wiki, pair.Wiki_domain()))
+			Xof_repo_pair pair = (Xof_repo_pair)repos.GetAt(i);
+			if (BryLni.Eq(wiki, pair.Wiki_domain()))
 				return pair;
 		}
 		return null;
@@ -48,11 +66,11 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 			this.Add_repo(repo_pair.Src().Key(), repo_pair.Trg().Key());
 		}
 	}
-	public Xof_repo_pair Repos_get_at(int i) {return (Xof_repo_pair)repos.Get_at(i);}
+	public Xof_repo_pair Repos_get_at(int i) {return (Xof_repo_pair)repos.GetAt(i);}
 	private Xof_repo_pair Repos_get_by_id(int id) {
 		int len = repos.Len();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.GetAt(i);
 			if (pair.Id() == id) return pair;
 		}
 		return null;
@@ -115,7 +133,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 			if (!found) return null;
 			Xowe_wiki trg_wiki = wiki;
 			int repo_idx = tmp_rslt.Repo_idx();
-			byte[] trg_wiki_key = Bry_.Empty;
+			byte[] trg_wiki_key = BryUtl.Empty;
 			if (repo_idx != Xof_meta_itm.Repo_unknown) {
 				trg_wiki_key = wiki.File_mgr().Repo_mgr().Repos_get_at(repo_idx).Wiki_domain();
 				trg_wiki = wiki.Appe().Wiki_mgr().Get_by_or_make(trg_wiki_key);
@@ -128,7 +146,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 						xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_same);
 					}
 					else {
-						if (!Bry_.Eq(trg_wiki_key, wiki.Domain_bry())) {
+						if (!BryLni.Eq(trg_wiki_key, wiki.Domain_bry())) {
 //								meta_itm.Vrtl_repo_(tmp_rslt.Repo_idx());
 							xfer_itm.Orig_repo_id_(tmp_rslt.Repo_idx());
 						}
@@ -154,9 +172,9 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	boolean Xfer_by_meta__exec(boolean chk_all, Xof_xfer_itm xfer_itm, Xof_meta_itm meta_itm, byte[] main_wiki_key, Xof_xfer_queue queue, boolean second_chance) {
 		int repos_len = repos.Len();
 		for (int i = 0; i < repos_len; i++) {								// iterate over all repo pairs
-			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.GetAt(i);
 			Xof_repo_itm pair_src = pair.Src();
-			boolean main_wiki_key_is_pair_src = Bry_.Eq(main_wiki_key, pair_src.Wiki_domain());
+			boolean main_wiki_key_is_pair_src = BryLni.Eq(main_wiki_key, pair_src.Wiki_domain());
 			if (	(chk_all && !main_wiki_key_is_pair_src)					// only do chk_all if main_wiki is not pair_src; note that chk_all will only be called in two ways (1) with main_wiki_key as null; (2) with main_key_as val
 				||	(!chk_all && main_wiki_key_is_pair_src)) {				// pair.Src.Wiki == main.Wiki; note that there can be multiple pairs with same src; EX: have 2 pairs for commons: one for file and another for http					
 				xfer_mgr.Atrs_by_itm(xfer_itm, pair_src, pair.Trg());
@@ -173,10 +191,10 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	}
 	public Xofw_file_finder_rslt Page_finder_locate(byte[] ttl_bry) {page_finder.Locate(tmp_rslt, repos, ttl_bry); return tmp_rslt;}
 	byte Xfer_by_meta__find_file(byte[] ttl_bry, Xof_meta_itm meta_itm, byte[] cur_wiki_key) {
-		byte new_tid = Byte_.Max_value_127;
+		byte new_tid = ByteUtl.MaxValue127;
 		boolean found = page_finder.Locate(tmp_rslt, repos, ttl_bry);
 		if (found) {
-			if (Bry_.Eq(cur_wiki_key, tmp_rslt.Repo_wiki_key())) {	// itm is in same repo as cur wiki
+			if (BryLni.Eq(cur_wiki_key, tmp_rslt.Repo_wiki_key())) {	// itm is in same repo as cur wiki
 				new_tid = Xof_meta_itm.Tid_main;					
 				byte[] redirect = tmp_rslt.Redirect();
 				if (redirect != Xop_redirect_mgr.Redirect_null_bry) {	// redirect found
@@ -206,7 +224,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 		Xoa_repo_mgr repo_mgr = wiki.Appe().File_mgr().Repo_mgr();
 		Xof_repo_itm src_repo = repo_mgr.Get_by(src_repo_key), trg_repo = repo_mgr.Get_by(trg_repo_key);
 		byte[] src_wiki_key = src_repo.Wiki_domain(), trg_wiki_key = trg_repo.Wiki_domain();
-		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_tid_.Bry__home)) throw Err_.new_wo_type("wiki keys do not match", "src", String_.new_u8(src_wiki_key), "trg", String_.new_u8(trg_wiki_key));
+		if (!BryLni.Eq(src_wiki_key, trg_wiki_key) && !BryLni.Eq(src_wiki_key, Xow_domain_tid_.Bry__home)) throw ErrUtl.NewArgs("wiki keys do not match", "src", StringUtl.NewU8(src_wiki_key), "trg", StringUtl.NewU8(trg_wiki_key));
 		Xof_repo_pair pair = new Xof_repo_pair((byte)repos.Len(), src_wiki_key, src_repo, trg_repo);
 		repos.Add(pair);
 		return pair;
@@ -220,7 +238,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 		if (make_pass) return true;
 
 		for (int i = 0; i < len; i++) {
-			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
+			Xof_repo_pair pair = (Xof_repo_pair)repos.GetAt(i);
 			if (i != repo_idx) {	// try other wikis
 				file.Dbmeta_itm().Orig_exists_(Xof_meta_itm.Exists_unknown);	// always reset orig exists; this may have been flagged to missing above and should be cleared
 				make_pass = Xfer_file_exec(file, pair, i);

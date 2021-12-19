@@ -14,16 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.engines.process;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Keyval;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.Type_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.xtns.scribunto.engines.Scrib_server;
 public class Process_server_mock implements Scrib_server {
 	private List_adp rsps = List_adp_.New(); private int rsps_idx = 0;
@@ -37,13 +36,13 @@ public class Process_server_mock implements Scrib_server {
 	}
 	public void Server_send(byte[] cmd, Object[] cmd_objs) {
 		this.cmd_objs = cmd_objs;
-		log_rcvd.Add(String_.new_u8(cmd));
+		log_rcvd.Add(StringUtl.NewU8(cmd));
 	}	Object[] cmd_objs;
 	public byte[] Server_recv() {
-		Process_server_mock_rcvd rcvd = (Process_server_mock_rcvd)rsps.Get_at(rsps_idx++);
+		Process_server_mock_rcvd rcvd = (Process_server_mock_rcvd)rsps.GetAt(rsps_idx++);
 		String rv = rcvd.Bld(cmd_objs);
 		log_sent.Add(rv);
-		return Bry_.new_u8(rv);
+		return BryUtl.NewU8(rv);
 	}
 	public void Term() {}
 	public void Clear() {rsps.Clear(); rsps_idx = 0; log_rcvd.Clear(); log_sent.Clear();}
@@ -63,41 +62,41 @@ class Process_server_mock_rcvd_str implements Process_server_mock_rcvd {
 class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 	public Process_server_mock_rcvd_val(boolean print_key) {this.print_key = print_key;} private boolean print_key;
 	public String Bld(Object[] cmd_objs) {
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		Bld_recursive(tmp_bfr, 0, (Keyval[])cmd_objs[5]);
-		byte[] values_str = tmp_bfr.To_bry_and_clear();
-		tmp_bfr.Add(Bry_rv_bgn).Add_int_variable(values_str.length).Add(Bry_rv_mid).Add(values_str).Add(Bry_rv_end);
-		return tmp_bfr.To_str_and_clear();
+		BryWtr tmp_bfr = BryWtr.New();
+		Bld_recursive(tmp_bfr, 0, (KeyVal[])cmd_objs[5]);
+		byte[] values_str = tmp_bfr.ToBryAndClear();
+		tmp_bfr.Add(Bry_rv_bgn).AddIntVariable(values_str.length).Add(Bry_rv_mid).Add(values_str).Add(Bry_rv_end);
+		return tmp_bfr.ToStrAndClear();
 	}
-	private void Bld_recursive(Bry_bfr bfr, int depth, Keyval[] ary) {
+	private void Bld_recursive(BryWtr bfr, int depth, KeyVal[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			if (i != 0) bfr.Add_byte(AsciiByte.Semic);
-			Keyval kv = ary[i];
+			if (i != 0) bfr.AddByte(AsciiByte.Semic);
+			KeyVal kv = ary[i];
 			Object kv_val = kv.Val();
 			if (kv_val == null) {
 				bfr.Add(gplx.langs.jsons.Json_itm_.Bry__null);
 				continue;
 			}
 			Class<?> kv_val_type = kv_val.getClass();
-			boolean kv_val_is_array = Type_.Eq(kv_val_type, Keyval[].class);
+			boolean kv_val_is_array = ClassUtl.Eq(kv_val_type, KeyVal[].class);
 			if (print_key && !kv_val_is_array)
-				bfr.Add_str_u8(kv.Key()).Add_byte(AsciiByte.Colon);
-			if		(Type_.Eq(kv_val_type, BoolUtl.ClsRefType))
+				bfr.AddStrU8(kv.KeyToStr()).AddByte(AsciiByte.Colon);
+			if		(ClassUtl.Eq(kv_val_type, BoolUtl.ClsRefType))
 				bfr.Add(BoolUtl.Cast(kv_val) ? gplx.langs.jsons.Json_itm_.Bry__true : gplx.langs.jsons.Json_itm_.Bry__false);
 			else if	(kv_val_is_array) {
-				Keyval[] sub = (Keyval[])kv_val;
-				if (sub.length == 0) {bfr.Add_byte(AsciiByte.CurlyBgn).Add_byte(AsciiByte.CurlyEnd);}
+				KeyVal[] sub = (KeyVal[])kv_val;
+				if (sub.length == 0) {bfr.AddByte(AsciiByte.CurlyBgn).AddByte(AsciiByte.CurlyEnd);}
 				else {
-					bfr.Add_byte_nl();
-					bfr.Add_byte_repeat(AsciiByte.Space, (depth + 1) * 2);
-					Bld_recursive(bfr, depth + 1, (Keyval[])kv_val);
+					bfr.AddByteNl();
+					bfr.AddByteRepeat(AsciiByte.Space, (depth + 1) * 2);
+					Bld_recursive(bfr, depth + 1, (KeyVal[])kv_val);
 				}
 			}
 			else
-				bfr.Add_str_u8(kv.Val_to_str_or_empty());
+				bfr.AddStrU8(kv.ValToStrOrEmpty());
 		}
 	}
 
-	private static final byte[] Bry_rv_bgn = Bry_.new_a7("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;s:"), Bry_rv_mid = Bry_.new_a7(":\""), Bry_rv_end = Bry_.new_a7("\";}}");
+	private static final byte[] Bry_rv_bgn = BryUtl.NewA7("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;s:"), Bry_rv_mid = BryUtl.NewA7(":\""), Bry_rv_end = BryUtl.NewA7("\";}}");
 }

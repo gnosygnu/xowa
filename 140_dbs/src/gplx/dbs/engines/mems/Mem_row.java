@@ -13,13 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.engines.mems; import gplx.dbs.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Mem_row implements Gfo_invk {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	private final Ordered_hash flds = Ordered_hash_.New();
 	public int		Len() {return hash.Len();}
-	public String	Fld_at(int i) {return (String)flds.Get_at(i);}
-	public Object	Get_at(int i) {return hash.Get_at(i);}
+	public String	Fld_at(int i) {return (String)flds.GetAt(i);}
+	public Object	Get_at(int i) {return hash.GetAt(i);}
 	public Object	Get_by(String key) {return hash.GetByOrNull(key);}
 	public Object	Get_by_or_dbnull(String key) {
 		Object rv = hash.GetByOrNull(key);

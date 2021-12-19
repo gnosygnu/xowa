@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.dbs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*;
@@ -28,10 +34,10 @@ public class Xob_orig_regy_tbl {
 		Sqlite_engine_.Db_attach(p, "page_db", file_registry_db.Url().Raw());
 		Io_url repo_0_dir = repo_0_wiki.Fsys_mgr().Root_dir(), repo_1_dir = repo_1_wiki.Fsys_mgr().Root_dir();
 		byte repo_0_tid = Xof_repo_tid_.Tid__local, repo_1_tid = Xof_repo_tid_.Tid__remote;
-		boolean local_is_remote = Bry_.Eq(repo_0_wiki.Domain_bry(), repo_1_wiki.Domain_bry());
+		boolean local_is_remote = BryLni.Eq(repo_0_wiki.Domain_bry(), repo_1_wiki.Domain_bry());
 		Xowe_wiki local_wiki = repo_0_wiki;
 		if (	repo_0_is_remote														// .gfs manually marked specifes repo_0 as remote
-			||	(	Bry_.Eq(repo_0_wiki.Domain_bry(), Xow_domain_itm_.Bry__commons)		// repo_0 = commons; force repo_0 to be remote; else all orig_repo will be 1; DATE:2014-02-01
+			||	(	BryLni.Eq(repo_0_wiki.Domain_bry(), Xow_domain_itm_.Bry__commons)		// repo_0 = commons; force repo_0 to be remote; else all orig_repo will be 1; DATE:2014-02-01
 				&&	local_is_remote														// repo_0 = repo_1
 				)
 			) {
@@ -39,9 +45,9 @@ public class Xob_orig_regy_tbl {
 			repo_1_tid = Xof_repo_tid_.Tid__local;
 			local_wiki = repo_1_wiki;
 		}
-		Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.By_int(repo_0_tid), repo_0_dir.GenSubFil(Xob_db_file.Name__wiki_image));
+		Create_data_for_repo(usr_dlg, p, local_wiki, ByteUtl.ByInt(repo_0_tid), repo_0_dir.GenSubFil(Xob_db_file.Name__wiki_image));
 		if (!local_is_remote) {	// only run for repo_1 if local != remote; only affects commons
-			Create_data_for_repo(usr_dlg, p, local_wiki, Byte_.By_int(repo_1_tid), repo_1_dir.GenSubFil(Xob_db_file.Name__wiki_image));
+			Create_data_for_repo(usr_dlg, p, local_wiki, ByteUtl.ByInt(repo_1_tid), repo_1_dir.GenSubFil(Xob_db_file.Name__wiki_image));
 			if (wiki_ns_for_file_is_case_match_all) {
 				Io_url repo_remote_dir = repo_0_is_remote ? repo_0_dir : repo_1_dir;
 				Create_data_for_cs(usr_dlg, p, local_wiki, repo_remote_dir);
@@ -80,7 +86,7 @@ public class Xob_orig_regy_tbl {
 	, Idx_xfer_temp			= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__xfer_temp  ON orig_regy (lnki_ttl, orig_file_ttl, orig_repo, orig_timestamp);")
 	;
 	private static final String
-		Tbl_sql = String_.Concat_lines_nl
+		Tbl_sql = StringUtl.ConcatLinesNl
 	(	"CREATE TABLE IF NOT EXISTS orig_regy"
 	,	"( lnki_id                     integer             NOT NULL			PRIMARY KEY"	// NOTE: must be PRIMARY KEY, else later REPLACE INTO will create dupe rows
 	,	", lnki_ttl                    varchar(256)        NOT NULL"
@@ -104,7 +110,7 @@ public class Xob_orig_regy_tbl {
 	,	", orig_timestamp              varchar(14)         NULL"
 	,	");"
 	)
-	,	Sql_create_data = String_.Concat_lines_nl
+	,	Sql_create_data = StringUtl.ConcatLinesNl
 	(	"INSERT INTO orig_regy (lnki_id, lnki_ttl, lnki_commons_ttl, orig_commons_flag, lnki_ext, lnki_count, orig_timestamp)"
 	,	"SELECT  Min(lnki_id)"
 	,	",       lnki_ttl"
@@ -119,7 +125,7 @@ public class Xob_orig_regy_tbl {
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)
-	,	Sql_update_repo_page = String_.Concat_lines_nl
+	,	Sql_update_repo_page = StringUtl.ConcatLinesNl
 	(	"REPLACE INTO orig_regy"
 	,	"SELECT  o.lnki_id"
 	,	",       o.lnki_ttl"
@@ -149,7 +155,7 @@ public class Xob_orig_regy_tbl {
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)
-	,	Sql_update_repo_redirect = String_.Concat_lines_nl
+	,	Sql_update_repo_redirect = StringUtl.ConcatLinesNl
 	(	"REPLACE INTO orig_regy"
 	,	"SELECT  o.lnki_id"
 	,	",       o.lnki_ttl"
@@ -179,7 +185,7 @@ public class Xob_orig_regy_tbl {
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)
-	,	Sql_cs_mark_dupes = String_.Concat_lines_nl
+	,	Sql_cs_mark_dupes = StringUtl.ConcatLinesNl
 	(	"REPLACE INTO orig_regy"
 	,	"SELECT  o.lnki_id"
 	,	",       o.lnki_ttl"
@@ -207,7 +213,7 @@ public class Xob_orig_regy_tbl {
 	,	"ORDER BY 1"	// must order by lnki_id since it is PRIMARY KEY, else sqlite will spend hours shuffling rows in table
 	,	";"
 	)
-	,	Sql_cs_update_ttls = String_.Concat_lines_nl
+	,	Sql_cs_update_ttls = StringUtl.ConcatLinesNl
 	(	"UPDATE  orig_regy"
 	,	"SET     lnki_ttl = lnki_commons_ttl"
 	,	",       orig_commons_flag = 2"

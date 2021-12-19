@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wikias; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.wikias;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.commons.GfoRandomUtl;
 import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
-	private byte[] val = Bry_.Empty;
+	private byte[] val = BryUtl.Empty;
 	private byte[] choicetemplate = null, atr_before = null, atr_after = null;
 	private Rndsel_option_itm[] options_ary;
 	private int weight_total = 0;
@@ -56,13 +63,13 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 			switch (tag_tid) {
 				case Tag__choicetemplate: {
 					if (choicetemplate == null) {	// only one <choicetemplate> should be specified; if many, always take 1st
-						choicetemplate = Bry_.Mid(src, head_tag_end, tail_tag_bgn);
+						choicetemplate = BryLni.Mid(src, head_tag_end, tail_tag_bgn);
 					}
 					break;
 				}
 				case Tag__option: {
 					int weight = tail_tag.Atrs__get_as_int_or(Atr__weight, 1);
-					option_list.Add(new Rndsel_option_itm(weight, Bry_.Mid(src, head_tag_end, tail_tag_bgn)));
+					option_list.Add(new Rndsel_option_itm(weight, BryLni.Mid(src, head_tag_end, tail_tag_bgn)));
 					weight_total += weight;
 					break;
 				}
@@ -73,7 +80,7 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 
 		// randomly select option_bry from all <option>s
 		byte[] option_bry = null;
-		int rnd = Rnd_test == -1 ? RandomAdp_.new_().Next(weight_total) + 1 : Rnd_test;
+		int rnd = Rnd_test == -1 ? GfoRandomUtl.New().Next(weight_total) + 1 : Rnd_test;
 		int options_len = options_ary.length;
 		for (int i = 0; i < options_len; ++i) {
 			Rndsel_option_itm option = options_ary[i];
@@ -86,21 +93,21 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 
 		// decorate option_bry
 		if (choicetemplate != null) {
-			option_bry = Bry_.Add(Xop_curly_bgn_lxr.Hook, choicetemplate, AsciiByte.PipeBry, option_bry, Xop_curly_end_lxr.Hook);
+			option_bry = BryUtl.Add(Xop_curly_bgn_lxr.Hook, choicetemplate, AsciiByte.PipeBry, option_bry, Xop_curly_end_lxr.Hook);
 		}
-		if (!Bry_.Eq(atr_before, Bry_.Empty)) option_bry = Bry_.Add(atr_before, option_bry);
-		if (!Bry_.Eq(atr_after , Bry_.Empty)) option_bry = Bry_.Add(option_bry, atr_after);
+		if (!BryLni.Eq(atr_before, BryUtl.Empty)) option_bry = BryUtl.Add(atr_before, option_bry);
+		if (!BryLni.Eq(atr_after , BryUtl.Empty)) option_bry = BryUtl.Add(option_bry, atr_after);
 
 		this.val = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), option_bry, false);
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (val != null) bfr.Add(val);
 	}
 	public static final byte Xatr__before = 0, Xatr__after = 1;
 	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("before", Xatr__before).Add_str_byte("after", Xatr__after);
 	private static final byte Tag__option = 0, Tag__choicetemplate = 1;
-	private static final byte[] Atr__weight = Bry_.new_a7("weight");
+	private static final byte[] Atr__weight = BryUtl.NewA7("weight");
 	public static int Rnd_test = -1;
 }
 class Rndsel_option_itm {

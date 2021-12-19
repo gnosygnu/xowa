@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.utls;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.caches.*;
 public class Xomp_tmpl_cache_bldr {
@@ -24,7 +31,7 @@ public class Xomp_tmpl_cache_bldr {
 		return rv;
 	}
 	private static void Fill_all(Xow_page_cache cache, Xowe_wiki wiki) {
-		String sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
+		String sql = StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "SELECT  pp.page_id"
 		, ",       pp.page_namespace"
 		, ",       pp.page_title"
@@ -71,7 +78,7 @@ public class Xomp_tmpl_cache_bldr {
 		// handle redirects
 		int redirect_len = redirect_list.Len();
 		for (int i = 0; i < redirect_len; ++i) {
-			Xow_page_cache_itm src_itm = (Xow_page_cache_itm)redirect_list.Get_at(i);
+			Xow_page_cache_itm src_itm = (Xow_page_cache_itm)redirect_list.GetAt(i);
 			Xow_page_cache_itm trg_itm = (Xow_page_cache_itm)page_regy.GetByOrNull(src_itm.Redirect_id());
 			byte[] trg_itm_wtxt = null;
 			Xoa_ttl trg_ttl = null;

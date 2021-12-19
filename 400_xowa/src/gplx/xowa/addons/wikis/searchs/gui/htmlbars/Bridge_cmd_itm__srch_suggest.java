@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.gui.htmlbars; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.gui.*;
+package gplx.xowa.addons.wikis.searchs.gui.htmlbars;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.htmls.bridges.*;
 public class Bridge_cmd_itm__srch_suggest implements Bridge_cmd_itm {
 	private Xoa_app app;
-	public byte[] Key() {return Bry_.new_a7("xowa.search.ui.suggest");}
+	public byte[] Key() {return BryUtl.NewA7("xowa.search.ui.suggest");}
 	public void	Init_by_app(Xoa_app app) {
 		this.app = app;
 	}

@@ -13,11 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.flds; import gplx.*;
-import gplx.core.encoders.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.flds;
+import gplx.core.encoders.Base85_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Gfo_fld_rdr extends Gfo_fld_base {
-	private Bry_bfr bfr = Bry_bfr_.New();
+	private BryWtr bfr = BryWtr.New();
 	public byte[] Data() {return data;} public Gfo_fld_rdr Data_(byte[] v) {data = v; data_len = v.length; pos = 0; return this;} private byte[] data; int data_len;
 	public int Pos() {return pos;} public Gfo_fld_rdr Pos_(int v) {pos = v; return this;} private int pos;
 	public int Fld_bgn() {return fld_bgn;} public Gfo_fld_rdr Fld_bgn_(int v) {fld_bgn = v; return this;} private int fld_bgn;
@@ -26,15 +33,15 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 	public int Row_idx() {return row_idx;} private int row_idx;
 	public void Ini(byte[] data, int pos) {this.data = data; this.data_len = data.length; this.pos = pos;}
 
-	public String Read_str_simple()	{Move_next_simple(); return String_.new_u8(data, fld_bgn, fld_end);}
-	public byte[] Read_bry_simple() {Move_next_simple(); return Bry_.Mid(data, fld_bgn, fld_end);}	// was Mid_by_len???; 20120915
+	public String Read_str_simple()	{Move_next_simple(); return StringUtl.NewU8(data, fld_bgn, fld_end);}
+	public byte[] Read_bry_simple() {Move_next_simple(); return BryLni.Mid(data, fld_bgn, fld_end);}	// was Mid_by_len???; 20120915
 	public int Read_int_base85_lenN(int len)	{fld_bgn = pos; fld_end = pos + len - 1	; pos = pos + len + 1	; return Base85_.To_int_by_bry(data, fld_bgn, fld_end);}
 	public int Read_int_base85_len5()			{fld_bgn = pos; fld_end = pos + 4		; pos = pos + 6			; return Base85_.To_int_by_bry(data, fld_bgn, fld_end);}
-	public int Read_int() 			{Move_next_simple(); return Bry_.To_int_or(data, fld_bgn, fld_end, -1);}
-	public byte Read_int_as_byte() 	{Move_next_simple(); return (byte)Bry_.To_int_or(data, fld_bgn, fld_end, -1);}
+	public int Read_int() 			{Move_next_simple(); return BryUtl.ToIntOr(data, fld_bgn, fld_end, -1);}
+	public byte Read_int_as_byte() 	{Move_next_simple(); return (byte)BryUtl.ToIntOr(data, fld_bgn, fld_end, -1);}
 	public byte Read_byte() 		{Move_next_simple(); return data[fld_bgn];}
-	public double Read_double() 	{Move_next_simple(); return Bry_.To_double(data, fld_bgn, fld_end);}
-	public DateAdp Read_dte() {// NOTE: fmt = yyyyMMdd HHmmss.fff
+	public double Read_double() 	{Move_next_simple(); return BryUtl.ToDouble(data, fld_bgn, fld_end);}
+	public GfoDate Read_dte() {// NOTE: fmt = yyyyMMdd HHmmss.fff
 		int y = 0, M = 0, d = 0, H = 0, m = 0, s = 0, f = 0;
 		if (pos < data_len && data[pos] == row_dlm) {++pos; ++row_idx; fld_idx = 0;} fld_bgn = pos;
 		y += (data[fld_bgn +  0] - AsciiByte.Num0) * 1000;
@@ -54,10 +61,10 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 		f += (data[fld_bgn + 16] - AsciiByte.Num0) *  100;
 		f += (data[fld_bgn + 17] - AsciiByte.Num0) *   10;
 		f += (data[fld_bgn + 18] - AsciiByte.Num0);
-		if (data[fld_bgn + 19] != fld_dlm) throw Err_.new_wo_type("csv date is invalid", "txt", String_.new_u8__by_len(data, fld_bgn, 20));
+		if (data[fld_bgn + 19] != fld_dlm) throw ErrUtl.NewArgs("csv date is invalid", "txt", StringUtl.NewU8ByLen(data, fld_bgn, 20));
 		fld_end = pos + 20;
 		pos = fld_end + 1; ++fld_idx;
-		return DateAdp_.new_(y, M, d, H, m, s, f);
+		return GfoDateUtl.New(y, M, d, H, m, s, f);
 	}
 	public void Move_next_simple() {
 		if (pos < data_len) {
@@ -78,17 +85,17 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 				return;
 			}
 		}
-		throw Err_.new_wo_type("fld_dlm failed", "fld_dlm", (char)fld_dlm, "bgn", fld_bgn);
+		throw ErrUtl.NewArgs("fld_dlm failed", "fld_dlm", (char)fld_dlm, "bgn", fld_bgn);
 	}
-	public String Read_str_escape()	{Move_next_escaped(bfr); return String_.new_u8(bfr.To_bry_and_clear());}
-	public byte[] Read_bry_escape()	{Move_next_escaped(bfr); return bfr.To_bry_and_clear();}
+	public String Read_str_escape()	{Move_next_escaped(bfr); return StringUtl.NewU8(bfr.ToBryAndClear());}
+	public byte[] Read_bry_escape()	{Move_next_escaped(bfr); return bfr.ToBryAndClear();}
 	public void Move_1() {++pos;}
 	public void Move_next_escaped() {Move_next_escaped(bfr); bfr.Clear();}
 	public int Move_next_simple_fld() {
 		Move_next_simple();
 		return fld_end;
 	}
-	public int Move_next_escaped(Bry_bfr trg) {
+	public int Move_next_escaped(BryWtr trg) {
 		//if (pos < data_len && data[pos] == row_dlm) {++pos; ++row_idx; fld_idx = 0;}	// REMOVE:20120919: this will fail for empty fields at end of line; EX: "a|\n"; intent was probably to auto-advance to new row, but this intent should be explicit
 		fld_bgn = pos;
 		boolean quote_on = false;
@@ -100,11 +107,11 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 			}
 			else if (b == escape_dlm) {	
 				++i;
-//					if (i == data_len) throw Err_.new_wo_type("escape char at end of String");
+//					if (i == data_len) throw ErrUtl.NewArgs("escape char at end of String");
 				b = data[i];
 				byte escape_val = decode_regy[b];
-				if (escape_val == AsciiByte.Null)	{trg.Add_byte(escape_dlm).Add_byte(b);} //throw Err_.new_fmt_("unknown escape key: key={0}", data[i]);
-				else								trg.Add_byte(escape_val);
+				if (escape_val == AsciiByte.Null)	{trg.AddByte(escape_dlm).AddByte(b);} //throw Err_.new_fmt_("unknown escape key: key={0}", data[i]);
+				else								trg.AddByte(escape_val);
 			}
 			else if (b == AsciiByte.Null) {
 				trg.Add(Bry_nil);
@@ -113,7 +120,7 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 				quote_on = !quote_on;
 			}
 			else
-				trg.Add_byte(b);
+				trg.AddByte(b);
 		}
 		return -1;
 	}
@@ -121,5 +128,5 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 	public Gfo_fld_rdr Ctor_sql()  {return (Gfo_fld_rdr)super.Ctor_sql_base();}
 	public static Gfo_fld_rdr xowa_()	{return new Gfo_fld_rdr().Ctor_xdat();}
 	public static Gfo_fld_rdr sql_()	{return new Gfo_fld_rdr().Ctor_sql();}
-	private static final byte[] Bry_nil = Bry_.new_a7("\\0");
+	private static final byte[] Bry_nil = BryUtl.NewA7("\\0");
 }

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.cache.localisation; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.cache.*;
+package gplx.xowa.mediawiki.includes.cache.localisation;
+import gplx.libs.files.Io_url;
+import gplx.xowa.mediawiki.*;
 public class XomwLocalisationCacheForXowa extends XomwLocalisationCache { 	private static boolean init;
 	public static void Init_ip(Io_url val) {
 		init = false;

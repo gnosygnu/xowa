@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls; import gplx.*; import gplx.gfui.*;
-import org.junit.*; import gplx.gfui.draws.*; import gplx.gfui.imgs.*;
+package gplx.gfui.controls;
+import gplx.frameworks.tests.GfoTstr;
+import org.junit.*; import gplx.gfui.draws.*;
 public class GfuiBorderMgr_tst {
 	@Before public void setup() {
 		borderMgr = GfuiBorderMgr.new_();
@@ -40,11 +41,11 @@ public class GfuiBorderMgr_tst {
 		tst_Eq(borderMgr, null, black, red, red, red);
 	}
 	void tst_Eq(GfuiBorderMgr borderMgr, PenAdp all, PenAdp top, PenAdp left, PenAdp right, PenAdp bottom) {
-		Tfds.Eq(borderMgr.All(), all);
-		Tfds.Eq(borderMgr.Top(), top);
-		Tfds.Eq(borderMgr.Left(), left);
-		Tfds.Eq(borderMgr.Right(), right);
-		Tfds.Eq(borderMgr.Bot(), bottom);
+		GfoTstr.EqObj(borderMgr.All(), all);
+		GfoTstr.EqObj(borderMgr.Top(), top);
+		GfoTstr.EqObj(borderMgr.Left(), left);
+		GfoTstr.EqObj(borderMgr.Right(), right);
+		GfoTstr.EqObj(borderMgr.Bot(), bottom);
 	}
 	GfuiBorderMgr borderMgr;
 	PenAdp black = PenAdp_.black_(), red = PenAdp_.new_(ColorAdp_.Red, 1);

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.xowa.*;
 public class Xoh_cmd_mgr {
 	public int Count() {return cmds.Len();}
 	public void Clear() {cmds.Clear();}
@@ -27,10 +32,10 @@ public class Xoh_cmd_mgr {
 			if (usr_dlg.Canceled()) {usr_dlg.Prog_none(GRP_KEY, "cmds.done", ""); app.Log_wtr().Queue_enabled_(false); return;}
 			Xoh_cmd_itm itm = null;
 			try {
-				itm = (Xoh_cmd_itm)cmds.Get_at(i);
+				itm = (Xoh_cmd_itm)cmds.GetAt(i);
 				itm.Hcmd_exec(app, usr_dlg, page);
 				itm.Hcmd_write(app, usr_dlg, page);
-			} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to execute html cmd", "name", itm == null ? "unknown" : itm.Hcmd_id());}
+			} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to execute html cmd", "name", itm == null ? "unknown" : itm.Hcmd_id());}
 		}
 		this.Clear();
 	}

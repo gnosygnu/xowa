@@ -13,17 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts; import gplx.gfui.*;
+import gplx.types.errs.ErrUtl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.widgets.*;
 
 import gplx.gfui.controls.gxws.*;
 import gplx.gfui.draws.*;
-import gplx.gfui.kits.*;
-import gplx.gfui.kits.core.Swt_kit;
-import gplx.gfui.layouts.swts.*;
-
 class Swt_core__frames extends Swt_core__base {
 	private final Composite outer; 
 	private final Control inner;
@@ -65,7 +62,7 @@ class Swt_core__frames extends Swt_core__base {
 		for (int i = 0; i < frames_len; i++)
 			frames[i].Item().setForeground(color);
 	}
-	@Override public void Controls_add(GxwElem sub)	{throw Err_.new_unimplemented();}
+	@Override public void Controls_add(GxwElem sub)	{throw ErrUtl.NewUnimplemented();}
 	@Override public void Controls_del(GxwElem sub)	{}
 	@Override public void Invalidate() {
 		inner.redraw();

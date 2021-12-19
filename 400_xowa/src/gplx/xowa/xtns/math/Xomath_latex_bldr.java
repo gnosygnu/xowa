@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.math;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*;
 import gplx.core.envs.*;
 public class Xomath_latex_bldr {
@@ -36,7 +46,7 @@ public class Xomath_latex_bldr {
 
 			try {
 				// get itm and generate png
-				Xomath_latex_itm itm = (Xomath_latex_itm)page.File_math().Get_at(i);
+				Xomath_latex_itm itm = (Xomath_latex_itm)page.File_math().GetAt(i);
 				String queue_msg = usr_dlg.Prog_many("", "", "generating math ~{0} of ~{1}: ~{2}", i + List_adp_.Base1, len, itm.Src());
 				Generate_png(app, itm.Src(), itm.Md5(), itm.Png(), queue_msg);
 
@@ -46,7 +56,7 @@ public class Xomath_latex_bldr {
 				js_wkr.Html_elem_delete("xowa_math_txt_" + itm.Uid());
 			}
 			catch (Exception e) {
-				usr_dlg.Warn_many("", "", "page.async.math: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_log(e));
+				usr_dlg.Warn_many("", "", "page.async.math: page=~{0} err=~{1}", page.Ttl().Raw(), ErrUtl.ToStrLog(e));
 			}
 		}
 		page.File_math().Clear();
@@ -57,13 +67,13 @@ public class Xomath_latex_bldr {
 		Io_url tex_fil = tmp_dir.GenSubFil("xowa_math_temp.tex");
 
 		// make tex_bry
-		byte[] tex_doc = Bry_.Replace(math, Bry_.new_a7("\n\n"), AsciiByte.NlBry);	// remove completely blank lines; not sure if this is right; PAGE:en.w:Standard Model_(mathematical_formulation); EX:<math>(\mathbf{1},\mathbf\n\n{1},0)</math>
-		tex_doc = fmt__latex_doc.Bld_many_to_bry(Bry_bfr_.New(), tex_doc);
+		byte[] tex_doc = BryUtlByWtr.Replace(math, BryUtl.NewA7("\n\n"), AsciiByte.NlBry);	// remove completely blank lines; not sure if this is right; PAGE:en.w:Standard Model_(mathematical_formulation); EX:<math>(\mathbf{1},\mathbf\n\n{1},0)</math>
+		tex_doc = fmt__latex_doc.Bld_many_to_bry(BryWtr.New(), tex_doc);
 		Io_mgr.Instance.SaveFilBry(tex_fil, tex_doc);
 
 		// run tex to dvi
 		Process_adp tex_to_dvi_cmd = app.Prog_mgr().App__tex_to_dvi();
-		prog_fmt = String_.Replace(prog_fmt, "~", "~~");	// double-up ~ or else will break in progress bar
+		prog_fmt = StringUtl.Replace(prog_fmt, "~", "~~");	// double-up ~ or else will break in progress bar
 		tex_to_dvi_cmd.Prog_fmt_(prog_fmt + " tex_to_dvi: ~{process_seconds} second(s); ~{process_exe_name} ~{process_exe_args}");
 		boolean pass = tex_to_dvi_cmd.Run(tex_fil.Raw(), tmp_dir.Xto_api()).Exit_code_pass();
 		if (!pass)
@@ -77,7 +87,7 @@ public class Xomath_latex_bldr {
 		if (!pass)
 			app.Usr_dlg().Warn_many("", "dvi_to_png.fail", "fail: dvi_to_png: error=~{0} latex=~{1}", dvi_to_png_cmd.Rslt_out(), tex_doc);
 	}
-	private static final Bry_fmt fmt__latex_doc = Bry_fmt.Auto(Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	private static final BryFmt fmt__latex_doc = BryFmt.Auto(BryUtl.NewA7(StringUtl.ConcatLinesNlSkipLast
 	( "\\documentclass{article}"
 	, "\\usepackage{amsmath}"
 	, "\\usepackage{amsfonts}"

@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.core;
-import gplx.Bry_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_itm;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
-import gplx.Ordered_hash;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.apps.apis.xowa.xtns.Xoapi_wikibase;
 import gplx.xowa.xtns.wbases.Wdata_doc;
 public class Wdata_lang_sorter implements Gfo_evt_itm, ComparerAble {
@@ -47,12 +47,12 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, ComparerAble {
 		Wdata_lang_sortable rhs = (Wdata_lang_sortable)rhsObj;
 		int lhs_lang_sort = lhs.Lang_sort(), rhs_lang_sort = rhs.Lang_sort();
 		if (lhs_lang_sort != Sort_none || rhs_lang_sort != Sort_none)	// one of the items has a lang order
-			return Int_.Compare(lhs_lang_sort, rhs_lang_sort);			// sort by defined lang order
+			return IntUtl.Compare(lhs_lang_sort, rhs_lang_sort);			// sort by defined lang order
 		else
-			return Bry_.Compare(lhs.Lang_code(), rhs.Lang_code());		// sort by alphabetical
+			return BryUtl.Compare(lhs.Lang_code(), rhs.Lang_code());		// sort by alphabetical
 	}
 	public void Init_by_wdoc(Wdata_doc wdoc) {
-		if ((Bry_.Ary_eq(wdoc.Sort_langs(), langs))) return;
+		if ((BryUtl.AryEq(wdoc.Sort_langs(), langs))) return;
 		wdoc.Sort_langs_(langs);
 		Sort_wdoc_list(BoolUtl.Y, wdoc.Slink_list());
 		Sort_wdoc_list(BoolUtl.N, wdoc.Label_list());
@@ -62,11 +62,11 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, ComparerAble {
 	private void Sort_wdoc_list(boolean is_slink, Ordered_hash list) {
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wdata_lang_sortable itm = (Wdata_lang_sortable)list.Get_at(i);
+			Wdata_lang_sortable itm = (Wdata_lang_sortable)list.GetAt(i);
 			if (is_slink) {
 				Wdata_sitelink_itm slink = (Wdata_sitelink_itm)itm;
 				byte[] lang_val = slink.Domain_info().Lang_orig_key();	// use orig, not cur; EX: simplewiki has orig of "simple" but lang of "en"
-				if (Bry_.Len_eq_0(lang_val)) lang_val = slink.Site();	// unknown lang; EX: "xyzwiki" -> ""; make site = lang, else "" lang will sort towards top of list; PAGE:wd.q:20 DATE:2014-10-03
+				if (BryUtl.IsNullOrEmpty(lang_val)) lang_val = slink.Site();	// unknown lang; EX: "xyzwiki" -> ""; make site = lang, else "" lang will sort towards top of list; PAGE:wd.q:20 DATE:2014-10-03
 				slink.Lang_(lang_val);
 			}
 			itm.Lang_sort_(Sort_calc(itm));
@@ -83,8 +83,8 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, ComparerAble {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	public static final int Sort_null = Int_.Min_value;
-	private static final int Sort_none = Int_.Max_value;
+	public static final int Sort_null = IntUtl.MinValue;
+	private static final int Sort_none = IntUtl.MaxValue;
 }
 class Wdata_lang_sorter_itm {
 	public Wdata_lang_sorter_itm(int sort, byte[] lang) {this.sort = sort; this.lang = lang;}

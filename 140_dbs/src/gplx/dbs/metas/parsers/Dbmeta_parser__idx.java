@@ -13,42 +13,48 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
+package gplx.dbs.metas.parsers; import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Dbmeta_parser__idx {
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	private final List_adp tmp_list = List_adp_.New();
 	public Dbmeta_idx_itm Parse(byte[] src) {
-		rdr.Init_by_page(Bry_.Empty, src, src.length);
-		rdr.Skip_ws().Chk_trie_val(trie, Tid__create);
+		rdr.InitByPage(BryUtl.Empty, src, src.length);
+		rdr.SkipWs().ChkTrieVal(trie, Tid__create);
 		boolean unique = false;
-		byte tid = rdr.Skip_ws().Chk_or(trie, Byte_.Max_value_127);
+		byte tid = rdr.SkipWs().ChkOr(trie, ByteUtl.MaxValue127);
 		switch (tid) {
 			case Tid__index:	break;
-			case Tid__unique:	rdr.Skip_ws().Chk_trie_val(trie, Tid__index); unique = true; break;
-			default:			throw Err_.new_("db", "index parse failed; 'CREATE' should be followed by 'INDEX' or 'UNIQUE'", "src", src);
+			case Tid__unique:	rdr.SkipWs().ChkTrieVal(trie, Tid__index); unique = true; break;
+			default:			throw ErrUtl.NewArgs("index parse failed; 'CREATE' should be followed by 'INDEX' or 'UNIQUE'", "src", src);
 		}
 		byte[] idx_name = rdr.Read_sql_identifier();
-		rdr.Skip_ws().Chk_trie_val(trie, Tid__on);
+		rdr.SkipWs().ChkTrieVal(trie, Tid__on);
 		byte[] tbl_name = rdr.Read_sql_identifier();
-		rdr.Skip_ws().Chk(AsciiByte.ParenBgn);
+		rdr.SkipWs().Chk(AsciiByte.ParenBgn);
 		while (true) {
-			byte[] fld_bry = rdr.Read_sql_identifier(); if (fld_bry == null) throw Err_.new_("db", "index parse failed; index field is not an identifier", "src", src);
+			byte[] fld_bry = rdr.Read_sql_identifier(); if (fld_bry == null) throw ErrUtl.NewArgs("index parse failed; index field is not an identifier", "src", src);
 			// TODO_OLD: check for ASC / DESC
-			Dbmeta_idx_fld fld_itm = new Dbmeta_idx_fld(String_.new_u8(fld_bry), Dbmeta_idx_fld.Sort_tid__none);
+			Dbmeta_idx_fld fld_itm = new Dbmeta_idx_fld(StringUtl.NewU8(fld_bry), Dbmeta_idx_fld.Sort_tid__none);
 			tmp_list.Add(fld_itm);
-			byte sym = rdr.Skip_ws().Read_byte();
+			byte sym = rdr.SkipWs().ReadByte();
 			if (sym == AsciiByte.ParenEnd) break;
 		}
-		return new Dbmeta_idx_itm(unique, String_.new_u8(tbl_name), String_.new_u8(idx_name), (Dbmeta_idx_fld[])tmp_list.ToAryAndClear(Dbmeta_idx_fld.class));
+		return new Dbmeta_idx_itm(unique, StringUtl.NewU8(tbl_name), StringUtl.NewU8(idx_name), (Dbmeta_idx_fld[])tmp_list.ToAryAndClear(Dbmeta_idx_fld.class));
 	}
 	private static final byte Tid__create = 0, Tid__unique = 1, Tid__index = 2, Tid__on = 3;
 	private static final byte[]
-	  Bry__create	= Bry_.new_a7("create")
-	, Bry__unique	= Bry_.new_a7("unique")
-	, Bry__index	= Bry_.new_a7("index")
-	, Bry__on		= Bry_.new_a7("on");
+	  Bry__create	= BryUtl.NewA7("create")
+	, Bry__unique	= BryUtl.NewA7("unique")
+	, Bry__index	= BryUtl.NewA7("index")
+	, Bry__on		= BryUtl.NewA7("on");
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Bry__create	, Tid__create)
 	.Add_bry_byte(Bry__unique	, Tid__unique)

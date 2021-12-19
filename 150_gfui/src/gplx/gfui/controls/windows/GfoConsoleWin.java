@@ -13,23 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.GfoMsg_;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_invk_cmd;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.UsrDlg_;
-import gplx.UsrMsg;
-import gplx.UsrMsgWkr;
-import gplx.UsrMsgWkr_;
-import gplx.core.envs.System_;
+package gplx.gfui.controls.windows;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.libs.dlgs.UsrMsgWkr;
+import gplx.libs.dlgs.UsrMsgWkr_;
+import gplx.core.envs.SystemUtl;
 import gplx.gfml.GfmlDataNde;
 import gplx.gfui.PointAdp;
 import gplx.gfui.PointAdp_;
@@ -103,7 +104,7 @@ public class GfoConsoleWin implements Gfo_invk, UsrMsgWkr {
 		}
 		else {
 			statusBox.Text_(statusBox.Text() + s);
-			statusBox.SelBgn_set(String_.Len(statusBox.Text()) - 1);
+			statusBox.SelBgn_set(StringUtl.Len(statusBox.Text()) - 1);
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -126,20 +127,20 @@ class GfoConsoleWinCmds implements Gfo_invk {
 		GfsCore.Instance.ExecRegy("gplx.gfui.GfoConsoleWin.ini");
 	}
 	public void Results_add(String s) {
-		if (!String_.Has_at_end(s, GfuiTextBox_.NewLine))
+		if (!StringUtl.HasAtEnd(s, GfuiTextBox_.NewLine))
 			s += GfuiTextBox_.NewLine;
 		statusBox.Text_(statusBox.Text() + s);
-		statusBox.SelBgn_set(String_.Len(statusBox.Text()) - 1);
+		statusBox.SelBgn_set(StringUtl.Len(statusBox.Text()) - 1);
 	}
 	void Hide() {win.Hide();}
 	void Exec(GfoMsg msg) {
 		String cmdText = consoleBox.SelLen() == 0 ? consoleBox.Text() : consoleBox.SelText();
 		String cmd = FixNewLines(cmdText);
 		GfoMsg runMsg = GfoMsg_.Null;
-		try {runMsg = GfsCore.Instance.MsgParser().ParseToMsg(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx_full(e)); return;}
+		try {runMsg = GfsCore.Instance.MsgParser().ParseToMsg(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + ErrUtl.ToStrFull(e)); return;}
 		GfsCtx ctx = GfsCtx.new_();
 		Object rv = GfsCore.Instance.ExecMany(ctx, runMsg);
-		resultBox.Text_(Object_.Xto_str_strict_or_empty(rv));
+		resultBox.Text_(ObjectUtl.ToStrOrEmpty(rv));
 	}
 	void Help() {
 		statusBox.Text_("");
@@ -147,20 +148,20 @@ class GfoConsoleWinCmds implements Gfo_invk {
 		String cmdText = "help:'" + consoleBox.SelText() + "';";
 		String cmd = FixNewLines(cmdText);
 		GfoMsg runMsg = GfoMsg_.Null;
-		try {runMsg = GfmlDataNde.XtoMsgNoRoot(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + Err_.Message_gplx_full(e)); return;}
+		try {runMsg = GfmlDataNde.XtoMsgNoRoot(cmd);} catch (Exception e) {statusBox.Text_("invalid gfml " + ErrUtl.ToStrFull(e)); return;}
 		GfsCtx ctx = GfsCtx.new_();
 		try {
 		Object rv = GfsCore.Instance.ExecOne(ctx, runMsg);
 		if (rv != Gfo_invk_.Rv_handled && rv != Gfo_invk_.Rv_unhandled) {
-			UsrDlg_.Instance.Note(Object_.Xto_str_strict_or_empty(rv));
+			UsrDlg_.Instance.Note(ObjectUtl.ToStrOrEmpty(rv));
 		}
 //			Results_add(FixNewLines(ctx.Results_XtoStr()));
-		} catch (Exception e) {statusBox.Text_("help failed " + Err_.Message_gplx_full(e)); return;}
+		} catch (Exception e) {statusBox.Text_("help failed " + ErrUtl.ToStrFull(e)); return;}
 	}
 	void Save() {
 		String consoleFilStr = consoleFilBox.Text();
 		Io_url url = Io_url_.Empty;
-		if (String_.Len_eq_0(consoleFilStr)) {
+		if (StringUtl.IsNullOrEmpty(consoleFilStr)) {
 			url = GfuiIoDialogUtl.SelectFile();
 			consoleFilBox.Text_(url.Raw());
 			return;
@@ -172,7 +173,7 @@ class GfoConsoleWinCmds implements Gfo_invk {
 	void Load() {
 		String consoleFilStr = consoleFilBox.Text();
 		Io_url dir = Io_url_.Empty;
-		if (String_.Len_eq_0(consoleFilStr))
+		if (StringUtl.IsNullOrEmpty(consoleFilStr))
 			dir = Io_url_.Empty;
 		else {
 			dir = Io_url_.new_any_(consoleFilStr);
@@ -182,8 +183,8 @@ class GfoConsoleWinCmds implements Gfo_invk {
 		consoleBox.Text_(Io_mgr.Instance.LoadFilStr(url));
 	}
 	String FixNewLines(String cmd) {
-		cmd = String_.Replace(cmd, "\n", "\r\n");
-		cmd = String_.Replace(cmd, "\r\r", "\r");
+		cmd = StringUtl.Replace(cmd, "\n", "\r\n");
+		cmd = StringUtl.Replace(cmd, "\r\r", "\r");
 		return cmd;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -243,8 +244,8 @@ class GfuiTextBoxLogger implements Gfo_invk {
 	public void Write(String s) {
 		if (!owner.Enabled()) return;
 		if (!win.Visible()) win.Visible_set(true);
-		textToShow += tbox.Text() + String_.as_(s)+ String_.CrLf;
-		long curTick = System_.Ticks();
+		textToShow += tbox.Text() + StringUtl.CastOrNull(s)+ StringUtl.CrLf;
+		long curTick = SystemUtl.Ticks();
 //			if (curTick - lastTick > 500) {
 			WriteText(textToShow);
 			textToShow = "";
@@ -261,7 +262,7 @@ class GfuiTextBoxLogger implements Gfo_invk {
 	}
 	void Invk_WriteText(String text) {
 		tbox.Text_(text);
-		tbox.SelBgn_set(String_.Len(text) - 1);
+		tbox.SelBgn_set(StringUtl.Len(text) - 1);
 		if (!tbox.Focus_has()) tbox.Focus();
 	}
 	void WhenTick() {

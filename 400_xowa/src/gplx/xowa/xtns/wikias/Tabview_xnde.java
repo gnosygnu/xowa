@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wikias; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.wikias;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
@@ -32,12 +40,12 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 
 		// get id
 		id = Keep_alphanum(id);
-		if (Bry_.Len_eq_0(id)) id = Int_.To_bry(global_id++);
+		if (BryUtl.IsNullOrEmpty(id)) id = IntUtl.ToBry(global_id++);
 
 		// parse src
-		byte[] tabs_src = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
-		tabs_src = Bry_.Trim(tabs_src);	// if(isset($tabs[0]) && $tabs[0] == "") {unset($tabs[0]);} if($tabs[count($tabs)] == "") {unset($tabs[count($tabs)]);}
-		byte[][] tabs_ary = Bry_split_.Split_lines(tabs_src);
+		byte[] tabs_src = BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+		tabs_src = BryUtl.Trim(tabs_src);	// if(isset($tabs[0]) && $tabs[0] == "") {unset($tabs[0]);} if($tabs[count($tabs)] == "") {unset($tabs[count($tabs)]);}
+		byte[][] tabs_ary = BrySplit.SplitLines(tabs_src);
 		List_adp tabs_list = List_adp_.New();
 		int tabs_len = tabs_ary.length;
 		for (int i = 0; i < tabs_len; ++i) {
@@ -52,7 +60,7 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		ctx.Page().Html_data().Head_mgr().Itm__tabber().Enabled_y_();
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (tab_itms_ary != null) Tabber_tab_itm.Write(bfr, id, tab_itms_ary);
 		// write html
 		//Bry_bfr bfr = Bry_bfr_.New();
@@ -77,21 +85,21 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private static byte[] Keep_alphanum(byte[] src) {
 		if (src == null) return null;
 		int src_len = src.length; if (src_len == 0) return src;
-		Bry_bfr bfr = null;
+		BryWtr bfr = null;
 		for (int i = 0; i < src_len; ++i) {
 			byte b = src[i];
 			if (	AsciiByte.IsLtr(b)
 				||	AsciiByte.IsNum(b)) {
-				if (bfr != null) bfr.Add_byte(b);
+				if (bfr != null) bfr.AddByte(b);
 			}
 			else {	// not alphanum;
 				if (bfr == null) {	// 1st occurrence; create bfr and add initial to it
-					bfr = Bry_bfr_.New();
-					bfr.Add_mid(src, 0, i);
+					bfr = BryWtr.New();
+					bfr.AddMid(src, 0, i);
 				}
 			}
 		}
-		return bfr == null ? src : bfr.To_bry_and_clear();
+		return bfr == null ? src : bfr.ToBryAndClear();
 	}
 }
 class Tabview_tab_itm {
@@ -109,7 +117,7 @@ class Tabview_tab_itm {
 	public final byte[] Page_body;
 
 	public static Tabview_tab_itm Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] src) {
-		byte[][] args_ary = Bry_split_.Split(src, AsciiByte.Pipe);
+		byte[][] args_ary = BrySplit.Split(src, AsciiByte.Pipe);
 		int args_len = args_ary.length;
 		
 		boolean cache = false, active = false;
@@ -119,7 +127,7 @@ class Tabview_tab_itm {
 			switch (i) {
 				case 0:
 					page_ttl_bry = args_itm;
-					if (Bry_.Has_at_bgn(page_ttl_bry, AsciiByte.AngleBgn) || Bry_.Has_at_end(page_ttl_bry, AsciiByte.AngleEnd)) return null;
+					if (BryUtl.HasAtBgn(page_ttl_bry, AsciiByte.AngleBgn) || BryUtl.HasAtEnd(page_ttl_bry, AsciiByte.AngleEnd)) return null;
 					Xoa_ttl page_ttl = wiki.Ttl_parse(page_ttl_bry);
 					if (page_ttl == null) return null;
 					gplx.xowa.wikis.caches.Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(page_ttl);
@@ -129,13 +137,13 @@ class Tabview_tab_itm {
 					break;
 				case 1:
 					tab_name = args_itm;
-					if (Bry_.Has_at_bgn(tab_name, AsciiByte.AngleBgn) || Bry_.Has_at_end(tab_name, AsciiByte.AngleEnd)) return null;
+					if (BryUtl.HasAtBgn(tab_name, AsciiByte.AngleBgn) || BryUtl.HasAtEnd(tab_name, AsciiByte.AngleEnd)) return null;
 					break;
 				case 2:
-					cache = Bry_.To_bool_or(args_itm, false);
+					cache = BryUtl.ToBoolOr(args_itm, false);
 					break;
 				case 3:
-					active = Bry_.To_bool_or(args_itm, false);
+					active = BryUtl.ToBoolOr(args_itm, false);
 					break;
 			}
 		}

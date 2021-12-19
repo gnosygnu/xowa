@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
+package gplx.xowa.htmls.core.wkrs.imgs.atrs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xoh_img_cls__tst {
 	private Xoh_img_cls__fxt fxt = new Xoh_img_cls__fxt();
@@ -27,6 +30,6 @@ public class Xoh_img_cls__tst {
 }
 class Xoh_img_cls__fxt {
 	public void Test__to_html(byte tid, String other, String expd) {
-		Tfds.Eq(expd, String_.new_u8(Xoh_img_cls_.To_html(tid, Bry_.new_u8_safe(other))));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(Xoh_img_cls_.To_html(tid, BryUtl.NewU8Safe(other))));
 	}
 }

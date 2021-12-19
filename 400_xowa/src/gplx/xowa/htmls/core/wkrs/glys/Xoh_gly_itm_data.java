@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.btries.*;
+package gplx.xowa.htmls.core.wkrs.glys;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*;
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*;
 public class Xoh_gly_itm_data {
@@ -70,15 +75,15 @@ public class Xoh_gly_itm_data {
 		Gfh_tag capt_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);
 		int capt_tail_bgn = capt_tail.Src_bgn();
 		int capt_tail_end = capt_tail.Src_end();
-		capt_bgn = Bry_find_.Find_fwd_while_not_ws(src, capt_head_end, capt_tail_bgn);	// skip any \n, \s
+		capt_bgn = BryFind.FindFwdWhileNotWs(src, capt_head_end, capt_tail_bgn);	// skip any \n, \s
 		if (capt_tail_bgn - capt_bgn == 0) {
 			capt_tid = Capt_tid__empty;
 			capt_end = capt_bgn;
 			return true;										// EX: <div class='gallerytext'></div>
 		}
-		Object capt_tid_obj = Capt_tid__trie.Match_bgn(src, capt_bgn, capt_tail_bgn);
+		Object capt_tid_obj = Capt_tid__trie.MatchBgn(src, capt_bgn, capt_tail_bgn);
 		if (capt_tid_obj == null) return false;	// something wrong;
-		this.capt_tid = ((Byte_obj_val)capt_tid_obj).Val();
+		this.capt_tid = ((ByteVal)capt_tid_obj).Val();
 		boolean capt_head_is_p = false;
 		switch (capt_tid) {
 			case Capt_tid__p:		capt_bgn += 3; capt_head_is_p = true; break;		// EX: <div class='gallerytext'><p>
@@ -86,12 +91,12 @@ public class Xoh_gly_itm_data {
 		}
 		if (capt_head_is_p)
 			tag_rdr.Pos_(capt_bgn);
-		capt_bgn = Bry_find_.Find_fwd_while_not_ws(src, capt_bgn, capt_tail_bgn);
+		capt_bgn = BryFind.FindFwdWhileNotWs(src, capt_bgn, capt_tail_bgn);
 		capt_end = capt_tail_bgn;
 		if (capt_head_is_p) {
 			Gfh_tag div_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);	// search for closing </div>				
 			capt_end = div_tail.Src_bgn();
-			if (Bry_.Match(src, capt_end - 5, capt_end, Bry__p__rhs))
+			if (BryLni.Eq(src, capt_end - 5, capt_end, Bry__p__rhs))
 				capt_end -= 5; 													// set capt_end to before </p>; 5 = "\n</p>";
 			else																// no </p>; occurs when <hr> in middle; PAGE:fr.w:Forfry DATE:2016-06-24
 				capt_tid = Capt_tid__p_wo_rhs;
@@ -99,7 +104,7 @@ public class Xoh_gly_itm_data {
 		tag_rdr.Pos_(capt_tail_end);
 		return true;
 	}
-	private static final byte[] Atr__cls__gallerytext = Bry_.new_a7("gallerytext"), Bry__p__rhs = Bry_.new_a7("</p>\n");
+	private static final byte[] Atr__cls__gallerytext = BryUtl.NewA7("gallerytext"), Bry__p__rhs = BryUtl.NewA7("</p>\n");
 	public static final byte Capt_tid__p = 0, Capt_tid__br = 1, Capt_tid__empty = 2, Capt_tid__null = 3, Capt_tid__p_wo_rhs = 4;
 	private static final Btrie_slim_mgr Capt_tid__trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Gfh_tag_.P_lhs	, Capt_tid__p)

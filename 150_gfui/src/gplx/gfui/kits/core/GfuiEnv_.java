@@ -13,24 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.core;
 import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.windows.*;
-import gplx.gfml.*; import gplx.langs.gfs.*; import gplx.core.envs.*;
+import gplx.gfml.*; import gplx.langs.gfs.*;
 import gplx.core.envs.Env_;
 import gplx.core.envs.Op_sys;
 import gplx.core.envs.Process_adp;
 import gplx.core.threads.*;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.libs.dlgs.UsrMsgWkr;
+import gplx.libs.dlgs.UsrMsgWkr_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
 import java.awt.AWTKeyStroke;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 public class GfuiEnv_ {

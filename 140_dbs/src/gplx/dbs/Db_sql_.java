@@ -13,23 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.dbs;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Db_sql_ {
 	public static String Make_by_fmt(String[] lines, Object... args) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = lines.length;
 		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_byte_nl();
-			bfr.Add_str_u8(lines[i]);
+			if (i != 0) bfr.AddByteNl();
+			bfr.AddStrU8(lines[i]);
 		}
-		String fmt = bfr.To_str_and_clear();
-		return String_.Format(fmt, args);
+		String fmt = bfr.ToStrAndClear();
+		return StringUtl.Format(fmt, args);
 	}
 	public static byte[] Escape_arg(byte[] raw) {
 		int len = raw.length;
-		Bry_bfr bfr = null;
+		BryWtr bfr = null;
 		boolean dirty = false;
 
 		for (int i = 0; i < len; ++i) {
@@ -37,26 +39,26 @@ public class Db_sql_ {
 			if (b == AsciiByte.Apos) {
 				if (bfr == null) {
 					dirty = true;
-					bfr = Bry_bfr_.New();
-					bfr.Add_mid(raw, 0, i);
+					bfr = BryWtr.New();
+					bfr.AddMid(raw, 0, i);
 				}
-				bfr.Add_byte_apos().Add_byte_apos();
+				bfr.AddByteApos().AddByteApos();
 			}
 			else {
 				if (dirty) {
-					bfr.Add_byte(b);
+					bfr.AddByte(b);
 				}
 			}
 		}
-		return dirty ? bfr.To_bry_and_clear() : raw;
+		return dirty ? bfr.ToBryAndClear() : raw;
 	}
 	public static String Prep_in_from_ary(Object ary) {	
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = ArrayUtl.Len(ary);
 		for (int i = 0; i < len; i++) {
-			if (i != 0) bfr.Add_byte(AsciiByte.Comma);
-			bfr.Add_byte(AsciiByte.Question);
+			if (i != 0) bfr.AddByte(AsciiByte.Comma);
+			bfr.AddByte(AsciiByte.Question);
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 }

@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.cases;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.Hash_adp_bry;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.core.strings.String_bldr;
-import gplx.core.strings.String_bldr_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xol_case_mgr_tst {		
@@ -49,12 +49,12 @@ public class Xol_case_mgr_tst {
 		fxt.Test_reuse_1st_upper("É");
 		fxt.Lower("Ι", "ι");	// PURPOSE:test reversal; PAGE:en.d:ἀρχιερεύς DATE:2014-09-02
 	}
-	@Test  public void Turkish_redirect() {	// PURPOSE: lowercase redirect should match uppercase for asymmetric brys; PAGE:tr.w:Zvishavane DATE:2015-09-07
+	@Test public void Turkish_redirect() {	// PURPOSE: lowercase redirect should match uppercase for asymmetric brys; PAGE:tr.w:Zvishavane DATE:2015-09-07
 		Hash_adp_bry hash = Hash_adp_bry.c__u8(BoolUtl.N, Xol_case_mgr_.U8());
-		byte[] upper = Bry_.new_u8("YÖNLENDİRME");
-		byte[] lower = Bry_.new_u8("yönlendirme");
+		byte[] upper = BryUtl.NewU8("YÖNLENDİRME");
+		byte[] lower = BryUtl.NewU8("yönlendirme");
 		hash.Add(upper, upper);								// add upper to hash
-		Tfds.Eq_bry(upper, (byte[])hash.Get_by_bry(lower));	// get upper by using lower
+		GfoTstr.Eq(upper, (byte[])hash.Get_by_bry(lower));	// get upper by using lower
 	}
 //		@Test public void Hack() {
 //			Xol_case_itm[] ary = Xol_case_mgr_.Utf_8;
@@ -71,11 +71,11 @@ public class Xol_case_mgr_tst {
 class Xol_case_mgr_fxt {
 	private Xol_case_mgr case_mgr = Xol_case_mgr_.new_(); private String_bldr sb = String_bldr_.new_();
 	public void Clear() {case_mgr.Clear();}
-	public Xol_case_itm_bry itm_both_(String src, String trg)	{return new Xol_case_itm_bry(Xol_case_itm_.Tid_both , Bry_.new_u8(src), Bry_.new_u8(trg));}
-	public Xol_case_itm_bry itm_upper_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_upper, Bry_.new_u8(src), Bry_.new_u8(trg));}
-	public Xol_case_itm_bry itm_lower_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_lower, Bry_.new_u8(src), Bry_.new_u8(trg));}
+	public Xol_case_itm_bry itm_both_(String src, String trg)	{return new Xol_case_itm_bry(Xol_case_itm_.Tid_both , BryUtl.NewU8(src), BryUtl.NewU8(trg));}
+	public Xol_case_itm_bry itm_upper_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_upper, BryUtl.NewU8(src), BryUtl.NewU8(trg));}
+	public Xol_case_itm_bry itm_lower_(String src, String trg) {return new Xol_case_itm_bry(Xol_case_itm_.Tid_lower, BryUtl.NewU8(src), BryUtl.NewU8(trg));}
 	public String Init_ltrs_raw() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 			(	"0|a|A"
 			,	"1|b|B"
 			,	"2|C|c"
@@ -83,7 +83,7 @@ class Xol_case_mgr_fxt {
 	}
 	public Xol_case_mgr_fxt Init_ltrs() {
 		case_mgr = Xol_case_mgr_.new_();
-		case_mgr.Add_bulk(Bry_.new_u8(Init_ltrs_raw()));
+		case_mgr.Add_bulk(BryUtl.NewU8(Init_ltrs_raw()));
 		return this;
 	}
 	public Xol_case_mgr_fxt Init_ltrs_universal() {
@@ -93,34 +93,34 @@ class Xol_case_mgr_fxt {
 	public Xol_case_mgr_fxt Upper(String raw_str, String expd) {return Case_build(BoolUtl.Y, raw_str, expd);}
 	public Xol_case_mgr_fxt Lower(String raw_str, String expd) {return Case_build(BoolUtl.N, raw_str, expd);}
 	public Xol_case_mgr_fxt Case_build(boolean upper, String raw_str, String expd) {
-		byte[] raw = Bry_.new_u8(raw_str);
+		byte[] raw = BryUtl.NewU8(raw_str);
 		byte[] actl = case_mgr.Case_build(upper, raw, 0, raw.length);
-		Tfds.Eq(expd, String_.new_u8(actl));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(actl));
 		return this;
 	}
 	public void parse_xo__tst(String raw, Xol_case_itm_bry... expd) {
-		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xol_case_itm_.parse_xo_(Bry_.new_u8(raw))));
+		GfoTstr.EqLines(Xto_str(expd), Xto_str(Xol_case_itm_.parse_xo_(BryUtl.NewU8(raw))));
 	}
 	public void parse_mw__tst(Xol_case_itm_bry... expd) {
 		String raw = raw_(expd);
-		Xol_case_itm[] actl = Xol_case_itm_.parse_mw_(Bry_.new_u8(raw));
-		Tfds.Eq_str_lines(Xto_str(expd), Xto_str(actl));
+		Xol_case_itm[] actl = Xol_case_itm_.parse_mw_(BryUtl.NewU8(raw));
+		GfoTstr.EqLines(Xto_str(expd), Xto_str(actl));
 	}
 	public String Xto_str(Xol_case_itm[] ary) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Xol_case_itm itm = ary[i];
-			sb.Add(Byte_.To_str(itm.Tid())).Add_char_pipe().Add(String_.new_u8(itm.Src_ary())).Add_char_pipe().Add(String_.new_u8(itm.Trg_ary())).Add_char_nl();
+			sb.Add(ByteUtl.ToStr(itm.Tid())).AddCharPipe().Add(StringUtl.NewU8(itm.Src_ary())).AddCharPipe().Add(StringUtl.NewU8(itm.Trg_ary())).AddCharNl();
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 	public String raw_(Xol_case_itm_bry[] itms) {
 		int itms_len = itms.length;
 		uppers_list.Clear(); lowers_list.Clear();
 		for (int i = 0; i < itms_len; i++) {
 			Xol_case_itm_bry itm = itms[i];
-			String src = String_.new_u8(itm.Src_ary());
-			String trg = String_.new_u8(itm.Trg_ary());
+			String src = StringUtl.NewU8(itm.Src_ary());
+			String trg = StringUtl.NewU8(itm.Trg_ary());
 			switch (itm.Tid()) {
 				case Xol_case_itm_.Tid_both:
 					uppers_list.Add(trg); uppers_list.Add(src);
@@ -137,29 +137,29 @@ class Xol_case_mgr_fxt {
 		sb.Add("s:14:\"wikiLowerChars\";a:1038:{");
 		raw_ary(sb, lowers);
 		sb.Add("}}");
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 	private void raw_ary(String_bldr sb, String[] ary) {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			String itm = ary[i];
-			int itm_len = String_.Len(itm);
-			sb.Add_fmt("s:{0}:\"{1}\";", itm_len, itm);
+			int itm_len = StringUtl.Len(itm);
+			sb.AddFmt("s:{0}:\"{1}\";", itm_len, itm);
 		}
 	}
 	public void Test_reuse_1st_upper(String raw)				{Test_reuse_1st_upper(raw, null, BoolUtl.Y);}
 	public void Test_reuse_1st_upper(String raw, String expd)	{Test_reuse_1st_upper(raw, expd, BoolUtl.N);}
 	private void Test_reuse_1st_upper(String raw, String expd, boolean expd_is_same) {
-		byte[] raw_bry = Bry_.new_u8(raw);
+		byte[] raw_bry = BryUtl.NewU8(raw);
 		byte[] actl_bry = case_mgr.Case_reuse_1st_upper(raw_bry);
-		String actl_str = String_.new_u8(actl_bry);
-		boolean actl_is_same = Object_.Eq(raw_bry, actl_bry);	// pointers will be same if no change
+		String actl_str = StringUtl.NewU8(actl_bry);
+		boolean actl_is_same = ObjectUtl.Eq(raw_bry, actl_bry);	// pointers will be same if no change
 		if (expd_is_same) {
-			Tfds.Eq_true(actl_is_same, "expd should be same: " + actl_str);
+			GfoTstr.EqBoolY(actl_is_same, "expd should be same: " + actl_str);
 		}
 		else {
-			Tfds.Eq_true(!actl_is_same, "expd should not be same: " + actl_str);
-			Tfds.Eq(expd, actl_str, expd);
+			GfoTstr.EqBoolY(!actl_is_same, "expd should not be same: " + actl_str);
+			GfoTstr.EqObj(expd, actl_str, expd);
 		}
 	}
 }

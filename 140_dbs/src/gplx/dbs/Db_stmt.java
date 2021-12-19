@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
 import gplx.dbs.engines.*; import gplx.core.stores.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDecimal;
 public interface Db_stmt extends Rls_able {
 	Db_stmt Crt_bool_as_byte(String k, boolean v);
 	Db_stmt Val_bool_as_byte(String k, boolean v);
@@ -35,9 +38,9 @@ public interface Db_stmt extends Rls_able {
 	Db_stmt Crt_double(String k, double v);
 	Db_stmt Val_double(String k, double v);
 	Db_stmt Val_double(double v);
-	Db_stmt Crt_decimal(String k, Decimal_adp v);
-	Db_stmt Val_decimal(String k, Decimal_adp v);
-	Db_stmt Val_decimal(Decimal_adp v);
+	Db_stmt Crt_decimal(String k, GfoDecimal v);
+	Db_stmt Val_decimal(String k, GfoDecimal v);
+	Db_stmt Val_decimal(GfoDecimal v);
 	Db_stmt Crt_bry(String k, byte[] v);
 	Db_stmt Val_bry(String k, byte[] v);
 	Db_stmt Val_bry(byte[] v);
@@ -48,8 +51,8 @@ public interface Db_stmt extends Rls_able {
 	Db_stmt Val_bry_as_str(String k, byte[] v);
 	Db_stmt Val_bry_as_str(byte[] v);
 	Db_stmt Val_rdr_(gplx.core.ios.streams.Io_stream_rdr rdr, long rdr_len);
-	Db_stmt Crt_date(String k, DateAdp v);
-	Db_stmt Val_date(String k, DateAdp v);
+	Db_stmt Crt_date(String k, GfoDate v);
+	Db_stmt Val_date(String k, GfoDate v);
 	Db_stmt Crt_text(String k, String v);
 	Db_stmt Val_text(String k, String v);
 	boolean		Exec_insert();

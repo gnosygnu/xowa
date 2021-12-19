@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.libs.services;
 
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.XophpException;
 import gplx.xowa.mediawiki.XophpRuntimeException;
 
@@ -32,7 +32,7 @@ public class XomwServiceAlreadyDefinedException extends XophpRuntimeException {
      */
     public XomwServiceAlreadyDefinedException(String serviceName) {this(serviceName, null);}
     public XomwServiceAlreadyDefinedException(String serviceName, XophpException previous) {
-        super(String_.Format("Service already defined: {0}", serviceName), 0, previous);
+        super(StringUtl.Format("Service already defined: {0}", serviceName), 0, previous);
     }
 
 }

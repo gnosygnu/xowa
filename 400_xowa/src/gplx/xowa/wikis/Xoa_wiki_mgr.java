@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 public interface Xoa_wiki_mgr extends Gfo_invk {
 	int				Count();
 	boolean			Has(byte[] key);

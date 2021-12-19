@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
+package gplx.dbs.metas.updates; import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.dbs.engines.sqlite.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
 public class Schema_update_cmd_ {
 	public static Schema_update_cmd Make_tbl_create(String tbl_name, String tbl_sql, Db_idx_itm... tbl_idxs) {return new Schema_update_cmd__tbl_create(tbl_name, tbl_sql, tbl_idxs);}
 }

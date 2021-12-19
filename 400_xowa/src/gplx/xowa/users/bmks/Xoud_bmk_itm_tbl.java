@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.bmks; import gplx.*;
+package gplx.xowa.users.bmks;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xoud_bmk_itm_tbl implements Rls_able {
 	private final String tbl_name = "bmk_itm"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_owner, fld_sort, fld_name, fld_wiki, fld_url, fld_comment;
@@ -49,7 +54,7 @@ public class Xoud_bmk_itm_tbl implements Rls_able {
 			.Exec_update();
 	}
 	public void Update_sort(int id, int sort) {
-		if (stmt_update_sort == null) stmt_update_sort = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_sort);
+		if (stmt_update_sort == null) stmt_update_sort = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_sort);
 		stmt_update_sort.Clear().Val_int(fld_sort, sort).Crt_int(fld_id, id).Exec_update();;
 	}
 	public void Delete(int id) {
@@ -58,7 +63,7 @@ public class Xoud_bmk_itm_tbl implements Rls_able {
 	}
 	public Xoud_bmk_itm_row[] Select_grp(int owner) {
 		List_adp list = List_adp_.New();
-		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, String_.Ary(fld_owner), fld_sort)
+		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, StringUtl.Ary(fld_owner), fld_sort)
 			.Crt_int(fld_owner, owner)
 			.Exec_select__rls_auto();
 		try {
@@ -74,7 +79,7 @@ public class Xoud_bmk_itm_tbl implements Rls_able {
 			int rv = 0;
 			if (rdr.Move_next()) {
 				Object rv_obj = rdr.Read_obj(fld_sort);
-				rv = rv_obj == null ? 0 : Int_.Cast(rv_obj) + 1;
+				rv = rv_obj == null ? 0 : IntUtl.Cast(rv_obj) + 1;
 			}
 			return rv;
 		}

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.errs.ErrUtl;
 class GfmlVarTkn implements GfmlTkn {
 	public int ObjType() {return GfmlObj_.Type_tkn;}
 	public String Key() {return key;} private String key;
@@ -25,11 +26,11 @@ class GfmlVarTkn implements GfmlTkn {
 	}	String val;
 	public GfmlBldrCmd Cmd_of_Tkn() {return GfmlBldrCmd_.Null;}
 	public GfmlTkn[] SubTkns() {return ary;} GfmlTkn[] ary;
-	public GfmlTkn MakeNew(String rawNew, String valNew) {throw Err_.new_invalid_op("makeNew cannot make copy of token with only raw").Args_add("key", key, "rawNew", rawNew, "valNew", valNew);}
+	public GfmlTkn MakeNew(String rawNew, String valNew) {throw ErrUtl.NewInvalidOp("makeNew cannot make copy of token with only raw").ArgsAdd("key", key).ArgsAdd("rawNew", rawNew).ArgsAdd("valNew", valNew);}
 	public String TknType() {return "evalTkn";}
 
 	GfmlVarCtx ctx; String varKey;
-	@gplx.Internal protected GfmlVarTkn(String key, GfmlTkn[] ary, GfmlVarCtx ctx, String varKey) {
+	public GfmlVarTkn(String key, GfmlTkn[] ary, GfmlVarCtx ctx, String varKey) {
 		this.key = key; this.ary = ary;
 		this.ctx = ctx; this.varKey = varKey;
 		this.val = ctx.Fetch_Val(varKey);

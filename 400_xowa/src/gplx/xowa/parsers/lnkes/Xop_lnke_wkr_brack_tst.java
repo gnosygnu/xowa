@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.parsers.xndes.*;
 public class Xop_lnke_wkr_brack_tst {
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
@@ -45,7 +48,7 @@ public class Xop_lnke_wkr_brack_tst {
 		fxt.Test_parse_page_wiki_str("[http://www.a.org''b'']", "<a href=\"http://www.a.org\" rel=\"nofollow\" class=\"external text\"><i>b</i></a>");		
 		fxt.Test_parse_page_wiki_str("[http://www.a.org'b]", "<a href=\"http://www.a.org'b\" rel=\"nofollow\" class=\"external autonumber\">[1]</a>");
 	}
-	@Test  public void Nowiki() {
+	@Test public void Nowiki() {
 		fxt.Test_parse_page_all_str
 		(	"<nowiki>http://a.org</nowiki>"
 		,	"http://a.org"
@@ -54,12 +57,12 @@ public class Xop_lnke_wkr_brack_tst {
 	@Test public void Lnki_one() {	// PURPOSE: parallel test for "http://a.org[[B]]"; DATE:2014-07-11
 		fxt.Test_parse_page_wiki_str
 		( "[http://a.org b [[C]] d]"
-		,String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"http://a.org\" rel=\"nofollow\" class=\"external text\">b <a href=\"/wiki/C\">C</a> d</a>"
 		));
 	}
 	@Test public void Encode_xwiki() {	// PURPOSE: href title and args should always be encoded; PAGE:en.w:List_of_Category_A_listed_buildings_in_West_Lothian DATE:2014-07-15
-		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(Bry_.new_a7("commons.wikimedia.org"), Bry_.new_a7("commons.wikimedia.org"));
+		fxt.App().Usere().Wiki().Xwiki_mgr().Add_by_atrs(BryUtl.NewA7("commons.wikimedia.org"), BryUtl.NewA7("commons.wikimedia.org"));
 		fxt.Test__parse__wtxt_to_html		// encode page
 		( "[http://commons.wikimedia.org/%22%3E_A B]"
 		, "<a href='/site/commons.wikimedia.org/wiki/%22%3E_A'>B</a>"		// '%22%3E' not '">'

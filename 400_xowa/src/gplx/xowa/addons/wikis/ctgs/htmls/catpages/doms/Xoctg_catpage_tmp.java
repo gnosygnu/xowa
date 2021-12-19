@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.addons.wikis.ctgs.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
 public class Xoctg_catpage_tmp {
 	private final List_adp subc_list = List_adp_.New(), page_list = List_adp_.New(), file_list = List_adp_.New();
 	public void Add(Xoctg_catpage_itm itm) {
@@ -36,7 +40,7 @@ public class Xoctg_catpage_tmp {
 			case Xoa_ctg_mgr.Tid__subc: return subc_list;
 			case Xoa_ctg_mgr.Tid__page: return page_list;
 			case Xoa_ctg_mgr.Tid__file: return file_list;
-			default: throw Err_.new_unhandled_default(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 }

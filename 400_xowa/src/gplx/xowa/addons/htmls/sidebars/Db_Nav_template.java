@@ -1,10 +1,9 @@
 package gplx.xowa.addons.htmls.sidebars;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.jsons.Json_nde;
 import gplx.langs.mustaches.JsonMustacheNde;
 import gplx.langs.mustaches.Mustache_bfr;
@@ -22,7 +21,7 @@ public class Db_Nav_template {
 	private static boolean once = true;
 	private static Mustache_tkn_itm menu_root;
 
-	public static void Build_Sidebar(Xowe_wiki wiki, Bry_bfr bfr, byte[] id, byte[] text, byte[] itms) {
+	public static void Build_Sidebar(Xowe_wiki wiki, BryWtr bfr, byte[] id, byte[] text, byte[] itms) {
 		if (once) {
 			once = false;
 			Io_url template_root = wiki.Appe().Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "xtns", "Skin-Vector", "templates");
@@ -79,7 +78,7 @@ public class Db_Nav_template {
     	jnde.AddKvStr("href", "URL_str");
     	jnde.AddKvBool("exists", true);
     	jnde.AddKvBool("primary", true);
-    	jnde.AddKvStr("link-class", String_.Empty);
+    	jnde.AddKvStr("link-class", StringUtl.Empty);
     	jnde.AddKvStr("context", "subject");
 
         Json_nde namespaces = Json_nde.NewByVal();
@@ -88,27 +87,27 @@ public class Db_Nav_template {
 		//Json_nde data_namespaces = new Json_nde(null, -1);
 		msgdata.AddKvNde("data-namespace-tabs",
 			getMenuData(
-				Bry_.new_a7("namespaces"),
+				BryUtl.NewA7("namespaces"),
 				namespaces,
 				MENU_TYPE_TABS
 			)
 		);
                 
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		Mustache_render_ctx mctx = new Mustache_render_ctx().Init(new JsonMustacheNde(msgdata));
 		Mustache_bfr mbfr = Mustache_bfr.New_bfr(tmp_bfr);
 		navigation_root.Render(mbfr, mctx);
 		byte[] result = mbfr.To_bry_and_clear();
-		System.out.println(String_.new_u8(result));
+		System.out.println(StringUtl.NewU8(result));
 	}
 
     /* Vector/SkinVector.php */
 	private static int MENU_TYPE_DROPDOWN = 0, MENU_TYPE_TABS = 1, MENU_TYPE_PORTAL = 2, MENU_TYPE_DEFAULT = 3;
 	private static byte[][] extraClasses = new byte[][] {
-		Bry_.new_a7("vector-menu vector-menu-dropdown vectorMenu"),
-		Bry_.new_a7("vector-menu vector-menu-tabs vectorTabs"),
-		Bry_.new_a7("vector-menu vector-menu-portal portal"),
-		Bry_.new_a7("vector-menu")
+		BryUtl.NewA7("vector-menu vector-menu-dropdown vectorMenu"),
+		BryUtl.NewA7("vector-menu vector-menu-tabs vectorTabs"),
+		BryUtl.NewA7("vector-menu vector-menu-portal portal"),
+		BryUtl.NewA7("vector-menu")
 	};
 	private Json_nde getMenuData(byte[] label, Json_nde urls, int type) { return getMenuData(label, urls, type, false); }
 	private Json_nde getMenuData(byte[] label_bry, Json_nde urls, int type, boolean setLabelToSelected) {
@@ -142,9 +141,9 @@ public class Db_Nav_template {
 //		$props = [
 //			'id' => "p-$label",
 
-		String label = String_.new_u8(label_bry);
+		String label = StringUtl.NewU8(label_bry);
 		String msg = label; // for now
-		String linkertooltip = String_.Empty;
+		String linkertooltip = StringUtl.Empty;
 		String listClasses = type == MENU_TYPE_DROPDOWN
 			? "menu vector-menu-content-list"
 			: "vector-menu-content-list";
@@ -217,9 +216,9 @@ public class Db_Nav_template {
 	private static Json_nde s_getMenuData(Xowe_wiki wiki, byte[] label_bry, byte[] urls, int type, boolean setLabelToSelected) {
 		boolean isPortal = type == MENU_TYPE_PORTAL;
 
-		String label = String_.new_u8(label_bry);
+		String label = StringUtl.NewU8(label_bry);
 		String msg = label; // for now
-		String linkertooltip = String_.Empty;
+		String linkertooltip = StringUtl.Empty;
 		String listClasses = type == MENU_TYPE_DROPDOWN
 			? "menu vector-menu-content-list"
 			: "vector-menu-content-list";

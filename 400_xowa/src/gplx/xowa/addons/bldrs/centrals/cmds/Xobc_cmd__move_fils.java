@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.cmds;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.addons.bldrs.centrals.*;
 public class Xobc_cmd__move_fils extends Xobc_cmd__base {
 	private final Io_url src_dir, trg_dir;
 	private final List_adp trg_fils = List_adp_.New();
@@ -27,7 +33,7 @@ public class Xobc_cmd__move_fils extends Xobc_cmd__base {
 		int len = src_fils.length;
 		for (int i = 0; i < len; ++i) {
 			Io_url src_fil = src_fils[i];
-			if (String_.Eq(src_fil.Ext(), ".md5")) continue;
+			if (StringUtl.Eq(src_fil.Ext(), ".md5")) continue;
 			Io_url trg_fil = trg_dir.GenSubFil(src_fil.NameAndExt());
 			Io_mgr.Instance.MoveFil_args(src_fil, trg_fil, true).Exec();
 			trg_fils.Add(trg_fil);

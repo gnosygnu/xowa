@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.paras; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.paras;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.tblws.*;
@@ -24,10 +25,10 @@ public class Xop_nl_tab_lxr implements Xop_lxr {
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		int non_ws_pos = Bry_find_.Find_fwd_while_space_or_tab(src, cur_pos, src_len);
+		int non_ws_pos = BryFind.FindFwdWhileSpaceOrTab(src, cur_pos, src_len);
 		if (non_ws_pos < src_len) {	// bounds check
 			Btrie_slim_mgr tblw_trie = ctx.App().Utl_trie_tblw_ws();
-			Object tblw_obj = tblw_trie.Match_bgn(src, non_ws_pos, src_len);
+			Object tblw_obj = tblw_trie.MatchBgn(src, non_ws_pos, src_len);
 			if (tblw_obj != null) {
 				Xop_tblw_ws_itm tblw_itm = (Xop_tblw_ws_itm)tblw_obj;
 				byte itm_type = tblw_itm.Tblw_type();

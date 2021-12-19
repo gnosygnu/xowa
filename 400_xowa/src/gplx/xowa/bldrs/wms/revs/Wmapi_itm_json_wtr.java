@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.revs;
+import gplx.types.basics.utls.IntUtl;
 import gplx.langs.jsons.*;
 class Wmapi_itm_json_wtr {
 	public Json_wtr Wtr() {return wtr;} private final Json_wtr wtr = new Json_wtr();
@@ -33,7 +34,7 @@ class Wmapi_itm_json_wtr {
 		wtr.Doc_nde_end();
 	}
 	private void Write_page(Wmapi_itm__pge itm) {
-		wtr.Nde_bgn(Int_.To_str(itm.Page_id()));
+		wtr.Nde_bgn(IntUtl.ToStr(itm.Page_id()));
 		wtr.Kv_int("pageid", itm.Page_id());
 		wtr.Kv_int("ns", itm.Page_ns());
 		wtr.Kv_bry("title", itm.Page_ttl());

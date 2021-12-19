@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.hxtns.blobs;
 
-import gplx.Bry_bfr;
-import gplx.Hash_adp_bry;
-import gplx.Rls_able;
-import gplx.String_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.ios.Io_stream_zip_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
@@ -82,8 +82,8 @@ public class Hxtn_blob_tbl implements Rls_able {
 			rdr.Rls();
 		}
 	}
-	public void Select_to_regy(Bry_bfr temp_bfr, Hash_adp_bry blob_data_hash) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, String_.Ary(fld_wiki_id, fld_blob_id, fld_blob_tid))
+	public void Select_to_regy(BryWtr temp_bfr, Hash_adp_bry blob_data_hash) {
+		Db_rdr rdr = conn.Stmt_select(tbl_name, StringUtl.Ary(fld_wiki_id, fld_blob_id, fld_blob_tid))
 			.Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -115,8 +115,8 @@ public class Hxtn_blob_tbl implements Rls_able {
 		}
 	}
 
-	public static byte[] Make_key(Bry_bfr temp_bfr, int blob_id, int wiki_id, int blob_tid) {
-		return temp_bfr.Add_int_variable(blob_id).Add_byte_pipe().Add_int_variable(wiki_id).Add_byte_pipe().Add_int_variable(blob_tid).To_bry_and_clear();
+	public static byte[] Make_key(BryWtr temp_bfr, int blob_id, int wiki_id, int blob_tid) {
+		return temp_bfr.AddIntVariable(blob_id).AddBytePipe().AddIntVariable(wiki_id).AddBytePipe().AddIntVariable(blob_tid).ToBryAndClear();
 	}
 
 	public static final int Blob_tid__wtxt = 0, Blob_tid__html = 1;

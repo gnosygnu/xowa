@@ -13,11 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.xowa.langs.*;
-import gplx.core.intls.ucas.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages;
+import gplx.core.intls.ucas.Uca_ltr_extractor;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs.Xoctg_catpage_loader;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_ctg;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts.Xoctg_fmt_grp;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.Xoctg_collation_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.Xoctg_catpage_url;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.Xoctg_catpage_url_parser;
+import gplx.xowa.langs.Xol_lang_itm;
 public class Xoctg_catpage_mgr implements Gfo_invk {
 	private final Xow_wiki wiki;
 	private final Hash_adp_bry cache = Hash_adp_bry.cs();
@@ -36,14 +54,14 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 			case Xoa_ctg_mgr.Tid__subc: return fmt_subcs;
 			case Xoa_ctg_mgr.Tid__page: return fmt_pages;
 			case Xoa_ctg_mgr.Tid__file: return fmt_files;
-			default: throw Err_.new_unhandled(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public byte[] Missing_ctg_cls_css() {
-		if		(String_.Eq(missing_cls, Str__missing_cls__normal))		return Css__missing_cls__normal;
-		else if (String_.Eq(missing_cls, Str__missing_cls__hide))		return Css__missing_cls__hide;
-		else if (String_.Eq(missing_cls, Str__missing_cls__red))		return Css__missing_cls__red;
-		else															return Bry_.Empty;	// NOTE: do not throw error, else fatal error when regen'ing cfg db; DATE:2016-12-27
+		if		(StringUtl.Eq(missing_cls, Str__missing_cls__normal))		return Css__missing_cls__normal;
+		else if (StringUtl.Eq(missing_cls, Str__missing_cls__hide))		return Css__missing_cls__hide;
+		else if (StringUtl.Eq(missing_cls, Str__missing_cls__red))		return Css__missing_cls__red;
+		else															return BryUtl.Empty;	// NOTE: do not throw error, else fatal error when regen'ing cfg db; DATE:2016-12-27
 	}
 	public void Init_by_wiki(Xow_wiki wiki) {
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__missing_class);
@@ -66,7 +84,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 			return loader.Load_ctg_or_null(wiki, page_ttl, this, catpage_url, cat_ttl, limit);
 		}
 	}
-	public void Write_catpage(Bry_bfr bfr, Xoa_page page) {
+	public void Write_catpage(BryWtr bfr, Xoa_page page) {
 		try	{
 			// get catpage_url
 			Xoctg_catpage_url catpage_url = Xoctg_catpage_url_parser.Parse(page.Url());
@@ -82,7 +100,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 			fmt_files.Write_catpage_grp(bfr, wiki, lang, ltr_extractor, ctg, grp_max);
 		}
 		catch (Exception e) {
-			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", page.Url_bry_safe(), Err_.Message_gplx_log(e));
+			Xoa_app_.Usr_dlg().Warn_many("", "", "failed to generate category: title=~{0} err=~{1}", page.Url_bry_safe(), ErrUtl.ToStrLog(e));
 		}
 	}
 	public void Cache__add(byte[] ttl, Xoctg_catpage_ctg ctg) {
@@ -102,5 +120,5 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 
 	private static final String Cfg__missing_class = "xowa.addon.category.catpage.missing_class";
 	private static final String Str__missing_cls__normal = "normal", Str__missing_cls__hide = "hide", Str__missing_cls__red = "red_link";
-	private static final byte[] Css__missing_cls__normal = Bry_.new_a7(".xowa-missing-category-entry {}"), Css__missing_cls__hide = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Css__missing_cls__red = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
+	private static final byte[] Css__missing_cls__normal = BryUtl.NewA7(".xowa-missing-category-entry {}"), Css__missing_cls__hide = BryUtl.NewA7(".xowa-missing-category-entry {display: none;}"), Css__missing_cls__red = BryUtl.NewA7(".xowa-missing-category-entry {color: red;}");
 }

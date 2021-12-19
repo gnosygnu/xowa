@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
 import gplx.core.consoles.*; import gplx.core.criterias.*;
+import gplx.libs.files.Io_url;
 public class IoEngine_xrg_queryDir {
 	public Io_url Url() {return url;} public IoEngine_xrg_queryDir Url_(Io_url val) {url = val; return this;} Io_url url;
 	public boolean Recur() {return recur;} public IoEngine_xrg_queryDir Recur_() {return Recur_(true);} public IoEngine_xrg_queryDir Recur_(boolean val) {recur = val; return this;} private boolean recur = false;
@@ -39,7 +40,7 @@ public class IoEngine_xrg_queryDir {
 	public IoItmHash ExecAsItmHash() {
 		Criteria crt = dirInclude ? Criteria_.All : Criteria_fld.new_(IoItm_base_.Prop_Type, Criteria_.eq_(IoItmFil.Type_Fil));
 		IoItmHash list = ExecAsDir().XtoIoItmList(crt);
-		list.Sort_by(IoItmBase_comparer_nest.Instance);
+		list.SortBy(IoItmBase_comparer_nest.Instance);
 		return list;
 	}
 	public static IoEngine_xrg_queryDir new_(Io_url url) {
@@ -49,5 +50,5 @@ public class IoEngine_xrg_queryDir {
 		rv.dirCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, Criteria_.All);
 		rv.subDirScanCrt = Criteria_fld.new_(IoItm_base_.Prop_Path, Criteria_.All);
 		return rv;
-	}	IoEngine_xrg_queryDir() {}
+	}   IoEngine_xrg_queryDir() {}
 }

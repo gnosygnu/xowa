@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.gfs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
 import gplx.langs.gfs.*;
 public class Xoa_gfs_mgr_ {
 	public static GfoMsg Parse_to_msg(String v) {return Gfs_msg_bldr.Instance.ParseToMsg(v);}

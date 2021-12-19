@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls;
-import gplx.Bry_bfr;
-import gplx.Int_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_tkn_itm;
 import gplx.xowa.parsers.Xop_tkn_itm_;
@@ -32,14 +32,14 @@ public class Arg_nde_tkn extends Xop_tkn_itm_base {
 	public Arg_itm_tkn Val_tkn() {return val_tkn;} public Arg_nde_tkn Val_tkn_(Arg_itm_tkn v) {val_tkn = v; return this;} Arg_itm_tkn val_tkn = Arg_itm_tkn_null.Null_arg_itm;
 	public boolean KeyTkn_exists() {return key_tkn != Arg_itm_tkn_null.Null_arg_itm;}
 	public Xop_tkn_itm Eq_tkn() {return eq_tkn;} public Arg_nde_tkn Eq_tkn_(Xop_tkn_itm v) {eq_tkn = v; return this;} private Xop_tkn_itm eq_tkn = Xop_tkn_null.Null_tkn;
-	public int Arg_tid() {return arg_tid;} public void Arg_tid_(int v) {arg_tid = v;} private int arg_tid = Int_.Max_value;
+	public int Arg_tid() {return arg_tid;} public void Arg_tid_(int v) {arg_tid = v;} private int arg_tid = IntUtl.MaxValue;
 	@Override public void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr) {fmtr.Reg_arg(ctx, src, arg_idx, this);}
 	@Override public void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data) {
 		key_tkn.Tmpl_compile(ctx, src, prep_data);
 		eq_tkn.Tmpl_compile(ctx, src, prep_data);
 		val_tkn.Tmpl_compile(ctx, src, prep_data);
 	}
-	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {
+	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, BryWtr bfr) {
 		key_tkn.Tmpl_evaluate(ctx, src, caller, bfr);
 		eq_tkn.Tmpl_evaluate(ctx, src, caller, bfr);
 		val_tkn.Tmpl_evaluate(ctx, src, caller, bfr);

@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.dbs.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*;
+import gplx.dbs.*;
 public class Xoctg_catpage_itm {
 	private byte version;
 	Xoctg_catpage_itm(byte version, byte grp_tid, int page_id, byte[] sortkey_prefix, byte[] sortkey_binary) {
@@ -36,26 +40,26 @@ public class Xoctg_catpage_itm {
 	public void Page_ttl_(Xoa_ttl ttl) {
 		this.page_ttl = ttl;
 		// sortkey_prefix will be blank for v2; use page_ttl; PAGE:s.w:Category:Computer_science DATE:2015-11-22
-		if (version == Version__2 && Bry_.Len_eq_0(sortkey_prefix))
+		if (version == Version__2 && BryUtl.IsNullOrEmpty(sortkey_prefix))
 			sortkey_prefix = page_ttl.Page_txt();
 
 		// sortkey_binary will be blank for v2,v3; use page_ttl; PAGE:fr.w:Article_contenant_un_appel_à_traduction_en_anglais; DATE:2016-10-11
-		if (version != Version__4 && Bry_.Len_eq_0(sortkey_binary)) sortkey_binary = page_ttl.Page_txt();
+		if (version != Version__4 && BryUtl.IsNullOrEmpty(sortkey_binary)) sortkey_binary = page_ttl.Page_txt();
 	}
-	public byte[] Sortkey_handle_make(Bry_bfr tmp_bfr, Xow_wiki wiki, byte[] prv_sortkey_handle) {
+	public byte[] Sortkey_handle_make(BryWtr tmp_bfr, Xow_wiki wiki, byte[] prv_sortkey_handle) {
 		// page.tbl missing even though in cat_link.tbl; happens for "User:" namespace pages;
 		if (page_ttl == Xoa_ttl.Null) {
 			// sortkey_prefix exists; happens for [[Category:A]] as opposed to [[Category:A|some_sortkey_prefix]]; also, {{DEFAULTSORTKEY:some_sortkey_prefix}}
-			if (Bry_.Len_gt_0(sortkey_prefix)) {
+			if (BryUtl.IsNotNullOrEmpty(sortkey_prefix)) {
 				sortkey_handle = sortkey_prefix;
 				return sortkey_handle;				// set sortkey_prefix as new prv_sortkey_handle;
 			}
 			else {
 				// set sortkey_handle to "prv_sortkey" + "page_id"; needed for multiple "missing" catlinks which span 200 page boundaries
 				tmp_bfr.Add(prv_sortkey_handle);
-				tmp_bfr.Add_byte_nl();
-				tmp_bfr.Add_int_variable(page_id);
-				sortkey_handle = tmp_bfr.To_bry_and_clear();
+				tmp_bfr.AddByteNl();
+				tmp_bfr.AddIntVariable(page_id);
+				sortkey_handle = tmp_bfr.ToBryAndClear();
 				return prv_sortkey_handle;
 			}
 		}
@@ -66,11 +70,11 @@ public class Xoctg_catpage_itm {
 				sortkey_handle = page_ttl.Page_txt();
 			}
 			else {
-				byte[] sortkey_normalized = Bry_.Replace(sortkey_prefix, Sortkey_prefix_replace__src, Sortkey_prefix_replace__trg);
+				byte[] sortkey_normalized = BryUtlByWtr.Replace(sortkey_prefix, Sortkey_prefix_replace__src, Sortkey_prefix_replace__trg);
 				sortkey_normalized = wiki.Lang().Case_mgr().Case_reuse_1st_upper(sortkey_normalized); // ISSUE#:637
 				tmp_bfr.Add(sortkey_normalized);
-				tmp_bfr.Add_byte_nl().Add(page_ttl.Page_txt());	// "$prefix\n$unprefixed";
-				sortkey_handle = tmp_bfr.To_bry_and_clear();
+				tmp_bfr.AddByteNl().Add(page_ttl.Page_txt());	// "$prefix\n$unprefixed";
+				sortkey_handle = tmp_bfr.ToBryAndClear();
 			}
 			return sortkey_handle;
 		}
@@ -78,14 +82,14 @@ public class Xoctg_catpage_itm {
 
 	public static final Xoctg_catpage_itm[] Ary_empty = new Xoctg_catpage_itm[0];
 	public static Xoctg_catpage_itm New_by_rdr(Xow_wiki wiki, Db_rdr rdr, byte version) {
-		byte[] sortkey_binary = Bry_.Empty;
-		byte[] sortkey_prefix = Bry_.Empty;
+		byte[] sortkey_binary = BryUtl.Empty;
+		byte[] sortkey_prefix = BryUtl.Empty;
 		if (version == Version__4) {
 			sortkey_binary = rdr.Read_bry("cl_sortkey");
 			sortkey_prefix = rdr.Read_bry_by_str("cl_sortkey_prefix");
 		}
 		else {
-			sortkey_binary = Bry_.Empty;
+			sortkey_binary = BryUtl.Empty;
 			sortkey_prefix = rdr.Read_bry_by_str("cl_sortkey");
 		}
 		Xoctg_catpage_itm rv = new Xoctg_catpage_itm(version, rdr.Read_byte("cl_type_id"), rdr.Read_int("cl_from"), sortkey_prefix, sortkey_binary);
@@ -93,16 +97,16 @@ public class Xoctg_catpage_itm {
 		if (version == Version__4) {
 			String ttl_str = rdr.Read_str("page_title");
 			if (ttl_str != null) {// NOTE: ttl_str will be NULL if LEFT JOIN fails on page_db.page
-				rv.Page_ttl_(wiki.Ttl_parse(rdr.Read_int("page_namespace"), Bry_.new_u8(ttl_str)));
+				rv.Page_ttl_(wiki.Ttl_parse(rdr.Read_int("page_namespace"), BryUtl.NewU8(ttl_str)));
 			}
 		}
 		return rv;
 	}
 	public static Xoctg_catpage_itm New_by_ttl(byte grp_tid, int page_id, Xoa_ttl ttl) {	// TEST
-		Xoctg_catpage_itm rv = new Xoctg_catpage_itm(Version__4, grp_tid, page_id, ttl.Page_txt(), Bry_.Empty);
+		Xoctg_catpage_itm rv = new Xoctg_catpage_itm(Version__4, grp_tid, page_id, ttl.Page_txt(), BryUtl.Empty);
 		rv.Page_ttl_(ttl);
 		return rv;
 	}
 	private static final byte Version__2 = 2, Version__4 = 4;
-	private static final byte[] Sortkey_prefix_replace__src = Bry_.new_a7("\n\t"), Sortkey_prefix_replace__trg = Bry_.new_a7("  ");
+	private static final byte[] Sortkey_prefix_replace__src = BryUtl.NewA7("\n\t"), Sortkey_prefix_replace__trg = BryUtl.NewA7("  ");
 }

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.xowa.guis.*;
+package gplx.xowa.htmls.heads;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 public class Xoh_head_itm__tabber extends Xoh_head_itm__base {
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__tabber;}
 	@Override public int Flags() {return Flag__css_include | Flag__js_tail_script;}

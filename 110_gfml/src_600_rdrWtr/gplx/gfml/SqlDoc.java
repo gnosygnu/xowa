@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.strings.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class SqlDoc {
 	public static GfmlDoc XtoDoc(String raw) {
 		GfmlBldr bldr = GfmlBldr_.new_();
@@ -43,7 +45,7 @@ public class SqlDoc {
 	}
 	static GfmlLxr whitespace_(GfmlLxr lxr) {
 		GfmlTkn tkn = GfmlTkn_.cmd_("key:gfml.whitespace_0", GfmlBldrCmd_.Null);
-		GfmlLxr rv = GfmlLxr_.range_("lxr:gfml.whitespace_0", String_.Ary(" ", String_.Tab, String_.CrLf, String_.Lf), tkn, false);
+		GfmlLxr rv = GfmlLxr_.range_("lxr:gfml.whitespace_0", StringUtl.Ary(" ", StringUtl.Tab, StringUtl.CrLf, StringUtl.Nl), tkn, false);
 		lxr.SubLxr_Add(rv);
 		return rv;
 	}
@@ -77,11 +79,11 @@ class SqlCmd_quote_end implements GfmlBldrCmd {
 		String_bldr sb = String_bldr_.new_();
 		GfmlObjList list = bldr.CurFrame().WaitingTkns();
 		for (int i = 0; i < list.Len(); i++) {
-			GfmlTkn pnd = (GfmlTkn)list.Get_at(i);
+			GfmlTkn pnd = (GfmlTkn)list.GetAt(i);
 			sb.Add(pnd.Val());
 		}
-		//Int_.To_str(bldr.CurNdeFrame().Nde().SubTkns().length)
-		GfmlAtr atr = GfmlAtr.new_(GfmlTkn_.raw_("word"), GfmlTkn_.raw_(sb.To_str()), GfmlType_.String);
+		//IntUtl.To_str(bldr.CurNdeFrame().Nde().SubTkns().length)
+		GfmlAtr atr = GfmlAtr.new_(GfmlTkn_.raw_("word"), GfmlTkn_.raw_(sb.ToStr()), GfmlType_.String);
 		bldr.CurNdeFrame().CurNde().SubObjs_Add(atr);
 		bldr.Frames_end();
 	}

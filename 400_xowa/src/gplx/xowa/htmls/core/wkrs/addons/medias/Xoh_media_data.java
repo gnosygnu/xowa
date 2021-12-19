@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.addons.medias; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.addons.*;
+package gplx.xowa.htmls.core.wkrs.addons.medias;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
@@ -103,9 +106,9 @@ public class Xoh_media_data implements Xoh_data_itm, Gfh_style_wkr {
 		this.lnki_ttl_bgn = lnki_ttl_bgn; this.lnki_ttl_end = lnki_ttl_end;
 	}
 	public boolean On_atr(byte[] src, int atr_idx, int atr_val_bgn, int atr_val_end, int itm_bgn, int itm_end, int key_bgn, int key_end, int val_bgn, int val_end) {
-		if		(Bry_.Match(src, key_bgn, key_end, Style__max_width)) {	// 'max-width'
+		if		(BryLni.Eq(src, key_bgn, key_end, Style__max_width)) {	// 'max-width'
 			if (aud_width == -1) {
-				aud_width = Bry_.To_int_or__lax(src, val_bgn, val_end, -1);
+				aud_width = BryUtl.ToIntOrLax(src, val_bgn, val_end, -1);
 				return true;
 			}	// else if already set, fall-thru to below
 		}
@@ -116,8 +119,8 @@ public class Xoh_media_data implements Xoh_data_itm, Gfh_style_wkr {
 		tag_rdr.Err_wkr().Warn(msg, args);
 		return false;
 	}
-	public static final byte[] Hook_bry = Bry_.new_a7(" class=\"media mw-media");
-	private static final byte[] Style__max_width = Bry_.new_a7("max-width");
+	public static final byte[] Hook_bry = BryUtl.NewA7(" class=\"media mw-media");
+	private static final byte[] Style__max_width = BryUtl.NewA7("max-width");
 
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_media_data rv = new Xoh_media_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}

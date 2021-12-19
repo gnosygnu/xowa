@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
 public class Xoae_page__tst {
 	private final Xoae_page__fxt fxt = new Xoae_page__fxt();
 	@Test public void Ttl() {
@@ -31,12 +33,12 @@ class Xoae_page__fxt {
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 	}
 	public void Init__page(String ttl) {
-		page = Xoae_page.New(wiki, wiki.Ttl_parse(Bry_.new_u8(ttl)));
+		page = Xoae_page.New(wiki, wiki.Ttl_parse(BryUtl.NewU8(ttl)));
 	}
 	public void Exec__ttl(String raw) {
-		page.Ttl_(wiki.Ttl_parse(Bry_.new_u8(raw)));
+		page.Ttl_(wiki.Ttl_parse(BryUtl.NewU8(raw)));
 	}
 	public void Test__url(String expd) {
-		Gftest.Eq__str(expd, page.Url().To_str(), "url");
+		GfoTstr.Eq(expd, page.Url().To_str(), "url");
 	}
 }

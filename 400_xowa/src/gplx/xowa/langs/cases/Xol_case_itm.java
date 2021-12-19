@@ -13,15 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.primitives.*;
+package gplx.xowa.langs.cases;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.core.intls.*;
+import gplx.types.basics.strings.unicodes.Utf16Utl;
+import gplx.types.custom.brys.wtrs.BryRef;
 public interface Xol_case_itm extends Gfo_case_itm {
 	byte Tid();
 	byte[] Src_ary();
 	byte[] Trg_ary();
-	void Case_build_upper(Bry_bfr bfr);
-	void Case_build_lower(Bry_bfr bfr);
+	void Case_build_upper(BryWtr bfr);
+	void Case_build_lower(BryWtr bfr);
 	void Case_reuse_upper(byte[] ary, int bgn, int len);
 	void Case_reuse_lower(byte[] ary, int bgn, int len);
 	Xol_case_itm Clone();
@@ -41,8 +43,8 @@ class Xol_case_itm_byt implements Xol_case_itm {
 	public byte[] Trg_ary() {return trg_ary;} private byte[] trg_ary;
 	public byte Src_byte() {return src_byte;} private byte src_byte;
 	public byte Trg_byte() {return trg_byte;} private byte trg_byte;
-	public void Case_build_upper(Bry_bfr bfr) {bfr.Add_byte(upper_byte);} private byte upper_byte;
-	public void Case_build_lower(Bry_bfr bfr) {bfr.Add_byte(lower_byte);} private byte lower_byte;
+	public void Case_build_upper(BryWtr bfr) {bfr.AddByte(upper_byte);} private byte upper_byte;
+	public void Case_build_lower(BryWtr bfr) {bfr.AddByte(lower_byte);} private byte lower_byte;
 	public void Case_reuse_upper(byte[] ary, int bgn, int len) {ary[bgn] = upper_byte;}
 	public void Case_reuse_lower(byte[] ary, int bgn, int len) {ary[bgn] = lower_byte;}
 	public Xol_case_itm Clone() {return new Xol_case_itm_byt(tid, src_byte, trg_byte);}
@@ -60,15 +62,15 @@ class Xol_case_itm_bry implements Xol_case_itm {
 			case Xol_case_itm_.Tid_lower:		upper_ary = src_ary; lower_ary = trg_ary; asymmetric_bry = trg_ary; break;
 		}
 		len_lo = lower_ary.length;
-		utf8_id_lo = Utf16_.Decode_to_int(lower_ary, 0);
-		hashcode_ci_lo = Bry_obj_ref.CalcHashCode(lower_ary, 0, len_lo);
+		utf8_id_lo = Utf16Utl.DecodeToInt(lower_ary, 0);
+		hashcode_ci_lo = BryRef.CalcHashCode(lower_ary, 0, len_lo);
 	}
 	public byte Tid() {return tid;} public Xol_case_itm_bry Tid_(byte v) {tid = v; return this;} private byte tid;
 	public boolean Is_single_byte() {return false;}
 	public byte[] Src_ary() {return src_ary;} private byte[] src_ary;
 	public byte[] Trg_ary() {return trg_ary;} private byte[] trg_ary;
-	public void Case_build_upper(Bry_bfr bfr) {bfr.Add(upper_ary);} private byte[] upper_ary;
-	public void Case_build_lower(Bry_bfr bfr) {bfr.Add(lower_ary);} private byte[] lower_ary;
+	public void Case_build_upper(BryWtr bfr) {bfr.Add(upper_ary);} private byte[] upper_ary;
+	public void Case_build_lower(BryWtr bfr) {bfr.Add(lower_ary);} private byte[] lower_ary;
 	public void Case_reuse_upper(byte[] ary, int bgn, int len) {	// ASSUME: upper/lower have same width; i.e.: upper'ing a character doesn't go from a 2-width byte to a 3-width byte
 		for (int i = 0; i < len; i++)
 			ary[i + bgn] = upper_ary[i];

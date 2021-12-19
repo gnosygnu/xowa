@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.heads;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 public class Xoh_head_itm__collapsible extends Xoh_head_itm__base {
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__collapsible;}
 	@Override public int Flags() {return Flag__js_head_global;}
@@ -24,9 +26,9 @@ public class Xoh_head_itm__collapsible extends Xoh_head_itm__base {
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_expand);
 	}
 	private static final byte[]
-	  Key_enabled				= Bry_.new_a7("collapsible-enabled")
-	, Key_collapsed				= Bry_.new_a7("collapsible-collapsed")
-	, Key_collapse				= Bry_.new_a7("collapsible-collapse")
-	, Key_expand				= Bry_.new_a7("collapsible-expand")
+	  Key_enabled				= BryUtl.NewA7("collapsible-enabled")
+	, Key_collapsed				= BryUtl.NewA7("collapsible-collapsed")
+	, Key_collapse				= BryUtl.NewA7("collapsible-collapse")
+	, Key_expand				= BryUtl.NewA7("collapsible-expand")
 	;
 }

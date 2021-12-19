@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
@@ -45,13 +52,13 @@ public class Xobldr__page__page_score extends Xob_cmd__base implements Xob_cmd {
 		, DbmetaFldItm.NewInt(Pagerank__fld_link_count)
 		, DbmetaFldItm.NewInt(Pagerank__fld_has_converged).DefaultValSet(0)
 		, DbmetaFldItm.NewDouble(Pagerank__fld_page_rank).DefaultValSet(1)
-		, DbmetaFldItm.NewInt("page_namespace").DefaultValSet(Int_.Min_value)
+		, DbmetaFldItm.NewInt("page_namespace").DefaultValSet(IntUtl.MinValue)
 		, DbmetaFldItm.NewByte("page_is_redirect").DefaultValSet(0)
 		, DbmetaFldItm.NewInt("page_len").DefaultValSet(0)
 		));
 
 		new Db_attach_mgr(plink_conn, new Db_attach_itm("page_db", page_conn))
-			.Exec_sql_w_msg("generating list of pages",  String_.Concat_lines_nl_skip_last
+			.Exec_sql_w_msg("generating list of pages",  StringUtl.ConcatLinesNlSkipLast
 		( "INSERT INTO page_rank_temp (page_id, link_count, page_namespace, page_is_redirect, page_len)"
 		, "SELECT   p.page_id"
 		, ",        Coalesce(Count(pl.trg_id), {0}) AS link_count"
@@ -71,8 +78,8 @@ public class Xobldr__page__page_score extends Xob_cmd__base implements Xob_cmd {
 			int converged_count = plink_conn.Exec_select_as_int("SELECT Count(page_id) FROM page_rank_temp WHERE has_converged = 0;", 0);
 			if (converged_count == 0) break;
 			new Db_attach_mgr(plink_conn, new Db_attach_itm("page_db", page_conn))
-				.Exec_sql_w_msg(String_.Format("calculating page_rank; iteration={0} unconverged={1}", iteration_idx, converged_count)
-			, String_.Concat_lines_nl_skip_last
+				.Exec_sql_w_msg(StringUtl.Format("calculating page_rank; iteration={0} unconverged={1}", iteration_idx, converged_count)
+			, StringUtl.ConcatLinesNlSkipLast
 			( "REPLACE INTO page_rank_temp (page_id, page_rank, link_count, has_converged, page_namespace, page_is_redirect, page_len)"
 			, "SELECT   pr.page_id"
 			, ",        {1} + ({0} * Coalesce(w.page_rank, 0)) AS page_rank"

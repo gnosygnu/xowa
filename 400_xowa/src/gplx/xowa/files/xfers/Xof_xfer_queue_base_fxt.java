@@ -13,11 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.xfers;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.ios.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.cnvs.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.apps.wms.apis.*; import gplx.xowa.apps.wms.apis.origs.*;	
+import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_xfer_queue_base_fxt {
 	public Xoapi_orig_mok Api_size() {return api_size;} private Xoapi_orig_mok api_size = Xoapi_orig_mok.Instance;
 	public Xof_repo_itm Src_commons_repo() {return src_commons_repo;} private Xof_repo_itm src_commons_repo;
@@ -36,10 +42,10 @@ public class Xof_xfer_queue_base_fxt {
 			file_mgr.Img_mgr().Wkr_query_img_size_(new Xof_img_wkr_query_img_size_mock());
 			app.Wmf_mgr().Api_mgr().Api_orig_(api_size);
 
-			byte[] src_commons = Bry_.new_a7("src_commons");
-			byte[] src_en_wiki = Bry_.new_a7("src_en_wiki");
-			byte[] trg_commons = Bry_.new_a7("trg_commons");
-			byte[] trg_en_wiki = Bry_.new_a7("trg_en_wiki");
+			byte[] src_commons = BryUtl.NewA7("src_commons");
+			byte[] src_en_wiki = BryUtl.NewA7("src_en_wiki");
+			byte[] trg_commons = BryUtl.NewA7("trg_commons");
+			byte[] trg_en_wiki = BryUtl.NewA7("trg_en_wiki");
 			src_commons_repo = Ini_repo_add(file_mgr, src_commons, "mem/src/commons.wikimedia.org/", Xow_domain_itm_.Str__commons, false);
 			src_en_wiki_repo = Ini_repo_add(file_mgr, src_en_wiki, "mem/src/en.wikipedia.org/"		, Xow_domain_itm_.Str__enwiki, false);
 			Ini_repo_add(file_mgr, trg_commons, "mem/trg/commons.wikimedia.org/", Xow_domain_itm_.Str__commons, true).Primary_(true);
@@ -68,16 +74,16 @@ public class Xof_xfer_queue_base_fxt {
 	public void ini_page_create_en_wiki(String ttl)								{Init_page_create(en_wiki, ttl, "");}
 	public void ini_page_create_en_wiki_redirect(String ttl, String redirect)	{Init_page_create(en_wiki, ttl, "#REDIRECT [[" + redirect + "]]");}
 	public void Init_page_create(Xowe_wiki wiki, String ttl, String txt) {
-		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, Bry_.new_u8(ttl));
-		byte[] page_raw = Bry_.new_u8(txt);
+		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, BryUtl.NewU8(ttl));
+		byte[] page_raw = BryUtl.NewU8(txt);
 		wiki.Db_mgr().Save_mgr().Data_create(wiki, page_ttl, page_raw);
 	}
 	Xof_repo_itm Ini_repo_add(Xof_file_mgr file_mgr, byte[] key, String root, String wiki, boolean trg) {
-		Xof_repo_itm repo = file_mgr.Repo_mgr().Set(String_.new_u8(key), root, wiki).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
+		Xof_repo_itm repo = file_mgr.Repo_mgr().Set(StringUtl.NewU8(key), root, wiki).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		if (trg) {
 			byte[][] ary = repo.Mode_names();
-			ary[0] = Bry_.new_a7("raw");
-			ary[1] = Bry_.new_a7("fit");
+			ary[0] = BryUtl.NewA7("raw");
+			ary[1] = BryUtl.NewA7("fit");
 		}
 		return repo;
 	}
@@ -98,16 +104,16 @@ public class Xof_xfer_queue_base_fxt {
 		for (int i = 0; i < trg_fils.length; i++) {
 			Io_fil trg_fil = trg_fils[i];
 			String data = Io_mgr.Instance.LoadFilStr(trg_fil.Url());
-			Tfds.Eq_str_lines(trg_fil.Data(), data, trg_fil.Url().Raw());
+			GfoTstr.EqLines(trg_fil.Data(), data, trg_fil.Url().Raw());
 		}		
 	}
 	public void	 save_(Io_fil v)						{Io_mgr.Instance.SaveFilStr(v.Url(), v.Data());}
-	public Io_fil reg_(String url, String... v)	{return new Io_fil(Io_url_.mem_fil_(url), String_.Concat_lines_nl(v));}
+	public Io_fil reg_(String url, String... v)	{return new Io_fil(Io_url_.mem_fil_(url), StringUtl.ConcatLinesNl(v));}
 	public Io_fil img_(String url_str, int w, int h)	{return file_(url_str, file_img(w, h));}
 	public Io_fil svg_(String url_str, int w, int h)	{return file_(url_str, file_svg(w, h));}
 	public Io_fil ogg_(String url_str)					{return file_(url_str, "");}
-	public void fil_absent(String url)					{Tfds.Eq_false(Io_mgr.Instance.ExistsFil(Io_url_.mem_fil_(url)), "fil should not exist: {0}", url);}
+	public void fil_absent(String url)					{GfoTstr.EqBoolN(Io_mgr.Instance.ExistsFil(Io_url_.mem_fil_(url)), "fil should not exist: {0}", url);}
 	Io_fil file_(String url_str, String data)			{return new Io_fil(Io_url_.mem_fil_(url_str), data);}
-	String file_img(int w, int h) {return String_.Format("{0},{1}", w, h);}
-	String file_svg(int w, int h) {return String_.Format("<svg width=\"{0}\" height=\"{1}\" />", w, h);}
+	String file_img(int w, int h) {return StringUtl.Format("{0},{1}", w, h);}
+	String file_svg(int w, int h) {return StringUtl.Format("<svg width=\"{0}\" height=\"{1}\" />", w, h);}
 }

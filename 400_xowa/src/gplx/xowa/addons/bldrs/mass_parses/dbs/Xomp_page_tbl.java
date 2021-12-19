@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs;
 import gplx.dbs.*;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xomp_page_tbl implements Db_tbl {
 	private final Object thread_lock = new Object();
 	private final Db_conn conn;
@@ -43,9 +45,9 @@ public class Xomp_page_tbl implements Db_tbl {
 	public void Update_wkr_uid(int wkr_uid, Db_conn wkr_conn) {
 		synchronized (thread_lock) {	// LOCK:used by multiple threads
 			Db_attach_mgr attach_mgr = new Db_attach_mgr(conn, new Db_attach_itm("wkr_db", wkr_conn));
-			attach_mgr.Exec_sql_w_msg("updating page_regy: wkr_id=" + wkr_uid, String_.Concat_lines_nl_skip_last	// ANSI.Y
+			attach_mgr.Exec_sql_w_msg("updating page_regy: wkr_id=" + wkr_uid, StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 			( "UPDATE  xomp_page"
-			, "SET     xomp_wkr_id = " + Int_.To_str(wkr_uid)
+			, "SET     xomp_wkr_id = " + IntUtl.ToStr(wkr_uid)
 			, ",       html_len = (SELECT length(body) FROM <wkr_db>html h WHERE h.page_id = xomp_page.page_id)"
 			, "WHERE   page_id IN (SELECT page_id FROM <wkr_db>html h)"
 			));

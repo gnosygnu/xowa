@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.drds.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
+package gplx.xowa.drds.files;
+import gplx.libs.logs.Gfo_log;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 public class Xod_fsys_mgr {
 	public Xod_fsys_mgr(Gfo_log log, Xod_activity_adp activity) {
 		this.usr_data_dir = Io_url_.lnx_dir_(activity.Fsys__files_dir() + "/");
@@ -26,7 +29,7 @@ public class Xod_fsys_mgr {
 		}
 		log.Info("fsys_mgr:root_dir", "root", app_root_dir.Xto_api());
 	}
-	public Io_url Usr_data_dir() {return usr_data_dir;} private Io_url usr_data_dir;		// cleared by "Clear data"; maps to both @gplx.Internal protected and external storage
+	public Io_url Usr_data_dir() {return usr_data_dir;} private Io_url usr_data_dir;		// cleared by "Clear data"; maps to both public and external storage
 	// private Io_url Usr_temp_dir() {return usr_temp_dir;} private Io_url usr_temp_dir;	// cleared by "Clear cache"
 	public Io_url Usr_data_fil() {return usr_data_fil;} private Io_url usr_data_fil;
 	public Io_url App_root_dir() {return app_root_dir;} private Io_url app_root_dir;

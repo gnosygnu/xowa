@@ -13,7 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.svcs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.svcs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.objects.Cancelable_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.fulltexts.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.guis.cbks.*;
@@ -70,7 +83,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			}
 		} catch (Exception exc) {
 			if (app.Tid_is_edit())
-				((Xoae_app)app).Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_full(exc));
+				((Xoae_app)app).Gui_mgr().Kit().Ask_ok("", "", ErrUtl.ToStrFull(exc));
 		}
 	}
 	private void Search_wiki(Xofulltext_args_qry args, Xofulltext_cache_mgr cache_mgr, Xofulltext_searcher_ui ui, Xofulltext_args_wiki wiki_args) {
@@ -106,7 +119,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 			ui.Send_done();
 		}
 		catch (Exception exc) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to search_wiki; err=~{0}", Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to search_wiki; err=~{0}", ErrUtl.ToStrLog(exc));
 		}
 	}
 	private boolean Display_cached_qry(Xofulltext_args_qry args, Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_cache_qry qry, int qry_id, Xofulltext_args_wiki wiki_args) {
@@ -116,13 +129,13 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 		int max = qry.Pages().Len();
 		for (int i = bgn; i < end; i++) {
 			if (i >= max) return false; // more pages requested than available
-			Xofulltext_cache_page page = (Xofulltext_cache_page)qry.Pages().Get_at(i);
+			Xofulltext_cache_page page = (Xofulltext_cache_page)qry.Pages().GetAt(i);
 			ui.Send_page_add(new Xofulltext_searcher_page(qry_id, wiki.Domain_bry(), page.Page_id(), page.Page_ttl(), wiki_args.expand_snips));
 
 			// loop lines
 			int lines_len = page.Lines().Len();
 			for (int j = 0; j < lines_len; j++) {
-				Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().Get_at(j);
+				Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().GetAt(j);
 				ui.Send_line_add(false, wiki_args.show_all_snips, qry_id, wiki.Domain_bry(), page.Page_id(), line.Line_seq(), line.Line_html());
 			}
 		}
@@ -162,13 +175,13 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 
 				int bgn = len - max;
 				for (int i = 0; i < bgn; i++) {
-					Xofulltext_args_qry args = (Xofulltext_args_qry)wkr_hash.Get_at(i);
+					Xofulltext_args_qry args = (Xofulltext_args_qry)wkr_hash.GetAt(i);
 					deleted.Add(args);
 				}
 
 				len = deleted.Len();
 				for (int i = 0; i < len; i++) {
-					Xofulltext_args_qry args = (Xofulltext_args_qry)deleted.Get_at(i);
+					Xofulltext_args_qry args = (Xofulltext_args_qry)deleted.GetAt(i);
 					wkr_hash.Del(args.page_guid);
 				}
 			}

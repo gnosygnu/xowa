@@ -113,11 +113,11 @@ public class XomwLanguage_tst {
 		fxt.Test_commafy("-123456789"     , "-12,34,56,789");
 		fxt.Test_commafy("-1234567890"    , "-1,23,45,67,890");
 	}
-	@Test  public void handleExplicitPluralForms() {
+	@Test public void handleExplicitPluralForms() {
 		fxt.Test__handleExplicitPluralForms__string("1", XophpArray.New("1=one"), "one");
 		fxt.Test__handleExplicitPluralForms__array("1", XophpArray.New("no_match"), XophpArray.New().Add(0, "no_match"));
 	}
-	@Test  public void getPluralRuleIndexNumber() {
+	@Test public void getPluralRuleIndexNumber() {
 		fxt.Init__pluralRulesXml
 		( "<pluralRules locales='ast ca de en et fi fy gl it ji nl sv sw ur yi'>"
 		, "    <pluralRule count='one'>i = 1 and v = 0 @integer 1</pluralRule>"

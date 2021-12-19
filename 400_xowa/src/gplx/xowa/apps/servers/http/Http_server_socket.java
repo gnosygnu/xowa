@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.net.*; import gplx.core.threads.*; import gplx.core.primitives.*;
+package gplx.xowa.apps.servers.http;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.core.net.*; import gplx.core.threads.*;
+import gplx.frameworks.invks.GfsCtx;
 class Http_server_socket implements Gfo_invk {
 	private final Http_server_mgr server_mgr;
 	private Server_socket_adp server_socket;

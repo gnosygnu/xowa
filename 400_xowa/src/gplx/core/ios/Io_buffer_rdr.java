@@ -13,15 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.ios.streams.*;/*IoStream*/
+package gplx.core.ios;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.objects.Rls_able;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.StringUtl;
 public class Io_buffer_rdr implements Rls_able {
 	private Io_stream_rdr rdr;
 	Io_buffer_rdr(Io_stream_rdr rdr, Io_url url, int bfr_len) {
 		this.rdr = rdr; this.url = url;
-		if (bfr_len <= 0) throw Err_.new_wo_type("bfr_len must be > 0", "bfr_len", bfr_len);
+		if (bfr_len <= 0) throw ErrUtl.NewArgs("bfr_len must be > 0", "bfr_len", bfr_len);
 		bfr = new byte[bfr_len]; this.bfr_len = bfr_len;
-		IoItmFil fil = Io_mgr.Instance.QueryFil(url); if (!fil.Exists()) throw Err_.new_wo_type("fil does not exist", "url", url);
+		IoItmFil fil = Io_mgr.Instance.QueryFil(url); if (!fil.Exists()) throw ErrUtl.NewArgs("fil does not exist", "url", url);
 		fil_len = fil.Size();
 		fil_pos = 0;
 		fil_eof = false;
@@ -34,7 +40,7 @@ public class Io_buffer_rdr implements Rls_able {
 	public boolean Fil_eof() {return fil_eof;} private boolean fil_eof;
 	public boolean Bfr_load_all() {return Bfr_load(0, bfr_len);}
 	public boolean Bfr_load_from(int bfr_pos) {
-		if (bfr_pos < 0 || bfr_pos > bfr_len) throw Err_.new_wo_type("invalid bfr_pos", "bfr_pos", bfr_pos, "bfr_len", bfr_len);
+		if (bfr_pos < 0 || bfr_pos > bfr_len) throw ErrUtl.NewArgs("invalid bfr_pos", "bfr_pos", bfr_pos, "bfr_len", bfr_len);
 		for (int i = bfr_pos; i < bfr_len; i++)				// shift end of bfr to bgn; EX: bfr[10] and load_from(8); [8] -> [0]; [9] -> [1];
 			bfr[i - bfr_pos] = bfr[i];
 		return Bfr_load(bfr_len - bfr_pos, bfr_pos);		// fill rest of bfr; EX: [2]... will come from file
@@ -57,8 +63,8 @@ public class Io_buffer_rdr implements Rls_able {
 		bfr_len = -1;
 		if (rdr != null) rdr.Rls();
 	}
-	@gplx.Internal protected void Dump_to_file(int bgn, int len, String url_str, String msg) {	// DBG:
-		String text = String_.new_u8__by_len(bfr, bgn, len);
+	public void Dump_to_file(int bgn, int len, String url_str, String msg) {	// DBG:
+		String text = StringUtl.NewU8ByLen(bfr, bgn, len);
 		Io_mgr.Instance.AppendFilStr(Io_url_.new_any_(url_str), msg + text + "\n");
 	}
 	public static Io_buffer_rdr new_(Io_stream_rdr rdr, int bfr_len) {

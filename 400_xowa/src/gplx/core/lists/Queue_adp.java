@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
+package gplx.core.lists;
+import gplx.types.errs.ErrUtl;
 public class Queue_adp {
 	private int count;
 	private Queue_itm head;
@@ -38,7 +39,7 @@ public class Queue_adp {
 		return rv;
 	}
 	public Object Peek() {
-		if (head == null) throw Err_.new_wo_type("queue is empty");
+		if (head == null) throw ErrUtl.NewArgs("queue is empty");
 		Queue_itm rv = head;
 		return rv.Data();
 	}

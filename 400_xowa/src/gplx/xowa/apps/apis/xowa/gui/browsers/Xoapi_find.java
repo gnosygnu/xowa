@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.String_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
 import gplx.gfui.controls.standards.GfuiTextBox;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.guis.views.Xog_js_procs;
 import gplx.xowa.guis.views.Xog_tab_itm;
@@ -82,7 +82,7 @@ class Xog_find_box {
 	}
 	private void Exec_find(String find, boolean highlight_matches) {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
-		find = String_.Replace(find, "\\", "\\\\");		// NOTE: backslashes are always literal, never escape codes; EX: "C:\new" "\n" means "\n", not (byte)10; DATE:2015-08-17
+		find = StringUtl.Replace(find, "\\", "\\\\");		// NOTE: backslashes are always literal, never escape codes; EX: "C:\new" "\n" means "\n", not (byte)10; DATE:2015-08-17
 		boolean find_in_hdoc = tab.View_mode() == Xopg_view_mode_.Tid__read;
 		if (find_in_hdoc)
 			tab.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__find_in_hdoc		, find, dir_fwd, case_match, wrap_search, highlight_matches);

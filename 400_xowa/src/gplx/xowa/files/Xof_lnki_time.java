@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
+import gplx.types.basics.utls.DoubleUtl;
 import gplx.core.stores.*;
 import gplx.dbs.*;
 public class Xof_lnki_time {
@@ -24,7 +25,7 @@ public class Xof_lnki_time {
 	public static double	Db_load_int(DataRdr rdr, String fld)	{return rdr.ReadInt(fld);}
 	public static double	Db_load_int(Db_rdr rdr, String fld)		{return rdr.Read_int(fld);}
 	public static int		X_int(double v) {return (int)v;}
-	public static String	X_str(double v) {return Double_.To_str(v);}
+	public static String	X_str(double v) {return DoubleUtl.ToStr(v);}
 	public static final double		Null = -1;
 	public static boolean		Null_y(double v) {return v == Null;}
 	public static boolean		Null_n(double v) {return v != Null;}

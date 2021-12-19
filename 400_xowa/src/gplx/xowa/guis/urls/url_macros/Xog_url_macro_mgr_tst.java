@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.urls.url_macros; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.urls.*;
+package gplx.xowa.guis.urls.url_macros;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xog_url_macro_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xog_url_macro_mgr_fxt fxt = new Xog_url_macro_mgr_fxt();
@@ -27,7 +30,7 @@ public class Xog_url_macro_mgr_tst {
 	@Test public void Type_custom()		{fxt.Test("wd.q:123"			, "www.wikidata.org/wiki/Q123");}
 	@Test public void Type_del() {
 		fxt.Test("w:A", "en.wikipedia.org/wiki/A");
-		fxt.Abrv_mgr().Types_mgr().Del(Bry_.new_a7("w"));
+		fxt.Abrv_mgr().Types_mgr().Del(BryUtl.NewA7("w"));
 		fxt.Test("w:A", null);
 	}
 	@Test public void Type_set() {
@@ -35,7 +38,7 @@ public class Xog_url_macro_mgr_tst {
 		fxt.Test("w.A", null);
 	}
 	@Test public void Lang_default() {
-		fxt.Abrv_mgr().Lang_default_(Bry_.new_a7("fr"));
+		fxt.Abrv_mgr().Lang_default_(BryUtl.NewA7("fr"));
 		fxt.Test("w:Page", "fr.wikipedia.org/wiki/Page");
 	}
 	@Test public void Precedence()	{	// PURPOSE: Custom should take precedence over type
@@ -49,6 +52,6 @@ class Xog_url_macro_mgr_fxt {
 	}
 	public Xog_url_macro_mgr Abrv_mgr() {return abrv_mgr;} private Xog_url_macro_mgr abrv_mgr;
 	public void Test(String raw, String expd) {
-		Tfds.Eq(expd, String_.new_a7(abrv_mgr.Fmt_or_null(Bry_.new_a7(raw))));
+		GfoTstr.EqObj(expd, StringUtl.NewA7(abrv_mgr.Fmt_or_null(BryUtl.NewA7(raw))));
 	}
 }

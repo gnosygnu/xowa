@@ -13,7 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.core.consoles.*; import gplx.core.ios.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.xmls.*; 
@@ -23,11 +37,11 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 	public String Cmd_key() {return KEY;} public static final String KEY = "dump_mgr";
 	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_run() {
-		Xob_page_wkr[] wkr_ary = (Xob_page_wkr[])wkrs.To_ary(Xob_page_wkr.class); int wkr_ary_len = wkr_ary.length;
+		Xob_page_wkr[] wkr_ary = (Xob_page_wkr[])wkrs.ToAry(Xob_page_wkr.class); int wkr_ary_len = wkr_ary.length;
 		for (int i = 0; i < wkr_ary_len; i++)
 			wkr_ary[i].Page_wkr__bgn();
 		Io_buffer_rdr fil = Io_buffer_rdr.Null; Xowd_page_itm page = new Xowd_page_itm(); Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
-		Xob_xml_parser parser = bldr.Dump_parser().Data_bfr_len_(Io_mgr.Len_mb); 
+		Xob_xml_parser parser = bldr.Dump_parser().Data_bfr_len_(IoConsts.LenMB);
 		long fil_len = 0;
 		Gfo_usr_dlg usr_dlg = bldr.App().Usr_dlg();
 		try {
@@ -38,19 +52,18 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 			// fil.Seek(bldr.Opts().ResumeAt());
 			int prv_pos = 0;
 			while (true) {
-				int cur_pos = parser.Parse_page(page, usr_dlg, fil, fil.Bfr(), prv_pos, ns_mgr); if (cur_pos == Bry_find_.Not_found) break;
+				int cur_pos = parser.Parse_page(page, usr_dlg, fil, fil.Bfr(), prv_pos, ns_mgr); if (cur_pos == BryFind.NotFound) break;
 				if (cur_pos < prv_pos)
-					bldr.Print_prog_msg(fil.Fil_pos(), fil_len, 1, optRdrFillFmt, Int_.To_str_pad_bgn_zero((int)(fil.Fil_pos() / Io_mgr.Len_mb), Int_.DigitCount((int)(fil.Fil_len() / Io_mgr.Len_mb))), "", String_.new_u8(page.Ttl_full_db()));
+					bldr.Print_prog_msg(fil.Fil_pos(), fil_len, 1, optRdrFillFmt, IntUtl.ToStrPadBgnZero((int)(fil.Fil_pos() / IoConsts.LenMB), IntUtl.CountDigits((int)(fil.Fil_len() / IoConsts.LenMB))), "", StringUtl.NewU8(page.Ttl_full_db()));
 				prv_pos = cur_pos;
 				try {
 					for (int i = 0; i < wkr_ary_len; i++)
 						wkr_ary[i].Page_wkr__run(page);
 				}
 				catch (Exception e) {
-					Err_.Noop(e);
 					long dividend = fil.Fil_pos();
 					if (dividend >= fil_len) dividend = fil_len - 1; // prevent % from going over 100
-					String msg = Decimal_adp_.CalcPctStr(dividend, fil_len, "00.00") + "|" + String_.new_u8(page.Ttl_full_db()) + "|" + Err_.Message_gplx_log(e);
+					String msg = GfoDecimalUtl.CalcPctStr(dividend, fil_len, "00.00") + "|" + StringUtl.NewU8(page.Ttl_full_db()) + "|" + ErrUtl.ToStrLog(e);
 					bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
 					Console_adp__sys.Instance.Write_str_w_nl(msg);
 				}
@@ -59,10 +72,10 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 				wkr_ary[i].Page_wkr__run_cleanup();
 		}
 		catch (Exception e) {
-			String msg = Err_.Message_lang(e);
+			String msg = ErrUtl.Message(e);
 			bldr.Usr_dlg().Log_wkr().Log_to_session(msg);
 			Console_adp__sys.Instance.Write_str_w_nl(msg);
-			throw Err_.new_exc(e, "xo", "error while reading dump");
+			throw ErrUtl.NewArgs(e, "error while reading dump");
 		}
 		finally {fil.Rls();}
 		bldr.Usr_dlg().Prog_none("", "", "reading completed: performing post-processing clean-up");
@@ -87,10 +100,10 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 		int fil_ary_len = fil_ary.length;
 		return fil_ary_len == 0 ? null : fil_ary[fil_ary_len - 1];	// return last
 	}
-	int optRdrBfrSize = 8 * Io_mgr.Len_mb;
+	int optRdrBfrSize = 8 * IoConsts.LenMB;
 	String optRdrFillFmt = "reading ~{0} MB: ~{1} ~{2}";
 	static final String GRP_KEY = "xowa.bldr.rdr";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		throw Err_.new_unimplemented();
+		throw ErrUtl.NewUnimplemented();
 	}
 }

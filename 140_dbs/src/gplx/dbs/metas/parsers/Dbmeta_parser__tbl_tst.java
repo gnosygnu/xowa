@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
+package gplx.dbs.metas.parsers; import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.DbmetaFldType;
 import gplx.dbs.Dbmeta_tbl_itm;
@@ -28,7 +28,7 @@ public class Dbmeta_parser__tbl_tst {
 		fxt.Test_parse("CREATE TABLE tbl_1 (fld_1 int, fld_2 int)", fxt.Make_tbl("tbl_1", "fld_1", "fld_2"));
 	}
 	@Test public void Test_smoke() {
-		fxt.Test_parse(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse(StringUtl.ConcatLinesNlSkipLast
 		( "CREATE TABLE page"
 		, "( page_id integer NOT NULL PRIMARY KEY"
 		, ", page_namespace integer NOT NULL"
@@ -55,9 +55,9 @@ class Dbmeta_parser__tbl_fxt {
 		return Dbmeta_tbl_itm.New(tbl_name, flds);
 	}
 	public void Test_parse(String src, Dbmeta_tbl_itm expd_tbl) {
-		Dbmeta_tbl_itm actl_tbl = tbl_parser.Parse(Bry_.new_u8(src));
-		Tfds.Eq(expd_tbl.Name(), actl_tbl.Name());
-		Tfds.Eq_ary_str(To_str_ary(expd_tbl.Flds()), To_str_ary(actl_tbl.Flds()));
+		Dbmeta_tbl_itm actl_tbl = tbl_parser.Parse(BryUtl.NewU8(src));
+		GfoTstr.EqObj(expd_tbl.Name(), actl_tbl.Name());
+		GfoTstr.EqLines(To_str_ary(expd_tbl.Flds()), To_str_ary(actl_tbl.Flds()));
 	}
 	private static String[] To_str_ary(Dbmeta_fld_mgr fld_mgr) {
 		int len = fld_mgr.Len();

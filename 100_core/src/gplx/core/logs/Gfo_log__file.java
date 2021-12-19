@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,16 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.logs;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Gfo_log;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.logs.Gfo_log;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.ArrayUtl;
 public class Gfo_log__file extends Gfo_log__base {
 	public final Gfo_log_itm_wtr fmtr;
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public Gfo_log__file(Io_url url, Gfo_log_itm_wtr fmtr) {
 		this.url = url; this.fmtr = fmtr;
 	}
@@ -46,19 +45,19 @@ public class Gfo_log__file extends Gfo_log__base {
 	@Override public void Flush() {
 		int len = itms.Len();
 		for (int i = 0; i < len; ++i) {
-			Gfo_log_itm itm = (Gfo_log_itm)itms.Get_at(i);
+			Gfo_log_itm itm = (Gfo_log_itm)itms.GetAt(i);
 			fmtr.Write(bfr, itm);
 		}
-		byte[] bry = bfr.To_bry_and_clear(); if (bry.length == 0) return;	// don't bother writing empty bfr; happens during Xolog.Delete
+		byte[] bry = bfr.ToBryAndClear(); if (bry.length == 0) return;    // don't bother writing empty bfr; happens during Xolog.Delete
 		Io_mgr.Instance.AppendFilByt(url, bry);
 		itms.Clear();
 	}
 	public static void Delete_old_files(Io_url dir, Gfo_log log) {
 		Io_url[] fils = Io_mgr.Instance.QueryDir_fils(dir);
 		int fils_len = fils.length;
-		if (fils_len < 9) return;	// exit if less than 8 files
-		int cutoff = fils_len - 8;	
-		ArrayUtl.Sort(fils);			// sort by path
+		if (fils_len < 9) return;    // exit if less than 8 files
+		int cutoff = fils_len - 8;    
+		ArrayUtl.Sort(fils);            // sort by path
 		for (int i = 0; i < cutoff; ++i) {
 			Io_url fil = fils[i];
 			log.Info("deleting old log file", "file", fil.Raw());

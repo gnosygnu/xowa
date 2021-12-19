@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,24 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
+package gplx.core.ios;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import org.junit.*;
 public class IoUrl_wnt_tst {
 	IoUrlFxt fx = IoUrlFxt.new_();
 	@Test public void Raw() {
 		fx.tst_Xto_gplx(Io_url_.wnt_fil_("C:\\dir\\fil.txt"), "C:\\dir\\fil.txt");
 		fx.tst_Xto_gplx(Io_url_.wnt_dir_("C:\\dir\\"), "C:\\dir\\");
-		fx.tst_Xto_gplx(Io_url_.wnt_dir_("C:\\dir")	, "C:\\dir\\"); // add \
+		fx.tst_Xto_gplx(Io_url_.wnt_dir_("C:\\dir")    , "C:\\dir\\"); // add \
 	}
 	@Test public void Xto_api() {
 		fx.tst_Xto_api(Io_url_.wnt_fil_("C:\\fil.txt"), "C:\\fil.txt");
-		fx.tst_Xto_api(Io_url_.wnt_dir_("C:\\dir\\"), "C:\\dir");	// del \
+		fx.tst_Xto_api(Io_url_.wnt_dir_("C:\\dir\\"), "C:\\dir");    // del \
 		fx.tst_Xto_api(Io_url_.wnt_dir_("C:"), "C:");
 	}
 	@Test public void OwnerRoot() {
-		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:\\dir")		, "C:\\");
-		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:\\fil.png")	, "C:\\");
-		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:")			, "C:\\");
+		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:\\dir")        , "C:\\");
+		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:\\fil.png")    , "C:\\");
+		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:")            , "C:\\");
 	}
 	@Test public void IsDir() {
 		fx.tst_IsDir(Io_url_.wnt_dir_("C:\\dir\\"), true);
@@ -41,7 +45,7 @@ public class IoUrl_wnt_tst {
 		fx.tst_OwnerDir(Io_url_.wnt_dir_("C:\\dir\\sub1"), Io_url_.wnt_dir_("C:\\dir"));
 		fx.tst_OwnerDir(Io_url_.wnt_fil_("C:\\fil.txt"), Io_url_.wnt_dir_("C:"));
 		fx.tst_OwnerDir(Io_url_.wnt_dir_("C:"), Io_url_.Empty);
-//			fx.tst_OwnerDir(Io_url_.wnt_fil_("press enter to select this folder"), Io_url_.Empty);
+//            fx.tst_OwnerDir(Io_url_.wnt_fil_("press enter to select this folder"), Io_url_.Empty);
 	}
 	@Test public void NameAndExt() {
 		fx.tst_NameAndExt(Io_url_.wnt_fil_("C:\\fil.txt"), "fil.txt");
@@ -66,31 +70,31 @@ public class IoUrl_wnt_tst {
 		fx.tst_GenNewExt(Io_url_.wnt_fil_("C:\\fil.tst.gif"), ".png", Io_url_.wnt_fil_("C:\\fil.tst.png")); // last in multiple dotted
 	}
 	@Test public void GenRelUrl_orEmpty() {
-		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\fil.txt")		, Io_url_.wnt_dir_("C:\\root")	, "fil.txt"); // fil
-		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_dir_("C:\\root\\dir")			, Io_url_.wnt_dir_("C:\\root")	, "dir\\"); // dir
-		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\dir\\fil.txt")	, Io_url_.wnt_dir_("C:\\root")	, "dir\\fil.txt"); // fil: nested1			
-		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\dir\\fil.txt")	, Io_url_.wnt_dir_("C:")			, "root\\dir\\fil.txt"); // fil: nested2
+		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\fil.txt")        , Io_url_.wnt_dir_("C:\\root")    , "fil.txt"); // fil
+		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_dir_("C:\\root\\dir")            , Io_url_.wnt_dir_("C:\\root")    , "dir\\"); // dir
+		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\dir\\fil.txt")    , Io_url_.wnt_dir_("C:\\root")    , "dir\\fil.txt"); // fil: nested1            
+		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\dir\\fil.txt")    , Io_url_.wnt_dir_("C:")            , "root\\dir\\fil.txt"); // fil: nested2
 	}
 	@Test public void GenParallel() {
 		fx.tst_GenParallel(Io_url_.wnt_fil_("C:\\root1\\fil.txt"), Io_url_.wnt_dir_("C:\\root1"), Io_url_.wnt_dir_("D:\\root2"), Io_url_.wnt_fil_("D:\\root2\\fil.txt"));
-		fx.tst_GenParallel(Io_url_.wnt_dir_("C:\\root1\\dir")	, Io_url_.wnt_dir_("C:\\root1"), Io_url_.wnt_dir_("D:\\root2"), Io_url_.wnt_dir_("D:\\root2\\dir"));
+		fx.tst_GenParallel(Io_url_.wnt_dir_("C:\\root1\\dir")    , Io_url_.wnt_dir_("C:\\root1"), Io_url_.wnt_dir_("D:\\root2"), Io_url_.wnt_dir_("D:\\root2\\dir"));
 	}
 }
 class IoUrlFxt {
-	public void tst_Xto_api(Io_url url, String expd) {Tfds.Eq(expd, url.Xto_api());}
-	public void tst_OwnerRoot(Io_url url, String expd) {Tfds.Eq(expd, url.OwnerRoot().Raw());}
-	public void tst_XtoNames(Io_url url, String... expdAry) {Tfds.Eq_ary(expdAry, url.XtoNames().ToStrAry());}
-	public void tst_NameAndExt(Io_url url, String expd) {Tfds.Eq(expd, url.NameAndExt());}
-	public void tst_Xto_gplx(Io_url url, String expd) {Tfds.Eq(expd, url.Raw());}
-	public void tst_IsDir(Io_url url, boolean expd) {Tfds.Eq(expd, url.Type_dir());}
-	public void tst_OwnerDir(Io_url url, Io_url expd) {Tfds.Eq_url(expd, url.OwnerDir());}
-	public void tst_NameOnly(Io_url url, String expd) {Tfds.Eq(expd, url.NameOnly());}
-	public void tst_Ext(Io_url url, String expd) {Tfds.Eq(expd, url.Ext());}
-	public void tst_GenSubDir_nest(Io_url rootDir, String[] parts, Io_url expd) {Tfds.Eq(expd, rootDir.GenSubDir_nest(parts));}
-	public void tst_GenNewExt(Io_url url, String ext, Io_url expd) {Tfds.Eq_url(expd, url.GenNewExt(ext));}
-	public void tst_GenRelUrl_orEmpty(Io_url url, Io_url rootDir, String expd) {Tfds.Eq(expd, url.GenRelUrl_orEmpty(rootDir));}
-	public void tst_GenParallel(Io_url url, Io_url oldRoot, Io_url newRoot, Io_url expd) {Tfds.Eq_url(expd, url.GenParallel(oldRoot, newRoot));}
+	public void tst_Xto_api(Io_url url, String expd) {GfoTstr.EqObj(expd, url.Xto_api());}
+	public void tst_OwnerRoot(Io_url url, String expd) {GfoTstr.EqObj(expd, url.OwnerRoot().Raw());}
+	public void tst_XtoNames(Io_url url, String... expdAry) {GfoTstr.EqLines(expdAry, url.XtoNames().ToStrAry());}
+	public void tst_NameAndExt(Io_url url, String expd) {GfoTstr.EqObj(expd, url.NameAndExt());}
+	public void tst_Xto_gplx(Io_url url, String expd) {GfoTstr.EqObj(expd, url.Raw());}
+	public void tst_IsDir(Io_url url, boolean expd) {GfoTstr.EqObj(expd, url.Type_dir());}
+	public void tst_OwnerDir(Io_url url, Io_url expd) {GfoTstr.EqObj(expd, url.OwnerDir());}
+	public void tst_NameOnly(Io_url url, String expd) {GfoTstr.EqObj(expd, url.NameOnly());}
+	public void tst_Ext(Io_url url, String expd) {GfoTstr.EqObj(expd, url.Ext());}
+	public void tst_GenSubDir_nest(Io_url rootDir, String[] parts, Io_url expd) {GfoTstr.EqObj(expd, rootDir.GenSubDir_nest(parts));}
+	public void tst_GenNewExt(Io_url url, String ext, Io_url expd) {GfoTstr.EqObj(expd, url.GenNewExt(ext));}
+	public void tst_GenRelUrl_orEmpty(Io_url url, Io_url rootDir, String expd) {GfoTstr.EqObj(expd, url.GenRelUrl_orEmpty(rootDir));}
+	public void tst_GenParallel(Io_url url, Io_url oldRoot, Io_url newRoot, Io_url expd) {GfoTstr.EqObj(expd, url.GenParallel(oldRoot, newRoot));}
 
-	public String[] ary_(String... ary) {return String_.Ary(ary);}
-	public static IoUrlFxt new_() {return new IoUrlFxt();}	IoUrlFxt() {}
+	public String[] ary_(String... ary) {return StringUtl.Ary(ary);}
+	public static IoUrlFxt new_() {return new IoUrlFxt();}    IoUrlFxt() {}
 }

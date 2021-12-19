@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
 import org.junit.*;
 public class Xof_file_wkr__tst {		
 	private final Xof_file_wkr___fxt fxt = new Xof_file_wkr___fxt();
@@ -26,6 +28,6 @@ public class Xof_file_wkr__tst {
 }
 class Xof_file_wkr___fxt {
 	public void Test__ttl_standardize(String src_str, String expd) {
-		Tfds.Eq_bry(Bry_.new_u8(expd), Xof_file_wkr_.Ttl_standardize(Bry_.new_u8(src_str)));
+		GfoTstr.Eq(BryUtl.NewU8(expd), Xof_file_wkr_.Ttl_standardize(BryUtl.NewU8(src_str)));
 	}
 }

@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.pages;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
-import gplx.xowa.addons.apps.cfgs.specials.edits.services.*; import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
+import gplx.xowa.addons.apps.cfgs.specials.edits.services.*;
 class Xocfg_edit_html extends Xow_special_wtr__base {
 	private final Xocfg_edit_loader loader;
 	private final String grp, ctx, lang;

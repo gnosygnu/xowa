@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.hdrs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.hdrs;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.*;
 import gplx.xowa.parsers.xndes.*;
 public class Xop_hdr_wkr implements Xop_ctx_wkr {
@@ -34,7 +35,7 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);
 		Close_open_itms(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);
 		ctx.Para().Process_block__bgn__nl_w_symbol(ctx, root, src, bgn_pos, cur_pos, Xop_xnde_tag_.Tag__h2);	// pass h2; should pass h# where # is correct #, but for purpose of Para_wkr, <h2> tag does not matter
-		int new_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Xop_hdr_lxr.Hook);				// count all =
+		int new_pos = BryFind.FindFwdWhile(src, cur_pos, src_len, Xop_hdr_lxr.Hook);				// count all =
 		int hdr_len = new_pos - cur_pos + 1;														// +1 b/c Hook has 1 eq: "\n="
 		switch (hdr_len) {
 			case 1: ctx.Msg_log().Add_itm_none(Xop_hdr_log.Len_1, src, bgn_pos, new_pos); break;			// <h1>; flag

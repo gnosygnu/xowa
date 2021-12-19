@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.gui.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*; import gplx.core.envs.*;
+package gplx.xowa.apps.apis.xowa.gui.pages;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
+import gplx.gfui.kits.core.*;
+import gplx.xowa.guis.views.*;
 public class Xoapi_selection implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
 	public void Init_by_kit(Xoae_app app) {
@@ -28,12 +38,12 @@ public class Xoapi_selection implements Gfo_invk {
 		if (this.Active_tab_is_null()) return;
 		Xog_html_itm html_itm = win.Tab_mgr().Active_tab().Html_itm();
 		String src = html_itm.Html_selected_get_src_or_empty();
-		if (String_.Len_eq_0(src)) {app.Usr_dlg().Prog_many("", "", "no file selected: tab=~{0}", html_itm.Owner_tab().Page().Url().To_str()); return;}
+		if (StringUtl.IsNullOrEmpty(src)) {app.Usr_dlg().Prog_many("", "", "no file selected: tab=~{0}", html_itm.Owner_tab().Page().Url().To_str()); return;}
 		Io_url src_url = Io_url_.New__http_or_fail(src);
 		String trg_name = src_url.NameAndExt();
-		if (String_.Has(src, "/thumb/")) trg_name = src_url.OwnerDir().NameOnly();
+		if (StringUtl.Has(src, "/thumb/")) trg_name = src_url.OwnerDir().NameOnly();
 		String trg = app.Gui_mgr().Kit().New_dlg_file(Gfui_kit_.File_dlg_type_save, "Select file to save to:").Init_file_(trg_name).Ask();
-		if (String_.Len_eq_0(trg)) return;
+		if (StringUtl.IsNullOrEmpty(trg)) return;
 		Io_url trg_url = Io_url_.new_fil_(trg); 
 		Io_mgr.Instance.CopyFil(src_url, trg_url, true);
 	}

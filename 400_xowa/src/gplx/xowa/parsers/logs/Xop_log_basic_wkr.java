@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.logs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.envs.*;
-import gplx.dbs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Xop_log_basic_wkr implements Gfo_invk {
 	private Xop_log_basic_tbl log_tbl;
@@ -34,14 +39,14 @@ public class Xop_log_basic_wkr implements Gfo_invk {
 	public void Log_end(Xoae_page page, long log_bgn, int log_tid, byte[] log_msg, byte[] src, int src_bgn, int src_end, int args_len, int args_bgn, int args_end) {
 		log_tbl.Insert
 			( log_tid
-			, log_msg == Xop_log_basic_wkr.Null_log_msg ? "" : String_.new_u8(log_msg)
-			, save_log_time ?  System_.Ticks__elapsed_in_frac(log_bgn) : Xop_log_basic_wkr.Null_log_time
+			, log_msg == Xop_log_basic_wkr.Null_log_msg ? "" : StringUtl.NewU8(log_msg)
+			, save_log_time ?  SystemUtl.Ticks__elapsed_in_frac(log_bgn) : Xop_log_basic_wkr.Null_log_time
 			, page.Db().Page().Id()
-			, save_page_ttl ? String_.new_u8(page.Ttl().Full_db()) : Xop_log_basic_wkr.Null_page_ttl
+			, save_page_ttl ? StringUtl.NewU8(page.Ttl().Full_db()) : Xop_log_basic_wkr.Null_page_ttl
 			, save_args_len ? args_len : Xop_log_basic_wkr.Null_args_len
-			, save_args_str ? String_.new_u8(src, args_bgn, args_end) : Xop_log_basic_wkr.Null_args_str
+			, save_args_str ? StringUtl.NewU8(src, args_bgn, args_end) : Xop_log_basic_wkr.Null_args_str
 			, src_end - src_bgn
-			, save_src_str ? String_.new_u8(src, src_bgn, src_end) : Xop_log_basic_wkr.Null_src_str
+			, save_src_str ? StringUtl.NewU8(src, src_bgn, src_end) : Xop_log_basic_wkr.Null_src_str
 			);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

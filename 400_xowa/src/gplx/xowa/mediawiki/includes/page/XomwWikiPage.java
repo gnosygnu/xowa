@@ -16,8 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.page;
 // MW.SRC:1.33.1
 
-import gplx.core.primitives.ObjectWrapperRef;
-import gplx.core.primitives.String_obj_ref;
+import gplx.types.basics.wrappers.ObjRef;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.includes.XomwDefines;
 import gplx.xowa.mediawiki.includes.XomwHooks;
@@ -133,7 +132,7 @@ public class XomwWikiPage { // implements Page, IDBAccessObject
 		}
 
 		XomwWikiPage page = null;
-		ObjectWrapperRef pageWrapper = new ObjectWrapperRef();
+		ObjRef pageWrapper = new ObjRef();
 		if (!XomwHooks.run("WikiPageFactory", XophpArray.New(title, pageWrapper))) {
 			return (XomwWikiPage)pageWrapper.Val();
 		}

@@ -13,14 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.names; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.names;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
 import org.junit.*;
-import gplx.core.tests.*;
-import gplx.xowa.xtns.cldrs.*;
 public class Xol_name_mgr_tst {
 	private final Xol_name_mgr_fxt fxt = new Xol_name_mgr_fxt();
 
-	@Test  public void Cldr_only() {
+	@Test public void Cldr_only() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__all
 			, fxt.Make__cldr_names("en", "de")
@@ -31,7 +34,7 @@ public class Xol_name_mgr_tst {
 			, "en|en_cldr"
 			));
 	}
-	@Test  public void Lang_name__langs() {
+	@Test public void Lang_name__langs() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__all
 			, fxt.Make__cldr_names("en", "de", "es")
@@ -44,7 +47,7 @@ public class Xol_name_mgr_tst {
 			, "fr|fr_lang" // add fr_lang
 			));
 	}
-	@Test  public void mwFile() {
+	@Test public void mwFile() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__mwFile
 			, fxt.Make__cldr_names("en", "de")
@@ -55,7 +58,7 @@ public class Xol_name_mgr_tst {
 			, "en|en_lang"
 			));
 	}
-	@Test  public void mw() {
+	@Test public void mw() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__mw
 			, fxt.Make__cldr_names("en", "de")
@@ -80,7 +83,7 @@ class Xol_name_mgr_fxt {
 		, Ordered_hash lang_files
 		, Ordered_hash expd_langs) {
 		Ordered_hash actl_langs = Xol_name_mgr.fetchLanguageNamesUncached(inLanguage, include, cldr_names, lang_names, lang_files);
-		Gftest.Eq__ary(To_str_ary(expd_langs), To_str_ary(actl_langs));
+		GfoTstr.EqLines(To_str_ary(expd_langs), To_str_ary(actl_langs));
 	}
 	private static String[] Add_suffix(String[] ary, String val_suffix) {
 		int len = ary.length;
@@ -94,8 +97,8 @@ class Xol_name_mgr_fxt {
 		int len = hash.Len();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			Keyval kv = (Keyval)hash.Get_at(i);
-			rv[i] = kv.Key() + "|" + kv.Val();
+			KeyVal kv = (KeyVal)hash.GetAt(i);
+			rv[i] = kv.KeyToStr() + "|" + kv.Val();
 		}
 		return rv;
 	}
@@ -103,13 +106,13 @@ class Xol_name_mgr_fxt {
 		Ordered_hash hash = Ordered_hash_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			Keyval kv = Split(ary[i]);
-			hash.Add(kv.Key(), kv);
+			KeyVal kv = Split(ary[i]);
+			hash.Add(kv.KeyToStr(), kv);
 		}
 		return hash;
 	}
-	private static Keyval Split(String str) {
-		String[] ary = String_.Split(str, "|");
-		return Keyval_.new_(ary[0], ary.length == 1 ? ary[0] : ary[1]);
+	private static KeyVal Split(String str) {
+		String[] ary = StringUtl.Split(str, "|");
+		return KeyVal.NewStr(ary[0], ary.length == 1 ? ary[0] : ary[1]);
 	}
 }

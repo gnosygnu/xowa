@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.pfuncs;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
+import gplx.xowa.xtns.wbases.*;
 import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Wdata_pf_property__parse__tst {
 	@Before public void init() {fxt.Init();} private final Wdata_pf_property_data_fxt fxt = new Wdata_pf_property_data_fxt();
@@ -37,7 +42,7 @@ class Wdata_pf_property_data_fxt {
 	}
 	private Wdata_pf_property_data actl;
 	public Wdata_pf_property_data_fxt Run__parse(String raw) {			
-		byte[] raw_bry = Bry_.new_u8(raw);
+		byte[] raw_bry = BryUtl.NewU8(raw);
 		Xowe_wiki wiki = parser_fxt.Wiki(); Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		Xop_tkn_mkr tkn_mkr = app.Parser_mgr().Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
@@ -46,7 +51,7 @@ class Wdata_pf_property_data_fxt {
 		this.actl = Wdata_pf_property_data.Parse(ctx, raw_bry, Xot_invk_mock.Null, tkn);
 		return this;
 	}
-	public Wdata_pf_property_data_fxt Chk_q(String v)		{Tfds.Eq_bry(v, actl.Q); return this;}
-	public Wdata_pf_property_data_fxt Chk_of(String v)		{Tfds.Eq_bry(v, actl.Of); return this;}
-	public Wdata_pf_property_data_fxt Chk_from(String v)	{Tfds.Eq_bry(v, actl.From); return this;}
+	public Wdata_pf_property_data_fxt Chk_q(String v)		{GfoTstr.Eq(v, actl.Q); return this;}
+	public Wdata_pf_property_data_fxt Chk_of(String v)		{GfoTstr.Eq(v, actl.Of); return this;}
+	public Wdata_pf_property_data_fxt Chk_from(String v)	{GfoTstr.Eq(v, actl.From); return this;}
 }

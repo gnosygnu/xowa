@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 class GfmlDocLxrs {
-	@gplx.Internal protected static void Default_lxr(GfmlLxrRegy regy, GfmlLxr rootLxr) {
+	public static void Default_lxr(GfmlLxrRegy regy, GfmlLxr rootLxr) {
 		GfmlLxr[] ary = new GfmlLxr[] {	GfmlDocLxrs.Whitespace_lxr()
 									,	GfmlDocLxrs.Quote0_Eval0_lxr()
 									,	GfmlDocLxrs.Quote1_lxr()
@@ -44,10 +45,10 @@ class GfmlDocLxrs {
 	}
 	public static GfmlLxr Whitespace_lxr() {
 		GfmlTkn tkn = GfmlTkn_.cmd_("key:gfml.whitespace_0", GfmlBldrCmd_whitespace.Instance);
-		GfmlLxr rv = GfmlLxr_.range_("lxr:gfml.whitespace_0", String_.Ary(" ", String_.Tab, String_.CrLf, String_.Lf), tkn, false);
+		GfmlLxr rv = GfmlLxr_.range_("lxr:gfml.whitespace_0", StringUtl.Ary(" ", StringUtl.Tab, StringUtl.CrLf, StringUtl.Nl), tkn, false);
 		return rv;
 	}
-	public static GfmlLxr Comment0_lxr() {return GfmlLxr_.frame_("gfml.comment_0", GfmlFrame_.comment_(), "//", String_.Lf);}
+	public static GfmlLxr Comment0_lxr() {return GfmlLxr_.frame_("gfml.comment_0", GfmlFrame_.comment_(), "//", StringUtl.Nl);}
 //		public static GfmlLxr Comment0a_lxr() {return GfmlLxr_.frame_("gfml.comment_0b", GfmlFrame_.comment_(), "//", "\n");}
 	public static GfmlLxr Comment1_lxr() {
 		GfmlLxr rv = GfmlLxr_.frame_("gfml.comment_1", GfmlFrame_.comment_(), "/*", "*/");
@@ -102,7 +103,7 @@ class GfmlDocLxrs {
 		GfmlLxr rv = GfmlLxr_.frame_("gfml.quote_fold_0", GfmlFrame_.quote_(), "^'", "'^");
 
 		GfmlTkn tkn = GfmlTkn_.valConst_("key:gfml.quote_fold_0_whitespace", GfmlTkn_.NullVal, GfmlBldrCmd_whitespace.Instance);
-		GfmlLxr whitespace = GfmlLxr_.range_("lxr:gfml.quote_fold_0_whitespace", String_.Ary(String_.Tab, String_.CrLf, String_.Lf), tkn, false);
+		GfmlLxr whitespace = GfmlLxr_.range_("lxr:gfml.quote_fold_0_whitespace", StringUtl.Ary(StringUtl.Tab, StringUtl.CrLf, StringUtl.Nl), tkn, false);
 		GfmlLxr escapeBgn = lxr_escape_("gfml.quote_fold_0_escape_bgn", "^'^'", "^'");
 		GfmlLxr escapeEnd = lxr_escape_("gfml.quote_fold_0_escape_end", "'^'^", "'^");
 		rv.SubLxr_Add(whitespace, escapeBgn, escapeEnd, rv);	// NOTE: adding rv makes it recursive

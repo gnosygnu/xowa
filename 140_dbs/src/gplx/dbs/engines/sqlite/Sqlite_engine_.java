@@ -13,17 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.engines.sqlite; import gplx.dbs.*;
 import gplx.dbs.qrys.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
 public class Sqlite_engine_ {
 	public static void Db_attach(Db_conn p, String alias, String url) {
-		String s = String_.Format("ATTACH '{0}' AS {1};", url, alias);
+		String s = StringUtl.Format("ATTACH '{0}' AS {1};", url, alias);
 		Db_qry qry = Db_qry_sql.xtn_(s);
 		p.Exec_qry(qry);
 	}
 	public static void Db_detach(Db_conn p, String alias) {
-		String s = String_.Format("DETACH '{0}';", alias);
+		String s = StringUtl.Format("DETACH '{0}';", alias);
 		Db_qry qry = Db_qry_sql.xtn_(s);
 		p.Exec_qry(qry);
 	}
@@ -46,7 +51,7 @@ public class Sqlite_engine_ {
 		p.Exec_qry(qry);
 	}
 	public static void Tbl_rename(Db_conn p, String src, String trg) {
-		Db_qry qry = Db_qry_sql.ddl_(String_.Format("ALTER TABLE {0} RENAME TO {1};", src, trg));
+		Db_qry qry = Db_qry_sql.ddl_(StringUtl.Format("ALTER TABLE {0} RENAME TO {1};", src, trg));
 		p.Exec_qry(qry);
 	}
 	public static void Idx_create(Gfo_usr_dlg usr_dlg, Db_conn conn, String tbl, Dbmeta_idx_itm[] idx_ary) {
@@ -72,8 +77,8 @@ public class Sqlite_engine_ {
 	public static final int Stmt_arg_max = 999;					// 999 is max number of variables allowed by sqlite
 	public static final boolean Supports_read_binary_stream = false;	
 	public static final boolean Supports_indexed_by = true;			
-	public static String X_date_to_str(DateAdp v) {return v == Date_null ? "" : v.XtoStr_fmt_iso_8561();}
-	public static final DateAdp Date_null = null;
+	public static String X_date_to_str(GfoDate v) {return v == Date_null ? "" : v.ToStrFmtIso8561();}
+	public static final GfoDate Date_null = null;
 	public static final byte Wildcard_byte = AsciiByte.Hash;
 	public static final String Wildcard_str = "%";
 	public static int Read_only_detection = Io_mgr.Read_only__basic__file;

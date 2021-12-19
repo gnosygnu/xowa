@@ -13,10 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.libs; import gplx.*;
-import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.mediawiki.includes.libs.replacers.*;
+package gplx.xowa.mediawiki.includes.libs;
+import gplx.types.basics.lists.List_adp;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.xowa.mediawiki.includes.libs.replacers.XomwRegexlikeReplacer;
+import gplx.xowa.mediawiki.includes.libs.replacers.XomwReplacer;
 /**
 * A collection of static methods to play with strings.
 */
@@ -81,11 +89,11 @@ public class XomwStringUtils {
 			// eos
 			if (cur == src_end) {
 				// add rest
-				tmp.Add(Bry_.Mid(src, prv, src_end));
+				tmp.Add(BryLni.Mid(src, prv, src_end));
 				break;
 			}
 
-			Object o = delimiter_explode_trie.Match_at(trv, src, cur, src_end);
+			Object o = delimiter_explode_trie.MatchAt(trv, src, cur, src_end);
 
 			// regular char; continue;
 			if (o == null) {
@@ -94,11 +102,11 @@ public class XomwStringUtils {
 			}
 
 			// handle sep, bgn, end
-			byte tid = ((gplx.core.primitives.Byte_obj_val)o).Val();
+			byte tid = ((ByteVal)o).Val();
 			switch (tid) {
 				case DELIMITER_EXPLODE__SEP:
 					if (depth == 0) {
-						tmp.Add(Bry_.Mid(src, prv, cur));
+						tmp.Add(BryLni.Mid(src, prv, cur));
 						prv = cur + 1;
 					}
 					break;
@@ -171,8 +179,8 @@ public class XomwStringUtils {
 	* @return String
 	*/
 	// XO.MW:flags not supported; goes directly to regex; also, flags of "i" will do case-insensitive
-	public static void delimiterReplaceCallback(Bry_bfr bfr, byte[] bgn, byte[] end, XomwReplacer callback,
-		byte[] src
+	public static void delimiterReplaceCallback(BryWtr bfr, byte[] bgn, byte[] end, XomwReplacer callback,
+	                                            byte[] src
 	) {
 		/* XO.MW.PORTED:
 			MW does following logic
@@ -194,13 +202,13 @@ public class XomwStringUtils {
 
 		while (true) {
 			if (pos >= srcLen) {
-				bfr.Add_mid(src, prv, srcLen);
+				bfr.AddMid(src, prv, srcLen);
 				break;
 			}
-			if      (Bry_.Eq(src, pos, pos + bgnLen, bgn)) {
+			if      (BryLni.Eq(src, pos, pos + bgnLen, bgn)) {
 				tokenTypeIsStart = true;
 			}
-			else if (Bry_.Eq(src, pos, pos + endLen, end)) {
+			else if (BryLni.Eq(src, pos, pos + endLen, end)) {
 				tokenTypeIsStart = false;
 			}
 			else {
@@ -215,7 +223,7 @@ public class XomwStringUtils {
 				if (!foundStart) {
 					// Found start
 					// Write out the non-matching section
-					bfr.Add_mid(src, prv, pos);
+					bfr.AddMid(src, prv, pos);
 					pos += bgnLen;
 					prv = pos;
 					foundStart = true;
@@ -232,7 +240,7 @@ public class XomwStringUtils {
 				} else {
 					// Non-matching end, write it out
 					// EX: "a)b" -> "a)"
-					bfr.Add_mid(src, prv, pos + endLen);
+					bfr.AddMid(src, prv, pos + endLen);
 				}
 				pos += endLen;
 				prv = pos;
@@ -256,7 +264,7 @@ public class XomwStringUtils {
 	* @return String The String with the matches replaced
 	*/
 	// XO.MW:removed flags=''
-	public static void delimiterReplace(Bry_bfr bfr, byte[] startDelim, byte[] endDelim, byte[] replace, byte[] subject) {
+	public static void delimiterReplace(BryWtr bfr, byte[] startDelim, byte[] endDelim, byte[] replace, byte[] subject) {
 		XomwRegexlikeReplacer replacer = new XomwRegexlikeReplacer(replace);
 
 		delimiterReplaceCallback(bfr, startDelim, endDelim, replacer, subject);
@@ -314,7 +322,7 @@ public class XomwStringUtils {
 		// if same length find / repl, do in-place replacement; EX: "!!"  -> "||"
 		int find_len = find.length;
 		int repl_len = repl.length;
-		if (find_len != repl_len) throw Err_.new_wo_type("find and repl should be same length");
+		if (find_len != repl_len) throw ErrUtl.NewArgs("find and repl should be same length");
 
 		byte find_0 = find[0];
 		byte dlm_bgn = AsciiByte.AngleBgn;
@@ -325,10 +333,10 @@ public class XomwStringUtils {
 		for (int i = src_bgn; i < src_end; i++) {
 			byte b = src[i];
 			if (  b == find_0
-				&& Bry_.Match(src, i + 1, i + find_len, find, 1, find_len)
+				&& BryLni.Eq(src, i + 1, i + find_len, find, 1, find_len)
 				&& repl_active
 				) {
-				Bry_.Set(src, i, i + find_len, repl);
+				BryUtl.Set(src, i, i + find_len, repl);
 			}
 			else if (b == dlm_bgn) {
 				repl_active = false;

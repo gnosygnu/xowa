@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
+package gplx.xowa.wikis.xwikis.sitelinks.htmls;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xoa_sitelink_div_wtr_tst {
 	private final Xoa_sitelink_div_wtr_fxt fxt = new Xoa_sitelink_div_wtr_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test public void Basic() {
-		fxt.tst("[[simple:Earth]] [[fr:Terre]] [[es:Tierra]] [[de:Erde]] [[it:Terre]]", String_.Concat_lines_nl_skip_last
+		fxt.tst("[[simple:Earth]] [[fr:Terre]] [[es:Tierra]] [[de:Erde]] [[it:Terre]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 5) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
@@ -44,7 +45,7 @@ public class Xoa_sitelink_div_wtr_tst {
 		));
 	}
 	@Test public void Empty() {
-		fxt.tst("[[simple:]]", String_.Concat_lines_nl_skip_last
+		fxt.tst("[[simple:]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 1) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
@@ -62,7 +63,7 @@ public class Xoa_sitelink_div_wtr_tst {
 	}
 	@Test public void Unregistered() {
 //			fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("zh"), Bry_.new_a7("zh.wikipedia.org"), Bry_.new_a7("http://zh.wikipedia.org/~{0}"));
-		fxt.tst("[[zh:Earth]]", String_.Concat_lines_nl_skip_last
+		fxt.tst("[[zh:Earth]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 1) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"
@@ -79,7 +80,7 @@ public class Xoa_sitelink_div_wtr_tst {
 		));
 	}
 	@Test public void Anchor() {// PURPOSE: A#b was not showing anchor "#b"; DATE:2013-10-23
-		fxt.tst("[[simple:A#b]]", String_.Concat_lines_nl_skip_last
+		fxt.tst("[[simple:A#b]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 1) </h5>"
 		, "  <div id='wikidata-langs-toggle-elem' style='display:none;'>"

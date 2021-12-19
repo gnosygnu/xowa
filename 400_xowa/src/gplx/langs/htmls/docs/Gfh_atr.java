@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-public class Gfh_atr implements gplx.core.brys.Bfr_arg {
+package gplx.langs.htmls.docs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+public class Gfh_atr implements BryBfrArg {
 	public Gfh_atr(int idx, int atr_bgn, int atr_end, byte[] key, byte[] val, byte[] src, int val_bgn, int val_end) {
 		this.idx = idx; this.atr_bgn = atr_bgn; this.atr_end = atr_end; this.key = key; this.val = val;
 		this.src = src; this.val_bgn = val_bgn; this.val_end = val_end;
@@ -30,16 +34,16 @@ public class Gfh_atr implements gplx.core.brys.Bfr_arg {
 	public boolean Val_dat_missing() {return val_end == -1;}
 	public byte[] Val() {
 		if (val == null)
-			val = Bry_.Mid(src, val_bgn, val_end);
+			val = BryLni.Mid(src, val_bgn, val_end);
 		return val;
 	}	private byte[] val;
-	public void Html__add(Bry_bfr bfr) {
+	public void Html__add(BryWtr bfr) {
 		if (val_end > val_bgn)
-			bfr.Add_mid(src, val_bgn, val_end);
+			bfr.AddMid(src, val_bgn, val_end);
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		if (Val_dat_exists())
-			bfr.Add_mid(src, val_bgn, val_end);
+			bfr.AddMid(src, val_bgn, val_end);
 	}
-	public static final Gfh_atr Noop = new Gfh_atr(-1, -1, -1, Bry_.Empty, Bry_.Empty, Bry_.Empty, -1, -1);
+	public static final Gfh_atr Noop = new Gfh_atr(-1, -1, -1, BryUtl.Empty, BryUtl.Empty, BryUtl.Empty, -1, -1);
 }

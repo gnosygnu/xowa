@@ -13,21 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
+package gplx.core.net;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*; import gplx.core.tests.*;
 public class Http_request_parser_tst {
 	@Before public void init() {fxt.Clear();} private final Http_request_parser_fxt fxt = new Http_request_parser_fxt();
-	@Test  public void Type_post()	{
+	@Test public void Type_post()	{
 		fxt.Test_type_post("POST /url HTTP/1.1", Http_request_itm.Type_post, "/url", "HTTP/1.1");
 	}
-	@Test  public void Type_content_type()	{
+	@Test public void Type_content_type()	{
 		fxt.Test_content_type("Content-Type: multipart/form-data; boundary=---------------------------72432484930026", "multipart/form-data", "-----------------------------72432484930026");
 	}
-	@Test  public void Type_content_type__x_www_form_url_encoded()	{	// PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04
+	@Test public void Type_content_type__x_www_form_url_encoded()	{	// PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04
 		fxt.Test_content_type("Content-Type: application/x-www-form-urlencoded", null, null);
 	}
-	@Test  public void Type_form_data() {
-		fxt.Test_form_data(String_.Ary
+	@Test public void Type_form_data() {
+		fxt.Test_form_data(StringUtl.Ary
 		( "POST /url HTTP/1.1"
 		, "Content-Type: multipart/form-data; boundary=---------------------------12345678901234"
 		, ""
@@ -45,10 +48,10 @@ public class Http_request_parser_tst {
 		, fxt.Make_post_data_itm("key1", "val1")
 		);
 	}
-	@Test  public void Type_accept_charset()	{
+	@Test public void Type_accept_charset()	{
 		fxt.Test_ignore("Accept-Charset: ISO-8859-1,utf-8;q=0.7");
 	}
-	@Test  public void Nginx() {// PURPOSE: support http headers from nginx; ISSUE#:255
+	@Test public void Nginx() {// PURPOSE: support http headers from nginx; ISSUE#:255
 		fxt.Test_ignore("Upgrade-Insecure-Requests: test1; X-Host: test2; X-Real-IP: test3;");
 	}
 }
@@ -63,19 +66,19 @@ class Http_request_parser_fxt {
 		parser.Clear();
 		server_wtr.Clear();
 	}
-	public Http_post_data_itm Make_post_data_itm(String key, String val) {return new Http_post_data_itm(Bry_.new_u8(key), Bry_.new_u8(val));}
+	public Http_post_data_itm Make_post_data_itm(String key, String val) {return new Http_post_data_itm(BryUtl.NewU8(key), BryUtl.NewU8(val));}
 	public void Test_type_post(String line, int expd_type, String expd_url, String expd_protocol) {
-		client_rdr.Stream_(String_.Ary(line));
+		client_rdr.Stream_(StringUtl.Ary(line));
 		Http_request_itm req = parser.Parse(client_rdr);
-		Tfds.Eq(expd_type		, req.Type());
-		Tfds.Eq(expd_url		, String_.new_u8(req.Url()));
-		Tfds.Eq(expd_protocol	, String_.new_u8(req.Protocol()));
+		GfoTstr.EqObj(expd_type		, req.Type());
+		GfoTstr.EqObj(expd_url		, StringUtl.NewU8(req.Url()));
+		GfoTstr.EqObj(expd_protocol	, StringUtl.NewU8(req.Protocol()));
 	}
 	public void Test_content_type(String line, String expd_content_type, String expd_content_boundary) {
-		client_rdr.Stream_(String_.Ary(line));
+		client_rdr.Stream_(StringUtl.Ary(line));
 		Http_request_itm req = parser.Parse(client_rdr);
-		Tfds.Eq(expd_content_type		, String_.new_u8(req.Content_type()));
-		Tfds.Eq(expd_content_boundary	, String_.new_u8(req.Content_type_boundary()));
+		GfoTstr.EqObj(expd_content_type		, StringUtl.NewU8(req.Content_type()));
+		GfoTstr.EqObj(expd_content_boundary	, StringUtl.NewU8(req.Content_type_boundary()));
 	}
 	public void Test_form_data(String[] ary, Http_post_data_itm... expd) {
 		client_rdr.Stream_(ary);
@@ -84,13 +87,13 @@ class Http_request_parser_fxt {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Http_post_data_itm itm = hash.Get_at(i);
-			Tfds.Eq_bry(itm.Key(), expd[i].Key());
-			Tfds.Eq_bry(itm.Val(), expd[i].Val());
+			GfoTstr.Eq(itm.Key(), expd[i].Key());
+			GfoTstr.Eq(itm.Val(), expd[i].Val());
 		}
 	}
 	public void Test_ignore(String line) {
-		client_rdr.Stream_(String_.Ary(line));
+		client_rdr.Stream_(StringUtl.Ary(line));
 		parser.Parse(client_rdr);
-		Gftest.Eq__str(null, server_wtr.Data());
+		Gftest.EqNull(server_wtr.Data());
 	}
 }	

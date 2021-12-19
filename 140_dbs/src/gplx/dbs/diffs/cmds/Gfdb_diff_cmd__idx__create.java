@@ -89,7 +89,7 @@ class Gfdb_diff_cmd__idx__fld implements Gfo_srl_itm {
 //			wtr.Set_int		("fld_nullable"	, cur.Nullable_tid());
 //			wtr.Set_bool	("fld_primary"	, cur.Primary());
 //			wtr.Set_bool	("fld_autonum"	, cur.Autonum());
-//			wtr.Set_str		("fld_dflt"		, Object_.Xto_str_or(cur.Default(), null));
+//			wtr.Set_str		("fld_dflt"		, ObjectUtl.Xto_str_or(cur.Default(), null));
 ////			wtr.Set_int		("fld_asc"		, cur.Sort_tid);
 //			wtr.Itm_end();
 //		}

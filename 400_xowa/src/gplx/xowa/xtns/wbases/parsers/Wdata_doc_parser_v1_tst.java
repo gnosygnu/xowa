@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.parsers;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.core.*;
 public class Wdata_doc_parser_v1_tst {
 	@Before public void init() {fxt.Init();} private Wdata_doc_parser_v1_fxt fxt = new Wdata_doc_parser_v1_fxt();
-	@Test  public void Entity_v1_1() {
+	@Test public void Entity_v1_1() {
 		fxt.Test_entity("{ 'entity':'q1' }", "q1");
 	}
-	@Test  public void Entity_v1_2() {
+	@Test public void Entity_v1_2() {
 		fxt.Test_entity("{ 'entity':['item',1] }", "q1");
 	}
-	@Test  public void Sitelink_v1_1() {
-		fxt.Test_sitelinks(String_.Concat_lines_nl_skip_last
+	@Test public void Sitelink_v1_1() {
+		fxt.Test_sitelinks(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'links':"
 		, "  { 'enwiki':'en_val'"
 		, "  , 'dewiki':'de_val'"
@@ -38,8 +38,8 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_sitelink("frwiki", "fr_val")
 		);
 	}
-	@Test  public void Sitelink_v1_2() {
-		fxt.Test_sitelinks(String_.Concat_lines_nl_skip_last
+	@Test public void Sitelink_v1_2() {
+		fxt.Test_sitelinks(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'links':"
 		, "  { 'enwiki':"
 		, "    { 'name':'en_val'"
@@ -67,8 +67,8 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_sitelink("frwiki", "fr_val")
 		);
 	}
-	@Test  public void Labels() {
-		fxt.Test_labels(String_.Concat_lines_nl_skip_last
+	@Test public void Labels() {
+		fxt.Test_labels(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'label':"
 		, "  { 'en':'en_val'"
 		, "  , 'de':'de_val'"
@@ -81,8 +81,8 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_langval("fr", "fr_val")
 		);
 	}
-	@Test  public void Descriptions() {
-		fxt.Test_descriptions(String_.Concat_lines_nl_skip_last
+	@Test public void Descriptions() {
+		fxt.Test_descriptions(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'description':"
 		, "  { 'en':'en_val'"
 		, "  , 'de':'de_val'"
@@ -95,8 +95,8 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_langval("fr", "fr_val")
 		);
 	}
-	@Test  public void Aliases() {
-		fxt.Test_aliases(String_.Concat_lines_nl_skip_last
+	@Test public void Aliases() {
+		fxt.Test_aliases(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'aliases':"
 		, "  { 'en':"
 		, "    [ 'en_val_1'"
@@ -120,8 +120,8 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_alias("fr", "fr_val_1")
 		);
 	}
-	@Test  public void Aliases_alt() {
-		fxt.Test_aliases(String_.Concat_lines_nl_skip_last
+	@Test public void Aliases_alt() {
+		fxt.Test_aliases(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'aliases':"
 		, "  { 'en':"
 		, "    { '0':'en_val_1'"
@@ -134,8 +134,8 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_alias("en", "en_val_1", "en_val_2", "en_val_3")
 		);
 	}
-	@Test  public void Claims() {
-		fxt.Test_claims(String_.Concat_lines_nl_skip_last
+	@Test public void Claims() {
+		fxt.Test_claims(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'claims':"
 		, "  ["
 		, "    { 'm':"
@@ -155,8 +155,8 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_claim_string(1, "abc")
 		);
 	}
-	@Test  public void Claim_bad() {	// wikidata flags several entries as "bad"; https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2013/10
-		fxt.Test_claims(String_.Concat_lines_nl_skip_last
+	@Test public void Claim_bad() {	// wikidata flags several entries as "bad"; https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2013/10
+		fxt.Test_claims(StringUtl.ConcatLinesNlSkipLast
 		(	"{ 'entity':['item',2]"
 		,	", 'claims':"
 		,	"  ["

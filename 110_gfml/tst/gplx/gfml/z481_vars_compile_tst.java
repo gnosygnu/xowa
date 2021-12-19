@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class z481_vars_compile_tst {
 	@Before public void setup() {
@@ -26,8 +27,8 @@ public class z481_vars_compile_tst {
 			, fx.nde_().Atru_("key_test").Atru_("val_test").Atru_("context_test"));
 
 		GfmlVarItm itm = pragma.CompileItmNde(gnde);
-		Tfds.Eq_rev(itm.Key(),			"key_test");
-		Tfds.Eq_rev(itm.TknVal(),		"val_test");
-		Tfds.Eq_rev(itm.CtxKey(),		"context_test");
+		GfoTstr.EqObj("key_test", itm.Key());
+		GfoTstr.EqObj("val_test", itm.TknVal());
+		GfoTstr.EqObj("context_test", itm.CtxKey());
 	}
 }

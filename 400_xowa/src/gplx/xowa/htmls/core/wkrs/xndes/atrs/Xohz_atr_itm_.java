@@ -13,17 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.xndes.atrs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.wkrs.xndes.dicts.*;
 class Xohz_atr_itm_ {
-	public static void Dec__add__quote_bgn(Bry_bfr bfr, byte[] key) {
-		bfr.Add_byte_space().Add(key).Add_byte_eq().Add_byte_quote();
+	public static void Dec__add__quote_bgn(BryWtr bfr, byte[] key) {
+		bfr.AddByteSpace().Add(key).AddByteEq().AddByteQuote();
 	}
-	public static void Dec__add__quote_end(Bry_bfr bfr) {
-		bfr.Add_byte_quote();
+	public static void Dec__add__quote_end(BryWtr bfr) {
+		bfr.AddByteQuote();
 	}
 }
 class Xohz_atr_itm__str implements Xohz_atr_itm {	// EX: id='some_string'		
@@ -43,11 +50,11 @@ class Xohz_atr_itm__str implements Xohz_atr_itm {	// EX: id='some_string'
 		Xoh_xnde_dict_itm itm = hctx.Hzip__xnde__dict().Get().Get_by_key_or_new(src, hatr.Val_bgn(), hatr.Val_end());
 		bfr.Add_hzip_int(val_id_len, itm.Id());
 	}
-	public void Dec_all(Xoh_hdoc_ctx hctx, Bry_rdr rdr, Int_flag_bldr flag_bldr, Bry_bfr bfr) {
+	public void Dec_all(Xoh_hdoc_ctx hctx, BryRdr rdr, Int_flag_bldr flag_bldr, BryWtr bfr) {
 		boolean exists = flag_bldr.Get_as_bool(flag_idx);
 		if (!exists) return;
 		Xohz_atr_itm_.Dec__add__quote_bgn(bfr, key);
-		int val_id = rdr.Read_hzip_int(val_id_len);
+		int val_id = rdr.ReadHzipInt(val_id_len);
 		Xoh_xnde_dict_itm itm = hctx.Hzip__xnde__dict().Get().Get_by_id_or_null(val_id);
 		bfr.Add(itm.Val());
 		Xohz_atr_itm_.Dec__add__quote_end(bfr);
@@ -67,16 +74,16 @@ class Xohz_atr_itm__int implements Xohz_atr_itm {	// EX: colspan='5'; rowspan='2
 		flag_bldr.Set_as_bool(flag_idx, hatr.Val_dat_exists());
 	}
 	public void Enc_data	(Xoh_hdoc_ctx hctx, byte[] src, Gfh_atr hatr, Xoh_hzip_bfr bfr) {
-		int val = Bry_.To_int_or(src, hatr.Val_bgn(), hatr.Val_end(), Int_.Min_value);
-		if (val == Int_.Min_value)
+		int val = BryUtl.ToIntOr(src, hatr.Val_bgn(), hatr.Val_end(), IntUtl.MinValue);
+		if (val == IntUtl.MinValue)
 			bfr.Add_hzip_mid(src, hatr.Val_bgn(), hatr.Val_end());
 		else
 			bfr.Add_hzip_int(val_len, val);
 	}
-	public void Dec_all(Xoh_hdoc_ctx hctx, Bry_rdr rdr, Int_flag_bldr flag_bldr, Bry_bfr bfr) {
+	public void Dec_all(Xoh_hdoc_ctx hctx, BryRdr rdr, Int_flag_bldr flag_bldr, BryWtr bfr) {
 		if (!flag_bldr.Get_as_bool(flag_idx)) return;
 		Xohz_atr_itm_.Dec__add__quote_bgn(bfr, key);
-		bfr.Add_int_variable(rdr.Read_hzip_int(val_len));
+		bfr.AddIntVariable(rdr.ReadHzipInt(val_len));
 		Xohz_atr_itm_.Dec__add__quote_end(bfr);
 	}
 }
@@ -113,11 +120,11 @@ class Xohz_atr_itm__enm implements Xohz_atr_itm {	// EX: scope='col','row'
 		if (tmp_val_id == 0)
 			bfr.Add_hzip_mid(src, tmp_src_bgn, tmp_src_end);
 	}
-	public void Dec_all(Xoh_hdoc_ctx hctx, Bry_rdr rdr, Int_flag_bldr flag_bldr, Bry_bfr bfr) {
+	public void Dec_all(Xoh_hdoc_ctx hctx, BryRdr rdr, Int_flag_bldr flag_bldr, BryWtr bfr) {
 		Xohz_atr_itm_.Dec__add__quote_bgn(bfr, key);
 		int enm_val = flag_bldr.Get_as_int(flag_idx);
 		if (enm_val == 0)
-			bfr.Add(rdr.Read_bry_to(AsciiByte.Escape));
+			bfr.Add(rdr.ReadBryTo(AsciiByte.Escape));
 		else
 			bfr.Add(val_ary[enm_val - 1]);
 		Xohz_atr_itm_.Dec__add__quote_end(bfr);
@@ -131,6 +138,6 @@ class Xohz_atr_itm__enm implements Xohz_atr_itm {	// EX: scope='col','row'
 		else if	(v <  64)	return  6;
 		else if	(v < 128)	return  7;
 		else if	(v < 256)	return  8;
-		throw Err_.new_("hzip", "unknown log2", "val", v);
+		throw ErrUtl.NewArgs("unknown log2", "val", v);
 	}
 }

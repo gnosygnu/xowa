@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.net;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Http_request_itm {
 	public Http_request_itm(int type, byte[] url, byte[] protocol, byte[] host, byte[] user_agent
 		, byte[] accept, byte[] accept_language, byte[] accept_encoding, boolean dnt, byte[] x_requested_with, byte[] cookie, byte[] referer
@@ -48,34 +50,34 @@ public class Http_request_itm {
 	public byte[] Cache_control() {return cache_control;} private final byte[] cache_control;
 	public byte[] Origin() {return origin;} private final byte[] origin;
 	public Http_post_data_hash Post_data_hash() {return post_data_hash;} private final Http_post_data_hash post_data_hash;
-	public String To_str(Bry_bfr bfr, boolean line) {
-		bfr	.Add_kv_dlm(line, "type"					, type == Type_get ? "GET" : "POST")
-			.Add_kv_dlm(line, "url"						, url)
-			.Add_kv_dlm(line, "protocol"				, protocol)
-			.Add_kv_dlm(line, "host"					, host)
-			.Add_kv_dlm(line, "user_agent"				, user_agent)
-			.Add_kv_dlm(line, "accept"					, accept)
-			.Add_kv_dlm(line, "accept_encoding"			, accept_encoding)
-			.Add_kv_dlm(line, "dnt"						, dnt)
-			.Add_kv_dlm(line, "x_requested_with"		, x_requested_with)
-			.Add_kv_dlm(line, "cookie"					, cookie)
-			.Add_kv_dlm(line, "referer"					, referer)
-			.Add_kv_dlm(line, "content_length"			, content_length)
-			.Add_kv_dlm(line, "content_type"			, content_type)
-			.Add_kv_dlm(line, "content_type_boundary"	, content_type_boundary)
-			.Add_kv_dlm(line, "connection"				, connection)
-			.Add_kv_dlm(line, "pragma"					, pragma)
-			.Add_kv_dlm(line, "cache_control"			, cache_control)
+	public String To_str(BryWtr bfr, boolean line) {
+		bfr	.AddKvDlm(line, "type"					, type == Type_get ? "GET" : "POST")
+			.AddKvDlm(line, "url"						, url)
+			.AddKvDlm(line, "protocol"				, protocol)
+			.AddKvDlm(line, "host"					, host)
+			.AddKvDlm(line, "user_agent"				, user_agent)
+			.AddKvDlm(line, "accept"					, accept)
+			.AddKvDlm(line, "accept_encoding"			, accept_encoding)
+			.AddKvDlm(line, "dnt"						, dnt)
+			.AddKvDlm(line, "x_requested_with"		, x_requested_with)
+			.AddKvDlm(line, "cookie"					, cookie)
+			.AddKvDlm(line, "referer"					, referer)
+			.AddKvDlm(line, "content_length"			, content_length)
+			.AddKvDlm(line, "content_type"			, content_type)
+			.AddKvDlm(line, "content_type_boundary"	, content_type_boundary)
+			.AddKvDlm(line, "connection"				, connection)
+			.AddKvDlm(line, "pragma"					, pragma)
+			.AddKvDlm(line, "cache_control"			, cache_control)
 			;
 		if (post_data_hash != null) {
 			int len = post_data_hash.Len();
 			for (int i = 0; i < len; ++i) {
 				Http_post_data_itm itm = post_data_hash.Get_at(i);
-				bfr.Add_byte_repeat(AsciiByte.Space, 2);
-				bfr.Add_kv_dlm(line, String_.new_u8(itm.Key()), itm.Val());
+				bfr.AddByteRepeat(AsciiByte.Space, 2);
+				bfr.AddKvDlm(line, StringUtl.NewU8(itm.Key()), itm.Val());
 			}
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	public static final int Type_get = 1, Type_post = 2;
 }

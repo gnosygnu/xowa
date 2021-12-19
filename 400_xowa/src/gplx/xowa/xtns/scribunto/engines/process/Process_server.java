@@ -13,15 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.core.threads.*;
-import gplx.core.encoders.*;
-import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.engines.process;
 import gplx.core.threads.Thread_adp_;
-import java.io.*;
+import gplx.libs.ios.IoConsts;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.xtns.scribunto.Scrib_xtn_mgr;
+import gplx.xowa.xtns.scribunto.engines.Scrib_server;
+import java.io.InputStream;
+import java.io.OutputStream;
 public class Process_server implements Scrib_server {
     private Process process;
-    private OutputStream stream_write; private Process_server_gobbler_recv stream_read; private byte[] bry_header = new byte[16], bry_body = new byte[Io_mgr.Len_kb * 4], bry_error = new byte[Io_mgr.Len_kb * 4];
+    private OutputStream stream_write; private Process_server_gobbler_recv stream_read; private byte[] bry_header = new byte[16], bry_body = new byte[IoConsts.LenKB * 4], bry_error = new byte[IoConsts.LenKB * 4];
     private Process_stream_rdr process_rdr;
     private Process_server_gobbler_error error_reader;
 	public int Server_timeout() {return server_timeout;} public Scrib_server Server_timeout_(int v) {server_timeout = v; return this;} int server_timeout = 8000;
@@ -32,7 +35,7 @@ public class Process_server implements Scrib_server {
     	ProcessBuilder pb = new ProcessBuilder(process_args);
     	pb.redirectErrorStream(false);
     	try {process = pb.start();}
-    	catch (Exception e) {throw Err_.new_exc(e, "core", "process init failed", "args", String_.AryXtoStr(process_args));}
+    	catch (Exception e) {throw ErrUtl.NewArgs(e, "process init failed", "args", StringUtl.AryToStr(process_args));}
         stream_write = process.getOutputStream();
         error_reader = new Process_server_gobbler_error(process.getErrorStream(), bry_error);
         error_reader.Start();
@@ -42,7 +45,7 @@ public class Process_server implements Scrib_server {
     	return Server_recv();
     }
     public void Server_send(byte[] cmd, Object[] cmd_objs) {
-        if (process == null) throw Err_.new_wo_type("process not started");
+        if (process == null) throw ErrUtl.NewArgs("process not started");
         cmd_last = cmd;
 //        stream_read.Data_reset();
         stream_read = new Process_server_gobbler_recv(process.getInputStream(), process_rdr).Start();
@@ -50,7 +53,7 @@ public class Process_server implements Scrib_server {
 	        stream_write.write(cmd);
 	        stream_write.flush();
         }
-        catch (Exception e) {throw Err_.new_exc(e, "core", "failed to write to output");}
+        catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to write to output");}
     }	private byte[] cmd_last;
     public byte[] Server_recv() {
     	long time_bgn = System.currentTimeMillis();
@@ -60,7 +63,7 @@ public class Process_server implements Scrib_server {
     		if (rv != null) return rv;
     		long time_now = System.currentTimeMillis();
     		if (time_now > time_woke + server_timeout_busy_wait) {
-				if (time_now > time_bgn + server_timeout) throw Scrib_xtn_mgr.err_("lua_timeout: timeout={0} cmd={1}", server_timeout, String_.new_u8(cmd_last));
+				if (time_now > time_bgn + server_timeout) throw Scrib_xtn_mgr.err_("lua_timeout: timeout={0} cmd={1}", server_timeout, StringUtl.NewU8(cmd_last));
 				Thread_adp_.Sleep(server_timeout_polling);
 				time_woke = System.currentTimeMillis();
 			}
@@ -93,7 +96,7 @@ class Process_server_gobbler_error extends Thread {
         	if (terminating)
         		return;
         	else
-        		throw Err_.new_exc(e, "core", "failed to write to output");
+        		throw ErrUtl.NewArgs(e, "failed to write to output");
         }
     }
     public void Term() {

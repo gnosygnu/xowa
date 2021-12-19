@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.nss;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
 import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.utls.*;
 public class Xow_ns implements Gfo_invk {
 	public Xow_ns(int id, byte case_match, byte[] name, boolean is_alias) {
@@ -24,21 +36,21 @@ public class Xow_ns implements Gfo_invk {
 	public void Name_bry_(byte[] v) {
 		if (id == Xow_ns_.Tid__main) {	// NOTE: Main will never prefix titles; EX: "Test" vs "Category:Test"
 			this.name_db_str			= "";
-			this.name_db			= Bry_.Empty;
-			this.name_db_w_colon	= Bry_.Empty;
+			this.name_db			= BryUtl.Empty;
+			this.name_db_w_colon	= BryUtl.Empty;
 		}
 		else {
 			this.name_db			= v;
-			this.name_db_w_colon	= Bry_.Add(v, AsciiByte.Colon);
-			this.name_db_str		= String_.new_u8(v);
+			this.name_db_w_colon	= BryUtl.Add(v, AsciiByte.Colon);
+			this.name_db_str		= StringUtl.NewU8(v);
 		}
-		this.num_str = Int_.To_str_pad_bgn_zero(id, 3);
-		this.num_bry = Bry_.new_a7(num_str);
+		this.num_str = IntUtl.ToStrPadBgnZero(id, 3);
+		this.num_bry = BryUtl.NewA7(num_str);
 		synchronized (url_encoder) {	// LOCK:static-obj
 			this.name_enc = url_encoder.Encode(name_db);
 		}
-		this.name_ui = Bry_.Replace(name_enc, AsciiByte.Underline, AsciiByte.Space);
-		this.name_ui_w_colon = Bry_.Replace(name_db_w_colon, AsciiByte.Underline, AsciiByte.Space);
+		this.name_ui = BryUtl.Replace(name_enc, AsciiByte.Underline, AsciiByte.Space);
+		this.name_ui_w_colon = BryUtl.Replace(name_db_w_colon, AsciiByte.Underline, AsciiByte.Space);
 	}
 	public boolean		Exists()				{return exists;} public Xow_ns Exists_(boolean v) {exists = v; return this;} private boolean exists;
 	public byte[]	Name_db()				{return name_db;} private byte[] name_db;
@@ -78,19 +90,19 @@ public class Xow_ns implements Gfo_invk {
 	public boolean		Is_meta()				{return id < Xow_ns_.Tid__main;}									// ASSUME: only Special, Media
 	public boolean		Is_alias()				{return is_alias;} private boolean is_alias;
 	public int		Count()					{return count;} public Xow_ns Count_(int v) {count = v; return this;} private int count;
-	public byte[]	Gen_ttl(byte[] page)	{return id == Xow_ns_.Tid__main ? page : Bry_.Add(name_db_w_colon, page);}
+	public byte[]	Gen_ttl(byte[] page)	{return id == Xow_ns_.Tid__main ? page : BryUtl.Add(name_db_w_colon, page);}
 	public void		Aliases_add(String alias) {
-		if (String_.Eq(alias, name_db_str)) return;
+		if (StringUtl.Eq(alias, name_db_str)) return;
 		if (aliases == null) aliases = Ordered_hash_.New();
 		aliases.AddIfDupeUse1st(alias, alias);
 	}	private Ordered_hash aliases;
-	public Keyval[] Aliases_as_scrib_ary() {	// NOTE: intended for Scrib_lib_site; DATE:2014-02-15
-		if (aliases == null) return Keyval_.Ary_empty;
+	public KeyVal[] Aliases_as_scrib_ary() {	// NOTE: intended for Scrib_lib_site; DATE:2014-02-15
+		if (aliases == null) return KeyValUtl.AryEmpty;
 		int len = aliases.Len();
-		Keyval[] rv = new Keyval[len];
+		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++) {
-			String alias = (String)aliases.Get_at(i);
-			rv[i] = Keyval_.int_(i + List_adp_.Base1, alias);
+			String alias = (String)aliases.GetAt(i);
+			rv[i] = KeyVal.NewInt(i + List_adp_.Base1, alias);
 		}
 		return rv;
 	}

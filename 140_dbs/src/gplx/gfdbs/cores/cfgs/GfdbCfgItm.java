@@ -1,6 +1,6 @@
 package gplx.gfdbs.cores.cfgs;
 
-import gplx.Type_;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.gfdbs.cores.GfdbState;
 import gplx.gfdbs.cores.GfdbItm;
 
@@ -24,7 +24,7 @@ public class GfdbCfgItm implements GfdbItm<String, GfdbCfgItm> {
 		this.ValSet(valInt.toString());
 		return valInt;
 	}
-    @Override public String toString() {return Type_.SimpleName_by_obj(this) + toStringItm();}
+    @Override public String toString() {return ClassUtl.SimpleNameByObj(this) + toStringItm();}
     protected String toStringItm() {
         return "|dbState=" + dbState.name()
             +  "|key=" + key

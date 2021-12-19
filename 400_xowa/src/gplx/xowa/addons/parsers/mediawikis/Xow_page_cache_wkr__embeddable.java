@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
+package gplx.xowa.addons.parsers.mediawikis;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.xowa.parsers.utils.*;
 class Xow_page_cache_wkr__embeddable implements gplx.xowa.wikis.caches.Xow_page_cache_wkr {
 	private final Xop_mediawiki_loader cbk;
@@ -28,7 +31,7 @@ class Xow_page_cache_wkr__embeddable implements gplx.xowa.wikis.caches.Xow_page_
 		// loop to handle redirects; DATE:2017-05-29
 		int loops = 0;
 		while (loops++ < 5) {
-			wikitext = Bry_.new_u8(cbk.LoadWikitext(String_.new_u8(full_db)));
+			wikitext = BryUtl.NewU8(cbk.LoadWikitext(StringUtl.NewU8(full_db)));
 			Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(wikitext);
 			// not a redirect; exit loop
 			if (redirect_ttl == null) {

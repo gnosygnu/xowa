@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.envs;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
 public class Op_sys_ {
 	public static boolean Wnt_invalid_char(byte b) {
 		switch (b) {
@@ -26,8 +26,8 @@ public class Op_sys_ {
 			case AsciiByte.Pipe:
 			case AsciiByte.Question:
 			case AsciiByte.Star:
-			case AsciiByte.Quote:		return true;
-			default:					return false;
+			case AsciiByte.Quote:        return true;
+			default:                    return false;
 		}
 	}
 }

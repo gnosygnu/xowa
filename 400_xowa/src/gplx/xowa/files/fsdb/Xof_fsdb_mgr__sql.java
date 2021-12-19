@@ -13,7 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.fsdb;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 import gplx.xowa.files.repos.*;
 import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.guis.cbks.js.*;
@@ -38,7 +48,7 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, Gfo_invk {
 			this.bin_mgr = new Xof_bin_mgr(mnt_mgr, repo_mgr, wiki.App().File__img_mgr().Wkr_resize_img(), wiki.App().Wmf_mgr().Download_wkr().Download_xrg().Download_fmt());
 			bin_mgr.Wkrs__add(Xof_bin_wkr__fsdb_sql.new_(mnt_mgr));
 			bin_mgr.Wkrs__add(Xof_bin_wkr__http_wmf.new_(wiki));
-		}	catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to initialize fsdb_mgr}", "wiki", wiki.Domain_str());}
+		}	catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to initialize fsdb_mgr}", "wiki", wiki.Domain_str());}
 	}
 	public void Fsdb_search_by_list(List_adp itms, Xow_wiki cur_wiki, Xoa_page page, Xog_js_wkr js_wkr) {
 		if (!fsdb_enabled) return;
@@ -48,11 +58,11 @@ public class Xof_fsdb_mgr__sql implements Xof_fsdb_mgr, Gfo_invk {
 		Xou_cache_mgr cache_mgr = wiki.App().User().User_db_mgr().Cache_mgr();
 		for (int i = 0; i < len; i++) {
 			if (usr_dlg.Canceled()) return;
-			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.Get_at(i);
+			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.GetAt(i);
 			if (fsdb.Hdump_mode() == Xof_fsdb_itm.Hdump_mode__null) {
 				Xof_orig_itm orig = wiki.File__orig_mgr().Find_by_ttl_or_null(fsdb.Lnki_ttl(), i, len);
 				if (orig != Xof_orig_itm.Null) { // orig exists;
-					gplx.xowa.files.repos.Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), fsdb.Lnki_ttl(), Bry_.Empty);
+					gplx.xowa.files.repos.Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), fsdb.Lnki_ttl(), BryUtl.Empty);
 					if (repo == null) continue;
 					fsdb.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
 				}

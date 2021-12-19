@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.core.btries.*;
+package gplx.xowa.addons.wikis.ctgs.enums;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.errs.ErrUtl;
 public class Xoctg_type_enum {
 	private final Btrie_rv trv = new Btrie_rv();
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs()
@@ -22,8 +25,8 @@ public class Xoctg_type_enum {
 		.Add_str_byte("file"		, Tid__file)
 		.Add_str_byte("page"		, Tid__page);
 	public byte To_tid_or_fail(byte[] raw) {
-		byte tid = trie.Match_byte_or(trv, raw, 0, raw.length, Byte_.Max_value_127);
-		if (tid == Byte_.Max_value_127) throw Err_.new_unhandled_default(raw);
+		byte tid = trie.Match_byte_or(trv, raw, 0, raw.length, ByteUtl.MaxValue127);
+		if (tid == ByteUtl.MaxValue127) throw ErrUtl.NewUnhandled(raw);
 		return tid;
 	}
 	public static final byte Tid__subc = 0, Tid__file = 1, Tid__page = 2, Tid_max = 3;

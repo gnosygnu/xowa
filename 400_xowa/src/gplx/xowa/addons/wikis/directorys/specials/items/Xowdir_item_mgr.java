@@ -13,11 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.addons.wikis.directorys.dbs.*; import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
+package gplx.xowa.addons.wikis.directorys.specials.items;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_wtr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_db_mgr;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_db_utl;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_itm;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_json;
+import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xodb_wiki_data;
+import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_db_mkr;
+import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xow_wiki_factory;
 class Xowdir_item_mgr {
 	private final Xoa_app app;
 	private final Json_wtr json_wtr = new Json_wtr();
@@ -39,7 +58,7 @@ class Xowdir_item_mgr {
 		Xowdir_wiki_itm old_item = db_mgr.Tbl__wiki().Select_by_key_or_null(domain);
 
 		// validate
-		mainpage_name = String_.Replace(mainpage_name, " ", "_");
+		mainpage_name = StringUtl.Replace(mainpage_name, " ", "_");
 		String err_msg = Validate(app, db_mgr, itm_is_new, domain, name, dir_url, mainpage_name);
 		if (err_msg != null) {
 			app.Gui__cbk_mgr().Send_json(cbk_trg, "xo.wiki_directory.notify__recv", gplx.core.gfobjs.Gfobj_nde.New().Add_str("msg_text", err_msg));
@@ -56,11 +75,11 @@ class Xowdir_item_mgr {
 
 		if (itm_is_new) {
 			// create the actual wiki
-			byte[] mainpage_text = Io_mgr.Instance.LoadFilBryOr(Xowdir_item_html.Addon_dir(app).GenSubFil_nest("res", "page", "Main_Page.txt"), Bry_.Empty);
-			Xow_db_mkr.Create_wiki(new Xodb_wiki_data(domain, fil_url), name, Bry_.new_u8(mainpage_name), mainpage_text);
+			byte[] mainpage_text = Io_mgr.Instance.LoadFilBryOr(Xowdir_item_html.Addon_dir(app).GenSubFil_nest("res", "page", "Main_Page.txt"), BryUtl.Empty);
+			Xow_db_mkr.Create_wiki(new Xodb_wiki_data(domain, fil_url), name, BryUtl.NewU8(mainpage_name), mainpage_text);
 
 			// load it
-			Xow_wiki_factory.Load_personal((Xoae_app)app, Bry_.new_u8(domain), dir_url);
+			Xow_wiki_factory.Load_personal((Xoae_app)app, BryUtl.NewU8(domain), dir_url);
 
 			// navigate to it
 			app.Gui__cbk_mgr().Send_redirect(cbk_trg, "/site/" + domain + "/wiki/" + mainpage_name);
@@ -86,7 +105,7 @@ class Xowdir_item_mgr {
 		// get item by id
 		Xowdir_db_mgr db_mgr = new Xowdir_db_mgr(app.User().User_db_mgr().Conn());
 		Xowdir_wiki_itm itm = db_mgr.Tbl__wiki().Select_by_id_or_null(id);
-		if (itm == null) throw Err_.new_wo_type("wiki does not exist", "id", id);
+		if (itm == null) throw ErrUtl.NewArgs("wiki does not exist", "id", id);
 
 		// delete it
 		db_mgr.Tbl__wiki().Delete_by_id(id);
@@ -96,7 +115,7 @@ class Xowdir_item_mgr {
 	}
 	public void Reindex_search(Json_nde args) {
 		String domain = args.Get_as_str("domain");
-		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgri().Get_by_or_null(Bry_.new_u8(domain));
+		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgri().Get_by_or_null(BryUtl.NewU8(domain));
 
 		// update page count; needed else search cannot generate correct ranges when normalizing search_scores
 		int page_count = wiki.Data__core_mgr().Tbl__page().Select_count_all();
@@ -119,45 +138,45 @@ class Xowdir_item_mgr {
 	private String Validate(Xoa_app app, Xowdir_db_mgr db_mgr, boolean itm_is_new, String domain, String name, Io_url dir_url, String mainpage_name) {
 		// domain
 		if (itm_is_new) {
-			if (String_.Len_eq_0(domain))
+			if (StringUtl.IsNullOrEmpty(domain))
 				return "Domain cannot be empty: " + domain;
 			if (db_mgr.Tbl__wiki().Select_by_key_or_null(domain) != null)
 				return "Domain already exists: " + domain;
-			if (String_.Len(domain) > 63)
+			if (StringUtl.Len(domain) > 63)
 				return "Domain must be 63 characters or less: " + domain;
-			if (!Is_valid_domain_name(Bry_.new_u8(domain)))
+			if (!Is_valid_domain_name(BryUtl.NewU8(domain)))
 				return "Domain is invalid; can only have letters, numbers, or a dot. If a dash exists, it cannot be at the start or the end: " + domain;
 		}
 
 		// name
-		if (String_.Len_eq_0(name))
+		if (StringUtl.IsNullOrEmpty(name))
 			return "Name cannot be empty: " + name;
-		if (String_.Len(name) > 255)
+		if (StringUtl.Len(name) > 255)
 			return "Name must: be 255 characters or less: " + name;
 
 		// dir
 		String dir_str = dir_url.Raw();
-		if (String_.Len_eq_0(dir_str))
+		if (StringUtl.IsNullOrEmpty(dir_str))
 			return "Folder cannot be empty: " + dir_str;
 
 		// try to create fil
 		Io_mgr.Instance.CreateDirIfAbsent(dir_url);
 		Io_url tmp_fil = dir_url.GenSubFil("xowa.temp.txt");
 		Io_mgr.Instance.SaveFilStr(tmp_fil, "temp");
-		if (!String_.Eq(Io_mgr.Instance.LoadFilStr(tmp_fil), "temp"))
+		if (!StringUtl.Eq(Io_mgr.Instance.LoadFilStr(tmp_fil), "temp"))
 			return "Folder could not be created: " + dir_str;
 		Io_mgr.Instance.DeleteFil(tmp_fil);
 
 		// mainpage_name
 		if (itm_is_new) {
-			byte[] mainpage_name_bry = Bry_.new_u8(mainpage_name);
+			byte[] mainpage_name_bry = BryUtl.NewU8(mainpage_name);
 			Xoa_ttl ttl = Xoa_ttl.Parse(app.User().Wikii(), mainpage_name_bry);
 			if (ttl == null)
 				return "Main Page has invalid characters. Please see the new wiki help page for more info: " + mainpage_name;
 
-			Bry_bfr tmp = Bry_bfr_.New();
+			BryWtr tmp = BryWtr.New();
 			byte[] ucase_1st = app.User().Wikii().Lang().Case_mgr().Case_build_1st_upper(tmp, mainpage_name_bry, 0, mainpage_name_bry.length);
-			if (!Bry_.Eq(mainpage_name_bry, ucase_1st))
+			if (!BryLni.Eq(mainpage_name_bry, ucase_1st))
 				return "Main Page must start with an uppercase letter.";
 		}
 

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.srchs; import gplx.*;
+package gplx.xowa.addons.bldrs.exports.splits.srchs;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
@@ -41,7 +42,7 @@ class Split_meta_wkr__link extends Split_meta_wkr_base {
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
 		int trg_db_id = srch_db_mgr.Tbl__link__get_idx(ns_id);
 		attach_mgr.Conn_links_(new Db_attach_itm("link_db", srch_db_mgr.Tbl__link__get_at(trg_db_id).conn));
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		( "SELECT  sl.word_id, sl.page_id, sl.link_score, sw.page_id, " + trg_db_id + " AS trg_db_id"
 		, "FROM    <link_db>search_link sl"
 		, "        JOIN split_search_word sw ON sw.word_id = sl.word_id"

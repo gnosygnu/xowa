@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
@@ -53,7 +56,7 @@ abstract class Xomp_make_merger__base implements Xomp_make_merger, ComparerAble 
 		// build sql
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(src_mgr_db.Conn());
 		attach_mgr.Conn_links_(new Db_attach_itm("src_wkr_db", src_wkr_db.Conn()));
-		String sql = Db_sql_.Make_by_fmt(String_.Ary
+		String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  src_mgr.xomp_uid"
 		, ",       src_wkr.*"
 		, "FROM    <src_wkr_db>{0} src_wkr"
@@ -85,7 +88,7 @@ abstract class Xomp_make_merger__base implements Xomp_make_merger, ComparerAble 
 		rows.SortBy(this);
 		int len = rows.Len();
 		for (int i = 0; i < len; ++i) {
-			Save__trg_row(rows.Get_at(i));
+			Save__trg_row(rows.GetAt(i));
 		}
 		rows.Clear();
 	}

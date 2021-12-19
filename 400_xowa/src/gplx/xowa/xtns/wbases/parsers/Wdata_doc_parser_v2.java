@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.parsers;
 
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.Err_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.jsons.Json_ary;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_itm;
@@ -42,8 +42,8 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	public byte[] Parse_qid(Json_doc doc) {
 		try {
 			Json_itm itm = doc.Find_nde(Bry_id);
-			return Bry_.Lcase__1st(itm.Data_bry());	// standardize on "q" instead of "Q" for compatibility with v1
-		}	catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse qid", "src", String_.new_u8(doc.Src()));}
+			return BryUtl.Lcase1st(itm.Data_bry());	// standardize on "q" instead of "Q" for compatibility with v1
+		}	catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse qid", "src", StringUtl.NewU8(doc.Src()));}
 	}
 	public Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc) {
 		try {
@@ -57,7 +57,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				Json_kv site_kv = null, name_kv = null; Json_ary badges_ary = null;
 				for (int j = 0; j < data_nde_len; ++j) {
 					Json_kv sub = Json_kv.Cast(data_nde.Get_at(j));
-					byte tid = Wdata_dict_sitelink.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+					byte tid = Wdata_dict_sitelink.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == ByteUtl.MaxValue127) continue;
 					switch (tid) {
 						case Wdata_dict_sitelink.Tid__site:			site_kv	= Json_kv.Cast(sub); break;
 						case Wdata_dict_sitelink.Tid__title:		name_kv	= Json_kv.Cast(sub); break;
@@ -69,7 +69,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				rv.Add(site_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse sitelinks", "qid", StringUtl.NewU8(qid));}
 	}
 	public Ordered_hash Parse_langvals(byte[] qid, Json_doc doc, boolean label_or_description) {
 		try {
@@ -84,7 +84,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				int data_nde_len = data_nde.Len();
 				for (int j = 0; j < data_nde_len; ++j) {
 					Json_kv sub = Json_kv.Cast(data_nde.Get_at(j));
-					byte tid = Wdata_dict_langtext.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+					byte tid = Wdata_dict_langtext.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == ByteUtl.MaxValue127) continue;
 					switch (tid) {
 						case Wdata_dict_langtext.Tid__language:		break;
 						case Wdata_dict_langtext.Tid__value:		text_kv	= Json_kv.Cast(sub); break;
@@ -95,7 +95,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse langvals", "qid", String_.new_u8(qid), "langval_tid", label_or_description);}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse langvals", "qid", StringUtl.NewU8(qid), "langval_tid", label_or_description);}
 	}
 	public Ordered_hash Parse_aliases(byte[] qid, Json_doc doc) {
 		try {
@@ -112,7 +112,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 					int k_len = lang_nde.Len();
 					for (int k = 0; k < k_len; ++k) {
 						Json_kv sub = Json_kv.Cast(lang_nde.Get_at(k));
-						byte tid = Wdata_dict_langtext.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+						byte tid = Wdata_dict_langtext.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == ByteUtl.MaxValue127) continue;
 						switch (tid) {
 							case Wdata_dict_langtext.Tid__language:		break;
 							case Wdata_dict_langtext.Tid__value:		vals[j] = sub.Val().Data_bry(); break;
@@ -124,7 +124,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse sitelinks", "qid", StringUtl.NewU8(qid));}
 	}
 	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
 		synchronized (this) {// TS; DATE:2016-07-06
@@ -138,7 +138,7 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 					claims_parser.Make_claim_itms(qid, temp_list, src, claim_nde);
 				}
 				return Wdata_doc_parser_v1.Claims_list_to_hash(temp_list);
-			} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse claims", "qid", String_.new_u8(doc.Src()));}
+			} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse claims", "qid", StringUtl.NewU8(doc.Src()));}
 		}
 	}
 	public Wbase_claim_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_nde nde) {return claims_parser.Parse_datavalue(qid, pid, snak_tid, nde);}
@@ -155,12 +155,12 @@ public class Wdata_doc_parser_v2 implements Wdata_doc_parser {
 	, Str_type									= "type"
 	;
 	public static final byte[] 
-	  Bry_id									= Bry_.new_a7(Str_id)
-	, Bry_sitelinks								= Bry_.new_a7(Str_sitelinks)
-	, Bry_labels								= Bry_.new_a7(Str_labels)
-	, Bry_descriptions							= Bry_.new_a7(Str_descriptions)
-	, Bry_aliases								= Bry_.new_a7(Str_aliases)
-	, Bry_claims								= Bry_.new_a7(Str_claims)
-	, Bry_type									= Bry_.new_a7(Str_type)
+	  Bry_id									= BryUtl.NewA7(Str_id)
+	, Bry_sitelinks								= BryUtl.NewA7(Str_sitelinks)
+	, Bry_labels								= BryUtl.NewA7(Str_labels)
+	, Bry_descriptions							= BryUtl.NewA7(Str_descriptions)
+	, Bry_aliases								= BryUtl.NewA7(Str_aliases)
+	, Bry_claims								= BryUtl.NewA7(Str_claims)
+	, Bry_type									= BryUtl.NewA7(Str_type)
 	;
 }

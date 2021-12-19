@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.xdats; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.tdbs.xdats;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
 import gplx.xowa.wikis.tdbs.*;
 import gplx.core.ios.streams.*; import gplx.core.encoders.*;
 public class Xob_xdat_file_wtr {
@@ -27,7 +30,7 @@ public class Xob_xdat_file_wtr {
 		this.fil_max = fil_max; 
 		this.root_dir = root_dir;
 		fil_ext = Xotdb_dir_info.Wtr_ext(wtr_tid);
-		bfr = Bry_bfr_.New_w_size(fil_max);
+		bfr = BryWtr.NewWithSize(fil_max);
 		idx = new int[fil_max / 8];	// ASSUME: any given row must at least be 8 bytes long
 		Url_gen(fil_idx);	// set 1st url
 		wtr = Io_stream_wtr_.New_by_tid(wtr_tid);
@@ -35,13 +38,13 @@ public class Xob_xdat_file_wtr {
 	public int Fil_idx() {return fil_idx;} public Xob_xdat_file_wtr Fil_idx_(int v) {fil_idx = v; return this;} private int fil_idx;
 	public int Ns_ord_idx() {return ns_ord_idx;} public Xob_xdat_file_wtr Ns_ord_idx_(int v) {ns_ord_idx = v; return this;} private int ns_ord_idx;	// NOTE: optional; needed for page cmd which will flush all wtrs, but needs ns_idx for stats
 	public Io_url Fil_url() {return fil_url;}
-	@gplx.Internal protected int[] Idx() {return idx;} private int[] idx;
+	public int[] Idx() {return idx;} private int[] idx;
 	public int Idx_pos() {return idx_pos;} private int idx_pos;
-	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr;
+	public BryWtr Bfr() {return bfr;} BryWtr bfr;
 	public Xob_xdat_file_wtr Add_idx(byte data_dlm) {return Add_idx_direct(bfr.Len(), data_dlm);}
 	public Xob_xdat_file_wtr Add_idx_direct(int itm_len, byte data_dlm) {
-		if (data_dlm != AsciiByte.Null) {	// write closing dlm for data_eny, unless Byte_.Null passed in
-			bfr.Add_byte(data_dlm);
+		if (data_dlm != AsciiByte.Null) {	// write closing dlm for data_eny, unless ByteUtl.Null passed in
+			bfr.AddByte(data_dlm);
 			++itm_len;
 		}
 		if (idx_pos + 1 > idx.length) Idx_resize(idx.length * 2);	// resize hdr if necessary
@@ -58,7 +61,7 @@ public class Xob_xdat_file_wtr {
 			wtr.Url_(fil_url).Open();
 			if (idx_pos > 0)				// write idx; NOTE: if idx written, then .xdat; else .csv
 				FlushIdx(wtr);
-			wtr.Write(bfr.Bfr(), 0, bfr.Len());	// write data;
+			wtr.Write(bfr.Bry(), 0, bfr.Len());	// write data;
 			wtr.Flush();
 		}
 		finally {wtr.Rls();}

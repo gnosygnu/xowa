@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.texts.*;/*EncodingAdp_*/ import gplx.core.ios.streams.*;
+package gplx.core.ios;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import org.junit.*;
+import gplx.core.ios.streams.*;
 public abstract class IoEngine_fil_basic_base_tst {
 	@Before public void setup() {
 		engine = engine_();
 		fx = IoEngineFxt.new_();
 		setup_hook();
-	}	protected IoEngine engine; protected IoEngineFxt fx; protected Io_url fil, root;
+	}   protected IoEngine engine; protected IoEngineFxt fx; protected Io_url fil, root;
 	protected abstract IoEngine engine_();
 	protected abstract void setup_hook();
 	@Test public void ExistsFil() {
@@ -72,17 +79,16 @@ public abstract class IoEngine_fil_basic_base_tst {
 		try {fx.run_SaveFilText(fil, "changed");}
 		catch (Exception exc) {
 			fx.tst_LoadFilStr(fil, "text");
-			Err_.Noop(exc);
 			return;
 		}
-		Tfds.Fail_expdError();
+		GfoTstr.FailBcExpdError();
 	}
 	@Test public void LoadFilStr() {
 		fx.run_SaveFilText(fil, "text");
 		fx.tst_LoadFilStr(fil, "text");
 	}
 	@Test public void LoadFilStr_missingIgnored() {
-		Tfds.Eq("", engine.LoadFilStr(IoEngine_xrg_loadFilStr.new_(fil).MissingIgnored_()));
+		GfoTstr.EqObj("", engine.LoadFilStr(IoEngine_xrg_loadFilStr.new_(fil).MissingIgnored_()));
 	}
 	@Test public void UpdateFilAttrib() {
 		fx.run_SaveFilText(fil, "text");
@@ -109,11 +115,11 @@ public abstract class IoEngine_fil_basic_base_tst {
 
 		engine.UpdateFilAttrib(fil, IoItmAttrib.readOnly_());
 		try {engine.DeleteFil_api(IoEngine_xrg_deleteFil.new_(fil));}
-		catch (Exception exc) {Err_.Noop(exc);
+		catch (Exception exc) {
 			fx.tst_ExistsPaths(true, fil);
 			return;
 		}
-		Tfds.Fail_expdError();
+		GfoTstr.FailBcExpdError();
 	}
 	@Test public void DeleteFil_readOnly_pass() {
 		fx.run_SaveFilText(fil, "text");
@@ -125,19 +131,19 @@ public abstract class IoEngine_fil_basic_base_tst {
 	@Test public void QueryFil_size() {
 		fx.run_SaveFilText(fil, "text");
 
-		fx.tst_QueryFil_size(fil, String_.Len("text"));
+		fx.tst_QueryFil_size(fil, StringUtl.Len("text"));
 	}
 	@Test public void UpdateFilModifiedTime() {
 		fx.run_SaveFilText(fil, "text");
 
-		DateAdp time = Datetime_now.Dflt_add_min_(10);
+		GfoDate time = GfoDateNow.DfltAddMin(10);
 		engine.UpdateFilModifiedTime(fil, time);
 		fx.tst_QueryFil_modifiedTime(fil, time);
 	}
 	@Test public void OpenStreamRead() {
 		fx.run_SaveFilText(fil, "text");
 
-		int textLen = String_.Len("text");
+		int textLen = StringUtl.Len("text");
 		byte[] buffer = new byte[textLen];
 		IoStream stream = IoStream_.Null;
 		try {
@@ -145,30 +151,30 @@ public abstract class IoEngine_fil_basic_base_tst {
 			stream.Read(buffer, 0, textLen);
 		}
 		finally {stream.Rls();}
-		String actl = String_.new_u8(buffer);
-		Tfds.Eq("text", actl);
+		String actl = StringUtl.NewU8(buffer);
+		GfoTstr.EqObj("text", actl);
 	}
 	@Test public void OpenStreamWrite() {
 		IoStream stream = IoEngine_xrg_openWrite.new_(fil).Exec();
-		byte[] buffer = Bry_.new_u8("text");
-		int textLen = String_.Len("text");
+		byte[] buffer = BryUtl.NewU8("text");
+		int textLen = StringUtl.Len("text");
 		stream.Write(buffer, 0, textLen);
 		stream.Rls();
 
 		fx.tst_LoadFilStr(fil, "text");
 	}
-//		@Test public virtual void OpenStreamWrite_in_place() {
-//			byte[] buffer = Bry_.new_u8("a|b|c");
-//			IoStream stream = IoEngine_xrg_openWrite.new_(fil).Exec();
-//			stream.Write(buffer, 0, buffer.length);
-//			stream.Rls();
-//			
-//			buffer = Bry_.new_u8("B");
-//			stream = IoEngine_xrg_openWrite.new_(fil).Exec();
-//			stream.Seek(2);
-//			stream.Write(buffer, 0, buffer.length);
-//			stream.Rls();
+//        @Test public virtual void OpenStreamWrite_in_place() {
+//            byte[] buffer = Bry_.new_u8("a|b|c");
+//            IoStream stream = IoEngine_xrg_openWrite.new_(fil).Exec();
+//            stream.Write(buffer, 0, buffer.length);
+//            stream.Rls();
+//            
+//            buffer = Bry_.new_u8("B");
+//            stream = IoEngine_xrg_openWrite.new_(fil).Exec();
+//            stream.Seek(2);
+//            stream.Write(buffer, 0, buffer.length);
+//            stream.Rls();
 //
-//			fx.tst_LoadFilStr(fil, "a|B|c");
-//		}
+//            fx.tst_LoadFilStr(fil, "a|B|c");
+//        }
 }

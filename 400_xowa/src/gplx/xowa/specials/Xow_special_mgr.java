@@ -13,7 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.specials;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.xowa.*;
 import gplx.xowa.users.history.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
@@ -92,10 +105,10 @@ public class Xow_special_mgr {
 		}
 	}
 	public void Special__gen(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
-		int slash_pos = Bry_find_.Find_fwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
-		byte[] special_name = slash_pos == Bry_find_.Not_found
+		int slash_pos = BryFind.FindFwd(ttl.Page_txt_wo_qargs(), Xoa_ttl.Subpage_spr);	// check for slash
+		byte[] special_name = slash_pos == BryFind.NotFound
 				? ttl.Base_txt_wo_qarg()							// slash absent; use base_txt; ignore qry args and just get page_names; EX: Search/Earth?fulltext=y; Allpages?from=Earth...
-				: Bry_.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash exists; use root page; EX: Special:ItemByTitle/enwiki/Earth
+				: BryLni.Mid(ttl.Page_txt_wo_qargs(), 0, slash_pos);	// slash exists; use root page; EX: Special:ItemByTitle/enwiki/Earth
 		special_name = Xoa_ttl.Replace_spaces(special_name);		// handle spaces; EX:Spezial:Zufällige_Seite
 
 		Xow_special_page special = (Xow_special_page)hash.Get_by_bry(special_name);
@@ -104,7 +117,7 @@ public class Xow_special_mgr {
 			Hash_adp safelist = app.Special_regy().Safelist_pages();
 			if (safelist.Len() > 0) { // safelist pages enabled
 				if (!safelist.Has(special_name)) {
-					byte[] safelist_failed = Bry_.new_u8("This special page is not listed in the special_pages safelist. Re-run XOWA and list it in the command-line arguments similar to this: \"--http_server.special_pages_safelist " + String_.new_u8(special_name) + "\"");
+					byte[] safelist_failed = BryUtl.NewU8("This special page is not listed in the special_pages safelist. Re-run XOWA and list it in the command-line arguments similar to this: \"--http_server.special_pages_safelist " + StringUtl.NewU8(special_name) + "\"");
 					Xopage_html_data page_data = new Xopage_html_data(special.Special__meta().Display_ttl(), safelist_failed);
 					page_data.Apply(page);
 					return;
@@ -112,9 +125,9 @@ public class Xow_special_mgr {
 			}
 
 			special = special.Special__clone();
-			page.Db().Page().Modified_on_(Datetime_now.Get());
+			page.Db().Page().Modified_on_(GfoDateNow.Get());
 			try {special.Special__gen(wiki, page, url, ttl);}
-			catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", Err_.Message_gplx_log(e));}
+			catch (Exception e) {Gfo_log_.Instance.Warn("failed to generate special page", "url", url.To_str(), "err", ErrUtl.ToStrLog(e));}
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -13,20 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.core.envs.*;
+package gplx.xowa.files.xfers;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.core.envs.*;
 import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_queue {
 	private final List_adp xfer_list = List_adp_.New(); private final Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();
-	public Int_obj_ref Html_uid() {return html_uid;} private Int_obj_ref html_uid = Int_obj_ref.New_neg1();
+	public IntRef Html_uid() {return html_uid;} private IntRef html_uid = IntRef.NewNeg1();
 	public int Count() {return xfer_list.Len();}
 	public void Clear() {
 		dirty_meta_mgrs.Clear();
 		xfer_list.Clear();
-		html_uid.Val_neg1_();
+		html_uid.ValSetNeg1();
 	}
-	public Xof_file_itm Get_at(int i) {return (Xof_file_itm)xfer_list.Get_at(i);} // TEST
+	public Xof_file_itm Get_at(int i) {return (Xof_file_itm)xfer_list.GetAt(i);} // TEST
 	public void Add(Xof_file_itm xfer_itm) {xfer_list.Add(xfer_itm);}
 	public void Exec(Xowe_wiki wiki, Xoae_page page) {
 		if (wiki.File_mgr().Version() == Xow_file_mgr.Version_2)
@@ -40,7 +48,7 @@ public class Xof_xfer_queue {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
 		for (int i = 0; i < xfer_len; i++) {
 			if (wiki.Appe().Usr_dlg().Canceled()) break;
-			Xof_xfer_itm xfer_itm = (Xof_xfer_itm)xfer_list.Get_at(i);
+			Xof_xfer_itm xfer_itm = (Xof_xfer_itm)xfer_list.GetAt(i);
 			meta_mgr = xfer_itm.Dbmeta_itm().Owner_fil().Owner_mgr();
 			byte[] meta_mgr_key = meta_mgr.Wiki().Domain_bry();
 			if (!dirty_meta_mgrs.Has(meta_mgr_key)) dirty_meta_mgrs.Add(meta_mgr_key, meta_mgr);	// only add if new
@@ -50,14 +58,14 @@ public class Xof_xfer_queue {
 			xfer_itm.Set__meta(xfer_itm.Dbmeta_itm(), xfer_itm.Dbmeta_itm().Repo_itm(wiki), wiki.Html_mgr().Img_thumb_width());
 			xfer_itm.Calc_by_meta();
 			if (!xfer_itm.File_exists()) continue;	// file not found; don't call Update_img, else invalid src will be passed and caption box will be incorrectly resized; EX:ar.d:جَبَّارَة; DATE:2014-04-13
-			if (Bry_.Len_gt_0(xfer_itm.Html_view_url().To_http_file_bry())	// only update images that have been found; otherwise "Undefined" shows up in image box
+			if (BryUtl.IsNotNullOrEmpty(xfer_itm.Html_view_url().To_http_file_bry())	// only update images that have been found; otherwise "Undefined" shows up in image box
 				&& xfer_itm.Html_elem_tid() != Xof_html_elem.Tid_none) {	// skip updates when downloading orig on File page (there won't be any frame to update)
 				Xog_js_wkr js_wkr = Env_.Mode_testing() ? Xog_js_wkr_.Noop : page.Tab_data().Tab().Html_itm(); 
 				Js_img_mgr.Update_img(page, js_wkr, xfer_itm);
 			}
 		}
 		for (int i = 0; i < dirty_meta_mgrs.Len(); i++) {
-			meta_mgr = (Xof_meta_mgr)dirty_meta_mgrs.Get_at(i);
+			meta_mgr = (Xof_meta_mgr)dirty_meta_mgrs.GetAt(i);
 			meta_mgr.Save(true);
 		}
 		this.Clear();
@@ -71,7 +79,7 @@ public class Xof_xfer_queue {
 		List_adp rv = List_adp_.New();
 		int list_len = xfer_list.Len();
 		for (int i = 0; i < list_len; i++) {
-			Xof_file_itm xfer = (Xof_file_itm)xfer_list.Get_at(i);
+			Xof_file_itm xfer = (Xof_file_itm)xfer_list.GetAt(i);
 			if (xfer.Hdump_mode() == Xof_fsdb_itm.Hdump_mode__null) {
 				Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
 				fsdb.Init_at_lnki(xfer.Lnki_exec_tid(), xfer.Lnki_wiki_abrv(), xfer.Lnki_ttl(), xfer.Lnki_type(), xfer.Lnki_upright(), xfer.Lnki_w(), xfer.Lnki_h(), xfer.Lnki_time(), xfer.Lnki_page(), upright_patch);

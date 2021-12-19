@@ -13,14 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.history; import gplx.*;
+package gplx.xowa.guis.history;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Xog_history_stack {
 	private final List_adp list = List_adp_.New();
 	public int Len() {return list.Len();}
 	public void Clear() {list.Clear(); cur_pos = 0;}
-	public Xog_history_itm Get_at(int i) {return (Xog_history_itm)list.Get_at(i);}
+	public Xog_history_itm Get_at(int i) {return (Xog_history_itm)list.GetAt(i);}
 	public int Cur_pos() {return cur_pos;} private int cur_pos = 0;
-	public Xog_history_itm Cur_itm() {return list.Len() == 0 ? Xog_history_itm.Null : (Xog_history_itm)list.Get_at(cur_pos);}
+	public Xog_history_itm Cur_itm() {return list.Len() == 0 ? Xog_history_itm.Null : (Xog_history_itm)list.GetAt(cur_pos);}
 	public void Add(Xog_history_itm new_itm) {
 		Xog_history_itm cur_itm = this.Cur_itm(); 
 		if (cur_itm != Xog_history_itm.Null && cur_itm.Eq_wo_bmk_pos(new_itm)) return;		// do not add if last itm is same;

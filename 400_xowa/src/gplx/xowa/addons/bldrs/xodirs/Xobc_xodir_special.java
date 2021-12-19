@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.xodirs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
-import gplx.xowa.specials.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.xowa.addons.wikis.imports.*;
+package gplx.xowa.addons.bldrs.xodirs;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
+import gplx.xowa.specials.*;
+import gplx.core.net.qargs.*;
 public class Xobc_xodir_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
@@ -32,7 +35,7 @@ public class Xobc_xodir_special implements Xow_special_page {
 		
 		new Xobc_xodir_html().Bld_page_by_mustache(wiki.App(), page, this);
 	}
-	private static final byte[] Bry__path = Bry_.new_a7("path");
+	private static final byte[] Bry__path = BryUtl.NewA7("path");
 
 	Xobc_xodir_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
 	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;

@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.vnts;
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.langs.vnts.converts.Xol_convert_mgr;
 import gplx.xowa.parsers.vnts.Vnt_convert_lang;
@@ -41,15 +41,15 @@ public class Xol_vnt_mgr implements Gfo_invk {
 	public Xol_vnt_itm				Regy__get_or_new(byte[] key) {
 		Xol_vnt_itm rv = regy.Get_by(key);
 		if (rv == null) {
-			byte[] name = lang.Msg_mgr().Itm_by_key_or_new(Bry_.Add(Msg_variantname, key)).Val();
+			byte[] name = lang.Msg_mgr().Itm_by_key_or_new(BryUtl.Add(Msg_variantname, key)).Val();
 			rv = regy.Add(key, name);
 			enabled = true;	// NOTE: mark enabled if any vnts have been added
 		}
 		return rv;
 	}
 	public void Cur_itm_(byte[] v) {
-		if (Bry_.Len_eq_0(v)) return;	// Cfg is empty by default
-		this.cur_itm = regy.Get_by(v); if (cur_itm == null) throw Err_.new_("lang.vnt", "vnt not found", "key", v);
+		if (BryUtl.IsNullOrEmpty(v)) return;	// Cfg is empty by default
+		this.cur_itm = regy.Get_by(v); if (cur_itm == null) throw ErrUtl.NewArgs("vnt not found", "key", v);
 	} 
 	public void Init_end() {
 		int len = regy.Len();
@@ -77,5 +77,5 @@ public class Xol_vnt_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_get = "get", Invk_init_end = "init_end", Invk_cur_vnt_ = "cur_vnt_", Invk_vnt_grp_ = "vnt_grp_", Invk_html_style_ = "html_style_";
-	private static final byte[] Msg_variantname = Bry_.new_a7("variantname-");
+	private static final byte[] Msg_variantname = BryUtl.NewA7("variantname-");
 }

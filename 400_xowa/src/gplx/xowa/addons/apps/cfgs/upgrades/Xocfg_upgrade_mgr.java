@@ -13,7 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.upgrades; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.apps.cfgs.upgrades;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyVal;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.langs.gfs.*;
 public class Xocfg_upgrade_mgr {
@@ -29,7 +40,7 @@ public class Xocfg_upgrade_mgr {
 			Io_mgr.Instance.MoveFil_args(cfg_fil, cfg_fil.GenNewExt(".bak"), true).Exec();
 
 			// parse, remap, and update
-			Keyval[] kvs = Parse(cfg_raw);
+			KeyVal[] kvs = Parse(cfg_raw);
 
 			// get mappings
 			Ordered_hash mappings = Ordered_hash_.New();
@@ -39,35 +50,35 @@ public class Xocfg_upgrade_mgr {
 				while (rdr.Move_next()) {
 					String cfg_old = rdr.Read_str("cfg_old");
 					String cfg_new = rdr.Read_str("cfg_new");
-					mappings.Add(cfg_old, Keyval_.new_(cfg_old, cfg_new));
+					mappings.Add(cfg_old, KeyVal.NewStr(cfg_old, cfg_new));
 				}
 			}
 			finally {rdr.Rls();}
 
 			// remap
-			for (Keyval kv : kvs) {
-				Keyval mapping = (Keyval)mappings.GetByOrNull(kv.Key());
+			for (KeyVal kv : kvs) {
+				KeyVal mapping = (KeyVal)mappings.GetByOrNull(kv.KeyToStr());
 				if (mapping == null) {
-					Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find mapping; key=~{0} val=~{1}", kv.Key(), kv.Val());
-					kv.Key_("");
+					Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find mapping; key=~{0} val=~{1}", kv.KeyToStr(), kv.Val());
+					kv.KeySet("");
 					continue;
 				}
-				kv.Key_(mapping.Val());
+				kv.KeySet(mapping.Val());
 			}
 
 			// apply
 			app.Cfg().Cache_mgr().Db_usr().Conn().Txn_bgn("convert");
-			for (Keyval kv : kvs) {
-				if (String_.Eq(kv.Key(), "")) continue;
-				Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:converting; key=~{0} val=~{1}", kv.Key(), kv.Val());
-				app.Cfg().Set_str_app(kv.Key(), kv.Val_to_str_or_empty());
+			for (KeyVal kv : kvs) {
+				if (StringUtl.Eq(kv.KeyToStr(), "")) continue;
+				Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:converting; key=~{0} val=~{1}", kv.KeyToStr(), kv.Val());
+				app.Cfg().Set_str_app(kv.KeyToStr(), kv.ValToStrOrEmpty());
 			}
 			app.Cfg().Cache_mgr().Db_usr().Conn().Txn_end();
 		} catch (Exception exc) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to convert old cfg; err=~{0}", Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to convert old cfg; err=~{0}", ErrUtl.ToStrLog(exc));
 		}
 	}
-	public static Keyval[] Parse(byte[] src) {
+	public static KeyVal[] Parse(byte[] src) {
 		// main parse
 		Gfs_parser parser = new Gfs_parser();
 		Ordered_hash hash = Ordered_hash_.New();
@@ -80,48 +91,48 @@ public class Xocfg_upgrade_mgr {
 			Gfs_nde key_atr = get_nde.Atrs_get_at(0);
 			Gfs_nde val_nde = get_nde.Subs_get_at(0);
 			Gfs_nde val_atr = val_nde.Atrs_get_at(0);
-			String key = String_.new_u8(key_atr.Name_bry(src));
-			hash.Add(key, Keyval_.new_(key, String_.new_u8(val_atr.Name_bry(src))));
+			String key = StringUtl.NewU8(key_atr.Name_bry(src));
+			hash.Add(key, KeyVal.NewStr(key, StringUtl.NewU8(val_atr.Name_bry(src))));
 		}
 
 		// consolidate io.cmd
 		List_adp deleted = List_adp_.New();
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Keyval args_kv = (Keyval)hash.Get_at(i);
-			String args_kv_key = args_kv.Key();
-			String args_kv_val = args_kv.Val_to_str_or_empty();
-			if (String_.Has_at_end(args_kv_key, ".args")) {
-				Keyval cmd_kv = (Keyval)hash.GetByOrNull(String_.Replace(args_kv_key, ".args", ".cmd"));
+			KeyVal args_kv = (KeyVal)hash.GetAt(i);
+			String args_kv_key = args_kv.KeyToStr();
+			String args_kv_val = args_kv.ValToStrOrEmpty();
+			if (StringUtl.HasAtEnd(args_kv_key, ".args")) {
+				KeyVal cmd_kv = (KeyVal)hash.GetByOrNull(StringUtl.Replace(args_kv_key, ".args", ".cmd"));
 				if (cmd_kv == null) {
 					Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find cmd; key=~{0} val=~{1}", args_kv_key, args_kv.Val());
 					continue;
 				}
-				String cmd_kv_val = cmd_kv.Val_to_str_or_empty();
-				if (!String_.Has_at_end(cmd_kv_val, "|")) cmd_kv_val += "|";
-				cmd_kv.Val_(cmd_kv_val + args_kv_val);
+				String cmd_kv_val = cmd_kv.ValToStrOrEmpty();
+				if (!StringUtl.HasAtEnd(cmd_kv_val, "|")) cmd_kv_val += "|";
+				cmd_kv.ValSet(cmd_kv_val + args_kv_val);
 				deleted.Add(args_kv_key);
 			}
-			else if (String_.Has_at_bgn(args_kv_key, "app.cfg.get.gui.bnds.init('")) {
-				args_kv_key = String_.Replace(args_kv_key, "app.cfg.get.gui.bnds.init('", "");
-				args_kv_key = String_.Replace(args_kv_key, "').src", "");
+			else if (StringUtl.HasAtBgn(args_kv_key, "app.cfg.get.gui.bnds.init('")) {
+				args_kv_key = StringUtl.Replace(args_kv_key, "app.cfg.get.gui.bnds.init('", "");
+				args_kv_key = StringUtl.Replace(args_kv_key, "').src", "");
 				args_kv_key = "xowa.gui.shortcuts." + args_kv_key;
-				args_kv.Key_(args_kv_key);
+				args_kv.KeySet(args_kv_key);
 
-				args_kv_val = String_.Replace(args_kv_val, "box='", "");
-				args_kv_val = String_.Replace(args_kv_val, "';ipt='", "|");
-				args_kv_val = String_.Replace(args_kv_val, "';", "");
-				args_kv.Val_(args_kv_val);
+				args_kv_val = StringUtl.Replace(args_kv_val, "box='", "");
+				args_kv_val = StringUtl.Replace(args_kv_val, "';ipt='", "|");
+				args_kv_val = StringUtl.Replace(args_kv_val, "';", "");
+				args_kv.ValSet(args_kv_val);
 			}
 		}
 
 		// delete args
 		len = deleted.Len();
 		for (int i = 0; i < len; i++) {
-			String deleted_key = (String)deleted.Get_at(i);
+			String deleted_key = (String)deleted.GetAt(i);
 			hash.Del(deleted_key);
 		}
 
-		return (Keyval[])hash.To_ary_and_clear(Keyval.class);
+		return (KeyVal[])hash.ToAryAndClear(KeyVal.class);
 	}
 }

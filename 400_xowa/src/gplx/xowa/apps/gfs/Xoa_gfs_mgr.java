@@ -13,18 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.gfs; import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_invk_root_wkr;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
+package gplx.xowa.apps.gfs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_root_wkr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
 import gplx.langs.gfs.GfsCore;
 import gplx.langs.gfs.Gfs_wtr;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.apps.Xoa_app_eval;
 import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
@@ -45,7 +46,7 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 		Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("gfs.done: ~{0}", url.Raw());
 	}
 	public void Run_url_for(Gfo_invk invk, Io_url url) {
-		String raw = Io_mgr.Instance.LoadFilStr_args(url).MissingIgnored_().Exec(); if (String_.Len_eq_0(raw)) return;
+		String raw = Io_mgr.Instance.LoadFilStr_args(url).MissingIgnored_().Exec(); if (StringUtl.IsNullOrEmpty(raw)) return;
 		Run_str_for(invk, raw);
 	}
 	public Object Run_str(String raw) {return Run_str_for(GfsCore.Instance.Root(), raw);}
@@ -59,14 +60,14 @@ public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
 				rv = GfsCore.Instance.ExecOne_to(ctx, invk, root_msg.Subs_getAt(i));
 			return rv;	// return rv from last call
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "error while executing script: err=~{0}", Err_.Message_gplx_full(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "error while executing script: err=~{0}", ErrUtl.ToStrFull(e));
 			return Gfo_invk_.Rv_error;
 		}
 	}
 	private void Run_url_by_type(String type) {
-		if		(String_.Eq(type, "xowa_cfg_app"))		Run_url(app_fsys_mgr.Cfg_app_fil());
-		else if	(String_.Eq(type, "xowa.user.os"))		gplx.xowa.addons.apps.cfgs.mgrs.dflts.Xocfg_dflt_mgr.Run_os_gfs(user_name, this, app_fsys_mgr);
-		else											throw Err_.new_wo_type("invalid gfs type", "type", type);
+		if		(StringUtl.Eq(type, "xowa_cfg_app"))		Run_url(app_fsys_mgr.Cfg_app_fil());
+		else if	(StringUtl.Eq(type, "xowa.user.os"))		gplx.xowa.addons.apps.cfgs.mgrs.dflts.Xocfg_dflt_mgr.Run_os_gfs(user_name, this, app_fsys_mgr);
+		else											throw ErrUtl.NewArgs("invalid gfs type", "type", type);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run_file_by_type))		Run_url_by_type(m.ReadStr("v"));

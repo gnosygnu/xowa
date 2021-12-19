@@ -41,7 +41,7 @@ public class Xomath_core__tst {
 		Renderer_(true);
 		fxt.Test__parse_to_html_mgr("<math>a\"b</math>", "<span id='xowa_math_txt_0'>a\"b</span>");
 	}
-	@Test  public void Script() {
+	@Test public void Script() {
 		Renderer_(false);
 		fxt.Test__parse_to_html_mgr("<math><script>alert('fail');</script></math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>&lt;script>alert('fail');</script></span>");
 	}

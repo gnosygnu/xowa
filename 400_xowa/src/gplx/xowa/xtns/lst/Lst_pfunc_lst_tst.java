@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.lst;
 
-import gplx.Io_mgr;
-import gplx.String_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xop_fxt;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class Lst_pfunc_lst_tst {
 		fxt.Clear().Page_txt_("a<section begin=key0/>''val0''<section end=key0/> b").Test_lst("{{#lst:section_test|key0}}", "<i>val0</i>");
 	}
 	@Test public void Refs_ignored() {	// PURPOSE: assert that nearby refs are ignored
-		fxt.Clear().Page_txt_("a<section begin=key0/>val0<ref>ref1</ref><section end=key0/> b  <ref>ref2</ref>").Test_lst("{{#lst:section_test|key0}}<references/>", String_.Concat_lines_nl
+		fxt.Clear().Page_txt_("a<section begin=key0/>val0<ref>ref1</ref><section end=key0/> b  <ref>ref2</ref>").Test_lst("{{#lst:section_test|key0}}<references/>", StringUtl.ConcatLinesNl
 		(	"val0<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup><ol class=\"references\">"
 		,	"<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">ref1</span></li>"
 		,	"</ol>"
@@ -90,7 +90,7 @@ public class Lst_pfunc_lst_tst {
 	@Test public void Nested__ref() {				// PURPOSE: handle tags; PAGE:it.s:La_Secchia_rapita/Canto_primo DATE:2015-12-02
 		fxt.Fxt().Init_page_create("Template:TagTemplate", "<ref>xyz</ref>");
 		fxt.Fxt().Init_page_create("PoemPage", "<poem>A{{TagTemplate}}B</poem>");
-		fxt.Fxt().Test_parse_page_all_str("{{#section:PoemPage}}<references/>", String_.Replace(String_.Concat_lines_nl_skip_last
+		fxt.Fxt().Test_parse_page_all_str("{{#section:PoemPage}}<references/>", StringUtl.Replace(StringUtl.ConcatLinesNlSkipLast
 		( "<div class='poem'>"
 		, "<p>"
 		, "A<sup id='cite_ref-0' class='reference'><a href='#cite_note-0'>[1]</a></sup>B"
@@ -103,12 +103,12 @@ public class Lst_pfunc_lst_tst {
 	}
 	@Test public void Nested__ref_poem() {				// PURPOSE: handle tags; PAGE:it.s:La_Secchia_rapita/Canto_primo DATE:2015-12-02
 		fxt.Fxt().Init_page_create("Template:TagTemplate", "{{#tag:ref|abc<poem>def</poem>xyz}}");
-		fxt.Fxt().Init_page_create("PoemPage", String_.Concat_lines_nl_skip_last
+		fxt.Fxt().Init_page_create("PoemPage", StringUtl.ConcatLinesNlSkipLast
 		( "<poem>A{{TagTemplate}}"
 		, "    B"
 		, "</poem>"
 		));
-		fxt.Fxt().Test_parse_page_all_str("{{#section:PoemPage}}<references/>", String_.Replace(String_.Concat_lines_nl_skip_last
+		fxt.Fxt().Test_parse_page_all_str("{{#section:PoemPage}}<references/>", StringUtl.Replace(StringUtl.ConcatLinesNlSkipLast
 		( "<div class='poem'>"
 		, "<p>"
 		, "A<sup id='cite_ref-0' class='reference'><a href='#cite_note-0'>[1]</a></sup><br/>"

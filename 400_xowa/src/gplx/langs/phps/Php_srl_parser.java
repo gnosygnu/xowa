@@ -13,23 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.phps;
+import gplx.types.errs.Err;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Php_srl_parser {
-	@gplx.Internal protected Php_srl_factory Factory() {return factory;} Php_srl_factory factory = new Php_srl_factory();
+	public Php_srl_factory Factory() {return factory;} Php_srl_factory factory = new Php_srl_factory();
 	byte[] raw; int raw_len, pos;
-	public Keyval[] Parse_as_kvs(byte[] raw) {
+	public KeyVal[] Parse_as_kvs(byte[] raw) {
 		Php_srl_itm_ary root = Parse(raw);
 		return Xto_kv_ary(root);
 	}
-	Keyval[] Xto_kv_ary(Php_srl_itm_ary ary) {
+	KeyVal[] Xto_kv_ary(Php_srl_itm_ary ary) {
 		int len = ary.Subs_len();
-		Keyval[] rv = new Keyval[len];
+		KeyVal[] rv = new KeyVal[len];
 		for (int i = 0; i < len; i++)
 			rv[i] = Xto_kv(ary.Subs_get_at(i));
 		return rv;
 	}
-	Keyval Xto_kv(Php_srl_itm_kv itm) {
+	KeyVal Xto_kv(Php_srl_itm_kv itm) {
 		if (itm == null) return null;
 		Php_srl_itm itm_key = itm.Key();
 		Object key = itm_key == null ? null : itm_key.Val();
@@ -41,15 +51,15 @@ public class Php_srl_parser {
 				val = Xto_kv_ary(ary);
 				break;
 			case Php_srl_itm_.Tid_function:
-				val = new gplx.xowa.xtns.scribunto.Scrib_lua_proc(Object_.Xto_str_strict_or_null_mark(key), Int_.Cast(itm_val.Val()));	// NOTE: in most cases, key is a STRING (name of ScribFunction); however, for gsub it is an INT (arg_idx) b/c it is passed as a parameter
+				val = new gplx.xowa.xtns.scribunto.Scrib_lua_proc(ObjectUtl.ToStrOrNullMark(key), IntUtl.Cast(itm_val.Val()));	// NOTE: in most cases, key is a STRING (name of ScribFunction); however, for gsub it is an INT (arg_idx) b/c it is passed as a parameter
 				break;
 			default:
 				val = itm_val.Val();
 				break;
 		}
-		return Keyval_.obj_(key, val);
+		return KeyVal.NewObj(key, val);
 	}
-	@gplx.Internal protected Php_srl_itm_ary Parse(byte[] raw) {
+	public Php_srl_itm_ary Parse(byte[] raw) {
 		this.raw = raw; this.raw_len = raw.length; pos = 0;
 		Php_srl_itm_ary rv = new Php_srl_itm_ary(0, raw_len);
 		Php_srl_itm_kv cur_kv = factory.Kv();
@@ -76,7 +86,7 @@ public class Php_srl_parser {
 
 			// handle null kv; PAGE:en.w:Abziri DATE:2017-11-29
 			if (	key_itm.Tid() == Php_srl_itm_.Tid_string 
-				&&	String_.Eq(Php_srl_parser.NULL_ARRAY_ITEM, (String)key_itm.Val())) {
+				&&	StringUtl.Eq(Php_srl_parser.NULL_ARRAY_ITEM, (String)key_itm.Val())) {
 				rv.Subs_add(null);
 				continue;
 			} 
@@ -102,7 +112,7 @@ public class Php_srl_parser {
 				switch (b) {
 					case AsciiByte.Num1: 	rv = factory.Bool_y(); break;
 					case AsciiByte.Num0:	rv = factory.Bool_n(); break;
-					default:				throw err_(raw, pos, raw_len, "unknown boolean type {0}", Char_.To_str(b));
+					default:				throw err_(raw, pos, raw_len, "unknown boolean type {0}", CharUtl.ToStr(b));
 				}
 				pos = Chk(raw, pos + 1, AsciiByte.Semic);
 				break;
@@ -112,12 +122,12 @@ public class Php_srl_parser {
 				break;
 			case AsciiByte.Ltr_d:		// EX: 'd:1.23;'
 				pos = Chk(raw, pos + 1, AsciiByte.Colon);
-				int double_end = Bry_find_.Find_fwd(raw, AsciiByte.Semic, pos, raw_len);
-				String double_str = String_.new_a7(raw, pos, double_end);
+				int double_end = BryFind.FindFwd(raw, AsciiByte.Semic, pos, raw_len);
+				String double_str = StringUtl.NewA7(raw, pos, double_end);
 				double double_val = 0;
-				if		(String_.Eq(double_str, "INF")) double_val = Double_.Inf_pos;
-				else if (String_.Eq(double_str, "NAN")) double_val = Double_.NaN;
-				else 									double_val = Double_.parse(double_str);
+				if		(StringUtl.Eq(double_str, "INF")) double_val = DoubleUtl.InfinityPos;
+				else if (StringUtl.Eq(double_str, "NAN")) double_val = DoubleUtl.NaN;
+				else 									double_val = DoubleUtl.Parse(double_str);
 				rv = factory.Double(pos, double_end, double_val);
 				pos = Chk(raw, double_end, AsciiByte.Semic);
 				break;
@@ -126,7 +136,7 @@ public class Php_srl_parser {
 				pos = Chk(raw, pos, AsciiByte.Colon);
 				pos = Chk(raw, pos, AsciiByte.Quote);
 				int str_end = pos + len_val;
-				String str_val = String_.new_u8(raw, pos, str_end);
+				String str_val = StringUtl.NewU8(raw, pos, str_end);
 				rv = factory.Str(pos, str_end, str_val);
 				pos = Chk(raw, str_end, AsciiByte.Quote);
 				pos = Chk(raw, pos, AsciiByte.Semic);
@@ -145,7 +155,7 @@ public class Php_srl_parser {
 				rv = factory.Func(func_bgn, pos, func_id);
 				pos += 2;
 				break;
-			default: throw err_(raw, pos, "unexpected type: {0}", Char_.To_str(b));
+			default: throw err_(raw, pos, "unexpected type: {0}", CharUtl.ToStr(b));
 		}
 		return rv;
 	}
@@ -153,7 +163,7 @@ public class Php_srl_parser {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, AsciiByte.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
-		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.Min_value);
+		int int_val = BryUtl.ToIntOr(raw, pos, int_end, IntUtl.MinValue);
 		pos = int_end;
 		return int_val;		
 	}
@@ -161,7 +171,7 @@ public class Php_srl_parser {
 		pos = bgn;
 		pos = Chk(raw, pos + 1, AsciiByte.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
-		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.Min_value);
+		int int_val = BryUtl.ToIntOr(raw, pos, int_end, IntUtl.MinValue);
 		Php_srl_itm_int rv = factory.Int(pos, int_end, int_val);
 		pos = int_end;
 		return rv;
@@ -171,7 +181,7 @@ public class Php_srl_parser {
 		if (actl == expd)
 			return i + 1;
 		else
-			throw err_(raw, i, "expected '{0}' but got '{1}'", Char_.To_str(expd), Char_.To_str(actl));
+			throw err_(raw, i, "expected '{0}' but got '{1}'", CharUtl.ToStr(expd), CharUtl.ToStr(actl));
 	}
 	int Skip_while_num(byte[] raw, int raw_len, int bgn, boolean num_is_int) {
 		int num_len = 1;
@@ -196,8 +206,8 @@ public class Php_srl_parser {
 	}
 	Err err_(byte[] raw, int bgn, String fmt, Object... args) {return err_(raw, bgn, raw.length, fmt, args);}
 	Err err_(byte[] raw, int bgn, int raw_len, String fmt, Object... args) {
-		String msg = String_.Format(fmt, args) + " " + Int_.To_str(bgn) + " " + String_.new_u8__by_len(raw, bgn, 20);
-		return Err_.new_wo_type(msg);
+		String msg = StringUtl.Format(fmt, args) + " " + IntUtl.ToStr(bgn) + " " + StringUtl.NewU8ByLen(raw, bgn, 20);
+		return ErrUtl.NewArgs(msg);
 	}
 	public static final String NULL_ARRAY_ITEM = "NULL_ARRAY_ITEM";
 }

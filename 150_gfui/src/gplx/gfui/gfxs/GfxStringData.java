@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.gfxs; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.gfxs;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.gfui.*;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
 import gplx.core.envs.*;
 import gplx.gfui.draws.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.windows.*;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class GfxStringData {
 	public String Val() {
 		if (ownerElem == null) return val;
@@ -37,8 +41,8 @@ public class GfxStringData {
 	public AttributedString MnemonicString() {return mnemonicString;} AttributedString mnemonicString;
 	String drawn = "";
 	public void MnemonicString_sync() {
-		int pos = GfuiWinKeyCmdMgr.ExtractPosFromText(this.Val()); if (pos == String_.Find_none) return;
-		drawn = String_.MidByLen(this.Val(), 0, pos) + String_.Mid(this.Val(), pos + 1);	// rebuild string without &
+		int pos = GfuiWinKeyCmdMgr.ExtractPosFromText(this.Val()); if (pos == StringUtl.FindNone) return;
+		drawn = StringUtl.MidByLen(this.Val(), 0, pos) + StringUtl.Mid(this.Val(), pos + 1);	// rebuild string without &
 		mnemonicString = new AttributedString(drawn);
 		mnemonicString.addAttribute(TextAttribute.FONT, font.UnderFont());
 		mnemonicString.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON, pos, pos + 1);
@@ -63,12 +67,12 @@ public class GfxStringData {
 		textRect = RectAdpF.new_(x, textRect.Y(), textRect.Width(), textRect.Height());
 		return textRect;
 	}
-	@gplx.Internal protected SizeAdp OwnerSize() {return ownerSize;}
+	public SizeAdp OwnerSize() {return ownerSize;}
 	public void OwnerSize_sync(SizeAdp val) {
 		ownerSize = val; TextRect_setNull();
 		ownerElem.Core().Invalidate();	// NOTE: force redraw; this may be redundant in WINFORMS but needed in SWING especially when windowOpened causes resize; SWING seems to execute windowOpened -> resize -> paint -> componentResized
 	} SizeAdp ownerSize = SizeAdp_.new_(20, 20); 
-	@gplx.Internal protected GxwElem UnderElem() {return owner.UnderElem();}
+	public GxwElem UnderElem() {return owner.UnderElem();}
 	public void DrawData(GfxAdp gfx) {
 		if (textRect.Eq(RectAdpF.Null)) {textRect = TextRect_calc(gfx);}
 		gfx.DrawStringXtn(this.Val(), font, brush, textRect.X(), textRect.Y(), textRect.Width(), textRect.Height(), this);
@@ -93,7 +97,7 @@ public class GfxStringData {
 //		}
 		float x = GfuiAlign_.CalcInsideOfAxis(alignH.Val(), (int)width, ownerSize.Width());
 		float y = 0; int alignVVal = alignV.Val(); float ownerHeight = ownerSize.Height();
-		if 		(alignVVal == GfuiAlign_.Null.Val())	y = Int_.Min_value;
+		if 		(alignVVal == GfuiAlign_.Null.Val())	y = IntUtl.MinValue;
 		else if (alignVVal == GfuiAlign_.Lo.Val())		y = height - descent;
 		else if (alignVVal == GfuiAlign_.Mid.Val())		y = (ownerHeight - (ownerHeight - height) / 2);// - descent; // COMMENT: subtracting descent is theoretically correct, but practically results in text shifted up
 		else if (alignVVal == GfuiAlign_.Hi.Val())		y = ownerHeight - descent;

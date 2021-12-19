@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.dynamicPageList;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.core.primitives.Int_obj_ref;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
@@ -51,7 +51,7 @@ class Dpl_page_finder {
 		// init vars for loop below
 		int itm_ns_filter = itm.Ns_filter();
 		List_adp remove_list = List_adp_.New();
-		Int_obj_ref tmp_id = Int_obj_ref.New_zero();
+		IntRef tmp_id = IntRef.NewZero();
 
 		// get include_pags; note that this is a UNION of all member pages; EX: include_ttls=Ctg_A,Ctg_B,Ctg_C will only return pages in Ctg_A AND Ctg_B AND Ctg_C
 		Ordered_hash rv = Ordered_hash_.New();
@@ -70,8 +70,8 @@ class Dpl_page_finder {
 			int cur_len = cur_pages.Len();
 			for (int j = 0; j < cur_len; j++) {
 				// get item and init tmp
-				Xowd_page_itm page_itm = (Xowd_page_itm)cur_pages.Get_at(j);
-				tmp_id.Val_(page_itm.Id());
+				Xowd_page_itm page_itm = (Xowd_page_itm)cur_pages.GetAt(j);
+				tmp_id.ValSet(page_itm.Id());
 
 				// check if should be removed
 				if (   (i != 0 && !rv.Has(tmp_id)) // item doesn't exist in previous set; note this doesn't apply to the 0th set
@@ -85,8 +85,8 @@ class Dpl_page_finder {
 			// remove pages
 			int remove_len = remove_list.Len();
 			for (int j = 0; j < remove_len; j++) {
-				Xowd_page_itm page_itm = (Xowd_page_itm)remove_list.Get_at(j);
-				cur_pages.Del(tmp_id.Val_(page_itm.Id()));
+				Xowd_page_itm page_itm = (Xowd_page_itm)remove_list.GetAt(j);
+				cur_pages.Del(tmp_id.ValSet(page_itm.Id()));
 			}
 
 			// set cur_pages as main list
@@ -94,7 +94,7 @@ class Dpl_page_finder {
 		}
 
 		// sorting
-		rv.Sort_by
+		rv.SortBy
 			( itm.Sort_ascending() == BoolUtl.NullByte
 			? (ComparerAble)Xowd_page_itm_sorter.IdAsc // sort not specified; use default;
 			: (ComparerAble)new Dpl_page_sorter(itm)); // sort specified
@@ -118,11 +118,11 @@ class Dpl_page_finder {
 	}
 	private void Find_pages_in_ctg(Ordered_hash rv, byte[] page_ttl, Xoa_ttl cat_ttl) {
 		// get ctg
-		Xoctg_catpage_ctg ctg = wiki.Ctg__catpage_mgr().Get_by_cache_or_null(page_ttl, Xoctg_catpage_url.New__blank(), cat_ttl, Int_.Max_value);
+		Xoctg_catpage_ctg ctg = wiki.Ctg__catpage_mgr().Get_by_cache_or_null(page_ttl, Xoctg_catpage_url.New__blank(), cat_ttl, IntUtl.MaxValue);
 		if (ctg == null) return;
 
 		// loop grps to get each page
-		Int_obj_ref tmp_id = Int_obj_ref.New_zero();
+		IntRef tmp_id = IntRef.NewZero();
 		for (byte tid = 0; tid < Xoa_ctg_mgr.Tid___max; tid++) {
 			// get grp; EX: subc; page; file
 			Xoctg_catpage_grp grp = ctg.Grp_by_tid(tid);
@@ -133,20 +133,20 @@ class Dpl_page_finder {
 				Xoctg_catpage_itm itm = grp.Itms__get_at(i);
 				int itm_page_id = itm.Page_id();
 
-				if (rv.Has(tmp_id.Val_(itm_page_id))) continue; // check to make sure not already added
+				if (rv.Has(tmp_id.ValSet(itm_page_id))) continue; // check to make sure not already added
 
 				Xowd_page_itm page = new Xowd_page_itm();
 				if (itm.Page_ttl() == null) continue; // cat_link can exist without entry in page_db.page
 				page.Id_(itm_page_id);
 				page.Ttl_(itm.Page_ttl());
-				rv.Add(Int_obj_ref.New(itm_page_id), page);
+				rv.Add(IntRef.New(itm_page_id), page);
 			}
 		}
 	}
 
 	private Xoa_ttl Get_ctg_ttl_or_null(List_adp list, int i) {// helper method to extract ttl from list
 		// get ttl
-		byte[] ttl_bry = (byte[])list.Get_at(i);
+		byte[] ttl_bry = (byte[])list.GetAt(i);
 		Xoa_ttl ttl = wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ttl_bry);
 
 		// log if invalid; NOTE: pages in en.n will pass "{{{2}}}" as category title; PAGE:en.b:Category:Egypt DATE:2016-10-18

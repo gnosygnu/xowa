@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class Io_url_gen_ {
 	public static Io_url_gen dir_(Io_url v) {return new Io_url_gen_dir(v);}
 	public static Io_url_gen dir_(Io_url v, String fmt, int digits) {return new Io_url_gen_dir(v).Fmt_(fmt).Fmt_digits_(digits);}
@@ -23,11 +27,11 @@ class Io_url_gen_dir implements Io_url_gen {
 	public String Fmt() {return fmt;} public Io_url_gen_dir Fmt_(String v) {fmt = v; return this;} private String fmt = "{0}.csv";
 	public int Fmt_digits() {return fmt_digits;} public Io_url_gen_dir Fmt_digits_(int v) {fmt_digits = v; return this;} private int fmt_digits = 10;
 	public Io_url Cur_url() {return cur_url;} Io_url cur_url;
-	public Io_url Nxt_url() {cur_url = dir.GenSubFil(String_.Format(fmt, Int_.To_str_pad_bgn_zero(idx++, fmt_digits))); return cur_url;} private int idx = 0;
+	public Io_url Nxt_url() {cur_url = dir.GenSubFil(StringUtl.Format(fmt, IntUtl.ToStrPadBgnZero(idx++, fmt_digits))); return cur_url;} private int idx = 0;
 	public Io_url[] Prv_urls() {
 		Io_url[] rv = new Io_url[idx];
 		for (int i = 0; i < idx; i++) {
-			rv[i] = dir.GenSubFil(String_.Format(fmt, Int_.To_str_pad_bgn_zero(i, fmt_digits)));
+			rv[i] = dir.GenSubFil(StringUtl.Format(fmt, IntUtl.ToStrPadBgnZero(i, fmt_digits)));
 		}
 		return rv;
 	}

@@ -15,13 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
 import gplx.core.net.qargs.Gfo_qarg_itm;
 import gplx.core.net.qargs.Gfo_qarg_mgr;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xoa_ttl;
@@ -37,7 +36,7 @@ import gplx.xowa.wikis.pages.dbs.Xopg_db_page;
 
 public class Xowe_page_mgr {
 	private final Xowe_wiki wiki;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private final Gfo_qarg_mgr tmp_qarg_mgr = new Gfo_qarg_mgr();
 	public Xowe_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
 	public Xosync_read_mgr Sync_mgr() {return read_mgr;} private final Xosync_read_mgr read_mgr = new Xosync_read_mgr();
@@ -59,19 +58,19 @@ public class Xowe_page_mgr {
 				byte[] curid_bry = tmp_qarg_mgr.Read_bry_or(Xoa_url_.Qarg__curid, null);
 				// if "curid" qarg exists....
 				if (curid_bry != null) {
-					int curid = Bry_.To_int_or(curid_bry, -1);
+					int curid = BryUtl.ToIntOr(curid_bry, -1);
 					Xowd_page_itm tmp_page = wiki.Data__core_mgr().Db__core().Tbl__page().Select_by_id_or_null(curid);
 					// if curid exists in page tbl...
 					if (tmp_page != null) {
 						ttl = wiki.Ttl_parse(tmp_page.Ns_id(), tmp_page.Ttl_page_db());
 						// handle "home/wiki/?curid=123"; XO automatically changes to "home/wiki/Main_Page?curid=123"; change back to "home/wiki/?curid=123"
 						if (url.Page_is_main()) {
-							url.Page_bry_(Bry_.Empty);
+							url.Page_bry_(BryUtl.Empty);
 						}
 					}
 				}
 			} catch (Exception exc) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to handle cur_id; url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_log(exc));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to handle cur_id; url=~{0} err=~{1}", url.Raw(), ErrUtl.ToStrLog(exc));
 			}
 		}
 
@@ -97,7 +96,7 @@ public class Xowe_page_mgr {
 		if (from_html_db) {
 			if (read_from_html_db_preferred) {
 				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page, !isCategoryPage); // NOTE: if loading for html_db, do not build page_box; will be built below; ISSUE#:722; DATE:2020-05-17
-				int html_len = Bry_.Len(page.Db().Html().Html_bry());
+				int html_len = BryUtl.Len(page.Db().Html().Html_bry());
 				from_html_db = html_len > 0;	// NOTE: archive.org has some wtxt_dbs which included page|html_db_id without actual html_dbs; DATE:2016-06-22
 				Gfo_usr_dlg_.Instance.Log_many("", "", "page_load: loaded html; page=~{0} html_len=~{1}", ttl.Full_db(), html_len);
 			}
@@ -110,12 +109,12 @@ public class Xowe_page_mgr {
 			wiki.Parser_mgr().Parse(page, false);
 
 			// load from html_db if no wtxt found and option just marked as not read_preferred
-			if (	Bry_.Len_eq_0(page.Db().Text().Text_bry())				// no wtxt found
+			if (	BryUtl.IsNullOrEmpty(page.Db().Text().Text_bry())				// no wtxt found
 				&&	!ttl.Ns().Id_is_special()								// skip special
 				&&	!read_from_html_db_preferred							// read preferred not marked
 				) {
 				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page, true);
-				from_html_db = Bry_.Len_gt_0(page.Db().Html().Html_bry());	
+				from_html_db = BryUtl.IsNotNullOrEmpty(page.Db().Html().Html_bry());
 			}
 			else {
 				Gfo_usr_dlg_.Instance.Log_many("", "", "page_load: loaded wikitext; page=~{0} wikitext_len=~{1}", ttl.Full_db(), page.Db().Text().Text_bry().length);
@@ -128,10 +127,10 @@ public class Xowe_page_mgr {
 			wiki.Ctg__catpage_mgr().Write_catpage(tmp_bfr, page);
 			if (from_html_db) {
 				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, page);
-				page.Db().Html().Html_bry_(Bry_.Add(page.Db().Html().Html_bry(), tmp_bfr.To_bry_and_clear()));
+				page.Db().Html().Html_bry_(BryUtl.Add(page.Db().Html().Html_bry(), tmp_bfr.ToBryAndClear()));
 			}
 			else {
-				page.Html_data().Catpage_data_(tmp_bfr.To_bry_and_clear());
+				page.Html_data().Catpage_data_(tmp_bfr.ToBryAndClear());
 			}
 		}
 

@@ -15,29 +15,28 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.swts;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_itm;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_evt_mgr_owner;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Keyval_hash;
-import gplx.Long_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Type_;
-import gplx.UsrDlg_;
-import gplx.core.envs.System_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyValHash;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.core.envs.SystemUtl;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
@@ -74,12 +73,12 @@ import org.eclipse.swt.widgets.Control;
 
 public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_mgr_owner {
 	private Swt_html_lnr_location lnr_location; private Swt_html_lnr_status lnr_status;
-	public Swt_html(Swt_kit kit, Swt_control owner_control, Keyval_hash ctorArgs) {
+	public Swt_html(Swt_kit kit, Swt_control owner_control, KeyValHash ctorArgs) {
 		this.kit = kit;
 		lnr_location = new Swt_html_lnr_location(this);
 		lnr_status = new Swt_html_lnr_status(this);
-		Object browser_tid_obj = ctorArgs.Get_val_or(Swt_kit.Cfg_Html_BrowserType, null);
-		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : Int_.Cast(browser_tid_obj);
+		Object browser_tid_obj = ctorArgs.GetByValOr(Swt_kit.Cfg_Html_BrowserType, null);
+		this.browser_tid = browser_tid_obj == null ? Browser_tid_none : IntUtl.Cast(browser_tid_obj);
 		browser = new Browser(owner_control.Under_composite(), browser_tid);
 		core = new Swt_core_cmds_html(this, browser);
 		browser.addKeyListener(new Swt_lnr_key(this));
@@ -119,47 +118,47 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	public String 		Html_js_eval_script(String script) 								{return Eval_script_as_str(script);}
 	public Object		Html_js_eval_script_as_obj(String script) 						{return Eval_script(script);}
 	public boolean 		Html_js_eval_proc_as_bool(String proc, Object... args) 			{return BoolUtl.Cast(Html_js_eval_proc_as_obj(proc, args));}
-	public String	Html_js_eval_proc_as_str(String proc, Object... args) {return Object_.Xto_str_strict_or_null(Html_js_eval_proc_as_obj(proc, args));}
+	public String	Html_js_eval_proc_as_str(String proc, Object... args) {return ObjectUtl.ToStrOrNull(Html_js_eval_proc_as_obj(proc, args));}
 	public String Html_js_send_json(String name, String data) {
-		String script = String_.Format("return {0}('{1}');", name, String_.Replace(data, "\n", "") );
+		String script = StringUtl.Format("return {0}('{1}');", name, StringUtl.Replace(data, "\n", "") );
 		return (String)Eval_script(script);
 	}
 	private Object Html_js_eval_proc_as_obj(String proc, Object... args) {
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_a7("return ").Add_str_u8(proc).Add_byte(AsciiByte.ParenBgn);
+		BryWtr bfr = BryWtr.New();
+		bfr.AddStrA7("return ").AddStrU8(proc).AddByte(AsciiByte.ParenBgn);
 		int args_len = args.length;
 		for (int i = 0; i < args_len; ++i) {
 			Object arg = args[i];
-			if (i != 0) bfr.Add_byte(AsciiByte.Comma);
+			if (i != 0) bfr.AddByte(AsciiByte.Comma);
 			boolean quote_val = true;
-			if 		(	Type_.Eq_by_obj(arg, BoolUtl.ClsRefType)
-					||	Type_.Eq_by_obj(arg, Int_.Cls_ref_type)
-					||	Type_.Eq_by_obj(arg, Long_.Cls_ref_type)
+			if 		(	ClassUtl.EqByObj(BoolUtl.ClsRefType, arg)
+					||	ClassUtl.EqByObj(IntUtl.ClsRefType, arg)
+					||	ClassUtl.EqByObj(LongUtl.ClsRefType, arg)
 				) {
 				quote_val = false;
 			}
-			if (quote_val) bfr.Add_byte(AsciiByte.Apos);
+			if (quote_val) bfr.AddByte(AsciiByte.Apos);
 			if (quote_val) 
-				bfr.Add_str_u8(Escape_quote(Object_.Xto_str_strict_or_null_mark(arg)));
+				bfr.AddStrU8(Escape_quote(ObjectUtl.ToStrOrNullMark(arg)));
 			else
-				bfr.Add_obj_strict(arg);
-			if (quote_val) bfr.Add_byte(AsciiByte.Apos);
+				bfr.AddObjStrict(arg);
+			if (quote_val) bfr.AddByte(AsciiByte.Apos);
 		}
-		bfr.Add_byte(AsciiByte.ParenEnd).Add_byte(AsciiByte.Semic);
-		return Eval_script(bfr.To_str_and_clear());
+		bfr.AddByte(AsciiByte.ParenEnd).AddByte(AsciiByte.Semic);
+		return Eval_script(bfr.ToStrAndClear());
 	}
 	public static String Escape_quote(String v) {
 		String rv = v;
-		rv = String_.Replace(rv, "'", "\\'");
-		rv = String_.Replace(rv, "\"", "\\\"");
-		rv = String_.Replace(rv, "\n", "\\n");
+		rv = StringUtl.Replace(rv, "'", "\\'");
+		rv = StringUtl.Replace(rv, "\"", "\\\"");
+		rv = StringUtl.Replace(rv, "\n", "\\n");
 		return rv;
 	}
 	public void Html_invk_src_(Gfo_evt_itm invk) {lnr_location.Host_set(invk); lnr_status.Host_set(invk);}
 	public void Html_dispose() {
 		browser.dispose();
 		delete_owner.SubElems().DelOrFail(delete_cur);	// NOTE: must delete cur from owner, else new tab will fail after closing one; DATE:2014-07-09
-		System_.Garbage_collect();
+		SystemUtl.Garbage_collect();
 	}
 	private GfuiElem delete_owner, delete_cur;
 	public void Delete_elems_(GfuiElem delete_owner, GfuiElem delete_cur) {this.delete_owner = delete_owner; this.delete_cur = delete_cur;}	// HACK: set owner / cur so delete can work;
@@ -205,7 +204,7 @@ class Swt_html_lnr_title implements TitleListener {
 	public Swt_html_lnr_title(Swt_html html_box) {this.html_box = html_box;}
 	@Override public void changed(TitleEvent ev) {
 		try {UsrDlg_.Instance.Note(ev.title);}		
-		catch (Exception e) {html_box.Kit().Ask_ok("xowa.swt.html_box", "title.fail", Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
+		catch (Exception e) {html_box.Kit().Ask_ok("xowa.swt.html_box", "title.fail", ErrUtl.ToStrFull(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync
 	}
 }
 class Swt_html_func extends BrowserFunction {    
@@ -221,7 +220,7 @@ class Swt_html_func extends BrowserFunction {
     		return gplx.gfui.controls.standards.Gfui_html.Js_args_exec(invk, args);
     	}
     	catch (Exception e) {
-    		String rv = Err_.Message_gplx_full(e);
+    		String rv = ErrUtl.ToStrFull(e);
     		browser.execute("alert('" + Swt_html.Escape_quote(rv) + "')");
     		return rv;
     	}
@@ -237,10 +236,10 @@ class Swt_html_lnr_status implements StatusTextListener {
 		String ev_text = Swt_html_utl.NormalizeSwtUrl(ev.text);
 
 		String load_by_url_path = html_box.Load_by_url_path();
-		if (load_by_url_path != null) ev_text = String_.Replace(ev_text, load_by_url_path, "");	// remove "C:/xowa/tab_1.html"
+		if (load_by_url_path != null) ev_text = StringUtl.Replace(ev_text, load_by_url_path, "");	// remove "C:/xowa/tab_1.html"
 //		if (String_.Has(ev_text, "Loading [MathJax]")) return;	// suppress MathJax messages; // NOTE: disabled for 2.1 (which no longer outputs messages to status); DATE:2013-05-03
 		try {if (host != null) Gfo_evt_mgr_.Pub_obj(host, Gfui_html.Evt_link_hover, "v", ev_text);}
-		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", "status.fail", Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 
+		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", "status.fail", ErrUtl.ToStrFull(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync
 	}
 }
 class Swt_html_lnr_progress implements ProgressListener {
@@ -260,19 +259,19 @@ class Swt_html_lnr_location implements LocationListener {
 		String location = Swt_html_utl.NormalizeSwtUrl(arg.location);
 
 		// location_changing fires once when page is loaded -> ignore
-		if (String_.Eq(location, String_.Empty)) {
+		if (StringUtl.Eq(location, StringUtl.Empty)) {
 			return;
 		}
 
 		// navigating to file://page.html will fire location event; ignore if url mode (loading pages from file)
 		if (html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url
-			&& 	String_.Has_at_bgn(location, "file:")
-			&& 	String_.Has_at_end(location, ".html")
+			&& 	StringUtl.HasAtBgn(location, "file:")
+			&& 	StringUtl.HasAtEnd(location, ".html")
 			) {
 			return;
 		}
 
-		if (String_.Has_at_bgn(location, "javascript:")) {
+		if (StringUtl.HasAtBgn(location, "javascript:")) {
 			html_box.Html_js_eval_script(location);
 			arg.doit = false;
 			return;
@@ -282,7 +281,7 @@ class Swt_html_lnr_location implements LocationListener {
 			Gfo_evt_mgr_.Pub_obj(host, evt, "v", location);
 			arg.doit = false; // cancel navigation event, else there will be an error when trying to go to invalid location
 		}
-		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", evt, Err_.Message_gplx_full(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync 		
+		catch (Exception e) {html_box.Kit().Ask_ok("xowa.gui.html_box", evt, ErrUtl.ToStrFull(e));}	// NOTE: must catch error or will cause app to lock; currently called inside displaySync
 	}
 }
 class Swt_html_lnr_mouse implements MouseListener {

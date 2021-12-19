@@ -13,30 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.pfuncs.ttls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.core.btries.*;
 import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_rel2abs extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	private static final byte[] Ary_dot_slash = Bry_.new_a7("./"), Ary_dot_dot = Bry_.new_a7(".."), Ary_dot_dot_slash = Bry_.new_a7("../");
+	private static final byte[] Ary_dot_slash = BryUtl.NewA7("./"), Ary_dot_dot = BryUtl.NewA7(".."), Ary_dot_dot_slash = BryUtl.NewA7("../");
 	private static void qry_bgns_with_init() {
 		qry_bgns_with = Btrie_fast_mgr.cs();
-		qry_bgns_with.Add(AsciiByte.Slash, Int_obj_ref.New(Id_slash));
-		qry_bgns_with.Add(AsciiByte.Dot, Int_obj_ref.New(Id_dot));
-		qry_bgns_with.Add(Ary_dot_slash, Int_obj_ref.New(Id_dot_slash));
-		qry_bgns_with.Add(Ary_dot_dot, Int_obj_ref.New(Id_dot_dot));
-		qry_bgns_with.Add(Ary_dot_dot_slash, Int_obj_ref.New(Id_dot_dot_slash));
+		qry_bgns_with.Add(AsciiByte.Slash, IntRef.New(Id_slash));
+		qry_bgns_with.Add(AsciiByte.Dot, IntRef.New(Id_dot));
+		qry_bgns_with.Add(Ary_dot_slash, IntRef.New(Id_dot_slash));
+		qry_bgns_with.Add(Ary_dot_dot, IntRef.New(Id_dot_dot));
+		qry_bgns_with.Add(Ary_dot_dot_slash, IntRef.New(Id_dot_dot_slash));
 	}	private static Btrie_fast_mgr qry_bgns_with;
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// REF.MW:ParserFunctions_body.php
 		byte[] qry = Eval_argx(ctx, src, caller, self);
 		byte[] orig = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, self.Args_len(), 0);
 		if (orig.length == 0) orig = ctx.Page().Ttl().Full_txt();
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+		BryWtr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().GetB512();
 		try {bfr.Add(Rel2abs(tmp_bfr, ctx.Wiki().Parser_mgr().Rel2abs_ary(), qry, orig));}
-		finally {tmp_bfr.Mkr_rls();}
+		finally {tmp_bfr.MkrRls();}
 	}
 	public static boolean Rel2abs_ttl(byte[] ttl, int bgn, int end) {
 		int last = end - 1;
@@ -59,9 +63,9 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		}
 		return rv;
 	}
-	private static final Int_obj_ref ignore_rel2abs_tid = Int_obj_ref.New_zero();	// TS:return value not used
-	public static byte[] Rel2abs(Bry_bfr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src) {return Rel2abs(tmp_bfr, seg_ary, qry, src, ignore_rel2abs_tid);}
-	public static byte[] Rel2abs(Bry_bfr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src, Int_obj_ref rel2abs_tid) {
+	private static final IntRef ignore_rel2abs_tid = IntRef.NewZero();	// TS:return value not used
+	public static byte[] Rel2abs(BryWtr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src) {return Rel2abs(tmp_bfr, seg_ary, qry, src, ignore_rel2abs_tid);}
+	public static byte[] Rel2abs(BryWtr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src, IntRef rel2abs_tid) {
 		if (qry_bgns_with == null) qry_bgns_with_init();
 		int qry_len = qry.length, src_len = src.length;
 		
@@ -73,8 +77,8 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		Btrie_rv trv = new Btrie_rv();
 		Object o = qry_bgns_with.Match_at(trv, qry, 0, qry_len);	// check if qry begins with ".", "/", "./", "../"; if it doesn't return;
 		if (o != null) {
-			int id = ((Int_obj_ref)o).Val();
-			rel2abs_tid.Val_(id);
+			int id = ((IntRef)o).Val();
+			rel2abs_tid.ValSet(id);
 			switch (id) {
 				case Id_dot:							// "."
 					break;
@@ -99,7 +103,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		}
 
 		// create segs; see NOTE_1 for approach
-		byte b = Byte_.Zero;
+		byte b = ByteUtl.Zero;
 		boolean loop = true, dot_mode = true;
 		while (loop) {
 			if (i == tmp_len) {							// finished an ary (either src or qry)
@@ -134,7 +138,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 						case 2:	
 							if (dot_mode) {				// "/../"; pop seg_ary
 								seg_pos -= 2;
-								if (seg_pos < 0) return Bry_.Empty; // FUTURE: return MediaWiki error
+								if (seg_pos < 0) return BryUtl.Empty; // FUTURE: return MediaWiki error
 							}
 							else create_seg = true;		// something else; create seg
 							break;
@@ -160,14 +164,14 @@ public class Pfunc_rel2abs extends Pf_func_base {
 			tmp_is_1st = false;			
 		}
 		for (int j = 0; j < seg_pos; j += 2) {
-			if (j != 0) tmp_bfr.Add_byte(AsciiByte.Slash);
+			if (j != 0) tmp_bfr.AddByte(AsciiByte.Slash);
 			if (seg_ary[j] >= tmp_len) {
 				tmp = qry;
 				tmp_adj = src_len + 1;
 			}
-			tmp_bfr.Add_mid(tmp, seg_ary[j] - tmp_adj, seg_ary[j+1] - tmp_adj);
+			tmp_bfr.AddMid(tmp, seg_ary[j] - tmp_adj, seg_ary[j+1] - tmp_adj);
 		}
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
 	public static final int Ttl_max = 2048;	// ASSUME: max len of 256 * 8 bytes
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_rel2abs;}

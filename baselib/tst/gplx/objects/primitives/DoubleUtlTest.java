@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.objects.primitives;
-import gplx.tests.GfoTstr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.DoubleUtl;
 import org.junit.Test;
 public class DoubleUtlTest {
 	private final DoubleUtlTstr tstr = new DoubleUtlTstr();
@@ -38,12 +39,13 @@ public class DoubleUtlTest {
 		tstr.TestToStrByPrintF(56225d   / 7776747000d  , "7.2298867379895E-06"); // fails with 0; ISSUE#:697; DATE:2020-08-11
 		tstr.TestToStrByPrintF(35746d   / 7805411000d  , "4.5796435319037E-06"); // fails with 0; ISSUE#:697; DATE:2020-08-11
 	}
+	@Test public void Xto_str_loose() {
+		tstr.TestXtoStrLoose(2449.6000000d        , "2449.6");
+		tstr.TestXtoStrLoose(623.700d                , "623.7");
+	}
 }
 class DoubleUtlTstr {
-	public void TestToStrByPrintF(double v, String expd) {
-		GfoTstr.EqStr(expd, DoubleUtl.ToStrByPrintF(v));
-	}
-	public void TestTrimZeroes(String val, String expd) {
-		GfoTstr.EqStr(expd, DoubleUtl.TrimZeroes(val));
-	}
+	public void TestToStrByPrintF(double v, String expd) {GfoTstr.Eq(expd, DoubleUtl.ToStrByPrintF(v));}
+	public void TestTrimZeroes(String val, String expd) {GfoTstr.Eq(expd, DoubleUtl.TrimZeroes(val));}
+	public void TestXtoStrLoose(double v, String expd) {GfoTstr.Eq(expd, DoubleUtl.ToStrLoose(v));}
 }

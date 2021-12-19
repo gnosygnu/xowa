@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.lst;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.hdrs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.pages.wtxts.*;
+import gplx.xowa.wikis.pages.wtxts.*;
 public class Lst_pfunc_itm {
 	public Lst_pfunc_itm(byte[] itm_src, Lst_section_nde_mgr sec_mgr, Xopg_toc_mgr toc_mgr) {
 		this.itm_src = itm_src; this.sec_mgr = sec_mgr; this.toc_mgr = toc_mgr;
@@ -44,12 +47,12 @@ public class Lst_pfunc_itm {
 			wiki.Parser_mgr().Tmpl_stack_del();	// take template off stack; evaluate will never recurse, but will fail if ttl is still on stack; DATE:2014-03-10
 
 			// eval tmpl
-			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
+			BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetM001();
 			try {
 				tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.New_root(ttl.Page_txt()), tmp_bfr);
-				sub_src = tmp_bfr.To_bry_and_clear();
+				sub_src = tmp_bfr.ToBryAndClear();
 			} finally {
-				tmp_bfr.Mkr_rls();
+				tmp_bfr.MkrRls();
 			}
 
 			// parse again

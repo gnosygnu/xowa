@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.pages;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.xowa.specials.*; import gplx.core.net.qargs.*;
 import gplx.xowa.addons.apps.cfgs.specials.edits.services.*;
 public class Xocfg_edit_special implements Xow_special_page {
@@ -25,7 +28,7 @@ public class Xocfg_edit_special implements Xow_special_page {
 		String lang = url_args.Read_str_or("lang", wiki.App().User().Wikii().Lang().Key_str());
 
 		Xocfg_edit_loader loader = Xocfg_edit_loader.New(wiki.App());
-		if (String_.Eq(grp, "")) {
+		if (StringUtl.Eq(grp, "")) {
 			grp = wiki.App().Cfg().Get_str_app(Cfg__previous_grp);
 			if (!loader.Grp_key_exists(grp)) {
 				grp = "xowa.app.security";

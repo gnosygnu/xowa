@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.files; import gplx.*;
-import gplx.core.security.algos.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.security.files;
+import gplx.core.security.algos.Hash_algo_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Cksum_list {
 	public Cksum_list(byte type, Cksum_itm[] itms, long itms_size) {
 		this.Type = type; this.Itms = itms; this.Itms_size = itms_size;
@@ -38,21 +47,21 @@ public class Cksum_list {
 	public static Cksum_list Parse(byte type, Io_url owner_dir, byte[] bry) {
 		List_adp list = List_adp_.New();
 
-		byte[][] lines = Bry_split_.Split_lines(bry);
+		byte[][] lines = BrySplit.SplitLines(bry);
 		int len = lines.length;
 		long itms_size = 0;
 		for (int i = 0; i < len; ++i) {
 			byte[] line = lines[i];	// EX: "d41d8cd98f00b204e9800998ecf8427e *file.txt"
 
 			// get hash
-			int space_pos = Bry_find_.Find_fwd(line, AsciiByte.Space);
-			if (space_pos == Bry_find_.Not_found) throw Err_.new_("chsum", "checksum line does not have space", "line", line);
-			byte[] hash = Bry_.Mid(line, 0, space_pos);
+			int space_pos = BryFind.FindFwd(line, AsciiByte.Space);
+			if (space_pos == BryFind.NotFound) throw ErrUtl.NewArgs("checksum line does not have space", "line", line);
+			byte[] hash = BryLni.Mid(line, 0, space_pos);
 
 			// get file
 			int file_bgn = space_pos + 1;
 			if (line[file_bgn] == AsciiByte.Star) ++file_bgn;	// ignore leading *; EX: "*file.txt" -> "file.txt"
-			byte[] file = Bry_.Mid(line, file_bgn);
+			byte[] file = BryLni.Mid(line, file_bgn);
 			Io_url file_url = GenSubFil_nest(owner_dir, file);
 			long file_size = Io_mgr.Instance.QueryFil(file_url).Size();
 			itms_size += file_size;
@@ -65,20 +74,20 @@ public class Cksum_list {
 	}
 	private static Io_url GenSubFil_nest(Io_url dir, byte[] src) {	// split "a/b/c" or "a\b\c" -> [a, b, c]
 		byte dir_spr = gplx.core.envs.Op_sys.Lnx.Fsys_dir_spr_byte();
-		int dir_pos = Bry_find_.Find_fwd(src, dir_spr);
-		if (dir_pos == Bry_find_.Not_found) {
+		int dir_pos = BryFind.FindFwd(src, dir_spr);
+		if (dir_pos == BryFind.NotFound) {
 			dir_spr = gplx.core.envs.Op_sys.Wnt.Fsys_dir_spr_byte();
-			dir_pos = Bry_find_.Find_fwd(src, dir_spr);
-			if (dir_pos == Bry_find_.Not_found)
-				return dir.GenSubFil(String_.new_u8(src));
+			dir_pos = BryFind.FindFwd(src, dir_spr);
+			if (dir_pos == BryFind.NotFound)
+				return dir.GenSubFil(StringUtl.NewU8(src));
 		}
-		byte[][] parts = Bry_split_.Split(src, dir_spr);
-		return dir.GenSubFil_nest(String_.Ary(parts));
+		byte[][] parts = BrySplit.Split(src, dir_spr);
+		return dir.GenSubFil_nest(StringUtl.Ary(parts));
 	}
 	private static byte Get_hash_tid_by_ext(String ext) {
-		if		(String_.Eq(ext, ".md5"))		return Hash_algo_.Tid__md5;
-		else if	(String_.Eq(ext, ".sha1"))		return Hash_algo_.Tid__sha1;
-		else if	(String_.Eq(ext, ".sha256"))	return Hash_algo_.Tid__sha2_256;
-		else									throw Err_.new_unhandled_default(ext);
+		if		(StringUtl.Eq(ext, ".md5"))		return Hash_algo_.Tid__md5;
+		else if	(StringUtl.Eq(ext, ".sha1"))		return Hash_algo_.Tid__sha1;
+		else if	(StringUtl.Eq(ext, ".sha256"))	return Hash_algo_.Tid__sha2_256;
+		else									throw ErrUtl.NewUnhandled(ext);
 	}
 }

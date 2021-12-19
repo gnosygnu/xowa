@@ -13,26 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.title;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public class XomwMediaWikiTitleCodecParts {
 	public byte[] interwiki;
 	public boolean local_interwiki;
-	public byte[] fragment = Bry_.Empty;
+	public byte[] fragment = BryUtl.Empty;
 	public int ns;
 	public byte[] dbkey;
 	public byte[] user_case_dbkey;
 	public XomwMediaWikiTitleCodecParts(byte[] dbkey, int defaultNamespace) {
-		this.interwiki = Bry_.Empty;
+		this.interwiki = BryUtl.Empty;
 		this.local_interwiki = false;
-		this.fragment = Bry_.Empty;
+		this.fragment = BryUtl.Empty;
 		this.ns = defaultNamespace;
 		this.dbkey = dbkey;
 		this.user_case_dbkey = dbkey;
 	}
 	public String ToStr() {
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_int_variable(ns).Add_byte_pipe();
-		bfr.Add(dbkey).Add_byte_pipe();
-		return bfr.To_str_and_clear();
+		BryWtr bfr = BryWtr.New();
+		bfr.AddIntVariable(ns).AddBytePipe();
+		bfr.Add(dbkey).AddBytePipe();
+		return bfr.ToStrAndClear();
 	}
 }

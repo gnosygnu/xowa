@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,22 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.texts; import gplx.*; import gplx.core.*;
+package gplx.core.texts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Base64Converter {
-	private final static char[] ALPHABET = String_.XtoCharAry("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
+	private final static char[] ALPHABET = StringUtl.ToCharAry("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/");
 	private static int[]  toInt   = null;//new int[128];
-    static void Init() {
+	static void Init() {
 		toInt = new int[128];
-        for(int i=0; i< ALPHABET.length; i++){
-            toInt[ALPHABET[i]]= i;
-        }
-    }
-    public static char GetIndexChar(int i) {return ALPHABET[i];}
-    public static int GetIndexInt(char c) {
-    	if (toInt == null) Init();
-    	return toInt[c];
-    }
-	public static String EncodeString(String orig) {return Encode(Bry_.new_u8(orig));}
+		for(int i=0; i< ALPHABET.length; i++){
+			toInt[ALPHABET[i]]= i;
+		}
+	}
+	public static char GetIndexChar(int i) {return ALPHABET[i];}
+	public static int GetIndexInt(char c) {
+		if (toInt == null) Init();
+		return toInt[c];
+	}
+	public static String EncodeString(String orig) {return Encode(BryUtl.NewU8(orig));}
 	public static String Encode(byte[] buf){
 		if (toInt == null) Init();
 		int size = buf.length;
@@ -54,27 +56,27 @@ public class Base64Converter {
 		}
 		return new String(ar);
 	}
-	public static String DecodeString(String orig) {return String_.new_u8(Decode(orig));}
+	public static String DecodeString(String orig) {return StringUtl.NewU8(Decode(orig));}
 	public static byte[] Decode(String s){
 		if (toInt == null) Init();
-		int sLen = String_.Len(s);
-		int delta = String_.Has_at_end(s, "==") ? 2 : String_.Has_at_end(s, "=") ? 1 : 0;
+		int sLen = StringUtl.Len(s);
+		int delta = StringUtl.HasAtEnd(s, "==") ? 2 : StringUtl.HasAtEnd(s, "=") ? 1 : 0;
 		byte[] buffer = new byte[sLen *3/4 - delta];
 		int mask = 0xFF;
 		int index = 0;
 		for(int i=0; i< sLen; i+=4){
-			int c0 = toInt[String_.CharAt(s, i)];
-			int c1 = toInt[String_.CharAt(s, i + 1)];
+			int c0 = toInt[StringUtl.CharAt(s, i)];
+			int c1 = toInt[StringUtl.CharAt(s, i + 1)];
 			buffer[index++]= (byte)(((c0 << 2) | (c1 >> 4)) & mask);
 			if(index >= buffer.length){
 				return buffer;
 			}
-			int c2 = toInt[String_.CharAt(s, i + 2)];
+			int c2 = toInt[StringUtl.CharAt(s, i + 2)];
 			buffer[index++]= (byte)(((c1 << 4) | (c2 >> 2)) & mask);
 			if(index >= buffer.length){
 				return buffer;
 			}
-			int c3 = toInt[String_.CharAt(s, i + 3)];
+			int c3 = toInt[StringUtl.CharAt(s, i + 3)];
 			buffer[index++]= (byte)(((c2 << 6) | c3) & mask);
 		}
 		return buffer;

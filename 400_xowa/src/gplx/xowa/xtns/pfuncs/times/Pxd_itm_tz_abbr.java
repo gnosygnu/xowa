@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 class Pxd_itm_tz_abbr extends Pxd_itm_base implements Pxd_itm_prototype {
 	private final int tz_idx;
 	private final byte[] tz_abbr;
@@ -25,7 +27,7 @@ class Pxd_itm_tz_abbr extends Pxd_itm_base implements Pxd_itm_prototype {
 		this.tz_idx = tz_idx;
 		this.tz_offset = offset;
 		this.Ctor(ary_idx); 
-		this.Seg_idx_(DateAdp_.SegIdx_tz);
+		this.Seg_idx_(GfoDateUtl.SegIdxTz);
 	}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_tz_abbr;}
 	@Override public int Eval_idx() {return 90;}
@@ -37,8 +39,8 @@ class Pxd_itm_tz_abbr extends Pxd_itm_base implements Pxd_itm_prototype {
 		return true;
 	}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
-		DateAdp cur = bldr.To_date();
-		cur = cur.Add_second(-tz_offset);
+		GfoDate cur = bldr.To_date();
+		cur = cur.AddSecond(-tz_offset);
 		bldr.By_date(cur);
 		return true;
 	}

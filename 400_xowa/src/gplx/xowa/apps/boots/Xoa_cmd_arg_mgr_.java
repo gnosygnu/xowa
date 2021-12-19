@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.boots;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.envs.*;
 class Xoa_cmd_arg_mgr_ {
 	public static String GenHdr(boolean forSourceCode, String programName, String hdr_bgn, String hdr_end) {
@@ -22,7 +23,7 @@ class Xoa_cmd_arg_mgr_ {
 		String codeBgn = forSourceCode ? "/*" + newLine : "";
 		String codeEnd = forSourceCode ? "*/" + newLine : "";
 		String codeHdr = forSourceCode ? "This file is part of {0}." + newLine + newLine : "";
-		String fmt = String_.Concat
+		String fmt = StringUtl.Concat
 			( codeBgn
 			, codeHdr
 			, hdr_bgn
@@ -41,6 +42,6 @@ class Xoa_cmd_arg_mgr_ {
 			, codeEnd
 			, hdr_end
 			);
-		return String_.Format(fmt, programName);
+		return StringUtl.Format(fmt, programName);
 	}
 }

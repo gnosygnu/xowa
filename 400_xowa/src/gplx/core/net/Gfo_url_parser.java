@@ -14,23 +14,23 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.net;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
 import gplx.core.net.qargs.Gfo_qarg_itm;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfo_url_parser {
 	private final Btrie_slim_mgr protocols = Btrie_slim_mgr.ci_a7();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
 	private final Btrie_rv trv = new Btrie_rv();
 	private final List_adp segs_list = List_adp_.New(), qargs_list = List_adp_.New();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(500);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(500);
 	public Gfo_url_parser() {
 		Init_protocols(Gfo_protocol_itm.Ary());
 		Init_protocol_itm(Gfo_protocol_itm.Bry_relative, Gfo_protocol_itm.Tid_relative_1);
@@ -53,8 +53,8 @@ public class Gfo_url_parser {
 			rel = true;
 		}
 		if (!rel) {	// search for ":"; NOTE: only search if not rel; i.e.: "//"
-			int colon_pos = Bry_find_.Find_fwd(src, AsciiByte.Colon, pos, src_end);		// no colon found; EX: "//a.org/b"; "a.org/b"
-			if (colon_pos != Bry_find_.Not_found)											// colon found; EX: "http://" or "https://"
+			int colon_pos = BryFind.FindFwd(src, AsciiByte.Colon, pos, src_end);		// no colon found; EX: "//a.org/b"; "a.org/b"
+			if (colon_pos != BryFind.NotFound)											// colon found; EX: "http://" or "https://"
 				pos = colon_pos + AsciiByte.Len1;
 			if (pos < src_end && src[pos] == AsciiByte.Slash) {							// skip slash after colon
 				pos += 1;
@@ -62,17 +62,17 @@ public class Gfo_url_parser {
 					pos += 1;
 			}
 		}
-		int slash_pos = Bry_find_.Find_fwd(src, AsciiByte.Slash, pos, src_end);
-		if (slash_pos == Bry_find_.Not_found)												// no terminating slash; EX: http://a.org
+		int slash_pos = BryFind.FindFwd(src, AsciiByte.Slash, pos, src_end);
+		if (slash_pos == BryFind.NotFound)												// no terminating slash; EX: http://a.org
 			slash_pos = src_end;
-		slash_pos = Bry_.Trim_end_pos(src, slash_pos);
+		slash_pos = BryUtl.TrimEndPos(src, slash_pos);
 		site_data.Atrs_set(rel, pos, slash_pos);
 	}
 	public Gfo_url Parse(byte[] src) {return Parse(src, 0, src.length);}
 	public Gfo_url Parse(byte[] src, int src_bgn, int src_end) {
 		// protocol
 		byte protocol_tid = protocols.Match_byte_or(trv, src, src_bgn, src_end, Gfo_protocol_itm.Tid_unknown);
-		int pos = Bry_find_.Find_fwd_while(src, trv.Pos(), src_end, AsciiByte.Slash);	// set pos after last slash; EX: "https://A" -> position before "A"
+		int pos = BryFind.FindFwdWhile(src, trv.Pos(), src_end, AsciiByte.Slash);	// set pos after last slash; EX: "https://A" -> position before "A"
 		byte[] protocol_bry = protocol_tid == Gfo_protocol_itm.Tid_unknown
 			? null
 			: Make_bry(false, src, src_bgn, pos);
@@ -186,7 +186,7 @@ public class Gfo_url_parser {
 		return (Gfo_qarg_itm[])qargs_list.ToAryAndClear(Gfo_qarg_itm.class);
 	} 
 	private byte[] Make_bry(boolean encoded, byte[] src, int bgn, int end) {
-		return encoded ? Gfo_url_encoder_.Xourl.Decode(tmp_bfr, BoolUtl.N, src, bgn, end).To_bry_and_clear() : Bry_.Mid(src, bgn, end);
+		return encoded ? Gfo_url_encoder_.Xourl.Decode(tmp_bfr, BoolUtl.N, src, bgn, end).ToBryAndClear() : BryLni.Mid(src, bgn, end);
 	}
 
 	public static final byte[] Bry_double_slash = new byte[] {AsciiByte.Slash, AsciiByte.Slash};

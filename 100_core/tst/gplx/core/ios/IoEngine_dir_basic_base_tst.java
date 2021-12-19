@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
+import gplx.libs.files.Io_url;
 import org.junit.*;
 public abstract class IoEngine_dir_basic_base_tst {
 	@Before public void setup() {
 		engine = engine_();
 		fx = IoEngineFxt.new_();
 		setup_hook();
-	}	protected IoEngine engine; @gplx.Internal protected IoEngineFxt fx; protected Io_url fil, root;
+	}   protected IoEngine engine; public IoEngineFxt fx; protected Io_url fil, root;
 	protected abstract IoEngine engine_();
 	protected abstract void setup_hook();
 	@Test public void CreateDir() {
@@ -43,11 +44,11 @@ public abstract class IoEngine_dir_basic_base_tst {
 		engine.CreateDir(subDir);
 		fx.tst_ExistsPaths(true, subDir, subDir.OwnerDir());
 	}
-//		@Test public void DeleteDir_missing_fail() {
-//			try {engine.DeleteDir(root);}
-//			catch {return;}
-//			Tfds.Fail_expdError();
-//		}
+//        @Test public void DeleteDir_missing_fail() {
+//            try {engine.DeleteDir(root);}
+//            catch {return;}
+//            Tfds.Fail_expdError();
+//        }
 	@Test public void DeleteDir_missing_pass() {
 		engine.DeleteDir(root);
 	}

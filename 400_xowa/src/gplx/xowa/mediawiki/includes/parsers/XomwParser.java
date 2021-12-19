@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
-import gplx.core.primitives.Bool_obj_ref;
-import gplx.core.primitives.Int_obj_ref;
-import gplx.core.primitives.String_obj_ref;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.wrappers.BoolRef;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.basics.wrappers.StringRef;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
 import gplx.core.net.*;
@@ -33,9 +39,6 @@ import gplx.xowa.mediawiki.includes.parsers.lnkes.*;
 import gplx.xowa.mediawiki.includes.parsers.magiclinks.*;
 import gplx.xowa.mediawiki.includes.parsers.nbsps.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
-
-import static gplx.xowa.mediawiki.includes.XomwDefines.NS_MEDIAWIKI;
-
 /**
 * PHP Parser - Processes wiki markup (which uses a more user-friendly
 * syntax, such as "[[link]]" for making links), and provides a one-way
@@ -269,7 +272,7 @@ public class XomwParser implements XomwParserIface {
 	private int mMarkerIndex = 0;
 
 	// XOWA
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private final XomwEnv env;
 	private final XomwSanitizer sanitizer = new XomwSanitizer();
 	private final Xomw_table_wkr tableWkr;
@@ -288,7 +291,7 @@ public class XomwParser implements XomwParserIface {
 	private static Xomw_regex_boundary regex_boundary;
 	private static Xomw_regex_url regex_url;
 	private final Btrie_rv trv = new Btrie_rv();
-	private final Bry_bfr tmp = Bry_bfr_.New();
+	private final BryWtr tmp = BryWtr.New();
 
 	public XomwSanitizer Sanitizer() {return sanitizer;}
 	public XomwStripState Strip_state() {return mStripState;}
@@ -594,12 +597,12 @@ public class XomwParser implements XomwParserIface {
 	public XomwParser(XomwEnv env) {
 		this.__construct();
 		if (regex_space == null) {
-			synchronized (Type_.Type_by_obj(this)) {
+			synchronized (ClassUtl.TypeByObj(this)) {
 				regex_space = new Xomw_regex_space();
 				regex_boundary = new Xomw_regex_boundary(regex_space);
 				regex_url = new Xomw_regex_url(regex_space);
-				Atr__rel = Bry_.new_a7("rel");
-				Get_external_link_rel = Bry_.new_a7("nofollow");
+				Atr__rel = BryUtl.NewA7("rel");
+				Get_external_link_rel = BryUtl.NewA7("nofollow");
 			}
 		}
 
@@ -1686,12 +1689,12 @@ public class XomwParser implements XomwParserIface {
 	* @return String
 	*/
 	public byte[] insertStripItem(byte[] text) {
-		byte[] marker = tmp.Add_bry_many(MARKER_PREFIX, STRIP_ITEM).Add_int_variable(this.mMarkerIndex).Add(MARKER_SUFFIX).To_bry_and_clear();
+		byte[] marker = tmp.AddBryMany(MARKER_PREFIX, STRIP_ITEM).AddIntVariable(this.mMarkerIndex).Add(MARKER_SUFFIX).ToBryAndClear();
 		this.mMarkerIndex++;
 		this.mStripState.addGeneral(marker, text);
 		return marker;
 	}
-	public String insertStripItem(String text) {return String_.new_u8(insertStripItem(Bry_.new_u8(text)));}
+	public String insertStripItem(String text) {return StringUtl.NewU8(insertStripItem(BryUtl.NewU8(text)));}
 
 
 	/**
@@ -2051,7 +2054,7 @@ public class XomwParser implements XomwParserIface {
 
 		// replaceInternalLinks may sometimes leave behind
 		// absolute URLs, which have to be masked to hide them from replaceExternalLinks			
-		XomwParserBfr_.Replace(pbfr, Bry__marker__noparse, Bry_.Empty); // $text = str_replace(XomwParser.MARKER_PREFIX . 'NOPARSE', '', $text);
+		XomwParserBfr_.Replace(pbfr, Bry__marker__noparse, BryUtl.Empty); // $text = str_replace(XomwParser.MARKER_PREFIX . 'NOPARSE', '', $text);
 
 		magiclinksWkr.doMagicLinks(pctx, pbfr);
 //			$text = $this.formatHeadings($text, $origText, $isMain);
@@ -3282,7 +3285,7 @@ public class XomwParser implements XomwParserIface {
 	* @param String $text More-or-less HTML
 	* @return String Less-or-more HTML with NOPARSE bits
 	*/
-	public byte[] armorLinks(Bry_bfr trg, byte[] src, int src_bgn, int src_end) {
+	public byte[] armorLinks(BryWtr trg, byte[] src, int src_bgn, int src_end) {
 		// XO.MW.PORTED
 		// return preg_replace('/\b((?i)' . this.mUrlProtocols . ')/',
 		//	XomwParser.MARKER_PREFIX . "NOPARSE$1", $text);
@@ -3295,12 +3298,12 @@ public class XomwParser implements XomwParserIface {
 			if (cur == src_end) {
 				// if dirty, add rest of String
 				if (dirty)
-					trg.Add_mid(src, prv, src_end);
+					trg.AddMid(src, prv, src_end);
 				break;
 			}
 
 			// check if cur matches protocol
-			Object protocol_obj = protocols_trie.Match_at(trv, src, cur, src_end);
+			Object protocol_obj = protocols_trie.MatchAt(trv, src, cur, src_end);
 			// no match; continue
 			if (protocol_obj == null) {
 				cur++;
@@ -3309,27 +3312,27 @@ public class XomwParser implements XomwParserIface {
 			else {
 				dirty = true;
 				byte[] protocol_bry = (byte[])protocol_obj;
-				if (called_by_bry) trg = Bry_bfr_.New();
-				trg.Add_bry_many(XomwParser.MARKER_PREFIX, Bry__noparse, protocol_bry);
+				if (called_by_bry) trg = BryWtr.New();
+				trg.AddBryMany(XomwParser.MARKER_PREFIX, Bry__noparse, protocol_bry);
 				cur += protocol_bry.length;
 				prv = cur;
 			}
 		}
 		if (called_by_bry) {
 			if (dirty)
-				return trg.To_bry_and_clear();
+				return trg.ToBryAndClear();
 			else {
 				if (src_bgn == 0 && src_end == src.length)
 					return src;
 				else
-					return Bry_.Mid(src, src_bgn, src_end);
+					return BryLni.Mid(src, src_bgn, src_end);
 			}
 		}
 		else {
 			if (dirty)
 				return null;
 			else {
-				trg.Add_mid(src, src_bgn, src_end);
+				trg.AddMid(src, src_bgn, src_end);
 				return null;
 			}
 		}
@@ -3844,14 +3847,14 @@ public class XomwParser implements XomwParserIface {
 	*/
 	public String replaceVariables(String text, XomwParserCtx pctx, XomwPPFrame frame, boolean argsOnly) {
 		// Is there any text? Also, Prevent too big inclusions!
-		int textSize = String_.Len(text);
+		int textSize = StringUtl.Len(text);
 		if (textSize < 1 || textSize > this.mOptions.getMaxIncludeSize()) {
 			return text;
 		}
 
 		if (frame == null) {
 			frame = this.getPreprocessor().newFrame();
-		} else if (!(Type_.Is_assignable_from_by_obj(frame, XomwPPFrame.class))) {
+		} else if (!(ClassUtl.IsAssignableFromByObj(frame, XomwPPFrame.class))) {
 			// wfDebug(__METHOD__ . " called using plain parameters instead of "
 			//	. "a PPFrame instance. Creating custom frame.\n");
 			frame = this.getPreprocessor().newCustomFrame(frame);
@@ -4088,7 +4091,7 @@ public class XomwParser implements XomwParserIface {
 //				String relative = this.maybeDoSubpageLink(part1, subpage);
 			String relative = "";
 
-			if (!String_.Eq(part1, relative)) {
+			if (!StringUtl.Eq(part1, relative)) {
 				part1 = relative;
 				ns = this.mTitle.getNamespace();
 			}
@@ -4275,7 +4278,7 @@ public class XomwParser implements XomwParserIface {
 		} else {
 			ret = XophpArray.New("text", text);
 		}
-Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText, originalTitle);
+GfoTstr.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText, originalTitle);
 		return ret;
 	}
 
@@ -4511,20 +4514,20 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 	 * @return array
 	 */
 	public static XophpArray statelessFetchTemplate(XomwTitle title, XomwParser parser) { // $parser = false
-		String_obj_ref text = String_obj_ref.new_(XophpString_.False);
-		Bool_obj_ref skip = Bool_obj_ref.n_();
+		StringRef text = StringRef.New(XophpString_.False);
+		BoolRef skip = BoolRef.NewN();
 		XomwTitle finalTitle = title;
 		XophpArray deps = XophpArray.New();
 
 		// Loop to fetch the article, with up to 1 redirect
 		for (int i = 0; i < 2 && XophpObject_.is_object(title); i++) {
 			// Give extensions a chance to select the revision instead
-			Int_obj_ref id = Int_obj_ref.New(XophpInt_.False); // Assume current
+			IntRef id = IntRef.New(XophpInt_.False); // Assume current
 			XomwHooks.run("BeforeParserFetchTemplateAndtitle",
 				XophpArray.New(parser, title, skip, id));
 
 			if (skip.Val()) {
-				text = text.Val_(XophpString_.False);
+				text = text.ValSet(XophpString_.False);
 				deps.Add(XophpArray.New()
 					.Add("title", title)
 					.Add("page_id", title.getArticleID())
@@ -4563,12 +4566,12 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 			XomwContent content;
 			if (XophpObject_.is_true(rev)) {
 				content = rev.getContent();
-				text = text.Val_(XophpObject_.is_true(content) ? content.getWikitextForTransclusion() : null);
+				text = text.ValSet(XophpObject_.is_true(content) ? content.getWikitextForTransclusion() : null);
 				
 				XomwHooks.run("ParserFetchTemplate",
 					XophpArray.New(parser, title, rev, text, deps)); // NOTE: was &deps
 				if (XophpString_.is_false(text.Val()) || XophpString_.is_null(text.Val())) {
-					text = text.Val_(XophpString_.False);
+					text = text.ValSet(XophpString_.False);
 					break;
 				}
 			} else if (title.getNamespace() == XomwDefines.NS_MEDIAWIKI) {
@@ -5857,7 +5860,7 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 	public byte[] replaceLinkHolders(byte[] text) {
 		// this.mLinkHolders.replace(text);
 		this.mLinkHolders.replace(tmp_pbfr.Init(text));
-		return tmp_pbfr.Trg().To_bry_and_clear();
+		return tmp_pbfr.Trg().ToBryAndClear();
 	}
 
 // MW.SRC:v1.33.1
@@ -7244,23 +7247,23 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 //	}
 	public static final String MARKER_PREFIX_STR = "\u007f'\"`UNIQ-";
 	public static final byte[]
-	  MARKER_PREFIX  = Bry_.new_a7(MARKER_PREFIX_STR)
-	, MARKER_SUFFIX  = Bry_.new_a7("-QINU`\"'\u007f")
+	  MARKER_PREFIX  = BryUtl.NewA7(MARKER_PREFIX_STR)
+	, MARKER_SUFFIX  = BryUtl.NewA7("-QINU`\"'\u007f")
 	;
 	private static final byte[]
-	  STRIP_ITEM = Bry_.new_a7("-item-")
-	, Bry__noparse = Bry_.new_a7("NOPARSE")
+	  STRIP_ITEM = BryUtl.NewA7("-item-")
+	, Bry__noparse = BryUtl.NewA7("NOPARSE")
 	;
-	private static final byte[] Bry__marker__noparse = Bry_.Add(MARKER_PREFIX, Bry__noparse);
+	private static final byte[] Bry__marker__noparse = BryUtl.Add(MARKER_PREFIX, Bry__noparse);
 	public static Btrie_slim_mgr Protocols__dflt() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
 		Gfo_protocol_itm[] ary = Gfo_protocol_itm.Ary();
 		for (Gfo_protocol_itm itm : ary) {
 			byte[] key = itm.Text_bry();	// EX: "https://"
-			rv.Add_obj(key, key);
+			rv.AddObj(key, key);
 		}
-		byte[] bry__relative = Bry_.new_a7("//");
-		rv.Add_obj(bry__relative, bry__relative);	// REF.MW: "$this.mUrlProtocols = wfUrlProtocols();"; "wfUrlProtocols($includeProtocolRelative = true)"
+		byte[] bry__relative = BryUtl.NewA7("//");
+		rv.AddObj(bry__relative, bry__relative);	// REF.MW: "$this.mUrlProtocols = wfUrlProtocols();"; "wfUrlProtocols($includeProtocolRelative = true)"
 		return rv;
 	}
 }

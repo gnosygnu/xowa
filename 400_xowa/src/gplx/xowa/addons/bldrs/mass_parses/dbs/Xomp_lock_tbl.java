@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*;
-import gplx.dbs.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xomp_lock_tbl implements Db_tbl {
 	private final String fld_uid_prv;
 	private final Db_conn conn;
@@ -33,12 +39,12 @@ public class Xomp_lock_tbl implements Db_tbl {
 	public int Select() {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
 		try {
-			if (!rdr.Move_next()) throw Err_.new_wo_type("xomp_lock has no rows");
+			if (!rdr.Move_next()) throw ErrUtl.NewArgs("xomp_lock has no rows");
 			return rdr.Read_int(fld_uid_prv);}
 		finally {rdr.Rls();}
 	}
 	public void Update(int uid_prv) {
-		conn.Stmt_update(tbl_name, String_.Ary_empty, fld_uid_prv).Clear().Val_int(fld_uid_prv, uid_prv).Exec_update();
+		conn.Stmt_update(tbl_name, StringUtl.AryEmpty, fld_uid_prv).Clear().Val_int(fld_uid_prv, uid_prv).Exec_update();
 	}
 	public void Rls() {}
 }

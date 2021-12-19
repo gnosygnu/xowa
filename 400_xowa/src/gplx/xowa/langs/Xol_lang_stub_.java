@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs; import gplx.*;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.langs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.Hash_adp_bry;
 public class Xol_lang_stub_ {	// lists all known stub_ary supported by MW
-	public static final byte[] Key__unknown = Bry_.Empty;
+	public static final byte[] Key__unknown = BryUtl.Empty;
 	public static final ComparerAble Comparer_key = new Xol_sub_itm_comparer();
 	public static final int 
   Id__intl = -2
@@ -1004,8 +1006,8 @@ Regy_add(stub_hash, Id_zu, "zu", "isiZulu");
 	private static Hash_adp_bry stub_hash; private static final Xol_lang_stub[] stub_ary = new Xol_lang_stub[Id__max];
 	public static Xol_lang_stub[] Ary() {return stub_ary;}
 	private static void Regy_add(Hash_adp_bry stub_hash, int uid, String code_str, String canonical) {
-		byte[] code = Bry_.new_a7(code_str);// ASCII:lang_code should always be ASCII
-		Xol_lang_stub itm = new Xol_lang_stub(uid, code, Bry_.new_u8(canonical));
+		byte[] code = BryUtl.NewA7(code_str);// ASCII:lang_code should always be ASCII
+		Xol_lang_stub itm = new Xol_lang_stub(uid, code, BryUtl.NewU8(canonical));
 		stub_ary[uid] = itm;
 		stub_hash.Add(code, itm);
 	}
@@ -1025,12 +1027,12 @@ Regy_add(stub_hash, Id_zu, "zu", "isiZulu");
 		Xol_lang_stub rv = Get_by_key_or_null(key, bgn, end);
 		return rv == null ? Intl : rv;
 	}
-	public static final Xol_lang_stub Intl = new Xol_lang_stub(Xol_lang_stub_.Id__intl, Bry_.Empty, Bry_.Empty);	// intended for international wikis like commons, wikidata, etc..
+	public static final Xol_lang_stub Intl = new Xol_lang_stub(Xol_lang_stub_.Id__intl, BryUtl.Empty, BryUtl.Empty);	// intended for international wikis like commons, wikidata, etc..
 }
 class Xol_sub_itm_comparer implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xol_lang_stub lhs = (Xol_lang_stub)lhsObj;
 		Xol_lang_stub rhs = (Xol_lang_stub)rhsObj;
-		return Bry_.Compare(lhs.Key(), rhs.Key());
+		return BryUtl.Compare(lhs.Key(), rhs.Key());
 	}
 }

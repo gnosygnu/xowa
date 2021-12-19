@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.qrys; import gplx.dbs.*;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*; import gplx.dbs.sqls.*;
 public class Db_qry_select_tst {
 	@Before public void setup() {
@@ -83,5 +84,5 @@ public class Db_qry_select_tst {
 //			expd = "SELECT fld0, fld1 FROM tbl0 GROUP BY fld0, fld1 HAVING Count(fld0) > 1";
 //			Tfds.Eq(cmd.To_str(), expd);
 //		}
-	void tst_XtoStr(Db_qry qry, String expd) {Tfds.Eq(expd, cmd.ToSqlExec(SqlQryWtrUtl.NewBasic()));}
+	void tst_XtoStr(Db_qry qry, String expd) {GfoTstr.EqObj(expd, cmd.ToSqlExec(SqlQryWtrUtl.NewBasic()));}
 }

@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
+package gplx.xowa.mediawiki;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.*;
+import gplx.core.btries.*;
 public class XophpString__tst {
 	private final XophpString__fxt fxt = new XophpString__fxt();
 	@Test public void Strspn_fwd__byte() {
@@ -38,11 +46,11 @@ public class XophpString__tst {
 		fxt.Test_strspn_bwd__space_or_tab("     a", 4, -1, 4);	// bgn
 		fxt.Test_strspn_bwd__space_or_tab("     a", 4,  2, 2);	// max
 	}
-	@Test  public void Substr__bgn_is_neg() {
+	@Test public void Substr__bgn_is_neg() {
 		fxt.Test_substr("abcde"                   , -1, "e");
 		fxt.Test_substr("abcde"                   , -3, -1, "cd");
 	}
-	@Test  public void Strtr() {
+	@Test public void Strtr() {
 		fxt.Init_strtr_by_trie("01", "89", "02", "79");
 		fxt.Test_strtr_by_trie("abc"           , "abc");                 // found=none
 		fxt.Test_strtr_by_trie("ab_01_cd"      , "ab_89_cd");            // found=one
@@ -50,12 +58,12 @@ public class XophpString__tst {
 		fxt.Test_strtr_by_trie("01_ab"         , "89_ab");               // BOS
 		fxt.Test_strtr_by_trie("ab_01"         , "ab_89");               // EOS
 	}
-	@Test  public void Str_repeat() {
+	@Test public void Str_repeat() {
 		fxt.Test_str_repeat("abc", 3, "abcabcabc");
 		fxt.Test_str_repeat("", 3, "");
 		fxt.Test_str_repeat("abc", 0, "");
 	}
-	@Test  public void Strpos() {
+	@Test public void Strpos() {
 		fxt.Test__strpos("abc", "b", 0, 1);
 		fxt.Test__strpos("abc", "z", 0, XophpString_.strpos_NULL);
 		fxt.Test__strpos("aba", "a", 1, 2);
@@ -179,22 +187,22 @@ public class XophpString__tst {
 }
 class XophpString__fxt {
 	public void Test_strspn_fwd__byte(String src_str, byte find, int bgn, int max, int expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
-		Gftest.Eq__int(expd, XophpString_.strspn_fwd__byte(src_bry, find, bgn, max, src_bry.length));
+		byte[] src_bry = BryUtl.NewU8(src_str);
+		GfoTstr.Eq(expd, XophpString_.strspn_fwd__byte(src_bry, find, bgn, max, src_bry.length));
 	}
 	public void Test_strspn_fwd__space_or_tab(String src_str, int bgn, int max, int expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
-		Gftest.Eq__int(expd, XophpString_.strspn_fwd__space_or_tab(src_bry, bgn, max, src_bry.length));
+		byte[] src_bry = BryUtl.NewU8(src_str);
+		GfoTstr.Eq(expd, XophpString_.strspn_fwd__space_or_tab(src_bry, bgn, max, src_bry.length));
 	}
 	public void Test_strspn_bwd__byte(String src_str, byte find, int bgn, int max, int expd) {
-		Gftest.Eq__int(expd, XophpString_.strspn_bwd__byte(Bry_.new_u8(src_str), find, bgn, max));
+		GfoTstr.Eq(expd, XophpString_.strspn_bwd__byte(BryUtl.NewU8(src_str), find, bgn, max));
 	}
 	public void Test_strspn_bwd__space_or_tab(String src_str, int bgn, int max, int expd) {
-		Gftest.Eq__int(expd, XophpString_.strspn_bwd__space_or_tab(Bry_.new_u8(src_str), bgn, max));
+		GfoTstr.Eq(expd, XophpString_.strspn_bwd__space_or_tab(BryUtl.NewU8(src_str), bgn, max));
 	}
-	public void Test_substr(String src_str, int bgn, String expd) {Test_substr(src_str, bgn, String_.Len(src_str), expd);}
+	public void Test_substr(String src_str, int bgn, String expd) {Test_substr(src_str, bgn, StringUtl.Len(src_str), expd);}
 	public void Test_substr(String src_str, int bgn, int len, String expd) {
-		Gftest.Eq__str(expd, XophpString_.substr(Bry_.new_u8(src_str), bgn, len));
+		GfoTstr.Eq(expd, XophpString_.substr(BryUtl.NewU8(src_str), bgn, len));
 	}
 	private Btrie_slim_mgr strtr_trie;
 	public void Init_strtr_by_trie(String... kvs) {
@@ -205,59 +213,59 @@ class XophpString__fxt {
 		}
 	}
 	public void Test_strtr_by_trie(String src, String expd) {
-		Bry_bfr tmp = Bry_bfr_.New();
+		BryWtr tmp = BryWtr.New();
 		Btrie_rv trv = new Btrie_rv();
-		Gftest.Eq__str(expd, XophpString_.strtr(Bry_.new_u8(src), strtr_trie, tmp, trv));
+		GfoTstr.Eq(expd, XophpString_.strtr(BryUtl.NewU8(src), strtr_trie, tmp, trv));
 	}
 	public void Test_str_repeat(String str, int count, String expd) {
-		Gftest.Eq__str(expd, XophpString_.str_repeat(str, count));
+		GfoTstr.Eq(expd, XophpString_.str_repeat(str, count));
 	}
 	public void Test__strpos(String haystack, String needle, int offset, int expd) {
-		Gftest.Eq__int(expd, XophpString_.strpos(haystack, needle, offset));
+		GfoTstr.Eq(expd, XophpString_.strpos(haystack, needle, offset));
 	}
 	public Hash_adp Init__strspn_hash(String mask) {return XophpString_.strspn_hash(mask);}
-	public void Test__strspn(int expd, String ignore, String subject, String mask)            {Test__strspn(expd, ignore, subject, mask, Int_.Zero, Int_.Zero);}
-	public void Test__strspn(int expd, String ignore, String subject, String mask, int start) {Test__strspn(expd, ignore, subject, mask,     start, Int_.Zero);}
+	public void Test__strspn(int expd, String ignore, String subject, String mask)            {Test__strspn(expd, ignore, subject, mask, IntUtl.Zero, IntUtl.Zero);}
+	public void Test__strspn(int expd, String ignore, String subject, String mask, int start) {Test__strspn(expd, ignore, subject, mask,     start, IntUtl.Zero);}
 	public void Test__strspn(int expd, String ignore, String subject, String mask, int start, int length) {
 		int actl = XophpString_.strspn(subject, XophpString_.strspn_hash(mask), start, length);
-		Gftest.Eq__int(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test__rtrim(String str, String character_mask, String expd) {
-		Gftest.Eq__str(expd, XophpString_.rtrim(str, character_mask));
+		GfoTstr.Eq(expd, XophpString_.rtrim(str, character_mask));
 	}
 	public void Test__rtrim__fail(String str, String character_mask, String expd_exc) {
 		try {
 			XophpString_.rtrim(str, character_mask);
 		} catch (Exception exc) {
-			String actl_exc = Err_.Message_lang(exc);
-			if (!String_.Has(actl_exc, expd_exc)) {
-				Gftest.Fail("expected failure, but got this: " + actl_exc);
+			String actl_exc = ErrUtl.Message(exc);
+			if (!StringUtl.Has(actl_exc, expd_exc)) {
+				GfoTstr.Fail("expected failure, but got this: " + actl_exc);
 			}
 			return;
 		}
-		Gftest.Fail("expected failure, but got none: " + character_mask);
+		GfoTstr.Fail("expected failure, but got none: " + character_mask);
 	}
 	public void Test__ltrim(String str, String character_mask, String expd) {
-		Gftest.Eq__str(expd, XophpString_.ltrim(str, character_mask));
+		GfoTstr.Eq(expd, XophpString_.ltrim(str, character_mask));
 	}
 	public void Test__trim(String str, String character_mask, String expd) {
-		Gftest.Eq__str(expd, XophpString_.trim(str, character_mask));
+		GfoTstr.Eq(expd, XophpString_.trim(str, character_mask));
 	}
 	public void Test__ord(String str, int expd) {
-		Gftest.Eq__int(expd, XophpString_.ord(str));
+		GfoTstr.Eq(expd, XophpString_.ord(str));
 	}
 	public void Test__Fmt(String expd, String fmt, Object... args) {
-		Gftest.Eq__str(expd, XophpString_.Fmt(fmt, args));
+		GfoTstr.Eq(expd, XophpString_.Fmt(fmt, args));
 	}
 	public void Test__strrev(String src, String expd) {
-		Gftest.Eq__str(expd, XophpString_.strrev(src));
+		GfoTstr.Eq(expd, XophpString_.strrev(src));
 	}
 	public void Test__str_repeat(String input, int multiplier, String expd) {
-		Gftest.Eq__str(expd, XophpString_.str_repeat(input, multiplier));
+		GfoTstr.Eq(expd, XophpString_.str_repeat(input, multiplier));
 	}
-	public void Test__strcspn(int expd, String subject, String mask)            {Test__strcspn(expd, subject, mask, Int_.Zero, Int_.Zero);}
-	public void Test__strcspn(int expd, String subject, String mask, int start) {Test__strcspn(expd, subject, mask,     start, Int_.Zero);}
+	public void Test__strcspn(int expd, String subject, String mask)            {Test__strcspn(expd, subject, mask, IntUtl.Zero, IntUtl.Zero);}
+	public void Test__strcspn(int expd, String subject, String mask, int start) {Test__strcspn(expd, subject, mask,     start, IntUtl.Zero);}
 	public void Test__strcspn(int expd, String subject, String mask, int start, int length) {
-		Gftest.Eq__int(expd, XophpString_.strcspn(subject, XophpString_.strspn_hash(mask), start, length));
+		GfoTstr.Eq(expd, XophpString_.strcspn(subject, XophpString_.strspn_hash(mask), start, length));
 	}
 }

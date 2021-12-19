@@ -14,9 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.data;
-
-import gplx.Err_;
-
+import gplx.types.errs.ErrUtl;
 public class Xow_db_file_ {
 	public static final int Uid__core = 0;
 	public static final byte
@@ -58,7 +56,7 @@ public class Xow_db_file_ {
 			case Tid__random:		return Key__random;
 			case Tid__css:			return Key__css;
 			case Tid__html_user:	return Key__html_user;
-			default:				throw Err_.new_unhandled(v);
+			default:				throw ErrUtl.NewUnhandled(v);
 		}
 	}
 }

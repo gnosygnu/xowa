@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.registrys.lists; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.registrys.lists;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.users.data.*;
 class Xow_list_html extends Xow_special_wtr__base {
@@ -27,8 +33,8 @@ class Xow_list_html extends Xow_special_wtr__base {
 		int len = site_ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xoud_site_row site_itm = site_ary[i];
-			if (String_.Eq(site_itm.Domain(), gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home)) continue;
-			list.Add(new Xow_list_doc_wiki(Bry_.new_u8(site_itm.Domain()), site_itm.Date()));
+			if (StringUtl.Eq(site_itm.Domain(), gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home)) continue;
+			list.Add(new Xow_list_doc_wiki(BryUtl.NewU8(site_itm.Domain()), site_itm.Date()));
 		}
 		return new Xow_list_doc(gplx.xowa.addons.wikis.imports.Xow_import_special.Get_root_url(), (Xow_list_doc_wiki[])list.ToAryAndClear(Xow_list_doc_wiki.class));
 	}

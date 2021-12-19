@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.ifs;
-import gplx.Bry_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.tdbs.metas.Xof_meta_itm;
@@ -47,7 +47,7 @@ public class Pfunc_ifexist_tst {
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");	// BUG:2nd call actually ends up as n; PAGE:en.w:Harstad DATE:2018-07-03
 	}
 	@Test public void Media_y_file_v1() {// DATE:2014-07-04
-		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Dbmeta_mgr().Get_itm_or_new(Bry_.new_a7("A.png"));
+		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Dbmeta_mgr().Get_itm_or_new(BryUtl.NewA7("A.png"));
 		meta_itm.Orig_exists_(BoolUtl.YByte);
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
 	}

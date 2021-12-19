@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*;
+package gplx.xowa.wikis.data.tbls;
 import gplx.core.criterias.*;
 import gplx.dbs.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
 class Xowd_page_tbl__id extends Xowd_page_tbl__in_wkr__base {
 	private final List_adp list;		// list is original list of ids which may have dupes; needed to fill statement (which takes range of bgn - end); DATE:2013-12-08
 	private final Ordered_hash hash;	// hash is unique list of ids; needed for fetch from rdr (which indexes by id)
@@ -30,7 +32,7 @@ class Xowd_page_tbl__id extends Xowd_page_tbl__in_wkr__base {
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Xowd_page_itm page = (Xowd_page_itm)list.Get_at(i);
+			Xowd_page_itm page = (Xowd_page_itm)list.GetAt(i);
 			stmt.Val_int(page.Id());		
 		}
 	}

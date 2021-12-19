@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*;
-import gplx.xowa.guis.views.*; import gplx.xowa.guis.cmds.*;
+package gplx.xowa.guis.bnds;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.ipts.IptArg;
+import gplx.gfui.ipts.IptArg_;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptCfg_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.guis.cmds.Xog_cmd_mgr_invk;
+import gplx.xowa.guis.views.Xog_tab_itm;
+import gplx.xowa.guis.views.Xog_tab_mgr;
+import gplx.xowa.guis.views.Xog_win_itm;
 public class Xog_bnd_box_ {
 	public static final String Key_browser = "browser", Key_browser_url = "browser.url", Key_browser_search = "browser.search", Key_browser_allpages = "browser.allpages", Key_browser_html = "browser.html", Key_browser_find = "browser.find", Key_browser_prog = "browser.prog", Key_browser_info = "browser.info";
 	public static final String Gui_browser = "Window", Gui_browser_url = "Url bar", Gui_browser_search = "Search box", Gui_browser_allpages = "Allpages box", Gui_browser_html = "HTML browser", Gui_browser_find = "Find box", Gui_browser_prog = "Status bar", Gui_browser_info = "System Messages box";
@@ -44,7 +53,7 @@ public class Xog_bnd_box_ {
 		return Xto_sys_str(tid);
 	}
 	public static int[] Xto_sys_int_ary(String s) {
-		String[] ary = String_.Split(s, "|");
+		String[] ary = StringUtl.Split(s, "|");
 		int len = ary.length;
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++)
@@ -52,15 +61,15 @@ public class Xog_bnd_box_ {
 		return rv;
 	}
 	public static int Xto_sys_int(String s) {
-		if		(String_.Eq(s, Key_browser))			return Tid_browser;
-		else if	(String_.Eq(s, Key_browser_url))		return Tid_browser_url;
-		else if	(String_.Eq(s, Key_browser_search))		return Tid_browser_search;
-		else if	(String_.Eq(s, Key_browser_allpages))	return Tid_browser_allpages;
-		else if	(String_.Eq(s, Key_browser_html))		return Tid_browser_html;
-		else if	(String_.Eq(s, Key_browser_find))		return Tid_browser_find;
-		else if	(String_.Eq(s, Key_browser_prog))		return Tid_browser_prog;
-		else if	(String_.Eq(s, Key_browser_info))		return Tid_browser_info;
-		else											throw Err_.new_unhandled(s);
+		if		(StringUtl.Eq(s, Key_browser))			return Tid_browser;
+		else if	(StringUtl.Eq(s, Key_browser_url))		return Tid_browser_url;
+		else if	(StringUtl.Eq(s, Key_browser_search))		return Tid_browser_search;
+		else if	(StringUtl.Eq(s, Key_browser_allpages))	return Tid_browser_allpages;
+		else if	(StringUtl.Eq(s, Key_browser_html))		return Tid_browser_html;
+		else if	(StringUtl.Eq(s, Key_browser_find))		return Tid_browser_find;
+		else if	(StringUtl.Eq(s, Key_browser_prog))		return Tid_browser_prog;
+		else if	(StringUtl.Eq(s, Key_browser_info))		return Tid_browser_info;
+		else											throw ErrUtl.NewUnhandled(s);
 	}
 	public static String Xto_sys_str(int v) {
 		switch (v) {
@@ -72,7 +81,7 @@ public class Xog_bnd_box_ {
 			case Tid_browser_find:				return Key_browser_find;
 			case Tid_browser_prog:				return Key_browser_prog;
 			case Tid_browser_info:				return Key_browser_info;
-			default:							throw Err_.new_unhandled(v);
+			default:							throw ErrUtl.NewUnhandled(v);
 		}
 	}
 	public static String Xto_gui_str(int v) {
@@ -85,32 +94,32 @@ public class Xog_bnd_box_ {
 			case Tid_browser_find:				return Gui_browser_find;
 			case Tid_browser_prog:				return Gui_browser_prog;
 			case Tid_browser_info:				return Gui_browser_info;
-			default:							throw Err_.new_unhandled(v);
+			default:							throw ErrUtl.NewUnhandled(v);
 		}
 	}
 	public static int Xby_gui_str(String s) {
-		if		(String_.Eq(s, Gui_browser))			return Tid_browser;
-		else if	(String_.Eq(s, Gui_browser_url))		return Tid_browser_url;
-		else if	(String_.Eq(s, Gui_browser_search))		return Tid_browser_search;
-		else if	(String_.Eq(s, Gui_browser_allpages))	return Tid_browser_allpages;
-		else if	(String_.Eq(s, Gui_browser_html))		return Tid_browser_html;
-		else if	(String_.Eq(s, Gui_browser_find))		return Tid_browser_find;
-		else if	(String_.Eq(s, Gui_browser_prog))		return Tid_browser_prog;
-		else if	(String_.Eq(s, Gui_browser_info))		return Tid_browser_info;
-		else											throw Err_.new_unhandled(s);
+		if		(StringUtl.Eq(s, Gui_browser))			return Tid_browser;
+		else if	(StringUtl.Eq(s, Gui_browser_url))		return Tid_browser_url;
+		else if	(StringUtl.Eq(s, Gui_browser_search))		return Tid_browser_search;
+		else if	(StringUtl.Eq(s, Gui_browser_allpages))	return Tid_browser_allpages;
+		else if	(StringUtl.Eq(s, Gui_browser_html))		return Tid_browser_html;
+		else if	(StringUtl.Eq(s, Gui_browser_find))		return Tid_browser_find;
+		else if	(StringUtl.Eq(s, Gui_browser_prog))		return Tid_browser_prog;
+		else if	(StringUtl.Eq(s, Gui_browser_info))		return Tid_browser_info;
+		else											throw ErrUtl.NewUnhandled(s);
 	}
 	public static void Set_bnd_for_grp(byte mode, Xog_win_itm win, Xog_cmd_mgr_invk invk_mgr, Xog_bnd_box box, Xog_bnd_itm itm, IptArg ipt) {
 		GfuiElem box_elem = null;
 		String grp_key = box.Key();
-		if		(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_html))			{Set_bnd_for_tab(mode, win.Tab_mgr(), invk_mgr, box, itm, ipt); return;}
-		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser))					box_elem = win.Win_box();
-		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_url))				box_elem = win.Url_box();
-		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_search))			box_elem = win.Search_box();
-		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_allpages))		box_elem = win.Allpages_box();
-		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_find))			box_elem = win.Find_box();
-		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_prog))			box_elem = win.Prog_box();
-		else if	(String_.Eq(grp_key, Xog_bnd_box_.Key_browser_info))			box_elem = win.Info_box();
-		else																	throw Err_.new_wo_type("unknown box", "grp", grp_key);
+		if		(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser_html))			{Set_bnd_for_tab(mode, win.Tab_mgr(), invk_mgr, box, itm, ipt); return;}
+		else if	(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser))					box_elem = win.Win_box();
+		else if	(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser_url))				box_elem = win.Url_box();
+		else if	(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser_search))			box_elem = win.Search_box();
+		else if	(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser_allpages))		box_elem = win.Allpages_box();
+		else if	(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser_find))			box_elem = win.Find_box();
+		else if	(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser_prog))			box_elem = win.Prog_box();
+		else if	(StringUtl.Eq(grp_key, Xog_bnd_box_.Key_browser_info))			box_elem = win.Info_box();
+		else																	throw ErrUtl.NewArgs("unknown box", "grp", grp_key);
 		Set_bnd_for_elem(mode, box, box_elem, invk_mgr, itm, ipt);
 	}
 	public static void Set_bnd_for_elem(byte mode, Xog_bnd_box box, GfuiElem box_elem, Xog_cmd_mgr_invk invk_mgr, Xog_bnd_itm itm, IptArg ipt) {
@@ -125,7 +134,7 @@ public class Xog_bnd_box_ {
 			case Set_del_ipt:
 				box_elem.IptBnds().Del_by_ipt(ipt);
 				break;
-			default: throw Err_.new_unhandled(mode);
+			default: throw ErrUtl.NewUnhandled(mode);
 		}
 	}
 	private static void Set_bnd_for_tab(byte mode, Xog_tab_mgr tab_mgr, Xog_cmd_mgr_invk invk_mgr, Xog_bnd_box box, Xog_bnd_itm itm, IptArg ipt) {

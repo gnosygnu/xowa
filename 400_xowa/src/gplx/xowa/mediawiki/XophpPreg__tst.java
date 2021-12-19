@@ -14,10 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.IntList;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class XophpPreg__tst {
 	private final XophpPreg__fxt fxt = new XophpPreg__fxt();
@@ -26,10 +27,10 @@ public class XophpPreg__tst {
 	@Test public void Eos()           {fxt.Test_split("a''"              , "''", BoolUtl.Y, "a", "''");}
 }
 class XophpPreg__fxt {
-	private final gplx.core.primitives.Int_list rv = new gplx.core.primitives.Int_list();
-	public void Test_split(String src, String dlm, boolean extend, String... expd) {Test_split(src, 0, String_.Len(src), dlm, extend, expd);}
+	private final IntList rv = new IntList(16);
+	public void Test_split(String src, String dlm, boolean extend, String... expd) {Test_split(src, 0, StringUtl.Len(src), dlm, extend, expd);}
 	public void Test_split(String src, int src_bgn, int src_end, String dlm, boolean extend, String... expd) {
-		byte[][] actl = XophpPreg_.split(rv, Bry_.new_u8(src), src_bgn, src_end, Bry_.new_u8(dlm), extend);
-		Gftest.Eq__ary(expd, String_.Ary(actl), "find_failed");
+		byte[][] actl = XophpPreg_.split(rv, BryUtl.NewU8(src), src_bgn, src_end, BryUtl.NewU8(dlm), extend);
+		GfoTstr.EqLines(expd, StringUtl.Ary(actl), "find_failed");
 	}
 }

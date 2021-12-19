@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.edits;
-import gplx.Bry_;
-import gplx.Datetime_now;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -67,7 +67,7 @@ public class Xoctg_edit_mgr {
 		Xowd_text_tbl last_text_tbl = new Xowd_text_tbl(last_text_db.Conn(), db_mgr.Props().Schema_is_1(), db_mgr.Props().Zip_tid_text());
 
 		// get some variables for creating cat_link rows
-		int timestamp = (int)Datetime_now.Get().Timestamp_unix();
+		int timestamp = (int)GfoDateNow.Get().TimestampUnix();
 		Xoctg_collation_mgr collation_mgr = wiki.Ctg__catpage_mgr().Collation_mgr();
 		Xowd_page_itm tmp_page = new Xowd_page_itm();
 
@@ -82,7 +82,7 @@ public class Xoctg_edit_mgr {
 				// create [[Category]] page
 				ctg_id = Xopg_db_mgr.Create
 					( page_tbl, last_text_tbl, last_text_db.Id(), core_db.Tbl__ns(), core_db.Tbl__cfg()
-					, gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl.Page_db(), Bry_.Empty
+					, gplx.xowa.wikis.nss.Xow_ns_.Tid__category, ctg_ttl.Page_db(), BryUtl.Empty
 					, last_cat_link_db.Id()); // NOTE: new categories go into last cat_link_db
 
 				// create cat_core row

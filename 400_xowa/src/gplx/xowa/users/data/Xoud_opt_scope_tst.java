@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.data;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import org.junit.*; import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoud_opt_scope_tst {
@@ -34,17 +37,17 @@ class Xoud_opt_scope_fxt {
 	}
 	public Xoud_opt_scope Make(int lang_id, int type_id) {return new Xoud_opt_scope(lang_id, type_id);}
 	public void Test_parse(String raw, Xoud_opt_scope... expd) {
-		Xoud_opt_scope[] actl = parser.Parse(Bry_.new_u8(raw));
-		Tfds.Eq(To_str(expd), To_str(actl));
+		Xoud_opt_scope[] actl = parser.Parse(BryUtl.NewU8(raw));
+		GfoTstr.EqObj(To_str(expd), To_str(actl));
 	}
 	private static String To_str(Xoud_opt_scope[] ary) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xoud_opt_scope itm = ary[i];
-			if (i != 0) bfr.Add_str_a7(",");
-			bfr.Add_str_a7(itm.To_str());
+			if (i != 0) bfr.AddStrA7(",");
+			bfr.AddStrA7(itm.To_str());
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 }

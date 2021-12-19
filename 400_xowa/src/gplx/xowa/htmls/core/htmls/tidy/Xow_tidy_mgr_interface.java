@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.htmls.core.htmls.tidy;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public interface Xow_tidy_mgr_interface {
-	void Exec_tidy(Bry_bfr bfr, boolean indent, byte[] page_url);
+	void Exec_tidy(BryWtr bfr, boolean indent, byte[] page_url);
 }

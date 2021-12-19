@@ -13,29 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.bldrs.installs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class Xoi_mirror_parser {
 	public String[] Parse(String raw_str) {
-		if (String_.Len_eq_0(raw_str)) return String_.Ary_empty;
-		byte[] raw = Bry_.new_u8(raw_str);
+		if (StringUtl.IsNullOrEmpty(raw_str)) return StringUtl.AryEmpty;
+		byte[] raw = BryUtl.NewU8(raw_str);
 		List_adp rv = List_adp_.New();
 		int pos = 0;
 		while (true) {
-			int bgn = Bry_find_.Find_fwd(raw, CONST_href_bgn, pos); if (bgn == Bry_find_.Not_found) break;
+			int bgn = BryFind.FindFwd(raw, CONST_href_bgn, pos); if (bgn == BryFind.NotFound) break;
 			bgn += CONST_href_bgn.length;			
-			int end = Bry_find_.Find_fwd(raw, CONST_href_end, bgn); if (end == Bry_find_.Not_found) return String_.Ary_empty;
-			byte[] date = Bry_.Mid(raw, bgn, end); 
+			int end = BryFind.FindFwd(raw, CONST_href_end, bgn); if (end == BryFind.NotFound) return StringUtl.AryEmpty;
+			byte[] date = BryLni.Mid(raw, bgn, end);
 			pos = end + CONST_href_end.length;			
-			if (Bry_.Match(date, CONST_date_parent_dir)) continue;
+			if (BryLni.Eq(date, CONST_date_parent_dir)) continue;
 			int date_pos_last = date.length - 1;
-			if (date_pos_last == -1) return String_.Ary_empty;
-			if (date[date_pos_last] == AsciiByte.Slash) date = Bry_.Mid(date, 0, date_pos_last);	// trim trailing /; EX: "20130101/" -> "20130101"
-			rv.Add(String_.new_u8(date));
+			if (date_pos_last == -1) return StringUtl.AryEmpty;
+			if (date[date_pos_last] == AsciiByte.Slash) date = BryLni.Mid(date, 0, date_pos_last);	// trim trailing /; EX: "20130101/" -> "20130101"
+			rv.Add(StringUtl.NewU8(date));
 		}
 		return rv.ToStrAry();
-	}	private static final byte[] CONST_href_bgn = Bry_.new_a7("<a href=\""), CONST_href_end = Bry_.new_a7("\""), CONST_date_parent_dir = Bry_.new_a7("../");
+	}	private static final byte[] CONST_href_bgn = BryUtl.NewA7("<a href=\""), CONST_href_end = BryUtl.NewA7("\""), CONST_date_parent_dir = BryUtl.NewA7("../");
 	public static String Find_last_lte(String[] ary, String comp) {	// assuming sorted ary, find last entry that is lte comp
 		int len = ary.length;
 		for (int i = len - 1; i > -1; i--) {

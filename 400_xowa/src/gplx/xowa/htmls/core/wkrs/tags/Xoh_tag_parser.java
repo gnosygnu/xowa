@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.tags; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.tags;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.hdumps.*;
@@ -55,7 +58,7 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 			if (hdump_atr != Gfh_atr.Noop) {
 				Xoh_hdump_wkr hdump_wkr = (Xoh_hdump_wkr)hdump_wkrs.GetByOrNull(hdump_atr.Val());
 				if (hdump_wkr == null) {
-					tag_rdr.Err_wkr().Warn("unable to find hdump_wkr: " + String_.new_a7(hdump_atr.Val()));
+					tag_rdr.Err_wkr().Warn("unable to find hdump_wkr: " + StringUtl.NewA7(hdump_atr.Val()));
 					rv = cur_end;
 					hdoc_wkr.On_txt(pos, rv);
 				}
@@ -134,5 +137,5 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 		data.Pool__rls();
 		return rv;
 	}
-	public static byte[] Bry__data_xowa_hdump = Bry_.new_a7("data-xowa-hdump");
+	public static byte[] Bry__data_xowa_hdump = BryUtl.NewA7("data-xowa-hdump");
 }

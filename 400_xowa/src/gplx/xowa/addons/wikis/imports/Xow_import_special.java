@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
-import gplx.xowa.specials.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.wikis.pages.*;
-import gplx.core.ios.*;	
+package gplx.xowa.addons.wikis.imports;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
+import gplx.xowa.specials.*;
+import gplx.core.net.qargs.*; import gplx.xowa.wikis.pages.*;
 public class Xow_import_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
@@ -35,7 +39,7 @@ public class Xow_import_special implements Xow_special_page {
 		if (	selected == 1
 			&&	dir_cmd != null) {
 			Xow_import_addon addon = Xow_import_addon.Addon__get(wiki);
-			Xow_import_dir_cbk import_cbk = addon.Dir_selected_cbks__get_by(String_.new_u8(dir_cmd));
+			Xow_import_dir_cbk import_cbk = addon.Dir_selected_cbks__get_by(StringUtl.NewU8(dir_cmd));
 			import_cbk.Cbk__dir_selected(wiki, page, owner_str);
 		}
 
@@ -44,9 +48,9 @@ public class Xow_import_special implements Xow_special_page {
 
 	public static byte[] Get_root_url() {
 		byte tid = gplx.core.envs.Op_sys.Cur().Tid();
-		byte[] rv = Bry_.new_a7("/");
+		byte[] rv = BryUtl.NewA7("/");
 		switch (tid) {
-			case gplx.core.envs.Op_sys.Tid_wnt	: rv = Bry_.new_a7("C:\\"); break;
+			case gplx.core.envs.Op_sys.Tid_wnt	: rv = BryUtl.NewA7("C:\\"); break;
 		}
 		rv = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(rv);
 		return rv;

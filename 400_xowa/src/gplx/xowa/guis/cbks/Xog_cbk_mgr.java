@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.cbks;
 import gplx.core.gfobjs.*;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
 public class Xog_cbk_mgr {	// INSTANCE:app
 	private Xog_cbk_wkr[] wkrs = Xog_cbk_wkr_.Ary_empty; private int wkrs_len = 0;
 	public void Reg(Xog_cbk_wkr wkr) {

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.wikis.ttls.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
 public class Xop_subst_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {
@@ -38,7 +40,7 @@ public class Xop_subst_tst {
 	@Test public void Unreferenced() {	// PURPOSE: if subst, but in tmpl stage, do not actually subst; PAGE:en.w:Unreferenced; DATE:2013-01-31
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("substcheck", "SUBST");
-		fxt.Init_defn_add("ifsubst", String_.Concat_lines_nl
+		fxt.Init_defn_add("ifsubst", StringUtl.ConcatLinesNl
 			(	"{{ {{{|safesubst:}}}#ifeq:{{ {{{|safesubst:}}}NAMESPACE}}|{{NAMESPACE}}"
 			,	" |{{{no|{{{2|}}}}}}"
 			,	" |{{{yes|{{{1|}}}}}}"
@@ -61,7 +63,7 @@ public class Xop_subst_tst {
 		fxt.Init_defn_add("test", "{{safesubst:urlencode:{{Template:{{{1}}}}}}}");
 		fxt.Test_parse_page_tmpl_str("{{test|Template:[xyz]}}", "%7B%7BTemplate%3ATemplate%3A%5Bxyz%5D%7D%7D");	// url-encoded version of {{safesubst:Template:xyz}}
 	}
-	@Test  public void Nowiki() {	// PURPOSE: stack overflow; PAGE:Близкие_друзья_(Сезон_2) DATE:2014-10-21
+	@Test public void Nowiki() {	// PURPOSE: stack overflow; PAGE:Близкие_друзья_(Сезон_2) DATE:2014-10-21
 		fxt.Init_defn_add("ET", "");
 		fxt.Init_defn_add("ds", "<includeonly>{{subst:</includeonly><includeonly>ET|<nowiki>{{subst:ds}}</nowiki>}}</includeonly>");
 		fxt.Test_parse_page_tmpl_str("{{subst:ds}}", "");	// {{subst:ds}} causes stack overflow; {{ds}} does not

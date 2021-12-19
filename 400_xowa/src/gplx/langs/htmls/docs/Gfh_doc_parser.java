@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.langs.htmls.docs; import gplx.langs.htmls.*;
 import gplx.core.btries.*;
 public class Gfh_doc_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
@@ -21,14 +21,14 @@ public class Gfh_doc_parser {
 	public Gfh_doc_parser(Gfh_txt_wkr txt_wkr, Gfh_doc_wkr... wkr_ary) {
 		this.txt_wkr = txt_wkr;
 		for (Gfh_doc_wkr wkr : wkr_ary)
-			trie.Add_obj(wkr.Hook(), wkr);
+			trie.AddObj(wkr.Hook(), wkr);
 	}
 	public void Parse(byte[] page_url, byte[] src, int src_bgn, int src_end) {
 		int txt_bgn = -1;
 		int pos = src_bgn;
 		Btrie_rv trv = new Btrie_rv();
 		while (pos < src_end) {
-			Object o = trie.Match_at(trv, src, pos, src_end);
+			Object o = trie.MatchAt(trv, src, pos, src_end);
 			if (o == null) {									// not a known hook; add to txt
 				if (txt_bgn == -1) txt_bgn = pos;
 				++pos;

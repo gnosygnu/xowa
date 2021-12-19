@@ -13,17 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*;
-import gplx.dbs.*; import gplx.xowa.addons.wikis.ctgs.dbs.*; import gplx.xowa.wikis.data.tbls.*;	
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.xowa.*;
+import gplx.dbs.*;
+import gplx.xowa.wikis.data.tbls.*;
 class Xoctg_pagebox_loader implements Select_in_cbk {
 	private final Xoctg_pagebox_hash hash; private final byte[] page_url;
 	public Xoctg_pagebox_loader(Xoctg_pagebox_hash hash, byte[] page_url) {
 		this.hash = hash; this.page_url = page_url;
 	}
 	public int Hash_max() {return hash.Len();}
-	public void Write_sql(Bry_bfr bfr, int idx) {
+	public void Write_sql(BryWtr bfr, int idx) {
 		Xoctg_pagebox_itm page = (Xoctg_pagebox_itm)hash.Get_at(idx);
-		bfr.Add_int_variable(page.Id());
+		bfr.AddIntVariable(page.Id());
 	}
 	public void Read_data(Db_rdr rdr) {
 		int cat_id = rdr.Read_int("cat_id");
@@ -36,14 +44,14 @@ class Xoctg_pagebox_loader implements Select_in_cbk {
 	public void Select_catlinks_by_page(Xow_wiki wiki, Db_conn cat_link_conn, Xoctg_pagebox_hash hash, int page_id) {
 		// init
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(cat_link_conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()));
-		String sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
+		String sql = StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "SELECT  cl.cl_to_id"
 		, ",       cl.cl_timestamp_unix"
 		, ",       p.page_namespace"
 		, ",       p.page_title"
 		, "FROM    cat_link cl"
 		, "        JOIN <page_db>page p ON cl.cl_to_id = p.page_id"
-		, "WHERE   cl.cl_from = " + Int_.To_str(page_id)
+		, "WHERE   cl.cl_from = " + IntUtl.ToStr(page_id)
 		);
 		sql = attach_mgr.Resolve_sql(sql);
 
@@ -58,11 +66,11 @@ class Xoctg_pagebox_loader implements Select_in_cbk {
 				Xoctg_pagebox_itm itm = (Xoctg_pagebox_itm)hash.Get_by_ttl(ttl.Full_db());
 				if (itm == null)
 					itm = hash.Add_by_ttl(ttl);
-				itm.Load_by_db(rdr.Read_int("cl_to_id"), DateAdp_.unixtime_utc_ms_(rdr.Read_long("cl_timestamp_unix")));
+				itm.Load_by_db(rdr.Read_int("cl_to_id"), GfoDateUtl.NewUnixtimeUtcMs(rdr.Read_long("cl_timestamp_unix")));
 			}
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "category.pagebox: fatal error while retrieving categories; page=~{0} err=~{1}", page_id, Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "category.pagebox: fatal error while retrieving categories; page=~{0} err=~{1}", page_id, ErrUtl.ToStrLog(e));
 		}
 		finally {
 			rdr.Rls();

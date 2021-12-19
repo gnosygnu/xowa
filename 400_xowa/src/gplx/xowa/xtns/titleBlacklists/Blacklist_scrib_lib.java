@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.titleBlacklists; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.titleBlacklists;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Blacklist_scrib_lib implements Scrib_lib {
 	public String Key() {return "mw.ext.TitleBlacklist";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -29,12 +37,12 @@ public class Blacklist_scrib_lib implements Scrib_lib {
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_test:										return Test(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int Proc_test = 0;
 	public static final String Invk_test = "test";
-	private static final String[] Proc_names = String_.Ary(Invk_test);
+	private static final String[] Proc_names = StringUtl.Ary(Invk_test);
 	public boolean Test(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_null();	// assume all titles are blacklisted; note that this info is not available;
 	}

@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.tdbs.metas;
+import gplx.core.primitives.Gfo_number_parser;
+import gplx.core.primitives.Int_ary_parser;
+import gplx.core.primitives.Obj_ary_parser_base;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 	private final Gfo_number_parser number_parser = new Gfo_number_parser();
 	private final Int_ary_parser int_ary_parser = new Int_ary_parser();
@@ -33,16 +37,16 @@ public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
 	}
 	@Override protected void Parse_itm(byte[] bry, int bgn, int end) {	// EX: "1:45,40"; "1:45,40:3,4"
 		Xof_meta_thumb itm = new Xof_meta_thumb(); boolean height_found = false;
-		if (end - 2 < bgn)	throw Err_.new_wo_type("itm must be at least 2 bytes long", "itm", String_.new_u8(bry, bgn, end)); // EX: 4,6
+		if (end - 2 < bgn)	throw ErrUtl.NewArgs("itm must be at least 2 bytes long", "itm", StringUtl.NewU8(bry, bgn, end)); // EX: 4,6
 		int pos = bgn;
 		byte exists_byte = bry[pos];
 		switch (exists_byte) {
 			case AsciiByte.Num0: itm.Exists_(Xof_meta_itm.Exists_n); break;
 			case AsciiByte.Num1: itm.Exists_(Xof_meta_itm.Exists_y); break;
 			case AsciiByte.Num2: itm.Exists_(Xof_meta_itm.Exists_unknown); break;
-			default: throw Err_.new_wo_type("exists must be 0,1,2", "exists", exists_byte, "itm", String_.new_u8(bry, bgn, end));
+			default: throw ErrUtl.NewArgs("exists must be 0,1,2", "exists", exists_byte, "itm", StringUtl.NewU8(bry, bgn, end));
 		}
-		if (bry[pos + 1] != Dlm_exists) throw Err_.new_wo_type("question must follow exists", "bad_char", bry[pos + 1], "itm", String_.new_u8(bry, bgn, end));
+		if (bry[pos + 1] != Dlm_exists) throw ErrUtl.NewArgs("question must follow exists", "bad_char", bry[pos + 1], "itm", StringUtl.NewU8(bry, bgn, end));
 		pos += 2;
 		int num_bgn = pos;
 		while (pos < end) {

@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
 import java.io.InputStream;
 import gplx.core.ios.streams.*;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class Io_stream_rdr_process implements Io_stream_rdr {
 	    private Process process;
     private InputStream stream_read;
@@ -31,13 +34,13 @@ public class Io_stream_rdr_process implements Io_stream_rdr {
     	pb.redirectErrorStream(false);
     	try {process = pb.start();}
     	catch (Exception e) {
-    		throw Err_.new_exc(e, "core", "process init failed", "args", String_.AryXtoStr(process_args));
+    		throw ErrUtl.NewArgs(e, "process init failed", "args", StringUtl.AryToStr(process_args));
     		}
     	stream_read = process.getInputStream();
 		return this;
 			}
-	public void Open_mem(byte[] v) {throw Err_.new_unimplemented();}
-	public Object Under() {throw Err_.new_unimplemented();}
+	public void Open_mem(byte[] v) {throw ErrUtl.NewUnimplemented();}
+	public Object Under() {throw ErrUtl.NewUnimplemented();}
 
 	public int Read(byte[] bry, int bgn, int len) {
 				try {
@@ -53,15 +56,15 @@ public class Io_stream_rdr_process implements Io_stream_rdr {
 				if (rv >= len) break;
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.new_exc(e, "io", "process read failed", "bgn", bgn, "len", len);}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "process read failed", "bgn", bgn, "len", len);}
 			}
 	public long Skip(long len) {
 				try {return stream_read.skip(len);}
-		catch (Exception e) {throw Err_.new_exc(e, "io", "process skip failed", "len", len);}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "process skip failed", "len", len);}
 			}
 	public void Rls() {
 				try {stream_read.close();}
-		catch (Exception e) {throw Err_.new_exc(e, "io", "process rls failed");}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "process rls failed");}
 		process.destroy();
 			}
 	public static Io_stream_rdr_process new_(Io_url process_exe, Io_url stream_url, String... process_args) {return new Io_stream_rdr_process(process_exe, stream_url, process_args);}

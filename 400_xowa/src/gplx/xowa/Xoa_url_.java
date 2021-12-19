@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.wikis.pages.*;
 public class Xoa_url_ {
 	public static final int Tid_unknown = 0, Tid_page = 1, Tid_anch = 2, Tid_inet = 3, Tid_file = 4, Tid_xcmd = 5;
@@ -26,12 +27,12 @@ public class Xoa_url_ {
 	public static void Invalid_warn(String url) {Xoa_app_.Usr_dlg().Plog_many("", "", "invalid url; url=~{0}", url);}
 	public static String Main_page__home_str = gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home + gplx.xowa.htmls.hrefs.Xoh_href_.Str__wiki + gplx.xowa.Xoa_page_.Main_page_str;	// EX:home/wiki/Main_Page
 	public static final byte[]
-	  Qarg__redirect            = Bry_.new_a7("redirect")
-	, Qarg__redirect__no        = Bry_.new_a7("no")
-	, Qarg__action              = Bry_.new_a7("action")
+	  Qarg__redirect            = BryUtl.NewA7("redirect")
+	, Qarg__redirect__no        = BryUtl.NewA7("no")
+	, Qarg__action              = BryUtl.NewA7("action")
 	, Qarg__action__read        = Xopg_view_mode_.Bry__read
 	, Qarg__action__edit        = Xopg_view_mode_.Bry__edit
 	, Qarg__action__html        = Xopg_view_mode_.Bry__html
-	, Qarg__curid               = Bry_.new_a7("curid")
+	, Qarg__curid               = BryUtl.NewA7("curid")
 	;
 }

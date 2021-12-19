@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.xowa.apps.urls.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.xndes.tags.*; import gplx.xowa.htmls.core.wkrs.xndes.dicts.*;
@@ -52,8 +54,8 @@ public class Xoh_hdoc_ctx {
 		this.app = app;
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
-		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, AsciiByte.SlashBry);
-		this.fsys__file__math = Bry_.Add(fsys__file, Bry_.new_a7("math"), AsciiByte.SlashBry);
+		this.fsys__file__comm = BryUtl.Add(fsys__file, Xow_domain_itm_.Bry__commons, AsciiByte.SlashBry);
+		this.fsys__file__math = BryUtl.Add(fsys__file, BryUtl.NewA7("math"), AsciiByte.SlashBry);
 		this.fsys__res = gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? Fsys__res__drd : fsys__root;
 		this.fsys__is_wnt = gplx.core.envs.Op_sys.Cur().Tid_is_wnt();
 		Xou_cache_mgr usr_cache_mgr = app.User().User_db_mgr().Cache_mgr();
@@ -75,14 +77,14 @@ public class Xoh_hdoc_ctx {
 			Xof_repo_pair pair = pairs[i];
 			Xof_repo_itm itm = pair.Trg();
 			byte[] itm_domain = itm.Wiki_domain();
-			if		(Bry_.Eq(itm_domain, wiki__domain_bry))
+			if		(BryLni.Eq(itm_domain, wiki__domain_bry))
 				repo_local = itm;
-			else if (Bry_.Eq(itm_domain, Xow_domain_itm_.Bry__commons))
+			else if (BryLni.Eq(itm_domain, Xow_domain_itm_.Bry__commons))
 				repo_remote = pair.Trg();
 		}
 
 		this.abrv__wiki = wiki.Domain_itm().Abrv_xo();
-		this.fsys__file__wiki = Bry_.Add(fsys__file, wiki__domain_bry, AsciiByte.SlashBry);
+		this.fsys__file__wiki = BryUtl.Add(fsys__file, wiki__domain_bry, AsciiByte.SlashBry);
 		this.page = page;
 		this.page__url = page.Url_bry_safe();
 		this.Clear();
@@ -93,5 +95,5 @@ public class Xoh_hdoc_ctx {
 
 	public void Test__cache__mgr_(Xou_cache_finder v) {this.cache_mgr = v;}
 	public static final int Invalid = -1;
-	private static final byte[] Fsys__res__drd = Bry_.new_a7("file:///android_asset/xowa/");
+	private static final byte[] Fsys__res__drd = BryUtl.NewA7("file:///android_asset/xowa/");
 }

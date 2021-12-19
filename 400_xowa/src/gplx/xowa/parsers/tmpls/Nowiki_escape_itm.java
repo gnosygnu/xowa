@@ -13,26 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*;
+package gplx.xowa.parsers.tmpls;
 import gplx.core.btries.*; import gplx.langs.htmls.entitys.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 public class Nowiki_escape_itm {
 	public Nowiki_escape_itm(byte[] src, byte[] trg) {this.src = src; this.trg = trg; this.src_adj = src.length - 1;}
 	private int src_adj;
 	public byte[] Src() {return src;} private byte[] src;
 	public byte[] Trg() {return trg;} private byte[] trg;
-	public static boolean Escape(Bry_bfr tmp_bfr, byte[] src, int bgn, int end) {// <nowiki> works by escaping all wtxt symbols so that wtxt parser does not hook into any of them
+	public static boolean Escape(BryWtr tmp_bfr, byte[] src, int bgn, int end) {// <nowiki> works by escaping all wtxt symbols so that wtxt parser does not hook into any of them
 		boolean dirty = false;
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			Object o = trie.Match_bgn_w_byte(b, src, i, end);
 			if (o == null) {
 				if (dirty)
-					tmp_bfr.Add_byte(b);
+					tmp_bfr.AddByte(b);
 			}
 			else {
 				if (!dirty) {
-					tmp_bfr.Add_mid(src, bgn, i);
+					tmp_bfr.AddMid(src, bgn, i);
 					dirty = true;
 				}
 				Nowiki_escape_itm itm = (Nowiki_escape_itm)o;
@@ -61,9 +63,9 @@ public class Nowiki_escape_itm {
 		New_trie_itm(rv, pre_bry						, pre_bry);
 		return rv;
 	}		
-	private static void New_trie_itm(Btrie_slim_mgr rv, byte[] src, String trg) {New_trie_itm(rv, src, Bry_.new_u8(trg));}
+	private static void New_trie_itm(Btrie_slim_mgr rv, byte[] src, String trg) {New_trie_itm(rv, src, BryUtl.NewU8(trg));}
 	private static void New_trie_itm(Btrie_slim_mgr rv, byte[] src, byte[] trg) {
 		Nowiki_escape_itm itm = new Nowiki_escape_itm(src, trg);
-		rv.Add_obj(src, itm);			
+		rv.AddObj(src, itm);
 	}
 }

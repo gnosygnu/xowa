@@ -13,33 +13,39 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.bldrs.sql_dumps;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import org.junit.*;
-import gplx.core.tests.*;
 public class Xosql_dump_parser__tst {		
 	private final Xosql_dump_parser__fxt fxt = new Xosql_dump_parser__fxt();
 	private static final String table_def = "\n  KEY \n) ENGINE; ";
 	@Test public void One() {
-		fxt.Init(String_.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2);", "2|");
+		fxt.Init(StringUtl.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2);", "2|");
 	}
 	@Test public void Many() {
-		fxt.Init(String_.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2),(3,4),(5,6);", "2|\n4|\n6|");
+		fxt.Init(StringUtl.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2),(3,4),(5,6);", "2|\n4|\n6|");
 	}
 	@Test public void Quote_basic() {
-		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a','b');", "a|b|");
+		fxt.Init(StringUtl.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a','b');", "a|b|");
 	}
 	@Test public void Escape_backslash() {
-		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a\\\\b','c');", "a\\b|c|");
+		fxt.Init(StringUtl.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a\\\\b','c');", "a\\b|c|");
 	}
 	@Test public void Escape_quote() {
-		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a\"b','c');", "a\"b|c|");
+		fxt.Init(StringUtl.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a\"b','c');", "a\"b|c|");
 	}
 	@Test public void Fld_paren_end() {
-		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'Психостимуляторы_(лекарственные_средства)','c');", "Психостимуляторы_(лекарственные_средства)|c|");
+		fxt.Init(StringUtl.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'Психостимуляторы_(лекарственные_средства)','c');", "Психостимуляторы_(лекарственные_средства)|c|");
 	}
 	@Test public void Insert_multiple() {
-		fxt.Init(String_.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2);INSERT INTO 'tbl_1' VALUES (3,4)", "2|\n4|");
+		fxt.Init(StringUtl.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2);INSERT INTO 'tbl_1' VALUES (3,4)", "2|\n4|");
 	}
 }
 class Xosql_dump_parser__fxt {
@@ -57,34 +63,34 @@ class Xosql_dump_parser__fxt {
 		Io_mgr.Instance.SaveFilBry(src_fil, Make_dump(tbl_flds, raw_str));
 		parser.Src_fil_(src_fil);
 		parser.Parse(Gfo_usr_dlg_.Test());
-		Gftest.Eq__str(expd, cbk.To_bry_and_clear());
+		GfoTstr.Eq(expd, cbk.To_bry_and_clear());
 	}
 	private byte[] Make_dump(String[] tbl_flds, String insert) {
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_a7("CREATE TABLE tbl_0 (");
+		BryWtr bfr = BryWtr.New();
+		bfr.AddStrA7("CREATE TABLE tbl_0 (");
 		for (int i = 0; i < tbl_flds.length; ++i) {
-			bfr.Add_byte_nl();
-			bfr.Add_byte(AsciiByte.Tick);
-			bfr.Add_str_a7(tbl_flds[i]);
-			bfr.Add_byte(AsciiByte.Tick);
-			bfr.Add_byte_comma();
+			bfr.AddByteNl();
+			bfr.AddByte(AsciiByte.Tick);
+			bfr.AddStrA7(tbl_flds[i]);
+			bfr.AddByte(AsciiByte.Tick);
+			bfr.AddByteComma();
 		}
-		bfr.Add_str_a7("\nUNIQUE KEY idx_0 (fld_0));\n");
-            bfr.Add_str_u8(insert);
-		return bfr.To_bry_and_clear();
+		bfr.AddStrA7("\nUNIQUE KEY idx_0 (fld_0));\n");
+            bfr.AddStrU8(insert);
+		return bfr.ToBryAndClear();
 	}
 }
 class Xosql_dump_cbk__test implements Xosql_dump_cbk {
 	private int prv_idx = -1;
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public void Clear() {prv_idx = -1; bfr.Clear();}
 	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		if (fld_idx <= prv_idx) {
-			if (prv_idx != -1) bfr.Add_byte_nl();
+			if (prv_idx != -1) bfr.AddByteNl();
 		}
-		bfr.Add_mid(src, val_bgn, val_end).Add_byte_pipe();
+		bfr.AddMid(src, val_bgn, val_end).AddBytePipe();
 		prv_idx = fld_idx;
 	}
 	public void On_row_done() {}
-	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
+	public byte[] To_bry_and_clear() {return bfr.ToBryAndClear();}
 }

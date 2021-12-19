@@ -15,17 +15,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.GfsCtx;
-import gplx.Hash_adp_bry;
-import gplx.Io_mgr;
-import gplx.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
 import gplx.core.ios.Io_stream_zip_mgr;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
@@ -46,9 +47,9 @@ import gplx.xowa.xtns.indicators.Indicator_hxtn_page_wkr;
 
 public class Xow_hdump_mgr__load implements Gfo_invk {
 	private final Xow_wiki wiki; private final Xoh_hzip_mgr hzip_mgr; private final Io_stream_zip_mgr zip_mgr;
-	private final Xoh_page tmp_hpg; private final Bry_bfr tmp_bfr; private final Xowd_page_itm tmp_dbpg = new Xowd_page_itm();
+	private final Xoh_page tmp_hpg; private final BryWtr tmp_bfr; private final Xowd_page_itm tmp_dbpg = new Xowd_page_itm();
 	private Xow_override_mgr override_mgr__html, override_mgr__page;
-	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
+	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, BryWtr tmp_bfr) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
 		this.make_mgr = Xoh_make_mgr.New_make();
 	}
@@ -92,7 +93,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			if (load_ctg) {
 				tmp_bfr.Add(src);
 				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, hpg);
-				src = tmp_bfr.To_bry_and_clear();
+				src = tmp_bfr.ToBryAndClear();
 			}
 
 			hpg.Db().Html().Html_bry_(src);
@@ -100,7 +101,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			return true;
 		}
 	}
-	public byte[] Decode_as_bry(Bry_bfr bfr, Xoh_page hpg, byte[] src, boolean mode_is_diff) {hzip_mgr.Hctx().Mode_is_diff_(mode_is_diff); hzip_mgr.Decode(bfr, wiki, hpg, src); return bfr.To_bry_and_clear();}
+	public byte[] Decode_as_bry(BryWtr bfr, Xoh_page hpg, byte[] src, boolean mode_is_diff) {hzip_mgr.Hctx().Mode_is_diff_(mode_is_diff); hzip_mgr.Decode(bfr, wiki, hpg, src); return bfr.ToBryAndClear();}
 
 	public byte[] Parse(byte[] src, Xoae_page page) { // NOTE: currently, only used by HTTP_SERVER; may generalize later
 		Xoh_page hpg = new Xoh_page();
@@ -121,7 +122,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			case Xoh_hzip_dict_.Hdb__hzip:
 				if (override_mgr__html != null)	// null when Parse is called directly
 					src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
-				hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
+				hpg.Section_mgr().Add(0, 2, BryUtl.Empty, BryUtl.Empty).Content_bgn_(0);	// +1 to skip \n
 				src = Decode_as_bry(tmp_bfr.Clear(), hpg, src, BoolUtl.N);
 				hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
 				break;
@@ -213,9 +214,9 @@ class Xow_override_mgr {
 		for (int i = 0; i < urls_len; ++i) {
 			Io_url url = urls[i];
 			byte[] raw = Io_mgr.Instance.LoadFilBry(url); int bry_len = raw.length;
-			int nl_pos = Bry_find_.Find_fwd(raw, AsciiByte.Nl, 0, bry_len); if (nl_pos == Bry_find_.Not_found) continue;
-			byte[] ttl = Bry_.Mid(raw, 0, nl_pos);
-			byte[] src = Bry_.Mid(raw, nl_pos + 1, bry_len);				
+			int nl_pos = BryFind.FindFwd(raw, AsciiByte.Nl, 0, bry_len); if (nl_pos == BryFind.NotFound) continue;
+			byte[] ttl = BryLni.Mid(raw, 0, nl_pos);
+			byte[] src = BryLni.Mid(raw, nl_pos + 1, bry_len);
 			hash.Add_bry_obj(ttl, src);
 		}
 	}

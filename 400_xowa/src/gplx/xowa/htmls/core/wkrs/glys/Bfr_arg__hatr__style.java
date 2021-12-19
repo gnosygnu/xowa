@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.glys;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.xowa.htmls.core.wkrs.bfr_args.*;
-class Bfr_arg__hatr__style implements gplx.core.brys.Bfr_arg {
+class Bfr_arg__hatr__style implements BryBfrArg {
 	private final byte[] atr_bgn;
 	private int max_w, w;
 	private byte[] xtra_cls;
@@ -27,28 +30,28 @@ class Bfr_arg__hatr__style implements gplx.core.brys.Bfr_arg {
 	public void Clear() {max_w = 0; w = 0; xtra_cls = null;}
 	public void Bfr_arg__clear() {this.Clear();}
 	public boolean Bfr_arg__missing() {return max_w == 0 && xtra_cls == null;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		if (Bfr_arg__missing()) return;
 		bfr.Add(atr_bgn);
 		if (max_w > 0) {
 			bfr.Add(Style__frag_1);
-			bfr.Add_int_variable(max_w);
+			bfr.AddIntVariable(max_w);
 			bfr.Add(Style__frag_3);
 		}
 		if (w > 0) {
-			bfr.Add_byte_space();
+			bfr.AddByteSpace();
 			bfr.Add(Style__frag_2);
-			bfr.Add_int_variable(w);
+			bfr.AddIntVariable(w);
 			bfr.Add(Style__frag_3);
 		}
 		if (xtra_cls != null) {
 			bfr.Add(xtra_cls);
 		}
-		bfr.Add_byte_quote();
+		bfr.AddByteQuote();
 	}
 	private static final byte[]
-	  Style__frag_1 = Bry_.new_a7("max-width:")
-	, Style__frag_2 = Bry_.new_a7("_width:")
-	, Style__frag_3 = Bry_.new_a7("px;")
+	  Style__frag_1 = BryUtl.NewA7("max-width:")
+	, Style__frag_2 = BryUtl.NewA7("_width:")
+	, Style__frag_3 = BryUtl.NewA7("px;")
 	;
 }

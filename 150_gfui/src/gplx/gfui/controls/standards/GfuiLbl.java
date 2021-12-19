@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.gfxs.*; import gplx.gfui.imgs.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+package gplx.gfui.controls.standards;
+import gplx.gfui.gfxs.*;
+import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+import gplx.types.commons.KeyValHash;
 public class GfuiLbl extends GfuiElemBase { // standard label does not support tooltips
 	@Override public void Click() {
 		int focusOrder = this.OwnerElem().SubElems().IndexOfA(this);
@@ -26,13 +28,13 @@ public class GfuiLbl extends GfuiElemBase { // standard label does not support t
 		this.TextMgr().DrawData(args.Graphics());
 		return true;
 	}		
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.CustomDraw_set(true);
 	}
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		this.CustomDraw_set(true);
 	}
-	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
 }

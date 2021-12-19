@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Xop_xnde_tag_stack {
 	public void Push()		{xmlTagsStack.Add(xmlTags); xmlTags = new int[Xop_xnde_tag_.Tid__len];}
 	public void Pop()		{xmlTags = (int[])List_adp_.Pop(xmlTagsStack);}

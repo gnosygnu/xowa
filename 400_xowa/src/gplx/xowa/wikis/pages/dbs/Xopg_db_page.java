@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.dbs;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.DateAdp;
-import gplx.DateAdp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.wikis.nss.Xow_ns;
@@ -30,7 +30,7 @@ public class Xopg_db_page {
 	public int          Id()                {return id;}                private int id;
 	public int          Ns_id()             {return ns_id;}             private int ns_id;
 	public byte[]       Ttl_bry()           {return ttl_bry;}           private byte[] ttl_bry;
-	public DateAdp      Modified_on()       {return modified_on;}       private DateAdp modified_on;
+	public GfoDate Modified_on()       {return modified_on;}       private GfoDate modified_on;
 	public int          Text_len()          {return text_len;}          private int text_len;
 	public int          Text_db_id()        {return text_db_id;}        private int text_db_id;
 	public int          Html_db_id()        {return html_db_id;}        private int html_db_id;
@@ -42,7 +42,7 @@ public class Xopg_db_page {
 	public void Exists_(boolean v)                  {this.exists = v;}
 	public Xopg_db_page Id_(int v)                  {this.id = v; return this;}
 	public Xopg_db_page Score_(int v)               {this.score = v; return this;}
-	public Xopg_db_page Modified_on_(DateAdp v)     {this.modified_on = v; return this;}
+	public Xopg_db_page Modified_on_(GfoDate v)     {this.modified_on = v; return this;}
 	public Xopg_db_page Html_db_id_(int v)          {this.html_db_id = v; return this;}
 
 	// wiki-related
@@ -50,7 +50,7 @@ public class Xopg_db_page {
 	public Xoa_ttl      Ttl()               {return ttl;}               private Xoa_ttl ttl;
 
 	// init methods
-	public Xopg_db_page Init_by_db(int id, int ns_id, byte[] ttl_bry, DateAdp modified_on, int text_len, int text_db_id, int html_db_id, int redirect_to_id, int score) {
+	public Xopg_db_page Init_by_db(int id, int ns_id, byte[] ttl_bry, GfoDate modified_on, int text_len, int text_db_id, int html_db_id, int redirect_to_id, int score) {
 		this.id = id; this.ns_id = ns_id; this.ttl_bry = ttl_bry; this.modified_on = modified_on;
 		this.text_len = text_len; this.text_db_id = text_db_id; this.html_db_id = html_db_id; this.redirect_to_id = redirect_to_id; this.score = score;
 		this.ns = null; this.ttl = null;
@@ -67,7 +67,7 @@ public class Xopg_db_page {
 	}
 	public void Clear() {
 		this.exists = true;
-		this.modified_on = DateAdp_.MinValue;	// NOTE: must set to MinValue else some tests will fail
+		this.modified_on = GfoDateUtl.MinValue;	// NOTE: must set to MinValue else some tests will fail
 
 		// NOTE: must set to -1 b/c code checks for -1 to indicate no html; DATE:2016-07-14;
 		// NOTE: this should probably be removed, but would need to change all the checks; DATE:2020-08-06

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.JsonConfig.*;
-import gplx.core.primitives.*;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
+import gplx.types.basics.lists.IntList;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.*;
 import gplx.xowa.langs.*;
 public class JCTabularContent extends JCDataContent {//		protected function createDefaultView() {
@@ -138,11 +139,11 @@ public class JCTabularContent extends JCDataContent {//		protected function crea
 		XophpStdClass data = this.getData();
 		JCLocalizeItmFunc localize = new JCLocalizeItmFunc(lang);
 
-		Int_list isLocalized = new Int_list();
+		IntList isLocalized = new IntList(16);
 		result.Set_by_as_itm("schema", new XophpStdClass());
 
 		XophpStdClass result_schema_flds = new XophpStdClass();
-		result.Set_by_as_itm(String_.Ary("schema", "fields"), result_schema_flds);
+		result.Set_by_as_itm(StringUtl.Ary("schema", "fields"), result_schema_flds);
 		XophpStdClass flds = data.Get_by_ary_as_itm("schema", "fields");
 		int flds_len = flds.Len();
 		for (int ind = 0; ind < flds_len; ind++) {
@@ -182,8 +183,8 @@ class JCArrayFunc {
 }
 class JCLocalizeAryFunc {
 	private final JCLocalizeItmFunc localize;
-	private final Int_list isLocalized;
-	public JCLocalizeAryFunc(JCLocalizeItmFunc localize, Int_list isLocalized) {
+	private final IntList isLocalized;
+	public JCLocalizeAryFunc(JCLocalizeItmFunc localize, IntList isLocalized) {
 		this.localize = localize;
 		this.isLocalized = isLocalized;
 	}

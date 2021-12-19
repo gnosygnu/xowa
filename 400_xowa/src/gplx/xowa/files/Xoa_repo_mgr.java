@@ -13,35 +13,43 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*;
+package gplx.xowa.files;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
 public class Xoa_repo_mgr implements Gfo_invk {
 	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr;
 	public Xoa_repo_mgr(Xoa_fsys_mgr app_fsys, Xof_rule_mgr ext_rule_mgr) {this.app_fsys = app_fsys; this.ext_rule_mgr = ext_rule_mgr;}
 	public int Count() {return hash.Len();}
-	public Xof_repo_itm Get_at(int i)		{return (Xof_repo_itm)hash.Get_at(i);}
+	public Xof_repo_itm Get_at(int i)		{return (Xof_repo_itm)hash.GetAt(i);}
 	public Xof_repo_itm Get_by(byte[] key)	{return (Xof_repo_itm)hash.GetByOrNull(key);}
 	public Xof_repo_itm Get_by_primary(byte[] key)	{
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_itm repo = (Xof_repo_itm)hash.Get_at(i);
-			if (Bry_.Eq(key, repo.Wiki_domain()) && repo.Primary()) return repo;
+			Xof_repo_itm repo = (Xof_repo_itm)hash.GetAt(i);
+			if (BryLni.Eq(key, repo.Wiki_domain()) && repo.Primary()) return repo;
 		}
 		return null;
 	}
 	public Xof_repo_itm Get_by_wmf_fsys(byte[] key) {
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_itm repo = (Xof_repo_itm)hash.Get_at(i);
-			if (Bry_.Eq(key, repo.Wiki_domain()) && repo.Wmf_fsys()) return repo;
+			Xof_repo_itm repo = (Xof_repo_itm)hash.GetAt(i);
+			if (BryLni.Eq(key, repo.Wiki_domain()) && repo.Wmf_fsys()) return repo;
 		}
 		return null;
 	}
 	public Xof_repo_itm Get_by_wiki_key(byte[] key)	{
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Xof_repo_itm repo = (Xof_repo_itm)hash.Get_at(i);
-			if (Bry_.Eq(key, repo.Wiki_domain())) return repo;
+			Xof_repo_itm repo = (Xof_repo_itm)hash.GetAt(i);
+			if (BryLni.Eq(key, repo.Wiki_domain())) return repo;
 		}
 		return null;
 	}
@@ -51,9 +59,9 @@ public class Xoa_repo_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_set = "set";
 	public Xof_repo_itm Set(String key, String url_str, String wiki) {
-		byte[] key_bry = Bry_.new_u8(key);
+		byte[] key_bry = BryUtl.NewU8(key);
 		Xof_repo_itm itm = (Xof_repo_itm)hash.GetByOrNull(key_bry);
-		byte[] wiki_domain = Bry_.new_u8(wiki);
+		byte[] wiki_domain = BryUtl.NewU8(wiki);
 		if (itm == null) {
 			itm = new Xof_repo_itm(key_bry, app_fsys, ext_rule_mgr, wiki_domain);
 			this.Add(itm);

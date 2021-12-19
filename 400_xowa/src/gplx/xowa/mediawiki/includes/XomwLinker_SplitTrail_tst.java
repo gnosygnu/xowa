@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
+import org.junit.*;
+import gplx.core.btries.*;
 public class XomwLinker_SplitTrail_tst {
 	private final XomwLinker_SplitTrail_fxt fxt = new XomwLinker_SplitTrail_fxt();
 	@Test public void Basic()                {fxt.Test__split_trail("abc def"          , "abc"             , " def");}
@@ -30,8 +35,8 @@ class XomwLinker_SplitTrail_fxt {
 		linker.Init_by_wiki(XomwEnv_fxt.NewTest(), trie);
 	}
 	public void Test__split_trail(String trail_str, String expd_inside, String expd_trail) {
-		byte[][] split_trail = linker.splitTrail(Bry_.new_u8(trail_str));
-		Gftest.Eq__str(expd_inside, String_.new_u8(split_trail[0]));
-		Gftest.Eq__str(expd_trail , String_.new_u8(split_trail[1]));
+		byte[][] split_trail = linker.splitTrail(BryUtl.NewU8(trail_str));
+		GfoTstr.Eq(expd_inside, StringUtl.NewU8(split_trail[0]));
+		GfoTstr.Eq(expd_trail , StringUtl.NewU8(split_trail[1]));
 	}
 }

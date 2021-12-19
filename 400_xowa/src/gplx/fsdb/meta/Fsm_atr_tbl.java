@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*;
+package gplx.fsdb.meta;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.Db_tbl_owner;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.types.errs.ErrUtl;
 public class Fsm_atr_tbl implements Db_tbl {
 	public final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_uid, fld_url;
@@ -46,7 +54,7 @@ public class Fsm_atr_tbl implements Db_tbl {
 			}
 		}
 		finally {rdr.Rls();}
-		throw Err_.new_wo_type("missing atr db", "conn", conn.Conn_info().Db_api());
+		throw ErrUtl.NewArgs("missing atr db", "conn", conn.Conn_info().Db_api());
 	}
 	public void Insert(int id, String url_rel) {
 		conn.Stmt_insert(tbl_name, flds).Val_int(fld_uid, id).Val_str(fld_url, url_rel).Exec_insert();

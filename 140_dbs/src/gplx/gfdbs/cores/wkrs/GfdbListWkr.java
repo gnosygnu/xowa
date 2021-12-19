@@ -4,8 +4,8 @@ import gplx.gfdbs.cores.GfdbState;
 import gplx.gfdbs.cores.GfdbItm;
 import gplx.gfdbs.cores.cmds.GfdbModifyCmd;
 import gplx.gfdbs.cores.cmds.GfdbSelectCmd;
-import gplx.objects.lists.GfoIndexedList;
-import gplx.objects.lists.GfoListBase;
+import gplx.types.commons.lists.GfoIndexedList;
+import gplx.types.commons.lists.GfoListBase;
 
 public class GfdbListWkr<K, I extends GfdbItm<K, I>> {
     private final GfoIndexedList<K, I> regy;

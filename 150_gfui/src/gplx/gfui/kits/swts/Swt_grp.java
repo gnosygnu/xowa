@@ -13,28 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.*;
-import gplx.core.threads.Thread_adp_;
-
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.commons.KeyValHash;
 import org.eclipse.swt.*;
-import org.eclipse.swt.custom.*;
 import org.eclipse.swt.events.*;
-import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.layout.*;
 import org.eclipse.swt.widgets.*;
 
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.Gxw_grp;
-import gplx.gfui.draws.*;
-import gplx.gfui.kits.core.GfuiInvkCmd;
 import gplx.gfui.kits.core.Swt_kit;
 
 public class Swt_grp implements Gxw_grp, Swt_control, FocusListener, Gfo_evt_mgr_owner {
 //	private GfuiInvkCmd cmd_sync;
 	private Composite composite;
-	public Swt_grp(Swt_kit kit, Swt_control owner, Keyval_hash ctorArgs) {
+	public Swt_grp(Swt_kit kit, Swt_control owner, KeyValHash ctorArgs) {
 		this.kit = kit;
 		composite = new Composite(owner.Under_composite(), SWT.NONE);
 		core = new Swt_core__basic(composite);

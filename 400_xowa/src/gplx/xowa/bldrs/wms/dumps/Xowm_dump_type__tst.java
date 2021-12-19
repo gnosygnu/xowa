@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.wikis.*;
+package gplx.xowa.bldrs.wms.dumps;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
 public class Xowm_dump_type__tst {
 	private final Xowm_dump_type__fxt fxt = new Xowm_dump_type__fxt();
 	@Test public void Parse() {
@@ -23,5 +25,5 @@ public class Xowm_dump_type__tst {
 	}
 }
 class Xowm_dump_type__fxt {
-	public void Test_parse(String raw_str, int expd) {Tfds.Eq_int(expd, Xowm_dump_type_.parse_by_file(Bry_.new_u8(raw_str)), "dump_type");}
+	public void Test_parse(String raw_str, int expd) {GfoTstr.Eq(expd, Xowm_dump_type_.parse_by_file(BryUtl.NewU8(raw_str)), "dump_type");}
 }

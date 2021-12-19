@@ -14,24 +14,24 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.installs;
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Keyval;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.core.brys.fmtrs.Bry_fmtr_eval_mgr_;
 import gplx.core.threads.Gfo_thread_cmd;
 import gplx.core.threads.Gfo_thread_cmd_;
 import gplx.core.threads.Gfo_thread_cmd_download;
 import gplx.core.threads.Gfo_thread_cmd_replace;
 import gplx.core.threads.Gfo_thread_cmd_unzip;
 import gplx.core.threads.Thread_adp_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.BryFmtrEvalMgrUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
 public class Xoi_cmd_mgr implements Gfo_invk {
@@ -73,12 +73,12 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		int cmds_len = cmds.Len();
 		if (cmds_len == 0) return;
 		for (int i = 0; i < cmds_len - 1; i++) {
-			Gfo_thread_cmd cur_cmd = (Gfo_thread_cmd)cmds.Get_at(i);
-			Gfo_thread_cmd nxt_cmd = (Gfo_thread_cmd)cmds.Get_at(i + 1);
+			Gfo_thread_cmd cur_cmd = (Gfo_thread_cmd)cmds.GetAt(i);
+			Gfo_thread_cmd nxt_cmd = (Gfo_thread_cmd)cmds.GetAt(i + 1);
 			cur_cmd.Cmd_ctor();
 			cur_cmd.Async_next_cmd_(nxt_cmd);
 		}
-		Gfo_thread_cmd cmd = (Gfo_thread_cmd)cmds.Get_at(0);
+		Gfo_thread_cmd cmd = (Gfo_thread_cmd)cmds.GetAt(0);
 		cmds.Clear();
 		this.Working_(BoolUtl.Y);
 		app.Bldr__running_(true);
@@ -86,18 +86,18 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 	}
 	Object Dump_add_many(GfoMsg m) {
 		int args_len = m.Args_count();
-		if (args_len < 4) throw Err_.new_wo_type("Please provide the following: wiki name, wiki date, dump_type, and one command; EX: ('simple.wikipedia.org', 'latest', 'pages-articles', 'wiki.download')");
-		String wiki_key = m.Args_getAt(0).Val_to_str_or_empty();
-		String wiki_date = m.Args_getAt(1).Val_to_str_or_empty();
-		String dump_type = m.Args_getAt(2).Val_to_str_or_empty();
+		if (args_len < 4) throw ErrUtl.NewArgs("Please provide the following: wiki name, wiki date, dump_type, and one command; EX: ('simple.wikipedia.org', 'latest', 'pages-articles', 'wiki.download')");
+		String wiki_key = m.Args_getAt(0).ValToStrOrEmpty();
+		String wiki_date = m.Args_getAt(1).ValToStrOrEmpty();
+		String dump_type = m.Args_getAt(2).ValToStrOrEmpty();
 		Gfo_thread_cmd cmd = null;
 		for (int i = 3; i < args_len; i++) {
-			Keyval kv = m.Args_getAt(i);
-			String kv_val = kv.Val_to_str_or_empty();
-			if (String_.Eq(kv_val, Wiki_cmd_custom))
+			KeyVal kv = m.Args_getAt(i);
+			String kv_val = kv.ValToStrOrEmpty();
+			if (StringUtl.Eq(kv_val, Wiki_cmd_custom))
 				return Dump_add_many_custom(wiki_key, wiki_date, dump_type, false);
 			else {
-				cmd = Dump_cmd_new(wiki_key, wiki_date, dump_type, kv.Val_to_str_or_empty());
+				cmd = Dump_cmd_new(wiki_key, wiki_date, dump_type, kv.ValToStrOrEmpty());
 				cmds.Add(cmd);
 			}
 		}
@@ -105,19 +105,19 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 	}
 	public Gfo_thread_cmd Dump_add_many_custom(String wiki_key, String wiki_date, String dump_type, boolean dumpfile_cmd) {
 		String[] custom_cmds = (app.Cfg().Get_bool_app_or("xowa.bldr.import.unzip_bz2_file", false)) // CFG: Cfg__
-			? String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_unzip.KEY_dump, Xoi_cmd_wiki_import.KEY)
-			: String_.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);
+			? StringUtl.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_unzip.KEY_dump, Xoi_cmd_wiki_import.KEY)
+			: StringUtl.Ary(Xoi_cmd_wiki_download.Key_wiki_download, Xoi_cmd_wiki_import.KEY);
 		int custom_cmds_len = custom_cmds.length;
 		Gfo_thread_cmd cmd = null;
 		for (int j = 0; j < custom_cmds_len; j++) {
 			cmd = Dump_cmd_new(wiki_key, wiki_date, dump_type, custom_cmds[j]);
 			if (dumpfile_cmd) {
-				if		(String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_download.Key_wiki_download)) continue;	// skip download if wiki.dump_file
-				else if	(String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_unzip.KEY_dump)) {
-					Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki_key));
+				if		(StringUtl.Eq(cmd.Async_key(), Xoi_cmd_wiki_download.Key_wiki_download)) continue;	// skip download if wiki.dump_file
+				else if	(StringUtl.Eq(cmd.Async_key(), Xoi_cmd_wiki_unzip.KEY_dump)) {
+					Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(BryUtl.NewU8(wiki_key));
 					if (wiki.Import_cfg().Src_fil_xml()  != null) continue;	// skip unzip if xml exists
 				}
-				else if (String_.Eq(cmd.Async_key(), Xoi_cmd_wiki_import.KEY)) {
+				else if (StringUtl.Eq(cmd.Async_key(), Xoi_cmd_wiki_import.KEY)) {
 					((Xoi_cmd_wiki_import)cmd).Import_move_bz2_to_done_(false);
 				}
 			}
@@ -126,27 +126,27 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		return cmd;
 	}
 	Gfo_thread_cmd Dump_cmd_new(String wiki_key, String wiki_date, String dump_type, String cmd_key) {
-		if		(String_.Eq(cmd_key, Xoi_cmd_wiki_download.Key_wiki_download))			return new Xoi_cmd_wiki_download().Ctor_download_(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_unzip.KEY_dump))						return new Xoi_cmd_wiki_unzip(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_import.KEY))							return new Xoi_cmd_wiki_import(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_build.KEY))						return new Xoi_cmd_category2_build(install_mgr, wiki_key).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_page_props.KEY_category2))		return new Xoi_cmd_category2_page_props(install_mgr, wiki_key, wiki_date).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_category2_categorylinks.KEY_category2))	return new Xoi_cmd_category2_categorylinks(install_mgr, wiki_key, wiki_date).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_search2_build.KEY))						return new Xoi_cmd_search2_build(install_mgr, wiki_key).Owner_(this);
-		else																			throw Err_.new_unhandled(cmd_key);
+		if		(StringUtl.Eq(cmd_key, Xoi_cmd_wiki_download.Key_wiki_download))			return new Xoi_cmd_wiki_download().Ctor_download_(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_wiki_unzip.KEY_dump))						return new Xoi_cmd_wiki_unzip(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_wiki_import.KEY))							return new Xoi_cmd_wiki_import(install_mgr, wiki_key, wiki_date, dump_type).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_category2_build.KEY))						return new Xoi_cmd_category2_build(install_mgr, wiki_key).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_category2_page_props.KEY_category2))		return new Xoi_cmd_category2_page_props(install_mgr, wiki_key, wiki_date).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_category2_categorylinks.KEY_category2))	return new Xoi_cmd_category2_categorylinks(install_mgr, wiki_key, wiki_date).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_search2_build.KEY))						return new Xoi_cmd_search2_build(install_mgr, wiki_key).Owner_(this);
+		else																			throw ErrUtl.NewUnhandled(cmd_key);
 	}
 	public static final String Wiki_cmd_custom = "wiki.custom", Wiki_cmd_dump_file = "wiki.dump_file";
 	public Gfo_thread_cmd Cmd_add(GfoMsg m) {Gfo_thread_cmd rv = Cmd_clone(m); cmds.Add(rv); return rv;}
 	Gfo_thread_cmd Cmd_clone(GfoMsg m) {
 		String cmd_key = m.ReadStr("v");
-		if		(String_.Eq(cmd_key, Gfo_thread_cmd_download.KEY))						return new Gfo_thread_cmd_download().Init("downloading", m.ReadStr("src"), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg"))).Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Ctor(app.Usr_dlg(), app.Gui_mgr().Kit());
-		else if	(String_.Eq(cmd_key, Gfo_thread_cmd_unzip.KEY))							return new Gfo_thread_cmd_unzip().Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Init(app.Usr_dlg(), app.Gui_mgr().Kit(), app.Prog_mgr().App_decompress_bz2(), app.Prog_mgr().App_decompress_zip(), app.Prog_mgr().App_decompress_gz(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("src")), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg")));
-		else if	(String_.Eq(cmd_key, Gfo_thread_cmd_replace.KEY))						return new Gfo_thread_cmd_replace().Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Init(app.Usr_dlg(), app.Gui_mgr().Kit(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("fil")));
-		else if	(String_.Eq(cmd_key, Xoi_cmd_wiki_goto_page.KEY))						return new Xoi_cmd_wiki_goto_page(app, m.ReadStr("v")).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_msg_ok.KEY))								return new Xoi_cmd_msg_ok(app.Usr_dlg(), app.Gui_mgr().Kit(), m.ReadStr("v")).Owner_(this);
-		else if	(String_.Eq(cmd_key, Xoi_cmd_imageMagick_download.KEY_imageMagick))		return new Xoi_cmd_imageMagick_download(app.Usr_dlg(), app.Gui_mgr().Kit(), Bry_fmtr_eval_mgr_.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg"))).Owner_(this);
-		else if	(String_.Eq(cmd_key, Wiki_cmd_dump_file))								return Wiki_cmd_dump_file_make(m);
-		else																			throw Err_.new_unhandled(cmd_key);
+		if		(StringUtl.Eq(cmd_key, Gfo_thread_cmd_download.KEY))						return new Gfo_thread_cmd_download().Init("downloading", m.ReadStr("src"), BryFmtrEvalMgrUtl.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg"))).Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Ctor(app.Usr_dlg(), app.Gui_mgr().Kit());
+		else if	(StringUtl.Eq(cmd_key, Gfo_thread_cmd_unzip.KEY))							return new Gfo_thread_cmd_unzip().Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Init(app.Usr_dlg(), app.Gui_mgr().Kit(), app.Prog_mgr().App_decompress_bz2(), app.Prog_mgr().App_decompress_zip(), app.Prog_mgr().App_decompress_gz(), BryFmtrEvalMgrUtl.Eval_url(app.Url_cmd_eval(), m.ReadBry("src")), BryFmtrEvalMgrUtl.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg")));
+		else if	(StringUtl.Eq(cmd_key, Gfo_thread_cmd_replace.KEY))						return new Gfo_thread_cmd_replace().Url_eval_mgr_(app.Url_cmd_eval()).Owner_(this).Init(app.Usr_dlg(), app.Gui_mgr().Kit(), BryFmtrEvalMgrUtl.Eval_url(app.Url_cmd_eval(), m.ReadBry("fil")));
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_wiki_goto_page.KEY))						return new Xoi_cmd_wiki_goto_page(app, m.ReadStr("v")).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_msg_ok.KEY))								return new Xoi_cmd_msg_ok(app.Usr_dlg(), app.Gui_mgr().Kit(), m.ReadStr("v")).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Xoi_cmd_imageMagick_download.KEY_imageMagick))		return new Xoi_cmd_imageMagick_download(app.Usr_dlg(), app.Gui_mgr().Kit(), BryFmtrEvalMgrUtl.Eval_url(app.Url_cmd_eval(), m.ReadBry("trg"))).Owner_(this);
+		else if	(StringUtl.Eq(cmd_key, Wiki_cmd_dump_file))								return Wiki_cmd_dump_file_make(m);
+		else																			throw ErrUtl.NewUnhandled(cmd_key);
 	}
 	Gfo_thread_cmd Wiki_cmd_dump_file_make(GfoMsg m) {	// note: might be used directly in home-wiki pages to download files
 		Xoi_cmd_dumpfile dumpfile = new Xoi_cmd_dumpfile().Parse_msg(m);

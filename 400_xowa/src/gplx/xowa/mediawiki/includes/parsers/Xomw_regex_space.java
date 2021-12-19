@@ -13,45 +13,47 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
 import gplx.core.btries.*;
 public class Xomw_regex_space {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Xomw_regex_space() {
-		byte[] space = Bry_.New_by_ints(32);
+		byte[] space = BryUtl.NewByInts(32);
 		ws = new byte[][]
 		{ space
-		, Bry_.New_by_ints(9)
-		, Bry_.New_by_ints(10)
-		, Bry_.New_by_ints(13)
+		, BryUtl.NewByInts(9)
+		, BryUtl.NewByInts(10)
+		, BryUtl.NewByInts(13)
 		};
 		// Zs; REF:http://www.fileformat.info/info/unicode/category/Zs/list.htm
 		zs = new byte[][]
 		{ space
-		, Bry_.New_by_ints(194, 160)
-		, Bry_.New_by_ints(225, 154, 128)
-		, Bry_.New_by_ints(226, 128, 129)
-		, Bry_.New_by_ints(226, 128, 130)
-		, Bry_.New_by_ints(226, 128, 131)
-		, Bry_.New_by_ints(226, 128, 132)
-		, Bry_.New_by_ints(226, 128, 133)
-		, Bry_.New_by_ints(226, 128, 134)
-		, Bry_.New_by_ints(226, 128, 135)
-		, Bry_.New_by_ints(226, 128, 136)
-		, Bry_.New_by_ints(226, 128, 137)
-		, Bry_.New_by_ints(226, 128, 138)
-		, Bry_.New_by_ints(226, 128, 175)
-		, Bry_.New_by_ints(226, 129, 159)
-		, Bry_.New_by_ints(227, 128, 128)
+		, BryUtl.NewByInts(194, 160)
+		, BryUtl.NewByInts(225, 154, 128)
+		, BryUtl.NewByInts(226, 128, 129)
+		, BryUtl.NewByInts(226, 128, 130)
+		, BryUtl.NewByInts(226, 128, 131)
+		, BryUtl.NewByInts(226, 128, 132)
+		, BryUtl.NewByInts(226, 128, 133)
+		, BryUtl.NewByInts(226, 128, 134)
+		, BryUtl.NewByInts(226, 128, 135)
+		, BryUtl.NewByInts(226, 128, 136)
+		, BryUtl.NewByInts(226, 128, 137)
+		, BryUtl.NewByInts(226, 128, 138)
+		, BryUtl.NewByInts(226, 128, 175)
+		, BryUtl.NewByInts(226, 129, 159)
+		, BryUtl.NewByInts(227, 128, 128)
 		};
 
 		byte[][] ary = ws;
 		for (byte[] bry : ary) {
-			trie.Add_bry_byte(bry, Byte_.Zero);
+			trie.Add_bry_byte(bry, ByteUtl.Zero);
 		}
 		ary = zs;
 		for (byte[] bry : ary) {
-			trie.Add_bry_byte(bry, Byte_.Zero);
+			trie.Add_bry_byte(bry, ByteUtl.Zero);
 		}
 	}
 	public byte[][] Ws() {return ws;} private byte[][] ws;

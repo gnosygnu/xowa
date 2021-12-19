@@ -13,17 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.xdats; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.core.ios.streams.*;
-import gplx.core.encoders.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.tdbs.xdats;
+import gplx.core.encoders.Base85_;
+import gplx.core.ios.streams.Io_stream_wtr;
+import gplx.core.ios.streams.Io_stream_wtr_;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.wikis.tdbs.BryBfrBase85;
 public class Xob_xdat_file {
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_len() {return src_len;} public Xob_xdat_file Src_len_(int v) {src_len = v; return this;} private int src_len;	// NOTE: src_len can be different than src.length (occurs when reusing brys)
-	public Xob_xdat_file Update(Bry_bfr bfr, Xob_xdat_itm itm, byte[] v) {
+	public Xob_xdat_file Update(BryWtr bfr, Xob_xdat_itm itm, byte[] v) {
 		int ary_len = itm_ends.length;
 		int itm_idx = itm.Itm_idx(); 
 		int prv = itm_idx == 0 ? 0 : itm_ends[itm_idx - 1];
@@ -35,10 +44,10 @@ public class Xob_xdat_file {
 			itm_ends[i] += dif;
 		}
 		Src_rebuild_hdr(bfr, ary_len);
-		bfr.Add_mid(src, itm_0_bgn, itm.Itm_bgn());
+		bfr.AddMid(src, itm_0_bgn, itm.Itm_bgn());
 		bfr.Add(v);
-		bfr.Add_mid(src, itm.Itm_end() + 1, src.length);	// NOTE: + 1 to skip nl
-		src = bfr.To_bry_and_clear();
+		bfr.AddMid(src, itm.Itm_end() + 1, src.length);	// NOTE: + 1 to skip nl
+		src = bfr.ToBryAndClear();
 		return this;
 	}
 	byte[][] Src_extract_brys(int ary_len) {
@@ -46,12 +55,12 @@ public class Xob_xdat_file {
 		int itm_bgn = this.itm_0_bgn;
 		for (int i = 0; i < ary_len; i++) {
 			int itm_end = itm_ends[i] + itm_0_bgn;
-			rv[i] = Bry_.Mid(src, itm_bgn, itm_end);
+			rv[i] = BryLni.Mid(src, itm_bgn, itm_end);
 			itm_bgn = itm_end;
 		}
 		return rv;
 	}
-	public void Sort(Bry_bfr bfr, ComparerAble comparer) {
+	public void Sort(BryWtr bfr, ComparerAble comparer) {
 		int ary_len = itm_ends.length;
 		byte[][] brys = Src_extract_brys(ary_len);
 		ArrayUtl.Sort(brys, comparer);
@@ -66,71 +75,71 @@ public class Xob_xdat_file {
 			itm_bgn = itm_end;
 			bfr.Add(bry);
 		}
-		src = bfr.To_bry_and_clear(); 		
+		src = bfr.ToBryAndClear();
 	}
-	public void Insert(Bry_bfr bfr, byte[] itm) {
+	public void Insert(BryWtr bfr, byte[] itm) {
 		int ary_len = itm_ends.length;
 		itm_ends = (int[])ArrayUtl.Resize(itm_ends, ary_len + 1);
 		int prv_pos = ary_len == 0 ? 0 : itm_ends[ary_len - 1];
 		itm_ends[ary_len] = prv_pos + itm.length;
 		Src_rebuild(bfr, ary_len + 1, itm);
 	}
-	private void Src_rebuild_hdr(Bry_bfr bfr, int ary_len) {
+	private void Src_rebuild_hdr(BryWtr bfr, int ary_len) {
 		int bgn = 0;
 		for (int i = 0; i < ary_len; i++) {
 			int end = itm_ends[i];
 			int len = end - bgn;
-			bfr.Add_base85_len_5(len).Add_byte(Dlm_hdr_fld);
+			BryBfrBase85.AddBase85Len5(bfr, len).AddByte(Dlm_hdr_fld);
 			bgn = end;
 		}
-		bfr.Add_byte(Dlm_row);		
+		bfr.AddByte(Dlm_row);
 	}
-	private void Src_rebuild(Bry_bfr bfr, int ary_len, byte[] new_itm) {
+	private void Src_rebuild(BryWtr bfr, int ary_len, byte[] new_itm) {
 		Src_rebuild_hdr(bfr, ary_len);
 		Src_rebuild_brys(bfr, ary_len, new_itm);
 	}
-	private void Src_rebuild_brys(Bry_bfr bfr, int ary_len, byte[] new_itm) {
+	private void Src_rebuild_brys(BryWtr bfr, int ary_len, byte[] new_itm) {
 		int bgn = itm_0_bgn;
 		boolean insert = new_itm != null;
 		int ary_end = insert ? ary_len - 1 : ary_len;
 		for (int i = 0; i < ary_end; i++) {
 			int end = itm_ends[i] + itm_0_bgn;
-			bfr.Add_mid(src, bgn, end);
+			bfr.AddMid(src, bgn, end);
 			bgn = end;
 		}
 		if (insert) bfr.Add(new_itm);
 		itm_0_bgn = (ary_len * Len_idx_itm) + Len_itm_dlm;
-		src = bfr.To_bry_and_clear(); 
+		src = bfr.ToBryAndClear();
 	}	private static final byte Dlm_hdr_fld = AsciiByte.Pipe, Dlm_row = AsciiByte.Nl;
 	public void Save(Io_url url) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Srl_save_bry(bfr);
 		Io_stream_wtr wtr = Io_stream_wtr_.New_by_url(url);
 		try {
 			wtr.Open();
-			wtr.Write(bfr.Bfr(), 0, bfr.Len());
+			wtr.Write(bfr.Bry(), 0, bfr.Len());
 			wtr.Flush();
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to save file", "url", url.Xto_api());}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to save file", "url", url.Xto_api());}
 		finally {
 			wtr.Rls();
 		}
 	}
-	public void Srl_save_bry(Bry_bfr bfr) {
+	public void Srl_save_bry(BryWtr bfr) {
 		int itm_ends_len = itm_ends.length;
 		int prv_bgn = 0;
 		for (int i = 0; i < itm_ends_len; i++) {
 			int itm_end = itm_ends[i];
-			bfr.Add_base85_len_5(itm_end - prv_bgn).Add_byte(Dlm_hdr_fld);
+			BryBfrBase85.AddBase85Len5(bfr, itm_end - prv_bgn).AddByte(Dlm_hdr_fld);
 			prv_bgn = itm_end;
 		}
-		bfr.Add_byte(Dlm_row);
-		bfr.Add_mid(src, itm_0_bgn, src.length);
+		bfr.AddByte(Dlm_row);
+		bfr.AddMid(src, itm_0_bgn, src.length);
 	}
 	public byte[] Get_bry(int i) {
 		int bgn = i == 0 ? itm_0_bgn : itm_0_bgn + itm_ends[i - 1];
 		int end = itm_0_bgn + itm_ends[i];
-		return Bry_.Mid(src, bgn, end);
+		return BryLni.Mid(src, bgn, end);
 	}
 	public int Count() {return itm_ends.length;}
 	public Xob_xdat_file GetAt(Xob_xdat_itm itm, int idx) {
@@ -142,14 +151,14 @@ public class Xob_xdat_file {
 	}
 	public Xob_xdat_file Find(Xob_xdat_itm itm, byte[] lkp, int lkp_bgn, byte lkp_dlm, boolean exact) {
 		itm.Clear();
-		int itm_idx = Xob_xdat_file_.BinarySearch(itm_0_bgn, src, itm_ends, lkp, lkp_bgn, lkp_dlm, 1, exact, itm); if (itm_idx == String_.Find_none) {return this;}
+		int itm_idx = Xob_xdat_file_.BinarySearch(itm_0_bgn, src, itm_ends, lkp, lkp_bgn, lkp_dlm, 1, exact, itm); if (itm_idx == StringUtl.FindNone) {return this;}
 		GetAt(itm, itm_idx);
 		return this;
 	}
-	public Xob_xdat_file Clear() {src = null; itm_ends = Int_ary_.Empty; return this;}
-	private int[] itm_ends = Int_ary_.Empty; private int itm_0_bgn;
+	public Xob_xdat_file Clear() {src = null; itm_ends = IntAryUtl.Empty; return this;}
+	private int[] itm_ends = IntAryUtl.Empty; private int itm_0_bgn;
 	public Xob_xdat_file Parse(byte[] src, int src_len, Io_url url) {// SEE:NOTE_1;xdat format
-		if (src_len == 0) throw Err_.new_wo_type("file cannot be empty for parse", "url", url.Raw());
+		if (src_len == 0) throw ErrUtl.NewArgs("file cannot be empty for parse", "url", url.Raw());
 		int itm_count = 0, tmp_len = Parse_tmp_len; int[] tmp = Parse_tmp;
 		try {
 			int slot_bgn = 0, slot_old = 0, slot_new = 0;
@@ -173,34 +182,34 @@ public class Xob_xdat_file {
 			for (int i = 0; i < itm_count; i++)
 				itm_ends[i] = tmp[i];
 			itm_0_bgn = slot_bgn + Len_itm_dlm;
-			this.src = Bry_.Mid(src, 0, itm_ends_last + itm_0_bgn);
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse idx", "itm_count", itm_count, "url", url.Raw());}
+			this.src = BryLni.Mid(src, 0, itm_ends_last + itm_0_bgn);
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse idx", "itm_count", itm_count, "url", url.Raw());}
 		return this;
 	}	private static final int Parse_tmp_len = 8 * 1024; static int[] Parse_tmp = new int[Parse_tmp_len];
 	static final int Len_itm_dlm = 1, Len_idx_itm = 6, Offset_base85 = 4;	// 6 = 5 (base85_int) + 1 (new_line/pipe)
 	static final String GRP_KEY = "xowa.xdat_fil";
 	public static byte[] Rebuid_header(byte[] orig, byte[] dlm) {
-		byte[][] rows = Bry_split_.Split(orig, dlm);
+		byte[][] rows = BrySplit.Split(orig, dlm);
 		int rows_len = rows.length;
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int dlm_len = dlm.length;
 		for (int i = 1; i < rows_len; i++) {	// i=1; skip 1st row (which is empty header)
 			byte[] row = rows[i];
 			int row_len = row.length + dlm_len;
-			bfr.Add_base85_len_5(row_len).Add_byte(AsciiByte.Pipe);
+			BryBfrBase85.AddBase85Len5(bfr, row_len).AddByte(AsciiByte.Pipe);
 		}
-		bfr.Add_byte(AsciiByte.Nl);
+		bfr.AddByte(AsciiByte.Nl);
 		for (int i = 1; i < rows_len; i++) {	// i=1; skip 1st row (which is empty header)
 			byte[] row = rows[i];
 			bfr.Add(row);
 			bfr.Add(dlm);
 		}
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 }
 class Xob_xdat_file_ {
-	public static int BinarySearch(int itm_0_bgn, byte[] src, int[] itm_ends, byte[] lkp, int lkp_bgn, byte lkp_dlm, int itm_end_adj, boolean exact, Xob_xdat_itm xdat_itm) {if (lkp == null) throw Err_.new_null();
-		int itm_ends_len = itm_ends.length; if (itm_ends_len == 0) throw Err_.new_wo_type("itm_ends_len cannot have 0 itms");
+	public static int BinarySearch(int itm_0_bgn, byte[] src, int[] itm_ends, byte[] lkp, int lkp_bgn, byte lkp_dlm, int itm_end_adj, boolean exact, Xob_xdat_itm xdat_itm) {if (lkp == null) throw ErrUtl.NewNull();
+		int itm_ends_len = itm_ends.length; if (itm_ends_len == 0) throw ErrUtl.NewArgs("itm_ends_len cannot have 0 itms");
 		int lo = -1, hi = itm_ends_len - 1; // NOTE: -1 is necessary; see test
 		int itm_idx = (hi - lo) / 2;
 		int lkp_len = lkp.length;
@@ -231,19 +240,19 @@ class Xob_xdat_file_ {
 			int itm_dif = hi - lo;
 //				if (itm_end - 1 > fld_bgn) Tfds.Dbg(comp, itm_dif, String_.new_u8(src, fld_bgn, itm_end - 1));
 			switch (itm_dif) {
-				case 0:						return exact ? String_.Find_none : hi;	// NOTE: can be 0 when src.length == 1 || 2; also, sometimes 0 in some situations
+				case 0:						return exact ? StringUtl.FindNone : hi;	// NOTE: can be 0 when src.length == 1 || 2; also, sometimes 0 in some situations
 				case -1:
-					if (flagged)			return exact ? String_.Find_none : lo;
+					if (flagged)			return exact ? StringUtl.FindNone : lo;
 					else {
 						itm_idx--;
 						flagged = true;
 					}
 					break;
 				case 1:
-					if (flagged)			return exact ? String_.Find_none : hi;
+					if (flagged)			return exact ? StringUtl.FindNone : hi;
 					else {
 						itm_idx++;	// ++ to always take higher value when !exact???; EX: "ab,ad,af"
-						if (itm_idx >= itm_ends_len) return String_.Find_none;	// NOTE: occurs when there is only 1 item
+						if (itm_idx >= itm_ends_len) return StringUtl.FindNone;	// NOTE: occurs when there is only 1 item
 						flagged = true;
 					}
 					break;

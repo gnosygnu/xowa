@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*;
+package gplx.core.caches;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Gfo_cache_mgr_base {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int Compress_max() {return compress_max;} public void Compress_max_(int v) {compress_max = v;} private int compress_max = 16;
@@ -31,15 +35,15 @@ public class Gfo_cache_mgr_base {
 		hash.Del(key);
 	}
 	public void Compress() {
-		hash.Sort_by(Gfo_cache_itm_comparer.Touched_asc);
+		hash.SortBy(Gfo_cache_itm_comparer.Touched_asc);
 		int del_len = hash.Len() - compress_to;
 		List_adp del_list = List_adp_.New();
 		for (int i = 0; i < del_len; i++) {
-			Gfo_cache_itm_bry itm = (Gfo_cache_itm_bry)hash.Get_at(i);
+			Gfo_cache_itm_bry itm = (Gfo_cache_itm_bry)hash.GetAt(i);
 			del_list.Add(itm);
 		}
 		for (int i = 0; i < del_len; i++) {
-			Gfo_cache_itm_bry itm = (Gfo_cache_itm_bry)del_list.Get_at(i);
+			Gfo_cache_itm_bry itm = (Gfo_cache_itm_bry)del_list.GetAt(i);
 			hash.Del(itm.Key());
 		}
 	}

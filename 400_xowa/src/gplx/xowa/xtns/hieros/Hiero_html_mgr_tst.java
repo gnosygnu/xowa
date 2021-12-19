@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.hieros;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Hiero_html_mgr_tst {
@@ -25,10 +25,10 @@ public class Hiero_html_mgr_tst {
 		fxt = html_fxt.Hiero_fxt();
 		fxt.Reset();
 	}
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		fxt.Test_html_full_str
 		( "<hiero></hiero>"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -38,16 +38,16 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Glyph_1() {
+	@Test public void Glyph_1() {
 		String wtxt = html_fxt.Glyph_1__wtxt();
 		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Glyph_1__html(BoolUtl.Y));
 		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Glyph_1__html(BoolUtl.N), html_fxt.Glyph_1__html(BoolUtl.Y));
 	}
-	@Test  public void Mirrored() {
+	@Test public void Mirrored() {
 		fxt.Init_hiero_A1_B1();
 		fxt.Test_html_full_str
 		( "<hiero>A1\\</hiero>"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -63,9 +63,9 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Glyph_2() {
+	@Test public void Glyph_2() {
 		fxt.Init_hiero_A1_B1();
-		fxt.Test_html_full_str("<hiero>A1-B1</hiero>", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str("<hiero>A1-B1</hiero>", StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -84,11 +84,11 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Void_half() {
+	@Test public void Void_half() {
 		fxt.Init_hiero_A1_B1();
 		fxt.Test_html_full_str
 		( "<hiero>A1 . B1</hiero>"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -115,11 +115,11 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Void_full() {
+	@Test public void Void_full() {
 		fxt.Init_hiero_A1_B1();
 		fxt.Test_html_full_str
 		( "<hiero>A1 .. B1</hiero>"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -146,11 +146,11 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void New_line() {
+	@Test public void New_line() {
 		fxt.Init_hiero_A1_B1();
 		fxt.Test_html_full_str
 		( "<hiero>A1 ! B1</hiero>"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -173,14 +173,14 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Cartouche() {
+	@Test public void Cartouche() {
 		String wtxt = html_fxt.Cartouche__wtxt();
 		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Cartouche__html(BoolUtl.Y));
 		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Cartouche__html(BoolUtl.N), html_fxt.Cartouche__html(BoolUtl.Y));
 	}
-	@Test  public void Superposition_regular() {
+	@Test public void Superposition_regular() {
 		fxt.Init_hiero_A1_B1();
-		fxt.Test_html_full_str("<hiero>A1:B1</hiero>", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str("<hiero>A1:B1</hiero>", StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -198,9 +198,9 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Superposition_phoneme() {
+	@Test public void Superposition_phoneme() {
 		fxt.Init_hiero_p_t();
-		fxt.Test_html_full_str("<hiero>t:p</hiero>", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str("<hiero>t:p</hiero>", StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -218,9 +218,9 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Superposition_prefab() {
+	@Test public void Superposition_prefab() {
 		fxt.Init_hiero_a_A1();
-		fxt.Test_html_full_str("<hiero>a:A1</hiero>", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str("<hiero>a:A1</hiero>", StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -236,9 +236,9 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Juxtaposition_regular() {
+	@Test public void Juxtaposition_regular() {
 		fxt.Init_hiero_A1_B1();
-		fxt.Test_html_full_str("<hiero>A1*B1</hiero>", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str("<hiero>A1*B1</hiero>", StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -255,9 +255,9 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Juxtaposition_phoneme() {
+	@Test public void Juxtaposition_phoneme() {
 		fxt.Init_hiero_p_t();
-		fxt.Test_html_full_str("<hiero>t*p</hiero>", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str("<hiero>t*p</hiero>", StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -274,9 +274,9 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Juxtaposition_prefab() {
+	@Test public void Juxtaposition_prefab() {
 		fxt.Init_hiero_a_A1();
-		fxt.Test_html_full_str("<hiero>a*A1</hiero>", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str("<hiero>a*A1</hiero>", StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -292,13 +292,13 @@ public class Hiero_html_mgr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Para_if_text() {// PURPOSE: check that paras are handled correctly; EX: w:Hieroglyphics; DATE:2014-04-23
+	@Test public void Para_if_text() {// PURPOSE: check that paras are handled correctly; EX: w:Hieroglyphics; DATE:2014-04-23
 		fxt.Fxt().Init_para_y_();
-		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"	// should always be in <p>
 		, ""
 		, "<hiero></hiero> b"	// <hiero> should not be in <p> but "b" should be;
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<p>a"
 		, "</p>"
 		, "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
@@ -314,12 +314,12 @@ public class Hiero_html_mgr_tst {
 		));
 		fxt.Fxt().Init_para_n_();
 	}		
-	@Test  public void Para_skip_if_list() {// PURPOSE: do not add para if in list; EX:de.d:Damascus; DATE:2014-06-06
+	@Test public void Para_skip_if_list() {// PURPOSE: do not add para if in list; EX:de.d:Damascus; DATE:2014-06-06
 		fxt.Fxt().Init_para_y_();
-		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str(StringUtl.ConcatLinesNlSkipLast
 		( ":<hiero></hiero> a"	// a should not be in para
 		, ":b"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<dl>"
 		, "  <dd><table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"

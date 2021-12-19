@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.history;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.lists.List_adp;
+import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.dbs.*;
 import gplx.xowa.specials.*;
 public class Xoud_history_mgr implements Gfo_invk {
@@ -45,10 +52,10 @@ public class Xoud_history_mgr implements Gfo_invk {
 	public static boolean Skip_history(Xoa_ttl ttl) {
 		byte[] page_db = ttl.Page_db();
 		return	(	ttl.Ns().Id_is_special()
-				&&	(	Bry_.Eq(page_db, gplx.xowa.users.history.Xou_history_mgr.Ttl_name)	// do not add XowaPageHistory to history
-					||	Bry_.Eq(page_db, Xow_special_meta_.Itm__popup_history.Key_bry())
-					||	Bry_.Eq(page_db, Xow_special_meta_.Itm__default_tab.Key_bry())
-					||	Bry_.Eq(page_db, Xow_special_meta_.Itm__page_history.Key_bry())
+				&&	(	BryLni.Eq(page_db, gplx.xowa.users.history.Xou_history_mgr.Ttl_name)	// do not add XowaPageHistory to history
+					||	BryLni.Eq(page_db, Xow_special_meta_.Itm__popup_history.Key_bry())
+					||	BryLni.Eq(page_db, Xow_special_meta_.Itm__default_tab.Key_bry())
+					||	BryLni.Eq(page_db, Xow_special_meta_.Itm__page_history.Key_bry())
 					)
 				);
 	}

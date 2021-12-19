@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.tdbs.metas;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.core.flds.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
@@ -73,9 +77,9 @@ public class Xof_meta_itm {
 			Xof_meta_thumb thumb = thumbs[i];
 			int tmp_adj = w_adj;// thumb.Width() < 50 ? 0 : w_adj;
 			if (	(Xof_lnki_time.Null_y(seek) 
-				&&	Int_.Between(thumb.Width(), w - tmp_adj, w + tmp_adj))
+				&&	IntUtl.Between(thumb.Width(), w - tmp_adj, w + tmp_adj))
 				||	(w == Xop_lnki_tkn.Width_null
-					&& (Xof_lnki_time.Null_y(seek) || Int_.In(seek, thumb.Seeks()))))
+					&& (Xof_lnki_time.Null_y(seek) || IntUtl.In(seek, thumb.Seeks()))))
 				return thumb;
 		}
 		return null;
@@ -84,7 +88,7 @@ public class Xof_meta_itm {
 		for (int i = 0; i < thumbs_len; i++) {
 			Xof_meta_thumb thumb = thumbs[i];
 			int tmp_adj = 1;//thumb.Height() < 50 ? 0 : 1;
-			if (Int_.Between(thumb.Height(), h - tmp_adj, h + tmp_adj)) return thumb;
+			if (IntUtl.Between(thumb.Height(), h - tmp_adj, h + tmp_adj)) return thumb;
 		}
 		return null;
 	}
@@ -125,7 +129,7 @@ public class Xof_meta_itm {
 	private void Dirty() {if (owner_fil != null) owner_fil.Dirty_();}
 	public void Save(Gfo_fld_wtr wtr) {
 		wtr.Write_bry_escape_fld(ttl);
-		byte vrtl_repo_byte = Byte_.Max_value_127;
+		byte vrtl_repo_byte = ByteUtl.MaxValue127;
 		switch (vrtl_repo) {
 			case Repo_unknown:		vrtl_repo_byte = AsciiByte.Ltr_z; break;
 			case Repo_same:			vrtl_repo_byte = AsciiByte.Ltr_y; break;
@@ -134,13 +138,13 @@ public class Xof_meta_itm {
 		}
 		wtr.Write_byte_fld(vrtl_repo_byte);
 		wtr.Write_bry_escape_fld(ptr_ttl);
-		wtr.Bfr()	.Add_int_fixed(orig_exists, 1)	.Add_byte(Xof_meta_thumb_parser.Dlm_exists)
-					.Add_int_variable(orig_w)		.Add_byte(Xof_meta_thumb_parser.Dlm_width)
-					.Add_int_variable(orig_h)		.Add_byte_pipe();
+		wtr.Bfr()	.AddIntFixed(orig_exists, 1)	.AddByte(Xof_meta_thumb_parser.Dlm_exists)
+					.AddIntVariable(orig_w)		.AddByte(Xof_meta_thumb_parser.Dlm_width)
+					.AddIntVariable(orig_h)		.AddBytePipe();
 		int thumbs_len = thumbs.length;
-		Bry_bfr bfr = wtr.Bfr();
+		BryWtr bfr = wtr.Bfr();
 		for (int i = 0; i < thumbs_len; i++) {
-			if (i != 0) bfr.Add_byte(AsciiByte.Semic);
+			if (i != 0) bfr.AddByte(AsciiByte.Semic);
 			Xof_meta_thumb thumb = thumbs[i];
 			thumb.Save(bfr);
 		}
@@ -178,7 +182,7 @@ public class Xof_meta_itm {
 		  Tid_main		= 0
 		, Tid_ptr		= 1
 		, Tid_vrtl		= 2
-		, Tid_null		= Byte_.Max_value_127
+		, Tid_null		= ByteUtl.MaxValue127
 		;
-	public static final byte[] Ptr_ttl_null = Bry_.Empty;
+	public static final byte[] Ptr_ttl_null = BryUtl.Empty;
 }

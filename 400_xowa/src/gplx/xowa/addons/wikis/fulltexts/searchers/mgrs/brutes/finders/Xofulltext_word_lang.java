@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders;
 import gplx.core.btries.*;
-import gplx.core.intls.*;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
 import gplx.xowa.addons.wikis.fulltexts.core.*;
 public class Xofulltext_word_lang {
 	private final Btrie_slim_mgr ws_bgn = Btrie_slim_mgr.cs().Add_many_str(Xofulltext_punct_.Ws_bgn_ary);
@@ -38,10 +38,10 @@ public class Xofulltext_word_lang {
 			if (tmp_pos == 0) break;
 
 			// move back one char
-			tmp_pos = Utf8_.Get_prv_char_pos0(src, tmp_pos);
+			tmp_pos = Utf8Utl.GetPrvCharPos0(src, tmp_pos);
 
 			// check if char is ws
-			tmp_obj = ws_bgn.Match_at(trv, src, tmp_pos, hook_end);
+			tmp_obj = ws_bgn.MatchAt(trv, src, tmp_pos, hook_end);
 
 			// char is ws -> stop
 			if (tmp_obj != null) break;
@@ -58,7 +58,7 @@ public class Xofulltext_word_lang {
 			if (tmp_pos >= src_end) break;
 
 			// check if char is ws
-			tmp_obj = ws_end.Match_at(trv, src, tmp_pos, src_end);
+			tmp_obj = ws_end.MatchAt(trv, src, tmp_pos, src_end);
 
 			// stop if ws
 			if (tmp_obj != null) break;
@@ -78,7 +78,7 @@ public class Xofulltext_word_lang {
 				if (tmp_pos >= hook_bgn) break;
 
 				// check if char is punct
-				tmp_obj = punct_bgn.Match_at(trv, src, tmp_pos, word_end);
+				tmp_obj = punct_bgn.MatchAt(trv, src, tmp_pos, word_end);
 
 				// stop if not a punct
 				if (tmp_obj == null) break;
@@ -96,13 +96,13 @@ public class Xofulltext_word_lang {
 			tmp_pos = word_end;
 			while (true) {
 				// scan bwd one char
-				tmp_pos = Utf8_.Get_prv_char_pos0(src, tmp_pos);
+				tmp_pos = Utf8Utl.GetPrvCharPos0(src, tmp_pos);
 
 				// stop if passed hook-end
 				if (tmp_pos < hook_end) break;
 
 				// check if char is punct
-				tmp_obj = punct_end.Match_at(trv, src, tmp_pos, word_end);
+				tmp_obj = punct_end.MatchAt(trv, src, tmp_pos, word_end);
 
 				// stop if not a punct
 				if (tmp_obj == null) break;

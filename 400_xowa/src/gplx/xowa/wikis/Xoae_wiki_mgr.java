@@ -15,17 +15,17 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis;
 
-import gplx.Bry_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.Xowe_wiki;
@@ -67,9 +67,9 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	}
 	public int			Count()							{return list.Len();}
 	public boolean			Has(byte[] key)					{return hash.Has(key);}
-	public Xow_wiki		Get_at(int idx)					{return (Xow_wiki)list.Get_at(idx);}
-	public Xowe_wiki	Get_at_or_null(int i)			{return Int_.Between(i, 0, this.Count() - 1) ? (Xowe_wiki)list.Get_at(i) : null;}
-	public Xow_wiki		Get_by_or_null(byte[] key)		{return Bry_.Len_eq_0(key) ? null : (Xowe_wiki)hash.GetByOrNull(key);}
+	public Xow_wiki		Get_at(int idx)					{return (Xow_wiki)list.GetAt(idx);}
+	public Xowe_wiki	Get_at_or_null(int i)			{return IntUtl.Between(i, 0, this.Count() - 1) ? (Xowe_wiki)list.GetAt(i) : null;}
+	public Xow_wiki		Get_by_or_null(byte[] key)		{return BryUtl.IsNullOrEmpty(key) ? null : (Xowe_wiki)hash.GetByOrNull(key);}
 	public Xow_wiki		Get_by_or_make_init_y(byte[] key) {
 		synchronized (this) {	// LOCK:app-level; DATE:2016-07-06
 			Xowe_wiki rv = (Xowe_wiki)this.Get_by_or_null(key); if (rv == null) rv = Make_and_add(key);
@@ -91,11 +91,11 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		// get wiki_root_url from either user_wiki or /xowa/wiki/
 		Xowdir_wiki_itm user_wiki_itm = db_mgr == null 
 			? null	// TEST:
-			: db_mgr.Tbl__wiki().Select_by_key_or_null(String_.new_u8(domain_bry));
+			: db_mgr.Tbl__wiki().Select_by_key_or_null(StringUtl.NewU8(domain_bry));
 
 		Xowe_wiki rv = null;
 		if (user_wiki_itm == null) {
-			rv = (Xowe_wiki)Make(domain_bry, app.Fsys_mgr().Wiki_dir().GenSubDir(String_.new_a7(domain_bry)));
+			rv = (Xowe_wiki)Make(domain_bry, app.Fsys_mgr().Wiki_dir().GenSubDir(StringUtl.NewA7(domain_bry)));
 			Add(rv);
 		}
 		else {
@@ -128,7 +128,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	public void Free_mem(boolean clear_ctx) {
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
-			Xowe_wiki wiki = (Xowe_wiki)list.Get_at(i);
+			Xowe_wiki wiki = (Xowe_wiki)list.GetAt(i);
 //				wiki.Defn_cache().ReduceCache();
 			if (clear_ctx) wiki.Parser_mgr().Ctx().Clear_all();	// NOTE: clear_ctx will reset toc and refs
 			wiki.Cache_mgr().Page_cache().Free_mem(true);
@@ -137,7 +137,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	public void Rls() {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Xowe_wiki wiki = (Xowe_wiki)list.Get_at(i);
+			Xowe_wiki wiki = (Xowe_wiki)list.GetAt(i);
 			wiki.Rls();
 		}
 	}

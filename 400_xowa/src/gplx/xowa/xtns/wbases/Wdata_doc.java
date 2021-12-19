@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases;
-import gplx.Bry_;
-import gplx.Ordered_hash;
-import gplx.core.primitives.Int_obj_ref;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.langs.jsons.Json_doc;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
 import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
@@ -31,7 +31,7 @@ public class Wdata_doc {
 	public byte[] Qid() {return qid;} private final byte[] qid;
 	public Json_doc Jdoc() {return jdoc;} private final Json_doc jdoc;
 	public int Jdoc_size() {return jdoc == null ? 1 : jdoc.Src().length;}
-	public byte[][] Sort_langs() {return sort_langs;} public void Sort_langs_(byte[][] v) {sort_langs = v;} private byte[][] sort_langs = Bry_.Ary_empty;
+	public byte[][] Sort_langs() {return sort_langs;} public void Sort_langs_(byte[][] v) {sort_langs = v;} private byte[][] sort_langs = BryUtl.AryEmpty;
 
 	// NOTE: lazy instantiation b/c we don't want to parse entire json unless called; particulary necessary for {{#property}} calls;
 	public Ordered_hash Slink_list() {if (slink_list == null) slink_list = mgr.Wdoc_parser(jdoc).Parse_sitelinks(qid, jdoc);         return slink_list;} private Ordered_hash slink_list;
@@ -42,7 +42,7 @@ public class Wdata_doc {
 
 	// various getters
 	public Wbase_claim_grp Get_claim_grp_or_null(int pid) {
-		Object o = this.Claim_list().GetByOrNull(Int_obj_ref.New(pid));
+		Object o = this.Claim_list().GetByOrNull(IntRef.New(pid));
 		return (Wbase_claim_grp)o;
 	}
 	public byte[] Get_label_bry_or_null(byte[] lang_key) {

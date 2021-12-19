@@ -13,21 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.net;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 public class Gfo_protocol_itm {
 	public Gfo_protocol_itm(byte tid, String text) {
 		this.tid = tid;
-		this.text_bry = Bry_.new_u8(text);
+		this.text_bry = BryUtl.NewU8(text);
 		this.text_str = text;
 		int text_len = text_bry.length;
 		for (int i = 0; i < text_len; i++) {
 			if (text_bry[i] == AsciiByte.Colon) {
-				this.key_wo_colon_bry = Bry_.Mid(text_bry, 0, i);
+				this.key_wo_colon_bry = BryLni.Mid(text_bry, 0, i);
 				this.key_w_colon_bry_len = i;
-				this.key_wo_colon_str = String_.new_u8(key_wo_colon_bry);
-				this.key_w_colon_bry = Bry_.Mid(text_bry, 0, i + 1);
-				this.key_w_colon_str = String_.new_u8(key_w_colon_bry);
+				this.key_wo_colon_str = StringUtl.NewU8(key_wo_colon_bry);
+				this.key_w_colon_bry = BryLni.Mid(text_bry, 0, i + 1);
+				this.key_w_colon_str = StringUtl.NewU8(key_w_colon_bry);
 				this.text_ends_w_colon = i == text_len - 1;
 				break;
 			}
@@ -104,10 +109,10 @@ public class Gfo_protocol_itm {
 	, Itm_geo					= new_(Tid_geo			, "geo:")
 	;
 	public static final String Str_file = "file:", Str_xcmd = "xowa-cmd:";
-	public static final byte[] Bry_file = Bry_.new_a7(Str_file), Bry_xcmd = Bry_.new_a7(Str_xcmd);
-	public static final byte[] Bry_file_with_slashes = Bry_.new_a7("file:///");
+	public static final byte[] Bry_file = BryUtl.NewA7(Str_file), Bry_xcmd = BryUtl.NewA7(Str_xcmd);
+	public static final byte[] Bry_file_with_slashes = BryUtl.NewA7("file:///");
 	public static final int Len_xcmd = Bry_xcmd.length;
-	public static final byte[] Bry_relative = Bry_.new_a7("//");
+	public static final byte[] Bry_relative = BryUtl.NewA7("//");
 	public static Gfo_protocol_itm Get_or(byte tid, Gfo_protocol_itm or) {
 		Gfo_protocol_itm[] ary = Ary();
 		return tid >= ary.length ? or : ary[tid];
@@ -117,7 +122,7 @@ public class Gfo_protocol_itm {
 			int len = Regy.Len();
 			protocol_itm_ary = new Gfo_protocol_itm[len];
 			for (int i = 0; i < len; i++)
-				protocol_itm_ary[i] = (Gfo_protocol_itm)Regy.Get_at(i);
+				protocol_itm_ary[i] = (Gfo_protocol_itm)Regy.GetAt(i);
 		}
 		return protocol_itm_ary;
 	}	private static Gfo_protocol_itm[] protocol_itm_ary;
@@ -126,7 +131,7 @@ public class Gfo_protocol_itm {
 			int len = Regy.Len();
 			protocol_str_ary = new String[len];
 			for (int i = 0; i < len; i++)
-				protocol_str_ary[i] = ((Gfo_protocol_itm)Regy.Get_at(i)).Text_str();
+				protocol_str_ary[i] = ((Gfo_protocol_itm)Regy.GetAt(i)).Text_str();
 		}
 		return protocol_str_ary;
 	}	private static String[] protocol_str_ary;

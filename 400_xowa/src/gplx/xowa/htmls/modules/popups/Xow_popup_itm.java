@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
+package gplx.xowa.htmls.modules.popups;
+import gplx.frameworks.objects.Cancelable;
+import gplx.types.basics.utls.IntUtl;
+import gplx.xowa.*;
 public class Xow_popup_itm implements Cancelable {
 	public Xow_popup_itm(String popup_id, byte[] page_href, byte[] tooltip, int init_words_needed) {
 		this.popup_id = popup_id;
@@ -32,7 +35,7 @@ public class Xow_popup_itm implements Cancelable {
 	public boolean Mode_all() {return mode == Mode_tid_all;}
 	public Xow_popup_itm Mode_all_() {
 		mode = Mode_tid_all;
-		words_needed = Int_.Max_value;
+		words_needed = IntUtl.MaxValue;
 		return this;
 	}
 	public String Popup_id() {return popup_id;} private String popup_id;

@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.windows;
-import gplx.GfoMsg;
-import gplx.GfsCtx;
-import gplx.Keyval_hash;
-import gplx.Math_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.commons.KeyValHash;
+import gplx.types.basics.utls.MathUtl;
 import gplx.core.envs.Env_;
 import gplx.gfui.RectAdp;
 import gplx.gfui.SizeAdp;
@@ -50,7 +50,7 @@ public class GfuiWin_toaster extends GfuiWin {
 		fullyGrownTimerInterval = fullyGrownArg;
 		int timerEvents = 0;
 		if (growingArg > 10) {
-			timerEvents = Math_.Min((growingArg / 10), fullyGrown.Height());
+			timerEvents = MathUtl.Min((growingArg / 10), fullyGrown.Height());
 			growingTimerInterval = growingArg / timerEvents;
 			growingIncrement = fullyGrown.Height() / timerEvents;
 		}
@@ -60,7 +60,7 @@ public class GfuiWin_toaster extends GfuiWin {
 		}
 
 		if( timeForHidingArg > 10) {
-			timerEvents = Math_.Min((timeForHidingArg / 10), fullyGrown.Height());
+			timerEvents = MathUtl.Min((timeForHidingArg / 10), fullyGrown.Height());
 			shrinkingTimerInterval = timeForHidingArg / timerEvents;
 			shrinkingIncrement = fullyGrown.Height() / timerEvents;
 		}
@@ -142,9 +142,9 @@ public class GfuiWin_toaster extends GfuiWin {
 		this.Pos_(this.X(), PopupAnchorTop);    //this.Top - increment
 		this.Size_(SizeAdp_.new_(this.Width(), this.Height() + increment));
 	}
-	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.win_toaster_(ctorArgs);}
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.win_toaster_(ctorArgs);}
 
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.fullyGrown = SizeAdp_.new_(600, 96);
 		this.Pos_(-100, -100); this.Size_(fullyGrown); super.Show(); super.Hide();// was 20,20; set to fullyGrown b/c of java
@@ -167,7 +167,7 @@ public class GfuiWin_toaster extends GfuiWin {
 		if        (ctx.Match(k, Tmr_cmd))        WhenTick();
 		else super.Invk(ctx, ikey, k, m);
 		return this;
-	}    public static final String Tmr_cmd = "Tmr";
+	}   public static final String Tmr_cmd = "Tmr";
 	GfuiTextMemo messageLabel;
 	TimerAdp timer;
 	SizeAdp fullyGrown = SizeAdp_.Zero;
@@ -178,7 +178,7 @@ public class GfuiWin_toaster extends GfuiWin {
 		GfuiWin_toaster rv = new GfuiWin_toaster();
 //            rv.Icon_(IconAdp.cfg_("popup"));
 		rv.ctor_GfuiBox_base
-			(new Keyval_hash()
+			(new KeyValHash()
 			.Add(GfuiElem_.InitKey_focusAble, false)
 			.Add(GfuiElem_.InitKey_ownerWin, owner)
 			.Add(GfuiWin_.InitKey_winType, GfuiWin_.InitKey_winType_toaster)

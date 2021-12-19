@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.xndes;
 
-import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.parsers.htmls.Mwh_atr_itm;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,23 +57,23 @@ class Xop_xatr_whitelist_fxt {
 	}
 	public void Whitelist(int tag_id, String key_str, boolean expd) {
 		Mwh_atr_itm atr_itm = New_atr_itm(key_str, null);
-		Tfds.Eq(expd, whitelist_mgr.Chk(tag_id, atr_itm), key_str);
+		GfoTstr.EqObj(expd, whitelist_mgr.Chk(tag_id, atr_itm), key_str);
 	}
 	public void Whitelist(int tag_id, String key_str, String val_str, boolean expd) {
 		Mwh_atr_itm atr_itm = New_atr_itm(key_str, val_str);
-		Tfds.Eq(expd, whitelist_mgr.Chk(tag_id, atr_itm), key_str);
+		GfoTstr.EqObj(expd, whitelist_mgr.Chk(tag_id, atr_itm), key_str);
 	}
 	public void Scrub_style_pass(String style_val_str) {Scrub_style(style_val_str, style_val_str);}
 	public void Scrub_style_fail(String val_str) {Scrub_style(val_str, "");}
 	public void Scrub_style(String val_str, String expd) {
-		byte[] val_bry = Bry_.new_a7(val_str);
+		byte[] val_bry = BryUtl.NewA7(val_str);
 		Mwh_atr_itm atr_itm = New_atr_itm(null, val_str);
 		whitelist_mgr.Scrub_style(atr_itm, val_bry);
-		Tfds.Eq(expd, String_.new_a7(atr_itm.Val_bry()));
+		GfoTstr.EqObj(expd, StringUtl.NewA7(atr_itm.Val_bry()));
 	}
 	private static Mwh_atr_itm New_atr_itm(String key_str, String val_str) {
-		byte[] key_bry = key_str == null ? null : Bry_.new_u8(key_str);
-		byte[] val_bry = val_str == null ? null : Bry_.new_u8(val_str);
+		byte[] key_bry = key_str == null ? null : BryUtl.NewU8(key_str);
+		byte[] val_bry = val_str == null ? null : BryUtl.NewU8(val_str);
 		Mwh_atr_itm rv = new Mwh_atr_itm(key_bry, false, false, false, -1, -1, -1, -1, key_bry, -1, -1, val_bry, -1, 0);
 		return rv;
 	}

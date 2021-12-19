@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
+import gplx.libs.files.Io_url;
 import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*;
 public interface Xof_file_itm {
 	int					Lnki_exec_tid();
@@ -42,7 +43,7 @@ public interface Xof_file_itm {
 	byte				Html_elem_tid();
 	int					Html_w();
 	int					Html_h();
-	Io_url				Html_view_url();
+	Io_url Html_view_url();
 	Io_url				Html_orig_url();
 	int					Html_gallery_mgr_h();
 	Js_img_wkr			Html_img_wkr();

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public class Xogui_nde_iter {
 	private final Xoedit_nde_hash hash;
 	private int bgn, max;
@@ -25,30 +26,30 @@ public class Xogui_nde_iter {
 		return bgn < hash.Len();
 	}
 	public String To_sql_in() {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int end = bgn + max;
 		if (end > hash.Len()) end = hash.Len();
 		for (int i = bgn; i < end; i++) {
 			Xoedit_nde nde = hash.Get_at(i);
-			if (i != bgn) bfr.Add_byte_comma();
-			bfr.Add_int_variable(nde.Id());
+			if (i != bgn) bfr.AddByteComma();
+			bfr.AddIntVariable(nde.Id());
 		}
 		bgn = end;
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	public String To_sql_in_key() {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int end = bgn + max;
 		if (end > hash.Len()) end = hash.Len();
 		for (int i = bgn; i < end; i++) {
 			Xoedit_nde nde = (Xoedit_nde)hash.Get_at(i);
-			if (i != bgn) bfr.Add_byte_comma();
-			bfr.Add_byte_apos();
-			bfr.Add_str_u8(nde.Key());
-			bfr.Add_byte_apos();
+			if (i != bgn) bfr.AddByteComma();
+			bfr.AddByteApos();
+			bfr.AddStrU8(nde.Key());
+			bfr.AddByteApos();
 		}
 		bgn = end;
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	public static Xogui_nde_iter New_sql(Xoedit_nde_hash hash) {
 		return new Xogui_nde_iter(hash, 255);

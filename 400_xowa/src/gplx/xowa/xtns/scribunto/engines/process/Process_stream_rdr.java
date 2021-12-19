@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*;
-import gplx.core.ios.streams.*; import gplx.core.encoders.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.scribunto.engines.process;
+import gplx.types.basics.encoders.HexUtl;
+import gplx.core.ios.streams.IoStream;
+import gplx.core.ios.streams.IoStream_stream_rdr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.errs.ErrUtl;
 public class Process_stream_rdr {
 	public Process_stream_rdr(byte[] bry_header, byte[] bry_body) {this.bry_header = bry_header; this.bry_body = bry_body;} private byte[] bry_header, bry_body;
 	public IoStream_stream_rdr Rdr() {return rdr;} IoStream_stream_rdr rdr = new IoStream_stream_rdr();
@@ -23,10 +27,10 @@ public class Process_stream_rdr {
 		int bytes_read = rdr.Read(bry_header, 0, 16); 
 		if (bytes_read < 16) {
 			if (bytes_read == -1) return null;	// stream closed; should only occur when shutting down
-			else throw Err_.new_wo_type("failed to read header");
+			else throw ErrUtl.NewArgs("failed to read header");
 		}
-		int body_len = Hex_utl_.Parse_or(bry_header, 0,8, -1); 	if (body_len == -1) throw Err_.new_wo_type("failed to read body_len");
-		int chk_len= Hex_utl_.Parse_or(bry_header, 9, 16, -1);	if (chk_len == -1 || chk_len != (body_len * 2) - 1) throw Err_.new_wo_type("failed to read chk_len");
+		int body_len = HexUtl.ParseOr(bry_header, 0,8, -1); 	if (body_len == -1) throw ErrUtl.NewArgs("failed to read body_len");
+		int chk_len= HexUtl.ParseOr(bry_header, 9, 16, -1);	if (chk_len == -1 || chk_len != (body_len * 2) - 1) throw ErrUtl.NewArgs("failed to read chk_len");
 		byte[] trg_bry = (body_len > bry_body.length) ? new byte[body_len] : bry_body;
 		return Read_body(trg_bry, body_len, rdr);
 	}
@@ -45,7 +49,7 @@ public class Process_stream_rdr {
 						case AsciiByte.Ltr_n:		b = AsciiByte.Nl; break;
 						case AsciiByte.Ltr_r: 		b = AsciiByte.Cr; break;
 						case AsciiByte.Backslash: 	b = AsciiByte.Backslash; break;
-						default: 					throw Err_.new_unhandled(b);
+						default: 					throw ErrUtl.NewUnhandled(b);
 					}
 				}
 				else {					// regular mode
@@ -65,7 +69,7 @@ public class Process_stream_rdr {
 			src_pos += read_len;
 			trg_bgn += read_len;
 		}
-		return Bry_.Mid(trg_bry, 0, src_len);
+		return BryLni.Mid(trg_bry, 0, src_len);
 	}
 }
 /*

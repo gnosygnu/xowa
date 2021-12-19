@@ -13,8 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*;
-import org.junit.*; import gplx.core.strings.*; import gplx.core.type_xtns.*; import gplx.core.stores.*; import gplx.core.envs.*;
+package gplx.xowa.parsers.utils;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.core.envs.Op_sys;
+import gplx.core.stores.SrlMgr;
+import gplx.core.stores.SrlObj;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.core.type_xtns.BoolClassXtn;
+import gplx.core.type_xtns.ByteClassXtn;
+import gplx.core.type_xtns.ClassXtn;
+import gplx.core.type_xtns.DateAdpClassXtn;
+import gplx.core.type_xtns.DecimalAdpClassXtn;
+import gplx.core.type_xtns.DoubleClassXtn;
+import gplx.core.type_xtns.IntClassXtn;
+import gplx.core.type_xtns.LongClassXtn;
+import gplx.core.type_xtns.ObjectClassXtn;
+import gplx.core.type_xtns.StringClassXtn;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.Test;
 interface TstRuleMgr {
 	boolean SkipChkVal(String expdTypeKey, TstAtr expd);
 	boolean SkipChkObj(String expdTypeKey, String atrKey, TstObj expd);
@@ -71,11 +96,11 @@ public class TstObj_tst {
 		Eval("", expdChk, actlChk, new Xop_rule_mgr());
 	}
 	private static void Max(int[] ary, int idx, String val) {
-		int len = String_.Len(val);
+		int len = StringUtl.Len(val);
 		if (len > ary[idx]) ary[idx] = len;
 	}
 	private static int Add(int[] ary) {int rv = 0; for (int i = 0; i < ary.length; i++) rv += ary[i]; return rv;}
-	@gplx.Internal protected static void Eval(String raw, TstObj expdChk, TstObj actlChk, TstRuleMgr ruleMgr) {
+	public static void Eval(String raw, TstObj expdChk, TstObj actlChk, TstRuleMgr ruleMgr) {
 		List_adp rslts = List_adp_.New();
 		Eval(rslts, ruleMgr, Ordered_hash_.New(), "", expdChk, actlChk);
 
@@ -84,18 +109,18 @@ public class TstObj_tst {
 		boolean pass = true;
 		int[] cols = new int[3];
 		for (int i = 0; i < rslts.Len(); i++) {
-			TstRslt rslt = (TstRslt)rslts.Get_at(i);
+			TstRslt rslt = (TstRslt)rslts.GetAt(i);
 			Max(cols, 0, rslt.EvalStr());
 			Max(cols, 1, rslt.Id());
 			Max(cols, 2, rslt.Key());
 		}
-		String hdr =  String_.Repeat(" ", Add(cols) + 3);
+		String hdr =  StringUtl.Repeat(" ", Add(cols) + 3);
 		for (int i = 0; i < rslts.Len(); i++) {
-			TstRslt rslt = (TstRslt)rslts.Get_at(i);
+			TstRslt rslt = (TstRslt)rslts.GetAt(i);
 //				if (rslt.EvalPass()) continue;
-			sb	.Add(String_.PadEnd(rslt.EvalStr(), cols[0] + 1, " "))
-				.Add(String_.PadEnd(rslt.Id(), cols[1] + 1, " "))
-				.Add(String_.PadEnd(rslt.Key(), cols[2] + 1, " "))
+			sb	.Add(StringUtl.PadEnd(rslt.EvalStr(), cols[0] + 1, " "))
+				.Add(StringUtl.PadEnd(rslt.Id(), cols[1] + 1, " "))
+				.Add(StringUtl.PadEnd(rslt.Key(), cols[2] + 1, " "))
 				.Add(rslt.ExpdStr()).Add(Op_sys.Lnx.Nl_str());
 			if (!rslt.EvalPass()) {
 				sb.Add(hdr).Add(rslt.ActlStr()).Add(Op_sys.Lnx.Nl_str());
@@ -103,13 +128,13 @@ public class TstObj_tst {
 			}
 		}
 		if (pass) return;
-		throw Err_.new_wo_type(Op_sys.Lnx.Nl_str() + sb.To_str());
+		throw ErrUtl.NewArgs(Op_sys.Lnx.Nl_str() + sb.ToStr());
 	}
 	private static void Eval(List_adp rslts, TstRuleMgr ruleMgr, Ordered_hash props, String idx, TstObj expd, TstObj actl) {
 		int expdLen = expd.Atrs().Len();
 		props.Clear();
 		for (int i = 0; i < expdLen; i++) {
-			TstAtr expdAtr = (TstAtr)expd.Atrs().Get_at(i);
+			TstAtr expdAtr = (TstAtr)expd.Atrs().GetAt(i);
 			String key = expdAtr.Key();
 			TstAtr actlAtr = (TstAtr)actl.Atrs().GetByOrNull(key);
 			if (expdAtr.ValType() == ObjectClassXtn.Instance) {
@@ -131,11 +156,11 @@ public class TstObj_tst {
 		int expdSubsLen = expd.Subs().Len(), actlSubsLen = actl.Subs().Len();
 		int maxLen = expdSubsLen > actlSubsLen ? expdSubsLen : actlSubsLen;
 		for (int i = 0; i < maxLen; i++) {
-			TstObj expdSub = i < expdSubsLen ? (TstObj)expd.Subs().Get_at(i) : TstObj.Null;
-			TstObj actlSub = i < actlSubsLen ? (TstObj)actl.Subs().Get_at(i) : TstObj.Null;
+			TstObj expdSub = i < expdSubsLen ? (TstObj)expd.Subs().GetAt(i) : TstObj.Null;
+			TstObj actlSub = i < actlSubsLen ? (TstObj)actl.Subs().GetAt(i) : TstObj.Null;
 //				if (ruleMgr != null) ruleMgr.Eval(expd.TypeKey(), expdSub.PropName(), expdAtr, actlAtr, skip);
-			String iAsStr = Int_.To_str(i);
-			String subId = String_.Eq(idx, "") ? iAsStr : idx + "." + iAsStr;
+			String iAsStr = IntUtl.ToStr(i);
+			String subId = StringUtl.Eq(idx, "") ? iAsStr : idx + "." + iAsStr;
 			if (expdSub == TstObj.Null && actlSub != TstObj.Null) {
 				TstAtr mis = new TstAtr().Key_("idx").Val_(i).ValType_(IntClassXtn.Instance);
 				rslts.Add(new TstRslt().Expd_(mis).Actl_(mis).EvalPass_(false).EvalStr_("!=")
@@ -164,7 +189,7 @@ public class TstObj_tst {
 		TstRslt rslt = new TstRslt().Expd_(expd).Actl_(actl)
 			.Id_(id).Key_(key)
 			.EvalType_(evalType).EvalPass_(evalPass).EvalStr_(evalStr)
-			.ExpdStr_(Object_.Xto_str_strict_or_null_mark(expd.Val())).ActlStr_(Object_.Xto_str_strict_or_null_mark(actl.Val()))
+			.ExpdStr_(ObjectUtl.ToStrOrNullMark(expd.Val())).ActlStr_(ObjectUtl.ToStrOrNullMark(actl.Val()))
 			;
 		rslts.Add(rslt);
 	}
@@ -187,8 +212,8 @@ class TstObj implements SrlMgr {
 	public int SrlIntOr(String key, int v)						{Atrs_add(key, v, IntClassXtn.Instance); return v;}
 	public long SrlLongOr(String key, long v)					{Atrs_add(key, v, LongClassXtn.Instance); return v;}
 	public String SrlStrOr(String key, String v)				{Atrs_add(key, v, StringClassXtn.Instance); return v;}
-	public Decimal_adp SrlDecimalOr(String key, Decimal_adp v)	{Atrs_add(key, v, DecimalAdpClassXtn.Instance); return v;}
-	public DateAdp SrlDateOr(String key, DateAdp v)				{Atrs_add(key, v, DateAdpClassXtn.Instance); return v;}
+	public GfoDecimal SrlDecimalOr(String key, GfoDecimal v)	{Atrs_add(key, v, DecimalAdpClassXtn.Instance); return v;}
+	public GfoDate SrlDateOr(String key, GfoDate v)				{Atrs_add(key, v, DateAdpClassXtn.Instance); return v;}
 	public double SrlDoubleOr(String key, double v)				{Atrs_add(key, v, DoubleClassXtn.Instance); return v;}
 	public Object SrlObjOr(String key, Object v)				{
 		Atrs_add(key, v, ObjectClassXtn.Instance);

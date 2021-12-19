@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.langs.dsvs.*;
+package gplx.xowa.wikis.xwikis.sitelinks;
+import gplx.langs.dsvs.Dsv_fld_parser;
+import gplx.langs.dsvs.Dsv_fld_parser_;
+import gplx.langs.dsvs.Dsv_tbl_parser;
+import gplx.langs.dsvs.Dsv_wkr_base;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
 class Xoa_sitelink_mgr_parser extends Dsv_wkr_base {
 	private final Xoa_sitelink_grp_mgr grp_mgr;
 	private final Xoa_sitelink_itm_mgr itm_mgr;
@@ -25,9 +31,9 @@ class Xoa_sitelink_mgr_parser extends Dsv_wkr_base {
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {
-			case 0: cur_tid		= Bry_.To_int_or(src, bgn, end, -1); return true;
-			case 1: cur_fld1	= Bry_.Mid(src, bgn, end); return true;
-			case 2: cur_fld2	= Bry_.Mid(src, bgn, end); return true;
+			case 0: cur_tid		= BryUtl.ToIntOr(src, bgn, end, -1); return true;
+			case 1: cur_fld1	= BryLni.Mid(src, bgn, end); return true;
+			case 2: cur_fld2	= BryLni.Mid(src, bgn, end); return true;
 			default: return false;
 		}
 	}
@@ -41,7 +47,7 @@ class Xoa_sitelink_mgr_parser extends Dsv_wkr_base {
 				itm.Move_to(cur_grp);
 				itm.Site_name_(cur_fld2);
 				break;
-			default:		throw Err_.new_unhandled(cur_tid);
+			default:		throw ErrUtl.NewUnhandled(cur_tid);
 		}
 		cur_tid = -1;
 		cur_fld1 = cur_fld2 = null;

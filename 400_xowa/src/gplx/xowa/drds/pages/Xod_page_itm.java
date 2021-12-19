@@ -14,12 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.drds.pages;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.htmls.Xoh_page;
 import gplx.xowa.htmls.sections.Xoh_section_itm;
@@ -59,9 +58,9 @@ public class Xod_page_itm {
 	public void Init_by_dbpg(Xoa_ttl ttl, Xowd_page_itm db_page) {
 		this.page_id = db_page.Id();
 		this.rev_id = page_id;
-		this.ttl_text = String_.new_u8(ttl.Page_txt());
+		this.ttl_text = StringUtl.NewU8(ttl.Page_txt());
 		this.ttl_db = ttl.Page_db_as_str();
-		this.modified_on = db_page.Modified_on().XtoStr_fmt_iso_8561_w_tz();
+		this.modified_on = db_page.Modified_on().ToStrFmtIso8561WithTz();
 		this.lang_count = 1;
 		this.redirected = null;
 		this.description = null;
@@ -76,27 +75,27 @@ public class Xod_page_itm {
 		this.hpg = hpg;
 	}
 	public String To_str() {
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr	.Add_int_variable(page_id).Add_byte_pipe()
-			.Add_long_variable(rev_id).Add_byte_pipe()
-			.Add_str_u8(ttl_text).Add_byte_pipe()
-			.Add_str_u8(ttl_db).Add_byte_pipe()
-			.Add_str_a7_null(modified_on).Add_byte_pipe()
-			.Add_int_variable(lang_count).Add_byte_pipe()
-			.Add_str_a7_null(redirected).Add_byte_pipe()
-			.Add_str_a7_null(description).Add_byte_pipe()
-			.Add_yn(is_editable).Add_byte_pipe()
-			.Add_yn(is_main_page).Add_byte_pipe()
-			.Add_yn(is_disambiguation).Add_byte_pipe()
-			.Add_str_a7_null(head_url).Add_byte_pipe()
-			.Add_str_a7_null(head_ttl).Add_byte_pipe()
-			.Add_str_a7_null(first_allowed_editor_role).Add_byte_nl()
+		BryWtr bfr = BryWtr.New();
+		bfr	.AddIntVariable(page_id).AddBytePipe()
+			.AddLongVariable(rev_id).AddBytePipe()
+			.AddStrU8(ttl_text).AddBytePipe()
+			.AddStrU8(ttl_db).AddBytePipe()
+			.AddStrA7Null(modified_on).AddBytePipe()
+			.AddIntVariable(lang_count).AddBytePipe()
+			.AddStrA7Null(redirected).AddBytePipe()
+			.AddStrA7Null(description).AddBytePipe()
+			.AddYn(is_editable).AddBytePipe()
+			.AddYn(is_main_page).AddBytePipe()
+			.AddYn(is_disambiguation).AddBytePipe()
+			.AddStrA7Null(head_url).AddBytePipe()
+			.AddStrA7Null(head_ttl).AddBytePipe()
+			.AddStrA7Null(first_allowed_editor_role).AddByteNl()
 			;
 		int len = section_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Xoh_section_itm section = (Xoh_section_itm)section_list.Get_at(i);
+			Xoh_section_itm section = (Xoh_section_itm)section_list.GetAt(i);
 			section.To_bfr(bfr);
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 }

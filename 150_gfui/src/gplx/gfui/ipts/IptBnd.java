@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
 import gplx.core.interfaces.*;
+import gplx.types.basics.lists.List_adp;
 public interface IptBnd extends SrlAble {
 	String			Key();
-	List_adp			Ipts();
+	List_adp Ipts();
 	IptEventType	EventTypes();
 	void			Exec(IptEventData iptData);
 }

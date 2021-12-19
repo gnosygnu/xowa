@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.modules.popups;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.xowa.wikis.domains.*;
@@ -27,7 +33,7 @@ public class Xow_popup_parser {
 	private Xop_ctx tmpl_ctx; private Xop_root_tkn tmpl_root, wtxt_root; private Xot_compile_data tmpl_props = new Xot_compile_data();		
 	private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Popup;
 	private Xow_popup_anchor_finder hdr_finder = new Xow_popup_anchor_finder();
-	private final Bry_bfr hdr_html_bfr = Bry_bfr_.New();
+	private final BryWtr hdr_html_bfr = BryWtr.New();
 	public Xow_popup_cfg Cfg() {return cfg;} private Xow_popup_cfg cfg = new Xow_popup_cfg();
 	public Xow_popup_wrdx_mkr Wrdx_mkr() {return wrdx_mkr;} private Xow_popup_wrdx_mkr wrdx_mkr = new Xow_popup_wrdx_mkr();
 	public Xow_popup_html_mkr Html_mkr() {return html_mkr;} private Xow_popup_html_mkr html_mkr = new Xow_popup_html_mkr();
@@ -35,7 +41,7 @@ public class Xow_popup_parser {
 	public Xop_keeplist_wiki Tmpl_keeplist() {return tmpl_keeplist;} private Xop_keeplist_wiki tmpl_keeplist; // private byte[] tmpl_keeplist_bry = Bry_.Empty;
 	public Xop_ctx Wtxt_ctx() {return wtxt_ctx;} private Xop_ctx wtxt_ctx;
 	public void Tmpl_tkn_max_(int v) {
-		if (v < 0) v = Int_.Max_value;	// allow -1 as shortcut to deactivate
+		if (v < 0) v = IntUtl.MaxValue;	// allow -1 as shortcut to deactivate
 		tmpl_ctx.Tmpl_tkn_max_(v);
 		wtxt_ctx.Tmpl_tkn_max_(v);
 	}
@@ -48,7 +54,7 @@ public class Xow_popup_parser {
 		tmpl_ctx.Parse_tid_(Xop_parser_tid_.Tid__tmpl); wtxt_ctx.Parse_tid_(Xop_parser_tid_.Tid__wtxt);
 		tmpl_ctx.Xnde_names_tid_(Xop_parser_tid_.Tid__wtxt);
 		tmpl_ctx.Tid_is_popup_(true); wtxt_ctx.Tid_is_popup_(true);
-		tmpl_root = tkn_mkr.Root(Bry_.Empty); wtxt_root = tkn_mkr.Root(Bry_.Empty);
+		tmpl_root = tkn_mkr.Root(BryUtl.Empty); wtxt_root = tkn_mkr.Root(BryUtl.Empty);
 		html_mkr.Ctor(app, wiki);
 		cfg.Ellipsis_(wiki.Msg_mgr().Val_by_key_obj(Xow_popup_cfg.Msg_key_ellipsis));
 	}
@@ -58,7 +64,7 @@ public class Xow_popup_parser {
 			tmpl_keeplist = new Xop_keeplist_wiki(wiki);
 			tmpl_ctx.Tmpl_keeplist_(tmpl_keeplist);
 		}
-		if (!Bry_.Has_at_end(raw, AsciiByte.NlBry)) raw = Bry_.Add(raw, AsciiByte.NlBry);
+		if (!BryUtl.HasAtEnd(raw, AsciiByte.NlBry)) raw = BryUtl.Add(raw, AsciiByte.NlBry);
 		tmpl_keeplist.Srl().Load_by_bry(raw);
 	}
 	private boolean Canceled(Xow_popup_itm popup_itm, Xog_tab_itm cur_tab) {return popup_itm.Canceled() || cur_tab != null && cur_tab.Tab_is_loading();}
@@ -71,11 +77,11 @@ public class Xow_popup_parser {
 		wtxt_ctx.Page().Ttl_(ttl);	// NOTE: must set cur_page, or rel lnkis won't work; EX: [[../A]]
 	}
 	public byte[] Parse(Xowe_wiki cur_wiki, Xoae_page page, Xog_tab_itm cur_tab, Xow_popup_itm popup_itm) {	// NOTE: must pass cur_wiki for xwiki label; DATE:2014-07-02
-		if (Bry_.Eq(popup_itm.Wiki_domain(), Xow_domain_itm_.Bry__wikidata)) {
+		if (BryLni.Eq(popup_itm.Wiki_domain(), Xow_domain_itm_.Bry__wikidata)) {
 			data.Wrdx_bfr().Add(app.Wiki_mgr().Wdata_mgr().Popup_text(page));
 		}
 		else {
-			byte[] tmpl_src = page.Db().Text().Text_bry(); int tmpl_len = tmpl_src.length; if (tmpl_len == 0) return Bry_.Empty;
+			byte[] tmpl_src = page.Db().Text().Text_bry(); int tmpl_len = tmpl_src.length; if (tmpl_len == 0) return BryUtl.Empty;
 			int tmpl_bgn_orig = Xow_popup_parser_.Tmpl_bgn_get_(app, popup_itm, page.Ttl(), hdr_finder, tmpl_src, tmpl_len);
 			int tmpl_bgn = tmpl_bgn_orig;
 			int tmpl_read_len_cur = cfg.Tmpl_read_len();
@@ -122,10 +128,10 @@ public class Xow_popup_parser {
 		byte[] rv = html_mkr.Bld(cur_wiki, page, popup_itm, data.Wrdx_bfr());
 		return (Canceled(popup_itm, cur_tab)) ? null : rv;
 	}
-	private void Parse_wrdx_to_html(Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
+	private void Parse_wrdx_to_html(Xow_popup_itm popup_itm, BryWtr wrdx_bfr) {
 		Adjust_wrdx_end(popup_itm, wrdx_bfr);
 		wrdx_bfr.Add(cfg.Notoc());	// always add notoc at end
-		byte[] wrdx_bry = wrdx_bfr.To_bry_and_clear();
+		byte[] wrdx_bry = wrdx_bfr.ToBryAndClear();
 		wtxt_root.Clear();			// now start parsing wrdx_bry from wtxt to html
 		Wtxt_ctx_init(false, wrdx_bry);
 		parser.Parse_to_src_end(wtxt_root, wtxt_ctx, tkn_mkr, wrdx_bry, wtxt_trie, Xop_parser_.Doc_bgn_bos, wrdx_bry.length);
@@ -133,7 +139,7 @@ public class Xow_popup_parser {
 		wiki.Html_mgr().Html_wtr().Write_doc(wrdx_bfr, wtxt_ctx, hctx, wrdx_bry, wtxt_root);
 		wiki.Parser_mgr().Uniq_mgr().Parse(wrdx_bfr);
 	}
-	private void Adjust_wrdx_end(Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
+	private void Adjust_wrdx_end(Xow_popup_itm popup_itm, BryWtr wrdx_bfr) {
 		popup_itm.Words_found_(data.Words_found());
 		if (popup_itm.Mode_all()) return; // mode_all needs no adjustments
 		Xow_popup_word[] words = data.Words_found_ary();
@@ -183,19 +189,19 @@ public class Xow_popup_parser {
 		}
 		if (last_word_idx != -1) {
 			Xow_popup_word last_word = words[last_word_idx];
-			wrdx_bfr.Delete_rng_to_end(last_word.Bfr_end());// delete everything after last_word
+			wrdx_bfr.DelRngToEnd(last_word.Bfr_end());// delete everything after last_word
 			popup_itm.Words_found_(last_word_idx + List_adp_.Base1);	// last_word_idx = 0 -> words_found = 1
 			if (last_word.Tid() == Xop_tkn_itm_.Tid_hdr)	// on odd case where hdr is still last word, add \n else text will literally be "==A==" b/c no trailing \n
-				wrdx_bfr.Add_byte_nl();
+				wrdx_bfr.AddByteNl();
 		}
 		if (last_hdr_tkn != null) {
-			wrdx_bfr.Trim_end(AsciiByte.Nl);
+			wrdx_bfr.TrimEnd(AsciiByte.Nl);
 
 			// reparse hdr b/c existing hdr_tkn has Src_bgn / Src_end, but no src;
-			byte[] hdr_src = Bry_.Mid(wrdx_bfr.Bfr(), last_hdr_tkn.Bfr_bgn(), last_hdr_tkn.Bfr_end());
+			byte[] hdr_src = BryLni.Mid(wrdx_bfr.Bry(), last_hdr_tkn.Bfr_bgn(), last_hdr_tkn.Bfr_end());
 			Xop_root_tkn hdr_root = wtxt_ctx.Tkn_mkr().Root(hdr_src);
 			wiki.Parser_mgr().Main().Parse_wtxt_to_wdom(hdr_root, wtxt_ctx, wtxt_ctx.Tkn_mkr(), hdr_src, 0);
-			byte[] last_hdr_bry = Bry_.Empty;
+			byte[] last_hdr_bry = BryUtl.Empty;
 			for (int i = 0; i < hdr_root.Subs_len(); ++i) {
 				Xop_tkn_itm sub = hdr_root.Subs_get(i);
 				if (sub.Tkn_tid() == Xop_tkn_itm_.Tid_hdr) {
@@ -204,7 +210,7 @@ public class Xow_popup_parser {
 				}
 			}
 //				byte[] last_hdr_bry = ((Xop_hdr_tkn)last_hdr_tkn.Tkn()).Hdr_html_text();
-			html_mkr.Fmtr_next_sect().Bld_bfr_one(wrdx_bfr, last_hdr_bry);
+			html_mkr.Fmtr_next_sect().BldToBfrObj(wrdx_bfr, last_hdr_bry);
 		}
 		else {
 			if (page_partially_parsed)
@@ -228,17 +234,17 @@ public class Xow_popup_parser {
 class Xow_popup_parser_ {
 	public static int Tmpl_bgn_get_(Xoae_app app, Xow_popup_itm itm, Xoa_ttl page_ttl, Xow_popup_anchor_finder hdr_finder, byte[] src, int src_len) {
 		int rv = Xop_parser_.Doc_bgn_bos; if (itm.Mode_all()) return rv;
-		byte[] anch = itm.Page_href()[0] == AsciiByte.Hash ? Bry_.Mid(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
+		byte[] anch = itm.Page_href()[0] == AsciiByte.Hash ? BryLni.Mid(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
 		if (anch == null) return rv;
 		int hdr_bgn = hdr_finder.Find(src, src_len, anch, rv);	// NOTE: starting search from Xop_parser_.Doc_bgn_bos
-		return hdr_bgn == Bry_find_.Not_found ? rv : hdr_bgn;
+		return hdr_bgn == BryFind.NotFound ? rv : hdr_bgn;
 	}
 	public static int Calc_read_len(Xop_ctx ctx, int tmpl_read_cur, int tmpl_read_len, byte[] src, int bgn, int end) {// DATE:2014-07-19
 		int rv_default = tmpl_read_cur + tmpl_read_len;
 		Xop_tkn_itm tkn = Get_expensive_dangling_tkn(ctx);
 		if (tkn == null) return rv_default;					// no expensive tkns found; return rv_default; EX: headers are not considered expensive
 		int tkn_end = Calc_tkn_end(tkn, src, end);
-		if (tkn_end == Bry_find_.Not_found) return rv_default;	// no end found; return rv_default; might want to return src.length at future date
+		if (tkn_end == BryFind.NotFound) return rv_default;	// no end found; return rv_default; might want to return src.length at future date
 		return tkn_end - bgn;
 	}
 	private static Xop_tkn_itm Get_expensive_dangling_tkn(Xop_ctx ctx) {
@@ -260,8 +266,8 @@ class Xow_popup_parser_ {
 				end_bry = Xop_tblw_lxr.Hook_te;
 				break;
 		}
-		if (end_bry == null) return Bry_find_.Not_found;	// no end defined for tkn; return null which should revert to dflt
-		int end_pos = Bry_find_.Find_fwd(src, end_bry, pos);
-		return end_pos == Bry_find_.Not_found ? Bry_find_.Not_found : end_pos + end_bry.length;
+		if (end_bry == null) return BryFind.NotFound;	// no end defined for tkn; return null which should revert to dflt
+		int end_pos = BryFind.FindFwd(src, end_bry, pos);
+		return end_pos == BryFind.NotFound ? BryFind.NotFound : end_pos + end_bry.length;
 	}
 }

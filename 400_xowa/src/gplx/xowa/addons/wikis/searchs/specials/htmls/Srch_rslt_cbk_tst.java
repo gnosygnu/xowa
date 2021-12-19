@@ -13,14 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.searchs.specials.htmls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import org.junit.*;
 import gplx.xowa.guis.cbks.js.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_rslt_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Srch_rslt_cbk_fxt fxt = new Srch_rslt_cbk_fxt();
-	@Test  public void Basic() {// ISSUE#:462; DATE:2019-05-12
+	@Test public void Basic() {// ISSUE#:462; DATE:2019-05-12
 		fxt.Test_add(fxt.Make_rslt(50, "L"), fxt.Make_args_append("xowa_insert_w"   , "w|L")); // insert new
 		fxt.Test_add(fxt.Make_rslt(30, "N"), fxt.Make_args_append("xowa_insert_w"   , "w|N")); // insert below last
 		fxt.Test_add(fxt.Make_rslt(70, "J"), fxt.Make_args_append("w|L"             , "w|J")); // insert above first
@@ -32,7 +36,7 @@ public class Srch_rslt_cbk_tst {
 	}
 }
 class Srch_rslt_cbk_fxt {
-	private Srch_html_row_bldr html_row; private static final byte[] Bry_enwiki = Bry_.new_a7("w");
+	private Srch_html_row_bldr html_row; private static final byte[] Bry_enwiki = BryUtl.NewA7("w");
 	private Srch_html_row_wkr async;
 	private Xog_js_wkr__log js_wkr = new Xog_js_wkr__log();
 	private Xowe_wiki wiki;
@@ -46,21 +50,21 @@ class Srch_rslt_cbk_fxt {
 		page_id = 0;
 	}
 	public Srch_rslt_row Make_rslt(int len, String ttl) {
-		byte[] ttl_bry = Bry_.new_a7(ttl);
+		byte[] ttl_bry = BryUtl.NewA7(ttl);
 		++page_id;
-		byte[] key = Bry_.Add(Bry_enwiki, AsciiByte.PipeBry, ttl_bry);	// NOTE: deliberately changing key to use ttl instead of id to make tests more readable
+		byte[] key = BryUtl.Add(Bry_enwiki, AsciiByte.PipeBry, ttl_bry);	// NOTE: deliberately changing key to use ttl instead of id to make tests more readable
 		return new Srch_rslt_row(key, Bry_enwiki, wiki.Ttl_parse(ttl_bry), gplx.xowa.wikis.nss.Xow_ns_.Tid__main, ttl_bry, page_id, len, len, Srch_rslt_row.Page_redirect_id_null);
 	}
-	public Object[] Make_args_append(String uid, String html)	{return Object_.Ary(Xog_js_wkr__log.Proc_append_above, uid, html);}
-	public Object[] Make_args_replace(String uid)				{return Object_.Ary(Xog_js_wkr__log.Proc_replace_html, uid, "");}
+	public Object[] Make_args_append(String uid, String html)	{return ObjectUtl.Ary(Xog_js_wkr__log.Proc_append_above, uid, html);}
+	public Object[] Make_args_replace(String uid)				{return ObjectUtl.Ary(Xog_js_wkr__log.Proc_replace_html, uid, "");}
 	public void Test_add(Srch_rslt_row row, Object[]... expd) {
 		async.On_rslt_found(row);
 		int expd_len = expd.length;
-		Tfds.Eq(expd_len, js_wkr.Log__len());
+		GfoTstr.EqObj(expd_len, js_wkr.Log__len());
 		for (int i = 0; i < expd_len; ++i) {
-			String expd_str = String_.Concat_with_obj("\n", expd[i]);
-			String actl_str = String_.Concat_with_obj("\n", js_wkr.Log__get_at(i));
-			Tfds.Eq_str_lines(expd_str, actl_str);
+			String expd_str = StringUtl.ConcatWithObj("\n", expd[i]);
+			String actl_str = StringUtl.ConcatWithObj("\n", js_wkr.Log__get_at(i));
+			GfoTstr.EqLines(expd_str, actl_str);
 		}			
 		js_wkr.Log__clear();
 	}

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.diffs; import gplx.dbs.*;
 import gplx.dbs.metas.*;
+import gplx.types.basics.utls.IntUtl;
 public class Gfdb_diff_tbl {		
 	public Gfdb_diff_tbl(String name, DbmetaFldItm[] flds, DbmetaFldItm[] keys, DbmetaFldItm[] vals) {
 		this.Name = name; this.Flds = flds; this.Keys = keys; this.Vals = vals;
@@ -47,7 +48,7 @@ public class Gfdb_diff_tbl {
 			}
 		}
 		// try to find shortest unique index
-		Dbmeta_idx_itm unique_idx = null; int unique_idx_len = Int_.Max_value;
+		Dbmeta_idx_itm unique_idx = null; int unique_idx_len = IntUtl.MaxValue;
 		Dbmeta_idx_mgr idxs = tbl.Idxs();
 		int idxs_len = idxs.Len();
 		for (int i = 0; i < idxs_len; ++i) {

@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
-import gplx.core.type_xtns.*; import gplx.core.interfaces.*;
-import gplx.gfui.controls.standards.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.core.interfaces.InjectAble;
+import gplx.core.type_xtns.IntClassXtn;
+import gplx.gfui.controls.standards.GfuiTextBox;
+import gplx.gfui.controls.standards.GfuiTextBox_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
 public class IptBnd_upDownRange implements InjectAble, Gfo_invk, Gfo_evt_itm {
 	public Gfo_evt_mgr Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} Gfo_evt_mgr evt_mgr;
 	public void Inject(Object owner) {
@@ -31,8 +42,8 @@ public class IptBnd_upDownRange implements InjectAble, Gfo_invk, Gfo_evt_itm {
 		if		(ctx.Match(k, Invk_TxtBox_dec))		ExecCmd(cmd, curVal - 1);
 		else if	(ctx.Match(k, Invk_TxtBox_inc))		ExecCmd(cmd, curVal + 1);
 		else if	(ctx.Match(k, Invk_TxtBox_exec))	{
-			Object valObj = IntClassXtn.Instance.ParseOrNull(txtBox.Text()); if (valObj == null) throw Err_.new_wo_type("invalid int", "text", txtBox.Text());
-			ExecCmd(doIt, Int_.Cast(valObj));
+			Object valObj = IntClassXtn.Instance.ParseOrNull(txtBox.Text()); if (valObj == null) throw ErrUtl.NewArgs("invalid int", "text", txtBox.Text());
+			ExecCmd(doIt, IntUtl.Cast(valObj));
 		}
 		else if	(ctx.Match(k, evt))			WhenEvt(ctx, m);
 		else	return Gfo_invk_.Rv_unhandled;
@@ -41,7 +52,7 @@ public class IptBnd_upDownRange implements InjectAble, Gfo_invk, Gfo_evt_itm {
 	public int Adj() {return adj;} public IptBnd_upDownRange Adj_(int v) {adj = v; return this;} int adj;
 	void WhenEvt(GfsCtx ctx, GfoMsg m) {
 		curVal = m.ReadInt(arg) + adj;
-		txtBox.Text_(Int_.To_str(curVal));
+		txtBox.Text_(IntUtl.ToStr(curVal));
 	}
 	void ExecCmd(String c, int val) {
 		Gfo_invk_.Invk_by_val(src, c, val - adj);

@@ -14,12 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.splits.archives;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_crt_;
 import gplx.dbs.Db_qry_;
@@ -30,7 +26,11 @@ import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
 import gplx.dbs.metas.Dbmeta_idx_fld;
 import gplx.dbs.qrys.Db_qry__select_cmd;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.bldrs.exports.splits.htmls.Xoh_page_tbl_itm;
 import gplx.xowa.addons.bldrs.exports.splits.htmls.Xoh_src_tbl_mgr;
@@ -104,8 +104,8 @@ class Reindex_html_dbs_cmd {
 	}
 	private void Move_html_data(long trg_db_size_max) {
 		// read rows and move
-		Db_rdr rdr = core_conn.Stmt_select_order("repack", String_.Ary("sort_idx", "page_id", "page_ns", "page_len", "src_db"), String_.Ary_empty, "sort_idx").Exec_select__rls_auto();
-		Db_stmt stmt_update = core_conn.Stmt_update(tbl_page, String_.Ary(fld_page_id), fld_page_html_db_id);
+		Db_rdr rdr = core_conn.Stmt_select_order("repack", StringUtl.Ary("sort_idx", "page_id", "page_ns", "page_len", "src_db"), StringUtl.AryEmpty, "sort_idx").Exec_select__rls_auto();
+		Db_stmt stmt_update = core_conn.Stmt_update(tbl_page, StringUtl.Ary(fld_page_id), fld_page_html_db_id);
 		Xoh_page_tbl_itm trg_html_tbl = null; 
 		try {
 			Xowd_html_row src_html_row = new Xowd_html_row();
@@ -125,7 +125,7 @@ class Reindex_html_dbs_cmd {
 
 				Xoh_page_tbl_itm src_html_tbl = src_tbl_mgr.Get_or_load(rdr.Read_int("src_db"));
 				int page_id = rdr.Read_int("page_id");
-				if (!src_html_tbl.Html_tbl().Select_as_row(src_html_row, page_id)) throw Err_.new_wo_type("could not find html", "page_id", page_id);				
+				if (!src_html_tbl.Html_tbl().Select_as_row(src_html_row, page_id)) throw ErrUtl.NewArgs("could not find html", "page_id", page_id);
 
 				// check if new file needed
 				int page_size = src_html_row.Body().length;
@@ -168,12 +168,12 @@ class Reindex_html_dbs_cmd {
 		wiki.Data__core_mgr().Rls();
 		String repack_suffix = Xoh_trg_tbl_mgr.Repack_suffix;
 		Db_stmt delete_stmt = core_conn.Stmt_delete(Xowd_xowa_db_tbl.TBL_NAME, Xowd_xowa_db_tbl.Fld_id);
-		Db_rdr rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.TBL_NAME, String_.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
+		Db_rdr rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.TBL_NAME, StringUtl.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
 		while (rdr.Move_next()) {
 			byte file_tid = rdr.Read_byte(Xowd_xowa_db_tbl.Fld_type);
 			if (file_tid != Xow_db_file_.Tid__html_data) continue;
 			String file_url = rdr.Read_str(Xowd_xowa_db_tbl.Fld_url);
-			if (String_.Has(file_url, repack_suffix)) continue;				
+			if (StringUtl.Has(file_url, repack_suffix)) continue;
 			delete_stmt.Clear().Crt_int(Xowd_xowa_db_tbl.Fld_id, rdr.Read_int(Xowd_xowa_db_tbl.Fld_id)).Exec_delete();
 			Io_mgr.Instance.DeleteFil(wiki.Fsys_mgr().Root_dir().GenSubFil(file_url));
 		}
@@ -181,15 +181,15 @@ class Reindex_html_dbs_cmd {
 		delete_stmt.Rls();
 
 		// update new dbs
-		Db_stmt update_stmt = core_conn.Stmt_update(Xowd_xowa_db_tbl.TBL_NAME, String_.Ary(Xowd_xowa_db_tbl.Fld_id), Xowd_xowa_db_tbl.Fld_url);
-		rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.TBL_NAME, String_.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
+		Db_stmt update_stmt = core_conn.Stmt_update(Xowd_xowa_db_tbl.TBL_NAME, StringUtl.Ary(Xowd_xowa_db_tbl.Fld_id), Xowd_xowa_db_tbl.Fld_url);
+		rdr = core_conn.Stmt_select(Xowd_xowa_db_tbl.TBL_NAME, StringUtl.Ary(Xowd_xowa_db_tbl.Fld_id, Xowd_xowa_db_tbl.Fld_type, Xowd_xowa_db_tbl.Fld_url)).Exec_select__rls_auto();
 		while (rdr.Move_next()) {
 			byte file_tid = rdr.Read_byte(Xowd_xowa_db_tbl.Fld_type);
 			if (file_tid != Xow_db_file_.Tid__html_data) continue;
 			Io_url old_url = wiki.Fsys_mgr().Root_dir().GenSubFil(rdr.Read_str(Xowd_xowa_db_tbl.Fld_url));
 			String old_raw = old_url.Raw();
-			Io_url new_url = Io_url_.new_fil_(String_.Replace(old_raw, repack_suffix, ""));
-			if (!String_.Has(old_raw, repack_suffix)) throw Err_.new_wo_type("html db should be repack", "db_name", old_raw);
+			Io_url new_url = Io_url_.new_fil_(StringUtl.Replace(old_raw, repack_suffix, ""));
+			if (!StringUtl.Has(old_raw, repack_suffix)) throw ErrUtl.NewArgs("html db should be repack", "db_name", old_raw);
 			update_stmt.Clear().Val_str(Xowd_xowa_db_tbl.Fld_url, new_url.NameAndExt()).Crt_int(Xowd_xowa_db_tbl.Fld_id, rdr.Read_int(Xowd_xowa_db_tbl.Fld_id)).Exec_update();
 			Io_mgr.Instance.MoveFil(old_url, new_url);
 		}

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.consoles; import gplx.*;
+package gplx.core.consoles;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 public class Gfo_cmd_arg_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	private final List_adp err_list = List_adp_.New(), tmp_vals = List_adp_.New();
@@ -25,7 +30,7 @@ public class Gfo_cmd_arg_mgr {
 	public void Clear() {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			Gfo_cmd_arg_itm itm = (Gfo_cmd_arg_itm)hash.Get_at(i);
+			Gfo_cmd_arg_itm itm = (Gfo_cmd_arg_itm)hash.GetAt(i);
 			itm.Clear();
 		}
 		err_list.Clear();
@@ -40,7 +45,7 @@ public class Gfo_cmd_arg_mgr {
 		Gfo_cmd_arg_itm arg = (Gfo_cmd_arg_itm)hash.GetByOrNull(k);
 		return arg != null && arg.Val() != null && arg.Val_as_bool();
 	}
-	public Gfo_cmd_arg_itm Get_at(int i)		{return (Gfo_cmd_arg_itm)hash.Get_at(i);}
+	public Gfo_cmd_arg_itm Get_at(int i)		{return (Gfo_cmd_arg_itm)hash.GetAt(i);}
 	public Gfo_cmd_arg_itm Get_by(String key)	{return (Gfo_cmd_arg_itm)hash.GetByOrNull(key);}
 	public void Parse(String[] orig_ary) {
 		this.Clear();
@@ -50,7 +55,7 @@ public class Gfo_cmd_arg_mgr {
 		while (true) {
 			boolean done = orig_idx == orig_len;
 			String itm = done ? "" : orig_ary[orig_idx++];
-			boolean itm_is_key = String_.Has_at_bgn(itm, Key_prefix);	// has "--" -> is key
+			boolean itm_is_key = StringUtl.HasAtBgn(itm, Key_prefix);	// has "--" -> is key
 			if (	cur_itm != null				// pending itm
 				&&	(itm_is_key || done)) {		// cur arg is key ("--key2"), or all done
 				cur_itm.Val_(Gfo_cmd_arg_mgr_.Parse_ary_to_str(this, cur_itm.Val_tid(), tmp_vals.ToStrAryAndClear()));
@@ -58,7 +63,7 @@ public class Gfo_cmd_arg_mgr {
 			}
 			if (done) break;
 			if (itm_is_key) {
-				String key = String_.Mid(itm, prefix_len);
+				String key = StringUtl.Mid(itm, prefix_len);
 				Object o = hash.GetByOrNull(key);	if (o == null)			{Errs__add(Gfo_cmd_arg_mgr_.Err__key__unknown	, key); continue;}
 				cur_itm = (Gfo_cmd_arg_itm)o;	if (cur_itm.Dirty())	{Errs__add(Gfo_cmd_arg_mgr_.Err__key__duplicate	, key); continue;}
 			}
@@ -71,7 +76,7 @@ public class Gfo_cmd_arg_mgr {
 		// calc .Reqd and .Dflt
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			cur_itm = (Gfo_cmd_arg_itm)hash.Get_at(i);
+			cur_itm = (Gfo_cmd_arg_itm)hash.GetAt(i);
 			if (!cur_itm.Dirty()) {					// arg not passed
 				if		(cur_itm.Reqd())			// arg required but no value passed; add error
 					Errs__add(Gfo_cmd_arg_mgr_.Err__val__required, cur_itm.Key());
@@ -83,7 +88,7 @@ public class Gfo_cmd_arg_mgr {
 	public boolean Errs__exist() {return err_list.Len() > 0;}
 	public void Errs__add(String key, String val) {err_list.Add(key + ": " + val);}
 	public String[] Errs__to_str_ary() {return err_list.ToStrAry();}
-	public Gfo_cmd_arg_itm[] To_ary() {return (Gfo_cmd_arg_itm[])hash.To_ary(Gfo_cmd_arg_itm.class);}
+	public Gfo_cmd_arg_itm[] To_ary() {return (Gfo_cmd_arg_itm[])hash.ToAry(Gfo_cmd_arg_itm.class);}
 	private void Reg(Gfo_cmd_arg_itm defn) {hash.Add(defn.Key(), defn);}
 	public static final String Key_prefix = "--"; private static final int prefix_len = 2;
 }

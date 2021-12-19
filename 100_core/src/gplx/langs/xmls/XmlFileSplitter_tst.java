@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.xmls;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import org.junit.*;
-import gplx.core.ios.*; import gplx.core.texts.*;
 public class XmlFileSplitter_tst {
 	@Before public void setup() {
 		splitter = new XmlFileSplitter();
@@ -27,7 +32,7 @@ public class XmlFileSplitter_tst {
 		tst_FindMatchPos("abcde", "cd", 2);
 		tst_FindMatchPos("abcde", "f", -1);
 		tst_FindMatchPos("abcde", "fg", -1);
-	}	void tst_FindMatchPos(String src, String find, int expd) {Tfds.Eq(expd, splitter.FindMatchPos(byte_(src), byteAry_(find)));}
+	}   void tst_FindMatchPos(String src, String find, int expd) {GfoTstr.EqObj(expd, splitter.FindMatchPos(byte_(src), byteAry_(find)));}
 	@Test public void FindMatchPosRev() {
 		tst_FindMatchPosRev("abcde", "a", 0);
 		tst_FindMatchPosRev("abcde", "b", 1);
@@ -36,7 +41,7 @@ public class XmlFileSplitter_tst {
 		tst_FindMatchPosRev("abcde", "ef", -1);
 		tst_FindMatchPosRev("abcde", "za", -1);
 		tst_FindMatchPosRev("dbcde", "d", 3);
-	}	void tst_FindMatchPosRev(String src, String find, int expd) {Tfds.Eq(expd, splitter.FindMatchPosRev(byte_(src), byteAry_(find)));}
+	}   void tst_FindMatchPosRev(String src, String find, int expd) {GfoTstr.EqObj(expd, splitter.FindMatchPosRev(byte_(src), byteAry_(find)));}
 	@Test public void ExtractHdr() {
 		tst_ExtractHdr("<a><b>", "<b", "<a>", "<b>");
 	}
@@ -63,16 +68,16 @@ public class XmlFileSplitter_tst {
 		Io_mgr.Instance.SaveFilStr(xmlFil, txt);
 		splitter.Split(xmlFil);
 		Io_url[] tmpFilAry = Io_mgr.Instance.QueryDir_fils(tmpDir);
-		Tfds.Eq(expd.length, tmpFilAry.length);
+		GfoTstr.EqObj(expd.length, tmpFilAry.length);
 		for (int i = 0; i < tmpFilAry.length; i++) {
 			Io_url tmpFil = tmpFilAry[i];
-			Tfds.Eq(expd[i], Io_mgr.Instance.LoadFilStr(tmpFil));
+			GfoTstr.EqObj(expd[i], Io_mgr.Instance.LoadFilStr(tmpFil));
 		}
 	}
-	byte[] byte_(String s) {return Bry_.new_u8(s);}
+	byte[] byte_(String s) {return BryUtl.NewU8(s);}
 	byte[][] byteAry_(String s) {
 		byte[][] rv = new byte[1][];
-		rv[0] = Bry_.new_u8(s);
+		rv[0] = BryUtl.NewU8(s);
 		return rv;
 	}
 	void tst_ExtractHdr(String src, String find, String expdHdr, String expdSrc) {
@@ -80,7 +85,7 @@ public class XmlFileSplitter_tst {
 		byte[] srcAry = byte_(src);
 		int findPos = splitter.FindMatchPos(srcAry, byteAry_(find));
 		srcAry = splitter.SplitHdr(srcAry, findPos);
-            Tfds.Eq(String_.new_u8(splitter.Hdr()), expdHdr);
-		Tfds.Eq(String_.new_u8(srcAry), expdSrc);
+			GfoTstr.EqObj(StringUtl.NewU8(splitter.Hdr()), expdHdr);
+		GfoTstr.EqObj(StringUtl.NewU8(srcAry), expdSrc);
 	}
 }

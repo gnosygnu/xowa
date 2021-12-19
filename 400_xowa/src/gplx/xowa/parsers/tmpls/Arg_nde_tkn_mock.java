@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.parsers.*;
 import gplx.xowa.parsers.miscs.*;
 public class Arg_nde_tkn_mock extends Arg_nde_tkn {	public Arg_nde_tkn_mock(boolean arg_key_is_int, String k, String v) {
 		this.key_exists = !arg_key_is_int;
@@ -31,10 +34,10 @@ public class Arg_nde_tkn_mock extends Arg_nde_tkn {	public Arg_nde_tkn_mock(bool
 }
 class Arg_itm_tkn_mock extends Arg_itm_tkn_base {
 	public Arg_itm_tkn_mock(String v) {
-		byte[] dat_ary = Bry_.new_u8(v);
+		byte[] dat_ary = BryUtl.NewU8(v);
 		this.Subs_add(new Xop_bry_tkn(-1, -1, dat_ary));
 		this.Dat_ary_(dat_ary);
 		this.val = v;
 	}	String val;
-	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {bfr.Add_str_u8(val); return true;}
+	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, BryWtr bfr) {bfr.AddStrU8(val); return true;}
 }

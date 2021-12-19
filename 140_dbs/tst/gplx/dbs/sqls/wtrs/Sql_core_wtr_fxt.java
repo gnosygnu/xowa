@@ -14,29 +14,28 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls.wtrs;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.criterias.Criteria;
 import gplx.dbs.Db_qry;
 import gplx.dbs.sqls.SqlQryWtr;
 import gplx.dbs.sqls.SqlQryWtrUtl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 class Sql_core_wtr_fxt {
 	private final Sql_core_wtr__sqlite wtr = new Sql_core_wtr__sqlite();
 	private final Sql_wtr_ctx ctx = new Sql_wtr_ctx(false);
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public Sql_core_wtr_fxt Sql_wtr_(SqlQryWtr v) {sql_wtr = v; return this;} private SqlQryWtr sql_wtr = SqlQryWtrUtl.NewSqlite();
 	public void Test__val(Object val, String expd) {
 		wtr.Val_wtr().Bld_val(bfr, ctx, val);
-		Tfds.Eq_str(expd, bfr.To_str_and_clear());
+		GfoTstr.Eq(expd, bfr.ToStrAndClear());
 	}
 	public void Test__where(Criteria crt, String... expd) {
 		wtr.Where_wtr().Bld_where_elem(bfr, ctx, crt);
-		Tfds.Eq_str_lines(String_.Concat_lines_nl_skip_last(expd), bfr.To_str_and_clear());
+		GfoTstr.EqLines(StringUtl.ConcatLinesNlSkipLast(expd), bfr.ToStrAndClear());
 	}
 	public void Test__qry(Db_qry qry, String expd) {
-		Tfds.Eq_str_lines(expd, sql_wtr.ToSqlStr(qry, BoolUtl.N));
+		GfoTstr.EqLines(expd, sql_wtr.ToSqlStr(qry, BoolUtl.N));
 	}
 }

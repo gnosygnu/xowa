@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.wkrs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.dbs.*; import gplx.dbs.stmts.*; import gplx.dbs.percentiles.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 class Srch_word_count_wkr extends Percentile_select_base {
@@ -63,8 +67,8 @@ class Srch_word_count_wkr extends Percentile_select_base {
 	@Override protected void Rdr__done(boolean rslts_are_enough, boolean rslts_are_done) {
 		if (rslts_are_enough) Gfo_usr_dlg_.Instance.Log_many("", "", "search.word_count; rng=~{0}", rng_log.To_str_and_clear());
 	}
-	private static Bry_fmt
-	  Fmt__main = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
+	private static BryFmt
+	  Fmt__main = BryFmt.Auto(StringUtl.ConcatLinesNlSkipLast
 	( "SELECT  w.link_count"
 	, "FROM    search_word w INDEXED BY search_word__link_count_score__word_text"
 	, "WHERE   w.link_count_score >= ~{score_min}"

@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class XophpBool__tst {
 	private final XophpBool__fxt fxt = new XophpBool__fxt();
@@ -28,10 +28,10 @@ public class XophpBool__tst {
 class XophpBool__fxt {
 	public void Test__is_true_str(boolean expd, String... ary) {
 		for (String itm : ary) {
-			Gftest.Eq__bool(expd, XophpBool_.is_true(itm));
+			GfoTstr.Eq(expd, XophpBool_.is_true(itm));
 		}
 	}
 	public void Test__is_true_bry(boolean expd, byte[] itm) {
-		Gftest.Eq__bool(expd, XophpBool_.is_true(itm));
+		GfoTstr.Eq(expd, XophpBool_.is_true(itm));
 	}
 }

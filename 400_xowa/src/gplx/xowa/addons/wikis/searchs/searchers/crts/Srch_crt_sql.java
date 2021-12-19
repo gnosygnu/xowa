@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*;
+package gplx.xowa.addons.wikis.searchs.searchers.crts;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
 import gplx.dbs.sqls.SqlQryWtrUtl;
 import gplx.langs.regxs.*;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.wtrs.BryBfrUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.StringUtl;
 public class Srch_crt_sql {
 	public Srch_crt_sql(int tid, String eq, String rng_bgn, String rng_end, String like, Gfo_pattern pattern) {
 		this.Tid = tid;
@@ -43,9 +51,9 @@ public class Srch_crt_sql {
 		int raw_len = raw.length;
 
 		// get tid
-		int wildcard_pos = Bry_find_.Find_fwd(raw, wildcard_byte, 0, raw_len);
+		int wildcard_pos = BryFind.FindFwd(raw, wildcard_byte, 0, raw_len);
 		int tid = -1;
-		if		(wildcard_pos == Bry_find_.Not_found)	tid = Srch_crt_sql.Tid__eq;		// EX: 'a'
+		if		(wildcard_pos == BryFind.NotFound)	tid = Srch_crt_sql.Tid__eq;		// EX: 'a'
 		else if (wildcard_pos == raw_len - 1)			tid = Srch_crt_sql.Tid__rng;	// EX: 'a*'
 		else											tid = Srch_crt_sql.Tid__like;	// EX: '*a'
 
@@ -54,19 +62,19 @@ public class Srch_crt_sql {
 		byte[] pattern_raw = raw;
 		switch (tid) {
 			case Srch_crt_sql.Tid__eq:
-				eq = String_.new_a7(raw);
+				eq = StringUtl.NewA7(raw);
 				break;
 			case Srch_crt_sql.Tid__rng:
-				byte[] rng_tmp = Bry_.Mid(raw, 0, raw_len - 1);
-				rng_bgn = String_.new_u8(rng_tmp);
-				rng_end = String_.new_u8(gplx.core.intls.Utf8_.Increment_char_at_last_pos(rng_tmp));
+				byte[] rng_tmp = BryLni.Mid(raw, 0, raw_len - 1);
+				rng_bgn = StringUtl.NewU8(rng_tmp);
+				rng_end = StringUtl.NewU8(Utf8Utl.IncrementCharAtLastPos(rng_tmp));
 				break;
 			case Srch_crt_sql.Tid__like:
-				like = String_.new_u8(Bry_.Replace(raw, wildcard_byte, SqlQryWtrUtl.Like_wildcard));
+				like = StringUtl.NewU8(BryUtl.Replace(raw, wildcard_byte, SqlQryWtrUtl.Like_wildcard));
 				byte like_escape_byte = gplx.xowa.addons.wikis.searchs.searchers.wkrs.Srch_link_wkr_sql.Like_escape_byte;
-				Bry_bfr tmp_bfr = Bry_bfr_.Get();
-				try {pattern_raw = Bry_.Resolve_escape(tmp_bfr, like_escape_byte, raw, 0, raw.length);}
-				finally {tmp_bfr.Mkr_rls();}
+				BryWtr tmp_bfr = BryBfrUtl.Get();
+				try {pattern_raw = BryUtlByWtr.ResolveEscape(tmp_bfr, like_escape_byte, raw, 0, raw.length);}
+				finally {tmp_bfr.MkrRls();}
 				break;
 		}
 		Gfo_pattern pattern = tid == Srch_crt_sql.Tid__eq ? null : new Gfo_pattern(pattern_raw);

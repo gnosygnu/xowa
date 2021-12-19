@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.paras;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_ctx_wkr;
 import gplx.xowa.parsers.Xop_parser_;
@@ -172,7 +172,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 	public int Process_pre(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, int txt_pos) {
 		Dd_clear(ctx);
 		Btrie_slim_mgr tblw_ws_trie = ctx.App().Utl_trie_tblw_ws();
-		Object o = tblw_ws_trie.Match_at(trv, src, txt_pos, src_len);
+		Object o = tblw_ws_trie.MatchAt(trv, src, txt_pos, src_len);
 		if (o != null) {	// tblw_ws found
 			Xop_tblw_ws_itm ws_itm = (Xop_tblw_ws_itm)o;
 			byte tblw_type = ws_itm.Tblw_type();

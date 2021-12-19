@@ -13,18 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws;
+import gplx.types.commons.KeyValHash;
 public abstract class GxwElemFactory_base {
 	public abstract GxwElem control_();
 	public abstract GxwWin win_app_();
-	public abstract GxwWin win_tool_(Keyval_hash ctorArgs);
-	public abstract GxwWin win_toaster_(Keyval_hash ctorArgs);
+	public abstract GxwWin win_tool_(KeyValHash ctorArgs);
+	public abstract GxwWin win_toaster_(KeyValHash ctorArgs);
 	public abstract GxwElem lbl_();
 	public abstract GxwTextFld text_fld_();
 	public abstract GxwTextFld text_memo_();
 	public abstract GxwTextHtml text_html_();
-	public abstract GxwCheckListBox checkListBox_(Keyval_hash ctorArgs);
+	public abstract GxwCheckListBox checkListBox_(KeyValHash ctorArgs);
 	public abstract GxwComboBox comboBox_();
 	public abstract GxwListBox listBox_();
-	//	@gplx.Internal protected GxwElem spacer_() {return MockControl.new_();}
+	//	public GxwElem spacer_() {return MockControl.new_();}
 	}

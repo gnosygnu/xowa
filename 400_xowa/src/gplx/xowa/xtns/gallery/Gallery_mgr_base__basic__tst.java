@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.gallery;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.files.fsdb.Xof_fsdb_mgr_cfg;
 import org.junit.Before;
@@ -24,12 +24,12 @@ public class Gallery_mgr_base__basic__tst {
 	private Gallery_mgr_base_fxt fxt = new Gallery_mgr_base_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test public void Basic() {
-		fxt.Test_html_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_html_str(StringUtl.ConcatLinesNlSkipLast
 		( "<gallery widths=200px heights=300px>"
 		, "A.png|''a1''"
 		, "B.png|''b1''"
 		, "</gallery>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
 		, "  <li id=\"xowa_gallery_li_0\" class=\"gallerybox\" style=\"width:235px;\">"
 		, "    <div style=\"width:235px;\">"
@@ -59,7 +59,7 @@ public class Gallery_mgr_base__basic__tst {
 		, "  </li>"
 		, "</ul>"
 		));
-		fxt.Test_html_modules_js(String_.Concat_lines_nl_skip_last
+		fxt.Test_html_modules_js(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/mediawiki.page/mediawiki.page.gallery.css\" type='text/css'>"
 		));
@@ -71,19 +71,19 @@ public class Gallery_mgr_base__basic__tst {
 	@Test public void Itm_defaults_to_120() {
 		fxt.Test_html_frag("<gallery>File:A.png|a</gallery>", "<img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />");
 	}
-	@Test  public void Height_fix() {
+	@Test public void Height_fix() {
 		fxt.Fxt().Wiki().File_mgr().Cfg_set(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults, "y");
 		fxt.Test_html_frag("<gallery heights=250>File:A.png|a<br/>c</gallery>", " width=\"120\" height=\"250\"");
 		fxt.Test_html_frag("<div style=\"margin:15px auto;\">");
 		fxt.Fxt().Wiki().File_mgr().Cfg_set(Xof_fsdb_mgr_cfg.Grp_xowa, Xof_fsdb_mgr_cfg.Key_gallery_fix_defaults, "n");
 	}
-	@Test  public void Alt() {
+	@Test public void Alt() {
 		fxt.Test_html_frag("<gallery>File:A.png|b|alt=c</gallery>"
 		, "<img id=\"xoimg_0\" alt=\"c\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />"
 		, "<div class=\"gallerytext\"><p>b\n</p>"
 		);
 	}
-	@Test  public void Link() {
+	@Test public void Link() {
 		fxt.Test_html_frag("<gallery>File:A.png|b|link=c</gallery>", "<a href=\"/wiki/C\" class=\"image\"");
 	}
 	@Test public void Page() {	// PURPOSE: page was not being set; PAGE:pt.s:Portal:Diccionario_geographico_do_Brazil; DATE:2015-04-16
@@ -92,31 +92,31 @@ public class Gallery_mgr_base__basic__tst {
 		, "A.pdf/120px-8.jpg"	// make sure page 8 shows up
 		);
 	}
-	@Test  public void Alt_caption_multiple() {
+	@Test public void Alt_caption_multiple() {
 		fxt.Test_html_frag("<gallery>File:A.png|alt=b|c[[d|e]]f</gallery>", "<div class=\"gallerytext\"><p>c<a href=\"/wiki/D\">ef</a>\n</p>");
 	}
-	@Test  public void Alt_escape_quote() {
+	@Test public void Alt_escape_quote() {
 		fxt.Test_html_frag("<gallery>File:A.png|b|alt=c\"d'e</gallery>", "alt=\"c&quot;d'e\"");
 	}
-	@Test  public void Caption_null() {	// PURPOSE: null caption causes page to fail; EX: de.w:Lewis Caroll; <gallery>Datei:A.png</gallery>; DATE:2013-10-09
+	@Test public void Caption_null() {	// PURPOSE: null caption causes page to fail; EX: de.w:Lewis Caroll; <gallery>Datei:A.png</gallery>; DATE:2013-10-09
 		fxt.Test_html_frag("<gallery>File:A.png</gallery>", "<div class=\"gallerytext\">\n");
 	}
-	@Test  public void Ttl_has_no_ns() {	// PURPOSE: MW allows ttl to not have ns; DATE: 2013-11-18
+	@Test public void Ttl_has_no_ns() {	// PURPOSE: MW allows ttl to not have ns; DATE: 2013-11-18
 		fxt.Test_html_frag("<gallery>A.png|b</gallery>", "<img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />");	// make sure image is generated
 	}
-	@Test  public void Ref() {	// PURPOSE: <ref> inside <gallery> was not showing up in <references>; DATE:2013-10-09
+	@Test public void Ref() {	// PURPOSE: <ref> inside <gallery> was not showing up in <references>; DATE:2013-10-09
 		fxt.Test_html_frag("<gallery>File:A.png|<ref name='a'>b</ref></gallery><references/>"
 		, "<div class=\"gallerytext\"><p><sup id=\"cite_ref-a_0-0\" class=\"reference\"><a href=\"#cite_note-a-0\">[1]</a></sup>\n</p>"
-		, String_.Concat_lines_nl
+		, StringUtl.ConcatLinesNl
 		( "</ul><ol class=\"references\">"
 		, "<li id=\"cite_note-a-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-a_0-0\">^</a></span> <span class=\"reference-text\">b</span></li>"
 		, "</ol>"
 		)
 		);
 	}
-	@Test  public void Packed() {
+	@Test public void Packed() {
 		fxt.Test_html_frag("<gallery mode=packed heights=300px>File:A.png|a</gallery>", "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-packed\">");
-		fxt.Test_html_modules_js(String_.Concat_lines_nl_skip_last
+		fxt.Test_html_modules_js(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/mediawiki.page/mediawiki.page.gallery.css\" type='text/css'>"
 		, "  <script type='text/javascript'>"
@@ -126,9 +126,9 @@ public class Gallery_mgr_base__basic__tst {
 		, "  </script>"
 		));
 	}
-	@Test  public void Packed_hover() {
+	@Test public void Packed_hover() {
 		fxt.Test_html_frag("<gallery mode=packed-hover heights=300px>File:A.png|a</gallery>", "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-packed-hover\">");
-		fxt.Test_html_modules_js(String_.Concat_lines_nl_skip_last
+		fxt.Test_html_modules_js(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/mediawiki.page/mediawiki.page.gallery.css\" type='text/css'>"
 		, "  <script type='text/javascript'>"
@@ -138,26 +138,26 @@ public class Gallery_mgr_base__basic__tst {
 		, "  </script>"
 		));
 	}
-	@Test  public void Missing() {
+	@Test public void Missing() {
 		fxt.Init_files_missing_y_();
 		fxt.Test_html_frag("<gallery>File:A.png|b</gallery>", "<div class=\"thumb\" style=\"height:150px;\">A.png</div>");
 	}
-	@Test  public void Multiple() {	// PURPOSE.bug: multiple galleries should not use same gallery super; DATE:2014-04-13
+	@Test public void Multiple() {	// PURPOSE.bug: multiple galleries should not use same gallery super; DATE:2014-04-13
 		fxt.Test_html_frag("<gallery>File:A.png|a</gallery><gallery widths=180px>File:B.png|b</gallery>"
 		, "src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />"	// should not be 180px from gallery #2
 		);
 	}
-	@Test  public void Link_is_empty() {	// PURPOSE: "link=" causes null pointer exception; DATE:2014-06-15
-		fxt.Test_html_frag("<gallery>File:A.png|link=</gallery>", String_.Concat_lines_nl_skip_last
+	@Test public void Link_is_empty() {	// PURPOSE: "link=" causes null pointer exception; DATE:2014-06-15
+		fxt.Test_html_frag("<gallery>File:A.png|link=</gallery>", StringUtl.ConcatLinesNlSkipLast
 		(  "<div style=\"margin:15px auto;\">"
 		, "          <img id=\"xoimg_0\" alt=\"A.png\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/120px.png\" width=\"120\" height=\"120\" />"
 		));
 	}
-	@Test  public void Dangling_autcloses() {	// PURPOSE: dangling gallery should auto-close, not escape; PAGE:en.w:Wikipedia:Featured_pictures_thumbs_43 DATE:2014-08-23
+	@Test public void Dangling_autcloses() {	// PURPOSE: dangling gallery should auto-close, not escape; PAGE:en.w:Wikipedia:Featured_pictures_thumbs_43 DATE:2014-08-23
 		fxt.Test_html_frag("<gallery>File:A.png|b", "&lt;gallery&gt;File:A.png|b");
 	}
-	@Test  public void Nested() {	// PURPOSE: handle gallery nested inside ref; PAGE: es.w:Arquitectura_medieval DATE:2015-07-10
-		fxt.Test_html_frag(String_.Concat_lines_nl_skip_last
+	@Test public void Nested() {	// PURPOSE: handle gallery nested inside ref; PAGE: es.w:Arquitectura_medieval DATE:2015-07-10
+		fxt.Test_html_frag(StringUtl.ConcatLinesNlSkipLast
 		( "<gallery>"
 		, "File:A.jpg|A1"
 		, "File:B.jpg|B1 <ref>B2 <gallery>File:B11.jpg|B123./gallery></ref>"	// NOTE: nested gallery
@@ -166,17 +166,17 @@ public class Gallery_mgr_base__basic__tst {
 		), "C1"	// make sure that image after nested gallery appears
 		);
 	}
-	@Test  public void Alt__quotes() {	// PURPOSE: file name with quotes will cause broken alt; PAGE:en.w:en.w:Alexandria,_Romania; DATE:2015-12-27
+	@Test public void Alt__quotes() {	// PURPOSE: file name with quotes will cause broken alt; PAGE:en.w:en.w:Alexandria,_Romania; DATE:2015-12-27
 		fxt.Test_html_frag("<gallery>File:A\"b.png</gallery>", "alt=\"A&quot;b.png\"");	// NOTE: not 'alt="A"b.png"'
 	}
-	@Test  public void Invalid() {	// PURPOSE: ignore invalid file names; DATE:2016-01-12
+	@Test public void Invalid() {	// PURPOSE: ignore invalid file names; DATE:2016-01-12
 		fxt.Test_html_str("<gallery>File:#A.png|a</gallery>"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
 		, "</ul>"
 		));
 	}
-	@Test  public void Hdump__div_1_w() {// PURPOSE: handle hdump and div_1_width == 115 instead of 15; PAGE:en.w:National_Gallery_of_Art; DATE:2016-06-19
+	@Test public void Hdump__div_1_w() {// PURPOSE: handle hdump and div_1_width == 115 instead of 15; PAGE:en.w:National_Gallery_of_Art; DATE:2016-06-19
 		fxt.Fxt().Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
 		fxt.Fxt().Wiki().File__fsdb_mode().Tid__v2__bld__y_();	// NOTE: must set to v2 mode; dflt will call old v1 img code which "guesses" at html_h;
 		fxt.Test_html_frag("<gallery widths=200px heights=200px perrow=5>File:A.png|a</gallery>", "<div style=\"margin:15px auto;\">");

@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryLni;
 import gplx.core.btries.*; import gplx.core.brys.*;
-import gplx.core.primitives.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.IntList;
 public class XophpPreg_ {
-	public static byte[][] split(Int_list list, byte[] src, int src_bgn, int src_end, byte[] dlm, boolean extend) {
+	public static byte[][] split(IntList list, byte[] src, int src_bgn, int src_end, byte[] dlm, boolean extend) {
 		// find delimiters
 		int dlm_len = dlm.length;
 		byte dlm_nth = dlm[dlm_len - 1];
@@ -26,9 +30,9 @@ public class XophpPreg_ {
 		while (true) {
 			if (i == src_end) break;
 			int dlm_end = i + dlm_len;
-			if (dlm_end <= src_end && Bry_.Eq(src, i, dlm_end, dlm)) {
+			if (dlm_end <= src_end && BryLni.Eq(src, i, dlm_end, dlm)) {
 				if (extend) {
-					dlm_end = Bry_find_.Find_fwd_while(src, i, src_end, dlm_nth);
+					dlm_end = BryFind.FindFwdWhile(src, i, src_end, dlm_nth);
 				}
 				list.Add(i);
 				list.Add(dlm_end);
@@ -45,14 +49,14 @@ public class XophpPreg_ {
 			list.Clear();
 			return null;
 		}
-		if (list.Get_at(list.Len() - 2) == src_end) {	// if 2nd to last elem == src_end, then last item is Bry_.Empty; ignore it; EX: "a''" -> "a", "''" x> "a", "''", ""
+		if (list.GetAt(list.Len() - 2) == src_end) {	// if 2nd to last elem == src_end, then last item is Bry_.Empty; ignore it; EX: "a''" -> "a", "''" x> "a", "''", ""
 			rv_len--;
 		}
 		byte[][] rv = new byte[rv_len][];
 		for (i = 0; i < rv_len; i += 2) {
-			rv[i    ] = Bry_.Mid(src, list.Get_at(i + 0), list.Get_at(i + 1));
+			rv[i    ] = BryLni.Mid(src, list.GetAt(i + 0), list.GetAt(i + 1));
 			if (i + 1 == rv_len) break;
-			rv[i + 1] = Bry_.Mid(src, list.Get_at(i + 1), list.Get_at(i + 2));
+			rv[i + 1] = BryLni.Mid(src, list.GetAt(i + 1), list.GetAt(i + 2));
 		}
 		list.Clear();
 		return rv;
@@ -64,7 +68,7 @@ public class XophpPreg_ {
 			byte b = src[cur];
 			Object o = trie.Match_at_w_b0(trv, b, src, cur, src_end);
 			if (o == null)
-				cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+				cur += Utf8Utl.LenOfCharBy1stByte(b);
 			else {
 				trv.Match_bgn = cur;
 				return o;
@@ -73,7 +77,7 @@ public class XophpPreg_ {
 		return null;
 	}
 	
-	public static void replace(Bry_tmp bry, Bry_bfr tmp, Btrie_slim_mgr find_trie, Btrie_rv trv, byte[] repl_bry) {
+	public static void replace(Bry_tmp bry, BryWtr tmp, Btrie_slim_mgr find_trie, Btrie_rv trv, byte[] repl_bry) {
 		byte[] src = bry.src;
 		int src_bgn = bry.src_bgn;
 		int src_end = bry.src_end;
@@ -86,7 +90,7 @@ public class XophpPreg_ {
 			// eos
 			if (cur == src_end) {
 				if (dirty) {
-					tmp.Add_mid(src, prv, src_end);
+					tmp.AddMid(src, prv, src_end);
 				}
 				break;
 			}
@@ -94,11 +98,11 @@ public class XophpPreg_ {
 			byte b = src[cur];
 			Object o = find_trie.Match_at_w_b0(trv, b, src, cur, src_end);
 			if (o == null) {
-				cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+				cur += Utf8Utl.LenOfCharBy1stByte(b);
 			}
 			else {
 				dirty = true;
-				tmp.Add_mid(src, prv, cur);
+				tmp.AddMid(src, prv, cur);
 				tmp.Add(repl_bry);
 				cur = trv.Pos();
 				prv = cur;

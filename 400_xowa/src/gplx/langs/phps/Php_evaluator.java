@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
+package gplx.langs.phps;
 import gplx.core.log_msgs.*;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 /*
 NOTE: naive implementation of PHP parser; intended only for parsing Messages**.php files in MediaWiki. Specifically, it assumes the following:
 - all lines are assignment lines: EX: $a = b;
@@ -173,11 +176,11 @@ public class Php_evaluator implements Php_tkn_wkr {
 						break;
 					case Php_tkn_.Tid_var:
 						Php_tkn_var tkn_var = (Php_tkn_var)tkn; 
-						Ary_add_itm(new Php_itm_var(Bry_.Mid(src, tkn_var.Src_bgn(), tkn_var.Src_end())));
+						Ary_add_itm(new Php_itm_var(BryLni.Mid(src, tkn_var.Src_bgn(), tkn_var.Src_end())));
 						break;
 					case Php_tkn_.Tid_txt:
 						Php_tkn_txt tkn_txt = (Php_tkn_txt)tkn; 
-						Ary_add_itm(new Php_itm_var(Bry_.Mid(src, tkn_txt.Src_bgn(), tkn_txt.Src_end())));
+						Ary_add_itm(new Php_itm_var(BryLni.Mid(src, tkn_txt.Src_bgn(), tkn_txt.Src_end())));
 						break;
 					case Php_tkn_.Tid_ary:
 					case Php_tkn_.Tid_brack_bgn:

@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.menus;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.xowa.guis.menus.dom.*;
 import gplx.xowa.langs.*;
 public class Xog_menu_mgr implements Gfo_invk {
@@ -40,7 +46,7 @@ public class Xog_menu_mgr implements Gfo_invk {
 			Lang_changed(app.Usere().Lang());
 		}
 		catch (Exception e) {	// ignore errors while loading custom menus, else fatal error; DATE:2014-07-01
-			app.Usr_dlg().Warn_many("", "", "error while loading menus; err=~{0}", Err_.Message_gplx_full(e));
+			app.Usr_dlg().Warn_many("", "", "error while loading menus; err=~{0}", ErrUtl.ToStrFull(e));
 		}
 	}
 	public void Lang_changed(Xol_lang_itm lang) {

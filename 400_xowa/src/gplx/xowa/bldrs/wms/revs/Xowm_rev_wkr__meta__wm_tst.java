@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.revs; import gplx.*;
+package gplx.xowa.bldrs.wms.revs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 import gplx.core.net.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*;
@@ -27,13 +33,13 @@ public class Xowm_rev_wkr__meta__wm_tst {
 		, fxt.Make_pge(Xow_ns_.Tid__main, "B", 2, 22, 200, "2015-02-02T02:02:02Z", "user2", "note2")
 		);
 		fxt.Init_inet_upload(expd);
-		fxt.Test_fetch(String_.Ary("A", "B"), expd);	// test get both
+		fxt.Test_fetch(StringUtl.Ary("A", "B"), expd);	// test get both
 		fxt.Init_inet_upload(expd);
-		fxt.Test_fetch(String_.Ary("A")		, expd[0]);	// test get 1
+		fxt.Test_fetch(StringUtl.Ary("A")		, expd[0]);	// test get 1
 		fxt.Init_inet_upload(expd);
-		fxt.Test_fetch(String_.Ary("C"), fxt.Make_pge_empty(0, "C")); // test get none
+		fxt.Test_fetch(StringUtl.Ary("C"), fxt.Make_pge_empty(0, "C")); // test get none
 		fxt.Init_inet_upload(expd);
-		fxt.Test_fetch(String_.Ary("A", "B", "C"), expd[0], expd[1], fxt.Make_pge_empty(0, "C")); // test get too many
+		fxt.Test_fetch(StringUtl.Ary("A", "B", "C"), expd[0], expd[1], fxt.Make_pge_empty(0, "C")); // test get too many
 	}
 }
 class Xowm_rev_wkr__meta__wm_fxt {
@@ -53,10 +59,10 @@ class Xowm_rev_wkr__meta__wm_fxt {
 	public Wmapi_itm__pge Make_pge(int page_ns, String page_ttl, int page_id, int rev_id, int rev_len, String rev_time, String rev_user, String rev_note) {
 		Wmapi_itm__pge rv = new Wmapi_itm__pge();
 		rv.Init_id(page_id);
-		rv.Init_ttl(page_ns, Bry_.new_u8(page_ttl));
+		rv.Init_ttl(page_ns, BryUtl.NewU8(page_ttl));
 		Wmapi_itm__rvn rvn = new Wmapi_itm__rvn();
 		rv.Rvn_ary_(rvn);
-		rvn.Init(rev_id, rev_len, Bry_.new_a7(rev_time), Bry_.new_a7(rev_user), Bry_.new_a7(rev_note));
+		rvn.Init(rev_id, rev_len, BryUtl.NewA7(rev_time), BryUtl.NewA7(rev_user), BryUtl.NewA7(rev_note));
 		return rv;
 	}
 	public void Init_inet_upload(Wmapi_itm__pge... ary) {
@@ -68,14 +74,14 @@ class Xowm_rev_wkr__meta__wm_fxt {
 	public void Test_fetch(String[] ttl_ary, Wmapi_itm__pge... expd) {
 		Init_rev_hash(ttl_ary);
 		meta_wkr.Fetch_meta(domain_str, rev_hash, 0, rev_hash.Len());
-		Tfds.Eq_str_lines(String_.new_u8(json_wtr.To_bry(expd)), String_.new_u8(json_wtr.To_bry((Wmapi_itm__pge[])rev_hash.To_ary_and_clear(Wmapi_itm__pge.class))));
+		GfoTstr.EqLines(StringUtl.NewU8(json_wtr.To_bry(expd)), StringUtl.NewU8(json_wtr.To_bry((Wmapi_itm__pge[])rev_hash.ToAryAndClear(Wmapi_itm__pge.class))));
 	}
 	private void Init_rev_hash(String[] ttl_ary) {
 		rev_hash.Clear();
 		int len = ttl_ary.length;
 		for (int i = 0; i < len; ++i) {
 			String ttl_str = ttl_ary[i];
-			byte[] ttl_bry = Bry_.new_u8(ttl_str);
+			byte[] ttl_bry = BryUtl.NewU8(ttl_str);
 			rev_hash.Add(ttl_bry, new Wmapi_itm__pge().Init_ttl(Xow_ns_.Tid__main, ttl_bry));
 		}
 	}

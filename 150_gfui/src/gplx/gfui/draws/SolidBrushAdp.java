@@ -21,7 +21,7 @@ public class SolidBrushAdp  {
 		SolidBrushAdp comp = SolidBrushAdp_.as_(obj); if (comp == null) return false;
 		return color.Eq(comp.color);
 	}
-	@gplx.Internal protected static SolidBrushAdp new_(ColorAdp color) {
+	public static SolidBrushAdp new_(ColorAdp color) {
 		SolidBrushAdp rv = new SolidBrushAdp();
 		rv.color = color;
 		return rv;

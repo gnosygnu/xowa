@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.dbs; import gplx.*;
+package gplx.xowa.addons.apps.updates.dbs;
 import gplx.dbs.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class Xoa_app_version_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__version_id, fld__version_name, fld__version_date, fld__version_priority, fld__version_url, fld__version_summary, fld__version_details;
@@ -35,7 +38,7 @@ public class Xoa_app_version_tbl implements Db_tbl {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 	}
 	public Xoa_app_version_itm[] Select_by_id(int id) {
-		String sql = Db_sql_.Make_by_fmt(String_.Ary
+		String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  *"
 		, "FROM    app_version"
 		, "WHERE   version_id > {0}"

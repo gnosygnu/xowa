@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lists;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_list_wkr_basic_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -209,7 +211,7 @@ public class Xop_list_wkr_basic_tst {
 			);
 	}
 	@Test public void Mix_1ul_1hdr() {
-		fxt.Test_parse_page_wiki_str("*a\n==a==\n", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("*a\n==a==\n", StringUtl.ConcatLinesNlSkipLast
 		( "<ul>"
 		, "  <li>a"
 		, "  </li>"
@@ -219,7 +221,7 @@ public class Xop_list_wkr_basic_tst {
 		));
 	}
 	@Test public void Mix_1ul_1hdr_1ul() {
-		fxt.Test_parse_page_wiki_str("*a\n==a==\n*b", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("*a\n==a==\n*b", StringUtl.ConcatLinesNlSkipLast
 		( "<ul>"
 		, "  <li>a"
 		, "  </li>"
@@ -259,7 +261,7 @@ public class Xop_list_wkr_basic_tst {
 			);
 	}
 	@Test public void Mix_tblw_w_space() {
-		fxt.Test_html_full_str(": {|\n|a\n|}", String_.Concat_lines_nl_skip_last
+		fxt.Test_html_full_str(": {|\n|a\n|}", StringUtl.ConcatLinesNlSkipLast
 		( "<dl>"
 		, "  <dd>"
 		, "    <table>"
@@ -273,11 +275,11 @@ public class Xop_list_wkr_basic_tst {
 		));
 	}
 	@Test public void Dif_lvls_1_3_1() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"*1"
 			,	"***3"
 			,	"*1"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<ul>"
 			,	"  <li>1"
 			,	"    <ul>"
@@ -295,11 +297,11 @@ public class Xop_list_wkr_basic_tst {
 			));
 	}
 	@Test public void Dif_lvls_1_3_2() {// uneven lists
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"*1"
 			,	"***3"
 			,	"**2"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<ul>"
 			,	"  <li>1"
 			,	"    <ul>"
@@ -317,13 +319,13 @@ public class Xop_list_wkr_basic_tst {
 			));
 	}
 	@Test public void New_lines() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 			(	"*a"
 			,	""
 			,	"**b"
 			,	""
 			,	"**c"
-			) ,	String_.Concat_lines_nl_skip_last
+			) ,	StringUtl.ConcatLinesNlSkipLast
 			(	"<ul>"
 			,	"  <li>a"
 			,	"  </li>"

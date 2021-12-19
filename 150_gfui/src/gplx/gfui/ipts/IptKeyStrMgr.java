@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*;
+package gplx.gfui.ipts;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.StringUtl;
 class IptKeyStrMgr {
 	public IptKey FetchByKeyPress(int charVal) {
 		if (literals == null) Init();
@@ -23,12 +30,12 @@ class IptKeyStrMgr {
 	public String To_str(IptKey key) {
 		if (literals == null) Init();
 		Object rv = literals.GetByOrNull(key.Val());
-		return rv == null ? String_.Empty : (String)rv;
+		return rv == null ? StringUtl.Empty : (String)rv;
 	}
 	public void XtoIptKeyAry(List_adp list) {
 		if (literals == null) Init();
 		for (int i = 0; i < keys.Len(); i++)
-			list.Add((IptKey)keys.Get_at(i));
+			list.Add((IptKey)keys.GetAt(i));
 	}
 	void Init() {// default to US style keyboard
 		literals = Hash_adp_.New();
@@ -60,7 +67,7 @@ class IptKeyStrMgr {
 		Reg(lowerKey, lowerChr);
 		Reg(upperKey, upperChr);
 	}
-	void Reg(IptKey k, char c) {Reg(k, Char_.To_str(c), (int)c);}
+	void Reg(IptKey k, char c) {Reg(k, CharUtl.ToStr(c), (int)c);}
 	void Reg(IptKey k, String s, int charVal) {
 		int v = k.Val();
 		literals.Add(v, s);

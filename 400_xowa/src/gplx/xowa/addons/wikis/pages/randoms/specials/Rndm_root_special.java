@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.pages.randoms.specials;
 
-import gplx.Bry_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
@@ -39,14 +39,14 @@ public class Rndm_root_special implements Xow_special_page {
 
 		// get random ttl
 		String randomTitleString = selectRandomTitle(wiki, ns.Id());
-		wiki.Data_mgr().RedirectWithoutLoading(page, ns.Gen_ttl(Bry_.new_u8(randomTitleString)));
+		wiki.Data_mgr().RedirectWithoutLoading(page, ns.Gen_ttl(BryUtl.NewU8(randomTitleString)));
 	}
 
 	private String selectRandomTitle(Xow_wiki wiki, int ns_id) {
 		// ISSUE#:719; find pages without "/" and not redirect
 		// REF.MW:https://github.com/wikimedia/mediawiki/blob/master/includes/specials/SpecialRandomrootpage.php
 		Xowd_page_tbl pageTbl = wiki.Data__core_mgr().Db__core().Tbl__page();
-		String where = String_.Format
+		String where = StringUtl.Format
 		("p.{0} = {1} AND p.{2} = {3} AND p.{4} NOT LIKE '%/%'"
 		, pageTbl.Fld_page_ns(), ns_id
 		, pageTbl.Fld_redirect_id(), Xowd_page_tbl.INVALID_PAGE_ID
@@ -61,6 +61,6 @@ public class Rndm_root_special implements Xow_special_page {
 	}
 
 	public static final String SPECIAL_KEY = "RandomRootPage";
-	public static final byte[] Display_ttl = Bry_.new_a7("Random Root Page");
+	public static final byte[] Display_ttl = BryUtl.NewA7("Random Root Page");
 	public static final Xow_special_page Prototype = new Rndm_root_special();
 }

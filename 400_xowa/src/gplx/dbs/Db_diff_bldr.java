@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*;
+package gplx.dbs;
+import gplx.dbs.metas.*;
+import gplx.dbs.sqls.wtrs.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
 class Db_diff_bldr {
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	private final Sql_schema_wtr sql_bldr = new Sql_schema_wtr();
 	public Db_diff_bldr() {sql_bldr.Bfr_(bfr);}
 	public String Compare_db(String src_str, String trg_str) {
@@ -41,10 +43,10 @@ class Db_diff_bldr {
 			Dbmeta_tbl_itm src_tbl = trg_tbls.Get_by(trg_tbl.Name());
 			if (src_tbl == null) Tbl_create(trg_tbl);
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	private void Tbl_delete(Dbmeta_tbl_itm tbl) {
-		bfr.Add_str_a7("DROP TABLE ").Add_str_u8(tbl.Name()).Add_byte_nl();
+		bfr.AddStrA7("DROP TABLE ").AddStrU8(tbl.Name()).AddByteNl();
 	}
 	private void Tbl_create(Dbmeta_tbl_itm tbl) {
 //			sql_bldr.Bld_create_tbl(tbl);

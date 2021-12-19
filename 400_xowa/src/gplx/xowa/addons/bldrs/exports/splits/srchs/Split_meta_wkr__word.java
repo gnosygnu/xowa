@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.srchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.srchs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
-import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
+import gplx.xowa.addons.wikis.searchs.dbs.*;
 class Split_meta_wkr__word extends Split_meta_wkr_base {
 	private Srch_word_tbl tbl;
 	private Db_stmt stmt;
@@ -32,7 +34,7 @@ class Split_meta_wkr__word extends Split_meta_wkr_base {
 	}
 	@Override public void On_nth_rls(Split_ctx ctx, Db_conn trg_conn) {this.stmt = Db_stmt_.Rls(stmt);}
 	@Override protected String Load_sql(Db_attach_mgr attach_mgr, int ns_id, int score_bgn, int score_end) {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		( "SELECT  sw.word_id, sw.word_text, sw.link_count, sw.link_count_score, sw.link_score_min, sw.link_score_max, sw.page_id"
 		, "FROM    split_search_word sw"
 		, "WHERE   sw.page_score >= {0}"

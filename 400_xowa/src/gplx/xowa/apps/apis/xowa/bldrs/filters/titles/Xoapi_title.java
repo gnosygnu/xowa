@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.apis.xowa.bldrs.filters.titles;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.Io_url;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
 import gplx.Yn;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 public class Xoapi_title implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
@@ -35,11 +35,11 @@ public class Xoapi_title implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled)) 							return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_)) 							enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_wordlist_dir)) 						return Int_.To_str(score_init);
+		else if	(ctx.Match(k, Invk_wordlist_dir)) 						return IntUtl.ToStr(score_init);
 		else if	(ctx.Match(k, Invk_wordlist_dir_)) 						wordlist_dir= m.ReadIoUrl("v");
-		else if	(ctx.Match(k, Invk_score_init)) 						return Int_.To_str(score_init);
+		else if	(ctx.Match(k, Invk_score_init)) 						return IntUtl.ToStr(score_init);
 		else if	(ctx.Match(k, Invk_score_init_)) 						score_init = m.ReadInt("v");
-		else if	(ctx.Match(k, Invk_score_pass)) 						return Int_.To_str(score_pass);
+		else if	(ctx.Match(k, Invk_score_pass)) 						return IntUtl.ToStr(score_pass);
 		else if	(ctx.Match(k, Invk_score_pass_)) 						score_pass = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_log_enabled)) 						return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_log_enabled_)) 						log_enabled = m.ReadYn("v");

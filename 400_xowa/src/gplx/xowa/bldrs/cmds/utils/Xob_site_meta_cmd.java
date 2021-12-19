@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds.utils;
-import gplx.Bry_;
-import gplx.DateAdp;
-import gplx.Datetime_now;
-import gplx.GfoMsg;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg;
-import gplx.GfsCtx;
-import gplx.Io_url;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.net.Gfo_inet_conn;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.Xowe_wiki;
@@ -42,7 +42,7 @@ import gplx.xowa.wikis.domains.Xow_abrv_xo_;
 import gplx.xowa.wikis.domains.Xow_domain_regy;
 public class Xob_site_meta_cmd implements Xob_cmd {
 	private final Xob_bldr bldr;
-	private String[] wikis; private Io_url db_url; private DateAdp cutoff_time;
+	private String[] wikis; private Io_url db_url; private GfoDate cutoff_time;
 	public Xob_site_meta_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.bldr = bldr;}
 	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public String Cmd_key() {return Xob_cmd_keys.Key_site_meta;}
@@ -50,10 +50,10 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		Xoa_app app = bldr.App();
 		if (wikis == null)			wikis = Xow_domain_regy.All;
 		if (db_url == null)			db_url = app.Fsys_mgr().Cfg_site_meta_fil();
-		if (cutoff_time == null)	cutoff_time = Datetime_now.Get().Add_day(-1);
+		if (cutoff_time == null)	cutoff_time = GfoDateNow.Get().AddDay(-1);
 		Load_all(app, db_url, wikis, cutoff_time);
 	}
-	private void Load_all(Xoa_app app, Io_url db_url, String[] reqd_ary, DateAdp cutoff) {
+	private void Load_all(Xoa_app app, Io_url db_url, String[] reqd_ary, GfoDate cutoff) {
 		Site_json_parser site_parser = new Site_json_parser(app.Utl__json_parser());
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		Gfo_inet_conn inet_conn = app.Utl__inet_conn();
@@ -67,13 +67,13 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		int actl_len = actl_ary.length;
 		for (int i = 0; i < actl_len; ++i) {	// remove items that have been completed after cutoff date
 			Site_core_itm actl_itm = actl_ary[i];
-			reqd_hash.Del(String_.new_u8(actl_itm.Site_domain()));
+			reqd_hash.Del(StringUtl.NewU8(actl_itm.Site_domain()));
 		}
 		
 		reqd_len = reqd_hash.Len();
 		for (int i = 0; i < reqd_len; ++i) {
-			String domain_str = (String)reqd_hash.Get_at(i);
-			DateAdp json_date = Datetime_now.Get();
+			String domain_str = (String)reqd_hash.GetAt(i);
+			GfoDate json_date = GfoDateNow.Get();
 			byte[] json_text = null;
 			for (int j = 0; j < 5; ++j) {
 				json_text = gplx.xowa.bldrs.wms.Xowm_api_mgr.Call_by_qarg(usr_dlg, inet_conn, domain_str, Xoa_site_cfg_loader__inet.Qarg__all);
@@ -86,7 +86,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 				app.Usr_dlg().Note_many("", "", "wm.api: failed; wiki=~{0}", domain_str);
 				continue;
 			}
-			byte[] domain_bry = Bry_.new_u8(domain_str);
+			byte[] domain_bry = BryUtl.NewU8(domain_str);
 			byte[] site_abrv = Xow_abrv_xo_.To_bry(domain_bry);
 			json_db.Tbl__core().Insert(site_abrv, domain_bry, BoolUtl.N, json_date, json_text);
 		}
@@ -94,12 +94,12 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		reqd_len = reqd_ary.length;
 		for (int i = 0; i < reqd_len; ++i) {
 			String domain_str = reqd_ary[i];
-			byte[] site_abrv = Xow_abrv_xo_.To_bry(Bry_.new_u8(domain_str));
+			byte[] site_abrv = Xow_abrv_xo_.To_bry(BryUtl.NewU8(domain_str));
 			Site_core_itm core_itm = json_db.Tbl__core().Select_itm(site_abrv);
 			if (core_itm == null) continue; // sites with no wmf_api will be null; EX:als.wiktionary.org DATE:2018-04-17
 			if (core_itm.Json_completed()) continue;
 			Site_meta_itm meta_itm = new Site_meta_itm();
-			site_parser.Parse_root(meta_itm, String_.new_u8(core_itm.Site_domain()), core_itm.Json_text());
+			site_parser.Parse_root(meta_itm, StringUtl.NewU8(core_itm.Site_domain()), core_itm.Json_text());
 			json_db.Save(meta_itm, site_abrv);
 		}
 	}

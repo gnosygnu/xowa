@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.filters.dansguardians;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.primitives.Int_obj_ref;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
@@ -63,14 +63,14 @@ public class Dg_match_mgr {
 				Init_by_rule(rule);
 		}
 	}
-	@gplx.Internal protected void Init_by_rule(Dg_rule rule) {
+	public void Init_by_rule(Dg_rule rule) {
 		if (rule.Tid() != Dg_rule.Tid_rule) return;
 		if (log_enabled) log_mgr.Insert_rule(rule);
 		Dg_word[] words = rule.Words();
 		for (Dg_word word : words) {
 			Dg_rule_group rule_group = Get_rule_group_or_new(word.Raw());
 			rule_group.Rules_list().Add(rule);
-			btrie.Add_obj(word.Raw(), rule_group);
+			btrie.AddObj(word.Raw(), rule_group);
 		}
 	}
 	private Dg_rule_group Get_rule_group_or_new(byte[] word) {
@@ -111,7 +111,7 @@ public class Dg_match_mgr {
 		int pos = 0;
 		int score_cur = score_init;
 		while (pos < src_len) {
-			Object o = btrie.Match_bgn(src, pos, src_len);
+			Object o = btrie.MatchBgn(src, pos, src_len);
 			if (o == null)
 				++pos;
 			else {
@@ -127,13 +127,13 @@ public class Dg_match_mgr {
 		int rule_tally_len = rule_tally_hash.Len(); if (rule_tally_len == 0) return false;
 		int rule_match_count = 0;
 		for (int i = 0; i < rule_tally_len; ++i) {
-			Dg_rule_tally rule_tally = (Dg_rule_tally)rule_tally_hash.Get_at(i);
+			Dg_rule_tally rule_tally = (Dg_rule_tally)rule_tally_hash.GetAt(i);
 			int min_results = rule_tally.Results_pass_count();
 			if (min_results > 0) {
 				int rule_score = rule_tally.Rule().Score();
 				int rule_score_total = rule_score * min_results;
 				if (log_enabled) log_mgr.Insert_page_rule(log_tid, page_id, rule_tally.Rule().Id(), rule_score_total);
-				if (rule_score == Dg_rule.Score_banned) {score_cur = Int_.Max_value; break;}
+				if (rule_score == Dg_rule.Score_banned) {score_cur = IntUtl.MaxValue; break;}
 				score_cur += rule_score_total;
 				++rule_match_count;
 			}
@@ -184,12 +184,12 @@ class Dg_rule_tally {
 	public Dg_rule Rule() {return rule;} private final Dg_rule rule;
 	public int[] Results() {return results;} private final int[] results; private final int results_len;
 	public void Process(byte[] word) {
-		Int_obj_ref idx = (Int_obj_ref)rule.Word_idx_hash().Get_by_bry(word);
+		IntRef idx = (IntRef)rule.Word_idx_hash().Get_by_bry(word);
 		int idx_val = idx.Val();
 		results[idx_val] = results[idx_val] + 1;
 	}
 	public int Results_pass_count() {
-		int rv = Int_.Max_value;
+		int rv = IntUtl.MaxValue;
 		for (int i = 0; i < results_len; ++i) {
 			int result = results[i];
 			if (rv > result) rv = result;

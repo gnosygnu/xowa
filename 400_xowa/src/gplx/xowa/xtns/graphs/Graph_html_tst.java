@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.graphs;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Graph_html_tst {
@@ -23,8 +23,8 @@ public class Graph_html_tst {
 	@Before public void init() {
 		fxt.Reset();
 	}
-	@Test  public void Basic() {
-		fxt.Parser_fxt().Test_html_full_str(String_.Concat_lines_nl_skip_last
+	@Test public void Basic() {
+		fxt.Parser_fxt().Test_html_full_str(StringUtl.ConcatLinesNlSkipLast
 		( "<graph>"
 		, "{"
 		, "// COMMENT \n"
@@ -32,7 +32,7 @@ public class Graph_html_tst {
 		, "   \"width\":300"
 		, "}"
 		, "</graph>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class='mw-graph' xo-graph-version=2>"
 		, "{"
 		, ""
@@ -42,18 +42,18 @@ public class Graph_html_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Wikirawupload() {
+	@Test public void Wikirawupload() {
 		String wtxt = fxt.Wikirawupload__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Wikirawupload__html(BoolUtl.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Wikirawupload__html(BoolUtl.N), fxt.Wikirawupload__html(BoolUtl.Y));
 	}
-	@Test  public void Literal_XOWA_ROOT() {
+	@Test public void Literal_XOWA_ROOT() {
 		String wtxt = fxt.Literal_XOWA_ROOT__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Literal_XOWA_ROOT__html(BoolUtl.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Literal_XOWA_ROOT__html(BoolUtl.N), fxt.Literal_XOWA_ROOT__html(BoolUtl.Y));
 	}
-	@Test  public void Error__missing_endquote() {
-		fxt.Test__hload(String_.Concat_lines_nl_skip_last
+	@Test public void Error__missing_endquote() {
+		fxt.Test__hload(StringUtl.ConcatLinesNlSkipLast
 		( "<div class='mw-graph' xo-graph-version=2 data-xowa-hdump='graph-json'>"
 		, "{"
 		, "   \"version\":2,"
@@ -62,8 +62,8 @@ public class Graph_html_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Error__invalid() {
-		fxt.Test__hload(String_.Concat_lines_nl_skip_last
+	@Test public void Error__invalid() {
+		fxt.Test__hload(StringUtl.ConcatLinesNlSkipLast
 		( "<div class='mw-graph' xo-graph-version=2 data-xowa-hdump='graph-json'>"
 		, "{"
 		, "   \"version\":2,"

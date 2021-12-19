@@ -15,8 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.template_styles;
 
-import gplx.*;
 import gplx.core.lists.hashs.Hash_adp__int;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
@@ -66,7 +71,7 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		// assume "Template:" if no explicit ns and no ":"
 		if (!css_ttl.ForceLiteralLink()  // no initial ":"
 			&& css_ttl.Ns().Id_is_main()) {
-			css_ttl = wiki.Ttl_parse(Bry_.Add(Xow_ns_.Bry__template_w_colon, css_ttl_bry));
+			css_ttl = wiki.Ttl_parse(BryUtl.Add(Xow_ns_.Bry__template_w_colon, css_ttl_bry));
 		}
 
 		// get page
@@ -90,20 +95,20 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		}
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (css_ttl == null) {
-			bfr.Add_str_a7(formatTagError("Invalid title for TemplateStyles src attribute."));
+			bfr.AddStrA7(formatTagError("Invalid title for TemplateStyles src attribute."));
 			return;
 		}
 		if (css_src == null) {
-			bfr.Add_str_a7(formatTagError("Page " + String_.new_u8(css_ttl_bry) + " has no content."));
+			bfr.AddStrA7(formatTagError("Page " + StringUtl.NewU8(css_ttl_bry) + " has no content."));
 			return;
 		}
 
 		if (!css_ignore) {
-			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+			BryWtr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().GetB512();
 			try {
-				css_src = new XoCssTransformer(String_.new_u8(css_src))
+				css_src = new XoCssTransformer(StringUtl.NewU8(css_src))
 					.Minify()
 					.Prepend(prepend)
 					.Url("upload.wikimedia.org", "www.xowa.org/xowa/fsys/bin/any/xowa/upload.wikimedia.org")
@@ -111,8 +116,8 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 				html_head.Bld_many(tmp_bfr, css_page_id, css_src);
 				Xoh_head_itm__css_dynamic css_dynamic = ctx.Page().Html_data().Head_mgr().Itm__css_dynamic();
 				css_dynamic.Enabled_y_();
-				css_dynamic.Add(tmp_bfr.To_bry_and_clear());
-			} finally {tmp_bfr.Mkr_rls();}
+				css_dynamic.Add(tmp_bfr.ToBryAndClear());
+			} finally {tmp_bfr.MkrRls();}
 
 			if (hctx.Mode_is_hdump() && !hctx.Mode_is_hdump_wo_db()) {
 				int page_id = wpg.Db().Page().Id();
@@ -133,9 +138,9 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		.Add_str_byte("src", Xatr__src)
 		.Add_str_byte("wrapper", Xatr__wrapper)
 	;
-	private static final Bry_fmt
-	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{css}")
-	, html_error = Bry_fmt.Auto("<strong class=\"error\">~{msg}</strong>")
+	private static final BryFmt
+	  html_head  = BryFmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{css}")
+	, html_error = BryFmt.Auto("<strong class=\"error\">~{msg}</strong>")
 	;
 }
 class Template_styles_kv_itm implements gplx.xowa.apps.kvs.Xoa_kv_itm {

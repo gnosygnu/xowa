@@ -14,17 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-import gplx.Bry_bfr;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Int_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.langs.regxs.Regx_group;
 import gplx.langs.regxs.Regx_match;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 class Scrib_regx_grp_mgr {
 	private final List_adp capt_list = List_adp_.New();
 	private final List_adp full_list = List_adp_.New();
@@ -40,21 +39,21 @@ class Scrib_regx_grp_mgr {
 	}
 	public int Full__len() {return full_list.Len();}
 	public int Open__len() {return open_list.Len();}
-	public int Open__get_at(int idx) {return Int_.Cast(open_list.Get_at(idx));}
-	public void Open__pop() {List_adp_.Del_at_last(open_list);}
+	public int Open__get_at(int idx) {return IntUtl.Cast(open_list.GetAt(idx));}
+	public void Open__pop() {List_adp_.DelAtLast(open_list);}
 	public boolean Open__has(int v) {
 		int len = open_list.Len();
 		for (int i = 0; i < len; i++) {
-			Object o = open_list.Get_at(i);
-			if (Int_.Cast(o) == v) return true;
+			Object o = open_list.GetAt(i);
+			if (IntUtl.Cast(o) == v) return true;
 		}
 		return false;
 	}
 
 	public int Capt__len() {return capt_list.Len();}
-	public Keyval[] Capt__to_ary() {return capt_list.Len() == 0 ? null : (Keyval[])capt_list.ToAry(Keyval.class);}
+	public KeyVal[] Capt__to_ary() {return capt_list.Len() == 0 ? null : (KeyVal[])capt_list.ToAry(KeyVal.class);}
 	public void Capt__add__real(int grp_idx, boolean is_empty_capture) {
-		capt_list.Add(Keyval_.int_(grp_idx, is_empty_capture));
+		capt_list.Add(KeyVal.NewInt(grp_idx, is_empty_capture));
 		open_list.Add(grp_idx);
 		full_list.Add(new Scrib_regx_grp_itm(BoolUtl.N, is_empty_capture, full_list.Len()));
 		idx_list.Add(grp_idx, full_list.Len());
@@ -64,9 +63,9 @@ class Scrib_regx_grp_mgr {
 			full_list.Add(new Scrib_regx_grp_itm(BoolUtl.Y, BoolUtl.N, full_list.Len()));
 		fake_count += count;
 	}
-	public void Idx__add(Bry_bfr bfr, int regx_idx) {
-		int actl_idx = Int_.Cast(idx_list.GetByOrNull(regx_idx));
-		bfr.Add_int_variable(actl_idx);
+	public void Idx__add(BryWtr bfr, int regx_idx) {
+		int actl_idx = IntUtl.Cast(idx_list.GetByOrNull(regx_idx));
+		bfr.AddIntVariable(actl_idx);
 	}
 	public Regx_match[] Adjust_balanced_many(Regx_match[] matches) {
 		if (fake_count == 0) return matches;
@@ -85,7 +84,7 @@ class Scrib_regx_grp_mgr {
 		Regx_group[] new_groups = new Regx_group[full_list.Len() - fake_count];
 		int group_idx = 0;
 		for (int j = 0; j < old_groups.length; j++) {
-			Scrib_regx_grp_itm itm = (Scrib_regx_grp_itm)full_list.Get_at(j);
+			Scrib_regx_grp_itm itm = (Scrib_regx_grp_itm)full_list.GetAt(j);
 			if (itm.Is_fake()) continue;
 			new_groups[group_idx++] = old_groups[j];
 		}

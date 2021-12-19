@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.data;
-import gplx.DateAdp;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
@@ -27,7 +27,7 @@ import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.Xof_lnki_page;
 import gplx.xowa.files.Xof_lnki_time;
 public class Fsd_thm_tbl implements Db_tbl {
@@ -85,7 +85,7 @@ public class Fsd_thm_tbl implements Db_tbl {
 		.Exec_insert();
 	}
 	public boolean Select_itm_by_w_exact(int dir_id, int fil_id, Fsd_thm_itm thm) {
-		if (stmt_select_by_fil_exact == null) stmt_select_by_fil_exact = conn.Stmt_select(tbl_name, flds, String_.Ary_wo_null(fld_owner_id, fld_w, fld_time, fld_page));
+		if (stmt_select_by_fil_exact == null) stmt_select_by_fil_exact = conn.Stmt_select(tbl_name, flds, StringUtl.AryWoNull(fld_owner_id, fld_w, fld_time, fld_page));
 		stmt_select_by_fil_exact.Clear().Crt_int(fld_owner_id, fil_id).Crt_int(fld_w, thm.W());
 		if (schema_thm_page) {
 			stmt_select_by_fil_exact.Crt_double	(fld_time, Xof_lnki_time.Db_save_double(thm.Time()));
@@ -138,7 +138,7 @@ public class Fsd_thm_tbl implements Db_tbl {
 		itm.Ctor(mnt_id, dir_id, fil_id, thm_id, bin_db_id, w, h, time, page, size, modified, hash);
 		return true;
 	}
-	public static final DateAdp Modified_null = null;
+	public static final GfoDate Modified_null = null;
 	public static final String Hash_null = "", Modified_null_str = "";
 	public static boolean Match_nearest(List_adp list, Fsd_thm_itm thm, boolean schema_thm_page) {
 		int len = list.Len(); if (len == 0) return BoolUtl.N;
@@ -146,7 +146,7 @@ public class Fsd_thm_tbl implements Db_tbl {
 		int thm_w = thm.W(), thm_page = thm.Page(); double thm_time = thm.Time();
 		Fsd_thm_itm max = null;
 		for (int i = 0; i < len; ++i) {
-			Fsd_thm_itm comp = (Fsd_thm_itm)list.Get_at(i);
+			Fsd_thm_itm comp = (Fsd_thm_itm)list.GetAt(i);
 			int comp_w = comp.W();
 			int comp_page = schema_thm_page ? comp.Page() : thm_page;
 			if (	thm_w			== comp_w

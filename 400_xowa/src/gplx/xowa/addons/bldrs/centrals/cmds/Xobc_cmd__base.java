@@ -13,7 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.cmds;
+import gplx.core.envs.SystemUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.MathUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.progs.rates.*;
 import gplx.xowa.apps.apis.*;
 public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
@@ -25,7 +36,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 	private boolean log_verbose;
 	public Xobc_cmd__base(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_id) {
 		this.task_mgr = task_mgr; this.task_id = task_id; this.step_id = step_id; this.cmd_id = cmd_id;
-		this.cmd_uid = String_.Concat_with_str(":", Int_.To_str(task_id), Int_.To_str(step_id), Int_.To_str(cmd_id));
+		this.cmd_uid = StringUtl.ConcatWith(":", IntUtl.ToStr(task_id), IntUtl.ToStr(step_id), IntUtl.ToStr(cmd_id));
 		this.rate_list = task_mgr == null ? null : task_mgr.Rate_mgr().Get_or_new(this.Cmd_type());
 	}
 	public long				Prog_data_cur()	{return data_cur;}		private long data_cur;								public void Prog_data_cur_(long v) {this.data_cur = v;}
@@ -57,7 +68,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 			this.log_verbose = api_root.Addon().Bldr().Central().Log_verbose();
 		try {
 			Gfo_log_.Instance.Info("xobc_cmd task bgn", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
-			this.time_prv = gplx.core.envs.System_.Ticks();
+			this.time_prv = SystemUtl.Ticks();
 			this.status = Gfo_prog_ui_.Status__working;
 			this.Cmd_exec_hook(ctx);
 			Gfo_log_.Instance.Info("xobc_cmd task end", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id);
@@ -71,8 +82,8 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 			}
 		} catch (Exception e) {
 			this.status = Gfo_prog_ui_.Status__fail;
-			Gfo_log_.Instance.Warn("xobc_cmd task fail", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id, "err", Err_.Message_gplx_log(e));
-			task_mgr.Work_mgr().On_fail(this, this.Cmd_fail_resumes(), Err_.Message_lang(e));
+			Gfo_log_.Instance.Warn("xobc_cmd task fail", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id, "err", ErrUtl.ToStrLog(e));
+			task_mgr.Work_mgr().On_fail(this, this.Cmd_fail_resumes(), ErrUtl.Message(e));
 		}
 		finally {
 			Gfo_log_.Instance.Flush();
@@ -110,12 +121,12 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 
 	public boolean Prog_notify_and_chk_if_suspended(long new_data_cur, long new_data_end) {
 		if (status == Gfo_prog_ui_.Status__suspended) return true;	// task paused by ui; exit now;
-		long time_cur = gplx.core.envs.System_.Ticks();
+		long time_cur = SystemUtl.Ticks();
 		if (time_cur < time_prv + notify_delay) return false;		// message came too soon. ignore it
 
 		// update rate
 		double rate_now = (rate_list.Add(new_data_cur - data_cur, (time_cur - time_prv))) * 1000;
-		double delta = Math_.Abs_double((rate_now - rate_cur) / rate_cur);
+		double delta = MathUtl.AbsAsDouble((rate_now - rate_cur) / rate_cur);
 		if (	rate_cur == 0					// rate not set
 			||	delta > delta_threshold) {		// rate_now is at least 25% different than rate_prv
 			if (delta > delta_threshold * 2)	// rate_now is > 50% different

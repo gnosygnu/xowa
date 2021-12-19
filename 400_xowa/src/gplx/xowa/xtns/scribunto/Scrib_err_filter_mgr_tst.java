@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Scrib_err_filter_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Scrib_err_filter_mgr_fxt fxt = new Scrib_err_filter_mgr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Exec_add(11, "Mod_1", "Fnc_1", "Err_11", "Comm_11");
 		fxt.Exec_add(12, "Mod_1", "Fnc_2", "Err_12", "Comm_12");
 		fxt.Exec_add(21, "Mod_2", "Fnc_1", "Err_21", "Comm_21");
@@ -30,7 +30,7 @@ public class Scrib_err_filter_mgr_tst {
 		fxt.Test_match_n("Mod_1", "Fnc_1", "x");
 		fxt.Test_match_n("Mod_1", "Fnc_3", "x");
 		fxt.Test_match_n("Mod_3", "Fnc_1", "x");
-		fxt.Test_print(String_.Concat_lines_nl
+		fxt.Test_print(StringUtl.ConcatLinesNl
 		( "0|11|Mod_1|Fnc_1|Err_11|Comm_11"
 		, "1|12|Mod_1|Fnc_2|Err_12|Comm_12"
 		, "1|21|Mod_2|Fnc_1|Err_21|Comm_21"
@@ -44,9 +44,9 @@ class Scrib_err_filter_mgr_fxt {
 	public void Test_match_y(String mod, String fnc, String err) {Test_match(BoolUtl.Y, mod, fnc, err);}
 	public void Test_match_n(String mod, String fnc, String err) {Test_match(BoolUtl.N, mod, fnc, err);}
 	private void Test_match(boolean expd, String mod, String fnc, String err) {
-		Tfds.Eq(expd, err_mgr.Match(mod, fnc, err));
+		GfoTstr.EqObj(expd, err_mgr.Match(mod, fnc, err));
 	}
 	public void Test_print(String expd) {
-		Tfds.Eq_str_lines(expd, err_mgr.Print());
+		GfoTstr.EqLines(expd, err_mgr.Print());
 	}
 }

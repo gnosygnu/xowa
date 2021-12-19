@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.ctgs.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 public class Xoctg_catpage_loader {
 	public Xoctg_catpage_ctg Load_ctg_or_null(Xow_wiki wiki, byte[] page_ttl_bry, Xoctg_catpage_mgr catpage_mgr, Xoctg_catpage_url cat_url, Xoa_ttl cat_ttl, int limit) {
 		// get cat_id from page_tbl
@@ -55,7 +60,7 @@ public class Xoctg_catpage_loader {
 
 			// set prev / next props to dflt values
 			if (url_is_from) {					// url is from; EX: from=A
-				if (Bry_.Len_eq_0(url_sortkey))	// no sortkey specified for group, so group always starts with 1st itm -> disable previous link
+				if (BryUtl.IsNullOrEmpty(url_sortkey))	// no sortkey specified for group, so group always starts with 1st itm -> disable previous link
 					grp.Prev_disable_(true);
 			}
 			else {								// url is until; EX: until=A

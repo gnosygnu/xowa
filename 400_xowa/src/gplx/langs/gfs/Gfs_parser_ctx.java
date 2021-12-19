@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*;
-import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.gfs;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.btries.Btrie_rv;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValList;
+import gplx.types.basics.utls.CharUtl;
 class Gfs_parser_ctx {
 	public Btrie_fast_mgr Trie() {return trie;} Btrie_fast_mgr trie;
 	public Btrie_rv Trie_rv() {return trie_rv;} private final Btrie_rv trie_rv = new Btrie_rv();
@@ -26,7 +35,7 @@ class Gfs_parser_ctx {
 	public Gfs_nde Cur_nde() {return cur_nde;} Gfs_nde cur_nde;
 	public int Nxt_pos() {return nxt_pos;} private int nxt_pos;
 	public Gfs_lxr Nxt_lxr() {return nxt_lxr;} Gfs_lxr nxt_lxr;
-	public Bry_bfr Tmp_bfr() {return tmp_bfr;} private Bry_bfr tmp_bfr = Bry_bfr_.New();
+	public BryWtr Tmp_bfr() {return tmp_bfr;} private BryWtr tmp_bfr = BryWtr.New();
 	public void Process_eos() {}
 	public void Process_lxr(int nxt_pos, Gfs_lxr nxt_lxr)	{this.nxt_pos = nxt_pos; this.nxt_lxr = nxt_lxr;}
 	public void Process_null(int cur_pos)					{this.nxt_pos = cur_pos; this.nxt_lxr = null;}
@@ -58,27 +67,27 @@ class Gfs_parser_ctx {
 	public void Stack_add() {nodes.Add(cur_nde);} List_adp nodes = List_adp_.New();
 	public void Stack_pop(int pos) {
 		if (nodes.Len() < 2) err_mgr.Fail_nde_stack_empty(this, pos);	// NOTE: need at least 2 items; 1 to pop and 1 to set as current
-		List_adp_.Del_at_last(nodes);
+		List_adp_.DelAtLast(nodes);
 		Cur_nde_from_stack();
 	}
 	public Gfs_err_mgr Err_mgr() {return err_mgr;} Gfs_err_mgr err_mgr = new Gfs_err_mgr();
 }
 class Gfs_err_mgr {
 	public void Fail_eos(Gfs_parser_ctx ctx) {Fail(ctx, Fail_msg_eos, ctx.Src_len());}
-	public void Fail_unknown_char(Gfs_parser_ctx ctx, int pos, byte c) {Fail(ctx, Fail_msg_unknown_char, pos, Keyval_.new_("char", Char_.To_str((char)c)));}
+	public void Fail_unknown_char(Gfs_parser_ctx ctx, int pos, byte c) {Fail(ctx, Fail_msg_unknown_char, pos, KeyVal.NewStr("char", CharUtl.ToStr((char)c)));}
 	public void Fail_nde_stack_empty(Gfs_parser_ctx ctx, int pos) {Fail(ctx, Fail_msg_nde_stack_empty, pos);}
 	public void Fail_invalid_lxr(Gfs_parser_ctx ctx, int pos, int lxr_tid, byte c) {
-		Fail(ctx, Fail_msg_invalid_lxr, pos, Keyval_.new_("char", Char_.To_str((char)c)), Keyval_.new_("cur_lxr", Gfs_lxr_.Tid__name(lxr_tid)), Keyval_.new_("prv_lxr", Gfs_lxr_.Tid__name(ctx.Prv_lxr())));
+		Fail(ctx, Fail_msg_invalid_lxr, pos, KeyVal.NewStr("char", CharUtl.ToStr((char)c)), KeyVal.NewStr("cur_lxr", Gfs_lxr_.Tid__name(lxr_tid)), KeyVal.NewStr("prv_lxr", Gfs_lxr_.Tid__name(ctx.Prv_lxr())));
 	}
-	private void Fail(Gfs_parser_ctx ctx, String msg, int pos, Keyval... args) {
+	private void Fail(Gfs_parser_ctx ctx, String msg, int pos, KeyVal... args) {
 		byte[] src = ctx.Src(); int src_len = ctx.Src_len(); 
 		Fail_args_standard(src, src_len, pos);
 		int len = args.length;
 		for (int i = 0; i < len; i++) {
-			Keyval arg = args[i];
-			tmp_fail_args.Add(arg.Key(), arg.Val_to_str_or_empty());
+			KeyVal arg = args[i];
+			tmp_fail_args.Add(arg.KeyToStr(), arg.ValToStrOrEmpty());
 		}
-		throw Err_.new_wo_type(Fail_msg(msg, tmp_fail_args));
+		throw ErrUtl.NewArgs(Fail_msg(msg, tmp_fail_args));
 	}
 	private void Fail_args_standard(byte[] src, int src_len, int pos) {
 		tmp_fail_args.Add("excerpt_bgn", Fail_excerpt_bgn(src, src_len, pos));		
@@ -86,41 +95,41 @@ class Gfs_err_mgr {
 		tmp_fail_args.Add("pos"	, pos);		
 	}
 	public static final String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
-	String Fail_msg(String type, Keyval_list fail_args) {
-		tmp_fail_bfr.Add_str_u8(type).Add_byte(AsciiByte.Colon);
-		int len = fail_args.Count();
+	String Fail_msg(String type, KeyValList fail_args) {
+		tmp_fail_bfr.AddStrU8(type).AddByte(AsciiByte.Colon);
+		int len = fail_args.Len();
 		for (int i = 0; i < len; i++) {
-			tmp_fail_bfr.Add_byte(AsciiByte.Space);
-			Keyval kv = fail_args.Get_at(i);
-			tmp_fail_bfr.Add_str_u8(kv.Key());
-			tmp_fail_bfr.Add_byte(AsciiByte.Eq).Add_byte(AsciiByte.Apos);
-			tmp_fail_bfr.Add_str_u8(kv.Val_to_str_or_empty()).Add_byte(AsciiByte.Apos);
+			tmp_fail_bfr.AddByte(AsciiByte.Space);
+			KeyVal kv = fail_args.GetAt(i);
+			tmp_fail_bfr.AddStrU8(kv.KeyToStr());
+			tmp_fail_bfr.AddByte(AsciiByte.Eq).AddByte(AsciiByte.Apos);
+			tmp_fail_bfr.AddStrU8(kv.ValToStrOrEmpty()).AddByte(AsciiByte.Apos);
 		}
-		return tmp_fail_bfr.To_str_and_clear();
+		return tmp_fail_bfr.ToStrAndClear();
 	}
-	Bry_bfr tmp_fail_bfr = Bry_bfr_.Reset(255);
-	Keyval_list tmp_fail_args = new Keyval_list();
+	BryWtr tmp_fail_bfr = BryWtr.NewAndReset(255);
+	KeyValList tmp_fail_args = new KeyValList();
 	private static int excerpt_len = 50;
 	String Fail_excerpt_bgn(byte[] src, int src_len, int pos) {
 		int bgn = pos - excerpt_len; if (bgn < 0) bgn = 0;
 		Fail_excerpt_rng(tmp_fail_bfr, src, bgn, pos);
-		return tmp_fail_bfr.To_str_and_clear();
+		return tmp_fail_bfr.ToStrAndClear();
 	}
 	String Fail_excerpt_end(byte[] src, int src_len, int pos) {
 		int end = pos + excerpt_len; if (end > src_len) end = src_len;
 		Fail_excerpt_rng(tmp_fail_bfr, src, pos, end);
-		return tmp_fail_bfr.To_str_and_clear();
+		return tmp_fail_bfr.ToStrAndClear();
 	}
-	private static void Fail_excerpt_rng(Bry_bfr bfr, byte[] src, int bgn, int end) {
+	private static void Fail_excerpt_rng(BryWtr bfr, byte[] src, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
 				case AsciiByte.Tab: 			bfr.Add(Esc_tab); break;
 				case AsciiByte.Nl:		bfr.Add(Esc_nl); break;
 				case AsciiByte.Cr: bfr.Add(Esc_cr); break;
-				default:						bfr.Add_byte(b); break;
+				default:						bfr.AddByte(b); break;
 			}
 		}
 	}
-	private static final byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
+	private static final byte[] Esc_nl = BryUtl.NewA7("\\n"), Esc_cr = BryUtl.NewA7("\\r"), Esc_tab = BryUtl.NewA7("\\t");
 }

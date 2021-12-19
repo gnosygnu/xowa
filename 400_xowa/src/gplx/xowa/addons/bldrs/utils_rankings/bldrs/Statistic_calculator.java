@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.utils_rankings.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.utils_rankings.*;
+package gplx.xowa.addons.bldrs.utils_rankings.bldrs;
+import gplx.types.basics.utls.MathUtl;
 class Statistic_calculator {
 	private int count;
 	private double old_avg, cur_avg, old_sum, cur_sum;
 	public int Count()			{return count;}
 	public double Avg()			{return (count > 0) ? cur_avg : 0;}
 	public double Variance()	{return (count > 1) ? cur_sum / (count - 1) : 0;}
-	public double Stddev()		{return Math_.Sqrt(Variance());}
+	public double Stddev()		{return MathUtl.Sqrt(Variance());}
 	public void Clear() {count = 0;}
 	public void Push(double x) {
 		count++;

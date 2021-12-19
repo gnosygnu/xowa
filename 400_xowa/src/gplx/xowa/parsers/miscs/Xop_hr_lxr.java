@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.miscs;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.xndes.*;
@@ -32,7 +33,7 @@ public class Xop_hr_lxr implements Xop_lxr {
 		}
 		ctx.Apos().End_frame(ctx, root, src, bgn_pos, false);
 		ctx.CloseOpenItms(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos);		// close open items
-		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Hook_byt);	// gobble consecutive dashes
+		cur_pos = BryFind.FindFwdWhile(src, cur_pos, src_len, Hook_byt);	// gobble consecutive dashes
 		if (!bos)
 			ctx.Para().Process_nl(ctx, root, src, bgn_pos, bgn_pos);	// simulate \n in front of ----
 		ctx.Para().Process_block__bgn_y__end_n(Xop_xnde_tag_.Tag__hr);	// para=n; block=y

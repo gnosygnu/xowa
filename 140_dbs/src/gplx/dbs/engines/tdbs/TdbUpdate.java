@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.criterias.*;
 import gplx.core.gfo_ndes.*;
 import gplx.dbs.qrys.*;
+import gplx.types.commons.KeyVal;
 class TdbUpdateWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_update cmd = (Db_qry_update)cmdObj;
@@ -35,10 +36,10 @@ class TdbUpdateWkr implements Db_qryWkr {
 		return rv;
 	}
 	void UpdateRow(Db_qry_update cmd, GfoNde row) {
-		for (int i = 0; i < cmd.Args().Count(); i++) {
-			Keyval p = (Keyval)cmd.Args().Get_at(i);
+		for (int i = 0; i < cmd.Args().Len(); i++) {
+			KeyVal p = (KeyVal)cmd.Args().GetAt(i);
 			Db_arg prm = (Db_arg)p.Val();
-			row.Write(p.Key(), prm.Val);
+			row.Write(p.KeyToStr(), prm.Val);
 		}
 	}
 	public static TdbUpdateWkr new_() {TdbUpdateWkr rv = new TdbUpdateWkr(); return rv;}

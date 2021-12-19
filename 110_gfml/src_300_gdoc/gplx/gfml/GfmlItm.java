@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-public interface GfmlItm extends GfmlObj, To_str_able {
+package gplx.gfml;
+import gplx.frameworks.objects.ToStrAble;
+public interface GfmlItm extends GfmlObj, ToStrAble {
 	GfmlTkn		KeyTkn(); String Key(); // Key() is alternative to Key().Val()
 	GfmlType	Type();
 	boolean		KeyedSubObj();

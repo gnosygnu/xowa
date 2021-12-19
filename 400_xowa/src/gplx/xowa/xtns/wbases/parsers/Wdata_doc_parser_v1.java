@@ -13,10 +13,45 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.parsers; import gplx.*;
-import gplx.core.primitives.*; import gplx.langs.jsons.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.parsers;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_itm_;
+import gplx.langs.jsons.Json_itm_int;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
+import gplx.xowa.xtns.wbases.claims.Wbase_references_grp;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_entity_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
+import gplx.xowa.xtns.wbases.core.Wdata_alias_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_claim_v1;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
 public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	public Wdata_doc_parser_v1(Gfo_usr_dlg usr_dlg) {this.usr_dlg = usr_dlg;} private Gfo_usr_dlg usr_dlg;
 	public Wdata_doc_parser_v1() {}
@@ -29,11 +64,11 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				case Json_itm_.Tid__ary:	// "entity":["item",1]
 					Json_ary kv_val_as_ary = (Json_ary)kv_val;
 					Json_itm entity_id = kv_val_as_ary.Get_at(1);
-					return Bry_.Add(AsciiByte.Ltr_q, entity_id.Data_bry());
+					return BryUtl.Add(AsciiByte.Ltr_q, entity_id.Data_bry());
 				default:
-					throw Err_.new_unhandled(kv_val.Tid());
+					throw ErrUtl.NewUnhandled(kv_val.Tid());
 			}
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse qid", "src", String_.new_u8(doc.Src()));}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse qid", "src", StringUtl.NewU8(doc.Src()));}
 	}
 	public Ordered_hash Parse_sitelinks(byte[] qid, Json_doc doc) {
 		try {
@@ -61,7 +96,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				rv.Add(site_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse sitelinks", "qid", String_.new_u8(qid));}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse sitelinks", "qid", StringUtl.NewU8(qid));}
 	}
 	public Ordered_hash Parse_langvals(byte[] qid, Json_doc doc, boolean label_or_description) {
 		try {
@@ -76,7 +111,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse langvals", "qid", String_.new_u8(qid), "langval_tid", label_or_description);}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse langvals", "qid", StringUtl.NewU8(qid), "langval_tid", label_or_description);}
 	}
 	public Ordered_hash Parse_aliases(byte[] qid, Json_doc doc) {
 		try {
@@ -102,13 +137,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 							vals_bry_ary[j] = vals_sub_kv.Val().Data_bry();
 						}
 						break;
-					default: throw Err_.new_unhandled(data_val.Tid());
+					default: throw ErrUtl.NewUnhandled(data_val.Tid());
 				}
 				Wdata_alias_itm itm		= new Wdata_alias_itm(lang_bry, vals_bry_ary);
 				rv.Add(lang_bry, itm);
 			}
 			return rv;
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse aliases", "qid", String_.new_u8(qid));}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse aliases", "qid", StringUtl.NewU8(qid));}
 	}
 	public Ordered_hash Parse_claims(byte[] qid, Json_doc doc) {
 		try {
@@ -122,16 +157,16 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				temp_list.Add(claim_itm);
 			}
 			return Claims_list_to_hash(temp_list);
-		} catch (Exception e) {throw Err_.new_exc(e, "xo", "failed to parse claims", "qid", String_.new_u8(doc.Src()));}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to parse claims", "qid", StringUtl.NewU8(doc.Src()));}
 	}
-	public Wbase_claim_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_nde nde) {throw Err_.new_unimplemented();}
+	public Wbase_claim_base Parse_claims_data(byte[] qid, int pid, byte snak_tid, Json_nde nde) {throw ErrUtl.NewUnimplemented();}
 	public static Ordered_hash Claims_list_to_hash(List_adp full_list) {
 		full_list.Sort();
 		Ordered_hash rv = Ordered_hash_.New(); List_adp temp_itms = List_adp_.New();
 		int prv_pid = -1;
 		int len = full_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wbase_claim_base claim_itm = (Wbase_claim_base)full_list.Get_at(i);
+			Wbase_claim_base claim_itm = (Wbase_claim_base)full_list.GetAt(i);
 			int cur_pid = claim_itm.Pid();
 			if (prv_pid != cur_pid && prv_pid != -1)
 				Claims_list_to_hash__add(rv, prv_pid, temp_itms);
@@ -143,7 +178,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	}
 	private static void Claims_list_to_hash__add(Ordered_hash rv, int pid, List_adp temp_itms) {
 		if (temp_itms.Len() == 0) return; // NOTE: will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
-		Int_obj_ref claim_grp_key = Int_obj_ref.New(pid);
+		IntRef claim_grp_key = IntRef.New(pid);
 		Wbase_claim_grp claim_grp = new Wbase_claim_grp(claim_grp_key, (Wbase_claim_base[])temp_itms.ToAryAndClear(Wbase_claim_base.class));
 		rv.Add(claim_grp_key, claim_grp);
 	}
@@ -153,8 +188,8 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		for (int i = 0; i < len; i++) {
 			Json_kv kv = Json_kv.Cast(prop_nde.Get_at(i));
 			Json_itm kv_key = kv.Key();
-			Byte_obj_val bv = (Byte_obj_val)Prop_key_hash.Get_by_bry(kv_key.Data_bry());
-			if (bv == null) {Warn("invalid prop node: ~{0}", String_.new_u8(kv_key.Data_bry())); return null;}
+			ByteVal bv = (ByteVal)Prop_key_hash.Get_by_bry(kv_key.Data_bry());
+			if (bv == null) {Warn("invalid prop node: ~{0}", StringUtl.NewU8(kv_key.Data_bry())); return null;}
 			switch (bv.Val()) {
 				case Prop_tid_m:
 					rv = New_prop_by_m(src, Json_ary.cast_or_null(kv.Val()));
@@ -164,13 +199,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 					rv.Wguid_(kv.Data_bry());
 					break;
 				case Prop_tid_rank:
-					rv.Rank_tid_((byte)Int_.Cast(((Json_itm_int)kv.Val()).Data_as_int()));
+					rv.Rank_tid_((byte)IntUtl.Cast(((Json_itm_int)kv.Val()).Data_as_int()));
 					break;
 				case Prop_tid_q:
 					break;
 				case Prop_tid_refs:
 					break;
-				default:				throw Err_.new_unhandled(bv.Val());
+				default:				throw ErrUtl.NewUnhandled(bv.Val());
 			}
 		}
 		return rv;
@@ -211,7 +246,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				Json_nde sub_nde = Json_nde.Cast(ary.Get_at(3));
 				return new Wbase_claim_monolingualtext(pid, snak_tid, Get_val(sub_nde, 1), Get_val(sub_nde, 0));
 			}
-			default: {throw Err_.new_unhandled(val_tid);}
+			default: {throw ErrUtl.NewUnhandled(val_tid);}
 		}		
 	}
 	private static byte[] Get_val(Json_nde sub_nde, int i) {
@@ -238,9 +273,9 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		}
 		return rv;
 	}
-	public Wbase_claim_grp_list Parse_qualifiers(byte[] qid, Json_nde nde)		{throw Err_.new_unimplemented();}
-	public Wbase_references_grp[] Parse_references(byte[] qid, Json_ary owner)	{throw Err_.new_unimplemented();}
-	public int[] Parse_pid_order(byte[] qid, Json_ary ary) {throw Err_.new_unimplemented();}
+	public Wbase_claim_grp_list Parse_qualifiers(byte[] qid, Json_nde nde)		{throw ErrUtl.NewUnimplemented();}
+	public Wbase_references_grp[] Parse_references(byte[] qid, Json_ary owner)	{throw ErrUtl.NewUnimplemented();}
+	public int[] Parse_pid_order(byte[] qid, Json_ary ary) {throw ErrUtl.NewUnimplemented();}
 	public static final String
 	  Str_entity								= "entity"
 	, Str_id									= "id"
@@ -252,13 +287,13 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	, Str_name									= "name"
 	;
 	public static final byte[]
-	  Bry_entity								= Bry_.new_a7(Str_entity)
-	, Bry_id									= Bry_.new_a7(Str_id)
-	, Bry_links									= Bry_.new_a7(Str_links)
-	, Bry_label									= Bry_.new_a7(Str_label)
-	, Bry_aliases								= Bry_.new_a7(Str_aliases)
-	, Bry_claims								= Bry_.new_a7(Str_claims)
-	, Bry_description							= Bry_.new_a7(Str_description)
-	, Bry_name									= Bry_.new_a7(Str_name)
+	  Bry_entity								= BryUtl.NewA7(Str_entity)
+	, Bry_id									= BryUtl.NewA7(Str_id)
+	, Bry_links									= BryUtl.NewA7(Str_links)
+	, Bry_label									= BryUtl.NewA7(Str_label)
+	, Bry_aliases								= BryUtl.NewA7(Str_aliases)
+	, Bry_claims								= BryUtl.NewA7(Str_claims)
+	, Bry_description							= BryUtl.NewA7(Str_description)
+	, Bry_name									= BryUtl.NewA7(Str_name)
 	;
 }

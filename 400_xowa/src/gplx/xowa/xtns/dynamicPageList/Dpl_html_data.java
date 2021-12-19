@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.dynamicPageList;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
 class Dpl_html_data {
 	public byte Tid() {return tid;} private byte tid;
 	public byte[] Grp_bgn() {return grp_bgn;} private byte[] grp_bgn;
@@ -23,10 +25,10 @@ class Dpl_html_data {
 
 	public static final byte Tid_null = 0, Tid_none = 1, Tid_list_ol = 2, Tid_list_ul = 3, Tid_gallery = 4, Tid_inline = 5;
 	public static final byte[]
-	  Ul_bgn = Bry_.new_a7("<ul>"), Ul_end = Bry_.new_a7("</ul>")
-	, Ol_bgn = Bry_.new_a7("<ol>"), Ol_end = Bry_.new_a7("</ol>")
-	, Li_bgn = Bry_.new_a7("<li>"), Li_end = Bry_.new_a7("</li>")
-	, Br = Bry_.new_a7("<br />")
+	  Ul_bgn = BryUtl.NewA7("<ul>"), Ul_end = BryUtl.NewA7("</ul>")
+	, Ol_bgn = BryUtl.NewA7("<ol>"), Ol_end = BryUtl.NewA7("</ol>")
+	, Li_bgn = BryUtl.NewA7("<li>"), Li_end = BryUtl.NewA7("</li>")
+	, Br = BryUtl.NewA7("<br />")
 	;
 	private static final Dpl_html_data
 	  Itm_gallery	= new_(Tid_gallery, null, null, null, null)
@@ -47,7 +49,7 @@ class Dpl_html_data {
 		case Dpl_itm_keys.Key_none: 			return Itm_none;
 		case Dpl_itm_keys.Key_ordered: 			return Itm_ordered;
 		case Dpl_itm_keys.Key_unordered: 		return Itm_unordered;
-		default:								throw Err_.new_unhandled(key);
+		default:								throw ErrUtl.NewUnhandled(key);
 		}
 	}
 }

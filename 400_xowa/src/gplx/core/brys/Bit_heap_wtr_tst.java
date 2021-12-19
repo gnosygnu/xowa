@@ -14,35 +14,35 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.brys;
-import gplx.Bry_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Bit_heap_wtr_tst {
 	private final Bit_heap_wtr_fxt fxt = new Bit_heap_wtr_fxt();
-	@Test  public void Add_bool() {
+	@Test public void Add_bool() {
 		fxt.Clear().Add_bool(BoolUtl.Y).Test__vals(1, 1);
 		fxt.Clear().Add_bool(BoolUtl.N).Test__vals(1, 0);
 		fxt.Clear().Add_bool(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y).Test__vals(4,  15);
 		fxt.Clear().Add_bool(BoolUtl.Y, BoolUtl.N, BoolUtl.N, BoolUtl.Y).Test__vals(4,   9);
 		fxt.Clear().Add_bool(8, BoolUtl.Y).Test__vals(0, 0, 255);
 	}
-	@Test  public void Add_byte() {
+	@Test public void Add_byte() {
 		fxt.Clear().Add_byte(255).Test__vals(0, 0, 255);
 	}
-	@Test  public void Add_bool_byte() {
+	@Test public void Add_bool_byte() {
 		fxt.Clear().Add_bool(BoolUtl.N).Add_byte(255).Test__vals(1, 127, 254);
 		fxt.Clear().Add_bool(BoolUtl.Y).Add_byte(255).Test__vals(1, 127, 255);
 		fxt.Clear().Add_bool(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y).Add_byte(255).Test__vals(4, 15, 255);
 	}
-	@Test  public void Add_byte_digits() {
+	@Test public void Add_byte_digits() {
 		fxt.Clear().Add_byte(4,  15).Test__vals(4,  15);
 		fxt.Clear().Add_byte(7, 127).Add_byte(2, 3).Test__vals(1, 1, 255);
 		fxt.Clear().Add_byte(3, 7).Add_byte(3, 7).Test__vals(6, 63);
 		fxt.Clear().Add_byte(6, 63).Add_byte(3, 7).Test__vals(1, 1, 255);
 		fxt.Clear().Add_byte(3, 6).Add_byte(3, 6).Test__vals(6, 54);
 	}
-	@Test  public void Add_int_hzip() {
+	@Test public void Add_int_hzip() {
 		fxt.Clear().Add_int_hzip(1, 100).Test__vals(0, 0, 100);
 		fxt.Clear().Add_int_hzip(1, 300).Test__vals(0, 0, 253, 1, 44);
 		fxt.Clear().Add_int_hzip(2, 100).Test__vals(0, 0, 0, 100);
@@ -80,8 +80,8 @@ class Bit_heap_wtr_fxt {
 		return this;
 	}
 	public void Test__vals(int expd_cur_bits, int expd_cur, int... expd_ary) {
-		Tfds.Eq_int	(expd_cur_bits				, heap.Cur_bits()		, "cur_bits");
-		Tfds.Eq_int	(expd_cur					, heap.Cur()			, "cur");
-		Tfds.Eq_ary	(Bry_.New_by_ints(expd_ary)	, heap.Heap().To_bry()	, "heap");
+		GfoTstr.Eq(expd_cur_bits				, heap.Cur_bits()		, "cur_bits");
+		GfoTstr.Eq(expd_cur					, heap.Cur()			, "cur");
+		GfoTstr.EqAry(BryUtl.NewByInts(expd_ary)	, heap.Heap().ToBry()	, "heap");
 	}
 }

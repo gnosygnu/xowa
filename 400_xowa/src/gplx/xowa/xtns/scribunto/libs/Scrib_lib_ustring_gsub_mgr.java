@@ -14,26 +14,24 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.objects.strings.AsciiByte;
-import gplx.Char_;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Int_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.List_adp_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Type_;
 import gplx.langs.regxs.Regx_group;
 import gplx.langs.regxs.Regx_match;
-import gplx.objects.strings.unicodes.UstringUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.strings.unicodes.UstringUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.xtns.scribunto.Scrib_core;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
 import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
@@ -77,37 +75,37 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 		byte repl_tid = Repl_tid_null;
 		// @repl can be String, int, table, func
 		Class<?> repl_type = repl_obj.getClass();
-		if		(Object_.Eq(repl_type, String_.Cls_ref_type)) {
+		if		(ObjectUtl.Eq(repl_type, StringUtl.ClsRefType)) {
 			repl_tid = Repl_tid_string;
-			repl_bry = Bry_.new_u8((String)repl_obj);
+			repl_bry = BryUtl.NewU8((String)repl_obj);
 		}
-		else if	(Object_.Eq(repl_type, Int_.Cls_ref_type)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
+		else if	(ObjectUtl.Eq(repl_type, IntUtl.ClsRefType)) {	// NOTE:@replace sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 			repl_tid = Repl_tid_string;
-			repl_bry = Bry_.new_u8(Int_.To_str(Int_.Cast(repl_obj)));
+			repl_bry = BryUtl.NewU8(IntUtl.ToStr(IntUtl.Cast(repl_obj)));
 		}
-		else if	(Object_.Eq(repl_type, Keyval[].class)) {
+		else if	(ObjectUtl.Eq(repl_type, KeyVal[].class)) {
 			repl_tid = Repl_tid_table;
 			repl_hash = Hash_adp_.New();
-			Keyval[] kvs = (Keyval[])repl_obj;
+			KeyVal[] kvs = (KeyVal[])repl_obj;
 			int kvs_len = kvs.length;
 			for (int i = 0; i < kvs_len; i++) {
-				Keyval kv = kvs[i];
-				repl_hash.Add(kv.Key(), Bry_.new_u8(kv.Val_to_str_or_empty()));
+				KeyVal kv = kvs[i];
+				repl_hash.Add(kv.KeyToStr(), BryUtl.NewU8(kv.ValToStrOrEmpty()));
 			}
 		}
-		else if	(Object_.Eq(repl_type, Scrib_lua_proc.class)) {
+		else if	(ObjectUtl.Eq(repl_type, Scrib_lua_proc.class)) {
 			repl_tid = Repl_tid_luacbk;
 			repl_func = (Scrib_lua_proc)repl_obj;
 		}
-		else if	(Object_.Eq(repl_type, Double_.Cls_ref_type)) {	// NOTE:@replace sometimes double; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2; DATE:2016-04-21
+		else if	(ObjectUtl.Eq(repl_type, DoubleUtl.ClsRefType)) {	// NOTE:@replace sometimes double; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2; DATE:2016-04-21
 			repl_tid = Repl_tid_string;
-			repl_bry = Bry_.new_u8(Double_.To_str(Double_.cast(repl_obj)));
+			repl_bry = BryUtl.NewU8(DoubleUtl.ToStr(DoubleUtl.Cast(repl_obj)));
 		}
 		else
-			throw Err_.new_unhandled(Type_.Name(repl_type));
+			throw ErrUtl.NewUnhandled(ClassUtl.Name(repl_type));
 		return repl_tid;
 	}
-	public boolean Exec_repl_itm(Bry_bfr tmp_bfr, Scrib_regx_converter regx_converter, Regx_match match) {
+	public boolean Exec_repl_itm(BryWtr tmp_bfr, Scrib_regx_converter regx_converter, Regx_match match) {
 		switch (repl_tid) {
 			case Repl_tid_string:
 				int len = repl_bry.length;
@@ -117,7 +115,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 						case AsciiByte.Percent: {
 							++i;
 							if (i == len)	// % at end of stream; just add %;
-								tmp_bfr.Add_byte(b);							
+								tmp_bfr.AddByte(b);
 							else {
 								b = repl_bry[i];
 								switch (b) {
@@ -127,33 +125,33 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 										// REF.MW: https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/UstringLibrary.php#L785-L796
 										// NOTE: 0 means take result; REF.MW:if ($x === '0'); return $m[0]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 										if (idx == 0)
-											tmp_bfr.Add_str_u8(String_.Mid(src_str, match.Find_bgn(), match.Find_end()));
+											tmp_bfr.AddStrU8(StringUtl.Mid(src_str, match.Find_bgn(), match.Find_end()));
 										// NOTE: > 0 means get from groups if it exists; REF.MW:elseif (isset($m["m$x"])) return $m["m$x"]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 										else if (idx - 1 < match.Groups().length) {	// retrieve numbered capture; TODO_OLD: support more than 9 captures
 											Regx_group grp = match.Groups()[idx - 1];
-											tmp_bfr.Add_str_u8(grp.Val());	// NOTE: changed from String_.Mid(src_str, grp.Bgn(), grp.End()); DATE:2020-05-31
+											tmp_bfr.AddStrU8(grp.Val());	// NOTE: changed from String_.Mid(src_str, grp.Bgn(), grp.End()); DATE:2020-05-31
 										}
 										// NOTE: 1 per MW "Match undocumented Lua String.gsub behavior"; PAGE:en.d:Wiktionary:Scripts ISSUE#:393; DATE:2019-03-20
 										else if (idx == 1) {
-											tmp_bfr.Add_str_u8(String_.Mid(src_str, match.Find_bgn(), match.Find_end()));
+											tmp_bfr.AddStrU8(StringUtl.Mid(src_str, match.Find_bgn(), match.Find_end()));
 										}
 										else {
-											throw Err_.new_wo_type("invalid capture index %" + Char_.To_str(b) + " in replacement String");
+											throw ErrUtl.NewArgs("invalid capture index %" + CharUtl.ToStr(b) + " in replacement String");
 										}
 										break;
 									case AsciiByte.Percent:
-										tmp_bfr.Add_byte(AsciiByte.Percent);
+										tmp_bfr.AddByte(AsciiByte.Percent);
 										break;
 									default:	// not a number; add literal
-										tmp_bfr.Add_byte(AsciiByte.Percent);
-										tmp_bfr.Add_byte(b);	
+										tmp_bfr.AddByte(AsciiByte.Percent);
+										tmp_bfr.AddByte(b);
 										break;
 								}
 							}
 							break;
 						}
 						default:
-							tmp_bfr.Add_byte(b);
+							tmp_bfr.AddByte(b);
 							break;
 					}
 				}
@@ -162,7 +160,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 				Regx_group[] grps = match.Groups();
 				String find_str = null;
 				if (grps.length == 0) {
-					find_str = String_.Mid(src_str, match.Find_bgn(), match.Find_end());	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
+					find_str = StringUtl.Mid(src_str, match.Find_bgn(), match.Find_end());	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 				}
 				else {	// group exists, take first one (logic matches Scribunto); PAGE:en.w:Bannered_routes_of_U.S._Route_60; DATE:2014-08-15
 					Regx_group grp = grps[0];
@@ -170,29 +168,29 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 				}
 				Object actl_repl_obj = repl_hash.GetByOrNull(find_str);
 				if (actl_repl_obj == null)			// match found, but no replacement specified; EX:"abc", "[ab]", "a:A"; "b" in regex but not in tbl; EX:d:DVD; DATE:2014-03-31
-					tmp_bfr.Add_str_u8(find_str);
+					tmp_bfr.AddStrU8(find_str);
 				else
 					tmp_bfr.Add((byte[])actl_repl_obj);					
 				break;
 			}
 			case Repl_tid_luacbk: {
-				Keyval[] luacbk_args = null;
+				KeyVal[] luacbk_args = null;
 				Regx_group[] grps = match.Groups();
 				int grps_len = grps.length;
 				// no grps; pass 1 arg based on @match: EX: ("ace", "[b-d]"); args -> ("c")
 				if (grps_len == 0) {
-					String find_str = String_.Mid(src_str, match.Find_bgn(), match.Find_end());
+					String find_str = StringUtl.Mid(src_str, match.Find_bgn(), match.Find_end());
 					luacbk_args = Scrib_kv_utl_.base1_obj_(find_str);
 				}
 				// grps exist; pass n args based on grp[n].match; EX: ("acfg", "([b-d])([e-g])"); args -> ("c", "f")
 				else {
 					// memoize any_pos args for loop
 					boolean any_pos = regx_converter.Any_pos();
-					Keyval[] capt_ary = regx_converter.Capt_ary();
+					KeyVal[] capt_ary = regx_converter.Capt_ary();
 					int capt_ary_len = capt_ary == null ? 0 : capt_ary.length; // capt_ary can be null b/c xowa_gsub will always create one group;
 
 					// loop grps; for each grp, create corresponding arg in luacbk
-					luacbk_args = new Keyval[grps_len];
+					luacbk_args = new KeyVal[grps_len];
 					for (int i = 0; i < grps_len; i++) {
 						Regx_group grp = grps[i];
 
@@ -207,23 +205,23 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 							// standardCapture must pass string match
 							val = grp.Val();
 						}
-						luacbk_args[i] = Keyval_.int_(i + Scrib_core.Base_1, val);
+						luacbk_args[i] = KeyVal.NewInt(i + Scrib_core.Base_1, val);
 					}
 				}
 
 				// do callback
-				Keyval[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
+				KeyVal[] rslts = core.Interpreter().CallFunction(repl_func.Id(), luacbk_args);
 
 				// eval result
 				if (rslts.length == 0) // will be 0 when gsub_proc returns nil; PAGE:en.d:tracer; DATE:2017-04-22
 					return false;
 				else {									// ArrayIndex check
 					Object rslt_obj = rslts[0].Val();	// 0th idx has result
-					tmp_bfr.Add_str_u8(Object_.Xto_str_strict_or_empty(rslt_obj));	// NOTE: always convert to String; rslt_obj can be int; PAGE:en.d:seven DATE:2016-04-27
+					tmp_bfr.AddStrU8(ObjectUtl.ToStrOrEmpty(rslt_obj));	// NOTE: always convert to String; rslt_obj can be int; PAGE:en.d:seven DATE:2016-04-27
 				}
 				break;
 			}
-			default: throw Err_.new_unhandled(repl_tid);
+			default: throw ErrUtl.NewUnhandled(repl_tid);
 		}
 		return true;
 	}

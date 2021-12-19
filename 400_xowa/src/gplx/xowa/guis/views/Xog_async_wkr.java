@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.threads.*;
+package gplx.xowa.guis.views;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import gplx.xowa.wikis.pages.lnkis.*;
 import gplx.xowa.guis.cbks.js.*;
 public class Xog_async_wkr {
@@ -41,7 +43,7 @@ public class Xog_async_wkr {
 		// cache maintenance
 		usr_dlg.Prog_none("", "imgs.done", "");
 		try {app.File_mgr().Cache_mgr().Compress_check();}
-		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_full(e));}
+		catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cache: page=~{0} err=~{1}", page.Ttl().Raw(), ErrUtl.ToStrFull(e));}
 		app.Usere().User_db_mgr().Cache_mgr().Page_end(app.Wiki_mgr());
 		app.Log_wtr().Queue_enabled_(false);	// flush queue
 	}
@@ -51,7 +53,7 @@ public class Xog_async_wkr {
 		if (len > 0) {
 			usr_dlg.Prog_one("", "", "downloading images: ~{0}", len);
 			try {page.File_queue().Exec(wiki, page);}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_full(e));}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.image: page=~{0} err=~{1}", page.Ttl().Raw(), ErrUtl.ToStrFull(e));}
 		}
 
 		// if gallery.packed exists, call pack; NOTE:must fire even when there are 0 items in queue b/c hdump will restore images without placing in queue; PAGE:en.w:Mexico DATE:2016-08-14
@@ -68,7 +70,7 @@ public class Xog_async_wkr {
 		// run other cmds
 		if (page.Html_cmd_mgr().Count() > 0) {
 			try {page.Html_cmd_mgr().Exec(app, page);}
-			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page.Ttl().Raw(), Err_.Message_gplx_full(e));}
+			catch (Exception e) {usr_dlg.Warn_many("", "", "page.thread.cmds: page=~{0} err=~{1}", page.Ttl().Raw(), ErrUtl.ToStrFull(e));}
 		}
 	}
 	private static void Async_redlinks(Gfo_usr_dlg usr_dlg, Xoae_app app, Xoae_page page, Xog_js_wkr js_wkr) {

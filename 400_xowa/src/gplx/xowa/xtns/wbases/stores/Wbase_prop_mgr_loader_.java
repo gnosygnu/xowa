@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.stores;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.xtns.wbases.*;
 public class Wbase_prop_mgr_loader_ {
-	public static Wbase_prop_mgr_loader New_mock(Keyval... pairs) {
+	public static Wbase_prop_mgr_loader New_mock(KeyVal... pairs) {
 		return new Wbase_prop_mgr_loader__mock(pairs);
 	}
 	public static Wbase_prop_mgr_loader New_db(Wdata_wiki_mgr wbase_mgr) {
@@ -23,14 +28,14 @@ public class Wbase_prop_mgr_loader_ {
 	}
 }
 class Wbase_prop_mgr_loader__mock implements Wbase_prop_mgr_loader {
-	private final Keyval[] pairs;
-	public Wbase_prop_mgr_loader__mock(Keyval[] pairs) {
+	private final KeyVal[] pairs;
+	public Wbase_prop_mgr_loader__mock(KeyVal[] pairs) {
 		this.pairs = pairs;
 	}
 	public Ordered_hash Load() {
 		Ordered_hash rv = Ordered_hash_.New();
-		for (Keyval kv : pairs) 
-			rv.Add(kv.Key(), kv.Val_to_str_or_empty());
+		for (KeyVal kv : pairs)
+			rv.Add(kv.KeyToStr(), kv.ValToStrOrEmpty());
 		return rv;
 	}
 }

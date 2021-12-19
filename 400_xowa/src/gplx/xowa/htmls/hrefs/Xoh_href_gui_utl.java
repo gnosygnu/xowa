@@ -14,49 +14,47 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.hrefs;
-
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.String_;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.primitives.Byte_obj_val;
 import gplx.gfui.kits.swts.Swt_html_utl;
-
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.errs.ErrUtl;
 public class Xoh_href_gui_utl {
 	public static String Html_extract_text(String site, String page, String text_str) {
-		byte[] text_bry = Bry_.new_u8(text_str);
+		byte[] text_bry = BryUtl.NewU8(text_str);
 		int text_len = text_bry.length;
 		int text_tid = AsciiByte.ToA7Int(text_bry[0]);
 		switch (text_tid) {
 			case Text_tid_none: return "";	// "0"
-			case Text_tid_text: return String_.new_u8(text_bry, 2, text_len);	// 2 to skip "1|"
+			case Text_tid_text: return StringUtl.NewU8(text_bry, 2, text_len);	// 2 to skip "1|"
 			case Text_tid_href: break;	// fall through to below
-			default:			throw Err_.new_unhandled(text_tid);
+			default:			throw ErrUtl.NewUnhandled(text_tid);
 		}
-		String href_str = String_.Mid(String_.new_u8(text_bry), 2);
+		String href_str = StringUtl.Mid(StringUtl.NewU8(text_bry), 2);
 		href_str = Swt_html_utl.NormalizeSwtUrl(href_str);
-		if (String_.Has_at_bgn(href_str, Xoh_href_.Str__file))
+		if (StringUtl.HasAtBgn(href_str, Xoh_href_.Str__file))
 			href_str = Standardize_xowa_link(href_str);	// skip "file://"
-		Byte_obj_val href_tid = (Byte_obj_val)href_trie.Match_bgn(Bry_.new_u8(href_str), 0, href_str.length());
+		ByteVal href_tid = (ByteVal)href_trie.MatchBgn(BryUtl.NewU8(href_str), 0, href_str.length());
 		if (href_tid != null) {
 			switch (href_tid.Val()) {
 				case Href_tid_wiki:			return site + href_str;
-				case Href_tid_site:			return String_.Mid(href_str, 6);			// +6 to skip "site/"
+				case Href_tid_site:			return StringUtl.Mid(href_str, 6);			// +6 to skip "site/"
 				case Href_tid_anch:			return site + "/wiki/" + page + href_str;
 			}
 		}
 		return href_str;
 	}
 	public static String Standardize_xowa_link(String str) {
-		byte[] bry = Bry_.new_u8(str);
+		byte[] bry = BryUtl.NewU8(str);
 		int skip = Skip_start_of_xowa_link(bry, bry.length, 0);
-		return skip == 0 ? str : String_.Mid(str, skip);
+		return skip == 0 ? str : StringUtl.Mid(str, skip);
 	}
 	private static int Skip_start_of_xowa_link(byte[] src, int src_len, int bgn) {
-		if (!Bry_.Has_at_bgn(src, Xoh_href_.Bry__file, bgn, src_len)) return bgn;	// does not start with "file://"
+		if (!BryUtl.HasAtBgn(src, Xoh_href_.Bry__file, bgn, src_len)) return bgn;	// does not start with "file://"
 		int pos = bgn + Xoh_href_.Len__file;	// skip "file://"
-		Object tid_obj = href_trie.Match_bgn(src, pos, src_len);
+		Object tid_obj = href_trie.MatchBgn(src, pos, src_len);
 		if (tid_obj == null) {
 			if (src_len - pos > 0 && src[pos] == AsciiByte.Slash) { // handle "file:///C:/dir/fil.png"
 				return pos + 1;
@@ -65,11 +63,11 @@ public class Xoh_href_gui_utl {
 				return bgn; // if not a known xowa link, return original bgn;
 			}
 		}
-		switch (((Byte_obj_val)tid_obj).Val()) {
+		switch (((ByteVal)tid_obj).Val()) {
 			case Href_tid_site:			return pos;
 			case Href_tid_wiki:			return pos;
 			case Href_tid_anch:			return pos;
-			default:					throw Err_.new_unhandled(tid_obj);
+			default:					throw ErrUtl.NewUnhandled(tid_obj);
 		}
 	}
 	private static final byte Text_tid_none = 0, Text_tid_text = 1, Text_tid_href = 2;

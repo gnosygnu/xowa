@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs.patterns;
-import gplx.Keyval;
+import gplx.types.commons.KeyVal;
 import gplx.langs.regxs.Regx_match;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.unicodes.Ustring;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.strings.unicodes.Ustring;
 import gplx.xowa.xtns.scribunto.libs.Scrib_lib_ustring_gsub_mgr;
 import gplx.xowa.xtns.scribunto.libs.Scrib_regx_converter;
 public abstract class Scrib_pattern_matcher {
 	protected final Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-	public Keyval[] Capt_ary() {return regx_converter.Capt_ary();}
+	public KeyVal[] Capt_ary() {return regx_converter.Capt_ary();}
 	public abstract Regx_match Match_one(Ustring src_ucs, String pat_str, int bgn_as_codes, boolean replace);
 	public abstract String Gsub(Scrib_lib_ustring_gsub_mgr gsub_mgr, Ustring src_ucs, String pat_str, int bgn_as_codes);
 

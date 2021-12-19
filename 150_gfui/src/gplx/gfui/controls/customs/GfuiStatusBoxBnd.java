@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.Datetime_now;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.UsrMsg;
-import gplx.UsrMsgWkr_;
+package gplx.gfui.controls.customs; import gplx.types.commons.GfoDateNow;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.libs.dlgs.UsrMsgWkr_;
 import gplx.gfui.DirInt;
 import gplx.gfui.controls.windows.GfuiWin;
 import gplx.gfui.draws.ColorAdp_;
@@ -31,7 +31,7 @@ import gplx.gfui.layouts.GftGrid;
 public class GfuiStatusBoxBnd implements Gfo_invk {
 	public GfuiStatusBox Box() {return statusBox;} GfuiStatusBox statusBox = GfuiStatusBox_.new_("statusBox");
 	void ShowTime() {
-		statusBox.ExecUsrMsg(UsrMsgWkr_.Type_Note, UsrMsg.new_(Datetime_now.Get().XtoStr_gplx_long()));
+		statusBox.ExecUsrMsg(UsrMsgWkr_.Type_Note, UsrMsg.new_(GfoDateNow.Get().ToStrGplxLong()));
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_ShowTime))			ShowTime();

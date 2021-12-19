@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.xowa.addons.wikis.ctgs.*;
 import org.junit.*;
@@ -22,24 +26,24 @@ import gplx.core.intls.ucas.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts.*;
 public class Xoctg_catpage_mgr__basic__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_catpage_mgr_fxt fxt = new Xoctg_catpage_mgr_fxt();
-	@Test  public void Page_itm() {
+	@Test public void Page_itm() {
 		fxt	.Init_itms__pages("A1")
 			.Test__html__page(Xoa_ctg_mgr.Tid__page, AsciiByte.Ltr_A, "\n            <li><a href=\"/wiki/A1\" title=\"A1\">A1</a></li>");
 	}
-	@Test  public void Page_itm_missing() {
+	@Test public void Page_itm_missing() {
 		fxt.Init_itms__pages("A1");
 		Xoctg_catpage_itm itm = fxt.Ctg().Grp_by_tid(Xoa_ctg_mgr.Tid__page).Itms__get_at(0);
 		itm.Page_ttl_(Xoa_ttl.Null);
-		itm.Sortkey_handle_make(Bry_bfr_.New(), fxt.Wiki(), Bry_.Empty);
+		itm.Sortkey_handle_make(BryWtr.New(), fxt.Wiki(), BryUtl.Empty);
 		fxt.Test__html__page(Xoa_ctg_mgr.Tid__page, AsciiByte.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">missing page (0)</li>");
 	}
-	@Test  public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
-		byte[] page_bry = Bry_.new_a7("A 1");
-		Xoa_url url = Xoa_url.New(Bry_.new_a7("en.wikipedia.org"), page_bry);
+	@Test public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
+		byte[] page_bry = BryUtl.NewA7("A 1");
+		Xoa_url url = Xoa_url.New(BryUtl.NewA7("en.wikipedia.org"), page_bry);
 		Xoa_ttl ttl = Xoa_ttl.Parse(fxt.Wiki(), page_bry);
 		fxt.Wiki().Appe().Usere().History_mgr().Add(fxt.Wiki().App(), url, ttl, page_bry);
 		fxt	.Init_itms__pages("A_1")
-			.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
+			.Test__html__all(Xoa_ctg_mgr.Tid__page, StringUtl.ConcatLinesNlSkipLast
 			( ""
 			, "<div id=\"mw-pages\">"
 			, "  <h2>Pages in category \"Ctg_1\"</h2>"
@@ -59,9 +63,9 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test  public void Page_all() {
+	@Test public void Page_all() {
 		fxt	.Init_itms__pages("A1")
-			.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
+			.Test__html__all(Xoa_ctg_mgr.Tid__page, StringUtl.ConcatLinesNlSkipLast
 			( ""
 			, "<div id=\"mw-pages\">"
 			, "  <h2>Pages in category \"Ctg_1\"</h2>"
@@ -81,9 +85,9 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test  public void File_all() {
+	@Test public void File_all() {
 		fxt	.Init_itms__files("File:A1.png")
-			.Test__html__all(Xoa_ctg_mgr.Tid__file, String_.Concat_lines_nl_skip_last
+			.Test__html__all(Xoa_ctg_mgr.Tid__file, StringUtl.ConcatLinesNlSkipLast
 			( ""
 			, "<div id=\"mw-category-media\">"
 			, "  <h2>Media in category \"Ctg_1\"</h2>"
@@ -103,9 +107,9 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test  public void Subc_all() {
+	@Test public void Subc_all() {
 		fxt	.Init_itms__subcs("Category:Subc_1")
-			.Test__html__all(Xoa_ctg_mgr.Tid__subc, String_.Concat_lines_nl_skip_last
+			.Test__html__all(Xoa_ctg_mgr.Tid__subc, StringUtl.ConcatLinesNlSkipLast
 			( ""
 			, "<div id=\"mw-subcategories\">"
 			, "  <h2>Subcategories</h2>"
@@ -139,10 +143,10 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test  public void Page_all_cols() {
+	@Test public void Page_all_cols() {
 		fxt.Init_itms__pages("A1", "A2", "A3", "B1", "C1");
 		fxt.Init__grp_max_(6); // SEE:FOOTNOTE:LT_NOT_LTE DATE:2019-12-14
-		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
+		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "<div id=\"mw-pages\">"
 		, "  <h2>Pages in category \"Ctg_1\"</h2>"
@@ -179,10 +183,10 @@ public class Xoctg_catpage_mgr__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Page__numeric() {	// PURPOSE: check numeric sorting; 0, 2, 3, 10; not 0, 10, 2, 3; DATE:2016-10-09
+	@Test public void Page__numeric() {	// PURPOSE: check numeric sorting; 0, 2, 3, 10; not 0, 10, 2, 3; DATE:2016-10-09
 		fxt.Init_itms__pages("0", "2", "3", "10");
 		fxt.Init__grp_max_(5); // SEE:FOOTNOTE:LT_NOT_LTE DATE:2019-12-14
-		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
+		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "<div id=\"mw-pages\">"
 		, "  <h2>Pages in category \"Ctg_1\"</h2>"
@@ -215,9 +219,9 @@ public class Xoctg_catpage_mgr__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Title__escape_quotes() {// PURPOSE: quotes in title should be escaped; DATE:2015-12-28
+	@Test public void Title__escape_quotes() {// PURPOSE: quotes in title should be escaped; DATE:2015-12-28
 		fxt	.Init_itms__pages("A\"1")
-			.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
+			.Test__html__all(Xoa_ctg_mgr.Tid__page, StringUtl.ConcatLinesNlSkipLast
 			( ""
 			, "<div id=\"mw-pages\">"
 			, "  <h2>Pages in category \"Ctg_1\"</h2>"
@@ -237,14 +241,14 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test  public void Mixed_case_titles() {// PURPOSE: titles in mixed-case should sort under same upper-case letter; ISSUE#:637 DATE:2019-12-14
+	@Test public void Mixed_case_titles() {// PURPOSE: titles in mixed-case should sort under same upper-case letter; ISSUE#:637 DATE:2019-12-14
 		// init main ns to be case-sensitive, so that "A1" and "a2" get sorted into different groups (fr.wikisource)
 		fxt.Wiki().Ns_mgr().Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
 
 		// init pages
 		fxt.Init_itms__pages("A1", "a2");
 
-		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
+		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, StringUtl.ConcatLinesNlSkipLast
 			( ""
 			, "<div id=\"mw-pages\">"
 			, "  <h2>Pages in category \"Ctg_1\"</h2>"
@@ -270,7 +274,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test  public void Calc_col_len() {
+	@Test public void Calc_col_len() {
 		fxt.Test__calc_col_len(10, 0, 4);	// for 10 items, col 0 has 4 items
 		fxt.Test__calc_col_len(10, 1, 3);	// for 10 items, col 1 has 3 items
 		fxt.Test__calc_col_len(10, 2, 3);	// for 10 items, col 2 has 3 items
@@ -291,19 +295,19 @@ class Xoctg_catpage_mgr_fxt {
 			wiki = Xoa_app_fxt.Make__wiki__edit(app);
 			ctg_html = wiki.Ctg__catpage_mgr();
 		}
-		ctg = new Xoctg_catpage_ctg(1, Bry_.new_a7("Ctg_1"));
+		ctg = new Xoctg_catpage_ctg(1, BryUtl.NewA7("Ctg_1"));
 		grp_max = 3;	// default to 3 per page
 		return this;
 	}	private Xoae_app app; private Xoctg_catpage_mgr ctg_html;
-	public void Test__calc_col_len(int grp_len, int col_idx, int expd) {Tfds.Eq(expd, Xoctg_fmt_itm_base.Calc_col_len(grp_len, col_idx, 3));}
+	public void Test__calc_col_len(int grp_len, int col_idx, int expd) {GfoTstr.EqObj(expd, Xoctg_fmt_itm_base.Calc_col_len(grp_len, col_idx, 3));}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki; 
 	public Xoctg_catpage_ctg Ctg() {return ctg;} private Xoctg_catpage_ctg ctg;
 	public void Init__grp_max_(int v) {this.grp_max = v;}
 	public void Init__prev_hide_y_(byte tid) {ctg.Grp_by_tid(tid).Prev_disable_(true);}
-	public void Init__next_sortkey_(byte tid, String v) {ctg.Grp_by_tid(tid).Next_sortkey_(Bry_.new_u8(v));}
+	public void Init__next_sortkey_(byte tid, String v) {ctg.Grp_by_tid(tid).Next_sortkey_(BryUtl.NewU8(v));}
 	public void Test__navlink(boolean next, String ctg_str, String expd) {			
-		byte[] actl = ctg_html.Fmt(Xoa_ctg_mgr.Tid__page).Bld_bwd_fwd(wiki, Xoa_ttl.Parse(wiki, Bry_.new_a7(ctg_str)), ctg.Grp_by_tid(Xoa_ctg_mgr.Tid__page), grp_max);
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+		byte[] actl = ctg_html.Fmt(Xoa_ctg_mgr.Tid__page).Bld_bwd_fwd(wiki, Xoa_ttl.Parse(wiki, BryUtl.NewA7(ctg_str)), ctg.Grp_by_tid(Xoa_ctg_mgr.Tid__page), grp_max);
+		GfoTstr.EqLines(expd, StringUtl.NewU8(actl));
 	}
 	public Xoctg_catpage_mgr_fxt Init_itms__pages(String... titles) {
 		return Init_itms(Xoa_ctg_mgr.Tid__page, titles);
@@ -316,7 +320,7 @@ class Xoctg_catpage_mgr_fxt {
 		Xoctg_catpage_grp grp = ctg.Grp_by_tid(tid);
 		grp.Count_all_(len);
 		for (int i = 0; i < len; ++i) {
-			byte[] page_ttl_bry = Bry_.new_u8(ttls[i]);
+			byte[] page_ttl_bry = BryUtl.NewU8(ttls[i]);
 			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, page_ttl_bry);
 			Xoctg_catpage_itm itm = Xoctg_catpage_itm.New_by_ttl(tid, i, ttl);
 			tmp.Add(itm);
@@ -331,21 +335,21 @@ class Xoctg_catpage_mgr_fxt {
 		itm_fmt.Init_from_ltr(wiki, list, ltr_extractor);
 		itm_fmt.Set_ltr_and_bgn(new byte[] {grp_char_0}, 0);
 		itm_fmt.Col_end_(0, 0);
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		itm_fmt.Bfr_arg__add(bfr);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
+		itm_fmt.AddToBfr(bfr);
+		GfoTstr.EqLines(expd, bfr.ToStrAndRls());
 	}
 	public void Test__html_grp(byte tid, String expd) {
 		Xoctg_fmt_grp list_mgr = ctg_html.Fmt(tid);
 		Xoctg_fmt_ltr fmtr_grp = new Xoctg_fmt_ltr(list_mgr.Itm_fmt());
 		fmtr_grp.Init_from_grp(wiki, ctg.Grp_by_tid(tid), ltr_extractor);
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		fmtr_grp.Bfr_arg__add(bfr);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
+		fmtr_grp.AddToBfr(bfr);
+		GfoTstr.EqLines(expd, bfr.ToStrAndRls());
 	}
 	public void Test__html__all(byte tid, String expd) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
 		ctg_html.Fmt(tid).Write_catpage_grp(bfr, wiki, wiki.Lang(), ltr_extractor, ctg, grp_max);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_rls());
+		GfoTstr.EqLines(expd, bfr.ToStrAndRls());
 	}
 }

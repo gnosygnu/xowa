@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs.itms; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.diffs.itms; import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.commons.GfoDate;
 public class Gdif_job_tbl implements Rls_able {
 	private String tbl_name = "gdif_job";
 	private String fld_job_id, fld_name, fld_made_by, fld_made_on, fld_data;
@@ -27,7 +29,7 @@ public class Gdif_job_tbl implements Rls_able {
 	public String Tbl_name() {return tbl_name;}
 	public String Fld_job_id() {return fld_job_id;}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
-	public Gdif_job_itm Insert(int id, String name, String made_by, DateAdp made_on, String data) {
+	public Gdif_job_itm Insert(int id, String name, String made_by, GfoDate made_on, String data) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 		.Val_int(fld_job_id		, id)

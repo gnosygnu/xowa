@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.dbs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.bldrs.*;
 public class Xob_page_regy_tbl {
@@ -29,14 +34,14 @@ public class Xob_page_regy_tbl {
 	private static void Create_data__insert_page(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
 		usr_dlg.Note_many("", "", "inserting page: ~{0}", join.NameOnly());
 		Sqlite_engine_.Db_attach(cur, "page_db", join.Raw());
-		cur.Exec_sql(String_.Format(Sql_create_page, repo_tid));
+		cur.Exec_sql(StringUtl.Format(Sql_create_page, repo_tid));
 		Sqlite_engine_.Db_detach(cur, "page_db");
 	}
 	private static void Create_data__insert_redirect(Gfo_usr_dlg usr_dlg, Db_conn cur, byte repo_tid, Io_url join) {
 		if (!Io_mgr.Instance.ExistsFil(join)) return;	// redirect_db will not exist when commons.wikimedia.org is set up on new machine
 		usr_dlg.Note_many("", "", "inserting redirect: ~{0}", join.OwnerDir().NameOnly());
 		Sqlite_engine_.Db_attach(cur, "redirect_db", join.Raw());
-		cur.Exec_sql(String_.Format(Sql_create_redirect, repo_tid));
+		cur.Exec_sql(StringUtl.Format(Sql_create_redirect, repo_tid));
 		Sqlite_engine_.Db_detach(cur, "redirect_db");
 	}
 	public static final String Tbl_name = "page_regy"
@@ -48,7 +53,7 @@ public class Xob_page_regy_tbl {
 		Idx_main     		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS page_regy__main           ON page_regy (repo_id, itm_tid, src_ttl, src_id, trg_id, trg_ttl);")
 	;
 	private static final String
-		Tbl_sql = String_.Concat_lines_nl
+		Tbl_sql = StringUtl.ConcatLinesNl
 	(	"CREATE TABLE IF NOT EXISTS page_regy"
 	,	"( uid                     integer             NOT NULL			PRIMARY KEY           AUTOINCREMENT"	// NOTE: must be PRIMARY KEY, else later REPLACE INTO will create dupe rows
 	,	", repo_id                 integer             NOT NULL"
@@ -59,7 +64,7 @@ public class Xob_page_regy_tbl {
 	,	", trg_ttl                 varchar(255)        NOT NULL"
 	,	");"
 	)
-	,	Sql_create_page = String_.Concat_lines_nl
+	,	Sql_create_page = StringUtl.ConcatLinesNl
 	(	"INSERT INTO page_regy (repo_id, itm_tid, src_id, src_ttl, trg_id, trg_ttl)"
 	,	"SELECT  {0}"
 	,	",       0"		// 0=page
@@ -70,7 +75,7 @@ public class Xob_page_regy_tbl {
 	,	"FROM    page_db.page p"
 	,	";"
 	)
-	,	Sql_create_redirect = String_.Concat_lines_nl
+	,	Sql_create_redirect = StringUtl.ConcatLinesNl
 	(	"INSERT INTO page_regy (repo_id, itm_tid, src_id, src_ttl, trg_id, trg_ttl)"
 	,	"SELECT  {0}"
 	,	",       1"		// 1=redirect

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.data.tbls;
+import gplx.frameworks.objects.Cancelable;
 import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 abstract class Xowd_page_tbl__in_wkr__base extends Db_in_wkr__base {

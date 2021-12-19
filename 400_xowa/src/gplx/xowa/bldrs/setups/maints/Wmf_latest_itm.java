@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
+package gplx.xowa.bldrs.setups.maints;
+import gplx.types.commons.GfoDate;
 public class Wmf_latest_itm {
-	public Wmf_latest_itm(byte[] name, DateAdp date, long size) {
+	public Wmf_latest_itm(byte[] name, GfoDate date, long size) {
 		this.name = name; this.date = date; this.size = size;
 	}
 	public byte[] Name() {return name;} private final byte[] name;
-	public DateAdp Date() {return date;} private final DateAdp date;
+	public GfoDate Date() {return date;} private final GfoDate date;
 	public long Size() {return size;} private final long size;
 }

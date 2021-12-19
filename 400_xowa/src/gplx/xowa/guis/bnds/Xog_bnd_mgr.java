@@ -13,18 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.bnds; import gplx.objects.primitives.BoolUtl;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+package gplx.xowa.guis.bnds; import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.ipts.IptArg;
 import gplx.gfui.ipts.IptArg_;
@@ -47,7 +47,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	private Ordered_hash regy = Ordered_hash_.New();
 	public Xog_bnd_mgr(Xog_win_itm win) {this.win = win; invk_mgr = win.Gui_mgr().Cmd_mgr().Invk_mgr();}
 	public int Len() {return regy.Len();}
-	public Xog_bnd_itm Get_at(int i)			{return (Xog_bnd_itm)regy.Get_at(i);}
+	public Xog_bnd_itm Get_at(int i)			{return (Xog_bnd_itm)regy.GetAt(i);}
 	public Xog_bnd_itm Get_or_null(String v)	{return (Xog_bnd_itm)regy.GetByOrNull(v);}
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app;
@@ -199,14 +199,14 @@ public class Xog_bnd_mgr implements Gfo_invk {
 				Xog_bnd_itm old_bnd = old_box.Get_at(j);
 
 				// if keys match, delete old_bnd
-				if		(	String_.Eq(old_bnd.Key(), new_bnd.Key())) {
+				if		(	StringUtl.Eq(old_bnd.Key(), new_bnd.Key())) {
 					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_key, win, invk_mgr, old_box, old_bnd, new_bnd.Ipt());
 					deleted.Add(new_bnd);
 				}
 				// if ipts match, delete old_bnd
 				else if (	new_ipt_exists
 						&&	old_bnd.Box() == new_bnd.Box()
-						&&	String_.Eq(old_bnd.Ipt().Key(), new_ipt.Key())) {
+						&&	StringUtl.Eq(old_bnd.Ipt().Key(), new_ipt.Key())) {
 					Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_del_ipt, win, invk_mgr, old_box, old_bnd, old_bnd.Ipt());
 					old_bnd.Ipt_to_none();
 				}
@@ -216,7 +216,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 			int deleted_len = deleted.Len();
 			for (int j = 0; j < deleted_len; j++) {
 				// delete from box
-				Xog_bnd_itm deleted_itm = (Xog_bnd_itm)deleted.Get_at(j);
+				Xog_bnd_itm deleted_itm = (Xog_bnd_itm)deleted.GetAt(j);
 				old_box.Del(deleted_itm.Key());
 
 				// add back other items with same cmd but different key; needed b/c gfui.ipt_mgr hashes by cmd ("sandbox"), not key ("sandbox-1"); DATE:2016-12-25
@@ -224,7 +224,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 				if (list != null) {
 					int len = list.Len();
 					for (int k = 0; k < len; k++) {
-						Xog_bnd_itm restore_itm = (Xog_bnd_itm)list.Get_at(k);
+						Xog_bnd_itm restore_itm = (Xog_bnd_itm)list.GetAt(k);
 						Xog_bnd_box_.Set_bnd_for_grp(Xog_bnd_box_.Set_add, win, invk_mgr, old_box, restore_itm, restore_itm.Ipt());
 					}
 				}
@@ -365,7 +365,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	}
 	private void Init_itm(String cmd, int idx, int box, String ipt) {Init_itm(cmd, idx, box, IptArg_.parse_or_none_(ipt));}
 	private void Init_itm(String cmd, int idx, int box, IptArg ipt) {
-		String key = cmd + "-" + Int_.To_str(idx + List_adp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
+		String key = cmd + "-" + IntUtl.ToStr(idx + List_adp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
 		Xog_bnd_itm itm = new Xog_bnd_itm(key, BoolUtl.Y, cmd, box, ipt);
 		boxs[box].Add(itm);
 		regy.Add(itm.Key(), itm);
@@ -386,12 +386,12 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	private void Add_custom_bnds() {	// NOTE: custom bnds are stored in cfg; cfg executes before Init_by_kit when all windows elements are null; run cfg now, while Init_by_kit is called and elems are now created
 		int len = startup_itms.Len();
 		for (int i = 0; i < len; i++) {
-			Xog_bnd_itm new_itm = (Xog_bnd_itm)startup_itms.Get_at(i);
+			Xog_bnd_itm new_itm = (Xog_bnd_itm)startup_itms.GetAt(i);
 			try {
 				Xog_bnd_itm cur_itm = (Xog_bnd_itm)regy.GetByOrNull(new_itm.Key());
 				if (cur_itm == null) {win.Usr_dlg().Warn_many("", "", "binding no longer exists; key=~{0}", new_itm.Key());}	// could happen when breaking backward compatibility
 				cur_itm.Init_by_set(new_itm.Box(), new_itm.Ipt());
-			}	catch (Exception e) {win.Usr_dlg().Warn_many("", "", "failed to set custom binding; key=~{0} err=~{1}", new_itm.Key(), Err_.Message_gplx_full(e));}
+			}	catch (Exception e) {win.Usr_dlg().Warn_many("", "", "failed to set custom binding; key=~{0} err=~{1}", new_itm.Key(), ErrUtl.ToStrFull(e));}
 		}
 		startup_itms.Clear();
 	}
@@ -405,20 +405,20 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		this.Bind(Xog_bnd_box_.Tid_browser_info			, win.Info_box());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(String_.Eq(k, Run__show_remap_win)) {
+		if		(StringUtl.Eq(k, Run__show_remap_win)) {
 			Xog_bnd_win win = new Xog_bnd_win();			
 			String[] args = m.ReadStrAry("v", "\n");
 			win.Show(app, app.Gui_mgr().Kit(), app.Gui_mgr().Browser_win().Win_box(), args[0], args[1], args[2]);
 		}
 		else {
 			String val = m.ReadStr("v");
-			if (String_.Len_eq_0(val)) { // need to check, or may fail when running newer codebase against old cfgs; DATE:2017-06-02
+			if (StringUtl.IsNullOrEmpty(val)) { // need to check, or may fail when running newer codebase against old cfgs; DATE:2017-06-02
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "binding does not have val; key=~{0}", k);
 				return this;
 			}
 			String[] flds = gplx.xowa.addons.apps.cfgs.enums.Xoitm_gui_binding.To_ary(val);
 			int box = Xog_bnd_box_.Xto_sys_int(flds[0]);
-			String key = String_.Replace(k, "xowa.gui.shortcuts.", "");
+			String key = StringUtl.Replace(k, "xowa.gui.shortcuts.", "");
 			Xog_bnd_itm bnd = app.Gui_mgr().Bnd_mgr().Get_or_null(key);
 			Set(bnd, box, IptArg_.parse(flds[1]));
 		}

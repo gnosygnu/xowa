@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*;
+package gplx.xowa.addons.bldrs.exports.splits.rslts;
 import gplx.dbs.*;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
 public class Split_rslt_mgr {
 	private final Db_conn wkr_conn;
 	private Db_stmt rslt_type_stmt, rslt_db_stmt;
@@ -56,8 +59,8 @@ public class Split_rslt_mgr {
 	public void On__nth__new(int db_id, Io_url db_url, int ns_id) {
 		this.db_id = db_id; this.db_size = 0; this.db_url = db_url;
 		this.ns_id = ns_id;
-		this.score_min = Int_.Max_value;
-		this.score_max = Int_.Min_value;
+		this.score_min = IntUtl.MaxValue;
+		this.score_max = IntUtl.MinValue;
 		for (Split_rslt_wkr wkr : rslt_ary)
 			wkr.On__nth__new(db_id);
 	}

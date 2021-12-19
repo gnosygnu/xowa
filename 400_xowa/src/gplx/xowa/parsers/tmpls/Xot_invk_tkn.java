@@ -15,17 +15,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls;
 
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp_bry;
-import gplx.String_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.envs.Env_;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
@@ -77,7 +78,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				val.Subs_get(j).Tmpl_compile(ctx, src, prep_data);
 		}
 	}
-	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {	// this="{{t|{{{0}}}}}" caller="{{t|1}}"
+	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, BryWtr bfr) {	// this="{{t|{{{0}}}}}" caller="{{t|1}}"
 		// init common
 		boolean rv = false;
 		Xowe_wiki wiki = ctx.Wiki();
@@ -86,12 +87,12 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		// init defn / name
 		Xot_defn defn = tmpl_defn; 
 		byte[] name_ary = defn.Name();
-		byte[] name_ary_orig = Bry_.Empty;
+		byte[] name_ary_orig = BryUtl.Empty;
 		int name_bgn = 0, name_ary_len = 0; 
 		Arg_itm_tkn name_key_tkn = name_tkn.Key_tkn();
 
 		// init more
-		byte[] argx_ary = Bry_.Empty;
+		byte[] argx_ary = BryUtl.Empty;
 		boolean subst_found = false;
 		boolean name_had_subst = false;
 		boolean template_prefix_found = false;
@@ -101,19 +102,19 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (defn == Xot_defn_.Null) {
 			// dynamic tmpl; EX:{{{{{1}}}|a}}
 			if (name_key_tkn.Itm_static() == BoolUtl.NByte) {
-				Bry_bfr name_tkn_bfr = Bry_bfr_.New_w_size(name_tkn.Src_end() - name_tkn.Src_bgn());
+				BryWtr name_tkn_bfr = BryWtr.NewWithSize(name_tkn.Src_end() - name_tkn.Src_bgn());
 				if (defn_tid == Xot_defn_.Tid_subst)
 					name_tkn_bfr.Add(Get_first_subst_itm(lang.Kwd_mgr()));
 				name_tkn.Tmpl_evaluate(ctx, src, caller, name_tkn_bfr);
-				name_ary = name_tkn_bfr.To_bry_and_clear();
+				name_ary = name_tkn_bfr.ToBryAndClear();
 			}
 			// tmpl is static; note that dat_ary is still valid but rest of name may not be; EX: {{subst:name{{{1}}}}}
 			else
-				name_ary = Bry_.Mid(src, name_key_tkn.Dat_bgn(), name_key_tkn.Dat_end());
+				name_ary = BryLni.Mid(src, name_key_tkn.Dat_bgn(), name_key_tkn.Dat_end());
 			name_had_subst = name_key_tkn.Dat_ary_had_subst();
 			name_ary_orig = name_ary;	// cache name_ary_orig
 			name_ary_len = name_ary.length;
-			name_bgn = Bry_find_.Find_fwd_while_not_ws(name_ary, 0, name_ary_len);
+			name_bgn = BryFind.FindFwdWhileNotWs(name_ary, 0, name_ary_len);
 			if (	name_ary_len == 0			// name is blank; can occur with failed inner tmpl; EX: {{ {{does not exist}} }}
 				||	name_bgn == name_ary_len	// name is ws; EX: {{test| }} -> {{{{{1}}}}}is whitespace String; PAGE:en.d:wear_one's_heart_on_one's_sleeve; EX:{{t+|fr|avoir le cœur sur la main| }}
 				) {
@@ -126,15 +127,15 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 
 			// ignore "{{Template:"; EX: {{Template:a}} is the same thing as {{a}}
 			int tmpl_ns_len = wiki.Ns_mgr().Tmpls_get_w_colon(name_ary, name_bgn, name_ary_len);
-			if (tmpl_ns_len != Bry_find_.Not_found) {
-				name_ary = Bry_.Mid(name_ary, name_bgn + tmpl_ns_len, name_ary_len);
+			if (tmpl_ns_len != BryFind.NotFound) {
+				name_ary = BryLni.Mid(name_ary, name_bgn + tmpl_ns_len, name_ary_len);
 				name_ary_len = name_ary.length;
 				name_bgn = 0;
 				template_prefix_found = true;
 			}
 			byte[] ns_template_prefix = wiki.Ns_mgr().Ns_template().Name_db_w_colon(); int ns_template_prefix_len = ns_template_prefix.length;
-			if (name_ary_len > ns_template_prefix_len && Bry_.Match(name_ary, name_bgn, name_bgn + ns_template_prefix_len, ns_template_prefix)) {
-				name_ary = Bry_.Mid(name_ary, name_bgn + ns_template_prefix_len, name_ary_len);
+			if (name_ary_len > ns_template_prefix_len && BryLni.Eq(name_ary, name_bgn, name_bgn + ns_template_prefix_len, ns_template_prefix)) {
+				name_ary = BryLni.Mid(name_ary, name_bgn + ns_template_prefix_len, name_ary_len);
 				name_ary_len = name_ary.length;
 				name_bgn = 0;
 			}
@@ -156,14 +157,14 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary);
 					for (int i = 0; i < args_len; i++) {
 						Arg_nde_tkn nde = args[i];
-						bfr.Add_byte(AsciiByte.Pipe);						// add |
-						bfr.Add_mid(src, nde.Src_bgn(), nde.Src_end());		// add entire arg; "k=v"; note that src must be added, not evaluated, else <nowiki> may be dropped and cause stack overflow; PAGE:ru.w:Близкие_друзья_(Сезон_2) DATE:2014-10-21
+						bfr.AddByte(AsciiByte.Pipe);						// add |
+						bfr.AddMid(src, nde.Src_bgn(), nde.Src_end());		// add entire arg; "k=v"; note that src must be added, not evaluated, else <nowiki> may be dropped and cause stack overflow; PAGE:ru.w:Близкие_друзья_(Сезон_2) DATE:2014-10-21
 					}
 					Xot_fmtr_prm.Instance.Print(bfr);
 					bfr.Add(Xop_curly_end_lxr.Hook);
 					return true;				// NOTE: nothing else to do; return
 				case Xot_defn_.Tid_safesubst:
-					name_ary = Bry_.Mid(name_ary, finder_subst_end, name_ary_len);			// chop off "safesubst:"
+					name_ary = BryLni.Mid(name_ary, finder_subst_end, name_ary_len);			// chop off "safesubst:"
 					name_ary_len = name_ary.length;
 					if (defn != Xot_defn_.Null) {	// func found
 						if (finder_colon_pos != -1) colon_pos = defn.Name().length;			// set colon_pos; SEE NOTE_1
@@ -172,8 +173,8 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					break;
 				case Xot_defn_.Tid_func:
 					if (defn.Defn_require_colon_arg()) {
-						colon_pos =  Bry_find_.Find_fwd(name_ary, AsciiByte.Colon);
-						if (colon_pos == Bry_find_.Not_found)
+						colon_pos =  BryFind.FindFwd(name_ary, AsciiByte.Colon);
+						if (colon_pos == BryFind.NotFound)
 							defn = Xot_defn_.Null;
 					}						
 					else {
@@ -182,10 +183,10 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					break;
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
-					int raw_colon_pos = Bry_find_.Find_fwd(name_ary, AsciiByte.Colon);
-					if (raw_colon_pos == Bry_find_.Not_found) {}										// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
+					int raw_colon_pos = BryFind.FindFwd(name_ary, AsciiByte.Colon);
+					if (raw_colon_pos == BryFind.NotFound) {}										// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
 					else {																				// colon present;
-						name_ary = Bry_.Mid(name_ary, finder_subst_end + 1, name_ary_len);				// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
+						name_ary = BryLni.Mid(name_ary, finder_subst_end + 1, name_ary_len);				// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
 						name_ary_len = name_ary.length;
 						Xow_ns_mgr_name_itm ns_eval2 = wiki.Ns_mgr().Names_get_w_colon_or_null(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
 						if (ns_eval2 != null) {
@@ -204,16 +205,16 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			}
 			if (subst_found) {// subst found; remove Template: if it exists; EX: {{safesubst:Template:A}} -> {{A}} not {{Template:A}}; EX:en.d:Kazakhstan; DATE:2014-03-25
 				ns_template_prefix = wiki.Ns_mgr().Ns_template().Name_db_w_colon(); ns_template_prefix_len = ns_template_prefix.length;
-				if (name_ary_len > ns_template_prefix_len && Bry_.Match(name_ary, name_bgn, name_bgn + ns_template_prefix_len, ns_template_prefix)) {
-					name_ary = Bry_.Mid(name_ary, name_bgn + ns_template_prefix_len, name_ary_len);
+				if (name_ary_len > ns_template_prefix_len && BryLni.Eq(name_ary, name_bgn, name_bgn + ns_template_prefix_len, ns_template_prefix)) {
+					name_ary = BryLni.Mid(name_ary, name_bgn + ns_template_prefix_len, name_ary_len);
 					name_ary_len = name_ary.length;
 					name_bgn = 0;
 					template_prefix_found = true;
 				}
 			}
 			if (colon_pos != -1) {	// func; separate name_ary into name_ary and arg_x
-				argx_ary = Bry_.Trim(name_ary, colon_pos + 1, name_ary_len);	// trim bgn ws; needed for "{{formatnum:\n{{#expr:2}}\n}}"
-				name_ary = Bry_.Mid(name_ary, 0, colon_pos);
+				argx_ary = BryUtl.Trim(name_ary, colon_pos + 1, name_ary_len);	// trim bgn ws; needed for "{{formatnum:\n{{#expr:2}}\n}}"
+				name_ary = BryLni.Mid(name_ary, 0, colon_pos);
 			}
 			if (defn == Xot_defn_.Null) {
 				if (ctx.Tid_is_popup()) {	// popup && cur_tmpl > tmpl_max
@@ -222,7 +223,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				defn = wiki.Cache_mgr().Defn_cache().Get_by_key(name_ary);
 				if (defn == null) {
 					if (name_ary_len != 0 ) {	// name_ary_len != 0 for direct template inclusions; PAGE:en.w:Human evolution and {{:Human evolution/Species chart}}; && ctx.Tmpl_whitelist().Has(name_ary)
-						Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
+						Xoa_ttl ttl = Xoa_ttl.Parse(wiki, BryUtl.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 						if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 							if (subst_found || template_prefix_found) {	// if "subst:" or "Template:" found, use orig name; DATE:2014-03-31
 								bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary_orig).Add(Xop_curly_end_lxr.Hook);
@@ -233,7 +234,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 								bfr.Add(name_ary);
 								for (int i = 0; i < args_len; ++i) {
 									Arg_nde_tkn nde = this.Args_get_by_idx(i);
-									bfr.Add_byte(AsciiByte.Pipe);
+									bfr.AddByte(AsciiByte.Pipe);
 									// must evaluate args; "size={{{size|}}}" must become "size="; PAGE:en.w:Europe; en.w:Template:Country_data_Guernsey DATE:2016-10-13
 									nde.Tmpl_compile(ctx, src, Xot_compile_data.Noop);
 									nde.Tmpl_evaluate(ctx, src, caller, bfr);
@@ -257,7 +258,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			Xowd_page_itm page = lang.Vnt_mgr().Convert_mgr().Convert_ttl(wiki, wiki.Ns_mgr().Ns_template(), name_ary);
 			if (page != Xowd_page_itm.Null) {
 				name_ary = page.Ttl_page_db();
-				Xoa_ttl ttl = Xoa_ttl.Parse(wiki, Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
+				Xoa_ttl ttl = Xoa_ttl.Parse(wiki, BryUtl.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), name_ary));
 				if (ttl == null) { // ttl is not valid; just output orig; REF.MW:Parser.php|braceSubstitution|if ( !$found ) $text = $frame->virtualBracketedImplode( '{{', '|', '}}', $titleWithSpaces, $args );
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary).Add(Xop_curly_end_lxr.Hook);
 					return false;
@@ -273,9 +274,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			case Xot_defn_.Tid_null:	// defn is unknown
 				if (ignore_hash.Get_by_bry(name_ary) == null) {
 					if (Pfunc_rel2abs.Rel2abs_ttl(name_ary, name_bgn, name_ary_len)) {// rel_path; EX: {{/../Peer page}}; DATE:2013-03-27
-						Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
-						name_ary = Pfunc_rel2abs.Rel2abs(tmp_bfr, wiki.Parser_mgr().Rel2abs_ary(), Bry_.Mid(name_ary, name_bgn, name_ary_len), ctx.Page().Ttl().Raw());
-						tmp_bfr.Mkr_rls();
+						BryWtr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().GetB512();
+						name_ary = Pfunc_rel2abs.Rel2abs(tmp_bfr, wiki.Parser_mgr().Rel2abs_ary(), BryLni.Mid(name_ary, name_bgn, name_ary_len), ctx.Page().Ttl().Raw());
+						tmp_bfr.MkrRls();
 						return SubEval(ctx, wiki, bfr, name_ary, caller, src);				
 					}
 					if (subst_found)
@@ -313,9 +314,9 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 					rv = true;
 				}	catch (Exception e) {
 					if (Env_.Mode_testing()) 
-						throw Err_.new_exc(e, "xo", "failed to evaluate function", "page", ctx.Page().Ttl().Full_txt(), "defn", defn.Name(), "src", String_.new_u8(src, this.Src_bgn(), this.Src_end()));
+						throw ErrUtl.NewArgs(e, "failed to evaluate function", "page", ctx.Page().Ttl().Full_txt(), "defn", defn.Name(), "src", StringUtl.NewU8(src, this.Src_bgn(), this.Src_end()));
 					else {
-						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Page().Ttl().Full_txt(), defn.Name(), Bry_.Replace_nl_w_tab(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_log(e));
+						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Page().Ttl().Full_txt(), defn.Name(), BryUtlByWtr.ReplaceNlWithTab(src, this.Src_bgn(), this.Src_end()), ErrUtl.ToStrLog(e));
 						rv = false;
 					}
 				}
@@ -327,25 +328,25 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 				invk_tmpl.Frame_ttl_(defn_tmpl.Frame_ttl());	// set frame_ttl; needed for redirects; PAGE:en.w:Statutory_city; DATE:2014-08-22
 				trace.Trace_bgn(ctx, src, name_ary, caller, invk_tmpl, defn);
 
-				Bry_bfr rslt_bfr = wiki.Utl__bfr_mkr().Get_k004();
+				BryWtr rslt_bfr = wiki.Utl__bfr_mkr().GetK004();
 				try {
 					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(bfr);
 					//rv = defn_tmpl.Tmpl_evaluate(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), invk_tmpl, rslt_bfr); // create new ctx so __NOTOC__ only applies to template, not page; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
 					rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
-					prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), BoolUtl.Y);
+					prepend_mgr.End(ctx, bfr, rslt_bfr.Bry(), rslt_bfr.Len(), BoolUtl.Y);
 					if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
-						byte[] tmp_src = rslt_bfr.To_bry_and_clear();
+						byte[] tmp_src = rslt_bfr.ToBryAndClear();
 						if (tmp_src.length != 0)
 							rslt_bfr.Add(wiki.Parser_mgr().Main().Expand_tmpl(tmp_src));	// this could be cleaner / more optimized
 					}
-					bfr.Add_bfr_and_clear(rslt_bfr);
+					bfr.AddBfrAndClear(rslt_bfr);
 					trace.Trace_end(trg_bgn, bfr);
-				} finally {rslt_bfr.Mkr_rls();}
+				} finally {rslt_bfr.MkrRls();}
 				break;
 		}
 		return rv;
 	}
-	private boolean Popup_skip(Xop_ctx ctx, byte[] ttl, Bry_bfr bfr) {
+	private boolean Popup_skip(Xop_ctx ctx, byte[] ttl, BryWtr bfr) {
 		boolean skip = false;
 		skip = this.Src_end() - this.Src_bgn() > ctx.Tmpl_tkn_max();
 		if (!skip) {
@@ -363,7 +364,7 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 		else
 			return false;
 	}
-	private boolean Transclude(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, boolean template_prefix_found, byte[] name_ary, Xot_invk caller, byte[] src) {
+	private boolean Transclude(Xop_ctx ctx, Xowe_wiki wiki, BryWtr bfr, boolean template_prefix_found, byte[] name_ary, Xot_invk caller, byte[] src) {
 		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		byte[] transclude_src = null;
 		if (page_ttl.Ns().Id_is_tmpl()) {							// ttl is template; check tmpl_regy first before going to data_mgr
@@ -389,17 +390,17 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 			return false;
 		}
 	}
-	private boolean Eval_sub(Xop_ctx ctx, Xoa_ttl transclude_ttl, Xot_defn_tmpl transclude_tmpl, Xot_invk caller, byte[] src, Bry_bfr doc) {
+	private boolean Eval_sub(Xop_ctx ctx, Xoa_ttl transclude_ttl, Xot_defn_tmpl transclude_tmpl, Xot_invk caller, byte[] src, BryWtr doc) {
 		boolean rv = false;
 		Xot_invk tmp_tmpl = Xot_defn_tmpl_.CopyNew(ctx, transclude_tmpl, this, caller, src, transclude_ttl.Ns().Id(), transclude_tmpl.Name());
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(doc);
 		rv = transclude_tmpl.Tmpl_evaluate(ctx, tmp_tmpl, tmp_bfr);
-		prepend_mgr.End(ctx, doc, tmp_bfr.Bfr(), tmp_bfr.Len(), BoolUtl.Y);
-		doc.Add_bfr_and_clear(tmp_bfr);
+		prepend_mgr.End(ctx, doc, tmp_bfr.Bry(), tmp_bfr.Len(), BoolUtl.Y);
+		doc.AddBfrAndClear(tmp_bfr);
 		return rv;
 	}
-	private boolean SubEval(Xop_ctx ctx, Xowe_wiki wiki, Bry_bfr bfr, byte[] name_ary, Xot_invk caller, byte[] src_for_tkn) {
+	private boolean SubEval(Xop_ctx ctx, Xowe_wiki wiki, BryWtr bfr, byte[] name_ary, Xot_invk caller, byte[] src_for_tkn) {
 		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		Xot_defn_tmpl transclude_tmpl = null;
 		switch (page_ttl.Ns().Id()) {
@@ -411,13 +412,13 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 				}
 				break;
 			case Xow_ns_.Tid__special:
-				bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(AsciiByte.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
+				bfr.Add(Xop_tkn_.Lnki_bgn).AddByte(AsciiByte.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
 				return true;
 		}
 		if (transclude_tmpl == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
 			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(page_ttl);
 			if (	cache_itm != null) {
-				if (!Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
+				if (!BryLni.Eq(cache_itm.Ttl().Full_db(), ctx.Page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
 					transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), cache_itm.Wtxt__direct());
 					page_ttl = cache_itm.Ttl();
 				}
@@ -444,7 +445,7 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 		for (int i = 0; i < args_len; i++) {
 			Arg_nde_tkn nde = args[i];
 			if (!nde.KeyTkn_exists()) continue;
-			if (Bry_.Match(src, nde.Key_tkn().Dat_bgn(), nde.Key_tkn().Dat_end(), key)) return nde;	// NOTE: dat_ary is guaranteed to exist
+			if (BryLni.Eq(src, nde.Key_tkn().Dat_bgn(), nde.Key_tkn().Dat_end(), key)) return nde;	// NOTE: dat_ary is guaranteed to exist
 		}
 		return null;
 	}
@@ -464,9 +465,9 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 		return rv;
 	}
 	private byte[] Get_first_subst_itm(Xol_kwd_mgr kwd_mgr) {
-		Xol_kwd_grp grp = kwd_mgr.Get_at(Xol_kwd_grp_.Id_subst); if (grp == null) return Bry_.Empty;
+		Xol_kwd_grp grp = kwd_mgr.Get_at(Xol_kwd_grp_.Id_subst); if (grp == null) return BryUtl.Empty;
 		Xol_kwd_itm[] itms = grp.Itms();
-		return itms.length == 0 ? Bry_.Empty : itms[0].Val();
+		return itms.length == 0 ? BryUtl.Empty : itms[0].Val();
 	}
 	private static final Hash_adp_bry ignore_hash = Hash_adp_bry.ci_a7().Add_str_obj("Citation needed{{subst", "").Add_str_obj("Clarify{{subst", "");	// ignore SafeSubst templates
 }

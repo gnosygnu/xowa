@@ -14,22 +14,21 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.caches;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.core.primitives.Bool_obj_ref;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.BoolRef;
 import gplx.dbs.Db_cmd_mode;
 import gplx.dbs.Db_conn;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.files.Xoa_repo_mgr;
 import gplx.xowa.files.Xof_ext;
@@ -42,14 +41,14 @@ import gplx.xowa.files.repos.Xof_repo_itm;
 import gplx.xowa.wikis.Xoae_wiki_mgr;
 class Xofc_fil_mgr {
 	private Xof_cache_mgr cache_mgr;		
-	private final Xofc_fil_tbl tbl = new Xofc_fil_tbl(); private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Bry_bfr key_bldr = Bry_bfr_.Reset(255);
+	private final Xofc_fil_tbl tbl = new Xofc_fil_tbl(); private final Ordered_hash hash = Ordered_hash_.New_bry(); private final BryWtr key_bldr = BryWtr.NewAndReset(255);
 	public Xofc_fil_mgr(Xof_cache_mgr v) {this.cache_mgr = v;}
 	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {tbl.Conn_(v, created, schema_is_1);}
 	public void Save_all() {
 		int len = hash.Len();
 		boolean err_seen = false;
 		for (int i = 0; i < len; i++) {
-			Xofc_fil_itm itm = (Xofc_fil_itm)hash.Get_at(i);
+			Xofc_fil_itm itm = (Xofc_fil_itm)hash.GetAt(i);
 			if (err_seen)
 				itm.Uid_(cache_mgr.Next_id());
 			if (itm.Cmd_mode() == Db_cmd_mode.Tid_create) {		// create; check if in db;
@@ -64,14 +63,14 @@ class Xofc_fil_mgr {
 			}
 		}
 	}
-	public Xofc_fil_itm Get_or_make(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, Xof_ext ext, long size, Bool_obj_ref created) {
+	public Xofc_fil_itm Get_or_make(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, Xof_ext ext, long size, BoolRef created) {
 		byte[] key = Xofc_fil_itm.Gen_hash_key_v1(key_bldr, dir_id, name, is_orig, w, h, time);
 		Xofc_fil_itm itm = (Xofc_fil_itm)hash.GetByOrNull(key);
 		if (itm == Xofc_fil_itm.Null) {								// not in memory
 			itm = tbl.Select_one_v1(dir_id, name, is_orig, w, h, time);
 			if (itm == Xofc_fil_itm.Null) {							// not in db
 				itm = Make_v1(dir_id, name, is_orig, w, h, time, Xof_lnki_page.Null, ext, size);
-				created.Val_(true);
+				created.ValSet(true);
 			}
 			else													// NOTE: itm loaded from tbl; add to hash; do not add if created b/c Make adds to hash;
 				hash.Add(key, itm);
@@ -110,7 +109,7 @@ class Xofc_fil_mgr {
 			tbl.Conn().Txn_bgn("user__file_cache__compress");
 			long compress_to = cfg_mgr.Cache_min();
 			for (int i = 0; i < len; ++i) {
-				Xofc_fil_itm itm = (Xofc_fil_itm)hash.Get_at(i);
+				Xofc_fil_itm itm = (Xofc_fil_itm)hash.GetAt(i);
 				long itm_size = itm.Size();
 				long new_size = cur_size + itm_size;
 				if (new_size > compress_to) {
@@ -127,7 +126,7 @@ class Xofc_fil_mgr {
 			}
 			len = deleted.Len();
 			for (int i = 0; i < len; i++) {
-				Xofc_fil_itm itm = (Xofc_fil_itm)deleted.Get_at(i);
+				Xofc_fil_itm itm = (Xofc_fil_itm)deleted.GetAt(i);
 				byte[] fil_key = itm.Gen_hash_key_v1(key_bldr);
 				hash.Del(fil_key);
 			}
@@ -135,7 +134,7 @@ class Xofc_fil_mgr {
 			this.Save_all();		// save everything again
 		}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "failed to compress cache: err=~{0}", Err_.Message_gplx_full(e));
+			usr_dlg.Warn_many("", "", "failed to compress cache: err=~{0}", ErrUtl.ToStrFull(e));
 		}
 		finally {tbl.Conn().Txn_end();}
 	}
@@ -157,15 +156,15 @@ class Xofc_fil_mgr {
 	}
 	public void Cleanup() {tbl.Rls();}
 	private void Db_recalc_next_id(Xofc_fil_itm fil_itm, String err_msg) {
-		if (String_.Has(err_msg, "PRIMARY KEY must be unique")) { // primary key exception in strange situations (multiple xowas at same time)
+		if (StringUtl.Has(err_msg, "PRIMARY KEY must be unique")) { // primary key exception in strange situations (multiple xowas at same time)
 			int next_id = tbl.Select_max_uid() + 1;				
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), String_.new_u8(fil_itm.Name()), err_msg);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), StringUtl.NewU8(fil_itm.Name()), err_msg);
 			fil_itm.Uid_(next_id);
 			cache_mgr.Next_id_(next_id + 1);
 			err_msg = tbl.Db_save(fil_itm);
 			if (err_msg == null)
 				return;
 		}
-		Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), String_.new_u8(fil_itm.Name()), err_msg);
+		Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", fil_itm.Uid(), StringUtl.NewU8(fil_itm.Name()), err_msg);
 	}
 }

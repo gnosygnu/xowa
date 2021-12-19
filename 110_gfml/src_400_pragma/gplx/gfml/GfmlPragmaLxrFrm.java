@@ -13,18 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 class GfmlPragmaLxrFrm implements GfmlPragma {
 	public String KeyOfPragma() {return "_lxr_frame";}
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
 		Compile(bldr, pragmaNde);
 	}
-	@gplx.Internal protected static GfmlLxr Compile(GfmlBldr bldr, GfmlNde ownerNde) {
+	public static GfmlLxr Compile(GfmlBldr bldr, GfmlNde ownerNde) {
 		String key = ownerNde.SubKeys().FetchDataOrFail("key");
 		String type = ownerNde.SubKeys().FetchDataOrNull("type");
 		String bgn = ownerNde.SubKeys().FetchDataOrFail("bgn");
 		String end = ownerNde.SubKeys().FetchDataOrFail("end");
-		GfmlFrame frame = String_.Eq(type, "comment") ?  GfmlFrame_.comment_() : GfmlFrame_.quote_();
+		GfmlFrame frame = StringUtl.Eq(type, "comment") ?  GfmlFrame_.comment_() : GfmlFrame_.quote_();
 
 		GfmlLxr lxr = bldr.Doc().LxrRegy().Get_by(key);
 		if (lxr == null) {
@@ -33,7 +36,7 @@ class GfmlPragmaLxrFrm implements GfmlPragma {
 			bldr.Doc().RootLxr().SubLxr_Add(lxr);		// FIXME: always add to cur lxr; should be outside if block; also, auto_add=n to skip adding to rootLxr
 		}
 		else {
-			GfmlLxr_frame frameLxr = GfmlLxr_frame.as_(lxr); if (frameLxr == null) throw Err_.new_wo_type("lxr is not GfmlLxr_frame", "key", key, "type", Type_.Name_by_obj(lxr));
+			GfmlLxr_frame frameLxr = GfmlLxr_frame.as_(lxr); if (frameLxr == null) throw ErrUtl.NewArgs("lxr is not GfmlLxr_frame", "key", key, "type", ClassUtl.NameByObj(lxr));
 			if (type != null) {
 //					frame = frameLxr.Frame.MakeNew(frameLxr);
 			}
@@ -48,7 +51,7 @@ class GfmlPragmaLxrFrm implements GfmlPragma {
 		for (int i = 0; i < ownerNde.SubHnds().Count(); i++) {
 			GfmlNde subNde = (GfmlNde)ownerNde.SubHnds().Get_at(i);
 			GfmlLxr subLxr = null;
-			if (String_.Eq(subNde.Hnd(), "sym"))
+			if (StringUtl.Eq(subNde.Hnd(), "sym"))
 				subLxr = GfmlPragmaLxrSym.Compile(bldr, subNde);
 			lxr.SubLxr_Add(subLxr);
 		}

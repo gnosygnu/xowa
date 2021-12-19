@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
+package gplx.xowa.bldrs.wms.sites;
 import gplx.dbs.*;
-import gplx.objects.lists.CompareAbleUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
 public class Site_core_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_site_domain, fld_json_completed, fld_json_date, fld_json_text;
@@ -40,13 +44,13 @@ public class Site_core_tbl implements Db_tbl {
 		stmt_update = Db_stmt_.Rls(stmt_update);
 	}
 	public void Update(byte[] site_abrv, boolean json_completed) {
-		if (stmt_update == null) stmt_update = conn.Stmt_update(tbl_name, String_.Ary(fld_site_abrv), fld_json_completed);
+		if (stmt_update == null) stmt_update = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_site_abrv), fld_json_completed);
 		stmt_update.Clear()
 			.Val_bool_as_byte	(fld_json_completed		, json_completed)
 			.Crt_bry_as_str		(fld_site_abrv			, site_abrv)
 			.Exec_update();
 	}
-	public void Insert(byte[] site_abrv, byte[] site_domain, boolean json_completed, DateAdp json_date, byte[] json_text) {
+	public void Insert(byte[] site_abrv, byte[] site_domain, boolean json_completed, GfoDate json_date, byte[] json_text) {
 		if (stmt_delete == null) stmt_delete = conn.Stmt_delete(tbl_name, fld_site_abrv);
 		stmt_delete.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_delete();
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
@@ -54,7 +58,7 @@ public class Site_core_tbl implements Db_tbl {
 			.Val_bry_as_str		(fld_site_abrv			, site_abrv)
 			.Val_bry_as_str		(fld_site_domain		, site_domain)
 			.Val_bool_as_byte	(fld_json_completed		, json_completed)
-			.Val_str			(fld_json_date			, json_date.XtoStr_gplx())
+			.Val_str			(fld_json_date			, json_date.ToStrGplx())
 			.Val_bry_as_str		(fld_json_text			, json_text)
 			.Exec_insert();
 	}
@@ -68,7 +72,7 @@ public class Site_core_tbl implements Db_tbl {
 		}
 		finally {rdr.Rls();}
 	}
-	public Site_core_itm[] Select_all_downloaded(DateAdp cutoff) {
+	public Site_core_itm[] Select_all_downloaded(GfoDate cutoff) {
 		List_adp list = List_adp_.New();
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Clear().Exec_select__rls_auto();
 		try {

@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*;
+package gplx.xowa.parsers.htmls;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Mwh_doc_wkr__atr_bldr implements Mwh_doc_wkr {
 	private final List_adp list = List_adp_.New();
 	public Hash_adp_bry Nde_regy() {return null;}
@@ -40,6 +43,6 @@ public class Mwh_doc_wkr__atr_bldr implements Mwh_doc_wkr {
 
 	public Mwh_atr_itm[] To_atr_ary() {return (Mwh_atr_itm[])list.ToAryAndClear(Mwh_atr_itm.class);}
 	public int Atrs__len() {return list.Len();}
-	public Mwh_atr_itm Atrs__get_at(int i) {return (Mwh_atr_itm)list.Get_at(i);}
+	public Mwh_atr_itm Atrs__get_at(int i) {return (Mwh_atr_itm)list.GetAt(i);}
 	public void Atrs__clear() {list.Clear();}
 }

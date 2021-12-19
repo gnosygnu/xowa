@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.vendor.*; import gplx.xowa.mediawiki.vendor.wikimedia.*; import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.*;
+package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.commons.GfoDecimal;
+import gplx.xowa.mediawiki.*;
 // MW.SRC:1.33.1
 /**
 * Evaluator helper class representing a range list.
@@ -32,7 +36,7 @@ class XomwRange {
 	* @param int start The start of the range
 	* @param int|boolean end The end of the range, or false if the range is not bounded.
 	*/
-	public XomwRange(Decimal_adp start, Decimal_adp end) {
+	public XomwRange(GfoDecimal start, GfoDecimal end) {
 		if (end == null) {
 			this.parts.Add(start);
 		} else {
@@ -48,20 +52,20 @@ class XomwRange {
 	*   otherwise, number simply has to be inside the range.
 	* @return boolean True if the number is inside the range; otherwise, false.
 	*/
-	public boolean isNumberIn(Decimal_adp number) {return isNumberIn(number, true);}
-	public boolean isNumberIn(Decimal_adp number, boolean integerConstraint) {
+	public boolean isNumberIn(GfoDecimal number) {return isNumberIn(number, true);}
+	public boolean isNumberIn(GfoDecimal number, boolean integerConstraint) {
 		int parts_len = parts.Len();
 		for (int i = 0; i < parts_len; i++) {
 			Object part_obj = this.parts.Get_at(i);
 			if (XophpArray.is_array(part_obj)) {
 				XophpArray part = (XophpArray)part_obj;
 				if ((!integerConstraint || number.Floor().Eq(number))
-					&& number.Comp_gte((Decimal_adp)part.Get_at(0)) && number.Comp_lte((Decimal_adp)part.Get_at(1))
+					&& number.CompGte((GfoDecimal)part.Get_at(0)) && number.CompLte((GfoDecimal)part.Get_at(1))
 				) {
 					return true;
 				}
 			} else {
-				Decimal_adp part_decimal = (Decimal_adp)part_obj;
+				GfoDecimal part_decimal = (GfoDecimal)part_obj;
 				if (part_decimal == null) part_decimal = number; // if "new XomwRange(start, null)", then range is just "start, start"
 				if (number.Eq(part_decimal)) {
 					return true;
@@ -79,7 +83,7 @@ class XomwRange {
 	* @param int number The number to check
 	* @return boolean True if the number is inside the range; otherwise, false.
 	*/
-	public boolean isNumberWithin(Decimal_adp number) {
+	public boolean isNumberWithin(GfoDecimal number) {
 		return this.isNumberIn(number, false);
 	}
 
@@ -90,7 +94,7 @@ class XomwRange {
 	*   a range Object itself or a single number.
 	*/
 	public void add(Object otherObj) {
-		if (Type_.Eq_by_obj(otherObj, XomwRange.class)) {
+		if (ClassUtl.EqByObj(XomwRange.class, otherObj)) {
 			this.parts = XophpArray.array_merge(this.parts, ((XomwRange)otherObj).parts);
 		} else {
 			this.parts.Add(otherObj);
@@ -113,9 +117,9 @@ class XomwRange {
 			}
 			if (XophpArray.is_array(part_obj)) {
 				XophpArray part = (XophpArray)part_obj;
-				s += Int_.To_str(part.Get_at_int(0)) + ".." + Int_.To_str(part.Get_at_int(1));
+				s += IntUtl.ToStr(part.Get_at_int(0)) + ".." + IntUtl.ToStr(part.Get_at_int(1));
 			} else {
-				s += Int_.To_str(Int_.Cast(part_obj));
+				s += IntUtl.ToStr(IntUtl.Cast(part_obj));
 			}
 		}
 		s += ")";

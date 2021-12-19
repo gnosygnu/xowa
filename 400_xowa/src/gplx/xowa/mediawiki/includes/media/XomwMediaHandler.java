@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.media;
+import gplx.types.basics.utls.MathUtl;
 import gplx.xowa.mediawiki.includes.filerepo.file.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 public abstract class XomwMediaHandler {
@@ -97,7 +98,7 @@ public abstract class XomwMediaHandler {
 //		* @param File|FSFile $image The image Object, or false if there isn't one.
 //		*   Warning, FSFile::getPropsFromPath might pass an FSFile instead of File (!)
 //		* @param String $path The filename
-//		* @return array|boolean Follow the format of PHP getimagesize() @gplx.Internal protected function.
+//		* @return array|boolean Follow the format of PHP getimagesize() public function.
 //		*   See https://secure.php.net/getimagesize. MediaWiki will only ever use the
 //		*   first two array keys (the width and height), and the 'bits' associative
 //		*   key. All other array keys are ignored. Returning a 'bits' key is optional
@@ -625,9 +626,9 @@ public abstract class XomwMediaHandler {
 	*/
 	public static int fitBoxWidth(int boxWidth, int boxHeight, int maxHeight) {
 		double idealWidth = boxWidth * maxHeight / boxHeight;
-		int roundedUp = Math_.Ceil_as_int(idealWidth);
-		if (Math_.Round(roundedUp * boxHeight / boxWidth, 0) > maxHeight) {
-			return Math_.Floor_as_int(idealWidth);
+		int roundedUp = MathUtl.CeilAsInt(idealWidth);
+		if (MathUtl.Round(roundedUp * boxHeight / boxWidth, 0) > maxHeight) {
+			return MathUtl.FloorAsInt(idealWidth);
 		} else {
 			return roundedUp;
 		}

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.urls;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xow_url_parser__wiki_tst {
 	private final Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
@@ -33,7 +35,7 @@ public class Xow_url_parser__wiki_tst {
 	}
 	@Test public void Vnt() {
 		Xowe_wiki wiki = tstr.Wiki();
-		gplx.xowa.langs.vnts.Xol_vnt_regy_fxt.Init__vnt_mgr(wiki.Lang().Vnt_mgr(), 0, String_.Ary("zh-hans", "zh-hant"));
+		gplx.xowa.langs.vnts.Xol_vnt_regy_fxt.Init__vnt_mgr(wiki.Lang().Vnt_mgr(), 0, StringUtl.Ary("zh-hans", "zh-hant"));
 		tstr.Exec__parse("en.wikipedia.org/zh-hans/A").Test__wiki("en.wikipedia.org").Test__page("A").Test__vnt("zh-hans");
 	}
 }

@@ -15,11 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.xtns.wbases.hwtrs.Wdata_hwtr_msgs;
@@ -54,11 +53,11 @@ public class Wdata_wiki_mgr_tst {
 			.Add_sitelink("enwiki", "Test_ns:Test_page")
 			);
 
-		fxt.Test_link(Xoa_ttl.Parse(fxt.Wiki(), 124, Bry_.new_a7("Test_page")), "Q1"); // NOTE: wdata will save to "000" ns, b/c "124" ns is not canonical
+		fxt.Test_link(Xoa_ttl.Parse(fxt.Wiki(), 124, BryUtl.NewA7("Test_page")), "Q1"); // NOTE: wdata will save to "000" ns, b/c "124" ns is not canonical
 	}
 	@Test public void Write_json_as_html() {
 		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
-		fxt.Test_write_json_as_html("{'a':'b','c':['d','e'],'f':{'g':'<h>'}}", String_.Concat_lines_nl_skip_last
+		fxt.Test_write_json_as_html("{'a':'b','c':['d','e'],'f':{'g':'<h>'}}", StringUtl.ConcatLinesNlSkipLast
 		(	"<span id=\"xowa-wikidata-json\">"
 		,	"{ \"a\":\"b\""
 		,	", \"c\":"
@@ -81,9 +80,9 @@ public class Wdata_wiki_mgr_tst {
 	@Test public void Write_quantity_null() {	// handle missing lbound / ubound; DATE:2016-12-03
 		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
 
-		Bry_bfr bfr = Bry_bfr_.New();
-		Wdata_prop_val_visitor.Write_quantity(bfr, fxt.Wdata_mgr(), fxt.Wiki().Lang(), Bry_.new_a7("123"), null, null, null);
-		Gftest.Eq__str("123", bfr.To_bry_and_clear());
+		BryWtr bfr = BryWtr.New();
+		Wdata_prop_val_visitor.Write_quantity(bfr, fxt.Wdata_mgr(), fxt.Wiki().Lang(), BryUtl.NewA7("123"), null, null, null);
+		GfoTstr.Eq("123", bfr.ToBryAndClear());
 	}
 	@Test public void Geo() {
 		// null precision
@@ -101,16 +100,16 @@ public class Wdata_wiki_mgr_tst {
 }
 class Wdata_prop_val_visitor__fxt {
 	public void Test__normalize_for_decimal(String raw, String expd) {
-		Gftest.Eq__str(expd, Wdata_prop_val_visitor.Normalize_for_decimal(Bry_.new_u8(raw)), raw);
+		GfoTstr.Eq(expd, Wdata_prop_val_visitor.Normalize_for_decimal(BryUtl.NewU8(raw)), raw);
 	}
 	public void TestGeo(String expd, String lat, String lng, String prc) {TestGeo(expd, lat, lng, prc, null);}
 	public void TestGeo(String expd, String lat, String lng, String prc, String glb) {
 		boolean wikidata_page = glb != null;
 		Wdata_lbl_mgr lbl_mgr = new Wdata_lbl_mgr();
 		Wdata_hwtr_msgs msgs = Wdata_hwtr_msgs.new_en_();
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 
-		Wdata_prop_val_visitor.Write_geo(wikidata_page, bfr, lbl_mgr, msgs, Bry_.new_u8(lat), Bry_.new_u8(lng), null, Bry_.new_u8(prc), Bry_.new_u8_safe(glb));
-		Gftest.Eq__str(expd, bfr.To_str_and_clear());
+		Wdata_prop_val_visitor.Write_geo(wikidata_page, bfr, lbl_mgr, msgs, BryUtl.NewU8(lat), BryUtl.NewU8(lng), null, BryUtl.NewU8(prc), BryUtl.NewU8Safe(glb));
+		GfoTstr.Eq(expd, bfr.ToStrAndClear());
 	}
 }

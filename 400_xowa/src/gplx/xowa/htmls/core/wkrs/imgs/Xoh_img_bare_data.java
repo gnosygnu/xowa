@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.imgs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.btries.*; import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
-import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
+import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_img_bare_data implements Xoh_data_itm {
 	public int						Tid() {return Xoh_hzip_dict_.Tid__img_bare;}
 	public int						Src_bgn() {return src_bgn;} private int src_bgn;
@@ -36,9 +40,9 @@ public class Xoh_img_bare_data implements Xoh_data_itm {
 		byte[] root_dir_bry = hctx.Fsys__res();	// NOTE: Fsys_res == Fsys_root on all machines except drd; note that hdump builds are not done on drd
 		int root_dir_bgn = img_src_atr.Val_bgn();
 		int root_dir_end = root_dir_bgn + root_dir_bry.length;
-		if (Bry_.Match(src, root_dir_bgn, root_dir_end, root_dir_bry)) {	// begins with XOWA root dir
-			byte trie_tid = trie.Match_byte_or(trv, src, root_dir_end, src_end, Byte_.Max_value_127);
-			if (trie_tid == Byte_.Max_value_127) return false;
+		if (BryLni.Eq(src, root_dir_bgn, root_dir_end, root_dir_bry)) {	// begins with XOWA root dir
+			byte trie_tid = trie.Match_byte_or(trv, src, root_dir_end, src_end, ByteUtl.MaxValue127);
+			if (trie_tid == ByteUtl.MaxValue127) return false;
 			img_tid = trie_tid;
 			dir_bgn = root_dir_bgn;
 			dir_end = trv.Pos();
@@ -54,8 +58,8 @@ public class Xoh_img_bare_data implements Xoh_data_itm {
 
 	public static final byte Img_tid__hiero = 0, Img_tid__imap_btn = 1;
 	public static final byte[]
-	  Url__hiero = Bry_.new_a7("bin/any/xowa/xtns/Wikihiero/img/hiero_")
-	, Url__imap  = Bry_.new_a7("bin/any/xowa/xtns/ImageMap/imgs/")
+	  Url__hiero = BryUtl.NewA7("bin/any/xowa/xtns/Wikihiero/img/hiero_")
+	, Url__imap  = BryUtl.NewA7("bin/any/xowa/xtns/ImageMap/imgs/")
 	;
 	private final Btrie_rv trv = new Btrie_rv();
 	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.cs()

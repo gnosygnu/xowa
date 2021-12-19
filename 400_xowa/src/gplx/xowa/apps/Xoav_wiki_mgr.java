@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.apps;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
 import gplx.xowa.wikis.*;
 public class Xoav_wiki_mgr implements Xoa_wiki_mgr {
@@ -21,7 +30,7 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr {
 	public Xoav_wiki_mgr(Xoav_app app, Xol_case_mgr case_mgr) {this.app = app;}
 	public int			Count()								{return hash.Len();}
 	public boolean		Has(byte[] key)						{return hash.Has(key);}
-	public Xow_wiki		Get_at(int idx)						{return (Xow_wiki)hash.Get_at(idx);}
+	public Xow_wiki		Get_at(int idx)						{return (Xow_wiki)hash.GetAt(idx);}
 	public Xow_wiki		Get_by_or_null(byte[] key)			{return (Xow_wiki)hash.GetByOrNull(key);}
 	public Xow_wiki		Get_by_or_make_init_y(byte[] key) {
 		Xow_wiki rv = this.Get_by_or_null(key);
@@ -37,7 +46,7 @@ public class Xoav_wiki_mgr implements Xoa_wiki_mgr {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xoud_site_row itm = ary[i];
-			Xow_wiki wiki = Make(Bry_.new_u8(itm.Domain()), Io_url_.new_dir_(itm.Path()));
+			Xow_wiki wiki = Make(BryUtl.NewU8(itm.Domain()), Io_url_.new_dir_(itm.Path()));
 			this.Add(wiki);
 		}
 	}

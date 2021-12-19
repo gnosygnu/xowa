@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+package gplx.xowa.bldrs.cmds.utils;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.criterias.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
@@ -29,9 +36,9 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public void Cmd_run() {
 		Io_url wiki_root_dir = wiki.Fsys_mgr().Root_dir();
 		if (bz2_fil != null) {
-			if		(String_.Eq(bz2_cmd, "delete"))
+			if		(StringUtl.Eq(bz2_cmd, "delete"))
 				Io_mgr.Instance.DeleteFil(bz2_fil);
-			else if (String_.Eq(bz2_cmd, "move"))
+			else if (StringUtl.Eq(bz2_cmd, "move"))
 				Io_mgr.Instance.MoveFil(bz2_fil, bz2_fil.OwnerDir().OwnerDir().GenSubFil_nest("done", bz2_fil.NameAndExt()));
 		}
 		if (delete_xml)						Io_mgr.Instance.DeleteFil(Xob_page_wkr_cmd.Find_fil_by(wiki_root_dir, "*.xml"));
@@ -73,7 +80,7 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	, Invk_delete_by_match_ = "delete_by_match"
 	;
 	private static Criteria_ioMatch[] Delete_by_match_parse(String raw) {
-		String[] match_ary = String_.Split(raw, '|');
+		String[] match_ary = StringUtl.Split(raw, '|');
 		int match_ary_len = match_ary.length;
 		Criteria_ioMatch[] rv = new Criteria_ioMatch[match_ary_len];
 		for (int i = 0; i < rv.length; i++) {
@@ -117,11 +124,11 @@ public class Xob_cleanup_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		String html_prefix = wiki.Domain_str() + "-html";					// NOTE: skip anything with "-html"; EX: "en.wikipedia.org-html-ns.000-db.002.xowa"
 		for (int i = 0; i < files_len; i++) {
 			Io_url url = files[i];
-			if (	!String_.Eq(url.Ext(), ".xowa")
-				&&	!String_.Eq(url.Ext(), ".sqlite3"))
+			if (	!StringUtl.Eq(url.Ext(), ".xowa")
+				&&	!StringUtl.Eq(url.Ext(), ".sqlite3"))
 				continue;
-			if (	String_.Has_at_bgn(url.NameAndExt(), file_prefix)
-				||	String_.Has_at_bgn(url.NameAndExt(), html_prefix)
+			if (	StringUtl.HasAtBgn(url.NameAndExt(), file_prefix)
+				||	StringUtl.HasAtBgn(url.NameAndExt(), html_prefix)
 				) continue;	// skip
 			Io_mgr.Instance.DeleteFil(url);
 			deleted++;

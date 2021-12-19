@@ -22,13 +22,13 @@ import org.junit.Test;
 public class Xof_file_ext__stl_tst {
 	@Before public void init() {fxt.Reset();} private final Xof_file_fxt fxt = new Xof_file_fxt();
 	@After public void term() {fxt.Rls();}
-	@Test  public void Make_orig() {
+	@Test public void Make_orig() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.stl", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_orig("A.stl", 440, 400));
 		fxt.Exec_get(Xof_exec_arg.new_orig("A.stl").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_y());
 		fxt.Test_fsys("mem/root/common/thumb/6/2/A.stl/440px.png", "440,400");
 	}
-	@Test  public void Make_thumb() {
+	@Test public void Make_thumb() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.stl", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_orig("A.stl", 440, 400));
 		fxt.Exec_get(Xof_exec_arg.new_thumb("A.stl").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_y());

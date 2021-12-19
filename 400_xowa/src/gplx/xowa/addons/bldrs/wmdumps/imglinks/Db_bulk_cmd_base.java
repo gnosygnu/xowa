@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*;
+package gplx.xowa.addons.bldrs.wmdumps.imglinks;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 public abstract class Db_bulk_cmd_base {
 	public void Exec() {
@@ -51,7 +53,7 @@ class Imglnk_bulk_cmd__img_id extends Db_bulk_cmd_base {
 	}
 	@Override protected int Get_uid_rng() {return 10000;}
 	@Override protected void Bulk_bgn() {
-		sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
+		sql = StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "UPDATE  img_link_tmp"
 		, "SET     img_wiki = {0}"
 		, ",       img_id = (SELECT p.page_id FROM <page_db>page p WHERE p.page_namespace = 6 AND p.page_title = img_link_tmp.img_name)"
@@ -67,7 +69,7 @@ class Imglnk_bulk_cmd__img_id extends Db_bulk_cmd_base {
 		attach_mgr.Detach();
 	}
 	@Override protected void Bulk_run(int uid_bgn, int uid_end) {
-		conn.Exec_sql(String_.Format("updating img_link_tmp; wiki={0} uid={1}", img_wiki, uid_bgn), String_.Format(sql, img_wiki, uid_bgn, uid_end));
+		conn.Exec_sql(StringUtl.Format("updating img_link_tmp; wiki={0} uid={1}", img_wiki, uid_bgn), StringUtl.Format(sql, img_wiki, uid_bgn, uid_end));
 	}
 	public static void Bulk_exec(Db_conn conn, boolean wiki_is_local, Xowe_wiki wiki) {
 		new Imglnk_bulk_cmd__img_id(conn, wiki_is_local, wiki).Exec();

@@ -13,14 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.fsdb;
+import gplx.types.basics.utls.ByteUtl;
 import gplx.core.stores.*;
 import gplx.dbs.*;
+import gplx.types.basics.utls.StringUtl;
 class Fsdb_regy_fil_tbl {
 	public Fsdb_regy_fil_itm Select(String name, boolean is_orig, int w, int thumbtime) {
 		return null;
 	}
-	public static final String Tbl_sql = String_.Concat_lines_nl
+	public static final String Tbl_sql = StringUtl.ConcatLinesNl
 	( "CREATE TABLE regy_fil"
 	, "( regy_id           integer       NOT NULL        PRIMARY KEY       AUTOINCREMENT"
 	, ", wiki_type_id      integer"
@@ -63,7 +65,7 @@ class Fsdb_regy_fil_itm {
 		wiki_date_id = rdr.ReadInt(Fsdb_regy_fil_tbl.Fld_wiki_date_id);
 		wiki_type_id = rdr.ReadInt(Fsdb_regy_fil_tbl.Fld_wiki_type_id);
 		fil_name = rdr.ReadStr(Fsdb_regy_fil_tbl.Fld_fil_name);
-		fil_is_orig = rdr.ReadByte(Fsdb_regy_fil_tbl.Fld_fil_is_orig) != Byte_.Zero;
+		fil_is_orig = rdr.ReadByte(Fsdb_regy_fil_tbl.Fld_fil_is_orig) != ByteUtl.Zero;
 		fil_w = rdr.ReadInt(Fsdb_regy_fil_tbl.Fld_fil_w);
 		fil_h = rdr.ReadInt(Fsdb_regy_fil_tbl.Fld_fil_h);
 		fil_thumbtime = rdr.ReadInt(Fsdb_regy_fil_tbl.Fld_fil_thumbtime);

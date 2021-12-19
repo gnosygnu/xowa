@@ -13,13 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.vnts;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.langs.vnts.*;
 class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRule
 	private final Vnt_flag_parser flag_parser = new Vnt_flag_parser(); private final Vnt_flag_code_mgr flag_codes = new Vnt_flag_code_mgr(); private final Vnt_flag_lang_mgr flag_langs = new Vnt_flag_lang_mgr();
 	private final Vnt_rule_parser rule_parser = new Vnt_rule_parser(); private final Vnt_rule_undi_mgr rule_undis = new Vnt_rule_undi_mgr(); private final Vnt_rule_bidi_mgr rule_bidis = new Vnt_rule_bidi_mgr();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private final Ordered_hash cnv_marked_hash = Ordered_hash_.New_bry();
 	private Vnt_convert_lang converter;
 	private Xol_vnt_regy vnt_regy; private byte[] vnt_key;
@@ -44,10 +50,10 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 		this.vnt_key = vnt_itm.Key();
 		this.display = this.title = null;
 		this.action = AsciiByte.Null;
-		int pipe_pos = Bry_find_.Find_fwd(src, AsciiByte.Pipe, src_bgn, src_end);
+		int pipe_pos = BryFind.FindFwd(src, AsciiByte.Pipe, src_bgn, src_end);
 		flag_parser.Parse(flag_codes, flag_langs, vnt_regy, src, src_bgn, pipe_pos);
 		int rule_bgn = pipe_pos == -1 ? src_bgn : pipe_pos + 1;
-		this.rule_raw = Bry_.Mid(src, rule_bgn, src_end);
+		this.rule_raw = BryLni.Mid(src, rule_bgn, src_end);
 		int flag_langs_count = flag_langs.Count();
 		if (flag_langs_count > 0) {	// vnts exist in flag; EX: -{zh-hans;zh-hant|text}-
 			if (flag_langs.Has(vnt_key))
@@ -69,7 +75,7 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 		rule_parser.Clear(rule_undis, rule_bidis, rule_raw);
 		if (!flag_codes.Get(Vnt_flag_code_.Tid_raw) && !flag_codes.Get(Vnt_flag_code_.Tid_name))
 			rule_parser.Parse(src, rule_bgn, src_end);
-		if (log_mgr != null) log_mgr.Log_rule(src_bgn, src_end, Bry_.Mid(src, src_bgn, src_end), flag_codes, flag_langs, rule_undis, rule_bidis);
+		if (log_mgr != null) log_mgr.Log_rule(src_bgn, src_end, BryLni.Mid(src, src_bgn, src_end), flag_codes, flag_langs, rule_undis, rule_bidis);
 		if (rule_undis.Has_none() && rule_bidis.Has_none()) {
 			if		(	 flag_codes.Get(Vnt_flag_code_.Tid_add)
 					||	 flag_codes.Get(Vnt_flag_code_.Tid_del)
@@ -91,21 +97,21 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 			switch (flag) {
 				case Vnt_flag_code_.Tid_raw:		display = rule_parser.Raw(); break;		// if we don't do content convert, still strip the -{}- tags
 				case Vnt_flag_code_.Tid_name: // process N flag: output current variant name
-					byte[] vnt_key_trim = Bry_.Trim(rule_parser.Raw());
+					byte[] vnt_key_trim = BryUtl.Trim(rule_parser.Raw());
 					Xol_vnt_itm vnt_itm_trim = vnt_regy.Get_by(vnt_key_trim);
-					display = vnt_itm_trim == null ? display = Bry_.Empty : vnt_itm_trim.Name();
+					display = vnt_itm_trim == null ? display = BryUtl.Empty : vnt_itm_trim.Name();
 					break;
 				case Vnt_flag_code_.Tid_descrip:	display = Make_descrip(); break;			// process D flag: output rules description
-				case Vnt_flag_code_.Tid_hide:		display = Bry_.Empty; break;				// process H,- flag or T only: output nothing
-				case Vnt_flag_code_.Tid_del:		display = Bry_.Empty; action = AsciiByte.Dash; break;
-				case Vnt_flag_code_.Tid_add:		display = Bry_.Empty; action = AsciiByte.Plus; break;
+				case Vnt_flag_code_.Tid_hide:		display = BryUtl.Empty; break;				// process H,- flag or T only: output nothing
+				case Vnt_flag_code_.Tid_del:		display = BryUtl.Empty; action = AsciiByte.Dash; break;
+				case Vnt_flag_code_.Tid_add:		display = BryUtl.Empty; action = AsciiByte.Plus; break;
 				case Vnt_flag_code_.Tid_show:		display = Make_converted(vnt_itm); break;
-				case Vnt_flag_code_.Tid_title:		display = Bry_.Empty; title = Make_title(vnt_itm); break;
+				case Vnt_flag_code_.Tid_title:		display = BryUtl.Empty; title = Make_title(vnt_itm); break;
 				default:							break;									// ignore unknown flags (but see error case below)
 			}
 		}
 		if (display == null)
-			display = Bry_.Add(Bry__error_bgn, Bry__error_end);	// wfMessage( 'converter-manual-rule-error' )->inContentLanguage()->escaped()
+			display = BryUtl.Add(Bry__error_bgn, Bry__error_end);	// wfMessage( 'converter-manual-rule-error' )->inContentLanguage()->escaped()
 		Make_conv_tbl();			
 	}
 	private void Make_conv_tbl() {
@@ -124,7 +130,7 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 			if (bidi_bry != null) {
 				int marked_len = cnv_marked_hash.Len();
 				for (int j = 0; j < marked_len; ++j) {
-					Xol_vnt_itm marked_itm = (Xol_vnt_itm)cnv_marked_hash.Get_at(j);
+					Xol_vnt_itm marked_itm = (Xol_vnt_itm)cnv_marked_hash.GetAt(j);
 					byte[] marked_key = marked_itm.Key();
 					byte[] marked_bry = rule_bidis.Get_text_by_key_or_null(marked_key);
 					byte[] cur_bidi_bry = rule_bidis.Get_text_by_key_or_null(vnt_key);
@@ -152,7 +158,7 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 		for (int i = 0; i < len; ++i) {
 			Vnt_rule_bidi_itm bidi_itm = rule_bidis.Get_at(i);
 			Xol_vnt_itm vnt_itm = vnt_regy.Get_by(bidi_itm.Vnt());
-			tmp_bfr.Add(vnt_itm.Name()).Add_byte_colon().Add(bidi_itm.Text()).Add_byte_semic();
+			tmp_bfr.Add(vnt_itm.Name()).AddByteColon().Add(bidi_itm.Text()).AddByteSemic();
 		}
 		len = rule_undis.Len();
 		for (int i = 0; i < len; ++i) {
@@ -161,10 +167,10 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 			for (int j = 0; j < sub_len; ++j) {
 				Vnt_rule_undi_itm undi_itm = (Vnt_rule_undi_itm)undi_grp.Get_at(j);
 				Xol_vnt_itm undi_vnt = vnt_regy.Get_by(undi_grp.Vnt());
-				tmp_bfr.Add(undi_itm.Src()).Add(Bry__undi_spr).Add(undi_vnt.Name()).Add_byte_colon().Add(undi_itm.Trg()).Add_byte_semic();
+				tmp_bfr.Add(undi_itm.Src()).Add(Bry__undi_spr).Add(undi_vnt.Name()).AddByteColon().Add(undi_itm.Trg()).AddByteSemic();
 			}
 		}
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
 	private byte[] Make_title(Xol_vnt_itm vnt) {
 		if (vnt.Idx() == 0) {	// for mainLanguageCode; EX: "zh"
@@ -185,8 +191,8 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 		return rv;
 	}
 	private final static byte[]
-	  Bry__error_bgn = Bry_.new_a7("<span class=\"error\">vnt error")
-	, Bry__error_end = Bry_.new_a7("</span>")
-	, Bry__undi_spr = Bry_.new_u8("⇒")
+	  Bry__error_bgn = BryUtl.NewA7("<span class=\"error\">vnt error")
+	, Bry__error_end = BryUtl.NewA7("</span>")
+	, Bry__undi_spr = BryUtl.NewU8("⇒")
 	;
 }

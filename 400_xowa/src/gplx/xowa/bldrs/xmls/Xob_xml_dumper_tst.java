@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.xmls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
 public class Xob_xml_dumper_tst {
 	private final Xob_xml_dumper_fxt fxt = new Xob_xml_dumper_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic() {
-		fxt.Test_page(fxt.Make_ary(fxt.Make_page(1, Xow_ns_.Tid__main, "A", "A_text")), String_.Concat_lines_nl_skip_last
+	@Test public void Basic() {
+		fxt.Test_page(fxt.Make_ary(fxt.Make_page(1, Xow_ns_.Tid__main, "A", "A_text")), StringUtl.ConcatLinesNlSkipLast
 		( "<mediawiki xmlns='http://www.mediawiki.org/xml/export-0.10/' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://www.mediawiki.org/xml/export-0.10/ http://www.mediawiki.org/xml/export-0.10.xsd' version='0.10' xml:lang='en'>"
 		, "  <siteinfo>"
 		, "    <sitename>other</sitename>"
@@ -85,16 +89,16 @@ class Xob_xml_dumper_fxt {
 	}
 	public Xowd_page_itm[] Make_ary(Xowd_page_itm... ary) {return ary;}
 	public Xowd_page_itm Make_page(int id, int ns_id, String ttl_str, String text) {
-		Xoa_ttl ttl = wiki.Ttl_parse(ns_id, Bry_.new_u8(ttl_str));
-		return new Xowd_page_itm().Id_(id).Ns_id_(ns_id).Ttl_(ttl).Text_(Bry_.new_u8(text));
+		Xoa_ttl ttl = wiki.Ttl_parse(ns_id, BryUtl.NewU8(ttl_str));
+		return new Xowd_page_itm().Id_(id).Ns_id_(ns_id).Ttl_(ttl).Text_(BryUtl.NewU8(text));
 	}
 	public void Test_page(Xowd_page_itm[] ary, String expd) {
-		export_wtr.Write_root_bgn(wiki.Ns_mgr(), wiki.Domain_itm(), "", String_.new_u8(wiki.Props().Main_page()), "first-letter", "XOWA 2.5.2.2");
+		export_wtr.Write_root_bgn(wiki.Ns_mgr(), wiki.Domain_itm(), "", StringUtl.NewU8(wiki.Props().Main_page()), "first-letter", "XOWA 2.5.2.2");
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)
 			export_wtr.Write_page(ary[i]);
 		export_wtr.Write_root_end();
 		String actl = export_wtr.Bld_str();
-		Tfds.Eq_str_lines(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 	}
 }

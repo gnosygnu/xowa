@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls.core.bldrs;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 class Xob_link_dump_tbl implements Rls_able {
 	public static final String Tbl_name = "link_dump"; private static final DbmetaFldList flds = new DbmetaFldList();
@@ -55,7 +58,7 @@ class Xob_link_dump_tbl implements Rls_able {
 			.Exec_insert();
 	}
 	public Db_rdr Select_missing() {
-		return conn.Stmt_select_order(Tbl_name, flds, String_.Ary(Fld_trg_page_id), Fld_src_page_id, Fld_src_html_uid)
+		return conn.Stmt_select_order(Tbl_name, flds, StringUtl.Ary(Fld_trg_page_id), Fld_src_page_id, Fld_src_html_uid)
 			.Crt_int(Fld_trg_page_id, -1).Exec_select__rls_auto();
 	}
 	public static Xob_link_dump_tbl Get_or_new(Xow_wiki wiki) {

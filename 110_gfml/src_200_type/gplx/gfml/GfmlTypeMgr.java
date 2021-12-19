@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.lists.*;/*StackAdp*/
+package gplx.gfml;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.core.lists.StackAdp;
+import gplx.core.lists.StackAdp_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 class GfmlTypeMgr {
 	public GfmlTypRegy TypeRegy() {return typeRegy;} GfmlTypRegy typeRegy = GfmlTypRegy.new_();
 	public GfmlFldPool FldPool() {return fldPool;} GfmlFldPool fldPool = GfmlFldPool.new_(GfmlType_.new_any_());
@@ -36,7 +41,7 @@ class GfmlTypeMgr {
 	}
 	public void AtrExec(GfmlNde nde, GfmlAtr atr) {
 		String atrKey = atr.Key();
-		boolean isNull = String_.Eq(atrKey, GfmlTkn_.NullRaw);
+		boolean isNull = StringUtl.Eq(atrKey, GfmlTkn_.NullRaw);
 		GfmlFld atrFld = isNull
 			? fldPool.Keyed_PopNext()
 			: fldPool.Keyed_PopByKey(atrKey);
@@ -47,9 +52,9 @@ class GfmlTypeMgr {
 	}
 	void Resolve(GfmlNde nde, String ownerTypeKey) {
 		GfmlType type = GfmlType_.Null;
-		if (!String_.Eq(ownerTypeKey, GfmlType_.AnyKey)) {		// ownerType is specificType (!AnyType); lookup nde by ownerTypeKey + nde.Hnd
-			String ndeHndOrKey = String_.Len_eq_0(nde.Hnd()) ? nde.Key() : nde.Hnd();
-			if (String_.Len_eq_0(ndeHndOrKey)) ndeHndOrKey = nde.Hnd();
+		if (!StringUtl.Eq(ownerTypeKey, GfmlType_.AnyKey)) {		// ownerType is specificType (!AnyType); lookup nde by ownerTypeKey + nde.Hnd
+			String ndeHndOrKey = StringUtl.IsNullOrEmpty(nde.Hnd()) ? nde.Key() : nde.Hnd();
+			if (StringUtl.IsNullOrEmpty(ndeHndOrKey)) ndeHndOrKey = nde.Hnd();
 			String typeKey = GfmlType_.MakeKey(ownerTypeKey, ndeHndOrKey);
 			type = typeRegy.FetchOrNull(typeKey, nde.DocPos());
 		}
@@ -65,10 +70,10 @@ class GfmlTypeMgr {
 		String ndeKey = nde.Key(), ndeHnd = nde.Hnd();
 		String typKey = nde.Type().Key(); GfmlFld fld;
 		if (nde.KeyedSubObj()) {
-			if (String_.Len_eq_0(ndeKey)) {
+			if (StringUtl.IsNullOrEmpty(ndeKey)) {
 				fld = fldPool.Keyed_PopNext();
 				typKey = (fld == GfmlFld.Null) ? GfmlType_.AnyKey : fld.TypeKey();
-				if (ownerNde != null && !String_.Len_eq_0(fld.Name()))	// HACK: String_.Len_eq_0(fld.Name()) needed for DoesNotUsurpDatTknForName
+				if (ownerNde != null && !StringUtl.IsNullOrEmpty(fld.Name()))	// HACK: String_.Len_eq_0(fld.Name()) needed for DoesNotUsurpDatTknForName
 					ownerNde.SubKeys().RegisterKey(fld.Name(), nde);
 			}
 			else {
@@ -77,16 +82,16 @@ class GfmlTypeMgr {
 			}
 		}
 		else {
-			if (String_.Len_eq_0(ndeHnd)) {
+			if (StringUtl.IsNullOrEmpty(ndeHnd)) {
 				fld = fldPool.DefaultMember();
 				typKey = (fld == GfmlFld.Null) ? GfmlType_.AnyKey : fld.TypeKey();
-				if (String_.Len_eq_0(nde.Hnd()))		// type found, and curNde.Id is null; generate Id (DataRdr depends on this)
+				if (StringUtl.IsNullOrEmpty(nde.Hnd()))		// type found, and curNde.Id is null; generate Id (DataRdr depends on this)
 					nde.Hnd_set(fld.Name());
 			}
 			else
 				typKey = ndeHnd;
 		}
-		if (typKey == null) throw Err_.new_wo_type("could not identity type for node", "ndeKey", ndeKey, "ndeHnd", ndeHnd, "typKey", nde.Type().Key());
+		if (typKey == null) throw ErrUtl.NewArgs("could not identity type for node", "ndeKey", ndeKey, "ndeHnd", ndeHnd, "typKey", nde.Type().Key());
 		rv = typeRegy.FetchOrNull(typKey, nde.DocPos());
 		return (rv == GfmlType_.Null)
 			? GfmlType_.new_any_()									// unknown typeKey; name is not known (see EX:2) -> create new anyType
@@ -105,7 +110,7 @@ class GfmlFldPool {
 	public GfmlTkn Keyed_PopNextAsTkn() {return GfmlTkn_.val_(Keyed_PopNext().Name());} // helper method for GfmlFrame_nde
 	public GfmlFld Keyed_PopNext() {
 		if (keyedRegy.Len() == 0) return GfmlFld.Null;
-		GfmlFld rv = (GfmlFld)keyedRegy.Get_at(0);
+		GfmlFld rv = (GfmlFld)keyedRegy.GetAt(0);
 		keyedRegy.Del(rv.Name());
 		return rv;
 	}
@@ -114,10 +119,10 @@ class GfmlFldPool {
 		keyedRegy.Del(rv.Name());
 		return rv;
 	}
-	@gplx.Internal protected int Keyd_Count() {return keyedRegy.Len();}
-	@gplx.Internal protected GfmlFld Keyd_FetchAt(int i) {return (GfmlFld)keyedRegy.Get_at(i);}
+	public int Keyd_Count() {return keyedRegy.Len();}
+	public GfmlFld Keyd_FetchAt(int i) {return (GfmlFld)keyedRegy.GetAt(i);}
 	public GfmlFld DefaultMember() {return defaultMember;} GfmlFld defaultMember = GfmlFld.Null;
-	@gplx.Internal protected GfmlType Type() {return type;} GfmlType type = GfmlType_.Null;
+	public GfmlType Type() {return type;} GfmlType type = GfmlType_.Null;
 	void InitByType(GfmlType type) {
 		this.type = type;
 		for (int i = 0; i < type.SubFlds().Count(); i++) {

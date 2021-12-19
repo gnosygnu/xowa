@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.imgs;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
-import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
+import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_img_bare_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public int Tid() {return Xoh_hzip_dict_.Tid__img_bare;}
 	public String Key() {return Xoh_hzip_dict_.Key__img_bare;}
@@ -29,12 +33,12 @@ public class Xoh_img_bare_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		bfr.Add_hzip_mid(src, data.Dir_end(), data.Src_end());
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		Xoh_img_bare_data data = (Xoh_img_bare_data)data_itm; data.Clear();
-		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+		int flag = rdr.ReadHzipInt(1); flag_bldr.Decode(flag);
 		int img_tid	= flag_bldr.Get_as_int(Flag__img_tid);
-		int tag_0_bgn = rdr.Pos(), tag_0_end = rdr.Find_fwd_lr();
-		int tag_1_bgn = rdr.Pos(), tag_1_end = rdr.Find_fwd_lr();
+		int tag_0_bgn = rdr.Pos(), tag_0_end = rdr.FindFwdLr();
+		int tag_1_bgn = rdr.Pos(), tag_1_end = rdr.FindFwdLr();
 		data.Init_by_decode(img_tid, tag_0_bgn, tag_1_end, tag_0_end, tag_1_bgn);
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;

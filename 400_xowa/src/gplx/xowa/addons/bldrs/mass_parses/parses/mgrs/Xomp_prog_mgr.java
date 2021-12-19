@@ -13,11 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.mgrs;
+import gplx.core.envs.SystemUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.GfoTimeSpanUtl;
 import gplx.xowa.wikis.caches.*;
 public class Xomp_prog_mgr {
 	private final Object thread_lock = new Object();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private Xow_page_cache page_cache;
 	private int prog_interval, perf_interval;
 	private int pages_done, pages_total;
@@ -29,17 +37,17 @@ public class Xomp_prog_mgr {
 		this.prog_interval = prog_interval;
 		this.perf_interval = perf_interval;
 		this.perf_url = perf_url;
-		this.prog_bgn = this.prog_prv = this.perf_prv = gplx.core.envs.System_.Ticks();
+		this.prog_bgn = this.prog_prv = this.perf_prv = SystemUtl.Ticks();
 		Io_mgr.Instance.DeleteFil(perf_url);
 	}
 	public void Mark_done(int id) {
 		synchronized (thread_lock) {
 			pages_done += 1;
 			if (pages_done % prog_interval == 0) {
-				long prog_cur = gplx.core.envs.System_.Ticks();
+				long prog_cur = SystemUtl.Ticks();
 				int pages_left = pages_total - pages_done;
 				prog_done += (prog_cur - prog_prv);
-				double rate_cur = pages_done / (prog_done / Time_span_.Ratio_f_to_s);
+				double rate_cur = pages_done / (prog_done / GfoTimeSpanUtl.RatioFracsToSecs);
 				String time_past = gplx.xowa.addons.bldrs.centrals.utils.Time_dhms_.To_str(tmp_bfr, (int)((prog_cur - prog_bgn) / 1000), true, 0);
 				String time_left = gplx.xowa.addons.bldrs.centrals.utils.Time_dhms_.To_str(tmp_bfr, (int)(pages_left / rate_cur), true, 0);
 				Gfo_usr_dlg_.Instance.Prog_many("", "", "done=~{1} left=~{2} rate=~{3} time_past=~{4} time_left=~{5} cache_stats=~{6}", id, pages_done, pages_left, (int)rate_cur, time_past, time_left, page_cache.To_str());
@@ -47,16 +55,16 @@ public class Xomp_prog_mgr {
 			}
 			if (pages_done % perf_interval == 0) {
 				// get vars
-				long perf_cur = gplx.core.envs.System_.Ticks();
+				long perf_cur = SystemUtl.Ticks();
 				long perf_diff = (perf_cur - perf_prv);
 				this.perf_prv = perf_cur;
-				int memory_used = (int)(gplx.core.envs.Runtime_.Memory_used() / Io_mgr.Len_mb);
+				int memory_used = (int)(gplx.core.envs.Runtime_.Memory_used() / IoConsts.LenMB);
 
 				// save to file
-				tmp_bfr.Add_int_fixed(pages_done, 12).Add_byte_pipe();
-				tmp_bfr.Add_int_fixed(memory_used, 6).Add_byte_pipe();
-				tmp_bfr.Add_long_variable(perf_diff).Add_byte_pipe();
-				tmp_bfr.Add_dte(Datetime_now.Get()).Add_byte_nl();
+				tmp_bfr.AddIntFixed(pages_done, 12).AddBytePipe();
+				tmp_bfr.AddIntFixed(memory_used, 6).AddBytePipe();
+				tmp_bfr.AddLongVariable(perf_diff).AddBytePipe();
+				tmp_bfr.AddDate(GfoDateNow.Get()).AddByteNl();
 				Io_mgr.Instance.AppendFilBfr(perf_url, tmp_bfr);
 			}
 		}

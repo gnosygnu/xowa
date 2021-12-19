@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.core.lists.*;
+package gplx.gfui.controls.customs;
 import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+import gplx.types.commons.KeyValHash;
+import gplx.types.basics.lists.List_adp;
 public class GfuiCheckListBox extends GfuiElemBase {
 	public void Items_reverse() {checkListBox.Items_reverse();}
 	public void Items_count() {checkListBox.Items_count();}
@@ -27,8 +28,8 @@ public class GfuiCheckListBox extends GfuiElemBase {
 	public List_adp Items_getChecked() {return checkListBox.Items_getChecked();}
 
 	GxwCheckListBox checkListBox;
-	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return new GxwCheckListBox_lang();}
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return new GxwCheckListBox_lang();}
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.checkListBox = (GxwCheckListBox)UnderElem();
 	}

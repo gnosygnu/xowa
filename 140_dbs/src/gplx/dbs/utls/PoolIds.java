@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
-import gplx.core.stores.*;
-import gplx.dbs.qrys.*;
+package gplx.dbs.utls;
+import gplx.core.stores.DataRdr;
+import gplx.core.stores.DataRdr_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_pool;
+import gplx.dbs.Db_crt_;
+import gplx.dbs.Db_qry_;
+import gplx.dbs.qrys.Db_qry__select_cmd;
+import gplx.types.errs.ErrUtl;
 public class PoolIds {
 	public int FetchNext(Db_conn conn, String url) {
 		Db_qry__select_cmd cmd = Db_qry_.select_().From_(Tbl_Name).Where_(Db_crt_.New_eq(Fld_id_path, url));
@@ -41,10 +47,10 @@ public class PoolIds {
 		if (rv == 0) {
 			rv = conn.Exec_qry(Db_qry_.insert_(Tbl_Name).Val_str(Fld_id_path, url).Val_int(Fld_id_next_id, val));
 		}
-		if (rv != 1) throw Err_.new_wo_type("failed to update nextId", "url", url, "nextId", val);
+		if (rv != 1) throw ErrUtl.NewArgs("failed to update nextId", "url", url, "nextId", val);
 	}
 	public static final String Tbl_Name					= "pool_ids";
-	@gplx.Internal protected static final String Fld_id_path				= "id_path";
-	@gplx.Internal protected static final String Fld_id_next_id			= "id_next_id";
+	public static final String Fld_id_path				= "id_path";
+	public static final String Fld_id_next_id			= "id_next_id";
 	public static final PoolIds Instance = new PoolIds(); PoolIds() {}
 }

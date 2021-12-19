@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.titleBlacklists; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.titleBlacklists;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Blacklist_xtn_mgr extends Xox_mgr_base {
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("TitleBlacklist");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = BryUtl.NewA7("TitleBlacklist");
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		Scrib_xtn_mgr scrib_xtn = (Scrib_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY);
 		scrib_xtn.Lib_mgr().Add(new Blacklist_scrib_lib());

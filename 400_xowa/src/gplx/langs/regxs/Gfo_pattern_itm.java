@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
-import gplx.core.strings.*;
+package gplx.langs.regxs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
 public interface Gfo_pattern_itm {
 	byte Tid();
 	void Compile(byte[] src, int bgn, int end);
@@ -25,9 +28,9 @@ class Gfo_pattern_itm_text implements Gfo_pattern_itm {
 	public Gfo_pattern_itm_text() {}
 	public byte Tid() {return Gfo_pattern_itm_.Tid_text;}
 	public byte[] Text() {return text;} private byte[] text; private int text_len;
-	public void Xto_str(String_bldr sb) {sb.Add(this.Tid()).Add("|" + String_.new_u8(text));}
+	public void Xto_str(String_bldr sb) {sb.Add(this.Tid()).Add("|" + StringUtl.NewU8(text));}
 	public void Compile(byte[] src, int bgn, int end) {
-		this.text = Bry_.Mid(src, bgn, end);
+		this.text = BryLni.Mid(src, bgn, end);
 		this.text_len = end - bgn;
 	}
 	public int Match(Gfo_pattern_ctx ctx, byte[] src, int src_len, int pos) {
@@ -35,13 +38,13 @@ class Gfo_pattern_itm_text implements Gfo_pattern_itm {
 		int text_end = pos + text_len;
 		if (text_end > src_len) text_end = src_len;
 		if (ctx.Prv_was_wild()) {
-			int text_bgn = Bry_find_.Find_fwd(src, text, pos);
-			pass = text_bgn != Bry_find_.Not_found;
+			int text_bgn = BryFind.FindFwd(src, text, pos);
+			pass = text_bgn != BryFind.NotFound;
 			if (pass)
 				pos = text_bgn + text_len;
 		}
 		else {
-			pass = Bry_.Match(src, pos, text_end, text);
+			pass = BryLni.Eq(src, pos, text_end, text);
 			if (pass)
 				pos = text_end;
 		}

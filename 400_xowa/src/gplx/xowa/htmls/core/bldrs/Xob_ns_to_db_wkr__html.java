@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.dbs.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.htmls.core.dbs.*;
+package gplx.xowa.htmls.core.bldrs;
+import gplx.dbs.*;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.bldrs.*;
+import gplx.xowa.wikis.data.*;
+import gplx.xowa.htmls.core.dbs.*;
 public class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {
 	private final Xow_db_file page_db;
 	public Xob_ns_to_db_wkr__html(Xow_db_file page_db) {this.page_db = page_db;}
@@ -32,7 +35,7 @@ public class Xob_ns_to_db_wkr__html implements Xob_ns_to_db_wkr {
 			.Exec_sql_w_msg("hdump.update page.html_db_id", Sql_update_page_html_db_id, db.Id());
 		db_conn.Rls_conn();
 	}
-	private static final String Sql_update_page_html_db_id = String_.Concat_lines_nl_skip_last
+	private static final String Sql_update_page_html_db_id = StringUtl.ConcatLinesNlSkipLast
 	( "REPLACE INTO page (page_id, page_namespace, page_title, page_is_redirect, page_touched, page_len, page_random_int, page_text_db_id, page_html_db_id, page_redirect_id, page_score)"
 	, "SELECT   p.page_id"
 	, ",        p.page_namespace"

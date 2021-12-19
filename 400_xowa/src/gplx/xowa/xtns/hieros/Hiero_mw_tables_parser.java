@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.log_msgs.*;
+package gplx.xowa.xtns.hieros;
+import gplx.core.log_msgs.*;
 import gplx.langs.phps.*; import gplx.langs.dsvs.*;
+import gplx.libs.files.Io_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.wrappers.ByteRef;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.apps.gfs.*;
 public class Hiero_mw_tables_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
@@ -37,7 +45,7 @@ public class Hiero_mw_tables_parser {
 			byte[] key = line.Key().Val_obj_bry();
 			Object o = Tid_hash.Get_by_bry(key);
 			if (o != null) {
-				Byte_obj_val stub = (Byte_obj_val)o;
+				ByteVal stub = (ByteVal)o;
 				switch (stub.Val()) {
 					case Tid_prefabs:	Parse_prefabs(xtn_mgr.Prefab_mgr(), line); break;
 					case Tid_files:		Parse_files(xtn_mgr.File_mgr(), line); break;
@@ -67,7 +75,7 @@ public class Hiero_mw_tables_parser {
 		}		
 	}
 	private void Parse_phonemes(Hiero_phoneme_mgr mgr, Php_line_assign line) {	// $wh_phonemes = array(k => v, k => v ...);
-		List_adp tmp_list = List_adp_.New(); Byte_obj_ref tmp_rslt = Byte_obj_ref.zero_(); Bry_bfr tmp_bfr = Bry_bfr_.New();
+		List_adp tmp_list = List_adp_.New(); ByteRef tmp_rslt = ByteRef.NewZero(); BryWtr tmp_bfr = BryWtr.New();
 		Php_itm_ary ary = (Php_itm_ary)line.Val();
 		int subs_len = ary.Subs_len();
 		for (int i = 0; i < subs_len; i++) {
@@ -85,7 +93,7 @@ public class Hiero_mw_tables_parser {
 		bldr.Add_proc_init_many(Hiero_xtn_mgr.Invk_prefabs, Hiero_phoneme_mgr.Invk_srl, Dsv_wkr_base.Invk_load_by_str).Add_quote_xtn_apos_bgn();	// prefabs.srl.load_by_str('\n
 		for (int i = 0; i < len; i++) {
 			Hiero_prefab_itm itm = prefab_mgr.Get_at(i);
-			bldr.Bfr().Add(itm.Key()).Add_byte_nl();	// NOTE: escape not needed
+			bldr.Bfr().Add(itm.Key()).AddByteNl();	// NOTE: escape not needed
 		}
 		bldr.Add_quote_xtn_apos_end();	// ');\n
 		bldr.Add_nl();
@@ -95,7 +103,7 @@ public class Hiero_mw_tables_parser {
 		bldr.Add_proc_init_many(Hiero_xtn_mgr.Invk_files, Hiero_phoneme_mgr.Invk_srl, Dsv_wkr_base.Invk_load_by_str).Add_quote_xtn_apos_bgn();		// files.srl.load_by_str('\n
 		for (int i = 0; i < len; i++) {
 			Hiero_file_itm itm = file_mgr.Get_at(i);
-			bldr.Bfr().Add(itm.Key()).Add_byte_pipe().Add_int_variable(itm.File_w()).Add_byte_pipe().Add_int_variable(itm.File_h()).Add_byte_nl();	// NOTE: escape not needed
+			bldr.Bfr().Add(itm.Key()).AddBytePipe().AddIntVariable(itm.File_w()).AddBytePipe().AddIntVariable(itm.File_h()).AddByteNl();	// NOTE: escape not needed
 		}
 		bldr.Add_quote_xtn_apos_end();	// ');\n
 		bldr.Add_nl();
@@ -106,7 +114,7 @@ public class Hiero_mw_tables_parser {
 		bldr.Add_quote_xtn_bgn();
 		for (int i = 0; i < len; i++) {
 			Hiero_phoneme_itm itm = phoneme_mgr.Get_at(i);
-			bldr.Bfr().Add(itm.Key()).Add_byte_pipe().Add(itm.Gardiner_code()).Add_byte_nl();	// NOTE: escape not needed
+			bldr.Bfr().Add(itm.Key()).AddBytePipe().Add(itm.Gardiner_code()).AddByteNl();	// NOTE: escape not needed
 		}
 		bldr.Add_quote_xtn_end();
 		bldr.Add_paren_end().Add_term_nl();

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.files.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;	
 public class Xobldr__page_file_map__create extends Xob_cmd__base {
@@ -27,7 +29,7 @@ public class Xobldr__page_file_map__create extends Xob_cmd__base {
 		Create__page_file_map();
 	}
 	private void Append__fsdb_id() { // NOTE: append the field; do not create with table b/c will be extra baggage during all REPLACE INTO
-		String[] tbls = String_.Ary("xfer_regy", "xfer_temp", "lnki_regy", "lnki_temp", "fsdb_regy");
+		String[] tbls = StringUtl.Ary("xfer_regy", "xfer_temp", "lnki_regy", "lnki_temp", "fsdb_regy");
 		String fld = "fsdb_id";
 		for (String tbl : tbls) {
 			if (!conn.Meta_fld_exists(tbl, fld))

@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.*;
 import gplx.gfui.ipts.*;
 import gplx.gfui.draws.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
 public class GxwElem_mock_base implements GxwElem {
 	public GxwCore_base Core() {return ctrlMgr;} final GxwCore_mock ctrlMgr = new GxwCore_mock();
 	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host = GxwCbkHost_.Null;
@@ -39,7 +47,7 @@ class MockTextBox extends GxwElem_mock_base implements GxwTextFld {
 	public void CreateControlIfNeeded() {}
 	public void Margins_set(int left, int top, int right, int bot) {}
 }
-class MockTextBoxMulti extends MockTextBox implements GxwTextMemo, GxwTextHtml {		public Keyval[] Html_sel_atrs() {return Keyval_.Ary_empty;}
+class MockTextBoxMulti extends MockTextBox implements GxwTextMemo, GxwTextHtml {		public KeyVal[] Html_sel_atrs() {return KeyValUtl.AryEmpty;}
 	public void Html_enabled(boolean v) {}
 	public String Html_doc_html() {return "";}
 	public void Html_css_set(String s) {}
@@ -67,7 +75,7 @@ class MockComboBox extends GxwElem_mock_base implements GxwComboBox {
 	public int SelBgn() {return -1;} public void SelBgn_set(int v) {}
 	public int SelLen() {return 0;}  public void SelLen_set(int v) {}
 	public void Sel_(int bgn, int end) {}
-	public String[] DataSource_as_str_ary() {return String_.Ary_empty;}
+	public String[] DataSource_as_str_ary() {return StringUtl.AryEmpty;}
 	public void DataSource_set(Object... ary) {}
 	public String Text_fallback() {return "";} public void Text_fallback_(String v) {}
 	public int List_sel_idx() {return -1;} public void List_sel_idx_(int v) {}

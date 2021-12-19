@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
+package gplx.xowa.addons.htmls.tocs;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.lists.List_adp_;
 class Xoh_toc_wkr__lvl {
 	private static final int Toc_lvls_max = 7;
 	private final int[] sub_lvl_count = new int[Toc_lvls_max], lvl_count = new int[Toc_lvls_max];
@@ -60,14 +62,14 @@ class Xoh_toc_wkr__lvl {
 			if (toc_lvl < Toc_lvls_max) {
 				// $toc .= Linker::tocLineEnd();
 			}
-		}            
+		}
 		lvl_count[toc_lvl] = lvl;
 		sub_lvl_count[toc_lvl - List_adp_.Base1] = sub_lvl_count[toc_lvl - List_adp_.Base1] + 1;
 		prv_lvl = lvl;	// NOTE: same as "if ( $toclevel ) $prevlevel = $level;" but at end of block
 
 		// Tfds.Write(lvl, prv_lvl, lvl, toc_lvl, Int_ary_.To_str(",", lvl_count), Int_ary_.To_str(",", sub_lvl_count));
 		int[] copy = new int[toc_lvl];
-		Int_ary_.Copy_to(sub_lvl_count, toc_lvl, copy);
+		IntAryUtl.CopyTo(sub_lvl_count, toc_lvl, copy);
 		rv.Set__lvl(++uid, toc_lvl, copy);
 	}
 }

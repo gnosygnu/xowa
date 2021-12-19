@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.setups;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xoa_setup_mgr_tst {
@@ -36,6 +36,6 @@ class Xoa_setup_mgr_fxt {
 		Io_url dir = Io_url_.new_fil_(dir_str);
 		Io_mgr.Instance.CreateDirIfAbsent(dir);
 		Xoa_setup_mgr.Delete_old_dir(Gfo_usr_dlg_.Noop, version_prv, version_del, dir);
-		Tfds.Eq(expd, !Io_mgr.Instance.ExistsDir(dir), version_prv + "|" + version_del);
+		GfoTstr.EqObj(expd, !Io_mgr.Instance.ExistsDir(dir), version_prv + "|" + version_del);
 	}
 }

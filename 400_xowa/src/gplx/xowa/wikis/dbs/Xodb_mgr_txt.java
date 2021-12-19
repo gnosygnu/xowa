@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.htmls.core.*; import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.wikis.dbs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.commons.GfoDate;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
+import gplx.core.ios.streams.*;
+import gplx.xowa.addons.wikis.ctgs.*;
+import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.pages.*;
 public class Xodb_mgr_txt implements Xodb_mgr {
 	public Xodb_mgr_txt(Xowe_wiki wiki, Xow_page_mgr data_mgr) {
@@ -28,7 +36,7 @@ public class Xodb_mgr_txt implements Xodb_mgr {
 	public byte Data_storage_format() {return data_storage_format;} public void Data_storage_format_(byte v) {data_storage_format = v;} private byte data_storage_format = gplx.core.ios.streams.Io_stream_tid_.Tid__raw;
 	public Xodb_load_mgr Load_mgr() {return load_mgr;} private Xodb_load_mgr_txt load_mgr;
 	public Xodb_save_mgr Save_mgr() {return save_mgr;} private Xodb_save_mgr_txt save_mgr;
-	public DateAdp Dump_date_query() {
+	public GfoDate Dump_date_query() {
 		Io_url url = wiki.Tdb_fsys_mgr().Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 0);
 		return Io_mgr.Instance.QueryFil(url).ModifiedTime();
 	}
@@ -42,7 +50,7 @@ public class Xodb_mgr_txt implements Xodb_mgr {
 		return category_version;
 	}	byte category_version = Xoa_ctg_mgr.Version_null;
 	public byte Search_version() {return gplx.xowa.addons.wikis.searchs.specials.Srch_special_page.Version_2;}
-	public void Search_version_refresh() {throw Err_.new_unimplemented();}
+	public void Search_version_refresh() {throw ErrUtl.NewUnimplemented();}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_data_storage_format))				return Io_stream_tid_.Obsolete_to_str(data_storage_format);
 		else if	(ctx.Match(k, Invk_data_storage_format_))				data_storage_format = Io_stream_tid_.Obsolete_to_tid(m.ReadStr("v"));

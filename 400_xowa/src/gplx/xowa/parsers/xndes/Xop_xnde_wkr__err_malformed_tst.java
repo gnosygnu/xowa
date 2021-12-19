@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_xnde_wkr__err_malformed_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -26,7 +28,7 @@ public class Xop_xnde_wkr__err_malformed_tst {
 	}
 	@Test public void End_tag_broken() {	// chk that name_bgn is less than src_len else arrayIndex error; EX: <ref><p></p<<ref/>;  DATE:2014-01-18
 		fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());
-		fxt.Test_parse_page_all_str("<poem><p></p<</poem>", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str("<poem><p></p<</poem>", StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"	// NOTE: technically MW / WP does not add this <p>; however, easier to hardcode <p>; no "visual" effect; DATE:2014-04-27
 		, "<p>&lt;/p&lt;</p>"
@@ -45,14 +47,14 @@ public class Xop_xnde_wkr__err_malformed_tst {
 		fxt.Test_parse_page_all_str("<b/>", "<b></b>");
 	}
 	@Test public void Tblw() {	// PURPOSE.fix: don't auto-close past tblw PAGE:ro.b:Pagina_principala DATE:2014-06-26
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "<div>"
 		, "{|"			// this should stop xnde search
 		, "<center>"
 		, "</div>"		// this should not find <div> as its bgn_tag; note that it will "drop out" below
 		, "|}"
 		, "</div>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div>"
 		, "<table><center></div>"	// TIDY.dangling: tidy will correct dangling node; DATE:2014-07-22
 		, "  <tr>"
@@ -64,7 +66,7 @@ public class Xop_xnde_wkr__err_malformed_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Incomplete_tag() {	// PURPOSE: handle incomplete tag sequences; DATE:2014-10-22
+	@Test public void Incomplete_tag() {	// PURPOSE: handle incomplete tag sequences; DATE:2014-10-22
 		fxt.Test_parse_page_all_str("<", "&lt;");
 		fxt.Test_parse_page_all_str("</", "&lt;/");
 		fxt.Test_parse_page_all_str("</<", "&lt;/&lt;");	// this used to fail

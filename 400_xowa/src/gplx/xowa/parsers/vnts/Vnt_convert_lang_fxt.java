@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
 class Vnt_convert_lang_fxt {
 	private final Vnt_convert_lang converter_lang;
@@ -29,26 +32,26 @@ class Vnt_convert_lang_fxt {
 		Init_cur("zh-cn");
 	}
 	public Vnt_convert_lang_fxt Init_cur(String vnt) {
-		byte[] cur_vnt = Bry_.new_a7(vnt);
+		byte[] cur_vnt = BryUtl.NewA7(vnt);
 		this.vnt_itm = vnt_regy.Get_by(cur_vnt);
 		return this;
 	}
 	public void Test_parse(String raw, String expd) {
-		Tfds.Eq_str(expd, String_.new_u8(converter_lang.Parse_page(vnt_itm, -1, Bry_.new_u8(raw))));
+		GfoTstr.Eq(expd, StringUtl.NewU8(converter_lang.Parse_page(vnt_itm, -1, BryUtl.NewU8(raw))));
 	}
 	public void Test_parse_many(String raw, String expd, String... vnts) {
 		int len = vnts.length;
 		for (int i = 0; i < len; ++i) {
 			String vnt_key = vnts[i];
 			Init_cur(vnt_key);
-			Xol_vnt_itm vnt = vnt_regy.Get_by(Bry_.new_a7(vnt_key));
-			Tfds.Eq_str(expd, String_.new_u8(converter_lang.Parse_page(vnt, -1, Bry_.new_u8(raw))), vnt_key);
+			Xol_vnt_itm vnt = vnt_regy.Get_by(BryUtl.NewA7(vnt_key));
+			GfoTstr.Eq(expd, StringUtl.NewU8(converter_lang.Parse_page(vnt, -1, BryUtl.NewU8(raw))), vnt_key);
 		}
 	}
 	public void Test_parse_title(String raw, String expd_title, String expd_text, String vnt_key) {
 		Init_cur(vnt_key);
-		Xol_vnt_itm vnt = vnt_regy.Get_by(Bry_.new_a7(vnt_key));
-		Tfds.Eq_str(expd_text, String_.new_u8(converter_lang.Parse_page(vnt, -1, Bry_.new_u8(raw))), vnt_key);
-		Tfds.Eq_str(expd_title, converter_lang.Converted_title());
+		Xol_vnt_itm vnt = vnt_regy.Get_by(BryUtl.NewA7(vnt_key));
+		GfoTstr.Eq(expd_text, StringUtl.NewU8(converter_lang.Parse_page(vnt, -1, BryUtl.NewU8(raw))), vnt_key);
+		GfoTstr.Eq(expd_title, converter_lang.Converted_title());
 	}
 }

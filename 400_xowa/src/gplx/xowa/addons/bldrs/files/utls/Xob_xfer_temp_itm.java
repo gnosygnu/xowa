@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.utls;
+import gplx.types.basics.utls.ByteUtl;
 import gplx.core.stores.*;
-import gplx.dbs.*; import gplx.xowa.files.*;
+import gplx.dbs.*;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.files.*;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
 import gplx.xowa.addons.bldrs.files.dbs.*;
 public class Xob_xfer_temp_itm {
@@ -45,10 +49,10 @@ public class Xob_xfer_temp_itm {
 	public void Clear() {
 		orig_file_ttl = null;
 		lnki_ext = lnki_type = lnki_src_tid
-				= orig_repo = orig_media_type_tid = Byte_.Max_value_127;
+				= orig_repo = orig_media_type_tid = ByteUtl.MaxValue127;
 		chk_tid = Chk_tid_none;
 		lnki_id = lnki_tier_id = lnki_w = lnki_h = lnki_count =  lnki_page_id
-				= orig_w = orig_h = orig_page_id = Int_.Neg1;
+				= orig_w = orig_h = orig_page_id = IntUtl.Neg1;
 		join_ttl =  redirect_src = orig_media_type = null;
 		lnki_upright = Xop_lnki_tkn.Upright_null;
 		lnki_thumbtime = Xof_lnki_time.Null;
@@ -87,7 +91,7 @@ public class Xob_xfer_temp_itm {
 	;
 	public byte Chk_tid() {return chk_tid;} private byte chk_tid;
 	public boolean Chk(Xof_img_size img_size) {
-		if (String_.Eq(join_ttl, redirect_src)) // join_ttl is same as redirect_src; not a redirect; EX:(direct) join="A.png";redirect_src="A.png"; (redirect) join="A.png";redirect_src="B.png" (i.e.: B redirects to A)
+		if (StringUtl.Eq(join_ttl, redirect_src)) // join_ttl is same as redirect_src; not a redirect; EX:(direct) join="A.png";redirect_src="A.png"; (redirect) join="A.png";redirect_src="B.png" (i.e.: B redirects to A)
 			redirect_src = "";
 //			else {	// redirect; make sure extension matches; EX: A.png redirects to B.png; lnki_ext will be .png (the lnki's ext); should be .png (the actual file's ext)
 //				Xof_ext join_ext = Xof_ext_.new_by_ttl_(Bry_.new_u8(join_ttl));

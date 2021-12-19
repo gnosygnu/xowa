@@ -15,12 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.objects.strings.AsciiByte;
-import gplx.String_;
-import gplx.core.intls.Utf16_;
+import gplx.types.basics.encoders.HexUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.strings.unicodes.Utf16Utl;
 import gplx.langs.htmls.Gfh_utl;
 
 public class Json_itm_str extends Json_itm_base {
@@ -55,12 +56,12 @@ public class Json_itm_str extends Json_itm_base {
 	public String Data_as_str() {
 		if (data_str == null) {
 			data_bry = Data_make_bry();
-			data_str = String_.new_u8(data_bry);
+			data_str = StringUtl.NewU8(data_bry);
 		}
 		return data_str;
 	}
 	@Override public boolean Data_eq(byte[] comp) {
-		return Bry_.Match(this.Data_bry(), comp);
+		return BryLni.Eq(this.Data_bry(), comp);
 	}
 	private byte[] Data_make_bry() {
 		// data already made; return it;
@@ -75,7 +76,7 @@ public class Json_itm_str extends Json_itm_base {
 		int bgn;
 		int end;
 		if (doc == null) {
-			src = Bry_.new_u8_safe(this.data_str);
+			src = BryUtl.NewU8Safe(this.data_str);
 			bgn = 0;
 			end = src == null ? 0 : src.length;
 		}
@@ -87,15 +88,15 @@ public class Json_itm_str extends Json_itm_base {
 
 		// not escaped -> return the src
 		if (!escaped) {
-			this.data_bry = Bry_.Mid(src, bgn, end);
+			this.data_bry = BryLni.Mid(src, bgn, end);
 			return data_bry;
 		}
 
 		// escaped; get some temp vars
-		Bry_bfr bfr;
+		BryWtr bfr;
 		byte[] utf8_bry;
 		if (doc == null) {
-			bfr = Bry_bfr_.New();
+			bfr = BryWtr.New();
 			utf8_bry = new byte[6];
 		}
 		else { // PERF:reuse bfr / bry on jdoc itself
@@ -110,54 +111,54 @@ public class Json_itm_str extends Json_itm_base {
 				case AsciiByte.Backslash:
 					b = src[++i];
 					switch (b) {	// NOTE: must properly unescape chars; EX:wd.q:2; DATE:2014-04-23
-						case AsciiByte.Ltr_t:				bfr.Add_byte(AsciiByte.Tab); break;
-						case AsciiByte.Ltr_n:				bfr.Add_byte(AsciiByte.Nl); break;
-						case AsciiByte.Ltr_r:				bfr.Add_byte(AsciiByte.Cr); break;
-						case AsciiByte.Ltr_b:				bfr.Add_byte(AsciiByte.Backfeed); break;
-						case AsciiByte.Ltr_f:				bfr.Add_byte(AsciiByte.Formfeed); break;
+						case AsciiByte.Ltr_t:				bfr.AddByte(AsciiByte.Tab); break;
+						case AsciiByte.Ltr_n:				bfr.AddByte(AsciiByte.Nl); break;
+						case AsciiByte.Ltr_r:				bfr.AddByte(AsciiByte.Cr); break;
+						case AsciiByte.Ltr_b:				bfr.AddByte(AsciiByte.Backfeed); break;
+						case AsciiByte.Ltr_f:				bfr.AddByte(AsciiByte.Formfeed); break;
 						case AsciiByte.Ltr_u:
 							i += 1; // +1 to skip "u"
-							int utf8_val = gplx.core.encoders.Hex_utl_.Parse_or(src, i, i + 4, -1);
+							int utf8_val = HexUtl.ParseOr(src, i, i + 4, -1);
 							// check for UTF surrogate-pairs; ISSUE#:487; DATE:2019-06-02
 							// hi: 0xD800-0xDBFF; 55,296-56,319
-							if (utf8_val >= Utf16_.Surrogate_hi_bgn && utf8_val <= Utf16_.Surrogate_hi_end) {
+							if (utf8_val >= Utf16Utl.SurrogateHiBgn && utf8_val <= Utf16Utl.SurrogateHiEnd) {
 								int lo_bgn = i + 4;   // +4 to skip 4 hex-dec chars
 								if (lo_bgn + 6 <= end // +6 to handle encoded String; EX: '\u0022'
 									&& src[lo_bgn]     == AsciiByte.Backslash
 									&& src[lo_bgn + 1] == AsciiByte.Ltr_u) {
 									lo_bgn = lo_bgn + 2; // +2 to skip '\' and 'u'
-									int lo = gplx.core.encoders.Hex_utl_.Parse_or(src, lo_bgn, lo_bgn + 4, -1);
+									int lo = HexUtl.ParseOr(src, lo_bgn, lo_bgn + 4, -1);
 									// lo: 0xDC00-0xDFFF; 56,320-57,343
-									if (lo >= Utf16_.Surrogate_lo_bgn && lo <= Utf16_.Surrogate_lo_end) {
-										utf8_val = Utf16_.Surrogate_merge(utf8_val, lo);
+									if (lo >= Utf16Utl.SurrogateLoBgn && lo <= Utf16Utl.SurrogateLoEnd) {
+										utf8_val = Utf16Utl.SurrogateMerge(utf8_val, lo);
 										i += 6; // +6 to skip entire lo-String; EX: '\u0022'
 									}
 								}
 							}
-							int len = gplx.core.intls.Utf16_.Encode_int(utf8_val, utf8_bry, 0);
-							bfr.Add_mid(utf8_bry, 0, len);
+							int len = Utf16Utl.EncodeInt(utf8_val, utf8_bry, 0);
+							bfr.AddMid(utf8_bry, 0, len);
 							i += 3; // +3 b/c for-loop will do another +1 to bring total to 4; EX: '0022'
 							break;
 						case AsciiByte.Backslash:
 						case AsciiByte.Slash:
 						default:
-							bfr.Add_byte(b);	break;	// \?		" \ / b f n r t
+							bfr.AddByte(b);	break;	// \?		" \ / b f n r t
 					}
 					break;
 				default:
-					bfr.Add_byte(b);
+					bfr.AddByte(b);
 					break;
 			}
 		}
-		this.data_bry = bfr.To_bry_and_clear();
+		this.data_bry = bfr.ToBryAndClear();
 		return data_bry;
 	}
-	@Override public void Print_as_json(Bry_bfr bfr, int depth) {
-		bfr.Add_byte(AsciiByte.Quote);
+	@Override public void Print_as_json(BryWtr bfr, int depth) {
+		bfr.AddByte(AsciiByte.Quote);
 		byte[] data_bry = this.Data_bry();
 		int data_len = data_bry.length;
 		Gfh_utl.Escape_html_to_bfr(bfr, data_bry, 0, data_len, true, true, true, true, false);	// false to apos for backwards compatibility
-		bfr.Add_byte(AsciiByte.Quote);
+		bfr.AddByte(AsciiByte.Quote);
 	}
 
 	public static Json_itm_str NewByDoc(Json_doc doc, int src_bgn, int src_end, boolean escaped) {return new Json_itm_str(doc, src_bgn + 1, src_end - 1, null, escaped);}

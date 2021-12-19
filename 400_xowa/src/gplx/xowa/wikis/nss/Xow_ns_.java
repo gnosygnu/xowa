@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.nss;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
 public class Xow_ns_ {
 	public static final int	// PAGE:en.w:http://www.mediawiki.org/wiki/Help:Namespaces
 	  Tid__media			=  -2
@@ -30,7 +32,7 @@ public class Xow_ns_ {
 	, Tid__config			= 482				, Tid__config_talk			= 483
 	, Tid__data				= 486				, Tid__data_talk			= 487
 	, Tid__module			= 828				, Tid__module_talk			= 829
-	, Tid__null				= Int_.Min_value
+	, Tid__null				= IntUtl.MinValue
 	;
 	public static final String
 	  Key__media			= "Media"
@@ -51,29 +53,29 @@ public class Xow_ns_ {
 	, Key__wikipedia		= "Wikipedia"
 	;
 	public static final byte[]
-	  Bry__media			= Bry_.new_a7(Key__media)
-	, Bry__special			= Bry_.new_a7(Key__special)
-	, Bry__main				= Bry_.new_a7(Key__main)			, Bry__talk					= Bry_.new_a7(Key__talk)
-	, Bry__user				= Bry_.new_a7(Key__user)			, Bry__user_talk			= Bry_.new_a7(Key__user_talk)
-	, Bry__project			= Bry_.new_a7(Key__project)			, Bry__project_talk			= Bry_.new_a7(Key__project_talk)
-	, Bry__file				= Bry_.new_a7(Key__file)			, Bry__file_talk			= Bry_.new_a7(Key__file_talk)
-	, Bry__mediawiki		= Bry_.new_a7(Key__mediawiki)		, Bry__mediawiki_talk		= Bry_.new_a7(Key__mediawiki_talk)
-	, Bry__template			= Bry_.new_a7(Key__template)		, Bry__template_talk		= Bry_.new_a7(Key__template_talk)
-	, Bry__help				= Bry_.new_a7(Key__help)			, Bry__help_talk			= Bry_.new_a7(Key__help_talk)
-	, Bry__category			= Bry_.new_a7(Key__category)		, Bry__category_talk		= Bry_.new_a7(Key__category_talk)
-	, Bry__portal			= Bry_.new_a7(Key__portal)			, Bry__portal_talk			= Bry_.new_a7(Key__portal_talk)
-	, Bry__config			= Bry_.new_a7(Key__config)			, Bry__config_talk			= Bry_.new_a7(Key__config_talk)
-	, Bry__data				= Bry_.new_a7(Key__data)			, Bry__data_talk			= Bry_.new_a7(Key__data_talk)
-	, Bry__module			= Bry_.new_a7(Key__module)			, Bry__module_talk			= Bry_.new_a7(Key__module_talk)
-	, Bry__null				= Bry_.new_a7(Key__null)
+	  Bry__media			= BryUtl.NewA7(Key__media)
+	, Bry__special			= BryUtl.NewA7(Key__special)
+	, Bry__main				= BryUtl.NewA7(Key__main)			, Bry__talk					= BryUtl.NewA7(Key__talk)
+	, Bry__user				= BryUtl.NewA7(Key__user)			, Bry__user_talk			= BryUtl.NewA7(Key__user_talk)
+	, Bry__project			= BryUtl.NewA7(Key__project)			, Bry__project_talk			= BryUtl.NewA7(Key__project_talk)
+	, Bry__file				= BryUtl.NewA7(Key__file)			, Bry__file_talk			= BryUtl.NewA7(Key__file_talk)
+	, Bry__mediawiki		= BryUtl.NewA7(Key__mediawiki)		, Bry__mediawiki_talk		= BryUtl.NewA7(Key__mediawiki_talk)
+	, Bry__template			= BryUtl.NewA7(Key__template)		, Bry__template_talk		= BryUtl.NewA7(Key__template_talk)
+	, Bry__help				= BryUtl.NewA7(Key__help)			, Bry__help_talk			= BryUtl.NewA7(Key__help_talk)
+	, Bry__category			= BryUtl.NewA7(Key__category)		, Bry__category_talk		= BryUtl.NewA7(Key__category_talk)
+	, Bry__portal			= BryUtl.NewA7(Key__portal)			, Bry__portal_talk			= BryUtl.NewA7(Key__portal_talk)
+	, Bry__config			= BryUtl.NewA7(Key__config)			, Bry__config_talk			= BryUtl.NewA7(Key__config_talk)
+	, Bry__data				= BryUtl.NewA7(Key__data)			, Bry__data_talk			= BryUtl.NewA7(Key__data_talk)
+	, Bry__module			= BryUtl.NewA7(Key__module)			, Bry__module_talk			= BryUtl.NewA7(Key__module_talk)
+	, Bry__null				= BryUtl.NewA7(Key__null)
 	;
 	public static final String
 	  Alias__wikipedia = "Wikipedia"
 	, Alias__image = "Image"
 	;
-	public static final byte[] Alias__image__bry = Bry_.new_a7(Alias__image);
+	public static final byte[] Alias__image__bry = BryUtl.NewA7(Alias__image);
 	public static final byte[]
-	  Bry__template_w_colon	= Bry_.new_a7(Key__template + ":")
-	, Bry__module_w_colon	= Bry_.new_a7(Key__module + ":")
+	  Bry__template_w_colon	= BryUtl.NewA7(Key__template + ":")
+	, Bry__module_w_colon	= BryUtl.NewA7(Key__module + ":")
 	;
 }

@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*;
+package gplx.xowa.parsers.tblws;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.xndes.*;
 public class Xop_tblw_ws_itm {
 	public byte Tblw_type() {return tblw_type;} private byte tblw_type;
@@ -53,11 +54,11 @@ public class Xop_tblw_ws_itm {
 		trie_itm_xnde(rv, Xop_xnde_tag_.Tag__ol);
 		return rv;
 	}
-	private static void trie_itm(Btrie_slim_mgr trie, byte type, byte[] bry) {trie.Add_obj(bry, new Xop_tblw_ws_itm(type, bry.length));}
+	private static void trie_itm(Btrie_slim_mgr trie, byte type, byte[] bry) {trie.AddObj(bry, new Xop_tblw_ws_itm(type, bry.length));}
 	private static void trie_itm_xnde(Btrie_slim_mgr trie, Xop_xnde_tag tag) {
 		byte[] tag_name = tag.Name_bry();
 		int tag_name_len = tag_name.length;
-		trie.Add_obj(Bry_.Add(Bry_xnde_bgn, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len));
-		trie.Add_obj(Bry_.Add(Bry_xnde_end, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len + 1));
+		trie.AddObj(BryUtl.Add(Bry_xnde_bgn, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len));
+		trie.AddObj(BryUtl.Add(Bry_xnde_end, tag_name), new Xop_tblw_ws_itm(Type_xnde, tag_name_len + 1));
 	}	private static byte[] Bry_xnde_bgn = new byte[] {AsciiByte.Lt, AsciiByte.Slash}, Bry_xnde_end = new byte[] {AsciiByte.Lt};
 }

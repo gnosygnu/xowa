@@ -13,11 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.mediawiki.*;
-import gplx.core.btries.*;
-import gplx.langs.htmls.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.mediawiki.XophpPreg_;
+import gplx.xowa.mediawiki.XophpString_;
 /**
 * This is the part of the wikitext parser which handles automatic paragraphs
 * and conversion of start-of-line prefixes to HTML lists.
@@ -28,7 +38,7 @@ public class XomwBlockLevelPass {
 	private int lastSection = LAST_SECTION_NONE;
 	private boolean linestart;
 //		private $text;
-	private final Bry_bfr tmp = Bry_bfr_.New();
+	private final BryWtr tmp = BryWtr.New();
 	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] find_colon_no_links__before, find_colon_no_links__after;
 
@@ -74,9 +84,9 @@ public class XomwBlockLevelPass {
 	* @return String
 	*/
 	private byte[] closeParagraph() {
-		byte[] result = Bry_.Empty;
+		byte[] result = BryUtl.Empty;
 		if (this.lastSection != LAST_SECTION_NONE) {
-			result = tmp.Add(lastSection == LAST_SECTION_PARA ? Gfh_tag_.P_rhs : Gfh_tag_.Pre_rhs).Add_byte_nl().To_bry_and_clear(); // $result = '</' . $this->lastSection . ">\n";
+			result = tmp.Add(lastSection == LAST_SECTION_PARA ? Gfh_tag_.P_rhs : Gfh_tag_.Pre_rhs).AddByteNl().ToBryAndClear(); // $result = '</' . $this->lastSection . ">\n";
 		}
 		this.inPre = false;
 		this.lastSection = LAST_SECTION_NONE;
@@ -118,17 +128,17 @@ public class XomwBlockLevelPass {
 		byte[] result = this.closeParagraph();
 
 		if      (c == AsciiByte.Star)
-			result = Bry_.Add(result, Bry_.new_a7("<ul><li>"));
+			result = BryUtl.Add(result, BryUtl.NewA7("<ul><li>"));
 		else if (c == AsciiByte.Hash)
-			result = Bry_.Add(result, Bry_.new_a7("<ol><li>"));
+			result = BryUtl.Add(result, BryUtl.NewA7("<ol><li>"));
 		else if (c == AsciiByte.Colon)
-			result = Bry_.Add(result, Bry_.new_a7("<dl><dd>"));
+			result = BryUtl.Add(result, BryUtl.NewA7("<dl><dd>"));
 		else if (c == AsciiByte.Semic) {
-			result = Bry_.Add(result, Bry_.new_a7("<dl><dt>"));
+			result = BryUtl.Add(result, BryUtl.NewA7("<dl><dt>"));
 			this.DTopen = true;
 		}
 		else {
-			result = Bry_.new_a7("<!-- ERR 1 -->");
+			result = BryUtl.NewA7("<!-- ERR 1 -->");
 		}
 
 		return result;
@@ -142,23 +152,23 @@ public class XomwBlockLevelPass {
 	*/
 	private byte[] nextItem(byte c) {
 		if (c == AsciiByte.Star || c == AsciiByte.Hash) {
-			return Bry_.new_a7("</li>\n<li>");
+			return BryUtl.NewA7("</li>\n<li>");
 		}
 		else if (c == AsciiByte.Colon || c == AsciiByte.Semic) {
-			byte[] close = Bry_.new_a7("</dd>\n");
+			byte[] close = BryUtl.NewA7("</dd>\n");
 			if (this.DTopen) {
-				close = Bry_.new_a7("</dt>\n");
+				close = BryUtl.NewA7("</dt>\n");
 			}
 			if (c == AsciiByte.Semic) {
 				this.DTopen = true;
-				return Bry_.Add(close, Bry_.new_a7("<dt>"));
+				return BryUtl.Add(close, BryUtl.NewA7("<dt>"));
 			}
 			else {
 				this.DTopen = false;
-				return Bry_.Add(close, Bry_.new_a7("<dd>"));
+				return BryUtl.Add(close, BryUtl.NewA7("<dd>"));
 			}
 		}
-		return Bry_.new_a7("<!-- ERR 2 -->");
+		return BryUtl.NewA7("<!-- ERR 2 -->");
 	}
 
 	/**
@@ -170,22 +180,22 @@ public class XomwBlockLevelPass {
 	private byte[] closeList(byte c) {
 		byte[] text = null;
 		if (c == AsciiByte.Star) {
-			text = Bry_.new_a7("</li></ul>");
+			text = BryUtl.NewA7("</li></ul>");
 		}
 		else if (c == AsciiByte.Hash) {
-			text = Bry_.new_a7("</li></ol>");
+			text = BryUtl.NewA7("</li></ol>");
 		}
 		else if (c == AsciiByte.Colon) {
 			if (this.DTopen) {
 				this.DTopen = false;
-				text = Bry_.new_a7("</dt></dl>");
+				text = BryUtl.NewA7("</dt></dl>");
 			}
 			else {
-				text = Bry_.new_a7("</dd></dl>");
+				text = BryUtl.NewA7("</dd></dl>");
 			}
 		}
 		else {
-			return Bry_.new_a7("<!-- ERR 3 -->");
+			return BryUtl.NewA7("<!-- ERR 3 -->");
 		}
 		return text;
 	}
@@ -196,16 +206,16 @@ public class XomwBlockLevelPass {
 	*/
 	public void execute(XomwParserCtx pctx, XomwParserBfr pbfr, boolean linestart) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 		pbfr.Switch();
 
 		// XO.STATIC
 		if (block_chars_ary == null) {
-			synchronized (Type_.Type_by_obj(this)) {
+			synchronized (ClassUtl.TypeByObj(this)) {
 				block_chars_ary = Block_chars_ary__new();
 				openMatchTrie = Btrie_slim_mgr.ci_a7().Add_many_str
 				( "<table", "<h1", "<h2", "<h3", "<h4", "<h5", "<h6", "<pre", "<tr"
@@ -229,7 +239,7 @@ public class XomwBlockLevelPass {
 		// Parsing through the text line by line.  The main thing
 		// happening here is handling of block-level elements p, pre,
 		// and making lists from lines starting with * # : etc.
-		byte[] lastPrefix = Bry_.Empty;
+		byte[] lastPrefix = BryUtl.Empty;
 		this.DTopen = false;
 		boolean inBlockElem = false;
 		int prefixLen = 0;
@@ -239,13 +249,13 @@ public class XomwBlockLevelPass {
 		// PORTED.SPLIT: $textLines = StringUtils::explode("\n", $text);
 		int lineBgn = src_bgn;
 		while (lineBgn < src_end) {
-			int lineEnd = Bry_find_.Find_fwd(src, AsciiByte.Nl, lineBgn);
-			if (lineEnd == Bry_find_.Not_found)
+			int lineEnd = BryFind.FindFwd(src, AsciiByte.Nl, lineBgn);
+			if (lineEnd == BryFind.NotFound)
 				lineEnd = src_end;
 
 			// Fix up linestart
 			if (!this.linestart) {
-				bfr.Add_mid(src, lineBgn, lineEnd);
+				bfr.AddMid(src, lineBgn, lineEnd);
 				this.linestart = true;
 				continue;
 			}
@@ -262,11 +272,11 @@ public class XomwBlockLevelPass {
 			while (true) {
 				if (preCur >= lineEnd)
 					break;
-				Object o = pre_trie.Match_at(trv, src, preCur, lineEnd);
+				Object o = pre_trie.MatchAt(trv, src, preCur, lineEnd);
 				if (o == null)
 					preCur++;
 				else {
-					int pre_tid = Int_.Cast(o);
+					int pre_tid = IntUtl.Cast(o);
 					if (pre_tid == PRE_BGN)
 						preOpenMatch = true;
 					else if (pre_tid == PRE_END)
@@ -288,21 +298,21 @@ public class XomwBlockLevelPass {
 				//  for the purposes of determining whether or not we need to open/close
 				//  elements.
 				// substr($inputLine, $prefixLength);
-				prefix2 = Bry_.Replace(prefix, AsciiByte.Semic, AsciiByte.Colon);
-				t = Bry_.Mid(src, lineBgn + prefixLen, lineEnd);
+				prefix2 = BryUtl.Replace(prefix, AsciiByte.Semic, AsciiByte.Colon);
+				t = BryLni.Mid(src, lineBgn + prefixLen, lineEnd);
 				this.inPre = preOpenMatch;
 			}
 			else {
 				// Don't interpret any other prefixes in preformatted text
 				prefixLen = 0;
-				prefix = prefix2 = Bry_.Empty;
-				t = Bry_.Mid(src, lineBgn, lineEnd);
+				prefix = prefix2 = BryUtl.Empty;
+				t = BryLni.Mid(src, lineBgn, lineEnd);
 			}
 
 			// List generation
 			byte[] term = null, t2 = null;
 			int commonPrefixLen = -1;
-			if (prefixLen > 0 && Bry_.Eq(lastPrefix, prefix2)) {
+			if (prefixLen > 0 && BryLni.Eq(lastPrefix, prefix2)) {
 				// Same as the last item, so no need to deal with nesting or opening stuff
 				bfr.Add(this.nextItem(XophpString_.substr_byte(prefix, -1)));
 				pendingPTag = PARA_STACK_NONE;
@@ -312,8 +322,8 @@ public class XomwBlockLevelPass {
 					// ; title : definition text
 					// So we check for : in the remainder text to split up the
 					// title and definition, without b0rking links.
-					term = t2 = Bry_.Empty;
-					if (this.findColonNoLinks(t, term, t2) != Bry_find_.Not_found) {
+					term = t2 = BryUtl.Empty;
+					if (this.findColonNoLinks(t, term, t2) != BryFind.NotFound) {
 						term = find_colon_no_links__before;
 						t2   = find_colon_no_links__after;
 						t = t2;
@@ -340,8 +350,8 @@ public class XomwBlockLevelPass {
 				}
 
 				// Open prefixes where appropriate.
-				if (Bry_.Len_gt_0(lastPrefix) && prefixLen > commonPrefixLen) {
-					bfr.Add_byte_nl();
+				if (BryUtl.IsNotNullOrEmpty(lastPrefix) && prefixLen > commonPrefixLen) {
+					bfr.AddByteNl();
 				}
 				while (prefixLen > commonPrefixLen) {
 					byte c = XophpString_.substr_byte(prefix, commonPrefixLen, 1);
@@ -349,7 +359,7 @@ public class XomwBlockLevelPass {
 
 					if (c == AsciiByte.Semic) {
 						// @todo FIXME: This is dupe of code above
-						if (findColonNoLinks(t, term, t2) != Bry_find_.Not_found) {
+						if (findColonNoLinks(t, term, t2) != BryFind.NotFound) {
 							term = find_colon_no_links__before;
 							t2   = find_colon_no_links__after;
 							t = t2;
@@ -358,8 +368,8 @@ public class XomwBlockLevelPass {
 					}
 					++commonPrefixLen;
 				}
-				if (prefixLen == 0 && Bry_.Len_gt_0(lastPrefix)) {
-					bfr.Add_byte_nl();
+				if (prefixLen == 0 && BryUtl.IsNotNullOrEmpty(lastPrefix)) {
+					bfr.AddByteNl();
 				}
 				lastPrefix = prefix2;
 			}
@@ -399,7 +409,7 @@ public class XomwBlockLevelPass {
 				}
 				else if (!inBlockElem && !this.inPre) {
 					if (XophpString_.substr_byte(t, 0) == AsciiByte.Space
-						&& (this.lastSection == LAST_SECTION_PRE || Bry_.Trim(t) != Bry_.Empty)
+						&& (this.lastSection == LAST_SECTION_PRE || BryUtl.Trim(t) != BryUtl.Empty)
 						&& !inBlockquote
 					) {
 						// pre
@@ -408,14 +418,14 @@ public class XomwBlockLevelPass {
 							bfr.Add(closeParagraph()).Add(Gfh_tag_.Pre_lhs);
 							this.lastSection = LAST_SECTION_PRE;
 						}
-						t = Bry_.Mid(t, 1);
+						t = BryLni.Mid(t, 1);
 					}
 					else {
 						// paragraph
-						if (Bry_.Trim(t) == Bry_.Empty) {
+						if (BryUtl.Trim(t) == BryUtl.Empty) {
 							if (pendingPTag != PARA_STACK_NONE) {
 								ParaStackAdd(bfr, pendingPTag);
-								bfr.Add_str_a7("<br />");
+								bfr.AddStrA7("<br />");
 								pendingPTag = PARA_STACK_NONE;
 								this.lastSection = LAST_SECTION_PARA;
 							}
@@ -451,7 +461,7 @@ public class XomwBlockLevelPass {
 			if (pendingPTag == PARA_STACK_NONE) {
 				bfr.Add(t);
 				if (prefixLen == 0) {
-					bfr.Add_byte_nl();
+					bfr.AddByteNl();
 				}
 			}
 
@@ -462,7 +472,7 @@ public class XomwBlockLevelPass {
 			bfr.Add(this.closeList(prefix2[prefixLen - 1]));
 			--prefixLen;
 			if (prefixLen > 0) {
-				bfr.Add_byte_nl();
+				bfr.AddByteNl();
 			}
 		}
 		if (this.lastSection != LAST_SECTION_NONE) {
@@ -484,13 +494,13 @@ public class XomwBlockLevelPass {
 	private int findColonNoLinks(byte[] str, byte[] before, byte[] after) {
 		int len = str.length;
 		int colonPos = XophpString_.strpos(str, AsciiByte.Colon, 0, len);
-		if (colonPos == Bry_find_.Not_found) {
+		if (colonPos == BryFind.NotFound) {
 			// Nothing to find!
-			return Bry_find_.Not_found;
+			return BryFind.NotFound;
 		}
 
 		int ltPos = XophpString_.strpos(str, AsciiByte.AngleBgn, 0, len);
-		if (ltPos == Bry_find_.Not_found || ltPos > colonPos) {
+		if (ltPos == BryFind.NotFound || ltPos > colonPos) {
 			// Easy; no tag nesting to worry about
 			// XOMW: MW passes before / after by reference; XO: changes member and depends on callers to update
 			find_colon_no_links__before = XophpString_.substr(str, 0, colonPos);
@@ -523,20 +533,20 @@ public class XomwBlockLevelPass {
 						default:
 							// Skip ahead looking for something interesting
 							colonPos = XophpString_.strpos(str, AsciiByte.Colon, i, len);
-							if (colonPos == Bry_find_.Not_found) {
+							if (colonPos == BryFind.NotFound) {
 								// Nothing else interesting
-								return Bry_find_.Not_found;
+								return BryFind.NotFound;
 							}
 							ltPos = XophpString_.strpos(str, AsciiByte.AngleBgn, i, len);
 							if (level == 0) {
-								if (ltPos == Bry_find_.Not_found || colonPos < ltPos) {
+								if (ltPos == BryFind.NotFound || colonPos < ltPos) {
 									// We found it!
 									find_colon_no_links__before = XophpString_.substr(str, 0, colonPos);
 									find_colon_no_links__after = XophpString_.substr(str, colonPos + 1);
 									return i;
 								}
 							}
-							if (ltPos == Bry_find_.Not_found) {
+							if (ltPos == BryFind.NotFound) {
 								// Nothing else interesting to find; abort!
 								// We're nested, but there's no close tags left. Abort!
 								i = len;	// break 2
@@ -587,7 +597,7 @@ public class XomwBlockLevelPass {
 						level--;
 						if (level < 0) {
 							Gfo_usr_dlg_.Instance.Warn_many("", "", "Invalid input; too many close tags");
-							return Bry_find_.Not_found;
+							return BryFind.NotFound;
 						}
 						state = COLON_STATE_TEXT;
 					}
@@ -624,14 +634,14 @@ public class XomwBlockLevelPass {
 					}
 					break;
 			default:
-				throw Err_.new_wo_type("State machine error");
+				throw ErrUtl.NewArgs("State machine error");
 			}
 		}
 		if (level > 0) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "Invalid input; not enough close tags (level ~{0}, state ~{1})", level, state);
-			return Bry_find_.Not_found;
+			return BryFind.NotFound;
 		}
-		return Bry_find_.Not_found;
+		return BryFind.NotFound;
 	}
 
 	private static final byte
@@ -656,11 +666,11 @@ public class XomwBlockLevelPass {
 		return rv;
 	}
 	private static Btrie_slim_mgr openMatchTrie, closeMatchTrie, blockquoteTrie;
-	private static void ParaStackAdd(Bry_bfr bfr, int id) {
+	private static void ParaStackAdd(BryWtr bfr, int id) {
 		switch (id) {
-			case PARA_STACK_BGN: bfr.Add_str_a7("<p>"); break;
-			case PARA_STACK_MID: bfr.Add_str_a7("</p><p>"); break;
-			default:              throw Err_.new_unhandled_default(id);
+			case PARA_STACK_BGN: bfr.AddStrA7("<p>"); break;
+			case PARA_STACK_MID: bfr.AddStrA7("</p><p>"); break;
+			default:              throw ErrUtl.NewUnhandled(id);
 		}
 	}
 }

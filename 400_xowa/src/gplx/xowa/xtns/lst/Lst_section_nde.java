@@ -15,11 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.lst;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.Hash_adp_bry;
-import gplx.core.primitives.Byte_obj_val;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -39,7 +40,7 @@ public class Lst_section_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public byte[] Section_name() {return section_name;} private byte[] section_name;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
 		if (xatr_id_obj == null) return;
-		byte xatr_id = ((Byte_obj_val)xatr_id_obj).Val();
+		byte xatr_id = ((ByteVal)xatr_id_obj).Val();
 		switch (xatr_id) {
 			case Xatr_name: case Xatr_bgn: case Xatr_end:
 				name_tid = xatr_id;
@@ -67,13 +68,13 @@ public class Lst_section_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 								valPos = srcLen;
 								break;
 							case '=':// may not happen, but this is what regex allows; EX: <section begin=a b someOtherAttribute=c d></section>
-								valEnd = Bry_find_.Find_bwd_ws(src, valPos, valBgn);
+								valEnd = BryFind.FindBwdWs(src, valPos, valBgn);
 								valPos = srcLen;
 								break;
 						}
 						valPos++;
 					}
-					section_name = Bry_.Trim(Bry_.Mid(src, valBgn, valEnd));
+					section_name = BryUtl.Trim(BryLni.Mid(src, valBgn, valEnd));
 				}
 				break;
 		}
@@ -86,7 +87,7 @@ public class Lst_section_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		xnde.Atrs_ary_(atrs);
 		ctx.Lst_section_mgr().Add(this);
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {}	// NOTE: write nothing; <section> is just a bookmark
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {}	// NOTE: write nothing; <section> is just a bookmark
 	public static final byte Xatr_name = 0, Xatr_bgn = 1, Xatr_end = 2;
 	public static Hash_adp_bry new_xatrs_(Xol_lang_itm lang) {
 		Hash_adp_bry rv = Hash_adp_bry.ci_u8(lang.Case_mgr());	// UTF8:see xatrs below

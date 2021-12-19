@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.datas;
 import gplx.dbs.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.addons.bldrs.centrals.tasks.*;
 public class Xobc_task_regy_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
@@ -37,7 +40,7 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 	}
 	public void Select_all(Xobc_task_regy__base todo_regy) {
 		todo_regy.Clear();
-		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, String_.Ary_empty, fld_task_seqn).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, StringUtl.AryEmpty, fld_task_seqn).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				int task_seqn = rdr.Read_int(fld_task_seqn);
@@ -68,7 +71,7 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 			.Exec_insert();
 	}
 	public Xobc_task_regy_itm[] Select_by_wiki(byte[] wiki_domain) {
-		String sql = Db_sql_.Make_by_fmt(String_.Ary
+		String sql = Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  *"
 		, "FROM    task_regy"
 		, "WHERE   task_key LIKE '{0}%'"	// DEPENDENCY:Xobc_task_key

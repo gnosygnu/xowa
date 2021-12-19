@@ -13,21 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.phps;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 interface Php_srl_itm {
 	byte Tid();
 	int Src_bgn();
 	int Src_end();
 	Object Val();
-	void Xto_bfr(Bry_bfr bfr, int depth);
+	void Xto_bfr(BryWtr bfr, int depth);
 	void Clear();
 }
 class Php_srl_itm_ {
 	public static final Php_srl_itm[] Ary_empty = new Php_srl_itm[0];
 	public static final byte  Tid_unknown = 0, Tid_nil = 1, Tid_bool = 2, Tid_int = 3, Tid_double = 4, Tid_string = 5, Tid_array = 6, Tid_function = 7;
-	public static final byte[][] Names = Bry_.Ary("unknown", "nil", "boolean", "int", "double", "string", "array", "function");
+	public static final byte[][] Names = BryUtl.Ary("unknown", "nil", "boolean", "int", "double", "string", "array", "function");
 	public static final Object Val_nil = null, Val_table = null;
 }
 abstract class Php_srl_itm_base implements Php_srl_itm {
@@ -36,10 +39,10 @@ abstract class Php_srl_itm_base implements Php_srl_itm {
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
 	public Object Val() {return val;} Object val;
-	public void Xto_bfr(Bry_bfr bfr, int depth) {
+	public void Xto_bfr(BryWtr bfr, int depth) {
 		Php_srl_wtr.Indent(bfr, depth);
-		bfr.Add(Php_srl_itm_.Names[this.Tid()]).Add_byte(AsciiByte.Colon);
-		bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(this.Val())).Add_byte(AsciiByte.Semic).Add_byte_nl();
+		bfr.Add(Php_srl_itm_.Names[this.Tid()]).AddByte(AsciiByte.Colon);
+		bfr.AddStrU8(ObjectUtl.ToStrOrNullMark(this.Val())).AddByte(AsciiByte.Semic).AddByteNl();
 	}
 	public void Clear() {}
 }
@@ -107,15 +110,15 @@ class Php_srl_itm_ary extends Php_srl_itm_base {
 		subs_len = new_len;
 		return this;
 	}
-	@Override public void Xto_bfr(Bry_bfr bfr, int depth) {
+	@Override public void Xto_bfr(BryWtr bfr, int depth) {
 		Php_srl_wtr.Indent(bfr, depth);
-		bfr.Add_byte(AsciiByte.Ltr_a).Add_byte(AsciiByte.BrackBgn).Add_int_variable(subs_len).Add(CONST_ary_bgn);
+		bfr.AddByte(AsciiByte.Ltr_a).AddByte(AsciiByte.BrackBgn).AddIntVariable(subs_len).Add(CONST_ary_bgn);
 		for (int i = 0; i < subs_len; i++)
 			subs[i].Xto_bfr(bfr, depth + 1);
 		Php_srl_wtr.Indent(bfr, depth);
-		bfr.Add_byte(AsciiByte.CurlyEnd).Add_byte_nl();
+		bfr.AddByte(AsciiByte.CurlyEnd).AddByteNl();
 	}
-	private static final byte[] CONST_ary_bgn = Bry_.new_a7("]{\n");
+	private static final byte[] CONST_ary_bgn = BryUtl.NewA7("]{\n");
 	Php_srl_itm_kv[] subs = Php_srl_itm_kv.Ary_empty;
 }
 class Php_srl_itm_kv {
@@ -126,14 +129,14 @@ class Php_srl_itm_kv {
 		key.Clear();
 		val.Clear();
 	}
-	public void Xto_bfr(Bry_bfr bfr, int depth) {
+	public void Xto_bfr(BryWtr bfr, int depth) {
 		key.Xto_bfr(bfr, depth);
 		val.Xto_bfr(bfr, depth);
 	}
 	public static final Php_srl_itm_kv[] Ary_empty = new Php_srl_itm_kv[0];
 }
 class Php_srl_wtr {
-	public static void Indent(Bry_bfr bfr, int depth) {
-		if (depth > 0) bfr.Add_byte_repeat(AsciiByte.Space, depth * 2);	// indent
+	public static void Indent(BryWtr bfr, int depth) {
+		if (depth > 0) bfr.AddByteRepeat(AsciiByte.Space, depth * 2);	// indent
 	}
 }

@@ -24,7 +24,7 @@ public class GfuiElemKeys {
 	, IptRcvd_evt			= "IptRcvd_evt"
 	, Evt_menu_detected		= "menu_detected"
 	;
-	@gplx.Internal protected static final String
+	public static final String
 	  Key_set				= "Key_"
 	, TipText				= "TipText"
 	, TipText_				= "TipText_"

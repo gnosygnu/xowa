@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.net.Gfo_inet_conn_;
 import gplx.dbs.Db_conn_bldr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.bldrs.infos.Xob_info_session;
 import gplx.xowa.wikis.data.Xowd_core_db_props;
 public class Xoa_test_ {

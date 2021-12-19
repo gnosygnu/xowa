@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
+package gplx.xowa.bldrs.setups.maints;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.*;
 import gplx.core.ios.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.downloads.*;
@@ -49,7 +57,7 @@ public class Xoa_maint_mgr implements Gfo_invk {
 	}
 	public boolean Wmf_status_parse() {
 		Wmf_dump_list_parser parser = new Wmf_dump_list_parser();
-		Hash_adp_bry itms_hash = Hash_adp_bry.cs();		
+		Hash_adp_bry itms_hash = Hash_adp_bry.cs();
 		Wmf_dump_itm[] itms = parser.Parse(Io_mgr.Instance.LoadFilBry(wmf_dump_status_url));
 		int len = itms.length;
 		Xoa_app_.Usr_dlg().Log_many("", "", "maint.html count; count=~{0}", len);

@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
 import gplx.xowa.*;
 class Pft_fmt_itm_hebrew_ {
 	public static int Calc_hebrew_year_num_start(int year) {
@@ -39,7 +44,7 @@ class Pft_fmt_itm_hebrew_ {
 		mar += (int)(year_minus_3761 / 100 ) - (int)(year_minus_3761 / 400) - 24;
 		return mar;
 	}
-	public static int[] Calc_hebrew_date(DateAdp date) {
+	public static int[] Calc_hebrew_date(GfoDate date) {
 		int[] rv = new int[4];	// MEM:cache
 		Calc_hebrew_date(rv, date.Year(), date.Month(), date.Day());
 		return rv;
@@ -166,27 +171,27 @@ class Pft_fmt_itm_hebrew_ {
 		rv[3] = days;
 		return true;
 	}
-	public static byte[] Get_hebrew_month_name_full(Xowe_wiki wiki, DateAdp date) {return Get_hebrew_month_name(wiki, date, Month_name_full_ary);}
-	public static byte[] Get_hebrew_month_name_gen(Xowe_wiki wiki, DateAdp date) {return Get_hebrew_month_name(wiki, date, Month_name_gen_ary);}
-	private static byte[] Get_hebrew_month_name(Xowe_wiki wiki, DateAdp date, byte[][] name_ary) {
+	public static byte[] Get_hebrew_month_name_full(Xowe_wiki wiki, GfoDate date) {return Get_hebrew_month_name(wiki, date, Month_name_full_ary);}
+	public static byte[] Get_hebrew_month_name_gen(Xowe_wiki wiki, GfoDate date) {return Get_hebrew_month_name(wiki, date, Month_name_gen_ary);}
+	private static byte[] Get_hebrew_month_name(Xowe_wiki wiki, GfoDate date, byte[][] name_ary) {
 		int[] hebrew_date = Pft_fmt_itm_hebrew_.Calc_hebrew_date(date);
 		int hebrew_month = hebrew_date[Pft_fmt_itm_hebrew_.Rslt_month_num] - List_adp_.Base1;
 		byte[] msg_key = name_ary[hebrew_month];
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
 	private static final byte[][] Month_name_full_ary = new byte[][]
-	{ Bry_.new_a7("hebrew-calendar-m1"), Bry_.new_a7("hebrew-calendar-m2"), Bry_.new_a7("hebrew-calendar-m3")
-	, Bry_.new_a7("hebrew-calendar-m4"), Bry_.new_a7("hebrew-calendar-m5"), Bry_.new_a7("hebrew-calendar-m6")
-	, Bry_.new_a7("hebrew-calendar-m7"), Bry_.new_a7("hebrew-calendar-m8"), Bry_.new_a7("hebrew-calendar-m9")
-	, Bry_.new_a7("hebrew-calendar-m10"), Bry_.new_a7("hebrew-calendar-m11"), Bry_.new_a7("hebrew-calendar-m12")
-	, Bry_.new_a7("hebrew-calendar-m6a"), Bry_.new_a7("hebrew-calendar-m6b")
+	{ BryUtl.NewA7("hebrew-calendar-m1"), BryUtl.NewA7("hebrew-calendar-m2"), BryUtl.NewA7("hebrew-calendar-m3")
+	, BryUtl.NewA7("hebrew-calendar-m4"), BryUtl.NewA7("hebrew-calendar-m5"), BryUtl.NewA7("hebrew-calendar-m6")
+	, BryUtl.NewA7("hebrew-calendar-m7"), BryUtl.NewA7("hebrew-calendar-m8"), BryUtl.NewA7("hebrew-calendar-m9")
+	, BryUtl.NewA7("hebrew-calendar-m10"), BryUtl.NewA7("hebrew-calendar-m11"), BryUtl.NewA7("hebrew-calendar-m12")
+	, BryUtl.NewA7("hebrew-calendar-m6a"), BryUtl.NewA7("hebrew-calendar-m6b")
 	};
 	private static final byte[][] Month_name_gen_ary = new byte[][]
-	{ Bry_.new_a7("hebrew-calendar-m1-gen"), Bry_.new_a7("hebrew-calendar-m2-gen"), Bry_.new_a7("hebrew-calendar-m3-gen")
-	, Bry_.new_a7("hebrew-calendar-m4-gen"), Bry_.new_a7("hebrew-calendar-m5-gen"), Bry_.new_a7("hebrew-calendar-m6-gen")
-	, Bry_.new_a7("hebrew-calendar-m7-gen"), Bry_.new_a7("hebrew-calendar-m8-gen"), Bry_.new_a7("hebrew-calendar-m9-gen")
-	, Bry_.new_a7("hebrew-calendar-m10-gen"), Bry_.new_a7("hebrew-calendar-m11-gen"), Bry_.new_a7("hebrew-calendar-m12-gen")
-	, Bry_.new_a7("hebrew-calendar-m6a-gen"), Bry_.new_a7("hebrew-calendar-m6b-gen")
+	{ BryUtl.NewA7("hebrew-calendar-m1-gen"), BryUtl.NewA7("hebrew-calendar-m2-gen"), BryUtl.NewA7("hebrew-calendar-m3-gen")
+	, BryUtl.NewA7("hebrew-calendar-m4-gen"), BryUtl.NewA7("hebrew-calendar-m5-gen"), BryUtl.NewA7("hebrew-calendar-m6-gen")
+	, BryUtl.NewA7("hebrew-calendar-m7-gen"), BryUtl.NewA7("hebrew-calendar-m8-gen"), BryUtl.NewA7("hebrew-calendar-m9-gen")
+	, BryUtl.NewA7("hebrew-calendar-m10-gen"), BryUtl.NewA7("hebrew-calendar-m11-gen"), BryUtl.NewA7("hebrew-calendar-m12-gen")
+	, BryUtl.NewA7("hebrew-calendar-m6a-gen"), BryUtl.NewA7("hebrew-calendar-m6b-gen")
 	};
 	public static final int
 	  Rslt_year_num				= 0
@@ -195,44 +200,44 @@ class Pft_fmt_itm_hebrew_ {
 	, Rslt_month_days_count		= 3
 	;
 	private static final byte[][][] Numeral_tbls = new byte[][][]
-	{ new byte[][] {Bry_.Empty, Bry_.new_u8("א"), Bry_.new_u8("ב"), Bry_.new_u8("ג"), Bry_.new_u8("ד"), Bry_.new_u8("ה")	, Bry_.new_u8("ו")	, Bry_.new_u8("ז")	, Bry_.new_u8("ח")	, Bry_.new_u8("ט")	, Bry_.new_u8("י")}
-	, new byte[][] {Bry_.Empty, Bry_.new_u8("י"), Bry_.new_u8("כ"), Bry_.new_u8("ל"), Bry_.new_u8("מ"), Bry_.new_u8("נ")	, Bry_.new_u8("ס")	, Bry_.new_u8("ע")	, Bry_.new_u8("פ")	, Bry_.new_u8("צ")	, Bry_.new_u8("ק")}
-	, new byte[][] {Bry_.Empty, Bry_.new_u8("ק"), Bry_.new_u8("ר"), Bry_.new_u8("ש"), Bry_.new_u8("ת"), Bry_.new_u8("תק")	, Bry_.new_u8("תר")	, Bry_.new_u8("תש")	, Bry_.new_u8("תת")	, Bry_.new_u8("תתק"), Bry_.new_u8("תתר")}
-	, new byte[][] {Bry_.Empty, Bry_.new_u8("א"), Bry_.new_u8("ב"), Bry_.new_u8("ג"), Bry_.new_u8("ד"), Bry_.new_u8("ה")	, Bry_.new_u8("ו")	, Bry_.new_u8("ז")	, Bry_.new_u8("ח")	, Bry_.new_u8("ט")	, Bry_.new_u8("י")}
+	{ new byte[][] {BryUtl.Empty, BryUtl.NewU8("א"), BryUtl.NewU8("ב"), BryUtl.NewU8("ג"), BryUtl.NewU8("ד"), BryUtl.NewU8("ה")	, BryUtl.NewU8("ו")	, BryUtl.NewU8("ז")	, BryUtl.NewU8("ח")	, BryUtl.NewU8("ט")	, BryUtl.NewU8("י")}
+	, new byte[][] {BryUtl.Empty, BryUtl.NewU8("י"), BryUtl.NewU8("כ"), BryUtl.NewU8("ל"), BryUtl.NewU8("מ"), BryUtl.NewU8("נ")	, BryUtl.NewU8("ס")	, BryUtl.NewU8("ע")	, BryUtl.NewU8("פ")	, BryUtl.NewU8("צ")	, BryUtl.NewU8("ק")}
+	, new byte[][] {BryUtl.Empty, BryUtl.NewU8("ק"), BryUtl.NewU8("ר"), BryUtl.NewU8("ש"), BryUtl.NewU8("ת"), BryUtl.NewU8("תק")	, BryUtl.NewU8("תר")	, BryUtl.NewU8("תש")	, BryUtl.NewU8("תת")	, BryUtl.NewU8("תתק"), BryUtl.NewU8("תתר")}
+	, new byte[][] {BryUtl.Empty, BryUtl.NewU8("א"), BryUtl.NewU8("ב"), BryUtl.NewU8("ג"), BryUtl.NewU8("ד"), BryUtl.NewU8("ה")	, BryUtl.NewU8("ו")	, BryUtl.NewU8("ז")	, BryUtl.NewU8("ח")	, BryUtl.NewU8("ט")	, BryUtl.NewU8("י")}
 	};
 	public static byte[] Calc_hebrew_numeral(int num) {
-		if (num > 9999 || num <= 0) return Int_.To_bry(num);
+		if (num > 9999 || num <= 0) return IntUtl.ToBry(num);
 		
-		byte[] tmp = Bry_.Empty;
+		byte[] tmp = BryUtl.Empty;
 		int pow10 = 1000; 
 		for (int i = 3; i >= 0; pow10 /= 10, i--) {
 			if (num >= pow10) {
 				if (num == 15 || num == 16) {
-					tmp = Bry_.Add(tmp, Numeral_tbls[0][9], Numeral_tbls[0][num - 9]);
+					tmp = BryUtl.Add(tmp, Numeral_tbls[0][9], Numeral_tbls[0][num - 9]);
 					num = 0;
 				} else {
-					tmp = Bry_.Add(tmp, Numeral_tbls[i][(int)(num / pow10)]);
+					tmp = BryUtl.Add(tmp, Numeral_tbls[i][(int)(num / pow10)]);
 					if (pow10 == 1000)
-						tmp = Bry_.Add(tmp, AsciiByte.AposBry);
+						tmp = BryUtl.Add(tmp, AsciiByte.AposBry);
 				}
 			}
 			num = num % pow10;
 		}
-		byte[] rv = Bry_.Empty;
+		byte[] rv = BryUtl.Empty;
 		int tmp_len = tmp.length;
 		if (tmp_len == 2) {
-			rv = Bry_.Add(tmp, AsciiByte.AposBry);
+			rv = BryUtl.Add(tmp, AsciiByte.AposBry);
 		}
 		else {
-			rv  = Bry_.Add(Bry_.Mid(tmp, 0, tmp_len - 2), AsciiByte.QuoteBry);
-			rv  = Bry_.Add(rv, Bry_.Mid(tmp, tmp_len - 2, tmp_len));
+			rv  = BryUtl.Add(BryLni.Mid(tmp, 0, tmp_len - 2), AsciiByte.QuoteBry);
+			rv  = BryUtl.Add(rv, BryLni.Mid(tmp, tmp_len - 2, tmp_len));
 		}
 		int rv_len = rv.length;
-		Object end_obj = end_trie.Match_bgn(rv, rv_len - 2, rv_len);
+		Object end_obj = end_trie.MatchBgn(rv, rv_len - 2, rv_len);
 		if (end_obj != null) {
 			byte[] end = (byte[])end_obj;
-			byte[] start = Bry_.Mid(rv, 0, rv_len - 2);
-			rv = Bry_.Add(start, end);
+			byte[] start = BryLni.Mid(rv, 0, rv_len - 2);
+			rv = BryUtl.Add(start, end);
 		}
 		return rv;
 	}

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.site_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.site_cfgs;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xow_wiki;
 public interface Xoa_site_cfg_loader {
 	int			Tid();
 	void		Load_csv__bgn(Xoa_site_cfg_mgr mgr, Xow_wiki wiki);
@@ -28,7 +30,7 @@ class Xoa_site_cfg_loader_ {
 			case Tid__fsys:			return Key__fsys;
 			case Tid__inet:			return Key__inet;
 			case Tid__fallback:		return Key__fallback;
-			default:				throw Err_.new_unhandled(tid);
+			default:				throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 }

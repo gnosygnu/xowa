@@ -13,10 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.bldrs.css;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.*;
-import gplx.core.envs.*; import gplx.core.btries.*; import gplx.core.primitives.*;
+import gplx.core.envs.*; import gplx.core.btries.*;
 import gplx.xowa.files.downloads.*;
 public class Xoa_css_img_downloader {
 	private byte[] wiki_domain;
@@ -29,7 +44,7 @@ public class Xoa_css_img_downloader {
 		this.wiki_domain = wiki_domain;
 		List_adp img_list = List_adp_.New();
 		byte[] old_bry = Io_mgr.Instance.LoadFilBry(css_fil);
-		byte[] rel_url_prefix = Bry_.Add(Bry_fwd_slashes, wiki_domain);
+		byte[] rel_url_prefix = BryUtl.Add(Bry_fwd_slashes, wiki_domain);
 		byte[] new_bry = Convert_to_local_urls(rel_url_prefix, old_bry, img_list);
 		Io_url img_dir = css_fil.OwnerDir();
 		Download_fils(img_dir, img_list.ToStrAry());
@@ -39,7 +54,7 @@ public class Xoa_css_img_downloader {
 		try {
 			// init vars
 			int src_len = src.length;
-			Bry_bfr bfr = Bry_bfr_.New_w_size(src_len);
+			BryWtr bfr = BryWtr.NewWithSize(src_len);
 			Hash_adp img_hash = Hash_adp_bry.cs();
 			Btrie_rv trv = new Btrie_rv();
 
@@ -67,14 +82,14 @@ public class Xoa_css_img_downloader {
 					}
 
 					// match found
-					Byte_obj_val match = (Byte_obj_val)match_obj;
+					ByteVal match = (ByteVal)match_obj;
 					switch (match.Val()) {
 						case CONVERT_TID__COMMENT: // handle comment
 							// search for "*/"
-							int comment_end = Bry_find_.Find_fwd(src, Bry_comment_end, cur_pos);
+							int comment_end = BryFind.FindFwd(src, Bry_comment_end, cur_pos);
 
 							// "*/" not found; exit;
-							if (comment_end == Bry_find_.Not_found) {
+							if (comment_end == BryFind.NotFound) {
 								loop = false;
 								break;
 							}
@@ -91,7 +106,7 @@ public class Xoa_css_img_downloader {
 
 				// EOS reached; stop
 				if (!loop) {
-					bfr.Add_mid(src, prv_pos, src_len);
+					bfr.AddMid(src, prv_pos, src_len);
 					break;
 				}
 
@@ -113,110 +128,110 @@ public class Xoa_css_img_downloader {
 				}
 
 				// find end_pos
-				int end_pos = Bry_find_.Find_fwd(src, end_byte, bgn_pos, src_len);
-				if (end_pos == Bry_find_.Not_found) {	// unclosed "url("; exit since nothing else will be found
-					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.end_missing", "could not find end_sequence for 'url(': bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
-					bfr.Add_mid(src, prv_pos, src_len);
+				int end_pos = BryFind.FindFwd(src, end_byte, bgn_pos, src_len);
+				if (end_pos == BryFind.NotFound) {	// unclosed "url("; exit since nothing else will be found
+					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.end_missing", "could not find end_sequence for 'url(': bgn='~{0}' end='~{1}'", prv_pos, StringUtl.NewU8ByLen(src, prv_pos, prv_pos + 25));
+					bfr.AddMid(src, prv_pos, src_len);
 					break;
 				}
 
 				// trim whitespace; EX: "background: url( //upload.wikimedia.org/wikipedia/commons/thumb/2/24/Gtk-media-forward-ltr.svg/24px-Gtk-media-forward-ltr.svg.png )" ISSUE#:307 PAGE:en.v:MediaWiki:Common.css/Slideshows.css DATE:2018-12-23
-				bgn_pos = Bry_find_.Find_fwd_while_space_or_tab(src, bgn_pos, end_pos);
-				end_pos = Bry_find_.Find_bwd__skip_ws(src, end_pos, bgn_pos);
+				bgn_pos = BryFind.FindFwdWhileSpaceOrTab(src, bgn_pos, end_pos);
+				end_pos = BryFind.FindBwdSkipWs(src, end_pos, bgn_pos);
 
 				// empty; "url()"; ignore
 				if (end_pos - bgn_pos == 0) {
-					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.empty", "'url(' is empty: bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
-					bfr.Add_mid(src, prv_pos, bgn_pos);
+					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.empty", "'url(' is empty: bgn='~{0}' end='~{1}'", prv_pos, StringUtl.NewU8ByLen(src, prv_pos, prv_pos + 25));
+					bfr.AddMid(src, prv_pos, bgn_pos);
 					prv_pos = bgn_pos;
 					continue;
 				}
 
 				// parse img
-				byte[] img_raw = Bry_.Mid(src, bgn_pos, end_pos); int img_raw_len = img_raw.length;
-				if (Bry_.Has_at_bgn(img_raw, Bry_data_image, 0, img_raw_len)) {	// base64
-					bfr.Add_mid(src, prv_pos, end_pos);							// nothing to download; just add entire String
+				byte[] img_raw = BryLni.Mid(src, bgn_pos, end_pos); int img_raw_len = img_raw.length;
+				if (BryUtl.HasAtBgn(img_raw, Bry_data_image, 0, img_raw_len)) {	// base64
+					bfr.AddMid(src, prv_pos, end_pos);							// nothing to download; just add entire String
 					prv_pos = end_pos;
 					continue;
 				}
 				int import_url_end = Import_url_chk(rel_url_prefix, src, src_len, prv_pos, url_pos, img_raw, bfr);	// check for embedded stylesheets via @import tag
-				if (import_url_end != Bry_find_.Not_found)  {
+				if (import_url_end != BryFind.NotFound)  {
 					prv_pos = import_url_end;
 					continue;
 				}
 				byte[] img_cleaned = Xob_url_fixer.Fix(wiki_domain, img_raw, img_raw_len);
 				if (img_cleaned == null) {	// could not clean img
-					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.clean_failed", "could not extract valid http src: bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8(img_raw));
-					bfr.Add_mid(src, prv_pos, bgn_pos); prv_pos = bgn_pos; continue;
+					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.clean_failed", "could not extract valid http src: bgn='~{0}' end='~{1}'", prv_pos, StringUtl.NewU8(img_raw));
+					bfr.AddMid(src, prv_pos, bgn_pos); prv_pos = bgn_pos; continue;
 				}
 				if (!img_hash.Has(img_cleaned)) {// only add unique items for download;
 					img_hash.AddAsKeyAndVal(img_cleaned);
-					list.Add(String_.new_u8(img_cleaned));
+					list.Add(StringUtl.NewU8(img_cleaned));
 				}
-				img_cleaned = Replace_invalid_chars(Bry_.Copy(img_cleaned));	// NOTE: must call ByteAry.Copy else img_cleaned will change *inside* hash
+				img_cleaned = Replace_invalid_chars(BryUtl.Copy(img_cleaned));	// NOTE: must call ByteAry.Copy else img_cleaned will change *inside* hash
 
 				// add to bfr
-				bfr.Add_mid(src, prv_pos, bgn_pos);
-				if (!quoted) bfr.Add_byte(AsciiByte.Quote);
+				bfr.AddMid(src, prv_pos, bgn_pos);
+				if (!quoted) bfr.AddByte(AsciiByte.Quote);
 				bfr.Add(img_cleaned);
-				if (!quoted) bfr.Add_byte(AsciiByte.Quote);
+				if (!quoted) bfr.AddByte(AsciiByte.Quote);
 				prv_pos = end_pos;
 			}
-			return bfr.To_bry_and_clear();
+			return bfr.ToBryAndClear();
 		}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "failed to convert local_urls: ~{0} ~{1}", String_.new_u8(rel_url_prefix), Err_.Message_gplx_full(e));
+			usr_dlg.Warn_many("", "", "failed to convert local_urls: ~{0} ~{1}", StringUtl.NewU8(rel_url_prefix), ErrUtl.ToStrFull(e));
 			return src;
 		}
 	}
 	public static byte[] Import_url_build(byte[] stylesheet_prefix, byte[] rel_url_prefix, byte[] css_url) {
-		return Bry_.Has_at_bgn(css_url, Bry_http_protocol)			// css_url already starts with "http"; return self; PAGE:tr.n:Main_Page; DATE:2014-06-04
+		return BryUtl.HasAtBgn(css_url, Bry_http_protocol)			// css_url already starts with "http"; return self; PAGE:tr.n:Main_Page; DATE:2014-06-04
 			? css_url
-			: Bry_.Add(stylesheet_prefix, css_url)
+			: BryUtl.Add(stylesheet_prefix, css_url)
 			;
 	}
-	private int Import_url_chk(byte[] rel_url_prefix, byte[] src, int src_len, int old_pos, int find_bgn, byte[] url_raw, Bry_bfr bfr) {
-		if (find_bgn < Bry_import_len) return Bry_find_.Not_found;
-		if (!Bry_.Match(src, find_bgn - Bry_import_len, find_bgn, Bry_import)) return Bry_find_.Not_found;
+	private int Import_url_chk(byte[] rel_url_prefix, byte[] src, int src_len, int old_pos, int find_bgn, byte[] url_raw, BryWtr bfr) {
+		if (find_bgn < Bry_import_len) return BryFind.NotFound;
+		if (!BryLni.Eq(src, find_bgn - Bry_import_len, find_bgn, Bry_import)) return BryFind.NotFound;
 		byte[] css_url = url_raw; int css_url_len = css_url.length;
 		if (css_url_len > 0 && css_url[0] == AsciiByte.Slash) {		// css_url starts with "/"; EX: "/page" or "//site/page" DATE:2014-02-03
 			if (css_url_len > 1 && css_url[1] != AsciiByte.Slash)		// skip if css_url starts with "//"; EX: "//site/page"
-				css_url = Bry_.Add(rel_url_prefix, css_url);			// "/w/a.css" -> "//en.wikipedia.org/w/a.css"
+				css_url = BryUtl.Add(rel_url_prefix, css_url);			// "/w/a.css" -> "//en.wikipedia.org/w/a.css"
 		}
-		css_url = Bry_.Replace(css_url, AsciiByte.Space, AsciiByte.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
+		css_url = BryUtl.Replace(css_url, AsciiByte.Space, AsciiByte.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
 		byte[] css_src_bry = Import_url_build(stylesheet_prefix, rel_url_prefix, css_url);
-		String css_src_str = String_.new_u8(css_src_bry);
+		String css_src_str = StringUtl.NewU8(css_src_bry);
 		download_wkr.Download_xrg().Prog_fmt_hdr_(usr_dlg.Log_many(GRP_KEY, "logo.download", "downloading import for '~{0}'", css_src_str));
 		byte[] css_trg_bry = download_wkr.Download_xrg().Exec_as_bry(css_src_str);
 		if (css_trg_bry == null) {
 			usr_dlg.Warn_many("", "", "could not import css: url=~{0}", css_src_str);
-			return Bry_find_.Not_found;	// css not found
+			return BryFind.NotFound;	// css not found
 		}
-		bfr.Add_mid(src, old_pos, find_bgn - Bry_import_len).Add_byte_nl();
-		bfr.Add(Bry_comment_bgn).Add(css_url).Add(Bry_comment_end).Add_byte_nl();			
-		if (Bry_find_.Find_fwd(css_url, Wikisource_dynimg_ttl) != -1) css_trg_bry = Bry_.Replace(css_trg_bry, Wikisource_dynimg_find, Wikisource_dynimg_repl);	// FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
-		bfr.Add(css_trg_bry).Add_byte_nl();
-		bfr.Add_byte_nl();
-		int semic_pos = Bry_find_.Find_fwd(src, AsciiByte.Semic, find_bgn + url_raw.length, src_len);
+		bfr.AddMid(src, old_pos, find_bgn - Bry_import_len).AddByteNl();
+		bfr.Add(Bry_comment_bgn).Add(css_url).Add(Bry_comment_end).AddByteNl();
+		if (BryFind.FindFwd(css_url, Wikisource_dynimg_ttl) != -1) css_trg_bry = BryUtlByWtr.Replace(css_trg_bry, Wikisource_dynimg_find, Wikisource_dynimg_repl);	// FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
+		bfr.Add(css_trg_bry).AddByteNl();
+		bfr.AddByteNl();
+		int semic_pos = BryFind.FindFwd(src, AsciiByte.Semic, find_bgn + url_raw.length, src_len);
 		return semic_pos + AsciiByte.Len1;
 	}
 	private static final byte[]
-	  Wikisource_dynimg_ttl		= Bry_.new_a7("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")
-	, Wikisource_dynimg_find	= Bry_.new_a7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
-	, Wikisource_dynimg_repl	= Bry_.new_a7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], /*XOWA:handle file:// paths which will have /commons.wikimedia.org/ but not /wikipedia/ */ .freedImg img[src*=\"wikimedia\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
+	  Wikisource_dynimg_ttl		= BryUtl.NewA7("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")
+	, Wikisource_dynimg_find	= BryUtl.NewA7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
+	, Wikisource_dynimg_repl	= BryUtl.NewA7(".freedImg img[src*=\"wikipedia\"], .freedImg img[src*=\"wikisource\"], /*XOWA:handle file:// paths which will have /commons.wikimedia.org/ but not /wikipedia/ */ .freedImg img[src*=\"wikimedia\"], .freedImg img[src*=\"score\"], .freedImg img[src*=\"math\"] {")
 	;
 	public byte[] Clean_img_url(byte[] raw, int raw_len) {
 		int pos_bgn = 0;
-		if (Bry_.Has_at_bgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;
-		if (Bry_.Has_at_bgn(raw, Bry_http, 0, raw_len)) pos_bgn = Bry_http.length;
-		int pos_slash = Bry_find_.Find_fwd(raw, AsciiByte.Slash, pos_bgn, raw_len);
-		if (pos_slash == Bry_find_.Not_found) return null; // first segment is site_name; at least one slash must be present for image name; EX: site.org/img_name.jpg
+		if (BryUtl.HasAtBgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;
+		if (BryUtl.HasAtBgn(raw, Bry_http, 0, raw_len)) pos_bgn = Bry_http.length;
+		int pos_slash = BryFind.FindFwd(raw, AsciiByte.Slash, pos_bgn, raw_len);
+		if (pos_slash == BryFind.NotFound) return null; // first segment is site_name; at least one slash must be present for image name; EX: site.org/img_name.jpg
 		if (pos_slash == raw_len - 1) return null; // "site.org/" is invalid
 		int pos_end = raw_len;
-		int pos_question = Bry_find_.Find_bwd(raw, AsciiByte.Question);
-		if (pos_question != Bry_find_.Not_found)
+		int pos_question = BryFind.FindBwd(raw, AsciiByte.Question);
+		if (pos_question != BryFind.NotFound)
 			pos_end = pos_question;	// remove query params; EX: img_name?key=val 
-		return Bry_.Mid(raw, pos_bgn, pos_end);
+		return BryLni.Mid(raw, pos_bgn, pos_end);
 	}
 	private void Download_fils(Io_url css_dir, String[] ary) {
 		int ary_len = ary.length;
@@ -230,7 +245,7 @@ public class Xoa_css_img_downloader {
 			}
 		}
 	}
-	String Replace_invalid_chars_str(String raw_str) {return String_.new_u8(Replace_invalid_chars(Bry_.new_u8(raw_str)));}
+	String Replace_invalid_chars_str(String raw_str) {return StringUtl.NewU8(Replace_invalid_chars(BryUtl.NewU8(raw_str)));}
 	byte[] Replace_invalid_chars(byte[] raw_bry) {
 		int raw_len = raw_bry.length;
 		for (int i = 0; i < raw_len; i++) {	// convert invalid wnt chars to underscores
@@ -246,11 +261,11 @@ public class Xoa_css_img_downloader {
 		return raw_bry;
 	}
 	private static final byte[]
-	  Bry_url = Bry_.new_a7("url("), Bry_data_image = Bry_.new_a7("data:image/")
-	, Bry_http = Bry_.new_a7("http://"), Bry_fwd_slashes = Bry_.new_a7("//"), Bry_import = Bry_.new_a7("@import ")
-	, Bry_http_protocol = Bry_.new_a7("http")
+	  Bry_url = BryUtl.NewA7("url("), Bry_data_image = BryUtl.NewA7("data:image/")
+	, Bry_http = BryUtl.NewA7("http://"), Bry_fwd_slashes = BryUtl.NewA7("//"), Bry_import = BryUtl.NewA7("@import ")
+	, Bry_http_protocol = BryUtl.NewA7("http")
 	;
-	public static final byte[] Bry_comment_bgn = Bry_.new_a7("/*XOWA:"), Bry_comment_end = Bry_.new_a7("*/");
+	public static final byte[] Bry_comment_bgn = BryUtl.NewA7("/*XOWA:"), Bry_comment_end = BryUtl.NewA7("*/");
 	private static final int Bry_url_len = Bry_url.length, Bry_import_len = Bry_import.length;
 	private static final byte CONVERT_TID__URL = 1, CONVERT_TID__COMMENT = 2;
 	private static final Btrie_slim_mgr convert_trie = Btrie_slim_mgr.cs().Add_str_byte("url(", CONVERT_TID__URL).Add_str_byte("/*", CONVERT_TID__COMMENT);

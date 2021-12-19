@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.Keyval;
+import gplx.types.commons.KeyVal;
 import gplx.core.criterias.Criteria;
 import gplx.dbs.qrys.Db_qry__select_cmd;
 import gplx.dbs.qrys.Db_qry_delete;
@@ -30,10 +30,10 @@ public class Db_qry_ {
 	public static Db_qry_delete delete_(String tbl, Criteria crt)                           {return Db_qry_delete.new_(tbl, crt);}
 	public static Db_qry_delete delete_tbl_(String tbl)                                     {return Db_qry_delete.new_(tbl);}
 	public static Db_qry_insert insert_(String tbl)                                         {return new Db_qry_insert(tbl);}
-	public static Db_qry_insert insert_common_(String tbl, Keyval... pairs) {
+	public static Db_qry_insert insert_common_(String tbl, KeyVal... pairs) {
 		Db_qry_insert cmd = new Db_qry_insert(tbl);
-		for (Keyval pair : pairs)
-			cmd.Val_obj(pair.Key(), pair.Val());
+		for (KeyVal pair : pairs)
+			cmd.Val_obj(pair.KeyToStr(), pair.Val());
 		return cmd;
 	}
 
@@ -46,11 +46,11 @@ public class Db_qry_ {
 		update.Where_(crt);
 		return update;
 	}
-	public static Db_qry_update update_common_(String tbl, Criteria crt, Keyval... pairs) {
+	public static Db_qry_update update_common_(String tbl, Criteria crt, KeyVal... pairs) {
 		Db_qry_update cmd = new Db_qry_update();
 		cmd.From_(tbl); cmd.Where_(crt);
-		for (Keyval pair : pairs)
-			cmd.Val_obj(pair.Key(), pair.Val());
+		for (KeyVal pair : pairs)
+			cmd.Val_obj(pair.KeyToStr(), pair.Val());
 		return cmd;
 	}
 	public static gplx.core.gfo_ndes.GfoNde Exec_as_nde(Db_conn conn, Db_qry qry) {return gplx.core.gfo_ndes.GfoNde_.rdr_(conn.Exec_qry_as_old_rdr(qry));}

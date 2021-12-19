@@ -13,18 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+package gplx.xowa.files.fsdb.fs_roots;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.files.*;
 import org.junit.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.files.imgs.*;
-import gplx.fsdb.meta.*;
+import gplx.dbs.*;
+import gplx.xowa.files.imgs.*;
 public class Fs_root_wkr_tst {
 	@Before public void init() {fxt.Reset();} private Fs_root_wkr_fxt fxt = new Fs_root_wkr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init_fs("mem/dir/7/70/A.png", 200, 100);
 		fxt.Test_get("A.png", fxt.itm_().Url_("mem/dir/7/70/A.png").Size_(200, 100));
 		fxt.Test_db("A.png", fxt.itm_().Init(1, "mem/dir/7/70/A.png", 200, 100));
 	}
-	@Test  public void Recurse() {
+	@Test public void Recurse() {
 		fxt.Init_fs("mem/dir/A/A1.png", 200, 100);
 		fxt.Test_get("A1.png", fxt.itm_().Url_("mem/dir/A/A1.png").Size_(200, 100));
 	}
@@ -43,11 +50,11 @@ class Fs_root_wkr_fxt {
 	public Orig_fil_mok itm_() {return new Orig_fil_mok();}
 	public void Init_fs(String url, int w, int h) {Save_img(url, w, h);}
 	public void Test_get(String name, Orig_fil_mok expd) {
-		Orig_fil_row actl = root_dir.Get_by_ttl(Bry_.new_u8(name));
+		Orig_fil_row actl = root_dir.Get_by_ttl(BryUtl.NewU8(name));
 		expd.Test(actl);
 	}
 	public void Test_db(String ttl, Orig_fil_mok expd) {
-		Orig_fil_row actl = root_dir.Orig_tbl().Select_itm_or_null(url, Bry_.new_u8(ttl));
+		Orig_fil_row actl = root_dir.Orig_tbl().Select_itm_or_null(url, BryUtl.NewU8(ttl));
 		expd.Test(actl);
 	}
 	public static void Save_img(String url, int w, int h) {
@@ -67,16 +74,16 @@ class Orig_fil_mok {
 		this.uid = uid;
 		this.url = url; this.w = w; this.h = h;
 		this.name = Io_url_.new_any_(url).NameAndExt();
-		this.ext_id = Xof_ext_.new_by_ttl_(Bry_.new_u8(name)).Id();
+		this.ext_id = Xof_ext_.new_by_ttl_(BryUtl.NewU8(name)).Id();
 		return this;
 	}
 	public void Test(Orig_fil_row actl) {
-		if (actl == null) Tfds.Fail("actl itm is null");
-		if (w != -1)			Tfds.Eq(w, actl.W());
-		if (h != -1)			Tfds.Eq(h, actl.H());
-		if (url != null)		Tfds.Eq(url, actl.Url().Raw());
-		if (uid != -1)			Tfds.Eq(uid, actl.Uid());
-		if (ext_id != -1)		Tfds.Eq(uid, actl.Ext_id());
-		if (name != null)		Tfds.Eq(name, String_.new_u8(actl.Name()));
+		if (actl == null) GfoTstr.Fail("actl itm is null");
+		if (w != -1)			GfoTstr.EqObj(w, actl.W());
+		if (h != -1)			GfoTstr.EqObj(h, actl.H());
+		if (url != null)		GfoTstr.EqObj(url, actl.Url().Raw());
+		if (uid != -1)			GfoTstr.EqObj(uid, actl.Uid());
+		if (ext_id != -1)		GfoTstr.EqObj(uid, actl.Ext_id());
+		if (name != null)		GfoTstr.EqObj(name, StringUtl.NewU8(actl.Name()));
 	}
 }

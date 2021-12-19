@@ -13,11 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.primitives.*; import gplx.core.js.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*;
+package gplx.xowa.apps.servers;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
+import gplx.core.js.*;
+import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*;
 import gplx.xowa.apps.servers.tcp.*;
-import gplx.xowa.apps.servers.http.*; import gplx.xowa.guis.views.*;
+import gplx.xowa.guis.views.*;
 public class Gxw_html_server implements Gxw_html {
 	private Xosrv_socket_wtr wtr; private Gfo_usr_dlg usr_dlg;
 	private final Js_wtr js_wtr = new Js_wtr();
@@ -35,13 +45,13 @@ public class Gxw_html_server implements Gxw_html {
 	public String		Html_js_eval_script(String script) {return Exec_as_str(script);}
 	public Object		Html_js_eval_script_as_obj(String script) {return Exec_as_str(script);}
 	public void			Html_js_cbks_add(String js_func_name, Gfo_invk invk) {}
-	public String		Html_js_send_json(String name, String data) {throw Err_.new_unimplemented();}
+	public String		Html_js_send_json(String name, String data) {throw ErrUtl.NewUnimplemented();}
 	public void			Html_invk_src_(Gfo_evt_itm v) {}
-	public GxwCore_base	Core() {throw Err_.new_unimplemented();}
-	public GxwCbkHost	Host() {throw Err_.new_unimplemented();} public void Host_set(GxwCbkHost host) {throw Err_.new_unimplemented();}
-	public Object		UnderElem() {throw Err_.new_unimplemented();}
-	public String		TextVal() {throw Err_.new_unimplemented();} public void TextVal_set(String v) {throw Err_.new_unimplemented();} 
-			public void			EnableDoubleBuffering() {throw Err_.new_unimplemented();}
+	public GxwCore_base	Core() {throw ErrUtl.NewUnimplemented();}
+	public GxwCbkHost	Host() {throw ErrUtl.NewUnimplemented();} public void Host_set(GxwCbkHost host) {throw ErrUtl.NewUnimplemented();}
+	public Object		UnderElem() {throw ErrUtl.NewUnimplemented();}
+	public String		TextVal() {throw ErrUtl.NewUnimplemented();} public void TextVal_set(String v) {throw ErrUtl.NewUnimplemented();}
+			public void			EnableDoubleBuffering() {throw ErrUtl.NewUnimplemented();}
 	private boolean Exec_as_bool(String s) {
 		Exec_as_str(s);
 		return true;	// NOTE: js is async, so immediate return value is not possible; return true for now;
@@ -50,7 +60,7 @@ public class Gxw_html_server implements Gxw_html {
 		if (wtr == null) return "";	// HACK: handles http_server
 		s = "(function () {" + s + "})();"; // NOTE: dependent on firefox_addon which does 'var result = Function("with(arguments[0]){return "+cmd_text+"}")(session.window);'; DATE:2014-01-28
 		gplx.core.threads.Thread_adp_.Sleep(50);	// NOTE: need to sleep, else images won't actually show up on screen; PAGE:nethackwiki.com:Weapons; DATE:2015-08-23
-		Xosrv_msg msg = Xosrv_msg.new_(Xosrv_cmd_types.Browser_exec, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.Empty, Bry_.new_u8(s));
+		Xosrv_msg msg = Xosrv_msg.new_(Xosrv_cmd_types.Browser_exec, BryUtl.Empty, BryUtl.Empty, BryUtl.Empty, BryUtl.Empty, BryUtl.NewU8(s));
 		usr_dlg.Note_many("", "", "sending browser.js: msg=~{0}", s);
 		wtr.Write(msg);
 		return "";
@@ -76,7 +86,7 @@ public class Gxw_html_server implements Gxw_html {
 		Xog_win_itm browser_win = app.Gui_mgr().Browser_win();
 		Xog_tab_itm rv = browser_win.Active_tab();
 		if (rv == null) { // no active tab
-			Xoae_page page = Xoae_page.New(wiki, wiki.Ttl_parse(Bry_.new_a7("Empty_tab")));
+			Xoae_page page = Xoae_page.New(wiki, wiki.Ttl_parse(BryUtl.NewA7("Empty_tab")));
 			rv = browser_win.Tab_mgr().Tabs_new_init(wiki, page);		// create at least one active tab; DATE:2014-07-30
 		}
 		return rv;

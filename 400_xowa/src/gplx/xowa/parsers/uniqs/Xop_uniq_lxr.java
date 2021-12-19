@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.uniqs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.uniqs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BryFind;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 // EX: "\u007fUNIQ-item-1-QINU\u007f"
 public class Xop_uniq_lxr implements Xop_lxr {
@@ -25,14 +29,14 @@ public class Xop_uniq_lxr implements Xop_lxr {
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		// find end
-		int rhs_bgn = Bry_find_.Find_fwd(src, Xop_uniq_mgr.Bry__uniq__add__end, cur_pos);
-		if (rhs_bgn == Bry_find_.Not_found) {
+		int rhs_bgn = BryFind.FindFwd(src, Xop_uniq_mgr.Bry__uniq__add__end, cur_pos);
+		if (rhs_bgn == BryFind.NotFound) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "uniq_mgr:unable to find uniq; src=~{0}", src);
 			return ctx.Lxr_make_txt_(cur_pos);
 		}
 		int rhs_end = rhs_bgn + Xop_uniq_mgr.Bry__uniq__add__end.length;
 
-		byte[] key = Bry_.Mid(src, bgn_pos, rhs_end);
+		byte[] key = BryLni.Mid(src, bgn_pos, rhs_end);
 		Xop_uniq_tkn uniq_tkn = new Xop_uniq_tkn(bgn_pos, rhs_end, key);
 		ctx.Subs_add(root, uniq_tkn);
 		return rhs_end;

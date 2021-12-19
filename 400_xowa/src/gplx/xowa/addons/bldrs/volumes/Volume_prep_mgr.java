@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.volumes; import gplx.*;
+package gplx.xowa.addons.bldrs.volumes;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 class Volume_prep_mgr {
 	private final Volume_page_loader loader;
 	private final Volume_page_itm tmp_page = new Volume_page_itm();
@@ -36,14 +38,14 @@ class Volume_prep_mgr {
 		List_adp files_list = tmp_page.File_list();
 		int files_len = files_list.Len();
 		for (int i = 0; i < files_len; ++i) {
-			Volume_make_itm file_itm = (Volume_make_itm)files_list.Get_at(i);
+			Volume_make_itm file_itm = (Volume_make_itm)files_list.GetAt(i);
 			list.Add(file_itm);
 		}
 		List_adp links_list = tmp_page.Link_list();
 		int links_len = links_list.Len();
 		for (int i = 0; i < links_len; ++i) {
 			if (ctx.Page_max != -1 && ctx.Page_count++ > ctx.Page_max) return;
-			Volume_make_itm link_itm = (Volume_make_itm)links_list.Get_at(i);
+			Volume_make_itm link_itm = (Volume_make_itm)links_list.GetAt(i);
 			list.Add(link_itm);
 			ctx.Depth_count++;
 			Calc_make(ctx, link_itm.Item_ttl);

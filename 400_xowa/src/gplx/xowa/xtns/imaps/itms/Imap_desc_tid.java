@@ -13,23 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps.itms; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.imaps.itms;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Imap_desc_tid {
 	public static final byte Tid_tr = 0, Tid_br = 1, Tid_bl = 2, Tid_tl = 3, Tid_none = 4, Tid_null = 5;
 	public static final byte[]
-	  Key_tr		= Bry_.new_a7("top-right")
-	, Key_br		= Bry_.new_a7("bottom-right")
-	, Key_bl		= Bry_.new_a7("bottom-left")
-	, Key_tl		= Bry_.new_a7("top-left")
-	, Key_none		= Bry_.new_a7("none")
+	  Key_tr		= BryUtl.NewA7("top-right")
+	, Key_br		= BryUtl.NewA7("bottom-right")
+	, Key_bl		= BryUtl.NewA7("bottom-left")
+	, Key_tl		= BryUtl.NewA7("top-left")
+	, Key_none		= BryUtl.NewA7("none")
 	;
 
 	public static byte Parse_to_tid(Btrie_slim_mgr trie, byte[] src, int bgn, int end) {
-		Object rv = trie.Match_bgn(src, bgn, end);
-		return rv == null ? Tid_null : ((Byte_obj_val)rv).Val();
+		Object rv = trie.MatchBgn(src, bgn, end);
+		return rv == null ? Tid_null : ((ByteVal)rv).Val();
 	}
 	public static void Calc_margins(Int_2_ref rv, byte tid, int html_w, int html_h) {
 		int margin_l 
@@ -59,12 +62,12 @@ public class Imap_desc_tid {
 	}
 	private static byte[][] Parse_lang_types(Xowe_wiki wiki) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj("imagemap_desc_types");
-		if (Bry_.Len_eq_0(val)) return null;					// no msg in lang; return;
-		byte[][] ary = Bry_split_.Split(val, AsciiByte.Comma);	// msg is 5 words concatenated by comma: EX:top-right,bottom-right-bottom-left,top-left,none
+		if (BryUtl.IsNullOrEmpty(val)) return null;					// no msg in lang; return;
+		byte[][] ary = BrySplit.Split(val, AsciiByte.Comma);	// msg is 5 words concatenated by comma: EX:top-right,bottom-right-bottom-left,top-left,none
 		int ary_len = ary.length;
 		if (ary_len != 5) wiki.Appe().Usr_dlg().Warn_many("", "", "imap_desc does not have 5 items; wiki=~{0} val=~{1}", wiki.Domain_bry(), val);
 		for (int i = 0; i < 5; ++i)
-			ary[i] = Bry_.Trim(ary[i]);							// note that items will have trailing ws; EX: "top-right, bottom-right, bottom-left, top-left, none"
+			ary[i] = BryUtl.Trim(ary[i]);							// note that items will have trailing ws; EX: "top-right, bottom-right, bottom-left, top-left, none"
 		return ary;
 	}
 }

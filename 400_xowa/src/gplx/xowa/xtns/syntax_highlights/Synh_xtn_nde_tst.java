@@ -15,69 +15,69 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.syntax_highlights;
 
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xop_fxt;
 import org.junit.Test;
 
 public class Synh_xtn_nde_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight>abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}
-	@Test  public void Text() {
+	@Test public void Text() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\">abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\" class=\"prettyprint lang-text\">abc</pre></div>");
 	}
-	@Test  public void Style_pre() {
+	@Test public void Style_pre() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight style=\"color:red;\">abc</syntaxHighlight>", "<div class=\"mw-highlight\" style=\"color:red;\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}
-	@Test  public void Style_code() {
+	@Test public void Style_code() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\" style=\"color:red;\">abc</syntaxHighlight>", "<div class=\"mw-highlight\" style=\"color:red;\"><pre style=\"overflow:auto\" class=\"prettyprint lang-text\">abc</pre></div>");
 	}
-	@Test  public void Trim_ws() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Trim_ws() {
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight>"
 		,	"abc"
 		,	"</syntaxHighlight>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		,	"abc"
 		,	"</pre></div>"
 		));
 	}
-	@Test  public void Line() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Line() {
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight line>"
 		,	"a"
 		,	"b"
 		,	"</syntaxHighlight>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		,	"<span style=\"-moz-user-select:none;\">1 </span><span>a</span>"
 		,	"<span style=\"-moz-user-select:none;\">2 </span><span>b</span>"
 		,	"</pre></div>"
 		));
 	}
-	@Test  public void Start() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Start() {
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight line start=3>"
 		,	"a"
 		,	"b"
 		,	"</syntaxHighlight>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		,	"<span style=\"-moz-user-select:none;\">3 </span><span>a</span>"
 		,	"<span style=\"-moz-user-select:none;\">4 </span><span>b</span>"
 		,	"</pre></div>"
 		));
 	}
-	@Test  public void Highlight() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Highlight() {
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight line highlight='1,3'>"
 		,	"a"
 		,	"b"
 		,	"c"
 		,	"</syntaxHighlight>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		,	"<span style=\"-moz-user-select:none;\">1 </span><span style=\"background-color: #FFFFCC;\">a</span>"
 		,	"<span style=\"-moz-user-select:none;\">2 </span><span>b</span>"
@@ -85,14 +85,14 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test  public void Highlight_wo_line_arg() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Highlight_wo_line_arg() {
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight highlight='1,3'>"
 		,	"a"
 		,	"b"
 		,	"c"
 		,	"</syntaxHighlight>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		,	"<span style=\"background-color: #FFFFCC;\">a</span>"
 		,	"<span>b</span>"
@@ -100,14 +100,14 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test  public void Enclose_none() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Enclose_none() {
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight enclose=none style='color:red'>"
 		,	"a"
 		,	"b"
 		,	"c"
 		,	"</syntaxHighlight>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<code class=\"mw-highlight\" style=\"color:red\">"
 		,	"a"
 		,	"b"
@@ -115,13 +115,13 @@ public class Synh_xtn_nde_tst {
 		,	"</code>"
 		));
 	}
-	@Test  public void Line_padded() {
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Line_padded() {
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight line start=9>"
 		,	"a"
 		,	"b"
 		,	"</syntaxHighlight>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		,	"<span style=\"-moz-user-select:none;\"> 9 </span><span>a</span>"
 		,	"<span style=\"-moz-user-select:none;\">10 </span><span>b</span>"
@@ -130,7 +130,7 @@ public class Synh_xtn_nde_tst {
 	}
 	@Test public void EndTag_has_ws() {	// PURPOSE: </syntaxhighlight > not being closed correctly; PAGE:en.w:Mergesort; updated; DATE:2014-06-24
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		(	"a"
 		,	"<syntaxhighlight>"
 		,	"b"
@@ -139,7 +139,7 @@ public class Synh_xtn_nde_tst {
 		,	"<syntaxhighlight>"
 		,	"d"
 		,	"</syntaxhighlight>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"<p>a"
 		,	"</p>"
 		,	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
@@ -155,20 +155,20 @@ public class Synh_xtn_nde_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Trim_ws_from_end_tab() {// PURPOSE: trim ws between "abc" and "</syntaxhighlight"; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+	@Test public void Trim_ws_from_end_tab() {// PURPOSE: trim ws between "abc" and "</syntaxhighlight"; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<syntaxHighlight>"
 		,	"abc"
 		,	"  </syntaxHighlight>"	// trim ws here
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
 		,	"abc"
 		,	"</pre></div>"
 		));
 	}
-	@Test  public void Pre() {// PURPOSE: handle pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
+	@Test public void Pre() {// PURPOSE: handle pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"a"
 		,   ""
 		,	" <syntaxHighlight>"
@@ -176,7 +176,7 @@ public class Synh_xtn_nde_tst {
 		,	" </syntaxHighlight>"	// trim ws here
 		,   ""
 		,	"c"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<p>a"
 		,	"</p>"
 		,	" <div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
@@ -191,7 +191,7 @@ public class Synh_xtn_nde_tst {
 	@Test public void Inline() {
 		// 2020-08-27|ISSUE#:794|inline should be enclose=none
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"a"
 		,   ""
 		,	" <syntaxHighlight inline>"
@@ -199,7 +199,7 @@ public class Synh_xtn_nde_tst {
 		,	" </syntaxHighlight>"	// trim ws here
 		,   ""
 		,	"c"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<p>a"
 		,	"</p>"
 		,	" <code class=\"mw-highlight\">" // fails with <div class="mw-highlight"><pre style="overflow:auto">

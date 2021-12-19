@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.utils; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.bldrs.centrals.utils;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 public class Time_dhms_ {
-	public static String To_str(Bry_bfr bfr, long val, boolean show_unit, int max_places) {To_bfr(bfr, val, show_unit, max_places); return bfr.To_str_and_clear();}
-	public static void To_bfr(Bry_bfr bfr, long val, boolean show_unit, int max_places) {
+	public static String To_str(BryWtr bfr, long val, boolean show_unit, int max_places) {To_bfr(bfr, val, show_unit, max_places); return bfr.ToStrAndClear();}
+	public static void To_bfr(BryWtr bfr, long val, boolean show_unit, int max_places) {
 		byte suffix = AsciiByte.Null;
 		int count = 0;
 		for (int i = 0; i < 4; ++i) {
@@ -38,16 +39,16 @@ public class Time_dhms_ {
 					&&	i != 3)					// unless it is the seconds place; need to handle "0 s" specifically
 					continue;
 				suffix = unit;					// set suffix
-				bfr.Add_int_variable(cur);		// write cur; note that this is not zero-padded
+				bfr.AddIntVariable(cur);		// write cur; note that this is not zero-padded
 			}
 			else {								// str exists
-				bfr.Add_int_pad_bgn(AsciiByte.Num0, 2, cur);	// write cur; note that this zero-padded; also, note will write "00" if cur == 0
+				bfr.AddIntPadBgn(AsciiByte.Num0, 2, cur);	// write cur; note that this zero-padded; also, note will write "00" if cur == 0
 			}
 			if (++count == max_places) break;	// stop if max-places reached; EX: 86400 should write 1:00, not 1:00:00:00
 			if (i != 3)							// do not add ":" if seconds
-				bfr.Add_byte_colon();
+				bfr.AddByteColon();
 		}
 		if (show_unit)	// add units; EX: " s" for seconds
-			bfr.Add_byte_space().Add_byte(suffix);
+			bfr.AddByteSpace().AddByte(suffix);
         }
 }

@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.draws; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.draws;
 import java.awt.Font;
-import java.awt.Toolkit;
-import gplx.core.strings.*; import gplx.core.envs.*; import gplx.gfui.controls.gxws.*;
+import gplx.core.envs.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.controls.gxws.*;
+import gplx.types.commons.String_bldr_;
+import gplx.types.errs.ErrUtl;
 public class FontAdp implements Gfo_invk {
 	public String Name() {return name;} public FontAdp Name_(String val) {name = val; InitUnder(); return this;} private String name;
 	public float Size() {return size;} public FontAdp Size_(float val) {size = val; InitUnder(); return this;} float size;
@@ -50,11 +56,11 @@ public class FontAdp implements Gfo_invk {
 		}
 		else return Gfo_invk_.Rv_unhandled;
 	}	static final String Invk_name_ = "name_", Invk_size_ = "size_", Invk_style_ = "style_";
-	@Override public String toString() {return String_bldr_.new_().Add_kv("name", name).Add_kv_obj("size", size).Add_kv_obj("style", style).To_str();}
+	@Override public String toString() {return String_bldr_.new_().AddKv("name", name).AddKvObj("size", size).AddKvObj("style", style).ToStr();}
 
 	public static final FontAdp NullPtr = null;
 	public static FontAdp as_(Object obj) {return obj instanceof FontAdp ? (FontAdp)obj : null;}
-	public static FontAdp cast(Object obj) {try {return (FontAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, FontAdp.class, obj);}}
+	public static FontAdp cast(Object obj) {try {return (FontAdp)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, FontAdp.class, obj);}}
 	public static FontAdp new_(String name, float size, FontStyleAdp style) {
 		FontAdp rv = new FontAdp();
 		rv.name = name; rv.size = size; rv.style = style;

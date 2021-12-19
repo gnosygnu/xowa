@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.ios;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import org.junit.*; import gplx.core.envs.*;
 public class Io_line_rdr_tst {
 	Io_line_rdr_fxt fxt;
@@ -47,35 +57,35 @@ public class Io_line_rdr_tst {
 }
 class Io_line_rdr_fxt {
 	Io_line_rdr rdr;
-	List_adp lines = List_adp_.New(); Bry_bfr tmp = Bry_bfr_.New();
+	List_adp lines = List_adp_.New(); BryWtr tmp = BryWtr.New();
 	public Io_line_rdr_fxt(Io_url... urls) {rdr = new Io_line_rdr(Gfo_usr_dlg_.Test(), urls);}
 	public Io_line_rdr_fxt Load_len_lines_(int v) {return Load_len_(v * 3);}	// 3: 2=##, 1=\n
 	public Io_line_rdr_fxt Load_len_(int v) {rdr.Load_len_(v); return this;}
 	public Io_line_rdr_fxt File_lines_(int count) {
 		for (int i = 0; i < count; i++)
-			tmp.Add_int_fixed(i, 2).Add_byte_nl();
-		Io_mgr.Instance.SaveFilBry(rdr.Urls()[0], tmp.To_bry_and_clear());
+			tmp.AddIntFixed(i, 2).AddByteNl();
+		Io_mgr.Instance.SaveFilBry(rdr.Urls()[0], tmp.ToBryAndClear());
 		return this;
 	}
 //	public Io_url[] Src_fils() {return src_fils;} public Io_line_rdr_fxt Src_fils_(Io_url[] v) {src_fils = v; return this;} Io_url[] src_fils;
 	public Io_line_rdr_fxt tst_Match(String match, String expd) {
 		rdr.Key_gen_(Io_line_rdr_key_gen_.first_pipe);
-		boolean match_v = rdr.Match(Bry_.new_u8(match));
-		String actl = match_v ? String_.new_u8(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end()) : "";
-		Tfds.Eq(expd, actl);
+		boolean match_v = rdr.Match(BryUtl.NewU8(match));
+		String actl = match_v ? StringUtl.NewU8(rdr.Bfr(), rdr.Key_pos_bgn(), rdr.Key_pos_end()) : "";
+		GfoTstr.EqObj(expd, actl);
 		return this;
 	}  
 	public Io_line_rdr_fxt File_lines_pipe_(int count) {
 		for (int i = 0; i < count; i++)
-			tmp.Add_int_fixed(i, 2).Add_byte(AsciiByte.Pipe).Add_byte_nl();
-		Io_mgr.Instance.SaveFilBry(rdr.Urls()[0], tmp.To_bry_and_clear());
+			tmp.AddIntFixed(i, 2).AddByte(AsciiByte.Pipe).AddByteNl();
+		Io_mgr.Instance.SaveFilBry(rdr.Urls()[0], tmp.ToBryAndClear());
 		return this;
 	}
 
 	public Io_line_rdr_fxt File_lines_(int fil_idx, int bgn, int end) {
 		for (int i = bgn; i < end; i++)
-			tmp.Add_int_fixed(i, 2).Add_byte_nl();
-		Io_mgr.Instance.SaveFilBry(rdr.Urls()[fil_idx], tmp.To_bry_and_clear());
+			tmp.AddIntFixed(i, 2).AddByteNl();
+		Io_mgr.Instance.SaveFilBry(rdr.Urls()[fil_idx], tmp.ToBryAndClear());
 		return this;
 	}
 	public Io_line_rdr_fxt Clear() {rdr.Clear(); return this;}
@@ -85,11 +95,11 @@ class Io_line_rdr_fxt {
 			expd[i] = expd[i] + Op_sys.Lnx.Nl_str();
 		for (int i = 0; i < count; i++) {
 			if (rdr.Read_next())
-				lines.Add(String_.new_u8(rdr.Bfr(), rdr.Itm_pos_bgn(), rdr.Itm_pos_end()));
+				lines.Add(StringUtl.NewU8(rdr.Bfr(), rdr.Itm_pos_bgn(), rdr.Itm_pos_end()));
 			else
 				break;
 		}
-		Tfds.Eq_ary_str(expd, lines.ToStrAry());
+		GfoTstr.EqLines(expd, lines.ToStrAry());
 		return this;
 	}		
 }

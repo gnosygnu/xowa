@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.quotes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.quotes;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*;
 public class Xomw_quote_wkr__tst {
 	private final Xomw_quote_wkr__fxt fxt = new Xomw_quote_wkr__fxt();
@@ -33,11 +37,11 @@ public class Xomw_quote_wkr__tst {
 	@Test public void Nl__text()      {fxt.Test__parse("a\nb''c''d\n\ne"             , "a\nb<i>c</i>d\n\ne");}
 }
 class Xomw_quote_wkr__fxt {
-	private final Xomw_quote_wkr wkr = new Xomw_quote_wkr(Bry_bfr_.New());
+	private final Xomw_quote_wkr wkr = new Xomw_quote_wkr(BryWtr.New());
 	private final XomwParserBfr pbfr = new XomwParserBfr();
 	public void Test__parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		wkr.doAllQuotes(new XomwParserCtx(), pbfr.Init(src_bry));
-		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
+		GfoTstr.EqLines(expd, pbfr.Rslt().ToStrAndClear(), src_str);
 	}
 }

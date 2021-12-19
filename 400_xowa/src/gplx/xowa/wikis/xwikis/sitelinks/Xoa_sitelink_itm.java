@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.wikis.xwikis.sitelinks;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.xowa.wikis.domains.*;
 public class Xoa_sitelink_itm {
 	public Xoa_sitelink_itm(Xoa_sitelink_grp grp, byte[] key, byte[] name) {
@@ -34,16 +36,16 @@ public class Xoa_sitelink_itm {
 		grp.Active_len__add();
 	}
 	public void Move_to(Xoa_sitelink_grp new_grp) {
-		if (Bry_.Eq(new_grp.Name(), grp.Name())) return; // same grp
+		if (BryLni.Eq(new_grp.Name(), grp.Name())) return; // same grp
 		grp.Del(key);
 		new_grp.Add(this);
 		this.grp = new_grp;
 	}
 	public void Grp_(Xoa_sitelink_grp v) {this.grp = v;}
 	public void Site_name_(byte[] v) {this.name = v;}
-	public void To_bfr(Bry_bfr bfr) {
-		bfr.Add_int_digits(1, Xoa_sitelink_mgr_parser.Tid__itm).Add_byte_pipe();
-		bfr.Add(key).Add_byte_pipe();
-		bfr.Add(name).Add_byte_nl();
+	public void To_bfr(BryWtr bfr) {
+		bfr.AddIntDigits(1, Xoa_sitelink_mgr_parser.Tid__itm).AddBytePipe();
+		bfr.Add(key).AddBytePipe();
+		bfr.Add(name).AddByteNl();
 	}
 }

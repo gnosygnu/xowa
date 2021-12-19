@@ -13,10 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.htmls;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
 import gplx.langs.mustaches.*;
 import gplx.xowa.wikis.pages.*;
 public class Html__dump_to_fsys__cmd extends Xob_cmd__base {
@@ -29,12 +41,12 @@ public class Html__dump_to_fsys__cmd extends Xob_cmd__base {
 		Mustache_tkn_parser parser = new Mustache_tkn_parser();
 		Mustache_tkn_itm root = parser.Parse(Io_mgr.Instance.LoadFilBry(template_url));
 		Mustache_render_ctx ctx = new Mustache_render_ctx();
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Mustache_bfr mbfr = new Mustache_bfr(bfr);
 		Html_page_itm page_itm = new Html_page_itm();
 
 		// load rdr
-		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.File_dump(page_root, Bry_.new_a7(".html"));
+		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.File_dump(page_root, BryUtl.NewA7(".html"));
 		wiki.Init_assert();
 		gplx.xowa.wikis.data.tbls.Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page();
 		Db_conn conn = page_tbl.Conn();
@@ -43,26 +55,26 @@ public class Html__dump_to_fsys__cmd extends Xob_cmd__base {
 			String page_ttl_str = rdr.Read_str("page_title");
 			try {
 				// load page
-				Xoa_ttl page_ttl = wiki.Ttl_parse(Bry_.new_u8(page_ttl_str));
-				DateAdp page_modified_on = DateAdp_.parse_fmt(rdr.Read_str("page_touched"), gplx.xowa.wikis.data.tbls.Xowd_page_tbl.Page_touched_fmt);
+				Xoa_ttl page_ttl = wiki.Ttl_parse(BryUtl.NewU8(page_ttl_str));
+				GfoDate page_modified_on = GfoDateUtl.ParseFmt(rdr.Read_str("page_touched"), gplx.xowa.wikis.data.tbls.Xowd_page_tbl.Page_touched_fmt);
 				Io_url dump_fil_url = Io_url_.new_fil_(fsys_root.Gen_sub_path_for_os(page_ttl_str) + ".html");
 				if (skip_unchanged && Io_mgr.Instance.QueryFil(dump_fil_url).ModifiedTime().Eq(page_modified_on)) continue;
 
 				// parse page
 				Xoae_page page = wiki.Data_mgr().Load_page_and_parse(wiki.Utl__url_parser().Parse(page_ttl.Page_db()), page_ttl);
 				wiki.Parser_mgr().Parse(page, true);
-				page.Wikie().Html_mgr().Page_wtr_mgr().Page_read_fmtr().Fmt_("~{page_data}");
+				page.Wikie().Html_mgr().Page_wtr_mgr().Page_read_fmtr().FmtSet("~{page_data}");
 				page.Wikie().Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_body(bfr, wiki.Parser_mgr().Ctx(), hctx, page);
-				byte[] html_src = bfr.To_bry_and_clear();//page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, gplx.xowa.wikis.pages.Xopg_view_mode_.Tid__read);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
+				byte[] html_src = bfr.ToBryAndClear();//page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, gplx.xowa.wikis.pages.Xopg_view_mode_.Tid__read);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
 				byte[] html_head = page.Html_data().Custom_head_tags().To_html__style(bfr);
 
 				// fmt with mustache; write to file
-				page_itm.Init(http_root, page_root, page_ttl.Page_txt(), html_head, Bry_.Empty, html_src);
+				page_itm.Init(http_root, page_root, page_ttl.Page_txt(), html_head, BryUtl.Empty, html_src);
 				root.Render(mbfr, ctx.Init(page_itm));
 				Io_mgr.Instance.SaveFilBry(dump_fil_url, mbfr.To_bry_and_clear());
 				Io_mgr.Instance.UpdateFilModifiedTime(dump_fil_url, page_modified_on);
 			} catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "err: ~{0}", Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "err: ~{0}", ErrUtl.ToStrLog(e));
 			}
 		}
 	}

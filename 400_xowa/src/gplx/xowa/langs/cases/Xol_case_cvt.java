@@ -15,11 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.cases;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public class Xol_case_cvt {
 	public static byte[] Upper_1st(byte[] src, int pos, int src_len, boolean reuse) {return Up_low_1st(src, pos, src_len, BoolUtl.Y, reuse);}
 	public static byte[] Upper_1st(byte[] src, int pos, int src_len) {return Up_low_1st(src, pos, src_len, BoolUtl.Y);}
@@ -28,10 +27,10 @@ public class Xol_case_cvt {
 		return Up_low_1st(src, pos, src_len, upper, BoolUtl.Y);
 	}
 	public static byte[] Up_low_1st(byte[] src, int pos, int src_len, boolean upper, boolean reuse) {
-		if (src_len == 0) return Bry_.Empty;
+		if (src_len == 0) return BryUtl.Empty;
 		byte b = src[pos];
-		int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
-		if (b_len > src_len) return Bry_.Empty; // bad unicode
+		int b_len = Utf8Utl.LenOfCharBy1stByte(b);
+		if (b_len > src_len) return BryUtl.Empty; // bad unicode
 		if (reuse) {
 			return Upper_Lower_1st(src, pos, src_len, b_len, upper);
 		}
@@ -60,22 +59,22 @@ public class Xol_case_cvt {
 			return src;
 		} else {
 			// need to rebuild the byte string
-			Bry_bfr tmp_bfr = Bry_bfr_.New();
-			tmp_bfr.Add_mid(src, 0, pos);
+			BryWtr tmp_bfr = BryWtr.New();
+			tmp_bfr.AddMid(src, 0, pos);
 			tmp_bfr.Add(ucase);
-			tmp_bfr.Add_mid(src, pos + b_len, src_len);
-			return tmp_bfr.To_bry_and_clear();
+			tmp_bfr.AddMid(src, pos + b_len, src_len);
+			return tmp_bfr.ToBryAndClear();
 		}
 	}
 
 	public static byte[] Uppercase(byte[] src, int src_len) {return Case_cvt(src, src_len, BoolUtl.Y);}
 	public static byte[] Lowercase(byte[] src, int src_len) {return Case_cvt(src, src_len, BoolUtl.N);}
 	public static byte[] Case_cvt(byte[] src, int src_len, boolean upper) {
-		Bry_bfr tmp_bfr = null;
+		BryWtr tmp_bfr = null;
 		int pos = 0;
 		while (pos < src_len) {
 			byte b = src[pos];
-			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+			int b_len = Utf8Utl.LenOfCharBy1stByte(b);
 			byte[] ucase;
 			if (upper)
 				ucase = Xol_case_cvt_.Upper(src, pos, b_len);
@@ -88,8 +87,8 @@ public class Xol_case_cvt {
 							src[pos+i] = ucase[i];
 					} else {
 						// need to rebuild the byte string
-						tmp_bfr = Bry_bfr_.New();
-						tmp_bfr.Add_mid(src, 0, pos);
+						tmp_bfr = BryWtr.New();
+						tmp_bfr.AddMid(src, 0, pos);
 						tmp_bfr.Add(ucase);
 					}
 				}
@@ -98,9 +97,9 @@ public class Xol_case_cvt {
 					tmp_bfr.Add(ucase);
 				} else {
 					if (b_len == 1)
-						tmp_bfr.Add_byte(b);
+						tmp_bfr.AddByte(b);
 					else
-						tmp_bfr.Add_mid(src, pos, pos + b_len);
+						tmp_bfr.AddMid(src, pos, pos + b_len);
 				}
 			}
 			pos += b_len;
@@ -108,6 +107,6 @@ public class Xol_case_cvt {
 		if (tmp_bfr == null)
 			return src;
 		else
-			return tmp_bfr.To_bry_and_clear();
+			return tmp_bfr.ToBryAndClear();
 	}
 }

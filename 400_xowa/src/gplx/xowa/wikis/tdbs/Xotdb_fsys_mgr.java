@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.bldrs.*;
+package gplx.xowa.wikis.tdbs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.utils.*;
 public class Xotdb_fsys_mgr {
@@ -36,7 +41,7 @@ public class Xotdb_fsys_mgr {
 	public Io_url Url_ns_fil(byte tid, int ns_id, int fil_idx) {
 		Xotdb_dir_info dir_info = dir_regy[tid];
 		String dir_name = dir_info.Name() + Xotdb_dir_info.Wtr_dir(dir_info.Ext_tid());
-		return Xotdb_fsys_mgr.Url_fil(ns_dir.GenSubDir_nest(Int_.To_str_pad_bgn_zero(ns_id, 3), dir_name), fil_idx, dir_regy[tid].Ext_bry());
+		return Xotdb_fsys_mgr.Url_fil(ns_dir.GenSubDir_nest(IntUtl.ToStrPadBgnZero(ns_id, 3), dir_name), fil_idx, dir_regy[tid].Ext_bry());
 	}
 	public Io_url Url_site_fil(byte tid, int fil_idx)	{return Xotdb_fsys_mgr.Url_fil(Url_site_dir(tid), fil_idx, Xotdb_dir_info_.Bry_xdat);}
 	public Io_url Url_site_reg(byte tid)				{return Url_site_dir(tid).GenSubFil(Xotdb_dir_info_.Name_reg_fil);}
@@ -58,10 +63,10 @@ public class Xotdb_fsys_mgr {
 		for (int i = 0; i < len; i++) {
 			Io_url dir = dirs[i];
 			String dir_name = dir.NameOnly();
-			if		(String_.Eq(dir_name, "page"))			{tid = gplx.core.ios.streams.Io_stream_tid_.Tid__raw; break;} 
-			else if	(String_.Eq(dir_name, "page_zip"))		tid = gplx.core.ios.streams.Io_stream_tid_.Tid__zip;
-			else if	(String_.Eq(dir_name, "page_gz"))		tid = gplx.core.ios.streams.Io_stream_tid_.Tid__gzip;
-			else if	(String_.Eq(dir_name, "page_bz2"))		tid = gplx.core.ios.streams.Io_stream_tid_.Tid__bzip2;
+			if		(StringUtl.Eq(dir_name, "page"))			{tid = gplx.core.ios.streams.Io_stream_tid_.Tid__raw; break;}
+			else if	(StringUtl.Eq(dir_name, "page_zip"))		tid = gplx.core.ios.streams.Io_stream_tid_.Tid__zip;
+			else if	(StringUtl.Eq(dir_name, "page_gz"))		tid = gplx.core.ios.streams.Io_stream_tid_.Tid__gzip;
+			else if	(StringUtl.Eq(dir_name, "page_bz2"))		tid = gplx.core.ios.streams.Io_stream_tid_.Tid__bzip2;
 		}
 		fsys_mgr.Tdb_dir_regy()[id].Ext_tid_(tid);
 	}
@@ -70,7 +75,7 @@ public class Xotdb_fsys_mgr {
 		int len = ns_dirs.length;
 		Hash_adp rv = Hash_adp_.New();
 		for (int i = 0; i < len; i++) {
-			int ns_int = Int_.Parse_or(ns_dirs[i].NameOnly(), Int_.Min_value); if (ns_int == Int_.Min_value) continue; 
+			int ns_int = IntUtl.ParseOr(ns_dirs[i].NameOnly(), IntUtl.MinValue); if (ns_int == IntUtl.MinValue) continue;
 			Xow_ns ns = ns_mgr.Ids_get_or_null(ns_int); if (ns == null) continue;
 			ns.Exists_(true);
 		}

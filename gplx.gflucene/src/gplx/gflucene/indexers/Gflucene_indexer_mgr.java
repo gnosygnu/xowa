@@ -13,23 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gflucene.indexers; import gplx.*; import gplx.gflucene.*;
-import gplx.gflucene.core.*;
-import java.io.IOException;
-import org.lukhnos.portmobile.file.Path;
-import org.lukhnos.portmobile.file.Paths;
-
+package gplx.gflucene.indexers;
+import gplx.gflucene.analyzers.Gflucene_analyzer_mgr_;
+import gplx.gflucene.core.Gflucene_doc_data;
+import gplx.gflucene.core.Gflucene_index_data;
+import gplx.types.errs.ErrUtl;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.*;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.FieldType;
+import org.apache.lucene.document.NumericDocValuesField;
+import org.apache.lucene.document.StoredField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.TieredMergePolicy;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-
-import gplx.gflucene.analyzers.*;;
+import org.lukhnos.portmobile.file.Path;
+import org.lukhnos.portmobile.file.Paths;
+import java.io.IOException;
+;
 public class Gflucene_indexer_mgr {
 		private Analyzer analyzer;
     private IndexWriterConfig config;
@@ -55,14 +60,14 @@ public class Gflucene_indexer_mgr {
         try {
 			this.index = FSDirectory.open(path);
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to open lucene index", "path", path);
-		}        
+			throw ErrUtl.NewArgs(e, "failed to open lucene index", "path", path);
+		}       
 
         // create writer
         try {
 			wtr = new IndexWriter(index, config);
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to create writer");
+			throw ErrUtl.NewArgs(e, "failed to create writer");
 		}
         
         // create field for body
@@ -95,19 +100,19 @@ public class Gflucene_indexer_mgr {
 	    try {
 			wtr.addDocument(doc);
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to add document", "title", doc_data.title);
+			throw ErrUtl.NewArgs(e, "failed to add document", "title", doc_data.title);
 		}
 			}
 	public void Term() {
 		        try {
 			wtr.close();
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to close writer");
+			throw ErrUtl.NewArgs(e, "failed to close writer");
 		}
         try {
 			index.close();
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to close writer");
+			throw ErrUtl.NewArgs(e, "failed to close writer");
 		}
 			}
 
@@ -118,7 +123,7 @@ public class Gflucene_indexer_mgr {
 			case Gflucene_idx_opt.Uid_docs_and_freqs:                           return IndexOptions.DOCS_AND_FREQS;
 			case Gflucene_idx_opt.Uid_docs_and_freqs_and_positions:             return IndexOptions.DOCS_AND_FREQS_AND_POSITIONS;
 			case Gflucene_idx_opt.Uid_docs_and_freqs_and_positions_and_offsets: return IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS;
-			default:                                                            throw Err_.new_unhandled_default(opt.Uid());
+			default:                                                            throw ErrUtl.NewUnhandled(opt.Uid());
 		}
 	}
 	}

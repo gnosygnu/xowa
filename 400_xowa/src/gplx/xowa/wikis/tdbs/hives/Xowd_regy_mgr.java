@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.wikis.tdbs.hives;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.wikis.tdbs.*;
 public class Xowd_regy_mgr {
 	public static final int Not_found = -1;
@@ -40,20 +46,20 @@ public class Xowd_regy_mgr {
 	public Xowd_hive_regy_itm Update_add(int fil_idx, byte[] key) {
 		Xowd_hive_regy_itm rv = files_ary[fil_idx];
 		rv.Count_(rv.Count() + 1);
-		if 		(Bry_.Compare(key, rv.Bgn()) < CompareAbleUtl.Same)
+		if 		(BryUtl.Compare(key, rv.Bgn()) < CompareAbleUtl.Same)
 			rv.Bgn_(key);
-		else if (Bry_.Compare(key, rv.End()) > CompareAbleUtl.Same)
+		else if (BryUtl.Compare(key, rv.End()) > CompareAbleUtl.Same)
 			rv.End_(key);
 		return rv;
 	}
 	public boolean Update_change(int fil_idx, byte[] old_key, byte[] new_key) {
 		Xowd_hive_regy_itm rv = files_ary[fil_idx];
 		boolean changed = false;
-		if 		(Bry_.Eq(old_key, rv.Bgn())) {
+		if 		(BryLni.Eq(old_key, rv.Bgn())) {
 			rv.Bgn_(new_key);
 			changed = true;
 		}
-		else if (Bry_.Eq(old_key, rv.End())) {
+		else if (BryLni.Eq(old_key, rv.End())) {
 			rv.End_(new_key);
 			changed = true;
 		}
@@ -62,10 +68,10 @@ public class Xowd_regy_mgr {
 	public Xowd_hive_regy_itm Update_del(int fil_idx, byte[] key) {
 		Xowd_hive_regy_itm itm = files_ary[fil_idx];
 		itm.Count_(itm.Count() - 1);
-		throw Err_.new_unimplemented();	// FUTURE: note that deletes are harder; rng ends could be deleted, so would need to open file and get new rng end
+		throw ErrUtl.NewUnimplemented();	// FUTURE: note that deletes are harder; rng ends could be deleted, so would need to open file and get new rng end
 	}
 	public void Save() {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = files_ary.length;
 		for (int i = 0; i < len; i++) {
 			Xowd_hive_regy_itm itm = files_ary[i];

@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.skins; import gplx.*;
+package gplx.xowa.htmls.skins;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 class Xoh_skin_regy {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Len() {return hash.Len();}
-	public Xoh_skin_itm Get_at(int i) {return (Xoh_skin_itm)hash.Get_at(i);}
+	public Xoh_skin_itm Get_at(int i) {return (Xoh_skin_itm)hash.GetAt(i);}
 	public Xoh_skin_itm Get_by_key(String key) {return (Xoh_skin_itm)hash.GetByOrNull(key);}
 	public void Set(String key, String fmt) {
 		Xoh_skin_itm itm = Get_by_key(key);

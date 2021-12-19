@@ -15,11 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.exception;
 
-import gplx.Err;
-import gplx.String_;
-
+import gplx.types.errs.Err;
+import gplx.types.basics.utls.StringUtl;
 public class XomwUnexpectedValueException extends Err {
 	public XomwUnexpectedValueException(String fmt, Object... args) {
-		super(true, "", "", String_.Format(fmt, args));
+		super(StringUtl.Format(fmt, args));
 	}
 }

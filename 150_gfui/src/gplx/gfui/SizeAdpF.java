@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
+package gplx.gfui;
 import gplx.core.interfaces.*;
+import gplx.types.basics.utls.StringUtl;
 public class SizeAdpF implements ParseAble {
 	public float Width() {return width;} float width;
 	public float Height() {return height;} float height;
 	public Object ParseAsObj(String raw) {return SizeAdp_.parse(raw);}
-	@Override public String toString() {return String_.Concat_any(width, ":", height);}
-	@gplx.Internal protected SizeAdpF(float width, float height) {this.width = width; this.height = height;}
+	@Override public String toString() {return StringUtl.ConcatObjs(width, ":", height);}
+	public SizeAdpF(float width, float height) {this.width = width; this.height = height;}
 }

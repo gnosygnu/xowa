@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.directorys.specials.items.bldrs;
-import gplx.Guid_adp_;
+import gplx.types.commons.GfoGuidUtl;
 import gplx.core.ios.streams.Io_stream_tid_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.DbmetaFldItm;
@@ -26,7 +26,7 @@ import gplx.fsdb.meta.Fsm_atr_tbl;
 import gplx.fsdb.meta.Fsm_bin_tbl;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
 import gplx.fsdb.meta.Fsm_mnt_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_link_tbl;
 import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_cfg_;
 import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr;
@@ -92,7 +92,7 @@ public class Xow_db_mkr {
 		cfg_tbl.Upsert_int(Srch_db_cfg_.Grp__search__cfg, Srch_db_cfg_.Key__version_id, Srch_db_upgrade.Version__link_score);
 
 		// insert data: wiki
-		Xowd_xowa_db_tbl.Get_by_key(core_db).Upsert(0, Xow_db_file_.Tid__core, core_db.Url().NameAndExt(), "", -1, Guid_adp_.New_str());
+		Xowd_xowa_db_tbl.Get_by_key(core_db).Upsert(0, Xow_db_file_.Tid__core, core_db.Url().NameAndExt(), "", -1, GfoGuidUtl.NewAsstr());
 		Xowd_site_ns_tbl.Get_by_key(core_db).Insert(Xow_ns_mgr_.default_(Xol_case_mgr_.U8()));
 		Xowd_site_stats_tbl.Get_by_key(core_db).Update(0, 0, 0);
 

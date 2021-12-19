@@ -14,15 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfh_wtr {
-	private Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private BryWtr bfr = BryWtr.NewAndReset(255);
 	private List_adp nde_stack = List_adp_.New();
 	public byte Atr_quote() {return atr_quote;} public Gfh_wtr Atr_quote_(byte v) {atr_quote = v; return this;} private byte atr_quote = AsciiByte.Quote;
 	public Gfh_wtr Nde_full_atrs(byte[] tag, byte[] text, boolean text_escape, byte[]... atrs) {
@@ -47,8 +46,8 @@ public class Gfh_wtr {
 		Nde_end();
 		return this;
 	}
-	public Gfh_wtr Txt_mid(byte[] src, int bgn, int end) {bfr.Add_mid(src, bgn, end); return this;}
-	public Gfh_wtr Txt_byte(byte v) {bfr.Add_byte(v); return this;}
+	public Gfh_wtr Txt_mid(byte[] src, int bgn, int end) {bfr.AddMid(src, bgn, end); return this;}
+	public Gfh_wtr Txt_byte(byte v) {bfr.AddByte(v); return this;}
 	public Gfh_wtr Txt_raw(byte[] v) {bfr.Add(v); return this;}
 	public Gfh_wtr Txt(byte[] v) {
 		if (v != null) {
@@ -62,7 +61,7 @@ public class Gfh_wtr {
 		return this;
 	}
 	public Gfh_wtr Nde_bgn(byte[] name) {
-		bfr.Add_byte(AsciiByte.Lt);
+		bfr.AddByte(AsciiByte.Lt);
 		bfr.Add(name);
 		nde_stack.Add(name);
 		return this;
@@ -72,41 +71,41 @@ public class Gfh_wtr {
 		return this;
 	}
 	public Gfh_wtr Nde_end_inline() {
-		bfr.Add_byte(AsciiByte.Slash).Add_byte(AsciiByte.Gt);
-		List_adp_.Pop_last(nde_stack);
+		bfr.AddByte(AsciiByte.Slash).AddByte(AsciiByte.Gt);
+		List_adp_.PopLast(nde_stack);
 		return this;
 	}
 	public Gfh_wtr Nde_end_hdr() {
-		bfr.Add_byte(AsciiByte.Gt);
+		bfr.AddByte(AsciiByte.Gt);
 		return this;
 	}
 	public Gfh_wtr Nde_end() {
-		byte[] name = (byte[])List_adp_.Pop_last(nde_stack);
-		bfr.Add_byte(AsciiByte.Lt).Add_byte(AsciiByte.Slash);
+		byte[] name = (byte[])List_adp_.PopLast(nde_stack);
+		bfr.AddByte(AsciiByte.Lt).AddByte(AsciiByte.Slash);
 		bfr.Add(name);
-		bfr.Add_byte(AsciiByte.Gt);
+		bfr.AddByte(AsciiByte.Gt);
 		return this;
 	}
-	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
-	public byte[] Xto_bry() {return bfr.To_bry();}
-	public String Xto_str() {return bfr.To_str();}
-	public static void Write_atr_bry(Bry_bfr bfr, byte[] key, byte[] val) {Write_atr_bry(bfr, BoolUtl.Y, AsciiByte.Quote, key, val);}
-	public static void Write_atr_bry(Bry_bfr bfr, boolean write_space, byte atr_quote, byte[] key, byte[] val) {
-		if (Bry_.Len_eq_0(val)) return;	// don't write empty
-		if (write_space) bfr.Add_byte_space();
+	public byte[] To_bry_and_clear() {return bfr.ToBryAndClear();}
+	public byte[] Xto_bry() {return bfr.ToBry();}
+	public String Xto_str() {return bfr.ToStr();}
+	public static void Write_atr_bry(BryWtr bfr, byte[] key, byte[] val) {Write_atr_bry(bfr, BoolUtl.Y, AsciiByte.Quote, key, val);}
+	public static void Write_atr_bry(BryWtr bfr, boolean write_space, byte atr_quote, byte[] key, byte[] val) {
+		if (BryUtl.IsNullOrEmpty(val)) return;	// don't write empty
+		if (write_space) bfr.AddByteSpace();
 		bfr.Add(key);
-		bfr.Add_byte(AsciiByte.Eq);
-		bfr.Add_byte(atr_quote);
+		bfr.AddByte(AsciiByte.Eq);
+		bfr.AddByte(atr_quote);
 		Gfh_utl.Escape_html_to_bfr(bfr, val, 0, val.length, false, false, false, true, true);
-		bfr.Add_byte(atr_quote);
+		bfr.AddByte(atr_quote);
 	}
-	public static void Write_atr_int(Bry_bfr bfr, byte[] key, int val) {Write_atr_int(bfr, BoolUtl.Y, AsciiByte.Quote, key, val);}
-	public static void Write_atr_int(Bry_bfr bfr, boolean write_space, byte atr_quote, byte[] key, int val) {
-		if (write_space) bfr.Add_byte_space();
+	public static void Write_atr_int(BryWtr bfr, byte[] key, int val) {Write_atr_int(bfr, BoolUtl.Y, AsciiByte.Quote, key, val);}
+	public static void Write_atr_int(BryWtr bfr, boolean write_space, byte atr_quote, byte[] key, int val) {
+		if (write_space) bfr.AddByteSpace();
 		bfr.Add(key);
-		bfr.Add_byte(AsciiByte.Eq);
-		bfr.Add_byte(atr_quote);
-		bfr.Add_int_variable(val);
-		bfr.Add_byte(atr_quote);
+		bfr.AddByte(AsciiByte.Eq);
+		bfr.AddByte(atr_quote);
+		bfr.AddIntVariable(val);
+		bfr.AddByte(atr_quote);
 	}
 }

@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.app_cfgs; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.strings.*;
+package gplx.xowa.addons.bldrs.app_cfgs;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.xowa.*;
+import org.junit.*;
 public class Xob_wiki_cfg_bldr_tst {
 	Xob_wiki_cfg_bldr_fxt fxt = new Xob_wiki_cfg_bldr_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -23,7 +34,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			.Init_cmd("en.wikipedia.org", "key1", "en.val1")
 			.Init_cmd("fr.wikipedia.org", "key0", "fr.val0")
 			.Init_cmd("fr.wikipedia.org", "key1", "fr.val1")
-			.Expd_txt("en.wikipedia.org", String_.Concat_lines_nl
+			.Expd_txt("en.wikipedia.org", StringUtl.ConcatLinesNl
 			(	"// key0.bgn"
 			,	"en.val0"
 			,	"// key0.end"
@@ -31,7 +42,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			,	"en.val1"
 			,	"// key1.end"
 			))
-			.Expd_txt("fr.wikipedia.org", String_.Concat_lines_nl
+			.Expd_txt("fr.wikipedia.org", StringUtl.ConcatLinesNl
 			(	"// key0.bgn"
 			,	"fr.val0"
 			,	"// key0.end"
@@ -43,7 +54,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			;
 		fxt	.Clear()
 			.Init_cmd("en.wikipedia.org", "key2", "en.val2")
-			.Expd_txt("en.wikipedia.org", String_.Concat_lines_nl
+			.Expd_txt("en.wikipedia.org", StringUtl.ConcatLinesNl
 			(	"// key0.bgn"
 			,	"en.val0"
 			,	"// key0.end"
@@ -91,7 +102,7 @@ public class Xob_wiki_cfg_bldr_tst {
 //		}
 	@Test public void Ns_aliases() {
 		Io_mgr.Instance.InitEngine_mem();
-		Io_mgr.Instance.SaveFilStr("mem/en.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases", String_.Concat_lines_nl
+		Io_mgr.Instance.SaveFilStr("mem/en.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases", StringUtl.ConcatLinesNl
 		(	"<api>"
 		,	"<query>"
 		,	"<namespacealiases>"
@@ -108,7 +119,7 @@ public class Xob_wiki_cfg_bldr_tst {
 		,	"</api>"
 		));
 		String[] wikis = new String[] {"en.wikipedia.org"}; String protocol = "mem/";
-		Tfds.Eq_str_lines(Query_ns(protocol, gplx.core.ios.IoEngine_.MemKey, wikis), String_.Concat_lines_nl
+		GfoTstr.EqLines(Query_ns(protocol, gplx.core.ios.IoEngine_.MemKey, wikis), StringUtl.ConcatLinesNl
 		(	"app.bldr.wiki_cfg_bldr.get('en.wikipedia.org').new_cmd_('wiki.ns_mgr.aliases', 'ns_mgr.add_alias_bulk(\""
 		,	"4|WP"
 		,	"5|WT"
@@ -122,10 +133,10 @@ public class Xob_wiki_cfg_bldr_tst {
 		int wikis_len = wikis.length;
 		for (int i = 0; i < wikis_len; i++) {
 			String wiki = wikis[i];
-			if (String_.Len_eq_0(wiki)) continue;
+			if (StringUtl.IsNullOrEmpty(wiki)) continue;
 			try {
 			String api = protocol + wiki + "/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases";
-			String xml = String_.new_u8(Io_mgr.Instance.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(api));
+			String xml = StringUtl.NewU8(Io_mgr.Instance.DownloadFil_args("", null).Trg_engine_key_(trg_engine_key).Exec_as_bry(api));
 			if (xml == null) continue;	// not found
 			gplx.langs.xmls.XmlDoc xdoc = gplx.langs.xmls.XmlDoc_.parse(xml);
 			gplx.langs.xmls.XmlNde xnde = gplx.langs.xmls.Xpath_.SelectFirst(xdoc.Root(), "query/namespacealiases");
@@ -133,16 +144,16 @@ public class Xob_wiki_cfg_bldr_tst {
 			int xndes_len = xnde.SubNdes().Count();
 			for (int j = 0; j < xndes_len; j++) {
 				gplx.langs.xmls.XmlNde ns_nde = xnde.SubNdes().Get_at(j);
-				if (!String_.Eq(ns_nde.Name(), "ns")) continue;
-				int id = Int_.Parse(ns_nde.Atrs().FetchValOr("id", "-1"));
-				String name = String_.Replace(String_.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
-				sb.Add(Int_.To_str(id)).Add("|").Add(String_.Trim(name)).Add_char_nl();
+				if (!StringUtl.Eq(ns_nde.Name(), "ns")) continue;
+				int id = IntUtl.Parse(ns_nde.Atrs().FetchValOr("id", "-1"));
+				String name = StringUtl.Replace(StringUtl.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
+				sb.Add(IntUtl.ToStr(id)).Add("|").Add(StringUtl.Trim(name)).AddCharNl();
 			}
 			sb.Add("\");');\n");
 			}
-			catch(Exception e) {sb.Add("// fail: " + wiki + " " + Err_.Message_gplx_full(e)).Add_char_nl();}
+			catch(Exception e) {sb.Add("// fail: " + wiki + " " + ErrUtl.ToStrFull(e)).AddCharNl();}
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 }
 class Xob_wiki_cfg_bldr_fxt {
@@ -160,18 +171,18 @@ class Xob_wiki_cfg_bldr_fxt {
 		return this;
 	}
 	public Xob_wiki_cfg_bldr_fxt Expd_txt(String wiki, String text) {
-		hash.Add(wiki, Keyval_.new_(wiki, text));
+		hash.Add(wiki, KeyVal.NewStr(wiki, text));
 		return this;
 	}
 	public void Test() {
 		wiki_cfg_bldr.Exec();
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Keyval kv = (Keyval)hash.Get_at(i);
-			String wiki = kv.Key();
+			KeyVal kv = (KeyVal)hash.GetAt(i);
+			String wiki = kv.KeyToStr();
 			String expd = (String)kv.Val();
 			String actl = Io_mgr.Instance.LoadFilStr(app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(wiki + ".gfs"));
-			Tfds.Eq_str_lines(expd, actl);
+			GfoTstr.EqLines(expd, actl);
 		}
 	}
 }

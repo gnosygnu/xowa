@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*;
+package gplx.xowa.files;
 import gplx.langs.htmls.encoders.*; import gplx.core.security.algos.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.constants.AsciiByte;
 public class Xof_file_wkr_ {
 	private static final Hash_algo md5_hash = Hash_algo_.New__md5();
 	public static final Gfo_url_encoder Md5_decoder = Gfo_url_encoder_.New__http_url().Init__same__many(AsciiByte.Plus).Make();
@@ -45,7 +46,7 @@ public class Xof_file_wkr_ {
 			if (b == AsciiByte.Space) {
 				if (!dirty) {
 					dirty = true;
-					rv = new byte[len]; Bry_.Copy_to(src, 0, i, rv, 0);
+					rv = new byte[len]; BryLni.CopyTo(src, 0, i, rv, 0);
 				}
 				rv[i] = AsciiByte.Underline;
 			}

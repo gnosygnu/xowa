@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.Converter; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.vendor.*; import gplx.xowa.mediawiki.vendor.wikimedia.*; import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.*; import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.*;
+package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.Converter;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.*;
 // MW.SRC:1.33.1
 /**
 * Helper for Converter.
@@ -33,10 +35,10 @@ public class XomwExpression extends XomwFragment { 	/** @var String */
 	}
 
 	public boolean isType(String type) {
-		if (String_.Eq(type, "range") && (String_.Eq(this.type, "range") || String_.Eq(this.type, "number"))) {
+		if (StringUtl.Eq(type, "range") && (StringUtl.Eq(this.type, "range") || StringUtl.Eq(this.type, "number"))) {
 			return true;
 		}
-		if (String_.Eq(type, this.type)) {
+		if (StringUtl.Eq(type, this.type)) {
 			return true;
 		}
 

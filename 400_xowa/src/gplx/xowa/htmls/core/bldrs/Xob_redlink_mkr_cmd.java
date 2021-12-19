@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
+package gplx.xowa.htmls.core.bldrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
@@ -24,7 +30,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 	public String Cmd_key() {return Xob_cmd_keys.Key_html_redlinks;}
 	public void Cmd_run() {Read_data();}
 	private void Read_data() {
-		Bry_bfr bfr = Bry_bfr_.Reset(255);
+		BryWtr bfr = BryWtr.NewAndReset(255);
 		wiki.Init_assert();
 		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
 		Xob_db_file link_dump_db = Xob_db_file.New__redlink(wiki.Fsys_mgr().Root_dir());
@@ -49,12 +55,12 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 				int page_id = rdr.Read_int(page_tbl.Fld_page_id());
 				if (cur_page_id != page_id) {
 					if (cur_page_id != -1) Commit(redlink_tbl, cur_page_id, bfr);
-					bfr.Add_int_variable(2).Add_byte_pipe();	// 2=gplx.xowa.htmls.core.makes.imgs.Xohd_img_tid.Tid_redlink
+					bfr.AddIntVariable(2).AddBytePipe();	// 2=gplx.xowa.htmls.core.makes.imgs.Xohd_img_tid.Tid_redlink
 					cur_page_id = page_id;
 				}
 				// add html_uid to cur_page's bfr
 				int html_uid = rdr.Read_int(Xob_link_dump_tbl.Fld_src_html_uid);
-				bfr.Add_int_variable(html_uid).Add_byte_pipe();
+				bfr.AddIntVariable(html_uid).AddBytePipe();
 			}
 		}
 		finally {rdr.Rls();}
@@ -62,13 +68,13 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		redlink_tbl.Conn().Txn_end();				// close cur tbl
 		attach_mgr.Detach();
 	}
-	private void Commit(Xoh_redlink_tbl redlink_tbl, int cur_page_id, Bry_bfr bfr) {
-		redlink_tbl.Insert(cur_page_id, bfr.To_bry_and_clear());
+	private void Commit(Xoh_redlink_tbl redlink_tbl, int cur_page_id, BryWtr bfr) {
+		redlink_tbl.Insert(cur_page_id, bfr.ToBryAndClear());
 		++commit_count;
 		if ((commit_count % commit_interval ) == 0)
 			redlink_tbl.Conn().Txn_sav();
 	}
-	private static final String Sql_select_clause = String_.Concat_lines_nl_skip_last
+	private static final String Sql_select_clause = StringUtl.ConcatLinesNlSkipLast
 	( "SELECT p.page_html_db_id"
 	, ",      p.page_id"
 	, ",      ld.src_html_uid"

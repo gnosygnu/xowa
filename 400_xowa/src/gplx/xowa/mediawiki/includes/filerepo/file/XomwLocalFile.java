@@ -2391,7 +2391,7 @@ public class XomwLocalFile extends XomwFile {//		static final VERSION = 10; // c
 //
 //			result = this.file.repo.fileExistsBatch( files );
 //			if ( in_array( null, result, true ) ) {
-//				return Status::newFatal( 'backend-fail-@gplx.Internal protected',
+//				return Status::newFatal( 'backend-fail-@gplx.frameworks.objects.Internal protected',
 //					this.file.repo.getBackend().getName() );
 //			}
 //
@@ -2727,7 +2727,7 @@ public class XomwLocalFile extends XomwFile {//		static final VERSION = 10; // c
 //
 //			result = this.file.repo.fileExistsBatch( files );
 //			if ( in_array( null, result, true ) ) {
-//				return Status::newFatal( 'backend-fail-@gplx.Internal protected',
+//				return Status::newFatal( 'backend-fail-@gplx.frameworks.objects.Internal protected',
 //					this.file.repo.getBackend().getName() );
 //			}
 //
@@ -3076,7 +3076,7 @@ public class XomwLocalFile extends XomwFile {//		static final VERSION = 10; // c
 //
 //			result = this.file.repo.fileExistsBatch( files );
 //			if ( in_array( null, result, true ) ) {
-//				return Status::newFatal( 'backend-fail-@gplx.Internal protected',
+//				return Status::newFatal( 'backend-fail-@gplx.frameworks.objects.Internal protected',
 //					this.file.repo.getBackend().getName() );
 //			}
 //

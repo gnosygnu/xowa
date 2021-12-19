@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.windows;
+import gplx.frameworks.invks.GfsCtx;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
-import gplx.*; import gplx.gfui.*;
 import gplx.gfui.kits.core.GfuiEnv_;
 import gplx.langs.gfs.GfsCore;
+import gplx.types.errs.ErrUtl;
 public class GxwBorderFactory {
 	public static final javax.swing.border.Border Empty = new EmptyBorder(0, 0, 1, 0);	
 }
@@ -29,7 +30,7 @@ class GfuiMenuBarItmCmd implements ActionListener {
 			GfsCore.Instance.ExecOne(GfsCtx.Instance, GfuiMenuBarItm.CmdMsg(itm));
 		}
 		catch (Exception e) {
-			GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));
+			GfuiEnv_.ShowMsg(ErrUtl.ToStrFull(e));
 		}
 	}
 	public static GfuiMenuBarItmCmd new_(GfuiMenuBarItm itm) {

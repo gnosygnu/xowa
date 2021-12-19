@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Php_itm_kv implements Php_itm, Php_itm_sub {
 	public byte Itm_tid() {return Php_itm_.Tid_kv;}
 	public byte[] Val_obj_bry() {return null;}
@@ -22,7 +24,7 @@ public class Php_itm_kv implements Php_itm, Php_itm_sub {
 
 	private List_adp comments;
 	public int Comments__len() {return comments == null ? 0 : comments.Len();} 
-	public Php_tkn_comment Comments__get_at__or_null(int i) {return comments == null ? null : (Php_tkn_comment)comments.Get_at(0);} 
+	public Php_tkn_comment Comments__get_at__or_null(int i) {return comments == null ? null : (Php_tkn_comment)comments.GetAt(0);}
 	public void Comments__add(Php_tkn comment) {
 		if (comments == null) {
 			comments = List_adp_.New();

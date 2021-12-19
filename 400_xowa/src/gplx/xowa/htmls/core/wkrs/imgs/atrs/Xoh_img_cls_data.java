@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
+package gplx.xowa.htmls.core.wkrs.imgs.atrs;
+import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
-import gplx.objects.strings.AsciiByte;
-public class Xoh_img_cls_data implements Bfr_arg_clearable {
+import gplx.types.custom.brys.wtrs.args.BryBfrArgClearable;
+import gplx.types.custom.brys.rdrs.BryRdrErrWkr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+public class Xoh_img_cls_data implements BryBfrArgClearable {
 	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] src;
 	public byte Cls_tid() {return cls_tid;} private byte cls_tid;
@@ -32,7 +35,7 @@ public class Xoh_img_cls_data implements Bfr_arg_clearable {
 		this.src = src;
 		this.cls_tid = (byte)cls_tid; this.other_bgn = other_bgn; this.other_end = other_end;
 	}
-	public void Init_by_parse(Bry_err_wkr err_wkr, byte[] src, Gfh_tag tag) {
+	public void Init_by_parse(BryRdrErrWkr err_wkr, byte[] src, Gfh_tag tag) {
 		this.Clear();
 		Gfh_atr atr = tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__class);		// EX: class='thumbborder'
 		int src_bgn = atr.Val_bgn();
@@ -51,10 +54,10 @@ public class Xoh_img_cls_data implements Bfr_arg_clearable {
 			this.other_end = src_end;
 		}
 	}
-	public void Bfr_arg__clear()	{this.Clear();}
-	public boolean Bfr_arg__missing()	{return cls_tid == Xoh_img_cls_.Tid__none && other_end <= other_bgn;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
-		if (Bfr_arg__missing()) return;
+	public void BfrArgClear()	{this.Clear();}
+	public boolean BfrArgIsMissing()	{return cls_tid == Xoh_img_cls_.Tid__none && other_end <= other_bgn;}
+	public void AddToBfr(BryWtr bfr) {
+		if (BfrArgIsMissing()) return;
 		byte[] cls = null;
 		switch (cls_tid) {
 			case Xoh_img_cls_.Tid__thumbimage:	cls = Xoh_img_cls_.Bry__thumbimage; break;
@@ -63,8 +66,8 @@ public class Xoh_img_cls_data implements Bfr_arg_clearable {
 		if (cls != null)
 			bfr.Add(cls);
 		if (other_end > other_bgn) {
-			if (cls != null) bfr.Add_byte_space();
-			bfr.Add_mid(src, other_bgn, other_end);
+			if (cls != null) bfr.AddByteSpace();
+			bfr.AddMid(src, other_bgn, other_end);
 		}
 	}
 }

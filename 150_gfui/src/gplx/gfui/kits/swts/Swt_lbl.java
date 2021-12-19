@@ -13,20 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwElem;
-
+import gplx.types.commons.KeyValHash;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 public class Swt_lbl implements GxwElem, Swt_control {
 	private Label lbl;
-	public Swt_lbl(Swt_control owner, Keyval_hash ctorArgs) {
+	public Swt_lbl(Swt_control owner, KeyValHash ctorArgs) {
 		lbl = new Label(owner.Under_composite(), SWT.CENTER);
 		core = new Swt_core__basic(lbl);
 		lbl.addKeyListener(new Swt_lnr_key(this));

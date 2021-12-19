@@ -13,21 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_xnde_wkr__err_misc_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test public void Error_br_removed() {
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th><span>a</span><br/><span>b</span>"
 			,	"    </th>"
 			,	"  </tr>"
 			,	"</table>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <th><span>a</span><br/><span>b</span>"
@@ -40,7 +42,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 	}
 	@Test public void Div_should_not_pop_past_td() {	// PURPOSE: extra </div> should not close <div> that is outside of <td>; PAGE:en.w:Rome en.w:Ankara
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,		"<tr>"
 			,			"<td>"
@@ -70,7 +72,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 			,			"</td>"
 			,		"</tr>"
 			,	"</table>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -112,14 +114,14 @@ public class Xop_xnde_wkr__err_misc_tst {
 		fxt.Init_para_n_();
 	}
 	@Test public void Xnde_pops() {	// PURPOSE: somehow xnde pops upper nde; PAGE:en.w:Greek government debt crisis; "History of government debt"
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<i>"
 			,	"{|"
 			,	"|-"
 			,	"|<i>a</i>"
 			,	"|}"
 			,	"</i>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<i>"
 			,	"<table>"
 			,	"  <tr>"
@@ -137,7 +139,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 			);
 	}
 	@Test public void Xnde_para() {	// PURPOSE: buggy code caused </p> to close everything; keeping test b/c of <p> logic
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"<tr>"
 			,	"<td>"
@@ -150,7 +152,7 @@ public class Xop_xnde_wkr__err_misc_tst {
 			,	"</td>"
 			,	"</tr>"
 			,	"</table>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>"
@@ -179,16 +181,16 @@ public class Xop_xnde_wkr__err_misc_tst {
 	@Test public void Loose_xnde_names() {	// PURPOSE: MW allows <font-> and other variations; EX:w:2012_in_film
 		fxt.Test_parse_page_all_str("<font-size='100%'>a</font>", "<font>a</font>");
 	}
-	@Test  public void Anchor_nested() {
+	@Test public void Anchor_nested() {
 		fxt.Test_parse_page_all_str("b<a>c<a>d [[e]] f", "b&lt;a>c&lt;a>d <a href=\"/wiki/E\">e</a> f");
 	}
-	@Test  public void Img_should_not_be_xtn() {	// PURPOSE:<img> marked as .xtn; unclosed <img> was escaping rest of text; PAGE:de.w:Wikipedia:Technik/Archiv/2014 DATE:2014-11-06
+	@Test public void Img_should_not_be_xtn() {	// PURPOSE:<img> marked as .xtn; unclosed <img> was escaping rest of text; PAGE:de.w:Wikipedia:Technik/Archiv/2014 DATE:2014-11-06
 		fxt.Test_parse_page_all_str("<img>''a''", "&lt;img><i>a</i>");
 	}
-	@Test  public void Invalid__percent() {	// PURPOSE: invalidate xml tags with %; EX:<ref%s>; PAGE:pl.w:Scynk_nadrzewny; DATE:2016-08-07
+	@Test public void Invalid__percent() {	// PURPOSE: invalidate xml tags with %; EX:<ref%s>; PAGE:pl.w:Scynk_nadrzewny; DATE:2016-08-07
 		fxt.Test_parse_page_all_str("<b%>a</b>", "&lt;b%&gt;a</b>");	// NOTE: should be literally printed as <b%>, not transformed to <b>
 	}
-	@Test  public void Meta_link() {	// PURPOSE: meta and link tags should not print; EX:<meta> <link>; PAGE:fr.s:La_Dispute; DATE:2017-05-28
+	@Test public void Meta_link() {	// PURPOSE: meta and link tags should not print; EX:<meta> <link>; PAGE:fr.s:La_Dispute; DATE:2017-05-28
 		fxt.Test_parse_page_all_str("<meta /><link />", "");
 	}
 }

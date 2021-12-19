@@ -13,13 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.core.primitives.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.wikis.data.tbls;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.wrappers.IntVal;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_name_itm;
 public class Xowd_page_itm {
 	public Xowd_page_itm() {this.Clear();}
 	public int			Id() {return id;} public Xowd_page_itm Id_(int v) {id = v; id_val = null; return this;} private int id;
-	public Int_obj_val	Id_val() {if (id_val == null) id_val = new Int_obj_val(id); return id_val;} private Int_obj_val id_val;
+	public IntVal Id_val() {if (id_val == null) id_val = new IntVal(id); return id_val;} private IntVal id_val;
 	public int			Ns_id() {return ns_id;} public Xowd_page_itm Ns_id_(int v) {ns_id = v; return this;} private int ns_id;
 	public byte[]		Ttl_page_db() {return ttl_page_db;} public Xowd_page_itm Ttl_page_db_(byte[] v) {ttl_page_db = v; return this;} private byte[] ttl_page_db;	// EX: Category1
 	public byte[]		Ttl_full_db() {return ttl_full_db;} private byte[] ttl_full_db;	// EX: Category:Category1
@@ -31,7 +39,7 @@ public class Xowd_page_itm {
 	public byte[]		Text() {return text;} public Xowd_page_itm Text_(byte[] v) {text = v; if (v != null) text_len = v.length; return this;} private byte[] text;
 	public int			Random_int() {return random_int;} private int random_int;
 	public int			Redirect_id() {return redirect_id;} private int redirect_id;
-	public DateAdp		Modified_on() {return modified_on;} public Xowd_page_itm Modified_on_(DateAdp v) {modified_on = v; return this;} private DateAdp modified_on;
+	public GfoDate Modified_on() {return modified_on;} public Xowd_page_itm Modified_on_(GfoDate v) {modified_on = v; return this;} private GfoDate modified_on;
 	public boolean			Exists() {return exists;} private boolean exists;
 	public int			Score() {return score;} private int score;
 	public Xow_ns		Ns() {return ns;} private Xow_ns ns;
@@ -52,7 +60,7 @@ public class Xowd_page_itm {
 		this.ttl_page_db	= ttl_page_db;
 		this.text_len		= text_len;
 	}
-	public void	Init_by_load__all(int id, int ns_id, byte[] ttl_page_db, DateAdp modified_on, boolean redirected, int text_len, int random_int, int text_db_id, int html_db_id, int redirect_id, int score, int cat_db_id) {
+	public void	Init_by_load__all(int id, int ns_id, byte[] ttl_page_db, GfoDate modified_on, boolean redirected, int text_len, int random_int, int text_db_id, int html_db_id, int redirect_id, int score, int cat_db_id) {
 		// same as Init_by_load__idx; COMMENT: DATE:2016-08-28
 		this.exists			= true;
 		this.id				= id;
@@ -110,7 +118,7 @@ public class Xowd_page_itm {
 		else {
 			ns = name_itm.Ns();
 			byte[] ns_name_bry = name_itm.Name();
-			ttl_page_db = Bry_.Mid(v, ns_name_bry.length + 1, v.length);	// EX: "Template:A" -> "Template:" + "A"
+			ttl_page_db = BryLni.Mid(v, ns_name_bry.length + 1, v.length);	// EX: "Template:A" -> "Template:" + "A"
 		}
 		ns_id = ns.Id();
 		return this;
@@ -118,11 +126,11 @@ public class Xowd_page_itm {
 	public Xowd_page_itm Clear() {
 		id = Id_null; text_len = 0;	// text_len should be 0 b/c text defaults to 0;
 		text_db_id = tdb_row_idx = 0; // default to 0, b/c some tests do not set and will fail at -1
-		ns_id = Int_.Min_value;
-		ttl_full_db = ttl_page_db = null; text = Bry_.Empty;	// default to Ary_empty for entries that have <text />
+		ns_id = IntUtl.MinValue;
+		ttl_full_db = ttl_page_db = null; text = BryUtl.Empty;	// default to Ary_empty for entries that have <text />
 		ns = null;
 		redirected = exists = false;
-		modified_on = DateAdp_.MinValue;
+		modified_on = GfoDateUtl.MinValue;
 		id_val = null;
 		html_db_id = cat_db_id = -1;
 		redirect_id = -1;
@@ -145,7 +153,6 @@ public class Xowd_page_itm {
 		this.html_db_id = orig.html_db_id;
 		this.cat_db_id = orig.cat_db_id;
 	}
-	public void Srl_save(Bry_bfr bfr) {gplx.xowa.wikis.tdbs.Xotdb_page_itm_.Txt_id_save(bfr, this);}
 	public static final int Id_null = -1, Modified_on_null_int = 0, Redirect_id_null = -1;
 	public static final Xowd_page_itm[] Ary_empty = new Xowd_page_itm[0];
 	public static final Xowd_page_itm Null = null;

@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds;
-import gplx.Err_;
-import gplx.List_adp;
-import gplx.String_;
 import gplx.core.stores.DataRdr;
 import gplx.core.stores.DataRdr_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_stmt;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.data.Xow_db_file;
@@ -59,7 +59,7 @@ class Xob_dump_src_id {
 			cur_text_db_idx = text_db_idx;
 			Xow_db_file text_db = db_mgr.Core_data_mgr().Dbs__get_by_id_or_fail(text_db_idx);
 			Db_conn conn = text_db.Conn();
-			String sql = String_.Format(Sql_select_clause, New_rdr__redirect_clause(redirect));
+			String sql = StringUtl.Format(Sql_select_clause, New_rdr__redirect_clause(redirect));
 			text_stmt = conn.Stmt_sql(sql);
 		}
 		return text_stmt.Clear().Val_int(prv_id).Val_int(cur_ns).Exec_select();
@@ -82,10 +82,10 @@ class Xob_dump_src_id {
 			case BoolUtl.YByte:	return Sql_select__redirect_y;
 			case BoolUtl.NByte:	return Sql_select__redirect_n;
 			case BoolUtl.NullByte:	return Sql_select__redirect__;
-			default:			throw Err_.new_unhandled(redirect);
+			default:			throw ErrUtl.NewUnhandled(redirect);
 		}
 	}
-	private static final String Sql_select_clause = String_.Concat_lines_nl
+	private static final String Sql_select_clause = StringUtl.ConcatLinesNl
 	( "SELECT  p.page_id"
 	, ",       p.page_title"
 	, ",       t.text_data"

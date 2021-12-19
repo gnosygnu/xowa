@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.thms.divs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.thms.*;
-import gplx.core.brys.*;
+package gplx.xowa.htmls.core.wkrs.thms.divs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Xoh_thm_magnify_data {
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
@@ -40,5 +41,5 @@ public class Xoh_thm_magnify_data {
 		}
 		return true;
 	}
-	private static final byte[] Cls__magnify = Bry_.new_a7("magnify");
+	private static final byte[] Cls__magnify = BryUtl.NewA7("magnify");
 }

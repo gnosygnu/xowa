@@ -15,9 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Long_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.LongUtl;
 
 public class Json_itm_long extends Json_itm_base {
 	private final Json_doc doc;
@@ -38,8 +39,8 @@ public class Json_itm_long extends Json_itm_base {
 	@Override public byte[] Data_bry() {
 		if (data_bry == null) {
 			data_bry = doc == null
-				? Bry_.new_u8(Long_.To_str(data))
-				: Bry_.Mid(doc.Src(), src_bgn, src_end);
+				? BryUtl.NewU8(LongUtl.ToStr(data))
+				: BryLni.Mid(doc.Src(), src_bgn, src_end);
 		}
 		return data_bry;
 	}
@@ -50,11 +51,11 @@ public class Json_itm_long extends Json_itm_base {
 		}
 		return data;
 	}
-	@Override public void Print_as_json(Bry_bfr bfr, int depth) {
+	@Override public void Print_as_json(BryWtr bfr, int depth) {
 		if (doc == null)
-			bfr.Add_long_variable(data);
+			bfr.AddLongVariable(data);
 		else
-			bfr.Add_mid(doc.Src(), src_bgn, src_end);
+			bfr.AddMid(doc.Src(), src_bgn, src_end);
 	}
 
 	public static Json_itm_long NewByDoc(Json_doc doc, int src_bgn, int src_end) {return new Json_itm_long(doc, src_bgn, src_end, true, -1);}

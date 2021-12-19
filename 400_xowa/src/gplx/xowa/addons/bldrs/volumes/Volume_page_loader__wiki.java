@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.volumes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.volumes;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.xowa.*;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.wikis.nss.*;
 interface Volume_page_loader {
 	boolean Load(Volume_page_itm rv, byte[] ttl);
@@ -32,7 +35,7 @@ class Volume_page_loader__wiki implements Volume_page_loader {
 		int len = list.Len();
 		//gplx.xowa.wikis.data.tbls.Xowd_page_tbl page_tbl; page_tbl.Select_in__ttl
 		for (int i = 0; i < len; i++) {
-			Xop_lnki_tkn lnki = (Xop_lnki_tkn)list.Get_at(i);
+			Xop_lnki_tkn lnki = (Xop_lnki_tkn)list.GetAt(i);
 			int ns_id = lnki.Ns_id();
 			switch (ns_id) {
 				case Xow_ns_.Tid__special:

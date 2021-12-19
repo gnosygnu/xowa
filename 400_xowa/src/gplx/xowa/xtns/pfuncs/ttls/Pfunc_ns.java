@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.ttls;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.IntUtl;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
@@ -23,15 +29,15 @@ public class Pfunc_ns extends Pf_func_base {	// EX: {{ns:6}} -> File
 	@Override public int Id() {return Xol_kwd_grp_.Id_url_ns;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_ns(encode).Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
-		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == BryUtl.Empty) return;
 
 		int val_dat_ary_len = val_dat_ary.length;
-		int ns_id = Bry_.To_int_or(val_dat_ary, 0, val_dat_ary_len, Int_.Min_value);
-		if (ns_id == Int_.Min_value) {
+		int ns_id = BryUtl.ToIntOr(val_dat_ary, 0, val_dat_ary_len, IntUtl.MinValue);
+		if (ns_id == IntUtl.MinValue) {
 			Object o = ctx.Wiki().Ns_mgr().Names_get_or_null(val_dat_ary, 0, val_dat_ary_len);
 			if (o == null
-				&& !Bry_.Eq(ctx.Lang().Key_bry(), Xol_lang_itm_.Key_en)) // foreign language; english canonical names are still valid; REF.MW: Language.php|getNsIndex
+				&& !BryLni.Eq(ctx.Lang().Key_bry(), Xol_lang_itm_.Key_en)) // foreign language; english canonical names are still valid; REF.MW: Language.php|getNsIndex
 					o = canonical.Get_by_mid(val_dat_ary, 0, val_dat_ary_len);				
 			if (o != null) {
 				Xow_ns itm = (Xow_ns)o;

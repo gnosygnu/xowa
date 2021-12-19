@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class IoUrlInfo_alias_tst {
 	IoUrlInfo_alias alias;
@@ -47,9 +48,9 @@ public class IoUrlInfo_alias_tst {
 		tst_NameOnly("/home/", "home");
 		tst_NameOnly("/", "root");
 	}
-	void tst_Xto_api(String raw, String expd) {Tfds.Eq(expd, alias.Xto_api(raw));}
-	void tst_OwnerDir(String raw, String expd) {Tfds.Eq(expd, alias.OwnerDir(raw));}
-	void tst_NameOnly(String raw, String expd) {Tfds.Eq(expd, alias.NameOnly(raw));}
+	void tst_Xto_api(String raw, String expd) {GfoTstr.EqObj(expd, alias.Xto_api(raw));}
+	void tst_OwnerDir(String raw, String expd) {GfoTstr.EqObj(expd, alias.OwnerDir(raw));}
+	void tst_NameOnly(String raw, String expd) {GfoTstr.EqObj(expd, alias.NameOnly(raw));}
 	void Make(String srcDir, String trgDir) {
 		alias = IoUrlInfo_alias.new_(srcDir, trgDir, IoEngine_.SysKey);
 	}

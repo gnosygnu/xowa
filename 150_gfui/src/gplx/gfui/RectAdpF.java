@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
+package gplx.gfui;
+import gplx.types.basics.utls.IntUtl;
 public class RectAdpF {	//_20101206 // supports Graphics.MeasureString
 	public float X() {return x;} float x; public float Y() {return y;} float y;
 	public float Width() {return width;} float width; public float Height() {return height;} float height;
@@ -22,7 +23,7 @@ public class RectAdpF {	//_20101206 // supports Graphics.MeasureString
 		return comp.x == x && comp.y == y && comp.width == width && comp.height == height;
 	}
 
-	public static final RectAdpF Null = new_(Int_.Min_value, Int_.Min_value, Int_.Min_value, Int_.Min_value);
+	public static final RectAdpF Null = new_(IntUtl.MinValue, IntUtl.MinValue, IntUtl.MinValue, IntUtl.MinValue);
 	public static RectAdpF new_(float x, float y, float width, float height) {
 		RectAdpF rv = new RectAdpF();
 		rv.x = x; rv.y = y; rv.width = width; rv.height = height;

@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.htmls.core.htmls.tidy;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-
-import org.w3c.tidy.Configuration;
 import org.w3c.tidy.Tidy;
-import gplx.core.envs.*;
 import gplx.core.envs.*;
 class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		private Tidy tidy;
 	private ByteArrayOutputStream wtr; 
 	public void tidy_init() {
-		long bgn = System_.Ticks();
+		long bgn = SystemUtl.Ticks();
 		wtr = new ByteArrayOutputStream();
 		System.setProperty("line.separator", "\n");
 		tidy = new Tidy(); // obtain a new Tidy instance
@@ -47,7 +47,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		tidy.setTrimEmptyElements(true);		// NOTE: tidy always trims (not even an option)
 		tidy.setShowWarnings(false);			// NOTE: otherwise warnings printed to output window
 		tidy.setShowErrors(0);					// NOTE: otherwise errors printed to output window; EX: Error: <time> is not recognized!
-		app.Usr_dlg().Log_many("", "", "jtidy.init; elapsed=~{0}", System_.Ticks__elapsed_in_frac(bgn));
+		app.Usr_dlg().Log_many("", "", "jtidy.init; elapsed=~{0}", SystemUtl.Ticks__elapsed_in_frac(bgn));
 	}
 		private Xoae_app app;
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_jtidy;}
@@ -58,11 +58,11 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
 		tidy.setIndentContent(v);
 			}
-	public void Exec_tidy(Bry_bfr bfr, byte[] page_url) {
+	public void Exec_tidy(BryWtr bfr, byte[] page_url) {
 				if (tidy == null) tidy_init();			// lazy create to skip tests
 //		int bfr_len = bfr.Len();
 //		long bgn = Env_.TickCount();
-		byte[] orig = bfr.To_bry_and_clear();
+		byte[] orig = bfr.ToBryAndClear();
 		ByteArrayInputStream rdr = new ByteArrayInputStream(orig);
 		try {
 			tidy.parse(rdr, wtr);
@@ -70,7 +70,7 @@ class Xoh_tidy_wkr_jtidy implements Xoh_tidy_wkr {
 		}
 		catch (Exception exc) {
 			bfr.Add(orig);	// jtidy failed; restore original
-			app.Usr_dlg().Warn_many("", "", "jtidy.fail; page=~{0} exc=~{1}", page_url, Err_.Message_gplx_full(exc));
+			app.Usr_dlg().Warn_many("", "", "jtidy.fail; page=~{0} exc=~{1}", page_url, ErrUtl.ToStrFull(exc));
 		}
 		finally {
 			wtr.reset();

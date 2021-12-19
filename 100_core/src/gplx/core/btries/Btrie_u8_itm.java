@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.btries; import gplx.*; import gplx.core.*;
-import gplx.core.intls.*;
+package gplx.core.btries;
+import gplx.core.intls.Gfo_case_itm;
+import gplx.core.intls.Gfo_case_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.lists.Hash_adp_bry;
 class Btrie_u8_itm {
 	private Hash_adp_bry nxts;
 	private byte[] asymmetric_bry;
@@ -33,18 +36,18 @@ class Btrie_u8_itm {
 		if (rv_obj == null) return null;
 		Btrie_u8_itm rv = (Btrie_u8_itm)rv_obj;
 		byte[] asymmetric_bry = rv.asymmetric_bry;
-		if (asymmetric_bry == null)													// itm doesn't have asymmetric_bry; note that this is the case for most items
+		if (asymmetric_bry == null)                                                    // itm doesn't have asymmetric_bry; note that this is the case for most items
 			return rv;
-		else {																		// itm has asymmetric_bry; EX: "İ" was added to trie, must match "İ" and "i"; 
-			if (called_by_match) {													// called by mgr.Match
+		else {                                                                        // itm has asymmetric_bry; EX: "İ" was added to trie, must match "İ" and "i"; 
+			if (called_by_match) {                                                    // called by mgr.Match
 				return
-					(	Bry_.Eq(src, c_bgn, c_end, rv.key)							// key matches src;				EX: "aİ"
-					||	Bry_.Eq(src, c_bgn, c_end, rv.asymmetric_bry)				// asymmetric_bry matches src;	EX: "ai"; note that "aI" won't match
+					(    BryLni.Eq(src, c_bgn, c_end, rv.key)                            // key matches src;                EX: "aİ"
+					||    BryLni.Eq(src, c_bgn, c_end, rv.asymmetric_bry)                // asymmetric_bry matches src;    EX: "ai"; note that "aI" won't match
 					)
 					? rv : null;
 			}
-			else {																	// called by mgr.Add; this means that an asymmetric_itm was already added; happens when "İ" added first and then "I" added next
-				rv.asymmetric_bry = null;											// always null out asymmetric_bry; note that this noops non-asymmetric itms, while making an asymmetric_itm case-insenstivie (matches İ,i,I); see tests
+			else {                                                                    // called by mgr.Add; this means that an asymmetric_itm was already added; happens when "İ" added first and then "I" added next
+				rv.asymmetric_bry = null;                                            // always null out asymmetric_bry; note that this noops non-asymmetric itms, while making an asymmetric_itm case-insenstivie (matches İ,i,I); see tests
 				return rv;
 			}
 		}
@@ -53,12 +56,12 @@ class Btrie_u8_itm {
 		Btrie_u8_itm rv = new Btrie_u8_itm(key, val);
 		if (nxts == null) nxts = Hash_adp_bry.ci_u8(case_mgr);
 		nxts.Add_bry_obj(key, rv);
-		Gfo_case_itm case_itm = case_mgr.Get_or_null(key[0], key, 0, key.length);	// get case_item
-		if (case_itm != null) {														// note that case_itm may be null; EX: "__TOC__" and "_"
+		Gfo_case_itm case_itm = case_mgr.GetOrNull(key[0], key, 0, key.length);    // get case_item
+		if (case_itm != null) {                                                        // note that case_itm may be null; EX: "__TOC__" and "_"
 			byte[] asymmetric_bry = case_itm.Asymmetric_bry();
-			if (asymmetric_bry != null) {											// case_itm has asymmetry_bry; only itms in Xol_case_itm_ that are created with Tid_upper and Tid_lower will be non-null
-				rv.asymmetric_bry = asymmetric_bry;									// set itm to asymmetric_bry; EX: for İ, asymmetric_bry = i
-//					nxts.Add_bry_obj(asymmetric_bry, rv);								// add the asymmetric_bry to the hash; in above example, this allows "i" to match "İ"
+			if (asymmetric_bry != null) {                                            // case_itm has asymmetry_bry; only itms in Xol_case_itm_ that are created with Tid_upper and Tid_lower will be non-null
+				rv.asymmetric_bry = asymmetric_bry;                                    // set itm to asymmetric_bry; EX: for İ, asymmetric_bry = i
+//                    nxts.Add_bry_obj(asymmetric_bry, rv);                                // add the asymmetric_bry to the hash; in above example, this allows "i" to match "İ"
 			}
 		}
 		return rv;

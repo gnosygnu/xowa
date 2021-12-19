@@ -13,16 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.parsers;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.core.*;
 public class Wdata_doc_parser_v2__basic__tst {
 	@Before public void init() {fxt.Init();} private Wdata_doc_parser_v2_fxt fxt = new Wdata_doc_parser_v2_fxt();
-	@Test  public void Entity() {
+	@Test public void Entity() {
 		fxt.Test_entity("{ 'id':'Q2' }", "q2");
 	}
-	@Test  public void Sitelink() {
-		fxt.Test_sitelinks(String_.Concat_lines_nl_skip_last
+	@Test public void Sitelink() {
+		fxt.Test_sitelinks(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'sitelinks':"
 		, "  { 'enwiki':"
 		, "    { 'site':'enwiki'"
@@ -53,8 +54,8 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, fxt.Make_sitelink("frwiki", "fr_val")
 		);
 	}
-	@Test  public void Labels() {
-		fxt.Test_labels(String_.Concat_lines_nl_skip_last
+	@Test public void Labels() {
+		fxt.Test_labels(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'labels':"
 		, "  { 'en':"
 		, "    { 'language':'enwiki'"
@@ -76,8 +77,8 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, fxt.Make_langval("fr", "fr_val")
 		);
 	}
-	@Test  public void Descriptions() {
-		fxt.Test_descriptions(String_.Concat_lines_nl_skip_last
+	@Test public void Descriptions() {
+		fxt.Test_descriptions(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'descriptions':"
 		, "  { 'en':"
 		, "    { 'language':'enwiki'"
@@ -99,8 +100,8 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, fxt.Make_langval("fr", "fr_val")
 		);
 	}
-	@Test  public void Aliases() {
-		fxt.Test_aliases(String_.Concat_lines_nl_skip_last
+	@Test public void Aliases() {
+		fxt.Test_aliases(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'aliases':"
 		, "  { 'en':"
 		, "    ["
@@ -142,8 +143,8 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, fxt.Make_alias("fr", "fr_val_1")
 		);
 	}
-	@Test  public void Qualifiers() {
-		fxt.Test_qualifiers(String_.Concat_lines_nl_skip_last
+	@Test public void Qualifiers() {
+		fxt.Test_qualifiers(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'qualifiers':"
 		, "  { 'P1':"
 		, "    [ "
@@ -191,14 +192,14 @@ public class Wdata_doc_parser_v2__basic__tst {
 		), fxt.Make_claim_entity_qid(1, 11), fxt.Make_claim_entity_qid(1, 12), fxt.Make_claim_entity_qid(2, 21)
 		);
 	}
-	@Test  public void Pid_order() {
+	@Test public void Pid_order() {
 		fxt.Test_pid_order
 		( "{ 'qualifiers-order':['P1', 'P2', 'P3'] }"
 		, 1, 2, 3
 		);
 	}
-	@Test  public void References() {
-		fxt.Test_references(String_.Concat_lines_nl_skip_last
+	@Test public void References() {
+		fxt.Test_references(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'references':"
 		, "  [ "
 		, "    { 'hash':'8e7d51e38606193465d2a1e9d41ba490e06682a6'"
@@ -239,11 +240,11 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, "    }"
 		, "  ]"
 		, "}"
-		), Int_ary_.New(2, 3), fxt.Make_claim_entity_qid(2, 21), fxt.Make_claim_entity_qid(3, 31))
+		), IntAryUtl.New(2, 3), fxt.Make_claim_entity_qid(2, 21), fxt.Make_claim_entity_qid(3, 31))
 		;
 	}
-	@Test  public void References_empty() { // PURPOSE:sometimes references can have 0 snaks; return back an empty Wbase_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
-		fxt.Test_references(String_.Concat_lines_nl_skip_last
+	@Test public void References_empty() { // PURPOSE:sometimes references can have 0 snaks; return back an empty Wbase_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
+		fxt.Test_references(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'references':"
 		, "  [ "
 		, "    { 'hash':'8e7d51e38606193465d2a1e9d41ba490e06682a6'"
@@ -252,7 +253,7 @@ public class Wdata_doc_parser_v2__basic__tst {
 		, "    }"
 		, "  ]"
 		, "}"
-		), Int_ary_.Empty)
+		), IntAryUtl.Empty)
 		;
 	}
 }

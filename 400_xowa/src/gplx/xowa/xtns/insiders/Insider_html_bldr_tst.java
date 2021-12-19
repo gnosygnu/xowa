@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.insiders;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Insider_html_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Insider_html_bldr_fxt fxt = new Insider_html_bldr_fxt();
 	@Test public void Basic() {
 		fxt.Init_insider("A_1");
-		fxt.Test_bld(String_.Concat_lines_nl_skip_last
+		fxt.Test_bld(StringUtl.ConcatLinesNlSkipLast
 		( "<div id='p-insiders' class='portal' role='navigation'>"
 		, "  <h3>Docent</h3>"
 		, "  <div class='body'>"
@@ -50,11 +55,11 @@ class Insider_html_bldr_fxt {
 		page.Html_data().Xtn_skin_mgr().Add(skin_itm);
 	}
 	public void Init_insider(String lnki_ttl) {
-		skin_itm.Add(Bry_.new_u8(lnki_ttl));
+		skin_itm.Add(BryUtl.NewU8(lnki_ttl));
 	}
 	public void Test_bld(String expd) {
-		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+		BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 		skin_itm.Write(tmp_bfr, page);
-		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, tmp_bfr.ToStrAndClear());
 	}
 }

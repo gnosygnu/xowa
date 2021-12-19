@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.metas;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 public abstract class Split_meta_wkr_base {
@@ -21,7 +23,7 @@ public abstract class Split_meta_wkr_base {
 	public void Load(Db_conn wkr_conn, Split_page_mgr page_mgr, int ns_id, int score_bgn, int score_end) {
 		attach_mgr.Conn_main_(wkr_conn);
 		String sql_fmt = Load_sql(attach_mgr, ns_id, score_bgn, score_end);
-		String sql = attach_mgr.Resolve_sql(String_.Format(sql_fmt, score_bgn, score_end, ns_id));
+		String sql = attach_mgr.Resolve_sql(StringUtl.Format(sql_fmt, score_bgn, score_end, ns_id));
 		attach_mgr.Attach();
 		Db_rdr rdr = wkr_conn.Stmt_sql(sql).Exec_select__rls_auto();
 		Split_page_itm page = null;

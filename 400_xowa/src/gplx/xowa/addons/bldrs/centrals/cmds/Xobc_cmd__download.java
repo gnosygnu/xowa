@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.cmds;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.progs.*; import gplx.core.net.downloads.*;
 public class Xobc_cmd__download extends Xobc_cmd__base {
 	private final Xobc_task_mgr task_mgr;
@@ -41,7 +47,7 @@ public class Xobc_cmd__download extends Xobc_cmd__base {
 
 				// check if server error; note: must not loop if bad size; DATE:2016-09-24
 				String fail_msg = wkr.Fail_msg();
-				if (String_.Has_at_bgn(fail_msg, Http_download_wkr__jre.Err__server_download_failed)) {
+				if (StringUtl.HasAtBgn(fail_msg, Http_download_wkr__jre.Err__server_download_failed)) {
 
 					// check if anything more downloaded; if so, then reset to 0; DATE:2016-09-03
 					long trg_size_cur = Tmp_url_size();
@@ -52,7 +58,7 @@ public class Xobc_cmd__download extends Xobc_cmd__base {
 
 					// retry
 					if (error_tries_cur++ < error_tries_max) {
-						task_mgr.Work_mgr().On_stat(this.Task_id(), String_.Format("connection interrupted: retrying in {0} seconds; attempt {1} of {2}", error_wait / 1000, error_tries_cur, error_tries_max));
+						task_mgr.Work_mgr().On_stat(this.Task_id(), StringUtl.Format("connection interrupted: retrying in {0} seconds; attempt {1} of {2}", error_wait / 1000, error_tries_cur, error_tries_max));
 						Gfo_usr_dlg_.Instance.Log_many("", "", "xobc_cmd task download interrupted; ~{0} ~{1} ~{2} ~{3}", this.Task_id(), this.Step_id(), trg_url, Io_mgr.Instance.QueryFil(trg_url).Size());
 						gplx.core.threads.Thread_adp_.Sleep(error_wait);
 						continue;

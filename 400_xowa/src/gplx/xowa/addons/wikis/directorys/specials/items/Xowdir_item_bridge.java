@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.htmls.bridges.*;
+package gplx.xowa.addons.wikis.directorys.specials.items;
+import gplx.langs.jsons.Json_nde;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.htmls.bridges.Bridge_cmd_itm;
+import gplx.xowa.htmls.bridges.Bridge_cmd_mgr;
 public class Xowdir_item_bridge implements Bridge_cmd_itm {
 	private Xowdir_item_mgr itm_mgr;
 	public void Init_by_app(Xoa_app app) {
@@ -30,7 +34,7 @@ public class Xowdir_item_bridge implements Bridge_cmd_itm {
 			case Proc__save:					itm_mgr.Save(args); break;
 			case Proc__delete:					itm_mgr.Delete(args); break;
 			case Proc__reindex_search:			itm_mgr.Reindex_search(args); break;
-			default: throw Err_.new_unhandled_default(proc_id);
+			default: throw ErrUtl.NewUnhandled(proc_id);
 		}
 		return "";
 	}
@@ -42,6 +46,6 @@ public class Xowdir_item_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("reindex_search"				, Proc__reindex_search)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.item");
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = BryUtl.NewA7("wiki.directory.item");
         public static final Xowdir_item_bridge Prototype = new Xowdir_item_bridge(); Xowdir_item_bridge() {}
 }

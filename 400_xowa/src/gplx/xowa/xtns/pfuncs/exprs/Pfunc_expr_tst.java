@@ -82,7 +82,7 @@ public class Pfunc_expr_tst {
 	@Test public void Round_0()			{fxt.Test_parse_tmpl_str_test("{{#expr:0 round 1}}"								, "{{test}}"	, "0");}		// PURPOSE: 0 round 1 should be 0, not 0.0; DATE:2013-11-09
 	@Test public void Round_ex_1()			{fxt.Test_parse_tmpl_str_test("{{#expr:(0.03937007874015)round(3)}}"			, "{{test}}"	, "0.039");}	// PURPOSE: rounding results in excessive decimal places; PAGE:en.w:Milky Way (light year conversions)
 	@Test public void Mod_frac()			{fxt.Test_parse_tmpl_str_test("{{#expr:0.00999999mod10}}"						, "{{test}}"	, "0");}
-	@Test public void Mod_large()			{fxt.Test_parse_tmpl_str_test("{{#expr:39052000900mod100}}"						, "{{test}}"	, "0");}		// PURPOSE: JAVA was failing in converting to int and converted to Int_.Max_value instead; DATE:2013-01-26
+	@Test public void Mod_large()			{fxt.Test_parse_tmpl_str_test("{{#expr:39052000900mod100}}"						, "{{test}}"	, "0");}		// PURPOSE: JAVA was failing in converting to int and converted to IntUtl.Max_value instead; DATE:2013-01-26
 	@Test public void Fmod()				{fxt.Test_parse_tmpl_str_test("{{#expr:1.25 fmod .5}}"							, "{{test}}"	, "0.25");}
 	@Test public void Sqrt()				{fxt.Test_parse_tmpl_str_test("{{#expr:sqrt 4}}"								, "{{test}}"	, "2");}
 	@Test public void Sqrt_frac()			{fxt.Test_parse_tmpl_str_test("{{#expr:sqrt 2}}"								, "{{test}}"	, "1.41421356237309");}	// NOTE: MW (and C#) returns 31, not 309

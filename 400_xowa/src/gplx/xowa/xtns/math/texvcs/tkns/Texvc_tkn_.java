@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.math.texvcs.tkns;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 public class Texvc_tkn_ {
 	public static final int
 		Tid__root					=  0
@@ -32,7 +34,7 @@ public class Texvc_tkn_ {
 	,	Tid__brack_end				= 12	// '['
 	;
 	public static final int Tid_len = 13;
-	public static final byte[][] Bry__ary = Bry_.Ary
+	public static final byte[][] Bry__ary = BryUtl.Ary
 	( "root", "func", "curly"
 	, "ws", "text", "literal", "delimiter"
 	, "sub", "sup", "next_row", "next_cell", "brack_bgn", "brack_end"
@@ -44,21 +46,21 @@ public class Texvc_tkn_ {
 			default: return false;
 		}
 	}
-	public static String Print_dbg_str(Bry_bfr bfr, Texvc_tkn[] ary) {
+	public static String Print_dbg_str(BryWtr bfr, Texvc_tkn[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)
 			ary[i].Print_dbg_bry(bfr, 0);
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
-	public static void Print_dbg_str__bgn(Bry_bfr bfr, int indent, Texvc_tkn tkn) {
-		if (indent > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent * 2);
+	public static void Print_dbg_str__bgn(BryWtr bfr, int indent, Texvc_tkn tkn) {
+		if (indent > 0) bfr.AddByteRepeat(AsciiByte.Space, indent * 2);
 		bfr.Add(Bry__ary[tkn.Tid()]);
-		bfr.Add_byte(AsciiByte.ParenBgn);
-		bfr.Add_int_variable(tkn.Src_bgn());
-		bfr.Add_byte_comma().Add_int_variable(tkn.Src_end());
+		bfr.AddByte(AsciiByte.ParenBgn);
+		bfr.AddIntVariable(tkn.Src_bgn());
+		bfr.AddByteComma().AddIntVariable(tkn.Src_end());
 	}
-	public static void Print_dbg_str__end_head(Bry_bfr bfr) {
-		bfr.Add_byte(AsciiByte.ParenEnd);
-		bfr.Add_byte_nl();
+	public static void Print_dbg_str__end_head(BryWtr bfr) {
+		bfr.AddByte(AsciiByte.ParenEnd);
+		bfr.AddByteNl();
 	}
 }

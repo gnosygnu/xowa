@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.maints.*;
-abstract class Xocfg_maint_nde implements gplx.core.brys.Bry_bfr_able {
+package gplx.xowa.addons.apps.cfgs.specials.maints.services;
+import gplx.types.custom.brys.wtrs.BryBfrAble;
+import gplx.types.custom.brys.wtrs.BryWtr;
+abstract class Xocfg_maint_nde implements BryBfrAble {
 	public Xocfg_maint_nde(String owner, int id, String key, String name, String help) {
 		this.owner = owner;
 		this.id = id;
@@ -28,16 +30,16 @@ abstract class Xocfg_maint_nde implements gplx.core.brys.Bry_bfr_able {
 	public String Key() {return key;} private final String key;
 	public String Name() {return name;} private final String name;
 	public String Help() {return help;} private final String help;
-	public void To_bfr(Bry_bfr bfr) {
-		bfr.Add_str_u8_fmt("{0}|{1}|{2}|{3}|{4}", owner, this.Type_is_grp(), key, name, help);
+	public void AddToBfr(BryWtr bfr) {
+		bfr.AddStrU8Fmt("{0}|{1}|{2}|{3}|{4}", owner, this.Type_is_grp(), key, name, help);
 		To_bfr_hook(bfr);
 	}
-	protected abstract void To_bfr_hook(Bry_bfr bfr);
+	protected abstract void To_bfr_hook(BryWtr bfr);
 }
 class Xocfg_maint_grp extends Xocfg_maint_nde {	public Xocfg_maint_grp(String owner, int id, String key, String name, String help) {super(owner, id, key, name, help);
 	}
 	@Override public boolean Type_is_grp() {return true;}
-	@Override protected void To_bfr_hook(Bry_bfr bfr) {}
+	@Override protected void To_bfr_hook(BryWtr bfr) {}
 }
 class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(String owner, int id, String key, String name, String help, String scope, String type, String dflt, String html_atrs, String html_cls) {super(owner, id, key, name, help);
 		this.scope = scope;
@@ -52,7 +54,7 @@ class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(String ow
 	public String Dflt() {return dflt;} private final String dflt;
 	public String Html_atrs() {return html_atrs;} private final String html_atrs;
 	public String Html_cls() {return html_cls;} private final String html_cls;
-	@Override protected void To_bfr_hook(Bry_bfr bfr) {
-		bfr.Add_str_u8_fmt("|{0}|{1}|{2}|{3}|{4}", scope, type, dflt, html_atrs, html_cls);
+	@Override protected void To_bfr_hook(BryWtr bfr) {
+		bfr.AddStrU8Fmt("|{0}|{1}|{2}|{3}|{4}", scope, type, dflt, html_atrs, html_cls);
 	}
 }

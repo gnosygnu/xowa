@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public interface Xomw_page_fetcher {
 	byte[] Get_wtxt(byte[] wiki, byte[] page);
 }
@@ -27,6 +30,6 @@ class Xomw_page_fetcher__mock implements Xomw_page_fetcher {
 		return (byte[])hash.GetByOrNull(Make_key(wiki, page));
 	}
 	private static byte[] Make_key(byte[] wiki, byte[] page) {
-		return Bry_.Add(wiki, AsciiByte.PipeBry, page);
+		return BryUtl.Add(wiki, AsciiByte.PipeBry, page);
 	}
 }

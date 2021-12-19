@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class IptCfg_tst {
 	@Before public void setup() {
@@ -70,7 +76,7 @@ public class IptCfg_tst {
 		public Gfo_evt_mgr Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} Gfo_evt_mgr evt_mgr;
 		public void tst_SendKey(IptKey key, int expd) {
 			iptBnds.Process(IptEventData.new_(null, IptEventType_.KeyDown, key, IptEvtDataKey.new_(key), IptEvtDataMouse.Null));
-			Tfds.Eq(expd, actl);
+			GfoTstr.EqObj(expd, actl);
 			actl = 0;
 		}	int actl;
 		public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

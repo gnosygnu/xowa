@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
 import gplx.core.lists.*;/*Hash_adp_list*/
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
 interface GfmlPragma {
 	String KeyOfPragma();
 	void Exec(GfmlBldr bldr, GfmlNde pragmaNde);
@@ -39,7 +42,7 @@ class GfmlPragmaMgr {
 	static void Exec(GfmlDocPos pos, GfmlBldr bldr, Hash_adp_list cmds) {
 		List_adp list = cmds.GetByOrNull(pos.Path()); if (list == null) return;
 		for (int i = 0; i < list.Len(); i++) {
-			GfmlBldrCmd cmd = (GfmlBldrCmd)list.Get_at(i);
+			GfmlBldrCmd cmd = (GfmlBldrCmd)list.GetAt(i);
 			cmd.Exec(bldr, GfmlTkn_.Null);
 		}
 	}

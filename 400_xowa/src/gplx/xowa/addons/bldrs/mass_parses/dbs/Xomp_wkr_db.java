@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs;
+import gplx.types.basics.utls.IntUtl;
 import gplx.dbs.*;
+import gplx.libs.files.Io_url;
 import gplx.xowa.htmls.core.dbs.*;
 public class Xomp_wkr_db {
 	public Xomp_wkr_db(int idx, Io_url url) {
@@ -30,7 +32,7 @@ public class Xomp_wkr_db {
 	public Xowd_html_tbl Html_tbl() {return html_tbl;} private final Xowd_html_tbl html_tbl;
 
 	public static Xomp_wkr_db New(Io_url root_dir, int uid) {
-		Io_url url = root_dir.GenSubFil_nest("xomp_" + Int_.To_str_fmt(uid, "000"), "xomp_wkr.sqlite3");
+		Io_url url = root_dir.GenSubFil_nest("xomp_" + IntUtl.ToStrFmt(uid, "000"), "xomp_wkr.sqlite3");
 		return new Xomp_wkr_db(uid, url);
 	}
 }

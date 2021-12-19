@@ -1,13 +1,11 @@
 package gplx.gfdbs.cores.cmds;
-
-import gplx.Err_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.DbmetaFldItm;
-import gplx.gfdbs.cores.GfdbMeta;
 import gplx.dbs.stmts.Db_stmt_arg_list;
-
+import gplx.gfdbs.cores.GfdbMeta;
+import gplx.types.errs.ErrUtl;
 public class GfoDbSelectWkrOne<I, M extends GfdbMeta<I>> implements GfoDbSelectWkr<I> {
 	private final M meta;
 	private final String[] pkeyCols;
@@ -17,7 +15,7 @@ public class GfoDbSelectWkrOne<I, M extends GfdbMeta<I>> implements GfoDbSelectW
 	}
 	@Override public Db_rdr NewRdr(Db_conn conn, Object... pkeyVals) {
         Db_stmt stmt = conn.Stmt_select(meta.TblName(), meta.Flds(), pkeyCols);
-        if (pkeyCols.length != pkeyVals.length) throw Err_.new_wo_type("pkey lengths don't match");
+        if (pkeyCols.length != pkeyVals.length) throw ErrUtl.NewArgs("pkey lengths don't match");
         for (int i = 0; i < pkeyCols.length; i++) {
             String pkeyCol = pkeyCols[i];
             DbmetaFldItm pkeyFld = meta.Flds().GetByOrNull(pkeyCol);

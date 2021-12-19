@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
+package gplx.xowa.bldrs.css;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.core.btries.*;
+import gplx.types.basics.wrappers.ByteVal;
 class Xob_css_parser {
-	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+	private final BryWtr bfr = BryWtr.NewWithSize(255);
 	private final Xob_mirror_mgr mgr;
 	private final Xob_css_parser__url url_parser; private final Xob_css_parser__import import_parser;
 	private final Btrie_rv trv = new Btrie_rv();
@@ -31,11 +33,11 @@ class Xob_css_parser {
 			byte b = src[pos];
 			Object o = tkns_trie.Match_at_w_b0(trv, b, src, pos, src_len);
 			if (o == null) {
-				bfr.Add_byte(b);
+				bfr.AddByte(b);
 				++pos;
 			}
 			else {
-				byte tkn_tid = ((Byte_obj_val)o).Val();
+				byte tkn_tid = ((ByteVal)o).Val();
 				int match_pos = trv.Pos();
 				Xob_css_tkn__base tkn = null;
 				switch (tkn_tid) {

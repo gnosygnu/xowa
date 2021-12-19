@@ -13,13 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import org.junit.*; import gplx.core.strings.*;
-import gplx.xowa.langs.*;
+package gplx.xowa.langs.bldrs;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.xowa.*; import gplx.xowa.langs.*;
+import org.junit.*;
 public class Xobc_utl_make_lang_tst {		
 	@Before public void init() {fxt.Clear();} private Xobc_utl_make_lang_fxt fxt = new Xobc_utl_make_lang_fxt();
 	@Test public void Parse() {
-		fxt.Parse_rows(String_.Concat_lines_nl
+		fxt.Parse_rows(StringUtl.ConcatLinesNl
 			(	""
 			,	"if|#if~#si~"
 			,	""
@@ -33,11 +40,11 @@ public class Xobc_utl_make_lang_tst {
 			);
 	}
 	@Test public void Trailing_colon() {
-		fxt.Kwd_mgr().Parse_keep_trailing_colon(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_keep_trailing_colon(BryUtl.NewA7("fr"), BryUtl.NewU8(StringUtl.ConcatLinesNl
 			(	"if|if:~si:~"
 			,	"ifeq|"
 			)));
-		fxt.Ini_file_mw_core("fr", String_.Concat_lines_nl
+		fxt.Ini_file_mw_core("fr", StringUtl.ConcatLinesNl
 			(	"$magicWords = array("
 			,	"  'expr' => array(0, 'expr:'),"
 			,	"  'if' => array(0, 'if:', 'si:', 'if_unchanged:'),"
@@ -46,7 +53,7 @@ public class Xobc_utl_make_lang_tst {
 			)
 			);
 		fxt.Mgr().Bld_all();
-		fxt.Tst_file_xo("fr", String_.Concat_lines_nl
+		fxt.Tst_file_xo("fr", StringUtl.ConcatLinesNl
 			(	"this"
 			,	".keywords"
 			,	"  .load_text("
@@ -60,12 +67,12 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test public void Prepend_hash() {
-		fxt.Kwd_mgr().Parse_prepend_hash(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_prepend_hash(BryUtl.NewA7("fr"), BryUtl.NewU8(StringUtl.ConcatLinesNl
 			(	"if|if:~si:~"
 			,	"ifeq|"
 			,	"tag|tag~"
 			)));
-		fxt.Ini_file_mw_core("fr", String_.Concat_lines_nl
+		fxt.Ini_file_mw_core("fr", StringUtl.ConcatLinesNl
 			(	"$magicWords = array("
 			,	"  'tag'                   => array( '0', 'etiqueta', 'ETIQUETA', 'tag' ),"
 			,	"  'expr' => array(0, 'expr:'),"
@@ -75,7 +82,7 @@ public class Xobc_utl_make_lang_tst {
 			)
 			);
 		fxt.Mgr().Bld_all();
-		fxt.Tst_file_xo("fr", String_.Concat_lines_nl
+		fxt.Tst_file_xo("fr", StringUtl.ConcatLinesNl
 			(	"this"
 			,	".keywords"
 			,	"  .load_text("
@@ -90,11 +97,11 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test public void Add_words_hash() {
-		fxt.Kwd_mgr().Parse_add_words(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Kwd_mgr().Parse_add_words(BryUtl.NewA7("fr"), BryUtl.NewU8(StringUtl.ConcatLinesNl
 			(	"if|if_new:~if~"
 			,	"ifeq|"
 			)));
-		fxt.Ini_file_mw_core("fr", String_.Concat_lines_nl
+		fxt.Ini_file_mw_core("fr", StringUtl.ConcatLinesNl
 			(	"$magicWords = array("
 			,	"  'if' => array(0, 'if:', 'si:'),"
 			,	"  'ifeq' => array(0, 'sieq:'),"
@@ -102,7 +109,7 @@ public class Xobc_utl_make_lang_tst {
 			)
 			);
 		fxt.Mgr().Bld_all();
-		fxt.Tst_file_xo("fr", String_.Concat_lines_nl
+		fxt.Tst_file_xo("fr", StringUtl.ConcatLinesNl
 			(	"this"
 			,	".keywords"
 			,	"  .load_text("
@@ -115,18 +122,18 @@ public class Xobc_utl_make_lang_tst {
 			));
 	}
 	@Test public void Manual_text() {
-		fxt.Mgr().Parse_manual_text(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
+		fxt.Mgr().Parse_manual_text(BryUtl.NewA7("fr"), BryUtl.NewU8(StringUtl.ConcatLinesNl
 			(	"app;"
 			))
 			, fxt.Mgr().Manual_text_end_hash());
-		fxt.Ini_file_mw_core("fr", String_.Concat_lines_nl
+		fxt.Ini_file_mw_core("fr", StringUtl.ConcatLinesNl
 			(	"$magicWords = array("
 			,	"  'if' => array(0, 'if:', 'si:'),"
 			,	");"
 			)
 			);
 		fxt.Mgr().Bld_all();
-		fxt.Tst_file_xo("fr", String_.Concat_lines_nl
+		fxt.Tst_file_xo("fr", StringUtl.ConcatLinesNl
 			(	"this"
 			,	".keywords"
 			,	"  .load_text("
@@ -147,15 +154,15 @@ class Xobc_utl_make_lang_fxt {
 		mgr = new Xobc_utl_make_lang(app.Lang_mgr(), app.Fsys_mgr(), app.Msg_log());
 		return this;
 	}	private String_bldr sb = String_bldr_.new_(); private Xoae_app app;
-	public Xobcl_kwd_row row_(String key, String... itms) {return new Xobcl_kwd_row(Bry_.new_a7(key), Bry_.Ary(itms));} 
-	public void Parse_rows(String raw, Xobcl_kwd_row... expd) {Tfds.Eq_str_lines(Xto_str(expd), Xto_str(Xobc_utl_make_lang_kwds.Parse(Bry_.new_a7(raw))));}
+	public Xobcl_kwd_row row_(String key, String... itms) {return new Xobcl_kwd_row(BryUtl.NewA7(key), BryUtl.Ary(itms));}
+	public void Parse_rows(String raw, Xobcl_kwd_row... expd) {GfoTstr.EqLines(Xto_str(expd), Xto_str(Xobc_utl_make_lang_kwds.Parse(BryUtl.NewA7(raw))));}
 	public void Ini_file_mw_core(String lang, String raw) {
-		Io_url fil = app.Fsys_mgr().Cfg_lang_core_dir().OwnerDir().GenSubFil_nest("mediawiki", "core_php", "Messages" + String_.UpperFirst(lang) + ".php");
+		Io_url fil = app.Fsys_mgr().Cfg_lang_core_dir().OwnerDir().GenSubFil_nest("mediawiki", "core_php", "Messages" + StringUtl.UpperFirst(lang) + ".php");
 		Io_mgr.Instance.SaveFilStr(fil, raw);
 	}
 	public void Tst_file_xo(String lang, String expd) {
 		Io_url fil = Xol_lang_itm_.xo_lang_fil_(app.Fsys_mgr(), lang);
-		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(fil));
+		GfoTstr.EqLines(expd, Io_mgr.Instance.LoadFilStr(fil));
 	}
 	private String Xto_str(Xobcl_kwd_row[] expd) {
 		int len = expd.length;
@@ -165,14 +172,14 @@ class Xobc_utl_make_lang_fxt {
 			byte[][] itms = row.Itms();
 			int itms_len = itms.length;
 			if (itms_len > 0) {
-				sb.Add_char_pipe();
+				sb.AddCharPipe();
 				for (int j = 0; j < itms_len; j++) {
 					byte[] itm = itms[j];
-					sb.Add(itm).Add_char_pipe();
+					sb.Add(itm).AddCharPipe();
 				}
 			}
-			sb.Add_char_nl();
+			sb.AddCharNl();
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 }

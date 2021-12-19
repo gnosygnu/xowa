@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.xowa.*;
 import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.xtns.*;
@@ -25,7 +29,7 @@ public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 		List_adp queue = lbl_mgr.Queue();
 		int len = queue.Len();
 		for (int i = 0; i < len; ++i) {
-			Wdata_lbl_itm itm = (Wdata_lbl_itm)queue.Get_at(i);
+			Wdata_lbl_itm itm = (Wdata_lbl_itm)queue.GetAt(i);
 			Wdata_doc wdoc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(itm.Ttl());
 			if (wdoc == null) {
 				Xoa_app_.Usr_dlg().Warn_many("", "", "wbase.lbl_wkr:page does not exists; page=~{0}", itm.Ttl());
@@ -33,15 +37,15 @@ public class Wdata_lbl_wkr_wiki implements Wdata_lbl_wkr {
 			}
 			Ordered_hash labels = wdoc.Label_list();
 			if (labels.Len() == 0) continue;
-			labels.Sort_by(sorter);
+			labels.SortBy(sorter);
 			Wdata_langtext_itm label = Wdata_langtext_itm.Get_itm_or_null(wdoc.Label_list(), wikibase_api.Core_langs());
 			if (label == null)
-				itm.Load_vals(Bry_.Empty, itm.Ttl());	// NOTE: use itm.Ttl() in case no label is found for the core_lang
+				itm.Load_vals(BryUtl.Empty, itm.Ttl());	// NOTE: use itm.Ttl() in case no label is found for the core_lang
 			else {
 				itm.Load_vals(label.Lang(), label.Text());
 				if (itm.Text_en_enabled()) {
 					Wdata_langtext_itm en_label = (Wdata_langtext_itm)labels.GetByOrNull(Xol_lang_itm_.Key_en);
-					itm.Text_en_(en_label == null ? Bry_.Empty : en_label.Text());
+					itm.Text_en_(en_label == null ? BryUtl.Empty : en_label.Text());
 				}
 			}
 		}

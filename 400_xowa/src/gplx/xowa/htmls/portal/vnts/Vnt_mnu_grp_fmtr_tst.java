@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.portal.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.portal.*;
+package gplx.xowa.htmls.portal.vnts;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import org.junit.*; import gplx.xowa.langs.vnts.*;
 public class Vnt_mnu_grp_fmtr_tst {		
 	@Before public void init() {fxt.Clear();} private final Vnt_mnu_grp_fmtr_fxt fxt = new Vnt_mnu_grp_fmtr_fxt();
@@ -51,15 +54,15 @@ class Vnt_mnu_grp_fmtr_fxt {
 			if (i % 2 == 0)
 				lang_code = lang;
 			else {
-				mgr.Add(Bry_.new_u8(lang_code), Bry_.new_u8(lang));
+				mgr.Add(BryUtl.NewU8(lang_code), BryUtl.NewU8(lang));
 			}
 		}
 	}
 	public void Test_to_str(String page_href, String selected_vnt, String expd) {
 		Vnt_mnu_grp_fmtr vnt_grp_fmtr = new Vnt_mnu_grp_fmtr();
-		Bry_bfr bfr = Bry_bfr_.New();
-		vnt_grp_fmtr.Init(mgr, Bry_.new_u8(page_href), Bry_.new_a7("zh.wikipedia.org"), Bry_.new_u8(selected_vnt));
-		vnt_grp_fmtr.Bfr_arg__add(bfr);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		BryWtr bfr = BryWtr.New();
+		vnt_grp_fmtr.Init(mgr, BryUtl.NewU8(page_href), BryUtl.NewA7("zh.wikipedia.org"), BryUtl.NewU8(selected_vnt));
+		vnt_grp_fmtr.AddToBfr(bfr);
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 }

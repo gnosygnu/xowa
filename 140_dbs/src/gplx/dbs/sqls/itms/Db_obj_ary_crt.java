@@ -13,16 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
+package gplx.dbs.sqls.itms;
 import gplx.core.criterias.*;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.errs.ErrUtl;
 public class Db_obj_ary_crt implements gplx.core.criterias.Criteria {
 	public byte Tid() {return Criteria_.Tid_db_obj_ary;}
 	public Db_obj_ary_fld[] Flds() {return flds;} public Db_obj_ary_crt Flds_(Db_obj_ary_fld[] v) {this.flds = v; return this;} private Db_obj_ary_fld[] flds;
 	public Object[][]		Vals() {return vals;} public void Vals_(Object[][] v) {this.vals = v;} private Object[][] vals;
-	public void				Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
-	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
+	public void				Val_from_args(Hash_adp args) {throw ErrUtl.NewUnimplemented();}
+	public void				Val_as_obj_(Object v) {throw ErrUtl.NewUnimplemented();}
 	public boolean				Matches(Object obj) {return false;}
-	public String			To_str() {return "";}
+	public String ToStr() {return "";}
 	public static Db_obj_ary_crt new_(Db_obj_ary_fld... flds) {return new Db_obj_ary_crt().Flds_(flds);}
 	public static Db_obj_ary_crt new_by_type(byte type_tid, String... names) {
 		int len = names.length;

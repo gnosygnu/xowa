@@ -20,7 +20,7 @@ public class Xosync_hdoc_parser__tst {
 	private final Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
 	@Before public void init() {fxt.Init(true);}
 	@After public void term() {fxt.Term();}
-	@Test  public void Remove_edit() {
+	@Test public void Remove_edit() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos_concat_lines
 		( "<h2><span class='mw-headline' id='Section_1'>Section_1</span>"
 		, "<span class='mw-editsection'>"
@@ -34,7 +34,7 @@ public class Xosync_hdoc_parser__tst {
 		, "</h2>"
 		));
 	}
-//		@Test  public void Smoke() {
+//		@Test public void Smoke() {
 //			fxt.Exec__parse(Io_mgr.Instance.LoadFilStr("C:\\xowa\\dev\\wm.updater.src.html"));
 //			Io_mgr.Instance.SaveFilBry("C:\\xowa\\dev\\wm.updater.trg.html", fxt.Hdoc().Converted());
 //		}

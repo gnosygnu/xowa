@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.files.origs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
 import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.files.repos.*;
 import gplx.xowa.apps.wms.apis.origs.*;
@@ -63,7 +69,7 @@ public class Xof_orig_mgr {
 		int len = itms.Len();
 		for (int i = 0; i < len; i++) {
 			try {
-				Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.Get_at(i);
+				Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.GetAt(i);
 				fsdb.Orig_exists_n_();	// default to status = missing
 				Xof_orig_itm orig = (Xof_orig_itm)rv.GetByOrNull(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) continue;
 				if (orig.Insert_new()) this.Insert(orig.Repo(), fsdb.Lnki_ttl(), orig.Ext_id(), orig.W(), orig.H(), orig.Redirect());	// NOTE: orig_page must be same as find_arg not orig.Page() else will not be found for next call; DATE:2015-04-14
@@ -71,7 +77,7 @@ public class Xof_orig_mgr {
 				if (!Io_mgr.Instance.ExistsFil(fsdb.Html_view_url()))
 					fsdb.File_exists_n_();
 			} catch (Exception e) {
-				Xoa_app_.Usr_dlg().Warn_many("", "", "orig: exc=~{0}", Err_.Message_gplx_full(e));
+				Xoa_app_.Usr_dlg().Warn_many("", "", "orig: exc=~{0}", ErrUtl.ToStrFull(e));
 			}
 		}
 	}

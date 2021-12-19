@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.grammars;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.langs.*;
 import gplx.core.btries.*;
 public class Xol_grammar_ru implements Xol_grammar {
 	static final byte Genitive_null = 0, Genitive_bnkn = 1, Genitive_Bnkn = 26, Genitive_b = 3, Genitive_nr = 4, Genitive_ka = 5, Genitive_tn = 6, Genitive_abl = 7, Genitive_hnk = 8;
@@ -32,13 +35,13 @@ public class Xol_grammar_ru implements Xol_grammar {
 		return rv;
 	}
 	private static void genitive_trie_add(Btrie_bwd_mgr trie, byte tid, String find_str, String repl_str) {
-		byte[] find_bry = Bry_.new_u8(find_str);
-		byte[] repl_bry = repl_str == null ? null : Bry_.new_u8(repl_str);
+		byte[] find_bry = BryUtl.NewU8(find_str);
+		byte[] repl_bry = repl_str == null ? null : BryUtl.NewU8(repl_str);
 		Xol_grammar_ru_genitive_itm itm = new Xol_grammar_ru_genitive_itm(tid, find_bry, repl_bry);
 		trie.Add(find_bry, itm);
 	}
-	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {
-		if (Bry_.Len_eq_0(word)) return true;	// empty_string returns ""
+	public boolean Grammar_eval(BryWtr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {
+		if (BryUtl.IsNullOrEmpty(word)) return true;	// empty_string returns ""
 		byte tid = Xol_grammar_.Tid_of_type(type);
 		switch (tid) {
 			case Xol_grammar_.Tid_genitive:		{
@@ -47,7 +50,7 @@ public class Xol_grammar_ru implements Xol_grammar {
 				if (o != null) {
 					Xol_grammar_ru_genitive_itm itm = (Xol_grammar_ru_genitive_itm)o;
 					if (!itm.Repl_is_noop()) {
-						bfr.Add_mid(word, 0, trv.Pos() + 1);
+						bfr.AddMid(word, 0, trv.Pos() + 1);
 						bfr.Add(itm.Repl());
 						return true;
 					}

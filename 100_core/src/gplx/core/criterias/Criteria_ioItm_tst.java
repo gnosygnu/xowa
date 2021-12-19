@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.criterias; import gplx.*; import gplx.core.*;
+package gplx.core.criterias;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.commons.GfoDateUtl;
+import gplx.libs.files.Io_url_;
 import org.junit.*;
 import gplx.core.ios.*;
 public class Criteria_ioItm_tst {
@@ -30,9 +33,9 @@ public class Criteria_ioItm_tst {
 	}
 	@Test public void Modified() {
 		fil = fx.fil_wnt_("C:\\fil.txt");
-		crt = crt_(IoItmFil_.Prop_Modified, Criteria_.mte_(DateAdp_.parse_gplx("2001-01-01")));
-		tst_Match(true, crt, fil.ModifiedTime_(DateAdp_.parse_gplx("2001-01-02")), fil.ModifiedTime_(DateAdp_.parse_gplx("2001-01-01")));
-		tst_Match(false, crt, fil.ModifiedTime_(DateAdp_.parse_gplx("2000-12-31")));
+		crt = crt_(IoItmFil_.Prop_Modified, Criteria_.mte_(GfoDateUtl.ParseGplx("2001-01-01")));
+		tst_Match(true, crt, fil.ModifiedTime_(GfoDateUtl.ParseGplx("2001-01-02")), fil.ModifiedTime_(GfoDateUtl.ParseGplx("2001-01-01")));
+		tst_Match(false, crt, fil.ModifiedTime_(GfoDateUtl.ParseGplx("2000-12-31")));
 	}
 	@Test public void IoMatch() {
 		Criteria crt = Criteria_ioMatch.parse(true, "*.txt", false);
@@ -43,6 +46,6 @@ public class Criteria_ioItm_tst {
 	Criteria crt_(String fld, Criteria crt) {return Criteria_fld.new_(fld, crt);}
 	void tst_Match(boolean expt, Criteria fieldCrt, IoItm_base... ary) {
 		for (IoItm_base itm : ary)
-			Tfds.Eq(expt, fieldCrt.Matches(itm));
+			GfoTstr.EqObj(expt, fieldCrt.Matches(itm));
 	}
 }

@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.thms;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.htmls.core.wkrs.*;
+import org.junit.*; import gplx.langs.htmls.*;
 public class Xoh_thm_hzip__avo__tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
-	@Test  public void Video() {
-		fxt.Test__bicode("~&%test_caption~|E9eA.ogv~%A.ogv~~", Gfh_utl.Replace_apos(String_.Concat_lines_nl_skip_last
+	@Test public void Video() {
+		fxt.Test__bicode("~&%test_caption~|E9eA.ogv~%A.ogv~~", Gfh_utl.Replace_apos(StringUtl.ConcatLinesNlSkipLast
 		( "<div class='thumb tright'>"
 		,   "<div class='thumbinner' style='width:220px;'>"
 		,     "<div class='xowa_media_div'>"
@@ -34,8 +35,8 @@ public class Xoh_thm_hzip__avo__tst {
 		, "</div>"
 		)));
 	}
-	@Test  public void Audio() {
-		fxt.Test__bicode(Gfh_utl.Replace_apos(String_.Concat_lines_nl
+	@Test public void Audio() {
+		fxt.Test__bicode(Gfh_utl.Replace_apos(StringUtl.ConcatLinesNl
 		( "<div class='thumb tright'>"
 		, "  <div class='thumbinner' style='width:11px;'>"
 		, "    <div class=\"xowa_media_div\">"
@@ -47,7 +48,7 @@ public class Xoh_thm_hzip__avo__tst {
 		, "    </div>"
 		, "  </div>"
 		, "</div>"
-		)), String_.Concat_lines_nl_skip_last
+		)), StringUtl.ConcatLinesNlSkipLast
 		( "<div class='thumb tright'>"
 		, "  <div class='thumbinner' style='width:11px;'>"
 		, "    <div class='xowa_media_div'>"

@@ -13,16 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_owner;
-import gplx.Gfo_evt_mgr_;
-import gplx.GfoMsg;
-import gplx.GfsCtx;
-import gplx.Keyval_hash;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.core.threads.Thread_adp;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyValHash;
 import gplx.core.threads.Thread_adp_;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwComboBox;
@@ -41,7 +39,7 @@ import org.eclipse.swt.widgets.Control;
 
 class Swt_combo implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner {
 	private final Combo combo;
-	public Swt_combo(Swt_control owner, Keyval_hash ctorArgs) {
+	public Swt_combo(Swt_control owner, KeyValHash ctorArgs) {
 		combo = new Combo(owner.Under_composite(), SWT.DROP_DOWN);
 		core = new Swt_core__basic(combo);
 		combo.addKeyListener(new Swt_lnr_key(this));
@@ -63,7 +61,7 @@ class Swt_combo implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner 
 	@Override public int SelLen() {return combo.getSelection().y;} @Override public void SelLen_set(int v) {combo.setSelection(new Point(v, combo.getSelection().x));}
 	@Override public void Sel_(int bgn, int end) {combo.setSelection(new Point(bgn, end));}
 	@Override public void SelectedItm_set(Object v) {}
-	@Override public String[] DataSource_as_str_ary() {return String_.Ary_empty;}
+	@Override public String[] DataSource_as_str_ary() {return StringUtl.AryEmpty;}
 	@Override public void DataSource_set(Object... ary) {combo.setItems((String[])ary);}
 	@Override public String Text_fallback() {return "";} @Override public void Text_fallback_(String v) {}
 	@Override public int List_sel_idx() {return -1;} @Override public void List_sel_idx_(int v) {}
@@ -87,7 +85,7 @@ class Swt_combo implements GxwElem, GxwComboBox, Swt_control, Gfo_evt_mgr_owner 
 		String prv_text = combo.getText();
 		combo.setListVisible(v);
 		String cur_text = combo.getText();
-		while (!String_.Eq(cur_text, prv_text)) {	// NOTE: setting setListVisible to true may cause text to grab item from dropDown list; try to reset to original value; DATE:2016-03-14 
+		while (!StringUtl.Eq(cur_text, prv_text)) {	// NOTE: setting setListVisible to true may cause text to grab item from dropDown list; try to reset to original value; DATE:2016-03-14
 			Thread_adp_.Sleep(1);
 			combo.setText(prv_text);
 			cur_text = combo.getText();

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.consoles; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
+package gplx.core.consoles;
+import gplx.Yn;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 class Gfo_cmd_arg_mgr_ {
 	public static final String
 	  Err__key__unknown				= "unknown key"
@@ -35,7 +37,7 @@ class Gfo_cmd_arg_mgr_ {
 					return null;
 				}
 				return itm_as_int == BoolUtl.YInt;
-			default: throw Err_.new_unhandled(val_tid);
+			default: throw ErrUtl.NewUnhandled(val_tid);
 		}
 	}
 }

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
 
-import gplx.Gfo_log_;
+import gplx.libs.logs.Gfo_log_;
 import gplx.xowa.mediawiki.XomwEnv;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpString_;

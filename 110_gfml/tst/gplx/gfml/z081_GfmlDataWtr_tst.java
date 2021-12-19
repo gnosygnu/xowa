@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*; import gplx.core.stores.*;
 public class z081_GfmlDataWtr_tst {
 	@Before public void setup() {
@@ -64,6 +65,6 @@ public class z081_GfmlDataWtr_tst {
 	}
 	void tst_XtoStr(DataWtr wtr, String expd) {
 		String actl = wtr.To_str();
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 }

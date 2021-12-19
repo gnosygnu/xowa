@@ -14,23 +14,22 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.stmts;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_fmt;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.DbmetaFldType;
 import gplx.dbs.sqls.SqlQryWtrUtl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Db_stmt_mgr {
 	private final List_adp fmt_list = List_adp_.New();
 	private final Db_stmt_arg_list arg_list = new Db_stmt_arg_list();
 	public boolean Mode_is_stmt() {return mode_is_stmt;} public Db_stmt_mgr Mode_is_stmt_(boolean v) {mode_is_stmt = v; return this;} private boolean mode_is_stmt = true;
 	public void Clear() {arg_list.Clear(); fmt_list.Clear(); bfr.Clear();}
-	public Bry_bfr Bfr() {return bfr;} private final Bry_bfr bfr = Bry_bfr_.New();
+	public BryWtr Bfr() {return bfr;} private final BryWtr bfr = BryWtr.New();
 	public void Add_var_many(Object... ary) {
 		for (Object o : ary)
 			fmt_list.Add(o);
@@ -40,17 +39,17 @@ public class Db_stmt_mgr {
 		arg_list.Add(BoolUtl.Y, DbmetaFldType.TidStr, key, val);
 	}
 	public void Add_crt_int(String key, int val) {			
-		fmt_list.Add(mode_is_stmt ? stmt_arg_placeholder : Int_.To_str(val));			
+		fmt_list.Add(mode_is_stmt ? stmt_arg_placeholder : IntUtl.ToStr(val));
 		arg_list.Add(BoolUtl.Y, DbmetaFldType.TidInt, key, val);
 	}
-	public void Write_fmt(Bry_fmt fmt) {
+	public void Write_fmt(BryFmt fmt) {
 		fmt.Bld_many(bfr, (Object[])fmt_list.ToAryAndClear(Object.class));
 	}
-	public String Make_sql(Bry_fmt fmt) {	// should only be called publicly for debugging purposes
+	public String Make_sql(BryFmt fmt) {	// should only be called publicly for debugging purposes
 		Write_fmt(fmt);
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
-	public Db_stmt Make_stmt(Db_conn conn, Bry_fmt fmt) {
+	public Db_stmt Make_stmt(Db_conn conn, BryFmt fmt) {
 		return conn.Stmt_sql(Make_sql(fmt));
 	}
 	public void Fill_stmt_and_clear(Db_stmt stmt) {

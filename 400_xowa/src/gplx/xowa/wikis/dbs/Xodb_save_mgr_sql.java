@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.dbs;
 
-import gplx.DateAdp;
-import gplx.Datetime_now;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.DbmetaFldItm;
 import gplx.xowa.Xoa_ttl;
@@ -42,7 +42,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		int ns_count = db_file.Tbl__ns().Select_ns_count(ns_id) + 1;
 		int page_id = db_file.Tbl__cfg().Select_int_or(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, -1);
 		if (page_id == -1) {	// HACK: changed for tests; was dbs.qrys.Db_qry_sql.rdr_("SELECT (Max(page_id) + 1) AS max_page_id FROM page;")
-			Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_select(db_file.Tbl__page().Tbl_name(), String_.Ary(db_file.Tbl__page().Fld_page_id()), DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
+			Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_select(db_file.Tbl__page().Tbl_name(), StringUtl.Ary(db_file.Tbl__page().Fld_page_id()), DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 			try {
 				int max_page_id = -1;
 				while (rdr.Move_next()) {
@@ -63,7 +63,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		page_core_tbl.Insert_bgn();
 		page_text_tbl.Insert_bgn();
 		try {
-			db_mgr.Core_data_mgr().Create_page(page_core_tbl, page_text_tbl, page_id, ns_id, ttl.Page_db(), redirect, Datetime_now.Get(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
+			db_mgr.Core_data_mgr().Create_page(page_core_tbl, page_text_tbl, page_id, ns_id, ttl.Page_db(), redirect, GfoDateNow.Get(), text_zip, text_raw.length, ns_count, page_text_db.Id(), -1);
 			db_file.Tbl__ns().Update_ns_count(ns_id, ns_count);
 			db_file.Tbl__cfg().Update_int(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, page_id + 1);
 		} finally {
@@ -74,7 +74,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	}
 	public void Data_update(Xoae_page page, byte[] text_raw) {			
 		boolean redirect = page.Wikie().Redirect_mgr().Is_redirect(text_raw, text_raw.length);
-		DateAdp modified = update_modified_on_enabled ? Datetime_now.Get() : page.Db().Page().Modified_on();
+		GfoDate modified = update_modified_on_enabled ? GfoDateNow.Get() : page.Db().Page().Modified_on();
 		int page_id = page.Db().Page().Id();
 		db_mgr.Core_data_mgr().Tbl__page().Update__redirect__modified(page_id, redirect, modified);
 		Xowd_page_itm db_page = new Xowd_page_itm();

@@ -13,17 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http.hdocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*; import gplx.xowa.apps.servers.http.*;
-import gplx.core.btries.*; import gplx.core.primitives.*; import gplx.core.net.*;
-import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
-import gplx.xowa.htmls.core.wkrs.addons.forms.*;
+package gplx.xowa.apps.servers.http.hdocs;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.net.Gfo_protocol_itm;
+import gplx.langs.htmls.docs.Gfh_atr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.apps.servers.http.Http_server_wkr;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_ctx;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_wkr;
+import gplx.xowa.htmls.core.wkrs.addons.forms.Xoh_form_data;
+import gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_data;
+import gplx.xowa.htmls.core.wkrs.lnkis.anchs.Xoh_anch_href_data;
+import gplx.xowa.htmls.hrefs.Xoh_href_;
 class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
-	private Bry_bfr bfr; private Xoh_page hpg; private byte[] src;
+	private BryWtr bfr; private Xoh_page hpg; private byte[] src;
 	private byte[] root_http_dir; // EX: file:///C:/xowa/
-	public Bry_bfr Bfr() {return bfr;}
-	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
+	public BryWtr Bfr() {return bfr;}
+	public void On_page_bgn(BryWtr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = bfr; this.hpg = hpg; this.src = src;
 		if (root_http_dir == null) {
 			this.root_http_dir = hpg.Wiki().App().Fsys_mgr().Http_root().To_http_file_bry();
@@ -31,14 +46,14 @@ class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
 		}
 	}
 	public void On_page_end() {}
-	public void On_txt    (int rng_bgn, int rng_end)                               {bfr.Add_mid(src, rng_bgn, rng_end);}
+	public void On_txt    (int rng_bgn, int rng_end)                               {bfr.AddMid(src, rng_bgn, rng_end);}
 	public void On_escape (gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data) {bfr.Add(data.Hook());}
-	public void On_xnde   (gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)   {bfr.Add_mid(src, data.Src_bgn(), data.Src_end());}
+	public void On_xnde   (gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)   {bfr.AddMid(src, data.Src_bgn(), data.Src_end());}
 	public void On_lnki   (gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)     {
 		// get atr (with null checks)
 		Xoh_anch_href_data href_itm = data.Href_itm();
 		if (href_itm == null) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "lnki missing href; page=~{0} src=~{1}", hpg.Url_bry_safe(), Bry_.Mid(src, data.Src_bgn(), data.Src_end()));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "lnki missing href; page=~{0} src=~{1}", hpg.Url_bry_safe(), BryLni.Mid(src, data.Src_bgn(), data.Src_end()));
 			return;
 		}
 		Add_href(data.Src_bgn(), data.Src_end(), href_itm.Atr().Val_bgn(), href_itm.Atr().Val_end());
@@ -49,7 +64,7 @@ class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
 		return false;
 	}
 	public void On_gly(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_data data) {
-		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+		bfr.AddMid(src, data.Src_bgn(), data.Src_end());
 	}
 	public boolean Process_parse(Xoh_data_itm data) {
 		switch (data.Tid()) {
@@ -67,36 +82,36 @@ class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
 			case Xoh_hzip_dict_.Tid__form:
 				Xoh_form_data form_data = (Xoh_form_data)data;
 				Gfh_atr action_atr = form_data.Action_atr();
-				bfr.Add_mid(src, form_data.Src_bgn(), action_atr.Val_bgn());
-				if (Bry_.Match(src, action_atr.Val_bgn(), action_atr.Val_bgn() + Xoh_href_.Bry__wiki.length, Xoh_href_.Bry__wiki)) {
-					bfr.Add_byte_slash().Add(hpg.Wiki().Domain_bry());
+				bfr.AddMid(src, form_data.Src_bgn(), action_atr.Val_bgn());
+				if (BryLni.Eq(src, action_atr.Val_bgn(), action_atr.Val_bgn() + Xoh_href_.Bry__wiki.length, Xoh_href_.Bry__wiki)) {
+					bfr.AddByteSlash().Add(hpg.Wiki().Domain_bry());
 				}
-				bfr.Add_mid(src, action_atr.Val_bgn(), form_data.Src_end());
+				bfr.AddMid(src, action_atr.Val_bgn(), form_data.Src_end());
 				return true;
 			case Xoh_hzip_dict_.Tid__hdr:
 			case Xoh_hzip_dict_.Tid__toc:
 			case Xoh_hzip_dict_.Tid__lnke:
 			default:
-				bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+				bfr.AddMid(src, data.Src_bgn(), data.Src_end());
 				break;
 		}
 		return true;
 	}
 	private void Add_href(int itm_bgn, int itm_end, int href_bgn, int href_end) {
 		// add everything up to href_bgn
-		bfr.Add_mid(src, itm_bgn, href_bgn);
+		bfr.AddMid(src, itm_bgn, href_bgn);
 
 		// now "fix" href
 		Btrie_rv trv = new Btrie_rv();
-		Object tid_obj = href_trie.Match_at(trv, src, href_bgn, href_end);
+		Object tid_obj = href_trie.MatchAt(trv, src, href_bgn, href_end);
 		if (tid_obj != null) {
-			byte tid = ((Byte_obj_val)tid_obj).Val();
+			byte tid = ((ByteVal)tid_obj).Val();
 			switch (tid) {
 				case Tid__wiki:
-					bfr.Add_byte_slash().Add(hpg.Wiki().Domain_bry());
+					bfr.AddByteSlash().Add(hpg.Wiki().Domain_bry());
 					break;
 				case Tid__xcmd:
-					bfr.Add_str_a7("/exec/");
+					bfr.AddStrA7("/exec/");
 					href_bgn = trv.Pos();
 					break;
 				case Tid__site:
@@ -111,18 +126,18 @@ class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
 					href_bgn = trv.Pos() - 5; // 5 = "file/".length
 					break;
 				default:
-					throw Err_.new_unhandled_default(tid);
+					throw ErrUtl.NewUnhandled(tid);
 			}
 		}
 
 		// add remainder of href_val
-		bfr.Add_mid(src, href_bgn, href_end);
+		bfr.AddMid(src, href_bgn, href_end);
 
 		// add everything after href
-		bfr.Add_mid(src, href_end, itm_end);
+		bfr.AddMid(src, href_end, itm_end);
 	}
-	public static final byte[] Path_lnxusr_xowa_file = Bry_.new_a7("file:////home/lnxusr/xowa/file/");
-	private static final byte[] Bry__site = Bry_.new_a7("/site");
+	public static final byte[] Path_lnxusr_xowa_file = BryUtl.NewA7("file:////home/lnxusr/xowa/file/");
+	private static final byte[] Bry__site = BryUtl.NewA7("/site");
 	private static final byte
 	  Tid__wiki      = 1
 	, Tid__xcmd      = 2

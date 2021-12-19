@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
 import gplx.core.gfo_regys.*;
+import gplx.frameworks.invks.GfoMsg;
 public class GfoMsgParser_gfml implements GfoMsgParser {
 	public GfoMsg ParseToMsg(String s) {return GfmlDataNde.XtoMsg(s);}
         public static final GfoMsgParser_gfml Instance = new GfoMsgParser_gfml(); GfoMsgParser_gfml() {}

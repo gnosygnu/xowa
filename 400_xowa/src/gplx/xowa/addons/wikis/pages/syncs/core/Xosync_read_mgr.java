@@ -13,14 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.syncs.core; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.pages.syncs.core;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.wikis.pages.syncs.dbs.*;
 import gplx.xowa.apps.apis.xowa.addons.bldrs.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.addons.wikis.pages.syncs.wmapis.*;
-public class Xosync_read_mgr implements Gfo_invk {		
+public class Xosync_read_mgr implements Gfo_invk {
 	private int auto_interval = 60 * 24;	// in minutes
 	private Db_conn sync_conn; private Xosync_sync_tbl sync_tbl;
 	private final Xopg_match_mgr auto_page_matcher = new Xopg_match_mgr();
@@ -36,7 +48,7 @@ public class Xosync_read_mgr implements Gfo_invk {
 		if (!auto_enabled) return null;
 
 		// skip if home or other
-		if (Int_.In
+		if (IntUtl.In
 			( wiki.Domain_itm().Domain_type_id()
 			, Xow_domain_tid_.Tid__home
 			, Xow_domain_tid_.Tid__other))
@@ -79,13 +91,13 @@ public class Xosync_read_mgr implements Gfo_invk {
 			}
 
 			// get sync_date and check if sync needed
-			DateAdp sync_date = sync_tbl.Select_sync_date_or_min(tmp_dbpg.Id());
-			if (Datetime_now.Get().Diff(sync_date).Total_mins().To_int() <= auto_interval) {
-				Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: skipping auto-sync for page; wiki=~{0} page=~{1} sync_date=~{2}", wiki.Domain_bry(), page_ttl.Full_db(), sync_date.XtoStr_fmt_yyyy_MM_dd_HH_mm_ss());
+			GfoDate sync_date = sync_tbl.Select_sync_date_or_min(tmp_dbpg.Id());
+			if (GfoDateNow.Get().Diff(sync_date).TotalMins().ToInt() <= auto_interval) {
+				Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: skipping auto-sync for page; wiki=~{0} page=~{1} sync_date=~{2}", wiki.Domain_bry(), page_ttl.Full_db(), sync_date.ToStrFmt_yyyy_MM_dd_HH_mm_ss());
 				return rv;
 			}
 			else {
-				Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: running auto-sync for page; wiki=~{0} page=~{1} sync_date=~{2}", wiki.Domain_bry(), page_ttl.Full_db(), sync_date.XtoStr_fmt_yyyy_MM_dd_HH_mm_ss());
+				Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: running auto-sync for page; wiki=~{0} page=~{1} sync_date=~{2}", wiki.Domain_bry(), page_ttl.Full_db(), sync_date.ToStrFmt_yyyy_MM_dd_HH_mm_ss());
 			}
 			
 			// auto-sync page
@@ -96,7 +108,7 @@ public class Xosync_read_mgr implements Gfo_invk {
 
 			// insert into sync_db
 			Gfo_usr_dlg_.Instance.Log_many("", "", "page_sync: updating sync table; page=~{0}", page_ttl.Full_db());
-			sync_tbl.Upsert(parse_data.Page_id(), Datetime_now.Get());
+			sync_tbl.Upsert(parse_data.Page_id(), GfoDateNow.Get());
 
 			// redirect occurred; EX: A -> B will have A,B in pages
 			if (pages.Len() > 1) {

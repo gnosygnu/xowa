@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*;
+package gplx.langs.htmls;
 import gplx.core.brys.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Gfh_parser {
 	public Gfh_parser() {
 		Bry_bldr bry_bldr = new Bry_bldr();
@@ -62,7 +65,7 @@ public class Gfh_parser {
 		++pos;
 		int name_len = cur_name_end - cur_name_bgn;
 		if (pos + name_len >= end) return false;
-		if (!Bry_.Match(src, pos, pos + name_len, src, cur_name_bgn,  cur_name_end)) return false;
+		if (!BryLni.Eq(src, pos, pos + name_len, src, cur_name_bgn,  cur_name_end)) return false;
 		pos += name_len;
 		if (src[pos] != AsciiByte.Gt) return false;
 		++pos;

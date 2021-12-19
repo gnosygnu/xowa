@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.updates.specials;
-import gplx.Datetime_now;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
 import gplx.langs.mustaches.Mustache_doc_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.addons.apps.updates.Xoa_update_startup;
@@ -48,8 +48,8 @@ public class Xoa_update_html extends Xow_special_wtr__base {
 
 		// build root
 		String check_date = app.Cfg().Get_str_app_or("xowa.app.update.startup.inet_date", null);	// CFG:Cfg__
-		if (check_date == null) check_date = Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm_ss();
-		String build_date = String_.Mid(Xoa_app_.Build_date, 0, String_.FindFwd(Xoa_app_.Build_date, " "));	// remove time to show date only
+		if (check_date == null) check_date = GfoDateNow.Get().ToStrFmt_yyyy_MM_dd_HH_mm_ss();
+		String build_date = StringUtl.Mid(Xoa_app_.Build_date, 0, StringUtl.FindFwd(Xoa_app_.Build_date, " "));	// remove time to show date only
 		if (db_itms.length == 0) return new Xoa_update_itm__root(Xoa_app_.Version, build_date, check_date, web_access_enabled, "", "", Xoa_app_version_itm.Priority__trivial, "", "", "");
 
 		// convert to gui itm

@@ -15,12 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims.itms;
 
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Decimal_adp;
-import gplx.Decimal_adp_;
-import gplx.Gfo_usr_dlg_;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
@@ -35,40 +36,40 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 	public byte[]			Lbound()	{return lbound;} private final byte[] lbound;
 	public byte[]			Unit()		{return unit;} private final byte[] unit;
 
-	public Decimal_adp Amount_as_num() {
+	public GfoDecimal Amount_as_num() {
 		if (amount_as_num == null) {
 			amount_as_num = To_decimal_or_null("amount", amount);
 			if (amount_as_num == null) {
-				amount_as_num = Decimal_adp_.Zero;
+				amount_as_num = GfoDecimalUtl.Zero;
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase.claim: value is null; name=~{0}", "amount");
 			}
 		}
 		return amount_as_num;
-	}	private Decimal_adp amount_as_num;
-	public Decimal_adp Ubound_as_num() {
+	}	private GfoDecimal amount_as_num;
+	public GfoDecimal Ubound_as_num() {
 		if (ubound_as_num == null) {
 			ubound_as_num = To_decimal_or_null("upper", ubound);
 		}
 		return ubound_as_num;
-	}	private Decimal_adp ubound_as_num;
-	public Decimal_adp Lbound_as_num() {
+	}	private GfoDecimal ubound_as_num;
+	public GfoDecimal Lbound_as_num() {
 		if (lbound_as_num == null) {
 			lbound_as_num = To_decimal_or_null("lower", lbound);
 		}
 		return lbound_as_num;
-	}	private Decimal_adp lbound_as_num;
+	}	private GfoDecimal lbound_as_num;
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_quantity(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), String_.new_u8(amount), String_.new_u8(unit), String_.new_u8(ubound), String_.new_u8(lbound));
+		return StringUtl.ConcatWith("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), StringUtl.NewU8(amount), StringUtl.NewU8(unit), StringUtl.NewU8(ubound), StringUtl.NewU8(lbound));
 	}
 
-	public static final byte[] Unit_1 = Bry_.new_a7("1");
-	private static Decimal_adp To_decimal_or_null(String name, byte[] bry) {
+	public static final byte[] Unit_1 = BryUtl.NewA7("1");
+	private static GfoDecimal To_decimal_or_null(String name, byte[] bry) {
 		if (bry == null) return null;
 		int len = bry.length;
 		if (len == 0) return null;
-		if (bry[0] == AsciiByte.Plus) bry = Bry_.Mid(bry, 1);
-		return Decimal_adp_.parse(String_.new_a7(bry));
+		if (bry[0] == AsciiByte.Plus) bry = BryLni.Mid(bry, 1);
+		return GfoDecimalUtl.Parse(StringUtl.NewA7(bry));
 	}
 }

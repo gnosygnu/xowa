@@ -14,19 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.stores;
-
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.core.envs.SystemUtl;
 import gplx.core.logs.Gfo_log_wtr;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_nde;
 import gplx.langs.jsons.Json_parser;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -50,10 +49,10 @@ public class Wbase_doc_mgr {
 	}
 	public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled;
 	public void Cache__init(String cache_type, long cache_max, long compress_size, long used_weight) {
-		if		(String_.Eq(cache_type, "null")) doc_cache = new Wbase_doc_cache__null();
-		else if (String_.Eq(cache_type, "hash")) doc_cache = new Wbase_doc_cache__hash();
-		else if (String_.Eq(cache_type, "mru" )) doc_cache = new Wbase_doc_cache__mru(cache_max, compress_size, used_weight);
-		else throw Err_.new_unhandled_default(cache_type);
+		if		(StringUtl.Eq(cache_type, "null")) doc_cache = new Wbase_doc_cache__null();
+		else if (StringUtl.Eq(cache_type, "hash")) doc_cache = new Wbase_doc_cache__hash();
+		else if (StringUtl.Eq(cache_type, "mru" )) doc_cache = new Wbase_doc_cache__mru(cache_max, compress_size, used_weight);
+		else throw ErrUtl.NewUnhandled(cache_type);
 	}
 	public void Cleanup() {
 		doc_cache.Term();
@@ -61,13 +60,13 @@ public class Wbase_doc_mgr {
 	}
 	private void wbase_db_log__flush() {
 		int len = wbase_db_hash.Len();
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		for (int i = 0; i < len; i++) {
-			Wbase_db_log_itm itm = (Wbase_db_log_itm)wbase_db_hash.Get_at(i);
+			Wbase_db_log_itm itm = (Wbase_db_log_itm)wbase_db_hash.GetAt(i);
 			tmp_bfr.Add(itm.Ttl());
-			tmp_bfr.Add_byte_pipe().Add_int_variable(itm.Count());
-			tmp_bfr.Add_byte_pipe().Add_int_variable(itm.Elapsed());
-			tmp_bfr.Add_byte_nl();
+			tmp_bfr.AddBytePipe().AddIntVariable(itm.Count());
+			tmp_bfr.AddBytePipe().AddIntVariable(itm.Elapsed());
+			tmp_bfr.AddByteNl();
 			wbase_db_log.Write(tmp_bfr);
 		}
 		wbase_db_log.Flush();
@@ -108,7 +107,7 @@ public class Wbase_doc_mgr {
 			wbase_db_itm = new Wbase_db_log_itm(ttl_bry);
 			wbase_db_hash.Add(ttl_bry, wbase_db_itm);
 		}
-		long time_bgn = gplx.core.envs.System_.Ticks();
+		long time_bgn = SystemUtl.Ticks();
 
 		Wdata_doc rv = null;
 		synchronized (thread_lock) {	// LOCK:app-level; jdoc_parser; moved synchronized higher up; DATE:2016-09-03
@@ -150,10 +149,10 @@ public class Wbase_doc_mgr {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "too many redirects for ttl: orig=~{0} cur=~{1}", ttl_bry, cur_ttl_bry);
 		}
 
-		wbase_db_itm.Update(gplx.core.envs.System_.Ticks__elapsed_in_frac(time_bgn));
+		wbase_db_itm.Update(SystemUtl.Ticks__elapsed_in_frac(time_bgn));
 		return rv;
 	}
-	private static final byte[] Bry__redirect = Bry_.new_a7("redirect");
+	private static final byte[] Bry__redirect = BryUtl.NewA7("redirect");
 
 	public void Add(byte[] full_db, Wdata_doc page) {	// TEST:
 		synchronized (thread_lock) {	// LOCK:app-level

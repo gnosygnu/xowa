@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.*;
 import java.awt.AWTEvent;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -29,9 +31,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.util.Vector;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*; import gplx.gfui.controls.windows.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ObjectUtl;
 public class GxwCheckListBox_lang extends JScrollPane implements GxwCheckListBox, GxwElem {
 	Vector<CheckListItem> internalItems;
 	GxwListBox_lang listBox;
@@ -195,5 +198,5 @@ class CheckListItem {
     public Object Data() {return data;} Object data;       
     public boolean Selected() {return selected;} public void Selected_set(boolean selected) {this.selected = selected;}	protected boolean selected;
     public void Selected_toggle() {selected = !selected;}
-    public String toString() {return Object_.Xto_str_strict_or_null_mark(data);}
+    public String toString() {return ObjectUtl.ToStrOrNullMark(data);}
 }

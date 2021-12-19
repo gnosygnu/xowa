@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.xfers;
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
 import gplx.core.primitives.Int_2_ref;
-import gplx.core.primitives.String_obj_ref;
 import gplx.gfui.SizeAdp;
 import gplx.gfui.SizeAdp_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.wrappers.StringRef;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.apps.wms.apis.origs.Xoapi_orig_rslts;
 import gplx.xowa.bldrs.wms.Xowmf_mgr;
@@ -134,14 +134,14 @@ public class Xof_xfer_mgr {
 			if (rslts.Orig_wiki() != null) {
 				src_repo = wiki.Appe().File_mgr().Repo_mgr().Get_by_wmf_fsys(rslts.Orig_wiki());
 				trg_repo = wiki.Appe().File_mgr().Repo_mgr().Get_by_primary(rslts.Orig_wiki());
-				if (Bry_.Eq(rslts.Orig_wiki(), wiki.Domain_bry()))	// wmf returned same wiki as current
+				if (BryLni.Eq(rslts.Orig_wiki(), wiki.Domain_bry()))	// wmf returned same wiki as current
 					xfer_itm.Orig_repo_id_(Xof_meta_itm.Repo_same);	// set repo to "same"
 				else {												// wmf returned other wiki (which is 99% likely to be commons)
 					Xof_repo_pair trg_repo_pair = wiki.File_mgr().Repo_mgr().Repos_get_by_wiki(rslts.Orig_wiki());	// need to do this b/c commons is not always first; see wikinews; DATE:2013-12-04					
 					int trg_repo_idx = trg_repo_pair == null ? 0 : (int)trg_repo_pair.Id();	// 0=commons
 					xfer_itm.Orig_repo_id_(trg_repo_idx);
 				}
-				if (!Bry_.Eq(rslts.Orig_page(), orig_ttl)) {
+				if (!BryLni.Eq(rslts.Orig_page(), orig_ttl)) {
 					orig_ttl = rslts.Orig_page();
 					orig_ttl_md5 = Xof_file_wkr_.Md5(orig_ttl);
 					meta_itm.Ptr_ttl_(orig_ttl);
@@ -197,7 +197,7 @@ public class Xof_xfer_mgr {
 					trg_url = rslt.Trg();
 					if (lnki_w > 0 && lnki_h > 0) {			// lnki specified width and height; check against xfer; needed when w/h are wrong; lnki=65,50 but xfer=160,160; actl should be 50,50; PAGE:en.w:[[Image:Gnome-mime-audio-openclipart.svg|65x50px|center|link=|alt=]]; SEE:NOTE_1
 						Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), file_w, file_h, lnki_w, lnki_h, lnki_thumbable, -1, limit);	// NOTE: do not use lnki_upright; already applied above to generate new lnki_w; using it again will double-apply it 
-						if (Int_.Between(lnki_w, calc_size.Val_0() - 1, calc_size.Val_0() + 1))	// width matches; done
+						if (IntUtl.Between(lnki_w, calc_size.Val_0() - 1, calc_size.Val_0() + 1))	// width matches; done
 							return true;
 						else {								// width fails; cleanup invalid thumb
 							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; PAGE:en.w:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
@@ -239,7 +239,7 @@ public class Xof_xfer_mgr {
 					if (Make_img_exec(src_str, trg_url)) {	// download again
 						trg_url = rslt.Trg();
 						Xof_xfer_itm_.Calc_xfer_size(calc_size, xfer_itm.Lnki_type(), wiki.Html_mgr().Img_thumb_width(), file_w, file_h, lnki_w, lnki_h, lnki_thumbable, lnki_upright);// calculate again using width and height
-						if (Int_.Between(lnki_w, calc_size.Val_0() - 1, calc_size.Val_0() + 1))	// width matches; done
+						if (IntUtl.Between(lnki_w, calc_size.Val_0() - 1, calc_size.Val_0() + 1))	// width matches; done
 							return true;
 						else {								// width fails; cleanup invalid thumb; EX:w:[[File:Upper and Middle Manhattan.jpg|x120px]]
 							trg_url = rslt.Trg();			// NOTE: update url b/c size may have changed; PAGE:en.w:commons/Image:Tempesta.djvu which is 800px, but resized to 799px
@@ -316,7 +316,7 @@ public class Xof_xfer_mgr {
 			meta_itm.Orig_exists_(Xof_meta_itm.Exists_y);
 		}
 		return true;
-	}	String_obj_ref img_convert_rslt = String_obj_ref.null_();
+	}	StringRef img_convert_rslt = StringRef.NewNull();
 	private boolean Img_convert(Io_url src_url, Io_url trg_url) {
 		rslt.Atrs_src_trg_(src_url.Xto_api(), trg_url);	// NOTE: must be set at start; Img_rename_by_size may overwrite trg
 		if (Io_mgr.Instance.ExistsFil(trg_url)) return true; // NOTE: already converted; occurs when same image used twice on same page (EX: flags)
@@ -342,7 +342,7 @@ public class Xof_xfer_mgr {
 			Io_url new_trg = trg_url.GenNewNameOnly(new_name);
 			if (trg_url.Eq(new_trg)) return true;	// HACK: io will delete file if moving unto itself; (i.e.: mv A.png A.png is same as del A.png); problem is that this proc is being called too many times
 			try {Io_mgr.Instance.MoveFil_args(trg_url, new_trg, true).Exec();}
-			catch (Exception exc) {Err_.Noop(exc); return rslt.Fail("move failed");}
+			catch (Exception exc) {return rslt.Fail("move failed");}
 			rslt.Trg_(new_trg);
 		}
 		return true;
@@ -360,7 +360,7 @@ public class Xof_xfer_mgr {
 			byte download_rslt = wmf_mgr.Download_wkr().Download(src_repo_is_wmf, src_str, trg_url, wmf_mgr.Download_wkr().Download_xrg().Prog_fmt_hdr());
 			if (download_rslt == gplx.core.ios.IoEngine_xrg_downloadFil.Rslt_fail_host_not_found) {
 				wiki.File_mgr().Cfg_download().Enabled_(false);
-				throw Err_.new_wo_type("download_failed: host not found", "src", src_str, "trg", trg_url.Raw());
+				throw ErrUtl.NewArgs("download_failed: host not found", "src", src_str, "trg", trg_url.Raw());
 			}
 			pass = download_rslt == gplx.core.ios.IoEngine_xrg_downloadFil.Rslt_pass;
 		}

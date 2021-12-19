@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-class Site_interwikimap_itm implements To_str_able {
+package gplx.xowa.bldrs.wms.sites;
+import gplx.frameworks.objects.ToStrAble;
+import gplx.types.basics.utls.StringUtl;
+class Site_interwikimap_itm implements ToStrAble {
 	public Site_interwikimap_itm(byte[] prefix, boolean local
 		, boolean extralanglink, byte[] linktext, byte[] sitename
 		, byte[] language, boolean localinterwiki, byte[] url, boolean protorel) {
@@ -37,5 +39,5 @@ class Site_interwikimap_itm implements To_str_able {
 	public final boolean		Localinterwiki;
 	public final byte[]		Url;
 	public final boolean		Protorel;
-	public String To_str() {return String_.Concat_with_obj("|", Prefix, Local, Extralanglink, Linktext, Sitename, Language, Localinterwiki, Url, Protorel);}
+	public String ToStr() {return StringUtl.ConcatWithObj("|", Prefix, Local, Extralanglink, Linktext, Sitename, Language, Localinterwiki, Url, Protorel);}
 }

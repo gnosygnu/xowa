@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.standards;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.draws.*;
 import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyValHash;
 public class GfuiTextBox extends GfuiElemBase {
 	public static final String SelectionStartChanged_evt = "SelectionStartChanged";
 
@@ -24,12 +29,12 @@ public class GfuiTextBox extends GfuiElemBase {
 	public int SelBgn() {return textBox.SelBgn();} public void SelBgn_set(int v) {textBox.SelBgn_set(v); Gfo_evt_mgr_.Pub(this, SelectionStartChanged_evt);}
 	public int SelLen() {return textBox.SelLen();} public void SelLen_set(int v) {textBox.SelLen_set(v);}
 	public String SelText() {
-		return String_.MidByLen(this.TextMgr().Val(), this.SelBgn(), this.SelLen());
+		return StringUtl.MidByLen(this.TextMgr().Val(), this.SelBgn(), this.SelLen());
 	}
 	public void Focus_select_all() {
 		this.Focus();
 		this.SelBgn_set(0);
-		int len = String_.Len(this.Text());
+		int len = StringUtl.Len(this.Text());
 		this.SelLen_set(len);
 	}
 	public boolean OverrideTabKey() {return textBox.OverrideTabKey();} public void OverrideTabKey_(boolean val) {textBox.OverrideTabKey_(val);}
@@ -51,16 +56,16 @@ public class GfuiTextBox extends GfuiElemBase {
 		if (val == false)
 			this.Height_(13); // WORKAROUND (WinForms): if border is off, height automatically becomes 13 and immutable for singleLine fields; affects statusBox in opal.imgs which will show with small gap over bottom of screen
 	}
-	@gplx.Internal @Override protected void Click_key_set_(String v) {}// TextBox's shouldn't have clickKeys; among other things, .Text is used to set ClickKey, which for textBox may be very large
+	@Override public void Click_key_set_(String v) {}// TextBox's shouldn't have clickKeys; among other things, .Text is used to set ClickKey, which for textBox may be very large
 
-	@gplx.Internal protected void SetTextBox(GxwTextFld textBox) {this.textBox = textBox;}
+	public void SetTextBox(GxwTextFld textBox) {this.textBox = textBox;}
 	public void CreateControlIfNeeded() {textBox.CreateControlIfNeeded();}
-	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.text_fld_();}
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.text_fld_();}
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		textBox = (GxwTextFld)this.UnderElem();
 	}	GxwTextFld textBox;
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		textBox = (GxwTextFld)underElem;
 	}

@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*;
+package gplx.xowa.apps.servers.tcp; import gplx.core.ios.streams.IoStream;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 public class Xosrv_socket_rdr implements Gfo_invk {
 	private Socket_rdr rdr = new Socket_rdr();
 	public int Port() {return port;} private int port;
@@ -32,7 +35,7 @@ public class Xosrv_socket_rdr implements Gfo_invk {
 				server.Msg_rcvd(msg);
 				rdr.Close();
 			}
-		}	catch (Exception e) {Err_.Noop(e);}
+		}	catch (Exception e) {}
 		finally {rdr.Rls();}
 	}
 	public void Rls() {

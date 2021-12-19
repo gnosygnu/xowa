@@ -13,11 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.amps; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.parsers.*;
-import gplx.core.btries.*;
-import gplx.langs.htmls.entitys.*;
+package gplx.xowa.parsers.amps;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.langs.htmls.entitys.Gfh_entity_itm;
+import gplx.langs.htmls.entitys.Gfh_entity_trie;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.wtrs.BryBfrUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.parsers.Xop_tkn_mkr;
 public class Xop_amp_mgr {	// TS
 	private static final Btrie_rv trv = new Btrie_rv();
 	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final Btrie_slim_mgr amp_trie = Gfh_entity_trie.Instance;
@@ -28,7 +35,7 @@ public class Xop_amp_mgr {	// TS
 		Xop_amp_mgr_rslt rv = new Xop_amp_mgr_rslt();
 		Gfh_entity_itm itm; int cur;
 		synchronized (trv) {
-			itm = (Gfh_entity_itm)amp_trie.Match_at(trv, src, bgn, src_len);
+			itm = (Gfh_entity_itm)amp_trie.MatchAt(trv, src, bgn, src_len);
 			cur = trv.Pos();
 		}
 
@@ -58,15 +65,15 @@ public class Xop_amp_mgr {	// TS
 					rv.Pass_n_(fail_pos);
 					return rv;
 				}
-			default: throw Err_.new_unhandled_default(itm.Tid());
+			default: throw ErrUtl.NewUnhandled(itm.Tid());
 		}
 	}
 	public boolean Parse_ncr(Xop_amp_mgr_rslt rv, boolean ncr_is_hex, byte[] src, int src_len, int amp_pos, int num_bgn) {
 		int fail_pos = amp_pos + 1;	// default to fail pos; after amp;
 
 		// find semic; fail if none found
-		int semic_pos = Bry_find_.Find_fwd(src, AsciiByte.Semic, num_bgn, src_len);
-		if (semic_pos == Bry_find_.Not_found) return rv.Pass_n_(fail_pos);
+		int semic_pos = BryFind.FindFwd(src, AsciiByte.Semic, num_bgn, src_len);
+		if (semic_pos == BryFind.NotFound) return rv.Pass_n_(fail_pos);
 		if (semic_pos == num_bgn) return rv.Pass_n_(fail_pos); // handle "&#x;" where there is no hex/dec number; ISSUE#:494; DATE:2019-06-16
 		int num_end = semic_pos - 1;	// num_end = pos before semicolon
 
@@ -87,7 +94,7 @@ public class Xop_amp_mgr {	// TS
 				if (cur < 0 || cur > 10)		return rv.Pass_n_(fail_pos);
 			}
 			val += cur * factor;
-			if (val > gplx.core.intls.Utf8_.Codepoint_max) return rv.Pass_n_(fail_pos);	// fail if value > largest_unicode_codepoint
+			if (val > Utf8Utl.Codepoint_max) return rv.Pass_n_(fail_pos);	// fail if value > largest_unicode_codepoint
 			factor *= multiple;
 		}
 		return rv.Pass_y_(semic_pos + 1, val);	// +1 to position after semic
@@ -98,7 +105,7 @@ public class Xop_amp_mgr {	// TS
 		int end = src.length;
 		int pos = 0;
 		Xop_amp_mgr_rslt amp_rv = null;
-		Bry_bfr bfr = null;
+		BryWtr bfr = null;
 		Btrie_rv trv = null;
 
 		// scan for &
@@ -116,10 +123,10 @@ public class Xop_amp_mgr {	// TS
 					if (amp_obj != null) {
 						if (!dirty) {	// 1st amp found; add preceding String to bfr
 							if (bfr == null) {
-								bfr = Bry_bfr_.Get();
+								bfr = BryBfrUtl.Get();
 								dirty = true;
 							}
-							bfr.Add_mid(src, 0, pos);
+							bfr.AddMid(src, 0, pos);
 						}
 						Gfh_entity_itm amp_itm = (Gfh_entity_itm)amp_obj;
 						switch (amp_itm.Tid()) {
@@ -136,23 +143,23 @@ public class Xop_amp_mgr {	// TS
 									amp_rv = new Xop_amp_mgr_rslt();
 								boolean pass = Parse_ncr(amp_rv, ncr_is_hex, src, end, pos, int_bgn);
 								if (pass)
-									bfr.Add_u8_int(amp_rv.Val());
+									bfr.AddU8Int(amp_rv.Val());
 								else 
-									bfr.Add_mid(src, pos, nxt_pos);
+									bfr.AddMid(src, pos, nxt_pos);
 								pos = amp_rv.Pos();
 								break;
 							default:
-								throw Err_.new_unhandled_default(amp_itm.Tid());
+								throw ErrUtl.NewUnhandled(amp_itm.Tid());
 						}
 						continue;
 					}
 				}					
 			}
 			if (dirty)
-				bfr.Add_byte(b);
+				bfr.AddByte(b);
 			++pos;
 		}
-		return dirty ? bfr.To_bry_and_clear_and_rls() : src;
+		return dirty ? bfr.ToBryAndClearAndRls() : src;
 	}
         public static final Xop_amp_mgr Instance = new Xop_amp_mgr(); Xop_amp_mgr() {}
 }

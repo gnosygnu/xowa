@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tblws;
-import gplx.Bry_find_;
-import gplx.Err_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_ctx_wkr;
 import gplx.xowa.parsers.Xop_parser_;
@@ -122,7 +122,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 						else
 							return Xop_tblw_wkr.Handle_false_tblw_match(ctx, root, src, bgn_pos, cur_pos, tkn_mkr.Txt(bgn_pos + 1, cur_pos), true);	// +1 to skip "\n" in "\n|}" (don't convert \n to text); DATE:2014-02-19
 					}
-				default: throw Err_.new_unhandled(wlxr_type);
+				default: throw ErrUtl.NewUnhandled(wlxr_type);
 			}
 		}
 
@@ -167,7 +167,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 				if		(ignore_prv) {
 					ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_htmlTidy_tblw));
 					++tblw_te_ignore_count;
-					cur_pos = Bry_find_.Find_fwd_until(src, cur_pos, src_len, AsciiByte.Nl);	// NOTE: minor hack; this tblw tkn will be ignored, so ignore any of its attributes as well; gobble up all chars till nl. see:  if two consecutive tbs, ignore attributes on 2nd; en.wikibooks.org/wiki/Wikibooks:Featured books
+					cur_pos = BryFind.FindFwdUntil(src, cur_pos, src_len, AsciiByte.Nl);	// NOTE: minor hack; this tblw tkn will be ignored, so ignore any of its attributes as well; gobble up all chars till nl. see:  if two consecutive tbs, ignore attributes on 2nd; en.wikibooks.org/wiki/Wikibooks:Featured books
 					return cur_pos;
 				}
 				if (auto_create) {
@@ -507,7 +507,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		root.Subs_del_between(ctx, subs_bgn, subs_pos);
 		int atrs_bgn = prv_tblw.Src_end(), atrs_end = last_atr_tkn.Src_end();
 		if (prv_tblw.Tkn_tid() == Xop_tkn_itm_.Tid_tblw_tr)	// NOTE: if "|-" gobble all trailing dashes; REF: Parser.php!doTableStuff; $line = preg_replace( '#^\|-+#', '', $line ); DATE:2013-06-21
-			atrs_bgn = Bry_find_.Find_fwd_while(src, atrs_bgn, src.length, AsciiByte.Dash);
+			atrs_bgn = BryFind.FindFwdWhile(src, atrs_bgn, src.length, AsciiByte.Dash);
 		prv_tblw.Atrs_rng_set(atrs_bgn, atrs_end);
 		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt && atrs_bgn != -1) {
 			// NOWIKI;DATE:2018-01-16

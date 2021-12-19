@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.xmls;
-import gplx.Err_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.libs.files.Io_mgr;
 import gplx.core.envs.Process_adp;
 import gplx.core.ios.Io_stream_rdr_process;
 import gplx.core.ios.streams.Io_stream_rdr;
 import gplx.core.ios.streams.Io_stream_rdr_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
@@ -39,13 +39,13 @@ public class Xob_import_cfg {
 		if		(src_fil_xml == null && src_fil_bz2 == null)	return wiki.Fsys_mgr().Root_dir();
 		else if (src_fil_xml != null)							return src_fil_xml.OwnerDir();
 		else if (src_fil_bz2 != null)							return src_fil_bz2.OwnerDir();
-		else													throw Err_.new_wo_type("unknown src dir");
+		else													throw ErrUtl.NewArgs("unknown src dir");
 	}
 	public Io_stream_rdr Src_rdr() {
 		if (src_fil_xml == null && src_fil_bz2 == null) {	// will usually be null; non-null when user specifies src through command-line
 			Io_url url = Xob_io_utl_.Find_nth_by_wildcard_or_null(wiki.Fsys_mgr().Root_dir(), Xob_io_utl_.Pattern__wilcard, ".xml", ".bz2");
-			if (url == null) throw Err_.new_wo_type("could not find any .xml or .bz2 file", "dir", wiki.Fsys_mgr().Root_dir().Raw());
-			if (String_.Eq(url.Ext(), ".xml"))	Src_fil_xml_(url);
+			if (url == null) throw ErrUtl.NewArgs("could not find any .xml or .bz2 file", "dir", wiki.Fsys_mgr().Root_dir().Raw());
+			if (StringUtl.Eq(url.Ext(), ".xml"))	Src_fil_xml_(url);
 			else								Src_fil_bz2_(url);
 		}
 		if (src_fil_is_bz2) {
@@ -66,7 +66,7 @@ public class Xob_import_cfg {
 		}
 	}
 	private static void Chk_file_ext(Xoae_app app, Io_url fil, String expd_ext, String alt_ext) {
-		if (!String_.Eq(fil.Ext(), expd_ext))
+		if (!StringUtl.Eq(fil.Ext(), expd_ext))
 			app.Usr_dlg().Warn_many("", "", "File extension is not " + expd_ext + ". Please use '.src_" + alt_ext + "_fil_' instead; file=~{0}", fil.Raw());
 	}
 }

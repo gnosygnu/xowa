@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.wbases.stores;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.xowa.*;
 import gplx.xowa.xtns.wbases.*;
-import gplx.core.primitives.*;
 import gplx.xowa.wikis.domains.*;
 public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 	private final Wdata_wiki_mgr wbase_mgr;
@@ -34,10 +37,10 @@ public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 	public byte[] Get_qid_or_null(Xowe_wiki wiki, Xoa_ttl ttl) {return Get_qid_or_null(wiki.Wdata_wiki_abrv(), ttl);}
 	public byte[] Get_qid_or_null(byte[] wdata_wiki_abrv, Xoa_ttl ttl)	{
 		if (!enabled) return null;
-		if (Bry_.Len_eq_0(wdata_wiki_abrv)) return null;			// "other" wikis will never call wikidata
+		if (BryUtl.IsNullOrEmpty(wdata_wiki_abrv)) return null;			// "other" wikis will never call wikidata
 
 		// make key; EX: "enwiki|014|Earth"
-		byte[] key = Bry_.Add(wdata_wiki_abrv, AsciiByte.PipeBry, ttl.Ns().Num_bry(), AsciiByte.PipeBry, ttl.Page_db());
+		byte[] key = BryUtl.Add(wdata_wiki_abrv, AsciiByte.PipeBry, ttl.Ns().Num_bry(), AsciiByte.PipeBry, ttl.Page_db());
 
 		// get from cache
 		synchronized (cache) {
@@ -45,10 +48,10 @@ public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 			if (rv == null) {
 				// get from db
 				rv = wbase_mgr.Wdata_wiki().Db_mgr().Load_mgr().Load_qid(wdata_wiki_abrv, ttl.Ns().Id(), ttl.Page_db());
-				byte[] val_for_hash = rv == null ? Bry_.Empty : rv;		// JAVA: hashtable does not accept null as value; use Bry_.Empty
+				byte[] val_for_hash = rv == null ? BryUtl.Empty : rv;		// JAVA: hashtable does not accept null as value; use Bry_.Empty
 				this.Add(key, val_for_hash);							// NOTE: if not in db, will insert Bry_.Empty; DATE:2014-07-23
 			}
-			return Bry_.Len_eq_0(rv) ? null : rv;						// JAVA: convert Bry_.Empty to null which is what callers expect
+			return BryUtl.IsNullOrEmpty(rv) ? null : rv;						// JAVA: convert Bry_.Empty to null which is what callers expect
 		}
 	}
 	private void Add(byte[] key, byte[] val) {
@@ -58,9 +61,9 @@ public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 		}
 	}
 
-	public void Add(Bry_bfr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {// TEST:
-		Xow_abrv_wm_.To_abrv(bfr, lang_key, Int_obj_ref.New_zero().Val_(wiki_tid));
-		byte[] qids_key = bfr.Add_byte(AsciiByte.Pipe).Add(ns_num).Add_byte(AsciiByte.Pipe).Add(ttl).To_bry();
+	public void Add(BryWtr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {// TEST:
+		Xow_abrv_wm_.To_abrv(bfr, lang_key, IntRef.NewZero().ValSet(wiki_tid));
+		byte[] qids_key = bfr.AddByte(AsciiByte.Pipe).Add(ns_num).AddByte(AsciiByte.Pipe).Add(ttl).ToBry();
 		this.Add(qids_key, qid);
 	}
 }

@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.infos; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.infos;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
 import gplx.xowa.wikis.domains.*; import gplx.core.ios.*;
@@ -35,9 +42,9 @@ class Xobc_info_html extends Xow_special_wtr__base {
 		Xow_domain_itm wiki_domain = null;
 		int host_id = -1;
 		long total_size = 0;
-		Bry_bfr tmp_size_bfr = Bry_bfr_.New();
+		BryWtr tmp_size_bfr = BryWtr.New();
 		for (int i = 0; i < len; ++i) {
-			int step_id = Int_.Cast(list.Get_at(i));
+			int step_id = IntUtl.Cast(list.GetAt(i));
 			Xobc_import_step_itm step_itm = data_db.Tbl__import_step().Select_one(step_id);
 			if (i == 0) {
 				wiki_domain = Xow_abrv_xo_.To_itm(step_itm.Wiki_abrv());	// ASSUME: 1st step's wiki is same for all steps
@@ -46,7 +53,7 @@ class Xobc_info_html extends Xow_special_wtr__base {
 			String src_fil = host_eval.Eval_src_fil(data_db, host_id, wiki_domain, step_itm.Import_name);
 			Io_size_.To_bfr_new(tmp_size_bfr, step_itm.Import_size_zip, 2);
 			total_size += step_itm.Import_size_raw;
-			Xobc_info_url step_url = new Xobc_info_url(src_fil, tmp_size_bfr.To_bry_and_clear(), step_itm.Import_md5);
+			Xobc_info_url step_url = new Xobc_info_url(src_fil, tmp_size_bfr.ToBryAndClear(), step_itm.Import_md5);
 			step_urls[i] = step_url;
 		}
 
@@ -54,15 +61,15 @@ class Xobc_info_html extends Xow_special_wtr__base {
 		host_eval.Eval_dir_name(wiki_domain);
 		Io_url trg_dir = app.Fsys_mgr().Wiki_dir().GenSubDir(wiki_domain.Domain_str());
 		Io_size_.To_bfr_new(tmp_size_bfr, total_size, 2);
-		byte[] total_size_bry = tmp_size_bfr.To_bry_and_clear();
+		byte[] total_size_bry = tmp_size_bfr.ToBryAndClear();
 
 		// get torrent
 		String torrent_fil = null;
 		String key = data_db.Tbl__task_regy().Select_key_by_id_or_null(task_id);
-		if (key == null) torrent_fil = "failed to get torrent for " + Int_.To_str(task_id);
+		if (key == null) torrent_fil = "failed to get torrent for " + IntUtl.ToStr(task_id);
 		else {
 			String src_dir = host_eval.Eval_src_dir(data_db, host_id, wiki_domain);
-			torrent_fil = String_.Format("{0}Xowa_{1}wiki_latest_archive.torrent", src_dir, wiki_domain.Lang_orig_key()); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
+			torrent_fil = StringUtl.Format("{0}Xowa_{1}wiki_latest_archive.torrent", src_dir, wiki_domain.Lang_orig_key()); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
 		}
 		
 		return new Xobc_info_doc
@@ -74,7 +81,7 @@ class Xobc_info_html extends Xow_special_wtr__base {
 		);
 	}
 	public static String Make_torrent_fil(String src_dir, Xow_domain_itm domain) {
-		return String_.Format("{0}Xowa_{1}wiki_latest_archive.torrent", src_dir, domain.Lang_orig_key()); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
+		return StringUtl.Format("{0}Xowa_{1}wiki_latest_archive.torrent", src_dir, domain.Lang_orig_key()); // EX: https://archive.org/download/Xowa_dewiki_latest/Xowa_dewiki_latest_archive.torrent
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();
@@ -83,6 +90,6 @@ class Xobc_info_html extends Xow_special_wtr__base {
 		head_tags.Add(Xopg_tag_itm.New_css_file(addon_dir.GenSubFil_nest("bin", "xobc_info.css")));
 	}
 	@Override protected void Handle_invalid(Xoa_app app, Xoa_page page, Xow_special_page special) {
-		new Xopage_html_data(special.Special__meta().Display_ttl(), Bry_.new_u8("task has been deleted")).Apply(page);
+		new Xopage_html_data(special.Special__meta().Display_ttl(), BryUtl.NewU8("task has been deleted")).Apply(page);
 	}
 }

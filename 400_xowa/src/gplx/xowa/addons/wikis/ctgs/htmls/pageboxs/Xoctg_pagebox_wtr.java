@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs;
 
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_db_;
@@ -45,21 +45,21 @@ public class Xoctg_pagebox_wtr implements Gfo_invk {
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__grouping_enabled);
 	}
 
-	public void Write_pagebox(Bry_bfr bfr, Xoa_page page) {
+	public void Write_pagebox(BryWtr bfr, Xoa_page page) {
 		Xoctg_pagebox_itm[] itms = Get_catlinks_by_page(page);
 		if (itms.length > 0) {
 			this.Write_pagebox(bfr, page, itms);
 		}
 	}
 
-	public void Write_pagebox(Bry_bfr bfr, Xoa_page page, Xoctg_pagebox_itm[] pagebox_itms) {
+	public void Write_pagebox(BryWtr bfr, Xoa_page page, Xoctg_pagebox_itm[] pagebox_itms) {
 		try {
 			if (grouping_enabled)
 				double_box.Write_pagebox(bfr, pagebox_itms);
 			else
 				single_box.Write_pagebox(bfr, pagebox_itms);
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write pagebox categories; page=~{0} err=~{1}", page.Url_bry_safe(), Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to write pagebox categories; page=~{0} err=~{1}", page.Url_bry_safe(), ErrUtl.ToStrLog(e));
 		}
 	}
 

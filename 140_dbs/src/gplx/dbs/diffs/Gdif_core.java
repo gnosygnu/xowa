@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.diffs; import gplx.dbs.*;
 import gplx.dbs.diffs.itms.*;
 import gplx.dbs.diffs.builds.*;
+import gplx.types.commons.GfoDateNow;
 public class Gdif_core {
 	private final Db_conn conn;
 	private final Gdif_job_tbl job_tbl;
@@ -31,7 +32,7 @@ public class Gdif_core {
 	public Gdif_db Db() {return db;} private final Gdif_db db;
 	public Gdif_job_itm New_job(String name, String made_by) {
 		int job_id = conn.Sys_mgr().Autonum_next(job_tbl.Tbl_name(), job_tbl.Fld_job_id());
-		return job_tbl.Insert(job_id, name, made_by, Datetime_now.Get().XtoUtc(), "");
+		return job_tbl.Insert(job_id, name, made_by, GfoDateNow.Get().ToUtc(), "");
 	}
 	public Gdif_cmd_itm New_cmd(Gdif_bldr_ctx ctx, int tid) {
 		ctx.Cur_cmd_count++;

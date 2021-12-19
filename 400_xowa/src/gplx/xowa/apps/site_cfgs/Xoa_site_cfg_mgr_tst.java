@@ -14,19 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.site_cfgs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Datetime_now;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.btries.Btrie_slim_mgr;
 import gplx.dbs.cfgs.Db_cfg_tbl;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_printer;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_test_;
 import gplx.xowa.Xoae_app;
@@ -70,7 +69,7 @@ public class Xoa_site_cfg_mgr_tst {
 		fxt.Exec_load();
 		fxt.Test_db(Xoa_site_cfg_loader__inet.Qarg__interwikimap, fxt.Make_data(Xoa_site_cfg_loader_.Tid__inet, 2, "w", "https://en.wikipedia.org", "c", "https://commons.wikimedia.org"));
 	}
-//		@Test  public void Print() {
+//		@Test public void Print() {
 //			String s = fxt.Make_api(fxt.Make_api_interwikimap("k1", "v1", "k2", "v2"), fxt.Make_api_extensiontags2("k3", "v3", "k4", "v4"));
 //            Tfds.Dbg(s);
 //		}
@@ -80,7 +79,7 @@ class Xoa_site_cfg_mgr_fxt {
 	private final Xoa_site_cfg_mgr site_cfg_mgr;
 	private final Db_cfg_tbl cfg_tbl;
 	private final Json_printer printer = new Json_printer();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public Xoa_site_cfg_mgr_fxt() {
 		// Xoa_app_.Usr_dlg_(Xoa_app_.New__usr_dlg__console());
 		gplx.core.ios.IoEngine_system.Web_access_enabled = true;	// HACK: must manually enable web_access else above tests will fail due to some other test disabling singleton; DATE:2016-12-15
@@ -92,25 +91,25 @@ class Xoa_site_cfg_mgr_fxt {
 		this.site_cfg_mgr = app.Site_cfg_mgr();
 	}
 	public void Init() {
-		Datetime_now.Manual_y_(); Datetime_now.Autoincrement_n_();
+		GfoDateNow.ManualSetY(); GfoDateNow.AutoincrementSetN();
 		Io_mgr.Instance.InitEngine_mem();
 		cfg_tbl.Delete_grp(Xoa_site_cfg_loader__db.Grp__xowa_wm_api);
 		site_cfg_mgr.Init_loader_bgn(wiki);
 		app.Utl__inet_conn().Clear();
 	}
 	public void Term() {
-		Datetime_now.Manual_n_();
+		GfoDateNow.ManualSetN();
 	}
 	public void Init_db(String key, String data) {
-		cfg_tbl.Assert_bry(Xoa_site_cfg_loader__db.Grp__xowa_wm_api, key, Bry_.new_u8(data));
+		cfg_tbl.Assert_bry(Xoa_site_cfg_loader__db.Grp__xowa_wm_api, key, BryUtl.NewU8(data));
 	}
 	public void Test_db(String key, String expd) {
 		byte[] actl = cfg_tbl.Select_bry_or(Xoa_site_cfg_loader__db.Grp__xowa_wm_api, key, null);
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+		GfoTstr.EqLines(expd, StringUtl.NewU8(actl));
 	}
 	public void Init_inet(String data) {
 		String url = Xoa_site_cfg_loader__inet.Bld_url(tmp_bfr, wiki.Domain_str(), site_cfg_mgr.Data_hash(), site_cfg_mgr.Itm_ary());
-		app.Utl__inet_conn().Upload_by_bytes(url, Bry_.new_u8(data));
+		app.Utl__inet_conn().Upload_by_bytes(url, BryUtl.NewU8(data));
 	}
 	public void Init_fsys(String key, String data) {
 		Xoa_site_cfg_loader__fsys loader = Xoa_site_cfg_loader__fsys.new_(app);
@@ -128,67 +127,67 @@ class Xoa_site_cfg_mgr_fxt {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			String str = ary[i];
-			byte[] bry = Bry_.new_u8(str);
+			byte[] bry = BryUtl.NewU8(str);
 			boolean actl_exists = trie.Match_exact(bry, 0, bry.length) != null;
-			Tfds.Eq_bool(expd_exists, actl_exists, str);
+			GfoTstr.Eq(expd_exists, actl_exists, str);
 		}
 	}
 	public void Test_inet_qarg(String expd) {
 		Xoa_site_cfg_loader__inet loader__inet = (Xoa_site_cfg_loader__inet)site_cfg_mgr.Loader_ary()[2];
 		String api_url = loader__inet.Api_url();
-		Tfds.Eq(expd, String_.Mid(api_url, String_.FindBwd(api_url, "=") + 1));
+		GfoTstr.EqObj(expd, StringUtl.Mid(api_url, StringUtl.FindBwd(api_url, "=") + 1));
 	}
 	public String Make_api(byte[]... sections) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		bfr.Add_str_a7("{'query':");
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
+		bfr.AddStrA7("{'query':");
 		int len = sections.length;
-		bfr.Add_str_a7("{");
+		bfr.AddStrA7("{");
 		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_str_a7(",");
+			if (i != 0) bfr.AddStrA7(",");
 			bfr.Add(sections[i]);
 		}
-		bfr.Add_str_a7("}");
-		bfr.Add_str_a7("}");
-		return printer.Print_by_bry(Bry_.new_u8(Json_doc.Make_str_by_apos(bfr.To_str_and_rls()))).To_str();
+		bfr.AddStrA7("}");
+		bfr.AddStrA7("}");
+		return printer.Print_by_bry(BryUtl.NewU8(Json_doc.Make_str_by_apos(bfr.ToStrAndRls()))).To_str();
 	}
 	public byte[] Make_api_interwikimap(String... ary) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		bfr.Add_str_a7("'interwikimap':");
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
+		bfr.AddStrA7("'interwikimap':");
 		int len = ary.length;
-		bfr.Add_str_a7("[");
+		bfr.AddStrA7("[");
 		for (int i = 0; i < len; i += 2) {
-			if (i != 0) bfr.Add_str_a7(",");
-			bfr.Add_str_a7("{'prefix':'"	+ ary[i] + "'");
-			bfr.Add_str_a7(",'url':'"	+ ary[i + 1] + "'");
-			bfr.Add_str_a7("}");
+			if (i != 0) bfr.AddStrA7(",");
+			bfr.AddStrA7("{'prefix':'"	+ ary[i] + "'");
+			bfr.AddStrA7(",'url':'"	+ ary[i + 1] + "'");
+			bfr.AddStrA7("}");
 		}
-		bfr.Add_str_a7("]");
-		return bfr.To_bry_and_clear();
+		bfr.AddStrA7("]");
+		return bfr.ToBryAndClear();
 	}
 	public byte[] Make_api_extensiontags(String... ary) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		bfr.Add_str_a7("'extensiontags':");
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
+		bfr.AddStrA7("'extensiontags':");
 		int len = ary.length;
-		bfr.Add_str_a7("[");
+		bfr.AddStrA7("[");
 		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_str_a7(",");
-			bfr.Add_str_a7("'<"	+ ary[i] + ">'");
+			if (i != 0) bfr.AddStrA7(",");
+			bfr.AddStrA7("'<"	+ ary[i] + ">'");
 		}
-		bfr.Add_str_a7("]");
-		return bfr.To_bry_and_clear();
+		bfr.AddStrA7("]");
+		return bfr.ToBryAndClear();
 	}
 	public String Make_data(int loader_tid, int flds, String... ary) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
 		if (loader_tid != Xoa_site_cfg_loader_.Tid__null)	// null when constructing data for fsys
-			bfr.Add_str_u8(Xoa_site_cfg_loader__db.Bld_meta(loader_tid)).Add_byte_nl();
+			bfr.AddStrU8(Xoa_site_cfg_loader__db.Bld_meta(loader_tid)).AddByteNl();
 		int len = ary.length;
 		for (int i = 0; i < len; i += flds) {
-			if (i != 0) bfr.Add_byte_nl();
+			if (i != 0) bfr.AddByteNl();
 			for (int j = 0; j < flds; ++j) {
-				if (j != 0) bfr.Add_byte_pipe();
-				bfr.Add_str_u8(ary[i + j]);
+				if (j != 0) bfr.AddBytePipe();
+				bfr.AddStrU8(ary[i + j]);
 			}
 		}
-		return bfr.To_str_and_rls();
+		return bfr.ToStrAndRls();
 	}
 }

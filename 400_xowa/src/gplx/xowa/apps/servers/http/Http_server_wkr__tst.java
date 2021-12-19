@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.http;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Http_server_wkr__tst {
 	@Before public void init() {fxt.Clear();} private Http_server_wkr__fxt fxt = new Http_server_wkr__fxt();
@@ -31,10 +34,10 @@ class Http_server_wkr__fxt {
 		this.app = Xoa_app_fxt.Make__app__edit();
 	}
 	public void Init_wiki_main_page(String domain, String main_page) {
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(domain));
-		wiki.Props().Main_page_(Bry_.new_u8(main_page));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(BryUtl.NewU8(domain));
+		wiki.Props().Main_page_(BryUtl.NewU8(main_page));
 	}
 	public void Test_assert_main_page(String url, String expd) {
-		Tfds.Eq(expd, Http_server_wkr_.Assert_main_page(app, url));
+		GfoTstr.EqObj(expd, Http_server_wkr_.Assert_main_page(app, url));
 	}
 }

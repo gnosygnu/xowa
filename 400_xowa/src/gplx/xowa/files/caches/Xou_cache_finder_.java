@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.caches;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.files.repos.*;
 public class Xou_cache_finder_ {
 	public static final Xou_cache_finder Noop = new Xou_cache_finder_noop();
@@ -37,7 +41,7 @@ class Xou_cache_finder_db implements Xou_cache_finder {
 		if (cache_itm != null) {
 			Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(cache_itm.Orig_repo_id(), cur.Lnki_ttl(), page_url);
 			if (repo != null) {// unknown repo; shouldn't happen, but exit, else null ref
-				cur.Init_at_orig((byte)cache_itm.Orig_repo_id(), repo.Wiki_domain(), cache_itm.Orig_ttl(), cache_itm.Orig_ext_itm(), cache_itm.Orig_w(), cache_itm.Orig_h(), Bry_.Empty);
+				cur.Init_at_orig((byte)cache_itm.Orig_repo_id(), repo.Wiki_domain(), cache_itm.Orig_ttl(), cache_itm.Orig_ext_itm(), cache_itm.Orig_w(), cache_itm.Orig_h(), BryUtl.Empty);
 				cur.Init_at_html(Xof_exec_tid.Tid_wiki_page, img_size, repo, url_bldr);
 				if (Io_mgr.Instance.ExistsFil(cur.Html_view_url())) {
 					cache_itm.Update_view_stats();

@@ -15,8 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims.enums;
 
-import gplx.Bry_;
-
+import gplx.types.basics.utls.BryUtl;
 // NOTE: these map to "datatype", not "entity-type"; specifically `"datatype":"wikibase-lexeme"` vs `"entity-type":"lexeme"`
 public class Wbase_claim_type_ {
 	public static final byte	// SERIALIZED:wbase_prop|datatype; REF:https://www.wikidata.org/wiki/Help:Data_type
@@ -65,7 +64,7 @@ public class Wbase_claim_type_ {
 	private static Wbase_enum_itm New(byte tid, String key)						{return New(tid, key, key);}
 	private static Wbase_enum_itm New(byte tid, String key, String scrib)		{return Reg.Add(new Wbase_claim_type(tid, key, scrib));}
 	public static String Get_scrib_or_unknown(byte tid)	{return ((Wbase_claim_type)Reg.Get_itm_or(tid, Itm__unknown)).Key_for_scrib();}
-	public static byte Get_tid_or_unknown(String key)					{return Get_tid_or_unknown(Bry_.new_u8(key));}
+	public static byte Get_tid_or_unknown(String key)					{return Get_tid_or_unknown(BryUtl.NewU8(key));}
 	public static byte Get_tid_or_unknown(byte[] key)					{return Get_tid_or_unknown(key, 0, key.length);}
 	public static byte Get_tid_or_unknown(byte[] key, int bgn, int end) {return Reg.Get_tid_or(key, bgn, end, Tid__unknown);}
 }

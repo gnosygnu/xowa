@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.caches;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.addons.apps.cfgs.*;
 public class Xocfg_cache_grp {
 	private final Hash_adp vals = Hash_adp_.New();
@@ -69,7 +78,7 @@ public class Xocfg_cache_grp {
 		if (list == null) {// global match; EX: "app|key_1"
 			int len = subs.Len();
 			for (int i = 0; i < len; i++) {
-				list = (List_adp)subs.Get_at(i);
+				list = (List_adp)subs.GetAt(i);
 				Pub(list, val);
 			}
 		}
@@ -79,7 +88,7 @@ public class Xocfg_cache_grp {
 	private void Pub(List_adp list, String val) {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Xocfg_cache_sub sub = (Xocfg_cache_sub)list.Get_at(i);
+			Xocfg_cache_sub sub = (Xocfg_cache_sub)list.GetAt(i);
 			Gfo_invk_.Invk_by_msg(sub.Sub(), sub.Evt(), GfoMsg_.new_parse_(sub.Evt()).Add("v", val));
 		}
 	}

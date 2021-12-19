@@ -13,13 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.phps;
+import gplx.types.basics.strings.unicodes.Utf16Utl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteRef;
 public class Php_text_itm_parser {
 	public static final byte Rslt_orig = 0, Rslt_dirty = 1, Rslt_fmt = 2;
 	public boolean Quote_is_single() {return quote_is_single;} public Php_text_itm_parser Quote_is_single_(boolean v) {quote_is_single = v; return this;} private boolean quote_is_single;
-	public byte[] Parse_as_bry(List_adp tmp_list, byte[] raw, Byte_obj_ref rslt_ref, Bry_bfr tmp_bfr) {
+	public byte[] Parse_as_bry(List_adp tmp_list, byte[] raw, ByteRef rslt_ref, BryWtr tmp_bfr) {
 		Parse(tmp_list, raw, rslt_ref);
 		byte[] rv = raw;
 		switch (rslt_ref.Val()) {
@@ -29,18 +37,18 @@ public class Php_text_itm_parser {
 				tmp_bfr.Clear();
 				int tmp_list_len = tmp_list.Len();
 				for (int i = 0; i < tmp_list_len; i++) {
-					Php_text_itm itm = (Php_text_itm)tmp_list.Get_at(i);
+					Php_text_itm itm = (Php_text_itm)tmp_list.GetAt(i);
 					itm.Bld(tmp_bfr, raw);
 				}
-				rv = tmp_bfr.To_bry_and_clear();
+				rv = tmp_bfr.ToBryAndClear();
 				break;
 		}
 		return rv;
 	}
 	public void Parse(List_adp tmp_list, byte[] raw) {
-		Parse(tmp_list, raw, Byte_obj_ref.zero_());
+		Parse(tmp_list, raw, ByteRef.NewZero());
 	}
-	public void Parse(List_adp tmp_list, byte[] raw, Byte_obj_ref rslt) {
+	public void Parse(List_adp tmp_list, byte[] raw, ByteRef rslt) {
 		tmp_list.Clear();
 		int raw_len = raw.length; int raw_last = raw_len - 1; 
 		int txt_bgn = -1;
@@ -61,7 +69,7 @@ public class Php_text_itm_parser {
 						}
 					}
 					else {
-						if (pos_is_last) throw Err_.new_wo_type("backslash_is_last_char", "raw", String_.new_u8(raw));
+						if (pos_is_last) throw ErrUtl.NewArgs("backslash_is_last_char", "raw", StringUtl.NewU8(raw));
 						switch (next_char) {
 							case AsciiByte.Backslash:	next_char = AsciiByte.Backslash; break;
 							case AsciiByte.Quote:		next_char = AsciiByte.Quote; break;
@@ -81,7 +89,7 @@ public class Php_text_itm_parser {
 							case AsciiByte.Ltr_X:
 							case AsciiByte.Ltr_x:	{	// EX: "\xc2"
 								rslt_val = Rslt_dirty;
-								byte[] literal = Bry_.Add(CONST_utf_prefix, Bry_.Mid(raw, next_pos + 1, next_pos + 3));
+								byte[] literal = BryUtl.Add(CONST_utf_prefix, BryLni.Mid(raw, next_pos + 1, next_pos + 3));
 								tmp_list.Add(new Php_text_itm_utf16(i, i + 4, literal));
 								i = next_pos + 2;	// +2 to skip rest; EX: \xc2; +2 for c2
 								continue;
@@ -103,7 +111,7 @@ public class Php_text_itm_parser {
 						//throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "dollar_is_last_char", String_.new_u8(raw));
 					}
 					int int_end = Find_fwd_non_int(raw, i + 1, raw_len);	// +1 to search after $
-					int int_val = Bry_.To_int_or(raw, i + 1, int_end, -1); // +1 to search after $
+					int int_val = BryUtl.ToIntOr(raw, i + 1, int_end, -1); // +1 to search after $
 					if (int_val == -1) {
 						tmp_list.Add(new Php_text_itm_text(i, i + 1)); 
 						continue;
@@ -119,13 +127,13 @@ public class Php_text_itm_parser {
 			}
 		}	
 		if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, raw_len)); txt_bgn = -1; rslt_val = Rslt_dirty;}
-		rslt.Val_(rslt_val);
-	}	private static final byte[] CONST_utf_prefix = Bry_.new_a7("\\u00");
+		rslt.ValSet(rslt_val);
+	}	private static final byte[] CONST_utf_prefix = BryUtl.NewA7("\\u00");
 	private void Parse_utf16(List_adp rv, byte[] src, int bgn, int src_len) {
 		int end = bgn + 4;
-		if (end >= src_len) throw Err_.new_wo_type("utf16_parse", "src", String_.new_u8(src));
-		int v = Int_.By_hex_bry(src, bgn, end);	// +2; skip "\" + "u"
-		byte[] literal = gplx.core.intls.Utf16_.Encode_int_to_bry(v);
+		if (end >= src_len) throw ErrUtl.NewArgs("utf16_parse", "src", StringUtl.NewU8(src));
+		int v = IntUtl.ByHexBry(src, bgn, end);	// +2; skip "\" + "u"
+		byte[] literal = Utf16Utl.EncodeIntToBry(v);
 		rv.Add(new Php_text_itm_utf16(bgn, end, literal));
 	}
 	public static int Find_fwd_non_int(byte[] src, int bgn, int end) {

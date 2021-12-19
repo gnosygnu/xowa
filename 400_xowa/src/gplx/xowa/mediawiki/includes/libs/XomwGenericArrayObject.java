@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.libs;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.xowa.mediawiki.*;
 /**
 * Extends ArrayObject and does two things:
 *
@@ -112,7 +114,7 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 	*/
 	protected boolean hasValidType(Object val) {
 		Class<?> cls = this.getObjectType();
-		return Type_.Eq_by_obj(val, cls);
+		return ClassUtl.EqByObj(cls, val);
 	}
 
 	/**
@@ -134,8 +136,8 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 	protected void setElement(int index, Object val) {
 		if (!this.hasValidType(val)) {
 			throw new XophpInvalidArgumentException(
-				"Can only add "	+ Type_.Canonical_name(this.getObjectType()) + " implementing objects to "
-				+ Type_.Type_by_obj(this) + "."
+				"Can only add "	+ ClassUtl.CanonicalName(this.getObjectType()) + " implementing objects to "
+				+ ClassUtl.TypeByObj(this) + "."
 			);
 		}
 

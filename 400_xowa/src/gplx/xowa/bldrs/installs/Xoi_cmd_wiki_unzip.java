@@ -13,15 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*;
-import gplx.core.threads.*;
+package gplx.xowa.bldrs.installs;
+import gplx.core.threads.Gfo_thread_cmd;
+import gplx.core.threads.Gfo_thread_cmd_;
+import gplx.core.threads.Gfo_thread_cmd_unzip;
+import gplx.gfui.kits.core.Gfui_dlg_msg_;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
 class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd {	public static final String KEY_dump = "wiki.unzip";
 	public Xoi_cmd_wiki_unzip(Xoi_setup_mgr install_mgr, String wiki_key, String dump_date, String dump_type) {this.install_mgr = install_mgr; this.Owner_(install_mgr); this.wiki_key = wiki_key; this.dump_date = dump_date; this.dump_type = dump_type;} private Xoi_setup_mgr install_mgr; String wiki_key, dump_date, dump_type;
 	@Override public String Async_key() {return KEY_dump;}
 	@Override public byte Async_init() {
 		Xoae_app app = install_mgr.App(); Gfui_kit kit = app.Gui_mgr().Kit();
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(BryUtl.NewU8(wiki_key));
 		Io_url wiki_dir = wiki.Import_cfg().Src_dir();
 		Io_url[] urls = Io_mgr.Instance.QueryDir_args(wiki_dir).Recur_(false).FilPath_("*.xml.bz2").ExecAsUrlAry();
 		if (urls.length == 0) {
@@ -39,7 +48,7 @@ class Xoi_cmd_wiki_unzip extends Gfo_thread_cmd_unzip implements Gfo_thread_cmd 
 				case Gfui_dlg_msg_.Btn_yes:		Io_mgr.Instance.DeleteFil(trg); break;
 				case Gfui_dlg_msg_.Btn_no:		return Gfo_thread_cmd_.Init_cancel_step;
 				case Gfui_dlg_msg_.Btn_cancel:	return Gfo_thread_cmd_.Init_cancel_all;
-				default:						throw Err_.new_unhandled(rslt);
+				default:						throw ErrUtl.NewUnhandled(rslt);
 			}
 		}
 		return Gfo_thread_cmd_.Init_ok;

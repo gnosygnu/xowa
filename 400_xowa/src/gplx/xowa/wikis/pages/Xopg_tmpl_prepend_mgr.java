@@ -13,22 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages; import gplx.*;
+package gplx.xowa.wikis.pages;
 import gplx.core.btries.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xopg_tmpl_prepend_mgr {
-	private Bry_bfr[] stack = Bry_bfr_.Ary_empty; private int stack_len, stack_max;
+	private BryWtr[] stack = BryWtr.AryEmpty; private int stack_len, stack_max;
 	public void Clear() {
-		stack = Bry_bfr_.Ary_empty; stack_len = stack_max = 0;
+		stack = BryWtr.AryEmpty; stack_len = stack_max = 0;
 	}
 	public boolean Tmpl_args_parsing() {return tmpl_args_parsing;} public void Tmpl_args_parsing_(boolean v) {tmpl_args_parsing = v;} private boolean tmpl_args_parsing;
-	public Xopg_tmpl_prepend_mgr Bgn(Bry_bfr bfr) {
+	public Xopg_tmpl_prepend_mgr Bgn(BryWtr bfr) {
 		int new_len = stack_len + 1;
 		if (new_len > stack_max) {
 			stack_max += 8;
-			Bry_bfr[] new_stack = new Bry_bfr[stack_max];
+			BryWtr[] new_stack = new BryWtr[stack_max];
 			ArrayUtl.CopyTo(stack, new_stack, 0);
 			stack = new_stack;
 		}
@@ -36,15 +37,15 @@ public class Xopg_tmpl_prepend_mgr {
 		stack_len = new_len;
 		return this;
 	}
-	public void End(Xop_ctx ctx, Bry_bfr bfr, byte[] val, int val_len, boolean called_from_tmpl) {
+	public void End(Xop_ctx ctx, BryWtr bfr, byte[] val, int val_len, boolean called_from_tmpl) {
 		if (	val_len > 0														// val is not empty
 			&&	tmpl_prepend_nl_trie.Match_bgn(val, 0, val_len) != null			// val starts with {| : ; # *; REF.MW:Parser.php|braceSubstitution
 			) {
 			boolean add = true;
 			if (called_from_tmpl) {												// called from tmpl
 				for (int i = stack_len - 1; i > -1; --i) {						// iterate backwards over tmpl_stack;
-					Bry_bfr stack_bfr = stack[i];
-					switch (stack_bfr.Get_at_last_or_nil_if_empty()) {
+					BryWtr stack_bfr = stack[i];
+					switch (stack_bfr.GetAtLastOrNilIfEmpty()) {
 						case AsciiByte.Null:		continue;					// bfr is empty; ignore it
 						case AsciiByte.Nl:	add = false; i = -1; break;	// bfr ends in \n; don't add and stop; PAGE:bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
 						default:					i = -1; break;				// bfr has char; stop
@@ -54,7 +55,7 @@ public class Xopg_tmpl_prepend_mgr {
 			else																// called from func arg; always add \n; EX:vi.w:Friedrich_II_của_Phổ; DATE:2014-04-26
 				add = true;
 			if (add)
-				bfr.Add_byte(AsciiByte.Nl);
+				bfr.AddByte(AsciiByte.Nl);
 		}
 		if (called_from_tmpl) --stack_len;
 	}

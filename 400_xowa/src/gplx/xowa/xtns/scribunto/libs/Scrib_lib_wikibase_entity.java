@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.xtns.scribunto.Scrib_core;
@@ -64,7 +64,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 			case Proc__addOtherUsage:                               return AddOtherUsage(args, rslt);
 			case Proc__getSetting:                                  return GetSetting(args, rslt);
 			case Proc__incrementStatsKey:                           return IncrementStatsKey(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	public boolean GetGlobalSiteId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
@@ -104,9 +104,9 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 			return rslt.Init_str_empty();
 
 		// print it
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
 		wdata_mgr.Resolve_to_bfr(bfr, core.Wiki(), prop_grp, lang, BoolUtl.N);
-		return rslt.Init_obj(bfr.To_bry_and_rls());
+		return rslt.Init_obj(bfr.ToBryAndRls());
 	}
 	public boolean AddStatementUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_null();
@@ -155,7 +155,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 	, Invk__getSetting             = "getSetting"
 	, Invk__incrementStatsKey      = "incrementStatsKey"
 	;
-	private static final String[] Proc__names = String_.Ary
+	private static final String[] Proc__names = StringUtl.Ary
 	( Invk__getGlobalSiteId
 	, Invk__getLanguageCode
 	, Invk__formatStatements

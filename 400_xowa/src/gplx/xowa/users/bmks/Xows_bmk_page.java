@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*;
-import gplx.xowa.htmls.bridges.dbuis.tbls.*;
-import gplx.xowa.users.data.*; import gplx.xowa.specials.*;
+package gplx.xowa.users.bmks;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*;
+import gplx.xowa.specials.*;
 import gplx.xowa.wikis.pages.*;
 public class Xows_bmk_page implements Xow_special_page {
 	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__bookmarks;}
@@ -25,10 +25,10 @@ public class Xows_bmk_page implements Xow_special_page {
 		Xoa_app app = wiki.App();
 		Dbui_tbl_itm__bmk ui_tbl = Dbui_tbl_itm__bmk.get_or_new(app, app.User().User_db_mgr().Bmk_mgr().Tbl__itm());
 		page.Html_data().Head_mgr().Itm__dbui().Init(app).Enabled_y_();
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetM001();
 		ui_tbl.Select(bfr, Xoud_bmk_mgr.Owner_root);
 
-		Xopage_html_data page_data = new Xopage_html_data(this.Special__meta().Display_ttl(), bfr.To_bry_and_rls());
+		Xopage_html_data page_data = new Xopage_html_data(this.Special__meta().Display_ttl(), bfr.ToBryAndRls());
 		page_data.Apply(page);
 	}
 	public Xow_special_page Special__clone() {return this;}

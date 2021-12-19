@@ -14,6 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sys; import gplx.*; import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 class Db_sys_tbl implements Rls_able {
 	private final String tbl_name = "gfdb_sys";
 	private String fld_key, fld_val;
@@ -27,9 +30,9 @@ class Db_sys_tbl implements Rls_able {
 	public String Tbl_name() {return tbl_name;}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public int Assert_int_or(String key, int or) {
-		String rv = Assert_str_or(key, Int_.To_str(or));
-		try {return Int_.Parse(rv);}
-		catch (Exception e) {Err_.Noop(e); return or;}
+		String rv = Assert_str_or(key, IntUtl.ToStr(or));
+		try {return IntUtl.Parse(rv);}
+		catch (Exception e) {return or;}
 	}
 	public String Assert_str_or(String key, String or) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_key);
@@ -43,9 +46,9 @@ class Db_sys_tbl implements Rls_able {
 			}
 		}	finally {rdr.Rls();}
 	}
-	public void Update_int(String key, int val) {Update_str(key, Int_.To_str(val));}
+	public void Update_int(String key, int val) {Update_str(key, IntUtl.ToStr(val));}
 	private void Update_str(String key, String val) {
-		if (stmt_update == null) stmt_update = conn.Stmt_update(tbl_name, String_.Ary(fld_key), fld_val);
+		if (stmt_update == null) stmt_update = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_key), fld_val);
 		stmt_update.Clear()
 		.Val_str(fld_val		, val)
 		.Crt_str(fld_key		, key)

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.gallery;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Gallery_itm implements Js_img_wkr {
@@ -33,7 +38,7 @@ public class Gallery_itm implements Js_img_wkr {
 	public Xop_lnki_tkn		Lnki_tkn() {return lnki_tkn;} public Gallery_itm Lnki_tkn_(Xop_lnki_tkn v) {lnki_tkn = v; return this;} private Xop_lnki_tkn lnki_tkn;
 	public Gallery_itm Reset() {
 		ttl = null;
-		ttl_bgn = ttl_end = alt_bgn = alt_end = link_bgn = link_end = page_bgn = page_end = Bry_find_.Not_found;
+		ttl_bgn = ttl_end = alt_bgn = alt_end = link_bgn = link_end = page_bgn = page_end = BryFind.NotFound;
 		caption_bry = null;	// NOTE: use null instead of ""; more legible tests
 		caption_tkn = null;
 		ext = null;
@@ -46,17 +51,17 @@ public class Gallery_itm implements Js_img_wkr {
 	}
 	public void Js_wkr__update_hdoc(Xoa_page page, Xog_js_wkr js_wkr, int html_uid, int html_w, int html_h, Io_url html_view_url, int orig_w, int orig_h, Xof_ext orig_ext, Io_url html_orig_url, byte[] lnki_ttl) {
 		Gallery_mgr_base gallery_mgr = xnde.Gallery_mgr();
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004(), tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetK004(), tmp_bfr = wiki.Utl__bfr_mkr().GetK004();
 		try {
 			xfer_itm.Init_at_gallery_end(html_w, html_h, html_view_url, html_orig_url);
 			Gallery_mgr_wtr.Write_itm(bfr, tmp_bfr, wiki.Appe(), wiki, ctx.Page(), ctx, wiki.Html_mgr().Html_wtr(), Xoh_wtr_ctx.Basic, src, gallery_mgr, xnde, gallery_itm_idx, xfer_itm);
-			String itm_html = bfr.To_str_and_clear();
-			js_wkr.Html_elem_replace_html(String_.new_u8(gallery_li_id_bry), itm_html);
+			String itm_html = bfr.ToStrAndClear();
+			js_wkr.Html_elem_replace_html(StringUtl.NewU8(gallery_li_id_bry), itm_html);
 			if (gallery_itm_idx == xnde.Itms_len() - 1 && Gallery_mgr_base_.Mode_is_packed(xnde.Mode()))
 				page.Html_data().Xtn_gallery_packed_exists_y_();	// set flag for packed_gallery; don't fire multiple times; PAGE:en.w:National_Sculpture_Museum_(Valladolid); DATE:2014-07-21
 		}
 		finally {
-			bfr.Mkr_rls(); tmp_bfr.Mkr_rls();
+			bfr.MkrRls(); tmp_bfr.MkrRls();
 		}
 	}
 }

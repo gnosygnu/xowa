@@ -13,9 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.installs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.threads.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.xowa.bldrs.cmds.utils.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.htmls.hrefs.*;
@@ -50,7 +60,7 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		Xoae_app app = install_mgr.App();
 		app.Usr_dlg().Prog_one("", "", "preparing import: ~{0}", wiki_key);
 		Xob_bldr bldr = app.Bldr();
-		wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_a7(wiki_key));
+		wiki = app.Wiki_mgr().Get_by_or_make(BryUtl.NewA7(wiki_key));
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		bldr.Pause_at_end_(false);
@@ -62,13 +72,13 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 		wiki.Init_needed_(true);
 		wiki.Html_mgr().Page_wtr_mgr().Init_(true);
 		wiki.Init_assert();
-		if		(String_.Eq(src_url.Ext(), ".xml")) {
+		if		(StringUtl.Eq(src_url.Ext(), ".xml")) {
 			if (   app.Cfg().Get_bool_app_or("xowa.bldr.import.delete_xml_file", true)	// CFG: Cfg__
 				&& Io_mgr.Instance.ExistsFil(src_url.GenNewExt(".bz2"))	// only delete the file if there is a corresponding bz2 file; BUG.GH:#124; DATE:2017-02-02
 				)
 				Io_mgr.Instance.DeleteFil(src_url);
 		}
-		else if (String_.Eq(src_url.Ext(), ".bz2")) {
+		else if (StringUtl.Eq(src_url.Ext(), ".bz2")) {
 			Io_url trg_fil = app.Fsys_mgr().Wiki_dir().GenSubFil_nest("#dump", "done", src_url.NameAndExt());
 			if (import_move_bz2_to_done)
 				Io_mgr.Instance.MoveFil_args(src_url, trg_fil, true).Exec();
@@ -97,8 +107,8 @@ class Xoi_cmd_wiki_import implements Gfo_thread_cmd {
 	private void Open_wiki(String wiki_key) {
 		Xog_win_itm main_win = install_mgr.App().Gui_mgr().Browser_win();
 		if (main_win.Active_page() == null) return; // will be null when invoked through cmd-line
-		byte[] url = Bry_.Add(wiki.Domain_bry(), Xoh_href_.Bry__wiki, wiki.Props().Main_page());
-		main_win.Page__navigate_by_url_bar(String_.new_u8(url));
+		byte[] url = BryUtl.Add(wiki.Domain_bry(), Xoh_href_.Bry__wiki, wiki.Props().Main_page());
+		main_win.Page__navigate_by_url_bar(StringUtl.NewU8(url));
 	}	
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_process_async))			Process_async();

@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.xndes;
-import gplx.Bry_bfr;
-import gplx.Int_;
-import gplx.Io_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.ios.IoConsts;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_parser_tid_;
 import gplx.xowa.parsers.Xop_tkn_itm;
@@ -48,11 +48,11 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 	public Xop_xnde_tkn Atrs_ary_			(Mwh_atr_itm[] v) {atrs_ary = v; return this;} private Mwh_atr_itm[] atrs_ary;
 	public Xop_tblw_tkn Atrs_ary_as_tblw_	(Mwh_atr_itm[] v) {atrs_ary = v; return this;}
 	public Xop_xnde_tag Tag() {return tag;} public Xop_xnde_tkn Tag_(Xop_xnde_tag v) {tag = v; return this;} private Xop_xnde_tag tag;
-	public int Tag_open_bgn() {return tag_open_bgn;} private int tag_open_bgn = Int_.Null;
-	public int Tag_open_end() {return tag_open_end;} private int tag_open_end = Int_.Null;
+	public int Tag_open_bgn() {return tag_open_bgn;} private int tag_open_bgn = IntUtl.Null;
+	public int Tag_open_end() {return tag_open_end;} private int tag_open_end = IntUtl.Null;
 	public Xop_xnde_tkn Tag_open_rng_(int bgn, int end) {this.tag_open_bgn = bgn; this.tag_open_end = end; return this;}
-	public int Tag_close_bgn() {return tag_close_bgn;} private int tag_close_bgn = Int_.Null;
-	public int Tag_close_end() {return tag_close_end;} private int tag_close_end = Int_.Null;
+	public int Tag_close_bgn() {return tag_close_bgn;} private int tag_close_bgn = IntUtl.Null;
+	public int Tag_close_end() {return tag_close_end;} private int tag_close_end = IntUtl.Null;
 	public Xop_xnde_tkn Tag_close_rng_(int bgn, int end) {this.tag_close_bgn = bgn; this.tag_close_end = end; return this;}
 	public Xop_xnde_tkn Subs_add_ary(Xop_tkn_itm... ary) {for (Xop_tkn_itm itm : ary) Subs_add(itm); return this;}
 	public Xox_xnde Xnde_xtn() {return xnde_xtn;} public Xop_xnde_tkn Xnde_xtn_(Xox_xnde v) {xnde_xtn = v; return this;} private Xox_xnde xnde_xtn;
@@ -89,7 +89,7 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 		}
 	}
 //		public static Xop_ctx Hack_ctx;	// CHART
-	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {
+	@Override public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, BryWtr bfr) {
 //			if (ctx.Scribunto) {	// CHART
 //				byte[] key = uniq_mgr.Add(Bry_.Mid(src, this.Src_bgn(), this.Src_end()));
 //				bfr.Add(key);
@@ -106,10 +106,10 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 				}
 				break;
 			case Xop_xnde_tag_.Tid__nowiki:			// evaluate subs; add tags
-				bfr.Add_byte(AsciiByte.Lt).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(AsciiByte.Gt);
+				bfr.AddByte(AsciiByte.Lt).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).AddByte(AsciiByte.Gt);
 				for (int i = 0; i < subs_len; i++)
 					this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, bfr);
-				bfr.Add_byte(AsciiByte.Lt).Add_byte(AsciiByte.Slash).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(AsciiByte.Gt);
+				bfr.AddByte(AsciiByte.Lt).AddByte(AsciiByte.Slash).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).AddByte(AsciiByte.Gt);
 				break;
 			case Xop_xnde_tag_.Tid__onlyinclude:		// evaluate subs but toggle onlyinclude flag on/off
 //					boolean prv_val = ctx.Onlyinclude_enabled;
@@ -120,40 +120,40 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 				break;
 			default:								// ignore tags except for xtn; NOTE: Xtn tags are part of tagRegy_wiki_tmpl stage
 				if (tag.Xtn()) {
-					Bry_bfr cur_bfr = bfr;
+					BryWtr cur_bfr = bfr;
 					// UNIQ; DATE:2017-03-31
 					boolean is_tmpl_mode = ctx.Wiki().Parser_mgr().Ctx().Parse_tid() == Xop_parser_tid_.Tid__tmpl;
 					if (is_tmpl_mode) {
-						cur_bfr = ctx.Wiki().Utl__bfr_mkr().Get_m001().Reset_if_gt(Io_mgr.Len_mb);
+						cur_bfr = ctx.Wiki().Utl__bfr_mkr().GetM001().ResetIfGt(IoConsts.LenMB);
 					}
 
 					try {
 					// write tag_bgn; EX: <poem>
-					cur_bfr.Add_mid(src, tag_open_bgn, tag_open_end);
+					cur_bfr.AddMid(src, tag_open_bgn, tag_open_end);
 
 					// write subs; must always evaluate subs; handle <poem>{{{1}}}</poem>; DATE:2014-03-03
 					for (int i = 0; i < subs_len; i++)
 						this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, cur_bfr);
 
 					// write tag_end; EX: </poem>
-					cur_bfr.Add_mid(src, tag_close_bgn, tag_close_end);
+					cur_bfr.AddMid(src, tag_close_bgn, tag_close_end);
 
 					// xtn is unclosed; add a </xtn> else rest of page will be gobbled; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
 					// NOTE: must check for inline else will output trailing '</xtn>' after '<xtn/>' PAGE:en.w:National_Popular_Vote_Interstate_Compact DATE:2017-04-10
-					if (tag_close_bgn == Int_.Min_value && closeMode != Xop_xnde_tkn.CloseMode_inline) {
+					if (tag_close_bgn == IntUtl.MinValue && closeMode != Xop_xnde_tkn.CloseMode_inline) {
 						cur_bfr.Add(tag.Xtn_end_tag());
 						cur_bfr.Add(AsciiByte.GtBry);
 					}
 
 					// UNIQ; DATE:2017-03-31
 					if (is_tmpl_mode) {
-						byte[] val = cur_bfr.To_bry_and_clear();
+						byte[] val = cur_bfr.ToBryAndClear();
 						byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(BoolUtl.Y, tag.Name_bry(), val);
 						bfr.Add(key);
 					}
 					} finally {
 						if (is_tmpl_mode) {
-							cur_bfr.Mkr_rls();
+							cur_bfr.MkrRls();
 						}
 					}
 				}

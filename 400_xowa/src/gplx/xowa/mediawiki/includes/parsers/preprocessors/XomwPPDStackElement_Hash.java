@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
 // MW.FILE:Preprocessor_Hash
 /**
 * @ingroup Parser
@@ -32,7 +34,7 @@ public class XomwPPDStackElement_Hash extends XomwPPDStackElement { 	public Xomw
 	*/
 	@Override public Object breakSyntax(int openingCount) {
 		XophpArray accum = null;
-		if (String_.Eq(this.open, "\n")) {
+		if (StringUtl.Eq(this.open, "\n")) {
 			accum = (XophpArray)Get_at_hash(0).Accum();
 		}
 		else {

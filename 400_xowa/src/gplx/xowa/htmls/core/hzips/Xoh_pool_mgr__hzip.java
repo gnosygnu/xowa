@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.hzips; import gplx.*;
+package gplx.xowa.htmls.core.hzips;
 import gplx.core.btries.*; import gplx.core.threads.poolables.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.escapes.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
@@ -60,12 +62,12 @@ public class Xoh_pool_mgr__hzip {
 		mkr__timeline	= Reg(Xoh_timeline_data.Hook_bry					, new Xoh_timeline_hzip());
 	}
 	private Gfo_poolable_mgr Reg(byte[] hook, Gfo_poolable_itm proto) {
-		Gfo_poolable_mgr rv = Gfo_poolable_mgr_.New(1, 32, proto, Object_.Ary(hook));
-		trie.Add_obj(hook, rv);
+		Gfo_poolable_mgr rv = Gfo_poolable_mgr_.New(1, 32, proto, ObjectUtl.Ary(hook));
+		trie.AddObj(hook, rv);
 		return rv;
 	}
-	private static byte[] New_hook_len2(boolean mode_is_b256, int b0, int b1)	{return Bry_.New_by_ints(b0, mode_is_b256 ? b1 : b1 + AsciiByte.Bang);}
-	private static byte[] New_hook_len1(boolean mode_is_b256, int b0)			{return Bry_.New_by_ints(b0);}
+	private static byte[] New_hook_len2(boolean mode_is_b256, int b0, int b1)	{return BryUtl.NewByInts(b0, mode_is_b256 ? b1 : b1 + AsciiByte.Bang);}
+	private static byte[] New_hook_len1(boolean mode_is_b256, int b0)			{return BryUtl.NewByInts(b0);}
 	public static final byte
 	  Hook__core	= 1
 	, Hook__html	= 2

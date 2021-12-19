@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.tdbs;
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Xotdb_dir_info_ {
 	public static String Tid_name(byte tid) {
 		switch (tid) {
@@ -28,7 +28,7 @@ public class Xotdb_dir_info_ {
 			case Xotdb_dir_info_.Tid_category2_link:		return Xotdb_dir_info_.Name_category2_link;
 			case Xotdb_dir_info_.Tid_category2_main:		return Xotdb_dir_info_.Name_category2_main;
 			case Xotdb_dir_info_.Tid_search_ttl:			return Xotdb_dir_info_.Name_search_ttl;
-			default:										throw Err_.new_unhandled(tid);
+			default:										throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public static Xotdb_dir_info[] regy_() {
@@ -41,7 +41,7 @@ public class Xotdb_dir_info_ {
 		return rv;
 	}
 	public static boolean Dir_name_is_tdb(String dir_name) {
-		return String_.In(dir_name, Name_ns, Name_site, Name_cfg, "tmp");
+		return StringUtl.In(dir_name, Name_ns, Name_site, Name_cfg, "tmp");
 	}
 	private static void regy_itm_(Xotdb_dir_info[] rv, boolean ns_root, byte id) {rv[id] = new Xotdb_dir_info(ns_root, id, Tid_name(id));}
 	public static final String Ext_xdat = ".xdat", Ext_csv = ".csv", Ext_zip = ".zip"
@@ -49,7 +49,7 @@ public class Xotdb_dir_info_ {
 		, Name_cfg = "cfg"
 		, Name_reg_fil = "reg.csv", Name_category2 = "category2", Name_category2_link = "link", Name_category2_main = "main"
 		;
-	public static final byte[] Bry_xdat = Bry_.new_a7(Ext_xdat), Bry_csv = Bry_.new_a7(Ext_csv), Bry_zip = Bry_.new_a7(Ext_zip);
+	public static final byte[] Bry_xdat = BryUtl.NewA7(Ext_xdat), Bry_csv = BryUtl.NewA7(Ext_csv), Bry_zip = BryUtl.NewA7(Ext_zip);
 	public static final byte
 		Tid_page				= 0
 		, Tid_ttl 				= 1

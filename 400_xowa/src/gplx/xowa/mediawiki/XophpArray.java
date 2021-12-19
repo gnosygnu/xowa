@@ -15,20 +15,19 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Char_;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Object_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.Type_;
-import gplx.core.brys.Bry_bfr_able;
-import gplx.core.strings.String_bldr;
-import gplx.core.strings.String_bldr_;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.custom.brys.wtrs.BryBfrAble;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +37,7 @@ import java.util.Map;
 
 // REF.PHP:https://www.php.net/manual/en/language.types.array.php
 // also has static functions; REF.PHP:https://www.php.net/manual/en/ref.array.php
-public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
+public class XophpArray<T> implements BryBfrAble, Iterable<T> {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	private int newMemberIdx;
 
@@ -48,7 +47,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		internalPointerIndex = 0;
 	}
 	public int Len() {return hash.Len();}
-	public boolean Has_obj(Object key) {return Has(Object_.Xto_str_strict_or_null(key));}
+	public boolean Has_obj(Object key) {return Has(ObjectUtl.ToStrOrNull(key));}
 	public boolean Has(String key) {
 		return hash.Has(key);
 	}
@@ -75,8 +74,8 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		return this;
 	}
 	public XophpArray Add(String key, Object val) {
-		int key_as_int = Int_.Parse_or(key, Int_.Min_value);
-		if (key_as_int == Int_.Min_value) {
+		int key_as_int = IntUtl.ParseOr(key, IntUtl.MinValue);
+		if (key_as_int == IntUtl.MinValue) {
 			Set(XophpArrayItm.NewStr(key, val));
 		}
 		else {
@@ -102,26 +101,26 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	}
 	public XophpArray Get_at_ary_or_null(int i) {
 		Object rv = Get_at(i);
-		return Type_.Eq_by_obj(rv, XophpArray.class) ? (XophpArray)rv : null;
+		return ClassUtl.EqByObj(XophpArray.class, rv) ? (XophpArray)rv : null;
 	}
 	public XophpArray Get_at_ary(int i) {return (XophpArray)Get_at(i);}
-	public int Get_at_int(int i) {return Int_.Cast(Get_at(i));}
+	public int Get_at_int(int i) {return IntUtl.Cast(Get_at(i));}
 	public String Get_at_str(int i) {return (String)Get_at(i);}
 	public Object Get_at(int i) {
 		if (i < 0 || i >= hash.Len()) return null;
-		XophpArrayItm itm = (XophpArrayItm)hash.Get_at(i);
+		XophpArrayItm itm = (XophpArrayItm)hash.GetAt(i);
 		return itm == null ? null : itm.Val();
 	}
 	public XophpArrayItm Get_at_itm(int i) {
 		if (i < 0 || i >= hash.Len()) return null;
-		return (XophpArrayItm)hash.Get_at(i);
+		return (XophpArrayItm)hash.GetAt(i);
 	}
-	public Object Get_by_obj(Object key) {return Get_by(Object_.Xto_str_strict_or_null(key));}
-	public Object Get_by(int key) {return Get_by(Int_.To_str(key));}
+	public Object Get_by_obj(Object key) {return Get_by(ObjectUtl.ToStrOrNull(key));}
+	public Object Get_by(int key) {return Get_by(IntUtl.ToStr(key));}
 	public boolean Get_by_bool_or(String key, boolean or) {Object rv = this.Get_by(key); return rv == null ? or : BoolUtl.Cast(rv);}
 	public boolean Get_by_bool(String key) {return BoolUtl.Cast(this.Get_by(key));}
-	public int Get_by_int_or(String key, int or) {Object rv = this.Get_by(key); return rv == null ? or : Int_.Cast(rv);}
-	public int Get_by_int(String key) {return Int_.Cast(this.Get_by(key));}
+	public int Get_by_int_or(String key, int or) {Object rv = this.Get_by(key); return rv == null ? or : IntUtl.Cast(rv);}
+	public int Get_by_int(String key) {return IntUtl.Cast(this.Get_by(key));}
 	public XophpArray Xet_by_ary(String key) {
 		XophpArrayItm itm = (XophpArrayItm)hash.GetByOrNull(key);
 		if (itm == null) {
@@ -135,8 +134,8 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	}
 	public XophpArray Get_by_ary_or(String key, XophpArray or) {Object rv = this.Get_by(key); return rv == null ? or : (XophpArray)rv;}
 	public XophpArray Get_by_ary(String key) {return (XophpArray)this.Get_by(key);}
-	public String Get_by_str(char key) {return (String)this.Get_by(Char_.To_str(key));}
-	public String Get_by_str(int key) {return (String)this.Get_by(Int_.To_str(key));}
+	public String Get_by_str(char key) {return (String)this.Get_by(CharUtl.ToStr(key));}
+	public String Get_by_str(int key) {return (String)this.Get_by(IntUtl.ToStr(key));}
 	public String Get_by_str(String key) {return (String)this.Get_by(key);}
 	public T Get_by(String key) {
 		XophpArrayItm itm = (XophpArrayItm)hash.GetByOrNull(key);
@@ -162,7 +161,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		}
 	}
 	public void Del_at(int i) {
-		XophpArrayItm itm = (XophpArrayItm)hash.Get_at(i);
+		XophpArrayItm itm = (XophpArrayItm)hash.GetAt(i);
 		if (itm != null) {
 			hash.Del(itm.Key());
 		}
@@ -171,17 +170,17 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		hash.Del(key);
 	}
 	public XophpArrayItm[] To_ary() {
-		return (XophpArrayItm[])hash.To_ary(XophpArrayItm.class);
+		return (XophpArrayItm[])hash.ToAry(XophpArrayItm.class);
 	}
 	public String To_str() {
-		Bry_bfr bfr = Bry_bfr_.New();
-		To_bfr(bfr);
-		return bfr.To_str_and_clear();
+		BryWtr bfr = BryWtr.New();
+		AddToBfr(bfr);
+		return bfr.ToStrAndClear();
 	}
-	public void To_bfr(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		XophpArrayItm[] itms = To_ary();
 		for (XophpArrayItm itm : itms) {
-			itm.To_bfr(bfr);
+			itm.AddToBfr(bfr);
 		}
 	}
 	public void Itm_str_concat_end(int idx, String v) {
@@ -194,14 +193,14 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		XophpArray rv = new XophpArray();
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			XophpArrayItm itm = (XophpArrayItm)hash.Get_at(i);
+			XophpArrayItm itm = (XophpArrayItm)hash.GetAt(i);
 			rv.Add(itm.Key(), itm.Val());
 		}
 		return rv;
 	}
 	@Override public boolean equals(Object obj) {
 		if (obj == null) return false;
-		if (!Type_.Eq_by_obj(obj, XophpArray.class)) return false;
+		if (!ClassUtl.EqByObj(XophpArray.class, obj)) return false;
 		XophpArray comp = (XophpArray)obj;
 
 		// compare lens
@@ -213,7 +212,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		for (int i = 0; i < this_len; i++) {
 			XophpArrayItm this_itm = this.Get_at_itm(i);
 			XophpArrayItm comp_itm = comp.Get_at_itm(i);
-			if (!Object_.Eq(this_itm, comp_itm))
+			if (!ObjectUtl.Eq(this_itm, comp_itm))
 				return false;
 		}
 		return true;
@@ -247,7 +246,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 
 		@Override
 		public T next() {
-			return (T) ((XophpArrayItm)hash.Get_at(curIdx++)).Val();
+			return (T) ((XophpArrayItm)hash.GetAt(curIdx++)).Val();
 		}
 
 		@Override
@@ -273,7 +272,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 
 		@Override
 		public XophpArrayItm<T> next() {
-			return (XophpArrayItm<T>) hash.Get_at(curIdx++);
+			return (XophpArrayItm<T>) hash.GetAt(curIdx++);
 		}
 
 		@Override
@@ -288,13 +287,13 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	}
 
 	// DEPRECATE:use XophpArray
-	public static boolean popBoolOrN(List_adp list)           {return BoolUtl.Cast(List_adp_.Pop_or(list, false));}
-	public static byte[] popBryOrNull(List_adp list)       {return (byte[])List_adp_.Pop_or(list, null);}
+	public static boolean popBoolOrN(List_adp list)           {return BoolUtl.Cast(List_adp_.PopOr(list, false));}
+	public static byte[] popBryOrNull(List_adp list)       {return (byte[])List_adp_.PopOr(list, null);}
 	public static String[] array_keys_str(Ordered_hash array) {
 		int len = array.Len();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = (String)array.Get_at(i);
+			rv[i] = (String)array.GetAt(i);
 		}
 		return rv;
 	}
@@ -302,7 +301,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		int len = array.Len();
 		byte[][] rv = new byte[len][];
 		for (int i = 0; i < len; i++) {
-			rv[i] = (byte[])array.Get_at(i);
+			rv[i] = (byte[])array.GetAt(i);
 		}
 		return rv;
 	}
@@ -333,21 +332,21 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	public static boolean isset(XophpArray array, String key) {return array.Get_by(key) != null;}
 	public static boolean is_array(Object array) {return XophpType_.instance_of(array, XophpArray.class);}
 	public static void unset(XophpArray array, String key)   {array.hash.Del(key);}
-	public static void unset(XophpArray array, int key)      {array.hash.Del(Int_.To_str(key));}
+	public static void unset(XophpArray array, int key)      {array.hash.Del(IntUtl.ToStr(key));}
 	public static void unset(Ordered_hash array, Object key) {array.Del(key);}
 	public static boolean array_key_exists(String key, XophpArray array) {return array.Has(key);}
-	public static boolean array_key_exists(int key, XophpArray array)    {return array.Has(Int_.To_str(key));}
+	public static boolean array_key_exists(int key, XophpArray array)    {return array.Has(IntUtl.ToStr(key));}
 
 	public static Object array_pop(XophpArray array) {// "array_pop"
 		int pos = array.Len() - 1;
 		if (pos < 0) return null;
-		XophpArrayItm itm = (XophpArrayItm)array.hash.Get_at(pos);
+		XophpArrayItm itm = (XophpArrayItm)array.hash.GetAt(pos);
 		array.Del_at(pos);
 		return itm.Val();
 	}
 	public static Object end(XophpArray array) {
 		int len = array.Len();
-		return len == 0 ? null : ((XophpArrayItm)array.hash.Get_at(len - 1)).Val();
+		return len == 0 ? null : ((XophpArrayItm)array.hash.GetAt(len - 1)).Val();
 	}
 
 	// REF.PHP:https://www.php.net/manual/en/function.array-values.php
@@ -507,7 +506,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		int len = array.Len();
 		for (int i = 0; i < len; i++) {
 			XophpArrayItm itm = array.Get_at_itm(i);
-			rv.Set(Object_.Xto_str_strict_or_null(itm.Val()), itm.Key());
+			rv.Set(ObjectUtl.ToStrOrNull(itm.Val()), itm.Key());
 		}
 		return rv;
 	}
@@ -520,7 +519,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 			if (i != 0) sb.Add(glue);
 			sb.Add(pieces.Get_at_str(i));
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 
 	// REF.PHP:https://www.php.net/manual/en/function.in-array.php
@@ -529,7 +528,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		// if strict, cache needleType
 		Class<?> needleType = null;
 		if (strict && needle != null) {
-			needleType = Type_.Type_by_obj(needle);
+			needleType = ClassUtl.TypeByObj(needle);
 		}
 
 		// loop haystack to find match
@@ -546,14 +545,14 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 					return false;
 				}
 				else if (needle != null && val != null) {
-					if (!Type_.Eq_by_obj(val, needleType)) {
+					if (!ClassUtl.EqByObj(needleType, val)) {
 						return false;
 					}
 				}
 			}
 
 			// compare objects
-			if (Object_.Eq(needle, val)) {
+			if (ObjectUtl.Eq(needle, val)) {
 				return true;
 			}
 		}

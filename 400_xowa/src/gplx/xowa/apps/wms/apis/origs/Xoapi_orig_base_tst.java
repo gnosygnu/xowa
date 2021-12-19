@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.wms.apis.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.wms.*; import gplx.xowa.apps.wms.apis.*;
+package gplx.xowa.apps.wms.apis.origs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 // https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Main Page&rvprop=timestamp|content
 public class Xoapi_orig_base_tst {
@@ -42,19 +46,19 @@ class Xoapi_orig_base_fxt {
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);
 	}
 	public void Bld_api_url_tst(String ttl_str, int w, int h, String expd) {
-		String actl = Xoapi_orig_wmf.Bld_api_url(wiki.Domain_bry(), Bry_.new_u8(ttl_str), w, h);
-		Tfds.Eq(expd, actl);
+		String actl = Xoapi_orig_wmf.Bld_api_url(wiki.Domain_bry(), BryUtl.NewU8(ttl_str), w, h);
+		GfoTstr.EqObj(expd, actl);
 	}
 	public void Parse_size_tst(String xml_str, int expd_w, int expd_h) {
-		byte[] xml_bry = Bry_.new_u8(xml_str);
+		byte[] xml_bry = BryUtl.NewU8(xml_str);
 		Xoapi_orig_wmf.Parse_xml(rv, app.Usr_dlg(), xml_bry);
-		Tfds.Eq(expd_w, rv.Orig_w());
-		Tfds.Eq(expd_h, rv.Orig_h());
+		GfoTstr.EqObj(expd_w, rv.Orig_w());
+		GfoTstr.EqObj(expd_h, rv.Orig_h());
 	}
 	public void Parse_reg_tst(String xml_str, String expd_wiki, String expd_page) {
-		byte[] xml_bry = Bry_.new_u8(xml_str);
+		byte[] xml_bry = BryUtl.NewU8(xml_str);
 		Xoapi_orig_wmf.Parse_xml(rv, app.Usr_dlg(), xml_bry);
-		Tfds.Eq(expd_wiki, String_.new_u8(rv.Orig_wiki()));
-		Tfds.Eq(expd_page, String_.new_u8(rv.Orig_page()));
+		GfoTstr.EqObj(expd_wiki, StringUtl.NewU8(rv.Orig_wiki()));
+		GfoTstr.EqObj(expd_page, StringUtl.NewU8(rv.Orig_page()));
 	}
 }

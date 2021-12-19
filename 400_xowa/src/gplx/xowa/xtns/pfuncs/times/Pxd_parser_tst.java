@@ -13,18 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
 import org.junit.*;
 public class Pxd_parser_tst {
-	private final Bry_bfr bfr = Bry_bfr_.New_w_size(16);
+	private final BryWtr bfr = BryWtr.NewWithSize(16);
 	private final Pxd_parser parser = new Pxd_parser();
-	private final DateAdp test_date = DateAdp_.parse_fmt("2012-02-27", "yyyy-MM-dd");
+	private final GfoDate test_date = GfoDateUtl.ParseFmt("2012-02-27", "yyyy-MM-dd");
 	@Before public void init() {
-		Datetime_now.Manual_y_();
-		Datetime_now.Manual_(test_date);
+		GfoDateNow.ManualSetY();
+		GfoDateNow.ManualSet(test_date);
 	}
 	@After public void teardown() {
-		Datetime_now.Manual_n_();
+		GfoDateNow.ManualSetN();
 	}
 	@Test public void Month_name_0__day__year()					{tst_date_("Mar 2 2001"				, "2001-03-02");}			// y:Mar-02-2001;Mar.02.2001;Mar 02, 2001 n:Mar/02/2001;Feb,05,2011
 	@Test public void Month_name_0__day__year__bad_day()			{tst_date_("Mar 32 2001"			, "Invalid day: 32");}
@@ -70,28 +76,28 @@ public class Pxd_parser_tst {
 	@Test public void Ago()										{tst_date_("1 month ago"			, "2012-01-27");}
 
 	private void tst_date_(String raw, String expd) {
-		byte[] raw_ary = Bry_.new_u8(raw);
-		DateAdp date = parser.Parse(raw_ary, bfr);
-		if (date == DateAdp_.MinValue)
-			Tfds.Eq(expd, bfr.To_str_and_clear(), raw);
+		byte[] raw_ary = BryUtl.NewU8(raw);
+		GfoDate date = parser.Parse(raw_ary, bfr);
+		if (date == GfoDateUtl.MinValue)
+			GfoTstr.EqObj(expd, bfr.ToStrAndClear(), raw);
 		else
-			Tfds.Eq(expd, date.XtoStr_fmt_yyyy_MM_dd());
+			GfoTstr.EqObj(expd, date.ToStrFmt_yyyyMMdd());
 	}
 	private void tst_time_(String raw, String expd) {
-		byte[] raw_ary = Bry_.new_u8(raw);
-		DateAdp date = parser.Parse(raw_ary, bfr);
-		if (date == DateAdp_.MinValue)
-			Tfds.Eq(expd, bfr.To_str_and_clear(), raw);
+		byte[] raw_ary = BryUtl.NewU8(raw);
+		GfoDate date = parser.Parse(raw_ary, bfr);
+		if (date == GfoDateUtl.MinValue)
+			GfoTstr.EqObj(expd, bfr.ToStrAndClear(), raw);
 		else
-			Tfds.Eq(expd, date.XtoStr_fmt("HH:mm:ss.fff"));
+			GfoTstr.EqObj(expd, date.ToStrFmt("HH:mm:ss.fff"));
 	}
 	private void tst_both_(String raw, String expd) {
-		byte[] raw_ary = Bry_.new_u8(raw);
-		DateAdp date = parser.Parse(raw_ary, bfr);
-		if (date == DateAdp_.MinValue)
-			Tfds.Eq(expd, bfr.To_str_and_clear(), raw);
+		byte[] raw_ary = BryUtl.NewU8(raw);
+		GfoDate date = parser.Parse(raw_ary, bfr);
+		if (date == GfoDateUtl.MinValue)
+			GfoTstr.EqObj(expd, bfr.ToStrAndClear(), raw);
 		else
-			Tfds.Eq(expd, date.XtoStr_fmt("yyyy-MM-dd HH:mm:ss.fff"));
+			GfoTstr.EqObj(expd, date.ToStrFmt("yyyy-MM-dd HH:mm:ss.fff"));
 	}
 }
 /*	

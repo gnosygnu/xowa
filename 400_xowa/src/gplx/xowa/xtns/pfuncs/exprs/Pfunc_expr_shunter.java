@@ -13,29 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.exprs; import gplx.*;
-import gplx.core.btries.*; import gplx.core.brys.fmtrs.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.langs.msgs.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.xtns.pfuncs.exprs;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.btries.Btrie_rv;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.commons.GfoDecimal;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.parsers.Xop_ctx;
 public class Pfunc_expr_shunter {
 	private final Btrie_fast_mgr trie = expression_(); private final Btrie_rv trv = new Btrie_rv();
 	private final Val_stack val_stack = new Val_stack();
 	private final Func_tkn_stack prc_stack = new Func_tkn_stack();
-	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
-	public Bry_bfr Err() {return err_bfr;} private final Bry_bfr err_bfr = Bry_bfr_.New();
-	public Decimal_adp Err_set(Xop_ctx ctx, int msgId) {return Err_set(ctx, msgId, Bry_.Empty);}
-	public Decimal_adp Err_set(Xop_ctx ctx, int msg_id, byte[] arg) {
+	private final BryFmtr tmp_fmtr = BryFmtr.NewTmp();
+	public BryWtr Err() {return err_bfr;} private final BryWtr err_bfr = BryWtr.New();
+	public GfoDecimal Err_set(Xop_ctx ctx, int msgId) {return Err_set(ctx, msgId, BryUtl.Empty);}
+	public GfoDecimal Err_set(Xop_ctx ctx, int msg_id, byte[] arg) {
 		byte[] msg_val = ctx.Wiki().Msg_mgr().Val_by_id(msg_id);
 		err_bfr.Clear().Add(Err_bgn_ary);
-		tmp_fmtr.Fmt_(msg_val).Bld_bfr_one(err_bfr, arg);
+		tmp_fmtr.FmtSet(msg_val).BldToBfrObj(err_bfr, arg);
 		err_bfr.Add(Err_end_ary);
 		return Null_rslt;
 	}
 	public void Rslt_set(byte[] bry) {
 		err_bfr.Add(bry);
 	}
-	public Decimal_adp Evaluate(Xop_ctx ctx, byte[] src) {	// REF.MW: Expr.php
+	public GfoDecimal Evaluate(Xop_ctx ctx, byte[] src) {	// REF.MW: Expr.php
 		int src_len = src.length; if (src_len == 0) return Null_rslt;
 		int cur_pos = 0; byte cur_byt = src[0];
 		boolean mode_expr = true; Func_tkn prv_prc = null;
@@ -53,7 +61,7 @@ public class Pfunc_expr_shunter {
 					else
 						break;
 				}
-				return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unrecognised_word, Bry_.Mid(src, bgn_pos, cur_pos));
+				return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unrecognised_word, BryLni.Mid(src, bgn_pos, cur_pos));
 			}
 			else {
 				Expr_tkn t = (Expr_tkn)o;
@@ -75,11 +83,11 @@ public class Pfunc_expr_shunter {
 								default: loop = false; break;
 							}
 						}
-						Decimal_adp num = Null_rslt;
-						try {num = Bry_.To_decimal(src, numBgn, cur_pos);}
+						GfoDecimal num = Null_rslt;
+						try {num = BryUtl.ToDecimal(src, numBgn, cur_pos);}
 						catch (Exception exc) {
 							// NOTE: PATCH.PHP: 65.5.5 can evaluate to 65.5; EX "{{Geological eras|-600|height=2|border=none}}" eventually does "|10-to={{#ifexpr:{{{1|-4567}}}<-65.5|-65.5|{{{1}}}}}.5" which is 65.5.5
-							Err_.Noop(exc); 
+
 							int dot_count = 0;
 							for (int i = numBgn; i < cur_pos; i++) {
 								if (src[i] == AsciiByte.Dot) {
@@ -87,29 +95,29 @@ public class Pfunc_expr_shunter {
 										case 0: dot_count = 1; break;
 										case 1: 
 											try {
-												num = Bry_.To_decimal(src, numBgn, i);
+												num = BryUtl.ToDecimal(src, numBgn, i);
 											}
-											catch (Exception exc_inner) {Err_.Noop(exc_inner);}
+											catch (Exception exc_inner) {}
 											break;
 									}
 								}
 							}
 							if (num == null) return Null_rslt;
 						}
-						num = num.Round_to_default_precision(); // PURPOSE: number should be set to precision of 14; PAGE:de.wikipedia.org/wiki/Nationalpark_Mu_Ko_Ang_Thong ISSUE#:683 DATE:2020-03-24
+						num = num.RoundToDefaultPrecision(); // PURPOSE: number should be set to precision of 14; PAGE:de.wikipedia.org/wiki/Nationalpark_Mu_Ko_Ang_Thong ISSUE#:683 DATE:2020-03-24
 						val_stack.Push(num);
 						mode_expr = false;
 						break;
 					case Expr_tkn_.Tid_paren_lhs:
-						if (!mode_expr) return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unexpected_operator, Bry_.new_a7("("));
+						if (!mode_expr) return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unexpected_operator, BryUtl.NewA7("("));
 						prc_stack.Push((Func_tkn)t);
 						break;
 					case Expr_tkn_.Tid_operator:
 						Func_tkn cur_prc = (Func_tkn)t;
 						if (AsciiByte.IsLtr(cur_byt)) {
-							int nxt_pos = Bry_find_.Find_fwd_while_letter(src, cur_pos, src_len);
+							int nxt_pos = BryFind.FindFwdWhileLetter(src, cur_pos, src_len);
 							if (nxt_pos > cur_pos)
-								return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unrecognised_word, Bry_.Mid(src, bgn_pos, nxt_pos));
+								return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unrecognised_word, BryLni.Mid(src, bgn_pos, nxt_pos));
 						}
 						if (cur_prc.Func_is_const()) {		// func is "pi" or "e"; DATE:2014-03-01
 							if (mode_expr) {				// number expected; just call Calc (which will place value on stack)
@@ -165,7 +173,7 @@ public class Pfunc_expr_shunter {
 	}
 
 
-	public static final Decimal_adp Null_rslt = null;
+	public static final GfoDecimal Null_rslt = null;
 	private static Btrie_fast_mgr expression_() {	// changed to instance; DATE:2016-07-20
 		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; math and expressions
 		Trie_add(rv, new Ws_tkn(AsciiByte.Space));
@@ -175,7 +183,7 @@ public class Pfunc_expr_shunter {
 		Trie_add(rv, Paren_end_tkn.Instance);
 		Trie_add(rv, new Func_tkn_plus("+"));
 		Trie_add(rv, new Func_tkn_minus("-"));
-		Trie_add(rv, new Func_tkn_minus(Char_.To_str((char)8722)));
+		Trie_add(rv, new Func_tkn_minus(CharUtl.ToStr((char)8722)));
 		Trie_add(rv, new Func_tkn_times("*"));
 		Trie_add(rv, new Func_tkn_divide("/"));
 		Trie_add(rv, new Func_tkn_divide("div"));
@@ -225,5 +233,5 @@ public class Pfunc_expr_shunter {
 		return rv;
 	}
 	private static void Trie_add(Btrie_fast_mgr trie, Expr_tkn tkn) {trie.Add(tkn.Val_ary(), tkn);}
-	private static final byte[] Err_bgn_ary = Bry_.new_a7("<strong class=\"error\">"), Err_end_ary = Bry_.new_a7("</strong>");
+	private static final byte[] Err_bgn_ary = BryUtl.NewA7("<strong class=\"error\">"), Err_end_ary = BryUtl.NewA7("</strong>");
 }

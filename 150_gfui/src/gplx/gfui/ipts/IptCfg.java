@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public interface IptCfg extends Gfo_invk {
 	String CfgKey();
 	Object NewByKey(Object o);
@@ -26,7 +33,7 @@ class IptCfg_base implements IptCfg {
 	public IptCfgItm GetOrDefaultArgs(String bndKey, GfoMsg defaultMsg, IptArg[] defaultArgs) {
 		IptCfgItm rv = (IptCfgItm)hash.GetByOrNull(bndKey);
 		if (rv == null) {	// no cfg
-			rv = IptCfgItm.new_().Key_(bndKey).Ipt_(List_adp_.New_by_many((Object[])defaultArgs)).Msg_(defaultMsg);
+			rv = IptCfgItm.new_().Key_(bndKey).Ipt_(List_adp_.NewByMany((Object[])defaultArgs)).Msg_(defaultMsg);
 			hash.Add(bndKey, rv);
 		}
 		else {				// cfg exists
@@ -38,7 +45,7 @@ class IptCfg_base implements IptCfg {
 		IptCfgItm rv = GetOrDefaultArgs(bndKey, m, argAry);
 		rv.Msg_(m); // always overwrite msg
 		if (Dif(rv.Ipt(), argAry)) {
-			rv.Ipt_(List_adp_.New_by_many((Object[])argAry));
+			rv.Ipt_(List_adp_.NewByMany((Object[])argAry));
 			this.Change(bndKey, argAry);
 		}
 		return rv;
@@ -46,7 +53,7 @@ class IptCfg_base implements IptCfg {
 	boolean Dif(List_adp lhs, IptArg[] rhs) {
 		if (lhs.Len() != rhs.length) return true;
 		for (int i = 0; i < rhs.length; i++) {
-			IptArg lhsArg = (IptArg)lhs.Get_at(i);
+			IptArg lhsArg = (IptArg)lhs.GetAt(i);
 			IptArg rhsArg = rhs[i];
 			if (!lhsArg.Eq(rhsArg)) return true;
 		}
@@ -56,7 +63,7 @@ class IptCfg_base implements IptCfg {
 		List_adp list = (List_adp)owners.GetByOrNull(bndKey);
 		if (list == null) return;
 		for (int i = 0; i < list.Len(); i++) {
-			IptBndsOwner owner = (IptBndsOwner)list.Get_at(i);
+			IptBndsOwner owner = (IptBndsOwner)list.GetAt(i);
 			owner.IptBnds().Change(bndKey, ary);
 		}
 	}
@@ -82,7 +89,7 @@ class IptCfg_base implements IptCfg {
 	}	public static final String Invk_Add = "Add", Invk_set = "set";
 	public IptCfg_base(String cfgKey) {this.cfgKey = cfgKey;}
 	Ordered_hash hash = Ordered_hash_.New();
-	public Object NewByKey(Object o) {return new IptCfg_base((String)o);} @gplx.Internal protected static final IptCfg HashProto = new IptCfg_base(); @gplx.Internal protected IptCfg_base() {}
+	public Object NewByKey(Object o) {return new IptCfg_base((String)o);} public static final IptCfg HashProto = new IptCfg_base(); public IptCfg_base() {}
 }
 class IptCfgPtr {
 	public String CfgKey() {return cfgKey;} private String cfgKey;

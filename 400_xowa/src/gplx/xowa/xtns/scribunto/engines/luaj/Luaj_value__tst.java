@@ -13,28 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+package gplx.xowa.xtns.scribunto.engines.luaj;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.commons.XoKeyvalUtl;
 import org.junit.*;
-import gplx.core.tests.*;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 public class Luaj_value__tst {
 		private static final Luaj_value__fxt fxt = new Luaj_value__fxt();
 	@Test public void Obj_to_lua_val() {
 		fxt.Test__Obj_to_lua_val
-		( 	Keyval_.Ary
-			(   Keyval_.new_("data", Object_.Ary
-				(	Keyval_.Ary
-					(	Keyval_.new_("type", "type1")
-					,	Keyval_.new_("name", "name1")
+		( 	KeyValUtl.Ary
+			(   KeyVal.NewStr("data", ObjectUtl.Ary
+				(	KeyValUtl.Ary
+					(	KeyVal.NewStr("type", "type1")
+					,	KeyVal.NewStr("name", "name1")
 					)
-				, 	Keyval_.Ary
-					(	Keyval_.new_("type", "type2")
-					,	Keyval_.new_("name", "name2")
+				, 	KeyValUtl.Ary
+					(	KeyVal.NewStr("type", "type2")
+					,	KeyVal.NewStr("name", "name2")
 					)
 				)
 			)
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "data="
 		, "  1="
 		, "    name=name1"
@@ -52,12 +57,12 @@ class Luaj_value__fxt {
 
 		String actl = null;
 		if (actl_lv.istable()) {
-			Keyval[] actl_kv = Luaj_value_.Lua_tbl_to_kv_ary(server, (LuaTable)actl_lv);
-			actl = Keyval_.Ary__to_str__nest(actl_kv);
+			KeyVal[] actl_kv = Luaj_value_.Lua_tbl_to_kv_ary(server, (LuaTable)actl_lv);
+			actl = XoKeyvalUtl.AryToStrNest(actl_kv);
 		}
 		else {
 			actl = actl_lv.tojstring();			
 		}
-		Gftest.Eq__ary__lines(expd, actl, "", "");
+		GfoTstr.EqLines(expd, actl, "", "");
 	}
 }

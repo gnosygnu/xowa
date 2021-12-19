@@ -13,13 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.exts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.apps.*;
+package gplx.xowa.files.exts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.files.*;
 public class Xof_rule_mgr implements Gfo_invk {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xof_rule_mgr() {
 		Xof_rule_grp app_default = new Xof_rule_grp(this, Xof_rule_grp.Grp_app_default);
-		Set_app_default(app_default, Io_mgr.Len_gb, Xof_ext_.Bry__ary);
+		Set_app_default(app_default, IoConsts.LenGB, Xof_ext_.Bry__ary);
 		hash.Add(Xof_rule_grp.Grp_app_default, app_default);
 	}
 	private Xof_rule_grp Get_or_null(byte[] key) {return (Xof_rule_grp)hash.Get_by_bry(key);}
@@ -37,7 +44,7 @@ public class Xof_rule_mgr implements Gfo_invk {
 			app_default.Get_or_new(keys[i]).Make_max_(make_max);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_set))		return Get_or_new(Bry_.new_u8(m.ReadStr("v")));
+		if		(ctx.Match(k, Invk_set))		return Get_or_new(BryUtl.NewU8(m.ReadStr("v")));
 		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_set = "set";
 }

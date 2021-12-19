@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.mass_parses.makes;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
 import gplx.dbs.Db_rdr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_mgr_db;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_wkr_db;
@@ -49,7 +49,7 @@ class Xomp_make_hxtn {
 				while (rdr.Move_next()) {
 					page_tbl.Insert_by_rdr(rdr);
 					if (++count % 10000 == 0) {
-						Gfo_usr_dlg_.Instance.Prog_many("", "", "hxtn.page.insert: db=~{0} count=~{1}", Int_.To_str_pad_bgn_space(i, 3), Int_.To_str_pad_bgn_space(count, 8));
+						Gfo_usr_dlg_.Instance.Prog_many("", "", "hxtn.page.insert: db=~{0} count=~{1}", IntUtl.ToStrPadBgnSpace(i, 3), IntUtl.ToStrPadBgnSpace(count, 8));
 						page_tbl.Conn().Txn_sav();
 					}
 				}
@@ -66,7 +66,7 @@ class Xomp_make_hxtn {
 				while (rdr.Move_next()) {
 					blob_tbl.Insert_by_rdr(rdr);
 					if (++count % 10000 == 0) {
-						Gfo_usr_dlg_.Instance.Prog_many("", "", "hxtn.blob.insert: db=~{0} count=~{1}", Int_.To_str_pad_bgn_space(i, 3), Int_.To_str_pad_bgn_space(count, 8));
+						Gfo_usr_dlg_.Instance.Prog_many("", "", "hxtn.blob.insert: db=~{0} count=~{1}", IntUtl.ToStrPadBgnSpace(i, 3), IntUtl.ToStrPadBgnSpace(count, 8));
 						blob_tbl.Conn().Txn_sav();
 					}
 				}

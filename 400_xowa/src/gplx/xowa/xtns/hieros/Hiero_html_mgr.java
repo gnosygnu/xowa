@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.hieros;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.langs.htmls.Gfh_utl;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 class Hiero_html_mgr {		
-	private Bry_bfr html_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb), content_bfr = Bry_bfr_.Reset(255), tbl_content_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb), temp_bfr = Bry_bfr_.Reset(255);
+	private BryWtr html_bfr = BryWtr.NewAndReset(IoConsts.LenKB), content_bfr = BryWtr.NewAndReset(255), tbl_content_bfr = BryWtr.NewAndReset(IoConsts.LenKB), temp_bfr = BryWtr.NewAndReset(255);
 	private boolean cartouche_opened = false;
 	public static int scale = 100;
 	private Hiero_prefab_mgr prefab_mgr; private Hiero_file_mgr file_mgr; private Hiero_phoneme_mgr phoneme_mgr;
@@ -34,7 +34,7 @@ class Hiero_html_mgr {
 		phoneme_mgr = xtn_mgr.Phoneme_mgr();
 		wtr = new Hiero_html_wtr(this, phoneme_mgr);
 	}
-	public void Render_blocks(Bry_bfr final_bfr, Xoh_wtr_ctx hctx, Hiero_block[] blocks, int scale, boolean hr_enabled) {
+	public void Render_blocks(BryWtr final_bfr, Xoh_wtr_ctx hctx, Hiero_block[] blocks, int scale, boolean hr_enabled) {
 		wtr.Init_for_write(hctx);
 		Hiero_html_mgr.scale = scale;
 		tbl_content_bfr.Clear(); content_bfr.Clear(); temp_bfr.Clear();
@@ -48,14 +48,14 @@ class Hiero_html_mgr {
 				Render_block_single(content_bfr, hctx, hr_enabled, block);
 			else
 				Render_block_many(content_bfr, hctx, hr_enabled, block);
-			if (content_bfr.Len_gt_0())
-				tbl_content_bfr.Add_bfr_and_clear(content_bfr);	// $tbl_content = $tbl + $content;
+			if (content_bfr.HasSome())
+				tbl_content_bfr.AddBfrAndClear(content_bfr);	// $tbl_content = $tbl + $content;
 		}
-		if (tbl_content_bfr.Len_gt_0())
+		if (tbl_content_bfr.HasSome())
 			wtr.Tbl_inner(html_bfr, tbl_content_bfr);
 		wtr.Tbl_outer(final_bfr, html_bfr);
 	}
-	private void Render_block_single(Bry_bfr content_bfr, Xoh_wtr_ctx hctx, boolean hr_enabled, Hiero_block block) {
+	private void Render_block_single(BryWtr content_bfr, Xoh_wtr_ctx hctx, boolean hr_enabled, Hiero_block block) {
 		byte[] code = block.Get_at(0);		// block has only one code (hence the proc name: Render_block_single)
 		byte b_0 = code[0];
 		switch (b_0) {
@@ -84,7 +84,7 @@ class Hiero_html_mgr {
 			}
 		}
 	}
-	private void Render_block_many(Bry_bfr content_bfr, Xoh_wtr_ctx hctx, boolean hr_enabled, Hiero_block block) {			
+	private void Render_block_many(BryWtr content_bfr, Xoh_wtr_ctx hctx, boolean hr_enabled, Hiero_block block) {
 		temp_bfr.Clear(); // build prefab_bry: "convert all codes into '&' to test prefabs glyph"
 		int block_len = block.Len();
 		boolean amp = false;
@@ -102,11 +102,11 @@ class Hiero_html_mgr {
 				}
 			}
 			if (amp)
-				temp_bfr.Add_byte(AsciiByte.Amp);
+				temp_bfr.AddByte(AsciiByte.Amp);
 			else
 				temp_bfr.Add(v);
 		}
-		byte[] prefab_bry = temp_bfr.To_bry_and_clear();
+		byte[] prefab_bry = temp_bfr.ToBryAndClear();
 		Hiero_prefab_itm prefab_itm = prefab_mgr.Get_by_key(prefab_bry);
 		if (prefab_itm != null) {
 			byte[] td_height = wtr.Td_height(Resize_glyph(prefab_bry, cartouche_opened));
@@ -152,10 +152,10 @@ class Hiero_html_mgr {
 				if (v_len == 1) {
 					switch (v[0]) {
 						case AsciiByte.Colon:
-							temp_bfr.Add_str_a7("\n            <br/>");
+							temp_bfr.AddStrA7("\n            <br/>");
 							continue;
 						case AsciiByte.Star:
-							temp_bfr.Add_byte_space();
+							temp_bfr.AddByteSpace();
 							continue;
 					}
 				}
@@ -163,24 +163,24 @@ class Hiero_html_mgr {
 				byte[] td_height = wtr.Td_height(Resize_glyph(v, cartouche_opened, total));
 				temp_bfr.Add(Render_glyph(hctx, v, td_height));
 			}
-			wtr.Td(content_bfr, temp_bfr.To_bry_and_clear());
+			wtr.Td(content_bfr, temp_bfr.ToBryAndClear());
 		}
 	}
-	private byte[] Render_glyph(Xoh_wtr_ctx hctx, byte[] src)					{return Render_glyph(hctx, src, Bry_.Empty);}
+	private byte[] Render_glyph(Xoh_wtr_ctx hctx, byte[] src)					{return Render_glyph(hctx, src, BryUtl.Empty);}
 	private byte[] Render_glyph(Xoh_wtr_ctx hctx, byte[] src, byte[] td_height) {
 		int src_len = src.length; if (src_len == 0) return src; // bounds check
 		byte byte_n = src[src_len - 1];
 		byte[] img_cls = byte_n == AsciiByte.Backslash				// REF.MW:isMirrored
 			? Bry_cls_mirrored										// 'class="mw-mirrored" '
-			: Bry_.Empty;
+			: BryUtl.Empty;
 		byte[] glyph = Extract_code(src, src_len);					// trim backslashes from end; REF.MW:extractCode
-		if		(Bry_.Eq(glyph, Tkn_dot_dot))						// render void block
+		if		(BryLni.Eq(glyph, Tkn_dot_dot))						// render void block
 			return wtr.Void(BoolUtl.N);
-		else if (Bry_.Eq(glyph, Tkn_dot))							// render 1/2 width void block
+		else if (BryLni.Eq(glyph, Tkn_dot))							// render 1/2 width void block
 			return wtr.Void(BoolUtl.Y);
-		else if (Bry_.Eq(glyph, Tkn_lt))
+		else if (BryLni.Eq(glyph, Tkn_lt))
 			return wtr.Cartouche_img(hctx, BoolUtl.Y, glyph);
-		else if (Bry_.Eq(glyph, Tkn_gt))
+		else if (BryLni.Eq(glyph, Tkn_gt))
 			return wtr.Cartouche_img(hctx, BoolUtl.N, glyph);
 
 		Hiero_phoneme_itm phoneme_itm = phoneme_mgr.Get_by_key(glyph);
@@ -227,12 +227,12 @@ class Hiero_html_mgr {
 		return (int)(((Max_height - margin) * scale) / 100);
 	}
 	private static byte[] Extract_code(byte[] src, int src_len) { // trim backslashes from end; REF.MW:extractCode
-		return Bry_.Trim_end(src, AsciiByte.Backslash, src_len);
+		return BryUtl.TrimEnd(src, AsciiByte.Backslash, src_len);
 	}
 	public static final int Image_margin = 1;
 	public static final int Cartouche_width = 2;
 	public static final int Max_height = 44;
-	private static final byte[] Bry_cls_mirrored = Bry_.new_a7("class=\"mw-mirrored\" ");
+	private static final byte[] Bry_cls_mirrored = BryUtl.NewA7("class=\"mw-mirrored\" ");
 	private static final byte[]
 	  Tkn_lt		= new byte[] {AsciiByte.Lt}
 	, Tkn_gt		= new byte[] {AsciiByte.Gt}

@@ -13,30 +13,42 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.strings.*;
-import gplx.core.texts.*; /*CharStream*/	
+package gplx.gfml;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.Err;
+import gplx.core.texts.*; /*CharStream*/
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.types.errs.ErrUtl;
 public class GfmlLxr_ {
 	public static GfmlLxr general_(String key, GfmlTkn protoTkn) {return GfmlLxr_general.new_(key, protoTkn);}
 	public static GfmlLxr solo_(String key, GfmlTkn singletonTkn) {return GfmlLxr_singleton.new_(key, singletonTkn.Raw(), singletonTkn);}
 	public static GfmlLxr range_(String key, String[] ary, GfmlTkn protoTkn, boolean ignoreOutput) {return GfmlLxr_group.new_(key, ary, protoTkn, ignoreOutput);}
 
-	@gplx.Internal protected static GfmlLxr symbol_(String key, String raw, String val, GfmlBldrCmd cmd) {
+	public static GfmlLxr symbol_(String key, String raw, String val, GfmlBldrCmd cmd) {
 		GfmlTkn tkn = GfmlTkn_.singleton_(key, raw, val, cmd);
 		return GfmlLxr_.solo_(key, tkn);
 	}
-	@gplx.Internal protected static GfmlLxr frame_(String key, GfmlFrame frame, String bgn, String end) {return GfmlLxr_frame.new_(key, frame, bgn, end, GfmlBldrCmd_pendingTkns_add.Instance, GfmlBldrCmd_frameEnd.data_());}
+	public static GfmlLxr frame_(String key, GfmlFrame frame, String bgn, String end) {return GfmlLxr_frame.new_(key, frame, bgn, end, GfmlBldrCmd_pendingTkns_add.Instance, GfmlBldrCmd_frameEnd.data_());}
 	public static final GfmlLxr Null = new GfmlLxr_null();
 	public static final String CmdTknChanged_evt = "Changed";
 	public static GfmlLxr as_(Object obj) {return obj instanceof GfmlLxr ? (GfmlLxr)obj : null;}
-	public static GfmlLxr cast(Object obj) {try {return (GfmlLxr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr.class, obj);}}
+	public static GfmlLxr cast(Object obj) {try {return (GfmlLxr)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, GfmlLxr.class, obj);}}
 }
 class GfmlLxr_null implements GfmlLxr {
 	public String Key() {return "gfml.nullLxr";}
 	public Gfo_evt_mgr Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} Gfo_evt_mgr evt_mgr;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}
 	public GfmlTkn CmdTkn() {return GfmlTkn_.Null;} public void CmdTkn_set(GfmlTkn val) {}
-	public String[] Hooks() {return String_.Ary_empty;}
+	public String[] Hooks() {return StringUtl.AryEmpty;}
 	public GfmlTkn MakeTkn(CharStream stream, int hookLength) {return GfmlTkn_.Null;}
 	public void SubLxr_Add(GfmlLxr... lexer) {}
 	public GfmlLxr SubLxr() {return this;}
@@ -49,8 +61,8 @@ class GfmlLxr_singleton implements GfmlLxr, Gfo_evt_itm {
 	public void CmdTkn_set(GfmlTkn val) {
 		String oldRaw = singletonTkn.Raw();
 		singletonTkn = val;
-		hooks = String_.Ary(val.Raw());
-		Gfo_evt_mgr_.Pub_vals(this, GfmlLxr_.CmdTknChanged_evt, Keyval_.new_("old", oldRaw), Keyval_.new_("new", val.Raw()), Keyval_.new_("lxr", this));
+		hooks = StringUtl.Ary(val.Raw());
+		Gfo_evt_mgr_.Pub_vals(this, GfmlLxr_.CmdTknChanged_evt, KeyVal.NewStr("old", oldRaw), KeyVal.NewStr("new", val.Raw()), KeyVal.NewStr("lxr", this));
 	}
 	public String[] Hooks() {return hooks;} private String[] hooks;
 	public GfmlTkn MakeTkn(CharStream stream, int hookLength) {
@@ -64,9 +76,9 @@ class GfmlLxr_singleton implements GfmlLxr, Gfo_evt_itm {
 		rv.ctor_(key, hook, singletonTkn, GfmlLxr_.Null);
 		return rv;
 	}	protected GfmlLxr_singleton() {}
-	@gplx.Internal protected void ctor_(String key, String hook, GfmlTkn singletonTkn, GfmlLxr subLxr) {
+	public void ctor_(String key, String hook, GfmlTkn singletonTkn, GfmlLxr subLxr) {
 		this.key = key;
-		this.hooks = String_.Ary(hook); 
+		this.hooks = StringUtl.Ary(hook);
 		this.subLxr = subLxr;
 		this.singletonTkn = singletonTkn;
 	}
@@ -80,20 +92,20 @@ class GfmlLxr_group implements GfmlLxr {
 	public GfmlTkn MakeTkn(CharStream stream, int hookLength) {
 		while (stream.AtMid()) {
 			if (!ignoreOutput)
-				sb.Add_mid_len(stream.Ary(), stream.Pos(), hookLength);
+				sb.AddMidLen(stream.Ary(), stream.Pos(), hookLength);
 			stream.MoveNextBy(hookLength);
 
-			String found = String_.cast(trie.FindMatch(stream));
+			String found = StringUtl.Cast(trie.FindMatch(stream));
 			if (found == null) break;
 			hookLength = trie.LastMatchCount;
 		}
 		if (ignoreOutput) return GfmlTkn_.IgnoreOutput;
-		String raw = sb.To_str_and_clear();
+		String raw = sb.ToStrAndClear();
 		return outputTkn.MakeNew(raw, raw);
 	}
 	public GfmlLxr SubLxr() {throw Err_sublxr();}
 	public void SubLxr_Add(GfmlLxr... lexer) {throw Err_sublxr();}
-	Err Err_sublxr() {return Err_.new_unimplemented_w_msg("group lxr does not have subLxrs", "key", key, "output_tkn", outputTkn.Raw()).Trace_ignore_add_1_();}
+	Err Err_sublxr() {return ErrUtl.NewUnimplemented("group lxr does not have subLxrs", "key", key, "output_tkn", outputTkn.Raw());}
 	GfmlTrie trie = GfmlTrie.new_(); String_bldr sb = String_bldr_.new_(); boolean ignoreOutput;
 	public static GfmlLxr_group new_(String key, String[] hooks, GfmlTkn outputTkn, boolean ignoreOutput) {
 		GfmlLxr_group rv = new GfmlLxr_group();
@@ -151,7 +163,7 @@ class GfmlLxr_general implements GfmlLxr, Gfo_invk {
 		return lexer.MakeTkn(stream, length);
 	}
 	GfmlLxr_general_txtBfr txtBfr = new GfmlLxr_general_txtBfr(); GfmlTrie symTrie = GfmlTrie.new_(); GfmlLxr symLxr; int symTknLen; 
-	@gplx.Internal protected static GfmlLxr_general new_(String key, GfmlTkn txtTkn) {
+	public static GfmlLxr_general new_(String key, GfmlTkn txtTkn) {
 		GfmlLxr_general rv = new GfmlLxr_general();
 		rv.key = key; rv.txtTkn = txtTkn;
 		return rv;
@@ -174,7 +186,7 @@ class GfmlLxr_general_txtBfr {
 		Len++;
 	}	static final int NullPos = -1;
 	public GfmlTkn MakeTkn(CharStream stream, GfmlTkn textTkn) {
-		String raw = String_.new_charAry_(stream.Ary(), Bgn, Len);
+		String raw = StringUtl.NewCharAry(stream.Ary(), Bgn, Len);
 		Bgn = -1; Len = 0;
 		return textTkn.MakeNew(raw, raw);
 	}
@@ -211,5 +223,5 @@ class GfmlLxr_frame extends GfmlLxr_singleton {		GfmlFrame frame; GfmlLxr endLxr
 		return rv;
 	}	GfmlLxr_frame() {}
 	public static GfmlLxr_frame as_(Object obj) {return obj instanceof GfmlLxr_frame ? (GfmlLxr_frame)obj : null;}
-	public static GfmlLxr_frame cast(Object obj) {try {return (GfmlLxr_frame)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr_frame.class, obj);}}
+	public static GfmlLxr_frame cast(Object obj) {try {return (GfmlLxr_frame)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, GfmlLxr_frame.class, obj);}}
 }

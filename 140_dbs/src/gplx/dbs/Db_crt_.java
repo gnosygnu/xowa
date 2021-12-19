@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
 import gplx.core.criterias.*;
+import gplx.types.commons.KeyVal;
 public class Db_crt_ {
 	public static final Criteria Wildcard = Criteria_.All;
 	public static Criteria     New_and			(Criteria lhs, Criteria rhs)					{return Criteria_.And(lhs, rhs);}
@@ -52,11 +53,11 @@ public class Db_crt_ {
 		}
 		return rv;
 	}
-	public static Criteria eq_many_(Keyval... array) {
+	public static Criteria eq_many_(KeyVal... array) {
 		Criteria rv = null;
 		for (int i = 0; i < array.length; i++) {
-			Keyval pair = array[i];
-			Criteria crt = Db_crt_.New_eq(pair.Key(), pair.Val());
+			KeyVal pair = array[i];
+			Criteria crt = Db_crt_.New_eq(pair.KeyToStr(), pair.Val());
 			rv = (i == 0)? crt : Criteria_.And(rv, crt);
 		}
 		return rv;

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
-import gplx.core.strings.*; import gplx.core.envs.*;
+package gplx.langs.xmls;
+import gplx.core.envs.*;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class HierStrBldr {
 	public String Root() {return root;} public HierStrBldr Root_(String v) {root = v; return this;} private String root;
 	public Io_url RootAsIoUrl() {return Io_url_.new_dir_(root);}
@@ -24,12 +30,12 @@ public class HierStrBldr {
 	public String NumFmt() {return numFmt;} private String numFmt;
 	public int[] FilCountMaxs() {return filCountMaxs;} int[] filCountMaxs;
 	public Io_url GenStrIdxOnlyAsoUrl(int idx) {return Io_url_.new_fil_(GenStrIdxOnly(idx));}
-	public String GenStrIdxOnly(int idx) {return GenStr(String_.Ary_empty, idx);}
+	public String GenStrIdxOnly(int idx) {return GenStr(StringUtl.AryEmpty, idx);}
 	public Io_url GenStrAsIoUrl(String[] subDirs, int idx) {
 		return Io_url_.new_fil_(GenStr(subDirs, idx));
 	}
 	String GenStr(String[] subDirs, int idx) {
-		String_bldr sb = String_bldr_.new_(); 
+		String_bldr sb = String_bldr_.new_();
 		sb.Add(root);
 		for (String subDir : subDirs)
 			sb.Add(subDir).Add(dirSpr);
@@ -37,12 +43,12 @@ public class HierStrBldr {
 		int[] multipleAry = new int[filCountMaxs.length];
 		for (int i = filCountMaxs.length - 1; i >= 0; i--) {
 			multiple *= filCountMaxs[i];
-			multipleAry[i] = (idx / multiple) * multiple;	// NOTE: rounds down to multiple; EX: 11 -> 10
+			multipleAry[i] = (idx / multiple) * multiple;    // NOTE: rounds down to multiple; EX: 11 -> 10
 		}
 		for (int i = 0; i < multipleAry.length; i++)
-			sb.Add_fmt(dirFmt, Int_.To_str_fmt(multipleAry[i], numFmt));
-		sb.Add_fmt(filFmt, Int_.To_str_fmt(idx, numFmt));
-		return sb.To_str();
+			sb.AddFmt(dirFmt, IntUtl.ToStrFmt(multipleAry[i], numFmt));
+		sb.AddFmt(filFmt, IntUtl.ToStrFmt(idx, numFmt));
+		return sb.ToStr();
 	}
 	public HierStrBldr Ctor_io(Io_url root, String dirFmt, String filFmt, String numFmt, int... filCountMaxs) {
 		this.Ctor(root.Raw(), dirFmt + dirSpr, filFmt, numFmt, filCountMaxs);

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.standards;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class Gfui_tab_itm_data_tst {		
 	@Before public void init() {} private Gfui_tab_itm_data_fxt fxt = new Gfui_tab_itm_data_fxt();
@@ -25,6 +26,6 @@ public class Gfui_tab_itm_data_tst {
 }
 class Gfui_tab_itm_data_fxt {
 	public void Test_Get_idx_after_closing(int cur, int len, int expd) {
-		Tfds.Eq(expd, Gfui_tab_itm_data.Get_idx_after_closing(cur, len));
+		GfoTstr.EqObj(expd, Gfui_tab_itm_data.Get_idx_after_closing(cur, len));
 	}
 }

@@ -13,16 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.imgs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgClearable;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url_;
 import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.threads.poolables.*;
+import gplx.types.custom.brys.fmts.fmtrs.*; import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.parsers.lnkis.*;
-public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
-	private final Bfr_arg_clearable[] arg_ary;
+public class Xoh_img_wtr implements BryBfrArg, Xoh_wtr_itm {
+	private final BryBfrArgClearable[] arg_ary;
 	private final Bfr_arg__hatr_arg img_xowa_image = new Bfr_arg__hatr_arg(Xoh_img_xoimg_data.Bry__data_xowa_image);
 	private final Bfr_arg__hatr_id img_id = Bfr_arg__hatr_id.New_id(Xoh_img_mgr.Bry__html_uid), vid_play_id = Bfr_arg__hatr_id.New_id("xowa_file_play_"), img_imap_usemap = new Bfr_arg__hatr_id(Imap_xtn_mgr.Bry__usemap__name, Imap_xtn_mgr.Bry__usemap__prefix);
 	private final Bfr_arg__hatr_int img_w = new Bfr_arg__hatr_int(Gfh_atr_.Bry__width), img_h = new Bfr_arg__hatr_int(Gfh_atr_.Bry__height);
@@ -41,7 +48,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	private boolean img_is_vid; private boolean img_wo_anch;
 	private int div_w;
 	public Xoh_img_wtr() {
-		arg_ary = new Bfr_arg_clearable[] 
+		arg_ary = new BryBfrArgClearable[]
 		{ anch_href, anch_rel, anch_cls, anch_title, anch_xowa_title
 		, img_id, img_xowa_title, img_xowa_image, img_src, img_w, img_h, img_cls, img_alt
 		, img_pgbnr_atrs
@@ -49,26 +56,26 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	}
 	public Xof_fsdb_itm	Fsdb_itm() {return fsdb_itm;} private Xof_fsdb_itm fsdb_itm;
 	public Xoh_img_wtr Clear() {			
-		for (Bfr_arg_clearable arg : arg_ary)
-			arg.Bfr_arg__clear();
-		vid_play_id.Bfr_arg__clear();
-		img_imap_usemap.Bfr_arg__clear();
+		for (BryBfrArgClearable arg : arg_ary)
+			arg.BfrArgClear();
+		vid_play_id.BfrArgClear();
+		img_imap_usemap.BfrArgClear();
 		img_is_vid = false; img_wo_anch = false;
 		div_w = -1;
 		return this;
 	}
 	public Xoh_img_wtr Anch_cls_(byte[] v)	{anch_cls.Set_by_bry(v); return this;}
 	public Xoh_img_wtr Img_id_(int uid)		{img_id.Set(uid); return this;}
-	public boolean Init_by_parse(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_img_data data) {
+	public boolean Init_by_parse(BryWtr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_img_data data) {
 		if (!Init_by_decode(hpg, hctx, src, data)) return false;
-		this.Bfr_arg__add(bfr);
+		this.AddToBfr(bfr);
 		return true;
 	}
 	public void Init_html(int html_w, int html_h, byte[] src_bry) {
 		img_w.Set_by_int(html_w);
 		img_h.Set_by_int(html_h);
 		if (gplx.core.envs.Op_sys.Cur().Tid_is_drd())
-			src_bry = Bry_.Replace(src_bry, AsciiByte.QuestionBry, Bry__qarg__esc);	// NOTE: if drd, always escape "?" as "%3F" PAGE:en.w:Cleopatra en.w:Cave_painting; DATE:2016-01-31
+			src_bry = BryUtlByWtr.Replace(src_bry, AsciiByte.QuestionBry, Bry__qarg__esc);	// NOTE: if drd, always escape "?" as "%3F" PAGE:en.w:Cleopatra en.w:Cave_painting; DATE:2016-01-31
 		img_src.Set_by_bry(src_bry);
 		this.div_w = html_w;
 	}
@@ -135,7 +142,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		anch_cls.Set_by_arg(data.Anch_cls());
 		anch_title.Set_by_mid_or_null(src, data.Anch_title_bgn(), data.Anch_title_end());
 		if (	data.Img_wo_anch() 					// anchor-less image
-			||	Bry_.Len_gt_0(xowa_title))		// regular anch with image
+			||	BryUtl.IsNotNullOrEmpty(xowa_title))		// regular anch with image
 			anch_xowa_title.Set_by_bry(xowa_title);
 
 		if (write_xowa_file_title)
@@ -145,19 +152,19 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		if (data.Img_imap_idx() != -1) img_imap_usemap.Set(data.Img_imap_idx());
 		return true;
 	}
-	public void Init_by_gly(Bfr_arg_clearable href, byte[] xowa_title, Bfr_arg_clearable xoimg) {
+	public void Init_by_gly(BryBfrArgClearable href, byte[] xowa_title, BryBfrArgClearable xoimg) {
 		anch_href.Set_by_arg(href);
 		anch_xowa_title.Set_by_bry(xowa_title);
 		img_xowa_image.Set_by_arg(xoimg);
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		if (img_wo_anch)
-			img_wo_anch_fmtr.Bld_bfr_many(bfr, img_id, img_xowa_title, img_xowa_image, img_alt, img_src, img_w, img_h, img_cls, img_imap_usemap);
+			img_wo_anch_fmtr.BldToBfrMany(bfr, img_id, img_xowa_title, img_xowa_image, img_alt, img_src, img_w, img_h, img_cls, img_imap_usemap);
 		else {
 			if (img_is_vid) {
 				bfr.Add(Vid__bry__bgn);
 			}
-			img_fmtr.Bld_bfr_many(bfr, (Object[])arg_ary);
+			img_fmtr.BldToBfrMany(bfr, (Object[])arg_ary);
 			if (img_is_vid) {
 				if (div_w <= 0) div_w = Xof_img_size.Thumb_width_img;	// if no div_w, default to 220;
 				vid_fmt.Bld_many(bfr, vid_play_id, anch_xowa_title, div_w - 2, div_w);
@@ -166,20 +173,20 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_img_wtr rv = new Xoh_img_wtr(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
-	private static final byte[] Vid__bry__bgn = Bry_.new_a7("<div class=\"xowa_media_div\">\n<div>");
-	private static final Bry_fmtr
-	  img_fmtr = Bry_fmtr.new_
+	private static final byte[] Vid__bry__bgn = BryUtl.NewA7("<div class=\"xowa_media_div\">\n<div>");
+	private static final BryFmtr
+	  img_fmtr = BryFmtr.New
 	( "<a~{anch_href}~{anch_rel}~{anch_cls}~{anch_title}~{anch_xowa_title}><img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_alt}~{img_pgbnr_atrs}></a>"
 	, "anch_href", "anch_rel", "anch_cls", "anch_title", "anch_xowa_title", "img_id", "img_xowa_title", "img_xowa_image", "img_src", "img_w", "img_h", "img_cls", "img_alt", "img_pgbnr_atrs")
-	, img_wo_anch_fmtr = Bry_fmtr.new_
+	, img_wo_anch_fmtr = BryFmtr.New
 	( "<img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_alt}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_imap_usemap}/>"
 	, "img_id", "img_xowa_title", "img_xowa_image", "img_src", "img_w", "img_h", "img_cls", "img_alt", "img_imap_usemap")
 	;
-	private final Bry_fmt
-	  vid_fmt = Bry_fmt.Auto_nl_apos
+	private final BryFmt
+	  vid_fmt = BryFmt.Auto_nl_apos
 	( "</div>"
 	, "<div><a~{vid_play_id} href=''~{xowa_title} class='xowa_media_play' style='width:~{a_width}px;max-width:~{a_max_width}px;' alt='Play sound'></a></div>"
 	, "</div>"
 	);
-	private static final byte[] Bry__qarg__esc = Bry_.new_a7("%3F");
+	private static final byte[] Bry__qarg__esc = BryUtl.NewA7("%3F");
 }

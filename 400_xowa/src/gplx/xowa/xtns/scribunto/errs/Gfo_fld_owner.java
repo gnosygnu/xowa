@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.errs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.errs;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.utls.ByteUtl;
 import gplx.core.criterias.*;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public interface Gfo_fld_owner {
 	int		Fld_val_as_int(int fld_idx);
 	String	Fld_val_as_str(int fld_idx);
@@ -55,9 +59,9 @@ class Gfo_fld_crt implements Criteria {
 		Object comp = owner.Fld_val_as_obj(fld_idx);
 		return crt.Matches(comp);
 	}
-	public void				Val_from_args(Hash_adp args) {throw Err_.new_unimplemented();}
-	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
-	public String To_str() {return String_.Concat(Byte_.To_str(fld_idx), " ", crt.To_str());}
+	public void				Val_from_args(Hash_adp args) {throw ErrUtl.NewUnimplemented();}
+	public void				Val_as_obj_(Object v) {throw ErrUtl.NewUnimplemented();}
+	public String ToStr() {return StringUtl.Concat(ByteUtl.ToStr(fld_idx), " ", crt.ToStr());}
 	public static Gfo_fld_crt new_(byte fld_idx, Criteria crt) {
 		Gfo_fld_crt rv = new Gfo_fld_crt();
 		rv.fld_idx = fld_idx; rv.crt = crt;

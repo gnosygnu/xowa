@@ -13,15 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*;
+package gplx.xowa.bldrs.cmds.texts.tdbs;
 import gplx.core.ios.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Io_sort_cmd_ns implements Io_make_cmd {
-	Xob_xdat_file_wtr fil_wtr; Bry_bfr reg_bfr = Bry_bfr_.New(), key_bfr_0 = Bry_bfr_.New_w_size(512), key_bfr_n = Bry_bfr_.New_w_size(512);
+	Xob_xdat_file_wtr fil_wtr; BryWtr reg_bfr = BryWtr.New(), key_bfr_0 = BryWtr.NewWithSize(512), key_bfr_n = BryWtr.NewWithSize(512);
 	int fil_count = 0, itm_count = 0;
 	public Io_sort_cmd_ns(Gfo_usr_dlg usr_dlg) {this.usr_dlg = usr_dlg;} Gfo_usr_dlg usr_dlg;
-	public int Trg_fil_max() {return trg_fil_max;} public Io_sort_cmd_ns Trg_fil_max_(int v) {trg_fil_max = v; return this;} private int trg_fil_max = 65 * Io_mgr.Len_kb;
+	public int Trg_fil_max() {return trg_fil_max;} public Io_sort_cmd_ns Trg_fil_max_(int v) {trg_fil_max = v; return this;} private int trg_fil_max = 65 * IoConsts.LenKB;
 	Io_url reg_url;
 	public Io_sort_cmd Make_dir_(Io_url v) {make_dir = v; return this;} Io_url make_dir;
 	public void Sort_bgn() {
@@ -34,9 +39,9 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 		int itm_len = itm_end - itm_bgn;
 		if (fil_wtr.FlushNeeded(itm_len)) Flush();
 		byte[] bfr = rdr.Bfr();
-		if (key_bfr_0.Len() == 0) {key_bfr_0.Add_mid(bfr, key_bgn, key_end);}
-		key_bfr_n.Clear().Add_mid(bfr, key_bgn, key_end);
-		fil_wtr.Bfr().Add_mid(rdr.Bfr(), itm_bgn, itm_end);
+		if (key_bfr_0.Len() == 0) {key_bfr_0.AddMid(bfr, key_bgn, key_end);}
+		key_bfr_n.Clear().AddMid(bfr, key_bgn, key_end);
+		fil_wtr.Bfr().AddMid(rdr.Bfr(), itm_bgn, itm_end);
 		fil_wtr.Add_idx(AsciiByte.Null);
 		++itm_count;
 	}
@@ -47,10 +52,10 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 	}
 	private void Flush() {
 		reg_bfr
-			.Add_int_variable(fil_count++).Add_byte(AsciiByte.Pipe)
-			.Add_bfr_and_preserve(key_bfr_0).Add_byte(AsciiByte.Pipe)
-			.Add_bfr_and_preserve(key_bfr_n).Add_byte(AsciiByte.Pipe)
-			.Add_int_variable(itm_count).Add_byte(AsciiByte.Nl);
+			.AddIntVariable(fil_count++).AddByte(AsciiByte.Pipe)
+			.AddBfrAndPreserve(key_bfr_0).AddByte(AsciiByte.Pipe)
+			.AddBfrAndPreserve(key_bfr_n).AddByte(AsciiByte.Pipe)
+			.AddIntVariable(itm_count).AddByte(AsciiByte.Nl);
 		itm_count = 0;
 		key_bfr_0.Clear();
 		if (fil_wtr.Fil_idx() % 10 == 0)

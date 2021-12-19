@@ -13,13 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.Bry_bfr;
-import gplx.objects.strings.AsciiByte;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.Err_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Type_ids_;
+package gplx.dbs.sqls.wtrs;
 import gplx.core.criterias.Criteria;
 import gplx.core.criterias.Criteria_;
 import gplx.core.criterias.Criteria_between;
@@ -33,15 +27,22 @@ import gplx.core.criterias.Criteria_like;
 import gplx.dbs.sqls.itms.Db_obj_ary_crt;
 import gplx.dbs.sqls.itms.Db_obj_ary_fld;
 import gplx.dbs.sqls.itms.Sql_where_clause;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.errs.ErrUtl;
 public class Sql_where_wtr {
 	private final Sql_core_wtr qry_wtr;
 	private final Sql_val_wtr val_wtr;
 	public Sql_where_wtr(Sql_core_wtr qry_wtr, Sql_val_wtr val_wtr) {this.qry_wtr = qry_wtr; this.val_wtr = val_wtr;}
-	public void Bld_where(Bry_bfr bfr, Sql_wtr_ctx ctx, Sql_where_clause where_itm) {
+	public void Bld_where(BryWtr bfr, Sql_wtr_ctx ctx, Sql_where_clause where_itm) {
 		if (where_itm == Sql_where_clause.Where__null) return;
 		Bld_where(bfr, ctx, where_itm.Root);
 	}
-	public void Bld_where(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria crt) {
+	public void Bld_where(BryWtr bfr, Sql_wtr_ctx ctx, Criteria crt) {
 		if (crt == null) return;
 		if (crt.Tid() == Criteria_.Tid_wrapper) {
 			Criteria_fld crt_fld = (Criteria_fld)crt;
@@ -55,26 +56,26 @@ public class Sql_where_wtr {
 			}
 		}
 		if (crt.Tid() == Criteria_.Tid_const) return;
-		bfr.Add_str_a7(" WHERE ");
+		bfr.AddStrA7(" WHERE ");
 		Bld_where_elem(bfr, ctx, crt);
 	}
-	public void Bld_where_elem(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria crt) {
+	public void Bld_where_elem(BryWtr bfr, Sql_wtr_ctx ctx, Criteria crt) {
 		if (crt == null) return;	// handle empty crt; EX: SELECT * FROM tbl;
 		Criteria_bool_base crt_bool = Criteria_bool_base.as_(crt);
 		if (crt_bool != null) {
-			bfr.Add_str_a7("(");
+			bfr.AddStrA7("(");
 			Bld_where_elem(bfr, ctx, crt_bool.Lhs());
-			bfr.Add_str_u8_many(" ", crt_bool.Op_literal(), " ");
+			bfr.AddStrU8Many(" ", crt_bool.Op_literal(), " ");
 			Bld_where_elem(bfr, ctx, crt_bool.Rhs());
-			bfr.Add_str_a7(")");
+			bfr.AddStrA7(")");
 			return;
 		}
 		if (crt.Tid() == Criteria_.Tid_db_obj_ary) {
 			Bld_where__db_obj(bfr, ctx, (Db_obj_ary_crt)crt);
 		}
 		else {
-			Criteria_fld leaf = Criteria_fld.as_(crt); if (leaf == null) throw Err_.new_invalid_op(crt.To_str());
-			String leaf_pre = leaf.Pre(); if (leaf_pre != Criteria_fld.Pre_null) bfr.Add_str_u8(leaf_pre).Add_byte_dot();
+			Criteria_fld leaf = Criteria_fld.as_(crt); if (leaf == null) throw ErrUtl.NewInvalidOp(crt.ToStr());
+			String leaf_pre = leaf.Pre(); if (leaf_pre != Criteria_fld.Pre_null) bfr.AddStrU8(leaf_pre).AddByteDot();
 			qry_wtr.Bld_col_name(bfr, leaf.Key());
 			Criteria leaf_crt = leaf.Crt();
 			switch (leaf_crt.Tid()) {
@@ -84,78 +85,78 @@ public class Sql_where_wtr {
 				case Criteria_.Tid_in:				Bld_where__in		(bfr, ctx, (Criteria_in)leaf_crt); break;
 				case Criteria_.Tid_like:			Bld_where__like		(bfr, ctx, (Criteria_like)leaf_crt); break;
 				case Criteria_.Tid_iomatch:			Bld_where__iomatch	(bfr, ctx, (Criteria_ioMatch)leaf_crt); break;
-				default:							throw Err_.new_unhandled(leaf_crt);
+				default:							throw ErrUtl.NewUnhandled(leaf_crt);
 			}
 		}
 	}
-	private void Bld_where__eq(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_eq crt) {
-		bfr.Add_str_a7(crt.Neg() ? " != " : " = ");
+	private void Bld_where__eq(BryWtr bfr, Sql_wtr_ctx ctx, Criteria_eq crt) {
+		bfr.AddStrA7(crt.Neg() ? " != " : " = ");
 		val_wtr.Bld_val(bfr, ctx, crt.Val());
 	}
-	private void Bld_where__comp(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_comp crt) {
+	private void Bld_where__comp(BryWtr bfr, Sql_wtr_ctx ctx, Criteria_comp crt) {
 		int comp_tid = crt.Comp_mode();
-		bfr.Add_byte_space();
-		bfr.Add_byte(comp_tid < CompareAbleUtl.Same ? AsciiByte.AngleBgn : AsciiByte.AngleEnd);
-		if (comp_tid % 2 == CompareAbleUtl.Same) bfr.Add_byte_eq();
-		bfr.Add_byte_space();
+		bfr.AddByteSpace();
+		bfr.AddByte(comp_tid < CompareAbleUtl.Same ? AsciiByte.AngleBgn : AsciiByte.AngleEnd);
+		if (comp_tid % 2 == CompareAbleUtl.Same) bfr.AddByteEq();
+		bfr.AddByteSpace();
 		val_wtr.Bld_val(bfr, ctx, crt.Val());
 	}
-	private void Bld_where__between(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_between crt) {
-		bfr.Add_str_a7(crt.Neg() ? " NOT BETWEEN " : " BETWEEN ");
+	private void Bld_where__between(BryWtr bfr, Sql_wtr_ctx ctx, Criteria_between crt) {
+		bfr.AddStrA7(crt.Neg() ? " NOT BETWEEN " : " BETWEEN ");
 		val_wtr.Bld_val(bfr, ctx, crt.Lo());
-		bfr.Add_str_a7(" AND ");
+		bfr.AddStrA7(" AND ");
 		val_wtr.Bld_val(bfr, ctx, crt.Hi());
 	}
-	private void Bld_where__like(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_like crt) {
-		bfr.Add_str_a7(crt.Neg() ? " NOT LIKE " : " LIKE ");
+	private void Bld_where__like(BryWtr bfr, Sql_wtr_ctx ctx, Criteria_like crt) {
+		bfr.AddStrA7(crt.Neg() ? " NOT LIKE " : " LIKE ");
 		val_wtr.Bld_val(bfr, ctx, crt.Pattern().Raw());
-		bfr.Add_str_u8(String_.Format(" ESCAPE '{0}'", crt.Pattern().Escape()));
+		bfr.AddStrU8(StringUtl.Format(" ESCAPE '{0}'", crt.Pattern().Escape()));
 	}
-	private void Bld_where__in(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_in crt) {
-		bfr.Add_str_a7(crt.Neg() ? " NOT IN " : " IN ");
+	private void Bld_where__in(BryWtr bfr, Sql_wtr_ctx ctx, Criteria_in crt) {
+		bfr.AddStrA7(crt.Neg() ? " NOT IN " : " IN ");
 		Object[] ary = crt.Ary();
 		int len = crt.Ary_len();
 		for (int i = 0; i < len; ++i) {
 			if (i == 0)
-				bfr.Add_byte(AsciiByte.ParenBgn);
+				bfr.AddByte(AsciiByte.ParenBgn);
 			else
-				bfr.Add_byte(AsciiByte.Comma).Add_byte_space();
+				bfr.AddByte(AsciiByte.Comma).AddByteSpace();
 			val_wtr.Bld_val(bfr, ctx, ary[i]);
 		}
-		bfr.Add_byte(AsciiByte.ParenEnd);
+		bfr.AddByte(AsciiByte.ParenEnd);
 	}
-	private void Bld_where__iomatch(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_ioMatch crt) {
-		bfr.Add_str_a7(crt.Neg() ? " NOT IOMATCH " : " IOMATCH ");
+	private void Bld_where__iomatch(BryWtr bfr, Sql_wtr_ctx ctx, Criteria_ioMatch crt) {
+		bfr.AddStrA7(crt.Neg() ? " NOT IOMATCH " : " IOMATCH ");
 		val_wtr.Bld_val(bfr, ctx, crt.Pattern().Raw());
 	}
-	public void Bld_where__db_obj(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_obj_ary_crt crt) {
+	public void Bld_where__db_obj(BryWtr bfr, Sql_wtr_ctx ctx, Db_obj_ary_crt crt) {
 		Object[][] ary = crt.Vals();
 		int ary_len = ary.length; 
 		Db_obj_ary_fld[] flds = crt.Flds();
 		for (int i = 0; i < ary_len; i++) {
 			Object[] itm = (Object[])ary[i];
 			int itm_len = itm.length;
-			if (i != 0) bfr.Add_str_a7(" OR ");
-			bfr.Add_str_a7("(");
+			if (i != 0) bfr.AddStrA7(" OR ");
+			bfr.AddStrA7("(");
 			for (int j = 0; j < itm_len; j++) {
-				if (j != 0) bfr.Add_str_a7(" AND ");
+				if (j != 0) bfr.AddStrA7(" AND ");
 				Db_obj_ary_fld fld = flds[j];
 				Object val = itm[j];
 				boolean quote = false;
 				switch (fld.Type_tid()) {
-					case Type_ids_.Id__str:
-					case Type_ids_.Id__char:
-					case Type_ids_.Id__date:
+					case TypeIds.IdStr:
+					case TypeIds.IdChar:
+					case TypeIds.IdDate:
 						quote = true;
 						break;
 				}
-				bfr.Add_str_a7(fld.Name());
-				bfr.Add_str_a7("=");
-				if (quote) bfr.Add_str_a7("'");
-				bfr.Add_str_a7(Object_.Xto_str_strict_or_empty(val));
-				if (quote) bfr.Add_str_a7("'");
+				bfr.AddStrA7(fld.Name());
+				bfr.AddStrA7("=");
+				if (quote) bfr.AddStrA7("'");
+				bfr.AddStrA7(ObjectUtl.ToStrOrEmpty(val));
+				if (quote) bfr.AddStrA7("'");
 			}
-			bfr.Add_str_a7(")");
+			bfr.AddStrA7(")");
 		}		
 	}
 }

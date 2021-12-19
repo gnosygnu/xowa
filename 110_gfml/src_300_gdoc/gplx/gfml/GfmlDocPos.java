@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.strings.*;
-import gplx.objects.lists.CompareAble;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.gfml;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class GfmlDocPos implements CompareAble {
 	public String Path() {if (path == null) MakePath(); return path;} private String path;
 	public int compareTo(Object obj) {
@@ -33,7 +35,7 @@ public class GfmlDocPos implements CompareAble {
 			else if (origVal >	compVal)	return CompareAbleUtl.More;
 		}
 		if (ary.length < comp.ary.length)	return CompareAbleUtl.Less;		// less ary than comp, and whatever ary they share are equal; must be less
-		return Int_.Compare(idx, comp.idx);									// compare idx
+		return IntUtl.Compare(idx, comp.idx);									// compare idx
 	}
 	public GfmlDocPos NewClone() {return new GfmlDocPos(ary, idx);}
 	public GfmlDocPos NewDown(int newIdx) {
@@ -60,10 +62,10 @@ public class GfmlDocPos implements CompareAble {
 			sb.Add("_");
 		}
 		sb.Add(idx);
-		path = sb.To_str();
+		path = sb.ToStr();
 	}
 	int[] ary; int idx;
-	@gplx.Internal protected GfmlDocPos(int[] ary, int idx) {this.ary = ary; this.idx = idx;}
+	public GfmlDocPos(int[] ary, int idx) {this.ary = ary; this.idx = idx;}
 }
 class GfmlDocPos_ {
 	public static final GfmlDocPos Null = new GfmlDocPos(new int[0], -1);

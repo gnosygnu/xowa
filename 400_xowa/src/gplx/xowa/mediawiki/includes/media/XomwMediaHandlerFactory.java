@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.media; import gplx.*;
+package gplx.xowa.mediawiki.includes.media;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
 // XO.MW:MW has registry and instance cache; XO only has instance
 // XO.MW:SYNC:1.29; DATE:2017-02-05
 public class XomwMediaHandlerFactory {
@@ -44,18 +46,18 @@ public class XomwMediaHandlerFactory {
 	}
 
 	public static byte[]
-	  Mime__image__jpeg                    = Bry_.new_a7("image/jpeg")
-	, Mime__image__png                     = Bry_.new_a7("image/png")
-	, Mime__image__gif                     = Bry_.new_a7("image/gif")
-	, Mime__image__tiff                    = Bry_.new_a7("image/tiff")
-	, Mime__image__webp                    = Bry_.new_a7("image/webp")
-	, Mime__image__x_ms_bmp                = Bry_.new_a7("image/x-ms-bmp")
-	, Mime__image__x_bmp                   = Bry_.new_a7("image/x-bmp")
-	, Mime__image__x_xcf                   = Bry_.new_a7("image/x-xcf")
-	, Mime__image__svg_xml                 = Bry_.new_a7("image/svg+xml")
-	, Mime__image__svg                     = Bry_.new_a7("image/svg")
-	, Mime__image__vnd_djvu                = Bry_.new_a7("image/vnd.djvu")
-	, Mime__image__x_djvu_dot              = Bry_.new_a7("image/x.djvu")
-	, Mime__image__x_djvu_dash             = Bry_.new_a7("image/x-djvu")
+	  Mime__image__jpeg                    = BryUtl.NewA7("image/jpeg")
+	, Mime__image__png                     = BryUtl.NewA7("image/png")
+	, Mime__image__gif                     = BryUtl.NewA7("image/gif")
+	, Mime__image__tiff                    = BryUtl.NewA7("image/tiff")
+	, Mime__image__webp                    = BryUtl.NewA7("image/webp")
+	, Mime__image__x_ms_bmp                = BryUtl.NewA7("image/x-ms-bmp")
+	, Mime__image__x_bmp                   = BryUtl.NewA7("image/x-bmp")
+	, Mime__image__x_xcf                   = BryUtl.NewA7("image/x-xcf")
+	, Mime__image__svg_xml                 = BryUtl.NewA7("image/svg+xml")
+	, Mime__image__svg                     = BryUtl.NewA7("image/svg")
+	, Mime__image__vnd_djvu                = BryUtl.NewA7("image/vnd.djvu")
+	, Mime__image__x_djvu_dot              = BryUtl.NewA7("image/x.djvu")
+	, Mime__image__x_djvu_dash             = BryUtl.NewA7("image/x-djvu")
 	;
 }

@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*;
-import gplx.core.strings.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class IptBnd_ {
 	public static void msg_(IptCfg cfg, IptBndsOwner box, String bndKey, GfoMsg m, IptArg... ipt) {bld_(cfg, box, (Gfo_invk)box, bndKey, m, ipt);}
 	public static void msg_to_(IptCfg cfg, IptBndsOwner box, Gfo_invk invk, String bndKey, GfoMsg m, IptArg... ipt) {
@@ -35,8 +41,8 @@ public class IptBnd_ {
 	static String AryXtoStr(List_adp ary) {
 		String_bldr sb = String_bldr_.new_();
 		for (int i = 0; i < ary.Len(); i++)
-			sb.Add_spr_unless_first(((IptArg)ary.Get_at(i)).Key(), "|", i);
-		return sb.To_str();
+			sb.AddSprUnlessFirst(((IptArg)ary.GetAt(i)).Key(), "|", i);
+		return sb.ToStr();
 	}
 }
 class IptBnd_invk implements IptBnd {

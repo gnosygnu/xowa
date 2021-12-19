@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.core.primitives.*; import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.wikis.data.tbls;
+import gplx.types.basics.wrappers.IntVal;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xowd_category_itm {
 	public int Id() {return id;} private int id;
-	public Int_obj_val Id_val() {if (id_val == null) id_val = new Int_obj_val(id); return id_val;} Int_obj_val id_val;
+	public IntVal Id_val() {if (id_val == null) id_val = new IntVal(id); return id_val;} IntVal id_val;
 	public int File_idx() {return file_idx;} private int file_idx;
 	public boolean Hidden() {return hidden;} private boolean hidden;
 	public int Count_all()		{return count_subcs + count_files + count_pages;}
@@ -30,7 +32,7 @@ public class Xowd_category_itm {
 			case Xoa_ctg_mgr.Tid__subc: return count_subcs;
 			case Xoa_ctg_mgr.Tid__page: return count_pages;
 			case Xoa_ctg_mgr.Tid__file: return count_files;
-			default: throw Err_.new_unhandled(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}		
 	}
 	public void Adjust(int ns, int val) {

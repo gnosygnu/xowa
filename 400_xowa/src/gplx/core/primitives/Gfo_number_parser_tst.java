@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.primitives;
 
-import gplx.Bry_;
-import gplx.Decimal_adp;
-import gplx.Decimal_adp_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.GfoDecimalUtl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,19 +36,19 @@ public class Gfo_number_parser_tst {
 		fxt.Test_long("9876543210", 9876543210L);
 	}
 	@Test public void Decimal() {
-		fxt.Test_dec("1.23", Decimal_adp_.parse("1.23"));
-		fxt.Test_dec("1.023", Decimal_adp_.parse("1.023"));
-		fxt.Test_dec("-1.23", Decimal_adp_.parse("-1.23"));
+		fxt.Test_dec("1.23", GfoDecimalUtl.Parse("1.23"));
+		fxt.Test_dec("1.023", GfoDecimalUtl.Parse("1.023"));
+		fxt.Test_dec("-1.23", GfoDecimalUtl.Parse("-1.23"));
 	}
 	@Test public void Double_long() {
-		fxt.Test_dec(".42190046219457", Decimal_adp_.parse(".42190046219457"));
+		fxt.Test_dec(".42190046219457", GfoDecimalUtl.Parse(".42190046219457"));
 	}
 	@Test public void Exponent() {
 		fxt.Test_int("1E2", 100);
-		fxt.Test_dec("1.234E2", Decimal_adp_.parse("123.4"));
-		fxt.Test_dec("1.234E-2", Decimal_adp_.parse(".01234"));
-		fxt.Test_dec("123.4E-2", Decimal_adp_.parse("1.234"));
-		fxt.Test_dec("+6.0E-3", Decimal_adp_.parse(".006"));
+		fxt.Test_dec("1.234E2", GfoDecimalUtl.Parse("123.4"));
+		fxt.Test_dec("1.234E-2", GfoDecimalUtl.Parse(".01234"));
+		fxt.Test_dec("123.4E-2", GfoDecimalUtl.Parse("1.234"));
+		fxt.Test_dec("+6.0E-3", GfoDecimalUtl.Parse(".006"));
 		fxt.Test_err("e24", true); // 2020-09-07|ISSUE#:795|scientific notation requires coefficient
 	}
 	@Test public void Err() {
@@ -79,37 +79,37 @@ public class Gfo_number_parser_tst {
 class Gfo_number_parser_fxt {
 	private final Gfo_number_parser parser = new Gfo_number_parser();
 	public void Clear() {parser.Clear();}
-	public void Init_ignore(String chars) {parser.Ignore_chars_(Bry_.new_a7(chars));}
+	public void Init_ignore(String chars) {parser.Ignore_chars_(BryUtl.NewA7(chars));}
 	public void Test_int(String raw, int expd) {
-		byte[] raw_bry = Bry_.new_a7(raw);
+		byte[] raw_bry = BryUtl.NewA7(raw);
 		int actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_int(); 
-		Tfds.Eq(expd, actl, raw);
+		GfoTstr.EqObj(expd, actl, raw);
 	}
 	public void Test_long(String raw, long expd) {
-		byte[] raw_bry = Bry_.new_a7(raw);
-		Tfds.Eq(expd, parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_long(), raw);
+		byte[] raw_bry = BryUtl.NewA7(raw);
+		GfoTstr.EqObj(expd, parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_long(), raw);
 	}
-	public void Test_dec(String raw, Decimal_adp expd) {
-		byte[] raw_bry = Bry_.new_a7(raw);
-		Decimal_adp actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_dec(); 
-		Tfds.Eq(expd.To_double(), actl.To_double(), raw);
+	public void Test_dec(String raw, GfoDecimal expd) {
+		byte[] raw_bry = BryUtl.NewA7(raw);
+		GfoDecimal actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_dec();
+		GfoTstr.EqObj(expd.ToDouble(), actl.ToDouble(), raw);
 	}
 	public void Test_err(String raw, boolean expd) {
-		byte[] raw_bry = Bry_.new_a7(raw);
+		byte[] raw_bry = BryUtl.NewA7(raw);
 		boolean actl = parser.Parse(raw_bry, 0, raw_bry.length).Has_err(); 
-		Tfds.Eq(expd, actl, raw);
+		GfoTstr.EqObj(expd, actl, raw);
 	}
 	public void Test_hex(String raw, int expd_val) {Test_hex(raw, expd_val, true);}
 	public void Test_hex(String raw, int expd_val, boolean expd_pass) {
 		parser.Hex_enabled_(true);
-		byte[] raw_bry = Bry_.new_a7(raw);
+		byte[] raw_bry = BryUtl.NewA7(raw);
 		int actl = parser.Parse(raw_bry, 0, raw_bry.length).Rv_as_int();
 		if (expd_pass) {
-			Tfds.Eq(expd_val, actl, raw);
-			Tfds.Eq(true, !parser.Has_err());
+			GfoTstr.EqObj(expd_val, actl, raw);
+			GfoTstr.EqObj(true, !parser.Has_err());
 		}
 		else 
-			Tfds.Eq(false, !parser.Has_err());
+			GfoTstr.EqObj(false, !parser.Has_err());
 		parser.Hex_enabled_(false);
 	}
 }

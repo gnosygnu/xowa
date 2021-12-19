@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
-
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err;
-import gplx.Err_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.errs.Err;
+import gplx.types.errs.ErrUtl;
 
 public class Mustache_tkn_parser {
 	private byte[] src; private int src_end;
@@ -34,7 +34,7 @@ public class Mustache_tkn_parser {
 	public Mustache_tkn_parser(Io_url template_root) {
 		this.template_root = template_root;
 	}
-	public Mustache_tkn_itm Parse(String template) { return Parse(template, Bry_.Empty); }
+	public Mustache_tkn_itm Parse(String template) { return Parse(template, BryUtl.Empty); }
 	public Mustache_tkn_itm Parse(String template, byte[] default_text) {
 		byte[] template_data = Io_mgr.Instance.LoadFilBryOr(template_root.GenSubFil_nest(template + ".mustache"), default_text);
 		return Parse(template_data, 0, template_data.length);
@@ -51,8 +51,8 @@ public class Mustache_tkn_parser {
 		int txt_bgn = src_bgn;
 		boolean end_grp = false;
 		while (true) {// loop for "{{"
-			int lhs_bgn = Bry_find_.Find_fwd(src, tkn_def.Variable_lhs, txt_bgn, src_end);	// next "{{"
-			if (lhs_bgn == Bry_find_.Not_found) {											// no more "{{"
+			int lhs_bgn = BryFind.FindFwd(src, tkn_def.Variable_lhs, txt_bgn, src_end);	// next "{{"
+			if (lhs_bgn == BryFind.NotFound) {											// no more "{{"
 				subs_list.Add(new Mustache_tkn_text(src, txt_bgn, src_end));				// add everything between prv "}}" and cur "{{"
 				break;
 			}
@@ -61,8 +61,8 @@ public class Mustache_tkn_parser {
 			Mustache_tkn_data tkn_data = new Mustache_tkn_data(src[lhs_end]);				// preview tkn
 			lhs_end += tkn_data.lhs_end_adj;
 
-			int rhs_bgn = Bry_find_.Find_fwd(src, tkn_def.Variable_rhs, lhs_end, src_end);	// next "}}"
-			if (rhs_bgn == Bry_find_.Not_found) throw Fail(lhs_bgn, "unclosed tag");		// fail if no "}}"
+			int rhs_bgn = BryFind.FindFwd(src, tkn_def.Variable_rhs, lhs_end, src_end);	// next "}}"
+			if (rhs_bgn == BryFind.NotFound) throw Fail(lhs_bgn, "unclosed tag");		// fail if no "}}"
 			int rhs_end = rhs_bgn + tkn_def.Variable_rhs_len;
 			if (tkn_data.rhs_bgn_chk != AsciiByte.Null) {
 				if (src[rhs_bgn] != tkn_data.rhs_bgn_chk) throw Fail(lhs_end, "invalid check byte");
@@ -96,10 +96,10 @@ public class Mustache_tkn_parser {
 		return txt_bgn;
 	}
 	private int Parse_itm(Mustache_tkn_data tkn_data, List_adp subs_list, int lhs_end, int rhs_bgn, int rhs_end) {
-		byte[] val_bry = Bry_.Mid(src, lhs_end, rhs_bgn);
+		byte[] val_bry = BryLni.Mid(src, lhs_end, rhs_bgn);
 		Mustache_tkn_base tkn = null;
 		switch (tkn_data.tid) {
-			default:								throw Err_.new_unhandled(tkn_data.tid);
+			default:								throw ErrUtl.NewUnhandled(tkn_data.tid);
 			case Mustache_tkn_def.Variable:			tkn = new Mustache_tkn_variable(val_bry);	break;
 			case Mustache_tkn_def.Comment:			tkn = new Mustache_tkn_comment();			break;
 			case Mustache_tkn_def.Partial:			tkn = new Mustache_tkn_partial(val_bry, template_root);	break;
@@ -119,7 +119,7 @@ public class Mustache_tkn_parser {
 			return rhs_end;
 	}
 	private Err Fail(int pos, String fmt, Object... args) {
-		return Err_.new_("mustache", fmt, "excerpt", Bry_.Mid_by_len_safe(src, pos, 32));
+		return ErrUtl.NewArgs(fmt, "excerpt", BryUtl.MidByLenSafe(src, pos, 32));
 	}
 	private static int Trim_bwd_to_nl(byte[] src, int txt_bgn, int txt_end) {
 		int stop = txt_bgn - 1;

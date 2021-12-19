@@ -13,23 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*;
+package gplx.xowa.xtns.scribunto.libs;
 import gplx.core.btries.*;
-import gplx.core.primitives.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.BoolVal;
 public class Scrib_lib_text__nowiki_util {
 	public Btrie_slim_mgr Make_trie(byte[] tag) {
-		Bry_bfr tmp = Bry_bfr_.New();
+		BryWtr tmp = BryWtr.New();
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_u8();
-		byte[] lhs_bry = tmp.Add_bry_many(AsciiByte.AngleBgnBry, tag, AsciiByte.AngleEndBry).To_bry_and_clear();
-		byte[] rhs_bry = tmp.Add_bry_many(AsciiByte.AngleBgnBry, AsciiByte.SlashBry, tag, AsciiByte.AngleEndBry).To_bry_and_clear();
-		rv.Add_obj(lhs_bry, Bool_obj_val.True);
-		rv.Add_obj(rhs_bry, Bool_obj_val.False);
+		byte[] lhs_bry = tmp.AddBryMany(AsciiByte.AngleBgnBry, tag, AsciiByte.AngleEndBry).ToBryAndClear();
+		byte[] rhs_bry = tmp.AddBryMany(AsciiByte.AngleBgnBry, AsciiByte.SlashBry, tag, AsciiByte.AngleEndBry).ToBryAndClear();
+		rv.AddObj(lhs_bry, BoolVal.True);
+		rv.AddObj(rhs_bry, BoolVal.False);
 		return rv;
 	}
 	public byte[] Strip_tag(byte[] page, byte[] src, Btrie_slim_mgr trie) {
 		Btrie_rv trv = new Btrie_rv();
-		Bry_bfr tmp = null;
+		BryWtr tmp = null;
 		int bgn = 0;
 		int end = src.length;
 
@@ -48,7 +49,7 @@ public class Scrib_lib_text__nowiki_util {
 			}
 
 			// match found
-			Bool_obj_val tag_marker = (Bool_obj_val)o;
+			BoolVal tag_marker = (BoolVal)o;
 
 			// match is open tag; EX: <tag>
 			if (tag_marker.Val()) {
@@ -64,13 +65,13 @@ public class Scrib_lib_text__nowiki_util {
 				// only splice if open tag exists; avoids dangling rhs; EX: "a</tag>b"
 				if (lhs_found) {
 					lhs_found = false;
-					if (tmp == null) tmp = Bry_bfr_.New();
+					if (tmp == null) tmp = BryWtr.New();
 
 					// add text from previous </tag> to current <tag>;
-					tmp.Add_mid(src, rhs_end, lhs_bgn);
+					tmp.AddMid(src, rhs_end, lhs_bgn);
 
 					// add text between <tag> and </tag>;
-					tmp.Add_mid(src, lhs_end, pos);
+					tmp.AddMid(src, lhs_end, pos);
 
 					// update </tag> pos
 					rhs_end = trv.Pos();
@@ -83,9 +84,9 @@ public class Scrib_lib_text__nowiki_util {
 
 		// add remaining text to bfr
 		if (tmp != null) {
-			tmp.Add_mid(src, rhs_end, end);
+			tmp.AddMid(src, rhs_end, end);
 		}
 
-		return tmp == null ? src : tmp.To_bry_and_clear();
+		return tmp == null ? src : tmp.ToBryAndClear();
 	}
 }

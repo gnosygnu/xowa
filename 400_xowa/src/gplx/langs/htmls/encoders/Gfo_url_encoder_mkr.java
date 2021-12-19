@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls.encoders;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfo_url_encoder_mkr {
 	private Gfo_url_encoder_itm[] encode_ary, decode_ary;
 	private Gfo_url_encoder anchor_encoder;

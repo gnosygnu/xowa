@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.envs.*;
+package gplx.xowa.bldrs.cmds.utils;
+import gplx.core.envs.Process_adp;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoae_app;
 public class Xob_unzip_wkr {
 	private Process_adp decompress_bz2, decompress_zip, decompress_gz, process;
 	public int Process_exit_code() {return process.Exit_code();}
@@ -28,10 +33,10 @@ public class Xob_unzip_wkr {
 	}
 	public void Decompress(Io_url src, Io_url trg) {
 		String src_ext = src.Ext();
-		if		(String_.Eq(src_ext, gplx.core.ios.streams.Io_stream_tid_.Ext__bz2))		process = decompress_bz2;
-		else if	(String_.Eq(src_ext, gplx.core.ios.streams.Io_stream_tid_.Ext__zip))		process = decompress_zip;
-		else if	(String_.Eq(src_ext, gplx.core.ios.streams.Io_stream_tid_.Ext__gz))		process = decompress_gz;
-		else															throw Err_.new_unhandled(src_ext);
+		if		(StringUtl.Eq(src_ext, gplx.core.ios.streams.Io_stream_tid_.Ext__bz2))		process = decompress_bz2;
+		else if	(StringUtl.Eq(src_ext, gplx.core.ios.streams.Io_stream_tid_.Ext__zip))		process = decompress_zip;
+		else if	(StringUtl.Eq(src_ext, gplx.core.ios.streams.Io_stream_tid_.Ext__gz))		process = decompress_gz;
+		else															throw ErrUtl.NewUnhandled(src_ext);
 		Io_url trg_owner_dir = trg.OwnerDir();
 		Io_mgr.Instance.CreateDirIfAbsent(trg_owner_dir);
 		process.Run_mode_(process_run_mode);

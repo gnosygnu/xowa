@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.swts;
-import gplx.Gfo_evt_mgr_;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
 import gplx.core.bits.Bitmask_;
 import gplx.core.envs.Op_sys;
 import gplx.gfui.controls.gxws.GxwElem;
@@ -26,8 +26,8 @@ import gplx.gfui.ipts.IptKey_;
 import gplx.gfui.ipts.IptMouseBtn;
 import gplx.gfui.ipts.IptMouseBtn_;
 import gplx.gfui.ipts.IptMouseWheel_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;

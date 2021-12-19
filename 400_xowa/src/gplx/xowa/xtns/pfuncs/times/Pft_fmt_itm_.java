@@ -15,13 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Byte_;
-import gplx.objects.strings.AsciiByte;
-import gplx.DateAdp_;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.String_;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
 import gplx.core.btries.Btrie_fast_mgr;
 import gplx.core.btries.Btrie_rv;
 import gplx.xowa.langs.msgs.Xol_msg_itm_;
@@ -69,27 +70,27 @@ public class Pft_fmt_itm_ {
 	;
 
 	public static final Pft_fmt_itm
-	  Year_len4					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 4, BoolUtl.Y)
-	, Year_len2					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 2, BoolUtl.Y)
-	, Month_int_len2			= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_month			, 2, BoolUtl.Y)
-	, Month_int					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_month			, 2, BoolUtl.N)
-	, Day_int_len2				= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_day			, 2, BoolUtl.Y)
-	, Day_int					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_day			, 2, BoolUtl.N)
-	, Hour_base24_len2			= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_hour			, 2, BoolUtl.Y)
-	, Hour_base24				= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_hour			, 2, BoolUtl.N)
+	  Year_len4					= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxYear, 4, BoolUtl.Y)
+	, Year_len2					= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxYear, 2, BoolUtl.Y)
+	, Month_int_len2			= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxMonth, 2, BoolUtl.Y)
+	, Month_int					= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxMonth, 2, BoolUtl.N)
+	, Day_int_len2				= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxDay, 2, BoolUtl.Y)
+	, Day_int					= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxDay, 2, BoolUtl.N)
+	, Hour_base24_len2			= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxHour, 2, BoolUtl.Y)
+	, Hour_base24				= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxHour, 2, BoolUtl.N)
 	, Hour_base12_len2			= new Pft_fmt_itm_hour_base12(BoolUtl.Y)
 	, Hour_base12				= new Pft_fmt_itm_hour_base12(BoolUtl.N)
-	, Minute_int_len2			= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_minute		, 2, BoolUtl.Y)
-	, Second_int_len2			= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_second		, 2, BoolUtl.Y)
-	, Dow_base1_int				= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_dayOfWeek		, 1, BoolUtl.Y)
+	, Minute_int_len2			= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxMinute, 2, BoolUtl.Y)
+	, Second_int_len2			= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxSecond, 2, BoolUtl.Y)
+	, Dow_base1_int				= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxDayOfWeek, 1, BoolUtl.Y)
 	, Dow_base0_int				= new Pft_fmt_itm_dow_base0()
-	, WeekOfYear_int			= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_weekOfYear	, 2, BoolUtl.N)
-	, WeekOfYear_int_len2		= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_weekOfYear	, 2, BoolUtl.Y)
-	, Month_abrv				= new Pft_fmt_itm_seg_str(DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_abrv_jan - Int_.Base1)		// Jan
-	, Month_name				= new Pft_fmt_itm_seg_str(DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_name_january - Int_.Base1)	// January
-	, Month_gen					= new Pft_fmt_itm_seg_str(DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_gen_january - Int_.Base1)	// January
-	, Dow_abrv					= new Pft_fmt_itm_seg_str(DateAdp_.SegIdx_dayOfWeek, Xol_msg_itm_.Id_dte_dow_abrv_sun)					// Sun
-	, Dow_name					= new Pft_fmt_itm_seg_str(DateAdp_.SegIdx_dayOfWeek, Xol_msg_itm_.Id_dte_dow_name_sunday)				// Sunday
+	, WeekOfYear_int			= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxWeekOfYear, 2, BoolUtl.N)
+	, WeekOfYear_int_len2		= new Pft_fmt_itm_seg_int(GfoDateUtl.SegIdxWeekOfYear, 2, BoolUtl.Y)
+	, Month_abrv				= new Pft_fmt_itm_seg_str(GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_abrv_jan - IntUtl.Base1)		// Jan
+	, Month_name				= new Pft_fmt_itm_seg_str(GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_name_january - IntUtl.Base1)	// January
+	, Month_gen					= new Pft_fmt_itm_seg_str(GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_gen_january - IntUtl.Base1)	// January
+	, Dow_abrv					= new Pft_fmt_itm_seg_str(GfoDateUtl.SegIdxDayOfWeek, Xol_msg_itm_.Id_dte_dow_abrv_sun)					// Sun
+	, Dow_name					= new Pft_fmt_itm_seg_str(GfoDateUtl.SegIdxDayOfWeek, Xol_msg_itm_.Id_dte_dow_name_sunday)				// Sunday
 	, Year_isLeap				= new Pft_fmt_itm_year_isLeap()
 	, Timestamp_unix			= new Pft_fmt_itm_timestamp_unix()
 	, Byte_space				= new Pft_fmt_itm_raw_byt(AsciiByte.Space)
@@ -189,19 +190,19 @@ public class Pft_fmt_itm_ {
 		Btrie_fast_mgr trie = Pft_fmt_itm_.Regy;
 		Btrie_rv trv = new Btrie_rv();
 		int i = 0, fmt_len = fmt.length;
-		fmt_itms.Clear(); int raw_bgn = String_.Pos_neg1; byte raw_byt = Byte_.Zero;
+		fmt_itms.Clear(); int raw_bgn = StringUtl.PosNeg1; byte raw_byt = ByteUtl.Zero;
 		while (i < fmt_len) {
 			byte b = fmt[i];
 			Object o = trie.Match_at_w_b0(trv, b, fmt, i, fmt_len);
 			if (o != null) {
-				if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
+				if (raw_bgn != StringUtl.PosNeg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = StringUtl.PosNeg1;}
 				fmt_itms.Add((Pft_fmt_itm)o);
 				i = trv.Pos();
 			}
 			else {
 				switch (b) {
 					case AsciiByte.Backslash:
-						if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
+						if (raw_bgn != StringUtl.PosNeg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = StringUtl.PosNeg1;}
 						++i; // peek next char
 						if (i == fmt_len)	// trailing backslash; add one; EX: "b\" -> "b\" not "b"
 							fmt_itms.Add(new Pft_fmt_itm_raw_byt(AsciiByte.Backslash));
@@ -210,7 +211,7 @@ public class Pft_fmt_itm_ {
 						++i;
 						break;
 					case AsciiByte.Quote:
-						if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = String_.Pos_neg1;}
+						if (raw_bgn != StringUtl.PosNeg1) {fmt_itms.Add(i - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(raw_byt) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i)); raw_bgn = StringUtl.PosNeg1;}
 						++i; // skip quote_bgn
 						raw_bgn = i;
 						while (i < fmt_len) {
@@ -222,17 +223,17 @@ public class Pft_fmt_itm_ {
 								++i;
 						}
 						fmt_itms.Add(i - raw_bgn == 0 ? new Pft_fmt_itm_raw_byt(AsciiByte.Quote) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, i));
-						raw_bgn = String_.Pos_neg1;
+						raw_bgn = StringUtl.PosNeg1;
 						++i; // skip quote_end
 						break;
 					default:
-						if (raw_bgn == String_.Pos_neg1) {raw_bgn = i; raw_byt = b;}
-						i += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+						if (raw_bgn == StringUtl.PosNeg1) {raw_bgn = i; raw_byt = b;}
+						i += Utf8Utl.LenOfCharBy1stByte(b);
 						break;
 				}
 			}
 		}
-		if (raw_bgn != String_.Pos_neg1) {fmt_itms.Add(fmt_len - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(fmt[fmt_len - 1]) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, fmt_len)); raw_bgn = String_.Pos_neg1;}
+		if (raw_bgn != StringUtl.PosNeg1) {fmt_itms.Add(fmt_len - raw_bgn == 1 ? new Pft_fmt_itm_raw_byt(fmt[fmt_len - 1]) : (Pft_fmt_itm)new Pft_fmt_itm_raw_ary(fmt, raw_bgn, fmt_len)); raw_bgn = StringUtl.PosNeg1;}
 		return (Pft_fmt_itm[])fmt_itms.ToAry(Pft_fmt_itm.class);
 	}
 }

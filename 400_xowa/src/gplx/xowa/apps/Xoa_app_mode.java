@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps; import gplx.*;
-import gplx.core.primitives.*;
+package gplx.xowa.apps;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.IntVal;
+import gplx.types.errs.ErrUtl;
 public class Xoa_app_mode {
 	Xoa_app_mode(int tid) {this.tid = tid;}
 	public int Tid() {return tid;} private final int tid;
@@ -40,7 +43,7 @@ public class Xoa_app_mode {
 		}
 	}
 	private static final int Tid_cmd = 1, Tid_gui = 2, Tid_tcp = 3, Tid_http = 4, Tid_file = 5;
-	private static final byte[] Key_cmd = Bry_.new_a7("cmd"), Key_gui = Bry_.new_a7("gui"), Key_tcp = Bry_.new_a7("server"), Key_http = Bry_.new_a7("http_server"), Key_file = Bry_.new_a7("file");
+	private static final byte[] Key_cmd = BryUtl.NewA7("cmd"), Key_gui = BryUtl.NewA7("gui"), Key_tcp = BryUtl.NewA7("server"), Key_http = BryUtl.NewA7("http_server"), Key_file = BryUtl.NewA7("file");
 	public static final Xoa_app_mode Itm_cmd = new Xoa_app_mode(Tid_cmd), Itm_gui = new Xoa_app_mode(Tid_gui), Itm_tcp = new Xoa_app_mode(Tid_tcp), Itm_http = new Xoa_app_mode(Tid_http), Itm_file = new Xoa_app_mode(Tid_file);
 	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_bry_int(Key_cmd	, Tid_cmd)
@@ -50,15 +53,15 @@ public class Xoa_app_mode {
 	.Add_bry_int(Key_file	, Tid_file)
 	;
 	public static Xoa_app_mode parse(String s) {
-		Object o = type_hash.GetByOrNull(Bry_.new_u8(s)); if (o == null) return Itm_cmd;	// default to cmd as per early behaviour; handles mistaken "--app_mode wrong"
-		int tid = ((Int_obj_val)o).Val();
+		Object o = type_hash.GetByOrNull(BryUtl.NewU8(s)); if (o == null) return Itm_cmd;	// default to cmd as per early behaviour; handles mistaken "--app_mode wrong"
+		int tid = ((IntVal)o).Val();
 		switch (tid) {
 			case Tid_cmd:		return Itm_cmd;
 			case Tid_gui:		return Itm_gui;
 			case Tid_http:		return Itm_http;
 			case Tid_tcp:		return Itm_tcp;
 			case Tid_file:		return Itm_file;
-			default:			throw Err_.new_unhandled(tid);
+			default:			throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 }

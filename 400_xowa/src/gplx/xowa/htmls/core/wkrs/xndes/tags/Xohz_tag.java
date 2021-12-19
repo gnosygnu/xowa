@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.tags; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.xndes.tags;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
@@ -49,7 +55,7 @@ public class Xohz_tag {
 		int hatrs_len = hatrs.Len();
 		int unknown_atrs = 0;
 		for (int i = 0; i < hatrs_len; ++i) {
-			Gfh_atr hatr = (Gfh_atr)hatrs.Get_at(i);
+			Gfh_atr hatr = (Gfh_atr)hatrs.GetAt(i);
 			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.GetByOrNull(hatr.Key());
 			if (zatr == null)	++unknown_atrs;
 			else				zatr.Enc_flag(hctx, src, hatr, flag_bldr);
@@ -59,19 +65,19 @@ public class Xohz_tag {
 		bfr.Add_hzip_int(flag_len, flag_bldr.Encode());
 		if (unknown_atrs > 0) bfr.Add_hzip_int(1, unknown_atrs);
 		for (int i = 0; i < zatr_ary_len; ++i) {
-			Gfh_atr hatr = (Gfh_atr)hatrs.Get_at(i);
+			Gfh_atr hatr = (Gfh_atr)hatrs.GetAt(i);
 			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.GetByOrNull(hatr.Key());
 			if (zatr != null)	zatr.Enc_data(hctx, src, hatr, bfr);	// zatr should be String
 //				else				zatr.Enc_data(hctx, src, hatr, bfr);
 		}			
 		return true;
 	}
-	public boolean Decode(Xoh_hdoc_ctx hctx, Bry_bfr bfr, Bry_rdr rdr, byte[] src, int src_bgn, int src_end) {
-		int flag = rdr.Read_hzip_int(flag_len); flag_bldr.Decode(flag);
-		bfr.Add_byte(AsciiByte.AngleBgn).Add(key);
+	public boolean Decode(Xoh_hdoc_ctx hctx, BryWtr bfr, BryRdr rdr, byte[] src, int src_bgn, int src_end) {
+		int flag = rdr.ReadHzipInt(flag_len); flag_bldr.Decode(flag);
+		bfr.AddByte(AsciiByte.AngleBgn).Add(key);
 		boolean tag_is_inline			= flag_bldr.Get_as_bool(flag__tag_is_inline);
 		boolean unknown_atrs_exist		= flag_bldr.Get_as_bool(flag__unknown_atrs_exist);
-		int unknown_atrs = unknown_atrs_exist ? rdr.Read_int_to() : 0;
+		int unknown_atrs = unknown_atrs_exist ? rdr.ReadIntTo() : 0;
 		for (int i = 0; i < zatr_ary_len; ++i) {
 			Xohz_atr_itm meta_atr = zatr_ary[i];
 			meta_atr.Dec_all(hctx, rdr, flag_bldr, bfr);

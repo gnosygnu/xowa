@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.ios.streams.*;
-import gplx.fsdb.meta.*;
+package gplx.xowa.files.bins;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.fsdb.meta.Fsm_cfg_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_fsdb_itm;
 public class Xof_bin_skip_mgr {
 	private Xof_bin_skip_wkr[] wkrs = new Xof_bin_skip_wkr[0]; private int wkrs_len;
 	public Xof_bin_skip_mgr(Fsm_cfg_mgr cfg_mgr, String[] wkr_keys) {
@@ -35,9 +42,9 @@ public class Xof_bin_skip_mgr {
 	}
 	private Xof_bin_skip_wkr New_wkr(Fsm_cfg_mgr cfg_mgr, String key) {
 		Xof_bin_skip_wkr rv = null;
-		if		(String_.Eq(key, Xof_bin_skip_wkr_.Key__page_gt_1))		rv = Xof_bin_skip_wkr__page_gt_1.Instance;
-		else if	(String_.Eq(key, Xof_bin_skip_wkr_.Key__small_size))	rv = Xof_bin_skip_wkr__small_size.Instance;
-		else															throw Err_.new_unhandled(key);
+		if		(StringUtl.Eq(key, Xof_bin_skip_wkr_.Key__page_gt_1))		rv = Xof_bin_skip_wkr__page_gt_1.Instance;
+		else if	(StringUtl.Eq(key, Xof_bin_skip_wkr_.Key__small_size))	rv = Xof_bin_skip_wkr__small_size.Instance;
+		else															throw ErrUtl.NewUnhandled(key);
 		if (!rv.Skip_init(cfg_mgr)) return null;
 		return rv;
 	}

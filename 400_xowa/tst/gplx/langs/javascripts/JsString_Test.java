@@ -1,6 +1,6 @@
 package gplx.langs.javascripts;
 
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.Test;
 
 public class JsString_Test {
@@ -19,9 +19,9 @@ public class JsString_Test {
 }
 class JsString_Tstr {
     public void Test_slice(String note, String expd, String src, int bgn) {
-        Gftest.Eq__str(expd, JsString_.slice(src, bgn), note);
+        GfoTstr.Eq(expd, JsString_.slice(src, bgn), note);
     }
     public void Test_slice(String note, String expd, String src, int bgn, int end) {
-        Gftest.Eq__str(expd, JsString_.slice(src, bgn, end), note);
+        GfoTstr.Eq(expd, JsString_.slice(src, bgn, end), note);
     }
 }

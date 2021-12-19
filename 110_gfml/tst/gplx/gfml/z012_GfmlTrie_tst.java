@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 import gplx.core.texts.*; /*CharStream*/
 public class z012_GfmlTrie_tst {
@@ -66,6 +67,6 @@ public class z012_GfmlTrie_tst {
 	void tst_FindMatch_first(String text, String expd) {
 		CharStream stream = CharStream.pos0_(text);
 		String actl = (String)trie.FindMatch(stream);
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 }

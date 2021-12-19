@@ -13,16 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.core.tests.*;
-import gplx.core.btries.*; import gplx.core.brys.*;
-import gplx.xowa.apps.fsys.*;
-import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
-import gplx.xowa.files.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.xtns.graphs;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.tests.Gfo_test_lnr_base;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.rdrs.BryRdrErrWkr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_src_data;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import gplx.xowa.wikis.nss.Xow_ns_;
 class Graph_json_save_mgr {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__xowa_root, Tid__text);
 	public Graph_json_save_mgr(Xoa_fsys_mgr fsys_mgr) {
@@ -31,13 +46,13 @@ class Graph_json_save_mgr {
 	public boolean Root_dir_found() {return root_dir_found;} private boolean root_dir_found;
 	public byte[] Save(Xoae_page page, Xop_ctx ctx, byte[] domain_bry, String page_ttl, byte[] src, int src_bgn, int src_end) {
 		// init err_wkr
-		Bry_err_wkr err_wkr = new Bry_err_wkr();
-		err_wkr.Init_by_page(page_ttl, src);
-		err_wkr.Init_by_sect("graph", src_bgn);
+		BryRdrErrWkr err_wkr = new BryRdrErrWkr();
+		err_wkr.InitByPage(page_ttl, src);
+		err_wkr.InitBySect("graph", src_bgn);
 
 		// init other helpers
 		Xowe_wiki wiki = page.Wikie();
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Btrie_rv trv = new Btrie_rv();
 		Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
 
@@ -46,10 +61,10 @@ class Graph_json_save_mgr {
 		int prv_bfr = src_bgn;
 		while (find_bgn < src_end) {
 			// match byte against trie
-			byte tid = trie.Match_byte_or(trv, src, find_bgn, src_end, Byte_.Max_value_127);
+			byte tid = trie.Match_byte_or(trv, src, find_bgn, src_end, ByteUtl.MaxValue127);
 
 			// file:/// or {XOWA_ROOT} not found; look at next byte
-			if (tid == Byte_.Max_value_127) {
+			if (tid == ByteUtl.MaxValue127) {
 				find_bgn++;
 				continue;
 			}
@@ -59,7 +74,7 @@ class Graph_json_save_mgr {
 			switch (tid) {
 				// {XOWA_ROOT} found; double up;
 				case Tid__text:
-					bfr.Add_mid(src, prv_bfr, find_end);
+					bfr.AddMid(src, prv_bfr, find_end);
 					bfr.Add(Bry__xowa_root);
 					prv_bfr = find_bgn = find_end;
 					break;
@@ -68,7 +83,7 @@ class Graph_json_save_mgr {
 					// check for '"wikirawupload:'
 					int wikirawupload_bgn = find_bgn - Bry__wikirawupload.length;
 					if (wikirawupload_bgn < 0) wikirawupload_bgn = 0;
-					if (!Bry_.Match(src, wikirawupload_bgn, find_bgn, Bry__wikirawupload)) {
+					if (!BryLni.Eq(src, wikirawupload_bgn, find_bgn, Bry__wikirawupload)) {
 						err_wkr.Warn("Graph_json_save_mgr: missing wikirawupload");
 						find_bgn++;
 						continue;
@@ -76,8 +91,8 @@ class Graph_json_save_mgr {
 
 					// get url_end by searching for '\"'
 					int url_bgn = find_bgn;
-					int url_end = Bry_find_.Find_fwd(src, AsciiByte.Quote, find_bgn, src_end);
-					if (url_end == Bry_find_.Not_found) {
+					int url_end = BryFind.FindFwd(src, AsciiByte.Quote, find_bgn, src_end);
+					if (url_end == BryFind.NotFound) {
 						err_wkr.Warn("Graph_json_save_mgr: missing endquote");
 						find_bgn++;
 						continue;
@@ -91,9 +106,9 @@ class Graph_json_save_mgr {
 						continue;
 					}
 
-					bfr.Add_mid(src, prv_bfr, find_bgn);
+					bfr.AddMid(src, prv_bfr, find_bgn);
 					bfr.Add(Bry__xowa_root);
-					bfr.Add_byte_slash(); // add / to make load_mgr easier since img_src_parser looks for /file/; EX: "{XOWA_ROOT}file/" vs "{XOWA_ROOT}/file/"
+					bfr.AddByteSlash(); // add / to make load_mgr easier since img_src_parser looks for /file/; EX: "{XOWA_ROOT}file/" vs "{XOWA_ROOT}/file/"
 
 					if (test_lnr != null)
 						test_lnr.Add_actl_args(img_src_parser.Repo_is_commons(), img_src_parser.File_is_orig(), img_src_parser.File_ttl_bry());
@@ -110,25 +125,25 @@ class Graph_json_save_mgr {
 					prv_bfr = find_bgn = find_end;
 					break;
 				default:
-					throw Err_.new_unhandled_default(tid);
+					throw ErrUtl.NewUnhandled(tid);
 			}
 		}
 
 		// unchanged
 		if (prv_bfr == src_bgn) {
-			return Bry_.Mid(src, src_bgn, src_end);
+			return BryLni.Mid(src, src_bgn, src_end);
 		}
 		// changed
 		else {
 			root_dir_found = true;
-			bfr.Add_mid(src, prv_bfr, src_end);
-			return bfr.To_bry_and_clear();
+			bfr.AddMid(src, prv_bfr, src_end);
+			return bfr.ToBryAndClear();
 		}
 	}
 	public void Test_lnr_(Gfo_test_lnr_base v) {this.test_lnr = v;} private Gfo_test_lnr_base test_lnr;
 	public static final byte Tid__root = 0, Tid__text = 1;
 	public static final byte[]
-	  Bry__wikirawupload = Bry_.new_a7("\"wikirawupload:")
-	, Bry__xowa_root = Bry_.new_a7("{XOWA_ROOT}")
+	  Bry__wikirawupload = BryUtl.NewA7("\"wikirawupload:")
+	, Bry__xowa_root = BryUtl.NewA7("{XOWA_ROOT}")
 	;
 }

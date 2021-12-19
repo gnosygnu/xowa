@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.addons.parsers.mediawikis;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.*;
 public class Xop_mediawiki_wkr__tst {
 	private final Xop_mediawiki_wkr__fxt fxt = new Xop_mediawiki_wkr__fxt();
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
@@ -43,12 +46,12 @@ class Xop_mediawiki_wkr__fxt {
 		this.wkr = mgr.Make(wiki, cbk);
 	}
 	public void Test__parse(String page, String wtxt, String... expd) {
-		Gftest.Eq__ary__lines(String_.Concat_lines_nl_skip_last(expd), wkr.Parse(page, wtxt), "parse failed; wtxt={0}", wtxt);
+		GfoTstr.EqLines(StringUtl.ConcatLinesNlSkipLast(expd), wkr.Parse(page, wtxt), "parse failed; wtxt={0}", wtxt);
 	}
 }
 class Xop_mediawiki_loader__mock implements Xop_mediawiki_loader {
 	public String LoadWikitext(String page) {
-		if (String_.Eq(page, "Template:Bold"))	return "'''bold'''";
+		if (StringUtl.Eq(page, "Template:Bold"))	return "'''bold'''";
 		else									return "text";
 	}
 }

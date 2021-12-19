@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.tblws;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
@@ -55,11 +57,11 @@ public class Xop_tblw_lxr implements Xop_lxr {
 					}
 				}
 				if (wlxr_type == Xop_tblw_wkr.Tblw_type_th2) {											// !!; extra check to make sure \n! exists; DATE:2014-10-19
-					int prv_th_pos = Bry_find_.Find_bwd(src, AsciiByte.Nl, bgn_pos);				// search for previous \n
-					boolean invalid = prv_th_pos == Bry_find_.Not_found;									// no \n; invalid
+					int prv_th_pos = BryFind.FindBwd(src, AsciiByte.Nl, bgn_pos);				// search for previous \n
+					boolean invalid = prv_th_pos == BryFind.NotFound;									// no \n; invalid
 					if (!invalid) {
 						++prv_th_pos;																	// skip \n
-						prv_th_pos = Bry_find_.Find_fwd_while_space_or_tab(src, prv_th_pos, src_len);	// skip \s; needed for "\n\s!" which is still a tblw
+						prv_th_pos = BryFind.FindFwdWhileSpaceOrTab(src, prv_th_pos, src_len);	// skip \s; needed for "\n\s!" which is still a tblw
 						if (prv_th_pos == bgn_pos)														// invalid: "\n" is directly in front of "!!"
 							invalid = true;
 						else
@@ -131,7 +133,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 	}
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
-	public static final byte[] Hook_tb = Bry_.new_a7("\n{|"), Hook_te = Bry_.new_a7("\n|}"), Hook_tr = Bry_.new_a7("\n|-")
-		, Hook_td = Bry_.new_a7("\n|"), Hook_th = Bry_.new_a7("\n!"), Hook_tc = Bry_.new_a7("\n|+")
-		, Hook_td2 = Bry_.new_a7("||"), Hook_th2 = Bry_.new_a7("!!");
+	public static final byte[] Hook_tb = BryUtl.NewA7("\n{|"), Hook_te = BryUtl.NewA7("\n|}"), Hook_tr = BryUtl.NewA7("\n|-")
+		, Hook_td = BryUtl.NewA7("\n|"), Hook_th = BryUtl.NewA7("\n!"), Hook_tc = BryUtl.NewA7("\n|+")
+		, Hook_td2 = BryUtl.NewA7("||"), Hook_th2 = BryUtl.NewA7("!!");
 }

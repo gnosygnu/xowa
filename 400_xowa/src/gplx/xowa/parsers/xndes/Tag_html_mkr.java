@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes; import gplx.xowa.*; import gplx.xowa.parsers.*;
 public interface Tag_html_mkr {
 	Tag_html_wkr Tag__create(Xowe_wiki wiki, Xop_ctx ctx);
 }
@@ -26,6 +26,6 @@ class Tag_html_mkr_basic implements Tag_html_mkr {
 		this.atrs_encode = atrs_encode;
 	}
 	public Tag_html_wkr Tag__create(Xowe_wiki wiki, Xop_ctx ctx) {
-		return new Tag_html_wkr_basic(wiki.Utl__bfr_mkr().Get_b512(), atrs_encode);
+		return new Tag_html_wkr_basic(wiki.Utl__bfr_mkr().GetB512(), atrs_encode);
 	}
 }

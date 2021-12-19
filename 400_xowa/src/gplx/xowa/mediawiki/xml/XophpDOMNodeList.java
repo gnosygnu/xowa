@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.xml; import gplx.*;
+package gplx.xowa.mediawiki.xml;
 import gplx.langs.xmls.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class XophpDOMNodeList {
 	private final List_adp list = List_adp_.New();
 	public XophpDOMNodeList(XmlNdeList nde_list) {
@@ -25,5 +27,5 @@ public class XophpDOMNodeList {
 		}
 	}
 	public int count() {return list.Len();}
-	public XophpDOMNode item(int i) {return (XophpDOMNode)list.Get_at(i);}
+	public XophpDOMNode item(int i) {return (XophpDOMNode)list.GetAt(i);}
 }

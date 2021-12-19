@@ -15,13 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.mass_parses.parses.mgrs;
 
-import gplx.Datetime_now;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
+import gplx.core.envs.SystemUtl;
+import gplx.libs.ios.IoConsts;
+import gplx.types.commons.GfoDateNow;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url;
 import gplx.core.ios.streams.Io_stream_tid_;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.parsers.logs.Xop_log_invoke_wkr;
@@ -54,13 +55,13 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	public long Wbase_cache_mru_size() {return wbase_cache_mru_size;} private long wbase_cache_mru_size = 100;
 	public long Wbase_cache_mru_weight() {return wbase_cache_mru_weight;} private long wbase_cache_mru_weight = 10;
 	public long Wbase_cache_mru_compress_size() {return wbase_cache_mru_compress_size;} private long wbase_cache_mru_compress_size = 70;
-	public long Page_cache_min() {return page_cache_min;} private long page_cache_min = 1500 * Io_mgr.Len_mb_long;
-	public long Page_cache_max() {return page_cache_max;} private long page_cache_max = 2000 * Io_mgr.Len_mb_long;
+	public long Page_cache_min() {return page_cache_min;} private long page_cache_min = 1500 * IoConsts.LenMBAsLong;
+	public long Page_cache_max() {return page_cache_max;} private long page_cache_max = 2000 * IoConsts.LenMBAsLong;
 	public void Init(Xowe_wiki wiki) {
 		if (num_wkrs == -1)             num_wkrs = gplx.core.envs.Runtime_.Cpu_count();
 		if (num_pages_in_pool == -1)    num_pages_in_pool = num_wkrs * 1000;
 		if (mgr_url == null)            mgr_url = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("tmp", "xomp");
-		if (wkr_machine_name == null)   wkr_machine_name = gplx.core.envs.System_.Env__machine_name();
+		if (wkr_machine_name == null)   wkr_machine_name = SystemUtl.Env__machine_name();
 	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -78,7 +79,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, Invk__load_all_templates_))			load_all_templates = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__load_all_imglinks_))			load_all_imglinks = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk__load_ifexists_ns_))				load_ifexists_ns = m.ReadStr("v");
-		else if	(ctx.Match(k, Invk__manual_now_))					Datetime_now.Manual_and_freeze_(m.ReadDate("v"));
+		else if	(ctx.Match(k, Invk__manual_now_))					GfoDateNow.ManualSetAndFreeze(m.ReadDate("v"));
 		else if	(ctx.Match(k, Invk__mgr_url_))						mgr_url = m.ReadIoUrl("v");
 		else if	(ctx.Match(k, Invk__wkr_machine_name_))				wkr_machine_name = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk__show_msg__fetched_pool_))		show_msg__fetched_pool = m.ReadYn("v");

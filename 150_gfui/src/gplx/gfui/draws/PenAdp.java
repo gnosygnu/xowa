@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.draws; import gplx.*;
+package gplx.gfui.draws;
 import java.awt.BasicStroke;
-import gplx.core.strings.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.commons.String_bldr_;
 public class PenAdp implements Gfo_invk {
 	public float Width() {return width;} public void Width_set(float v) {width = v; InitUnder();} float width;
 	public ColorAdp Color() {return color;} public void Color_set(ColorAdp v) {color = v; InitUnder();} ColorAdp color;
@@ -28,13 +34,13 @@ public class PenAdp implements Gfo_invk {
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	static final String Invk_Width_ = "Width_", Invk_Color_ = "Color_";
-	@Override public String toString() {return String_bldr_.new_().Add_kv_obj("width", width).Add_kv("color", color.XtoHexStr()).To_str();}
+	@Override public String toString() {return String_bldr_.new_().AddKvObj("width", width).AddKv("color", color.XtoHexStr()).ToStr();}
 	@Override public int hashCode() {return color.Value() ^ (int)width;}
 	@Override public boolean equals(Object obj) {	// cannot use Eq b/c of difficulty in comparing null instances
 		PenAdp comp = PenAdp_.as_(obj); if (comp == null) return false;
 		return color.Eq(comp.color) && width == comp.width;
 	}		
-	@gplx.Internal protected PenAdp(ColorAdp color, float width) {this.color = color; this.width = width;}
+	public PenAdp(ColorAdp color, float width) {this.color = color; this.width = width;}
 }
 class PenAdpCache {
 		public BasicStroke Fetch(float width) {

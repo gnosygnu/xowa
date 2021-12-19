@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
-import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 public class Xow_find_file_mgr {
 	private final Xof_repo_itm repo_itm;
 	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
@@ -24,13 +25,13 @@ public class Xow_find_file_mgr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xow_find_file_mgr(Xof_repo_itm repo_itm, String wiki_domain_str) {
 		this.repo_itm = repo_itm;
-		this.wiki_domain = Bry_.new_u8(wiki_domain_str);
+		this.wiki_domain = BryUtl.NewU8(wiki_domain_str);
 	}
 	public void Init_file(String orig_ttl_str, int orig_w, int orig_h) {this.Init_file(true, orig_ttl_str, orig_w, orig_h);}
 	public void Init_file(boolean repo_is_remote, String orig_ttl_str, int orig_w, int orig_h) {
 		byte orig_repo_id = repo_is_remote ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
 		byte[] orig_repo_name = repo_is_remote ? Xow_domain_itm_.Bry__commons : wiki_domain;
-		byte[] orig_ttl_bry = Bry_.new_u8(orig_ttl_str);
+		byte[] orig_ttl_bry = BryUtl.NewU8(orig_ttl_str);
 		Xof_ext orig_ext = Xof_ext_.new_by_ttl_(orig_ttl_bry);
 		byte[] orig_redirect = null;
 		this.Init_file(orig_repo_id, orig_repo_name, orig_ttl_bry, orig_ext, orig_w, orig_h, orig_redirect);

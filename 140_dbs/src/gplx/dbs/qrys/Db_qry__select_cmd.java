@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.qrys;
-import gplx.Err_;
-import gplx.Int_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
 import gplx.core.criterias.Criteria;
 import gplx.core.criterias.Criteria_;
 import gplx.dbs.Db_qry;
@@ -30,7 +30,7 @@ import gplx.dbs.sqls.itms.Sql_select_clause;
 import gplx.dbs.sqls.itms.Sql_select_fld;
 import gplx.dbs.sqls.itms.Sql_tbl_itm;
 import gplx.dbs.sqls.itms.Sql_where_clause;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Db_qry__select_cmd implements Db_qry {
 	public int				Tid()				{return Db_qry_.Tid_select;}
 	public boolean ReturnsRdr()		{return BoolUtl.Y;}
@@ -39,7 +39,7 @@ public class Db_qry__select_cmd implements Db_qry {
 	public Db_qry__select_cmd From_(String tbl) {return From_(tbl, Sql_tbl_itm.Alias__null);}
 	public Db_qry__select_cmd From_(String name, String alias) {return From_(Sql_tbl_itm.Db__null, name, alias);}
 	public Db_qry__select_cmd From_(String db, String tbl, String alias) {
-		if (from != null) throw Err_.new_("sql_qry", "super table already defined", "from", from.Base_tbl.Name);
+		if (from != null) throw ErrUtl.NewArgs("super table already defined", "from", from.Base_tbl.Name);
 		from = new Sql_from_clause(new Sql_tbl_itm(Sql_tbl_itm.Tid__from, db, tbl, alias, Sql_join_fld.Ary__empty));
 		return this;
 	}
@@ -47,7 +47,7 @@ public class Db_qry__select_cmd implements Db_qry {
 	public Db_qry__select_cmd Join_(String db, String name, String alias, Sql_join_fld... join_flds)	{return Join_(Sql_tbl_itm.Tid__inner, db					, name, alias, join_flds);}
 	public Db_qry__select_cmd Join_(int join_tid, String name, String alias, Sql_join_fld... join_flds) {return Join_(join_tid, Sql_tbl_itm.Db__null, name, alias, join_flds);}
 	public Db_qry__select_cmd Join_(int join_tid, String db, String name, String alias, Sql_join_fld... join_flds) {
-		if (from == null) throw Err_.new_("sql_qry", "super table is not defined");
+		if (from == null) throw ErrUtl.NewArgs("super table is not defined");
 		from.Tbls.Add(new Sql_tbl_itm(join_tid, db, name, alias, join_flds));
 		return this;
 	}
@@ -71,7 +71,7 @@ public class Db_qry__select_cmd implements Db_qry {
 		return this;
 	}
 	public Db_qry__select_cmd Where_and(Criteria crt) {
-		if (where_itm == Sql_where_clause.All) throw Err_.new_("sql_qry", "where is not defined");
+		if (where_itm == Sql_where_clause.All) throw ErrUtl.NewArgs("where is not defined");
 		where_itm.Root = Criteria_.And(where_itm.Root, crt);
 		return this;
 	}
@@ -93,13 +93,13 @@ public class Db_qry__select_cmd implements Db_qry {
 			order.Flds__add(new Sql_order_fld(Sql_order_fld.Tbl__null, flds[i], Sql_order_fld.Sort__nil));
 		return this;
 	}
-	public int Limit() {return limit;} public Db_qry__select_cmd Limit_(int v) {this.limit = v; return this;} private int limit = Limit__disabled; public static final int Limit__disabled = Int_.Min_value;
-	public int Offset() {return offset;} public Db_qry__select_cmd Offset_(int v) {this.offset = v; return this;} private int offset = Offset__disabled; public static final int Offset__disabled = Int_.Min_value;
+	public int Limit() {return limit;} public Db_qry__select_cmd Limit_(int v) {this.limit = v; return this;} private int limit = Limit__disabled; public static final int Limit__disabled = IntUtl.MinValue;
+	public int Offset() {return offset;} public Db_qry__select_cmd Offset_(int v) {this.offset = v; return this;} private int offset = Offset__disabled; public static final int Offset__disabled = IntUtl.MinValue;
 	public String Indexed_by() {return indexed_by;} public Db_qry__select_cmd Indexed_by_(String v) {indexed_by = v; return this;} private String indexed_by;
 
 	public Sql_group_clause GroupBy() {return groupBy;} private Sql_group_clause groupBy = null;
 	public Db_qry__select_cmd GroupBy_(String... flds) {
-		if (groupBy != null) throw Err_.new_("sql_qry", "group by already defined", "group", groupBy);
+		if (groupBy != null) throw ErrUtl.NewArgs("group by already defined", "group", groupBy);
 		groupBy = Sql_group_clause.new_(flds);
 		return this;
 	}

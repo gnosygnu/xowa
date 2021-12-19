@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*;
+package gplx.xowa.apps.servers.http;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 class Http_server_wkr_fsys_hack_ {
 	private static final byte[]
-	  Bry__file_lhs = Bry_.new_a7("file:///")
-	, Bry__file_fsys = Bry_.new_a7("/fsys")
+	  Bry__file_lhs = BryUtl.NewA7("file:///")
+	, Bry__file_fsys = BryUtl.NewA7("/fsys")
 	;
 	private static final Btrie_slim_mgr xowa_path_segment_trie = Btrie_slim_mgr.ci_a7()
 		.Add_many_str
@@ -30,17 +33,17 @@ class Http_server_wkr_fsys_hack_ {
 		;
 	public static byte[] Replace(byte[] html_bry) {
 		// init
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = html_bry.length;
 		int pos = 0;
 
 		// loop while finding root_dir_http
 		while (true) {
 			// find "file:///"
-			int file_bgn = Bry_find_.Find_fwd(html_bry, Bry__file_lhs, pos);
+			int file_bgn = BryFind.FindFwd(html_bry, Bry__file_lhs, pos);
 
 			// exit if nothing found
-			if (file_bgn == Bry_find_.Not_found)
+			if (file_bgn == BryFind.NotFound)
 				break;
 
 			// set file_end (after "file:///")
@@ -48,7 +51,7 @@ class Http_server_wkr_fsys_hack_ {
 
 			// skip if page literally starts with "file:"
 			if (file_bgn == 0) {
-				bfr.Add_mid(html_bry, pos, file_end);
+				bfr.AddMid(html_bry, pos, file_end);
 				pos = file_end;
 				continue;
 			}
@@ -81,7 +84,7 @@ class Http_server_wkr_fsys_hack_ {
 
 			// preceding char is not supported; exit; EX: '!file:///'
 			if (quote_end_char == AsciiByte.Null) {
-				bfr.Add_mid(html_bry, pos, file_end);
+				bfr.AddMid(html_bry, pos, file_end);
 				pos = file_end;
 				continue;
 			}
@@ -89,22 +92,22 @@ class Http_server_wkr_fsys_hack_ {
 			// find quote_end
 			int quote_end =
 				quote_is_ws
-				? Bry_find_.Find_fwd_until_ws(html_bry, file_end, len)
-				: Bry_find_.Find_fwd         (html_bry, quote_end_char, file_end);
+				? BryFind.FindFwdUntilWs(html_bry, file_end, len)
+				: BryFind.FindFwd(html_bry, quote_end_char, file_end);
 
 			// exit if no quote_end
-			if (quote_end == Bry_find_.Not_found) 
+			if (quote_end == BryFind.NotFound)
 				break;
 
 			// skip if "'file: ... '" is too long. should be no more than 300
 			if (quote_end - file_end > 300) {
-				bfr.Add_mid(html_bry, pos, quote_end);
+				bfr.AddMid(html_bry, pos, quote_end);
 				pos = quote_end;
 				continue;
 			}
 
 			// loop chars between quote_bgn and quote_end and must have one of segments defined above; "/file/", "/bin/any/", "/user/anonymous/"
-			int mid_bgn = Bry_find_.Not_found;
+			int mid_bgn = BryFind.NotFound;
 			Btrie_rv trv = new Btrie_rv();
 			for (int i = quote_bgn; i < quote_end; i++) {
 				byte b = html_bry[i];
@@ -117,26 +120,26 @@ class Http_server_wkr_fsys_hack_ {
 
 			// skip if no xowa_path_segment found
 			if (mid_bgn == -1) {
-				bfr.Add_mid(html_bry, pos, quote_end);
+				bfr.AddMid(html_bry, pos, quote_end);
 				pos = quote_end;
 				continue;
 			}
 
 			// add everything up to xowa_path_segment
-			bfr.Add_mid(html_bry, pos, file_bgn);
+			bfr.AddMid(html_bry, pos, file_bgn);
 
 			// add "/fsys/"
 			bfr.Add(Bry__file_fsys);
 
 			// add everything up to quote_end
-			bfr.Add_mid(html_bry, mid_bgn, quote_end);
+			bfr.AddMid(html_bry, mid_bgn, quote_end);
 
 			// move pos forward
 			pos = quote_end;
 		}
 
 		// add rest
-		bfr.Add_mid(html_bry, pos, len);
-		return bfr.To_bry_and_clear();
+		bfr.AddMid(html_bry, pos, len);
+		return bfr.ToBryAndClear();
 	}
 }

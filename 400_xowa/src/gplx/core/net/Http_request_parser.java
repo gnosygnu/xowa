@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.net;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.Err_;
-import gplx.String_;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.primitives.Int_obj_val;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.IntVal;
+import gplx.types.errs.ErrUtl;
 public class Http_request_parser {
 	private boolean dnt;
 	private int type, content_length;
@@ -32,7 +32,7 @@ public class Http_request_parser {
 				accept_encoding, x_requested_with, cookie, referer, content_type, 
 				content_type_boundary, connection, pragma, cache_control, origin;
 	private Http_post_data_hash post_data_hash;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255); private final Btrie_rv trv = new Btrie_rv();
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(255); private final Btrie_rv trv = new Btrie_rv();
 	private final Http_server_wtr server_wtr; private final boolean log;
 	public Http_request_parser(Http_server_wtr server_wtr, boolean log) {this.server_wtr = server_wtr; this.log = log;}
 	public void Clear() {
@@ -52,99 +52,99 @@ public class Http_request_parser {
 			while (true) {
 				String line_str = rdr.Read_line(); if (line_str == null) break;	// needed for TEST
 				if (log) server_wtr.Write_str_w_nl(line_str);
-				byte[] line = Bry_.new_u8(line_str);
+				byte[] line = BryUtl.NewU8(line_str);
 				int line_len = line.length;
 				if (line_len == 0) {
 					switch (type) {
 						case Http_request_itm.Type_get:		break;
 						case Http_request_itm.Type_post:
-							if (reading_post_data || post_nl_seen) throw Err_.new_wo_type("http.request.parser;invalid new line during post", "request", To_str());
+							if (reading_post_data || post_nl_seen) throw ErrUtl.NewArgs("http.request.parser;invalid new line during post", "request", To_str());
 							post_nl_seen = true;	// only allow one \n per POST
 							continue;				// ignore line and get next
-						default:							throw Err_.new_unimplemented();
+						default:							throw ErrUtl.NewUnimplemented();
 					}
 					break;	// only GET will reach this line; GET requests always end with blank line; stop;
 				}
-				if (content_type_boundary != null && Bry_.Has_at_bgn(line, content_type_boundary)) {
+				if (content_type_boundary != null && BryUtl.HasAtBgn(line, content_type_boundary)) {
 					while (true) {
-						if (Bry_.Has_at_end(line, Tkn_content_type_boundary_end)) break;	// last form_data pair will end with "--"; stop
+						if (BryUtl.HasAtEnd(line, Tkn_content_type_boundary_end)) break;	// last form_data pair will end with "--"; stop
 						line = Parse_content_type_boundary(rdr);
 					}
 					break;	// assume form_data sends POST request
 				}
-				Object o = trie.Match_at(trv, line, 0, line_len);
+				Object o = trie.MatchAt(trv, line, 0, line_len);
 				if (o == null) {
-					server_wtr.Write_str_w_nl(String_.Format("http.request.parser; unknown line; line={0} request={1}", line_str, To_str()));
+					server_wtr.Write_str_w_nl(StringUtl.Format("http.request.parser; unknown line; line={0} request={1}", line_str, To_str()));
 					continue;
 				}
-				int val_bgn = Bry_find_.Find_fwd_while_ws(line, trv.Pos(), line_len);	// skip ws after key; EX: "Host: "
-				int tid = ((Int_obj_val)o).Val();
+				int val_bgn = BryFind.FindFwdWhileWs(line, trv.Pos(), line_len);	// skip ws after key; EX: "Host: "
+				int tid = ((IntVal)o).Val();
 				switch (tid) {
 					case Tid_get:
 					case Tid_post:						Parse_type(tid, val_bgn, line, line_len); break;
-					case Tid_host:						this.host = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_user_agent:				this.user_agent = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_accept:					this.accept = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_accept_language:			this.accept_language = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_accept_encoding:			this.accept_encoding = Bry_.Mid(line, val_bgn, line_len); break;
+					case Tid_host:						this.host = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_user_agent:				this.user_agent = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_accept:					this.accept = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_accept_language:			this.accept_language = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_accept_encoding:			this.accept_encoding = BryLni.Mid(line, val_bgn, line_len); break;
 					case Tid_dnt:						this.dnt = line[val_bgn] == AsciiByte.Num1; break;
-					case Tid_x_requested_with:			this.x_requested_with = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_cookie:					this.cookie = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_referer:					this.referer = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_content_length:			this.content_length = Bry_.To_int_or(line, val_bgn, line_len, -1); break;
+					case Tid_x_requested_with:			this.x_requested_with = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_cookie:					this.cookie = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_referer:					this.referer = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_content_length:			this.content_length = BryUtl.ToIntOr(line, val_bgn, line_len, -1); break;
 					case Tid_content_type:				Parse_content_type(val_bgn, line, line_len); break;
-					case Tid_connection:				this.connection = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_pragma:					this.pragma = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_cache_control:				this.cache_control = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_origin:					this.origin = Bry_.Mid(line, val_bgn, line_len); break;
+					case Tid_connection:				this.connection = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_pragma:					this.pragma = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_cache_control:				this.cache_control = BryLni.Mid(line, val_bgn, line_len); break;
+					case Tid_origin:					this.origin = BryLni.Mid(line, val_bgn, line_len); break;
 					case Tid_upgrade_request:			break;
 					case Tid_x_host:					break;
 					case Tid_x_real_ip:     			break;
 					case Tid_accept_charset:			break;
 					case Tid_sec_fetch_mode:            break;
 					case Tid_sec_fetch_site:            break;
-					default:							throw Err_.new_unhandled(tid);
+					default:							throw ErrUtl.NewUnhandled(tid);
 				}
 			}
 			return Make_request_itm();
 		}
 	}
 	private void Parse_type(int tid, int val_bgn, byte[] line, int line_len) {	// EX: "POST /xowa-cmd:exec_as_json HTTP/1.1"
-		int url_end = Bry_find_.Find_bwd(line, AsciiByte.Space, line_len); if (url_end == Bry_find_.Not_found) throw Err_.new_wo_type("invalid protocol", "line", line, "request", To_str());
+		int url_end = BryFind.FindBwd(line, AsciiByte.Space, line_len); if (url_end == BryFind.NotFound) throw ErrUtl.NewArgs("invalid protocol", "line", line, "request", To_str());
 		switch (tid) {
 			case Tid_get	: this.type = Http_request_itm.Type_get; break;
 			case Tid_post	: this.type = Http_request_itm.Type_post; break;
-			default			: throw Err_.new_unimplemented();
+			default			: throw ErrUtl.NewUnimplemented();
 		}
-		this.url = Bry_.Mid(line, val_bgn, url_end);
-		this.protocol = Bry_.Mid(line, url_end + 1, line_len);
+		this.url = BryLni.Mid(line, val_bgn, url_end);
+		this.protocol = BryLni.Mid(line, url_end + 1, line_len);
 	}
 	private void Parse_content_type(int val_bgn, byte[] line, int line_len) {	// EX: Content-Type: multipart/form-data; boundary=---------------------------72432484930026
 		// handle wolfram and other clients; DATE:2015-08-03
-		int boundary_bgn = Bry_find_.Find_fwd(line, Tkn_boundary, val_bgn, line_len); if (boundary_bgn == Bry_find_.Not_found) return; // PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04 // throw Err_.new_wo_type("invalid content_type", "line", line, "request", To_str());
-		int content_type_end = Bry_find_.Find_bwd(line, AsciiByte.Semic, boundary_bgn);
-		this.content_type = Bry_.Mid(line, val_bgn, content_type_end);
-		this.content_type_boundary = Bry_.Add(Tkn_content_type_boundary_end, Bry_.Mid(line, boundary_bgn += Tkn_boundary.length, line_len));
+		int boundary_bgn = BryFind.FindFwd(line, Tkn_boundary, val_bgn, line_len); if (boundary_bgn == BryFind.NotFound) return; // PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04 // throw ErrUtl.NewArgs("invalid content_type", "line", line, "request", To_str());
+		int content_type_end = BryFind.FindBwd(line, AsciiByte.Semic, boundary_bgn);
+		this.content_type = BryLni.Mid(line, val_bgn, content_type_end);
+		this.content_type_boundary = BryUtl.Add(Tkn_content_type_boundary_end, BryLni.Mid(line, boundary_bgn += Tkn_boundary.length, line_len));
 	}
 	private Http_request_itm Make_request_itm() {
 		return new Http_request_itm(type, url, protocol, host, user_agent, accept, accept_language, accept_encoding, dnt, x_requested_with, cookie, referer, content_length, content_type, content_type_boundary, connection, pragma, cache_control, origin, post_data_hash);
 	}
 	private byte[] Parse_content_type_boundary(Http_client_rdr rdr) {
 		if (post_data_hash == null) post_data_hash = new Http_post_data_hash();
-		byte[] line = Bry_.new_u8(rdr.Read_line());  // cur line is already known to be content_type_boundary; skip it
+		byte[] line = BryUtl.NewU8(rdr.Read_line());  // cur line is already known to be content_type_boundary; skip it
 		byte[] key = Parse_post_data_name(line);
 		String line_str = rdr.Read_line();	// blank-line
-		if (String_.Len_gt_0(line_str)) {throw Err_.new_wo_type("http.request.parser; blank_line should follow content_type_boundary", "request", To_str());}
+		if (StringUtl.IsNotNullOrEmpty(line_str)) {throw ErrUtl.NewArgs("http.request.parser; blank_line should follow content_type_boundary", "request", To_str());}
 		while (true) {
-			line = Bry_.new_u8(rdr.Read_line());
-			if (Bry_.Has_at_bgn(line, content_type_boundary)) break;
+			line = BryUtl.NewU8(rdr.Read_line());
+			if (BryUtl.HasAtBgn(line, content_type_boundary)) break;
 
 			// add \n between lines, but not after last line
-			if (tmp_bfr.Len_gt_0())
-				tmp_bfr.Add_byte_nl();
+			if (tmp_bfr.HasSome())
+				tmp_bfr.AddByteNl();
 			tmp_bfr.Add(line);
 		}
-		byte[] val = tmp_bfr.To_bry_and_clear();
+		byte[] val = tmp_bfr.ToBryAndClear();
 		post_data_hash.Add(key, val);
 		return line;
 	}
@@ -155,17 +155,17 @@ public class Http_request_parser {
 		pos = Assert_tkn(line, pos, line_len, Tkn_name);
 		int name_end = line_len;
 		if (line[pos] == AsciiByte.Quote) {
-			if (line[name_end - 1] != AsciiByte.Quote) throw Err_.new_wo_type("http.request.parser; invalid form at end", "line", line, "request", To_str());
+			if (line[name_end - 1] != AsciiByte.Quote) throw ErrUtl.NewArgs("http.request.parser; invalid form at end", "line", line, "request", To_str());
 			++pos;
 			--name_end;
 		}
-		return Bry_.Mid(line, pos, name_end);
+		return BryLni.Mid(line, pos, name_end);
 	}
 	private int Assert_tkn(byte[] src, int src_pos, int src_len, byte[] tkn) {
 		int tkn_len = tkn.length;
-		if (!Bry_.Match(src, src_pos, src_pos + tkn_len, tkn)) throw Err_.new_wo_type("http.request.parser; invalid form_data line", "tkn", tkn, "line", src, "request", To_str());
+		if (!BryLni.Eq(src, src_pos, src_pos + tkn_len, tkn)) throw ErrUtl.NewArgs("http.request.parser; invalid form_data line", "tkn", tkn, "line", src, "request", To_str());
 		int rv = src_pos += tkn_len;
-		return Bry_find_.Find_fwd_while_ws(src, rv, src_len);
+		return BryFind.FindFwdWhileWs(src, rv, src_len);
 	}
 	private String To_str() {return Make_request_itm().To_str(tmp_bfr, BoolUtl.N);}
 	private static final int Tid_get = 1, Tid_post = 2, Tid_host = 3, Tid_user_agent = 4, Tid_accept = 5, Tid_accept_language = 6, Tid_accept_encoding = 7, Tid_dnt = 8
@@ -196,8 +196,8 @@ public class Http_request_parser {
 	.Add_str_int("Sec-Fetch-Mode:"                        , Tid_sec_fetch_mode)
 	.Add_str_int("Sec-Fetch-Site:"                        , Tid_sec_fetch_site)
 	;
-	private static final byte[] Tkn_boundary = Bry_.new_a7("boundary="), Tkn_content_type_boundary_end = Bry_.new_a7("--")
-	, Tkn_content_disposition = Bry_.new_a7("Content-Disposition:"), Tkn_form_data = Bry_.new_a7("form-data;")
-	, Tkn_name = Bry_.new_a7("name=")
+	private static final byte[] Tkn_boundary = BryUtl.NewA7("boundary="), Tkn_content_type_boundary_end = BryUtl.NewA7("--")
+	, Tkn_content_disposition = BryUtl.NewA7("Content-Disposition:"), Tkn_form_data = BryUtl.NewA7("form-data;")
+	, Tkn_name = BryUtl.NewA7("name=")
 	;
 }

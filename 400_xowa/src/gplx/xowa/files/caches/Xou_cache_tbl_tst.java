@@ -14,17 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.caches;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_mgr;
-import gplx.Io_url_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url_;
 import gplx.dbs.Db_cmd_mode;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.Db_conn_bldr_data;
 import gplx.dbs.Db_rdr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xou_cache_tbl_tst {
@@ -33,7 +32,7 @@ public class Xou_cache_tbl_tst {
 	@Test public void Orig_ttl__redirect()		{fxt.Test_save_orig_ttl("A.png", "B.png", "B.png");}
 }
 class Xou_cache_tbl_fxt {
-	private final Bry_bfr lnki_key_bfr = Bry_bfr_.New_w_size(255);
+	private final BryWtr lnki_key_bfr = BryWtr.NewWithSize(255);
 	private Xou_cache_tbl tbl;
 	public void Clear() {
 		Io_mgr.Instance.InitEngine_mem();
@@ -48,23 +47,23 @@ class Xou_cache_tbl_fxt {
 	, boolean file_is_orig, int file_w, double file_time, int file_page, long file_size
 	, int view_count, long view_date) {
 		return new Xou_cache_itm(lnki_key_bfr, Db_cmd_mode.Tid_create
-		, Bry_.new_u8(lnki_wiki_abrv_xo), Bry_.new_u8(lnki_ttl), lnki_type, lnki_upright, lnki_w, lnki_h, lnki_time, lnki_page, user_thumb_w
-		, orig_repo_id, Bry_.new_u8(orig_ttl), orig_ext_id, orig_w, orig_h
+		, BryUtl.NewU8(lnki_wiki_abrv_xo), BryUtl.NewU8(lnki_ttl), lnki_type, lnki_upright, lnki_w, lnki_h, lnki_time, lnki_page, user_thumb_w
+		, orig_repo_id, BryUtl.NewU8(orig_ttl), orig_ext_id, orig_w, orig_h
 		, html_w, html_h, html_time, html_page
 		, file_is_orig, file_w, file_time, file_page, file_size
 		, view_count, view_date
 		);
 	}
 	public Xou_cache_itm Exec_select_one(String lnki_wiki_abrv_xo, String lnki_ttl, int lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, int user_thumb_w) {
-		return tbl.Select_one(Bry_.new_u8(lnki_wiki_abrv_xo), Bry_.new_u8(lnki_ttl), 1, 1, 1, 1, 1, 1, 1);
+		return tbl.Select_one(BryUtl.NewU8(lnki_wiki_abrv_xo), BryUtl.NewU8(lnki_ttl), 1, 1, 1, 1, 1, 1, 1);
 	}
 	public void Test_save_orig_ttl(String lnki_ttl, String orig_ttl, String expd_orig_ttl) {
 		Xou_cache_itm itm = Make_itm("en.w", lnki_ttl, 1, 1, 1, 1, 1, 1, 1, 1, orig_ttl, 1, 1, 1, 1, 1, 1, 1, BoolUtl.Y, 1, 1, 1, 1, 1, 1);
 		tbl.Db_save(itm);
 		Db_rdr rdr = tbl.Select_all_for_test();
 		try {
-			Tfds.Eq_true(rdr.Move_next());
-			Tfds.Eq(expd_orig_ttl, rdr.Read_str(tbl.Fld_orig_ttl()));
+			GfoTstr.EqBoolY(rdr.Move_next());
+			GfoTstr.EqObj(expd_orig_ttl, rdr.Read_str(tbl.Fld_orig_ttl()));
 		}
 		finally {rdr.Rls();}
 	}

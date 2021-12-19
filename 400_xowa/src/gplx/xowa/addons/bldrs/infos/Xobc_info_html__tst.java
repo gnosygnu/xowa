@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.infos; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.xowa.wikis.domains.*;
+package gplx.xowa.addons.bldrs.infos;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
+import gplx.xowa.wikis.domains.*;
 public class Xobc_info_html__tst {
 	private final Xobc_info_html__fxt fxt = new Xobc_info_html__fxt();
 	@Test 	public void Torrent__en_w()		{fxt.Test__torrent_link("en.wikipedia.org"		, "https://archive.org/download/Xowa_enwiki_latest_archive.torrent");}
@@ -22,6 +25,6 @@ public class Xobc_info_html__tst {
 }
 class Xobc_info_html__fxt {
 	public void Test__torrent_link(String domain_str, String expd) {
-		Gftest.Eq__str(expd, Xobc_info_html.Make_torrent_fil("https://archive.org/download/", Xow_domain_itm_.parse(Bry_.new_u8(domain_str))));
+		GfoTstr.Eq(expd, Xobc_info_html.Make_torrent_fil("https://archive.org/download/", Xow_domain_itm_.parse(BryUtl.NewU8(domain_str))));
 	}
 }

@@ -14,19 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.dynamicPageList;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.core.primitives.Bool_obj_val;
 import gplx.langs.htmls.Gfh_tag_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.BoolVal;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.parsers.Xop_ctx;
@@ -39,8 +40,8 @@ class Dpl_itm {
 	public byte[] Page_ttl() {return page_ttl;} private byte[] page_ttl;
 	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
 	public List_adp Ctg_excludes() {return ctg_excludes;} private List_adp ctg_excludes;
-	public int Count() {return count;} private int count = Int_.Min_value;
-	public int Offset() {return offset;} private int offset = Int_.Min_value;
+	public int Count() {return count;} private int count = IntUtl.MinValue;
+	public int Offset() {return offset;} private int offset = IntUtl.MinValue;
 	public boolean No_follow() {return no_follow;} private boolean no_follow;
 	public boolean Suppress_errors() {return suppress_errors;} private boolean suppress_errors;
 	public boolean Show_ns() {return show_ns;} private boolean show_ns;
@@ -61,7 +62,7 @@ class Dpl_itm {
 		this.page_ttl = page_ttl;
 		sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		sub_tkn_mkr = sub_ctx.Tkn_mkr();
-		sub_root = sub_tkn_mkr.Root(Bry_.Empty);
+		sub_root = sub_tkn_mkr.Root(BryUtl.Empty);
 		int content_bgn = xnde.Tag_open_end(), content_end = xnde.Tag_close_bgn();
 		int pos = content_bgn;
 		int fld_bgn = content_bgn;
@@ -83,8 +84,8 @@ class Dpl_itm {
 					key_id = Dpl_itm_keys.Parse(src, fld_bgn, fld_end, Dpl_itm_keys.Key_null);
 					if (key_id == Dpl_itm_keys.Key_null) {	// unknown key; warn and set pos to end of line; EX: "unknown=";
 						Parse_missing_key(usr_dlg, page_ttl, src, fld_bgn, fld_end);
-						fld_bgn = Bry_find_.Find_fwd(src, AsciiByte.Nl, pos);
-						if (fld_bgn == Bry_find_.Not_found)
+						fld_bgn = BryFind.FindFwd(src, AsciiByte.Nl, pos);
+						if (fld_bgn == BryFind.NotFound)
 							loop = false;
 						else {
 							pos = fld_bgn;	// set pos after \n else bounds error if multiple bad keys on same line; NOTE: ++pos below; EX: \nbad1=a bad2=b\n; PAGE:de.n:Brandenburg DATE:2016-04-21
@@ -101,7 +102,7 @@ class Dpl_itm {
 					if (fld_bgn != pos) {					// ignores blank lines
 						if (ws_bgn_idx != -1) fld_bgn = ws_bgn_idx + 1;	// +1 to position after last known ws
 						int fld_end = ws_end_idx == -1 ? pos : ws_end_idx;
-						byte[] val = Bry_.Mid(src, fld_bgn, fld_end);
+						byte[] val = BryLni.Mid(src, fld_bgn, fld_end);
 						Parse_cmd(wiki, key_id, val);
 					}
 					fld_bgn = pos + AsciiByte.Len1;
@@ -131,11 +132,11 @@ class Dpl_itm {
 			case Dpl_itm_keys.Key_stablepages:			stable_pages = Dpl_stable_tid.Parse(val); break;
 			case Dpl_itm_keys.Key_qualitypages:			quality_pages = Dpl_redirect.Parse(val); break;
 			case Dpl_itm_keys.Key_addfirstcategorydate:	Parse_ctg_date(val); break;
-			case Dpl_itm_keys.Key_count:				count = Bry_.To_int_or(val, Int_.Min_value); break;
-			case Dpl_itm_keys.Key_offset:				offset = Bry_.To_int_or(val, Int_.Min_value); break;
-			case Dpl_itm_keys.Key_imagesperow:			gallery_imgs_per_row = Bry_.To_int_or(val, Int_.Min_value); break;
-			case Dpl_itm_keys.Key_imagewidth:			gallery_img_w = Bry_.To_int_or(val, Int_.Min_value); break;
-			case Dpl_itm_keys.Key_imageheight:			gallery_img_h = Bry_.To_int_or(val, Int_.Min_value); break;
+			case Dpl_itm_keys.Key_count:				count = BryUtl.ToIntOr(val, IntUtl.MinValue); break;
+			case Dpl_itm_keys.Key_offset:				offset = BryUtl.ToIntOr(val, IntUtl.MinValue); break;
+			case Dpl_itm_keys.Key_imagesperow:			gallery_imgs_per_row = BryUtl.ToIntOr(val, IntUtl.MinValue); break;
+			case Dpl_itm_keys.Key_imagewidth:			gallery_img_w = BryUtl.ToIntOr(val, IntUtl.MinValue); break;
+			case Dpl_itm_keys.Key_imageheight:			gallery_img_h = BryUtl.ToIntOr(val, IntUtl.MinValue); break;
 			case Dpl_itm_keys.Key_gallerycaption:		gallery_caption = val; break;	// FUTURE: parse for {{int:}}?
 			case Dpl_itm_keys.Key_galleryshowfilesize:	gallery_filesize = Dpl_itm_keys.Parse_as_bool(val, true); break;
 			case Dpl_itm_keys.Key_galleryshowfilename:	gallery_filename = Dpl_itm_keys.Parse_as_bool(val, true); break;
@@ -160,35 +161,35 @@ class Dpl_itm {
 //			}
 	}
 	private void Parse_missing_key(Gfo_usr_dlg usr_dlg, byte[] page_ttl, byte[] src, int fld_bgn, int fld_end) {
-		byte[] key_bry = Bry_.Mid(src, fld_bgn, fld_end);
+		byte[] key_bry = BryLni.Mid(src, fld_bgn, fld_end);
 		boolean log = 
 			(	Known_invalid_keys.Get_by_mid(src, fld_bgn, fld_end) != null	// known invalid key; just log it; handles common items like orcer and showcurid
-			||	Bry_.Has_at_bgn(key_bry, Gfh_tag_.Comm_bgn)					// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
+			||	BryUtl.HasAtBgn(key_bry, Gfh_tag_.Comm_bgn)					// ignore comment-like keys; EX: <!--category=Ctg_0--> will have key of "<!--category="
 			);
-		String err_msg = String_.Format("dynamic_page_list:unknown_key: page={0} key={1}", String_.new_u8(page_ttl), String_.new_u8(key_bry));
+		String err_msg = StringUtl.Format("dynamic_page_list:unknown_key: page={0} key={1}", StringUtl.NewU8(page_ttl), StringUtl.NewU8(key_bry));
 		if (log)
 			usr_dlg.Log_many("", "", err_msg);
 		else
 			usr_dlg.Warn_many("", "", err_msg);
 	}
 	private static final Hash_adp_bry Known_invalid_keys = Hash_adp_bry.ci_a7()
-	.Add_str_obj("orcer"						, Bool_obj_val.True)	// ignore as per http://en.wikinews.org/wiki/Template_talk:United_States; (Note it doesn't make a difference, as categoryadd is the default order method.)
-	.Add_str_obj("addcategorydatefirst"			, Bool_obj_val.True)
-	.Add_str_obj("mainspace"					, Bool_obj_val.True)
-	.Add_str_obj("showcurid"					, Bool_obj_val.True)	// ignore for now; puts unique id at end of link for google news; https://www.mediawiki.org/wiki/Extension:DynamicPageList_%28Wikimedia%29; DATE:2015-09-07
-	.Add_str_obj("googlehack"					, Bool_obj_val.True)	// same as showcurid
-	.Add_str_obj("sort"							, Bool_obj_val.True)	// fr.n
-	.Add_str_obj("supresserror"					, Bool_obj_val.True)	// fr.n
-	.Add_str_obj("supresserrors"				, Bool_obj_val.True)	// frequency: 3 - 10
-	.Add_str_obj("addlasteditor"				, Bool_obj_val.True)
-	.Add_str_obj("noresultsheader"				, Bool_obj_val.True)
-	.Add_str_obj("catergory"					, Bool_obj_val.True)
-	.Add_str_obj("catrgory"						, Bool_obj_val.True)
-	.Add_str_obj("allrevisionssince"			, Bool_obj_val.True)	// frequency: 1
-	.Add_str_obj("limit"						, Bool_obj_val.True)
-	.Add_str_obj("namespacename"				, Bool_obj_val.True)
+	.Add_str_obj("orcer"						, BoolVal.True)	// ignore as per http://en.wikinews.org/wiki/Template_talk:United_States; (Note it doesn't make a difference, as categoryadd is the default order method.)
+	.Add_str_obj("addcategorydatefirst"			, BoolVal.True)
+	.Add_str_obj("mainspace"					, BoolVal.True)
+	.Add_str_obj("showcurid"					, BoolVal.True)	// ignore for now; puts unique id at end of link for google news; https://www.mediawiki.org/wiki/Extension:DynamicPageList_%28Wikimedia%29; DATE:2015-09-07
+	.Add_str_obj("googlehack"					, BoolVal.True)	// same as showcurid
+	.Add_str_obj("sort"							, BoolVal.True)	// fr.n
+	.Add_str_obj("supresserror"					, BoolVal.True)	// fr.n
+	.Add_str_obj("supresserrors"				, BoolVal.True)	// frequency: 3 - 10
+	.Add_str_obj("addlasteditor"				, BoolVal.True)
+	.Add_str_obj("noresultsheader"				, BoolVal.True)
+	.Add_str_obj("catergory"					, BoolVal.True)
+	.Add_str_obj("catrgory"						, BoolVal.True)
+	.Add_str_obj("allrevisionssince"			, BoolVal.True)	// frequency: 1
+	.Add_str_obj("limit"						, BoolVal.True)
+	.Add_str_obj("namespacename"				, BoolVal.True)
 	;
-	public static final int Ns_filter_null = Int_.Min_value;
+	public static final int Ns_filter_null = IntUtl.MinValue;
 	// boolean ctg_date = false, ctg_date_strip = false;
 	// byte[] ns_include = null;
 	// byte[] ctg_date_fmt;
@@ -206,7 +207,7 @@ class Dpl_stable_tid {
 			case Dpl_itm_keys.Key_exclude: 			return Tid_exclude;
 			case Dpl_itm_keys.Key_include: 			return Tid_include;
 			case Dpl_itm_keys.Key_only: 			return Tid_only;
-			default:								throw Err_.new_unhandled(key);
+			default:								throw ErrUtl.NewUnhandled(key);
 		}
 	}
 }

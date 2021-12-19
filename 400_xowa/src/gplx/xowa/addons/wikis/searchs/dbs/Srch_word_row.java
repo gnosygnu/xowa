@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.dbs;
+import gplx.types.basics.utls.BryUtl;
 public class Srch_word_row {
 	public Srch_word_row(int id, byte[] text, int link_count, int link_count_score, int link_score_min, int link_score_max) {
 		this.Id = id; this.Text = text;
@@ -30,5 +31,5 @@ public class Srch_word_row {
 	public int Db_row_size() {return Db_row_size_fixed + Text.length;}
 	private static final int Db_row_size_fixed = (5 * 4);	// 5 ints
 
-        public static final Srch_word_row Empty = new Srch_word_row(-1, Bry_.Empty, 0, 0, 0, 0);
+        public static final Srch_word_row Empty = new Srch_word_row(-1, BryUtl.Empty, 0, 0, 0, 0);
 }

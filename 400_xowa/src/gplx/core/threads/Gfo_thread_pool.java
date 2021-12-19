@@ -13,7 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*;
+package gplx.core.threads;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Gfo_thread_pool implements Gfo_invk {
 	private Object thread_lock = new Object();
 	private List_adp queue = List_adp_.New();
@@ -37,14 +47,14 @@ public class Gfo_thread_pool implements Gfo_invk {
 			if (running) return;								// already running; discard run request and rely on running-wkr to call Run when done
 			int len = queue.Len(); if (len == 0) return;		// nothing in list; occurs when last item calls Run when done
 			running = true;
-			wkr = (Gfo_thread_wkr)List_adp_.Pop_first(queue);
+			wkr = (Gfo_thread_wkr)List_adp_.PopFirst(queue);
 		}			
 		Thread_adp_.Start_by_msg(wkr.Thread__name(), this, run_msg.Clear().Add("v", wkr));
 	}
 	private void Run_wkr(Gfo_thread_wkr wkr) {
 		try {wkr.Thread__exec();}
 		catch (Exception e) {
-			usr_dlg.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", wkr.Thread__name(), Err_.Message_gplx_full(e));
+			usr_dlg.Warn_many("", "", "uncaught exception while running thread; name=~{0} err=~{1}", wkr.Thread__name(), ErrUtl.ToStrFull(e));
 		}
 		finally {
 			if (wkr.Thread__resume())

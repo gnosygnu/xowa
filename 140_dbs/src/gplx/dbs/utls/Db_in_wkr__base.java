@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.utls; import gplx.dbs.*;
+import gplx.frameworks.objects.Cancelable;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
 public abstract class Db_in_wkr__base {
 	protected int Interval() {return gplx.dbs.engines.sqlite.Sqlite_engine_.Stmt_arg_max - 10;}	// -10 for safety's sake
 	protected abstract Db_qry	Make_qry	(int bgn, int end);

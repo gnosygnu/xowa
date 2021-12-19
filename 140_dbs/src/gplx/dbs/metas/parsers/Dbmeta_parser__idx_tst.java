@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas.parsers;
-import gplx.Bry_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.metas.Dbmeta_idx_fld;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Dbmeta_parser__idx_tst {
@@ -32,10 +32,10 @@ class Dbmeta_parser__idx_fxt {
 	public void Clear() {}
 	public Dbmeta_idx_itm Make_idx(boolean unique, String idx_name, String tbl_name, String... fld_names) {return new Dbmeta_idx_itm(unique, tbl_name, idx_name, Dbmeta_idx_itm.To_fld_ary(fld_names));}
 	public void Test_parse(String src, Dbmeta_idx_itm expd) {
-		Dbmeta_idx_itm actl = parser.Parse(Bry_.new_u8(src));
-		Tfds.Eq_bool(expd.Unique(), actl.Unique());
-		Tfds.Eq_str(expd.Name(), actl.Name());
-		Tfds.Eq_str(expd.Tbl(), actl.Tbl());
-		Tfds.Eq_bool(BoolUtl.Y, Dbmeta_idx_fld.Ary_eq(expd.Flds, actl.Flds));
+		Dbmeta_idx_itm actl = parser.Parse(BryUtl.NewU8(src));
+		GfoTstr.Eq(expd.Unique(), actl.Unique());
+		GfoTstr.Eq(expd.Name(), actl.Name());
+		GfoTstr.Eq(expd.Tbl(), actl.Tbl());
+		GfoTstr.Eq(BoolUtl.Y, Dbmeta_idx_fld.Ary_eq(expd.Flds, actl.Flds));
 	}
 }

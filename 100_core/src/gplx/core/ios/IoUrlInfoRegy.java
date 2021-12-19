@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,17 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
-import gplx.core.envs.*;
+package gplx.core.ios;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.core.envs.Op_sys;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class IoUrlInfoRegy implements Gfo_invk {
 	public void Reg(IoUrlInfo info) {hash.AddIfDupeUseNth(info.Key(), info);}
 	public IoUrlInfo Match(String raw) {
-		if (String_.Len(raw) == 0) return IoUrlInfo_.Nil;
+		if (StringUtl.Len(raw) == 0) return IoUrlInfo_.Nil;
 		for (int i = hash.Len(); i > 0; i--) {
-			IoUrlInfo info = (IoUrlInfo)hash.Get_at(i - 1);
+			IoUrlInfo info = (IoUrlInfo)hash.GetAt(i - 1);
 			if (info.Match(raw)) return info;
 		}
-		throw Err_.new_wo_type("could not match ioPathInfo", "raw", raw, "count", hash.Len());
+		throw ErrUtl.NewArgs("could not match ioPathInfo", "raw", raw, "count", hash.Len());
 	}
 	public void Reset() {
 		hash.Clear();
@@ -33,7 +40,7 @@ public class IoUrlInfoRegy implements Gfo_invk {
 		Reg(IoUrlInfo_wnt.Instance);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_Add)) {
+		if        (ctx.Match(k, Invk_Add)) {
 			String srcDirStr = m.ReadStr("srcDir");
 			String trgDirStr = m.ReadStr("trgDir");
 			String engineKey = m.ReadStrOr("engineKey", IoEngine_.SysKey);
@@ -42,9 +49,9 @@ public class IoUrlInfoRegy implements Gfo_invk {
 			IoUrlInfoRegy.Instance.Reg(alias);
 		}
 		return this;
-	}	public static final String Invk_Add = "Add";
+	}   public static final String Invk_Add = "Add";
 	Ordered_hash hash = Ordered_hash_.New();
-        public static final IoUrlInfoRegy Instance = new IoUrlInfoRegy();
+		public static final IoUrlInfoRegy Instance = new IoUrlInfoRegy();
 	IoUrlInfoRegy() {
 		this.Reset();
 	}

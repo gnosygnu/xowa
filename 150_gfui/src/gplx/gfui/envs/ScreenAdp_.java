@@ -13,22 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.envs; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.envs; import gplx.gfui.*;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
 import gplx.gfui.controls.gxws.*;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class ScreenAdp_ {
 	public static final ScreenAdp Primary = screen_(0);
 	public static ScreenAdp as_(Object obj) {return obj instanceof ScreenAdp ? (ScreenAdp)obj : null;}
-	public static ScreenAdp cast(Object obj) {try {return (ScreenAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ScreenAdp.class, obj);}}
+	public static ScreenAdp cast(Object obj) {try {return (ScreenAdp)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, ScreenAdp.class, obj);}}
 	public static ScreenAdp parse(String raw) {	// ex: {screen{1}
 		try {
-			raw = String_.Replace(raw, "{screen{", "");
-			raw = String_.Replace(raw, "}", "");
-			return ScreenAdp_.screen_(Int_.Parse(raw));
-		}	catch(Exception exc) {throw Err_.new_parse_exc(exc, ScreenAdp.class, raw);}
+			raw = StringUtl.Replace(raw, "{screen{", "");
+			raw = StringUtl.Replace(raw, "}", "");
+			return ScreenAdp_.screen_(IntUtl.Parse(raw));
+		}	catch(Exception exc) {throw ErrUtl.NewParse(exc, ScreenAdp.class, raw);}
 	}
 	public static ScreenAdp from_point_(PointAdp pos) {// NOTE: not using FromPoint b/c of plat_wce
 		if (ScreenAdp_.Count() == 1) return Primary;
@@ -45,7 +47,7 @@ public class ScreenAdp_ {
 //		return 1;//Screen.AllScreens.Length;
 			}
 	public static ScreenAdp screen_(int index) {
-				if (index >= ScreenAdp_.Count()) throw Err_.new_missing_idx(index, ScreenAdp_.Count());
+				if (index >= ScreenAdp_.Count()) throw ErrUtl.NewMissingIdx(index, ScreenAdp_.Count());
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice[] devs = env.getScreenDevices();
 		GraphicsConfiguration conf = devs[index].getDefaultConfiguration();		

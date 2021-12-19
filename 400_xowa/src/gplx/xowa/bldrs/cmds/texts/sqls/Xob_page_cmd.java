@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.xowa.bldrs.cmds.texts.sqls;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.core.ios.*;
 import gplx.xowa.bldrs.wkrs.*;
@@ -26,7 +32,7 @@ import gplx.xowa.addons.bldrs.files.dbs.*;
 public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gfo_invk {
 	private Xow_db_mgr db_mgr; private Db_idx_mode idx_mode = Db_idx_mode.Itm_end; private Xowd_page_tbl page_core_tbl; private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
 	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl; private boolean redirect_id_enabled;
-	private DateAdp modified_latest = DateAdp_.MinValue; private int page_count_all, page_count_main = 0; private int commit_interval = 100000;	// 100 k				
+	private GfoDate modified_latest = GfoDateUtl.MinValue; private int page_count_all, page_count_main = 0; private int commit_interval = 100000;	// 100 k
 	private Dg_match_mgr dg_match_mgr; private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	public Xob_page_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	public String Page_wkr__key() {return Xob_cmd_keys.Key_text_page;}
@@ -57,7 +63,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 	}
 	public void Page_wkr__run(Xowd_page_itm page) {
 		int id = page.Id();
-		DateAdp modified = page.Modified_on(); if (modified.compareTo(modified_latest) == CompareAbleUtl.More) modified_latest = modified;
+		GfoDate modified = page.Modified_on(); if (modified.compareTo(modified_latest) == CompareAbleUtl.More) modified_latest = modified;
 		byte[] text_raw = page.Text(); int text_raw_len = page.Text_len();
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text_raw, text_raw_len); boolean redirect = redirect_ttl != null;
 		page.Redirected_(redirect);
@@ -70,7 +76,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 		Xow_db_file text_db = ns_to_db_mgr.Get_by_ns(ns.Bldr_data(), text_zip.length);
 		try {db_mgr.Create_page(page_core_tbl, text_db.Tbl__text(), id, page.Ns_id(), page.Ttl_page_db(), redirect, modified, text_zip, text_raw_len, random_int, text_db.Id(), -1);}
 		catch (Exception e) {
-			throw Err_.new_exc(e, "bldr", "create page in db failed; skipping page", "id", id, "ns", page.Ns_id(), "name", page.Ttl_page_db(), "redirect", redirect, "modified", modified, "text_len", text_raw_len, "text_db_id", text_db.Id());
+			throw ErrUtl.NewArgs(e, "create page in db failed; skipping page", "id", id, "ns", page.Ns_id(), "name", page.Ttl_page_db(), "redirect", redirect, "modified", modified, "text_len", text_raw_len, "text_db_id", text_db.Id());
 		}
 		if (redirect && redirect_id_enabled)
 			redirect_tbl.Insert(id, page.Ttl_page_db(), redirect_ttl);

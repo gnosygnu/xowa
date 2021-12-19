@@ -13,16 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
+package gplx.xowa.xtns.dynamicPageList;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.errs.ErrUtl;
 class Dpl_itm_keys {
 	public static byte Parse(byte[] src, int bgn, int end, byte or) {
 		Object o = keys.Get_by_mid(src, bgn, end);
-		return o == null ? or : ((Byte_obj_val)o).Val();
+		return o == null ? or : ((ByteVal)o).Val();
 	}
 	public static byte Parse(byte[] bry, byte or) {
 		Object o = keys.Get_by_bry(bry);
-		return o == null ? or : ((Byte_obj_val)o).Val();
+		return o == null ? or : ((ByteVal)o).Val();
 	}
 	public static boolean Parse_as_bool(byte[] bry, boolean or) {
 		byte key = Dpl_itm_keys.Parse(bry, Key_null);
@@ -30,11 +34,11 @@ class Dpl_itm_keys {
 			case Dpl_itm_keys.Key_false:	return false;
 			case Dpl_itm_keys.Key_true:		return true;
 			case Dpl_itm_keys.Key_null:		return or;
-			default:						throw Err_.new_unhandled(String_.new_u8(bry));	// shouldn't happen; should always go to or;
+			default:						throw ErrUtl.NewUnhandled(StringUtl.NewU8(bry));	// shouldn't happen; should always go to or;
 		}
 	}
 	public static final byte
-	  Key_null = Byte_.Max_value_127
+	  Key_null = ByteUtl.MaxValue127
 	, Key_category = 1
 	, Key_notcategory = 2
 	, Key_ns = 3

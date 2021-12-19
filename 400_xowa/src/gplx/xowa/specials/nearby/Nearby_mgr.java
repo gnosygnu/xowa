@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.specials.nearby;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
 public class Nearby_mgr implements Xow_special_page {
 	Xowe_wiki wiki; byte[] trg;
@@ -25,7 +34,7 @@ public class Nearby_mgr implements Xow_special_page {
 	int results_cur = 0;
 //		int depth_max = 5;
 //		int pages_count = 0;
-	Bry_bfr tmp_bfr = Bry_bfr_.New();
+	BryWtr tmp_bfr = BryWtr.New();
 	public int Results_max() {return results_max;} public Nearby_mgr Results_max_(int v) {results_max = v; return this;} private int results_max = 1;
 	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__nearby;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
@@ -35,26 +44,26 @@ public class Nearby_mgr implements Xow_special_page {
 //			wiki.Parser_mgr().Parse(page, false);	// do not clear else previous Search_text will be lost		
 	}
 	byte[] Bld_html(Xowe_wiki wiki) {
-		form_fmtr.Bld_bfr_many(tmp_bfr);
-		List_adp list = Find_from_to(wiki, Bry_.new_a7("Earth"), Bry_.new_a7("Atom"), excluded);
-		tmp_bfr.Add_str_a7("<table>");
+		form_fmtr.BldToBfrMany(tmp_bfr);
+		List_adp list = Find_from_to(wiki, BryUtl.NewA7("Earth"), BryUtl.NewA7("Atom"), excluded);
+		tmp_bfr.AddStrA7("<table>");
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Nearby_rslt rslt = (Nearby_rslt)list.Get_at(i);
-			tmp_bfr.Add_str_a7("<tr>");
+			Nearby_rslt rslt = (Nearby_rslt)list.GetAt(i);
+			tmp_bfr.AddStrA7("<tr>");
 			int cell_len = rslt.Len();
 			for (int j = 0; j < cell_len; j++) {
 				Xoa_ttl ttl = (Xoa_ttl)rslt.Get_at(j);
-				tmp_bfr.Add_str_a7("<td>[[");
+				tmp_bfr.AddStrA7("<td>[[");
 				tmp_bfr.Add(ttl.Page_db());
-				tmp_bfr.Add_str_a7("]]</td>");
+				tmp_bfr.AddStrA7("]]</td>");
 			}
-			tmp_bfr.Add_str_a7("</tr>");
+			tmp_bfr.AddStrA7("</tr>");
 		}
-		tmp_bfr.Add_str_a7("</table>");
-		return tmp_bfr.To_bry_and_clear();
+		tmp_bfr.AddStrA7("</table>");
+		return tmp_bfr.ToBryAndClear();
 	}
-	Bry_fmtr form_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl
+	BryFmtr form_fmtr = BryFmtr.New(StringUtl.ConcatLinesNl
 		(	"<form id='xowa_nearby_form' action='/wiki/Special:XowaNearby'>"
 		,	"<table>"
 		,	"  <tr><td>From:</td><td><input name='xowa_bgn' value='Earth' /></td></tr>"
@@ -86,7 +95,7 @@ public class Nearby_mgr implements Xow_special_page {
 		int len = src_pool.Len();
 		Ordered_hash next_pool = Ordered_hash_.New_bry();
 		for (int i = 0; i < len; i++) {
-			Nearby_itmx itmx = (Nearby_itmx)src_pool.Get_at(i);
+			Nearby_itmx itmx = (Nearby_itmx)src_pool.GetAt(i);
 			Xoa_ttl ttl = itmx.Ttl();
 			byte[] ttl_bry = ttl.Page_db();
 			if (excluded.Has(ttl_bry)) continue;
@@ -104,7 +113,7 @@ public class Nearby_mgr implements Xow_special_page {
 			}
 			int lnkis_len = lnkis.Len();
 			for (int j = 0; j < lnkis_len; j++) {
-				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.Get_at(j);
+				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.GetAt(j);
 				if (next_pool.Has(lnki_ttl.Page_db())) continue;
 				Nearby_itmx next_itmx = new Nearby_itmx(itmx.Trail(), lnki_ttl);
 				next_pool.Add(lnki_ttl.Page_db(), next_itmx);
@@ -175,20 +184,20 @@ class Nearby_rslt {
 	public Nearby_rslt(List_adp trail, Xoa_ttl trg_ttl) {
 		int len = trail.Len();
 		for (int i = 0; i < len; i++) {
-			Xoa_ttl ttl = (Xoa_ttl)trail.Get_at(i);
+			Xoa_ttl ttl = (Xoa_ttl)trail.GetAt(i);
 			list.Add(ttl);
 		}
 		list.Add(trg_ttl);
 	}
 	public int Len() {return list.Len();}
-	public Xoa_ttl Get_at(int i) {return (Xoa_ttl)list.Get_at(i);}
+	public Xoa_ttl Get_at(int i) {return (Xoa_ttl)list.GetAt(i);}
 	List_adp list = List_adp_.New();	
 }
 class Nearby_itmx {
 	public Nearby_itmx(List_adp v, Xoa_ttl ttl) {
 		int len = v.Len();
 		for (int i = 0; i < len; i++) {
-			Xoa_ttl v_ttl = (Xoa_ttl)v.Get_at(i);
+			Xoa_ttl v_ttl = (Xoa_ttl)v.GetAt(i);
 			trail.Add(v_ttl);
 		}
 		trail.Add(ttl);

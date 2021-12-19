@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.lists.GfoIndexedList;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.commons.lists.GfoIndexedList;
 public class DbmetaFldList {
 	private final GfoIndexedList<String, DbmetaFldItm> flds = new GfoIndexedList<>();
 	public void Clear()                                            {flds.Clear();}

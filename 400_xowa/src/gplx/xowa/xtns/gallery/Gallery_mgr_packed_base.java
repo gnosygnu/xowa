@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.modules.*;
+package gplx.xowa.xtns.gallery;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.MathUtl;
+import gplx.xowa.*;
+import gplx.xowa.files.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 	@Override public byte	Tid() {return Gallery_mgr_base_.Tid__packed;}
@@ -45,8 +49,8 @@ public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 		Get_thumb_size_static(lnki, ext, itm_default_w, itm_default_h);
 	}
 	@Override public void Adjust_image_parameters(Xof_file_itm xfer_itm) {
-		int w = (int)Math_.Ceil(xfer_itm.Html_w() / Scale_factor);
-		int h = (int)Math_.Ceil(xfer_itm.Html_h() / Scale_factor);
+		int w = (int)MathUtl.Ceil(xfer_itm.Html_w() / Scale_factor);
+		int h = (int)MathUtl.Ceil(xfer_itm.Html_h() / Scale_factor);
 		xfer_itm.Html_size_(w, h);
 	}
 	public static final double Scale_factor = 1.5d;	// We artificially have 1.5 the resolution neccessary so that we can scale it up by that much on the client side, without worrying about requesting a new image.
@@ -62,19 +66,19 @@ public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 	}
 }
 class Gallery_mgr_packed_overlay extends Gallery_mgr_packed_base {
-	@Override public void Wrap_gallery_text(Bry_bfr bfr, byte[] gallery_text, int thm_w, int thm_h) {
+	@Override public void Wrap_gallery_text(BryWtr bfr, byte[] gallery_text, int thm_w, int thm_h) {
 		if (gallery_text.length == 0) return; // If we have no text, do not output anything to avoid ugly white overlay.
 		int img_w = this.Get_gb_width(thm_w, thm_h) - this.Get_thumb_padding() - this.Get_gb_padding();
 		int caption_w = (img_w - 20);
-		bfr	.Add(Wrap_gallery_text_0).Add_int_variable(caption_w)
+		bfr	.Add(Wrap_gallery_text_0).AddIntVariable(caption_w)
 			.Add(Wrap_gallery_text_1).Add(gallery_text)
 			.Add(Wrap_gallery_text_2)
 			;
 	}
 	private static final byte[]
-	  Wrap_gallery_text_0 = Bry_.new_a7("\n      <div class=\"gallerytextwrapper\" style=\"width: ")
-	, Wrap_gallery_text_1 = Bry_.new_a7("px\"><div class=\"gallerytext\">\n") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
-	, Wrap_gallery_text_2 = Bry_.new_a7("\n      </div></div>")	// NOTE: 2nd </div> is not part of MW, but needed to close div
+	  Wrap_gallery_text_0 = BryUtl.NewA7("\n      <div class=\"gallerytextwrapper\" style=\"width: ")
+	, Wrap_gallery_text_1 = BryUtl.NewA7("px\"><div class=\"gallerytext\">\n") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
+	, Wrap_gallery_text_2 = BryUtl.NewA7("\n      </div></div>")	// NOTE: 2nd </div> is not part of MW, but needed to close div
 	;
 }
 class Gallery_mgr_packed_hover extends Gallery_mgr_packed_overlay {		@Override public byte Tid() {return Gallery_mgr_base_.Tid__packed__hover;}

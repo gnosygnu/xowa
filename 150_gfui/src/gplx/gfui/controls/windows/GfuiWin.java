@@ -13,18 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.Datetime_now;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk_cmd;
-import gplx.Gfo_invk_cmd_mgr;
-import gplx.GfsCtx;
-import gplx.Keyval_hash;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.UsrDlg_;
-import gplx.UsrMsg;
+package gplx.gfui.controls.windows; import gplx.frameworks.objects.New;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.Gfo_invk_cmd_mgr;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.commons.KeyValHash;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.libs.dlgs.UsrMsg;
 import gplx.core.envs.Env_;
 import gplx.gfui.SizeAdp;
 import gplx.gfui.SizeAdp_;
@@ -59,15 +60,15 @@ public class GfuiWin extends GfuiElemBase {
 	public GfuiQuitMode QuitMode()		{return quitMode;} public GfuiWin QuitMode_(GfuiQuitMode val) {quitMode = val; return this;} private GfuiQuitMode quitMode = GfuiQuitMode.ExitApp; // easier to debug
 	@Override public boolean Opened_done()	{return opened;} private boolean opened;
 	@Override public GfuiWin OwnerWin()	{return this;}  // TODO_OLD: null
-	@gplx.Internal protected GfuiWinKeyCmdMgr KeyCmdMgr() {return keyCmdMgr;} private GfuiWinKeyCmdMgr keyCmdMgr = GfuiWinKeyCmdMgr.new_(); 
+	public GfuiWinKeyCmdMgr KeyCmdMgr() {return keyCmdMgr;} private GfuiWinKeyCmdMgr keyCmdMgr = GfuiWinKeyCmdMgr.new_();
 	public GfuiWinFocusMgr FocusMgr() {return focusMgr;} private GfuiWinFocusMgr focusMgr;
-	@gplx.New public GfuiWin Size_(SizeAdp size) {
+	@New public GfuiWin Size_(SizeAdp size) {
 		super.Size_(size);
 		if (!opened && (size.Width() < 112 || size.Height() < 27)) // WORKAROUND/WINFORMS: Form.Size must be > 112,27 if Form is not Visible
 			smallOpenSize = size;				
 		return this;
 	}	private SizeAdp smallOpenSize = SizeAdp_.Null;
-	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
+	@Override public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
 		super.ctor_kit_GfuiElemBase(kit, key, underElem, ctorArgs);
 		win = (GxwWin)underElem;
 		win.OpenedCmd_set(Gfo_invk_cmd.New_by_key(this, Evt_Opened));
@@ -78,7 +79,7 @@ public class GfuiWin extends GfuiElemBase {
 		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		win = (GxwWin)this.UnderElem();
 		win.OpenedCmd_set(Gfo_invk_cmd.New_by_key(this, Evt_Opened));
@@ -89,10 +90,10 @@ public class GfuiWin extends GfuiElemBase {
 		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}
-	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {
-		String type = (String)ctorArgs.Get_val_or(GfuiWin_.InitKey_winType, GfuiWin_.InitKey_winType_app);
-		if		(String_.Eq(type, GfuiWin_.InitKey_winType_tool))		return GxwElemFactory_.Instance.win_tool_(ctorArgs);
-		else if	(String_.Eq(type, GfuiWin_.InitKey_winType_toaster))	return GxwElemFactory_.Instance.win_toaster_(ctorArgs);
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {
+		String type = (String)ctorArgs.GetByValOr(GfuiWin_.InitKey_winType, GfuiWin_.InitKey_winType_app);
+		if		(StringUtl.Eq(type, GfuiWin_.InitKey_winType_tool))		return GxwElemFactory_.Instance.win_tool_(ctorArgs);
+		else if	(StringUtl.Eq(type, GfuiWin_.InitKey_winType_toaster))	return GxwElemFactory_.Instance.win_toaster_(ctorArgs);
 		else															return GxwElemFactory_.Instance.win_app_();
 	}
 	@Override public void Opened_cbk() {
@@ -136,7 +137,7 @@ public class GfuiWin extends GfuiElemBase {
 		else if	(ctx.Match(k, Evt_Opened))								Opened_cbk();
 		else if	(ctx.Match(k, StopAppByAltF4_evt))						StopAppByAltF4(IptEventData.ctx_(ctx, m));
 		else if	(ctx.Match(k, Invk_ShowFocusOwner))						GfuiEnv_.ShowMsg(GfuiFocusMgr.Instance.FocusedElem().Key_of_GfuiElem());
-		else if	(ctx.Match(k, GfuiStatusBoxBnd.Invk_ShowTime))			{UsrDlg_.Instance.Note(UsrMsg.new_(Datetime_now.Get().toString())); return this;}
+		else if	(ctx.Match(k, GfuiStatusBoxBnd.Invk_ShowTime))			{UsrDlg_.Instance.Note(UsrMsg.new_(GfoDateNow.Get().toString())); return this;}
 		else if	(ctx.MatchIn(k, Invk_Close, GfuiQuitMode.Destroy_cmd))	Close();
 		else if	(ctx.MatchIn(k, Invk_Hide, GfuiQuitMode.Suspend_cmd))	Hide();
 		else {

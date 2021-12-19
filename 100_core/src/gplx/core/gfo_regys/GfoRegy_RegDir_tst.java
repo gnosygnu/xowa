@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfo_regys; import gplx.*; import gplx.core.*;
+package gplx.core.gfo_regys;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class GfoRegy_RegDir_tst {
 	@Before public void setup() {
 		regy = GfoRegy.new_();
 		Io_mgr.Instance.InitEngine_mem();
 		root = Io_url_.mem_dir_("mem/root");
-	}	GfoRegy regy; Io_url root;
+	}   GfoRegy regy; Io_url root;
 	@Test public void Basic() {
 		ini_fil("101_tsta.txt");
 		ini_fil("102_tstb.txt");
@@ -35,25 +39,25 @@ public class GfoRegy_RegDir_tst {
 		ini_fil("101_tsta.txt");
 		ini_fil("102_tsta.txt");
 		try {regy.RegDir(root, "*.txt", false, "_", ".");}
-		catch (Exception e) {Tfds.Err_has(e, GfoRegy.Err_Dupe); return;}
-		Tfds.Fail_expdError();
+		catch (Exception e) {GfoTstr.ErrHas(e, GfoRegy.Err_Dupe); return;}
+		GfoTstr.FailBcExpdError();
 	}
 	@Test public void Err_chopBgn() {
 		ini_fil("123_");
 		try {regy.RegDir(root, "*", false, "_", ".");}
-		catch (Exception e) {Tfds.Err_has(e, GfoRegy.Err_ChopBgn); return;}
-		Tfds.Fail_expdError();
+		catch (Exception e) {GfoTstr.ErrHas(e, GfoRegy.Err_ChopBgn); return;}
+		GfoTstr.FailBcExpdError();
 	}
 	@Test public void Err_chopEnd() {
 		ini_fil(".txt");
 		try {regy.RegDir(root, "*.txt", false, "_", ".");}
-		catch (Exception e) {Tfds.Err_has(e, GfoRegy.Err_ChopEnd); return;}
-		Tfds.Fail_expdError();
+		catch (Exception e) {GfoTstr.ErrHas(e, GfoRegy.Err_ChopEnd); return;}
+		GfoTstr.FailBcExpdError();
 	}
-	void tst_Count(int expd) {Tfds.Eq(expd, regy.Count());}
+	void tst_Count(int expd) {GfoTstr.EqObj(expd, regy.Count());}
 	void tst_Exists(String expd) {
 		GfoRegyItm itm = regy.FetchOrNull(expd);
-		Tfds.Eq_nullNot(itm);
+		GfoTstr.EqNotNull(itm);
 	}
 	void ini_fil(String... nest) {Io_mgr.Instance.SaveFilStr(root.GenSubFil_nest(nest), "");}
 }

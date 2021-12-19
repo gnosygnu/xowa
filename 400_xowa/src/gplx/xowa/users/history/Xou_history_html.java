@@ -13,27 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.users.history;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.specials.*;
-public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xow_special_page {
+public class Xou_history_html implements BryBfrArg, Xow_special_page {
 	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__page_history;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
 		Xowe_wiki wiki = (Xowe_wiki)wikii; Xoae_page page = (Xoae_page)pagei;
 		this.app = wiki.Appe(); this.mgr = app.Usere().History_mgr();
 		mgr.Sort();
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_m001(); 
-		html_grp.Bld_bfr_many(bfr, this);
-		page.Db().Text().Text_bry_(bfr.To_bry_and_rls());
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetM001();
+		html_grp.BldToBfrMany(bfr, this);
+		page.Db().Text().Text_bry_(bfr.ToBryAndRls());
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = mgr.Len();
 		for (int i = 0; i < len; i++) {
 			Xou_history_itm itm = mgr.Get_at(i);
-			html_itm.Bld_bfr_many(bfr, itm.Wiki(), itm.Page(), itm.View_count(), itm.View_end().XtoStr_fmt_yyyy_MM_dd_HH_mm());
+			html_itm.BldToBfrMany(bfr, itm.Wiki(), itm.Page(), itm.View_count(), itm.View_end().ToStrFmt_yyyy_MM_dd_HH_mm());
 		}		
 	}	private Xou_history_mgr mgr; Xoae_app app;
-	public Bry_fmtr Html_grp() {return html_grp;} Bry_fmtr html_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	public BryFmtr Html_grp() {return html_grp;} BryFmtr html_grp = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 		(	"<table class='sortable'>"
 		,	"  <tr>"
 		,	"    <th>page</th>"
@@ -43,7 +47,7 @@ public class Xou_history_html implements gplx.core.brys.Bfr_arg, Xow_special_pag
 		,	"  </tr>~{itms}"
 		,	"</table>"
 		), "itms");
-	public Bry_fmtr Html_itm() {return html_itm;} Bry_fmtr html_itm = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	public BryFmtr Html_itm() {return html_itm;} BryFmtr html_itm = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 		(	""
 		,	"  <tr>"
 		,	"    <td>[[~{itm_wiki}:~{itm_page}|~{itm_page}]]</td>"

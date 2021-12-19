@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.gfui.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.files;
+import gplx.frameworks.tests.GfoTstr;
+import org.junit.*; import gplx.core.primitives.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_itm_tst {		
 	@Before public void init() {fxt.ini();} Xof_xfer_itm_fxt fxt = new Xof_xfer_itm_fxt();
 	@Test public void Box()						{tst_Calc_view("40,50"	, "40,40"	, "40,40");}	// EX:[[File:Crystal Clear app kedit.svg|50x40px]]
@@ -32,8 +34,8 @@ public class Xof_xfer_itm_tst {
 		Int_2_val file = Int_2_val.parse(file_str);
 		Int_2_val expd = Int_2_val.parse(expd_str);
 		Xof_xfer_itm_.Calc_view(rv, Xop_lnki_type.Id_thumb, lnki.Val_0(), lnki.Val_1(), file.Val_0(), file.Val_1(), true);
-		Tfds.Eq(expd.Val_0(), rv.Val_0());
-		Tfds.Eq(expd.Val_1(), rv.Val_1());
+		GfoTstr.EqObj(expd.Val_0(), rv.Val_0());
+		GfoTstr.EqObj(expd.Val_1(), rv.Val_1());
 	}
 	@Test 	public void Thumb_lnkY() 						{fxt.Lnki_(300, 200).tst(300, 200);}							// size provided; use
 	@Test 	public void Thumb_lnkN() 						{fxt.Lnki_( -1,  -1).tst(220,  -1);}							// w=thumbnail default
@@ -56,8 +58,8 @@ class Xof_xfer_itm_fxt {
 		boolean wmf_thumbable = Xof_xfer_itm_.Lnki_thumbable_calc(lnki_img_type, lnki_w, lnki_h);
 		Int_2_ref calc_size = new Int_2_ref();
 		Xof_xfer_itm_.Calc_xfer_size(calc_size, Xop_lnki_type.Id_thumb, Xof_img_size.Thumb_width_img, file_w, file_h, lnki_w, lnki_h, wmf_thumbable, lnki_upright);
-		Tfds.Eq(expd_w, calc_size.Val_0());
-		Tfds.Eq(expd_h, calc_size.Val_1());
+		GfoTstr.EqObj(expd_w, calc_size.Val_0());
+		GfoTstr.EqObj(expd_h, calc_size.Val_1());
 		return this;
 	}
 }

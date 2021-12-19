@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xot_examples_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -47,7 +50,7 @@ public class Xot_examples_tst {
 		Init_tmpl_redirect(); fxt.Test_parse_tmpl_str("{{Redirect|abc}}", "\"abc\" redirects here. For other uses, see [[abc (disambiguation)]].");
 	}
 	private void Init_tmpl_main() {
-		fxt.Init_page_create("Template:Main", String_.Concat_lines_nl
+		fxt.Init_page_create("Template:Main", StringUtl.ConcatLinesNl
 		(	"{{#ifeq:{{SUBJECTSPACE}}|Category|The main {{#ifeq:{{NAMESPACE:{{{1}}}}}||article|page}}{{#if:{{{2|}}}|s}} for this [[Wikipedia:Categorization|category]] {{#if:{{{2|}}}|are|is}}|Main {{#ifeq:{{NAMESPACE:{{{1}}}}}||article|page}}{{#if:{{{2|}}}|s}}:}} [[{{{1|{{PAGENAME}}}}}|{{{l1|{{{1|{{PAGENAME}}}}}}}}]]{{#if:{{{2| }}}"
 		,	" |{{#if:{{{3|}}}|,&#32;|&#32;and&#32;}}[[{{{2}}}|{{{l2|{{{2}}}}}}]]}}{{#if:{{{3|}}}"
 		,	" |{{#if:{{{4|}}}|,&#32;|,&#32;and&#32;}}[[{{{3}}}|{{{l3|{{{3}}}}}}]]}}{{#if:{{{4|}}}"
@@ -69,7 +72,7 @@ public class Xot_examples_tst {
 	}
 	private void Init_tmpl_about() {
 		fxt.Init_page_create("Template:!", "|");
-		fxt.Init_page_create("Template:About", String_.Concat_lines_nl
+		fxt.Init_page_create("Template:About", StringUtl.ConcatLinesNl
 		(	"{{#if: {{{1|}}}|<!--"
 		,	"	-->This {{#ifeq:{{NAMESPACE}}|{{ns:0}}|article|page}} is about {{{1}}}.&#32;&#32;}}<!--"
 		,	"-->For {{#if:{{{2|}}}|{{{2}}}|other uses}}, see {{#if:{{{3|}}}|[[{{{3}}}]]{{#ifeq:{{{4|}}}|and|&#32;and {{#if:{{{5|}}}|[[{{{5}}}]]|[[{{PAGENAME}} (disambiguation)]]}}}}|[[{{PAGENAME}} (disambiguation)]]}}.<!--"
@@ -89,7 +92,7 @@ public class Xot_examples_tst {
 		));
 	}
 	private void Init_tmpl_see_also() {
-		fxt.Init_page_create("Template:See also", String_.Concat_lines_nl
+		fxt.Init_page_create("Template:See also", StringUtl.ConcatLinesNl
 		(	"See also: {{#if:{{{1<includeonly>|</includeonly>}}} |<!--then:-->[[{{{1}}}{{#if:{{{label 1|{{{l1|}}}}}}|{{!}}{{{label 1|{{{l1}}}}}}}}]] |<!--else:-->'''Error: [[Template:See also|Template must be given at least one article name]]'''"
 		,	"}}{{#if:{{{2|}}}|{{#if:{{{3|}}}|, |&nbsp;and }} [[{{{2}}}{{#if:{{{label 2|{{{l2|}}}}}}|{{!}}{{{label 2|{{{l2}}}}}}}}]]"
 		,	"}}{{#if:{{{3|}}}|{{#if:{{{4|}}}|, |,&nbsp;and }} [[{{{3}}}{{#if:{{{label 3|{{{l3|}}}}}}|{{!}}{{{label 3|{{{l3}}}}}}}}]]"
@@ -110,7 +113,7 @@ public class Xot_examples_tst {
 		));
 	}
 	private void Init_tmpl_redirect() {
-		fxt.Init_page_create("Template:Redirect", String_.Concat_lines_nl
+		fxt.Init_page_create("Template:Redirect", StringUtl.ConcatLinesNl
 		(	"\"{{{1}}}\" redirects here. For {{#if:{{{2|}}}|{{{2}}}|other uses}}, see {{#if:{{{3|}}}|[[{{{3}}}]]{{#ifeq:{{{4|}}}|and|&#32;and {{#if:{{{5|}}}|[[{{{5}}}]]|[[{{{1}}} (disambiguation)]]}}}}|[[{{{1}}} (disambiguation)]]}}.<!--"
 		,	"-->{{#if:{{{2|}}}|{{#if:{{{4|}}}|<!--"
 		,	"  -->{{#ifeq:{{{4|}}}|and||<!-- \"and\" is a special word, don't output \"For and, ...\""

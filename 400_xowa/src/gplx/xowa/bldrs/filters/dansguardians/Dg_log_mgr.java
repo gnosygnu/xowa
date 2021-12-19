@@ -13,16 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
+package gplx.xowa.bldrs.filters.dansguardians;
 import gplx.dbs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
 class Dg_log_mgr {
 	private Db_conn conn;
 	private final Dg_file_tbl		tbl_file = new Dg_file_tbl();
 	private final Dg_rule_tbl		tbl_rule = new Dg_rule_tbl();
 	private final Dg_page_score_tbl	tbl_page_score = new Dg_page_score_tbl();
 	private final Dg_page_rule_tbl	tbl_page_rule = new Dg_page_rule_tbl();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(16);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(16);
 	public void Init(Io_url db_url) {
 		Db_conn_bldr_data conn_data = Db_conn_bldr.Instance.Get_or_new(db_url);
 		conn = conn_data.Conn(); boolean created = conn_data.Created();

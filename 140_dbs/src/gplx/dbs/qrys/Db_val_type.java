@@ -15,22 +15,22 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.qrys;
 
-import gplx.Bry_find_;
-import gplx.DateAdp_;
-import gplx.Decimal_adp_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.objects.lists.GfoListBase;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.primitives.ByteUtl;
-import gplx.objects.primitives.CharUtl;
-import gplx.objects.primitives.DoubleUtl;
-import gplx.objects.primitives.FloatUtl;
-import gplx.objects.primitives.IntUtl;
-import gplx.objects.primitives.LongUtl;
-import gplx.objects.primitives.ShortUtl;
-import gplx.objects.strings.bfrs.GfoStrBldr;
-import gplx.objects.types.TypeUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.commons.lists.GfoListBase;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.ShortUtl;
+import gplx.types.basics.strings.bfrs.GfoStringBldr;
+import gplx.types.basics.utls.ClassUtl;
 
 public class Db_val_type {
 	public static final byte // not serialized
@@ -54,32 +54,32 @@ public class Db_val_type {
 	;
 	public static int ToTypeId(Object o) {
 		Class<?> type = o.getClass();
-		if      (TypeUtl.Eq(type, IntUtl.ClsRefType))         return Tid_int32;
-		else if (TypeUtl.Eq(type, String_.Cls_ref_type))      return Tid_nvarchar;
-		else if (TypeUtl.Eq(type, byte[].class))              return Tid_nvarchar;
-		else if (TypeUtl.Eq(type, BoolUtl.ClsRefType))        return Tid_bool;
-		else if (TypeUtl.Eq(type, ByteUtl.ClsRefType))        return Tid_byte;
-		else if (TypeUtl.Eq(type, LongUtl.ClsRefType))        return Tid_int64;
-		else if (TypeUtl.Eq(type, DoubleUtl.ClsRefType))      return Tid_double;
-		else if (TypeUtl.Eq(type, Decimal_adp_.Cls_ref_type)) return Tid_decimal;
-		else if (TypeUtl.Eq(type, DateAdp_.Cls_ref_type))     return Tid_date;
-		else if (TypeUtl.Eq(type, FloatUtl.ClsRefType))       return Tid_float;
-		else if (TypeUtl.Eq(type, ShortUtl.ClsRefType))       return Tid_int16;
-		else if (TypeUtl.Eq(type, CharUtl.ClsRefType))        return Tid_char;
+		if      (ClassUtl.Eq(type, IntUtl.ClsRefType))         return Tid_int32;
+		else if (ClassUtl.Eq(type, StringUtl.ClsRefType))      return Tid_nvarchar;
+		else if (ClassUtl.Eq(type, byte[].class))              return Tid_nvarchar;
+		else if (ClassUtl.Eq(type, BoolUtl.ClsRefType))        return Tid_bool;
+		else if (ClassUtl.Eq(type, ByteUtl.ClsRefType))        return Tid_byte;
+		else if (ClassUtl.Eq(type, LongUtl.ClsRefType))        return Tid_int64;
+		else if (ClassUtl.Eq(type, DoubleUtl.ClsRefType))      return Tid_double;
+		else if (ClassUtl.Eq(type, GfoDecimalUtl.Cls_ref_type)) return Tid_decimal;
+		else if (ClassUtl.Eq(type, GfoDateUtl.ClsRefType))     return Tid_date;
+		else if (ClassUtl.Eq(type, FloatUtl.ClsRefType))       return Tid_float;
+		else if (ClassUtl.Eq(type, ShortUtl.ClsRefType))       return Tid_int16;
+		else if (ClassUtl.Eq(type, CharUtl.ClsRefType))        return Tid_char;
 		else                                                return Tid_unknown;
 	}
 	public static String ToSqlStr(String sql, GfoListBase<Object> paramList) {
 		try {
-			GfoStrBldr sb = new GfoStrBldr();
+			GfoStringBldr sb = new GfoStringBldr();
 			int oldPos = 0;
 			int paramIdx = 0;
 			while (true) {
-				int newPos = String_.FindFwd(sql, "?", oldPos);
-				if (newPos == Bry_find_.Not_found) break;
+				int newPos = StringUtl.FindFwd(sql, "?", oldPos);
+				if (newPos == BryFind.NotFound) break;
 				if (paramIdx == paramList.Len()) break;
 				sb.AddMid(sql, oldPos, newPos);
 				Object paramObj = paramList.GetAt(paramIdx++);
-				String paramStr = Object_.Xto_str_loose_or(paramObj, "");
+				String paramStr = ObjectUtl.ToStrLooseOr(paramObj, "");
 				boolean quote = false;
 				switch (ToTypeId(paramObj)) {
 					case Tid_char:
@@ -92,7 +92,7 @@ public class Db_val_type {
 				}
 				if (quote) {
 					sb.AddChar('\'');
-					sb.Add(String_.Replace(paramStr, "'", "\\'"));
+					sb.Add(StringUtl.Replace(paramStr, "'", "\\'"));
 					sb.AddChar('\'');
 				} else {
 					sb.Add(paramStr);

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
+package gplx.xowa.addons.wikis.directorys.dbs;
+import gplx.types.basics.utls.BryUtl;
 import gplx.langs.jsons.*;
 public class Xowdir_wiki_json {
 	public Xowdir_wiki_json(String name, String main_page) {
@@ -36,8 +37,8 @@ public class Xowdir_wiki_json {
 
 	public static Xowdir_wiki_json New_by_json(Json_parser json_parser, String json) {
 		Json_doc jdoc = json_parser.Parse(json);
-		String name      = jdoc.Get_val_as_str_or(Bry_.Ary("core", "name"), "");
-		String main_page = jdoc.Get_val_as_str_or(Bry_.Ary("core", "mainpage"), "");
+		String name      = jdoc.Get_val_as_str_or(BryUtl.Ary("core", "name"), "");
+		String main_page = jdoc.Get_val_as_str_or(BryUtl.Ary("core", "mainpage"), "");
 		return new Xowdir_wiki_json(name, main_page);
 	}
 	public static Xowdir_wiki_json New_empty() {

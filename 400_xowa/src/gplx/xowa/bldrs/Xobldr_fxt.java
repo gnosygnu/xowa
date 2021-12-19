@@ -13,12 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.core.tests.*; import gplx.core.times.*;
+package gplx.xowa.bldrs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.GfoDateParser;
+import gplx.types.commons.GfoDateUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xobldr_fxt {
-	private final DateAdp_parser dateParser = DateAdp_parser.new_();
+	private final GfoDateParser dateParser = new GfoDateParser();
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xob_bldr Bldr() {return bldr;} private Xob_bldr bldr;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
@@ -35,10 +41,10 @@ public class Xobldr_fxt {
 	}
 	public Xowd_page_itm New_page_wo_date(int id, String title, String text) {return New_page(id, "2012-01-02 13:14", title, text);}
 	public Xowd_page_itm New_page(int id, String date, String title, String text) {
-		Xowd_page_itm rv = new Xowd_page_itm().Id_(id).Ttl_(Bry_.new_u8(title), wiki.Ns_mgr()).Text_(Bry_.new_u8(text));
+		Xowd_page_itm rv = new Xowd_page_itm().Id_(id).Ttl_(BryUtl.NewU8(title), wiki.Ns_mgr()).Text_(BryUtl.NewU8(text));
 		int[] modified_on = new int[7];
-		dateParser.Parse_iso8651_like(modified_on, date);
-		rv.Modified_on_(DateAdp_.seg_(modified_on));
+		dateParser.ParseIso8651Like(modified_on, date);
+		rv.Modified_on_(GfoDateUtl.NewBySegs(modified_on));
 		return rv;
 	}
 	public void Run_page_wkr(Xob_page_wkr wkr, Xowd_page_itm... pages) {

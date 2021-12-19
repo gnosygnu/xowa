@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls;
-import gplx.Bry_;
 import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_url;
@@ -25,15 +25,15 @@ import org.junit.Before;
 import org.junit.Test;
 public class Xoctg_catpage_url__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_catpage_url__fxt fxt = new Xoctg_catpage_url__fxt();
-	@Test  public void Specific() {
+	@Test public void Specific() {
 		fxt.Exec__parse("A?subcatfrom=B&filefrom=C&pagefrom=D"		).Test__keys("B", "C", "D").Test__fwds(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
 		fxt.Exec__parse("A?subcatuntil=B&fileuntil=C&pageuntil=D"	).Test__keys("B", "C", "D").Test__fwds(BoolUtl.N, BoolUtl.N, BoolUtl.N);
 	}
-	@Test  public void General() {
+	@Test public void General() {
 		fxt.Exec__parse("A?from=B"	).Test__keys("B", "B", "B").Test__fwds(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
 		fxt.Exec__parse("A?until=B"	).Test__keys("B", "B", "B").Test__fwds(BoolUtl.N, BoolUtl.N, BoolUtl.N);
 	}
-	@Test  public void Url_encoded() {
+	@Test public void Url_encoded() {
 		fxt.Exec__parse("A?from=B+C").Test__keys("B C", "B C", "B C").Test__fwds(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
 	}
 }
@@ -44,10 +44,10 @@ class Xoctg_catpage_url__fxt {
 		this.xo_url_parser = app.User().Wikii().Utl__url_parser();
 	}
 	public Xoctg_catpage_url__fxt Exec__parse(String url_str) {
-		Xoa_url page_url = xo_url_parser.Parse(Bry_.new_u8(url_str));
+		Xoa_url page_url = xo_url_parser.Parse(BryUtl.NewU8(url_str));
 		this.ctg_url = Xoctg_catpage_url_parser.Parse(page_url);
 		return this;
 	}
-	public Xoctg_catpage_url__fxt Test__keys(String... expd)		{Gftest.Eq__ary(Bry_.Ary(expd), ctg_url.Grp_keys(), "keys"); return this;}
-	public Xoctg_catpage_url__fxt Test__fwds(boolean... expd)		{Gftest.Eq__ary(expd, ctg_url.Grp_fwds(), "fwds"); return this;}
+	public Xoctg_catpage_url__fxt Test__keys(String... expd)		{Gftest.EqLines(BryUtl.Ary(expd), ctg_url.Grp_keys(), "keys"); return this;}
+	public Xoctg_catpage_url__fxt Test__fwds(boolean... expd)		{Gftest.EqAry(expd, ctg_url.Grp_fwds(), "fwds"); return this;}
 }

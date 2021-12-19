@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.cmds;
+import gplx.types.basics.utls.BryUtl;
 public class Xog_cmd_ctg {
-	public Xog_cmd_ctg(int tid, String key_str) {this.tid = tid; this.key_str = key_str; this.key_bry = Bry_.new_u8(key_str);}
+	public Xog_cmd_ctg(int tid, String key_str) {this.tid = tid; this.key_str = key_str; this.key_bry = BryUtl.NewU8(key_str);}
 	public int Tid() {return tid;} private int tid;
 	public String Key_str() {return key_str;} private String key_str;
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;

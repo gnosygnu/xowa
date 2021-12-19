@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
+package gplx.xowa.xtns.pfuncs.ttls;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.langs.htmls.encoders.*;
+import gplx.types.basics.lists.List_adp;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_anchorencode_mgr {
 	private final Xop_parser parser; // create a special-parser for handling wikitext inside {{anchorencode:}}
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private final Xop_ctx ctx;
 	private final byte[] src;
 	public Pfunc_anchorencode_mgr(Xop_parser parser, Xop_ctx owner_ctx, byte[] src) {
@@ -28,7 +29,7 @@ public class Pfunc_anchorencode_mgr {
 		this.ctx.Lnki().Build_args_list_(true);
 		this.src = src;
 	}
-	public void Encode_anchor(Bry_bfr bfr) {
+	public void Encode_anchor(BryWtr bfr) {
 		// parse
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
@@ -40,26 +41,26 @@ public class Pfunc_anchorencode_mgr {
 		}
 
 		// write to bfr and encode it
-		byte[] unencoded = tmp_bfr.To_bry_and_clear();
+		byte[] unencoded = tmp_bfr.ToBryAndClear();
 		Gfo_url_encoder_.Id.Encode(tmp_bfr, unencoded);
-		bfr.Add_bfr_and_clear(tmp_bfr);
+		bfr.AddBfrAndClear(tmp_bfr);
 	}
 	private void Tkn(Xop_tkn_itm sub) {
 		switch (sub.Tkn_tid()) {
 			case Xop_tkn_itm_.Tid_apos: // noop
 				break;
 			case Xop_tkn_itm_.Tid_html_ncr:
-				tmp_bfr.Add_u8_int(((Xop_amp_tkn_num)sub).Val());
+				tmp_bfr.AddU8Int(((Xop_amp_tkn_num)sub).Val());
 				break;
 			case Xop_tkn_itm_.Tid_html_ref:
-				tmp_bfr.Add_u8_int(((Xop_amp_tkn_ent)sub).Char_int());
+				tmp_bfr.AddU8Int(((Xop_amp_tkn_ent)sub).Char_int());
 				break;
 			case Xop_tkn_itm_.Tid_lnke: { // FUTURE: need to move number to lnke_tkn so that number will be correct/consistent? 
 				Xop_lnke_tkn lnke = (Xop_lnke_tkn)sub;
 				int subs_len = lnke.Subs_len();
 				for (int i = 0; i < subs_len; i++) {
 					Xop_tkn_itm lnke_sub = lnke.Subs_get(i);
-					tmp_bfr.Add_mid(src, lnke_sub.Src_bgn(), lnke_sub.Src_end());
+					tmp_bfr.AddMid(src, lnke_sub.Src_bgn(), lnke_sub.Src_end());
 				}
 				break;
 			}
@@ -75,7 +76,7 @@ public class Pfunc_anchorencode_mgr {
 				Lnki((Xop_lnki_tkn)sub);
 				break;
 			default:
-				tmp_bfr.Add_mid(src, sub.Src_bgn(), sub.Src_end());
+				tmp_bfr.AddMid(src, sub.Src_bgn(), sub.Src_end());
 				break;
 		}		
 	}
@@ -84,14 +85,14 @@ public class Pfunc_anchorencode_mgr {
 			int trg_bgn = lnki.Trg_tkn().Src_bgn();
 			if (lnki.Ttl().ForceLiteralLink()) // literal link; skip colon; EX: [[:a]] -> a
 				++trg_bgn;
-			tmp_bfr.Add_mid(src, trg_bgn, lnki.Trg_tkn().Src_end()); // pos after last trg char; EX: "]" in "[[A]]"
+			tmp_bfr.AddMid(src, trg_bgn, lnki.Trg_tkn().Src_end()); // pos after last trg char; EX: "]" in "[[A]]"
 		}
 		else { // trg + caption + other; EX: [[A|b]]; [[File:A.png|thumb|caption]]
 			List_adp args_list = lnki.Args_list();
 			int len = args_list.Len();
 			for (int i = 0; i < len; i++) {
-				if (i != 0) tmp_bfr.Add_byte_pipe();
-				Arg_nde_tkn arg = (Arg_nde_tkn)args_list.Get_at(i);
+				if (i != 0) tmp_bfr.AddBytePipe();
+				Arg_nde_tkn arg = (Arg_nde_tkn)args_list.GetAt(i);
 				switch (arg.Arg_tid()) {
 					case Xop_lnki_arg_parser.Tid_caption:
 						Xop_tkn_itm caption_tkn = lnki.Caption_val_tkn();
@@ -101,7 +102,7 @@ public class Pfunc_anchorencode_mgr {
 						}
 						break;
 					default:
-						tmp_bfr.Add_mid(src, arg.Src_bgn(), arg.Src_end());
+						tmp_bfr.AddMid(src, arg.Src_bgn(), arg.Src_end());
 						break;
 				}
 			}
@@ -109,6 +110,6 @@ public class Pfunc_anchorencode_mgr {
 
 		// add tail; EX: [[A]]b
 		if (lnki.Tail_bgn() != -1)
-			tmp_bfr.Add_mid(src, lnki.Tail_bgn(), lnki.Tail_end());
+			tmp_bfr.AddMid(src, lnki.Tail_bgn(), lnki.Tail_end());
 	}
 }

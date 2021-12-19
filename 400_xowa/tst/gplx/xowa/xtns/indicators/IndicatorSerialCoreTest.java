@@ -1,10 +1,10 @@
 package gplx.xowa.xtns.indicators;
 
-import gplx.Bry_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.Test;
 
 public class IndicatorSerialCoreTest {
@@ -12,7 +12,7 @@ public class IndicatorSerialCoreTest {
 
     @Test
     public void Save() {
-        tstr.TestBoth(String_.Concat_lines_nl
+        tstr.TestBoth(StringUtl.ConcatLinesNl
         ( "AA"
         , "2"
         , "5|name0"
@@ -26,23 +26,23 @@ class IndicatorSerialCoreTstr {
     public Indicator_xnde NewXnde(String name, String html) {
         Indicator_xnde xnde = new Indicator_xnde();
         xnde.Name_(name);
-        xnde.Html_(Bry_.new_u8(html));
+        xnde.Html_(BryUtl.NewU8(html));
         return xnde;
     }
 
     public void TestBoth(String data, Indicator_xnde... xndes) {
         byte[] save = TestSave(data, xndes);
-        TestLoad(String_.new_u8(save), xndes);
+        TestLoad(StringUtl.NewU8(save), xndes);
     }
     public byte[] TestSave(String expd, Indicator_xnde... xndes) {
         byte[] actl = IndicatorSerialCore.Save(ToList(xndes));
-        Gftest.Eq__str(expd, actl);
+        GfoTstr.Eq(expd, actl);
         return actl;
     }
     public Ordered_hash TestLoad(String data, Indicator_xnde... expd) {
-        Ordered_hash list = IndicatorSerialCore.Load(Bry_.new_u8(data));
+        Ordered_hash list = IndicatorSerialCore.Load(BryUtl.NewU8(data));
 
-        Gftest.Eq__bry(IndicatorSerialCore.Save(ToList(expd)), IndicatorSerialCore.Save(list)); // should probably compare items, but easier to compare seiarlization
+        GfoTstr.Eq(IndicatorSerialCore.Save(ToList(expd)), IndicatorSerialCore.Save(list)); // should probably compare items, but easier to compare seiarlization
 
         return list;
     }

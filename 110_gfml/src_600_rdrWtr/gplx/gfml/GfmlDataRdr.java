@@ -36,7 +36,7 @@ public class GfmlDataRdr extends GfmlDataRdr_base {
 	}
 	public static DataRdr wtr_(DataWtr wtr) {return raw_root_(wtr.To_str());}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new GfmlDataRdr();}
-	@gplx.Internal protected GfmlDataRdr() {
+	public GfmlDataRdr() {
 		this.Parse_set(true);
 	}
 }

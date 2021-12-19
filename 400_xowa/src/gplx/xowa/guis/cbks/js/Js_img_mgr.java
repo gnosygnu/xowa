@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.cbks.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.cbks.*;
+package gplx.xowa.guis.cbks.js;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.xtns.gallery.*;
-import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa.guis.views.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.files.*;
+import gplx.xowa.parsers.lnkis.*;
 public class Js_img_mgr {
 	public static void Update_link_missing(Xog_js_wkr html_itm, String html_id) {
 		html_itm.Html_redlink(html_id);
@@ -53,5 +56,5 @@ public class Js_img_mgr {
 				break;
 		}
 	}
-	public static String To_doc_uid(int html_uid) {return gplx.xowa.htmls.Xoh_img_mgr.Str__html_uid + Int_.To_str(html_uid);}
+	public static String To_doc_uid(int html_uid) {return gplx.xowa.htmls.Xoh_img_mgr.Str__html_uid + IntUtl.ToStr(html_uid);}
 }

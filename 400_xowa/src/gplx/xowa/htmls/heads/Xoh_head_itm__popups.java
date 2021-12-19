@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.xowa.guis.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*;
+package gplx.xowa.htmls.heads;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import gplx.xowa.htmls.modules.popups.*; import gplx.xowa.addons.apps.cfgs.*;
 public class Xoh_head_itm__popups extends Xoh_head_itm__base {
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__popups;}
@@ -42,15 +42,15 @@ public class Xoh_head_itm__popups extends Xoh_head_itm__base {
 	@Override public void Write_js_tail_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		wtr.Write_js_line(Jquery_init);	// NOTE: must assert that jquery is init'd, else popup.js will not compile after going back / forward; DATE:2014-09-10
 		wtr.Write_js_tail_load_lib(app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "res", "src", "xowa", "popups", "xo.popup.js"));
-	}	public static final byte[] Jquery_init = Bry_.new_a7("xowa.js.jquery.init();"), Mw_init = Bry_.new_a7("xowa.js.mediaWiki.init();");
+	}	public static final byte[] Jquery_init = BryUtl.NewA7("xowa.js.jquery.init();"), Mw_init = BryUtl.NewA7("xowa.js.mediaWiki.init();");
 	private static byte[] Css_url_day, Css_url_night;
 	private static final byte[]
-	  Key_win_show_delay			= Bry_.new_a7("popups-win-show_delay")
-	, Key_win_hide_delay			= Bry_.new_a7("popups-win-hide_delay")
-	, Key_win_max_w					= Bry_.new_a7("popups-win-max_w")
-	, Key_win_max_h					= Bry_.new_a7("popups-win-max_h")
-	, Key_win_show_all_max_w		= Bry_.new_a7("popups-win-show_all_max_w")
-	, Key_win_bind_focus_blur		= Bry_.new_a7("popups-win-bind_focus_blur")
-	, Key_win_bind_hover_area		= Bry_.new_a7("popups-win-bind_hover_area")
+	  Key_win_show_delay			= BryUtl.NewA7("popups-win-show_delay")
+	, Key_win_hide_delay			= BryUtl.NewA7("popups-win-hide_delay")
+	, Key_win_max_w					= BryUtl.NewA7("popups-win-max_w")
+	, Key_win_max_h					= BryUtl.NewA7("popups-win-max_h")
+	, Key_win_show_all_max_w		= BryUtl.NewA7("popups-win-show_all_max_w")
+	, Key_win_bind_focus_blur		= BryUtl.NewA7("popups-win-bind_focus_blur")
+	, Key_win_bind_hover_area		= BryUtl.NewA7("popups-win-bind_hover_area")
 	;
 }

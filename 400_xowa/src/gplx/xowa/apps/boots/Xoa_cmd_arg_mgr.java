@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.boots;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Io_url;
-import gplx.String_;
 import gplx.core.consoles.Gfo_cmd_arg_itm_;
 import gplx.core.consoles.Gfo_cmd_arg_mgr;
 import gplx.core.consoles.Gfo_cmd_arg_mgr_printer;
 import gplx.core.envs.Op_sys;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.apps.Xoa_app_mode;
 public class Xoa_cmd_arg_mgr {
@@ -64,9 +64,9 @@ public class Xoa_cmd_arg_mgr {
 		return true;
 	}
 	private boolean Print(Gfo_usr_dlg usr_dlg) {
-		String header = String_.Concat_lines_nl_skip_last
+		String header = StringUtl.ConcatLinesNlSkipLast
 		(	Xoa_cmd_arg_mgr_.GenHdr(false, "XOWA", "XOWA: the XOWA Offline Wiki Application\n", "")
-		,	String_.Repeat("-", 80) 
+		,	StringUtl.Repeat("-", 80)
 		,	""
 		,	"version: " + Xoa_app_.Version + "; build date: " + Xoa_app_.Build_date
 		);
@@ -105,7 +105,7 @@ public class Xoa_cmd_arg_mgr {
 			case Op_sys.Tid_wnt: rv = "windows"; break;
 			case Op_sys.Tid_osx: rv = "macosx"; break;
 			case Op_sys.Tid_arm: rv = "arm"; break;
-			default: throw Err_.new_unhandled("unknown platform " + Op_sys.Cur());
+			default: throw ErrUtl.NewUnhandled("unknown platform " + Op_sys.Cur());
 		}
 		if (op_sys.Bitness() == Op_sys.Bitness_64) rv += "_64";
 		return rv;

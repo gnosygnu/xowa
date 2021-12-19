@@ -13,20 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class IptMouseWheel_ {
 	public static final IptMouseWheel
 		  None	= new IptMouseWheel("wheel.none")
 		, Up	= new IptMouseWheel("wheel.up")
 		, Down	= new IptMouseWheel("wheel.down");
 	public static IptMouseWheel parse(String raw) {
-		if		(String_.Eq(raw, None.Key()))	return None;
-		else if	(String_.Eq(raw, Up.Key()))		return Up;
-		else if	(String_.Eq(raw, Down.Key()))	return Down;
-		else throw Err_.new_parse_type(IptMouseWheel.class, raw);
+		if		(StringUtl.Eq(raw, None.Key()))	return None;
+		else if	(StringUtl.Eq(raw, Up.Key()))		return Up;
+		else if	(StringUtl.Eq(raw, Down.Key()))	return Down;
+		else throw ErrUtl.NewParse(IptMouseWheel.class, raw);
 	}
 	public static IptMouseWheel api_(Object obj) {
-		int delta = Int_.Cast(obj);
+		int delta = IntUtl.Cast(obj);
 		if		(delta > 0)		return Up;
 		else if (delta < 0)		return Down;
 		else					return None;

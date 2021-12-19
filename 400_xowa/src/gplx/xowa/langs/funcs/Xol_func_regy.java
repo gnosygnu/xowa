@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.funcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*; import gplx.core.intls.*; import gplx.core.envs.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.langs.funcs;
+import gplx.types.custom.brys.BryFind;
+import gplx.xowa.langs.*;
+import gplx.core.btries.*;
+import gplx.core.envs.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.langs.kwds.*;
 public class Xol_func_regy {
@@ -49,10 +52,10 @@ public class Xol_func_regy {
 	}
 	private void Add(byte[] ary, boolean case_match, Xot_defn func) {
 		if (case_match)
-			cs_trie.Add_obj(ary, func);
+			cs_trie.AddObj(ary, func);
 		else {
 			byte[] lower_ary = lang.Case_mgr().Case_build_lower(ary, 0, ary.length);
-			ci_trie.Add_obj(lower_ary, func);
+			ci_trie.AddObj(lower_ary, func);
 		}
 	}
 	public void Find_defn(Xol_func_itm rv, byte[] src, int txt_bgn, int txt_end) {
@@ -77,14 +80,14 @@ public class Xol_func_regy {
 				case Xot_defn_.Tid_safesubst:
 				case Xot_defn_.Tid_subst:
 					rv.Init_by_subst(defn_tid, txt_bgn, match_pos);
-					if (match_pos < txt_end) txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos, txt_end);
+					if (match_pos < txt_end) txt_bgn = BryFind.FindFwdWhileNotWs(src, match_pos, txt_end);
 					break;
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
 				case Xot_defn_.Tid_msgnw:
 					rv.Init_by_subst(defn_tid, txt_bgn, match_pos);
 					if (match_pos + 1 < txt_end)	// +1 to include ":" (keyword id "raw", not "raw:")
-						txt_bgn = Bry_find_.Find_fwd_while_not_ws(src, match_pos + 1, txt_end);
+						txt_bgn = BryFind.FindFwdWhileNotWs(src, match_pos + 1, txt_end);
 					break;
 				default: return;
 			}
@@ -92,7 +95,7 @@ public class Xol_func_regy {
 		return;
 	}
 	private Xot_defn Match_bgn(byte[] src, int bgn, int end) {
-		Object cs_obj = cs_trie.Match_bgn(src, bgn, end);
+		Object cs_obj = cs_trie.MatchBgn(src, bgn, end);
 		Xot_defn rv = null;
 		if (cs_obj != null) {					// match found for cs; could be false_match; EX: NAME"+"SPACE and NAME"+"SPACENUMBER
 			rv = (Xot_defn)cs_obj;
@@ -101,7 +104,7 @@ public class Xol_func_regy {
 			// else {}							// func_name doesn't match cur_name; continue below; EX: NAME"+"SPACENUMBER passed in and matches NAME"+"SPACE (which is cs); note that NAME"+"SPACENUMBER only exists in ci
 		}
 		byte[] ary = lang.Case_mgr().Case_build_lower(src, bgn, end);	// NOTE: cannot call Case_reuse_lower b/c some langs (Turkish) may have differently-sized brys between upper and lower; DATE:2017-01-26
-		Xot_defn rv_alt = (Xot_defn)ci_trie.Match_bgn(ary, 0, ary.length);
+		Xot_defn rv_alt = (Xot_defn)ci_trie.MatchBgn(ary, 0, ary.length);
 		return (rv != null && rv_alt == null) 
 			? rv		// name not found in ci, but name was found in cs; return cs; handles NAME"+"SPACENUMBER
 			: rv_alt;	// else return rv_alt

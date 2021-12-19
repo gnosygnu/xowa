@@ -13,15 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.*;
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 import gplx.gfui.draws.*;
 import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
 public class GxwComboBox_lang extends JComboBox implements GxwComboBox, GxwElem, ActionListener {
-	public String[] DataSource_as_str_ary() {return String_.Ary_empty;}
+	public String[] DataSource_as_str_ary() {return StringUtl.AryEmpty;}
 	public void DataSource_set(Object... ary) {
 		for (Object o : ary)
 			this.insertItemAt(o, this.getItemCount());
@@ -72,7 +77,7 @@ public class GxwComboBox_lang extends JComboBox implements GxwComboBox, GxwElem,
 	@Override public void setBounds(Rectangle r) {super.setBounds(r); this.validate();}
 	@Override public void setSize(int w, int h) {super.setSize(w, h); this.validate();}
 	@Override public void setSize(Dimension d) {super.setSize(d); this.validate();}
-	public String TextVal() {return Object_.Xto_str_strict_or_empty(this.SelectedItm());} public void TextVal_set(String v) {this.SelectedItm_set(v);}
+	public String TextVal() {return ObjectUtl.ToStrOrEmpty(this.SelectedItm());} public void TextVal_set(String v) {this.SelectedItm_set(v);}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		return this;
 	}

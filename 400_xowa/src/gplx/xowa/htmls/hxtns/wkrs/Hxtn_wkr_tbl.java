@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.hxtns.wkrs; import gplx.*;
+package gplx.xowa.htmls.hxtns.wkrs;
 import gplx.dbs.*;
 import gplx.core.lists.hashs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.utls.IntUtl;
 public class Hxtn_wkr_tbl implements Rls_able {
 	private static final String tbl_name = "hxtn_wkr"; private static final DbmetaFldList flds = new DbmetaFldList();
 	private static final String
@@ -32,7 +35,7 @@ public class Hxtn_wkr_tbl implements Rls_able {
 	}
 	public void Rls() {}
 	public int Select_max() {
-		return Int_.Cast(conn.Stmt_select_max(tbl_name, fld_wkr_id).Exec_select_val());
+		return IntUtl.Cast(conn.Stmt_select_max(tbl_name, fld_wkr_id).Exec_select_val());
 	}
 	public void Insert(int wkr_id, String wkr_key) {
 		conn.Stmt_insert(tbl_name, flds).Clear()

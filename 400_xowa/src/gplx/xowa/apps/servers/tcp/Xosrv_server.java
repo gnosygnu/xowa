@@ -13,14 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.tcp; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
-import gplx.xowa.*;
-import gplx.xowa.apps.servers.*;
-import gplx.core.primitives.*;
-import gplx.core.envs.*; import gplx.core.threads.*;
-import gplx.gfui.controls.standards.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.apps.servers.tcp;
+import gplx.core.envs.SystemUtl;
+import gplx.core.threads.Thread_adp_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.controls.standards.Gfui_html;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_doc_srl;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_itm_;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_parser;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.wrappers.StringRef;
+import gplx.types.commons.GfoTimeSpanUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.apps.servers.Gxw_html_server;
 public class Xosrv_server implements Gfo_invk {
 	private long last_cmd;
 	public Xosrv_socket_rdr Rdr() {return rdr;} private Xosrv_socket_rdr rdr = new Xosrv_socket_rdr();
@@ -39,10 +57,10 @@ public class Xosrv_server implements Gfo_invk {
 		Gxw_html_server.Init_gui_for_server(app, wtr);
 		Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_http_server_main, rdr, Xosrv_socket_rdr.Invk_start);
 		app.Usr_dlg().Note_many("", "", "server started: listening on ~{0}. Press Ctrl+C to exit", rdr_port);
-		last_cmd = System_.Ticks();
+		last_cmd = SystemUtl.Ticks();
 		Running_(true);
 		while (running) {
-			if (shutdown_interval != -1 && System_.Ticks() - last_cmd > shutdown_interval) break;
+			if (shutdown_interval != -1 && SystemUtl.Ticks() - last_cmd > shutdown_interval) break;
 			Thread_adp_.Sleep(1000);
 		}
 		rdr.Rls();
@@ -52,38 +70,38 @@ public class Xosrv_server implements Gfo_invk {
 	public void Msg_rcvd(Xosrv_msg msg) {
 		try {
 			byte[] cmd_name = msg.Cmd_name();
-			byte[] rsp_name = Bry_.Empty;
-			long time_bgn = System_.Ticks();
+			byte[] rsp_name = BryUtl.Empty;
+			long time_bgn = SystemUtl.Ticks();
 			last_cmd = time_bgn;
 			byte[] msg_bry = msg.Msg_text();
-			String msg_str = String_.new_u8(msg_bry);
+			String msg_str = StringUtl.NewU8(msg_bry);
 			app.Usr_dlg().Note_many("", "", "processing cmd: ~{0}", msg_str);
 			String rsp_str = null;
-			if		(Bry_.Eq(cmd_name, Xosrv_cmd_types.Cmd_exec)) 	{rsp_name = Xosrv_cmd_types.Cmd_pass; rsp_str = Exec_cmd(msg_str);}
-			else if	(Bry_.Eq(cmd_name, Xosrv_cmd_types.Js_exec)) 	{rsp_name = Xosrv_cmd_types.Js_pass;  rsp_str = Exec_js(msg.Sender(), msg_bry);}
-			Xosrv_msg rsp_msg = Xosrv_msg.new_(rsp_name, msg.Msg_id(), msg.Recipient(), msg.Sender(), msg.Msg_date(), Bry_.new_u8(rsp_str));
-			app.Usr_dlg().Note_many("", "", "sending rsp: bytes=~{0}", String_.Len(rsp_str));
+			if		(BryLni.Eq(cmd_name, Xosrv_cmd_types.Cmd_exec)) 	{rsp_name = Xosrv_cmd_types.Cmd_pass; rsp_str = Exec_cmd(msg_str);}
+			else if	(BryLni.Eq(cmd_name, Xosrv_cmd_types.Js_exec)) 	{rsp_name = Xosrv_cmd_types.Js_pass;  rsp_str = Exec_js(msg.Sender(), msg_bry);}
+			Xosrv_msg rsp_msg = Xosrv_msg.new_(rsp_name, msg.Msg_id(), msg.Recipient(), msg.Sender(), msg.Msg_date(), BryUtl.NewU8(rsp_str));
+			app.Usr_dlg().Note_many("", "", "sending rsp: bytes=~{0}", StringUtl.Len(rsp_str));
 			wtr.Write(rsp_msg);		
-			app.Usr_dlg().Note_many("", "", "rsp sent: elapsed=~{0}", Time_span_.fracs_(System_.Ticks() - time_bgn).XtoStrUiAbbrv());
-		} catch (Exception e) {app.Usr_dlg().Warn_many("", "", "server error: ~{0}", Err_.Message_gplx_full(e));}
+			app.Usr_dlg().Note_many("", "", "rsp sent: elapsed=~{0}", GfoTimeSpanUtl.NewFracs(SystemUtl.Ticks() - time_bgn).ToStrUiAbrv());
+		} catch (Exception e) {app.Usr_dlg().Warn_many("", "", "server error: ~{0}", ErrUtl.ToStrFull(e));}
 	}
 	private String Exec_cmd(String msg_text) {
 		Object rv_obj = app.Gfs_mgr().Run_str(msg_text);
-		String rv = Type_.Eq_by_obj(rv_obj, String_.Cls_ref_type) ? (String)rv_obj : Object_.Xto_str_strict_or_null(rv_obj);
+		String rv = ClassUtl.EqByObj(StringUtl.ClsRefType, rv_obj) ? (String)rv_obj : ObjectUtl.ToStrOrNull(rv_obj);
 		return rv;
 	}
 	public String Exec_js(byte[] sender, byte[] msg_text) {
-		String_obj_ref trace = String_obj_ref.new_("exec_js");
+		StringRef trace = StringRef.New("exec_js");
 		try {
 			Object[] xowa_exec_args = xowa_exec_parser.Parse_xowa_exec(msg_text);
-			trace.Val_("js_args");
+			trace.ValSet("js_args");
 //				xowa_exec_args = (Object[])ArrayUtl.Resize(xowa_exec_args, xowa_exec_args.length + 1);
 //				xowa_exec_args[xowa_exec_args.length - 1] = sender;
 			Object rv_obj = Gfui_html.Js_args_exec(app.Gui_mgr().Browser_win().Active_html_itm().Js_cbk(), xowa_exec_args);
-			trace.Val_("json_write: " + Object_.Xto_str_strict_or_null_mark(rv_obj));
+			trace.ValSet("json_write: " + ObjectUtl.ToStrOrNullMark(rv_obj));
 			return json_wtr.Write_root(Bry_xowa_js_result, rv_obj).Bld_as_str();
-		} catch (Exception e) {throw Err_.new_exc(e, "http", "exec_js error", "trace", trace, "msg", msg_text);}
-	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final byte[] Bry_xowa_js_result = Bry_.new_a7("xowa_js_result");
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "exec_js error", "trace", trace, "msg", msg_text);}
+	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final byte[] Bry_xowa_js_result = BryUtl.NewA7("xowa_js_result");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rdr_port))				return rdr_port;
 		else if	(ctx.Match(k, Invk_rdr_port_))				rdr_port = m.ReadInt("v");
@@ -117,16 +135,16 @@ class Xosrv_xowa_exec_parser {
 	private Object Parse_ary_itm(Json_itm itm) {
 		switch (itm.Tid()) {
 			case Json_itm_.Tid__str:
-				return String_.new_u8(itm.Data_bry());
+				return StringUtl.NewU8(itm.Data_bry());
 			case Json_itm_.Tid__ary: 
 				Json_ary ary = (Json_ary)itm;
 				int len = ary.Len();
 				String[] rv = new String[len];
 				for (int i = 0; i < len; i++)
-					rv[i] = String_.new_u8(ary.Get_at(i).Data_bry());
+					rv[i] = StringUtl.NewU8(ary.Get_at(i).Data_bry());
 				return rv;
 			default:
-				throw Err_.new_unhandled(itm.Tid());
+				throw ErrUtl.NewUnhandled(itm.Tid());
 		}
 	}
 }

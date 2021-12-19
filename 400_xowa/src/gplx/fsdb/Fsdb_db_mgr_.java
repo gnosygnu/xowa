@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb; import gplx.*;
-import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.fsdb.meta.*;
+package gplx.fsdb;
+import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.fsdb.meta.*;
 public class Fsdb_db_mgr_ {
 	public static Fsdb_db_mgr new_detect(Xow_wiki wiki, Io_url wiki_dir, Io_url file_dir) {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
@@ -34,12 +40,12 @@ public class Fsdb_db_mgr_ {
 		String domain_str = wiki.Domain_str();
 		try {
 			String cfg_domain_str = wiki.Data__core_mgr().Db__core().Tbl__cfg().Select_str_or("xowa.bldr.session", "wiki_domain", domain_str);
-			if (!String_.Eq(domain_str, cfg_domain_str)) {
+			if (!StringUtl.Eq(domain_str, cfg_domain_str)) {
 				Gfo_usr_dlg_.Instance.Note_many("", "", "fsdb.db_core.init: fsys.domain doesn't match db.domain; fsys=~{0} db=~{1}", domain_str, cfg_domain_str);
 				domain_str = cfg_domain_str;
 			}
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "fsdb.db_core.init: failed to get domain from config; err=~{0}", Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "fsdb.db_core.init: failed to get domain from config; err=~{0}", ErrUtl.ToStrLog(e));
 		}
 
 		Fsdb_db_mgr rv = null;
@@ -61,7 +67,7 @@ public class Fsdb_db_mgr_ {
 		if (!Db_conn_bldr.Instance.Exists(user_core_url)) {	// if user file does not exist, create it; needed b/c offline packages don't include file; DATE:2015-04-19
 			try {Fsdb_db_mgr__v2_bldr.Make_core_file_user(wiki, user_core_url, user_core_url.NameAndExt(), main_core_url.NameAndExt());}
 			catch (Exception e) {	// do not fail if read-only permissions
-				usr_dlg.Warn_many("", "", "failed to create user db: url=~{0} err=~{1}", user_core_url.Raw(), Err_.Message_gplx_log(e));
+				usr_dlg.Warn_many("", "", "failed to create user db: url=~{0} err=~{1}", user_core_url.Raw(), ErrUtl.ToStrLog(e));
 				user_core_url = null;		// null out for conditional below
 			}
 		}

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.wtrs.HtmlBryBfr;
+import gplx.xowa.mediawiki.*;
 // MW.FILE:Preprocessor_Hash
 /**
 * @ingroup Parser
@@ -35,13 +40,13 @@ public class XomwPPNode_Hash_Text extends XomwPPNode {	public String value;
 		if (!XophpType_.is_scalar(value_obj)) {
 			throw XomwMWException.New_by_method(XomwPPNode_Hash_Text.class, "CTOR", "given Object instead of String");
 		}
-		this.value = Object_.Xto_str_strict_or_null(value_obj);
+		this.value = ObjectUtl.ToStrOrNull(value_obj);
 		this.store = store;
 		this.index = index;
 	}
 
 	@Override public String toString() {
-		return String_.new_u8(Bry_.Escape_html(Bry_.new_u8(this.value)));
+		return StringUtl.NewU8(HtmlBryBfr.EscapeHtml(BryUtl.NewU8(this.value)));
 	}
 
 	@Override public XomwPPNode getNextSibling() {

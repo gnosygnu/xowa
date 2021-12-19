@@ -15,11 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wms.revs;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Ordered_hash;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
 import gplx.core.net.Gfo_inet_conn;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_nde;
@@ -29,7 +28,7 @@ import gplx.xowa.bldrs.wms.Xowm_api_mgr;
 class Xowm_rev_wkr__meta__wm implements Xowm_rev_wkr__meta {
 	private final Json_parser json_parser = new Json_parser();
 	private final Xowm_json_parser__page json_page_parser = new Xowm_json_parser__page();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(255);
 	private final Wmapi_itm__pge tmp_pge = new Wmapi_itm__pge();
 	public Xowm_rev_wkr__meta__wm() {
 		tmp_pge.Rvn_ary_(new Wmapi_itm__rvn());
@@ -37,11 +36,11 @@ class Xowm_rev_wkr__meta__wm implements Xowm_rev_wkr__meta {
 	public Gfo_inet_conn Inet_conn() {return inet_conn;} public void Inet_conn_(Gfo_inet_conn v) {this.inet_conn = v;} private Gfo_inet_conn inet_conn;
 	public void Fetch_meta(String domain_str, Ordered_hash hash, int bgn, int end) {
 		for (int i = bgn; i < end; ++i) {
-			Wmapi_itm__pge itm = (Wmapi_itm__pge)hash.Get_at(i);
-			if (i != bgn) tmp_bfr.Add_byte(AsciiByte.Pipe);
+			Wmapi_itm__pge itm = (Wmapi_itm__pge)hash.GetAt(i);
+			if (i != bgn) tmp_bfr.AddByte(AsciiByte.Pipe);
 			tmp_bfr.Add(itm.Page_ttl());
 		}
-		byte[] json = inet_conn.Download_as_bytes_or_null(Xowm_api_mgr.Bld_api_url(domain_str, "action=query&prop=revisions&rvprop=size|ids|timestamp|user|comment&format=json&rawcontinue=titles=" + tmp_bfr.To_str_and_clear()));
+		byte[] json = inet_conn.Download_as_bytes_or_null(Xowm_api_mgr.Bld_api_url(domain_str, "action=query&prop=revisions&rvprop=size|ids|timestamp|user|comment&format=json&rawcontinue=titles=" + tmp_bfr.ToStrAndClear()));
 		Parse_doc(hash, json);
 	}
 	private void Parse_doc(Ordered_hash hash, byte[] json) {
@@ -60,5 +59,5 @@ class Xowm_rev_wkr__meta__wm implements Xowm_rev_wkr__meta {
 		hash_itm.Rvn_ary_(new Wmapi_itm__rvn());
 		hash_itm.Rvn_itm_last().Init(tmp_rvn.Rvn_id(), tmp_rvn.Rvn_len(), tmp_rvn.Rvn_time(), tmp_rvn.Rvn_user(), tmp_rvn.Rvn_note());
 	}
-	private static final byte[][] Jpath__query_pages = Bry_.Ary("query", "pages");
+	private static final byte[][] Jpath__query_pages = BryUtl.Ary("query", "pages");
 }

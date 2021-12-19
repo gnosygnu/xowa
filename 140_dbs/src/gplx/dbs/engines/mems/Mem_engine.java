@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.mems; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
 import gplx.dbs.wkrs.SqlWkrMgr;
-
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.errs.ErrUtl;
 public class Mem_engine implements Db_engine {
 	private final Hash_adp tbl_hash = Hash_adp_.New();
 	Mem_engine(Db_conn_info conn_info) {
@@ -38,15 +42,15 @@ public class Mem_engine implements Db_engine {
 	public String				Txn_end()				{return "";}// --txn_count; return "";}
 	public void					Txn_cxl()				{}//--txn_count;}
 	public void					Txn_sav()				{this.Txn_end(); this.Txn_bgn("");}
-	public Object				Exec_as_obj(Db_qry qry) {throw Err_.new_unimplemented();}
+	public Object				Exec_as_obj(Db_qry qry) {throw ErrUtl.NewUnimplemented();}
 	public void					Conn_open() {}
 	public void					Conn_term() {
-		// if (txn_count != 0) throw Err_.new_wo_type("Conn_term.txns still open", "txn_count", txn_count);	// IGNORE: causing test to fails; DATE:2016-03-30
+		// if (txn_count != 0) throw ErrUtl.NewArgs("Conn_term.txns still open", "txn_count", txn_count);	// IGNORE: causing test to fails; DATE:2016-03-30
 	}
-	public Db_rdr				Exec_as_rdr__rls_manual(Object rdr_obj, String sql) {throw Err_.new_unimplemented();}
-	public Db_rdr				Exec_as_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {throw Err_.new_unimplemented();}
-	public DataRdr				New_rdr(java.sql.ResultSet rdr, String sql) {throw Err_.new_unimplemented();} 
-	public Object				Stmt_by_sql(String sql) {throw Err_.new_unimplemented();}
+	public Db_rdr				Exec_as_rdr__rls_manual(Object rdr_obj, String sql) {throw ErrUtl.NewUnimplemented();}
+	public Db_rdr				Exec_as_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql) {throw ErrUtl.NewUnimplemented();}
+	public DataRdr				New_rdr(java.sql.ResultSet rdr, String sql) {throw ErrUtl.NewUnimplemented();}
+	public Object				Stmt_by_sql(String sql) {throw ErrUtl.NewUnimplemented();}
 	public void					Meta_tbl_create(Dbmeta_tbl_itm meta) {
 		Mem_tbl mem_tbl = new Mem_tbl(meta);
 		tbl_hash.AddIfDupeUseNth(meta.Name(), mem_tbl);

@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.mediawiki.XophpClassBldr;
 public class JCTabularContentFactory implements XophpClassBldr {
 	public String Id() {return JCTabularContent.Model_id;}

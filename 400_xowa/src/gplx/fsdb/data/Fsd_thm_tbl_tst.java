@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.data;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Fsd_thm_tbl_tst {
 	@Before public void init() {fxt.Clear();} private Fsd_thm_tbl_fxt fxt = new Fsd_thm_tbl_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init_list(fxt.Make(100), fxt.Make(200), fxt.Make(400));
 		fxt.Test_match_nearest_itm(fxt.Make(400), fxt.Make(400));
 		fxt.Test_match_nearest_itm(fxt.Make(200), fxt.Make(200));
@@ -31,7 +31,7 @@ public class Fsd_thm_tbl_tst {
 		fxt.Test_match_nearest_itm(fxt.Make(150), fxt.Make(200));
 		fxt.Test_match_nearest_itm(fxt.Make(999), fxt.Make(400));
 	}
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		fxt.Init_list();	// no items
 		fxt.Test_match_nearest_itm(fxt.Make(100), Fsd_thm_itm.Null);
 	}
@@ -50,12 +50,12 @@ class Fsd_thm_tbl_fxt {
 	public void Test_match_nearest_itm(Fsd_thm_itm req, Fsd_thm_itm expd) {
 		Fsd_thm_tbl.Match_nearest(list, req, BoolUtl.Y);
 		if (expd == Fsd_thm_itm.Null) {
-			Tfds.Eq(req.Req_w(), 0);
+			GfoTstr.EqObj(req.Req_w(), 0);
 		}
 		else {
-			Tfds.Eq(expd.W(), req.W());
-			Tfds.Eq(expd.Time(), req.Time());
-			Tfds.Eq(expd.Page(), req.Page());
+			GfoTstr.EqObj(expd.W(), req.W());
+			GfoTstr.EqObj(expd.Time(), req.Time());
+			GfoTstr.EqObj(expd.Page(), req.Page());
 		}
 	}
 }

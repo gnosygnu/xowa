@@ -15,18 +15,16 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto;
 
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 public class Scrib_err_filter_mgr implements Gfo_invk {
 	private final Object thread_lock = new Object();
 	private final Ordered_hash hash_by_mod = Ordered_hash_.New();
@@ -37,8 +35,8 @@ public class Scrib_err_filter_mgr implements Gfo_invk {
 		int itms_len = itms.Len();
 		boolean match = false;
 		for (int i = 0; i < itms_len; ++i) {
-			Scrib_err_filter_itm itm = (Scrib_err_filter_itm)itms.Get_at(i);
-			if (String_.Has(err, itm.Err())) {
+			Scrib_err_filter_itm itm = (Scrib_err_filter_itm)itms.GetAt(i);
+			if (StringUtl.Has(err, itm.Err())) {
 				match = true;
 				itm.Count_actl_add_1();
 				break;
@@ -55,24 +53,24 @@ public class Scrib_err_filter_mgr implements Gfo_invk {
 		}
 	}
 	public String Print() {
-		Bry_bfr bfr = Bry_bfr_.New_w_size(8);
+		BryWtr bfr = BryWtr.NewWithSize(8);
 		int i_len = hash_by_mod.Len();
 		for (int i = 0; i < i_len; ++i) {
-			Ordered_hash fncs = (Ordered_hash)hash_by_mod.Get_at(i);
+			Ordered_hash fncs = (Ordered_hash)hash_by_mod.GetAt(i);
 			int j_len = fncs.Len();
 			for (int j = 0; j < j_len; ++j) {
-				List_adp errs = (List_adp)fncs.Get_at(j);
+				List_adp errs = (List_adp)fncs.GetAt(j);
 				int k_len = errs.Len();
 				for (int k = 0; k < k_len; ++k) {
-					Scrib_err_filter_itm err = (Scrib_err_filter_itm)errs.Get_at(k);
-					bfr.Add_int_variable(err.Count_actl()).Add_byte_pipe().Add_int_variable(err.Count_expd())
-						.Add_byte_pipe().Add_str_u8(err.Mod()).Add_byte_pipe().Add_str_u8(err.Fnc()).Add_byte_pipe().Add_str_u8(err.Err())
-						.Add_byte_pipe().Add_str_u8(err.Comment())
-						.Add_byte_nl();
+					Scrib_err_filter_itm err = (Scrib_err_filter_itm)errs.GetAt(k);
+					bfr.AddIntVariable(err.Count_actl()).AddBytePipe().AddIntVariable(err.Count_expd())
+						.AddBytePipe().AddStrU8(err.Mod()).AddBytePipe().AddStrU8(err.Fnc()).AddBytePipe().AddStrU8(err.Err())
+						.AddBytePipe().AddStrU8(err.Comment())
+						.AddByteNl();
 				}
 			}
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	private List_adp Get_itms_or_null(String mod, String fnc) {
 		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.GetByOrNull(mod); if (hash_by_fnc == null) return null;

@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files;
-import gplx.Bry_;
-import gplx.Io_mgr;
-import gplx.Io_url_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.files.origs.Xof_orig_tbl;
 import gplx.xowa.files.repos.Xof_repo_tid_;
@@ -51,6 +51,6 @@ public class Xof_file_fxt {
 	}
 	public void Exec_orig_add(boolean repo_is_commons, String orig_ttl, int orig_ext_id, int orig_w, int orig_h, String orig_redirect) {
 		byte repo_tid = repo_is_commons ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
-		wiki.File_mgr().Orig_mgr().Insert(repo_tid, Bry_.new_u8(orig_ttl), orig_ext_id, orig_w, orig_h, Bry_.new_u8(orig_redirect));
+		wiki.File_mgr().Orig_mgr().Insert(repo_tid, BryUtl.NewU8(orig_ttl), orig_ext_id, orig_w, orig_h, BryUtl.NewU8(orig_redirect));
 	}
 }

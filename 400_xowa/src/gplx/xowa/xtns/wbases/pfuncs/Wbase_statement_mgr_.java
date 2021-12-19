@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.pfuncs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.wbases.pfuncs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.xowa.xtns.wbases.*;
 import gplx.core.envs.*;
@@ -22,13 +25,13 @@ import gplx.core.primitives.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Wbase_statement_mgr_ {
-	public static void Get_wbase_data(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src, Pf_func_base pfunc, boolean mode_is_statements) {
+	public static void Get_wbase_data(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src, Pf_func_base pfunc, boolean mode_is_statements) {
 		// init
 		byte[] pid_ttl = pfunc.Eval_argx(ctx, src, caller, self);
 		Xop_log_property_wkr property_wkr = ctx.Xtn__wikidata__property_wkr();
 		long log_time_bgn = 0;
 		if (property_wkr != null) {
-			log_time_bgn = System_.Ticks();
+			log_time_bgn = SystemUtl.Ticks();
 			if (!property_wkr.Eval_bgn(ctx.Page(), pid_ttl)) return;
 		}
 		Xoae_app app = ctx.App();
@@ -65,14 +68,14 @@ public class Wbase_statement_mgr_ {
 		num_parser.Parse(bry, 1, bry_len);
 		return num_parser.Has_err() ? Wbase_pid.Id_null : num_parser.Rv_as_int();
 	}
-	private static void Print_self(Gfo_usr_dlg usr_dlg, Bry_bfr bfr, byte[] src, Xot_invk self, String warn_cls, String warn_fmt, Object... args) {
-		bfr.Add_mid(src, self.Src_bgn(), self.Src_end());
+	private static void Print_self(Gfo_usr_dlg usr_dlg, BryWtr bfr, byte[] src, Xot_invk self, String warn_cls, String warn_fmt, Object... args) {
+		bfr.AddMid(src, self.Src_bgn(), self.Src_end());
 		usr_dlg.Log_many("", warn_cls, warn_fmt, args);
 	}
 	public static Wdata_doc Get_doc(Wdata_wiki_mgr wdata_mgr, Xowe_wiki wiki, Xoa_ttl ttl, Wdata_pf_property_data data) {
-		if		(Bry_.Len_gt_0(data.Q))		return wdata_mgr.Doc_mgr.Get_by_loose_id_or_null(data.Q);
-		else if	(Bry_.Len_gt_0(data.From))	return wdata_mgr.Doc_mgr.Get_by_xid_or_null(data.From);	// NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
-		else if (Bry_.Len_gt_0(data.Of)) {
+		if		(BryUtl.IsNotNullOrEmpty(data.Q))		return wdata_mgr.Doc_mgr.Get_by_loose_id_or_null(data.Q);
+		else if	(BryUtl.IsNotNullOrEmpty(data.From))	return wdata_mgr.Doc_mgr.Get_by_xid_or_null(data.From);	// NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
+		else if (BryUtl.IsNotNullOrEmpty(data.Of)) {
 			Xoa_ttl of_ttl = Xoa_ttl.Parse(wiki, data.Of); if (of_ttl == null) return null;
 			byte[] qid = wdata_mgr.Qid_mgr.Get_qid_or_null(wiki, of_ttl); if (qid == null) return null;	// NOTE: for now, use wiki.Lang_key(), not page.Lang()
 			return wdata_mgr.Doc_mgr.Get_by_loose_id_or_null(qid);

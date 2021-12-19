@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
 // MW.SRC:1.33
 public class XomwCategoryViewer {// extends ContextSource 
 //		/** @var int */
@@ -166,7 +168,7 @@ public class XomwCategoryViewer {// extends ContextSource
 //		}
 //
 //		/**
-//		* Add a subcategory to the @gplx.Internal protected lists, using a Category Object
+//		* Add a subcategory to the public lists, using a Category Object
 //		* @param Category cat
 //		* @param String sortkey
 //		* @param int pageLength
@@ -577,7 +579,7 @@ public class XomwCategoryViewer {// extends ContextSource
 			String charVal = itm.Key();
 			XophpArray articlesItm = (XophpArray)itm.Val();
 			// Change space to non-breaking space to keep headers aligned
-			String h3char = String_.Eq(charVal, " ") ? XophpHtml_.ENTITYREF_NBSP : XophpHtml_.htmlspecialchars(charVal);
+			String h3char = StringUtl.Eq(charVal, " ") ? XophpHtml_.ENTITYREF_NBSP : XophpHtml_.htmlspecialchars(charVal);
 
 			ret += "<div class=\"mw-category-group\"><h3>" + h3char;
 			ret += "</h3>\n";

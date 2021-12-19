@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.paras;
-import gplx.Bry_find_;
+import gplx.types.custom.brys.BryFind;
 import gplx.core.btries.Btrie_fast_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.parsers.Xop_ctx;
@@ -48,7 +48,7 @@ public class Xop_pre_lxr implements Xop_lxr {
 			ctx.Subs_add(root, tkn_mkr.Space(root, cur_pos - 1, cur_pos));
 			return cur_pos;
 		}
-		int txt_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, AsciiByte.Space);	// NOTE: was Find_fwd_while_tab_or_space, which incorrectly converted tabs to spaces; PAGE:en.w:Cascading_Style_Sheets; DATE:2014-06-23
+		int txt_pos = BryFind.FindFwdWhile(src, cur_pos, src_len, AsciiByte.Space);	// NOTE: was Find_fwd_while_tab_or_space, which incorrectly converted tabs to spaces; PAGE:en.w:Cascading_Style_Sheets; DATE:2014-06-23
 		if (txt_pos == src_len) return cur_pos;			// "\n\s" at EOS; treat as \n only; EX: "a\n   " -> ""; also bounds check
 		byte b = src[txt_pos];
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) {		// BOS; gobble up all \s\t; EX: "BOS\s\s\sa" -> "BOSa"
@@ -67,9 +67,9 @@ public class Xop_pre_lxr implements Xop_lxr {
 				break;
 			case Xop_tkn_itm_.Tid_list:					// close all lists unless [[Category]]; SEE:NOTE_4; rewritten; DATE:2015-03-31
 				boolean close_all_lists = true;
-				if (Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_bgn, txt_pos, src_len) == txt_pos) {		// look for "[["
+				if (BryFind.FindFwd(src, Xop_tkn_.Lnki_bgn, txt_pos, src_len) == txt_pos) {		// look for "[["
 					int tmp_pos = txt_pos + Xop_tkn_.Lnki_bgn.length;
-					if (Bry_find_.Find_fwd(src, ctx.Wiki().Ns_mgr().Ns_category().Name_db_w_colon(), tmp_pos, src_len) == tmp_pos)	// look for "Category:"
+					if (BryFind.FindFwd(src, ctx.Wiki().Ns_mgr().Ns_category().Name_db_w_colon(), tmp_pos, src_len) == tmp_pos)	// look for "Category:"
 						close_all_lists = false;		// "[[Category:" found; "\n\s[[Category:" should not close list; note that [[Category]] is invisible
 				}
 				if (close_all_lists)

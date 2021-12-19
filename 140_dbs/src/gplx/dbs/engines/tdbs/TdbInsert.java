@@ -13,10 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
-import gplx.dbs.qrys.*;
-import gplx.dbs.sqls.itms.*;
+package gplx.dbs.engines.tdbs;
+import gplx.core.gfo_ndes.GfoFldList;
+import gplx.core.gfo_ndes.GfoNde;
+import gplx.core.gfo_ndes.GfoNde_;
+import gplx.core.stores.DataRdr;
+import gplx.dbs.Db_qry;
+import gplx.dbs.engines.Db_engine;
+import gplx.dbs.qrys.Db_arg;
+import gplx.dbs.qrys.Db_qry_insert;
+import gplx.dbs.sqls.itms.Sql_select_fld;
+import gplx.dbs.sqls.itms.Sql_select_fld_list;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.StringUtl;
 class TdbInsertWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_insert cmd = (Db_qry_insert)cmdObj;
@@ -33,8 +44,8 @@ class TdbInsertWkr implements Db_qryWkr {
 		Sql_select_fld_list insertFlds = insert.Cols(); int insertFldsCount = insertFlds.Len();
 		GfoFldList selectFldsForNewRow = null;
 		try {selectFldsForNewRow = TdbSelectWkr.To_GfoFldLst(tbl, insertFlds);}
-		catch (Exception e) {throw Err_.new_exc(e, "db", "failed to generate flds for new row");}
-		if (insertFldsCount > selectFldsForNewRow.Count()) throw Err_.new_wo_type("insert flds cannot exceed selectFlds", "insertFlds", To_str(insertFlds), "selectFlds", selectFldsForNewRow.To_str());
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to generate flds for new row");}
+		if (insertFldsCount > selectFldsForNewRow.Count()) throw ErrUtl.NewArgs("insert flds cannot exceed selectFlds", "insertFlds", To_str(insertFlds), "selectFlds", selectFldsForNewRow.To_str());
 		while (rdr.MoveNextPeer()) {
 			count++;
 			GfoNde row = GfoNde_.vals_(selectFldsForNewRow, new Object[insertFldsCount]);
@@ -47,21 +58,21 @@ class TdbInsertWkr implements Db_qryWkr {
 	}
 	int InsertRowsByVals(TdbEngine engine, TdbTable tbl, Db_qry_insert insert) {
 		GfoNde row = GfoNde_.vals_(tbl.Flds(), new Object[tbl.Flds().Count()]);
-		for (int i = 0; i < insert.Args().Count(); i++) {
-			Keyval kv = insert.Args().Get_at(i);
+		for (int i = 0; i < insert.Args().Len(); i++) {
+			KeyVal kv = insert.Args().GetAt(i);
 			Db_arg arg = (Db_arg)kv.Val();
-			row.Write(kv.Key(), arg.Val);
+			row.Write(kv.KeyToStr(), arg.Val);
 		}
 		tbl.Rows().Add(row);
 		return 1;
 	}
 	private String To_str(Sql_select_fld_list flds) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		for (int i = 0; i < flds.Len(); i++) {
 			Sql_select_fld fld = flds.Get_at(i);
-			bfr.Add_str_u8(String_.Format("{0},{1}|", fld.Fld, fld.Alias));
+			bfr.AddStrU8(StringUtl.Format("{0},{1}|", fld.Fld, fld.Alias));
 		}
-		return bfr.To_str();
+		return bfr.ToStr();
 	}
 	public static TdbInsertWkr new_() {TdbInsertWkr rv = new TdbInsertWkr(); return rv;}
 }

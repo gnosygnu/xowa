@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
+package gplx.langs.phps;
 import gplx.core.encoders.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.encoders.HexUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
 class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.String.php
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public byte[] Parse(byte[] src, int src_pos, int src_end) {
 		try {
 			while (src_pos < src_end) {
@@ -76,14 +80,14 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 							for (int i = 0; i < 2; i++) { // per REF, hex is {1,2}
 								byte n = src[src_pos];
 								num_end = src_pos;
-								if (Hex_utl_.Is_hex(n)) {
+								if (HexUtl.IsHex(n)) {
 									++src_pos;
 								}
 								else {
 									break;
 								}
 							}
-							val = Hex_utl_.Parse_or(src, num_bgn, num_end, -1);
+							val = HexUtl.ParseOr(src, num_bgn, num_end, -1);
 							break;
 						}
 						// unicode
@@ -109,7 +113,7 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 								++src_pos;
 							}
 
-							val = Hex_utl_.Parse_or(src, num_bgn, num_end, -1);
+							val = HexUtl.ParseOr(src, num_bgn, num_end, -1);
 							break;
 						}
 						default:
@@ -121,13 +125,13 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 					val = b;
 				}
 				if (val < 255)
-					bfr.Add_byte((byte)val);
+					bfr.AddByte((byte)val);
 				else
-					bfr.Add_u8_int(val);
+					bfr.AddU8Int(val);
 			}
-			return bfr.To_bry_and_clear();
+			return bfr.ToBryAndClear();
 		} catch (Exception e) {
-			throw Err_.new_exc(e, "Ustring_parser", "unable to parse ustring", "src", Bry_.Mid(src, src_pos, src_end));
+			throw ErrUtl.NewArgs(e, "unable to parse ustring", "src", BryLni.Mid(src, src_pos, src_end));
 		}
 	}
 }

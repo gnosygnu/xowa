@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xobldr__lnki_temp__create__tst {
 	private Xobldr__lnki_temp__create__fxt fxt = new Xobldr__lnki_temp__create__fxt();
-	@Test  public void Xto_commons() {
+	@Test public void Xto_commons() {
 		fxt.Init__to_commons(true);
 		fxt.Test__to_commons("a", "A");
 		fxt.Test__to_commons("A", null);
@@ -36,6 +40,6 @@ class Xobldr__lnki_temp__create__fxt {
 		return this;
 	}
 	public void Test__to_commons(String ttl, String expd) {
-		Tfds.Eq(expd, String_.new_u8(gplx.xowa.addons.bldrs.mass_parses.parses.utls.Xomp_lnki_temp_wkr.To_commons_ttl(wiki_ns_file_is_case_match_all, commons_wiki, Bry_.new_u8(ttl))));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(gplx.xowa.addons.bldrs.mass_parses.parses.utls.Xomp_lnki_temp_wkr.To_commons_ttl(wiki_ns_file_is_case_match_all, commons_wiki, BryUtl.NewU8(ttl))));
 	}
 }

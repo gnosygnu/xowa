@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*;
+package gplx.xowa.xtns.xowa_cmds;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.errs.ErrUtl;
 class Xo_custom_html_pos_ {
 	public static final byte Tid__head_end = 1, Tid__tail = 2;
 	private static final Hash_adp_bry hash = Hash_adp_bry.ci_a7()
@@ -22,8 +25,8 @@ class Xo_custom_html_pos_ {
 	.Add_str_byte("tail", Tid__tail)
 	;
 	public static byte To_tid(byte[] bry) {
-		byte tid = hash.Get_as_byte_or(bry, Byte_.Max_value_127);
-		if (tid == Byte_.Max_value_127) throw Err_.new_wo_type("unknown pos", "pos", bry);
+		byte tid = hash.Get_as_byte_or(bry, ByteUtl.MaxValue127);
+		if (tid == ByteUtl.MaxValue127) throw ErrUtl.NewArgs("unknown pos", "pos", bry);
 		return tid;
 	}
 }
@@ -37,11 +40,11 @@ class Xo_custom_html_type_ {
 		switch (tid) {
 			case Tid__css_code: return Gfh_tag_.Bry__style;
 			case Tid__js_code : return Gfh_tag_.Bry__script;
-			default: throw Err_.new_unhandled_default(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public static byte To_tid(byte[] bry) {
-		byte tid = hash.Get_as_byte_or(bry, Byte_.Max_value_127); if (tid == Byte_.Max_value_127) throw Err_.new_wo_type("unknown type", "type", bry);
+		byte tid = hash.Get_as_byte_or(bry, ByteUtl.MaxValue127); if (tid == ByteUtl.MaxValue127) throw ErrUtl.NewArgs("unknown type", "type", bry);
 		return tid;
 	}
 }

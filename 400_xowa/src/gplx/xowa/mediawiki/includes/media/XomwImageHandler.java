@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
+package gplx.xowa.mediawiki.includes.media;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.xowa.mediawiki.XophpObject_;
+import gplx.xowa.mediawiki.includes.filerepo.file.XomwFile;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.Xomw_lnki_wkr;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.Xomw_param_itm;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.Xomw_param_map;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.Xomw_params_handler;
 /*	XO.TODO:
 	* validateThumbParams
 */
@@ -59,12 +68,12 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 			width = handlerParams.width;
 		}
 		else {
-			throw Err_.new_wo_type("No width specified to makeParamString");
+			throw ErrUtl.NewArgs("No width specified to makeParamString");
 		}
 
 		// Removed for ProofreadPage
 		// width = intval(width);
-		return Bry_.Add(Int_.To_bry(width), Xomw_lnki_wkr.Bry__px);
+		return BryUtl.Add(IntUtl.ToBry(width), Xomw_lnki_wkr.Bry__px);
 	}
 
 //		public Xomw_param_map parseParamString(byte[] src) {

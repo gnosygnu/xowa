@@ -13,17 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.basics.utls.ClassUtl;
 public class XophpType_ {
 	public static int To_type_id(Object o) {
-		int type_id = Type_ids_.To_id_by_obj(o);
+		int type_id = TypeIds.ToIdByObj(o);
 		switch (type_id) {
-			case Type_ids_.Id__bry:
-				type_id = Type_ids_.Id__str;
+			case TypeIds.IdBry:
+				type_id = TypeIds.IdStr;
 				break;
-			case Type_ids_.Id__obj:
-				if (Type_.Eq_by_obj(o, XophpArray.class)) {
-					type_id = Type_ids_.Id__array;
+			case TypeIds.IdObj:
+				if (ClassUtl.EqByObj(XophpArray.class, o)) {
+					type_id = TypeIds.IdArray;
 				}
 				break;
 		}
@@ -33,23 +35,23 @@ public class XophpType_ {
 		if (o == null) return false;
 		int type_id = To_type_id(o);
 		switch (type_id) {
-			case Type_ids_.Id__int:
-			case Type_ids_.Id__float:
-			case Type_ids_.Id__str:
-			case Type_ids_.Id__bool:
+			case TypeIds.IdInt:
+			case TypeIds.IdFloat:
+			case TypeIds.IdStr:
+			case TypeIds.IdBool:
 				return true;
 			default:
 				return false;
 		}
 	}
 	public static boolean is_string(Object o) {
-		return To_type_id(o) == Type_ids_.Id__str;
+		return To_type_id(o) == TypeIds.IdStr;
 	}
 	public static boolean is_array(Object o) {
-		return Type_.Eq_by_obj(o, XophpArray.class);
+		return ClassUtl.EqByObj(XophpArray.class, o);
 	}
 	public static boolean instance_of(Object o, Class<?> t) {
-		return Type_.Eq_by_obj(o, t) || Type_.Is_assignable_from_by_obj(o, t);
+		return ClassUtl.EqByObj(t, o) || ClassUtl.IsAssignableFromByObj(o, t);
 	}
 
 	public static Class<?> get_class(Object o) {return o.getClass();}

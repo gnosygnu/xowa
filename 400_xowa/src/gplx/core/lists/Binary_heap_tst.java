@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.lists;
-import gplx.core.primitives.Int_obj_val;
+import gplx.types.basics.wrappers.IntVal;
 import gplx.core.tests.Gftest;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Binary_heap_tst {
 	private final Binary_heap_fxt fxt = new Binary_heap_fxt();
@@ -43,13 +43,13 @@ class Binary_heap_fxt implements ComparerAble {
 	}
 	public void Exec__add(int... ary) {
 		for (int i : ary)
-			heap.Add(new Int_obj_val(i));
+			heap.Add(new IntVal(i));
 	}
 	public void Test__pop(int... expd) {
 		int len = expd.length;
 		int[] actl = new int[len];
 		for (int i = 0; i < len; i++)
-			actl[i] = ((Int_obj_val)heap.Pop()).Val();
-		Gftest.Eq__ary(expd, actl, "heaps don't match");
+			actl[i] = ((IntVal)heap.Pop()).Val();
+		Gftest.EqAry(expd, actl, "heaps don't match");
 	}
 }

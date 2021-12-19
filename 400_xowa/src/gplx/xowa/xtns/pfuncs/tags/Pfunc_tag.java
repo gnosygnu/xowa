@@ -14,10 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.tags;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.kwds.Xol_kwd_grp_;
 import gplx.xowa.parsers.Xop_ctx;
@@ -35,7 +36,7 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 	@Override public boolean Func_require_colon_arg() {return true;}
 
 	// make <xnde> based on {{#tag}}; EX: {{#tag:ref|a|name=1}} -> <ref name='1'>a</ref>
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		// get tag_name
 		byte[] tag_name = Eval_argx(ctx, src, caller, self);
 		if (tag_name.length == 0) return; // EX: {{#tag}}
@@ -58,7 +59,7 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 			Eval_attrs(ctx, wiki, caller, self, src, args_len, html_wkr);
 
 			// process body
-			byte[] body = Bry_.Empty;
+			byte[] body = BryUtl.Empty;
 			if (args_len > 0) {
 				body = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
 				// REF.MW: $inner = $frame->expand( array_shift( $args ) );
@@ -77,7 +78,7 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 	}
 	private void Eval_attrs(Xop_ctx ctx, Xowe_wiki wiki, Xot_invk caller, Xot_invk self, byte[] src, int args_len, Tag_html_wkr html_wkr) {
 		if (args_len <= 1) return; // NOTE: 1 b/c 0 is innerText
-		Bry_bfr atr_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr atr_bfr = wiki.Utl__bfr_mkr().GetB512();
 		try {
 			byte[][] kvp = new byte[2][];
 			for (int i = 1; i < args_len; i++) {
@@ -87,7 +88,7 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 
 				// strip flanking-matching quotes; EX: "'abc'" -> "abc"; REF.MW:preg_match( '/^(?:["\'](.+)["\']|""|\'\')$/s', $value, $m )
 				byte[] atr_val = kvp[1];
-				int atr_len = Bry_.Len(atr_val);
+				int atr_len = BryUtl.Len(atr_val);
 				if (atr_len > 1) {
 					int atr_bgn = 0;
 					boolean trim_bgn = false, trim_end = false;
@@ -106,14 +107,14 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 							break;
 					}
 					if (trim_bgn && trim_end)
-						kvp[1] = Bry_.Mid(atr_val, atr_bgn, atr_end);
+						kvp[1] = BryLni.Mid(atr_val, atr_bgn, atr_end);
 				}
 
 				// process attr
 				html_wkr.Tag__process_attr(kvp[0], kvp[1]);
 			}
 		} finally {
-			atr_bfr.Mkr_rls();
+			atr_bfr.MkrRls();
 		}
 	}
 }

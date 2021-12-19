@@ -23,7 +23,7 @@ public class TabPnlItm {
 		return this;
 	}	String name;
 	public int Idx() {return idx;}
-	@gplx.Internal protected TabPnlItm Idx_(int val) {
+	public TabPnlItm Idx_(int val) {
 		idx = val;
 		return this;
 	}	int idx;

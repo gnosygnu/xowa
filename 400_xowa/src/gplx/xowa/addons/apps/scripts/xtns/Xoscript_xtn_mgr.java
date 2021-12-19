@@ -14,18 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.scripts.xtns;
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.scripts.Gfo_script_engine;
 import gplx.core.scripts.Gfo_script_engine_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.apps.scripts.Xoscript_env;
@@ -50,7 +50,7 @@ public class Xoscript_xtn_mgr {
 		for (int i = 0; i < root_urls_len; ++i) {
 			Io_url root_url = root_urls[0];
 			String root_name_and_ext = root_url.NameAndExt();
-			if (String_.EqAny(root_name_and_ext, "xowa.script.main.js", "xowa.script.main.lua")) {
+			if (StringUtl.EqAny(root_name_and_ext, "xowa.script.main.js", "xowa.script.main.lua")) {
 				this.root_itm = new Xoscript_xtn_itm("xowa.root", root_url, Gfo_script_engine_.New_by_ext(root_url.Ext()));
 				break;
 			}
@@ -58,25 +58,25 @@ public class Xoscript_xtn_mgr {
 		root_itm.Engine().Load_script(root_itm.Url());
 		root_itm.Engine().Invoke_function("xoscript__main", this);
 	}
-	public void Run(Bry_bfr rv, Xow_wiki wiki, Xoa_page page) {
+	public void Run(BryWtr rv, Xow_wiki wiki, Xoa_page page) {
 		int len = hash.Len();
 		Xoscript_log log = new Xoscript_log();
 		for (int i = 0; i < len; ++i) {
-			Xoscript_xtn_itm itm = (Xoscript_xtn_itm)hash.Get_at(i);
+			Xoscript_xtn_itm itm = (Xoscript_xtn_itm)hash.GetAt(i);
 			Gfo_script_engine engine = (Gfo_script_engine)itm.Engine();
 			Xoscript_env env = new Xoscript_env(engine, itm.Url().OwnerDir());
-			Xoscript_page spg = new Xoscript_page(rv, env, new Xoscript_url(page.Wiki().Domain_str(), String_.new_u8(page.Url().Page_bry())));
+			Xoscript_page spg = new Xoscript_page(rv, env, new Xoscript_url(page.Wiki().Domain_str(), StringUtl.NewU8(page.Url().Page_bry())));
 			engine.Put_object("xolog", log);
 			engine.Load_script(itm.Url());
 			try {engine.Invoke_function("xoscript__init", env);}
-			catch (Exception e) {Gfo_usr_dlg_.Instance.Note_many("", "", "xoscript__init failed; url=~{0} err=~{1}", itm.Url(), Err_.Message_lang(e));}
+			catch (Exception e) {Gfo_usr_dlg_.Instance.Note_many("", "", "xoscript__init failed; url=~{0} err=~{1}", itm.Url(), ErrUtl.Message(e));}
 			try {engine.Invoke_function("xoscript__page_write_end", spg);}
-			catch (Exception e) {Gfo_usr_dlg_.Instance.Note_many("", "", "xoscript__page_write_end failed; url=~{0} err=~{1}", itm.Url(), Err_.Message_lang(e));}
+			catch (Exception e) {Gfo_usr_dlg_.Instance.Note_many("", "", "xoscript__page_write_end failed; url=~{0} err=~{1}", itm.Url(), ErrUtl.Message(e));}
 
 			// overwrite html
 			if (spg.doc().dirty()) {
 				rv.Clear();
-				rv.Add_str_u8(spg.doc().html());
+				rv.AddStrU8(spg.doc().html());
 			}
 		}
 	}	

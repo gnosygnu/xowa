@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Gfo_usr_dlg;
-import gplx.Int_ary_;
-import gplx.Ordered_hash;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_idx_itm;
 import gplx.dbs.Db_stmt;
@@ -66,7 +66,7 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	public Xob_wdata_db_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wbase_db;}
 	@Override public byte Init_redirect() {return BoolUtl.NByte;}	// json will never be found in a redirect
-	@Override public int[] Init_ns_ary() {return Int_ary_.New(Xow_ns_.Tid__main, Wdata_wiki_mgr.Ns_property);}
+	@Override public int[] Init_ns_ary() {return IntAryUtl.New(Xow_ns_.Tid__main, Wdata_wiki_mgr.Ns_property);}
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		cfg_tbl.Delete_all();
@@ -141,7 +141,7 @@ abstract class Wdata_tbl_base {
 	public static void Exec_insert_kvs(Db_stmt stmt, int page_id, Ordered_hash hash) {
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Json_kv kv = (Json_kv)hash.Get_at(i);
+			Json_kv kv = (Json_kv)hash.GetAt(i);
 			stmt.Clear()
 			.Val_int(page_id)
 			.Val_bry_as_str(kv.Key().Data_bry())
@@ -153,7 +153,7 @@ abstract class Wdata_tbl_base {
 class Wdata_label_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_label";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		(	"CREATE TABLE IF NOT EXISTS wdata_label"
 		,	"( page_id             integer             NOT NULL"
 		,	", lang_key            varchar(16)         NOT NULL"
@@ -169,7 +169,7 @@ class Wdata_label_tbl extends Wdata_tbl_base {
 class Wdata_alias_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_alias";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		(	"CREATE TABLE IF NOT EXISTS wdata_alias"
 		,	"( page_id             integer             NOT NULL"
 		,	", lang_key            varchar(16)         NOT NULL"
@@ -184,13 +184,13 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 		int len = hash.Len();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
-			Json_kv kv = (Json_kv)hash.Get_at(i);
+			Json_kv kv = (Json_kv)hash.GetAt(i);
 			byte[] key = kv.Key().Data_bry();
 			Json_grp val_grp = (Json_grp)kv.Val();
 			int val_grp_len = val_grp.Len();
 			for (int j = 0; j < val_grp_len; j++) {
 				Json_itm val_itm = val_grp.Get_at(j);
-				byte[] val = Bry_.Empty;
+				byte[] val = BryUtl.Empty;
 				if		(val_itm.Tid() == Json_itm_.Tid__str)
 					val = val_itm.Data_bry();
 				else if (val_itm.Tid() == Json_itm_.Tid__kv) {	// EX: q80 and de aliases
@@ -209,7 +209,7 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 class Wdata_description_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_description";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		(	"CREATE TABLE IF NOT EXISTS wdata_description"
 		,	"( page_id             integer             NOT NULL"
 		,	", lang_key            varchar(16)         NOT NULL"
@@ -225,7 +225,7 @@ class Wdata_description_tbl extends Wdata_tbl_base {
 class Wdata_link_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_link";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		(	"CREATE TABLE IF NOT EXISTS wdata_link"
 		,	"( page_id             integer             NOT NULL"
 		,	", wiki_key            varchar(255)        NOT NULL"
@@ -240,10 +240,10 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 		int len = hash.Len();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
-			Json_kv kv = (Json_kv)hash.Get_at(i);
+			Json_kv kv = (Json_kv)hash.GetAt(i);
 			byte[] key = kv.Key().Data_bry();
 			Json_itm kv_val = kv.Val();
-			byte[] val = Bry_.Empty;
+			byte[] val = BryUtl.Empty;
 			if (kv_val.Tid() == Json_itm_.Tid__str)
 				val = kv_val.Data_bry();
 			else {
@@ -263,7 +263,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 class Wbase_claim_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_claim";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 			(	"CREATE TABLE IF NOT EXISTS wdata_claim"
 			,	"( claim_id            integer             NOT NULL"
 			,	", page_id             integer             NOT NULL"
@@ -293,10 +293,10 @@ class Wbase_claim_tbl extends Wdata_tbl_base {
 		Ordered_hash list = wdoc.Claim_list();
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
-			Wbase_claim_grp claim_grp = (Wbase_claim_grp)list.Get_at(i);
+			Wbase_claim_grp claim_grp = (Wbase_claim_grp)list.GetAt(i);
 			int itms_len = claim_grp.Len();
 			int entity_id = -1;
-			byte[] claim_val = Bry_.Empty;
+			byte[] claim_val = BryUtl.Empty;
 			for (int j = 0; j < itms_len; j++) {
 				Wbase_claim_base claim = claim_grp.Get_at(j);
 				claim.Welcome(visitor);
@@ -306,8 +306,8 @@ class Wbase_claim_tbl extends Wdata_tbl_base {
 		}
 	}
 	public void Exec_insert(int claim_id, int page_id, int prop_id, byte val_tid, byte entity_tid, int entity_id, byte[] val_text, byte[] guid, int rank, int ref_count, int qual_count) {
-		if (val_text == null) val_text = Bry_.Empty;
-		if (guid == null) guid = Bry_.Empty;
+		if (val_text == null) val_text = BryUtl.Empty;
+		if (guid == null) guid = BryUtl.Empty;
 		this.Insert_stmt().Clear()
 		.Val_int(claim_id)
 		.Val_int(page_id)
@@ -329,7 +329,7 @@ class Wbase_claim_tbl extends Wdata_tbl_base {
 class Wbase_claim_time_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_claim_time";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		(	"CREATE TABLE IF NOT EXISTS wdata_claim_time"
 		,	"( claim_id            integer             NOT NULL"
 		,	", time_val            varchar(64)         NOT NULL"  // -04540000000-01-01T00:00:00Z
@@ -363,7 +363,7 @@ class Wbase_claim_time_tbl extends Wdata_tbl_base {
 class Wbase_claim_geo_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_claim_geo";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 			(	"CREATE TABLE IF NOT EXISTS wdata_claim_geo"
 			,	"( claim_id            integer             NOT NULL"
 			,	", geo_latitude        double              NOT NULL"  // 41.590833333333
@@ -395,7 +395,7 @@ class Wbase_claim_geo_tbl extends Wdata_tbl_base {
 class Wdata_ref_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_ref";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 			(	"CREATE TABLE IF NOT EXISTS wdata_ref"
 			,	"( ref_id              integer             NOT NULL"
 			,	", page_id             integer             NOT NULL"
@@ -418,7 +418,7 @@ class Wdata_ref_tbl extends Wdata_tbl_base {
 class Wdata_qual_tbl extends Wdata_tbl_base {
 	@Override public String Tbl_name() {return "wdata_qual";}
 	@Override public String Tbl_create_sql() {
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 			(	"CREATE TABLE IF NOT EXISTS wdata_qual"
 			,	"( qual_id             integer             NOT NULL"
 			,	", page_id             integer             NOT NULL"
@@ -447,17 +447,17 @@ class Xob_wdata_db_visitor implements Wbase_claim_visitor {
 	public void Init(byte[] lang_key) {this.lang_key = lang_key;}
 	public byte[] Rv() {return rv;} private byte[] rv;
 	public void Visit_str(Wbase_claim_string itm)						{rv = itm.Val_bry();}
-	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm)	{rv = Bry_.Add_w_dlm(AsciiByte.Pipe, itm.Lang(), itm.Text());}
+	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm)	{rv = BryUtl.AddWithDlm(AsciiByte.Pipe, itm.Lang(), itm.Text());}
 	public void Visit_quantity(Wbase_claim_quantity itm)				{rv = itm.Amount();}
 	public void Visit_time(Wbase_claim_time itm)						{rv = itm.Time();}
-	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm)	{rv = Bry_.Add_w_dlm(AsciiByte.Comma, itm.Lat(), itm.Lng());}
-	public void Visit_system(Wbase_claim_value itm)                     {rv = Bry_.Empty;}
+	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm)	{rv = BryUtl.AddWithDlm(AsciiByte.Comma, itm.Lat(), itm.Lng());}
+	public void Visit_system(Wbase_claim_value itm)                     {rv = BryUtl.Empty;}
 	public void Visit_entity(Wbase_claim_entity itm) {
 		Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(itm.Page_ttl_db());
 		if (entity_doc != null) {
 			rv = entity_doc.Get_label_bry_or_null(lang_key);
 		}
 		if (rv == null) // can be null if entity_doc is null or if label is null;
-			rv = Bry_.Empty;
+			rv = BryUtl.Empty;
 	}
 }

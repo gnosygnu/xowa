@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.libs.services;
 
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.XophpException;
 import gplx.xowa.mediawiki.XophpRuntimeException;
 
@@ -31,7 +31,7 @@ public class XomwServiceDisabledException extends XophpRuntimeException {
      */
     public XomwServiceDisabledException(String serviceName) {this(serviceName, null);}
     public XomwServiceDisabledException(String serviceName, XophpException previous) {
-        super(String_.Format("Service disabled: {0}", serviceName), 0, previous);
+        super(StringUtl.Format("Service disabled: {0}", serviceName), 0, previous);
     }
 
 }

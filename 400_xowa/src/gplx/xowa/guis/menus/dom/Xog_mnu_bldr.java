@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.menus.dom;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
+import gplx.frameworks.invks.GfoMsg;
 import gplx.gfui.imgs.ImageAdp;
 import gplx.gfui.imgs.ImageAdp_null;
 import gplx.gfui.kits.core.Gfui_kit;
 import gplx.gfui.kits.core.Gfui_mnu_grp;
 import gplx.gfui.kits.core.Gfui_mnu_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.apps.gfs.Xoa_gfs_mgr_;
 import gplx.xowa.guis.cmds.Xog_cmd_itm;
@@ -55,7 +55,7 @@ public class Xog_mnu_bldr {
 					sub_gui = sub_gui_grp;
 					break;
 				}
-				default: throw Err_.new_unhandled(sub_dom.Tid());
+				default: throw ErrUtl.NewUnhandled(sub_dom.Tid());
 			}
 			sub_dom.Under_gui_(sub_gui);
 		}
@@ -83,7 +83,7 @@ public class Xog_mnu_bldr {
 	}
 //		private void Add_chk(String key, String text, String shortcut, String img) {
 //			Xog_mnu_itm rv = Add_itm(Xog_mnu_itm.Tid_chk, key, text, shortcut, img);
-//			Xog_cmd_itm cmd = gui_mgr.Cmd_mgr().Regy().Get_or_null(key); if (cmd == null) throw Err_.new_wo_type("unknown cmd; key={0}", key);
+//			Xog_cmd_itm cmd = gui_mgr.Cmd_mgr().Regy().Get_or_null(key); if (cmd == null) throw ErrUtl.NewArgs("unknown cmd; key={0}", key);
 //			Gfo_evt_itm pub = gui_mgr.App().Gfs_mgr().Get_owner_as_event_obj(cmd.Cmd());
 //			Gfo_evt_mgr_.Sub_same(pub, Xog_mnu_evt_mgr.Evt_selected_changed, rv.Evt_mgr());
 //		}

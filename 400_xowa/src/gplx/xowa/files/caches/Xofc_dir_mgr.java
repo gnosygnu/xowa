@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*;
+package gplx.xowa.files.caches;
 import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 class Xofc_dir_mgr {
 	private final Xofc_dir_tbl tbl = new Xofc_dir_tbl();
 	private final Ordered_hash hash_by_names = Ordered_hash_.New_bry(); private final Hash_adp hash_by_ids = Hash_adp_.New();
@@ -48,7 +56,7 @@ class Xofc_dir_mgr {
 		int len = hash_by_names.Len();
 		boolean err_seen = false;
 		for (int i = 0; i < len; i++) {
-			Xofc_dir_itm itm = (Xofc_dir_itm)hash_by_names.Get_at(i);
+			Xofc_dir_itm itm = (Xofc_dir_itm)hash_by_names.GetAt(i);
 			if (err_seen)
 				itm.Id_(cache_mgr.Next_id());
 			if (itm.Cmd_mode() == Db_cmd_mode.Tid_create) {			// create; check if in db;
@@ -70,21 +78,21 @@ class Xofc_dir_mgr {
 		hash_by_ids.Clear();
 		hash_by_names.Clear();
 		for (int i = 0; i < len; ++i) {
-			Xofc_dir_itm itm = (Xofc_dir_itm)list.Get_at(i);
+			Xofc_dir_itm itm = (Xofc_dir_itm)list.GetAt(i);
 			hash_by_names.Add(itm.Name(), itm);
 			hash_by_ids.Add(itm.Id(), itm);
 		}
 	}
 	public void Cleanup() {tbl.Cleanup();}
 	private void Db_recalc_next_id(Xofc_dir_itm itm, String err) {
-		if (String_.Has(err, "PRIMARY KEY must be unique")) { // primary key exception in strange situations (multiple xowas at same time)
+		if (StringUtl.Has(err, "PRIMARY KEY must be unique")) { // primary key exception in strange situations (multiple xowas at same time)
 			int next_id = tbl.Select_max_uid() + 1;				
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_u8(itm.Name()), err);
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "uid out of sync; incrementing; uid=~{0} name=~{1} err=~{2}", itm.Id(), StringUtl.NewU8(itm.Name()), err);
 			itm.Id_(next_id);
 			cache_mgr.Next_id_(next_id + 1);
 			err = tbl.Db_save(itm);
 			if (err == null) return;
 		}
-		Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", itm.Id(), String_.new_u8(itm.Name()), err);
+		Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to save uid; uid=~{0} name=~{1} err=~{2}", itm.Id(), StringUtl.NewU8(itm.Name()), err);
 	}
 }

@@ -15,11 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims.itms;
 
-import gplx.Bry_;
-import gplx.Decimal_adp;
-import gplx.Decimal_adp_;
-import gplx.Object_;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
@@ -41,6 +37,6 @@ public class Wbase_claim_globecoordinate extends Wbase_claim_base {
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_globecoordinate(this);}
 	@Override public String toString() {// TEST:
-		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), String_.new_u8(lat), String_.new_u8(lng), String_.new_u8(alt), String_.new_u8(prc), String_.new_u8(glb));
+		return StringUtl.ConcatWith("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), StringUtl.NewU8(lat), StringUtl.NewU8(lng), StringUtl.NewU8(alt), StringUtl.NewU8(prc), StringUtl.NewU8(glb));
 	}
 }

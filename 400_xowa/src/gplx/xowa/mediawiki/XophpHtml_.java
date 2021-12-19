@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.wtrs.HtmlBryBfr;
 public class XophpHtml_ {
 	public static String htmlspecialchars(String raw) {
-		return String_.new_u8(Bry_.Escape_html(Bry_.new_u8(raw)));
+		return StringUtl.NewU8(HtmlBryBfr.EscapeHtml(BryUtl.NewU8(raw)));
 	}
 
 	public static final String ENTITYREF_NBSP = "\u00A0";

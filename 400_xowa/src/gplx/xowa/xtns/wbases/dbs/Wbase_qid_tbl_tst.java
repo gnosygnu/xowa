@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.dbs;
-import gplx.Bry_;
-import gplx.Io_mgr;
-import gplx.Io_url_;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.wikis.nss.Xow_ns_;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,11 +45,11 @@ class Xowd_wbase_qid_tbl_fxt {
 	}
 	public void Exec_insert(String src_wiki, int src_ns, String src_ttl, String trg_ttl) {
 		qid_tbl.Insert_bgn();
-		qid_tbl.Insert_cmd_by_batch(Bry_.new_u8(src_wiki), src_ns, Bry_.new_u8(src_ttl), Bry_.new_u8(trg_ttl));
+		qid_tbl.Insert_cmd_by_batch(BryUtl.NewU8(src_wiki), src_ns, BryUtl.NewU8(src_ttl), BryUtl.NewU8(trg_ttl));
 		qid_tbl.Insert_end();
 	}
 	public void Test_select(String src_wiki, int src_ns, String src_ttl, String expd) {
-		byte[] actl = qid_tbl.Select_qid(Bry_.new_u8(src_wiki), src_ns, Bry_.new_u8(src_ttl));
-		Tfds.Eq(expd, String_.new_u8(actl));
+		byte[] actl = qid_tbl.Select_qid(BryUtl.NewU8(src_wiki), src_ns, BryUtl.NewU8(src_ttl));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(actl));
 	}
 }

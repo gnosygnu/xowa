@@ -13,24 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*;
+package gplx.xowa.htmls.core.wkrs.glys;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgClearable;
 import gplx.langs.htmls.*;
-import gplx.objects.strings.AsciiByte;
-class Bfr_arg__elem__capt implements gplx.core.brys.Bfr_arg_clearable {
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+class Bfr_arg__elem__capt implements BryBfrArgClearable {
 	private byte[] capt;
 	public Bfr_arg__elem__capt() {
 		this.Clear();
 	}
 	public void Capt_(byte[] v) {this.capt = v;}
 	public void Clear() {capt = null;}
-	public void Bfr_arg__clear() {this.Clear();}
-	public boolean Bfr_arg__missing() {return capt == null;}
-	public void Bfr_arg__add(Bry_bfr bfr) {		// EX: '\n<li class="gallerycaption">Z</li>'
-		if (Bfr_arg__missing()) return;
-		bfr.Add_byte_nl();
+	public void BfrArgClear() {this.Clear();}
+	public boolean BfrArgIsMissing() {return capt == null;}
+	public void AddToBfr(BryWtr bfr) {		// EX: '\n<li class="gallerycaption">Z</li>'
+		if (BfrArgIsMissing()) return;
+		bfr.AddByteNl();
 		bfr.Add(Gfh_tag_.Li_lhs_bgn);			// '<li'
 		Gfh_atr_.Add(bfr, Gfh_atr_.Bry__class, Xoh_gly_grp_data.Atr__cls__gallerycaption);	// ' class="gallerycaption"'
-		bfr.Add_byte(AsciiByte.AngleEnd);		// '>'
+		bfr.AddByte(AsciiByte.AngleEnd);		// '>'
 		bfr.Add(capt);
 		bfr.Add(Gfh_tag_.Li_rhs);				// '</li>'
 	}

@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.gallery;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.wikis.ttls.*;
 public class Gallery_xnde_tst {
 	private final Xop_fxt fxt = new Xop_fxt(); String raw_src;
 	@Before public void init() {fxt.Reset(); fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());}
-	@Test  public void Lnki_no_caption() {
+	@Test public void Lnki_no_caption() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
@@ -26,7 +28,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Lnki_1() {
+	@Test public void Lnki_1() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|b</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
@@ -34,7 +36,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Lnki_3() {
+	@Test public void Lnki_3() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|a\nFile:B.png|b\nFile:C.png|c</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
@@ -44,7 +46,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Ignore_newLines() {
+	@Test public void Ignore_newLines() {
 		fxt.Test_parse_page_wiki("<gallery>\n\n\nFile:A.png|a\n\n\nFile:B.png|b\n\n\n</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
@@ -53,7 +55,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Only_first_pipe() {
+	@Test public void Only_first_pipe() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|File:B.png|cc</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
@@ -61,7 +63,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Invalid_lnki() {
+	@Test public void Invalid_lnki() {
 		fxt.Test_parse_page_wiki("<gallery>A.png|cc</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
@@ -69,7 +71,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void File_only_trailing_nl() {
+	@Test public void File_only_trailing_nl() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png\n</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
 		(	new_chkr_gallery_mgr().Expd_subs_
@@ -77,7 +79,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Invalid_curly() {
+	@Test public void Invalid_curly() {
 		raw_src = "a\n";			
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|" + raw_src + "}}</gallery>"	// NOTE: }} is ignored since it is not a valid title
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
@@ -86,7 +88,7 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Caption() {
+	@Test public void Caption() {
 		raw_src = "a<br/>c";
 		fxt.Test_parse_page_wiki("<gallery>File:A.png|" + raw_src + "</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
@@ -95,9 +97,9 @@ public class Gallery_xnde_tst {
 			)
 		));
 	}
-	@Test  public void Xnde_atr() {
+	@Test public void Xnde_atr() {
 		raw_src = "<center>a<br/>b</center>";
-		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki(StringUtl.ConcatLinesNlSkipLast
 		(	"<gallery perrow=3>"
 		,	"File:A.jpg|" + raw_src
 		,	"</gallery>"
@@ -107,9 +109,9 @@ public class Gallery_xnde_tst {
 				)
 			));
 	}
-	@Test  public void Err_pre() {	// PURPOSE: leading ws was failing; PAGE:en.w:Vlaardingen; "\nA.jpg| <center>Visbank</center>\n"
+	@Test public void Err_pre() {	// PURPOSE: leading ws was failing; PAGE:en.w:Vlaardingen; "\nA.jpg| <center>Visbank</center>\n"
 		raw_src = " <center>a</center>";
-		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki(StringUtl.ConcatLinesNlSkipLast
 		(	"<gallery>"
 		,	"File:A.jpg|" + raw_src
 		,	"</gallery>"
@@ -119,9 +121,9 @@ public class Gallery_xnde_tst {
 				)
 			));
 	}
-	@Test  public void Err_comment() {	// PURPOSE: comment was being rendered; PAGE:en.w:Perpetual motion; <!-- removed A.jpg|bcde -->
+	@Test public void Err_comment() {	// PURPOSE: comment was being rendered; PAGE:en.w:Perpetual motion; <!-- removed A.jpg|bcde -->
 		raw_src = "b";
-		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki(StringUtl.ConcatLinesNlSkipLast
 		(	"<gallery>"
 		,	"<!-- deleted A.jpg|" + raw_src
 		,	"</gallery>"
@@ -130,7 +132,7 @@ public class Gallery_xnde_tst {
 			)
 		);
 	}
-	@Test  public void Misc_atr() {		// make sure misc attribute doesn't fail
+	@Test public void Misc_atr() {		// make sure misc attribute doesn't fail
 		raw_src = "b";
 		fxt.Test_parse_page_wiki("<gallery id=a>File:A.png|" + raw_src + "</gallery>"
 		,	fxt.tkn_xnde_().Xnde_tagId_(Xop_xnde_tag_.Tid__gallery).Xnde_xtn_
@@ -174,7 +176,7 @@ class Gallery_itm_chkr implements Tst_chkr {
 		Gallery_itm actl = (Gallery_itm)actl_obj;
 		int err = 0;
 		err += mgr.Tst_sub_obj(expd_lnki, actl.Ttl(), path, err);
-		err += mgr.Tst_val(expd_caption == null, "", "caption", expd_caption, String_.new_u8(actl.Caption_bry()));
+		err += mgr.Tst_val(expd_caption == null, "", "caption", expd_caption, StringUtl.NewU8(actl.Caption_bry()));
 		return err;
 	}
 }

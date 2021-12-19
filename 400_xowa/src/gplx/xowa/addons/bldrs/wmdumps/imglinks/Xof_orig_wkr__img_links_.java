@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*;
+package gplx.xowa.addons.bldrs.wmdumps.imglinks;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
@@ -27,7 +31,7 @@ public class Xof_orig_wkr__img_links_ {
 	public static Xof_orig_itm Load_itm(Xof_orig_wkr__img_links wkr, Db_conn conn, Xowe_wiki wiki, byte[] ttl) {
 		Imglnk_reg_tbl imglnk_reg_tbl = wkr.Tbl__imglnk_reg();
 		Db_rdr rdr = imglnk_reg_tbl.Select_by_ttl_stmt().Clear().Crt_bry_as_str("img_src", ttl).Exec_select__rls_manual();
-		byte img_repo = Byte_.Max_value_127;
+		byte img_repo = ByteUtl.MaxValue127;
 		byte[] img_trg = null;
 		try {
 			if (rdr.Move_next()) {
@@ -58,7 +62,7 @@ public class Xof_orig_wkr__img_links_ {
 	}
 
 	private static void Load_all_by_wiki(Xof_orig_wkr__img_links rv, Db_conn conn, byte repo_id, Xowe_wiki wiki) {
-		String sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
+		String sql = StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "SELECT  ilr.img_repo, ilr.img_src, i.img_media_type, i.img_minor_mime, i.img_size, i.img_width, i.img_height, i.img_bits, i.img_ext_id, i.img_timestamp, ilr.img_trg AS img_redirect"
 		, "FROM    imglnk_reg ilr"
 		, "        JOIN <img_db>image i ON ilr.img_trg = i.img_name"

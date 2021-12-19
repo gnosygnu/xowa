@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cksums.dbs; import gplx.*;
+package gplx.xowa.addons.bldrs.files.cksums.dbs;
 import gplx.dbs.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class Xocksum_cksum_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__fil_id, fld__thm_id, fld__bin_db_id, fld__bin_len, fld__cksum_tid, fld__cksum_count, fld__cksum_val, fld__cksum_date;
@@ -41,7 +44,7 @@ public class Xocksum_cksum_tbl implements Db_tbl {
 	}
 	public void Insert_missing() {
 		// insert from fsdb_fil
-		conn.Exec_sql(Db_sql_.Make_by_fmt(String_.Ary
+		conn.Exec_sql(Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "INSERT INTO fsdb_cksum (fil_id, thm_id, bin_db_id, bin_size, cksum_tid, cksum_count, cksum_val, cksum_date)"
 		, "SELECT  f.fil_id, -1, f.fil_bin_db_id, f.fil_size, {0}, 0, '', ''"
 		, "FROM    fsdb_fil f"
@@ -51,7 +54,7 @@ public class Xocksum_cksum_tbl implements Db_tbl {
 		), Cksum_tid__md5));
 
 		// insert from fsdb_fil
-		conn.Exec_sql(Db_sql_.Make_by_fmt(String_.Ary
+		conn.Exec_sql(Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "INSERT INTO fsdb_cksum (fil_id, thm_id, bin_db_id, bin_size, cksum_tid, cksum_count, cksum_val, cksum_date)"
 		, "SELECT  t.thm_owner_id, t.thm_id, t.thm_bin_db_id, t.thm_size, {0}, 0, '', ''"
 		, "FROM    fsdb_thm t"
@@ -60,7 +63,7 @@ public class Xocksum_cksum_tbl implements Db_tbl {
 		), Cksum_tid__md5));
 	}
 	public Db_stmt Select_samples_stmt(int count) {
-		return conn.Stmt_sql(Db_sql_.Make_by_fmt(String_.Ary
+		return conn.Stmt_sql(Db_sql_.Make_by_fmt(StringUtl.Ary
 		( "SELECT  *"
 		, "FROM    fsdb_cksum"
 		, "WHERE   cksum_val = ''"

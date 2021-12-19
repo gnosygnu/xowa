@@ -13,12 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoIoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import org.junit.*;
 public class z803_useCase_KbdKeyboard_tst {
 	String raw; GfmlDoc gdoc;
 	@Test public void Quote() {		// smokeTest; make sure DefaultLxr supports both quoting mechanisms
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"gfui-keyboard-ui:{"
 			,	"	keyQuote {"
 			,	"		\"'\"	'key.quote';"
@@ -35,7 +39,7 @@ public class z803_useCase_KbdKeyboard_tst {
 			);
 	}
 	@Test public void Key_LtrA() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	TypeHeader
 			,	"keys:{"
 			,	"	keyA {"
@@ -53,12 +57,12 @@ public class z803_useCase_KbdKeyboard_tst {
 			);
 	}
 	@Test public void Load_Smoke() {
-		Io_url url = Tfds.RscDir.GenSubFil_nest("110_gfml", "cfgs_archive", "gfui-keyboard-ui.cfg.gfml");
+		Io_url url = GfoIoTstr.RscDir.GenSubFil_nest("110_gfml", "cfgs_archive", "gfui-keyboard-ui.cfg.gfml");
 		raw = Io_mgr.Instance.LoadFilStr(url);
 		gdoc = GfmlDoc_.parse_any_eol_(raw);
 //			Tfds.Write(gdoc.RootNde().To_str());
 	}
-	String TypeHeader = String_.Concat
+	String TypeHeader = StringUtl.Concat
 		(	"_type:{"
 		,	"	keys {"
 		,	"		key {"

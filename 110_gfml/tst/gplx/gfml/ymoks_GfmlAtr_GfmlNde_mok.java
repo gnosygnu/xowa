@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.strings.*;
+package gplx.gfml;
+import gplx.frameworks.tests.TfdsTstr_fxt;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 interface GfmlItm_mok {
 	int ObjType();
 }
@@ -28,10 +34,10 @@ class GfmlAtr_mok implements GfmlItm_mok {
 	}
 	public String XtoStrStub() {
 		String_bldr sb = String_bldr_.new_();
-		sb.Add_kv("key=", key).Add_kv("val=", val);
-		return sb.To_str();
+		sb.AddKv("key=", key).AddKv("val=", val);
+		return sb.ToStr();
 	}
-        public static final GfmlAtr_mok Null = new GfmlAtr_mok().Key_(String_.Null_mark).Val_(String_.Null_mark);
+        public static final GfmlAtr_mok Null = new GfmlAtr_mok().Key_(StringUtl.NullMark).Val_(StringUtl.NullMark);
 	public static GfmlAtr_mok as_(Object obj) {return obj instanceof GfmlAtr_mok ? (GfmlAtr_mok)obj : null;}
         public static GfmlAtr_mok new_(String key, String val) {
 		GfmlAtr_mok rv = new GfmlAtr_mok();
@@ -51,8 +57,8 @@ class GfmlNde_mok implements GfmlItm_mok {
 	public List_adp Subs() {return subs;}
 	public String XtoStrStub() {
 		String_bldr sb = String_bldr_.new_();
-		sb.Add_kv("key=", key).Add_kv("hnd=", hnd).Add_kv("typ=", typ).Add_kv("subs=", Int_.To_str(subs.Len()));
-		return sb.To_str();
+		sb.AddKv("key=", key).AddKv("hnd=", hnd).AddKv("typ=", typ).AddKv("subs=", IntUtl.ToStr(subs.Len()));
+		return sb.ToStr();
 	}
 	public GfmlNde_mok Subs_(GfmlItm_mok... ary) {
 		for (GfmlItm_mok itm : ary)
@@ -76,7 +82,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 		if (ownerMok.keyed) rv.KeyedSubObj_(ownerMok.keyed);
 		if (ownerMok.key != null) rv.KeyTkn_set(GfmlTkn_.val_(ownerMok.key));
 		for (int i = 0; i < ownerMok.subs.Len(); i++) {
-			GfmlItm_mok itm = (GfmlItm_mok)ownerMok.subs.Get_at(i);
+			GfmlItm_mok itm = (GfmlItm_mok)ownerMok.subs.GetAt(i);
 			if (itm.ObjType() == GfmlObj_.Type_nde) {
 				GfmlNde_mok itmMok = (GfmlNde_mok)itm;
 				rv.SubObjs_Add(itmMok.XtoGfmlItm(regy));
@@ -89,7 +95,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 		return rv;
 	}
 	public static GfmlNde_mok as_(Object obj) {return obj instanceof GfmlNde_mok ? (GfmlNde_mok)obj : null;}
-        public static final GfmlNde_mok Null = new GfmlNde_mok().Hnd_(String_.Null_mark).Typ_(String_.Null_mark);
+        public static final GfmlNde_mok Null = new GfmlNde_mok().Hnd_(StringUtl.NullMark).Typ_(StringUtl.NullMark);
         public static final GfmlNde_mok ErrAtr = new GfmlNde_mok().Hnd_("<<ErrAtr>>").Typ_("<<ErrAtr>>");
         public static GfmlNde_mok new_() {return new GfmlNde_mok();} GfmlNde_mok() {}
         public static GfmlNde_mok gfmlNde_(GfmlNde nde) {return InitNde(nde);}
@@ -105,7 +111,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 			if (subItm.ObjType() == GfmlObj_.Type_atr) {
 				GfmlAtr subAtr = (GfmlAtr)subItm;
 				GfmlAtr_mok mokAtr = GfmlAtr_mok.new_(subAtr.Key(), subAtr.DatTkn().Val());
-				if (!String_.Len_eq_0(subAtr.Key())) mokAtr.Key_(subAtr.Key());
+				if (!StringUtl.IsNullOrEmpty(subAtr.Key())) mokAtr.Key_(subAtr.Key());
 				rv.subs.Add(mokAtr);
 			}
 			else {
@@ -140,7 +146,7 @@ class GfmlTypeResolver_fxt {
 		for (int i = 0; i < max; i++) {
 			GfmlItm_mok expdSub = (GfmlItm_mok)tstr.List_FetchAtOrNull(expd.Subs(), i);
 			GfmlItm_mok actlSub = (GfmlItm_mok)tstr.List_FetchAtOrNull(actl.Subs(), i);
-			tstr.SubName_push(Int_.To_str(i));
+			tstr.SubName_push(IntUtl.ToStr(i));
 			if (expdSub == null) {
 				GfmlNde_mok mm = GfmlNde_mok.as_(actlSub);
 				String actlSubStr = mm == null ? "sub:null" : mm.XtoStrStub();

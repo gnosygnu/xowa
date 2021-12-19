@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.nss;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
 import org.junit.*;
 import gplx.xowa.langs.cases.*;
 public class Xow_ns_mgr_tst {		
@@ -29,8 +32,8 @@ public class Xow_ns_mgr_tst {
 		fxt.Ns_mgr().Add_new(Xow_ns_.Tid__template, "Template");
 		fxt.Ns_mgr().Aliases_add(Xow_ns_.Tid__template, "Templatex");
 		fxt.Ns_mgr().Init();
-		byte[] name = Bry_.new_a7("Templatex:Abc");
-		Tfds.Eq(10, fxt.Ns_mgr().Tmpls_get_w_colon(name, 0, name.length));
+		byte[] name = BryUtl.NewA7("Templatex:Abc");
+		GfoTstr.EqObj(10, fxt.Ns_mgr().Tmpls_get_w_colon(name, 0, name.length));
 	}
 	@Test public void Utf8() {// PURPOSE: handle different casings for ns_names; PAGE:ru.w:Портрет_итальянского_Ренессанса DATE:2014-07-04
 		Xow_ns_mgr ns_mgr = new Xow_ns_mgr(Xol_case_mgr_.U8());
@@ -50,7 +53,7 @@ class Xow_ns_mgr_fxt {
 		int ids_len = ids.length;
 		for (int i = 0; i < ids_len; i++) {
 			int id = ids[i];
-			ns_mgr.Add_new(id, Int_.To_str(id));
+			ns_mgr.Add_new(id, IntUtl.ToStr(id));
 		}
 		return this;
 	}
@@ -62,16 +65,16 @@ class Xow_ns_mgr_fxt {
 			Xow_ns ns_itm = ns_mgr.Ords_ary()[i]; 
 			actl[i] = ns_itm == null ? -100 : ns_itm.Id();
 		}
-		Tfds.Eq_ary(expd, actl);
+		GfoTstr.EqAry(expd, actl);
 		return this;
 	}
 	public void Test_ns_name(int expd_id, String... ns_names) {
 		int ns_names_len = ns_names.length;
 		for (int i = 0; i < ns_names_len; ++i) {
 			String ns_name = ns_names[i];
-			Xow_ns actl_ns = ns_mgr.Names_get_or_null(Bry_.new_u8(ns_name));
-			int actl_id = actl_ns == null ? Int_.Min_value : actl_ns.Id();
-			Tfds.Eq(expd_id, actl_id, ns_name);
+			Xow_ns actl_ns = ns_mgr.Names_get_or_null(BryUtl.NewU8(ns_name));
+			int actl_id = actl_ns == null ? IntUtl.MinValue : actl_ns.Id();
+			GfoTstr.EqObj(expd_id, actl_id, ns_name);
 		}
 	}
 }

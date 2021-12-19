@@ -13,45 +13,48 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.js; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.js;
+import gplx.langs.html.HtmlEntityCodes;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.core.btries.*;
-import gplx.langs.htmls.entitys.*;
 public class Xoh_js_cleaner {
 	private Xoae_app app; private boolean ctor = true;
 	public Xoh_js_cleaner(Xoae_app app) {this.app = app;}
-	public void Clean_bfr(Xowe_wiki wiki, Xoa_ttl ttl, Bry_bfr bfr, int bgn) {
+	public void Clean_bfr(Xowe_wiki wiki, Xoa_ttl ttl, BryWtr bfr, int bgn) {
 		int end = bfr.Len();
-		byte[] cleaned = this.Clean(wiki, bfr.Bfr(), bgn, end);
+		byte[] cleaned = this.Clean(wiki, bfr.Bry(), bgn, end);
 		if (cleaned != null) {
-			bfr.Del_by(end - bgn);
+			bfr.DelBy(end - bgn);
 			bfr.Add(cleaned);
-			app.Usr_dlg().Log_many("", "", "javascript detected: wiki=~{0} ~{1}", wiki.Domain_str(), String_.new_u8(ttl.Full_txt()));
+			app.Usr_dlg().Log_many("", "", "javascript detected: wiki=~{0} ~{1}", wiki.Domain_str(), StringUtl.NewU8(ttl.Full_txt()));
 		}
 	}
 	public byte[] Clean(Xowe_wiki wiki, byte[] src, int bgn, int end) {
 		if (ctor) Ctor();
-		Bry_bfr bfr = null;
+		BryWtr bfr = null;
 		boolean dirty = false;
 		try {
-			bfr = wiki.Utl__bfr_mkr().Get_m001();
+			bfr = wiki.Utl__bfr_mkr().GetM001();
 			int pos = bgn;
 			while (pos < end) {
 				byte b = src[pos];
 				Object o = trie.Match_bgn_w_byte(b, src, pos, end);
 				if (o == null) {
 					if (dirty)
-						bfr.Add_byte(b);
+						bfr.AddByte(b);
 					++pos;
 				}
 				else {					
 					byte[] frag = (byte[])o;
 					int frag_len = frag.length;
 					if (frag[0] == AsciiByte.Lt) {	// jscript node; EX: <script
-						if (!dirty) {bfr.Add_mid(src, bgn, pos); dirty = true;}
-						bfr.Add(Gfh_entity_.Lt_bry);
-						bfr.Add_mid(frag, 1, frag.length);
+						if (!dirty) {bfr.AddMid(src, bgn, pos); dirty = true;}
+						bfr.Add(HtmlEntityCodes.LtBry);
+						bfr.AddMid(frag, 1, frag.length);
 						pos += frag_len; 
 					}
 					else {	// jscript attribue; EX: onmouseover
@@ -59,16 +62,16 @@ public class Xoh_js_cleaner {
 						if (atr_pos == -1)	// false match; EX: "onSelectNotJs=3"; "regionSelect=2"
 							pos += frag_len;
 						else {
-							if (!dirty) {bfr.Add_mid(src, bgn, pos); dirty = true;}
+							if (!dirty) {bfr.AddMid(src, bgn, pos); dirty = true;}
 							bfr.Add(frag);
-							bfr.Add(Gfh_entity_.Eq_bry);
+							bfr.Add(HtmlEntityCodes.EqBry);
 							pos = atr_pos;
 						}
 					}
 				}
 			}
-		}	finally {if (bfr != null) bfr.Mkr_rls();}
-		return dirty ? bfr.To_bry_and_clear() : null;
+		}	finally {if (bfr != null) bfr.MkrRls();}
+		return dirty ? bfr.ToBryAndClear() : null;
 	}
 	private int Get_pos_eq(byte[] src, int pos, int end, int frag_len) {
 		if (	pos > 0								// bounds check
@@ -200,5 +203,5 @@ public class Xoh_js_cleaner {
 		Reg_itm("seekSegmentTime");
 		ctor = false;
 	}
-	private void Reg_itm(String s) {trie.Add_bry(Bry_.new_a7(s));} Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:javascript event name
+	private void Reg_itm(String s) {trie.Add_bry(BryUtl.NewA7(s));} Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci.ascii:javascript event name
 }

@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import org.junit.*; import gplx.xowa.files.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
 public class Xoh_file_wtr__audio__tst {
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Audio__full() {
 		fxt.Test_parse_page_wiki_str
-		( "[[File:A.oga|noicon]]", String_.Concat_lines_nl_skip_last
+		( "[[File:A.oga|noicon]]", StringUtl.ConcatLinesNlSkipLast
 		( "    <div class=\"xowa_media_div\">"
 		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
 		, "    </div>"
@@ -30,7 +32,7 @@ public class Xoh_file_wtr__audio__tst {
 	@Test public void Audio__full_ogg() {// PURPOSE: ogg should show src on first load
 		fxt.Wiki().Html_mgr().Img_suppress_missing_src_(true);	// simulate release-mode wherein missing images will not have src
 		fxt.Test_parse_page_all_str
-		( "[[File:A.ogg]]", String_.Concat_lines_nl_skip_last
+		( "[[File:A.ogg]]", StringUtl.ConcatLinesNlSkipLast
 		( "    <div class=\"xowa_media_div\">"
 		, "      <div>"
 		+	        "<a href=\"/wiki/File:A.ogg\" class=\"image\" title=\"A.ogg\" xowa_title=\"A.ogg\">"
@@ -44,7 +46,7 @@ public class Xoh_file_wtr__audio__tst {
 	}
 	@Test public void Audio__thumb() {
 		fxt.Test_parse_page_wiki_str
-		( "[[File:A.oga|thumb|a|alt=b]]", String_.Concat_lines_nl_skip_last
+		( "[[File:A.oga|thumb|a|alt=b]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"thumb tright\">"
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
 		, "    <div class=\"xowa_media_div\">"
@@ -72,7 +74,7 @@ public class Xoh_file_wtr__audio__tst {
 	}
 	@Test public void Audio__noicon() {
 		fxt.Test_parse_page_wiki_str
-		( "[[File:A.oga|thumb|noicon|a|alt=b]]", String_.Concat_lines_nl_skip_last
+		( "[[File:A.oga|thumb|noicon|a|alt=b]]", StringUtl.ConcatLinesNlSkipLast
 		( "    <div class=\"xowa_media_div\">"
 		,       "<div><a id=\"xowa_file_play_0\" href=\"file:///mem/wiki/repo/trg/orig/4/f/A.oga\" xowa_title=\"A.oga\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
 		, "    </div>"

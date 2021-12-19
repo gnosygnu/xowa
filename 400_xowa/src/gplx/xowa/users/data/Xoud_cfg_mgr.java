@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.data;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 public class Xoud_cfg_mgr {
 	public Db_cfg_tbl Tbl() {return tbl;} private Db_cfg_tbl tbl;
@@ -24,12 +26,12 @@ public class Xoud_cfg_mgr {
 	}
 	public int		Select_int_or(String grp, String key, int or)		{
 		String rv = Select_str_or(grp, key, null);
-		return rv == null ? or : Int_.Parse_or(rv, or);
+		return rv == null ? or : IntUtl.ParseOr(rv, or);
 	}
 	public byte[]	Select_bry_or(String key, byte[] or)				{return Select_bry_or(""	, key, or);}
 	public byte[]	Select_bry_or(String grp, String key, byte[] or)	{
 		String rv = Select_str_or(grp, key, null);
-		return rv == null ? or : Bry_.new_u8(rv);
+		return rv == null ? or : BryUtl.NewU8(rv);
 	}
 	public String	Select_str_or(String grp, String key, String or) {
 		String rv = tbl.Select_str_or(grp, key, null);
@@ -43,11 +45,11 @@ public class Xoud_cfg_mgr {
 			return or;
 		}
 		else
-			return Bry_.new_u8(rv);
+			return BryUtl.NewU8(rv);
 	}
 	public void Upsert_int(String grp, String key, int val) {
-		int exists = Select_int_or(grp, key, Int_.Min_value);
-		if (exists == Int_.Min_value)
+		int exists = Select_int_or(grp, key, IntUtl.MinValue);
+		if (exists == IntUtl.MinValue)
 			Insert_int(grp, key, val);
 		else
 			Update_int(grp, key, val);
@@ -59,11 +61,11 @@ public class Xoud_cfg_mgr {
 		else
 			Update_str(grp, key, val);
 	}
-	public void Update_str(String grp, String key, String val)	{Update_bry(grp, key, Bry_.new_u8(val));}
+	public void Update_str(String grp, String key, String val)	{Update_bry(grp, key, BryUtl.NewU8(val));}
 	public void Update_bry(String key, byte[] val)				{Update_bry("", key, val);}
 	public void Update_bry(String grp, String key, byte[] val)	{tbl.Update_bry(grp, key, val);}
 	public void Update_int(String grp, String key, int val)		{tbl.Update_int(grp, key, val);}
-	public void Insert_str(String grp, String key, String val)	{Insert_bry(grp, key, Bry_.new_u8(val));}
+	public void Insert_str(String grp, String key, String val)	{Insert_bry(grp, key, BryUtl.NewU8(val));}
 	public void Insert_bry(String key, byte[] val)				{Insert_bry("", key, val);}
 	public void Insert_bry(String grp, String key, byte[] val)	{tbl.Insert_bry(grp, key, val);}
 	public void Insert_int(String grp, String key, int val)		{tbl.Insert_int(grp, key, val);}

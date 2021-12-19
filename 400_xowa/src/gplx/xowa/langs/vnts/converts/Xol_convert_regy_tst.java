@@ -14,12 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.vnts.converts;
-import gplx.Bry_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_test_;
 import gplx.xowa.Xoa_ttl;
@@ -65,39 +64,39 @@ class Xol_convert_regy_fxt {
 	public Xowd_data_tstr Data_mgr() {return data_mgr;} private final Xowd_data_tstr data_mgr = new Xowd_data_tstr();
 	public void Clear() {
 		app = Xoa_app_fxt.Make__app__edit();
-		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7("zh"));
+		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(BryUtl.NewA7("zh"));
 		Xol_lang_itm_.Lang_init(lang);
-		Init_cnv(app, "zh", "zh-hant", Keyval_.new_("x0", "x1"));
+		Init_cnv(app, "zh", "zh-hant", KeyVal.NewStr("x0", "x1"));
 		wiki = Xoa_app_fxt.Make__wiki__edit(app, "zh.wikipedia.org", lang);
 		Xoa_test_.Init__db__edit(wiki);
 		data_mgr.Wiki_(wiki);
-		gplx.xowa.langs.vnts.Xol_vnt_regy_fxt.Init__vnt_mgr(wiki.Lang().Vnt_mgr(), 1, String_.Ary("zh", "zh-hans", "zh-hant"));
+		gplx.xowa.langs.vnts.Xol_vnt_regy_fxt.Init__vnt_mgr(wiki.Lang().Vnt_mgr(), 1, StringUtl.Ary("zh", "zh-hans", "zh-hant"));
 		parser_fxt = new Xop_fxt(app, wiki);
 	}
 	public void Init_page(String ttl, String wtxt) {Xow_data_fxt.Create(wiki, data_mgr, ttl, wtxt);}
-	public static void Init_cnv(Xoae_app app, String lang_key, String vnt_key, Keyval... ary) {
-		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7(lang_key));
-		Xol_convert_grp grp = lang.Vnt_mgr().Convert_mgr().Converter_regy().Get_or_make(Bry_.new_a7(vnt_key));
+	public static void Init_cnv(Xoae_app app, String lang_key, String vnt_key, KeyVal... ary) {
+		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(BryUtl.NewA7(lang_key));
+		Xol_convert_grp grp = lang.Vnt_mgr().Convert_mgr().Converter_regy().Get_or_make(BryUtl.NewA7(vnt_key));
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
-			Keyval itm = ary[i];
-			grp.Add(Bry_.new_u8(itm.Key()), Bry_.new_u8(itm.Val_to_str_or_empty()));
+			KeyVal itm = ary[i];
+			grp.Add(BryUtl.NewU8(itm.KeyToStr()), BryUtl.NewU8(itm.ValToStrOrEmpty()));
 		}
-		Xol_vnt_itm vnt_itm = lang.Vnt_mgr().Regy__get_or_new(Bry_.new_a7(vnt_key));
-		vnt_itm.Convert_ary_(Bry_.Ary(vnt_key));
+		Xol_vnt_itm vnt_itm = lang.Vnt_mgr().Regy__get_or_new(BryUtl.NewA7(vnt_key));
+		vnt_itm.Convert_ary_(BryUtl.Ary(vnt_key));
 		vnt_itm.Convert_wkr().Init(lang.Vnt_mgr().Convert_mgr().Converter_regy(), vnt_itm.Convert_ary());
 	}
 	public void Test_parse(String raw, String expd) {
 		parser_fxt.Test_parse_page_all_str(raw, expd);
 	}
 	public void Test_convert_by_ttl(String lang_key, String raw, boolean expd) {
-		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7(lang_key));
-		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(raw));
+		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(BryUtl.NewA7(lang_key));
+		Xoa_ttl ttl = wiki.Ttl_parse(BryUtl.NewU8(raw));
 		Xowd_page_itm page = lang.Vnt_mgr().Convert_mgr().Convert_ttl(wiki, ttl);
 		if (expd)
-			Tfds.Eq_true(page.Exists());
+			GfoTstr.EqBoolY(page.Exists());
 		else
-			Tfds.Eq_null(page);
+			GfoTstr.EqNull(page);
 	}
 }
 class Xow_data_fxt {

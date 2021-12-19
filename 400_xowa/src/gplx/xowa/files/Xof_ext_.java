@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files;
-
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_bry;
-import gplx.core.primitives.Int_obj_val;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.IntVal;
 
 public class Xof_ext_ {
 	public static final int Id_unknown = 0	// SERIALIZED; ids are saved to fsdb;
@@ -33,16 +33,16 @@ public class Xof_ext_ {
 	;
 	public static final int Id__max = 22;
 	public static final byte[]
-	  Bry_png = Bry_.new_a7("png"), Bry_jpg = Bry_.new_a7("jpg"), Bry_jpeg = Bry_.new_a7("jpeg")
-	, Bry_gif = Bry_.new_a7("gif"), Bry_tif = Bry_.new_a7("tif"), Bry_tiff = Bry_.new_a7("tiff")
-	, Bry_svg = Bry_.new_a7("svg"), Bry_djvu = Bry_.new_a7("djvu"), Bry_pdf = Bry_.new_a7("pdf")
-	, Bry_mid = Bry_.new_a7("mid"), Bry_ogg = Bry_.new_a7("ogg"), Bry_oga = Bry_.new_a7("oga")
-	, Bry_ogv = Bry_.new_a7("ogv"), Bry_webm = Bry_.new_a7("webm"), Bry_flac = Bry_.new_a7("flac")
-	, Bry_bmp = Bry_.new_a7("bmp"), Bry_xcf = Bry_.new_a7("xcf"), Bry_wav = Bry_.new_a7("wav"), Bry_opus = Bry_.new_a7("opus")
-	, Bry_stl = Bry_.new_a7("stl"), Bry_webp = Bry_.new_a7("webp")
+	  Bry_png = BryUtl.NewA7("png"), Bry_jpg = BryUtl.NewA7("jpg"), Bry_jpeg = BryUtl.NewA7("jpeg")
+	, Bry_gif = BryUtl.NewA7("gif"), Bry_tif = BryUtl.NewA7("tif"), Bry_tiff = BryUtl.NewA7("tiff")
+	, Bry_svg = BryUtl.NewA7("svg"), Bry_djvu = BryUtl.NewA7("djvu"), Bry_pdf = BryUtl.NewA7("pdf")
+	, Bry_mid = BryUtl.NewA7("mid"), Bry_ogg = BryUtl.NewA7("ogg"), Bry_oga = BryUtl.NewA7("oga")
+	, Bry_ogv = BryUtl.NewA7("ogv"), Bry_webm = BryUtl.NewA7("webm"), Bry_flac = BryUtl.NewA7("flac")
+	, Bry_bmp = BryUtl.NewA7("bmp"), Bry_xcf = BryUtl.NewA7("xcf"), Bry_wav = BryUtl.NewA7("wav"), Bry_opus = BryUtl.NewA7("opus")
+	, Bry_stl = BryUtl.NewA7("stl"), Bry_webp = BryUtl.NewA7("webp")
 	;
 	public static final byte[][] Bry__ary = new byte[][]
-	{ Bry_.Empty, Bry_png, Bry_jpg, Bry_jpeg
+	{ BryUtl.Empty, Bry_png, Bry_jpg, Bry_jpeg
 	, Bry_gif, Bry_tif, Bry_tiff
 	, Bry_svg, Bry_djvu, Bry_pdf
 	, Bry_mid, Bry_ogg, Bry_oga
@@ -51,15 +51,15 @@ public class Xof_ext_ {
 	, Bry_stl, Bry_webp
 	};
 	public static final byte[][] Mime_type__ary = new byte[][]
-	{ Bry_.new_a7("application/octet-stream"), Bry_.new_a7("image/png"), Bry_.new_a7("image/jpg"), Bry_.new_a7("image/jpeg")
-	, Bry_.new_a7("image/gif"), Bry_.new_a7("image/tiff"), Bry_.new_a7("image/tiff")
-	, Bry_.new_a7("image/svg+xml"), Bry_.new_a7("image/x.djvu"), Bry_.new_a7("application/pdf")
-	, Bry_.new_a7("application/x-midi"), Bry_.new_a7("video/ogg"), Bry_.new_a7("audio/oga")
-	, Bry_.new_a7("video/ogg"), Bry_.new_a7("video/webm"), Bry_.new_a7("audio/flac")
-	, Bry_.new_a7("image/bmp")
-	, Bry_.new_a7("image/x-xcf") // changed from "/xcf"; DATE:2020-04-21
-	, Bry_.new_a7("audio/x-wav"), Bry_.new_a7("audio/opus")
-	, Bry_.new_a7("model/stl"), Bry_.new_a7("video/webp")
+	{ BryUtl.NewA7("application/octet-stream"), BryUtl.NewA7("image/png"), BryUtl.NewA7("image/jpg"), BryUtl.NewA7("image/jpeg")
+	, BryUtl.NewA7("image/gif"), BryUtl.NewA7("image/tiff"), BryUtl.NewA7("image/tiff")
+	, BryUtl.NewA7("image/svg+xml"), BryUtl.NewA7("image/x.djvu"), BryUtl.NewA7("application/pdf")
+	, BryUtl.NewA7("application/x-midi"), BryUtl.NewA7("video/ogg"), BryUtl.NewA7("audio/oga")
+	, BryUtl.NewA7("video/ogg"), BryUtl.NewA7("video/webm"), BryUtl.NewA7("audio/flac")
+	, BryUtl.NewA7("image/bmp")
+	, BryUtl.NewA7("image/x-xcf") // changed from "/xcf"; DATE:2020-04-21
+	, BryUtl.NewA7("audio/x-wav"), BryUtl.NewA7("audio/opus")
+	, BryUtl.NewA7("model/stl"), BryUtl.NewA7("video/webp")
 	};
 	private static final Hash_adp id_hash = id_hash_new_();
 	private static Hash_adp id_hash_new_() {
@@ -73,7 +73,7 @@ public class Xof_ext_ {
 		id_hash_new_(rv, Bry_opus, Id_opus);    id_hash_new_(rv, Bry_stl, Id_stl);		id_hash_new_(rv, Bry_webp, Id_webp);
 		return rv;
 	}
-	private static void id_hash_new_(Hash_adp hash, byte[] key, int val) {hash.Add(key, new Int_obj_val(val));}
+	private static void id_hash_new_(Hash_adp hash, byte[] key, int val) {hash.Add(key, new IntVal(val));}
 
 	private static final Hash_adp_bry ext_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_bry(Bry_png).Add_bry_bry(Bry_jpg).Add_bry_bry(Bry_jpeg)
@@ -87,17 +87,17 @@ public class Xof_ext_ {
 	private static final Xof_ext[] Ary = new Xof_ext[Id__max];
 
 	public static byte[] Get_ext_by_id_(int id) {
-		if (id < 0 || id >= Id__max) throw Err_.new_wo_type("index out of bounds", "id", id);
+		if (id < 0 || id >= Id__max) throw ErrUtl.NewArgs("index out of bounds", "id", id);
 		return Bry__ary[id];
 	}
 	public static int Get_id_by_ext_(byte[] ext_bry) {
 		Object o = id_hash.GetByOrNull(ext_bry);
-		return o == null ? Id_unknown : ((Int_obj_val)o).Val();
+		return o == null ? Id_unknown : ((IntVal)o).Val();
 	}
 	public static Xof_ext new_by_ttl_(byte[] ttl) {
 		int ttl_len = ttl.length;
-		int dot_pos = Bry_find_.Find_bwd(ttl, AsciiByte.Dot);
-		byte[] ext = (dot_pos == Bry_find_.Not_found || dot_pos == ttl_len) ? Bry_.Empty : Bry_.Lcase__all(ttl, dot_pos + 1, ttl_len); // +1 to bgn after .
+		int dot_pos = BryFind.FindBwd(ttl, AsciiByte.Dot);
+		byte[] ext = (dot_pos == BryFind.NotFound || dot_pos == ttl_len) ? BryUtl.Empty : BryUtl.LcaseAll(ttl, dot_pos + 1, ttl_len); // +1 to bgn after .
 		return new_(Get_id_by_ext_(ext), ext);
 	}
 	public static Xof_ext new_by_ext_(byte[] ext)	{return new_(Get_id_by_ext_(ext), ext);}
@@ -111,13 +111,13 @@ public class Xof_ext_ {
 		return rv;
 	}
 	public static byte[] Lower_ext(byte[] ttl) {
-		int dot_pos = Bry_find_.Find_bwd(ttl, AsciiByte.Dot);
+		int dot_pos = BryFind.FindBwd(ttl, AsciiByte.Dot);
 		int ttl_len = ttl.length;
-		if (dot_pos == Bry_find_.Not_found || dot_pos == ttl_len - 1) return ttl;
+		if (dot_pos == BryFind.NotFound || dot_pos == ttl_len - 1) return ttl;
 		Object o = ext_hash.Get_by_mid(ttl, dot_pos + 1, ttl_len);
 		if (o == null) return ttl;
 		byte[] ext = (byte[])o;
-		boolean match = Bry_.Match(ttl, dot_pos, ttl_len, ext);
+		boolean match = BryLni.Eq(ttl, dot_pos, ttl_len, ext);
 		if (match) return ttl;
 		int ext_len = ext.length;
 		for (int i = 0; i < ext_len; i++)

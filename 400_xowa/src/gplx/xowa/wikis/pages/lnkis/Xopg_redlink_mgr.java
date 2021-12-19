@@ -14,18 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.lnkis;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xow_wiki;
@@ -75,13 +75,13 @@ public class Xopg_redlink_mgr implements Gfo_invk {
 			if (page_row.Exists()) continue;	// page exists; nothing to do;
 
 			// for vnt languages, convert missing ttl to vnt and check again; EX: [[zh_cn]] will check for page_ttl for [[zh_tw]]
-			String html_uid = Xopg_lnki_list.Lnki_id_prefix + Int_.To_str(lnki.Html_uid());
+			String html_uid = Xopg_lnki_list.Lnki_id_prefix + IntUtl.ToStr(lnki.Html_uid());
 			if (vnt_enabled) {
 				Xowd_page_itm vnt_page = vnt_mgr.Convert_mgr().Convert_ttl(wiki, lnki.Ttl());	// check db
 				if (vnt_page != null) {	// vnt found; update href to point to vnt
 					Xoa_ttl vnt_ttl = wiki.Ttl_parse(lnki.Ttl().Ns().Id(), vnt_page.Ttl_page_db());
-					js_wkr.Html_atr_set(html_uid, "href", "/wiki/" + String_.new_u8(vnt_ttl.Full_url()));
-					if (!String_.Eq(vnt_mgr.Html__lnki_style(), "")) js_wkr.Html_atr_set(html_uid, "style", vnt_mgr.Html__lnki_style());	// colorize for debugging
+					js_wkr.Html_atr_set(html_uid, "href", "/wiki/" + StringUtl.NewU8(vnt_ttl.Full_url()));
+					if (!StringUtl.Eq(vnt_mgr.Html__lnki_style(), "")) js_wkr.Html_atr_set(html_uid, "style", vnt_mgr.Html__lnki_style());	// colorize for debugging
 					continue;
 				}
 			}
@@ -104,6 +104,6 @@ public class Xopg_redlink_mgr implements Gfo_invk {
 		try {			
 			Xopg_redlink_mgr mgr = new Xopg_redlink_mgr(pg, js_wkr);
 			gplx.core.threads.Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_page_redlink, mgr, gplx.xowa.wikis.pages.lnkis.Xopg_redlink_mgr.Invk_run);
-		}	catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", pg.Ttl().Raw(), Err_.Message_gplx_full(e));}
+		}	catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "page.thread.redlinks: page=~{0} err=~{1}", pg.Ttl().Raw(), ErrUtl.ToStrFull(e));}
 	}
 }

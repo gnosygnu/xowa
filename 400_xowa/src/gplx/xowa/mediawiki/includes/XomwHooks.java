@@ -15,10 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
 
-import gplx.String_;
-import gplx.core.primitives.String_obj_ref;
-import gplx.core.tests.GfoTestMethod;
-import gplx.xowa.mediawiki.XophpArray;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.StringRef;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
@@ -119,7 +117,7 @@ public class XomwHooks {
     private static String callHook(String event, Object hookObj, XophpArray args) {return callHook(event, hookObj, args, null, null);}
     private static String callHook(String event, Object hookObj, XophpArray args, String deprecatedVersion) {return callHook(event, hookObj, args, deprecatedVersion, null);}
     private static String callHook(String event, Object hookObj, XophpArray args, String deprecatedVersion,
-		String_obj_ref fname
+		StringRef fname
    ) {
         XophpArray hook;
         // Turn non-array values into an array. (Can't use casting because of objects.)
@@ -149,7 +147,7 @@ public class XomwHooks {
          */
         XophpCallback callback = null;
         if (XophpType_.instance_of(hook.Get_at(0), XophpCallback.class)) { // XophpClosure
-            if (fname != null) fname.Val_("hook-" + event + "-closure");
+            if (fname != null) fname.ValSet("hook-" + event + "-closure");
             callback = (XophpCallback) XophpArray.array_shift(hook);
         } else if (XophpObject_.is_object(hook.Get_at_str(0))) {
             XophpCallbackOwner object = (XophpCallbackOwner)XophpArray.array_shift(hook);
@@ -160,7 +158,7 @@ public class XomwHooks {
                 method = "on" + event;
             }
 
-            if (fname != null) fname.Val_(XophpType_.get_class(object).getName() + "::" + method);
+            if (fname != null) fname.ValSet(XophpType_.get_class(object).getName() + "::" + method);
             callback = new XophpCallback(object, method);
         } else if (XophpString_.is_string(hook.Get_at(0))) {
             throw new XomwMWException("XOMW does not support string callbacks! Should not have been passed here!; event={0}; fname={1}\n", event,  XophpArray.array_shift(hook));
@@ -177,7 +175,7 @@ public class XomwHooks {
 
         // mark hook as deprecated, if deprecation version is specified
         if (deprecatedVersion != null) {
-            XomwGlobalFunctions.wfDeprecated(String_.Format( "{0} hook (used in {1})", event, fname), deprecatedVersion);
+            XomwGlobalFunctions.wfDeprecated(StringUtl.Format( "{0} hook (used in {1})", event, fname), deprecatedVersion);
         }
 
         // Call the hook.
@@ -248,7 +246,7 @@ public class XomwHooks {
         int len = handlers.Len();
         for (int i = 0; i < len; i++) {
             Object hookObj = handlers.Get_at(i);
-            String_obj_ref fname = String_obj_ref.empty_();
+            StringRef fname = StringRef.NewEmpty();
             String retval = callHook(event, hookObj, args, deprecatedVersion, fname);
             if (!XophpString_.is_null(retval) && !XophpString_.is_true(retval)) {
                 throw new XomwUnexpectedValueException("Invalid return from {0} for unabortable {1}.", fname, event);
@@ -257,7 +255,6 @@ public class XomwHooks {
         return true;
     }
 
-    @GfoTestMethod
     public static void clearAll() {
         handlers.Clear();
     }

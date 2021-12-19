@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.wms.apis.revisions; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.wms.*; import gplx.xowa.apps.wms.apis.*;
+package gplx.xowa.apps.wms.apis.revisions;
+import gplx.types.commons.GfoDate;
 public class Xowm_revn_data {
 	public Xowm_revn_data(byte[] wiki_domain
 		, int page_id, int page_ns, byte[] page_ttl
-		, int revn_id, DateAdp revn_time, byte[] revn_text) {
+		, int revn_id, GfoDate revn_time, byte[] revn_text) {
 		this.wiki_domain = wiki_domain;
 		this.page_id = page_id;
 		this.page_ns = page_ns;
@@ -33,6 +34,6 @@ public class Xowm_revn_data {
 	public byte[] Page_ttl() {return page_ttl;} private final byte[] page_ttl;
 
 	public int Revn_id() {return revn_id;} private final int revn_id;
-	public DateAdp Revn_time() {return revn_time;} private final DateAdp revn_time;
+	public GfoDate Revn_time() {return revn_time;} private final GfoDate revn_time;
 	public byte[] Revn_text() {return revn_text;} private final byte[] revn_text;
 }

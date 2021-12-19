@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.checks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.checks;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import gplx.core.ios.streams.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.addons.bldrs.wmdumps.imglinks.*;
+import gplx.xowa.files.*;
+import gplx.xowa.files.origs.*;
 import gplx.xowa.htmls.*;
 // TODO.XO:cache files in memory, else commonly used files (Wiki.png) will be loaded from fsdb for every usage on page
 // TODO.XO:save results to db to verify unused images (images in fsdb, but not loaded during this code)
@@ -60,7 +63,7 @@ class Xocheck_mgr {
 				Xof_fsdb_itm fsdb = hpg.Img_mgr().Get_at(i);
 				try {Check_images(page_ttl, fsdb);}
 				catch (Exception e) {
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "file failed; page_ttl=~{0} img_name=~{1} err=~{2}", page_ttl.Page_db(), fsdb.Lnki_ttl(), Err_.Message_gplx_log(e));
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "file failed; page_ttl=~{0} img_name=~{1} err=~{2}", page_ttl.Page_db(), fsdb.Lnki_ttl(), ErrUtl.ToStrLog(e));
 				}
 				file_count++;
 			}

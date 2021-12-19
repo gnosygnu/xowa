@@ -13,22 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*;
+package gplx.gfui.controls.windows;
 import gplx.core.interfaces.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.tabs.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class GfuiFocusXferBnd implements InjectAble, Gfo_invk {
 	public void Inject(Object owner) {
 		GfuiElem elem = GfuiElem_.cast(owner);		
 		IptBnd_.cmd_to_(IptCfg_.Null, elem, this, Invk_FocusNext, IptKey_.Down);
 		IptBnd_.cmd_to_(IptCfg_.Null, elem, this, Invk_FocusPrev, IptKey_.Up);
 	}
-	@gplx.Internal protected void Focus(GfuiElem cur, boolean fwd) {
+	public void Focus(GfuiElem cur, boolean fwd) {
 		List_adp allElemsInOwnerWin = List_adp_.New(); AddSubs(cur.OwnerWin(), allElemsInOwnerWin);
 		int curIdx = allElemsInOwnerWin.IdxOf(cur);
 		GfuiElem target = cur;
 		while (true) {	// find next visible elem
 			int cycle = TabBox_.Cycle(fwd, curIdx, allElemsInOwnerWin.Len());
-			target = GfuiElem_.cast(allElemsInOwnerWin.Get_at(cycle));
+			target = GfuiElem_.cast(allElemsInOwnerWin.GetAt(cycle));
 			if (target.Visible()) break;
 			if (cycle == curIdx) break;	// either (a) one elem in allElemsInOwnerWin or (b) n elems, and cycled back to start; break, else infinite loop
 			curIdx = cycle;

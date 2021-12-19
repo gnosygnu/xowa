@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*;
-import gplx.objects.lists.CompareAble;
+package gplx.xowa.files.caches;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.commons.GfoDateNow;
 import gplx.xowa.files.*;
 import gplx.dbs.*;
 public class Xofc_fil_itm implements CompareAble {
@@ -40,34 +43,34 @@ public class Xofc_fil_itm implements CompareAble {
 	}
 	public long		Cache_time() {return cache_time;} private long cache_time;
 	public Xofc_fil_itm Cache_time_now_() {
-		this.cache_time = Datetime_now.Get().XtoUtc().Timestamp_unix();
+		this.cache_time = GfoDateNow.Get().ToUtc().TimestampUnix();
 		cmd_mode = Db_cmd_mode.To_update(cmd_mode);
 		return this;
 	}
 	public byte		Cmd_mode() {return cmd_mode;} public Xofc_fil_itm Cmd_mode_(byte v) {cmd_mode = v; return this;} private byte cmd_mode;
 	public void		Cmd_mode_delete_() {cmd_mode = Db_cmd_mode.Tid_delete;}
-	public byte[]	Gen_hash_key_v1(Bry_bfr bfr)	{return Gen_hash_key_v1(bfr, dir_id, name, is_orig, w, h, time);}
-	public byte[]	Gen_hash_key_v2(Bry_bfr bfr)	{return Gen_hash_key_v2(bfr, dir_id, name, is_orig, w, time, page);}
-	public static byte[] Gen_hash_key_v1(Bry_bfr bfr, int dir_id, byte[] name, boolean is_orig, int w, int h, double time) {
-		bfr	.Add_int_variable(dir_id).Add_byte_pipe()
-			.Add(name).Add_byte_pipe()
-			.Add_yn(is_orig).Add_byte_pipe()
-			.Add_int_variable(w).Add_byte_pipe()
-			.Add_int_variable(h).Add_byte_pipe()
-			.Add_int_variable(Xof_lnki_time.X_int(time))
+	public byte[]	Gen_hash_key_v1(BryWtr bfr)	{return Gen_hash_key_v1(bfr, dir_id, name, is_orig, w, h, time);}
+	public byte[]	Gen_hash_key_v2(BryWtr bfr)	{return Gen_hash_key_v2(bfr, dir_id, name, is_orig, w, time, page);}
+	public static byte[] Gen_hash_key_v1(BryWtr bfr, int dir_id, byte[] name, boolean is_orig, int w, int h, double time) {
+		bfr	.AddIntVariable(dir_id).AddBytePipe()
+			.Add(name).AddBytePipe()
+			.AddYn(is_orig).AddBytePipe()
+			.AddIntVariable(w).AddBytePipe()
+			.AddIntVariable(h).AddBytePipe()
+			.AddIntVariable(Xof_lnki_time.X_int(time))
 			;
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
-	public static byte[] Gen_hash_key_v2(Bry_bfr bfr, int dir_id, byte[] name, boolean is_orig, int w, double time, int page) {
-		bfr	.Add_int_variable(dir_id).Add_byte_pipe()
-			.Add(name).Add_byte_pipe()
-			.Add_yn(is_orig).Add_byte_pipe()
-			.Add_int_variable(w).Add_byte_pipe()
-			.Add_double(Xof_lnki_time.Db_save_double(time)).Add_byte_pipe()
-			.Add_int_variable(page)
+	public static byte[] Gen_hash_key_v2(BryWtr bfr, int dir_id, byte[] name, boolean is_orig, int w, double time, int page) {
+		bfr	.AddIntVariable(dir_id).AddBytePipe()
+			.Add(name).AddBytePipe()
+			.AddYn(is_orig).AddBytePipe()
+			.AddIntVariable(w).AddBytePipe()
+			.AddDouble(Xof_lnki_time.Db_save_double(time)).AddBytePipe()
+			.AddIntVariable(page)
 			;
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
-	public int compareTo(Object obj) {Xofc_fil_itm comp = (Xofc_fil_itm)obj; return -Long_.Compare(cache_time, comp.cache_time);}	// - for DESC sort
+	public int compareTo(Object obj) {Xofc_fil_itm comp = (Xofc_fil_itm)obj; return -LongUtl.Compare(cache_time, comp.cache_time);}	// - for DESC sort
 	public static final Xofc_fil_itm Null = null;
 }

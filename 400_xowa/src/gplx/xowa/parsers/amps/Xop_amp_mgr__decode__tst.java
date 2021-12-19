@@ -14,11 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.amps;
-import gplx.Bry_;
-import gplx.Char_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.parsers.Xop_tkn_itm_;
 import gplx.xowa.parsers.Xop_tkn_mkr;
 import org.junit.Before;
@@ -40,32 +39,32 @@ public class Xop_amp_mgr__decode__tst {
 	@Test public void Hex_zero_padded()			{fxt.Test__decode_as_bry("&#x03a3;"			, "Σ");}
 	@Test public void Hex_upper_x()				{fxt.Test__decode_as_bry("&#X3A3;"			, "Σ");}
 	@Test public void Num_fail_large_codepoint()	{fxt.Test__decode_as_bry("&#538189831;"		, "&#538189831;");}
-	@Test public void Num_ignore_extra_x()			{fxt.Test__decode_as_bry("&#xx26D0;"		, Char_.To_str(Char_.By_int(9936)));}	// 2nd x is ignored
+	@Test public void Num_ignore_extra_x()			{fxt.Test__decode_as_bry("&#xx26D0;"		, CharUtl.ToStr(CharUtl.ByInt(9936)));}	// 2nd x is ignored
 }
 class Xop_amp_mgr_fxt {
 	private final Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
 	public void Test__decode_as_bry(String raw, String expd) {
-		Gftest.Eq__str(expd, String_.new_u8(amp_mgr.Decode_as_bry(Bry_.new_u8(raw))));
+		GfoTstr.Eq(expd, StringUtl.NewU8(amp_mgr.Decode_as_bry(BryUtl.NewU8(raw))));
 	}
 	public void Test__parse_tkn__ent(String raw, String expd) {
 		Xop_amp_mgr_rslt rv = Exec__parse_tkn(raw);
 		Xop_amp_tkn_ent tkn = (Xop_amp_tkn_ent)rv.Tkn();
-		Gftest.Eq__byte(Xop_tkn_itm_.Tid_html_ref, tkn.Tkn_tid());
-		Gftest.Eq__str(expd, tkn.Xml_name_bry());
+		GfoTstr.EqByte(Xop_tkn_itm_.Tid_html_ref, tkn.Tkn_tid());
+		GfoTstr.Eq(expd, tkn.Xml_name_bry());
 	}
 	public void Test__parse_tkn__ncr(String raw, int expd) {
 		Xop_amp_mgr_rslt rv = Exec__parse_tkn(raw);
 		Xop_amp_tkn_num tkn = (Xop_amp_tkn_num)rv.Tkn();
-		Gftest.Eq__byte(Xop_tkn_itm_.Tid_html_ncr, tkn.Tkn_tid());
-		Gftest.Eq__int(expd, tkn.Val());
+		GfoTstr.EqByte(Xop_tkn_itm_.Tid_html_ncr, tkn.Tkn_tid());
+		GfoTstr.Eq(expd, tkn.Val());
 	}
 	public void Test__parse_tkn__txt(String raw, int expd) {
 		Xop_amp_mgr_rslt rv = Exec__parse_tkn(raw);
-		Gftest.Eq__null(BoolUtl.Y, rv.Tkn());
-		Gftest.Eq__int(expd, rv.Pos());
+		GfoTstr.EqNull(rv.Tkn());
+		GfoTstr.Eq(expd, rv.Pos());
 	}
 	private Xop_amp_mgr_rslt Exec__parse_tkn(String raw) {
-		byte[] src = Bry_.new_u8(raw);
+		byte[] src = BryUtl.NewU8(raw);
 		return amp_mgr.Parse_tkn(new Xop_tkn_mkr(), src, src.length, 0, 1);
 	}
 }

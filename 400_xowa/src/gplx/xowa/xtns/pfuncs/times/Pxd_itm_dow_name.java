@@ -13,16 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	private final int dow_idx;
 	private final byte[] dow_name;
-	private int relative_adj = Int_.Max_value;
+	private int relative_adj = IntUtl.MaxValue;
 	public Pxd_itm_dow_name(int ary_idx, byte[] dow_name, int dow_idx) {
 		this.dow_name = dow_name; 
 		this.dow_idx = dow_idx;
 		this.Ctor(ary_idx); 
-		this.Seg_idx_(DateAdp_.SegIdx_dayOfWeek);
+		this.Seg_idx_(GfoDateUtl.SegIdxDayOfWeek);
 	}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_dow_name;}
 	@Override public int Eval_idx() {return 20;}
@@ -33,7 +36,7 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	}
 	@Override public boolean Eval(Pxd_parser state) {return true;}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
-		DateAdp cur = bldr.To_date();
+		GfoDate cur = bldr.To_date();
 
 		// adj = requested_dow - cur_dow; EX: requesting Friday, and today is Wednesday; adj = 2 (4 - 2); DATE:2014-05-02
 		int adj = dow_idx - cur.DayOfWeek();
@@ -48,7 +51,7 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 		else if (relative_adj == -1)
 			adj -= 7;
 
-		cur = cur.Add_day(adj);
+		cur = cur.AddDay(adj);
 		bldr.By_date(cur);
 		return true;
 	}

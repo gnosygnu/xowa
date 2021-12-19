@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,23 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
-import gplx.Io_url;
-import java.io.File;
+package gplx.langs.xmls;
 import java.io.IOException;
 import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 public class XmlDoc_ {
@@ -39,7 +31,7 @@ public class XmlDoc_ {
 		return rv;
 	}
 	private static void Select_tags(XmlNdeList_cls_list rv, XmlNde cur, String tag) {
-		if (String_.Eq(cur.Name(), tag)) {
+		if (StringUtl.Eq(cur.Name(), tag)) {
 			rv.Add(cur);
 		}
 		XmlNdeList sub_ndes = cur.SubNdes();
@@ -66,14 +58,14 @@ public class XmlDoc_ {
 			bldr = factory.newDocumentBuilder();
 		}
 		catch (ParserConfigurationException e) {
-			throw Err_.new_exc(e, "xml", "failed to create newDocumentBuilder");
+			throw ErrUtl.NewArgs(e, "failed to create newDocumentBuilder");
 		}
 		StringReader reader = new StringReader(raw);
 		InputSource source = new InputSource(reader);
 		Document doc = null;
-		try 	{doc = bldr.parse(source);}
-		catch 	(SAXException e) 	{throw Err_.new_exc(e, "xml", "failed to parse xml", "raw", raw);} 
-		catch 	(IOException e) 	{throw Err_.new_exc(e, "xml", "failed to parse xml", "raw", raw);}
+		try     {doc = bldr.parse(source);}
+		catch     (SAXException e)     {throw ErrUtl.NewArgs(e, "failed to parse xml", "raw", raw);}
+		catch     (IOException e)     {throw ErrUtl.NewArgs(e, "failed to parse xml", "raw", raw);}
 		return doc;
 	}
 	public static final String Err_XmlException = "gplx.xmls.XmlException";

@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times;
 
-import gplx.Bry_;
-import gplx.DateAdp;
-import gplx.List_adp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.Xowe_wiki;
 
 class Pft_fmt_itm_hijri {
-	public static int[] Calc_date(DateAdp date) {
+	public static int[] Calc_date(GfoDate date) {
 		int[] rv = new int[3];	// MEM:cache
 		Calc_date(rv, date.Year(), date.Month(), date.Day());
 		return rv;
@@ -57,17 +57,17 @@ class Pft_fmt_itm_hijri {
 		rv[2] = hiji_d;
 		return true;
 	}
-	public static byte[] Get_month_name(Xowe_wiki wiki, DateAdp date) {
+	public static byte[] Get_month_name(Xowe_wiki wiki, GfoDate date) {
 		int[] seg_ary = Calc_date(date);
 		int m = seg_ary[Rslt__month] - List_adp_.Base1;
 		byte[] msg_key = Month_names[m];
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
 	private static final byte[][] Month_names = new byte[][]
-	{ Bry_.new_a7("hijri-calendar-m1"), Bry_.new_a7("hijri-calendar-m2"), Bry_.new_a7("hijri-calendar-m3")
-	, Bry_.new_a7("hijri-calendar-m4"), Bry_.new_a7("hijri-calendar-m5"), Bry_.new_a7("hijri-calendar-m6")
-	, Bry_.new_a7("hijri-calendar-m7"), Bry_.new_a7("hijri-calendar-m8"), Bry_.new_a7("hijri-calendar-m9")
-	, Bry_.new_a7("hijri-calendar-m10"), Bry_.new_a7("hijri-calendar-m11"), Bry_.new_a7("hijri-calendar-m12")
+	{ BryUtl.NewA7("hijri-calendar-m1"), BryUtl.NewA7("hijri-calendar-m2"), BryUtl.NewA7("hijri-calendar-m3")
+	, BryUtl.NewA7("hijri-calendar-m4"), BryUtl.NewA7("hijri-calendar-m5"), BryUtl.NewA7("hijri-calendar-m6")
+	, BryUtl.NewA7("hijri-calendar-m7"), BryUtl.NewA7("hijri-calendar-m8"), BryUtl.NewA7("hijri-calendar-m9")
+	, BryUtl.NewA7("hijri-calendar-m10"), BryUtl.NewA7("hijri-calendar-m11"), BryUtl.NewA7("hijri-calendar-m12")
 	};
 	public static final int
 	  Rslt__year			= 0

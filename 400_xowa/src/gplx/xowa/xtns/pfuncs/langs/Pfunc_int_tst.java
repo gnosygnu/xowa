@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.langs;
 
-import gplx.Bry_;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xol_lang_itm;
@@ -100,14 +100,14 @@ class Pf_msg_mgr_fxt {
 	}
 	public void Init_msg_gfs(String key, String val, boolean fmt, boolean tmpl) {Init_msg_gfs(en_lang, key, val, fmt, tmpl);}
 	public void Init_msg_gfs(Xol_lang_itm lang, String key, String val, boolean fmt, boolean tmpl) {
-		Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_new(Bry_.new_u8(key));
-		msg_itm.Atrs_set(Bry_.new_u8(val), fmt, tmpl);
+		Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_new(BryUtl.NewU8(key));
+		msg_itm.Atrs_set(BryUtl.NewU8(val), fmt, tmpl);
 	}
 	public void Init_msg_db(String ttl, String val) {Init_msg_db(en_wiki, ttl, val);}
 	public void Init_msg_db(Xowe_wiki wiki, String ttl, String val) {
 		fxt.Init_page_create(wiki, "MediaWiki:" + ttl, val);
 	}
-	public Xowe_wiki Make_wiki(String domain) {return fxt.App().Wiki_mgr().Get_by_or_make(Bry_.new_u8(domain));}
+	public Xowe_wiki Make_wiki(String domain) {return fxt.App().Wiki_mgr().Get_by_or_make(BryUtl.NewU8(domain));}
 	public void Test_parse_en(String raw, String expd) {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, expd);
 	}
@@ -115,7 +115,7 @@ class Pf_msg_mgr_fxt {
 		fxt.Test_parse_tmpl_str_test(alt_wiki, raw, "{{test}}"	, expd);
 	}
 	public void Test_parse_lang(String other_lang_id, String raw, String expd) {
-		Xol_lang_itm other_lang = fxt.App().Lang_mgr().Get_by_or_load(Bry_.new_a7(other_lang_id));
+		Xol_lang_itm other_lang = fxt.App().Lang_mgr().Get_by_or_load(BryUtl.NewA7(other_lang_id));
 		fxt.Page().Lang_(other_lang); 
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", expd);
 		fxt.Page().Lang_(en_lang);	// NOTE: must reset back to en_lang, else rest of tests will look up under fr

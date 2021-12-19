@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.data.tbls;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
@@ -24,7 +24,7 @@ import gplx.dbs.Db_tbl;
 import gplx.dbs.Db_tbl_owner;
 import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.wikis.nss.Xow_ns;
 import gplx.xowa.wikis.nss.Xow_ns_mgr;
 public class Xowd_site_ns_tbl implements Db_tbl {
@@ -77,16 +77,16 @@ public class Xowd_site_ns_tbl implements Db_tbl {
 		}	finally {rdr.Rls();}
 	}
 	public int Select_ns_count(int ns_id) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_id))
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, StringUtl.Ary(fld_id))
 				.Crt_int(fld_id, ns_id)
 				.Exec_select__rls_auto();
 		try {
-			return rdr.Move_next() ? Int_.Cast(rdr.Read_int(fld_count)) : 0;
+			return rdr.Move_next() ? IntUtl.Cast(rdr.Read_int(fld_count)) : 0;
 		}	finally {rdr.Rls();}
 	}
 	public void Update_ns_count(int ns_id, int ns_count) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.site_ns: update started: ns_id=~{0} ns_count=~{1}", ns_id, ns_count);
-		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_count);
+		Db_stmt stmt = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_count);
 		stmt.Clear()
 			.Val_int(fld_count, ns_count)
 			.Crt_int(fld_id, ns_id)

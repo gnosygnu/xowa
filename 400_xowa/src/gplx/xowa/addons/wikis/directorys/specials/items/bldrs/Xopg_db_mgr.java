@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.directorys.specials.items.bldrs;
-import gplx.Datetime_now;
-import gplx.Err_;
 import gplx.dbs.cfgs.Db_cfg_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.wikis.searchs.Srch_search_addon;
@@ -41,7 +41,7 @@ public class Xopg_db_mgr {
 		if (page_tbl.Select_by_id_or_null(page_id) != null) {
 			int max_page_id = page_tbl.Conn().Exec_select_max_as_int(page_tbl.Tbl_name(), page_tbl.Fld_page_id(), Xowd_page_tbl.INVALID_PAGE_ID);
 			if (max_page_id == Xowd_page_tbl.INVALID_PAGE_ID) {
-				throw Err_.new_wo_type("no max found in page_tbl even though page_id was not unique?: db=~{0} page_id=~{1}", page_tbl.Conn().Conn_info().Db_api(), page_id);
+				throw ErrUtl.NewArgs("no max found in page_tbl even though page_id was not unique?: db=~{0} page_id=~{1}", page_tbl.Conn().Conn_info().Db_api(), page_id);
 			}
 			page_id = max_page_id + 1;
 		}
@@ -60,7 +60,7 @@ public class Xopg_db_mgr {
 		text_tbl.Insert_bgn();
 		int ns_count = ns_tbl.Select_ns_count(ns_id) + 1;
 		try {
-			page_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_page_db, redirect, Datetime_now.Get(), text_raw.length, ns_count, text_db_id, -1, cat_db_id);
+			page_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_page_db, redirect, GfoDateNow.Get(), text_raw.length, ns_count, text_db_id, -1, cat_db_id);
 			text_tbl.Insert_cmd_by_batch(page_id, text_zip);
 			ns_tbl.Update_ns_count(ns_id, ns_count);
 		} finally {

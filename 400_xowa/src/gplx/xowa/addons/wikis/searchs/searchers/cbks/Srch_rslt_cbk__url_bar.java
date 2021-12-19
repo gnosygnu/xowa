@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.searchers.cbks;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.String_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
 import gplx.gfui.controls.standards.GfuiComboBox;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_ctx;
@@ -62,7 +62,7 @@ public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 			if (i >= max_results) break;
 			if (i < rslts_len) {
 				Srch_rslt_row rslt = rslts_list.Get_at(i);
-				cbo_itm = String_.new_u8(rslt.To_display(Srch_rslt_row.Display_type__url_bar));
+				cbo_itm = StringUtl.NewU8(rslt.To_display(Srch_rslt_row.Display_type__url_bar));
 			}
 			cbo_ary[i] = cbo_itm;
 		}

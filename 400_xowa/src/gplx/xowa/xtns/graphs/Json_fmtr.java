@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.graphs;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 public class Json_fmtr {
-	public static byte[] clean(Bry_bfr tmp_bfr, byte[] json) {
+	public static byte[] clean(BryWtr tmp_bfr, byte[] json) {
 		int maxLen = json.length;
 		int mark = 0;
 		boolean inString = false;
@@ -44,7 +46,7 @@ public class Json_fmtr {
 					) {
 						// Transition into a comment
 						// Add characters seen to buffer
-						tmp_bfr.Add_mid(json, mark, idx);
+						tmp_bfr.AddMid(json, mark, idx);
 						// Consume the look ahead character
 						idx++;
 						// Track state
@@ -68,13 +70,13 @@ public class Json_fmtr {
 				case AsciiByte.Comma: {  // remove trailing commas of the form {a,}; note that FormatJson.php does this in a separate regex call; '/,([ \t]*[}\]][^"\r\n]*([\r\n]|$)|[ \t]*[\r\n][ \t\r\n]*[}\]])/'
 					if (inComment || inString) continue;
 
-					int peek_next = Bry_find_.Find_fwd_while_ws(json, idx + 1, maxLen);
+					int peek_next = BryFind.FindFwdWhileWs(json, idx + 1, maxLen);
 					if (peek_next != maxLen 
 						&&	(	json[peek_next] == AsciiByte.BrackEnd
 							||	json[peek_next] == AsciiByte.CurlyEnd)
 							) {
 						// Add characters seen to buffer
-						tmp_bfr.Add_mid(json, mark, idx);
+						tmp_bfr.AddMid(json, mark, idx);
 						// position after comma
 						mark = idx + 1;
 					}
@@ -92,8 +94,8 @@ public class Json_fmtr {
 		}
 
 		// Add final chunk to buffer before returning
-		tmp_bfr.Add_mid(json, mark, maxLen);
-		return tmp_bfr.To_bry_and_clear();
+		tmp_bfr.AddMid(json, mark, maxLen);
+		return tmp_bfr.ToBryAndClear();
 	}
 }
 

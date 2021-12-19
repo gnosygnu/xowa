@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.ipts.*;
 import gplx.gfui.kits.core.Gfui_clipboard;
 import gplx.gfui.kits.core.Gfui_clipboard_;
-
+import gplx.types.basics.utls.StringUtl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
@@ -30,7 +33,7 @@ public class Swt_clipboard implements Gfui_clipboard {
 		clipboard = new Clipboard(display);
 	}	Display display; Clipboard clipboard;
 	public void Copy(String v) {
-		if (String_.Len_eq_0(v)) return;		
+		if (StringUtl.IsNullOrEmpty(v)) return;
 		TextTransfer textTransfer = TextTransfer.getInstance();
 		clipboard.setContents(new Object[]{v}, new Transfer[]{textTransfer});
 	}

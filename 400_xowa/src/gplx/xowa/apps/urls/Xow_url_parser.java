@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.urls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.apps.urls;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*;
@@ -24,7 +29,7 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.x
 public class Xow_url_parser {
 	private final Object thread_lock = new Object();
 	private final Gfo_url_encoder encoder;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	private final Gfo_url_parser url_parser = new Gfo_url_parser();
 	private final Gfo_url_encoder gfs_encoder = Gfo_url_encoder_.New__gfs().Make();
 	private final Xoa_app app; private final Xow_wiki wiki; private final byte[] domain_bry;
@@ -43,7 +48,7 @@ public class Xow_url_parser {
 	}
 	public Xoa_url Parse_by_urlbar_or_null(String str) {
 		Xoae_app app = (Xoae_app)wiki.App();
-		byte[] bry = Strip_mobile_segment(Bry_.new_u8(str));
+		byte[] bry = Strip_mobile_segment(BryUtl.NewU8(str));
 		byte[] fmt = app.Gui_mgr().Url_macro_mgr().Fmt_or_null(bry);
 		if (fmt != null) bry = fmt;
 		Xoa_url rv = Xoa_url.blank(); 
@@ -56,7 +61,7 @@ public class Xow_url_parser {
 			rv.Page_bry_(wiki_itm.Props().Main_page());
 		}
 		Xow_wiki parse_wiki = wiki;
-		if (!Bry_.Eq(wiki_bry, wiki.Domain_bry()))							// NOTE: url's wiki is different than current wiki
+		if (!BryLni.Eq(wiki_bry, wiki.Domain_bry()))							// NOTE: url's wiki is different than current wiki
 			parse_wiki = app.Wiki_mgr().Get_by_or_make_init_y(wiki_bry);	// NOTE: change parse_wiki to url's wiki; needed to handle transition from home to en.d or other case-sensitivity wiki; EX: "d:earth" -> "earth" x> "Earth"; DATE:2016-04-28
 		Xoa_ttl ttl = parse_wiki .Ttl_parse(rv.Page_bry());					// NOTE: parse to ttl to get proper casing; EX: "earth" -> "Earth" x> "earth"; DATE:2016-03-25
 		rv.Page_bry_(ttl.Full_db());
@@ -69,7 +74,7 @@ public class Xow_url_parser {
 	public boolean Parse(Xoa_url rv, byte[] src, int bgn, int end) {
 		synchronized (thread_lock) {
 			if (end - bgn == 0) {Init_tmp_vars(Gfo_url.Empty); Make(rv); return false;}
-			tmp_orig = (bgn == 0 && end == src.length) ? src : Bry_.Mid(src, bgn, end);
+			tmp_orig = (bgn == 0 && end == src.length) ? src : BryLni.Mid(src, bgn, end);
 			// src = encoder.Decode(src, bgn, end);		// NOTE: must decode any url-encoded parameters; TOMBSTONE:do not auto-decode DATE:2016-10-10
 			int src_len = end - bgn;
 			Gfo_url gfo_url = url_parser.Parse(src, bgn, end);	// parse to plain gfo_url
@@ -94,7 +99,7 @@ public class Xow_url_parser {
 							tmp_protocol_tid = wiki.Props().Protocol_tid();
 						if (app.User().Wikii().Xwiki_mgr().Get_by_key(tmp_wiki) != null)// src is offline wiki; EX: http://fr.wikipedia.org/wiki/A
 							Bld_page(0);
-						else if (Bry_.Eq(tmp_wiki, Bry_upload_wikimedia_org))			// src is upload.wikimedia.org; EX: "http://upload.wikimedia.org/wikipedia/commons/a/ab/C.svg"
+						else if (BryLni.Eq(tmp_wiki, Bry_upload_wikimedia_org))			// src is upload.wikimedia.org; EX: "http://upload.wikimedia.org/wikipedia/commons/a/ab/C.svg"
 							Bld_page_from_upload_wikimedia_org();
 						else															// src is unknown site: EX: "http://a.org"
 							tmp_tid = Xoa_url_.Tid_inet;
@@ -137,22 +142,22 @@ public class Xow_url_parser {
 		rv.Ctor
 		( tmp_tid, tmp_orig, tmp_raw, tmp_protocol_tid, tmp_protocol_bry, tmp_protocol_is_relative
 		, tmp_wiki, tmp_page, tmp_qargs, tmp_anch
-		, tmp_segs, tmp_vnt, tmp_wiki_is_missing, Bry_.Eq(tmp_wiki, wiki.Domain_bry()), tmp_page_is_main);
+		, tmp_segs, tmp_vnt, tmp_wiki_is_missing, BryLni.Eq(tmp_wiki, wiki.Domain_bry()), tmp_page_is_main);
 		return rv;
 	}
 	private void Bld_anch() {
 		tmp_tid = Xoa_url_.Tid_anch;
 		tmp_wiki = domain_bry; tmp_wiki_is_missing = true;
-		tmp_page = Bry_.Empty;
+		tmp_page = BryUtl.Empty;
 	}
 	private void Bld_xowa() {
 		tmp_tid = Xoa_url_.Tid_xcmd;
-		tmp_page = Bry_.Mid(tmp_raw, Gfo_protocol_itm.Len_xcmd);		// NOTE: just get String after protocol; anchor (#) or query params (?) must not be parsed
+		tmp_page = BryLni.Mid(tmp_raw, Gfo_protocol_itm.Len_xcmd);		// NOTE: just get String after protocol; anchor (#) or query params (?) must not be parsed
 		tmp_page = gfs_encoder.Decode(tmp_page);	// NOTE: should be decoded; EX: %20 -> " "
 	}
 	private void Bld_page_by_file_ns() {
 		tmp_tid = Xoa_url_.Tid_page;
-		tmp_segs[0] = Bry_.Add(Bry_file, tmp_wiki);			
+		tmp_segs[0] = BryUtl.Add(Bry_file, tmp_wiki);
 		tmp_page = Make_page_from_segs(0);
 		tmp_wiki = domain_bry; tmp_wiki_is_missing = true;
 	}
@@ -161,24 +166,24 @@ public class Xow_url_parser {
 		//	thum: https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/A.jpg/220px-A.jpg
 		byte[] domain_type = tmp_segs[1];						// seg[0] = type; EX: "/wikipedia/"
 		byte[] lang = tmp_segs[2];								// seg[1] = lang; EX: "en", "fr"; "commons"
-		if (Bry_.Eq(lang, Xow_domain_tid_.Bry__commons))	// commons links will have fmt of "/wikipedia/commons"; must change to wikimedia
+		if (BryLni.Eq(lang, Xow_domain_tid_.Bry__commons))	// commons links will have fmt of "/wikipedia/commons"; must change to wikimedia
 			domain_type = Xow_domain_tid_.Bry__wikimedia;
 		tmp_wiki = tmp_bfr.Clear()
-			.Add(lang).Add_byte(AsciiByte.Dot)					// add lang/type + .;	EX: "en."; "fr."; "commons."
+			.Add(lang).AddByte(AsciiByte.Dot)					// add lang/type + .;	EX: "en."; "fr."; "commons."
 			.Add(domain_type).Add(Bry_dot_org)					// add type + .org;		EX: "wikipedia.org"; "wikimedia.org";
-			.To_bry_and_clear();
-		if (tmp_segs_len > 6 && Bry_.Eq(tmp_segs[3], Xof_url_bldr.Bry_thumb)) tmp_page = tmp_segs[6];	// if "/thumb/", set page from seg[n-1] to seg[6]; EX: using thumb example above, "A.jpg", not "220px-A.jpg"
-		tmp_page = Bry_.Add(Bry_file, tmp_page);				// always add "File:" ns
+			.ToBryAndClear();
+		if (tmp_segs_len > 6 && BryLni.Eq(tmp_segs[3], Xof_url_bldr.Bry_thumb)) tmp_page = tmp_segs[6];	// if "/thumb/", set page from seg[n-1] to seg[6]; EX: using thumb example above, "A.jpg", not "220px-A.jpg"
+		tmp_page = BryUtl.Add(Bry_file, tmp_page);				// always add "File:" ns
 	}
 	private boolean Find_wiki(byte[] domain) {
 		Xow_xwiki_itm xwiki = app.User().Wikii().Xwiki_mgr().Get_by_key(domain);	// check if tmp_wiki is known wiki
 		if (xwiki != null) {
-			if (!Bry_.Eq(xwiki.Domain_bry(), domain))	// ignore aliases by checking that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; PAGE: ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
+			if (!BryLni.Eq(xwiki.Domain_bry(), domain))	// ignore aliases by checking that xwiki.domain == wiki; avoids false lang matches like "so/page" or "C/page"; PAGE: ca.s:So/Natura_del_so; DATE:2014-04-26; PAGE:no.b:C/Variabler; DATE:2014-10-14
 				xwiki = null;
 		}
 		if (xwiki != null) return true;
 		if (app.Wiki_mgri().Has(domain)) return true;
-		return Byte_.Match_any(tmp_protocol_tid, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https);
+		return ByteUtl.EqAny(tmp_protocol_tid, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https);
 	}
 	private void Bld_page(int bgn_seg) {
 		tmp_tid = Xoa_url_.Tid_page;
@@ -212,7 +217,7 @@ public class Xow_url_parser {
 		int rv = -1;
 		switch (tmp_segs_len - bgn_seg) {
 			case 1:	 // "en.wikipedia.org"
-				if (Bry_.Eq(tmp_segs[0 + bgn_seg], Xow_domain_itm_.Bry__home)) {	// ignore "home" which should always go to "home" of current wiki, not "home" wiki
+				if (BryLni.Eq(tmp_segs[0 + bgn_seg], Xow_domain_itm_.Bry__home)) {	// ignore "home" which should always go to "home" of current wiki, not "home" wiki
 					tmp_wiki = domain_bry;
 					return 0;
 				}
@@ -221,7 +226,7 @@ public class Xow_url_parser {
 					return -1;
 				}
 			case 2:	// "en.wikipedia.org/"; "en.wikipedia.org/wiki"; "en.wikipedia.org/A"
-				if (Bry_.Len_eq_0(tmp_segs[1 + bgn_seg])) {	// check for "en.wikipedia.org/"
+				if (BryUtl.IsNullOrEmpty(tmp_segs[1 + bgn_seg])) {	// check for "en.wikipedia.org/"
 					tmp_page_is_main = true;
 					return -1;
 				}
@@ -229,7 +234,7 @@ public class Xow_url_parser {
 					rv = 1;
 				break;
 			case 3: 
-				if (Bry_.Len_gt_0(tmp_segs[2 + bgn_seg]))	// check only for "en.wikipedia.org/wiki/" where seg[2] is blank
+				if (BryUtl.IsNotNullOrEmpty(tmp_segs[2 + bgn_seg]))	// check only for "en.wikipedia.org/wiki/" where seg[2] is blank
 					return 2;
 				else
 					rv = 2;
@@ -238,7 +243,7 @@ public class Xow_url_parser {
 				return 2;
 		}
 		byte[] mid = tmp_segs[1 + bgn_seg];
-		if (Bry_.Eq(mid, Bry_wiki)) {	// check if "/wiki/"
+		if (BryLni.Eq(mid, Bry_wiki)) {	// check if "/wiki/"
 			tmp_page_is_main = true;
 			return -1;
 		}
@@ -247,8 +252,8 @@ public class Xow_url_parser {
 	}
 	private byte[] Bld_page_by_alias(byte[] bry) {
 		if (bry == null) return null;
-		int colon_pos = Bry_find_.Find_fwd(bry, AsciiByte.Colon);						// check for colon; EX: commons:Earth
-		if (colon_pos == Bry_find_.Not_found) return null;									// no colon
+		int colon_pos = BryFind.FindFwd(bry, AsciiByte.Colon);						// check for colon; EX: commons:Earth
+		if (colon_pos == BryFind.NotFound) return null;									// no colon
 		Xow_wiki alias_wiki = wiki;														// default alias_wiki to cur_wiki
 		if (!tmp_wiki_is_missing)														// tmp_wiki exists; use it for alias wikis; DATE:2015-09-17
 			alias_wiki = wiki.App().Wiki_mgri().Get_by_or_make_init_n(tmp_wiki);
@@ -257,7 +262,7 @@ public class Xow_url_parser {
 		Xow_ns_mgr ns_mgr = tmp_wiki_is_missing ? wiki.Ns_mgr() : wiki.App().Dbmeta_mgr().Ns__get_or_load(tmp_wiki);
 		if (ns_mgr.Names_get_or_null(alias_itm.Key_bry()) != null)						// special case to handle collision between "wikipedia" alias and "Wikipedia" namespace; if alias exists as ns, ignore it; EX:sv.wikipedia.org/wiki/Wikipedia:Main_Page DATE:2015-07-31
 			return null;
-		byte[] rv = Bry_.Mid(bry, colon_pos + 1); 
+		byte[] rv = BryLni.Mid(bry, colon_pos + 1);
 		tmp_wiki = alias_itm.Domain_bry();
 		return rv;
 	}
@@ -265,17 +270,17 @@ public class Xow_url_parser {
 		int qargs_len = tmp_qargs.length;
 		for (int i = 0; i < qargs_len; ++i) {
 			Gfo_qarg_itm qarg = tmp_qargs[i];
-			if (Bry_.Eq(qarg.Key_bry(), Qarg__title))
+			if (BryLni.Eq(qarg.Key_bry(), Qarg__title))
 				tmp_page = qarg.Val_bry();					// handle /w/index.php?title=Earth
 		}
 	}
 	private byte[] Make_page_from_segs(int bgn) {
 		if (tmp_segs_len - bgn == 1) return tmp_segs[tmp_segs_len - 1];	// only 1 item; just return it; don't build bry
 		for (int i = bgn; i < tmp_segs_len; i++) {
-			if (i != bgn) tmp_bfr.Add_byte(AsciiByte.Slash);
+			if (i != bgn) tmp_bfr.AddByte(AsciiByte.Slash);
 			tmp_bfr.Add(tmp_segs[i]);
 		}
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
 	public String Build_str(Xoa_url url) {									// transform to "canonical" form that fits url box for both XOWA and Mozilla Firefox
 		tmp_bfr.Add(url.Wiki_bry());										// add wiki;		EX: "en.wikipedia.org"
@@ -285,18 +290,18 @@ public class Xow_url_parser {
 		if (args_len > 0) {
 			for (int i = 0; i < args_len; i++) {
 				byte dlm = i == 0 ? AsciiByte.Question : AsciiByte.Amp;
-				tmp_bfr.Add_byte(dlm);
+				tmp_bfr.AddByte(dlm);
 				Gfo_qarg_itm arg = url.Qargs_ary()[i];
-				tmp_bfr.Add(arg.Key_bry()).Add_byte(AsciiByte.Eq).Add(arg.Val_bry());
+				tmp_bfr.Add(arg.Key_bry()).AddByte(AsciiByte.Eq).Add(arg.Val_bry());
 			}
 		}
 		if (url.Anch_bry() != null)
-			tmp_bfr.Add_byte(AsciiByte.Hash).Add(url.Anch_bry());		// add anchor;		EX: "#B"
-		return tmp_bfr.To_str_and_clear();
+			tmp_bfr.AddByte(AsciiByte.Hash).Add(url.Anch_bry());		// add anchor;		EX: "#B"
+		return tmp_bfr.ToStrAndClear();
 	}
 	private static byte[] Strip_mobile_segment(byte[] v) {// DATE:2014-05-03
-		int pos = Bry_find_.Find_fwd(v, AsciiByte.Dot);
-		if (	pos == Bry_find_.Not_found		// no dot; EX: "A"
+		int pos = BryFind.FindFwd(v, AsciiByte.Dot);
+		if (	pos == BryFind.NotFound        // no dot; EX: "A"
 			||	pos + 2 >= v.length				// not enough space for .m.; EX: "A.b"
 			)	
 			return v;
@@ -308,15 +313,15 @@ public class Xow_url_parser {
 				return v;
 		}
 		if (v[pos + 2] != AsciiByte.Dot) return v;
-		return Bry_.Add(Bry_.Mid(v, 0, pos), Bry_.Mid(v, pos + 2));	// skip ".m"
+		return BryUtl.Add(BryLni.Mid(v, 0, pos), BryLni.Mid(v, pos + 2));	// skip ".m"
 	}
-	private static final byte[] Qarg__title = Bry_.new_a7("title");
+	private static final byte[] Qarg__title = BryUtl.NewA7("title");
 	private static final byte[]
-	  Bry_upload_wikimedia_org = Bry_.new_a7("upload.wikimedia.org")
-	, Bry_file = Bry_.new_a7("File:")	// NOTE: File does not need i18n; is a canonical namespace 
-	, Bry_wiki = Bry_.new_a7("wiki")
+	  Bry_upload_wikimedia_org = BryUtl.NewA7("upload.wikimedia.org")
+	, Bry_file = BryUtl.NewA7("File:")	// NOTE: File does not need i18n; is a canonical namespace
+	, Bry_wiki = BryUtl.NewA7("wiki")
 	;
 	public static final byte[]
-	  Bry_dot_org = Bry_.new_a7(".org")
+	  Bry_dot_org = BryUtl.NewA7(".org")
 	;
 }

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*;
+package gplx.xowa.xtns.cites;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Ref_itm_grp {
 	private final List_adp lsts = List_adp_.New();
 	private int lst_idx;
@@ -25,7 +27,7 @@ public class Ref_itm_grp {
 		return lst_idx++;
 	}
 	public int Lsts_len() {return lsts.Len();}
-	public Ref_itm_lst Lsts_get_at(int i) {return i < lsts.Len() ? (Ref_itm_lst)lsts.Get_at(i) : null;}	// NOTE: null can be returned; see Infobox planet; w:Mars
+	public Ref_itm_lst Lsts_get_at(int i) {return i < lsts.Len() ? (Ref_itm_lst)lsts.GetAt(i) : null;}	// NOTE: null can be returned; see Infobox planet; w:Mars
 	public void Lsts_add(byte[] itm_name, byte[] follow, Ref_nde itm) {
 		Ref_itm_lst lst = null;
 		int lsts_len = lsts.Len();
@@ -34,13 +36,13 @@ public class Ref_itm_grp {
 			lsts.Add(lst);
 		}
 		else
-			lst = (Ref_itm_lst)lsts.Get_at(lsts_len - 1);
+			lst = (Ref_itm_lst)lsts.GetAt(lsts_len - 1);
 		lst.Itms_add(itm_name, follow, itm);
 	}
 	public void Lsts_clear() {
 		int lsts_len = lsts.Len();
 		for (int i = 0; i < lsts_len; i++) {
-			Ref_itm_lst lst = (Ref_itm_lst)lsts.Get_at(i);
+			Ref_itm_lst lst = (Ref_itm_lst)lsts.GetAt(i);
 			lst.Itms_clear();
 		}
 		lsts.Clear();

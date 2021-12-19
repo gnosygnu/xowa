@@ -13,12 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.cfgs; import gplx.*;
+package gplx.xowa.users.cfgs;
 import gplx.dbs.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xou_cfg_mgr {
 	private Xou_cfg_tbl tbl;
 	private final Hash_adp hash = Hash_adp_.New();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public void Init_by_app(Db_conn conn) {
 		tbl = new Xou_cfg_tbl(conn);
 		tbl.Conn().Meta_tbl_assert(tbl);
@@ -31,7 +36,7 @@ public class Xou_cfg_mgr {
 			return itm == null ? or : itm.Val();
 		}
 	}
-	public void Set_app_bry(String key, byte[] val) {this.Set_app_str(key, String_.new_u8(val));}
+	public void Set_app_bry(String key, byte[] val) {this.Set_app_str(key, StringUtl.NewU8(val));}
 	public void Set_app_str(String key, String val) {
 		synchronized (hash) {	// LOCK:app-level
 			// update val in reg
@@ -60,12 +65,12 @@ public class Xou_cfg_mgr {
 	private static final int Usr__anonymous = 1;
 	private static final String Ctx__app = "app";
 	public static String Bld_uid(int usr, String ctx, String key) {
-		return String_.Concat(Int_.To_str(usr), "|", ctx, "|", key);
+		return StringUtl.Concat(IntUtl.ToStr(usr), "|", ctx, "|", key);
 	}
-	private static String Bld_uid(Bry_bfr tmp_bfr, int usr, String ctx, String key) {
-		tmp_bfr.Add_int_variable(usr).Add_byte_pipe();
-		tmp_bfr.Add_str_a7(ctx).Add_byte_pipe();
-		tmp_bfr.Add_str_u8(key);
-		return tmp_bfr.To_str_and_clear();
+	private static String Bld_uid(BryWtr tmp_bfr, int usr, String ctx, String key) {
+		tmp_bfr.AddIntVariable(usr).AddBytePipe();
+		tmp_bfr.AddStrA7(ctx).AddBytePipe();
+		tmp_bfr.AddStrU8(key);
+		return tmp_bfr.ToStrAndClear();
 	}
 }

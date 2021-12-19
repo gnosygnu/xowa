@@ -13,20 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.qrys.bats; import gplx.*; import gplx.dbs.*; import gplx.dbs.qrys.*;
+package gplx.dbs.qrys.bats;
 import gplx.dbs.engines.*;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Db_batch_grp {
 	public final Ordered_hash hash = Ordered_hash_.New();
 	public Db_batch_grp(byte tid) {this.tid = tid;}
 	public byte Tid() {return tid;} private final byte tid;
 	public int Len()								{return hash.Len();}
-	public Db_batch_itm Get_at(int idx)				{return (Db_batch_itm)hash.Get_at(idx); }
+	public Db_batch_itm Get_at(int idx)				{return (Db_batch_itm)hash.GetAt(idx); }
 	public void Add(Db_batch_itm itm)				{hash.Add(itm.Key(), itm);}
 	public void Del(String key)						{hash.Del(key);}
 	public void Run(Db_engine engine) {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			Db_batch_itm itm = (Db_batch_itm)hash.Get_at(i);
+			Db_batch_itm itm = (Db_batch_itm)hash.GetAt(i);
 			itm.Qry_bat__run(engine);
 		}
 	}

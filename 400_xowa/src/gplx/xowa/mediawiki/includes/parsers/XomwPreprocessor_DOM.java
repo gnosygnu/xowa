@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 // THREAD.UNSAFE: caching for repeated calls
-class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final BryWtr tmp_bfr = BryWtr.New();
 	private Xomw_prepro_accum__dom accum_dom = new Xomw_prepro_accum__dom("");
 	public XomwPreprocessor_DOM(XomwParser parser) {this.parser = parser;}
 	@Override public XomwParser Parser() {return parser;} private final XomwParser parser;
@@ -38,9 +41,9 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp
 		return accum;
 	}
 
-	@Override public String preprocessToDbg(byte[] src, boolean for_inclusion) {return String_.new_u8((byte[])this.preprocessToObj_base(src, for_inclusion));}
+	@Override public String preprocessToDbg(byte[] src, boolean for_inclusion) {return StringUtl.NewU8((byte[])this.preprocessToObj_base(src, for_inclusion));}
 	@Override public XomwPPNode preprocessToObj(String text, int flags) {
-		return (XomwPPNode)preprocessToObj_base(Bry_.new_u8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
+		return (XomwPPNode)preprocessToObj_base(BryUtl.NewU8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
 	}
 	@Override protected void preprocessToObj_root() {
 		accum_dom.Clear();
@@ -62,9 +65,9 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp
 			accum_dom.Del_at_end(ws_len);
 		}
 	}
-	@Override protected byte[] preprocessToObj_close_init() {return Bry_.Empty;}
+	@Override protected byte[] preprocessToObj_close_init() {return BryUtl.Empty;}
 	@Override protected byte[] preprocessToObj_close_make(byte[] src, int bgn, int end) {
-		return tmp_bfr.Add_str_a7("<close>").Add_bry_escape_html(src, bgn, end).Add_str_a7("</close>").To_bry_and_clear();
+		return tmp_bfr.AddStrA7("<close>").AddBryEscapeHtml(src, bgn, end).AddStrA7("</close>").ToBryAndClear();
 	}
 	@Override protected void preprocessToObj_ext(byte[] src, byte[] name, int atr_bgn, int atr_end, byte[] inner, byte[] close) {
 		accum_dom.Add_str_literal("<ext>");
@@ -87,17 +90,17 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp
 		accum_dom.Add_bry(close).Add_str_literal("</ext>");
 	}
 	@Override protected Xomw_prepro_accum preprocessToObj_heading_init(int count, int heading_index) {
-		byte[] rv = tmp_bfr.Add_str_a7("<h level=\"").Add_int_variable(count).Add_str_a7("\" i=\"").Add_int_variable(heading_index).Add_str_a7("\">").Add_str_u8(accum_dom.To_str()).Add_str_a7("</h>").To_bry_and_clear();
-		return new Xomw_prepro_accum__dom(String_.new_u8(rv));
+		byte[] rv = tmp_bfr.AddStrA7("<h level=\"").AddIntVariable(count).AddStrA7("\" i=\"").AddIntVariable(heading_index).AddStrA7("\">").AddStrU8(accum_dom.To_str()).AddStrA7("</h>").ToBryAndClear();
+		return new Xomw_prepro_accum__dom(StringUtl.NewU8(rv));
 	}
 	@Override protected void preprocessToObj_heading_end(Xomw_prepro_accum element) {
 		accum_dom.Add_bry(((Xomw_prepro_accum__dom)element).To_bry());
 	}
 	@Override protected Xomw_prepro_accum preprocessToObj_text(XomwPPDStackElement piece, byte[] rule_end, int matching_count) {
-		tmp_bfr.Add_str_u8((String)piece.breakSyntax(matching_count));
-		tmp_bfr.Add(Bry_.Repeat_bry(rule_end, matching_count));
-		byte[] rv = tmp_bfr.To_bry_and_clear();
-		return new Xomw_prepro_accum__dom(String_.new_u8(rv));
+		tmp_bfr.AddStrU8((String)piece.breakSyntax(matching_count));
+		tmp_bfr.Add(BryUtl.RepeatBry(rule_end, matching_count));
+		byte[] rv = tmp_bfr.ToBryAndClear();
+		return new Xomw_prepro_accum__dom(StringUtl.NewU8(rv));
 	}
 	@Override protected Xomw_prepro_accum preprocessToObj_xml(XomwPPDStackElement piece, byte[] name_bry, int max_count, int matching_count) {
 		// Note: $parts is already XML, does not need to be encoded further
@@ -109,14 +112,14 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp
 		// the stack, and all opening brackets are used up.
 		byte[] attr = null;
 		if (max_count == matching_count && piece.lineStart) {	// RELIC:!empty( $piece->lineStart )
-			attr = Bry_.new_a7(" lineStart=\"1\"");
+			attr = BryUtl.NewA7(" lineStart=\"1\"");
 		}
 		else {
-			attr = Bry_.Empty;
+			attr = BryUtl.Empty;
 		}
 
-		tmp_bfr.Add_str_a7("<").Add(name_bry).Add(attr).Add_str_a7(">");
-		tmp_bfr.Add_str_a7("<title>").Add(title).Add_str_a7("</title>");
+		tmp_bfr.AddStrA7("<").Add(name_bry).Add(attr).AddStrA7(">");
+		tmp_bfr.AddStrA7("<title>").Add(title).AddStrA7("</title>");
 
 		int arg_idx = 1;
 		int parts_len = parts.Len();
@@ -124,17 +127,17 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp
 			XomwPPDPart_DOM part = (XomwPPDPart_DOM)parts.Get_at(j);
 			if (part.eqpos != 0) {
 				byte[] part_bfr_bry = part.To_bry();
-				tmp_bfr.Add_str_a7("<part><name>").Add_mid(part_bfr_bry, 0, part.eqpos);
-				tmp_bfr.Add_str_a7("</name>=<value>").Add_mid(part_bfr_bry, part.eqpos + 1, part.Len());
-				tmp_bfr.Add_str_a7("</value></part>");
+				tmp_bfr.AddStrA7("<part><name>").AddMid(part_bfr_bry, 0, part.eqpos);
+				tmp_bfr.AddStrA7("</name>=<value>").AddMid(part_bfr_bry, part.eqpos + 1, part.Len());
+				tmp_bfr.AddStrA7("</value></part>");
 			}
 			else {
-				tmp_bfr.Add_str_a7("<part><name index=\"").Add_int_variable(arg_idx).Add_str_a7("\" /><value>").Add(part.To_bry()).Add_str_a7("</value></part>");
+				tmp_bfr.AddStrA7("<part><name index=\"").AddIntVariable(arg_idx).AddStrA7("\" /><value>").Add(part.To_bry()).AddStrA7("</value></part>");
 				arg_idx++;
 			}
 		}
-		byte[] element = tmp_bfr.Add_str_a7("</").Add(name_bry).Add_str_a7(">").To_bry_and_clear();
-		return new Xomw_prepro_accum__dom(String_.new_u8(element));
+		byte[] element = tmp_bfr.AddStrA7("</").Add(name_bry).AddStrA7(">").ToBryAndClear();
+		return new Xomw_prepro_accum__dom(StringUtl.NewU8(element));
 	}
 	@Override protected void preprocessToObj_add_element(Xomw_prepro_accum element) {
 		accum_dom.Add_bry(((Xomw_prepro_accum__dom)element).To_bry());
@@ -144,15 +147,15 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp
 		accum_dom.Add_bry(AsciiByte.EqBry);
 	}
 	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
-		Bry_bfr root_accum = Bry_bfr_.New().Add_str_u8(((Xomw_prepro_accum__dom)stack.Get_root_accum()).To_str());
+		BryWtr root_accum = BryWtr.New().AddStrU8(((Xomw_prepro_accum__dom)stack.Get_root_accum()).To_str());
 		int stack_len = stack.stack.Len();
 		for (int j = 0; j < stack_len; j++) {
 			// XomwPPDStackElement_Hash piece = (XomwPPDStackElement_Hash)stack.stack.Get_at(j);
 			// root_accum.Add((XophpArray)piece.breakSyntax(tmp_bfr));
 			// root_accum.Add((XophpArray)piece.breakSyntax(tmp_bfr, -1));
 		}
-		root_accum.Add_str_a7("</root>");
-		return root_accum.To_bry_and_clear();
+		root_accum.AddStrA7("</root>");
+		return root_accum.ToBryAndClear();
 	}
 
 	@Override public XomwPreprocessor Make_new(XomwParser parser) {return new XomwPreprocessor_DOM(parser);}

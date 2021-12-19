@@ -14,18 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.Gfo_usr_dlg__gui_;
-import gplx.Gfo_usr_dlg__log_base;
-import gplx.Gfo_usr_dlg_base;
-import gplx.GfsCtx;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.core.brys.Bry_bfr_mkr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.dlgs.Gfo_usr_dlg__gui_;
+import gplx.libs.dlgs.Gfo_usr_dlg__log_base;
+import gplx.libs.dlgs.Gfo_usr_dlg_base;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.custom.brys.wtrs.BryBfrMkr;
 import gplx.core.ios.Io_download_fmt;
 import gplx.core.log_msgs.Gfo_msg_log;
 import gplx.core.net.Gfo_inet_conn;
@@ -33,7 +32,8 @@ import gplx.core.net.Gfo_inet_conn_;
 import gplx.core.net.Gfo_url_parser;
 import gplx.core.threads.Gfo_thread_mgr;
 import gplx.langs.jsons.Json_parser;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.addons.Xoax_addon_mgr;
@@ -122,7 +122,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 
 	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
 	public Gfo_usr_dlg				Usr_dlg() {return usr_dlg;} public void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v; Xoa_app_.Usr_dlg_(usr_dlg);} private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Noop;
-	public Bry_bfr_mkr				Utl__bfr_mkr()				{return utl__bry_bfr_mkr;}	private final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public BryBfrMkr Utl__bfr_mkr()				{return utl__bry_bfr_mkr;}	private final BryBfrMkr utl__bry_bfr_mkr = new BryBfrMkr();
 	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
 	public Xop_amp_mgr Utl_amp_mgr() {return utl_amp_mgr;} private Xop_amp_mgr utl_amp_mgr = Xop_amp_mgr.Instance;
@@ -131,7 +131,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Gfo_msg_log Utl_msg_log() {return utl_msg_log;} private Gfo_msg_log utl_msg_log;
 	public Xoav_url_parser Utl_url_parser_xo() {return utl_url_parser_xo;} private Xoav_url_parser utl_url_parser_xo = new Xoav_url_parser();
 	public Gfo_url_parser Utl_url_parser_gfo() {return utl_url_parser_gfo;} private final Gfo_url_parser utl_url_parser_gfo = new Gfo_url_parser();
-	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {throw Err_.new_unimplemented_w_msg("implemented for Xoa_cfg_mgr");}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {throw ErrUtl.NewUnimplemented("implemented for Xoa_cfg_mgr");}
 	public void Init_by_app(Io_url user_db_url) {
 		user.Init_db(this, wiki_mgr, user_db_url);
 		this.Addon_mgr().Add_dflts_by_app(this).Run_by_app(this);

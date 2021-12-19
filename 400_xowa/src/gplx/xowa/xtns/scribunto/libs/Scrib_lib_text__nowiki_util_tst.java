@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
 import gplx.core.btries.*;
 import gplx.xowa.parsers.xndes.*;
 public class Scrib_lib_text__nowiki_util_tst {
@@ -49,7 +51,7 @@ class Scrib_lib_text__nowiki_util_fxt {
 		this.trie = util.Make_trie(Xop_xnde_tag_.Tag__nowiki.Name_bry());
 	}
 	public void Test__Strip_tag(String src, String expd) {
-		byte[] actl = util.Strip_tag(Bry_.new_a7("Page"), Bry_.new_u8(src), trie);
-		Gftest.Eq__str(expd, actl);
+		byte[] actl = util.Strip_tag(BryUtl.NewA7("Page"), BryUtl.NewU8(src), trie);
+		GfoTstr.Eq(expd, actl);
 	} 
 }

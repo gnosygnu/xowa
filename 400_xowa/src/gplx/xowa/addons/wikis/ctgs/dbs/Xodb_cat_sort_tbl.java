@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.ctgs.dbs;
 import gplx.dbs.*;
+import gplx.types.basics.utls.StringUtl;
 public class Xodb_cat_sort_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_key;
@@ -32,7 +33,7 @@ public class Xodb_cat_sort_tbl implements Db_tbl {
 	public void Delete_idx__key() {conn.Meta_idx_delete(tbl_name, fld_key);}
 	public void Insert_by_select(Db_conn tmp_conn) {
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(conn, new Db_attach_itm("temp_db", tmp_conn));
-		attach_mgr.Exec_sql(String_.Concat_lines_nl
+		attach_mgr.Exec_sql(StringUtl.ConcatLinesNl
 		( "INSERT INTO cat_sort (cs_key)"
 		, "SELECT DISTINCT cl_sortkey"
 		, "FROM   <temp_db>tmp_cat_link"

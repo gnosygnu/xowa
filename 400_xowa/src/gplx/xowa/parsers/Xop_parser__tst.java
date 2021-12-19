@@ -13,16 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.parsers;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_parser__tst {
 	@Before public void init() {fxt.Clear();} private Xop_parser__fxt fxt = new Xop_parser__fxt();
 	@Test public void Para_y() {
-		fxt.Test_parse_to_html(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_to_html(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, ""
 		, "b"
-		), true, String_.Concat_lines_nl_skip_last
+		), true, StringUtl.ConcatLinesNlSkipLast
 		( "<p>a"
 		, "</p>"
 		, ""
@@ -32,11 +37,11 @@ public class Xop_parser__tst {
 		));
 	}
 	@Test public void Para_n() {
-		fxt.Test_parse_to_html(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_to_html(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, ""
 		, "b"
-		), false, String_.Concat_lines_nl_skip_last
+		), false, StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "b"
 		));
@@ -44,13 +49,13 @@ public class Xop_parser__tst {
 }
 class Xop_parser__fxt {
 	private final Xop_fxt fxt = new Xop_fxt();
-	private Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private BryWtr bfr = BryWtr.NewAndReset(255);
 	public void Clear() {
 		fxt.Reset();
 	}
 	public void Test_parse_to_html(String raw, boolean para_enabled, String expd)  {
-		byte[] raw_bry = Bry_.new_u8(raw);
+		byte[] raw_bry = BryUtl.NewU8(raw);
 		fxt.Wiki().Parser_mgr().Main().Parse_text_to_html(bfr, fxt.Ctx(), fxt.Page(), para_enabled, raw_bry);
-		Tfds.Eq(expd, bfr.To_str_and_clear());
+		GfoTstr.EqObj(expd, bfr.ToStrAndClear());
 	}
 }

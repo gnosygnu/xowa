@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.thms;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.core.brys.Bry_rdr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.rdrs.BryRdr;
 import gplx.core.brys.Int_flag_bldr;
 import gplx.core.encoders.Gfo_hzip_int_;
-import gplx.core.primitives.Bry_obj_ref;
+import gplx.types.custom.brys.wtrs.BryRef;
 import gplx.core.threads.poolables.Gfo_poolable_itm;
 import gplx.core.threads.poolables.Gfo_poolable_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.htmls.Xoh_page;
 import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
 import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
@@ -36,14 +36,14 @@ import gplx.xowa.htmls.core.wkrs.thms.divs.Xoh_thm_caption_data;
 public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final Xoh_img_hzip img_hzip = new Xoh_img_hzip();
 	private final Xoh_thm_wtr wtr = new Xoh_thm_wtr();
-	private final Bry_obj_ref capt_1 = Bry_obj_ref.New_empty();
+	private final BryRef capt_1 = BryRef.NewEmpty();
 	public int Tid() {return Xoh_hzip_dict_.Tid__thm;}
 	public String Key() {return Xoh_hzip_dict_.Key__thm;}
 	public byte[] Hook() {return hook;} private byte[] hook;
 	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
 		Xoh_thm_data data = (Xoh_thm_data)data_obj;
 		if (!data.Rng_valid()) {
-			bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+			bfr.AddMid(src, data.Src_bgn(), data.Src_end());
 			return this;
 		}
 		Xoh_thm_caption_data capt_data = data.Capt_data();
@@ -57,15 +57,15 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		bfr.Add(hook);
 		Gfo_hzip_int_.Encode(1, bfr, flag_bldr.Encode());
 		if (div_1_width_exists) Gfo_hzip_int_.Encode(2, bfr, div_1_width);
-		if (capt_data.Capt_1_exists())	bfr.Add_mid(src, capt_data.Capt_1_bgn(), capt_data.Capt_1_end());
-		bfr.Add_byte(Xoh_hzip_dict_.Escape);
+		if (capt_data.Capt_1_exists())	bfr.AddMid(src, capt_data.Capt_1_bgn(), capt_data.Capt_1_end());
+		bfr.AddByte(Xoh_hzip_dict_.Escape);
 		if (capt_2_exists)				bfr.Add_hzip_mid(src, capt_data.Capt_2_bgn(), capt_data.Capt_2_end());
 		if (capt_3_exists)				bfr.Add_hzip_mid(src, capt_data.Capt_3_bgn(), capt_data.Capt_3_end());
 		img_hzip.Encode1(bfr, hdoc_wkr, hctx, hpg, BoolUtl.N, src, data.Img_data());
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
-		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+		int flag = rdr.ReadHzipInt(1); flag_bldr.Decode(flag);
 		boolean xowa_alt_text_exists			= flag_bldr.Get_as_bool(Flag__xowa_alt_text_exists);
 		boolean capt_3_exists					= flag_bldr.Get_as_bool(Flag__capt_3_exists);
 		boolean capt_2_is_tidy					= flag_bldr.Get_as_bool(Flag__capt_2_is_tidy);
@@ -73,11 +73,11 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean div_1_width_exists				= flag_bldr.Get_as_bool(Flag__div_1_width_exists);
 		int div_0_align						= flag_bldr.Get_as_int(Flag__div_0_align);
 		int div_1_width = 220;
-		if (div_1_width_exists) div_1_width = rdr.Read_hzip_int(2);
-		int capt_1_bgn = rdr.Pos(); int capt_1_end = rdr.Find_fwd_lr();
-		capt_1.Mid_(src, capt_1_bgn, capt_1_end);
-		byte[] capt_2_bry = capt_2_exists ? rdr.Read_bry_to() : Bry_.Empty;
-		byte[] capt_3_bry = capt_3_exists ? rdr.Read_bry_to() : Bry_.Empty;
+		if (div_1_width_exists) div_1_width = rdr.ReadHzipInt(2);
+		int capt_1_bgn = rdr.Pos(); int capt_1_end = rdr.FindFwdLr();
+		capt_1.ValSetByMid(src, capt_1_bgn, capt_1_end);
+		byte[] capt_2_bry = capt_2_exists ? rdr.ReadBryTo() : BryUtl.Empty;
+		byte[] capt_3_bry = capt_3_exists ? rdr.ReadBryTo() : BryUtl.Empty;
 		Xoh_img_data img_data = (Xoh_img_data)hctx.Pool_mgr__data().Get_by_tid(Xoh_hzip_dict_.Tid__img);
 		img_hzip.Decode1(bfr, hdoc_wkr, hctx, hpg, rdr, src, rdr.Pos(), src_end, img_data);
 		img_hzip.Wtr().Init_by_decode(hpg, hctx, src, img_data);

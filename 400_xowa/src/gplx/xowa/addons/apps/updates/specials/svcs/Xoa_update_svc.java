@@ -14,25 +14,24 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.updates.specials.svcs;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_invk_cmd;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.Keyval;
-import gplx.String_;
 import gplx.core.envs.Env_;
 import gplx.core.envs.Op_sys;
 import gplx.core.envs.Runtime_;
-import gplx.core.envs.System_;
+import gplx.core.envs.SystemUtl;
 import gplx.core.gfobjs.Gfobj_nde;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.addons.apps.updates.Xoa_update_startup;
 import gplx.xowa.addons.apps.updates.apps.Xoa_manifest_list;
@@ -113,17 +112,17 @@ class Xoa_update_svc implements Gfo_invk {
 
 		// get failed
 		Xoa_manifest_list list = new Xoa_manifest_list();
-		Keyval[] failed_ary = replace_wkr.Failed();
+		KeyVal[] failed_ary = replace_wkr.Failed();
 		int len = failed_ary.length;
 		for (int i = 0; i < len; i++) {
-			Keyval failed = failed_ary[i];
-			list.Add(Io_url_.new_fil_(failed.Key()), Io_url_.new_fil_(failed.Val_to_str_or_empty()));
+			KeyVal failed = failed_ary[i];
+			list.Add(Io_url_.new_fil_(failed.KeyToStr()), Io_url_.new_fil_(failed.ValToStrOrEmpty()));
 		}
 
 		// write failed
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		String app_update_cfg = app.Cfg().Get_str_app_or("xowa.app.update.restart_cmd", "");	// CFG:Cfg__
-		bfr.Add_str_u8(App__update__restart_cmd(app_update_cfg, Env_.AppUrl(), Op_sys.Cur().Tid(), Op_sys.Cur().Bitness()) + "\n");
+		bfr.AddStrU8(App__update__restart_cmd(app_update_cfg, Env_.AppUrl(), Op_sys.Cur().Tid(), Op_sys.Cur().Bitness()) + "\n");
 		list.Save(bfr);
 		Io_url manifest_url = update_dir.GenSubFil("xoa_update_manifest.txt");
 		Io_mgr.Instance.SaveFilBfr(manifest_url, bfr);
@@ -134,7 +133,7 @@ class Xoa_update_svc implements Gfo_invk {
 
 		// run standalone app
 		Runtime_.Exec("java -jar " + update_jar_fil.Raw()+ " " + manifest_url.Raw() + " " + version_root.Raw());
-		System_.Exit();
+		SystemUtl.Exit();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__download_done))		On_download_done(m);
@@ -147,7 +146,7 @@ class Xoa_update_svc implements Gfo_invk {
 	private static final String Invk__download_done = "download_done", Invk__download_fail = "download_fail", Invk__unzip_done = "unzip_done", Invk__replace_done = "replace_done";
 	public static String App__update__restart_cmd(String current, Io_url app_url, byte op_sys_tid, byte bitness) {
 		String rv = current;
-		if (!String_.Eq(rv, String_.Empty)) return rv; // something specified; return it
+		if (!StringUtl.Eq(rv, StringUtl.Empty)) return rv; // something specified; return it
 		String bitness_str = bitness == Op_sys.Bitness_32 ? "" : "_64";
 		Io_url root_dir = app_url.OwnerDir();
 
@@ -164,8 +163,8 @@ class Xoa_update_svc implements Gfo_invk {
 				file_fmt = "xowa{0}.exe";
 				break;
 			default:
-				throw Err_.new_unhandled_default(op_sys_tid);
+				throw ErrUtl.NewUnhandled(op_sys_tid);
 		}
-		return prepend_sh + root_dir.GenSubFil(String_.Format(file_fmt, bitness_str)).Raw();
+		return prepend_sh + root_dir.GenSubFil(StringUtl.Format(file_fmt, bitness_str)).Raw();
 	}
 }

@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.wmdumps.imglinks;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.files.origs.*;
 public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
@@ -29,7 +37,7 @@ public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 		else if (rv == null)	rv = Load_from_db(ttl);
 		return rv == Missing ? Xof_orig_itm.Null : rv;
 	}
-	public void			Find_by_list(Ordered_hash rv, List_adp itms) {throw Err_.new_unimplemented();}
+	public void			Find_by_list(Ordered_hash rv, List_adp itms) {throw ErrUtl.NewUnimplemented();}
 	public boolean		Add_orig(byte repo, byte[] page, int ext_id, int w, int h, byte[] redirect) {return false;}
 	public void			Db_txn_save() {}
 	public void			Db_rls() {}
@@ -52,8 +60,8 @@ public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 		Xob_db_file image_db = Xob_db_file.New__wiki_image(wiki.Fsys_mgr().Root_dir());
 		return image_db.Conn().Stmt_select
 		( "image"
-		, String_.Ary("img_media_type", "img_minor_mime", "img_size", "img_width", "img_height", "img_bits", "img_ext_id", "img_timestamp")
-		, String_.Ary("img_name")
+		, StringUtl.Ary("img_media_type", "img_minor_mime", "img_size", "img_width", "img_height", "img_bits", "img_ext_id", "img_timestamp")
+		, StringUtl.Ary("img_name")
 		);
 	}
 	public void Add_by_db(Xof_orig_itm itm) {
@@ -70,5 +78,5 @@ public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 			return rv;
 		}
 	}
-	private static final Xof_orig_itm Missing = new Xof_orig_itm(Byte_.Max_value_127, Bry_.Empty, -1, -1, -1, Bry_.Empty);
+	private static final Xof_orig_itm Missing = new Xof_orig_itm(ByteUtl.MaxValue127, BryUtl.Empty, -1, -1, -1, BryUtl.Empty);
 }

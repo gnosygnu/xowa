@@ -13,18 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.wrappers.IntRef;
 public class Xop_xnde_tag {
 	public Xop_xnde_tag(int id, String name_str) {	// NOTE: should only be used by Xop_xnde_tag_
 		this.id = id;
-		this.name_bry = Bry_.new_a7(name_str);
+		this.name_bry = BryUtl.NewA7(name_str);
 		this.name_str = name_str;
 		this.name_len = name_bry.length;
-		this.xtn_bgn_tag = Bry_.Add(AsciiByte.AngleBgnBry, name_bry);
-		this.xtn_end_tag = Bry_.Add(Xop_xnde_tag_.Bry__end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
+		this.xtn_bgn_tag = BryUtl.Add(AsciiByte.AngleBgnBry, name_bry);
+		this.xtn_end_tag = BryUtl.Add(Xop_xnde_tag_.Bry__end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
 		this.xtn_end_tag_tmp = new byte[xtn_end_tag.length]; ArrayUtl.Copy(xtn_end_tag, xtn_end_tag_tmp);
 	}
 	public int Id() {return id;} private final int id;
@@ -61,11 +65,11 @@ public class Xop_xnde_tag {
 	public boolean Ignore_empty() {return ignore_empty;} public Xop_xnde_tag Ignore_empty_() {ignore_empty = true; return this;} private boolean ignore_empty;
 	public Tag_html_mkr Html_mkr() {return html_mkr;} public Xop_xnde_tag Html_mkr_(Tag_html_mkr v) {this.html_mkr = v; return this;} private Tag_html_mkr html_mkr;
 	public boolean Xtn_skips_template_args() {return xtn_skips_template_args;} public Xop_xnde_tag Xtn_skips_template_args_() {xtn_skips_template_args = true; return this;} private boolean xtn_skips_template_args;
-	public Ordered_hash Langs() {return langs;} private Ordered_hash langs; private Int_obj_ref langs_key;
+	public Ordered_hash Langs() {return langs;} private Ordered_hash langs; private IntRef langs_key;
 	public Xop_xnde_tag Langs_(int lang_code, String name) {
 		if (langs == null) {
 			langs = Ordered_hash_.New();
-			langs_key = Int_obj_ref.New_neg1();
+			langs_key = IntRef.NewNeg1();
 		}
 		Xop_xnde_tag_lang lang_tag = new Xop_xnde_tag_lang(lang_code, name);
 		langs.Add(lang_tag.Lang_code(), lang_tag);
@@ -73,13 +77,13 @@ public class Xop_xnde_tag {
 	}
 	public Xop_xnde_tag_lang Langs_get(gplx.xowa.langs.cases.Xol_case_mgr case_mgr, int cur_lang, byte[] src, int bgn, int end) {
 		if (langs == null) return Xop_xnde_tag_lang.Instance;						// no langs defined; always return true; EX:<b>
-		if (Bry_.Eq(src, bgn, end, name_bry)) return Xop_xnde_tag_lang.Instance;	// canonical name (name_bry) is valid in all langs; EX: <section> and cur_lang=de
+		if (BryLni.Eq(src, bgn, end, name_bry)) return Xop_xnde_tag_lang.Instance;	// canonical name (name_bry) is valid in all langs; EX: <section> and cur_lang=de
 		synchronized (langs) {
-			langs_key.Val_(cur_lang);
+			langs_key.ValSet(cur_lang);
 		}
 		Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.GetByOrNull(langs_key);
 		if (lang == null) return null;										// cur tag is a lang tag, but no tag for this lang; EX: "<trecho>" and cur_lang=de
-		return Bry_.Eq_ci_a7(lang.Name_bry(), src, bgn, end)
+		return BryUtl.EqCiA7(lang.Name_bry(), src, bgn, end)
 			? lang
 			: null;
 	}

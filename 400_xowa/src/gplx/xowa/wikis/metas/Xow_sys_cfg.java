@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.metas;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.xowa.*;
 public class Xow_sys_cfg implements Gfo_invk {
 	public Xow_sys_cfg(Xowe_wiki wiki) {}
 	public boolean Xowa_cmd_enabled() {return xowa_cmd_enabled;} public Xow_sys_cfg Xowa_cmd_enabled_(boolean v) {xowa_cmd_enabled = v; return this;} private boolean xowa_cmd_enabled;

@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.exports.merges;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will have N itms
 	private final Split_tbl tbl;
@@ -37,7 +44,7 @@ public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will
 		// init heap_conn
 		String tbl_name = tbl.Tbl_name();
 		Io_url heap_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("tmp", "merge", tbl_name);
-		Io_url heap_url = heap_dir.GenSubFil(String_.Format("xowa.merge.temp.{0}{1}.sqlite3", tbl_name, trg_db_id == -1 ? "" : "." + Int_.To_str_pad_bgn_zero(trg_db_id, 4)));
+		Io_url heap_url = heap_dir.GenSubFil(StringUtl.Format("xowa.merge.temp.{0}{1}.sqlite3", tbl_name, trg_db_id == -1 ? "" : "." + IntUtl.ToStrPadBgnZero(trg_db_id, 4)));
 		Db_conn_bldr_data bldr_data = Db_conn_bldr.Instance.Get_or_new(heap_url);
 		Db_conn heap_conn = bldr_data.Conn();
 		if (bldr_data.Created())
@@ -57,7 +64,7 @@ public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will
 		// delete any old dbs
 		len = deleted.Len();
 		for (int i = 0; i < len; ++i) {
-			Merge2_heap_db itm = (Merge2_heap_db)deleted.Get_at(i);
+			Merge2_heap_db itm = (Merge2_heap_db)deleted.GetAt(i);
 			list.Del(itm);
 		}
 		deleted.Clear();
@@ -70,7 +77,7 @@ public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will
 		for (int i = 0; i < len; ++i)
 			Cleanup_file(this.Get_at(i));
 	}
-	private Merge2_heap_db	Get_at(int i)	{return (Merge2_heap_db)list.Get_at(i);}
+	private Merge2_heap_db	Get_at(int i)	{return (Merge2_heap_db)list.GetAt(i);}
 	private void Add(Merge2_heap_db itm) {
 		list.Add(itm);
 		cur = itm;
@@ -88,7 +95,7 @@ public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will
 		// heap_conn.Meta_idx_create(tbl_name, "sort", pkey_flds);
 		
 		// do bulk copy into wiki tbls; note ORDER BY
-		wkr.Copy_to_wiki(ctx, prog_wkr, tbl_name, tbl_flds, heap_conn, new Merge2_trg_itm__wiki(itm.Idx(), wiki_conn), String_.Ary_empty);
+		wkr.Copy_to_wiki(ctx, prog_wkr, tbl_name, tbl_flds, heap_conn, new Merge2_trg_itm__wiki(itm.Idx(), wiki_conn), StringUtl.AryEmpty);
 
 		// cleanup
 		if (itm_is_cur) {	// if cur, rebuild heap table; vaccum;

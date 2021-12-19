@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*;
+package gplx.dbs.sqls.wtrs;
 import gplx.dbs.sqls.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 import gplx.core.criterias.*; /*Criteria_base*/
 import gplx.core.ios.*;
@@ -53,8 +55,8 @@ public class Sql_qry_wtr__iosql__tst {
 	private final Sql_wtr_ctx ctx = new Sql_wtr_ctx(false);
 	void tst_Write(String expd, Criteria crt) {
 		Sql_where_wtr where_wtr = ((Sql_core_wtr)SqlQryWtrUtl.NewBasic()).Where_wtr();
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		where_wtr.Bld_where_elem(bfr, ctx, crt);
-		Tfds.Eq(expd, bfr.To_str_and_clear());
+		GfoTstr.EqObj(expd, bfr.ToStrAndClear());
 	}
 }

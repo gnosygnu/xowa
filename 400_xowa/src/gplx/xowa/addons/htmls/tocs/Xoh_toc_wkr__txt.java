@@ -14,14 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.htmls.tocs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.Gfh_tag_;
 import gplx.langs.htmls.Gfh_utl;
@@ -29,14 +24,18 @@ import gplx.langs.htmls.docs.Gfh_tag;
 import gplx.langs.htmls.docs.Gfh_tag_rdr;
 import gplx.langs.htmls.encoders.Gfo_url_encoder;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface;
 import gplx.xowa.parsers.amps.Xop_amp_mgr;
 class Xoh_toc_wkr__txt {
 	private final Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html().Skip_ws_after_slash_y_();
-	private final Bry_bfr anch_bfr = Bry_bfr_.New(), text_bfr = Bry_bfr_.New();
+	private final BryWtr anch_bfr = BryWtr.New(), text_bfr = BryWtr.New();
 	private final Gfo_url_encoder anch_encoder = Gfo_url_encoder_.New__html_id().Make();
 	private final Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
 	private final Hash_adp anch_hash = Hash_adp_bry.ci_u8(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
@@ -49,7 +48,7 @@ class Xoh_toc_wkr__txt {
 	}
 	public void Init(Xow_tidy_mgr_interface tidy_mgr, Xoa_url page_url) {
 		this.tidy_mgr = tidy_mgr;
-		this.page_url_bry = page_url == null ? Bry_.new_a7("null_url") : page_url.To_bry();
+		this.page_url_bry = page_url == null ? BryUtl.NewA7("null_url") : page_url.To_bry();
 	}
 	public void Calc_anch_text(Xoh_toc_itm rv, byte[] src) {	// text within hdr; EX: <h2>Abc</h2> -> Abc
 		int end = src.length;
@@ -63,25 +62,25 @@ class Xoh_toc_wkr__txt {
 				// tidy html; note reusing text_bfr as temp bfr
 				text_bfr.Clear().Add(src);
 				tidy_mgr.Exec_tidy(text_bfr, BoolUtl.N, page_url_bry);
-				src = text_bfr.To_bry_and_clear();
+				src = text_bfr.ToBryAndClear();
 				end = src.length;
 				tag_rdr.Init(page_url_bry, src, 0, end);
 
 				// try to calc again; if fail, give up
 				if (!Calc_anch_text_recurse(src, 0, end))
-					throw Err_.new_wo_type("could not tidy html");
+					throw ErrUtl.NewArgs("could not tidy html");
 			}
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "toc:failed while generating anch_text; page=~{0} src=~{1} err=~{2}", page_url_bry, src, Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "toc:failed while generating anch_text; page=~{0} src=~{1} err=~{2}", page_url_bry, src, ErrUtl.ToStrLog(e));
 			text_bfr.Clear().Add(src);
 			anch_encoder.Encode(anch_bfr, src);
 		}
 
-		byte[] anch_bry = anch_bfr.To_bry_and_clear_and_trim(BoolUtl.Y, BoolUtl.Y, Trim__id);
+		byte[] anch_bry = anch_bfr.ToBryAndClearAndTrim(BoolUtl.Y, BoolUtl.Y, Trim__id);
 		if (anch_hash.Has(anch_bry)) {
 			int anch_idx = 2;
 			while (true) {	// NOTE: this is not big-O performant, but it mirrors MW; DATE:2016-07-09
-				byte[] anch_tmp = Bry_.Add(anch_bry, AsciiByte.UnderlineBry, Int_.To_bry(anch_idx++));
+				byte[] anch_tmp = BryUtl.Add(anch_bry, AsciiByte.UnderlineBry, IntUtl.ToBry(anch_idx++));
 				if (!anch_hash.Has(anch_tmp)) {
 					anch_bry = anch_tmp;
 					break;
@@ -91,7 +90,7 @@ class Xoh_toc_wkr__txt {
 		anch_hash.AddAsKeyAndVal(anch_bry);
 		rv.Set__txt
 		( anch_bry
-		, text_bfr.To_bry_and_clear_and_trim());	// NOTE: both id and text trim ends
+		, text_bfr.ToBryAndClearAndTrim());	// NOTE: both id and text trim ends
 	}
 	private boolean Calc_anch_text_recurse(byte[] src, int pos, int end) {
 		tag_rdr.Src_rng_(pos, end);
@@ -108,9 +107,9 @@ class Xoh_toc_wkr__txt {
 			
 			// add any text before tag
 			if (pos < txt_end) {
-				byte[] anch_bry = amp_mgr.Decode_as_bry(Bry_.Trim(src, pos, txt_end, BoolUtl.Y, BoolUtl.Y, Trim__anch, BoolUtl.Y));	// trim \n else ".0a"; PAGE:en.w:List_of_U-boats_never_deployed DATE:2016-08-13
+				byte[] anch_bry = amp_mgr.Decode_as_bry(BryUtl.Trim(src, pos, txt_end, BoolUtl.Y, BoolUtl.Y, Trim__anch, BoolUtl.Y));	// trim \n else ".0a"; PAGE:en.w:List_of_U-boats_never_deployed DATE:2016-08-13
 				anch_encoder.Encode(anch_bfr, anch_bry);
-				text_bfr.Add_mid(src, pos, txt_end);
+				text_bfr.AddMid(src, pos, txt_end);
 			}
 
 			// set print_tag tag; REF.MW:Parser.php!formatHeadings
@@ -128,7 +127,7 @@ class Xoh_toc_wkr__txt {
 					break;
 				case Gfh_tag_.Id__span:		// print span only if it has a dir attribute
 					span_dir = lhs.Atrs__get_as_bry(Gfh_atr_.Bry__dir);
-					print_tag = Bry_.Len_gt_0(span_dir);
+					print_tag = BryUtl.IsNotNullOrEmpty(span_dir);
 					break;
 				case Gfh_tag_.Id__comment:	// never print tag
 				default:
@@ -173,14 +172,14 @@ class Xoh_toc_wkr__txt {
 
 			// print "<tag></tag>"; also, recurse
 			if (print_tag) {
-				text_bfr.Add_byte(AsciiByte.AngleBgn).Add(lhs_bry);
+				text_bfr.AddByte(AsciiByte.AngleBgn).Add(lhs_bry);
 				if (span_dir != null)	// if span has dir, add it; EX: <span id='1' dir='rtl'> -> <span dir='rtl'>
 					Gfh_atr_.Add(text_bfr, Gfh_atr_.Bry__dir, span_dir);					
-				text_bfr.Add_byte(AsciiByte.AngleEnd);	// only add name; do not add atrs; EX: <i id='1'> -> <i>
+				text_bfr.AddByte(AsciiByte.AngleEnd);	// only add name; do not add atrs; EX: <i id='1'> -> <i>
 			}
 			if (!Calc_anch_text_recurse(src, lhs_end, rhs_bgn)) return false;
 			if (print_tag && lhs_is_pair)
-				text_bfr.Add_mid(src, rhs_bgn, rhs_end);
+				text_bfr.AddMid(src, rhs_bgn, rhs_end);
 
 			// set new_pos
 			pos = new_pos;
@@ -189,5 +188,5 @@ class Xoh_toc_wkr__txt {
 		return true;
 	}
 
-	private static final byte[] Trim__id = Bry_.mask_(256, AsciiByte.UnderlineBry), Trim__anch = Bry_.mask_(256, AsciiByte.Tab, AsciiByte.Nl, AsciiByte.Cr);
+	private static final byte[] Trim__id = BryUtl.Mask(256, AsciiByte.UnderlineBry), Trim__anch = BryUtl.Mask(256, AsciiByte.Tab, AsciiByte.Nl, AsciiByte.Cr);
 }

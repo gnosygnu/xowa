@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.ttls;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Pfunc_titleparts_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -42,7 +44,7 @@ public class Pfunc_titleparts_tst {
 		fxt.Init_defn_add("!", "|");
 		fxt.Init_defn_add("!!", "||");
 		fxt.Test_parse_tmpl_str_test
-		(	String_.Concat_lines_nl_skip_last
+		(	StringUtl.ConcatLinesNlSkipLast
 		(	"{|"
 		,	"|-"
 		,	"{{#titleparts:"
@@ -51,7 +53,7 @@ public class Pfunc_titleparts_tst {
 		,	"|}"
 		)
 		,	"{{test}}"
-		,	String_.Concat_lines_nl_skip_last
+		,	StringUtl.ConcatLinesNlSkipLast
 		(	""	// NOTE: don't know why this new line is necessary, but hopefully it is benign
 		,	"{|"
 		,	"|-"

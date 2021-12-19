@@ -14,20 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.Type_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_wtr;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
 import gplx.xowa.xtns.scribunto.Scrib_invoke_func_fxt;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,12 +53,12 @@ public class Scrib_lib_text_json_tst {
 		, "  }"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.new_("int", 1)
-		, Keyval_.new_("String", "abc")
-		, Keyval_.new_("true", true)
-		, Keyval_.new_("array", new int[] {1, 2, 3})
-		, Keyval_.new_("node", Keyval_.Ary(Keyval_.new_("key", "val")))
+		, KeyValUtl.Ary
+		( KeyVal.NewStr("int", 1)
+		, KeyVal.NewStr("String", "abc")
+		, KeyVal.NewStr("true", true)
+		, KeyVal.NewStr("array", new int[] {1, 2, 3})
+		, KeyVal.NewStr("node", KeyValUtl.Ary(KeyVal.NewStr("key", "val")))
 		));
 	}
 	@Test public void Nde__obj_in_obj() {
@@ -74,10 +72,10 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.new_("x",	new Object[] 
-		{	1, 2, Keyval_.Ary
-		(		Keyval_.new_("y", "x")
+		, KeyValUtl.Ary
+		( KeyVal.NewStr("x",	new Object[]
+		{	1, 2, KeyValUtl.Ary
+		(		KeyVal.NewStr("y", "x")
 		)
 		}
 		)
@@ -98,10 +96,10 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.new_("x"
-		,	new Object[] {1, 2, Keyval_.Ary
-		(		Keyval_.new_("y"
+		, KeyValUtl.Ary
+		( KeyVal.NewStr("x"
+		,	new Object[] {1, 2, KeyValUtl.Ary
+		(		KeyVal.NewStr("y"
 		,			new Object[] {3, 4}
 		))}))			
 		);
@@ -114,10 +112,10 @@ public class Scrib_lib_text_json_tst {
 		, ", '2':2"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.new_("x", "x")
-		, Keyval_.new_("1", 1)
-		, Keyval_.new_("2", 2)
+		, KeyValUtl.Ary
+		( KeyVal.NewStr("x", "x")
+		, KeyVal.NewStr("1", 1)
+		, KeyVal.NewStr("2", 2)
 		));
 	}
 	@Test public void Nde__key_int__auto() {// NOTE: based on MW
@@ -204,7 +202,7 @@ public class Scrib_lib_text_json_tst {
 		, Kv_ary_utl.new_(BoolUtl.Y, new Object[] {1, 2, 3, new Object[] {4, 5, new Object[] {6, 7, 8}, 9}})
 		);
 	}
-	@Test  public void Nested__ary__nde() {
+	@Test public void Nested__ary__nde() {
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'axes':"
@@ -218,21 +216,21 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.new_("axes", Keyval_.Ary
-		(	Keyval_.int_(1, Keyval_.Ary
-		(		Keyval_.new_("type", "x")
-		,       Keyval_.new_("name", "X")
+		, KeyValUtl.Ary
+		( KeyVal.NewStr("axes", KeyValUtl.Ary
+		(	KeyVal.NewInt(1, KeyValUtl.Ary
+		(		KeyVal.NewStr("type", "x")
+		,       KeyVal.NewStr("name", "X")
 		))
-		,	Keyval_.int_(2, Keyval_.Ary
-		(		Keyval_.new_("type", "y")
-		,       Keyval_.new_("name", "Y")
+		,	KeyVal.NewInt(2, KeyValUtl.Ary
+		(		KeyVal.NewStr("type", "y")
+		,       KeyVal.NewStr("name", "Y")
 		))
 		))
 		)
 		);
 	}
-	@Test  public void Nested__ary__ary() {
+	@Test public void Nested__ary__ary() {
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'axes':"
@@ -247,13 +245,13 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.new_("axes", Keyval_.Ary
-		(	Keyval_.int_(1, new Object[]
+		, KeyValUtl.Ary
+		( KeyVal.NewStr("axes", KeyValUtl.Ary
+		(	KeyVal.NewInt(1, new Object[]
 		{		"a1"
 		,       "a2"
 		})
-		,	Keyval_.int_(2, new Object[]
+		,	KeyVal.NewInt(2, new Object[]
 		{		"b1"
 		,       "b2"
 		})
@@ -261,7 +259,7 @@ public class Scrib_lib_text_json_tst {
 		)
 		);
 	}
-	@Test  public void Nested__ary__ary_nde() {
+	@Test public void Nested__ary__ary_nde() {
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'axes':"
@@ -277,23 +275,23 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.new_("axes", Keyval_.Ary
-		(	  Keyval_.int_(1, Keyval_.Ary
-		(		  Keyval_.int_(1, Keyval_.Ary
-		(			  Keyval_.new_("type", "x1")
-		,			  Keyval_.new_("name", "X1")
+		, KeyValUtl.Ary
+		( KeyVal.NewStr("axes", KeyValUtl.Ary
+		(	  KeyVal.NewInt(1, KeyValUtl.Ary
+		(		  KeyVal.NewInt(1, KeyValUtl.Ary
+		(			  KeyVal.NewStr("type", "x1")
+		,			  KeyVal.NewStr("name", "X1")
 		))
-		, 		Keyval_.int_(2, Keyval_.Ary
-		(			Keyval_.new_("type", "y1")
-		,			Keyval_.new_("name", "Y1")
+		, 		KeyVal.NewInt(2, KeyValUtl.Ary
+		(			KeyVal.NewStr("type", "y1")
+		,			KeyVal.NewStr("name", "Y1")
 		))
 		))
 		)))
 		);
 	}
-	@Test  public void Decode__key__int() {
-		Keyval[] kv_ary = (Keyval[])json_fxt.Test_json_decode(fxt, lib
+	@Test public void Decode__key__int() {
+		KeyVal[] kv_ary = (KeyVal[])json_fxt.Test_json_decode(fxt, lib
 		, Scrib_lib_text__json_util.Flag__none
 		, Json_doc.Make_str_by_apos
 		( "{ '1':"
@@ -302,15 +300,15 @@ public class Scrib_lib_text_json_tst {
 		, ", '2':'b'"
 		, "}"
 		)
-		, Keyval_.Ary
-		( Keyval_.int_(1, Keyval_.Ary
-		(		Keyval_.int_(11, "aa")
+		, KeyValUtl.Ary
+		( KeyVal.NewInt(1, KeyValUtl.Ary
+		(		KeyVal.NewInt(11, "aa")
 		))
-		, Keyval_.int_(2, "b")
+		, KeyVal.NewInt(2, "b")
 		)
 		);
-		Tfds.Eq(kv_ary[0].Key_as_obj(), 1);
-		Tfds.Eq(((Keyval[])kv_ary[0].Val())[0].Key_as_obj(), 11);
+		GfoTstr.EqObj(kv_ary[0].KeyAsObj(), 1);
+		GfoTstr.EqObj(((KeyVal[])kv_ary[0].Val())[0].KeyAsObj(), 11);
 	}
 	@Test public void Primitives() {	// NOTE: based on MW; ISSUE#:329; DATE:2019-01-13
 		json_fxt.Test_json_roundtrip_primitive(fxt, lib, "abc", "abc");
@@ -326,43 +324,43 @@ class Scrib_lib_json_fxt {
 		Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none, obj, json);
 	}
 	public void Test_json_roundtrip_primitive(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, Object obj, String expd_encoded) {
-		Object actl_encoded = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonEncode, Object_.Ary(obj, Scrib_lib_text__json_util.Flag__none));
-		Gftest.Eq__str(Object_.Xto_str_loose_or(actl_encoded, "failed"), expd_encoded);
-		Object actl_decoded = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonDecode, Object_.Ary(expd_encoded, Scrib_lib_text__json_util.Flag__none));
-		Gftest.Eq__str(Object_.Xto_str_loose_or(obj, "failed"), Object_.Xto_str_loose_or(actl_decoded, "failed"));
+		Object actl_encoded = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonEncode, ObjectUtl.Ary(obj, Scrib_lib_text__json_util.Flag__none));
+		GfoTstr.Eq(ObjectUtl.ToStrLooseOr(actl_encoded, "failed"), expd_encoded);
+		Object actl_decoded = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonDecode, ObjectUtl.Ary(expd_encoded, Scrib_lib_text__json_util.Flag__none));
+		GfoTstr.Eq(ObjectUtl.ToStrLooseOr(obj, "failed"), ObjectUtl.ToStrLooseOr(actl_decoded, "failed"));
 	}
 	public Object Test_json_decode(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, int flag, String raw, Object expd) {
-		Object actl = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonDecode, Object_.Ary(raw, flag));
-		Tfds.Eq_str_lines(To_str(expd), To_str(actl), raw);
+		Object actl = fxt.Test_scrib_proc_rv_as_obj(lib, Scrib_lib_text.Invk_jsonDecode, ObjectUtl.Ary(raw, flag));
+		GfoTstr.EqLines(To_str(expd), To_str(actl), raw);
 		return actl;
 	}
 	public void Test_json_encode(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, int flag, Object raw, String expd) {
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_text.Invk_jsonEncode, Object_.Ary(raw, flag), "1=" + String_.Replace(expd, "'", "\""));
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_text.Invk_jsonEncode, ObjectUtl.Ary(raw, flag), "1=" + StringUtl.Replace(expd, "'", "\""));
 	}
 	private String To_str(Object o) {
 		if	(o == null) return "<< NULL >>";
 		Class<?> type = o.getClass();
-		if		(Type_.Eq(type, Keyval[].class))
-			return Kv_ary_utl.Ary_to_str(wtr, (Keyval[])o);
-		else if	(Type_.Is_array(type))
+		if		(ClassUtl.Eq(type, KeyVal[].class))
+			return Kv_ary_utl.Ary_to_str(wtr, (KeyVal[])o);
+		else if	(ClassUtl.IsArray(type))
 			return ToStrNestedObj(o);
 		else
-			return Object_.Xto_str_strict_or_null(o);
+			return ObjectUtl.ToStrOrNull(o);
 	}
 	private static String ToStrNestedObj(Object o) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		ToStrNestedAry(bfr, (Object)o, 0);
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
-	private static void ToStrNestedAry(Bry_bfr bfr, Object ary, int indent) {
+	private static void ToStrNestedAry(BryWtr bfr, Object ary, int indent) {
 		int len = ArrayUtl.Len(ary);
 		for (int i = 0; i < len; i++) {
 			Object itm = ArrayUtl.GetAt(ary, i);
-			if (itm != null && Type_.Is_array(itm.getClass()))
+			if (itm != null && ClassUtl.IsArray(itm.getClass()))
 				ToStrNestedAry(bfr, (Object)itm, indent + 1);
 			else {
-				if (indent > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent * 2);
-				bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(itm)).Add_byte_nl();
+				if (indent > 0) bfr.AddByteRepeat(AsciiByte.Space, indent * 2);
+				bfr.AddStrU8(ObjectUtl.ToStrOrNullMark(itm)).AddByteNl();
 			}
 		}
 	}

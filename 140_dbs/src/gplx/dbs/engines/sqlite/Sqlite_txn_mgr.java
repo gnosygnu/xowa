@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.sqlite;
-import gplx.Gfo_usr_dlg_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.engines.Db_engine;
 import gplx.dbs.qrys.Db_qry_sql;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Sqlite_txn_mgr {
 	private final List_adp txn_list = List_adp_.New();
 	public Sqlite_txn_mgr(Db_engine engine) {this.engine = engine;} private final Db_engine engine;
 	private boolean pragma_needed = BoolUtl.Y, txn_started = BoolUtl.N; // NOTE: txns only support 1 level; SQLite fails when nesting transactions; DATE:2015-03-11
 	public void	Txn_bgn(String name) {
-		if (String_.Len_eq_0(name)) name = "unnamed";
+		if (StringUtl.IsNullOrEmpty(name)) name = "unnamed";
 		if (pragma_needed) {
 			pragma_needed = false;
 			engine.Exec_as_obj(Db_qry_sql.xtn_("PRAGMA synchronous = OFF;"));
@@ -38,7 +38,7 @@ public class Sqlite_txn_mgr {
 //			Execute(Db_qry_sql.xtn_("PRAGMA locking_mode = EXCLUSIVE;"));
 //			Execute(Db_qry_sql.xtn_("PRAGMA cache_size=4000;"));	// too many will also cause out of memory
 		if (txn_started) {
-			engine.Exec_as_obj(Db_qry_sql.xtn_(String_.Format("SAVEPOINT {0};", name)));
+			engine.Exec_as_obj(Db_qry_sql.xtn_(StringUtl.Format("SAVEPOINT {0};", name)));
 		}
 		else {
 			txn_started = true;
@@ -48,28 +48,28 @@ public class Sqlite_txn_mgr {
 	}
 	public String Txn_end() {
 		if (txn_list.Len() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return "";}
-		String txn_last = (String)List_adp_.Pop_last(txn_list);
+		String txn_last = (String)List_adp_.PopLast(txn_list);
 		if (txn_list.Len() == 0) {// no txns left; commit it
 			engine.Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));
 			txn_started = false;
 		}
 		else
-			engine.Exec_as_obj(Db_qry_sql.xtn_(String_.Format("RELEASE SAVEPOINT {0};", txn_last)));
+			engine.Exec_as_obj(Db_qry_sql.xtn_(StringUtl.Format("RELEASE SAVEPOINT {0};", txn_last)));
 		return txn_last;
 	}
 	public void	Txn_cxl() {
 		if (txn_list.Len() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
-		String txn_last = (String)List_adp_.Pop_last(txn_list);
+		String txn_last = (String)List_adp_.PopLast(txn_list);
 		if (txn_list.Len() == 0) {// no txns left; rollback
 			engine.Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));
 			txn_started = false;
 		}
 		else
-			engine.Exec_as_obj(Db_qry_sql.xtn_(String_.Format("ROLBACK TRANSACTION TO SAVEPOINT {0};", txn_last)));
+			engine.Exec_as_obj(Db_qry_sql.xtn_(StringUtl.Format("ROLBACK TRANSACTION TO SAVEPOINT {0};", txn_last)));
 	}
 	public void	Txn_sav() {
 		if (txn_list.Len() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
-		String name = (String)txn_list.Get_at(txn_list.Len() - 1);
+		String name = (String)txn_list.GetAt(txn_list.Len() - 1);
 		this.Txn_end(); this.Txn_bgn(name);
 	}
 }

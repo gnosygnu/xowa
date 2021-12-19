@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,23 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.texts; import gplx.*; import gplx.core.*;
+package gplx.core.texts;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class CharStream_tst {
 	@Before public void setup() {
 		stream = CharStream.pos0_("abcdefgh");
 	}
 	@Test public void To_str() {
-		Tfds.Eq(stream.To_str(), "abcdefgh");
+		GfoTstr.EqObj(stream.To_str(), "abcdefgh");
 	}
 	@Test public void CurrentText() {
 		stream.MoveNextBy(1);
-		Tfds.Eq(stream.XtoStrAtCur(2), "bc");
-		Tfds.Eq(stream.To_str(), "abcdefgh");
+		GfoTstr.EqObj(stream.XtoStrAtCur(2), "bc");
+		GfoTstr.EqObj(stream.To_str(), "abcdefgh");
 	}
 	@Test public void CurrentText_outOfBounds() {
 		stream.MoveNextBy(7);
-		Tfds.Eq(stream.XtoStrAtCur(2), "h");
+		GfoTstr.EqObj(stream.XtoStrAtCur(2), "h");
 	}
 	@Test public void Match() {
 		stream.MoveNextBy(6);
@@ -49,11 +50,11 @@ public class CharStream_tst {
 		stream.Move_to(stream.Len());
 		tst_AtBounds(false, false, true);
 	}
-	void tst_Match(boolean expd, String text) {Tfds.Eq(expd, stream.Match(text));}
+	void tst_Match(boolean expd, String text) {GfoTstr.EqObj(expd, stream.Match(text));}
 	void tst_AtBounds(boolean atBgn, boolean atMid, boolean atEnd) {
-		Tfds.Eq(atBgn, stream.AtBgn());
-		Tfds.Eq(atMid, stream.AtMid());
-		Tfds.Eq(atEnd, stream.AtEnd());
+		GfoTstr.EqObj(atBgn, stream.AtBgn());
+		GfoTstr.EqObj(atMid, stream.AtMid());
+		GfoTstr.EqObj(atEnd, stream.AtEnd());
 	}
 	CharStream stream;
 }

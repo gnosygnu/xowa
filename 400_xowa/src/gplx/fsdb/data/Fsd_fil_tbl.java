@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*;
+package gplx.fsdb.data;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 public class Fsd_fil_tbl implements Db_tbl {
 	public final DbmetaFldList flds = new DbmetaFldList();
 	public final String fld_id, fld_owner_id, fld_name, fld_xtn_id, fld_ext_id, fld_size, fld_modified, fld_hash, fld_bin_db_id;
@@ -47,7 +49,7 @@ public class Fsd_fil_tbl implements Db_tbl {
 	}
 	public void Insert(int id, int owner_id, byte[] name, int xtn_id, int ext_id, long size, int bin_db_id) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		Insert(stmt_insert, id, owner_id, name, xtn_id, ext_id, size, bin_db_id, String_.Empty, String_.Empty);
+		Insert(stmt_insert, id, owner_id, name, xtn_id, ext_id, size, bin_db_id, StringUtl.Empty, StringUtl.Empty);
 	}
 	public void Insert(Db_stmt stmt, int id, int owner_id, byte[] name, int xtn_id, int ext_id, long size, int bin_db_id, String modified_on, String hash_md5) {
 		stmt.Clear()
@@ -71,8 +73,8 @@ public class Fsd_fil_tbl implements Db_tbl {
 		.Val_int(fld_bin_db_id, bin_db_id)
 		.Val_bry_as_str(fld_name, name)
 		.Val_long(fld_size, size)
-		.Val_str(fld_modified, String_.Empty)
-		.Val_str(fld_hash, String_.Empty)
+		.Val_str(fld_modified, StringUtl.Empty)
+		.Val_str(fld_hash, StringUtl.Empty)
 		.Crt_int(fld_id, id)
 		.Exec_update();
 	}	
@@ -90,7 +92,7 @@ public class Fsd_fil_tbl implements Db_tbl {
 		}
 		finally {rdr.Rls();}
 	}
-	public void Select_all(Bry_bfr key_bfr, gplx.core.caches.Gfo_cache_mgr_bry cache) {
+	public void Select_all(BryWtr key_bfr, gplx.core.caches.Gfo_cache_mgr_bry cache) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {

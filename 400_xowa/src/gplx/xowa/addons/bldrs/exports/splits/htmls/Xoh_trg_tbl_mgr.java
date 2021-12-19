@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.splits.htmls;
-import gplx.Int_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.data.Xow_db_file;
 import gplx.xowa.wikis.data.Xow_db_file_;
@@ -27,17 +27,17 @@ public class Xoh_trg_tbl_mgr {
 		this.db_mgr = wiki.Data__core_mgr();
 	}
 	public Xoh_page_tbl_itm Make_new(int ns, int part) {
-		Xow_db_file db_file = db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__html_data, Int_.To_str(ns), part, Make_file_name(Repack_suffix, Xow_db_file_.Tid__html_data, ns, part));
+		Xow_db_file db_file = db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__html_data, IntUtl.ToStr(ns), part, Make_file_name(Repack_suffix, Xow_db_file_.Tid__html_data, ns, part));
 		Xoh_page_tbl_itm rv = new Xoh_page_tbl_itm(BoolUtl.Y, db_file.Id(), db_file.Conn());
 		rv.Html_tbl().Create_tbl();
 		return rv;
 	}
 	public static String Make_file_name(String suffix, byte type, int ns, int part) {
-		String rv = String_.Format("{0}{1}{2}{3}.xowa"							// EX: .repack-html-ns.000-001.xowa
+		String rv = StringUtl.Format("{0}{1}{2}{3}.xowa"							// EX: .repack-html-ns.000-001.xowa
 			, suffix															// EX: .repack
 			, "-" + Xow_db_file_.To_key(type)									// EX: -html
-			, ns   < 0 ? "" : "-ns." + Int_.To_str_pad_bgn_zero(ns, 3)			// EX: -ns.001
-			, part < 0 ? "" : "-db." + Int_.To_str_pad_bgn_zero(part, 3)		// EX: -db.001
+			, ns   < 0 ? "" : "-ns." + IntUtl.ToStrPadBgnZero(ns, 3)			// EX: -ns.001
+			, part < 0 ? "" : "-db." + IntUtl.ToStrPadBgnZero(part, 3)		// EX: -db.001
 			);
 		return rv;
 	}

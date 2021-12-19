@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.merges;
 import gplx.dbs.Db_conn;
 import gplx.dbs.DbmetaFldList;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.bldrs.exports.utls.Split_tbl;
 public class Merge2_wkr__heap_one extends Merge2_wkr__heap_base {
 	public Merge2_wkr__heap_one(Split_tbl tbl) {super(tbl);}

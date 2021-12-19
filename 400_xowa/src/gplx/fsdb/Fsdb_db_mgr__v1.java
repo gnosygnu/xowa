@@ -14,10 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.Io_mgr;
-import gplx.Io_url;
+import gplx.libs.files.Io_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_;
 import gplx.dbs.Db_conn_bldr;
@@ -30,7 +27,10 @@ import gplx.fsdb.meta.Fsm_atr_tbl;
 import gplx.fsdb.meta.Fsm_bin_tbl;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
 import gplx.fsdb.meta.Fsm_mnt_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
 import gplx.xowa.files.origs.Xof_orig_tbl;
 public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 	private final Io_url file_dir;
@@ -58,7 +58,7 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 	public Fsdb_db_file		File__atr_file__at(int mnt_id)		{return mnt_id == Fsm_mnt_mgr.Mnt_idx_main ? atr_file__main : atr_file__user;}
 	public Fsdb_db_file		File__bin_file__at(int mnt_id, int bin_id, String file_name) {
 		boolean mnt_is_main = mnt_id == Fsm_mnt_mgr.Mnt_idx_main;
-		String bin_name = (mnt_is_main ? bin_prefix__main : bin_prefix__user) + Int_.To_str_pad_bgn_zero(bin_id, 4) + ".sqlite3";
+		String bin_name = (mnt_is_main ? bin_prefix__main : bin_prefix__user) + IntUtl.ToStrPadBgnZero(bin_id, 4) + ".sqlite3";
 		String mnt_name = mnt_is_main ? Fsm_mnt_tbl.Mnt_name_main : Fsm_mnt_tbl.Mnt_name_user;
 		Io_url url = file_dir.GenSubFil_nest(mnt_name, bin_name);	// EX: /xowa/enwiki/fsdb.main/fsdb.bin.0000.sqlite3
 		Db_conn conn = Db_conn_bldr.Instance.Get(url);
@@ -87,7 +87,7 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 			return rv;
 		}
 		rv = file_dir.GenSubFil_nest(mnt_name, Atr_name_v1b); if (Io_mgr.Instance.ExistsFil(rv)) return rv;
-		throw Err_.new_wo_type("could not find atr file", "dir", file_dir.Raw(), "mnt", mnt_name);
+		throw ErrUtl.NewArgs("could not find atr file", "dir", file_dir.Raw(), "mnt", mnt_name);
 	}
 	public static final String Orig_name = "wiki.orig#00.sqlite3", Mnt_name = "wiki.mnt.sqlite3", Abc_name	= "fsdb.abc.sqlite3"
 	, Atr_name_v1a = "fsdb.atr#00.sqlite3", Atr_name_v1b = "fsdb.atr.00.sqlite3";

@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.draws; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.draws;
+import gplx.frameworks.tests.TfdsTstr_fxt;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.IntUtl;
 import org.junit.*;
 public class ColorAdp__tst {
 	@Test public void parse_hex_() {
@@ -26,7 +29,7 @@ public class ColorAdp__tst {
 		tst_parse_int_(255, 0, 0, 0, 255);
 		tst_parse_int_(65535, 0, 0, 255, 255);
 		tst_parse_int_(16777215, 0, 255, 255, 255);
-		tst_parse_int_(Int_.Max_value, 127, 255, 255, 255);
+		tst_parse_int_(IntUtl.MaxValue, 127, 255, 255, 255);
 		tst_parse_int_(-1, 255, 255, 255, 255);
 	}
 	@Test public void parse() {
@@ -37,12 +40,12 @@ public class ColorAdp__tst {
 	void tst_parse_hex_(String raw, int a, int r, int g, int b) {
 		ColorAdp color = ColorAdp_.parse_hex_(raw);
 		tst_ColorAdp(color, a, r, g, b);
-		Tfds.Eq(color.XtoHexStr(), raw);
+		GfoTstr.EqObj(color.XtoHexStr(), raw);
 	}
 	void tst_parse_int_(int val, int a, int r, int g, int b) {
 		ColorAdp color = ColorAdp_.new_int_(val);
 		tst_ColorAdp(color, a, r, g, b);
-		Tfds.Eq(color.Value(), val);
+		GfoTstr.EqObj(color.Value(), val);
 	}
 	void tst_parse_(String s, int alpha, int red, int green, int blue) {tst_ColorAdp(ColorAdp_.parse(s), alpha, red, green, blue);}
 	void tst_ColorAdp(ColorAdp color, int alpha, int red, int green, int blue) {

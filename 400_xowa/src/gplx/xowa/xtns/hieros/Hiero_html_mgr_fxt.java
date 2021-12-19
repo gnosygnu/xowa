@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.hieros;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 public class Hiero_html_mgr_fxt {
 	private Hiero_xtn_mgr xtn_mgr;
 	public Hiero_html_mgr_fxt(Xop_fxt fxt) {this.fxt = fxt;}
@@ -46,9 +48,9 @@ public class Hiero_html_mgr_fxt {
 		this.Init_file("a&A1", 37, 38);
 		return this;
 	}
-	public Hiero_html_mgr_fxt Init_prefab(String prefab)					{xtn_mgr.Prefab_mgr().Add(Bry_.new_u8(prefab)); return this;}
-	public Hiero_html_mgr_fxt Init_file(String s, int w, int h)				{xtn_mgr.File_mgr().Add(Bry_.new_u8(s), w, h); return this;}
-	public Hiero_html_mgr_fxt Init_phoneme(String phoneme, String code)		{xtn_mgr.Phoneme_mgr().Add(Bry_.new_u8(phoneme), Bry_.new_u8(code)); return this;}
+	public Hiero_html_mgr_fxt Init_prefab(String prefab)					{xtn_mgr.Prefab_mgr().Add(BryUtl.NewU8(prefab)); return this;}
+	public Hiero_html_mgr_fxt Init_file(String s, int w, int h)				{xtn_mgr.File_mgr().Add(BryUtl.NewU8(s), w, h); return this;}
+	public Hiero_html_mgr_fxt Init_phoneme(String phoneme, String code)		{xtn_mgr.Phoneme_mgr().Add(BryUtl.NewU8(phoneme), BryUtl.NewU8(code)); return this;}
 	public void Test_html_full_str(String raw, String expd)					{fxt.Test_html_full_str(raw, expd);}
 	public void Test_html_full_frag(String raw, String expd)				{fxt.Test_html_full_frag(raw, expd);}
 }	

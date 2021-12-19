@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.types.basics.lists.Ordered_hash;
 import gplx.xowa.wikis.data.tbls.*;
 public interface Xobd_parser_wkr extends Gfo_invk {
 	Ordered_hash Wkr_hooks();

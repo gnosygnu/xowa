@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains.crts; import gplx.*;
+package gplx.xowa.wikis.domains.crts;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.wikis.domains.*;
 public class Xow_domain_crt_kv_itm_mgr {
 	private final List_adp list = List_adp_.New();
 	public void Clear() {list.Clear();}
-	@gplx.Internal protected void Add(Xow_domain_crt_kv_itm itm) {list.Add(itm);}
+	public void Add(Xow_domain_crt_kv_itm itm) {list.Add(itm);}
 	public boolean Parse_as_itms(byte[] raw) {
 		this.Clear();
 		Xow_domain_crt_kv_itm[] ary = Xow_domain_crt_itm_parser.Instance.Parse_as_kv_itms_or_null(raw);
@@ -40,7 +42,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 	public Xow_domain_crt_itm Find_itm(Xow_domain_itm cur, Xow_domain_itm comp) {
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Xow_domain_crt_kv_itm kv = (Xow_domain_crt_kv_itm)list.Get_at(i);
+			Xow_domain_crt_kv_itm kv = (Xow_domain_crt_kv_itm)list.GetAt(i);
 			if (kv.Key().Matches(cur, comp)) return kv.Val();
 		}
 		return Xow_domain_crt_itm__none.Instance;
@@ -48,7 +50,7 @@ public class Xow_domain_crt_kv_itm_mgr {
 	public Xow_domain_crt_itm[] Find_ary(Xow_domain_itm cur, Xow_domain_itm comp) {
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Xow_domain_crt_kv_ary kv = (Xow_domain_crt_kv_ary)list.Get_at(i);
+			Xow_domain_crt_kv_ary kv = (Xow_domain_crt_kv_ary)list.GetAt(i);
 			if (kv.Key().Matches(cur, comp)) return kv.Val();
 		}
 		return null;

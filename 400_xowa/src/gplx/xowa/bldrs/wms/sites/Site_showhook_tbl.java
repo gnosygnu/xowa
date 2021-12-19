@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
+package gplx.xowa.bldrs.wms.sites;
 import gplx.dbs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
 class Site_showhook_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_name, fld_scribunto, fld_subscribers;
@@ -46,7 +49,7 @@ class Site_showhook_tbl implements Db_tbl {
 				Site_showhook_itm itm = new Site_showhook_itm
 				( rdr.Read_bry_by_str(fld_name)
 				, rdr.Read_bry_by_str(fld_scribunto)
-				, Bry_split_.Split(rdr.Read_bry_by_str(fld_subscribers), AsciiByte.PipeBry)
+				, BrySplit.Split(rdr.Read_bry_by_str(fld_subscribers), AsciiByte.PipeBry)
 				);
 				list.Add(itm.Name(), itm);
 			}
@@ -59,7 +62,7 @@ class Site_showhook_tbl implements Db_tbl {
 		stmt_delete.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_delete();
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Site_showhook_itm itm = (Site_showhook_itm)list.Get_at(i);
+			Site_showhook_itm itm = (Site_showhook_itm)list.GetAt(i);
 			Insert(site_abrv, itm.Name(), itm.Scribunto(), itm.Subscribers());
 		}
 	}
@@ -68,7 +71,7 @@ class Site_showhook_tbl implements Db_tbl {
 			.Val_bry_as_str(fld_site_abrv		, site_abrv)
 			.Val_bry_as_str(fld_name			, name)
 			.Val_bry_as_str(fld_scribunto		, scribunto)
-			.Val_bry_as_str(fld_subscribers		, Bry_.Add_w_dlm(AsciiByte.Pipe, subscribers))
+			.Val_bry_as_str(fld_subscribers		, BryUtl.AddWithDlm(AsciiByte.Pipe, subscribers))
 			.Exec_insert();
 	}		
 }

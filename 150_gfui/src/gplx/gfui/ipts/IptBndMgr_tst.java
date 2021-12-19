@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
-import org.junit.*; import gplx.core.strings.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import org.junit.*;
 public class IptBndMgr_tst {
 	@Before public void setup() {
 		fx = new IptBndMgr_fx();
@@ -51,7 +57,7 @@ public class IptBndMgr_tst {
 				IptEventData evData = IptEventData.new_(null, IptArg_.EventType_default(arg), arg, null, null);
 				under.Process(evData);
 			}
-			Tfds.Eq(expd, output.To_str());
+			GfoTstr.EqObj(expd, output.ToStr());
 			return this;
 		}
 		String_bldr output = String_bldr_.new_();

@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.Float_;
-import gplx.Int_;
-import gplx.Io_url;
-import gplx.Long_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.LongUtl;
 import java.sql.ResultSet;
 public class Db_rdr__basic implements Db_rdr {
 	protected ResultSet rdr; 
@@ -35,25 +35,25 @@ public class Db_rdr__basic implements Db_rdr {
 	public String		Sql()					{return sql;} private String sql;
 	public boolean			Move_next()	{
 		try	 {return rdr.next();}	
-		catch (Exception e) {throw Err_.new_exc(e, "db", "move_next failed; check column casting error in SQL", "sql", sql);}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "move_next failed; check column casting error in SQL", "sql", sql);}
 	}
-	public byte[]		Read_bry(String k)			{try {return (byte[])rdr.getObject(k);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Bry_.Cls_val_name);}}
-	public byte[]		Read_bry_by_str(String k)	{try {return Bry_.new_u8((String)rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", String_.Cls_val_name);}}
-	public void			Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {throw Err_.new_unimplemented();}
-	public String 		Read_str(String k)			{try {return (String)rdr.getObject(k);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", String_.Cls_val_name);}}
-	public DateAdp		Read_date_by_str(String k)	{return DateAdp_.parse_iso8561(Read_str(k));}
-	public int 			Read_int(String k)			{try {return Int_.Cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Int_.Cls_val_name);}}
-	public long 		Read_long(String k)			{try {return Long_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Long_.Cls_val_name);}}
-	public float		Read_float(String k)		{try {return Float_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Float_.Cls_val_name);}}
-	public double		Read_double(String k)		{try {return Double_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Double_.Cls_val_name);}}
-	public byte			Read_byte(String k)			{try {return Byte_.Cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Byte_.Cls_val_name);}}
-	public boolean 		Read_bool_by_byte(String k)	{try {return Byte_.Cast(rdr.getObject(k)) == 1;} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", BoolUtl.ClsValName);}}
-	public int			Fld_len()					{try {return rdr.getMetaData().getColumnCount();} catch (Exception e) {throw Err_.new_exc(e, "db", "field count failed", "sql", sql);}}
-	public Object 		Read_obj(String k)			{try {return rdr.getObject(k);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Object_.Cls_val_name);}}
-	public Object 		Read_at(int i)				{try {return rdr.getObject(i + 1);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "idx", i, "type", Object_.Cls_val_name);}}
+	public byte[]		Read_bry(String k)			{try {return (byte[])rdr.getObject(k);} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", BryUtl.ClsValName);}}
+	public byte[]		Read_bry_by_str(String k)	{try {return BryUtl.NewU8((String)rdr.getObject(k));} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", StringUtl.ClsValName);}}
+	public void			Save_bry_in_parts(Io_url url, String tbl, String fld, String crt_key, Object crt_val) {throw ErrUtl.NewUnimplemented();}
+	public String 		Read_str(String k)			{try {return (String)rdr.getObject(k);} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", StringUtl.ClsValName);}}
+	public GfoDate Read_date_by_str(String k)	{return GfoDateUtl.ParseIso8561(Read_str(k));}
+	public int 			Read_int(String k)			{try {return IntUtl.Cast(rdr.getObject(k));} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", IntUtl.ClsValName);}}
+	public long 		Read_long(String k)			{try {return LongUtl.Cast(rdr.getObject(k));} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", LongUtl.ClsValName);}}
+	public float		Read_float(String k)		{try {return FloatUtl.Cast(rdr.getObject(k));} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", FloatUtl.ClsValName);}}
+	public double		Read_double(String k)		{try {return DoubleUtl.Cast(rdr.getObject(k));} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", DoubleUtl.ClsValName);}}
+	public byte			Read_byte(String k)			{try {return ByteUtl.Cast(rdr.getObject(k));} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", ByteUtl.ClsValName);}}
+	public boolean 		Read_bool_by_byte(String k)	{try {return ByteUtl.Cast(rdr.getObject(k)) == 1;} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", BoolUtl.ClsValName);}}
+	public int			Fld_len()					{try {return rdr.getMetaData().getColumnCount();} catch (Exception e) {throw ErrUtl.NewArgs(e, "field count failed", "sql", sql);}}
+	public Object 		Read_obj(String k)			{try {return rdr.getObject(k);} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "key", k, "type", ObjectUtl.ClsValName);}}
+	public Object 		Read_at(int i)				{try {return rdr.getObject(i + 1);} catch (Exception e) {throw ErrUtl.NewArgs(e, "read failed", "idx", i, "type", ObjectUtl.ClsValName);}}
 	public void			Rls() {
 		try	{rdr.close();} 
-		catch (Exception e) {throw Err_.new_exc(e, "db", "close failed");}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "close failed");}
 		if (stmt != null) {
 			stmt.Rls();
 			stmt = null;	// NOTE: must null reference else will throw SQLException during statements DATE:2016-04-10

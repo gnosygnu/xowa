@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.types.basics.utls.StringUtl;
 public class IptMouseMove implements IptArg {
 	public String Key()					{return key;} private String key = "move.any";
-	public boolean Eq(IptArg comp)			{return String_.Eq(this.Key(), comp.Key());}
+	public boolean Eq(IptArg comp)			{return StringUtl.Eq(this.Key(), comp.Key());}
 	public static final IptMouseMove AnyDirection = new IptMouseMove(); IptMouseMove() {}
 }

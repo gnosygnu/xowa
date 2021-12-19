@@ -13,15 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*;
+package gplx.xowa.parsers.utils;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.amps.*; import gplx.core.log_msgs.*;
 import gplx.langs.htmls.entitys.*;
 public class Xop_sanitizer {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs(), amp_trie;
 	private Xop_amp_mgr amp_mgr;
-	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	public Xop_sanitizer(Xop_amp_mgr amp_mgr, Gfo_msg_log msg_log) {
 		this.amp_mgr = amp_mgr; this.amp_trie = amp_mgr.Amp_trie();
 		trie_add("&"	, Tid_amp);
@@ -33,9 +34,9 @@ public class Xop_sanitizer {
 	private void trie_add(String hook, byte tid) {trie.Add_stub(hook, tid);}
 	public byte[] Escape_id(byte[] src) {
 		boolean dirty = Escape_id(src, 0, src.length, tmp_bfr);
-		return dirty ? tmp_bfr.To_bry_and_clear() : src;
+		return dirty ? tmp_bfr.ToBryAndClear() : src;
 	}
-	public boolean Escape_id(byte[] src, int bgn, int end, Bry_bfr bfr) {
+	public boolean Escape_id(byte[] src, int bgn, int end, BryWtr bfr) {
 		boolean dirty = false;
 		int pos = bgn;
 		boolean loop = true;
@@ -44,31 +45,31 @@ public class Xop_sanitizer {
 			byte b = src[pos];
 			Object o = trie.Match_bgn_w_byte(b, src, pos, end);
 			if (o == null) {
-				if (dirty) bfr.Add_byte(b);
+				if (dirty) bfr.AddByte(b);
 				++pos;
 			}
 			else {
 				if (!dirty) {
-					bfr.Add_mid(src, bgn, pos);
+					bfr.AddMid(src, bgn, pos);
 					dirty = true;
 				}
 				Btrie_itm_stub stub = (Btrie_itm_stub)o;
 				switch (stub.Tid()) {
-					case Tid_space:		bfr.Add_byte(AsciiByte.Underline)	; ++pos		; break;
-					case Tid_percent:	bfr.Add_byte(AsciiByte.Percent)	; ++pos		; break;
-					case Tid_colon:		bfr.Add_byte(AsciiByte.Colon)		; pos += 3	; break;
+					case Tid_space:		bfr.AddByte(AsciiByte.Underline)	; ++pos		; break;
+					case Tid_percent:	bfr.AddByte(AsciiByte.Percent)	; ++pos		; break;
+					case Tid_colon:		bfr.AddByte(AsciiByte.Colon)		; pos += 3	; break;
 					case Tid_amp:
 						++pos;
 						if (pos == end) {
-							bfr.Add_byte(AsciiByte.Amp);
+							bfr.AddByte(AsciiByte.Amp);
 							loop = false;
 							continue;
 						}
 						b = src[pos];
 						Object amp_obj = amp_trie.Match_bgn_w_byte(b, src, pos, end);
 						if (amp_obj == null) {
-							bfr.Add_byte(AsciiByte.Amp);
-							bfr.Add_byte(b);
+							bfr.AddByte(AsciiByte.Amp);
+							bfr.AddByte(b);
 							++pos;
 						}
 						else {
@@ -85,9 +86,9 @@ public class Xop_sanitizer {
 									Xop_amp_mgr_rslt rv = new Xop_amp_mgr_rslt();
 									amp_mgr.Parse_ncr(rv, itm_tid == Gfh_entity_itm.Tid_num_hex, src, end, pos - 1, pos + itm.Xml_name_bry().length);
 									if (rv.Pass())
-										bfr.Add_u8_int(rv.Val());
+										bfr.AddU8Int(rv.Val());
 									else
-										bfr.Add_byte(AsciiByte.Amp);
+										bfr.AddByte(AsciiByte.Amp);
 									pos = rv.Pos();
 									break;
 							}

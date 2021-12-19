@@ -13,12 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*;
 import gplx.gflucene.core.*;
 import gplx.gflucene.highlighters.*;
 import gplx.gflucene.searchers.*;
 import gplx.xowa.htmls.*;
-import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 import gplx.xowa.addons.wikis.fulltexts.core.*;
 class Xofulltext_highlighter_mgr implements Gfo_invk {
@@ -49,11 +59,11 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			if (searcher_args.Canceled()) return;
-			Gflucene_doc_data item = (Gflucene_doc_data)list.Get_at(i);
+			Gflucene_doc_data item = (Gflucene_doc_data)list.GetAt(i);
 			try {
 				Highlight_item(item);
 			} catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "search.highlight: failed to highlight lines in page; page=~{0} err=~{1}", item.page_id, Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "search.highlight: failed to highlight lines in page; page=~{0} err=~{1}", item.page_id, ErrUtl.ToStrLog(e));
 			}
 		}
 
@@ -70,13 +80,13 @@ class Xofulltext_highlighter_mgr implements Gfo_invk {
 		wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, page_ttl, false); // don't load categories for perf reasons
 		byte[] html = hpg.Db().Html().Html_bry();
 		html = extractor.Extract(html);
-		item.body = String_.new_u8(html);
+		item.body = StringUtl.NewU8(html);
 
 		// loop pages
 		int page_id = item.page_id;
 		Gflucene_highlighter_item[] lines = highlighter_mgr.Exec(searcher_data, item);
 		for (Gflucene_highlighter_item line : lines) {
-			ui.Send_line_add(true, wiki_args.show_all_snips, searcher_args.qry_id, wiki.Domain_bry(), page_id, line.num, Bry_.new_u8(line.text));
+			ui.Send_line_add(true, wiki_args.show_all_snips, searcher_args.qry_id, wiki.Domain_bry(), page_id, line.num, BryUtl.NewU8(line.text));
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

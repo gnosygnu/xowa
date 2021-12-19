@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.ifs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Pfunc_if_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -31,7 +33,7 @@ public class Pfunc_if_tst {
 	@Test public void If_prm_nest_2()		{fxt.Test_parse_tmpl_str_test("{{#if:{{{1|}}}|{{#if:{{{2|}}}|a|b}}|c}}"		, "{{test|1|2}}"	, "a");}
 	@Test public void If_ignore_key()		{fxt.Test_parse_tmpl_str_test("{{#if:|<i id=1|<i id=2}}"					, "{{test}}"		, "<i id=2");}
 	@Test public void If_newline()	{	// PURPOSE: new_line in comments; WP:[[redirect-distinguish|a|b]]
-		fxt.Test_parse_tmpl_str_test(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test(StringUtl.ConcatLinesNlSkipLast
 			(	"{{#if:1<!--"
 			,	"-->|a<!--"
 			,	"-->|b<!--"

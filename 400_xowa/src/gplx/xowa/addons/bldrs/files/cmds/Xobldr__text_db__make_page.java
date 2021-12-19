@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.wikis.dbs.*;
+import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.bldrs.files.dbs.*;
 public class Xobldr__text_db__make_page extends Xob_cmd__base {
 	public Xobldr__text_db__make_page(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}

@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.ns_files;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -41,13 +41,13 @@ import gplx.xowa.files.xfers.Xof_xfer_queue;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
 import gplx.xowa.parsers.lnkis.Xop_lnki_type;
-public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
+public class Xoh_ns_file_page_mgr implements BryBfrArg {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private Xow_repo_mgr repo_mgr;
 	private Xof_file_itm xfer_itm; private byte[] file_size_bry;
 	private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
-	public void Bld_html(Xowe_wiki cur_wiki, Xop_ctx ctx, Xoae_page page, Bry_bfr bfr, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, Xof_xfer_queue queue) {
+	public void Bld_html(Xowe_wiki cur_wiki, Xop_ctx ctx, Xoae_page page, BryWtr bfr, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, Xof_xfer_queue queue) {
 		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
 		this.ttl = ttl; this.html_wtr = html_wtr; this.repo_mgr = wiki.File__repo_mgr();
 		this.xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_file, ctx, ctx.Page(), queue, ttl.Page_txt()
@@ -56,7 +56,7 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 		// get orig
 		Xof_orig_itm orig = wiki.File_mgr().Orig_mgr().Find_by_ttl_or_null(xfer_itm.Lnki_ttl());
 		if (orig == Xof_orig_itm.Null) return;	// no orig;
-		Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), xfer_itm.Lnki_ttl(), Bry_.Empty);
+		Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), xfer_itm.Lnki_ttl(), BryUtl.Empty);
 		if (repo == null) return;
 		xfer_itm.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
 		xfer_itm.Init_at_html(Xof_exec_tid.Tid_wiki_file, img_size, repo, url_bldr);
@@ -64,7 +64,7 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 		// if non-wmf, point orig_url to fs_dir, not cache_dir; DATE:2017-02-01
 		if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
 			Xof_fsdb_mgr fsdb_mgr = cur_wiki.File_mgr().Fsdb_mgr();
-			if (String_.Eq(fsdb_mgr.Key(), Fs_root_core.Fsdb_mgr_key)) {
+			if (StringUtl.Eq(fsdb_mgr.Key(), Fs_root_core.Fsdb_mgr_key)) {
 				Fs_root_core fs_dir_core = (Fs_root_core)fsdb_mgr;
 				Io_url orig_url = fs_dir_core.Get_orig_url_or_null(xfer_itm.Lnki_ttl());
 				if (orig_url != null)
@@ -73,42 +73,42 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 		}
 
 		// get file size
-		this.file_size_bry = Bry_.Empty;
+		this.file_size_bry = BryUtl.Empty;
 		if (xfer_itm.File_exists()) {	// file exists
 			long file_size = Io_mgr.Instance.QueryFil(xfer_itm.Html_orig_url()).Size();
 			if (file_size == -1) file_size = 0; // QueryFil returns -1 if file doesn't exist
-			this.file_size_bry = Bry_.new_a7(gplx.core.ios.Io_size_.To_str(file_size));
+			this.file_size_bry = BryUtl.NewA7(gplx.core.ios.Io_size_.To_str(file_size));
 		}
 
 		// get commons notice
 		String commons_notice =  page.Commons_mgr().Xowa_mockup()
-			? String_.Format(Str_commons_notice, gplx.langs.htmls.Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, AsciiByte.Apos, page.Ttl().Full_db_as_str()))
+			? StringUtl.Format(Str_commons_notice, gplx.langs.htmls.Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, AsciiByte.Apos, page.Ttl().Full_db_as_str()))
 			: "";
-		html_wtr.Html_main().Bld_bfr_many(bfr, this, commons_notice);
+		html_wtr.Html_main().BldToBfrMany(bfr, this, commons_notice);
 	}
 
-	public void Bld_html(Xowe_wiki wiki, Bry_bfr bfr, Xof_file_itm xfer_itm, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, byte[] file_size_bry) {	// TEST:
+	public void Bld_html(Xowe_wiki wiki, BryWtr bfr, Xof_file_itm xfer_itm, Xoa_ttl ttl, Xoh_file_page_wtr html_wtr, byte[] file_size_bry) {	// TEST:
 		this.ttl = ttl; this.html_wtr = html_wtr; this.repo_mgr = wiki.File__repo_mgr();
 		this.xfer_itm = xfer_itm;  this.file_size_bry = file_size_bry;
-		html_wtr.Html_main().Bld_bfr_many(bfr, this, "");
+		html_wtr.Html_main().BldToBfrMany(bfr, this, "");
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		alt_wtr.Init_by_fmtr(repo_mgr, xfer_itm, html_wtr);
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
 		byte[] alt_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Full_txt());
 		byte[] xowa_title = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Page_url());
 		if (orig_ext.Id_is_thumbable_img())
-			html_wtr.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_url().To_http_file_bry(), file_size_bry, orig_ext.Mime_type()
+			html_wtr.Html_main_img().BldToBfrMany(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_url().To_http_file_bry(), file_size_bry, orig_ext.Mime_type()
 				, xfer_itm.Html_uid(), xfer_itm.Html_w(), xfer_itm.Html_h(), xfer_itm.Html_view_url().To_http_file_bry()
 				, alt_bry, xowa_title, alt_wtr);
 		else if (orig_ext.Id_is_video())	// NOTE: video must precede audio else File:***.ogg will not show thumbs
-			html_wtr.Html_main_vid().Bld_bfr_many(bfr, xfer_itm.Html_uid(), xfer_itm.Html_view_url().To_http_file_bry(), Atr_class_image, xowa_title
-				, xfer_itm.Html_view_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_h(), Bry_.Empty, xfer_itm.Html_orig_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_w());
+			html_wtr.Html_main_vid().BldToBfrMany(bfr, xfer_itm.Html_uid(), xfer_itm.Html_view_url().To_http_file_bry(), Atr_class_image, xowa_title
+				, xfer_itm.Html_view_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_h(), BryUtl.Empty, xfer_itm.Html_orig_url().To_http_file_bry(), xfer_itm.Html_w(), xfer_itm.Html_w());
 		else if (orig_ext.Id_is_audio())
-			html_wtr.Html_main_aud().Bld_bfr_many(bfr, xfer_itm.Html_orig_url().To_http_file_bry(), xowa_title, xfer_itm.Html_w(), xfer_itm.Html_w());
+			html_wtr.Html_main_aud().BldToBfrMany(bfr, xfer_itm.Html_orig_url().To_http_file_bry(), xowa_title, xfer_itm.Html_w(), xfer_itm.Html_w());
 	}
-	private static final byte[] Atr_class_image = Bry_.new_a7("image");
-	private static final String Str_commons_notice = String_.Concat_lines_nl_skip_last
+	private static final byte[] Atr_class_image = BryUtl.NewA7("image");
+	private static final String Str_commons_notice = StringUtl.ConcatLinesNlSkipLast
 	( "<table class='ambox ambox-delete' style=''>"
 	, "  <tr>"
 	, "    <td class='mbox-empty-cell'>"

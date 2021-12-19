@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xot_invk_wkr__transclude__tst {		
 	@Before		public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
@@ -48,7 +51,7 @@ public class Xot_invk_wkr__transclude__tst {
 	}
 	@Test public void Toc() {	// PURPOSE: __TOC__ in transcluded page should be ignored; PAGE:de.w:Game_of_Thrones DATE:2016-11-21
 		fxt.Init_page_create("TranscludedToc", "__TOC__\na");
-		fxt.Parser().Expand_tmpl(Bry_.new_u8("{{:TranscludedToc}}"));
-		Tfds.Eq(false, fxt.Page().Wtxt().Toc().Flag__toc());	// transcluded page is true, but current page should still be false
+		fxt.Parser().Expand_tmpl(BryUtl.NewU8("{{:TranscludedToc}}"));
+		GfoTstr.EqObj(false, fxt.Page().Wtxt().Toc().Flag__toc());	// transcluded page is true, but current page should still be false
 	}
 }

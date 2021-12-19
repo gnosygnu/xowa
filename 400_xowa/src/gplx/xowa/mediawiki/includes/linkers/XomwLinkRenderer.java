@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.linkers; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.linkers;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
@@ -137,8 +141,8 @@ public class XomwLinkRenderer {
 	* @param array $query
 	* @return String
 	*/
-	public void makeLink(Bry_bfr bfr,
-		XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+	public void makeLink(BryWtr bfr,
+	                     XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
 //			$title = Title::newFromLinkTarget($target);	// does db lookup?
 		if (target.isKnown()) {
 			this.makeKnownLink(bfr, target, text, extraAttribs, query);
@@ -239,8 +243,8 @@ public class XomwLinkRenderer {
 	* @param array $query
 	* @return String
 	*/
-	public void makePreloadedLink(Bry_bfr bfr,
-		XomwTitleOld target, byte[] text, byte[] classes, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+	public void makePreloadedLink(BryWtr bfr,
+	                              XomwTitleOld target, byte[] text, byte[] classes, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
 		// XO.MW.HOOK: this.runBeginHook --> 'HtmlPageLinkRendererBegin', 'LinkBegin'
 
 		target = this.normalizeTarget(target);
@@ -250,7 +254,7 @@ public class XomwLinkRenderer {
 		if (classes.length > 0)                 // XO.MW: do not bother adding if empty
 			attribs.Add(Gfh_atr_.Bry__class, classes);
 		byte[] prefixed_text = target.getPrefixedText();
-		if (prefixed_text != Bry_.Empty) {
+		if (prefixed_text != BryUtl.Empty) {
 			attribs.Add(Gfh_atr_.Bry__title, prefixed_text);
 		}
 
@@ -270,15 +274,15 @@ public class XomwLinkRenderer {
 	* @param array $query
 	* @return String
 	*/
-	public void makeKnownLink(Bry_bfr bfr,
-		XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
-		byte[] classes = Bry_.Empty;
+	public void makeKnownLink(BryWtr bfr,
+	                          XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+		byte[] classes = BryUtl.Empty;
 		if (target.isExternal()) {
 			classes = Bry__classes__extiw;
 		}
 		byte[] colour = this.getLinkClasses(target);
-		if (colour != Bry_.Empty) {
-			classes = Bry_.Add(classes, AsciiByte.SpaceBry, colour); // XO.MW: also does "$classes ? implode(' ', $classes) : '',"
+		if (colour != BryUtl.Empty) {
+			classes = BryUtl.Add(classes, AsciiByte.SpaceBry, colour); // XO.MW: also does "$classes ? implode(' ', $classes) : '',"
 		}
 
 		this.makePreloadedLink(bfr, 
@@ -296,14 +300,14 @@ public class XomwLinkRenderer {
 	* @param array $query
 	* @return String
 	*/
-	public void makeBrokenLink(Bry_bfr bfr,
-		XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+	public void makeBrokenLink(BryWtr bfr,
+	                           XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
 		// XO.MW.HOOK: Run legacy hook
 
 		// We don't want to include fragments for broken links, because they
 		// generally make no sense.
 		if (target.hasFragment()) {
-			target = target.createFragmentTarget(Bry_.Empty);
+			target = target.createFragmentTarget(BryUtl.Empty);
 		}
 		target = this.normalizeTarget(target);
 
@@ -343,7 +347,7 @@ public class XomwLinkRenderer {
 	* @param boolean $isKnown
 	* @return null|String
 	*/
-	private void buildAElement(Bry_bfr bfr, XomwTitleOld target, byte[] text, Xomw_atr_mgr attribs, boolean isKnown) {
+	private void buildAElement(BryWtr bfr, XomwTitleOld target, byte[] text, Xomw_atr_mgr attribs, boolean isKnown) {
 		// XO.MW.HOOK:HtmlPageLinkRendererEnd
 
 		byte[] htmlBry = text;
@@ -363,7 +367,7 @@ public class XomwLinkRenderer {
 		byte[] prefixed_text = target.getPrefixedText();
 		// If the target is just a fragment, with no title, we return the fragment
 		// text.  Otherwise, we return the title text itself.
-		if (prefixed_text == Bry_.Empty && target.hasFragment()) {
+		if (prefixed_text == BryUtl.Empty && target.hasFragment()) {
 			return target.getFragment();
 		}
 		return prefixed_text;
@@ -469,11 +473,11 @@ public class XomwLinkRenderer {
 //				return 'stub';
 //			}
 
-		return Bry_.Empty;
+		return BryUtl.Empty;
 	}
 	private static final byte[]
-	  Bry__classes__extiw = Bry_.new_a7("extiw")
-	, Bry__class__new = Bry_.new_a7("new")
-	, Bry__action__edit = Bry_.new_a7("edit")
+	  Bry__classes__extiw = BryUtl.NewA7("extiw")
+	, Bry__class__new = BryUtl.NewA7("new")
+	, Bry__action__edit = BryUtl.NewA7("edit")
 	;
 }

@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.core;
+import gplx.frameworks.invks.Gfo_invk;
 import gplx.gfui.draws.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public void Html_invk_src_(Gfo_evt_itm v) {}
 	public void Html_doc_html_load_by_mem(String s) {
 //			this.Core().ForeColor_set(plainText ? ColorAdp_.Black : ColorAdp_.Gray);
-		s = String_.Replace(s, "\r", "");
-		s = String_.Replace(s, "\n", "\r\n");
+		s = StringUtl.Replace(s, "\r", "");
+		s = StringUtl.Replace(s, "\n", "\r\n");
 		this.TextVal_set(s);
 		this.SelBgn_set(0);
 		html_doc_html_load_tid = Gxw_html_load_tid_.Tid_mem;
@@ -33,11 +38,11 @@ class Mem_html extends GxwTextMemo_lang implements Gxw_html {		public void Html_
 	public Object Html_js_eval_script_as_obj(String script) {return "";}
 	public String Html_js_send_json(String name, String data) {return "";}
 	String ExtractAtr(String key, String txt, int pos) {
-		int key_pos = String_.FindBwd(txt, key, pos);	if (key_pos == String_.Find_none) return null;
-		int q0 = String_.FindFwd(txt, "\"", key_pos);	if (q0 == String_.Find_none) return null;
-		int q1 = String_.FindFwd(txt, "\"", q0 + 1);	if (q1 == String_.Find_none) return null;
-		if (!Int_.Between(pos, q0, q1)) return null;	// current pos is not between nearest quotes
-		return String_.Mid(txt, q0 + 1, q1);
+		int key_pos = StringUtl.FindBwd(txt, key, pos);	if (key_pos == StringUtl.FindNone) return null;
+		int q0 = StringUtl.FindFwd(txt, "\"", key_pos);	if (q0 == StringUtl.FindNone) return null;
+		int q1 = StringUtl.FindFwd(txt, "\"", q0 + 1);	if (q1 == StringUtl.FindNone) return null;
+		if (!IntUtl.Between(pos, q0, q1)) return null;	// current pos is not between nearest quotes
+		return StringUtl.Mid(txt, q0 + 1, q1);
 	}
 	public void Html_js_enabled_(boolean v) {}
 	public String Html_js_eval_proc_as_str(String proc, Object... args) {return "not implemented by mem_html";}

@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.objects.New;
+import gplx.types.basics.lists.List_adp_base;
 public class GfmlObjList extends List_adp_base {
-	@gplx.New public GfmlObj Get_at(int idx) {return (GfmlObj)Get_at_base(idx);}
+	@New public GfmlObj GetAt(int idx) {return (GfmlObj)Get_at_base(idx);}
 	public void Add(GfmlObj tkn) {Add_base(tkn);}
 	public void Add_at(GfmlObj tkn, int idx) {super.AddAt_base(idx, tkn);}
 	public void Del(GfmlObj tkn) {Del_base(tkn);}

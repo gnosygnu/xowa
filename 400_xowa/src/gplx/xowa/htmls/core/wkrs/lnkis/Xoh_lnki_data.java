@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.lnkis;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
 import gplx.xowa.wikis.nss.*;
@@ -25,7 +28,7 @@ public class Xoh_lnki_data {
 	private byte[] src;
 	private int href_ns_id; private byte[] href_ns_name; private int href_ns_name_len;
 	private byte[] capt_src; private int capt_bgn, capt_end;
-	private final Bry_rdr rdr = new Bry_rdr();
+	private final BryRdr rdr = new BryRdr();
 	public int			Src_bgn() {return src_bgn;} private int src_bgn;
 	public int			Src_end() {return src_end;} private int src_end;
 	public boolean			Capt_has_ns() {return capt_has_ns;} private boolean capt_has_ns;
@@ -58,7 +61,7 @@ public class Xoh_lnki_data {
 	public boolean Parse1(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag anch_head) {
 		Init(src);
 		this.src_bgn = anch_head.Src_bgn();
-		rdr.Init_by_wkr(tag_rdr.Err_wkr(), "lnki", src_bgn, src.length);
+		rdr.InitByWkr(tag_rdr.Err_wkr(), "lnki", src_bgn, src.length);
 		Gfh_atr title_atr = anch_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__title);
 		if (!Parse_href(hctx, anch_head)) return false;
 		Parse_cls(anch_head);
@@ -68,7 +71,7 @@ public class Xoh_lnki_data {
 		return true;
 	}
 	private boolean Parse_href(Xoh_hdoc_ctx hctx, Gfh_tag anch_head) {
-		href_itm.Parse(rdr.Err_wkr(), hctx, src, anch_head);
+		href_itm.Parse(rdr.ErrWkr(), hctx, src, anch_head);
 		this.href_bgn = href_itm.Ttl_bgn(); this.href_end = href_itm.Ttl_end();
 		switch (href_itm.Tid()) {
 			case Xoh_anch_href_data.Tid__wiki: case Xoh_anch_href_data.Tid__site:
@@ -78,8 +81,8 @@ public class Xoh_lnki_data {
 				this.href_bgn = 0;
 				this.href_end = href_src.length;
 				if (href_ns_id != Xow_ns_.Tid__main) {										// not main; try to remove template name;				
-					int colon_pos = Bry_find_.Find_fwd(href_src, AsciiByte.Colon, href_bgn, href_end);
-					this.href_ns_name = Xoa_ttl.Replace_unders(Bry_.Mid(href_src, href_bgn, colon_pos + 1));		// EX: 11="Template talk:"
+					int colon_pos = BryFind.FindFwd(href_src, AsciiByte.Colon, href_bgn, href_end);
+					this.href_ns_name = Xoa_ttl.Replace_unders(BryLni.Mid(href_src, href_bgn, colon_pos + 1));		// EX: 11="Template talk:"
 					this.href_ns_name_len = href_ns_name.length;
 				}
 				break;
@@ -87,7 +90,7 @@ public class Xoh_lnki_data {
 		return true;
 	}
 	private void Parse_cls(Gfh_tag anch_head) {
-		byte[] cls_bry = anch_head.Atrs__get_as_bry(Gfh_atr_.Bry__class); if (Bry_.Len_eq_0(cls_bry)) return;
+		byte[] cls_bry = anch_head.Atrs__get_as_bry(Gfh_atr_.Bry__class); if (BryUtl.IsNullOrEmpty(cls_bry)) return;
 		this.cls_tid = Xoh_anch_cls_.Trie.Match_byte_or(cls_bry, 0, cls_bry.length, Xoh_anch_cls_.Tid__unknown);
 	}
 	private void Parse_capt(Gfh_tag_rdr tag_rdr, Gfh_tag anch_head) {
@@ -100,7 +103,7 @@ public class Xoh_lnki_data {
 		if (href_ns_id != Xow_ns_.Tid__main) {										// not main; try to remove template name;				
 			int capt_bgn_wo_ns = capt_bgn + href_ns_name_len;
 			href_bgn += href_ns_name_len;											// skip ns_name for href; EX: "Help:A" -> "A"; "Help" will be saved as encoded number
-			if (Bry_.Match(capt_src, capt_bgn, capt_bgn_wo_ns, href_ns_name)) { 	// capt matches ns_name; EX: <a href='/wiki/Help:A'>Help:A</a> -> "Help:A" matches "Help:"
+			if (BryLni.Eq(capt_src, capt_bgn, capt_bgn_wo_ns, href_ns_name)) { 	// capt matches ns_name; EX: <a href='/wiki/Help:A'>Help:A</a> -> "Help:A" matches "Help:"
 				capt_bgn = capt_bgn_wo_ns;											// skip ns; "Help:"
 				capt_has_ns = true;
 			}
@@ -134,7 +137,7 @@ public class Xoh_lnki_data {
 		title_bgn = title_atr.Val_bgn(); title_end = title_atr.Val_end();
 		if (href_ns_name != null) {	// ns_name exists
 			int title_bgn_wo_ns = title_bgn + href_ns_name_len;
-			if (Bry_.Match(src, title_bgn, title_bgn_wo_ns, href_ns_name))			// title matches href_ns;
+			if (BryLni.Eq(src, title_bgn, title_bgn_wo_ns, href_ns_name))			// title matches href_ns;
 				title_bgn = title_bgn_wo_ns;										// skip ns; "Help:"
 			else
 				title_missing_ns = true;
@@ -142,9 +145,9 @@ public class Xoh_lnki_data {
 		if (title_end == -1)
 			title_tid = Title__missing;
 		else {
-			if		(Bry_.Match(src, title_bgn, title_end, href_src, href_bgn, href_end) && !title_missing_ns)	// NOTE: do not mark title=href if href omitted title; PAGE:en.b:Wikibooks:WikiProject; DATE:2016-01-20
+			if		(BryLni.Eq(src, title_bgn, title_end, href_src, href_bgn, href_end) && !title_missing_ns)	// NOTE: do not mark title=href if href omitted title; PAGE:en.b:Wikibooks:WikiProject; DATE:2016-01-20
 				title_tid = Title__href;
-			else if (Bry_.Match(src, title_bgn, title_end, src, capt_bgn, capt_end))
+			else if (BryLni.Eq(src, title_bgn, title_end, src, capt_bgn, capt_end))
 				title_tid = Title__capt;
 			else {
 				title_tid = Title__diff;

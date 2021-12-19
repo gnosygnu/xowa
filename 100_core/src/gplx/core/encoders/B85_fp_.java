@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.encoders; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.core.encoders;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class B85_fp_ {
 	public static byte[] To_bry(double v) {
-		String str = Double_.To_str(v);
-		byte[] bry = Bry_.new_a7(str); int len = bry.length;
+		String str = DoubleUtl.ToStr(v);
+		byte[] bry = BryUtl.NewA7(str); int len = bry.length;
 		int num_len = len; boolean neg = false;
 		int bgn = 0; int dot = -1;
 		if (bry[0] == AsciiByte.Dash) {neg = true; bgn = 1; --num_len;}

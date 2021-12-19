@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.history;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoa_url_;
@@ -78,7 +78,7 @@ public class Xog_history_mgr {
 		return wiki.Data_mgr().Load_page_by_ttl(ttl);
 	}
 	private static byte[] Build_page_key(Xoae_page page) {return Build_page_key(page.Wiki().Domain_bry(), page.Ttl().Full_url(), page.Url().Qargs_mgr().To_bry());}
-	private static byte[] Build_page_key(byte[] wiki_key, byte[] page_key, byte[] args_key) {return Bry_.Add_w_dlm(AsciiByte.Pipe, wiki_key, page_key, args_key);}
+	private static byte[] Build_page_key(byte[] wiki_key, byte[] page_key, byte[] args_key) {return BryUtl.AddWithDlm(AsciiByte.Pipe, wiki_key, page_key, args_key);}
 	public static Xog_history_itm new_(Xoae_page pg) {
 		byte[] wiki = pg.Wiki().Domain_bry();
 		byte[] page = pg.Ttl().Full_url();		// get page_name only (no anchor; no query args)

@@ -13,12 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.core.consoles.*; import gplx.core.envs.*;
-import gplx.xowa.apps.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.langs.bldrs.*;
-import gplx.xowa.bldrs.wkrs.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.addons.bldrs.app_cfgs.*;
+package gplx.xowa.bldrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.core.consoles.Console_adp__sys;
+import gplx.core.envs.Env_;
+import gplx.core.envs.SystemUtl;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser;
+import gplx.libs.ios.IoConsts;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.app_cfgs.Xob_wiki_cfg_bldr;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.xmls.Xob_import_marker;
+import gplx.xowa.bldrs.xmls.Xob_xml_parser;
 public class Xob_bldr implements Gfo_invk {
 	private boolean pause_at_end = false; private long prv_prog_time; private Xob_xml_parser dump_parser;
 	public Xob_bldr(Xoae_app app) {
@@ -31,17 +50,17 @@ public class Xob_bldr implements Gfo_invk {
 	public Xob_cmd_regy			Cmd_regy() {return cmd_regy;} private final Xob_cmd_regy cmd_regy = new Xob_cmd_regy();
 	public Xob_cmd_mgr			Cmd_mgr() {return cmd_mgr;} private final Xob_cmd_mgr cmd_mgr;
 	public Gfo_usr_dlg			Usr_dlg() {return app.Usr_dlg();}
-	public int					Sort_mem_len() {return sort_mem_len;} public Xob_bldr Sort_mem_len_(int v) {sort_mem_len = v; return this;} private int sort_mem_len = 16 * Io_mgr.Len_mb;
-	public int					Dump_fil_len() {return dump_fil_len;} public Xob_bldr Dump_fil_len_(int v) {dump_fil_len = v; return this;} private int dump_fil_len =  1 * Io_mgr.Len_mb;
-	public int					Make_fil_len() {return make_fil_len;} public Xob_bldr Make_fil_len_(int v) {make_fil_len = v; return this;} private int make_fil_len = 64 * Io_mgr.Len_kb;
+	public int					Sort_mem_len() {return sort_mem_len;} public Xob_bldr Sort_mem_len_(int v) {sort_mem_len = v; return this;} private int sort_mem_len = 16 * IoConsts.LenMB;
+	public int					Dump_fil_len() {return dump_fil_len;} public Xob_bldr Dump_fil_len_(int v) {dump_fil_len = v; return this;} private int dump_fil_len =  1 * IoConsts.LenMB;
+	public int					Make_fil_len() {return make_fil_len;} public Xob_bldr Make_fil_len_(int v) {make_fil_len = v; return this;} private int make_fil_len = 64 * IoConsts.LenKB;
 	public Xob_xml_parser		Dump_parser() {if (dump_parser == null) this.dump_parser = new Xob_xml_parser(); return dump_parser;}
 	public Xob_import_marker	Import_marker() {return import_marker;} private Xob_import_marker import_marker;
 	public Xob_wiki_cfg_bldr	Wiki_cfg_bldr() {return wiki_cfg_bldr;} private Xob_wiki_cfg_bldr wiki_cfg_bldr;
 	public void					Pause_at_end_(boolean v) {this.pause_at_end = v;}
 	public void					Print_prog_msg(long cur, long end, int pct_idx, String fmt, Object... ary) {
-		long now = System_.Ticks(); if (now - prv_prog_time < 100) return;
+		long now = SystemUtl.Ticks(); if (now - prv_prog_time < 100) return;
 		this.prv_prog_time = now;
-		if (pct_idx > -1) ary[pct_idx] = Decimal_adp_.CalcPctStr(cur, end, "00.00");
+		if (pct_idx > -1) ary[pct_idx] = GfoDecimalUtl.CalcPctStr(cur, end, "00.00");
 		app.Usr_dlg().Prog_many("", "", fmt, ary);
 	}
 	public Xob_bldr Exec_json(String script) {
@@ -54,8 +73,8 @@ public class Xob_bldr implements Gfo_invk {
 			for (int i = 0; i < cmds_len; ++i) {
 				Json_nde cmd = cmds.Get_at_as_nde(i);
 				byte[] key = cmd.Get_bry_or_null("key");
-				Xob_cmd prime = cmd_regy.Get_or_null(String_.new_u8(key));
-				if (prime == null) throw Err_.new_("bldr", "bldr.cmd does not exists: cmd={0}", key);
+				Xob_cmd prime = cmd_regy.Get_or_null(StringUtl.NewU8(key));
+				if (prime == null) throw ErrUtl.NewArgs("bldr.cmd does not exists: cmd={0}", key);
 				byte[] wiki_key = cmd.Get_bry_or_null("wiki");
 				Xowe_wiki wiki = wiki_key == null ? app.Usere().Wiki() : app.Wiki_mgr().Get_by_or_make(wiki_key);
 				Xob_cmd clone = prime.Cmd_clone(this, wiki);
@@ -63,32 +82,32 @@ public class Xob_bldr implements Gfo_invk {
 				for (int j = 0; j < atrs_len; ++j) {
 					Json_kv atr_kv = cmd.Get_at_as_kv(j);
 					String atr_key = atr_kv.Key_as_str();
-					if	(	String_.Eq(atr_key, "key")
-						||	String_.Eq(atr_key, "wiki"))	continue;
+					if	(	StringUtl.Eq(atr_key, "key")
+						||	StringUtl.Eq(atr_key, "wiki"))	continue;
 					byte[] atr_val = atr_kv.Val_as_bry();
-					Gfo_invk_.Invk_by_val(clone, atr_key + Gfo_invk_.Mutator_suffix, String_.new_u8(atr_val));
+					Gfo_invk_.Invk_by_val(clone, atr_key + Gfo_invk_.Mutator_suffix, StringUtl.NewU8(atr_val));
 				}
 				cmd_mgr.Add(clone);
 			}
 			gplx.core.threads.Thread_adp_.Start_by_key("bldr_by_json", this, Invk_run_by_kit);
 		} catch (Exception e) {
-			app.Gui_mgr().Kit().Ask_ok("", "", "error: ~{0}", Err_.Message_gplx_log(e));
+			app.Gui_mgr().Kit().Ask_ok("", "", "error: ~{0}", ErrUtl.ToStrLog(e));
 		}
 		return this;
 	}
 	private void Run_by_kit() {	// same as Run, but shows exception; don't want to change backward compatibility on Run
 		try {this.Run();}
 		catch (Exception e) {
-			String log_msg = Err_.Message_gplx_log(e);
+			String log_msg = ErrUtl.ToStrLog(e);
 			Xoa_app_.Usr_dlg().Log_many("", "", log_msg);
-			app.Gui_mgr().Kit().Ask_ok("", "", "error: ~{0}", Err_.Message_gplx_full(e));
+			app.Gui_mgr().Kit().Ask_ok("", "", "error: ~{0}", ErrUtl.ToStrFull(e));
 		}
 	}
 	public void Run() {
 		try {
 			app.Bldr__running_(true);
 			app.Launch();	// HACK: bldr will be called by a gfs file which embeds "bldr.run" inside it; need to call Launch though before Run; DATE:2013-03-23
-			long time_bgn = System_.Ticks();
+			long time_bgn = SystemUtl.Ticks();
 			int cmd_mgr_len = cmd_mgr.Len();
 			for (int i = 0; i < cmd_mgr_len; i++) {
 				Xob_cmd cmd = cmd_mgr.Get_at(i);
@@ -98,28 +117,28 @@ public class Xob_bldr implements Gfo_invk {
 			for (int i = 0; i < cmd_mgr_len; i++) {
 				Xob_cmd cmd = cmd_mgr.Get_at(i);
 				app.Usr_dlg().Note_many("", "", "cmd bgn: ~{0}", cmd.Cmd_key());
-				long time_cur = System_.Ticks();
+				long time_cur = SystemUtl.Ticks();
 				try {
 					cmd.Cmd_bgn(this);
 					cmd.Cmd_run();
 					cmd.Cmd_end();
 				} catch (Exception e) {
-					throw Err_.new_exc(e, "bldr", "unknown error", "key", cmd.Cmd_key());
+					throw ErrUtl.NewArgs(e, "unknown error", "key", cmd.Cmd_key());
 				}
-				System_.Garbage_collect();
-				app.Usr_dlg().Note_many("", "", "cmd end: ~{0} ~{1}", cmd.Cmd_key(), Time_span_.from_(time_cur).XtoStrUiAbbrv());
+				SystemUtl.Garbage_collect();
+				app.Usr_dlg().Note_many("", "", "cmd end: ~{0} ~{1}", cmd.Cmd_key(), SystemUtl.TicksFrom(time_cur).ToStrUiAbrv());
 			}
 			for (int i = 0; i < cmd_mgr_len; i++) {
 				Xob_cmd cmd = cmd_mgr.Get_at(i);
 				cmd.Cmd_term();
 			}
-			app.Usr_dlg().Note_many("", "", "bldr done: ~{0}", Time_span_.from_(time_bgn).XtoStrUiAbbrv());
+			app.Usr_dlg().Note_many("", "", "bldr done: ~{0}", SystemUtl.TicksFrom(time_bgn).ToStrUiAbrv());
 			cmd_mgr.Clear();
 			if (pause_at_end && !Env_.Mode_testing()) {Console_adp__sys.Instance.Read_line("press enter to continue");}
 		}
 		catch (Exception e) {
 			app.Bldr__running_(false);
-			throw Err_.new_exc(e, "bldr", "unknown error");
+			throw ErrUtl.NewArgs(e, "unknown error");
 		}
 	}
 	private void Cancel() {

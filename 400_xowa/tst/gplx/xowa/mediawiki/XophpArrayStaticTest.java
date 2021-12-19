@@ -14,12 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
-
-import gplx.objects.primitives.BoolUtl;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.String_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import org.junit.Test;
 
 public class XophpArrayStaticTest {
@@ -260,7 +259,7 @@ public class XophpArrayStaticTest {
 	}
 	@Test public void implode() {
 		XophpArray orig = fxt.Make().Add_many("a", "b", "c");
-		Gftest.Eq__str
+		GfoTstr.Eq
 			( "a b c"
 			, XophpArray.implode(" ", orig)
 			);
@@ -270,19 +269,19 @@ public class XophpArrayStaticTest {
 		XophpArray array;
 		// Example #1
 		array = XophpArray.New("Mac", "NT", "Irix", "Linux");
-		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array("Irix", array));
-		Gftest.Eq__bool(BoolUtl.N, XophpArray.in_array("mac" , array));
+		GfoTstr.Eq(BoolUtl.Y, XophpArray.in_array("Irix", array));
+		GfoTstr.Eq(BoolUtl.N, XophpArray.in_array("mac" , array));
 
 		// Example #2
 		array = XophpArray.New(12.4d, 1.13d);
-		Gftest.Eq__bool(BoolUtl.N, XophpArray.in_array("12.4", array, true));
-		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array( 1.13d, array, true));
+		GfoTstr.Eq(BoolUtl.N, XophpArray.in_array("12.4", array, true));
+		GfoTstr.Eq(BoolUtl.Y, XophpArray.in_array( 1.13d, array, true));
 
 		// Example #3
 		array = XophpArray.New(XophpArray.New('p', 'h'), XophpArray.New('p', 'r'), 'o');
-		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array(XophpArray.New('p', 'h'), array));
-		Gftest.Eq__bool(BoolUtl.N, XophpArray.in_array(XophpArray.New('f', 'i'), array));
-		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array('o', array));
+		GfoTstr.Eq(BoolUtl.Y, XophpArray.in_array(XophpArray.New('p', 'h'), array));
+		GfoTstr.Eq(BoolUtl.N, XophpArray.in_array(XophpArray.New('f', 'i'), array));
+		GfoTstr.Eq(BoolUtl.Y, XophpArray.in_array('o', array));
 	}
 	@Test public void array_shift() {
 		XophpArray array;
@@ -292,7 +291,7 @@ public class XophpArrayStaticTest {
 		array = XophpArray.New("a", "b");
 		shifted = (String)XophpArray.array_shift(array);
 
-		Gftest.Eq__str("a", shifted);
+		GfoTstr.Eq("a", shifted);
 		fxt.Test__eq
 		( XophpArray.New().Add(0, "b")
 		, array
@@ -302,7 +301,7 @@ public class XophpArrayStaticTest {
 		array = XophpArray.New().Add("a", "a").Add(2, "b").Add(5, "c");
 		shifted = (String)XophpArray.array_shift(array);
 
-		Gftest.Eq__str("a", shifted);
+		GfoTstr.Eq("a", shifted);
 		fxt.Test__eq
 		( XophpArray.New().Add(0, "b").Add(1, "c")
 		, array
@@ -312,7 +311,7 @@ public class XophpArrayStaticTest {
 		array = XophpArray.New();
 		shifted = (String)XophpArray.array_shift(array);
 
-		Gftest.Eq__bool_y(shifted == null);
+		GfoTstr.EqBoolY(shifted == null);
 		fxt.Test__eq
 		( XophpArray.New()
 		, array
@@ -322,15 +321,15 @@ public class XophpArrayStaticTest {
 		array = null;
 		shifted = (String)XophpArray.array_shift(array);
 
-		Gftest.Eq__bool_y(shifted == null);
-		Gftest.Eq__bool_y(array == null);
+		GfoTstr.EqBoolY(shifted == null);
+		GfoTstr.EqBoolY(array == null);
 
 		// PHP examples
 		// Example #1
 		array = XophpArray.New("orange", "banana", "apple", "strawberry");
 		shifted = (String)XophpArray.array_shift(array);
 
-		Gftest.Eq__str("orange", shifted);
+		GfoTstr.Eq("orange", shifted);
 		fxt.Test__eq
 		( XophpArray.New().Add(0, "banana").Add(1, "apple").Add(2, "strawberry")
 		, array
@@ -378,16 +377,16 @@ public class XophpArrayStaticTest {
 		array = XophpArray.New("step one", "step two", "step three", "step four");
 
 		// by default, the pointer is on the first element
-		Gftest.Eq__str("step one", (String)XophpArray.current(array));
+		GfoTstr.Eq("step one", (String)XophpArray.current(array));
 
 		// skip two steps
 		XophpArray.next(array);
 		XophpArray.next(array);
-		Gftest.Eq__str("step three", (String)XophpArray.current(array));
+		GfoTstr.Eq("step three", (String)XophpArray.current(array));
 
 		// reset pointer, start again on step one
 		XophpArray.reset(array);
-		Gftest.Eq__str("step one", (String)XophpArray.current(array));
+		GfoTstr.Eq("step one", (String)XophpArray.current(array));
 	}
 	@Test public void array_diff() {
 		// test To_str
@@ -447,7 +446,7 @@ public class XophpArrayStaticTest {
 class XophpArray_fxt {
 	public XophpArray Make() {return new XophpArray();}
 	public void Test__eq(XophpArray expd, XophpArray actl) {
-		Gftest.Eq__str(expd.To_str(), actl.To_str());
+		GfoTstr.Eq(expd.To_str(), actl.To_str());
 	}
 }
 class XophpArrayTestCallbackOwner implements XophpCallbackOwner {
@@ -455,15 +454,15 @@ class XophpArrayTestCallbackOwner implements XophpCallbackOwner {
 	public Object Call(String method, Object... args) {
 		switch (method) {
 			case "array_filter_even":
-				return Int_.Cast(args[0]) % 2 == 0;
+				return IntUtl.Cast(args[0]) % 2 == 0;
 			case "array_filter_odd":
-				return Int_.Cast(args[0]) % 2 == 1;
+				return IntUtl.Cast(args[0]) % 2 == 1;
 			case "array_filter_key":
-				return String_.cast(args[0]).equals("b");
+				return StringUtl.Cast(args[0]).equals("b");
 			case "array_filter_both":
-				return String_.cast(args[0]).equals("b") || Int_.Cast(args[1]) == 4;
+				return StringUtl.Cast(args[0]).equals("b") || IntUtl.Cast(args[1]) == 4;
 			default:
-				throw Err_.new_unhandled_default(method);
+				throw ErrUtl.NewUnhandled(method);
 		}
 	}
 }

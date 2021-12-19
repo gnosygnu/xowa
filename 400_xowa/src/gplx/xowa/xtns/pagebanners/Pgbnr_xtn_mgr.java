@@ -15,10 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pagebanners;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Int_ary_;
-import gplx.core.brys.Bfr_arg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
 import gplx.langs.mustaches.Mustache_tkn_itm;
 import gplx.langs.mustaches.Mustache_tkn_parser;
 import gplx.xowa.Xoae_app;
@@ -32,8 +33,8 @@ import gplx.xowa.wikis.nss.Xow_ns_;
 import gplx.xowa.xtns.Xox_mgr;
 import gplx.xowa.xtns.Xox_mgr_base;
 
-public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("pagebanner");
+public class Pgbnr_xtn_mgr extends Xox_mgr_base implements BryBfrArg {
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = BryUtl.NewA7("pagebanner");
 	@Override public Xox_mgr Xtn_clone_new() {return new Pgbnr_xtn_mgr();}
 	public Pgbnr_cfg Cfg() {return cfg;} private Pgbnr_cfg cfg;
 	public Mustache_tkn_itm Template_root() {return template_root;} private Mustache_tkn_itm template_root;
@@ -41,17 +42,17 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		// load config; TODO_OLD: load by file
 		boolean enabled = false, enable_heading_override = true, enable_default_banner = false;
-		int[] ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__main); // default list; overriden by home/ wikivoyage below
+		int[] ns_ary = IntAryUtl.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__main); // default list; overriden by home/ wikivoyage below
 		int[] standard_sizes = new int[] {640, 1280, 2560};
-		int dflt_img_wdata_prop = 948; byte[] dflt_img_title = Bry_.new_a7("Pagebanner_default.jpg");	// www.wikidata.org/wiki/Property:P948
+		int dflt_img_wdata_prop = 948; byte[] dflt_img_title = BryUtl.NewA7("Pagebanner_default.jpg");	// www.wikidata.org/wiki/Property:P948
 		switch (wiki.Domain_tid()) {
 			case Xow_domain_tid_.Tid__home:
-				ns_ary = Int_ary_.New(Xow_ns_.Tid__main);
+				ns_ary = IntAryUtl.New(Xow_ns_.Tid__main);
 				enabled = true;
 				break;
 			case Xow_domain_tid_.Tid__wikivoyage:
 				// 2020-08-16|ISSUE#:748|include project for en.v; PAGE:en.v:Wikivoyage:Past_events/World_Cup_2010
-				ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__main, Xow_ns_.Tid__project);
+				ns_ary = IntAryUtl.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__main, Xow_ns_.Tid__project);
 				switch (wiki.Lang().Lang_id()) {
 					case Xol_lang_stub_.Id_en:
 					case Xol_lang_stub_.Id_fr:
@@ -59,11 +60,11 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 						enabled = true;
 						break;
 					case Xol_lang_stub_.Id_ru:
-						ns_ary = Int_ary_.New(0, 1, 10, 11, 12, 13, 14, 15, 2, 2300, 2301, 2302, 2303, 2600, 3, 4, 5, 6, 7, 8, 828, 829, 9);
+						ns_ary = IntAryUtl.New(0, 1, 10, 11, 12, 13, 14, 15, 2, 2300, 2301, 2302, 2303, 2600, 3, 4, 5, 6, 7, 8, 828, 829, 9);
 						enabled = true;
 						break;
 					case Xol_lang_stub_.Id_uk:
-						ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__project);
+						ns_ary = IntAryUtl.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__project);
 						enabled = true;
 						break;
 				}
@@ -72,7 +73,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 				switch (wiki.Lang().Lang_id()) {
 					case Xol_lang_stub_.Id_ca:
 						// enabled = enable_default_banner = true;
-						ns_ary = Int_ary_.New(102, Xow_ns_.Tid__user);
+						ns_ary = IntAryUtl.New(102, Xow_ns_.Tid__user);
 						break;
 					 case Xol_lang_stub_.Id_en:
 						// enabled = enable_default_banner = true;
@@ -91,17 +92,17 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 		Mustache_tkn_parser parser = new Mustache_tkn_parser(wiki.Appe().Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "xtns", "WikidataPageBanner", "templates"));
 		template_root = parser.Parse("banner", Template_dflt);
 	}
-	public Bfr_arg Write_html(Xoae_page wpg, Xop_ctx pctx, Xoh_wtr_ctx hctx) {
+	public BryBfrArg Write_html(Xoae_page wpg, Xop_ctx pctx, Xoh_wtr_ctx hctx) {
 		this.wpg = wpg; this.pctx = pctx; this.hctx = hctx;
 		return this;
 	}	private Xoae_page wpg; private Xop_ctx pctx; private Xoh_wtr_ctx hctx;
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		Pgbnr_itm itm = wpg.Html_data().Xtn_pgbnr(); if (itm == null) return;
 		Pgbnr_func.Add_banner(bfr, wpg, pctx, hctx, itm);
 	}
 
-	public static final byte[] Bry__cls__wpb_banner_image = Bry_.new_a7("wpb-banner-image");
-	private static final byte[] Template_dflt = Bry_.New_u8_nl_apos
+	public static final byte[] Bry__cls__wpb_banner_image = BryUtl.NewA7("wpb-banner-image");
+	private static final byte[] Template_dflt = BryUtlByWtr.NewU8NlSwapApos
 	( "<div class='ext-wpb-pagebanner pre-content'>"
 	, " <div class=\"{{#isPanorama}}wpb-banner-image-panorama {{/isPanorama}}wpb-topbanner{{extraClass}}\">"
 	, "		{{#isHeadingOverrideEnabled}}<h1 class='wpb-name'>{{title}}</h1>{{/isHeadingOverrideEnabled}}"

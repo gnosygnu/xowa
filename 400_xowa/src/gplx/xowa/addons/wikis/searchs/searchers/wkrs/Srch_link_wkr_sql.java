@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.searchers.wkrs;
-import gplx.Bry_;
-import gplx.Bry_fmt;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.String_;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.stmts.Db_stmt_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.addons.wikis.searchs.dbs.Srch_link_tbl;
 import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_tbl;
 import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_ctx;
@@ -49,13 +49,13 @@ public class Srch_link_wkr_sql {
 		}
 	}
 	public String Write(Srch_search_ctx ctx, Db_attach_mgr attach_mgr) {
-		String sql = stmt_mgr.Bfr().To_str_and_clear();
+		String sql = stmt_mgr.Bfr().ToStrAndClear();
 		try {
 			Gfo_usr_dlg_.Instance.Log_many("", "", "search.resolving; phrase=~{0} score_bgn=~{1} score_end=~{2}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), ctx.Score_rng.Score_end());
 			sql = attach_mgr.Resolve_sql(sql);
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Log_many("", "", "search.resolving err; phrase=~{0} score_bgn=~{1} score_end=~{2} err=~{3}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), ctx.Score_rng.Score_end(), Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "search.resolving err; phrase=~{0} score_bgn=~{1} score_end=~{2} err=~{3}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), ctx.Score_rng.Score_end(), ErrUtl.ToStrLog(e));
 		}
 		return sql;
 	}
@@ -81,13 +81,13 @@ public class Srch_link_wkr_sql {
 					Srch_crt_itm sub = subs[i];
 					if (sub.Tid == Srch_crt_itm.Tid__not) continue;	// do not build sql for NOT itms; EX: a + (b, c) + -d
 					if (i != 0)
-						stmt_mgr.Bfr().Add_str_a7(node.Tid == Srch_crt_itm.Tid__and ? "INTERSECT\n" : "UNION\n");
+						stmt_mgr.Bfr().AddStrA7(node.Tid == Srch_crt_itm.Tid__and ? "INTERSECT\n" : "UNION\n");
 					Bld_where(ctx, sub);
 				}
 				break;
 			case Srch_crt_itm.Tid__not:			break;		// never check database for NOT node
 			case Srch_crt_itm.Tid__invalid:		break;		// should not happen
-			default:							throw Err_.new_unhandled_default(node.Tid);
+			default:							throw ErrUtl.NewUnhandled(node.Tid);
 		}
 	}
 	private void Bld_leaf(Srch_search_ctx ctx, Srch_crt_itm node) {
@@ -124,27 +124,27 @@ public class Srch_link_wkr_sql {
 		stmt_mgr.Write_fmt(Fmt__link);
 	}
 	private static final byte[]
-	  Bry__page__bgn = Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	  Bry__page__bgn = BryUtl.NewA7(StringUtl.ConcatLinesNlSkipLast
 	( "SELECT  p.page_id, p.page_namespace, p.page_title, p.page_len, p.page_score, p.page_redirect_id"
 	, "FROM    <page_db>page p"
 	, "WHERE   p.page_id IN"
 	, "("
 	, ""
 	))
-	, Bry__page__end = Bry_.new_a7(")\n")
-	, Bry__link__bgn = Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	, Bry__page__end = BryUtl.NewA7(")\n")
+	, Bry__link__bgn = BryUtl.NewA7(StringUtl.ConcatLinesNlSkipLast
 	( "SELECT  l.page_id"
 	, "FROM    search_link l INDEXED BY search_link__word_id__link_score"
 	, "WHERE   "
 	))
 	;
 	private static final String
-	  Str__link__end = String_.Concat_lines_nl_skip_last
+	  Str__link__end = StringUtl.ConcatLinesNlSkipLast
 	( "AND     l.link_score >= ~{score_bgn}"
 	, "AND     l.link_score <  ~{score_end}"
 	, ""
 	)
-	, Str__word__text__bgn	= String_.Concat_lines_nl_skip_last
+	, Str__word__text__bgn	= StringUtl.ConcatLinesNlSkipLast
 	( "l.word_id IN"
 	, "("
 	, "SELECT  w~{uid}.word_id"
@@ -153,16 +153,16 @@ public class Srch_link_wkr_sql {
 	)
 	, Str__word__text__rng	= "WHERE   w~{uid}.word_text >= ~{word_bgn} AND w~{uid}.word_text < ~{word_end}\n"
 	, Str__word__text__like	= "AND     w~{uid}.word_text LIKE ~{word_like} ESCAPE '|'\n"
-	, Str__word__text__mnx = String_.Concat_lines_nl_skip_last
+	, Str__word__text__mnx = StringUtl.ConcatLinesNlSkipLast
 	( "~{and}  w~{uid}.link_score_max >= ~{score_bgn}"
 	, "AND     w~{uid}.link_score_min <  ~{score_end}"
 	, ""
 	);
-	private static final Bry_fmt
-	  Fmt__link				= Bry_fmt.Auto(Str__link__end)
-	, Fmt__word_id			= Bry_fmt.Auto("l.word_id = ~{word_uid}\n")
-	, Fmt__word_text__rng	= Bry_fmt.New(Str__word__text__bgn + Str__word__text__rng + Str__word__text__mnx  + ")\n", "uid", "and", "index", "word_bgn", "word_end", "score_bgn", "score_end")
-	, Fmt__word_text__like	= Bry_fmt.New(Str__word__text__bgn + Str__word__text__mnx + Str__word__text__like + ")\n", "uid", "and", "index", "score_bgn", "score_end", "word_like")
+	private static final BryFmt
+	  Fmt__link				= BryFmt.Auto(Str__link__end)
+	, Fmt__word_id			= BryFmt.Auto("l.word_id = ~{word_uid}\n")
+	, Fmt__word_text__rng	= BryFmt.New(Str__word__text__bgn + Str__word__text__rng + Str__word__text__mnx  + ")\n", "uid", "and", "index", "word_bgn", "word_end", "score_bgn", "score_end")
+	, Fmt__word_text__like	= BryFmt.New(Str__word__text__bgn + Str__word__text__mnx + Str__word__text__like + ")\n", "uid", "and", "index", "score_bgn", "score_end", "word_like")
 	;
 	public static final byte Like_escape_byte = AsciiByte.Pipe;
 }

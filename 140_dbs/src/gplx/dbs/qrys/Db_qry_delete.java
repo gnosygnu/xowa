@@ -21,7 +21,7 @@ import gplx.dbs.Db_crt_;
 import gplx.dbs.Db_qry;
 import gplx.dbs.Db_qry_;
 import gplx.dbs.sqls.SqlQryWtr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Db_qry_delete implements Db_qry {
 	Db_qry_delete(String base_table, Criteria where) {this.base_table = base_table; this.where = where;}
 	public int			Tid()							{return Db_qry_.Tid_delete;}

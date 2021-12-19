@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.htmls;
+import gplx.types.basics.arrays.IntAryUtl;
 class Mwh_doc_mgr {
 	private final int data_max_orig;
 	public Mwh_doc_mgr(int max) {
@@ -38,7 +39,7 @@ class Mwh_doc_mgr {
 		if (data_idx == data_max) {
 			int new_data_max = data_max == 0 ? Idx__mult : data_max * 2;
 			int[] new_data_ary = new int[new_data_max];
-			Int_ary_.Copy_to(data_ary, data_max, new_data_ary);
+			IntAryUtl.CopyTo(data_ary, data_max, new_data_ary);
 			this.data_ary = new_data_ary;
 			this.data_max = new_data_max;
 		}

@@ -14,22 +14,21 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-
-import gplx.objects.primitives.BoolUtl;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
 import gplx.langs.regxs.Regx_adp;
 import gplx.langs.regxs.Regx_adp_;
 import gplx.langs.regxs.Regx_group;
 import gplx.langs.regxs.Regx_match;
-import gplx.objects.strings.unicodes.Ustring;
-import gplx.objects.strings.unicodes.UstringUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.strings.unicodes.Ustring;
+import gplx.types.basics.strings.unicodes.UstringUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_page_;
 import gplx.xowa.xtns.scribunto.Scrib_core;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
@@ -51,8 +50,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.ustring.lua")
-			, Keyval_.new_("stringLengthLimit", string_len_max)
-			, Keyval_.new_("patternLengthLimit", pattern_len_max)
+			, KeyVal.NewStr("stringLengthLimit", string_len_max)
+			, KeyVal.NewStr("patternLengthLimit", pattern_len_max)
 			);
 		return mod;
 	}
@@ -64,12 +63,12 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			case Proc_gmatch_init:							return Gmatch_init(args, rslt);
 			case Proc_gmatch_callback:						return Gmatch_callback(args, rslt);
 			case Proc_gsub:									return Gsub(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int Proc_find = 0, Proc_match = 1, Proc_gmatch_init = 2, Proc_gmatch_callback = 3, Proc_gsub = 4;
 	public static final String Invk_find = "find", Invk_match = "match", Invk_gmatch_init = "gmatch_init", Invk_gmatch_callback = "gmatch_callback", Invk_gsub = "gsub";
-	private static final String[] Proc_names = String_.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
+	private static final String[] Proc_names = StringUtl.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
 	public boolean Find(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// get args
 		String text_str	       = args.Xstr_str_or_null(0);
@@ -97,7 +96,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// find_str of "" should return (bgn, bgn - 1) regardless of whether plain is true or false;
 		// NOTE: do not include surrogate calc; PAGE:en.d:佻 DATE:2017-04-24
 		// NOTE: not in MW; is this needed? DATE:2019-02-24
-		if (String_.Len_eq_0(find_str))
+		if (StringUtl.IsNullOrEmpty(find_str))
 			return rslt.Init_many_objs(bgn_as_codes_base1, bgn_as_codes_base1 - 1);
 
 		// if plain, just do literal match of find and exit
@@ -107,7 +106,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			int pos = text_ucs.IndexOf(find_ucs, bgn_as_codes);
 
 			// if nothing found, return empty
-			if (pos == String_.Find_none)
+			if (pos == StringUtl.FindNone)
 				return rslt.Init_ary_empty();
 
 			// bgn: adjust for base1
@@ -170,13 +169,13 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public boolean Gmatch_callback(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String text = args.Xstr_str_or_null(0); // NOTE: UstringLibrary.php!ustringGmatchCallback calls preg_match directly; $s can be any type, and php casts automatically; 
 		String regx = args.Pull_str(1);
-		Keyval[] capt = args.Cast_kv_ary_or_null(2);
+		KeyVal[] capt = args.Cast_kv_ary_or_null(2);
 		int pos = args.Pull_int(3);
 
 		Ustring text_ucs = UstringUtl.NewCodepoints(text);
 		// int pos_as_codes = To_java_by_lua(pos, text_ucs.Len_in_data());
 		Regx_match match = Scrib_pattern_matcher.New(core.Page_url()).Match_one(text_ucs, regx, pos, false);
-		if (match.Rslt_none()) return rslt.Init_many_objs(pos, Keyval_.Ary_empty);
+		if (match.Rslt_none()) return rslt.Init_many_objs(pos, KeyValUtl.AryEmpty);
 		List_adp tmp_list = List_adp_.New();
 		AddCapturesFromMatch(tmp_list, match, text, capt, true);	// NOTE: was incorrectly set as false; DATE:2014-04-23
 		return rslt.Init_many_objs(match.Find_end(), Scrib_kv_utl_.base1_list_(tmp_list));
@@ -202,7 +201,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			bgn_as_codes = 0;
 		return bgn_as_codes;
 	}
-	private void AddCapturesFromMatch(List_adp tmp_list, Regx_match rslt, String text, Keyval[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
+	private void AddCapturesFromMatch(List_adp tmp_list, Regx_match rslt, String text, KeyVal[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
 		int capts_len = capts == null ? 0 : capts.length;
 		if (capts_len > 0) { // NOTE: changed from "grps_len > 0"; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
 			Regx_group[] grps = rslt.Groups();
@@ -219,14 +218,14 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		}
 		else if (	op_is_match				// if op_is_match, and no captures, extract find_txt; note that UstringLibrary.php says "$arr[] = $m[0][0];" which means get the 1st match;
 				&&	tmp_list.Len() == 0)	// only add match once; EX: "aaaa", "a" will have four matches; get 1st; DATE:2014-04-02
-			tmp_list.Add(String_.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
+			tmp_list.Add(StringUtl.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
 	}
 	public static Regx_adp RegxAdp_new_(byte[] page_url, String regx) {
 		Regx_adp rv = Regx_adp_.new_(regx);
 		if (rv.Pattern_is_invalid()) {
 			// try to identify [z-a] errors; PAGE:https://en.wiktionary.org/wiki/Module:scripts/data;  DATE:2017-04-23
 			Exception exc = rv.Pattern_is_invalid_exception();
-			Gfo_usr_dlg_.Instance.Log_many("", "", "regx is invalid: regx=~{0} page=~{1} exc=~{2}", regx, page_url, Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "regx is invalid: regx=~{0} page=~{1} exc=~{2}", regx, page_url, ErrUtl.ToStrLog(exc));
 		}
 		return rv;
 	}

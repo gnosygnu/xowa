@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.directorys.dbs;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 import gplx.langs.jsons.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 public class Xowdir_wiki_tbl implements Db_tbl { // for domain and user-specific data only (name, url); don't replicate wiki-specific info here (like main_page)
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__wiki_id, fld__wiki_domain, fld__wiki_core_url, fld__wiki_json;
@@ -33,7 +38,7 @@ public class Xowdir_wiki_tbl implements Db_tbl { // for domain and user-specific
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public boolean Upsert(int id, String domain, Io_url core_url, String json) {
-		return Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__wiki_id), id, domain, core_url.Xto_api(), json);
+		return Db_tbl__crud_.Upsert(conn, tbl_name, flds, StringUtl.Ary(fld__wiki_id), id, domain, core_url.Xto_api(), json);
 	}
 	public Xowdir_wiki_itm[] Select_all() {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();

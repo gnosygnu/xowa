@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.htmls.css.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.htmls.css.dbs;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.commons.GfoDate;
 public class Xowd_css_core_tbl implements Rls_able {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_key, fld_updated_on;
@@ -29,14 +33,14 @@ public class Xowd_css_core_tbl implements Rls_able {
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = "css_core";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_key)));}
 	public void Rls() {}
-	public int Insert(String key, DateAdp updated_on) {
+	public int Insert(String key, GfoDate updated_on) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);
-		stmt_insert.Val_str(fld_key, key).Val_str(fld_updated_on, updated_on.XtoStr_fmt_yyyyMMdd_HHmmss()).Exec_insert();
+		stmt_insert.Val_str(fld_key, key).Val_str(fld_updated_on, updated_on.ToStrFmt_yyyyMMdd_HHmmss()).Exec_insert();
 		return Select_id_by_key(key);
 	}
-	public void Update(int id, String key, DateAdp updated_on) {
+	public void Update(int id, String key, GfoDate updated_on) {
 		Db_stmt stmt_update = conn.Stmt_update_exclude(tbl_name, flds, fld_id);
-		stmt_update.Val_str(fld_key, key).Val_str(fld_updated_on, updated_on.XtoStr_fmt_yyyyMMdd_HHmmss()).Crt_int(fld_id, id).Exec_update();
+		stmt_update.Val_str(fld_key, key).Val_str(fld_updated_on, updated_on.ToStrFmt_yyyyMMdd_HHmmss()).Crt_int(fld_id, id).Exec_update();
 	}
 	public Xowd_css_core_itm Select_by_key(String key) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_key).Crt_str(fld_key, key).Exec_select__rls_auto();

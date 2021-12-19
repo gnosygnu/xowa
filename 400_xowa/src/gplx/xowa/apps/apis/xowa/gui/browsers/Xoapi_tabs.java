@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.guis.views.Xog_tab_itm;
 import gplx.xowa.guis.views.Xog_tab_itm_;
@@ -37,7 +37,7 @@ public class Xoapi_tabs implements Gfo_invk {
 	public void New_href(boolean focus) {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		String link = tab.Html_itm().Html_selected_get_href_or_text();
-		if (String_.Len_eq_0(link)) {tab_mgr.Win().Usr_dlg().Prog_many("", "", "no link or text selected"); return;}
+		if (StringUtl.IsNullOrEmpty(link)) {tab_mgr.Win().Usr_dlg().Prog_many("", "", "no link or text selected"); return;}
 		tab_mgr.Tabs_new_dflt(true);
 		tab_mgr.Win().Page__navigate_by_url_bar(link);
 	}

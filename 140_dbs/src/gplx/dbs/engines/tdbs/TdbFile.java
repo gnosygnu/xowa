@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
 public class TdbFile {
 	public int Id() {return id;} int id;
 	public Io_url Path() {return url;} Io_url url;
@@ -25,5 +27,5 @@ public class TdbFile {
 	}
 	public static final int MainFileId = 1;
 	public static TdbFile as_(Object obj) {return obj instanceof TdbFile ? (TdbFile)obj : null;}
-	public static TdbFile cast(Object obj) {try {return (TdbFile)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, TdbFile.class, obj);}}
+	public static TdbFile cast(Object obj) {try {return (TdbFile)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, TdbFile.class, obj);}}
 }

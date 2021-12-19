@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.lists.binary_searches;
-import gplx.objects.lists.CompareAble;
+import gplx.types.commons.lists.CompareAble;
 interface Binary_search_cmp {
 	int Compare(Object comp);
 }

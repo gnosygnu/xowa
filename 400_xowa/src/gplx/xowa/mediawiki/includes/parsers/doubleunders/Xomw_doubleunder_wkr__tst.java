@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.doubleunders;
-import gplx.Bry_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
@@ -43,16 +43,16 @@ class Xomw_doubleunder_wkr__fxt {
 		wkr.Init_by_wiki(data, wiki.Lang());
 	}
 	public Xomw_doubleunder_wkr__fxt Test__parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		wkr.doDoubleUnderscore(pctx, pbfr.Init(src_bry));
-		Gftest.Eq__str(expd, pbfr.Rslt().To_str_and_clear(), src_str);
+		GfoTstr.Eq(expd, pbfr.Rslt().ToStrAndClear(), src_str);
 		return this;
 	}
 	public  Xomw_doubleunder_wkr__fxt Test__prop_y(boolean... ary) {return Test__prop(BoolUtl.Y, ary);}
 	public  Xomw_doubleunder_wkr__fxt Test__prop_n(boolean... ary) {return Test__prop(BoolUtl.N, ary);}
 	private Xomw_doubleunder_wkr__fxt Test__prop(boolean expd, boolean... ary) {
 		for (boolean v : ary)
-			Gftest.Eq__bool(expd, v);
+			GfoTstr.Eq(expd, v);
 		return this;
 	}
 }

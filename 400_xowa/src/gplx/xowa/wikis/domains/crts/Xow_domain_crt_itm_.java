@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
+package gplx.xowa.wikis.domains.crts;
+import gplx.types.basics.utls.BryLni;
+import gplx.xowa.wikis.domains.*;
 class Xow_domain_crt_itm_ {
         public static final Xow_domain_crt_itm Null = null;
 }
@@ -48,7 +50,7 @@ class Xow_domain_crt_itm__any_standard implements Xow_domain_crt_itm {
 class Xow_domain_crt_itm__lang implements Xow_domain_crt_itm {
 	private final byte[] lang_key;
 	public Xow_domain_crt_itm__lang(byte[] lang_key) {this.lang_key = lang_key;}
-	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return Bry_.Eq(comp.Lang_orig_key(), lang_key);}
+	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return BryLni.Eq(comp.Lang_orig_key(), lang_key);}
 }
 class Xow_domain_crt_itm__type implements Xow_domain_crt_itm {
 	private final int wiki_tid;
@@ -58,5 +60,5 @@ class Xow_domain_crt_itm__type implements Xow_domain_crt_itm {
 class Xow_domain_crt_itm__wiki implements Xow_domain_crt_itm {
 	private final byte[] domain;
 	public Xow_domain_crt_itm__wiki(byte[] domain) {this.domain = domain;}
-	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return Bry_.Eq(comp.Domain_bry(), domain);}
+	public boolean Matches(Xow_domain_itm cur, Xow_domain_itm comp) {return BryLni.Eq(comp.Domain_bry(), domain);}
 }

@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
-import gplx.core.strings.*; import gplx.core.criterias.*;
+package gplx.dbs.qrys; import gplx.dbs.*;
+import gplx.core.criterias.*;
 import gplx.dbs.sqls.SqlQryWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class Db_qry__select_in_tbl implements Db_qry {
 	public Db_qry__select_in_tbl(String base_table, String[] select_flds, String[] where_flds, String group_by_sql, String having_sql, String order_by_sql, String limit_sql) {
 		this.base_table = base_table; this.select_flds = select_flds; this.where_flds = where_flds; this.group_by_sql = group_by_sql; this.having_sql = having_sql; this.order_by_sql = order_by_sql; this.limit_sql = limit_sql;
@@ -55,7 +59,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 			if (having_sql		!= null) sb.Add(having_sql);
 			if (order_by_sql	!= null) {sb.Add(" ORDER BY "); sb.Add(order_by_sql);}
 			if (limit_sql		!= null) sb.Add(limit_sql);
-			return sb.To_str();
+			return sb.ToStr();
 		}
 	}
 	public static Db_qry__select_in_tbl new_(String base_table, String[] where_flds, String[] select_flds, String[] order_flds) {
@@ -66,13 +70,13 @@ public class Db_qry__select_in_tbl implements Db_qry {
 				case 0: break;
 				case 1: order_by_sql = order_flds[0]; break;
 				default:
-					Bry_bfr bfr = Bry_bfr_.New();
+					BryWtr bfr = BryWtr.New();
 					for (int i = 0; i < len; ++i) {
 						String order_fld = order_flds[i];
-						if (i != 0) bfr.Add_byte_comma();
-						bfr.Add_str_a7(order_fld);
+						if (i != 0) bfr.AddByteComma();
+						bfr.AddStrA7(order_fld);
 					}
-					order_by_sql = bfr.To_str_and_clear();
+					order_by_sql = bfr.ToStrAndClear();
 					break;
 			}
 		}
@@ -81,6 +85,6 @@ public class Db_qry__select_in_tbl implements Db_qry {
 		return rv;
 	}
 	public static Db_qry__select_in_tbl as_(Object obj) {return obj instanceof Db_qry__select_in_tbl ? (Db_qry__select_in_tbl)obj : null;}
-	public static final String[] Where_flds__all = String_.Ary_empty;
+	public static final String[] Where_flds__all = StringUtl.AryEmpty;
 	public static final String[] Order_by_null = null;
 }

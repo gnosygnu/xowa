@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
+import gplx.types.errs.ErrUtl;
 public class Db_cmd_mode {
 	Db_cmd_mode(int val) {this.val = val;}
 	public int Val() {return val;} int val;
@@ -34,7 +35,7 @@ public class Db_cmd_mode {
 			case Tid_ignore:					// must mark for update
 			case Tid_update:					// return self
 							return Tid_update;
-			default:		throw Err_.new_unhandled(cur);
+			default:		throw ErrUtl.NewUnhandled(cur);
 		}
 	}
 }

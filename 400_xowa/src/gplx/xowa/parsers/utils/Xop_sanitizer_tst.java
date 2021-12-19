@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.utils;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.core.log_msgs.*; import gplx.xowa.parsers.amps.*;
 public class Xop_sanitizer_tst {
 	Xop_sanitizer_fxt fxt = new Xop_sanitizer_fxt();
@@ -35,7 +39,7 @@ class Xop_sanitizer_fxt {
 		sanitizer = new Xop_sanitizer(Xop_amp_mgr.Instance, new Gfo_msg_log(Xoa_app_.Name));
 	}
 	public void tst_Escape_id(String raw, String expd)  {
-		byte[] raw_bry = Bry_.new_u8(raw);
-		Tfds.Eq(expd, String_.new_u8(sanitizer.Escape_id(raw_bry)));
+		byte[] raw_bry = BryUtl.NewU8(raw);
+		GfoTstr.EqObj(expd, StringUtl.NewU8(sanitizer.Escape_id(raw_bry)));
 	}
 }

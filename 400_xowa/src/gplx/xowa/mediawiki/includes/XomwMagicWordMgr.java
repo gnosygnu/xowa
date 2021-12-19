@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.types.basics.lists.Hash_adp_bry;
 public class XomwMagicWordMgr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Add(byte[] name, boolean cs, byte[]... synonyms) {

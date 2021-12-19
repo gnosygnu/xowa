@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
-import org.junit.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.scribunto.libs.wikibases;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
+import org.junit.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class GetEntityStatements__tst {
 	private final Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt();
@@ -32,7 +35,7 @@ public class GetEntityStatements__tst {
 			, wdata_fxt.Make_claim_string(3, "3b").Rank_tid_(Wbase_claim_rank_.Tid__normal)
 			, wdata_fxt.Make_claim_string(3, "3a").Rank_tid_(Wbase_claim_rank_.Tid__preferred)
 			).Xto_wdoc());
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntityStatements, Object_.Ary("q2", "P3", "best"), String_.Concat_lines_nl_skip_last
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntityStatements, ObjectUtl.Ary("q2", "P3", "best"), StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  P3="
 		, "    1="
@@ -54,7 +57,7 @@ public class GetEntityStatements__tst {
 			( wdata_fxt.Make_claim_string(3, "3c").Rank_tid_(Wbase_claim_rank_.Tid__deprecated)
 			, wdata_fxt.Make_claim_string(3, "3b").Rank_tid_(Wbase_claim_rank_.Tid__normal)
 			).Xto_wdoc());
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntityStatements, Object_.Ary("q2", "P3", "best"), String_.Concat_lines_nl_skip_last
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntityStatements, ObjectUtl.Ary("q2", "P3", "best"), StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  P3="
 		, "    1="
@@ -75,7 +78,7 @@ public class GetEntityStatements__tst {
 			.Add_claims
 			( wdata_fxt.Make_claim_string(3, "3c").Rank_tid_(Wbase_claim_rank_.Tid__deprecated)
 			).Xto_wdoc());
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntityStatements, Object_.Ary("q2", "P3", "best"), String_.Concat_lines_nl_skip_last
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntityStatements, ObjectUtl.Ary("q2", "P3", "best"), StringUtl.ConcatLinesNlSkipLast
 		("1=<<NULL>>"));
 	}
 }

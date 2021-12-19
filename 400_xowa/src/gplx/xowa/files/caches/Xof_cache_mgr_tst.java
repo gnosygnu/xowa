@@ -46,7 +46,7 @@ public class Xof_cache_mgr_tst {
 //			db_state = Db_cmd_mode.Tid_ignore;
 //			lnki_site = orig_wiki = -1;
 //			lnki_ttl = orig_ttl = null;
-//			lnki_type = Byte_.Max_value_127;
+//			lnki_type = ByteUtl.Max_value_127;
 //			lnki_upright = Xof_img_size.Upright_null;
 //			lnki_w = lnki_h = file_w = file_h = temp_w = Xof_img_size.Size_null;
 //			lnki_time = file_time = Xof_lnki_time.Null;

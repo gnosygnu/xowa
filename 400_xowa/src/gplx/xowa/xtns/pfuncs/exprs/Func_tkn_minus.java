@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.exprs;
+import gplx.types.commons.GfoDecimal;
 import gplx.xowa.parsers.*;
 class Func_tkn_minus extends Func_tkn_base {
 	public Func_tkn_minus(String v) {this.Ctor(v);}
@@ -21,8 +22,8 @@ class Func_tkn_minus extends Func_tkn_base {
 	@Override public int Precedence()	{return 6;}
 	@Override public Func_tkn GetAlt() {return Func_tkn_minus_negative.Instance;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
-		Decimal_adp rhs = val_stack.Pop();
-		Decimal_adp lhs = val_stack.Pop();
+		GfoDecimal rhs = val_stack.Pop();
+		GfoDecimal lhs = val_stack.Pop();
 		val_stack.Push(lhs.Subtract(rhs));
 		return true;
 	}

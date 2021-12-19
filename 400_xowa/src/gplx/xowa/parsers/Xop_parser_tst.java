@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers;
-import gplx.Bry_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.btries.Btrie_fast_mgr;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
@@ -40,7 +40,7 @@ class Xop_parser_fxt {
 	}
 	public void Test__Parse_to_src_end(String src_str, int pos, boolean parse_is_tmpl, int expd)  {
 		// init
-		byte[] src = Bry_.new_u8(src_str);
+		byte[] src = BryUtl.NewU8(src_str);
 		Xop_ctx ctx = Xop_ctx.New__top(wiki);
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		Xop_root_tkn root = tkn_mkr.Root(src);
@@ -48,6 +48,6 @@ class Xop_parser_fxt {
 		Btrie_fast_mgr trie = parse_is_tmpl ? tmpl_lxr_mgr.Trie() : wiki_lxr_mgr.Trie();
 
 		int actl = parser.Parse_to_src_end(root, ctx, tkn_mkr, src, trie, pos, src.length);
-            Gftest.Eq__int(expd, actl);
+            GfoTstr.Eq(expd, actl);
 	}
 }

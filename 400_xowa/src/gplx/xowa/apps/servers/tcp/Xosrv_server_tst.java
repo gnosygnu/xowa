@@ -13,15 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.tcp;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import org.junit.*;
-import gplx.core.ios.*;
 public class Xosrv_server_tst {
 	@Before public void init() {fxt.Clear();} private Xosrv_server_fxt fxt = new Xosrv_server_fxt();
-	@Test  public void Exec_js() {
+	@Test public void Exec_js() {
 		fxt.Test_exec_js("{\"args\":[\"xowa_exec_test\",\"a\",\"b\"]}", "{\"xowa_js_result\":\"xowa_exec_test|a|b\"}");
 	}
-	@Test  public void Exec_js_ary() {
+	@Test public void Exec_js_ary() {
 		fxt.Test_exec_js("{\"args\":[\"xowa_exec_test_as_array\",\"a\",\"b\"]}", "{\"xowa_js_result\":[\"xowa_exec_test_as_array\",\"a\",\"b\"]}");
 	}
 }
@@ -32,7 +34,7 @@ class Xosrv_server_fxt {
 		return this;
 	} 	private Xoae_app app;
 	public void Test_exec_js(String raw, String expd) {
-		String actl = app.Tcp_server().Exec_js(null, Bry_.new_a7(raw));
-		Tfds.Eq(expd, actl);
+		String actl = app.Tcp_server().Exec_js(null, BryUtl.NewA7(raw));
+		GfoTstr.EqObj(expd, actl);
 	}
 }

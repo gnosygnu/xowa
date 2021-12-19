@@ -13,16 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.binary_searches; import gplx.*;
-import gplx.objects.lists.CompareAble;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.core.lists.binary_searches;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.lists.List_adp_;
 public class Binary_search_ {
 	public static int Search(CompareAble[] ary	, CompareAble val) {return Search(new Binary_search_grp__ary(ary)	, new Binary_search_cmp__comparable(val));}
 	public static int Search(Object[] ary		, Binary_comparer comparer, Object val) {return Search(new Binary_search_grp__ary(ary), new Binary_search_cmp__comparer(comparer, val));}
 	private static int Search(Binary_search_grp grp, Binary_search_cmp cmp) {
 		int grp_len = grp.Len();
 		if (grp_len == 1) return 0;						// if 1 item, return 0;
-		if (grp_len == 0) return Bry_find_.Not_found;	// if 0 item, return -1
+		if (grp_len == 0) return BryFind.NotFound;	// if 0 item, return -1
 
 		// init
 		int interval = grp_len / 2;
@@ -58,6 +60,6 @@ public class Binary_search_ {
 			else if (pos > pos_last)	pos = pos_last;
 			pos_prv = pos;
 		}
-		return Bry_find_.Not_found;	// should only occur if (a) ary's 0th slot is not ""; or (b) some unknown error
+		return BryFind.NotFound;	// should only occur if (a) ary's 0th slot is not ""; or (b) some unknown error
 	}
 }

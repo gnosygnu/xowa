@@ -15,15 +15,15 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Int_;
-import gplx.Object_;
-import gplx.String_;
-import gplx.Type_;
-import gplx.core.brys.Bry_bfr_able;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.custom.brys.wtrs.BryBfrAble;
 
-public class XophpArrayItm<T> implements Bry_bfr_able {
+public class XophpArrayItm<T> implements BryBfrAble {
 	XophpArrayItm(boolean keyIsInt, int keyAsInt, String key, T val) {
 		this.keyIsInt = keyIsInt;
 		this.keyAsInt = keyAsInt;
@@ -35,16 +35,16 @@ public class XophpArrayItm<T> implements Bry_bfr_able {
 	public String Key() {return key;} private final String key;
 	public T Val() {return val;} public void Val_(T v) {this.val = v;} private T val;
 
-	public void To_bfr(Bry_bfr bfr) {
-		bfr.Add_str_u8(key).Add_byte_eq();
+	public void AddToBfr(BryWtr bfr) {
+		bfr.AddStrU8(key).AddByteEq();
 
-		if (Type_.Type_by_obj(val) == XophpArray.class) {
+		if (ClassUtl.TypeByObj(val) == XophpArray.class) {
 			XophpArray sub_ary = (XophpArray)val;
-			bfr.Add_byte_nl();
-			sub_ary.To_bfr(bfr);
+			bfr.AddByteNl();
+			sub_ary.AddToBfr(bfr);
 		}
 		else {
-			bfr.Add_obj(val).Add_byte_space();
+			bfr.AddObj(val).AddByteSpace();
 		}
 	}
 	@Override public boolean equals(Object obj) {
@@ -57,7 +57,7 @@ public class XophpArrayItm<T> implements Bry_bfr_able {
 				return false;
 		}
 		else {
-			if (!String_.Eq(this.key, comp.key))
+			if (!StringUtl.Eq(this.key, comp.key))
 				return false;
 		}
 
@@ -69,7 +69,7 @@ public class XophpArrayItm<T> implements Bry_bfr_able {
 		else if (this.val == null && comp.val == null)
 			return true;
 		else
-			return Object_.Eq(this.val, comp.val);
+			return ObjectUtl.Eq(this.val, comp.val);
 	}
 	@Override public int hashCode() {
 		int rv = 0;
@@ -79,6 +79,6 @@ public class XophpArrayItm<T> implements Bry_bfr_able {
 	}
 
 	private static final int NULL_KEY_INT = -1;
-	public static XophpArrayItm NewInt(int key, Object val)    {return new XophpArrayItm(BoolUtl.Y, key, Int_.To_str(key), val);}
+	public static XophpArrayItm NewInt(int key, Object val)    {return new XophpArrayItm(BoolUtl.Y, key, IntUtl.ToStr(key), val);}
 	public static XophpArrayItm NewStr(String key, Object val) {return new XophpArrayItm(BoolUtl.N, NULL_KEY_INT, key, val);}
 }

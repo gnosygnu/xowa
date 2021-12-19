@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.imaps;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.apps.fsys.*;
 import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_xtn_mgr extends Xox_mgr_base implements Gfo_invk {
 	private boolean init;
-	@Override public byte[]				Xtn_key()			{return XTN_KEY;}		public static final byte[] XTN_KEY = Bry_.new_a7("imageMap");
+	@Override public byte[]				Xtn_key()			{return XTN_KEY;}		public static final byte[] XTN_KEY = BryUtl.NewA7("imageMap");
 	@Override public boolean				Enabled_default()	{return true;}
 	public			Xoh_arg_img_core	Img_core_arg()		{return img_core_arg;}	private final Xoh_arg_img_core__basic img_core_arg = new Xoh_arg_img_core__basic();
         public			Imap_parser			Parser()			{return parser;}		private Imap_parser parser;
@@ -44,8 +47,8 @@ public class Imap_xtn_mgr extends Xox_mgr_base implements Gfo_invk {
 	public static byte[] Desc_icon_url(Xoa_fsys_mgr fsys_mgr) {return fsys_mgr.Bin_xtns_dir().GenSubFil_nest("ImageMap", "imgs", "desc-20.png").To_http_file_bry();}
 
 	public static final byte[]
-	  Bry__usemap__html		= Bry_.new_a7(" usemap=\"#imageMap_1_")
-	, Bry__usemap__name		= Bry_.new_a7("usemap")
-	, Bry__usemap__prefix	= Bry_.new_a7("#imageMap_1_")
+	  Bry__usemap__html		= BryUtl.NewA7(" usemap=\"#imageMap_1_")
+	, Bry__usemap__name		= BryUtl.NewA7("usemap")
+	, Bry__usemap__prefix	= BryUtl.NewA7("#imageMap_1_")
 	;
 }

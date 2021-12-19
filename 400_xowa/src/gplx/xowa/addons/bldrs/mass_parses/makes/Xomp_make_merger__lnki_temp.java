@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.types.basics.utls.IntUtl;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.files.dbs.*;
 class Xomp_make_merger__lnki_temp extends Xomp_make_merger__base {
@@ -40,6 +41,6 @@ class Xomp_make_merger__lnki_temp extends Xomp_make_merger__base {
 	@Override protected int Compare__hook(Object lhsObj, Object rhsObj) {
 		Xob_lnki_temp_row lhs = (Xob_lnki_temp_row)lhsObj;
 		Xob_lnki_temp_row rhs = (Xob_lnki_temp_row)rhsObj;
-		return Int_.Compare(lhs.Lnki_page_id(), rhs.Lnki_page_id());
+		return IntUtl.Compare(lhs.Lnki_page_id(), rhs.Lnki_page_id());
 	}
 }

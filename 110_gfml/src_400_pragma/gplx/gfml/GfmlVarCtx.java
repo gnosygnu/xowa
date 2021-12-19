@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.StringUtl;
 class GfmlVarCtx {
 	public String Key() {return key;} private String key;
 	public void Add_if_dupe_use_nth(GfmlVarItm itm) {hash.AddIfDupeUseNth(itm.Key(), itm);}
@@ -34,7 +37,7 @@ class GfmlVarCtx_ {
 		Hash_adp ctxRegy = FetchRegyOrNew(cache);
 		GfmlVarCtx rv = (GfmlVarCtx)ctxRegy.GetByOrNull(ctxKey);
 		if (rv == null) {
-			rv = (String_.Eq(ctxKey, DefaultKey))
+			rv = (StringUtl.Eq(ctxKey, DefaultKey))
 				? default_(ctxKey)
 				: GfmlVarCtx.new_(ctxKey);
 			ctxRegy.Add(rv.Key(), rv);
@@ -44,7 +47,7 @@ class GfmlVarCtx_ {
 	static GfmlVarCtx default_(String ctxKey) {
 		GfmlVarCtx rv = GfmlVarCtx.new_(ctxKey);
 		rv.Add_if_dupe_use_nth(GfmlVarItm.new_("t", GfmlTkn_.raw_("\t"), GfmlVarCtx_.DefaultKey));
-		rv.Add_if_dupe_use_nth(GfmlVarItm.new_("n", GfmlTkn_.raw_(String_.CrLf), GfmlVarCtx_.DefaultKey));
+		rv.Add_if_dupe_use_nth(GfmlVarItm.new_("n", GfmlTkn_.raw_(StringUtl.CrLf), GfmlVarCtx_.DefaultKey));
 		return rv;
 	}
 	static Hash_adp FetchRegyOrNew(Hash_adp cache) {

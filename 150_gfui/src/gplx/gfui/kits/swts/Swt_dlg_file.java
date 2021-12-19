@@ -13,11 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
 import gplx.gfui.kits.core.Gfui_dlg_file;
 import gplx.gfui.kits.core.Gfui_kit_;
-
+import gplx.libs.files.Io_url;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.SWT;
 public class Swt_dlg_file implements Gfui_dlg_file {

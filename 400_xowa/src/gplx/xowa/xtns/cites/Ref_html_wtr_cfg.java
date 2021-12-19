@@ -13,20 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.cites;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 public class Ref_html_wtr_cfg {
-	public Bry_fmtr Itm_html() 			{return itm_html;} 			private Bry_fmtr itm_html; 			public Ref_html_wtr_cfg Itm_html_(String v) {itm_html 				= Bry_fmtr.new_(v, "itm_id", "grp_id", "grp_key"); return this;}
-	public Bry_fmtr Itm_id_uid() 		{return itm_id_uid;} 		private Bry_fmtr itm_id_uid; 		public Ref_html_wtr_cfg Itm_id_uid_(String v) {itm_id_uid 			= Bry_fmtr.new_(v, "uid"); return this;}
-	public Bry_fmtr Itm_id_key_one() 	{return itm_id_key_one;} 	private Bry_fmtr itm_id_key_one; 	public Ref_html_wtr_cfg Itm_id_key_one_(String v) {itm_id_key_one 	= Bry_fmtr.new_(v, "itm_key", "uid", "minor"); return this;}
-	public Bry_fmtr Itm_id_key_many() 	{return itm_id_key_many;} 	private Bry_fmtr itm_id_key_many; 	public Ref_html_wtr_cfg Itm_id_key_many_(String v) {itm_id_key_many	= Bry_fmtr.new_(v, "itm_key", "uid"); return this;}
-	public Bry_fmtr Grp_html_one() 		{return grp_html_one;} 		private Bry_fmtr grp_html_one; 		public Ref_html_wtr_cfg Grp_html_one_(String v) {grp_html_one 		= Bry_fmtr.new_(v, "grp_id", "itm_id", "text"); return this;}
-	public Bry_fmtr Grp_html_many() 	{return grp_html_many;}		private Bry_fmtr grp_html_many; 	public Ref_html_wtr_cfg Grp_html_many_(String v) {grp_html_many 	= Bry_fmtr.new_(v, "grp_id", "related_ids", "text"); return this;}
-	public Bry_fmtr Grp_html_list()		{return grp_html_list;}		private Bry_fmtr grp_html_list;		public Ref_html_wtr_cfg Grp_html_list_(String v) {grp_html_list		= Bry_fmtr.new_(v, "itm_id", "backlabel"); return this;}
-	public Bry_fmtr Grp_id_uid() 		{return grp_id_uid;} 		private Bry_fmtr grp_id_uid; 		public Ref_html_wtr_cfg Grp_id_uid_(String v) {grp_id_uid 			= Bry_fmtr.new_(v, "uid"); return this;}
-	public Bry_fmtr Grp_id_key() 		{return grp_id_key;} 		private Bry_fmtr grp_id_key; 		public Ref_html_wtr_cfg Grp_id_key_(String v) {grp_id_key 			= Bry_fmtr.new_(v, "itm_key", "major"); return this;}
+	public BryFmtr Itm_html() 			{return itm_html;} 			private BryFmtr itm_html; 			public Ref_html_wtr_cfg Itm_html_(String v) {itm_html 				= BryFmtr.New(v, "itm_id", "grp_id", "grp_key"); return this;}
+	public BryFmtr Itm_id_uid() 		{return itm_id_uid;} 		private BryFmtr itm_id_uid; 		public Ref_html_wtr_cfg Itm_id_uid_(String v) {itm_id_uid 			= BryFmtr.New(v, "uid"); return this;}
+	public BryFmtr Itm_id_key_one() 	{return itm_id_key_one;} 	private BryFmtr itm_id_key_one; 	public Ref_html_wtr_cfg Itm_id_key_one_(String v) {itm_id_key_one 	= BryFmtr.New(v, "itm_key", "uid", "minor"); return this;}
+	public BryFmtr Itm_id_key_many() 	{return itm_id_key_many;} 	private BryFmtr itm_id_key_many; 	public Ref_html_wtr_cfg Itm_id_key_many_(String v) {itm_id_key_many	= BryFmtr.New(v, "itm_key", "uid"); return this;}
+	public BryFmtr Grp_html_one() 		{return grp_html_one;} 		private BryFmtr grp_html_one; 		public Ref_html_wtr_cfg Grp_html_one_(String v) {grp_html_one 		= BryFmtr.New(v, "grp_id", "itm_id", "text"); return this;}
+	public BryFmtr Grp_html_many() 	{return grp_html_many;}		private BryFmtr grp_html_many; 	public Ref_html_wtr_cfg Grp_html_many_(String v) {grp_html_many 	= BryFmtr.New(v, "grp_id", "related_ids", "text"); return this;}
+	public BryFmtr Grp_html_list()		{return grp_html_list;}		private BryFmtr grp_html_list;		public Ref_html_wtr_cfg Grp_html_list_(String v) {grp_html_list		= BryFmtr.New(v, "itm_id", "backlabel"); return this;}
+	public BryFmtr Grp_id_uid() 		{return grp_id_uid;} 		private BryFmtr grp_id_uid; 		public Ref_html_wtr_cfg Grp_id_uid_(String v) {grp_id_uid 			= BryFmtr.New(v, "uid"); return this;}
+	public BryFmtr Grp_id_key() 		{return grp_id_key;} 		private BryFmtr grp_id_key; 		public Ref_html_wtr_cfg Grp_id_key_(String v) {grp_id_key 			= BryFmtr.New(v, "itm_key", "major"); return this;}
 	public byte[][] Backlabels() {return backlabels;} private byte[][] backlabels;
 	public int Backlabels_len() {return backlabels_len;} private int backlabels_len;
 	public byte[] Grp_bgn() {return grp_bgn;} private byte[] grp_bgn;
@@ -39,9 +44,9 @@ public class Ref_html_wtr_cfg {
 		backlabels		= v;
 		backlabels_len	= v.length;
 	}
-	public static final byte[] Msg_backlabels_err = Bry_.new_a7("cite_error_no_link_label_group");
-	private static final byte[] Msg_backlabels = Bry_.new_a7("cite_references_link_many_format_backlink_labels");
-	public static final byte[] Note_href_bgn = Bry_.new_a7("#cite_note-");	// for TOC
+	public static final byte[] Msg_backlabels_err = BryUtl.NewA7("cite_error_no_link_label_group");
+	private static final byte[] Msg_backlabels = BryUtl.NewA7("cite_references_link_many_format_backlink_labels");
+	public static final byte[] Note_href_bgn = BryUtl.NewA7("#cite_note-");	// for TOC
 	public static Ref_html_wtr_cfg new_() {
 		Ref_html_wtr_cfg rv = new Ref_html_wtr_cfg();
 		rv.Itm_html_		("<sup id=\"cite_ref-~{itm_id}\" class=\"reference\"><a href=\"#cite_note-~{grp_id}\">[~{grp_key}]</a></sup>");
@@ -53,12 +58,12 @@ public class Ref_html_wtr_cfg {
 		rv.Grp_html_list_	(" <sup><a href=\"#cite_ref-~{itm_id}\">~{backlabel}</a></sup>");
 		rv.Grp_id_uid_		("~{uid}");
 		rv.Grp_id_key_		("~{itm_key}-~{major}");
-		rv.grp_bgn = Bry_.new_a7("<ol class=\"references\">\n");
-		rv.grp_end = Bry_.new_a7("</ol>\n");
+		rv.grp_bgn = BryUtl.NewA7("<ol class=\"references\">\n");
+		rv.grp_end = BryUtl.NewA7("</ol>\n");
 		rv.Backlabels_		(Ref_backlabels_default);
 		return rv;
 	}	Ref_html_wtr_cfg() {}
-	private static final byte[][] Ref_backlabels_default = Ref_backlabels_xby_str_ary(String_.Ary	// TEST:default backlabels for test only; actual backlabels will be overrriden by MediaWiki:Cite_references_link_many_format_backlink_labels; DATE:2014-06-07
+	private static final byte[][] Ref_backlabels_default = Ref_backlabels_xby_str_ary(StringUtl.Ary	// TEST:default backlabels for test only; actual backlabels will be overrriden by MediaWiki:Cite_references_link_many_format_backlink_labels; DATE:2014-06-07
 	(  "a",  "b",  "c",  "d",  "e",  "f",  "g",  "h",  "i",  "j",  "k",  "l",  "m",  "n",  "o",  "p",  "q",  "r",  "s",  "t",  "u",  "v",  "w",  "x",  "y",  "z"
 	, "aa", "ab", "ac", "ad", "ae", "af", "ag", "ah", "ai", "aj", "ak", "al", "am", "an", "ao", "ap", "aq", "ar", "as", "at", "au", "av", "aw", "ax", "ay", "az"
 	, "ba", "bb", "bc", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bk", "bl", "bm", "bn", "bo", "bp", "bq", "br", "bs", "bt", "bu", "bv", "bw", "bx", "by", "bz"
@@ -91,7 +96,7 @@ public class Ref_html_wtr_cfg {
 		int ary_len = ary.length;
 		byte[][] rv = new byte[ary_len][];
 		for (int i = 0; i < ary_len; i++)
-			rv[i] = Bry_.new_a7(ary[i]);
+			rv[i] = BryUtl.NewA7(ary[i]);
 		return rv;
 	}
 	public static byte[][] Ref_backlabels_xby_bry(byte[] raw) {
@@ -104,7 +109,7 @@ public class Ref_html_wtr_cfg {
 			switch (b) {
 				case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Tab:
 					if (bgn != -1) { // guard against leading ws, or multiple ws; EX: "bos\s\s" or "\s\s"
-						list.Add(Bry_.Mid(raw, bgn, pos));
+						list.Add(BryLni.Mid(raw, bgn, pos));
 						bgn = -1;
 					}
 					break;

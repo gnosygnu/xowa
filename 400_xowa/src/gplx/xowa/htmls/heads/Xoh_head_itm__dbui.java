@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.xowa.guis.*;
+package gplx.xowa.htmls.heads;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 public class Xoh_head_itm__dbui extends Xoh_head_itm__base {
 	@Override public byte[] Key() {return Xoh_head_itm_.Key__dbui;}
 	@Override public int Flags() {return Flag__css_text | Flag__css_include | Flag__js_tail_script | Flag__js_window_onload;}
@@ -46,7 +49,7 @@ public class Xoh_head_itm__dbui extends Xoh_head_itm__base {
 	public static Io_url Img_dir() {return dir_url.GenSubDir("img");} private static Io_url dir_url;
 	private static byte[] url_dbui_js, url_notify_js, url_jquery_ui_js, url_jquery_ui_css;
 	private static final byte[][] 
-	  Css__table_as_div = Bry_.Ary(String_.Ary
+	  Css__table_as_div = BryUtl.Ary(StringUtl.Ary
 	( ".xo_tbl {"
 	, "  display: table;"
 	, "  table-layout: fixed;"	// don't auto-size to text content
@@ -101,7 +104,7 @@ public class Xoh_head_itm__dbui extends Xoh_head_itm__base {
 	, "  cursor: move;"
 	, "}"    
 	))
-	, Js__sortable = Bry_.Ary(String_.Ary
+	, Js__sortable = BryUtl.Ary(StringUtl.Ary
 	( "  $('.xo_sortable').sortable({"
 	, "    revert: 100,"			// 100 for "fast" snap back
 	, "    items: '.xo_draggable',"	// to prevent header from being dragged

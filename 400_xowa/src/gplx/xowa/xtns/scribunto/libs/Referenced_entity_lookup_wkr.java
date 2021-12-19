@@ -13,8 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.stores.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.types.errs.Err;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.stores.Wbase_doc_mgr;
 // REF: https://github.com/wmde/WikibaseDataModelServices/blob/master/src/Lookup/EntityRetrievingClosestReferencedEntityIdLookup.php
 class Referenced_entity_lookup_wkr {		
 	private final Wbase_doc_mgr entity_mgr;
@@ -48,7 +64,7 @@ class Referenced_entity_lookup_wkr {
 			Ordered_hash toVisitNext = Ordered_hash_.New_bry();
 			int toVisitLen = toVisit.Len();
 			for (int i = 0; i < toVisitLen; i++) {
-				byte[] curId = (byte[])toVisit.Get_at(i);
+				byte[] curId = (byte[])toVisit.GetAt(i);
 				byte[] result = processEntityById(alreadyVisited, curId, fromId, propertyId, toIds, toVisitNext);
 				if (result != null)
 					return result;
@@ -62,15 +78,15 @@ class Referenced_entity_lookup_wkr {
 		throw newErr(true);
 	}
 	private Err newErr(boolean isMaxDepthOrMaxEntities) {
-		return Err_.new_wo_type("max exceeded", "type", isMaxDepthOrMaxEntities ? "depth" : "entities", "url", url.To_bry(true, false), "fromId", fromId, "propertyId", propertyId, "toIds", toString(toIds));
+		return ErrUtl.NewArgs("max exceeded", "type", isMaxDepthOrMaxEntities ? "depth" : "entities", "url", url.To_bry(true, false), "fromId", fromId, "propertyId", propertyId, "toIds", toString(toIds));
 	}
 	private static String toString(Ordered_hash hash) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(hash.Get_at(i))).Add_byte_pipe();
+			bfr.AddStrU8(ObjectUtl.ToStrOrNullMark(hash.GetAt(i))).AddBytePipe();
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	private byte[] processEntityById(Ordered_hash alreadyVisited, byte[] id, byte[] fromId, int propertyId, Ordered_hash toIds, Ordered_hash toVisit) {
 		Wdata_doc entity = getEntity(alreadyVisited, id, fromId, propertyId, toIds);
@@ -86,7 +102,7 @@ class Referenced_entity_lookup_wkr {
 	}
 	private Wdata_doc getEntity(Ordered_hash alreadyVisited, byte[] id, byte[] fromId, int propertyId, Ordered_hash toIds) {
 		if (alreadyVisited.Has(id)) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "Entity " + String_.new_u8(id) + " already visited");
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "Entity " + StringUtl.NewU8(id) + " already visited");
 			return null;
 		}
 		alreadyVisited.AddAsKeyAndVal(id);
@@ -113,7 +129,7 @@ class Referenced_entity_lookup_wkr {
 	private Ordered_hash merge(Ordered_hash toVisitNext, Ordered_hash alreadyVisited) {
 		int len = alreadyVisited.Len();
 		for (int i = 0; i < len; i++) {
-			byte[] bry = (byte[])alreadyVisited.Get_at(i);
+			byte[] bry = (byte[])alreadyVisited.GetAt(i);
 			if (toVisitNext.Has(bry))
 				toVisitNext.Del(bry);
 		}

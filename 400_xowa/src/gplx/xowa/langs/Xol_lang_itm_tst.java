@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.langs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
+import org.junit.*;
 public class Xol_lang_itm_tst {
 	private final Xol_lang_itm_fxt fxt = new Xol_lang_itm_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -22,7 +25,7 @@ public class Xol_lang_itm_tst {
 		Xol_lang_itm lang = fxt.Make("qqq");
 		fxt.Init_fallback_bry(lang, "en");
 		fxt.Init_fallback_bry(lang, "en"); // dupes would throw error; note that dupes can happen b/c "en" is default language; EX: isRTL("gl") -> "pt-br,en" -> "pt,en"
-		Gftest.Eq__str("en", lang.Fallback_bry());
+		GfoTstr.Eq("en", lang.Fallback_bry());
 	}
 }
 class Xol_lang_itm_fxt {
@@ -31,9 +34,9 @@ class Xol_lang_itm_fxt {
 		fxt = new Xop_fxt();
 	}
 	public Xol_lang_itm Make(String code) {
-		return new Xol_lang_itm(fxt.App().Lang_mgr(), Bry_.new_a7(code));
+		return new Xol_lang_itm(fxt.App().Lang_mgr(), BryUtl.NewA7(code));
 	}
 	public void Init_fallback_bry(Xol_lang_itm lang, String itm) {
-		lang.Fallback_bry_(Bry_.new_u8(itm));
+		lang.Fallback_bry_(BryUtl.NewU8(itm));
 	}
 }

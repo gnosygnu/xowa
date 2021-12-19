@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.primitives;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
 public abstract class Obj_ary_parser_base {
 	int pos_len = 4; int[] pos;
 	protected abstract void Ary_len_(int v);

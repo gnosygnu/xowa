@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+package gplx.xowa.guis.views.boots;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 public class Xog_error_data {
 	public Xog_error_data(String full_msg, String err_details, String err_msg) {
@@ -25,10 +27,10 @@ public class Xog_error_data {
 	public String Err_details() {return err_details;} private final String err_details;
 	public String Err_msg() {return err_msg;} private final String err_msg;
 	public static Xog_error_data new_(String err_msg, String err_trace) {
-		String err_details = String_.Concat_lines_nl_skip_last
+		String err_details = StringUtl.ConcatLinesNlSkipLast
 		( "OS: "		+ Op_sys.Cur().Os_name()
-		, "Java: "		+ System_.Prop__java_version() + " (" + Op_sys.Cur().Bitness_str() + " bit)"
-		, "Java path: " + System_.Prop__java_home()
+		, "Java: "		+ SystemUtl.Prop__java_version() + " (" + Op_sys.Cur().Bitness_str() + " bit)"
+		, "Java path: " + SystemUtl.Prop__java_home()
 		, "XOWA: "		+ Xoa_app_.Version
 		, "XOWA path: " + Env_.AppUrl().Raw()
 		, ""
@@ -36,7 +38,7 @@ public class Xog_error_data {
 		, "Stack: "		+ err_trace
 		);
 		String advice = Make_advice(err_msg);
-		String full_msg = String_.Concat_lines_nl_skip_last
+		String full_msg = StringUtl.ConcatLinesNlSkipLast
 		( "Sorry! XOWA failed to run!"
 		, ""
 		, advice
@@ -52,8 +54,8 @@ public class Xog_error_data {
 	}
 	private static String Make_advice(String err_msg) {
 		String check_troubleshooting_section = "check the TROUBLESHOOTING section in the readme.txt for known issues.";
-		if (String_.Has(err_msg, "Cannot load 64-bit SWT libraries on 32-bit JVM"))
-			return String_.Concat_lines_nl_skip_last
+		if (StringUtl.Has(err_msg, "Cannot load 64-bit SWT libraries on 32-bit JVM"))
+			return StringUtl.ConcatLinesNlSkipLast
 			( "Your Java installation looks like it's 32-bit. Please use the 32-bit package of XOWA."
 			, ""
 			, "For example, if you downloaded xowa_app_windows_64_v2.10.1.1.zip (64-bit), download xowa_app_windows_v2.10.1.1.zip (32-bit)"

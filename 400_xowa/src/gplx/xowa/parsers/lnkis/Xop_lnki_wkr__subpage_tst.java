@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkis;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xop_lnki_wkr__subpage_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
@@ -45,21 +47,21 @@ public class Xop_lnki_wkr__subpage_tst {
 	@Test public void Slash() {	// PURPOSE: /B should show /B, not A/B; DATE:2014-01-02
 		fxt.Page_ttl_("A");
 		fxt.Test_parse_page_wiki_str
-		( "[[/B]]", String_.Concat_lines_nl_skip_last
+		( "[[/B]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/A/B\">/B</a>"
 		));
 	}
 	@Test public void Slash_w_slash() {	// PURPOSE: /B/ should show B, not /B; DATE:2014-01-02
 		fxt.Page_ttl_("A");
 		fxt.Test_parse_page_wiki_str
-		( "[[/B/]]", String_.Concat_lines_nl_skip_last
+		( "[[/B/]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/A/B\">B</a>"
 		));
 	}
 	@Test public void Leaf_w_ncr() {	// PURPOSE: /B&#x63; should not encode &#x63; PAGE:en.s:The_English_Constitution_(1894) DATE:2014-09-07
 		fxt.Page_ttl_("A");
 		fxt.Test_parse_page_wiki_str
-		( "[[/B&#x63;|B]]", String_.Concat_lines_nl_skip_last
+		( "[[/B&#x63;|B]]", StringUtl.ConcatLinesNlSkipLast
 		( "<a href=\"/wiki/A/Bc\">B</a>"
 		));
 	}

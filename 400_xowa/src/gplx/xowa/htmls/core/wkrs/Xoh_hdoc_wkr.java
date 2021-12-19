@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.langs.htmls.docs.*;
-import gplx.xowa.wikis.ttls.*;
+package gplx.xowa.htmls.core.wkrs;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.core.hzips.*;
 public interface Xoh_hdoc_wkr {
-	Bry_bfr Bfr();
-	void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end);
+	BryWtr Bfr();
+	void On_page_bgn(BryWtr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end);
 	void On_page_end();
 	void On_txt		(int rng_bgn, int rng_end);
 	void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data);

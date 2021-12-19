@@ -13,19 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.*;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.Gxw_tab_itm;
 import gplx.gfui.controls.standards.Gfui_tab_itm_data;
 import gplx.gfui.kits.core.Swt_kit;
-
+import gplx.types.errs.ErrUtl;
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.*;
 import org.eclipse.swt.events.*;
-import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.widgets.*;
 
 public class Swt_tab_itm implements Gxw_tab_itm, Swt_control, FocusListener {
@@ -41,7 +42,7 @@ public class Swt_tab_itm implements Gxw_tab_itm, Swt_control, FocusListener {
 	public Swt_kit Kit() {return kit;} private Swt_kit kit;
 	@Override public Control Under_control() {return null;}
 	@Override public Composite Under_composite() {return null;}
-	@Override public Control Under_menu_control() {throw Err_.new_unimplemented();}
+	@Override public Control Under_menu_control() {throw ErrUtl.NewUnimplemented();}
 	@Override public String Tab_name() {return tab_itm.getText();} @Override public void Tab_name_(String v) {tab_itm.setText(v);}
 	@Override public String Tab_tip_text() {return tab_itm.getToolTipText();} @Override public void Tab_tip_text_(String v) {tab_itm.setToolTipText(v);}
 	public void Subs_add(GfuiElem sub) {

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net.downloads; import gplx.*; import gplx.core.*; import gplx.core.net.*;
+package gplx.core.net.downloads;
+import gplx.libs.files.Io_url;
 public interface Http_download_wkr {
 	String Fail_msg();
 	Io_url Tmp_url();

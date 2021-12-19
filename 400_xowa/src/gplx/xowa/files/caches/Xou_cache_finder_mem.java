@@ -13,11 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.caches;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.files.repos.*;
 public class Xou_cache_finder_mem implements Xou_cache_finder {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(255);
 	private final Xof_img_size img_size = new Xof_img_size();
 	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public boolean Find(Xow_wiki wiki, byte[] page_url, Xof_fsdb_itm cur) {

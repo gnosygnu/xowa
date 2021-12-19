@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.languages; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.languages;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.*;
 import gplx.langs.regxs.*;
 import gplx.core.primitives.*;
@@ -25,7 +31,7 @@ import gplx.xowa.mediawiki.includes.cache.localisation.*;
 import gplx.xowa.mediawiki.includes.exception.*;
 public class XomwLanguage {
 	public Xol_lang_itm XoLang() {return xoLang;} private Xol_lang_itm xoLang = null;
-	private final Bry_bfr tmpBfr = Bry_bfr_.New();
+	private final BryWtr tmpBfr = BryWtr.New();
 //		/**
 //		* @var LanguageConverter
 //		*/
@@ -44,7 +50,7 @@ public class XomwLanguage {
 	private XomwNamespacesByName mNamespaceIds, namespaceAliases;
 	private byte[] digitGroupingPattern = null;
 	private final List_adp tmp_matches = List_adp_.New();
-	private final Bry_bfr tmp_commafy = Bry_bfr_.New();
+	private final BryWtr tmp_commafy = BryWtr.New();
 
 //		/**
 //		* ReplacementArray Object caches
@@ -383,7 +389,7 @@ public class XomwLanguage {
 
 	/**
 	* Returns true if a language code is of a valid form for the purposes of
-	* @gplx.Internal protected customisation of MediaWiki, via Messages*.php or *.json.
+	* public customisation of MediaWiki, via Messages*.php or *.json.
 	*
 	* @param String code
 	*
@@ -3364,11 +3370,11 @@ public class XomwLanguage {
 	* @param mixed number
 	* @return String
 	*/
-	private static byte[] DIGIT_GROUPING_PATTERN_MILLION = Bry_.new_a7("###,###,###");
+	private static byte[] DIGIT_GROUPING_PATTERN_MILLION = BryUtl.NewA7("###,###,###");
 	public byte[] commafy(byte[] number) {
 		// ignore nulls
 		if (number == null) {
-			return Bry_.Empty;
+			return BryUtl.Empty;
 		}
 
 		// get number vars
@@ -3406,11 +3412,11 @@ public class XomwLanguage {
 		}
 		int integerLen = integerEnd - integerBgn;
 
-		if (digitGroupingPattern == null || Bry_.Eq(digitGroupingPattern, DIGIT_GROUPING_PATTERN_MILLION)) {
+		if (digitGroupingPattern == null || BryLni.Eq(digitGroupingPattern, DIGIT_GROUPING_PATTERN_MILLION)) {
 			// default grouping is at thousands,  use the same for ###,###,### pattern too.
 			// return strrev((String)preg_replace('/(\d{3})(?=\d)(?!\d*\.)/', '1,', strrev(number)));
 			if (negative)
-				tmp_commafy.Add_byte(AsciiByte.Dash);
+				tmp_commafy.AddByte(AsciiByte.Dash);
 
 			// calculate seg before 1st comma
 			int seg_0 = (integerLen) % 3;
@@ -3420,20 +3426,20 @@ public class XomwLanguage {
 
 			// print digits before 1st comma; EX: 12345 . "12"
 			if (seg_0 > 0) {
-				tmp_commafy.Add_mid(number, integerBgn, integerBgn + seg_0);
+				tmp_commafy.AddMid(number, integerBgn, integerBgn + seg_0);
 				integerBgn = integerBgn + seg_0;
 			}
 
 			// print digits in groups of 3; add comma to start
 			for (int i = integerBgn; i < integerEnd; i += 3) {
-				tmp_commafy.Add_byte_comma();
-				tmp_commafy.Add_mid(number, i, i + 3);
+				tmp_commafy.AddByteComma();
+				tmp_commafy.AddMid(number, i, i + 3);
 			}
 
 			// print decimal portion if it exists
 			if (decimalExists)
-				tmp_commafy.Add_mid(number, decimalBgn, number.length);
-			return tmp_commafy.To_bry_and_clear();
+				tmp_commafy.AddMid(number, decimalBgn, number.length);
+			return tmp_commafy.ToBryAndClear();
 		}
 		else {
 			// Ref: http://cldr.unicode.org/translation/number-patterns
@@ -3446,7 +3452,7 @@ public class XomwLanguage {
 
 			// decimal exists; add it first
 			if (decimalBgn != -1)
-				tmp_commafy.Add_reverse_mid(number, decimalBgn, numberLen);
+				tmp_commafy.AddReverseMid(number, decimalBgn, numberLen);
 
 			// no integer portion; exit
 			if (integerBgn == -1) {
@@ -3485,7 +3491,7 @@ public class XomwLanguage {
 
 			while (start > integerBgn) {
 				// get rightmost grouping of "#" from digitGroupingPattern
-				Int_2_ref curMatch = (Int_2_ref)tmp_matches.Get_at(numMatches - 1);
+				Int_2_ref curMatch = (Int_2_ref)tmp_matches.GetAt(numMatches - 1);
 				int matchLen = curMatch.Val_1() - curMatch.Val_0();
 
 				// calc start / end positions based on matchLen
@@ -3495,7 +3501,7 @@ public class XomwLanguage {
 				}
 
 				// add number
-				tmp_commafy.Add_reverse_mid(number, start, end);
+				tmp_commafy.AddReverseMid(number, start, end);
 				end = start;
 				if (numMatches > 1) {
 					// use the last pattern for the rest of the number
@@ -3504,15 +3510,15 @@ public class XomwLanguage {
 
 				// add comma if more digits still available
 				if (start > integerBgn) {
-					tmp_commafy.Add_byte(AsciiByte.Comma);
+					tmp_commafy.AddByte(AsciiByte.Comma);
 				}
 			}
 
 			// add negative if exists
 			if (negative)
-				tmp_commafy.Add_byte(AsciiByte.Dash);
+				tmp_commafy.AddByte(AsciiByte.Dash);
 
-			return tmp_commafy.To_reversed_bry_and_clear();
+			return tmp_commafy.ToReversedBryAndClear();
 		}
 	}
 	public void setDigitGroupingPattern(byte[] v) {
@@ -4073,7 +4079,7 @@ public class XomwLanguage {
 			String form = (String)formItem.Val();
 			if (XophpRegex_.preg_match_bool(handleExplicitPluralForms_digits, XophpRegex_.MODIFIER_i, form)) {
 				int pos = XophpString_.strpos(form, "=");
-				if (String_.Eq(XophpString_.substr(form, 0, pos), count)) {
+				if (StringUtl.Eq(XophpString_.substr(form, 0, pos), count)) {
 					return XophpString_.substr(form, pos + 1);
 				}
 				XophpArray.unset(mutable, index);
@@ -4445,7 +4451,7 @@ public class XomwLanguage {
 //		}
 //
 //		/**
-//		* Get the @gplx.Internal protected language code for this language Object
+//		* Get the public language code for this language Object
 //		*
 //		* NOTE: The return value of this function is NOT HTML-safe and must be escaped with
 //		* htmlspecialchars() or similar

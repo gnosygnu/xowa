@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
+import gplx.libs.files.Io_url;
 public class IoEngine_xrg_xferFil {
 	public boolean Type_move() {return move;} private boolean move = false;
 	public Io_url Src() {return src;} Io_url src;
@@ -28,5 +29,5 @@ public class IoEngine_xrg_xferFil {
 		IoEngine_xrg_xferFil rv = new IoEngine_xrg_xferFil();
 		rv.src = src; rv.trg = trg; rv.move = move;
 		return rv;
-	}	IoEngine_xrg_xferFil() {}
+	}   IoEngine_xrg_xferFil() {}
 }

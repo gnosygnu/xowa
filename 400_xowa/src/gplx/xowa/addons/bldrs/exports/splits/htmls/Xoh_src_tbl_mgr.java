@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.splits.htmls;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.wikis.data.Xow_db_file;
 public class Xoh_src_tbl_mgr {
@@ -37,7 +37,7 @@ public class Xoh_src_tbl_mgr {
 	public void Cleanup() {
 		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
-			Xoh_page_tbl_itm itm = (Xoh_page_tbl_itm)hash.Get_at(i);
+			Xoh_page_tbl_itm itm = (Xoh_page_tbl_itm)hash.GetAt(i);
 			itm.Rls();
 		}
 		hash.Clear();

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
+package gplx.core.threads;
+import gplx.frameworks.invks.Gfo_invk;
 public interface Gfo_thread_cmd extends Gfo_invk {
 	void Cmd_ctor();
 	String Async_key();

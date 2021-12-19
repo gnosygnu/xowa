@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xot_invk_wkr__prepend_nl__tst {		
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
@@ -33,13 +35,13 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_list", "# a");
 		fxt.Init_defn_add("test_print", "{{{1}}}");
-		fxt.Test_parse_tmpl_str_test(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test(StringUtl.ConcatLinesNlSkipLast
 		( "{{test_print|"
 		, "{{test_list}}"	// note that there is a "\n" here, but test_list will return "#"; "#" should not be prepended with \n
 		, "{{test_list}}"
 		, "}}"
 		), "{{test}}"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( ""		// NOTE: \n still prints b/c of \n between "{{test_print|" and "{{test_list}}"; should trim ws at start;
 		, "# a"
 		, "# a"
@@ -56,7 +58,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		fxt.Init_defn_add("cquote"		, "*b");
 		fxt.Init_defn_add("blockquote"	, "<blockquote>{{{1}}}</blockquote>");
 		fxt.Test_html_full_str("a\n{{blockquote|{{cquote}}}}"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "<blockquote>"
 		, "<ul>"
@@ -71,7 +73,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		fxt.Init_defn_add("Nest_1"		, "a{{Nest_1_1}}");			// 0: no \n
 		fxt.Init_defn_add("Nest_1_1"	, "b\n{{Nest_1_1_1}}");		// 1: \n
 		fxt.Init_defn_add("Nest_1_1_1"	, "*c");					// 2: "*" should not prepend \n b/c (1) has \n; used to only check (0)
-		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", StringUtl.ConcatLinesNlSkipLast
 		( "ab"	// not prepended
 		, "*c"
 		));
@@ -81,7 +83,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		fxt.Init_defn_add("Nest_1"		, "a\n{{Nest_1_1}}");		// 0: no \n
 		fxt.Init_defn_add("Nest_1_1"	, "b{{Nest_1_1_1}}");		// 1: char
 		fxt.Init_defn_add("Nest_1_1_1"	, "*c");					// 2: "*" should prepend \n b/c (1) has char; used to check (0) and not prepend
-		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "b"	// prepended
 		, "*c"
@@ -92,7 +94,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		fxt.Init_defn_add("Nest_1"		, "a\n{{Nest_1_1}}");		// 0: \n
 		fxt.Init_defn_add("Nest_1_1"	, "{{Nest_1_1_1}}");		// 1: ""
 		fxt.Init_defn_add("Nest_1_1_1"	, "*b");					// 2: "*" should not prepend \n b/c (1) is empty and (0) has \n
-		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", StringUtl.ConcatLinesNlSkipLast
 		( "a"	// not prepended
 		, "*b"
 		));
@@ -102,7 +104,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		fxt.Init_defn_add("Nest_1"		, "a{{Nest_1_1}}");			// 0: no \n
 		fxt.Init_defn_add("Nest_1_1"	, "{{Nest_1_1_1}}");		// 1: ""
 		fxt.Init_defn_add("Nest_1_1_1"	, "*b");					// 2: "*" should prepend \n b/c (1) is empty and (0) has char
-		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test("{{Nest_1}}", "{{test}}", StringUtl.ConcatLinesNlSkipLast
 		( "a"	// prepended
 		, "*b"
 		));

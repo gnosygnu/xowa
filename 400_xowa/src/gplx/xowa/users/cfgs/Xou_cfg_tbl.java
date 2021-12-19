@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.cfgs; import gplx.*;
+package gplx.xowa.users.cfgs;
 import gplx.dbs.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class Xou_cfg_tbl implements Db_tbl {
 	public final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_key, fld_usr, fld_ctx, fld_val;
@@ -45,7 +48,7 @@ public class Xou_cfg_tbl implements Db_tbl {
 		stmt.Rls();
 	}
 	private void Update(int usr, String ctx, String key, String val) {
-		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_usr, fld_ctx, fld_key), fld_val);
+		Db_stmt stmt = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_usr, fld_ctx, fld_key), fld_val);
 		stmt.Clear().Val_str(fld_val, val).Crt_int(fld_usr, usr).Crt_str(fld_ctx, ctx).Crt_str(fld_key, key).Exec_update();
 		stmt.Rls();
 	}

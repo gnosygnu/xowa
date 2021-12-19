@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.utls; import gplx.dbs.*;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class PoolIds_tst {
 	@Before public void setup() {
@@ -47,7 +48,7 @@ public class PoolIds_tst {
 	}
 	void tst_Fetch(String url, int expd) {
 		int actl = mgr.FetchNext(conn, url);
-		Tfds.Eq(expd, actl);
+		GfoTstr.EqObj(expd, actl);
 	}
 	Db_conn conn;
 	PoolIds mgr;

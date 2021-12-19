@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.JsonConfig.*;
-import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.content.*;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.mediawiki.*;
+import gplx.xowa.mediawiki.includes.content.*;
 public class JCContent extends TextContent { 	/** @var array */
 	private Object rawData = null;
 	/** @var stdClass|array */
@@ -83,10 +86,10 @@ public class JCContent extends TextContent { 	/** @var array */
 		return this.status.isGood();
 	}
 
-	private static final byte[] Bry__ary__empty = Bry_.new_a7("{}");
+	private static final byte[] Bry__ary__empty = BryUtl.NewA7("{}");
 	public boolean isEmpty() {
-		byte[] text = Bry_.Trim(this.getNativeData());
-		return Bry_.Len_eq_0(text) || Bry_.Eq(text, Bry__ary__empty);
+		byte[] text = BryUtl.Trim(this.getNativeData());
+		return BryUtl.IsNullOrEmpty(text) || BryLni.Eq(text, Bry__ary__empty);
 	}
 
 	/**

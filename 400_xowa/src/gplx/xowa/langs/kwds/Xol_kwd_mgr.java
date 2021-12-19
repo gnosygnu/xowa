@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.kwds; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.kwds;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.langs.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_kwd_mgr implements Gfo_invk {
@@ -43,13 +50,13 @@ public class Xol_kwd_mgr implements Gfo_invk {
 				kwd_default_trie = Btrie_slim_mgr.new_(grp.Case_match());
 				for (int i = 0; i < len; i++) {
 					Xol_kwd_itm itm = grp.Itms()[i];
-					kwd_default_trie.Add_obj(itm.Val(), itm);
+					kwd_default_trie.AddObj(itm.Val(), itm);
 				}
 			}
 		}
 		return kwd_default_trie == null
-			? Bry_.Has_at_bgn(match, kwd_default_key, 0, match_len)
-			: kwd_default_trie.Match_bgn(match, 0, match_len) != null
+			? BryUtl.HasAtBgn(match, kwd_default_key, 0, match_len)
+			: kwd_default_trie.MatchBgn(match, 0, match_len) != null
 			;
 	}
 	public Xol_kwd_grp Get_at(int id) {return grps[id];}
@@ -63,7 +70,7 @@ public class Xol_kwd_mgr implements Gfo_invk {
 	}
 	public Xol_kwd_grp New(boolean case_match, int id, String... words_str) {
 		Xol_kwd_grp rv = Get_or_new(id);
-		rv.Srl_load(case_match, Bry_.Ary(words_str));
+		rv.Srl_load(case_match, BryUtl.Ary(words_str));
 		return rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -78,7 +85,7 @@ public class Xol_kwd_mgr implements Gfo_invk {
 		int len = grp.Itms().length;
 		for (int i = 0; i < len; i++) {
 			Xol_kwd_itm itm = grp.Itms()[i];
-			rv.Add_obj(itm.Val(), itm);
+			rv.AddObj(itm.Val(), itm);
 		}
 		return rv;
 	}

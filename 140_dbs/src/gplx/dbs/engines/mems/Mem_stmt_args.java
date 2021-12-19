@@ -13,16 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*;
-import gplx.core.criterias.*;
+package gplx.dbs.engines.mems;
+import gplx.core.criterias.Criteria;
+import gplx.core.criterias.Criteria_;
+import gplx.core.criterias.Criteria_between;
+import gplx.core.criterias.Criteria_bool_base;
+import gplx.core.criterias.Criteria_fld;
+import gplx.core.criterias.Criteria_in;
+import gplx.core.criterias.Criteria_not;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 public class Mem_stmt_args {
 	private final List_adp list = List_adp_.New();
 	private int cur_idx = -1;
 	public void Clear() {list.Clear(); cur_idx = -1;}
-	public void Add(String k, Object v) {list.Add(Keyval_.new_(k, v));}
-	public Keyval Get_next() {
+	public void Add(String k, Object v) {list.Add(KeyVal.NewStr(k, v));}
+	public KeyVal Get_next() {
 		int idx = ++cur_idx;
-		return idx == list.Len() ? null: (Keyval)list.Get_at(idx);
+		return idx == list.Len() ? null: (KeyVal)list.GetAt(idx);
 	}
 }
 class Mem_stmt_args_ {
@@ -37,8 +48,8 @@ class Mem_stmt_args_ {
 				case Criteria_.Tid_comp:
 				case Criteria_.Tid_like:
 				case Criteria_.Tid_iomatch:
-					Keyval kvp = args.Get_next();
-					if (!String_.Eq(kvp.Key(), fld.Key())) throw Err_.new_("db", "fld_crt.key mismatch", "fld.key", fld_key, "kvp.key", kvp.Key());
+					KeyVal kvp = args.Get_next();
+					if (!StringUtl.Eq(kvp.KeyToStr(), fld.Key())) throw ErrUtl.NewArgs("fld_crt.key mismatch", "fld.key", fld_key, "kvp.key", kvp.KeyToStr());
 					sub.Val_as_obj_(kvp.Val());
 					break;
 				case Criteria_.Tid_in:
@@ -52,7 +63,7 @@ class Mem_stmt_args_ {
 					crt_between.Lo_((Comparable)(args.Get_next()).Val());
 					crt_between.Hi_((Comparable)(args.Get_next()).Val());
 					break;
-				default: throw Err_.new_unhandled(sub.Tid());
+				default: throw ErrUtl.NewUnhandled(sub.Tid());
 			}
 		}
 		else {
@@ -68,7 +79,7 @@ class Mem_stmt_args_ {
 					Criteria_not crt_not = (Criteria_not)crt;
 					Fill(args, crt_not.Crt());
 					break;
-				default: throw Err_.new_unhandled(tid);
+				default: throw ErrUtl.NewUnhandled(tid);
 			}
 		}
 	}

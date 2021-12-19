@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*;
-import gplx.objects.lists.CompareAble;
+package gplx.xowa.addons.bldrs.centrals.tasks;
+import gplx.types.commons.lists.CompareAble;
 import gplx.core.gfobjs.*;
+import gplx.types.basics.utls.IntUtl;
 import gplx.xowa.addons.bldrs.centrals.steps.*;
 public class Xobc_task_itm implements CompareAble {
 	private final int task_sort;
@@ -37,7 +38,7 @@ public class Xobc_task_itm implements CompareAble {
 	public boolean				Step_is_last()	{return step.Step_seqn() == step_count - 1;}
 	public void				Task_status_(byte v) {task_status = v;}		// called when task moves from init -> working -> suspended -> done
 	public void				Task_seqn_(int v) {this.task_seqn = v;}		// called when task is init'd from db, or added to list
-	public int				compareTo(Object obj) {Xobc_task_itm comp = (Xobc_task_itm)obj; return Int_.Compare(task_seqn, comp.task_seqn);}
+	public int				compareTo(Object obj) {Xobc_task_itm comp = (Xobc_task_itm)obj; return IntUtl.Compare(task_seqn, comp.task_seqn);}
 
 	public Gfobj_nde Save_to(Gfobj_nde nde) {
 		nde.Add_int	("task_id"				, task_id);

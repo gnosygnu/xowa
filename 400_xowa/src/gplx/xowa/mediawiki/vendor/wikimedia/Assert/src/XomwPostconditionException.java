@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 
 package gplx.xowa.mediawiki.vendor.wikimedia.Assert.src;
 
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.XophpLogicException;
 
 // MW.SRC:1.33.1
@@ -30,5 +30,5 @@ import gplx.xowa.mediawiki.XophpLogicException;
  * @copyright Wikimedia Deutschland e.V.
  */
 public class XomwPostconditionException extends XophpLogicException implements XomwAssertionException {
-    public XomwPostconditionException(String fmt, Object... args) {super(String_.Format(fmt, args));}
+    public XomwPostconditionException(String fmt, Object... args) {super(StringUtl.Format(fmt, args));}
 }

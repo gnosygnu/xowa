@@ -13,19 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.tags; import gplx.*;
-import gplx.core.primitives.*;
+package gplx.xowa.htmls.core.wkrs.xndes.tags;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.wrappers.ByteRef;
 import gplx.xowa.htmls.core.wkrs.xndes.atrs.*;
 public class Xohz_tag_regy {
 	private final Ordered_hash keys = Ordered_hash_.New_bry();
-	private final Hash_adp uids = Hash_adp_.New(); private final Byte_obj_ref uids_ref = Byte_obj_ref.zero_();
+	private final Hash_adp uids = Hash_adp_.New(); private final ByteRef uids_ref = ByteRef.NewZero();
 	public Xohz_atr_regy Atr_regy() {return atr_regy;} private final Xohz_atr_regy atr_regy = new Xohz_atr_regy();
 	public Xohz_tag Get_by_key(byte[] key)	{return (Xohz_tag)keys.GetByOrNull(key);}
-	public Xohz_tag Get_by_uid(byte uid)	{return (Xohz_tag)uids.GetByOrNull(uids_ref.Val_(uid));}
+	public Xohz_tag Get_by_uid(byte uid)	{return (Xohz_tag)uids.GetByOrNull(uids_ref.ValSet(uid));}
 	public Xohz_tag_regy Add(int uid, byte[] key, int flag_len, byte[] atr_key) {
 		Xohz_tag tag = new Xohz_tag(uid, key, flag_len, atr_regy.Resolve(atr_key));
 		keys.Add(key, tag);
-		uids.Add(Byte_obj_ref.new_((byte)uid), tag);
+		uids.Add(ByteRef.New((byte)uid), tag);
 		return this;
 	}
 }

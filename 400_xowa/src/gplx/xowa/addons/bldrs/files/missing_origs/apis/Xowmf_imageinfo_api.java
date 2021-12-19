@@ -13,58 +13,69 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*; import gplx.xowa.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.files.downloads.*;
+package gplx.xowa.addons.bldrs.files.missing_origs.apis;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.files.downloads.Xof_download_wkr;
 public class Xowmf_imageinfo_api {
 	private final Xof_download_wkr download_wkr;
 	private final Ordered_hash temp_hash = Ordered_hash_.New();
-	public static final byte[] FILE_NS_PREFIX = Bry_.new_a7("File:");
+	public static final byte[] FILE_NS_PREFIX = BryUtl.NewA7("File:");
 	public Xowmf_imageinfo_api(Xof_download_wkr download_wkr) {
 		this.download_wkr = download_wkr;
 	}
 	public void	Find_by_list(Ordered_hash src, byte repo_id, String api_domain, int idx) {
 		// fail if web access disabled
 		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) {
-			throw Err_.new_wo_type("web access must be enabled for missing_origs cmd");
+			throw ErrUtl.NewArgs("web access must be enabled for missing_origs cmd");
 		}
 
 		Json_parser parser = new Json_parser();			
 		Gfo_url_encoder encoder = Gfo_url_encoder_.New__http_url().Make();
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = src.Len();
 		try {
 			// loop until all titles found
 			while (idx < len) {
 				// generate api: EX: https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=timestamp|size|mediatype|mime&redirects&iilimit=500&titles=File:Different%20Faces%20Neptune.jpg|File:East.svg
 				// generate everything up to titles
-				bfr.Add_str_a7("https://");
-				bfr.Add_str_a7(api_domain);
-				bfr.Add_str_a7("/w/api.php?action=query");
-				bfr.Add_str_a7("&format=json"); // json easier to use than xml
-				bfr.Add_str_a7("&iilimit=1"); // limit to 1 revision history (default will return more); EX:File:Different_Faces_Neptune.jpg
-				bfr.Add_str_a7("&redirects"); // show redirects
-				bfr.Add_str_a7("&prop=imageinfo&iiprop=timestamp|size|mediatype|mime"); // list of props; NOTE: "url" / "sha1" for future; "bitdepth" always 0?
-				bfr.Add_str_a7("&titles=");
+				bfr.AddStrA7("https://");
+				bfr.AddStrA7(api_domain);
+				bfr.AddStrA7("/w/api.php?action=query");
+				bfr.AddStrA7("&format=json"); // json easier to use than xml
+				bfr.AddStrA7("&iilimit=1"); // limit to 1 revision history (default will return more); EX:File:Different_Faces_Neptune.jpg
+				bfr.AddStrA7("&redirects"); // show redirects
+				bfr.AddStrA7("&prop=imageinfo&iiprop=timestamp|size|mediatype|mime"); // list of props; NOTE: "url" / "sha1" for future; "bitdepth" always 0?
+				bfr.AddStrA7("&titles=");
 
 				// add titles; EX: File:A.png|File:B.png|
 				for (int i = idx; i < idx + 500; i++) {
-					Xowmf_imageinfo_item item = (Xowmf_imageinfo_item)src.Get_at(i);
+					Xowmf_imageinfo_item item = (Xowmf_imageinfo_item)src.GetAt(i);
 
 					// skip "|" if first
-					if (i != idx) bfr.Add_byte_pipe();
+					if (i != idx) bfr.AddBytePipe();
 
 					// add ttl_bry
 					byte[] ttl_bry = item.Lnki_ttl();
-					ttl_bry = Bry_.Add(FILE_NS_PREFIX, ttl_bry); // WMF API requires "File:" prefix; EX: "File:A.png" x> "A.png"
+					ttl_bry = BryUtl.Add(FILE_NS_PREFIX, ttl_bry); // WMF API requires "File:" prefix; EX: "File:A.png" x> "A.png"
 					ttl_bry = Xoa_ttl.Replace_unders(ttl_bry); // convert to spaces else will get extra "normalize" node
 					ttl_bry = encoder.Encode(ttl_bry); // encode for good form
 					bfr.Add(ttl_bry);
 				}
 				
 				// call api
-				byte[] rslt = download_wkr.Download_xrg().Exec_as_bry(bfr.To_str_and_clear());
+				byte[] rslt = download_wkr.Download_xrg().Exec_as_bry(bfr.ToStrAndClear());
 
 				// deserialize
 				Json_doc jdoc = parser.Parse(rslt);
@@ -93,7 +104,7 @@ public class Xowmf_imageinfo_api {
 						Xowmf_imageinfo_item trg_item = new Xowmf_imageinfo_item().Init_by_api_page(repo_id, page_id, title, size, width, height, mediatype, mime, timestamp);
 						temp_hash.Add(trg_item.Orig_file_ttl(), trg_item);
 					} catch (Exception e2) {
-						Gfo_usr_dlg_.Instance.Warn_many("", "", "missing_origs:failed to deserialize api obj; domain=~{0} ttl=~{1} json=~{2} err=~{3}", api_domain, title, page.Print_as_json(), Err_.Message_gplx_log(e2));
+						Gfo_usr_dlg_.Instance.Warn_many("", "", "missing_origs:failed to deserialize api obj; domain=~{0} ttl=~{1} json=~{2} err=~{3}", api_domain, title, page.Print_as_json(), ErrUtl.ToStrLog(e2));
 					}
 				}
 
@@ -118,13 +129,13 @@ public class Xowmf_imageinfo_api {
 				// loop over hash and copy back to src
 				int temp_hash_len = temp_hash.Len();
 				for (int i = 0; i < temp_hash_len; i++) {
-					Xowmf_imageinfo_item trg_item = (Xowmf_imageinfo_item)temp_hash.Get_at(i);
+					Xowmf_imageinfo_item trg_item = (Xowmf_imageinfo_item)temp_hash.GetAt(i);
 					Xowmf_imageinfo_item src_item = (Xowmf_imageinfo_item)temp_hash.GetByOrNull(trg_item.Lnki_ttl());
 					src_item.Copy_api_props(trg_item);
 				}
 			}
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "missing_origs:failure while calling wmf_api; domain=~{0} idx=~{1} err=~{2}", api_domain, idx, Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "missing_origs:failure while calling wmf_api; domain=~{0} idx=~{1} err=~{2}", api_domain, idx, ErrUtl.ToStrLog(e));
 		}
 	}
 }

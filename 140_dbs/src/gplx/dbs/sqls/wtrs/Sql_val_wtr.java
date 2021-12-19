@@ -14,59 +14,57 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls.wtrs;
-import gplx.Bry_bfr;
-import gplx.Byte_;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.Decimal_adp;
-import gplx.Decimal_adp_;
-import gplx.Double_;
-import gplx.Float_;
-import gplx.Int_;
-import gplx.Long_;
-import gplx.Object_;
-import gplx.Short_;
-import gplx.String_;
-import gplx.Type_ids_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.ShortUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDecimal;
 public class Sql_val_wtr {
 //		private final Bry_bfr tmp_bfr = Bry_bfr_.New(32);
 	public byte Seq__quote = AsciiByte.Apos, Seq__escape = AsciiByte.Backslash;
-	public void Bld_val(Bry_bfr bfr, Sql_wtr_ctx ctx, Object val) {
+	public void Bld_val(BryWtr bfr, Sql_wtr_ctx ctx, Object val) {
 		if (ctx.Mode_is_prep) {
-			bfr.Add_byte(AsciiByte.Question);
+			bfr.AddByte(AsciiByte.Question);
 			return;
 		}
 		if (val == null) {
-			bfr.Add_str_a7("NULL");
+			bfr.AddStrA7("NULL");
 			return;
 		}
-		int tid_type = Type_ids_.To_id_by_type(val.getClass());
+		int tid_type = TypeIds.ToIdByCls(val.getClass());
 		switch (tid_type) {
-			case Type_ids_.Id__bool:			Bld_val__bool		(bfr, BoolUtl.Cast(val)); break;
-			case Type_ids_.Id__byte:			Bld_val__byte		(bfr, Byte_.Cast(val)); break;
-			case Type_ids_.Id__short:			Bld_val__short		(bfr, Short_.cast(val)); break;
-			case Type_ids_.Id__int:			Bld_val__int		(bfr, Int_.Cast(val)); break;
-			case Type_ids_.Id__long:			Bld_val__long		(bfr, Long_.cast(val)); break;
-			case Type_ids_.Id__float:			Bld_val__float		(bfr, Float_.cast(val)); break;
-			case Type_ids_.Id__double:			Bld_val__double		(bfr, Double_.cast(val)); break;
-			case Type_ids_.Id__decimal:		Bld_val__decimal	(bfr, Decimal_adp_.cast(val)); break;
-			case Type_ids_.Id__str:			Bld_val__str		(bfr, String_.cast(val)); break;
-			case Type_ids_.Id__date:			Bld_val__date		(bfr, DateAdp_.cast(val)); break;
-			case Type_ids_.Id__obj:			Bld_val__str		(bfr, Object_.Xto_str_strict_or_null(val)); break;
+			case TypeIds.IdBool:			Bld_val__bool		(bfr, BoolUtl.Cast(val)); break;
+			case TypeIds.IdByte:			Bld_val__byte		(bfr, ByteUtl.Cast(val)); break;
+			case TypeIds.IdShort:			Bld_val__short		(bfr, ShortUtl.Cast(val)); break;
+			case TypeIds.IdInt:			Bld_val__int		(bfr, IntUtl.Cast(val)); break;
+			case TypeIds.IdLong:			Bld_val__long		(bfr, LongUtl.Cast(val)); break;
+			case TypeIds.IdFloat:			Bld_val__float		(bfr, FloatUtl.Cast(val)); break;
+			case TypeIds.IdDouble:			Bld_val__double		(bfr, DoubleUtl.Cast(val)); break;
+			case TypeIds.IdDecimal:		Bld_val__decimal	(bfr, (GfoDecimal)val); break;
+			case TypeIds.IdStr:			Bld_val__str		(bfr, StringUtl.Cast(val)); break;
+			case TypeIds.IdDate:			Bld_val__date		(bfr, ((GfoDate)val)); break;
+			case TypeIds.IdObj:			Bld_val__str		(bfr, ObjectUtl.ToStrOrNull(val)); break;
 		}
 	}
-	public void Bld_val__bool		(Bry_bfr bfr, boolean val)			{bfr.Add_int_digits(1, val ? 1 : 0);}	// NOTE: save boolean to 0 or 1 b/c sqlite doesn't support true / false //{bfr.Add_str_a7(val ? "true" : "false");}
-	public void Bld_val__byte		(Bry_bfr bfr, byte val)			{bfr.Add_byte_variable(val);}
-	public void Bld_val__short		(Bry_bfr bfr, short val)		{bfr.Add_short_variable(val);}
-	public void Bld_val__int		(Bry_bfr bfr, int val)			{bfr.Add_int_variable(val);}
-	public void Bld_val__long		(Bry_bfr bfr, long val)			{bfr.Add_long_variable(val);}
-	public void Bld_val__float		(Bry_bfr bfr, float val)		{bfr.Add_float(val);}
-	public void Bld_val__double		(Bry_bfr bfr, double val)		{bfr.Add_double(val);}
-	public void Bld_val__date		(Bry_bfr bfr, DateAdp val)		{bfr.Add_str_u8_many("'", val.XtoStr_gplx_long(), "'");}
-	public void Bld_val__decimal	(Bry_bfr bfr, Decimal_adp val)	{bfr.Add_str_u8_many("'", val.To_str(), "'");}
-	public void Bld_val__str		(Bry_bfr bfr, String val) {
+	public void Bld_val__bool		(BryWtr bfr, boolean val)			{bfr.AddIntDigits(1, val ? 1 : 0);}	// NOTE: save boolean to 0 or 1 b/c sqlite doesn't support true / false //{bfr.Add_str_a7(val ? "true" : "false");}
+	public void Bld_val__byte		(BryWtr bfr, byte val)			{bfr.AddByteVariable(val);}
+	public void Bld_val__short		(BryWtr bfr, short val)		{bfr.AddShortVariable(val);}
+	public void Bld_val__int		(BryWtr bfr, int val)			{bfr.AddIntVariable(val);}
+	public void Bld_val__long		(BryWtr bfr, long val)			{bfr.AddLongVariable(val);}
+	public void Bld_val__float		(BryWtr bfr, float val)		{bfr.AddFloat(val);}
+	public void Bld_val__double		(BryWtr bfr, double val)		{bfr.AddDouble(val);}
+	public void Bld_val__date		(BryWtr bfr, GfoDate val)		{bfr.AddStrU8Many("'", val.ToStrGplxLong(), "'");}
+	public void Bld_val__decimal	(BryWtr bfr, GfoDecimal val)	{bfr.AddStrU8Many("'", val.ToStr(), "'");}
+	public void Bld_val__str		(BryWtr bfr, String val) {
 //			byte[] bry = Bry_.new_u8(val); int len = bry.length; int pos = 0; int prv = -1; boolean dirty = false;
 //			while (true) {
 //				if (pos == len) break;
@@ -85,21 +83,21 @@ public class Sql_val_wtr {
 //			}
 //			if (dirty && prv != -1) tmp_bfr.Add_mid(bry, prv, len);
 
-		bfr.Add_byte(Seq__quote);
-		bfr.Add_str_u8(String_.Replace(val, "'", "''"));
+		bfr.AddByte(Seq__quote);
+		bfr.AddStrU8(StringUtl.Replace(val, "'", "''"));
 //			if (dirty)
 //				bfr.Add_bfr_and_clear(tmp_bfr);
 //			else
 //				bfr.Add(bry);
-		bfr.Add_byte(Seq__quote);
+		bfr.AddByte(Seq__quote);
 	}
 }
-class Sql_val_wtr_sqlite extends Sql_val_wtr {	@Override public void Bld_val__bool(Bry_bfr bfr, boolean val) {
-		bfr.Add_int_digits(1, val ? 1 : 0);	// NOTE: save boolean to 0 or 1 b/c sqlite doesn't support true / false
+class Sql_val_wtr_sqlite extends Sql_val_wtr {	@Override public void Bld_val__bool(BryWtr bfr, boolean val) {
+		bfr.AddIntDigits(1, val ? 1 : 0);	// NOTE: save boolean to 0 or 1 b/c sqlite doesn't support true / false
 	}
 }
-class Sql_val_wtr_mysql extends Sql_val_wtr {	@Override public void Bld_val__str(Bry_bfr bfr, String val) {
-		if (String_.Has(val, "\\")) val = String_.Replace(val, "\\", "\\\\");
+class Sql_val_wtr_mysql extends Sql_val_wtr {	@Override public void Bld_val__str(BryWtr bfr, String val) {
+		if (StringUtl.Has(val, "\\")) val = StringUtl.Replace(val, "\\", "\\\\");
 		super.Bld_val__str(bfr, val);
 	}
 }

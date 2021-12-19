@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups.keeplists; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*; import gplx.xowa.htmls.modules.popups.*;
+package gplx.xowa.htmls.modules.popups.keeplists;
+import gplx.types.basics.utls.BryLni;
+import gplx.xowa.*;
+import gplx.xowa.htmls.modules.popups.*;
 import gplx.langs.dsvs.*;
 import gplx.langs.regxs.*;
 import gplx.xowa.langs.cases.*;
@@ -27,9 +30,9 @@ public class Xop_keeplist_wiki_srl extends Dsv_wkr_base {
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {
-			case 0: wiki_bry  = Xoa_ttl.Replace_spaces(case_mgr.Case_build_lower(Bry_.Mid(src, bgn, end))); return true;
-			case 1: keeps_bry = Xoa_ttl.Replace_spaces(case_mgr.Case_build_lower(Bry_.Mid(src, bgn, end))); return true;
-			case 2: skips_bry = Xoa_ttl.Replace_spaces(case_mgr.Case_build_lower(Bry_.Mid(src, bgn, end))); return true;
+			case 0: wiki_bry  = Xoa_ttl.Replace_spaces(case_mgr.Case_build_lower(BryLni.Mid(src, bgn, end))); return true;
+			case 1: keeps_bry = Xoa_ttl.Replace_spaces(case_mgr.Case_build_lower(BryLni.Mid(src, bgn, end))); return true;
+			case 2: skips_bry = Xoa_ttl.Replace_spaces(case_mgr.Case_build_lower(BryLni.Mid(src, bgn, end))); return true;
 			default: return false;
 		}
 	}
@@ -37,7 +40,7 @@ public class Xop_keeplist_wiki_srl extends Dsv_wkr_base {
 		if (wiki_bry == null) throw parser.Err_row_bgn("wikis missing", pos);
 		if (keeps_bry == null) throw parser.Err_row_bgn("keeps missing", pos);
 		if (skips_bry == null) throw parser.Err_row_bgn("skips missing", pos);
-		if (!Bry_.Eq(wiki_bry, wiki.Domain_bry())) return;
+		if (!BryLni.Eq(wiki_bry, wiki.Domain_bry())) return;
 		Xop_keeplist_wiki tmpl_keeplist = Get_tmpl_keeplist();
 		Gfo_pattern[] keeps = Gfo_pattern.Parse_to_ary(keeps_bry);
 		Gfo_pattern[] skips = Gfo_pattern.Parse_to_ary(skips_bry);

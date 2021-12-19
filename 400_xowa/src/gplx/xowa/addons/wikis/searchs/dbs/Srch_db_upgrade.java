@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*;
+package gplx.xowa.addons.wikis.searchs.dbs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 public class Srch_db_upgrade {
 	private final Xow_wiki wiki;
 	public Srch_db_upgrade(Xow_wiki wiki, Srch_db_mgr search_db_mgr) {
@@ -23,7 +24,7 @@ public class Srch_db_upgrade {
 	public void Upgrade() {
 		if (!wiki.App().Mode().Tid_is_gui()) return;	// ignore if html-server or drd-app
 		Xoae_app app = ((Xoae_app)wiki.App());
-		boolean ok = app.Gui_mgr().Kit().Ask_ok_cancel("", "", String_.Concat_lines_nl_skip_last
+		boolean ok = app.Gui_mgr().Kit().Ask_ok_cancel("", "", StringUtl.ConcatLinesNlSkipLast
 		( "XOWA would like to upgrade your search database for " + wiki.Domain_str() + "."
 		, ""
 		, "* Press OK to upgrade. This may take an hour for English Wikipedia."

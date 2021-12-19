@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.apps.utls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
 public class Xoa_url_encoder__tst {
 	private final Xoa_url_encoder__fxt fxt = new Xoa_url_encoder__fxt();
 	@Test public void Syms__diff() 	{fxt.Test__encode(" &'=+", "_%26%27%3D%2B");}
@@ -24,6 +26,6 @@ public class Xoa_url_encoder__tst {
 class Xoa_url_encoder__fxt {
 	private final Xoa_url_encoder encoder = new Xoa_url_encoder();
 	public void Test__encode(String raw, String expd) {
-		Gftest.Eq__bry(Bry_.new_u8(expd), encoder.Encode(Bry_.new_u8(raw)));
+		GfoTstr.Eq(BryUtl.NewU8(expd), encoder.Encode(BryUtl.NewU8(raw)));
 	}
 }

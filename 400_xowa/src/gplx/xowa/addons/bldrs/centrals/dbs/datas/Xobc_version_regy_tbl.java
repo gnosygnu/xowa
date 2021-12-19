@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.datas;
 import gplx.dbs.*;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDateNow;
 public class Xobc_version_regy_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_version_id, fld_version_date, fld_version_note;
@@ -31,7 +33,7 @@ public class Xobc_version_regy_tbl implements Db_tbl {
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 		conn.Stmt_insert(tbl_name, flds)
-			.Val_int(fld_version_id, 1).Val_str(fld_version_date, Datetime_now.Get().XtoStr_fmt_yyyy_MM_dd_HH_mm()).Val_str(fld_version_note, "initial")
+			.Val_int(fld_version_id, 1).Val_str(fld_version_date, GfoDateNow.Get().ToStrFmt_yyyy_MM_dd_HH_mm()).Val_str(fld_version_note, "initial")
 			.Exec_insert();
 	}
 	public Xobc_version_regy_itm Select_latest() {
@@ -40,7 +42,7 @@ public class Xobc_version_regy_tbl implements Db_tbl {
 			if (rdr.Move_next())
 				return new Xobc_version_regy_itm(rdr.Read_int(fld_version_id), rdr.Read_str(fld_version_date), rdr.Read_str(fld_version_note));
 			else
-				throw Err_.new_("", "version_regy does not have version");
+				throw ErrUtl.NewArgs("version_regy does not have version");
 		}
 		finally {rdr.Rls();}
 	}

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class z400_GfmlTypeMakr_tst {
 	@Before public void setup() {
@@ -51,7 +52,7 @@ public class z400_GfmlTypeMakr_tst {
 		tst_XtoAry(makr, "item", "item/pos");
 	}		
 	void tst_Owner(GfmlTypeMakr typeMakr, String expdKey) {
-		Tfds.Eq(expdKey, typeMakr.Owner().Key());
+		GfoTstr.EqObj(expdKey, typeMakr.Owner().Key());
 	}
 	void tst_XtoAry(GfmlTypeMakr typeMakr, String... expdAry) {
 		GfmlType[] actlTypeAry = typeMakr.Xto_bry();
@@ -59,6 +60,6 @@ public class z400_GfmlTypeMakr_tst {
 		for (int i = 0; i < actlAry.length; i++) {
 			actlAry[i] = actlTypeAry[i].Key();
 		}
-		Tfds.Eq_ary(expdAry, actlAry);
+		GfoTstr.EqLines(expdAry, actlAry);
 	}
 }

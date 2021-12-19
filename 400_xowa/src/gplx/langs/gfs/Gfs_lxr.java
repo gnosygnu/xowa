@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.gfs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 interface Gfs_lxr {
 	int Lxr_tid();
 	int Process(Gfs_parser_ctx ctx, int bgn, int end);
@@ -54,9 +59,9 @@ class Gfs_lxr_comment_flat implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_comment;}
 	public int Process(Gfs_parser_ctx ctx, int lxr_bgn, int lxr_end) {
 		byte[] src = ctx.Src(); int src_len = ctx.Src_len();
-		int end_pos = Bry_find_.Find_fwd(src, end_bry, lxr_end, src_len);
+		int end_pos = BryFind.FindFwd(src, end_bry, lxr_end, src_len);
 		// if (end_pos == Bry_find_.Not_found) throw Err_.new_fmt_("comment is not closed: {0}", String_.new_u8(end_bry));	
-		return (end_pos == Bry_find_.Not_found) 
+		return (end_pos == BryFind.NotFound)
 			? src_len						// allow eos to terminate flat comment; needed for "tidy-always-adds-nl-in-textarea" fix; NOTE: DATE:2014-06-21
 			: end_pos + end_bry_len;		// position after end_bry
 	}
@@ -148,25 +153,25 @@ class Gfs_lxr_quote implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_quote;}
 	public int Process(Gfs_parser_ctx ctx, int lxr_bgn, int lxr_end) {
 		byte[] src = ctx.Src(); int src_len = ctx.Src_len();
-		int end_pos = Bry_find_.Find_fwd(src, end_bry, lxr_end, src_len);
-		if (end_pos == Bry_find_.Not_found) throw Err_.new_wo_type("quote is not closed", "end", String_.new_u8(end_bry));
-		Bry_bfr bfr = ctx.Tmp_bfr().Clear();
+		int end_pos = BryFind.FindFwd(src, end_bry, lxr_end, src_len);
+		if (end_pos == BryFind.NotFound) throw ErrUtl.NewArgs("quote is not closed", "end", StringUtl.NewU8(end_bry));
+		BryWtr bfr = ctx.Tmp_bfr().Clear();
 		int prv_pos = lxr_end;
 		int nxt_pos = end_pos + end_bry_len;
-		if (Bry_.Match(src, nxt_pos, nxt_pos + end_bry_len, end_bry)) {	// end_bry is doubled; EX: end_bry = ' and raw = a''
+		if (BryLni.Eq(src, nxt_pos, nxt_pos + end_bry_len, end_bry)) {	// end_bry is doubled; EX: end_bry = ' and raw = a''
 			while (true) {
-				bfr.Add_mid(src, prv_pos, end_pos);		// add everything up to end_bry
+				bfr.AddMid(src, prv_pos, end_pos);		// add everything up to end_bry
 				bfr.Add(end_bry);						// add end_bry
 				prv_pos = nxt_pos + end_bry_len;		// set prv_pos to after doubled end_bry
-				end_pos = Bry_find_.Find_fwd(src, end_bry, prv_pos, src_len);
-				if (end_pos == Bry_find_.Not_found) throw Err_.new_wo_type("quote is not closed", "end", String_.new_u8(end_bry));
+				end_pos = BryFind.FindFwd(src, end_bry, prv_pos, src_len);
+				if (end_pos == BryFind.NotFound) throw ErrUtl.NewArgs("quote is not closed", "end", StringUtl.NewU8(end_bry));
 				nxt_pos = end_pos + end_bry_len;
-				if (!Bry_.Match(src, nxt_pos, nxt_pos + end_bry_len, end_bry)) {
-					bfr.Add_mid(src, prv_pos, end_pos);
+				if (!BryLni.Eq(src, nxt_pos, nxt_pos + end_bry_len, end_bry)) {
+					bfr.AddMid(src, prv_pos, end_pos);
 					break;				
 				}
 			}
-			ctx.Make_atr_by_bry(lxr_bgn + bgn_bry_len, end_pos, bfr.To_bry_and_clear());
+			ctx.Make_atr_by_bry(lxr_bgn + bgn_bry_len, end_pos, bfr.ToBryAndClear());
 		}
 		else
 			ctx.Make_atr(lxr_bgn + bgn_bry_len, end_pos);

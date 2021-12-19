@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.lxrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+package gplx.xowa.xtns.math.texvcs.lxrs;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.btries.*; import gplx.xowa.xtns.math.texvcs.tkns.*;
 public class Texvc_lxr_trie_bldr {
 	public static Btrie_fast_mgr new_(Texvc_tkn_mkr tkn_mkr) {// REF.MW:/Math/textvccheck/lexer.mll
@@ -52,7 +53,7 @@ public class Texvc_lxr_trie_bldr {
 		Add_lxr_leaf(trie, tkn_mkr, lxr, tkn_tid, new Texvc_tkn__leaf_raw(), ary);
 	}
 	private static void Add_lxr_leaf_repl(Btrie_fast_mgr trie, Texvc_tkn_mkr tkn_mkr, int tid, String src, String trg) {
-		Add_lxr_leaf(trie, tkn_mkr, new Texvc_lxr__leaf(tid), tid, new Texvc_tkn__leaf_repl(tid, Bry_.new_u8(trg)), src);
+		Add_lxr_leaf(trie, tkn_mkr, new Texvc_lxr__leaf(tid), tid, new Texvc_tkn__leaf_repl(tid, BryUtl.NewU8(trg)), src);
 	}
 	private static void Add_lxr_leaf(Btrie_fast_mgr trie, Texvc_tkn_mkr tkn_mkr, Texvc_lxr lxr, int tkn_tid, Texvc_tkn proto, String... ary) {
 		tkn_mkr.Reg_singleton(tkn_tid, proto);

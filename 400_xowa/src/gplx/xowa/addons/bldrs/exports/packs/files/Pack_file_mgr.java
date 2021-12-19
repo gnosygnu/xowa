@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.bldrs.exports.packs.files;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*;
 import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.algos.*;
 import gplx.dbs.*;
@@ -40,7 +48,7 @@ public class Pack_file_mgr {
 
 		// build zip packs
 		Hash_algo hash_algo = Hash_algo_.New__md5();
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int hash_len = hash.Len();
 		for (int i = 0; i < hash_len; ++i) {
 			Pack_list list = (Pack_list)hash.Get_at(i);
@@ -74,14 +82,14 @@ public class Pack_file_mgr {
 					Pack_itm itm = (Pack_itm)list.Get_at(j);
 					byte[] owner_dir = host_eval.Eval_dir_name(wiki.Domain_itm());
 					Io_url src_url = itm.Zip_url();
-					Io_url trg_url = deploy_dir.GenSubFil_nest(String_.new_u8(owner_dir), src_url.NameAndExt());
+					Io_url trg_url = deploy_dir.GenSubFil_nest(StringUtl.NewU8(owner_dir), src_url.NameAndExt());
 					Io_mgr.Instance.MoveFil_args(src_url, trg_url, true).Exec();
 				}
 			}
 			Io_mgr.Instance.Delete_dir_empty(pack_dir);
 		}
 	}
-	private static void Make_task(Bry_bfr tmp_bfr, Xow_wiki wiki, String wiki_date, Xobc_data_db bc_db, Pack_hash hash, String task_type, int... list_tids) {
+	private static void Make_task(BryWtr tmp_bfr, Xow_wiki wiki, String wiki_date, Xobc_data_db bc_db, Pack_hash hash, String task_type, int... list_tids) {
 		// get packs
 		List_adp pack_list = List_adp_.New();
 		int list_tids_len = list_tids.length;
@@ -107,29 +115,29 @@ public class Pack_file_mgr {
 
 		// map steps
 		for (int i = 0; i < pack_list_len; ++i) {
-			Pack_itm itm = (Pack_itm)pack_list.Get_at(i);
+			Pack_itm itm = (Pack_itm)pack_list.GetAt(i);
 			int sm_id = bc_db.Conn().Sys_mgr().Autonum_next("step_map.sm_id");
 			bc_db.Tbl__step_map().Insert(sm_id, task_id, itm.Step_id(), i);
 		}
 	}
-	public static String Build_task_name(Bry_bfr tmp_bfr, Xow_wiki wiki, String wiki_date, String task_type, long raw_len) {// Simple Wikipedia - Articles (2016-06) [420.31 MB]
+	public static String Build_task_name(BryWtr tmp_bfr, Xow_wiki wiki, String wiki_date, String task_type, long raw_len) {// Simple Wikipedia - Articles (2016-06) [420.31 MB]
 		byte[] lang_key = wiki.Domain_itm().Lang_orig_key();
-		byte[] lang_name = Bry_.Len_eq_0(lang_key)	// species.wikimedia.org and other wikimedia wikis have no lang;
-			? Bry_.Empty
-			: Bry_.Add(gplx.xowa.langs.Xol_lang_stub_.Get_by_key_or_null(lang_key).Canonical_name(), AsciiByte.Space);		// EX: "Deutsch "
+		byte[] lang_name = BryUtl.IsNullOrEmpty(lang_key)	// species.wikimedia.org and other wikimedia wikis have no lang;
+			? BryUtl.Empty
+			: BryUtl.Add(gplx.xowa.langs.Xol_lang_stub_.Get_by_key_or_null(lang_key).Canonical_name(), AsciiByte.Space);		// EX: "Deutsch "
 		byte[] wiki_name = wiki.Domain_itm().Domain_type().Display_bry();													// EX: Wikipedia
 		String type_name = Get_task_name_by_task_type(task_type);
-		wiki_date = String_.Replace(wiki_date, ".", "-");
+		wiki_date = StringUtl.Replace(wiki_date, ".", "-");
 		String file_size = gplx.core.ios.Io_size_.To_str_new(tmp_bfr, raw_len, 2);
-		return String_.Format("{0}{1} - {2} ({3}) [{4}]", lang_name, wiki_name, type_name, wiki_date, file_size);
+		return StringUtl.Format("{0}{1} - {2} ({3}) [{4}]", lang_name, wiki_name, type_name, wiki_date, file_size);
 	}
 	private static String Get_task_name_by_task_type(String task_type) {
-		if		(String_.Eq(task_type, Xobc_task_regy_itm.Type__html))		return "Articles";
-		else if	(String_.Eq(task_type, Xobc_task_regy_itm.Type__file))		return "Images";
-		else if	(String_.Eq(task_type, Xobc_task_regy_itm.Type__text))		return "Wikitext";
+		if		(StringUtl.Eq(task_type, Xobc_task_regy_itm.Type__html))		return "Articles";
+		else if	(StringUtl.Eq(task_type, Xobc_task_regy_itm.Type__file))		return "Images";
+		else if	(StringUtl.Eq(task_type, Xobc_task_regy_itm.Type__text))		return "Wikitext";
 		else																return task_type;
 	}
-	private static void Make_pack(Xowe_wiki wiki, Io_url wiki_dir, byte[] wiki_abrv, String wiki_date, Xobc_data_db bc_db, Hash_algo hash_algo, Bry_bfr tmp_bfr, Pack_itm itm, int task_id) {
+	private static void Make_pack(Xowe_wiki wiki, Io_url wiki_dir, byte[] wiki_abrv, String wiki_date, Xobc_data_db bc_db, Hash_algo hash_algo, BryWtr tmp_bfr, Pack_itm itm, int task_id) {
 		// hash raws			
 		Io_url zip_url = itm.Zip_url();
 		Gfo_log_.Instance.Prog("hashing raw: " + zip_url.NameAndExt());
@@ -143,7 +151,7 @@ public class Pack_file_mgr {
 			byte[] raw_md5 = null;
 			try {raw_md5 = Hash_algo_utl.Calc_hash_w_prog_as_bry(hash_algo, raw_stream, Gfo_prog_ui_.Noop);}
 			finally {raw_stream.Rls();}
-			tmp_bfr.Add(raw_md5).Add_byte_space().Add_byte(AsciiByte.Star).Add_str_a7(raw_url.NameAndExt()).Add_byte_nl();
+			tmp_bfr.Add(raw_md5).AddByteSpace().AddByte(AsciiByte.Star).AddStrA7(raw_url.NameAndExt()).AddByteNl();
 			raw_size += raw_stream.Len();
 		}
 		Io_mgr.Instance.SaveFilBfr(md5_url, tmp_bfr);

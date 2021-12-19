@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_xnde_wkr__tblx_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -31,14 +33,14 @@ public class Xop_xnde_wkr__tblx_tst {
 	}
 	@Test public void Ws_bgn() {	// PURPOSE: some templates return leading ws; PAGE:en.w:UK
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"  <table>"
 			,	"    <tr>"
 			,	"      <td>a"
 			,	"      </td>"
 			,	"    </tr>"
 			,	"  </table>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -51,11 +53,11 @@ public class Xop_xnde_wkr__tblx_tst {
 	}
 	@Test public void Td_in_lnki_should_be_ignored() {// PURPOSE: \n| inside lnki should not be interpreted as table cell; EX: uk.w:Дніпро; DATE:2014-03-11
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "<table><tr><td>"
 		, "[[File:A.png|150px"
 		, "|B]]</td></tr></table>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<table>"
 		, "  <tr>"
 		, "    <td>"

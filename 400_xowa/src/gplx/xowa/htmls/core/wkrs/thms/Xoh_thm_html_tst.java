@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.thms;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_thm_html_tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
-	@Test  public void Image() {
-		fxt.Test__html("[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
+	@Test public void Image() {
+		fxt.Test__html("[[File:A.png|thumb|test_caption]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div class='thumb tright'>"
 		, "  <div class='thumbinner' style='width:220px;'>"
 		, "    <a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg='4|-1|-1|-1|-1|-1' alt='' src='' width='0' height='0'/></a>"
@@ -30,7 +31,7 @@ public class Xoh_thm_html_tst {
 		));
 	}
 	@Test public void Audio__link() {	// PURPOSE: handle IPA links; EX:[[File:Speakerlink-new.svg|11px|link=file:///C:/xowa/file/commons.wikimedia.org/orig/c/7/a/3/En-LudwigVanBeethoven.ogg|Listen]]; PAGE:en.w:Beethoven DATE:2015-12-28
-		fxt.Test__html("[[File:A.oga|11px|link=file:///C:/A.ogg|b]]", String_.Concat_lines_nl_skip_last
+		fxt.Test__html("[[File:A.oga|11px|link=file:///C:/A.ogg|b]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"thumb tright\">"
 		, "  <div class=\"thumbinner\" style=\"width:11px;\">"
 		, "    <div class=\"xowa_media_div\">"
@@ -45,8 +46,8 @@ public class Xoh_thm_html_tst {
 		, ""
 		));		
 	}
-	@Test  public void Video() {
-		fxt.Test__html("[[File:A.ogv|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
+	@Test public void Video() {
+		fxt.Test__html("[[File:A.ogv|thumb|test_caption]]", StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"thumb tright\">"
 		, "  <div class=\"thumbinner\" style=\"width:220px;\">"
 		, "    <div class=\"xowa_media_div\">"

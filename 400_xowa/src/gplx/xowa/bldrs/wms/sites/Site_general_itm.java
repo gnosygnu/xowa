@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-class Site_general_itm implements To_str_able {
+package gplx.xowa.bldrs.wms.sites;
+import gplx.frameworks.objects.ToStrAble;
+class Site_general_itm implements ToStrAble {
 	public Site_general_itm Ctor(byte[] main_page, byte[] base_url, byte[] site_name, byte[] logo, byte[] generator
 	, byte[] php_version, byte[] php_sapi, byte[] hhvm_version, byte[] db_type, byte[] db_version
 	, boolean image_whitelist_enabled, boolean lang_conversion, boolean title_conversion
@@ -106,5 +107,5 @@ class Site_general_itm implements To_str_able {
 	public int[] Thumb_limits() {return thumb_limits;} private int[] thumb_limits;
 	public int[] Image_limits() {return image_limits;} private int[] image_limits;
 	public byte[] Favicon() {return favicon;} private byte[] favicon;
-	public String To_str() {return "";}
+	public String ToStr() {return "";}
 }

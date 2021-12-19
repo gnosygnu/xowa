@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.installs;
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.core.threads.Gfo_thread_cmd;
 import gplx.core.threads.Gfo_thread_cmd_;
 import gplx.core.threads.Thread_adp_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.bldrs.Xob_bldr;
@@ -50,7 +50,7 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Process_async() {
 		Xoae_app app = install_mgr.App();
 		Xob_bldr bldr = app.Bldr();
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_a7(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(BryUtl.NewA7(wiki_key));
 		wiki.Init_assert();
 		bldr.Cmd_mgr().Clear();
 		Process_async_init(app, wiki, bldr);
@@ -59,7 +59,7 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 		catch (Exception e) {
 			running = false;
 			install_mgr.Cmd_mgr().Working_(BoolUtl.N);
-			throw Err_.new_exc(e, "xo", "error during import");
+			throw ErrUtl.NewArgs(e, "error during import");
 		}
 		app.Usr_dlg().Prog_none("", "clear", "");
 		app.Usr_dlg().Note_none("", "clear", "");
@@ -86,7 +86,7 @@ class Xoi_cmd_category2_categorylinks extends Xoi_cmd_wiki_download {	public Xoi
 class Xoi_cmd_category2_build extends Xoi_cmd_base {
 	public Xoi_cmd_category2_build(Xoi_setup_mgr install_mgr, String wiki_key) {this.Ctor(install_mgr, wiki_key); this.app = install_mgr.App(); this.wiki_key = wiki_key;} private Xoae_app app; private String wiki_key;
 	@Override public void Cmd_ctor() {
-		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki_key));
+		Xowe_wiki wiki = app.Wiki_mgr().Get_by_or_make(BryUtl.NewU8(wiki_key));
 		wiki.Import_cfg().Category_version_(gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr.Version_2);
 	}
 	@Override public String Async_key() {return KEY;} public static final String KEY = "wiki.category2.build";

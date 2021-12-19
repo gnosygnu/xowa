@@ -13,18 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.imgs; import gplx.*; import gplx.gfui.*;
-import java.awt.Graphics2D;
+package gplx.gfui.imgs;
+import gplx.frameworks.objects.Rls_able;
+import gplx.gfui.*;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import gplx.gfui.gfxs.*; import gplx.gfui.kits.core.*;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.errs.ErrUtl;
 public class ImageAdp_base implements ImageAdp, Rls_able {
-	@gplx.Internal protected ImageAdp_base(Image img) {this.under = img;}
+	public ImageAdp_base(Image img) {this.under = img;}
 	public Gfui_kit Kit() {return kit;} public void Kit_(Gfui_kit v) {this.kit = v;} Gfui_kit kit;
 	public SizeAdp Size() {
 		if (this == ImageAdp_.Null) return SizeAdp_.Null;
@@ -51,7 +54,7 @@ public class ImageAdp_base implements ImageAdp, Rls_able {
 	    boolean success = false;
 	    try {success = ImageIO.write((BufferedImage)under, fmtStr, fil);}
 	    catch (IOException e) {}
-	    if (!success) throw Err_.new_("gplx.gfui.imgs.SaveImageFailed", "save image failed", "srcUrl", url.Xto_api(), "trgFil", fil, "fmt", fmtStr);
+	    if (!success) throw ErrUtl.NewArgs("save image failed", "srcUrl", url.Xto_api(), "trgFil", fil, "fmt", fmtStr);
 		//#@endif
 			}
 	public ImageAdp Extract_image(RectAdp src_rect, SizeAdp trg_size) {return Extract_image(src_rect.X(), src_rect.Y(), src_rect.Width(), src_rect.Height(), trg_size.Width(), trg_size.Height());}

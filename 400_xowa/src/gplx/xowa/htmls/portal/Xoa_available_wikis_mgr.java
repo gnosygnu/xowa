@@ -14,17 +14,22 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.portal; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 public class Xoa_available_wikis_mgr implements Gfo_invk {
-	private Bry_fmtr itms_as_html_fmtr = Bry_fmtr.new_("\n        <li><a href=\"/site/~{domain}/\"~{itm_cls}>~{domain}</a></li>", "domain", "itm_cls");
+	private BryFmtr itms_as_html_fmtr = BryFmtr.New("\n        <li><a href=\"/site/~{domain}/\"~{itm_cls}>~{domain}</a></li>", "domain", "itm_cls");
 	public Xoa_available_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public String Itms_as_html() {
 		if (itms_as_html == null) {
 			String itm_cls = app.Usere().Wiki().Html_mgr().Head_mgr().Popup_mgr().Enabled() ? " class='xowa-hover-off'" : "";	// always add popup-disabled class in sidebar, even if popups aren't enabled; not worth effort to check cfg for get "current wiki"; DATE:2016-12-13
-			Bry_bfr tmp_bfr = Bry_bfr_.New();
+			BryWtr tmp_bfr = BryWtr.New();
 			Xow_xwiki_mgr xwiki_mgr = app.Usere().Wiki().Xwiki_mgr();
 			xwiki_mgr.Sort_by_key();
 			int len = xwiki_mgr.Len();
@@ -32,9 +37,9 @@ public class Xoa_available_wikis_mgr implements Gfo_invk {
 				Xow_xwiki_itm itm = xwiki_mgr.Get_at(i);
 				if (itm.Domain_tid() == Xow_domain_tid_.Tid__home) continue;// don't show home wiki
 				if (!itm.Offline()) continue;	// only show items marked Offline (added by Available_from_fsys); DATE:2014-09-21
-				itms_as_html_fmtr.Bld_bfr_many(tmp_bfr, itm.Domain_bry(), itm_cls);
+				itms_as_html_fmtr.BldToBfrMany(tmp_bfr, itm.Domain_bry(), itm_cls);
 			}
-			itms_as_html = tmp_bfr.To_str();
+			itms_as_html = tmp_bfr.ToStr();
 		}
 		return itms_as_html;
 	}	private String itms_as_html;
@@ -46,7 +51,7 @@ public class Xoa_available_wikis_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_visible))			return Yn.To_str(visible);
 		else if	(ctx.Match(k, Invk_visible_))			visible = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_visible_toggle))		{visible = !visible; app.Gui_mgr().Browser_win().Active_html_box().Html_js_eval_proc_as_str("xowa-portal-wikis-visible-toggle", BoolUtl.ToStrLower(visible));}
-		else if	(ctx.Match(k, Invk_itms_as_html_fmtr_))	itms_as_html_fmtr.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_itms_as_html_fmtr_))	itms_as_html_fmtr.FmtSet(m.ReadBry("v"));
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_visible = "visible", Invk_visible_ = "visible_", Invk_visible_toggle = "visible_toggle", Invk_itms_as_html = "itms_as_html", Invk_itms_as_html_fmtr_ = "itms_as_html_fmtr_", Invk_itms_refresh = "itms_refresh";

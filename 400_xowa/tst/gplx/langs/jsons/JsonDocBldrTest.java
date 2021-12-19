@@ -15,9 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.core.tests.Gftest;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.Test;
 
 public class JsonDocBldrTest {
@@ -40,8 +39,8 @@ public class JsonDocBldrTest {
 }
 class JsonDocBldrTestUtil {
     public void Test(JsonDocBldr bldr, String... ary) {
-        Bry_bfr bfr = Bry_bfr_.New();
+        BryWtr bfr = BryWtr.New();
         bldr.ToDoc().Root_grp().Print_as_json(bfr, 0);
-        Gftest.Eq__ary__lines(Json_doc.Make_str_by_apos(ary), bfr.To_str_and_clear());
+        GfoTstr.EqLines(Json_doc.Make_str_by_apos(ary), bfr.ToStrAndClear());
     }
 }

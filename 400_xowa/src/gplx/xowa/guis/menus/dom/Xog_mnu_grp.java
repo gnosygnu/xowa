@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.gfs.*;
+package gplx.xowa.guis.menus.dom;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
+import gplx.gfui.kits.core.*;
+import gplx.xowa.apps.gfs.*;
 import gplx.xowa.guis.views.*;
 public class Xog_mnu_grp extends Xog_mnu_base {
 	public Xog_mnu_grp(Xoa_gui_mgr gui_mgr, boolean mnu_is_popup, String key) {
@@ -51,7 +56,7 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 		if (!kit.Kit_mode__ready()) return;	// NOTE: .gfs will fire Build before Kit.Init; check that kit is inited
 		if (under_mnu == null) {
 			if (mnu_is_popup) {
-				if		(String_.Eq(key, Xog_popup_mnu_mgr.Root_key_tabs_btns))
+				if		(StringUtl.Eq(key, Xog_popup_mnu_mgr.Root_key_tabs_btns))
 					under_mnu = kit.New_mnu_popup(key, win.Tab_mgr().Tab_mgr());
 				else
 					under_mnu = kit.New_mnu_popup(key, win.Win_box());
@@ -64,17 +69,17 @@ public class Xog_mnu_grp extends Xog_mnu_base {
 		Xog_mnu_base.Update_grp_by_lang(bldr, app.Usere().Lang(), this);	// NOTE: always set lang after rebuild; else changes in home/wiki/Options/Menus will show blank captions; DATE:2014-06-05
 		if (mnu_is_popup) {
 			boolean rebind_to_win = false;
-			if		(String_.Eq(key, Xog_popup_mnu_mgr.Root_key_tabs_btns)) {
+			if		(StringUtl.Eq(key, Xog_popup_mnu_mgr.Root_key_tabs_btns)) {
 				kit.Set_mnu_popup(win.Tab_mgr().Tab_mgr(), under_mnu);
 				rebind_to_win = true;
 			}
-			else if (String_.Eq(key, Xog_popup_mnu_mgr.Root_key_html_page))	// rebind new popup box; DATE:2014-05-16
+			else if (StringUtl.Eq(key, Xog_popup_mnu_mgr.Root_key_html_page))	// rebind new popup box; DATE:2014-05-16
 				Bind_popup_menu(gui_mgr); 
-			else if (String_.Eq(key, Xog_popup_mnu_mgr.Root_key_html_link))
+			else if (StringUtl.Eq(key, Xog_popup_mnu_mgr.Root_key_html_link))
 				rebind_to_win = true;
-			else if (String_.Eq(key, Xog_popup_mnu_mgr.Root_key_prog))
+			else if (StringUtl.Eq(key, Xog_popup_mnu_mgr.Root_key_prog))
 				kit.Set_mnu_popup(win.Prog_box(), under_mnu);
-			else if (String_.Eq(key, Xog_popup_mnu_mgr.Root_key_info))
+			else if (StringUtl.Eq(key, Xog_popup_mnu_mgr.Root_key_info))
 				kit.Set_mnu_popup(win.Info_box(), under_mnu);
 			if (rebind_to_win) {	// WORKAROUND: SWT seems to bind popup menus to window; always rebind window to html_page; DATE:2014-05-17
 				kit.Set_mnu_popup(win.Win_box(), gui_mgr.Menu_mgr().Popup().Html_page().Under_mnu());

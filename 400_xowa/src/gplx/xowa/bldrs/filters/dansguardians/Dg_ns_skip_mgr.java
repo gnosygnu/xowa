@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.dansguardians;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.utls.IntUtl;
 import gplx.core.lists.hashs.*;
+import gplx.libs.files.Io_url;
 class Dg_ns_skip_mgr {
 	private final Hash_adp__int ns_hash = new Hash_adp__int();
 	private boolean is_empty = true;
@@ -25,12 +31,12 @@ class Dg_ns_skip_mgr {
 		byte[] src = Io_mgr.Instance.LoadFilBry_loose(url);
 
 		// parse to lines
-		byte[][] lines = Bry_split_.Split_lines(src);
+		byte[][] lines = BrySplit.SplitLines(src);
 
 		// add to hash
 		for (byte[] line : lines) {
-			int ns_id = Bry_.To_int_or(line, Int_.Max_value);
-			if (ns_id != Int_.Max_value) {
+			int ns_id = BryUtl.ToIntOr(line, IntUtl.MaxValue);
+			if (ns_id != IntUtl.MaxValue) {
 				Gfo_usr_dlg_.Instance.Log_many("", "", "adding ns; ns_id=~{0}", ns_id);
 				ns_hash.Add_if_dupe_use_1st(ns_id, line);
 				is_empty = false;

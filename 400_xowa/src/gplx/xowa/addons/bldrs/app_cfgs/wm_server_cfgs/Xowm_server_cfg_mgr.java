@@ -13,16 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.app_cfgs.wm_server_cfgs; import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.DateAdp;
-import gplx.Datetime_now;
-import gplx.Err_;
-import gplx.Io_mgr;
-import gplx.Io_url;
+package gplx.xowa.addons.bldrs.app_cfgs.wm_server_cfgs;
+import gplx.libs.files.Io_mgr;
 import gplx.core.ios.IoItmFil;
 import gplx.langs.phps.Php_evaluator;
 import gplx.langs.phps.Php_itm_ary;
@@ -30,6 +22,15 @@ import gplx.langs.phps.Php_itm_kv;
 import gplx.langs.phps.Php_line;
 import gplx.langs.phps.Php_line_assign;
 import gplx.langs.phps.Php_parser;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.wikis.domains.Xow_abrv_wm_;
 import gplx.xowa.wikis.domains.Xow_domain_itm;
@@ -44,14 +45,14 @@ public class Xowm_server_cfg_mgr {
 	}
 	private void Parse_cat_collation(byte[] all) {
 		// extract cat_collation
-		int bgn_pos = Bry_find_.Find_fwd(all, Bry_.new_a7("wgCategoryCollation"));
-		if (bgn_pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find wgCategoryCollation bgn");
-		bgn_pos = Bry_find_.Move_fwd(all, AsciiByte.NlBry, bgn_pos);
+		int bgn_pos = BryFind.FindFwd(all, BryUtl.NewA7("wgCategoryCollation"));
+		if (bgn_pos == BryFind.NotFound) throw ErrUtl.NewArgs("could not find wgCategoryCollation bgn");
+		bgn_pos = BryFind.MoveFwd(all, AsciiByte.NlBry, bgn_pos);
 
-		int end_pos = Bry_find_.Find_fwd(all, Bry_.new_a7("\n],"), bgn_pos);
-		if (end_pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find wgCategoryCollation end");
-		byte[] src = Bry_.Mid(all, bgn_pos, end_pos + 2);	// +2="],"
-		src = Bry_.Add(Bry_.new_a7("$test=["), src, Bry_.new_a7("];"));
+		int end_pos = BryFind.FindFwd(all, BryUtl.NewA7("\n],"), bgn_pos);
+		if (end_pos == BryFind.NotFound) throw ErrUtl.NewArgs("could not find wgCategoryCollation end");
+		byte[] src = BryLni.Mid(all, bgn_pos, end_pos + 2);	// +2="],"
+		src = BryUtl.Add(BryUtl.NewA7("$test=["), src, BryUtl.NewA7("];"));
 
 		// parse php
 		Php_parser php_parser = new Php_parser();
@@ -62,22 +63,22 @@ public class Xowm_server_cfg_mgr {
 		Php_itm_ary root_ary = (Php_itm_ary)line.Val();
 
 		// loop tkns and build String
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_byte_nl();
+		BryWtr bfr = BryWtr.New();
+		bfr.AddByteNl();
 		int len = root_ary.Subs_len();
-		byte[] wiki_abrv__default = Bry_.new_a7("default");
+		byte[] wiki_abrv__default = BryUtl.NewA7("default");
 		for (int i = 0; i < len; ++i) {
 			Php_itm_kv kv = (Php_itm_kv)root_ary.Subs_get(i);
 			byte[] wiki_abrv = kv.Key().Val_obj_bry();
 			byte[] collation = kv.Val().Val_obj_bry();
 
-			if (Bry_.Eq(wiki_abrv, wiki_abrv__default)) continue;	// skip "'default' => 'uppercase',"
+			if (BryLni.Eq(wiki_abrv, wiki_abrv__default)) continue;	// skip "'default' => 'uppercase',"
 			try {
 				byte[] wiki_domain = Xow_abrv_wm_.Parse_to_domain_bry(wiki_abrv);
 
 				Xow_domain_itm itm = Xow_domain_itm_.parse(wiki_domain);
-				bfr.Add_str_u8_fmt("app.bldr.wiki_cfg_bldr.get('{0}').new_cmd_('wiki.ctgs.collations', \"catpage_mgr.collation_('{1}');\");\n", itm.Domain_bry(), collation);
-			} catch (Exception e) {throw Err_.new_("failed to parse line", "wiki", wiki_abrv, "collation", collation, "err", Err_.Message_lang(e));}
+				bfr.AddStrU8Fmt("app.bldr.wiki_cfg_bldr.get('{0}').new_cmd_('wiki.ctgs.collations', \"catpage_mgr.collation_('{1}');\");\n", itm.Domain_bry(), collation);
+			} catch (Exception e) {throw ErrUtl.NewArgs("wiki", wiki_abrv, "collation", collation, "err", ErrUtl.Message(e));}
 		}
 		// Tfds.Write(bfr.To_str_and_clear());
 	}
@@ -87,8 +88,8 @@ public class Xowm_server_cfg_mgr {
 
 		// exit if file exists and is recent
 		if (trg_fil != null) {
-			DateAdp now = Datetime_now.Get();
-			if (now.Diff(trg_fil.ModifiedTime()).Total_mins().To_int() < min) return;
+			GfoDate now = GfoDateNow.Get();
+			if (now.Diff(trg_fil.ModifiedTime()).TotalMins().ToInt() < min) return;
 		}
 
 		// load b/c file doesn't exist, or is not recent

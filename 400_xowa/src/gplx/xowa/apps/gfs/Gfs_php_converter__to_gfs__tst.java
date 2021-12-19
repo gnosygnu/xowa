@@ -14,12 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.gfs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Gfs_php_converter__to_gfs__tst {
@@ -45,16 +44,16 @@ public class Gfs_php_converter__to_gfs__tst {
 	}
 }
 class Gfs_php_converter_fxt {
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public void Clear() {}
 	public void Test__to_gfs(String raw, String expd) {
-		byte[] actl = Gfs_php_converter.To_gfs(bfr, Bry_.new_u8(raw));
-		Tfds.Eq(expd, String_.new_u8(actl));
+		byte[] actl = Gfs_php_converter.To_gfs(bfr, BryUtl.NewU8(raw));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(actl));
 	}
 	public void Test_Xto_php_escape_y(String raw, String expd) {Test_Xto_php(raw, BoolUtl.Y, expd);}
 	public void Test_Xto_php_escape_n(String raw, String expd) {Test_Xto_php(raw, BoolUtl.N, expd);}
 	public void Test_Xto_php(String raw, boolean escape_backslash, String expd) {
-		byte[] actl = Gfs_php_converter.Xto_php(bfr, escape_backslash, Bry_.new_u8(raw));
-		Tfds.Eq(expd, String_.new_u8(actl));
+		byte[] actl = Gfs_php_converter.Xto_php(bfr, escape_backslash, BryUtl.NewU8(raw));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(actl));
 	}
 }

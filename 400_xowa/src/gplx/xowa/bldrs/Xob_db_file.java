@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 public class Xob_db_file {
 	Xob_db_file(Io_url url, Db_conn conn) {
@@ -33,7 +37,7 @@ public class Xob_db_file {
 	public static Xob_db_file New__page_file_map(Xow_wiki wiki)		{return New(wiki.Fsys_mgr().Root_dir(), wiki.Domain_str() + "-file-page_map.xowa");}
 	public static Xob_db_file New__img_link(Xow_wiki wiki)			{return New(wiki.Fsys_mgr().Root_dir(), "xowa.wiki.imglinks.sqlite3");}
 	public static Xob_db_file New__deletion_db(Xow_wiki wiki)		{
-		String name = String_.Format("{0}-file-deletion-{1}.xowa", wiki.Domain_str(), Datetime_now.Get().XtoStr_fmt("yyyy.MM"));
+		String name = StringUtl.Format("{0}-file-deletion-{1}.xowa", wiki.Domain_str(), GfoDateNow.Get().ToStrFmt("yyyy.MM"));
 		return New(wiki.Fsys_mgr().Root_dir(), name);
 	}
 	public static Xob_db_file New(Io_url dir, String name) {

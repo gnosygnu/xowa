@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+package gplx.xowa.xtns.math.texvcs.tkns;
+import gplx.types.errs.ErrUtl;
 public class Texvc_regy_nde {
 	private Texvc_tkn[] ary = Texvc_tkn_.Ary_empty; private int ary_max;
 	public Texvc_tkn Get_at_or_fail(int uid) {
 		Texvc_tkn rv = null;
 		if (uid > - 1 && uid < ary_max) rv = ary[uid];
-		if (rv == null) throw Err_.new_("math.texvc", "node token does not exist", "uid", uid);
+		if (rv == null) throw ErrUtl.NewArgs("node token does not exist", "uid", uid);
 		return rv;
 	}
 	public void Init(int expd_itms) {

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.layouts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.layouts;
 import gplx.gfui.controls.elems.*;
+import gplx.types.basics.utls.IntUtl;
 public interface GftSizeCalc {
 	int Key();
 	int Calc(GftGrid grid, GftBand band, GftItem owner, GftItem item, int ownerWidth);
@@ -24,7 +25,7 @@ class GftSizeCalc_pct implements GftSizeCalc {
 	public int Key() {return KEY;} public static final int KEY = 1;
 	public float Val() {return pct;} float pct;		
 	public int Calc(GftGrid grid, GftBand band, GftItem owner, GftItem item, int ownerWidth) {
-		return Int_.Mult(ownerWidth, pct / 100);
+		return IntUtl.Mult(ownerWidth, pct / 100);
 	}
 	public GftSizeCalc Clone() {return new GftSizeCalc_pct(pct);}
 	public GftSizeCalc_pct(float v) {pct = v;}

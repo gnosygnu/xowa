@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.btries;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
 public class Btrie_slim_itm {
 	private Btrie_slim_itm[] ary = Btrie_slim_itm.Ary_empty;
 	public Btrie_slim_itm(byte key_byte, Object val, boolean case_any) {this.key_byte = key_byte; this.val = val; this.case_any = case_any;}
@@ -50,19 +50,19 @@ public class Btrie_slim_itm {
 					cur_len = prv_len / 2;
 					if (prv_len % 2 == 1) ++cur_len;
 					cur_idx = prv_pos + (cur_len * adj);
-					if		(cur_idx < 0)			cur_idx = 0;
-					else if (cur_idx >= ary_len)	cur_idx = ary_len - 1;
+					if        (cur_idx < 0)            cur_idx = 0;
+					else if (cur_idx >= ary_len)    cur_idx = ary_len - 1;
 					itm = ary[cur_idx];
-					key_val = itm.Key_byte() & 0xff;	// PATCH.JAVA:need to convert to unsigned byte;
+					key_val = itm.Key_byte() & 0xff;    // PATCH.JAVA:need to convert to unsigned byte;
 					key_val = (case_any && (key_val > 64 && key_val < 91) ? key_val + 32 : key_val);
-					if		(find_val <	 key_val)	adj = -1;
-					else if (find_val >	 key_val)	adj =  1;
+					if        (find_val <     key_val)    adj = -1;
+					else if (find_val >     key_val)    adj =  1;
 					else  /*(find_val == cur_val)*/ return itm;
 					if (cur_len == 1) {
 						cur_idx += adj;
 						if (cur_idx < 0 || cur_idx >= ary_len) return null;
 						itm = ary[cur_idx];
-						return (itm.Key_byte() & 0xff) == find_val ? itm : null;	// PATCH.JAVA:need to convert to unsigned byte;
+						return (itm.Key_byte() & 0xff) == find_val ? itm : null;    // PATCH.JAVA:need to convert to unsigned byte;
 					}
 					prv_len = cur_len;
 					prv_pos = cur_idx;
@@ -107,12 +107,12 @@ class ByteHashItm_sorter {// quicksort
 		Sort_recurse(0, ary_len - 1);
 	}
 	private void Sort_recurse(int lo, int hi) {
-		int i = lo, j = hi;			
-		int mid = ary[lo + (hi-lo)/2].Key_byte()& 0xFF;				// get mid itm
-		while (i <= j) {											// divide into two lists
-			while ((ary[i].Key_byte() & 0xFF) < mid)				// if lhs.cur < mid, then get next from lhs
-				i++;				
-			while ((ary[j].Key_byte() & 0xFF) > mid)				// if rhs.cur > mid, then get next from rhs
+		int i = lo, j = hi;            
+		int mid = ary[lo + (hi-lo)/2].Key_byte()& 0xFF;                // get mid itm
+		while (i <= j) {                                            // divide into two lists
+			while ((ary[i].Key_byte() & 0xFF) < mid)                // if lhs.cur < mid, then get next from lhs
+				i++;                
+			while ((ary[j].Key_byte() & 0xFF) > mid)                // if rhs.cur > mid, then get next from rhs
 				j--;
 
 			// lhs.cur > mid && rhs.cur < mid; switch lhs.cur and rhs.cur; increase i and j

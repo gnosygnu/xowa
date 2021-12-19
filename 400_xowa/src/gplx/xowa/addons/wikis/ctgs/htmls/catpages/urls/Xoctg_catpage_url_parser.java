@@ -14,15 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp_bry;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.core.net.qargs.Gfo_qarg_itm;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
 public class Xoctg_catpage_url_parser {
@@ -37,9 +36,9 @@ public class Xoctg_catpage_url_parser {
 		boolean[] fwds = new boolean[Xoa_ctg_mgr.Tid___max];
 		for (int i = 0; i < Xoa_ctg_mgr.Tid___max; ++i) {
 			fwds[i] = BoolUtl.Y;
-			keys[i] = Bry_.Empty;
+			keys[i] = BryUtl.Empty;
 		}
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 
 		// loop qargs; EX: "?subcatfrom=B&filefrom=C&pagefrom=D"
 		for (int i = 0; i < len; ++i) {
@@ -56,7 +55,7 @@ public class Xoctg_catpage_url_parser {
 			// set val
 			byte[] val = arg.Val_bry();
 			Gfo_url_encoder_.Http_url.Decode(tmp_bfr, BoolUtl.N, val, 0, val.length);
-			val = tmp_bfr.To_bry_and_clear();
+			val = tmp_bfr.ToBryAndClear();
 
 			// set struct
 			switch (tid) {
@@ -88,10 +87,10 @@ public class Xoctg_catpage_url_parser {
 	, Tid__page_bgn = 6, Tid__page_end = 7
 	;
 	public static final byte[]
-	  Bry__arg_each_bgn		= Bry_.new_a7("from")			, Bry__arg_each_end 	= Bry_.new_a7("until")
-	, Bry__arg_subc_bgn 	= Bry_.new_a7("subcatfrom")		, Bry__arg_subc_end		= Bry_.new_a7("subcatuntil")
-	, Bry__arg_page_bgn 	= Bry_.new_a7("pagefrom")		, Bry__arg_page_end 	= Bry_.new_a7("pageuntil")
-	, Bry__arg_file_bgn 	= Bry_.new_a7("filefrom")		, Bry__arg_file_end		= Bry_.new_a7("fileuntil")
+	  Bry__arg_each_bgn		= BryUtl.NewA7("from")			, Bry__arg_each_end 	= BryUtl.NewA7("until")
+	, Bry__arg_subc_bgn 	= BryUtl.NewA7("subcatfrom")		, Bry__arg_subc_end		= BryUtl.NewA7("subcatuntil")
+	, Bry__arg_page_bgn 	= BryUtl.NewA7("pagefrom")		, Bry__arg_page_end 	= BryUtl.NewA7("pageuntil")
+	, Bry__arg_file_bgn 	= BryUtl.NewA7("filefrom")		, Bry__arg_file_end		= BryUtl.NewA7("fileuntil")
 	;
 	private static final Hash_adp_bry Key_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Bry__arg_each_bgn	, Tid__each_bgn)	.Add_bry_byte(Bry__arg_each_end	, Tid__each_end)

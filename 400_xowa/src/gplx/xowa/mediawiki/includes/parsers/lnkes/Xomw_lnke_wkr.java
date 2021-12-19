@@ -14,15 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkes;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.Type_;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.primitives.Int_obj_val;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.wrappers.IntVal;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.XophpPreg_;
 import gplx.xowa.mediawiki.includes.XomwLinker;
 import gplx.xowa.mediawiki.includes.XomwSanitizer;
@@ -37,7 +39,7 @@ import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_mgr;
 	* P2: $this->getConverterLanguage()->markNoConversion( $text );
 */
 public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
-	private final Bry_bfr tmp;
+	private final BryWtr tmp;
 	private Btrie_slim_mgr protocol_trie; private final Btrie_rv trv = new Btrie_rv();
 	private int autonumber;
 	private final XomwParserIface parser;
@@ -46,17 +48,17 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;
-	public Xomw_lnke_wkr(XomwParserIface parser, Bry_bfr tmp, XomwLinker linker, XomwSanitizer sanitizer) {
+	public Xomw_lnke_wkr(XomwParserIface parser, BryWtr tmp, XomwLinker linker, XomwSanitizer sanitizer) {
 		this.parser = parser;
 		this.tmp = tmp;
 		this.linker = linker;
 		this.sanitizer = sanitizer;
 
 		if (angle_entities_trie == null) {
-			synchronized (Type_.Type_by_obj(this)) {
-				Link_type__free           = Bry_.new_a7("free");
-				Link_type__text           = Bry_.new_a7("text");
-				Link_type__autonumber     = Bry_.new_a7("autonumber");
+			synchronized (ClassUtl.TypeByObj(this)) {
+				Link_type__free           = BryUtl.NewA7("free");
+				Link_type__text           = BryUtl.NewA7("text");
+				Link_type__autonumber     = BryUtl.NewA7("autonumber");
 
 				angle_entities_trie = Btrie_slim_mgr.cs().Add_many_str("&lt;", "&gt;");
 
@@ -80,11 +82,11 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	// XO.MW:SYNC:1.29; DATE:2017-02-01
 	public void replaceExternalLinks(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 		pbfr.Switch();
 
 		int cur = src_bgn;
@@ -127,18 +129,18 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			//   whitespace             -> \p{Zs}
 
 			// search for "["
-			int lnke_bgn = Bry_find_.Find_fwd(src, AsciiByte.BrackBgn, cur, src_end);
-			if (lnke_bgn == Bry_find_.Not_found) {
-				bfr.Add_mid(src, cur, src_end);
+			int lnke_bgn = BryFind.FindFwd(src, AsciiByte.BrackBgn, cur, src_end);
+			if (lnke_bgn == BryFind.NotFound) {
+				bfr.AddMid(src, cur, src_end);
 				break;	// no more "["; stop
 			}
 
 			// check for protocol; EX: "https://"
 			cur = lnke_bgn + 1;
 			int url_bgn = cur;
-			Object protocol_bry = protocol_trie.Match_at(trv, src, cur, src_end);
+			Object protocol_bry = protocol_trie.MatchAt(trv, src, cur, src_end);
 			if (protocol_bry == null) {
-				bfr.Add_mid(src, prv, cur);
+				bfr.AddMid(src, prv, cur);
 				prv = cur;
 				continue;// unknown protocol; ignore "["
 			}
@@ -148,7 +150,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			int domain_bgn = cur;
 			cur = regex_url.Find_fwd_while(trv, src, domain_bgn, src_end);
 			if (cur - domain_bgn == 0) {
-				bfr.Add_mid(src, prv, cur);
+				bfr.AddMid(src, prv, cur);
 				prv = cur;
 				continue;	// no chars found; invalid; EX: "[https://"abcde"]"
 			}
@@ -164,13 +166,13 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 				Object invalid_text_char = invalid_text_chars_trie.Match_at_w_b0(trv, b, src, cur, src_end);
 				if (invalid_text_char != null) break;
 				if (text_bgn == -1) text_bgn = cur;
-				cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+				cur += Utf8Utl.LenOfCharBy1stByte(b);
 				text_end = cur;
 			}
 			
 			// check for "]"
 			if (src[cur] != AsciiByte.BrackEnd) {
-				bfr.Add_mid(src, prv, cur);
+				bfr.AddMid(src, prv, cur);
 				prv = cur;
 				continue;
 			}
@@ -202,9 +204,9 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// No link text, e.g. [http://domain.tld/some.link]
 			if (text_missing) {
 				// Autonumber; EX: "[123]"
-				tmp.Add_byte(AsciiByte.BrackBgn);
-				tmp.Add_int_variable(autonumber++);	// TODO.XO:$langObj->formatNum( ++$this->mAutonumber );
-				tmp.Add_byte(AsciiByte.BrackEnd);
+				tmp.AddByte(AsciiByte.BrackBgn);
+				tmp.AddIntVariable(autonumber++);	// TODO.XO:$langObj->formatNum( ++$this->mAutonumber );
+				tmp.AddByte(AsciiByte.BrackEnd);
 				link_type = Link_type__autonumber;
 			}
 			else {
@@ -217,16 +219,16 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// TODO.XO:
 			// $text = $this->getConverterLanguage()->markNoConversion( $text );
 
-			byte[] url = Bry_.Mid(src, url_bgn, url_end);
+			byte[] url = BryLni.Mid(src, url_bgn, url_end);
 			url = sanitizer.cleanUrl(url);
 
-			bfr.Add_mid(src, prv, lnke_bgn);
+			bfr.AddMid(src, prv, lnke_bgn);
 			prv = cur;
 			// Use the encoded URL
 			// This means that users can paste URLs directly into the text
 			// Funny characters like � aren't valid in URLs anyway
 			// This was changed in August 2004
-			linker.makeExternalLink(bfr, url, Bry_.Mid(src, text_bgn, text_end), BoolUtl.N, link_type, parser.getExternalLinkAttribs(attribs), Bry_.Empty);
+			linker.makeExternalLink(bfr, url, BryLni.Mid(src, text_bgn, text_end), BoolUtl.N, link_type, parser.getExternalLinkAttribs(attribs), BryUtl.Empty);
 
 			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?
 			// Register link in the output Object.
@@ -241,6 +243,6 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private static Btrie_slim_mgr angle_entities_trie;
 	private static Btrie_slim_mgr invalid_text_chars_trie;
 	private static void New__trie_itm__by_len(Btrie_slim_mgr mgr, int... ary) {
-		mgr.Add_obj(Bry_.New_by_ints(ary), new Int_obj_val(ary.length));
+		mgr.AddObj(BryUtl.NewByInts(ary), new IntVal(ary.length));
 	}
 }

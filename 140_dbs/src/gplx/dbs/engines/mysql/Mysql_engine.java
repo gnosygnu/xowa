@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.mysql;
-import gplx.Err_;
 import gplx.core.stores.DataRdr;
 import gplx.core.stores.Db_data_rdr;
 import gplx.dbs.Db_conn_info;
@@ -24,7 +23,7 @@ import gplx.dbs.metas.Dbmeta_tbl_mgr;
 import gplx.dbs.sqls.SqlQryWtr;
 import gplx.dbs.sqls.SqlQryWtrUtl;
 import gplx.dbs.wkrs.SqlWkrMgr;
-
+import gplx.types.errs.ErrUtl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 public class Mysql_engine extends Db_engine_sql_base {
@@ -39,8 +38,8 @@ public class Mysql_engine extends Db_engine_sql_base {
 		return rv;
 	}
 	@Override public DataRdr New_rdr(ResultSet rdr, String commandText) {return Mysql_rdr.new_(rdr, commandText);}
-	@Override public Dbmeta_tbl_mgr Meta_mgr() {throw Err_.new_unimplemented();}
-		@gplx.Internal @Override protected Connection Conn_make() {
+	@Override public Dbmeta_tbl_mgr Meta_mgr() {throw ErrUtl.NewUnimplemented();}
+	@Override public Connection Conn_make() {
 		Mysql_conn_info conn_info_as_mysql = (Mysql_conn_info)conn_info; 
 		Connection rv = Conn_make_by_url("jdbc:mysql://localhost/" + conn_info_as_mysql.Database() + "?characterEncoding=UTF8&useSSL=false", conn_info_as_mysql.Uid(), conn_info_as_mysql.Pwd());
 		return rv;

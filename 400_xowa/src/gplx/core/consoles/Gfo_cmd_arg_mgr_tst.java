@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.consoles;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.Gfo_usr_dlg__gui_mock;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.dlgs.Gfo_usr_dlg__gui_mock;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.envs.Op_sys;
 import gplx.core.tests.Tst_chkr;
 import gplx.core.tests.Tst_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Gfo_cmd_arg_mgr_tst {		
@@ -101,23 +101,23 @@ class Gfo_cmd_arg_mgr_fxt {
 		tst_mgr.Tst_ary("", expd, actl);
 		return this;
 	}
-	public Gfo_cmd_arg_mgr_fxt Test_errs_none() {return Test_errs(String_.Ary_empty);}
+	public Gfo_cmd_arg_mgr_fxt Test_errs_none() {return Test_errs(StringUtl.AryEmpty);}
 	public Gfo_cmd_arg_mgr_fxt Test_errs(String... expd) {
 		String[] actl = mgr.Errs__to_str_ary();
 		int len = actl.length;
 		for (int i = 0; i < len; ++i) {	// extract key part; EX: "unknown key: abc" -> unknown key
-			actl[i] = String_.GetStrBefore(actl[i], ":");
+			actl[i] = StringUtl.GetStrBefore(actl[i], ":");
 		}
-		Tfds.Eq_ary_str(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 		return this;
 	}
 	public Gfo_cmd_arg_mgr_fxt Test_write(String... expd) {
-		Tfds.Eq_ary_str(expd, ((Gfo_usr_dlg__gui_mock)usr_dlg.Gui_wkr()).Msgs().ToStrAryAndClear());
+		GfoTstr.EqLines(expd, ((Gfo_usr_dlg__gui_mock)usr_dlg.Gui_wkr()).Msgs().ToStrAryAndClear());
 		return this;
 	}
 	public void Test_val_as_url_rel_dir_or(String root_dir, String dir_spr, String val, String expd) {
 		Io_url actl = Make_arg("key").Val_(val).Val_as_url__rel_dir_or(Io_url_.new_dir_(root_dir).GenSubDir("dir"), null);
-		Tfds.Eq(expd, actl.Raw());
+		GfoTstr.EqObj(expd, actl.Raw());
 	}
 }
 class Gfo_cmd_itm_chkr implements Tst_chkr {

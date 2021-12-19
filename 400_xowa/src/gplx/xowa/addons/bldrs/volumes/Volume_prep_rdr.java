@@ -13,14 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.volumes; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.bldrs.volumes;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.errs.ErrUtl;
 class Volume_prep_rdr {
 	public Volume_prep_itm[] Parse(Io_url url) {return Parse(Io_mgr.Instance.LoadFilBryOr(url, null));}
 	public Volume_prep_itm[] Parse(byte[] src) {
 		if (src == null) return Volume_prep_itm.Ary_empty;
 		List_adp rv = List_adp_.New();
-		byte[][] lines = Bry_split_.Split_lines(src);
+		byte[][] lines = BrySplit.SplitLines(src);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; ++i) {
 			Volume_prep_itm itm = Parse_line_or_null(lines[i]);
@@ -29,14 +35,14 @@ class Volume_prep_rdr {
 		return (Volume_prep_itm[])rv.ToAryAndClear(Volume_prep_itm.class);
 	}
 	private Volume_prep_itm Parse_line_or_null(byte[] line) {
-		byte[][] flds = Bry_split_.Split(line, AsciiByte.Pipe);
+		byte[][] flds = BrySplit.Split(line, AsciiByte.Pipe);
 		int flds_len = flds.length; if (flds_len == 0) return null;
 		Volume_prep_itm rv = new Volume_prep_itm();
 		for (int i = 0; i < flds_len; ++i) {
 			byte[] fld = flds[i];
 			switch (i) {
 				case 0: rv.Page_ttl = fld; break;
-				default: throw Err_.new_unhandled_default(i);
+				default: throw ErrUtl.NewUnhandled(i);
 			}
 		}
 		return rv;

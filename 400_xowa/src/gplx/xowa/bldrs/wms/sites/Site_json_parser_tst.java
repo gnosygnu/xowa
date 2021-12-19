@@ -14,15 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wms.sites;
-import gplx.Bry_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.String_;
-import gplx.Tfds;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_parser;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
 import gplx.xowa.wikis.nss.Xow_ns_case_;
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +31,7 @@ public class Site_json_parser_tst {
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test public void General() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'general':"
 		, "  { 'mainpage': 'Main Page'"
 		, "  , 'imagewhitelistenabled': ''"
@@ -54,10 +53,10 @@ public class Site_json_parser_tst {
 		, "  }"
 		, "}"
 		));
-		fxt.Test_general(Keyval_.new_("mainpage", "Main Page"), Keyval_.new_("imagewhitelistenabled", ""), Keyval_.new_("timeoffset", "0"), Keyval_.new_("thumblimits", "120|150"), Keyval_.new_("imagelimits", "320=240|640=480"));
+		fxt.Test_general(KeyVal.NewStr("mainpage", "Main Page"), KeyVal.NewStr("imagewhitelistenabled", ""), KeyVal.NewStr("timeoffset", "0"), KeyVal.NewStr("thumblimits", "120|150"), KeyVal.NewStr("imagelimits", "320=240|640=480"));
 	}
 	@Test public void Namespace() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'namespaces':"
 		, "  { '0':"
 		, "    { 'id': 0"
@@ -97,7 +96,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Statistic() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'statistics':"
 		, "  { 'pages': 1"
 		, "  , 'articles': 2"
@@ -116,7 +115,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Interwikimap() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'interwikimap':"
 		, "  ["
 		, "    { 'prefix': 'aquariumwiki'"
@@ -140,7 +139,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Namespacealias() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'namespacealiases':"
 		, "  [ "
 		, "    { 'id': 4"
@@ -159,7 +158,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Specialpagealias() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'specialpagealiases':"
 		, "  [ "
 		, "    { 'realname': 'BrokenRedirects'"
@@ -183,7 +182,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Library() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'libraries':"
 		, "  [ "
 		, "    { 'name': 'cssjanus/cssjanus'"
@@ -202,7 +201,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Extension() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'extensions':"
 		, "  [ "
 		, "    { 'type': 'media'"
@@ -242,7 +241,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Skin() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'skins':"
 		, "  [ "
 		, "    { 'code': 'vector'"
@@ -268,7 +267,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Magicword() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'magicwords':"
 		, "  [ "
 		, "    { 'name': 'expr'"
@@ -293,7 +292,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Functionhook() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'functionhooks':"
 		, "  [ 'ns'"
 		, "  , 'nse'"
@@ -303,7 +302,7 @@ public class Site_json_parser_tst {
 		fxt.Test_functionhook("ns", "nse");
 	}
 	@Test public void Showhook() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'showhooks':"
 		, "  [ "
 		, "    { 'name': 'APIAfterExecute'"
@@ -328,7 +327,7 @@ public class Site_json_parser_tst {
 		);
 	}
 	@Test public void Extensiontag() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'extensiontags':"
 		, "  [ '<pre>'"
 		, "  , '<nowiki>'"
@@ -338,7 +337,7 @@ public class Site_json_parser_tst {
 		fxt.Test_extensiontag("<pre>", "<nowiki>");
 	}
 	@Test public void Protocol() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'protocols':"
 		, "  [ 'bitcoin:'"
 		, "  , 'ftp://'"
@@ -348,7 +347,7 @@ public class Site_json_parser_tst {
 		fxt.Test_protocol("bitcoin:", "ftp://");
 	}
 	@Test public void Defaultoption() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'defaultoptions':"
 		, "  { 'globaluserpage': true"
 		, "  , 'cols': 80"
@@ -356,10 +355,10 @@ public class Site_json_parser_tst {
 		, "  }"
 		, "}"
 		));
-		fxt.Test_defaultoption(Keyval_.new_("globaluserpage", "true"), Keyval_.new_("cols", "80"), Keyval_.new_("echo-email-format", "html"));
+		fxt.Test_defaultoption(KeyVal.NewStr("globaluserpage", "true"), KeyVal.NewStr("cols", "80"), KeyVal.NewStr("echo-email-format", "html"));
 	}
 	@Test public void Language() {
-		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
+		fxt.Exec_parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'languages':"
 		, "  [ "
 		, "    { 'code': 'aa'"
@@ -379,7 +378,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_language("ab"	, "ab-bcp47", "Аҧсшәа")
 		);
 	}
-//		@Test  public void Smoke() {
+//		@Test public void Smoke() {
 //			Io_url json_url = Tfds.RscDir.GenSubFil_nest("400_xowa", "site_meta__en.wikipedia.org.json");
 //			byte[] src = Io_mgr.Instance.LoadFilBry(json_url);
 //			Site_json_parser parser = new Site_json_parser();
@@ -403,41 +402,41 @@ class Site_json_parser_fxt {
 		site_meta_parser.Parse_root(site_meta, "en.wikipedia.org", jdoc.Root_nde());
 	}
 	public Site_namespace_itm Make_namespace(int id, boolean case_tid_is_cs, String canonical, String localized, boolean subpages, boolean content, String defaultcontentmodel) {
-		return new Site_namespace_itm(id, case_tid_is_cs ? Xow_ns_case_.Bry__all : Xow_ns_case_.Bry__1st, Bry_.new_u8_safe(canonical), Bry_.new_u8_safe(localized), subpages, content, Bry_.new_u8_safe(defaultcontentmodel));
+		return new Site_namespace_itm(id, case_tid_is_cs ? Xow_ns_case_.Bry__all : Xow_ns_case_.Bry__1st, BryUtl.NewU8Safe(canonical), BryUtl.NewU8Safe(localized), subpages, content, BryUtl.NewU8Safe(defaultcontentmodel));
 	}
 	public Site_statistic_itm Make_statistic(long pages, long articles, long edits, long images, long users, long activeusers, long admins, long jobs, long queued_massmessages) {return new Site_statistic_itm().Ctor(pages, articles, edits, images, users, activeusers, admins, jobs, queued_massmessages);}
 	public Site_interwikimap_itm Make_interwikimap(String prefix, boolean local, boolean extralanglink, String linktext, String sitename, String language, boolean localinterwiki, String url, boolean protorel) {
-		return new Site_interwikimap_itm(Bry_.new_u8_safe(prefix), local, extralanglink, Bry_.new_u8_safe(linktext), Bry_.new_u8_safe(sitename), Bry_.new_u8_safe(language), localinterwiki, Bry_.new_u8_safe(url), protorel);
+		return new Site_interwikimap_itm(BryUtl.NewU8Safe(prefix), local, extralanglink, BryUtl.NewU8Safe(linktext), BryUtl.NewU8Safe(sitename), BryUtl.NewU8Safe(language), localinterwiki, BryUtl.NewU8Safe(url), protorel);
 	}
-	public Site_namespacealias_itm Make_namespacealias(int id, String alias) {return new Site_namespacealias_itm(id, Bry_.new_u8_safe(alias));}
-	public Site_specialpagealias_itm Make_specialpagealias(String realname, String... aliases) {return new Site_specialpagealias_itm(Bry_.new_u8_safe(realname), Bry_.Ary(aliases));}
-	public Site_library_itm Make_library(String name, String version) {return new Site_library_itm(Bry_.new_u8_safe(name), Bry_.new_u8_safe(version));}
+	public Site_namespacealias_itm Make_namespacealias(int id, String alias) {return new Site_namespacealias_itm(id, BryUtl.NewU8Safe(alias));}
+	public Site_specialpagealias_itm Make_specialpagealias(String realname, String... aliases) {return new Site_specialpagealias_itm(BryUtl.NewU8Safe(realname), BryUtl.Ary(aliases));}
+	public Site_library_itm Make_library(String name, String version) {return new Site_library_itm(BryUtl.NewU8Safe(name), BryUtl.NewU8Safe(version));}
 	public Site_extension_itm Make_extension
 		( String type, String name, String namemsg, String description, String descriptionmsg, String author, String url, String version
 		, String vcs_system, String vcs_version, String vcs_url, String vcs_date, String license_name, String license, String credits) {
 		return new Site_extension_itm
-		( Bry_.new_u8_safe(type), Bry_.new_u8_safe(name), Bry_.new_u8_safe(namemsg), Bry_.new_u8_safe(description), Bry_.new_u8_safe(descriptionmsg), Bry_.new_u8_safe(author), Bry_.new_u8_safe(url), Bry_.new_u8_safe(version)
-		, Bry_.new_u8_safe(vcs_system), Bry_.new_u8_safe(vcs_version), Bry_.new_u8_safe(vcs_url), Bry_.new_u8_safe(vcs_date), Bry_.new_u8_safe(license_name), Bry_.new_u8_safe(license), Bry_.new_u8_safe(credits)
+		( BryUtl.NewU8Safe(type), BryUtl.NewU8Safe(name), BryUtl.NewU8Safe(namemsg), BryUtl.NewU8Safe(description), BryUtl.NewU8Safe(descriptionmsg), BryUtl.NewU8Safe(author), BryUtl.NewU8Safe(url), BryUtl.NewU8Safe(version)
+		, BryUtl.NewU8Safe(vcs_system), BryUtl.NewU8Safe(vcs_version), BryUtl.NewU8Safe(vcs_url), BryUtl.NewU8Safe(vcs_date), BryUtl.NewU8Safe(license_name), BryUtl.NewU8Safe(license), BryUtl.NewU8Safe(credits)
 		);
 	}
-	public Site_skin_itm Make_skin(String code, boolean dflt, String name, boolean unusable) {return new Site_skin_itm(Bry_.new_u8_safe(code), dflt, Bry_.new_u8_safe(name), unusable);}
-	public Site_magicword_itm Make_magicword(String name, boolean case_match, String... aliases) {return new Site_magicword_itm(Bry_.new_u8_safe(name), case_match, Bry_.Ary(aliases));}
-	public Site_showhook_itm Make_showhook(String name, String scribunto, String... subscribers) {return new Site_showhook_itm(Bry_.new_u8_safe(name), Bry_.new_u8_safe(scribunto), Bry_.Ary(subscribers));}
-	public Site_language_itm Make_language(String code, String bcp47, String name) {return new Site_language_itm(Bry_.new_u8_safe(code), Bry_.new_u8(bcp47), Bry_.new_u8_safe(name));}
-	public void Test_general(Keyval... expd) {Tfds.Eq_ary_str(expd, (Keyval[])site_meta.General_list().To_ary(Keyval.class));}
-	public void Test_namespace(Site_namespace_itm... expd) {Tfds.Eq_ary_str(expd, (Site_namespace_itm[])site_meta.Namespace_list().To_ary(Site_namespace_itm.class));}
-	public void Test_statistic(Site_statistic_itm expd) {Tfds.Eq_str_intf(expd, site_meta.Statistic_itm());}
-	public void Test_interwikimap(Site_interwikimap_itm... expd) {Tfds.Eq_ary_str(expd, (Site_interwikimap_itm[])site_meta.Interwikimap_list().To_ary(Site_interwikimap_itm.class));}
-	public void Test_namespacealias(Site_namespacealias_itm... expd) {Tfds.Eq_ary_str(expd, (Site_namespacealias_itm[])site_meta.Namespacealias_list().ToAry(Site_namespacealias_itm.class));}
-	public void Test_specialpagealias(Site_specialpagealias_itm... expd) {Tfds.Eq_ary_str(expd, (Site_specialpagealias_itm[])site_meta.Specialpagealias_list().To_ary(Site_specialpagealias_itm.class));}
-	public void Test_library(Site_library_itm... expd) {Tfds.Eq_ary_str(expd, (Site_library_itm[])site_meta.Library_list().To_ary(Site_library_itm.class));}
-	public void Test_extension(Site_extension_itm... expd) {Tfds.Eq_ary_str(expd, (Site_extension_itm[])site_meta.Extension_list().To_ary(Site_extension_itm.class));}
-	public void Test_skin(Site_skin_itm... expd) {Tfds.Eq_ary_str(expd, (Site_skin_itm[])site_meta.Skin_list().To_ary(Site_skin_itm.class));}
-	public void Test_magicword(Site_magicword_itm... expd) {Tfds.Eq_ary_str(expd, (Site_magicword_itm[])site_meta.Magicword_list().To_ary(Site_magicword_itm.class));}
-	public void Test_functionhook(String... expd) {Tfds.Eq_ary_str(expd, String_.Ary((byte[][])site_meta.Functionhook_list().To_ary(byte[].class)));}
-	public void Test_showhook(Site_showhook_itm... expd) {Tfds.Eq_ary_str(expd, (Site_showhook_itm[])site_meta.Showhook_list().To_ary(Site_showhook_itm.class));}
-	public void Test_extensiontag(String... expd) {Tfds.Eq_ary_str(expd, String_.Ary((byte[][])site_meta.Extensiontag_list().To_ary(byte[].class)));}
-	public void Test_protocol(String... expd) {Tfds.Eq_ary_str(expd, String_.Ary((byte[][])site_meta.Protocol_list().To_ary(byte[].class)));}
-	public void Test_defaultoption(Keyval... expd) {Tfds.Eq_ary_str(expd, (Keyval[])site_meta.Defaultoption_list().To_ary(Keyval.class));}
-	public void Test_language(Site_language_itm... expd) {Tfds.Eq_ary_str(expd, (Site_language_itm[])site_meta.Language_list().To_ary(Site_language_itm.class));}
+	public Site_skin_itm Make_skin(String code, boolean dflt, String name, boolean unusable) {return new Site_skin_itm(BryUtl.NewU8Safe(code), dflt, BryUtl.NewU8Safe(name), unusable);}
+	public Site_magicword_itm Make_magicword(String name, boolean case_match, String... aliases) {return new Site_magicword_itm(BryUtl.NewU8Safe(name), case_match, BryUtl.Ary(aliases));}
+	public Site_showhook_itm Make_showhook(String name, String scribunto, String... subscribers) {return new Site_showhook_itm(BryUtl.NewU8Safe(name), BryUtl.NewU8Safe(scribunto), BryUtl.Ary(subscribers));}
+	public Site_language_itm Make_language(String code, String bcp47, String name) {return new Site_language_itm(BryUtl.NewU8Safe(code), BryUtl.NewU8(bcp47), BryUtl.NewU8Safe(name));}
+	public void Test_general(KeyVal... expd) {GfoTstr.EqAryObjAry(expd, (KeyVal[])site_meta.General_list().ToAry(KeyVal.class));}
+	public void Test_namespace(Site_namespace_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_namespace_itm[])site_meta.Namespace_list().ToAry(Site_namespace_itm.class));}
+	public void Test_statistic(Site_statistic_itm expd) {GfoTstr.Eq(expd, site_meta.Statistic_itm());}
+	public void Test_interwikimap(Site_interwikimap_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_interwikimap_itm[])site_meta.Interwikimap_list().ToAry(Site_interwikimap_itm.class));}
+	public void Test_namespacealias(Site_namespacealias_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_namespacealias_itm[])site_meta.Namespacealias_list().ToAry(Site_namespacealias_itm.class));}
+	public void Test_specialpagealias(Site_specialpagealias_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_specialpagealias_itm[])site_meta.Specialpagealias_list().ToAry(Site_specialpagealias_itm.class));}
+	public void Test_library(Site_library_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_library_itm[])site_meta.Library_list().ToAry(Site_library_itm.class));}
+	public void Test_extension(Site_extension_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_extension_itm[])site_meta.Extension_list().ToAry(Site_extension_itm.class));}
+	public void Test_skin(Site_skin_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_skin_itm[])site_meta.Skin_list().ToAry(Site_skin_itm.class));}
+	public void Test_magicword(Site_magicword_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_magicword_itm[])site_meta.Magicword_list().ToAry(Site_magicword_itm.class));}
+	public void Test_functionhook(String... expd) {GfoTstr.EqAryObjAry(expd, StringUtl.Ary((byte[][])site_meta.Functionhook_list().ToAry(byte[].class)));}
+	public void Test_showhook(Site_showhook_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_showhook_itm[])site_meta.Showhook_list().ToAry(Site_showhook_itm.class));}
+	public void Test_extensiontag(String... expd) {GfoTstr.EqAryObjAry(expd, StringUtl.Ary((byte[][])site_meta.Extensiontag_list().ToAry(byte[].class)));}
+	public void Test_protocol(String... expd) {GfoTstr.EqAryObjAry(expd, StringUtl.Ary((byte[][])site_meta.Protocol_list().ToAry(byte[].class)));}
+	public void Test_defaultoption(KeyVal... expd) {GfoTstr.EqAryObjAry(expd, (KeyVal[])site_meta.Defaultoption_list().ToAry(KeyVal.class));}
+	public void Test_language(Site_language_itm... expd) {GfoTstr.EqAryObjAry(expd, (Site_language_itm[])site_meta.Language_list().ToAry(Site_language_itm.class));}
 }

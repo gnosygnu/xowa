@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
 // MW.FILE:Preprocessor
 /**
 * @ingroup Parser
@@ -82,11 +84,11 @@ public class XomwPPDStackElement {
 	*/
 	public XomwPPDStackElementFlags getFlags() {
 		int partCount = XophpArray.count(this.parts);
-		boolean findPipe = String_.EqNot(this.open, "\n") && String_.EqNot(this.open, "[");
+		boolean findPipe = StringUtl.EqNot(this.open, "\n") && StringUtl.EqNot(this.open, "[");
 		return new XomwPPDStackElementFlags
 			( findPipe
 			, findPipe && partCount > 1 && !XophpObject_.isset(Get_at(partCount - 1).eqpos)
-			, String_.Eq(this.open, "\n")
+			, StringUtl.Eq(this.open, "\n")
 			);
 	}
 
@@ -98,7 +100,7 @@ public class XomwPPDStackElement {
 	*/
 	public Object breakSyntax(int openingCount) {
 		Char_bfr bfr = new Char_bfr(16);
-		if (String_.Eq(this.open, "\n")) {
+		if (StringUtl.Eq(this.open, "\n")) {
 			XomwPPDPart_DOM part_0 = (XomwPPDPart_DOM)Get_at(0);
 			bfr.Add_bry(part_0.To_bry());
 		}

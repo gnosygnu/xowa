@@ -14,12 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Hash_adp_bry;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.XophpString_;
 import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_itm;
 import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_mgr;
@@ -211,14 +213,14 @@ public class XomwHtml {
 	*   escaped!
 	* @return String Raw HTML
 	*/
-	public static void rawElement(Bry_bfr bfr, XomwHtmlTemp temp, byte[] element, Xomw_atr_mgr attribs, byte[] contents) {			
-		Bry_.Lcase__all(element); // XO:lcase element
+	public static void rawElement(BryWtr bfr, XomwHtmlTemp temp, byte[] element, Xomw_atr_mgr attribs, byte[] contents) {
+		BryUtl.LcaseAll(element); // XO:lcase element
 		
 		openElementLcased(bfr, temp, element, attribs);// NOTE: same as $start = self::openElement($element, $attribs);
 
 		if (voidElements.Has(element)) {
 			// Silly XML.
-			bfr.Del_by_1().Add(ELEM_INLINE); // return substr($start, 0, -1) . '/>';
+			bfr.DelBy1().Add(ELEM_INLINE); // return substr($start, 0, -1) . '/>';
 		} 
 		else {
 			bfr.Add(contents);
@@ -254,13 +256,13 @@ public class XomwHtml {
 	*
 	* @return String
 	*/
-	private static void openElementLcased(Bry_bfr bfr, XomwHtmlTemp temp, byte[] element, Xomw_atr_mgr attribs) {
+	private static void openElementLcased(BryWtr bfr, XomwHtmlTemp temp, byte[] element, Xomw_atr_mgr attribs) {
 		// This is not required in HTML5, but let's do it anyway, for
 		// consistency and better compression.
 		// $element = strtolower($element);	// XO:handled by callers
 
 		// Remove invalid input types
-		if (Bry_.Eq(element, TAG_INPUT)) {
+		if (BryLni.Eq(element, TAG_INPUT)) {
 			// PORTED.HEADER:validTypes
 			byte[] attribsType = attribs.Get_val_or_null(ATR_TYPE);
 			if (attribsType != null && !validTypes.Has(attribsType)) {
@@ -271,13 +273,13 @@ public class XomwHtml {
 		// According to standard the default type for <button> elements is "submit".
 		// Depending on compatibility mode IE might use "button", instead.
 		// We enforce the standard "submit".
-		if (Bry_.Eq(element, TAG_BUTTON) && attribs.Get_val_or_null(ATR_TYPE) == null) {
+		if (BryLni.Eq(element, TAG_BUTTON) && attribs.Get_val_or_null(ATR_TYPE) == null) {
 			attribs.Set(ATR_TYPE, ATR_TYPE_SUBMIT);
 		}
 
-		bfr.Add_byte(AsciiByte.AngleBgn).Add(element);
+		bfr.AddByte(AsciiByte.AngleBgn).Add(element);
 		expandAttributes(bfr, temp, attribs);
-		bfr.Add_byte(AsciiByte.AngleEnd);
+		bfr.AddByte(AsciiByte.AngleEnd);
 	}
 
 	/**
@@ -287,10 +289,10 @@ public class XomwHtml {
 	* @param String $element Name of the element, e.g., 'a'
 	* @return String A closing tag
 	*/
-	private static void closeElementLcased(Bry_bfr bfr, byte[] element) {
+	private static void closeElementLcased(BryWtr bfr, byte[] element) {
 		// $element = strtolower($element); // XO: handled by caller
 
-		bfr.Add(gplx.langs.htmls.Gfh_tag_.Rhs_bgn).Add(element).Add_byte(AsciiByte.AngleEnd); // EX: "</", element, ">";
+		bfr.Add(gplx.langs.htmls.Gfh_tag_.Rhs_bgn).Add(element).AddByte(AsciiByte.AngleEnd); // EX: "</", element, ">";
 	}
 
 //		/**
@@ -452,7 +454,7 @@ public class XomwHtml {
 //		* @return String HTML fragment that goes between element name and '>'
 //		*   (starting with a space if at least one attribute is output)
 //		*/
-	public static void expandAttributes(Bry_bfr bfr, XomwHtmlTemp temp, Xomw_atr_mgr atrs) {
+	public static void expandAttributes(BryWtr bfr, XomwHtmlTemp temp, Xomw_atr_mgr atrs) {
 		int len = atrs.Len();
 		for (int i = 0; i < len; i++) {
 			Xomw_atr_itm atr = (Xomw_atr_itm)atrs.Get_at(i);
@@ -473,7 +475,7 @@ public class XomwHtml {
 
 			// Not technically required in HTML5 but we'd like consistency
 			// and better compression anyway.
-			key = Bry_.Xcase__build__all(temp.bfr, BoolUtl.N, key);
+			key = BryUtlByWtr.XcaseBuildAll(temp.bfr, BoolUtl.N, key);
 
 			// https://www.w3.org/TR/html401/index/attributes.html ("space-separated")
 			// https://www.w3.org/TR/html5/index.html#attributes-1 ("space-separated")
@@ -522,12 +524,12 @@ public class XomwHtml {
 			// }
 
 			if (boolAttrib) {
-				bfr.Add_byte_space().Add(key).Add(ATR_VAL_EMPTY); // $ret .= " $key=\"\"";
+				bfr.AddByteSpace().Add(key).Add(ATR_VAL_EMPTY); // $ret .= " $key=\"\"";
 			}
 			else {
 				// PORTED.HEADER:atrValEncodings
 				val = XophpString_.strtr(val, atrValEncodings, temp.bfr, temp.trv);
-				bfr.Add_byte_space().Add(key).Add(ATR_VAL_QUOTE).Add(val).Add_byte_quote();
+				bfr.AddByteSpace().Add(key).Add(ATR_VAL_QUOTE).Add(val).AddByteQuote();
 			}
 		}
 	}
@@ -1090,14 +1092,14 @@ public class XomwHtml {
 //			return implode(", ", $candidates);
 //		}
 	private static final byte[]
-	  ELEM_INLINE                = Bry_.new_a7("/>")
-	, ATR_VAL_QUOTE              = Bry_.new_a7("=\"")
-	, ATR_VAL_EMPTY              = Bry_.new_a7("=\"\"")
+	  ELEM_INLINE                = BryUtl.NewA7("/>")
+	, ATR_VAL_QUOTE              = BryUtl.NewA7("=\"")
+	, ATR_VAL_EMPTY              = BryUtl.NewA7("=\"\"")
 
-	, TAG_INPUT                  = Bry_.new_a7("input")
-	, TAG_BUTTON                 = Bry_.new_a7("button")
-	, ATR_TYPE                   = Bry_.new_a7("type")
-	, ATR_TYPE_SUBMIT            = Bry_.new_a7("submit")
+	, TAG_INPUT                  = BryUtl.NewA7("input")
+	, TAG_BUTTON                 = BryUtl.NewA7("button")
+	, ATR_TYPE                   = BryUtl.NewA7("type")
+	, ATR_TYPE_SUBMIT            = BryUtl.NewA7("submit")
 	;
 
 	private static final Btrie_slim_mgr atrValEncodings = Btrie_slim_mgr.cs()

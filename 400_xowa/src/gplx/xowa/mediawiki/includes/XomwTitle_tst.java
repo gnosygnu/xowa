@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
 public class XomwTitle_tst {
 	private final XomwTitleOld_fxt fxt = new XomwTitleOld_fxt();
 	@Test public void Alphanum()           {fxt.Test__find_fwd_while_title("0aB"             , 3);}
@@ -22,7 +24,7 @@ public class XomwTitle_tst {
 }
 class XomwTitleOld_fxt {
 	public void Test__find_fwd_while_title(String src_str, int expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
-		Gftest.Eq__int(expd, XomwTitleOld.Find_fwd_while_title(src_bry, 0, src_bry.length, XomwTitleOld.Title_chars_valid()));
+		byte[] src_bry = BryUtl.NewU8(src_str);
+		GfoTstr.Eq(expd, XomwTitleOld.Find_fwd_while_title(src_bry, 0, src_bry.length, XomwTitleOld.Title_chars_valid()));
 	}
 }

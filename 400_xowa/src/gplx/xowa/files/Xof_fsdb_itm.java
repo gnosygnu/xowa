@@ -14,12 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Int_;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.repos.Xof_repo_itm;
 import gplx.xowa.files.repos.Xof_repo_tid_;
 import gplx.xowa.guis.cbks.js.Js_img_wkr;
@@ -51,7 +52,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public int					Html_h()					{return html_h;} private int html_h;
 	public Io_url				Html_view_url()				{return html_view_url;} private Io_url html_view_url;
 	public Io_url				Html_orig_url()				{return html_orig_url;} private Io_url html_orig_url = Io_url_.Empty;
-	public int					Html_gallery_mgr_h()		{return html_gallery_mgr_h;} private int html_gallery_mgr_h = Int_.Neg1;
+	public int					Html_gallery_mgr_h()		{return html_gallery_mgr_h;} private int html_gallery_mgr_h = IntUtl.Neg1;
 	public Js_img_wkr			Html_img_wkr()				{return html_img_wkr;} private Js_img_wkr html_img_wkr;
 	public boolean				File_is_orig()				{return file_is_orig;} private boolean file_is_orig;
 	public int					File_w()					{return file_w;} private int file_w;
@@ -76,9 +77,9 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public void	Init_at_orig(byte orig_repo_id, byte[] orig_repo_name, byte[] orig_ttl, Xof_ext orig_ext, int orig_w, int orig_h, byte[] orig_redirect) {
 		this.orig_repo_id = orig_repo_id; this.orig_repo_name = orig_repo_name; this.orig_redirect = orig_redirect;
 		this.orig_w = orig_w; this.orig_h = orig_h;
-		if		(Bry_.Len_gt_0(orig_redirect))				// redirect exists; EX: A.png redirected to B.png
+		if		(BryUtl.IsNotNullOrEmpty(orig_redirect))				// redirect exists; EX: A.png redirected to B.png
 			this.Orig_ttl_(orig_redirect);					// update fsdb with atrs of B.png
-		else if	(!Bry_.Eq(lnki_ttl, orig_ttl))				// ttls differ; EX: "A_.png" vs "A.png"
+		else if	(!BryLni.Eq(lnki_ttl, orig_ttl))				// ttls differ; EX: "A_.png" vs "A.png"
 			this.Orig_ttl_(orig_ttl);
 		else
 			this.Orig_ttl_(orig_ttl);
@@ -184,19 +185,19 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 			file_is_orig = img_size.File_is_orig();
 		}
 	}
-	public void To_bfr(Bry_bfr bfr) {
-		bfr				   .Add_int_variable(html_uid);
-		bfr.Add_byte_pipe().Add_int_variable(lnki_exec_tid);
-		bfr.Add_byte_pipe().Add(lnki_wiki_abrv);
-		bfr.Add_byte_pipe().Add(lnki_ttl);
-		bfr.Add_byte_pipe().Add_int_variable(lnki_type);
-		bfr.Add_byte_pipe().Add_double(lnki_upright);
-		bfr.Add_byte_pipe().Add_int_variable(lnki_upright_patch);
-		bfr.Add_byte_pipe().Add_int_variable(lnki_w);
-		bfr.Add_byte_pipe().Add_int_variable(lnki_h);
-		bfr.Add_byte_pipe().Add_double(lnki_time);
-		bfr.Add_byte_pipe().Add_int_variable(lnki_page);
-		bfr.Add_byte_nl();
+	public void To_bfr(BryWtr bfr) {
+		bfr				   .AddIntVariable(html_uid);
+		bfr.AddBytePipe().AddIntVariable(lnki_exec_tid);
+		bfr.AddBytePipe().Add(lnki_wiki_abrv);
+		bfr.AddBytePipe().Add(lnki_ttl);
+		bfr.AddBytePipe().AddIntVariable(lnki_type);
+		bfr.AddBytePipe().AddDouble(lnki_upright);
+		bfr.AddBytePipe().AddIntVariable(lnki_upright_patch);
+		bfr.AddBytePipe().AddIntVariable(lnki_w);
+		bfr.AddBytePipe().AddIntVariable(lnki_h);
+		bfr.AddBytePipe().AddDouble(lnki_time);
+		bfr.AddBytePipe().AddIntVariable(lnki_page);
+		bfr.AddByteNl();
 	}
 	public static final int Hdump_mode__null = 0, Hdump_mode__v2 = 2;
 }

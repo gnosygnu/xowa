@@ -162,8 +162,8 @@ class GfmlFrame_nde extends GfmlFrame_base {
 	}
 	@Override protected GfmlFrame_base MakeNew_hook() {return new GfmlFrame_nde();}
 	public void IdxNdeBgn_set(int v) {tknMgr.IdxNdeBgn_set(v);}
-	@gplx.Internal protected void WaitingTkns_AddSym(GfmlTkn tkn, int type) {waitingTkns.Add(tkn); bldr.PrvSymType_set(type);}
-	@gplx.Internal protected void HndTkn_SetFromDatTkn() {
+	public void WaitingTkns_AddSym(GfmlTkn tkn, int type) {waitingTkns.Add(tkn); bldr.PrvSymType_set(type);}
+	public void HndTkn_SetFromDatTkn() {
 		GfmlTkn hndTkn = tknMgr.DatTkn_pop();
 		if (hndTkn != GfmlTkn_.Null)
 			nde.HndTkn_set(hndTkn);
@@ -201,22 +201,22 @@ class GfmlFrame_nde extends GfmlFrame_base {
 class GfmlFrame_nde_ {
 	public static GfmlFrame_nde as_(Object obj) {return obj instanceof GfmlFrame_nde ? (GfmlFrame_nde)obj : null;}
 	public static GfmlFrame_nde node_(GfmlBldr bldr, GfmlNde newNde) {return GfmlFrame_nde.new_(bldr, newNde, bldr.CurFrame().Lxr());}
-	@gplx.Internal protected static GfmlFrame_nde root_(GfmlBldr bldr, GfmlNde newNde, GfmlLxr newLxr) {return GfmlFrame_nde.new_(bldr, newNde, newLxr);}
-	@gplx.Internal protected static final GfmlFrame_nde OwnerRoot_ = null;
-	@gplx.Internal protected static void TransferToNde(GfmlObjList waitingTkns, GfmlNde nde, int bgn) {
+	public static GfmlFrame_nde root_(GfmlBldr bldr, GfmlNde newNde, GfmlLxr newLxr) {return GfmlFrame_nde.new_(bldr, newNde, newLxr);}
+	public static final GfmlFrame_nde OwnerRoot_ = null;
+	public static void TransferToNde(GfmlObjList waitingTkns, GfmlNde nde, int bgn) {
 		int end = waitingTkns.Len();
 		for (int i = bgn; i < end; i++) {
-			GfmlObj tkn = waitingTkns.Get_at(i);
+			GfmlObj tkn = waitingTkns.GetAt(i);
 			nde.SubObjs_Add(tkn);
 		}
 		if (bgn != end) // ignore if bgn == end
 			waitingTkns.DelRange(bgn, end - 1);
 	}
-	@gplx.Internal protected static void TransferToAtr(GfmlObjList src, GfmlAtr trg, int bgn, int end) {
+	public static void TransferToAtr(GfmlObjList src, GfmlAtr trg, int bgn, int end) {
 		int len = end - bgn;
 		if (len <= 0 || end == -1) return;	// -1 b/c calling proc passes end - 1, and end may be 0
 		for (int i = 0; i < len; i++)
-			trg.SubObjs_Add(src.Get_at(i + bgn));
+			trg.SubObjs_Add(src.GetAt(i + bgn));
 		src.DelRange(bgn, end - 1);
 	}		
 }

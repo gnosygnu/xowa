@@ -13,15 +13,40 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.WikibaseClient;
+import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.Wbase_entity_accessor;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.Wdata_prop_val_visitor_;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
+import gplx.xowa.xtns.wbases.stores.Wbase_doc_mgr;
+import gplx.xowa.xtns.wbases.stores.Wbase_prop_mgr;
 // REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private final Scrib_core core;
@@ -123,7 +148,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 			case Proc_orderProperties:					return OrderProperties(args, rslt);
 			case Proc_incrementStatsKey:                return IncrementStatsKey(args, rslt);
 			case Proc_getEntityModuleName:              return GetEntityModuleName(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int 
@@ -142,21 +167,21 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	, Invk_isValidEntityId = "isValidEntityId", Invk_getPropertyOrder = "getPropertyOrder", Invk_orderProperties = "orderProperties"
 	, Invk_incrementStatsKey = "incrementStatsKey", Invk_getEntityModuleName = "getEntityModuleName"
 	;
-	private static final String[] Proc_names = String_.Ary
+	private static final String[] Proc_names = StringUtl.Ary
 	( Invk_getLabel, Invk_getLabelByLanguage, Invk_getEntity, Invk_entityExists, Invk_getEntityStatements, Invk_getSetting, Invk_getEntityUrl
 	, Invk_renderSnak, Invk_formatValue, Invk_renderSnaks, Invk_formatValues
 	, Invk_getEntityId, Invk_getReferencedEntityId, Invk_getUserLang, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount
 	, Invk_isValidEntityId, Invk_getPropertyOrder, Invk_orderProperties, Invk_incrementStatsKey, Invk_getEntityModuleName
 	);
-	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), Keyval_.Ary_empty);}
+	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), KeyValUtl.AryEmpty);}
 
 	public boolean IsValidEntityId(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] entityId = args.Pull_bry(0);
 
 		// EntityId.php.extractSerializationParts expands "localRepoName:random:serialization:parts:entityId"
-		int colonPos = Bry_find_.Find_bwd(entityId, AsciiByte.Colon);
+		int colonPos = BryFind.FindBwd(entityId, AsciiByte.Colon);
 		if (colonPos != -1) {
-			entityId = Bry_.Mid(entityId, colonPos + 1);
+			entityId = BryLni.Mid(entityId, colonPos + 1);
 		}
 
 		boolean valid = checkEntityIdOrNull(entityId) != null;
@@ -214,11 +239,11 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		// get fromId, propertyId, and toIds
 		byte[] fromId = checkEntityIdOrNull(args.Pull_bry(0));
 		byte[] propertyIdBry = checkEntityIdOrNull(args.Pull_bry(1));
-		int propertyId = Bry_.To_int(Bry_.Mid(propertyIdBry, 1));
-		Keyval[] toIdsAry = args.Pull_kv_ary_safe(2);
+		int propertyId = BryUtl.ToInt(BryLni.Mid(propertyIdBry, 1));
+		KeyVal[] toIdsAry = args.Pull_kv_ary_safe(2);
 		Ordered_hash toIds = Ordered_hash_.New_bry();
-		for (Keyval kv : toIdsAry) {
-			toIds.AddAsKeyAndVal(checkEntityIdOrNull(Bry_.new_u8((String)kv.Val())));
+		for (KeyVal kv : toIdsAry) {
+			toIds.AddAsKeyAndVal(checkEntityIdOrNull(BryUtl.NewU8((String)kv.Val())));
 		}
 		Referenced_entity_lookup_wkr wkr = new Referenced_entity_lookup_wkr(ReferencedEntityIdMaxDepth, ReferencedEntityIdMaxReferencedEntityVisits, entity_mgr, core.Page().Url(), fromId, propertyId, toIds);
 		return rslt.Init_obj(wkr.Get_referenced_entity());
@@ -251,8 +276,8 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		Wbase_claim_base[] statements = this.entity_accessor.getEntityStatements(prefixedEntityId, propertyId, rank);
 		if (statements == null) return rslt.Init_null();
 
-		String propertyIdAsString = String_.new_u8(propertyId);
-		return rslt.Init_obj(Keyval_.new_(propertyIdAsString, Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, propertyIdAsString, statements, 1, core.Page().Url_bry_safe())));
+		String propertyIdAsString = StringUtl.NewU8(propertyId);
+		return rslt.Init_obj(KeyVal.NewStr(propertyIdAsString, Scrib_lib_wikibase_srl.Srl_claims_prop_ary(prop_mgr, propertyIdAsString, statements, 1, core.Page().Url_bry_safe())));
 	}
 	public boolean RenderSnak(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
 		Xowe_wiki wiki = core.Wiki();
@@ -315,10 +340,10 @@ public function formatValues( $snaksSerialization ) {
 				Wdata_wiki_mgr wdata_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr();
 				int pid_int = wdata_mgr.Pid_mgr.Get_pid_or_neg1(core.Wiki().Wdata_wiki_lang(), pid);
 				if (pid_int != gplx.xowa.xtns.wbases.core.Wbase_pid.Id_null) {
-					Bry_bfr tmp_bfr = Bry_bfr_.New();
-					tmp_bfr.Add_byte(AsciiByte.Ltr_P);
-					tmp_bfr.Add_long_variable(pid_int);
-					rv = tmp_bfr.To_bry_and_clear();
+					BryWtr tmp_bfr = BryWtr.New();
+					tmp_bfr.AddByte(AsciiByte.Ltr_P);
+					tmp_bfr.AddLongVariable(pid_int);
+					rv = tmp_bfr.ToBryAndClear();
 				}
 			}
 		}
@@ -330,7 +355,7 @@ public function formatValues( $snaksSerialization ) {
 			return rslt.Init_obj(rv);
 	}
 	public boolean GetPropertyOrder(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		throw Err_.new_("wbase", "getPropertyOrder not implemented", "url", core.Page().Url().To_str());
+		throw ErrUtl.NewArgs("getPropertyOrder not implemented", "url", core.Page().Url().To_str());
 	}
 
 	// TEST:
@@ -339,7 +364,7 @@ public function formatValues( $snaksSerialization ) {
 	// * more in lhs
 	// * more in rhs
 	public boolean OrderProperties(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Keyval[] propertyIds = args.Pull_kv_ary_safe(0);
+		KeyVal[] propertyIds = args.Pull_kv_ary_safe(0);
 
 //			if (propertyIds.length == 0) {
 //				return rslt.Init_obj(propertyIds);
@@ -420,11 +445,11 @@ public function formatValues( $snaksSerialization ) {
 		byte[] key = args.Pull_bry(0);
 		Object rv = core.Wiki().Xtn_mgr().Xtn_wikibase().Lua_bindings().getSetting(key);
 		if (rv == null) 
-			throw Err_.new_("wbase", "getSetting key missing", "key", key, "url", core.Page().Url().To_str());
+			throw ErrUtl.NewArgs("getSetting key missing", "key", key, "url", core.Page().Url().To_str());
 		return rslt.Init_obj(rv);
 	}
 	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		return rslt.Init_obj(Keyval_.Ary_empty);	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
+		return rslt.Init_obj(KeyValUtl.AryEmpty);	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
 	}
 	public boolean IncrementStatsKey(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_null();
@@ -445,9 +470,9 @@ public function formatValues( $snaksSerialization ) {
 		// get qid / pid from scrib_arg[0]
 		byte[] xid_bry = args.Pull_bry(0);
 		// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27
-		return Bry_.Len_eq_0(xid_bry)
+		return BryUtl.IsNullOrEmpty(xid_bry)
 			? null
-			: Bry_.Trim(xid_bry); // trim, b/c some pages will literally pass in "Property:P5\n"; PAGE:de.w:Mailand–Sanremo_2016 ISSUE#:363; DATE:2019-02-12
+			: BryUtl.Trim(xid_bry); // trim, b/c some pages will literally pass in "Property:P5\n"; PAGE:de.w:Mailand–Sanremo_2016 ISSUE#:363; DATE:2019-02-12
 	}
 	private Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core, String type, boolean logMissing) {
 		byte[] xid_bry = Get_xid_from_args(args);
@@ -458,24 +483,24 @@ public function formatValues( $snaksSerialization ) {
 		if (wdoc == null && logMissing) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), type, xid_bry);
 		return wdoc;
 	}
-	private static Keyval[] Deserialize_snaks(Scrib_proc_args args, int idx) {
+	private static KeyVal[] Deserialize_snaks(Scrib_proc_args args, int idx) {
 		// NOTE: SnakListDeserializer has an if-case to check for either "Snak[]" or "[key:"key",value:Snaks[]]" ISSUE#:666; PAGE:ja.w:Sed_(コンピュータ) DATE:2020-03-01
 		// REF.MW: https://github.com/wikimedia/mediawiki-vendor/blob/4361929262cc87a08345c69a71258f59319be2c7/wikibase/data-model-serialization/src/Deserializers/SnakListDeserializer.php#L53-L68
 		// get kvs
-		Keyval[] kvs = args.Pull_kv_ary_safe(idx);
+		KeyVal[] kvs = args.Pull_kv_ary_safe(idx);
 		int kvs_len = kvs.length;
 
 		if (kvs_len == 0) return kvs; // empty kvs; just return it;
 
 		// get 1st
-		Keyval kv = kvs[0];
+		KeyVal kv = kvs[0];
 
 		// key is String; EX: {"P10":[{"property":"P20"}]}
-		if (Type_.Eq_by_obj(kv.Key_as_obj(), String.class)) {
-			if (Type_.Eq_by_obj(kv.Key_as_obj(), Keyval[].class)) {
-				throw Err_.new_wo_type("The snaks per property " + kv.Key() + " should be an array" );
+		if (ClassUtl.EqByObj(String.class, kv.KeyAsObj())) {
+			if (ClassUtl.EqByObj(KeyVal[].class, kv.KeyAsObj())) {
+				throw ErrUtl.NewArgs("The snaks per property " + kv.KeyToStr() + " should be an array" );
 			}
-			return (Keyval[])kv.Val();
+			return (KeyVal[])kv.Val();
 		}
 		// key is int; EX: ["1":{"property":"P20"}]
 		else {

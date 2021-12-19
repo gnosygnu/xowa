@@ -14,13 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.msgs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.String_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_page;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
@@ -45,31 +46,31 @@ public class Xol_msg_mgr_ {
 		return rv == null ? or : rv;
 	}
 	public static String Get_msg_val_gui_or_null(Xoa_lang_mgr lang_mgr, Xol_lang_itm lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
-		byte[] msg_key = Bry_.Add(pre, key, suf);
+		byte[] msg_key = BryUtl.Add(pre, key, suf);
 		Xol_msg_itm msg_itm = lang.Msg_mgr().Itm_by_key_or_null(msg_key);
 		if (msg_itm == null)
 			msg_itm = lang_mgr.Lang_en().Msg_mgr().Itm_by_key_or_null(msg_key);			
-		return msg_itm == null ? null : String_.new_u8(msg_itm.Val());
+		return msg_itm == null ? null : StringUtl.NewU8(msg_itm.Val());
 	}
 	public static byte[] Get_msg_val(Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[][] fmt_args) {
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
 		Xol_msg_itm msg_itm = Get_msg_itm(tmp_bfr, wiki, lang, msg_key);
 		byte[] rv = (msg_itm.Defined_in_none())
-			? tmp_bfr.Add_byte(AsciiByte.Lt).Add(msg_key).Add_byte(AsciiByte.Gt).To_bry_and_clear()	// NOTE: do not use key from msg_itm; msg_itms are case-insensitive, and val should match key exactly; EX: missing should return <missing> not <Missing> DATE:2016-08-01
+			? tmp_bfr.AddByte(AsciiByte.Lt).Add(msg_key).AddByte(AsciiByte.Gt).ToBryAndClear()	// NOTE: do not use key from msg_itm; msg_itms are case-insensitive, and val should match key exactly; EX: missing should return <missing> not <Missing> DATE:2016-08-01
 			: Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
-		tmp_bfr.Mkr_rls();
+		tmp_bfr.MkrRls();
 		return rv;
-	}	private static final byte[] Missing_bry = Bry_.new_a7("$"), Slash_bry = new byte[] {AsciiByte.Slash};
-	public static byte[] Get_msg_val(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
+	}	private static final byte[] Missing_bry = BryUtl.NewA7("$"), Slash_bry = new byte[] {AsciiByte.Slash};
+	public static byte[] Get_msg_val(BryWtr tmp_bfr, Xow_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
 		byte[] msg_val = msg_itm.Val();
 		boolean has_fmt = msg_itm.Has_fmt_arg(), has_tmpl = msg_itm.Has_tmpl_txt();
 		if (!has_fmt && !has_tmpl)		// no fmt or tmpl; just add val
 			return msg_val;
 		if (has_fmt) {					// fmt exists; fmt first (before tmpl text); EX: Expression error: Unrecognised word "~{0}"
-			Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp().Missing_bgn_(Missing_bry).Missing_end_(Bry_.Empty).Missing_adj_(1);
-			tmp_fmtr.Fmt_(msg_val);
-			tmp_fmtr.Bld_bfr(tmp_bfr, fmt_args);
-			msg_val = tmp_bfr.To_bry_and_clear();
+			BryFmtr tmp_fmtr = BryFmtr.NewTmp().MissingBgnSet(Missing_bry).MissingEndSet(BryUtl.Empty).MissingAdjSet(1);
+			tmp_fmtr.FmtSet(msg_val);
+			tmp_fmtr.BldToBfr(tmp_bfr, fmt_args);
+			msg_val = tmp_bfr.ToBryAndClear();
 		}
 		if (has_tmpl) {
 			if (wiki.Type_is_edit()) {
@@ -81,10 +82,10 @@ public class Xol_msg_mgr_ {
 		}
 		return msg_val;
 	}
-	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key) {
+	public static Xol_msg_itm Get_msg_itm(BryWtr tmp_bfr, Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key) {
 		byte[] msg_key_sub_root = msg_key;
-		int slash_pos = Bry_find_.Find_bwd(msg_key, AsciiByte.Slash);
-		if (slash_pos != Bry_find_.Not_found) {	// key is of format "key/lang"; EX: "January/en"
+		int slash_pos = BryFind.FindBwd(msg_key, AsciiByte.Slash);
+		if (slash_pos != BryFind.NotFound) {	// key is of format "key/lang"; EX: "January/en"
 			int msg_key_len = msg_key.length;
 			if (slash_pos != msg_key_len) {		// get text after slash; EX: "en"
 				Object o = Xol_lang_stub_.Regy().Get_by_mid(msg_key, slash_pos + 1, msg_key_len);
@@ -92,18 +93,18 @@ public class Xol_msg_mgr_ {
 					Xol_lang_stub lang_itm = (Xol_lang_stub)o;
 					lang = wiki.App().Lang_mgr().Get_by_or_new(lang_itm.Key());		// set lang
 				}
-				msg_key_sub_root = Bry_.Mid(msg_key, 0, slash_pos);					// set msg to "a" (discarding "/b")
+				msg_key_sub_root = BryLni.Mid(msg_key, 0, slash_pos);					// set msg to "a" (discarding "/b")
 			}
 		}			
 		Xol_msg_itm msg_in_wiki = wiki.Msg_mgr().Get_or_null(msg_key);						// check wiki; used to be check lang, but Search_mediawiki should never be toggled on lang; DATE:2014-05-13
 		if (msg_in_wiki != null) return msg_in_wiki;										// NOTE: all new msgs will Search_mediawiki once; EX: de.w:{{int:Autosumm-replace}}; DATE:2013-01-25
 		msg_in_wiki = wiki.Msg_mgr().Get_or_make(msg_key);
 		byte[] msg_db = Get_msg_from_db_or_null(wiki, lang, msg_key, msg_key_sub_root);
-		byte[] msg_val = Bry_.Empty;
+		byte[] msg_val = BryUtl.Empty;
 		if (msg_db == null) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
 			Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
 			if (msg_in_lang == null) {
-				msg_val = tmp_bfr.Add_byte(AsciiByte.Lt).Add(msg_key).Add_byte(AsciiByte.Gt).To_bry_and_clear();	// set val to <msg_key>
+				msg_val = tmp_bfr.AddByte(AsciiByte.Lt).Add(msg_key).AddByte(AsciiByte.Gt).ToBryAndClear();	// set val to <msg_key>
 				msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__none);
 			}
 			else {
@@ -120,7 +121,7 @@ public class Xol_msg_mgr_ {
 	}
 	private static byte[] Get_msg_from_db_or_null(Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key, byte[] msg_key_sub_root) {
 		byte[] ns_bry = wiki.Ns_mgr().Ns_mediawiki().Name_db_w_colon();
-		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
+		Xoa_ttl ttl = wiki.Ttl_parse(BryUtl.Add(ns_bry, msg_key)); // ttl="MediaWiki:msg_key"; note that there may be "/lang"; EX:pl.d:Wikislownik:Bar/Archiwum_6 and newarticletext/pl
 		byte[] rv = null;
 		if (ttl != null)
 			rv = Load_msg_from_db_or_null(wiki, ttl);
@@ -129,7 +130,7 @@ public class Xol_msg_mgr_ {
 			int fallback_ary_len = fallback_ary.length;
 			for (int i = 0; i < fallback_ary_len; i++) {
 				byte[] fallback = fallback_ary[i];
-				ttl = wiki.Ttl_parse(Bry_.Add(ns_bry, msg_key_sub_root, Slash_bry, fallback));	// ttl="MediaWiki:msg_key/fallback"
+				ttl = wiki.Ttl_parse(BryUtl.Add(ns_bry, msg_key_sub_root, Slash_bry, fallback));	// ttl="MediaWiki:msg_key/fallback"
 				if (ttl != null)
 					rv = Load_msg_from_db_or_null(wiki, ttl);
 				if (rv != null) break;
@@ -145,7 +146,7 @@ public class Xol_msg_mgr_ {
 		// HACK: handle htmp_dump wikis when loading messages such as sidebar; DATE:2016-09-17
 		if (	!wiki.Type_is_edit()							// app is drd; DATE:2016-09-23
 			||	(	pg.Db().Page().Exists()						// page exists
-				&&	Bry_.Len_eq_0(pg.Db().Text().Text_bry())	// but text is empty -> check html_dump
+				&&	BryUtl.IsNullOrEmpty(pg.Db().Text().Text_bry())	// but text is empty -> check html_dump
 				)
 			) {
 			Xoh_page hpg = new Xoh_page();

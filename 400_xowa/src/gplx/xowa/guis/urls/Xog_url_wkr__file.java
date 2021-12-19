@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.urls;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.htmls.doms.*;
 import gplx.xowa.parsers.lnkis.*;
@@ -34,18 +41,18 @@ class Xog_url_wkr__file {
 	public Xowe_wiki File_wiki() {return file_wiki;} private Xowe_wiki file_wiki;
 	public void Extract_data(String html_doc, byte[] href_bry) {	// EX: file:///xowa/A.png
 		// find xowa_ttl from html_doc for given file; EX: file:///xowa/A.png -> xowa_ttl = "A.png"
-		String xowa_ttl = Xoh_dom_.Title_by_href(href_bry, Bry_.new_u8(html_doc));
+		String xowa_ttl = Xoh_dom_.Title_by_href(href_bry, BryUtl.NewU8(html_doc));
 		if (xowa_ttl == null) {
 			app.Gui_mgr().Kit().Ask_ok("", "", "could not find anchor with href in html: href=~{0}", href_bry);
 			return;
 		}
 
 		// get fsdb itm
-		this.file_page_db = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(Xoa_ttl.Replace_spaces(Bry_.new_u8(xowa_ttl)));
+		this.file_page_db = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(Xoa_ttl.Replace_spaces(BryUtl.NewU8(xowa_ttl)));
 		this.file_wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(page_wiki);
 		this.fsdb = Xog_url_wkr__file.Make_fsdb(file_wiki, file_page_db, img_size, url_bldr);
 
-		this.file_url = Io_url_.New__http_or_fail(String_.new_u8(gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(href_bry)));
+		this.file_url = Io_url_.New__http_or_fail(StringUtl.NewU8(gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(href_bry)));
 	}
 	public void Download_and_run() {
 		// download file if it doesn't exist
@@ -71,9 +78,9 @@ class Xog_url_wkr__file {
 		Xof_fsdb_itm fsdb = new Xof_fsdb_itm();
 		lnki_ttl = Xoa_ttl.Replace_spaces(gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(lnki_ttl));
 		fsdb.Init_at_lnki(Xof_exec_tid.Tid_viewer_app, wiki.Domain_itm().Abrv_xo(), lnki_ttl, Xop_lnki_type.Id_none, Xop_lnki_tkn.Upright_null, Xof_img_size.Size__neg1, Xof_img_size.Size__neg1, Xof_lnki_time.Null, Xof_lnki_page.Null, Xof_patch_upright_tid_.Tid_all);
-		fsdb.Init_at_hdoc(Int_.Max_value, Xof_html_elem.Tid_img);// NOTE: set elem_id to "impossible" number, otherwise it will auto-update an image on the page with a super-large size; [[File:Alfred Sisley 062.jpg]]
+		fsdb.Init_at_hdoc(IntUtl.MaxValue, Xof_html_elem.Tid_img);// NOTE: set elem_id to "impossible" number, otherwise it will auto-update an image on the page with a super-large size; [[File:Alfred Sisley 062.jpg]]
 		Xof_orig_itm orig = wiki.File__orig_mgr().Find_by_ttl_or_null(lnki_ttl); if (orig == Xof_orig_itm.Null) return null;	// orig not found; need orig in order to get repo
-		Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), lnki_ttl, Bry_.Empty); if (repo == null) return null; // repo not found
+		Xof_repo_itm repo = wiki.File__repo_mgr().Get_trg_by_id_or_null(orig.Repo(), lnki_ttl, BryUtl.Empty); if (repo == null) return null; // repo not found
 		fsdb.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
 		fsdb.Init_at_html(Xof_exec_tid.Tid_viewer_app, img_size, repo, url_bldr);
 		fsdb.File_is_orig_(true);

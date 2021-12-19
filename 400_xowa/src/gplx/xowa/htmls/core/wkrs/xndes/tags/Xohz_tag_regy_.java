@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
+package gplx.xowa.htmls.core.wkrs.xndes.tags;
+import gplx.types.basics.utls.BryUtl;
 import gplx.langs.htmls.*;
 import gplx.xowa.htmls.core.wkrs.xndes.atrs.*;
 public class Xohz_tag_regy_ {
@@ -26,11 +27,11 @@ public class Xohz_tag_regy_ {
 			.Itms__add_int(Atr__cellspacing		, Gfh_atr_.Bry__cellspacing)	// 1 or 1%
 			.Itms__add_int(Atr__colspan			, Gfh_atr_.Bry__colspan)
 			.Itms__add_int(Atr__rowspan			, Gfh_atr_.Bry__rowspan)
-			.Itms__add_enm(Atr__scope			, Gfh_atr_.Bry__scope, Bry_.Ary("row", "col", "rowgroup", "colgroup"))
-			.Itms__add_enm(Atr__align			, Gfh_atr_.Bry__align, Bry_.Ary("left", "center", "right"))
+			.Itms__add_enm(Atr__scope			, Gfh_atr_.Bry__scope, BryUtl.Ary("row", "col", "rowgroup", "colgroup"))
+			.Itms__add_enm(Atr__align			, Gfh_atr_.Bry__align, BryUtl.Ary("left", "center", "right"))
 			.Itms__add_str(Atr__bgcolor			, Gfh_atr_.Bry__bgcolor)
 			;
-		byte[] grp__tbl_cell = Bry_.new_a7("tbl.cell");
+		byte[] grp__tbl_cell = BryUtl.NewA7("tbl.cell");
 		atrs.Grps__add(grp__tbl_cell, Gfh_atr_.Bry__scope, Gfh_atr_.Bry__colspan, Gfh_atr_.Bry__rowspan);
 		tags.Add(Tag__th			, Gfh_tag_.Bry__th, 1, grp__tbl_cell);
 		tags.Add(Tag__td			, Gfh_tag_.Bry__td, 1, grp__tbl_cell);

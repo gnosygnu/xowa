@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 
 package gplx.xowa.parsers.tmpls;
 
-import gplx.Bry_;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.parsers.Xop_ctx;
@@ -57,13 +57,13 @@ class Xot_defn_tmpl__fxt {
 	public void Test_CopyNew_FrameTtl(int frameNs, String frameTtlStr, String expdFrameTtl) {
 		Xowe_wiki wiki = fxt.Wiki();
 		Xop_ctx ctx = Xop_ctx.New__top(wiki);
-		byte[] frameTtlBry = Bry_.new_u8(frameTtlStr);
+		byte[] frameTtlBry = BryUtl.NewU8(frameTtlStr);
 		Xot_defn_tmpl orig_defn = new Xot_defn_tmpl();
-		Xot_invk orig = Xot_invk_temp.New_root(Bry_.new_u8("orig"));
-		Xot_invk caller = Xot_invk_temp.New_root(Bry_.new_u8("caller"));
-		byte[] src = Bry_.Empty;
+		Xot_invk orig = Xot_invk_temp.New_root(BryUtl.NewU8("orig"));
+		Xot_invk caller = Xot_invk_temp.New_root(BryUtl.NewU8("caller"));
+		byte[] src = BryUtl.Empty;
 
 		Xot_invk tmpl =  Xot_defn_tmpl_.CopyNew(ctx, orig_defn, orig, caller, src, frameNs, frameTtlBry);
-		Gftest.Eq__bry(Bry_.new_u8(expdFrameTtl), tmpl.Frame_ttl());
+		GfoTstr.Eq(BryUtl.NewU8(expdFrameTtl), tmpl.Frame_ttl());
 	}
 }

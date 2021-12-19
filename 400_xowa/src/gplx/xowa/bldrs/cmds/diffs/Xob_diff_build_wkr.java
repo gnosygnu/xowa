@@ -14,15 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds.diffs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_fmt;
-import gplx.DateAdp_;
-import gplx.Io_url_;
-import gplx.String_;
-import gplx.core.brys.Bfr_arg_;
-import gplx.core.brys.fmts.Bfr_fmt_arg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.libs.files.Io_url_;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgUtl;
+import gplx.types.custom.brys.fmts.itms.BfrFmtArg;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.Dbmeta_tbl_itm;
@@ -34,7 +33,7 @@ import gplx.dbs.diffs.builds.Gfdb_diff_bldr;
 import gplx.dbs.diffs.builds.Gfdb_diff_wkr__db;
 import gplx.dbs.diffs.itms.Gdif_job_itm;
 import gplx.dbs.metas.Dbmeta_tbl_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.bldrs.Xob_bldr;
@@ -47,8 +46,8 @@ class Xob_diff_build_wkr {
 	public Xob_diff_build_wkr(Xob_bldr bldr, Xowe_wiki wiki, String old_url, String new_url, String dif_url, int commit_interval, Xowd_tbl_mapr tbl_mapr) {
 		this.wiki = wiki;
 		wiki.Init_by_wiki();
-		Bry_fmt url_fmt = Bry_fmt.New("").Args_(New_url_args(wiki, tbl_mapr.Name));
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryFmt url_fmt = BryFmt.New("").Args_(New_url_args(wiki, tbl_mapr.Name));
+		BryWtr tmp_bfr = BryWtr.New();
 		old_conn = New_conn(tmp_bfr, wiki, url_fmt, BoolUtl.N, old_url);
 		new_conn = New_conn(tmp_bfr, wiki, url_fmt, BoolUtl.N, new_url);
 		dif_conn = New_conn(tmp_bfr, wiki, url_fmt, BoolUtl.Y, dif_url);
@@ -56,7 +55,7 @@ class Xob_diff_build_wkr {
 	}
 	public void Exec() {
 		Gdif_core dif_core = new Gdif_core(dif_conn);
-		String name = String_.Format("{0}|{1}|diffs|{2}", wiki.Domain_str(), tbl_mapr.Name, wiki.Props().Modified_latest().XtoStr_fmt(DateAdp_.Fmt__yyyyMMdd));	// EX: "simple.wikipedia.org|text|diffs|20160112"
+		String name = StringUtl.Format("{0}|{1}|diffs|{2}", wiki.Domain_str(), tbl_mapr.Name, wiki.Props().Modified_latest().ToStrFmt(GfoDateUtl.Fmt_yyyyMMdd));	// EX: "simple.wikipedia.org|text|diffs|20160112"
 		String made_by = wiki.App().User().Key();
 		Gdif_job_itm job_itm = dif_core.New_job(name, made_by);
 		Gdif_bldr_ctx ctx = new Gdif_bldr_ctx().Init(dif_core, job_itm);
@@ -93,17 +92,17 @@ class Xob_diff_build_wkr {
 			// save txn
 		}
 	}
-	public static Db_conn New_conn(Bry_bfr tmp_bfr, Xow_wiki wiki, Bry_fmt fmtr, boolean autocreate, String url_fmt) {
+	public static Db_conn New_conn(BryWtr tmp_bfr, Xow_wiki wiki, BryFmt fmtr, boolean autocreate, String url_fmt) {
 		fmtr.Fmt_(url_fmt).Bld_many(tmp_bfr);
-		return Db_conn_bldr.Instance.Get_or_autocreate(autocreate, Io_url_.new_any_(tmp_bfr.To_str_and_clear()));
+		return Db_conn_bldr.Instance.Get_or_autocreate(autocreate, Io_url_.new_any_(tmp_bfr.ToStrAndClear()));
 	}
-	private static Bfr_fmt_arg[] New_url_args(Xow_wiki wiki, String db_mapr_name) {
-		Bfr_fmt_arg[] rv = new Bfr_fmt_arg[]
-		{ new Bfr_fmt_arg(Bry_.new_a7(".dump_dir"), new Bfr_arg__dump_dir(wiki))
-		, new Bfr_fmt_arg(Bry_.new_a7(".dump_core"), new Bfr_arg__dump_core(wiki))
-		, new Bfr_fmt_arg(Bry_.new_a7(".dump_domain"), new Bfr_arg__dump_domain(wiki))
-		, new Bfr_fmt_arg(Bry_.new_a7(".dir_spr"), new Bfr_arg__dir_spr())
-		, new Bfr_fmt_arg(Bry_.new_a7(".dif_name"), Bfr_arg_.New_bry(db_mapr_name))
+	private static BfrFmtArg[] New_url_args(Xow_wiki wiki, String db_mapr_name) {
+		BfrFmtArg[] rv = new BfrFmtArg[]
+		{ new BfrFmtArg(BryUtl.NewA7(".dump_dir"), new Bfr_arg__dump_dir(wiki))
+		, new BfrFmtArg(BryUtl.NewA7(".dump_core"), new Bfr_arg__dump_core(wiki))
+		, new BfrFmtArg(BryUtl.NewA7(".dump_domain"), new Bfr_arg__dump_domain(wiki))
+		, new BfrFmtArg(BryUtl.NewA7(".dir_spr"), new Bfr_arg__dir_spr())
+		, new BfrFmtArg(BryUtl.NewA7(".dif_name"), BryBfrArgUtl.NewBry(db_mapr_name))
 		};
 		return rv;
 	}		

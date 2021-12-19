@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.addons.medias;
-import gplx.Bry_bfr;
-import gplx.core.brys.Bry_rdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.rdrs.BryRdr;
 import gplx.core.brys.Int_flag_bldr;
 import gplx.core.encoders.Gfo_hzip_int_;
 import gplx.core.threads.poolables.Gfo_poolable_itm;
 import gplx.core.threads.poolables.Gfo_poolable_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.htmls.Xoh_page;
 import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
 import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
@@ -38,7 +38,7 @@ public class Xoh_media_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
 		Xoh_media_data data = (Xoh_media_data)data_obj;
 		if (!data.Rng_valid()) {
-			bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+			bfr.AddMid(src, data.Src_bgn(), data.Src_end());
 			return this;
 		}
 
@@ -59,9 +59,9 @@ public class Xoh_media_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		}
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		// flags
-		int flag = rdr.Read_hzip_int(1); flag_bldr.Decode(flag);
+		int flag = rdr.ReadHzipInt(1); flag_bldr.Decode(flag);
 		boolean is_audio = flag_bldr.Get_as_bool(Flag__is_audio);
 		boolean aud_noicon = flag_bldr.Get_as_bool(Flag__noicon);
 
@@ -69,8 +69,8 @@ public class Xoh_media_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		int aud_width = -1;
 		int lnki_ttl_bgn = -1, lnki_ttl_end = -1;
 		if (is_audio) {
-			aud_width = rdr.Read_hzip_int(2);
-			lnki_ttl_bgn = rdr.Pos(); lnki_ttl_end = rdr.Find_fwd_lr();
+			aud_width = rdr.ReadHzipInt(2);
+			lnki_ttl_bgn = rdr.Pos(); lnki_ttl_end = rdr.FindFwdLr();
 		}
 
 		// write

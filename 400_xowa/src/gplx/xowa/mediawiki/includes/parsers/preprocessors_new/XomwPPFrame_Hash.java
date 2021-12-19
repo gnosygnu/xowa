@@ -46,7 +46,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { //		/**
 //		* Recursion depth of this frame, top = 0
 //		* Note that this is NOT the same as expansion depth in expand()
 //		*/
-//		@gplx.New public int depth;
+//		@gplx.frameworks.objects.New public int depth;
 //
 //		private boolean volatile_bool;
 //		private int ttl;
@@ -259,8 +259,8 @@ public class XomwPPFrame_Hash extends XomwPPFrame { //		/**
 //						);
 //					} else {
 //						XophpArray ret = this.parser.braceSubstitution(bits, this);
-//						if (ret.isset(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
-//							newIterator = ret.Get_by(Object_.Cls_val_name);
+//						if (ret.isset(ObjectUtl.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+//							newIterator = ret.Get_by(ObjectUtl.Cls_val_name);
 //						} else {
 //							outItm += ret.Get_by_str("text");
 //						}
@@ -276,7 +276,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { //		/**
 //						);
 //					} else {
 //						XophpArray ret = this.parser.argSubstitution(bits, this);
-//						if (ret.isset(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+//						if (ret.isset(ObjectUtl.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
 //							newIterator = ret.Get_by("Object");
 //						} else {
 //							outItm += ret.Get_by_str("text");
@@ -344,7 +344,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { //		/**
 //						String titleText = this.title.getPrefixedDBkeyStr();
 //						this.parser.mHeadings.Add(titleText, bits.Get_by("i"));
 //						int serial = XophpArray.count(this.parser.mHeadings) - 1;
-//						String marker = XomwParser.MARKER_PREFIX + "-h-" + Int_.To_str(serial) + "-" + XomwParser.MARKER_SUFFIX;
+//						String marker = XomwParser.MARKER_PREFIX + "-h-" + IntUtl.To_str(serial) + "-" + XomwParser.MARKER_SUFFIX;
 //						s = XophpString_.substr(s, 0, bits.Get_by_int("level")) + marker + XophpString_.substr(s, bits.Get_by_int("level"));
 //						this.parser.mStripState.addGeneral(marker, "");
 //						outItm += s;
@@ -622,7 +622,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { //		/**
 //		* @param int ttl
 //		*/
 //		public override void setTTL(int val) {
-//			if (this.ttl == Int_.Null || val < this.ttl) {
+//			if (this.ttl == IntUtl.Null || val < this.ttl) {
 //				this.ttl = val;
 //			}
 //		}

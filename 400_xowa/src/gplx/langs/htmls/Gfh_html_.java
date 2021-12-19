@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.htmls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
 public class Gfh_html_ {
-	public static byte[] rawElement(Bry_bfr bfr, int tag_id, byte[] body, Gfh_atr_itm... atrs) {
+	public static byte[] rawElement(BryWtr bfr, int tag_id, byte[] body, Gfh_atr_itm... atrs) {
 		// add "<tag"
-		byte[] tag_name = Bry_.new_u8(Gfh_tag_.To_str(tag_id));
+		byte[] tag_name = BryUtl.NewU8(Gfh_tag_.To_str(tag_id));
 		Gfh_tag_.Bld_lhs_bgn(bfr, tag_name);
 
 		// add " key1=val1 ..."
@@ -34,6 +36,6 @@ public class Gfh_html_ {
 
 		// add "</tag>"
 		Gfh_tag_.Bld_rhs(bfr, tag_name);
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 }

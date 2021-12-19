@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.imaps;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.wtrs.BryBfrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.xtns.imaps.itms.*; import gplx.xowa.xtns.imaps.htmls.*;
 public class Imap_map implements Xoh_file_fmtr, Js_img_wkr {
 	private byte img_cls_tid; private Imap_xtn_mgr xtn_mgr;
@@ -33,7 +39,7 @@ public class Imap_map implements Xoh_file_fmtr, Js_img_wkr {
 	public Imap_err[]			Errs()			{return errs;}			private Imap_err[] errs;
 	public boolean					Invalid()		{return img == null;}	// invalid if missing image; PAGE:en.w:Wikipedia:WikiProject_Games/Advert EX: <imagemap>|thumb;</imagemap>; DATE:2014-08-12
 
-	public void Add_full_img(Bry_bfr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
+	public void Add_full_img(BryWtr tmp_bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
 		, byte[] a_href, boolean a_href_is_file, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 		, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
 		) {
@@ -42,29 +48,29 @@ public class Imap_map implements Xoh_file_fmtr, Js_img_wkr {
 		xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_imap);
 
 		if (hctx.Mode_is_hdump()) {
-			img_src = Bry_.Empty; // ISSUE#:553 DATE:2019-09-07
+			img_src = BryUtl.Empty; // ISSUE#:553 DATE:2019-09-07
 		}
 		Write_imap_div(tmp_bfr, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h(), a_xowa_title);
 	}
 	public void Js_wkr__update_hdoc(Xoa_page page, Xog_js_wkr js_wkr, int html_uid
 		, int html_w, int html_h, Io_url html_view_url
 		, int orig_w, int orig_h, Xof_ext orig_ext, Io_url html_orig_url, byte[] lnki_ttl) {
-		Bry_bfr tmp_bfr = Bry_bfr_.Get();
+		BryWtr tmp_bfr = BryBfrUtl.Get();
 		try {
 			Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, html_view_url.To_http_file_bry(), orig_w, orig_h, lnki_ttl);
-			js_wkr.Html_elem_replace_html("imap_div_" + Int_.To_str(html_uid), tmp_bfr.To_str_and_rls());
-		} finally {tmp_bfr.Mkr_rls();}
+			js_wkr.Html_elem_replace_html("imap_div_" + IntUtl.ToStr(html_uid), tmp_bfr.ToStrAndRls());
+		} finally {tmp_bfr.MkrRls();}
 	}
-	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] img_src, int orig_w, int orig_h, byte[] lnki_ttl) {
+	private void Write_imap_div(BryWtr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] img_src, int orig_w, int orig_h, byte[] lnki_ttl) {
 		Imap_map_arg map_arg = new Imap_map_arg(id, shapes, Calc_scale(orig_w, orig_h, html_w, html_h));
 		Imap_img_arg img_arg = new Imap_img_arg(hctx, xtn_mgr, this, html_uid, img_alt, img_src, html_w, html_h, Xoh_img_cls_.To_html(img_cls_tid, img_cls_other), a_href, lnki_ttl);
-		Imap_html_fmtrs.All.Bld_bfr_many(bfr, html_uid, Calc_desc_style(desc, html_w, html_h), map_arg, img_arg);
+		Imap_html_fmtrs.All.BldToBfrMany(bfr, html_uid, Calc_desc_style(desc, html_w, html_h), map_arg, img_arg);
 	}
 	private static byte[] Calc_desc_style(Imap_part_desc desc, int html_w, int html_h) {
-		if (desc == null) return Bry_.Empty;
-		Bry_bfr tmp_bfr = Bry_bfr_.Get();
-		try		{return Imap_html_fmtrs.Desc_style.Bld_bry_many(tmp_bfr, html_w, html_h);}
-		finally {tmp_bfr.Mkr_rls();}
+		if (desc == null) return BryUtl.Empty;
+		BryWtr tmp_bfr = BryBfrUtl.Get();
+		try		{return Imap_html_fmtrs.Desc_style.BldToBryMany(tmp_bfr, html_w, html_h);}
+		finally {tmp_bfr.MkrRls();}
 	}
 	private static double Calc_scale(int orig_w, int orig_h, int html_w, int html_h) {
 		int denominator = orig_w + orig_h;

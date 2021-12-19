@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,28 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
-import gplx.core.strings.*; import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
+package gplx.langs.dsvs;
+import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class DsvDataWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {
 		if (key == DsvStoreLayout.Key_const) layout = (DsvStoreLayout)val;
 	}
-	@Override public void WriteData(String name, Object val)		{sb.WriteFld(val == null ? null : val.toString());}
-	public void WriteLeafBgn(String leafName)					{}
-	public void WriteLeafEnd()									{sb.WriteRowSep();}
-	@Override public void WriteNodeBgn(String name)				{WriteTableBgn(name, GfoFldList_.Null);}
+	@Override public void WriteData(String name, Object val)        {sb.WriteFld(val == null ? null : val.toString());}
+	public void WriteLeafBgn(String leafName)                    {}
+	public void WriteLeafEnd()                                    {sb.WriteRowSep();}
+	@Override public void WriteNodeBgn(String name)                {WriteTableBgn(name, GfoFldList_.Null);}
 	public void WriteTableBgn(String name, GfoFldList flds) {
 		for (int i = 0; i < layout.HeaderList().Count(); i++) {
 			DsvHeaderItm data = layout.HeaderList().Get_at(i);
-			int id = data.Id();				
-			if		(id == DsvHeaderItm.Id_TableName)	WriteTableName(name);
-			else if (id == DsvHeaderItm.Id_LeafNames)	WriteMeta(flds, true, sym.FldNamesSym());
-			else if (id == DsvHeaderItm.Id_LeafTypes)	WriteMeta(flds, false, sym.FldTypesSym());
-			else if (id == DsvHeaderItm.Id_BlankLine)	sb.WriteRowSep();
-			else if (id == DsvHeaderItm.Id_Comment)		WriteComment(data.Val().toString());
+			int id = data.Id();                
+			if        (id == DsvHeaderItm.Id_TableName)    WriteTableName(name);
+			else if (id == DsvHeaderItm.Id_LeafNames)    WriteMeta(flds, true, sym.FldNamesSym());
+			else if (id == DsvHeaderItm.Id_LeafTypes)    WriteMeta(flds, false, sym.FldTypesSym());
+			else if (id == DsvHeaderItm.Id_BlankLine)    sb.WriteRowSep();
+			else if (id == DsvHeaderItm.Id_Comment)        WriteComment(data.Val().toString());
 		}
 	}
-	@Override public void WriteNodeEnd()							{}
+	@Override public void WriteNodeEnd()                            {}
 	public void Clear() {sb.Clear();}
 	public String To_str() {return sb.To_str();}
 	void WriteTableName(String tableName) {
@@ -58,11 +61,11 @@ public class DsvDataWtr extends DataWtr_base implements DataWtr {
 	}
 	@Override public SrlMgr SrlMgr_new(Object o) {return new DsvDataWtr();}
 	DsvStringBldr sb; DsvSymbols sym = DsvSymbols.default_(); DsvStoreLayout layout = DsvStoreLayout.csv_dat_();
-	@gplx.Internal protected DsvDataWtr() {sb = DsvStringBldr.new_(sym);}
+	public DsvDataWtr() {sb = DsvStringBldr.new_(sym);}
 }
 class DsvStringBldr {
 	public void Clear() {sb.Clear();}
-	public String To_str() {return sb.To_str();}
+	public String To_str() {return sb.ToStr();}
 	public void WriteCmd(String cmd) {
 		WriteFld(sym.CmdSequence(), true);
 		WriteFld(cmd);
@@ -74,28 +77,28 @@ class DsvStringBldr {
 	}
 	public void WriteFld(String val) {WriteFld(val, false);}
 	void WriteFld(String val, boolean writeRaw) {
-		if (isNewRow)							// if isNewRow, then fld is first, and no fldSpr needed (RowSep serves as fldSpr)
+		if (isNewRow)                            // if isNewRow, then fld is first, and no fldSpr needed (RowSep serves as fldSpr)
 			isNewRow = false;
 		else
 			sb.Add(sym.FldSep());
 
-		if (val == null) {}						// null -> append nothing
-		else if (String_.Eq(val, String_.Empty))// "" -> append ""
+		if (val == null) {}                        // null -> append nothing
+		else if (StringUtl.Eq(val, StringUtl.Empty))// "" -> append ""
 			sb.Add("\"\"");
-		else if (writeRaw)						// only cmds should be writeRaw (will append  ," ")
+		else if (writeRaw)                        // only cmds should be writeRaw (will append  ," ")
 			sb.Add(val);
-		else {									// escape as necessary; ex: "the quote "" char"; "the comma , char"
+		else {                                    // escape as necessary; ex: "the quote "" char"; "the comma , char"
 			boolean quoteField = false;
-			if (String_.Has(val, sym.QteDlm())) {
-				val = String_.Replace(val, "\"", "\"\"");
+			if (StringUtl.Has(val, sym.QteDlm())) {
+				val = StringUtl.Replace(val, "\"", "\"\"");
 				quoteField = true;
 			}
-			else if (String_.Has(val, sym.FldSep()))
+			else if (StringUtl.Has(val, sym.FldSep()))
 				quoteField = true;
 			else if (sym.RowSepIsNewLine() 
-				&& (String_.Has(val, "\n") || String_.Has(val, "\r")))
+				&& (StringUtl.Has(val, "\n") || StringUtl.Has(val, "\r")))
 				quoteField = true;
-			else if (String_.Has(val, sym.RowSep()))
+			else if (StringUtl.Has(val, sym.RowSep()))
 				quoteField = true;
 
 			if (quoteField) sb.Add(sym.QteDlm());
@@ -109,5 +112,5 @@ class DsvStringBldr {
 		DsvStringBldr rv = new DsvStringBldr();
 		rv.sym = sym;
 		return rv;
-	}	DsvStringBldr() {}
+	}   DsvStringBldr() {}
 }

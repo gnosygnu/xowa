@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.exports.splits.files;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*;
@@ -37,7 +40,7 @@ class Split_init__file {
 			, new Db_attach_itm("page_db", wiki.Data__core_mgr().Tbl__page().Conn())
 			, new Db_attach_itm("pfm_db", gplx.xowa.bldrs.Xob_db_file.New__page_file_map(wiki).Conn())
 			);
-		attach_mgr.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+		attach_mgr.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "INSERT INTO fsdb_img_regy (img_type, fil_id, thm_id, bin_db_id, page_uid, page_ns, page_score, page_id)"
 		, "SELECT  CASE WHEN pfm.thm_id = -1 THEN 0 ELSE 1 END, pfm.fil_id, pfm.thm_id, -1, Min(pr.page_uid), -1, -1, -1"
 		, "FROM    <pfm_db>page_file_map pfm"
@@ -57,14 +60,14 @@ class Split_init__file {
 		attach_mgr.Conn_links_(new Db_attach_itm("fsdb_db", atr_conn));
 
 		// update bin_db_id.fil
-		attach_mgr.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+		attach_mgr.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "UPDATE  fsdb_img_regy"
 		, "SET     bin_db_id = Coalesce((SELECT f.fil_bin_db_id FROM <fsdb_db>fsdb_fil f WHERE fsdb_img_regy.fil_id = f.fil_id AND fsdb_img_regy.thm_id = -1), bin_db_id)"
 		, "WHERE   img_type = 0"
 		));
 
 		// update bin_db_id.thm
-		attach_mgr.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+		attach_mgr.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "UPDATE  fsdb_img_regy"
 		, "SET     bin_db_id = Coalesce((SELECT t.thm_bin_db_id FROM <fsdb_db>fsdb_thm t WHERE fsdb_img_regy.fil_id = t.thm_owner_id AND fsdb_img_regy.thm_id = t.thm_id), bin_db_id)"
 		, "WHERE   img_type = 1"
@@ -79,7 +82,7 @@ class Split_init__file {
 		));
 
 		// add fils via thms; for thms with multiple fils, use Min(img_uid)
-		wkr_conn.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+		wkr_conn.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "INSERT INTO fsdb_fil_min (img_uid, fil_id, thm_id)"
 		// get fils directly
 		, "SELECT  f.img_uid, f.fil_id, f.thm_id"
@@ -100,7 +103,7 @@ class Split_init__file {
 		, DbmetaFldItm.NewByte("img_uid")
 		, DbmetaFldItm.NewInt("fil_id")
 		));
-		wkr_conn.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+		wkr_conn.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "INSERT INTO fsdb_fil_min_unique (img_uid, fil_id)"
 		, "SELECT  Min(f.img_uid), f.fil_id"
 		, "FROM    fsdb_fil_min f"
@@ -116,7 +119,7 @@ class Split_init__file {
 		, DbmetaFldItm.NewInt("page_score")
 		, DbmetaFldItm.NewInt("page_id")
 		));
-		wkr_conn.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+		wkr_conn.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 		( "INSERT INTO fsdb_fil_regy (img_uid, fil_id, page_ns, page_score, page_id)"
 		, "SELECT  fmu.img_uid, fmu.fil_id, fir.page_ns, fir.page_score, fir.page_id"
 		, "FROM    fsdb_fil_min_unique fmu"

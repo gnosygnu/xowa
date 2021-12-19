@@ -13,17 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.xtns.cites;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
-	public byte[] Name() {return name;} public Ref_nde Name_(byte[] v) {name = v; return this;} private byte[] name = Bry_.Empty;
-	public byte[] Group() {return group;} private byte[] group = Bry_.Empty;
-	public byte[] Follow() {return follow;} private byte[] follow = Bry_.Empty;
-	public boolean Follow_y() {return follow != Bry_.Empty;}
+	public byte[] Name() {return name;} public Ref_nde Name_(byte[] v) {name = v; return this;} private byte[] name = BryUtl.Empty;
+	public byte[] Group() {return group;} private byte[] group = BryUtl.Empty;
+	public byte[] Follow() {return follow;} private byte[] follow = BryUtl.Empty;
+	public boolean Follow_y() {return follow != BryUtl.Empty;}
 	public int Uid() {return uid;} public Ref_nde Uid_(int v) {uid = v; return this;} private int uid;
 	public boolean Head() {return head;} private boolean head;
 	public boolean Nested() {return nested;} private boolean nested;
@@ -34,7 +38,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public boolean Exists_in_lnki_title() {return exists_in_lnki_title;} public Ref_nde Exists_in_lnki_title_(boolean v) {exists_in_lnki_title = v; return this;} private boolean exists_in_lnki_title;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
 		if (xatr_id_obj == null) return;
-		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		ByteVal xatr_id = (ByteVal)xatr_id_obj;
 		switch (xatr_id.Val()) {
 			case Xatr_id_name:		name = wiki.Sanitizer().Escape_id(xatr.Val_as_bry()); break;
 			case Xatr_id_follow:	follow = xatr.Val_as_bry(); break;
@@ -45,7 +49,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (ctx.Tid_is_popup()) return; // popups don't show <ref>
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
-			body = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
+			body = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
 
 		// override "group" if inside "<references>"
 		byte[] references_group = ctx.References_group();
@@ -60,7 +64,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			ctx.Page().Ref_mgr().Grps_add(group, name, follow, this);
 		this.xnde = xnde;
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		html_wtr.Ref_wtr().Xnde_ref(hctx, bfr, src, xnde);
 	}
 	public Ref_nde[] Related() {return related;} Ref_nde[] related = Ary_empty;
@@ -79,7 +83,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public static final byte Xatr_id_name = 0, Xatr_id_group = 1, Xatr_id_follow = 2;
 	private static final Ref_nde[] Ary_empty = new Ref_nde[0];
 	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
-	.Add_str_obj("name", Byte_obj_val.new_(Ref_nde.Xatr_id_name))
-	.Add_str_obj("group", Byte_obj_val.new_(Ref_nde.Xatr_id_group))
-	.Add_str_obj("follow", Byte_obj_val.new_(Ref_nde.Xatr_id_follow));
+	.Add_str_obj("name", ByteVal.New(Ref_nde.Xatr_id_name))
+	.Add_str_obj("group", ByteVal.New(Ref_nde.Xatr_id_group))
+	.Add_str_obj("follow", ByteVal.New(Ref_nde.Xatr_id_follow));
 }

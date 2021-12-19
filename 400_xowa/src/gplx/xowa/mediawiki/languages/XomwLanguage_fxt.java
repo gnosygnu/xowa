@@ -13,10 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.tests.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.mediawiki.includes.cache.localisation.*;
+package gplx.xowa.mediawiki.languages;
+import gplx.core.tests.Gftest;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.includes.cache.localisation.XomwLocalisationCacheForXowa;
 public class XomwLanguage_fxt {
 	private XomwLanguage lang;
 	private final Xoae_app app;
@@ -25,28 +32,28 @@ public class XomwLanguage_fxt {
 		this.Init__lang("en");
 	}
 	public void Init_digitGroupingPattern(String digitGroupingPattern) {
-		lang.setDigitGroupingPattern(Bry_.new_u8(digitGroupingPattern));
+		lang.setDigitGroupingPattern(BryUtl.NewU8(digitGroupingPattern));
 	}
 	public void Init__lang(String lang_code) {
-		Xol_lang_itm xoLang = app.Lang_mgr().Get_by_or_load(Bry_.new_a7(lang_code));
+		Xol_lang_itm xoLang = app.Lang_mgr().Get_by_or_load(BryUtl.NewA7(lang_code));
 		this.lang = new XomwLanguage(xoLang);
 	}
 	public void Test_commafy(String raw, String expd) {
-		Gftest.Eq__str(expd, lang.commafy(Bry_.new_u8(raw)));
+		GfoTstr.Eq(expd, lang.commafy(BryUtl.NewU8(raw)));
 	}
 	public void Test__handleExplicitPluralForms__string(String count, XophpArray forms, String expd) {
-		Gftest.Eq__str(expd, (String)lang.handleExplicitPluralForms(count, forms));
+		GfoTstr.Eq(expd, (String)lang.handleExplicitPluralForms(count, forms));
 	}
 	public void Test__handleExplicitPluralForms__array(String count, XophpArray forms, XophpArray expd) {
-		Gftest.Eq__ary(expd.To_ary(), ((XophpArray)lang.handleExplicitPluralForms(count, forms)).To_ary());
+		Gftest.EqAry(expd.To_ary(), ((XophpArray)lang.handleExplicitPluralForms(count, forms)).To_ary());
 	}
 	public void Init__pluralRulesXml(String... ary) {
-		String xml = String_.Replace(String_.Concat_lines_nl
+		String xml = StringUtl.Replace(StringUtl.ConcatLinesNl
 		( "<supplementalData>"
 		, "    <version number='$Revision: 10807 $'/>"
 		, "    <generation date='$Date: 2014-08-14 14:43:27 -0500 (Thu, 14 Aug 2014) $'/>"
 		, "    <plurals type='cardinal'>"
-		, String_.Concat_lines_nl(ary)
+		, StringUtl.ConcatLinesNl(ary)
 		, "    </plurals>"
 		, "</supplementalData>"
 		), "'", "\"");
@@ -64,7 +71,7 @@ public class XomwLanguage_fxt {
 
 	public void Test__getPluralRuleIndexNumber(int expd, String... ary) {
 		for (String itm : ary) {
-			Gftest.Eq__int(expd, lang.getPluralRuleIndexNumber(itm), itm);
+			GfoTstr.Eq(expd, lang.getPluralRuleIndexNumber(itm), itm);
 		}
 	}
 }

@@ -15,10 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.parsers.mediawikis;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -31,7 +30,7 @@ import gplx.xowa.wikis.pages.Xopg_view_mode_;
 
 public class Xop_mediawiki_wkr {
 	private final Xowe_wiki wiki;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public Xop_mediawiki_wkr(Xowe_wiki wiki, Xop_mediawiki_loader loader) {
 		this.wiki = wiki;
 		if (loader != null)
@@ -43,9 +42,9 @@ public class Xop_mediawiki_wkr {
 		wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
 	}
 	public String Parse(String page, String wikitext) {
-		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(page));
+		Xoa_ttl ttl = wiki.Ttl_parse(BryUtl.NewU8(page));
 
-		byte[] wtxt = Bry_.new_u8(wikitext);
+		byte[] wtxt = BryUtl.NewU8(wikitext);
 		Xoae_page wpg = Xoae_page.New(wiki, ttl);
 		wpg.Db().Text().Text_bry_(wtxt);
 
@@ -58,7 +57,7 @@ public class Xop_mediawiki_wkr {
 
 		// write to html
 		boolean is_wikitext = Xow_page_tid.Identify(wpg.Wiki().Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext;
-		byte[] orig_bry = Bry_.Empty;
+		byte[] orig_bry = BryUtl.Empty;
 		if (is_wikitext) {
 			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_hdump(tmp_bfr, pctx, Xoh_wtr_ctx.Embeddable, wpg);
 
@@ -73,13 +72,13 @@ public class Xop_mediawiki_wkr {
 				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wpg, pagebox_itms);
 			}
 
-			orig_bry = tmp_bfr.To_bry_and_clear();
+			orig_bry = tmp_bfr.ToBryAndClear();
 			wpg.Db().Html().Html_bry_(orig_bry);
 		}
 		else {	// not wikitext; EX: pages in MediaWiki: ns; DATE:2016-09-12
 			wpg.Db().Html().Html_bry_(wpg.Db().Text().Text_bry());
 		}
 
-		return String_.new_u8(orig_bry);
+		return StringUtl.NewU8(orig_bry);
 	}
 }

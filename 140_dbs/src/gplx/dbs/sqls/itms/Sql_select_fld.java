@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.itms; import gplx.*;
-import gplx.core.type_xtns.*;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.dbs.sqls.itms;
+import gplx.core.type_xtns.ClassXtn;
+import gplx.core.type_xtns.ObjectClassXtn;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.StringUtl;
 public abstract class Sql_select_fld {
 	public Sql_select_fld(String tbl, String fld, String alias) {
 		this.Tbl = tbl; this.Fld = fld; this.Alias = alias;
@@ -47,15 +50,15 @@ class Sql_select_fld_wild extends Sql_select_fld {		Sql_select_fld_wild() {super
 	public static final Sql_select_fld_wild Instance = new Sql_select_fld_wild();
 
 	// tdb-related functions
-	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {throw Err_.new_wo_type("group by eval not allowed on *");}
-	@Override public void GroupBy_type(ClassXtn type) {throw Err_.new_wo_type("group by type not allowed on *");}
+	@Override public Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type) {throw ErrUtl.NewArgs("group by eval not allowed on *");}
+	@Override public void GroupBy_type(ClassXtn type) {throw ErrUtl.NewArgs("group by type not allowed on *");}
 }
 class Sql_select_fld_col extends Sql_select_fld {			public Sql_select_fld_col(String tbl, String fld, String alias) {super(tbl, fld, alias);}
 	@Override public String To_fld_sql() {
 		String rv = Fld;
 		if (this.Tbl != Tbl__null)
 			rv = this.Tbl + "." + Fld;
-		if (!String_.Eq(Alias, Fld))
+		if (!StringUtl.Eq(Alias, Fld))
 			rv = rv + " AS " + Alias;
 		return rv;
 	}

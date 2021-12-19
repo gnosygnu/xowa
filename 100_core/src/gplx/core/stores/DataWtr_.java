@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*; import gplx.core.*;
+package gplx.core.stores;
 import gplx.core.gfo_ndes.*;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDecimal;
 public class DataWtr_ {
 	public static final DataWtr Null = new DataWtr_null();
 }
@@ -36,8 +41,8 @@ class DataWtr_null implements DataWtr {
 	public int SrlIntOr(String key, int or) {return or;}
 	public long SrlLongOr(String key, long or) {return or;}
 	public String SrlStrOr(String key, String or) {return or;}
-	public DateAdp SrlDateOr(String key, DateAdp or) {return or;}
-	public Decimal_adp SrlDecimalOr(String key, Decimal_adp or) {return or;}
+	public GfoDate SrlDateOr(String key, GfoDate or) {return or;}
+	public GfoDecimal SrlDecimalOr(String key, GfoDecimal or) {return or;}
 	public double SrlDoubleOr(String key, double or) {return or;}
 	public Object SrlObjOr(String key, Object or) {return or;}
 	public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {}

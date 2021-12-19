@@ -19,7 +19,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //	// * @ingroup Parser
 //	// */
 //	class XomwPPTemplateFrame_Hash : XomwPPFrame_Hash { //		public XophpArray numberedArgs, namedArgs;
-//		@gplx.New public XomwPPFrame_Hash parent;
+//		@gplx.frameworks.objects.New public XomwPPFrame_Hash parent;
 //		public XophpArray numberedExpansionCache, namedExpansionCache;
 //
 //		/**

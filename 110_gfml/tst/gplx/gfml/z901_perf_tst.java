@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import org.junit.*; import gplx.core.strings.*; import gplx.core.envs.*;
+package gplx.gfml;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.LongUtl;
+import gplx.libs.files.Io_url_;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import org.junit.*;
+import gplx.core.envs.*;
 public class z901_perf_tst {
 	TimerWatch tmr = TimerWatch.new_();
 	@Test public void EmptyTestSoJunitWillNotFail() {}
@@ -42,7 +49,7 @@ public class z901_perf_tst {
 //			tmr.End_and_print("char");	// 1700
 
 		tmr.Bgn();
-		GfmlDoc_.parse_any_eol_(sbGfml.To_str());
+		GfmlDoc_.parse_any_eol_(sbGfml.ToStr());
 		tmr.End_and_print("gfml");	// 1700
 	}
 	//@Test
@@ -62,7 +69,7 @@ public class z901_perf_tst {
 		for (int i = 0; i < max; i++)
 			v = c.Val_proc();
 		tmr.End_and_print("proc");
-            Tfds.Write(v);
+            GfoTstr.Write(v);
 	}
 //		@Test
 //		public void ClassComp() {
@@ -100,13 +107,13 @@ class PerfFieldVsProc {
 	public int Val_proc() {return 1;}
 }
 class TimerWatch {
-	public void Bgn() {bgnTime = System_.Ticks();} long bgnTime;
-	public void End() {duration = System_.Ticks() - bgnTime;} long duration;
+	public void Bgn() {bgnTime = SystemUtl.Ticks();} long bgnTime;
+	public void End() {duration = SystemUtl.Ticks() - bgnTime;} long duration;
 	public void End_and_print(String text) {
 		this.End();
-		Tfds.Write(XtoStr_ms() + " " + text);
+		GfoTstr.Write(XtoStr_ms() + " " + text);
 	}
-	public String XtoStr_ms() {return Long_.To_str(duration);}
+	public String XtoStr_ms() {return LongUtl.ToStr(duration);}
         public static TimerWatch new_() {
 		TimerWatch rv = new TimerWatch();
 		rv.Bgn();

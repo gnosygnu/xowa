@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.Bry_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.Tfds;
+package gplx.xowa.bldrs; import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.ios.Io_fil_chkr;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
@@ -46,7 +46,7 @@ public class Xob_base_fxt {
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Gfo_invk Bldr_itm() {return bldr_itm;} Gfo_invk bldr_itm;
 	public Xowd_page_itm page_(String ttl) {return page_(ttl, "");}
-	public Xowd_page_itm page_(String ttl, String text) {return new Xowd_page_itm().Ttl_(Bry_.new_u8(ttl), wiki.Ns_mgr()).Text_(Bry_.new_u8(text));}
+	public Xowd_page_itm page_(String ttl, String text) {return new Xowd_page_itm().Ttl_(BryUtl.NewU8(ttl), wiki.Ns_mgr()).Text_(BryUtl.NewU8(text));}
 	public Io_fil_chkr meta_(String url, String data) {return new Io_fil_chkr(Io_url_.mem_fil_(url), data);}
 	public void Init_fxts(Xob_bldr bldr, Xowe_wiki wiki, Xob_base_fxt... fxt_ary) {
 		int fxt_ary_len = fxt_ary.length;
@@ -69,7 +69,7 @@ public class Xob_base_fxt {
 	}
 	public Xob_base_fxt Test_fil(String url, String expd) {return Test_fil(Io_url_.new_fil_(url), expd);}
 	public Xob_base_fxt Test_fil(Io_url url, String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));
+		GfoTstr.EqLines(expd, Io_mgr.Instance.LoadFilStr(url));
 		return this;
 	}
 	public static void Run_cmd(Xob_bldr bldr, Xob_cmd cmd) {

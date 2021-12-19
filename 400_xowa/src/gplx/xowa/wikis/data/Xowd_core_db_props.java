@@ -18,7 +18,7 @@ import gplx.core.ios.streams.Io_stream_tid_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.cfgs.Db_cfg_hash;
 import gplx.dbs.cfgs.Db_cfg_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.dbs.Xodb_mgr_sql;
 public class Xowd_core_db_props {

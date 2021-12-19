@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
 
-import gplx.Bry_;
-import gplx.Decimal_adp;
-import gplx.Double_;
-import gplx.Keyval;
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.commons.KeyVal;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
 import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
 import org.junit.Test;
@@ -54,13 +54,13 @@ class Scrib_lib_wikibase_srl_visitor_fxt {
 	public void TestGeoPrecision(double expd, String prc) {
 		String lat = "12";
 		String lng = "34";
-		visitor.Visit_globecoordinate(new Wbase_claim_globecoordinate(123, Wbase_claim_value_type_.Tid__value, Bry_.new_a7(lat), Bry_.new_a7(lng), null, Bry_.new_u8_safe(prc), null));
-		Keyval[] actl = visitor.Rv();
-		Keyval[] actlGeo = (Keyval[])actl[1].Val();
-		Gftest.Eq__double(expd, Double_.cast(actlGeo[4].Val()));
+		visitor.Visit_globecoordinate(new Wbase_claim_globecoordinate(123, Wbase_claim_value_type_.Tid__value, BryUtl.NewA7(lat), BryUtl.NewA7(lng), null, BryUtl.NewU8Safe(prc), null));
+		KeyVal[] actl = visitor.Rv();
+		KeyVal[] actlGeo = (KeyVal[])actl[1].Val();
+		GfoTstr.EqDouble(expd, DoubleUtl.Cast(actlGeo[4].Val()));
 	}
 	public void TestCalcPrecision(String expd, String prc, String lng) {
-		Decimal_adp actl = Scrib_lib_wikibase_srl_visitor.CalcPrecision(Bry_.new_u8(prc), Bry_.new_u8(lng));
-		Gftest.Eq__str(expd, actl.To_str("0.0E0"));
+		GfoDecimal actl = Scrib_lib_wikibase_srl_visitor.CalcPrecision(BryUtl.NewU8(prc), BryUtl.NewU8(lng));
+		GfoTstr.Eq(expd, actl.ToStr("0.0E0"));
 	}
 }

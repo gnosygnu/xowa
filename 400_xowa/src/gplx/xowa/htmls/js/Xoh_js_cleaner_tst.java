@@ -13,15 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.js;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xoh_js_cleaner_tst {
 	@Before public void init() {fxt.Init();} private Xoh_js_cleaner_fxt fxt = new Xoh_js_cleaner_fxt();
-	@Test  public void Basic() {fxt.Test_clean("<i>a</i>", "<i>a</i>");}
-	@Test  public void Js_nde() {fxt.Test_clean("a<script>b</script>c", "a&lt;script>b</script>c");}
-	@Test  public void Js_atr() {fxt.Test_clean("a<span onmouseover = 'fail'>b</span>c", "a<span onMouseOver&#61; 'fail'>b</span>c");}
-	@Test  public void Js_atr_noop() {fxt.Test_clean("a onmouseover b", "a onmouseover b");}
-	@Test  public void Js_atr_noop_regionSelect() {fxt.Test_clean("regionSelect=2", "regionSelect=2");}
+	@Test public void Basic() {fxt.Test_clean("<i>a</i>", "<i>a</i>");}
+	@Test public void Js_nde() {fxt.Test_clean("a<script>b</script>c", "a&lt;script>b</script>c");}
+	@Test public void Js_atr() {fxt.Test_clean("a<span onmouseover = 'fail'>b</span>c", "a<span onMouseOver&#61; 'fail'>b</span>c");}
+	@Test public void Js_atr_noop() {fxt.Test_clean("a onmouseover b", "a onmouseover b");}
+	@Test public void Js_atr_noop_regionSelect() {fxt.Test_clean("regionSelect=2", "regionSelect=2");}
 }
 class Xoh_js_cleaner_fxt {
 	public void Init() {
@@ -32,9 +36,9 @@ class Xoh_js_cleaner_fxt {
 		}
 	}	private Xoae_app app; Xowe_wiki wiki; Xoh_js_cleaner mgr;
 	public void Test_clean(String raw_str, String expd) {
-		byte[] raw = Bry_.new_a7(raw_str);
+		byte[] raw = BryUtl.NewA7(raw_str);
 		byte[] actl = mgr.Clean(wiki, raw, 0, raw.length);
 		if (actl == null) actl = raw;
-		Tfds.Eq(expd, String_.new_a7(actl));
+		GfoTstr.EqObj(expd, StringUtl.NewA7(actl));
 	}
 }

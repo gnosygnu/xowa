@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core;
 
 import gplx.core.ios.Io_stream_zip_mgr;
-import gplx.core.primitives.Bool_obj_ref;
+import gplx.types.basics.wrappers.BoolRef;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.htmls.Xoh_page;
@@ -33,7 +33,7 @@ import gplx.xowa.wikis.pages.dbs.Xopg_db_page;
 
 public class Xow_hdump_mgr__save {
 	private final Xow_wiki wiki; private final Xoh_hzip_mgr hzip_mgr; private final Io_stream_zip_mgr zip_mgr;
-	private final Xoh_page tmp_hpg; private final Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();
+	private final Xoh_page tmp_hpg; private final Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private BoolRef html_db_is_new = BoolRef.NewN();
 	private int dflt_zip_tid, dflt_hzip_tid;
 	public Xow_hdump_mgr__save(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg;
@@ -47,7 +47,7 @@ public class Xow_hdump_mgr__save {
 		synchronized (tmp_hpg) {
 			Bld_hdump(page);
 			tmp_hpg.Ctor_by_hdiff(tmp_bfr, page, page.Wikie().Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc));
-			Xow_db_file html_db = Get_html_db(wiki, page, html_db_is_new.Val_n_(), isEdit);
+			Xow_db_file html_db = Get_html_db(wiki, page, html_db_is_new.ValSetN(), isEdit);
 			return Save(page, tmp_hpg, html_db.Tbl__html(), html_db_is_new.Val(), true);
 		}
 	}
@@ -62,7 +62,7 @@ public class Xow_hdump_mgr__save {
 		page.File_queue().Clear(); // need to reset uid to 0, else xowa_file_# will keep incrementing upwards
 		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump_by_hzip_tid(dflt_hzip_tid);
 		wiki.Html__wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_body(tmp_bfr, page.Wikie().Parser_mgr().Ctx(), hctx, page); // save as hdump_fmt
-		page.Db().Html().Html_bry_(tmp_bfr.To_bry_and_clear());
+		page.Db().Html().Html_bry_(tmp_bfr.ToBryAndClear());
 	}
 	private byte[] Write(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoae_page page, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
 		switch (hzip_tid) {
@@ -81,12 +81,12 @@ public class Xow_hdump_mgr__save {
 			src = zip_mgr.Zip((byte)zip_tid, src);
 		return src;
 	}
-	private static Xow_db_file Get_html_db(Xow_wiki wiki, Xoae_page page, Bool_obj_ref html_db_is_new, boolean isEdit) {
+	private static Xow_db_file Get_html_db(Xow_wiki wiki, Xoae_page page, BoolRef html_db_is_new, boolean isEdit) {
 		Xow_db_file rv = Xow_db_file.Null;
 		Xow_db_mgr core_data_mgr = wiki.Data__core_mgr();
 		int html_db_id = page.Db().Page().Html_db_id();
 		if (html_db_id == Xopg_db_page.HTML_DB_ID_NULL) {
-			html_db_is_new.Val_y_();
+			html_db_is_new.ValSetY();
 
 			// get htmlDbTid; NOTE: probably do not need Tid__html_data b/c xomp_wkr and sync_mgr should be building the databases; ISSUE#:699; DATE:2020-08-06
 			byte htmlDbTid = isEdit ? Xow_db_file_.Tid__html_user : Xow_db_file_.Tid__html_data;

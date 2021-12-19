@@ -14,13 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pagebanners;
-
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.core.brys.Bfr_arg;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xop_fxt;
@@ -34,7 +32,7 @@ public class Pgbnr_func_tst {
 	@Before public void init() {fxt.Clear();}
 	@Test public void Basic() {
 		fxt.Init__orig(true, "A.png", 500, 200); // 500 > 200 * 2 for pageBanner;
-		fxt.Test__parse(BoolUtl.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		fxt.Test__parse(BoolUtl.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", BryUtlByWtr.NewU8NlSwapAposAsStr
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-banner-image-panorama wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
@@ -53,7 +51,7 @@ public class Pgbnr_func_tst {
 		));
 	}
 	@Test public void Hdump__basic() {
-		fxt.Test__parse(BoolUtl.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		fxt.Test__parse(BoolUtl.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", BryUtlByWtr.NewU8NlSwapAposAsStr
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
@@ -68,7 +66,7 @@ public class Pgbnr_func_tst {
 		));
 	}
 	@Test public void Hdump__quote() {	// PAGE:en.v:Europe; DATE:2016-07-12
-		fxt.Test__parse(BoolUtl.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		fxt.Test__parse(BoolUtl.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", BryUtlByWtr.NewU8NlSwapAposAsStr
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
@@ -96,9 +94,9 @@ class Pgbnr_func_fxt {
 	public void Test__parse(boolean hdump, String raw, String expd) {
 		fxt.Exec_parse_page_all_as_str(raw);
 		Xoh_wtr_ctx hctx = hdump ? Xoh_wtr_ctx.Hdump : Xoh_wtr_ctx.Basic;
-		Bfr_arg arg = fxt.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(fxt.Page(), fxt.Ctx(), hctx);
-		Bry_bfr bfr = Bry_bfr_.New();
-		arg.Bfr_arg__add(bfr);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		BryBfrArg arg = fxt.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(fxt.Page(), fxt.Ctx(), hctx);
+		BryWtr bfr = BryWtr.New();
+		arg.AddToBfr(bfr);
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 }

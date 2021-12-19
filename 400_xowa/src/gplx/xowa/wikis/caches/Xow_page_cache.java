@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.caches;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Decimal_adp_;
-import gplx.Io_mgr;
-import gplx.String_;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDecimalUtl;
 import gplx.core.caches.Lru_cache;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
@@ -33,7 +33,7 @@ public class Xow_page_cache {
 	public Xow_page_cache(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.cache_key = "xowa.app.page_cache.'" + wiki.Domain_str() + "'." + this.hashCode();
-		this.cache = new Lru_cache(BoolUtl.Y, cache_key, 8 * Io_mgr.Len_mb, 16 * Io_mgr.Len_mb);
+		this.cache = new Lru_cache(BoolUtl.Y, cache_key, 8 * IoConsts.LenMB, 16 * IoConsts.LenMB);
 	}
 	public String Cache_key() {return cache_key;} private final String cache_key;
 	public void Load_wkr_(Xow_page_cache_wkr v) {this.load_wkr = v;} private Xow_page_cache_wkr load_wkr;
@@ -117,6 +117,6 @@ public class Xow_page_cache {
 		return rv;
 	}
 	public String To_str() {
-		return String_.Format("cache_pct:{0} cache_misses:{1} cache_evicts:{2} cache_tries:{3} cache_size:{4}", Decimal_adp_.divide_(cache_misses * 100, cache_tries).To_str("0.00"), cache_misses, cache.Evicts(), cache_tries, cache.Cur());
+		return StringUtl.Format("cache_pct:{0} cache_misses:{1} cache_evicts:{2} cache_tries:{3} cache_size:{4}", GfoDecimalUtl.NewByDivide(cache_misses * 100, cache_tries).ToStr("0.00"), cache_misses, cache.Evicts(), cache_tries, cache.Cur());
 	}
 }

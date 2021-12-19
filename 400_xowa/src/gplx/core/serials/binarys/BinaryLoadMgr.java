@@ -1,6 +1,6 @@
 package gplx.core.serials.binarys;
 
-import gplx.Bry_;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.serials.core.SerialLoadMgr;
 import gplx.core.serials.core.SerialLoadWkr;
 import gplx.core.texts.Base64Converter;
@@ -41,6 +41,6 @@ public class BinaryLoadMgr implements SerialLoadMgr {
         return new BinaryLoadWkr().Ctor(this);
     }
 
-    public byte[] FldDlm() {return fldDlm;} private final byte[] fldDlm = Bry_.new_a7("|");
-    public byte[] RowDlm() {return rowDlm;} private final byte[] rowDlm = Bry_.new_a7("\n");
+    public byte[] FldDlm() {return fldDlm;} private final byte[] fldDlm = BryUtl.NewA7("|");
+    public byte[] RowDlm() {return rowDlm;} private final byte[] rowDlm = BryUtl.NewA7("\n");
 }

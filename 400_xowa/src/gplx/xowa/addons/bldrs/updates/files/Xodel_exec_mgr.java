@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.updates.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.updates.files;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.core.progs.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.*;
@@ -49,7 +57,7 @@ public class Xodel_exec_mgr {
 
 			// loop dbs
 			int dbs_len = mnt_itm.Bin_mgr().Dbs__len();				
-			String dbs_len_str = Int_.To_str(dbs_len - Int_.Base1);
+			String dbs_len_str = IntUtl.ToStr(dbs_len - IntUtl.Base1);
 			int db_bgn = cfg_tbl.Select_int_or("", Cfg__deletion_db__db_bgn, 0);
 			for (int i = db_bgn; i < dbs_len; ++i) {
 				if (prog_ui.Prog_notify_and_chk_if_suspended(i, dbs_len)) return;
@@ -65,9 +73,9 @@ public class Xodel_exec_mgr {
 		// get rows to delete in db
 		List_adp list = List_adp_.New();
 		int bin_db_id = bin_db.Id();
-		String bin_db_id_str = Int_.To_str(bin_db_id);
+		String bin_db_id_str = IntUtl.ToStr(bin_db_id);
 		usr_dlg.Prog_many("", "", "processing files for deletion in database " + bin_db_id_str + " of " + dbs_len_str);
-		Db_rdr rdr = deletion_conn.Exec_rdr(String_.Concat_lines_nl
+		Db_rdr rdr = deletion_conn.Exec_rdr(StringUtl.ConcatLinesNl
 		( "SELECT  ff.fil_id    AS item_id"
 		, ",       1            AS item_is_orig"
 		, "FROM    fsdb_fil ff"
@@ -97,7 +105,7 @@ public class Xodel_exec_mgr {
 		// delete bin
 		Db_stmt delete_bin_stmt = deletion_conn.Stmt_sql("DELETE FROM bin_db.fsdb_bin WHERE bin_owner_id = ?");
 		for (int i = 0; i < len; ++i) {
-			Xodel_prune_itm itm = (Xodel_prune_itm)list.Get_at(i);
+			Xodel_prune_itm itm = (Xodel_prune_itm)list.GetAt(i);
 			delete_bin_stmt.Clear().Crt_int("bin_owner_id", itm.Item_id);
 			delete_bin_stmt.Exec_delete();
 
@@ -109,7 +117,7 @@ public class Xodel_exec_mgr {
 		Db_stmt delete_fil_stmt = deletion_conn.Stmt_sql("DELETE FROM fsdb_fil WHERE fil_id = ?");
 		Db_stmt delete_thm_stmt = deletion_conn.Stmt_sql("DELETE FROM fsdb_thm WHERE thm_id = ?");
 		for (int i = 0; i < len; ++i) {
-			Xodel_prune_itm itm = (Xodel_prune_itm)list.Get_at(i);
+			Xodel_prune_itm itm = (Xodel_prune_itm)list.GetAt(i);
 			if (itm.Item_is_orig) {
 				delete_fil_stmt.Clear().Crt_int("fil_id", itm.Item_id);
 				delete_fil_stmt.Exec_delete();

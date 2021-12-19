@@ -14,13 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.mems;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_mgr;
-import gplx.Io_url_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Tfds;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.Db_qry;
@@ -28,7 +27,7 @@ import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 class Mem_db_fxt {
 	public Mem_db_fxt() {
 		Io_mgr.Instance.InitEngine_mem();
@@ -63,25 +62,25 @@ class Mem_db_fxt {
 		Db_stmt stmt = conn.Stmt_new(qry);
 		Db_rdr rdr = new Mem_exec_select((Mem_engine)conn.Engine()).Select((Mem_stmt)stmt);
 		List_adp actl_list = List_adp_.New();
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int expd_len = expd.length;
 		String[] expd_rows = new String[expd_len];
 		for (int i = 0; i < expd_len; ++i) {
 			String[] expd_row = expd[i];
 			for (int j = 0; j < expd_row.length; ++j) {
-				if (j != 0) tmp_bfr.Add_byte_pipe();
-				tmp_bfr.Add_str_u8(expd_row[j]);
+				if (j != 0) tmp_bfr.AddBytePipe();
+				tmp_bfr.AddStrU8(expd_row[j]);
 			}
-			expd_rows[i] = tmp_bfr.To_str_and_clear();
+			expd_rows[i] = tmp_bfr.ToStrAndClear();
 		}
 		while (rdr.Move_next()) {
 			int fld_len = rdr.Fld_len();
 			for (int i = 0; i < fld_len; ++i) {
-				if (i != 0) tmp_bfr.Add_byte_pipe();
-				tmp_bfr.Add_obj_strict(rdr.Read_at(i));
+				if (i != 0) tmp_bfr.AddBytePipe();
+				tmp_bfr.AddObjStrict(rdr.Read_at(i));
 			}
-			actl_list.Add(tmp_bfr.To_str_and_clear());
+			actl_list.Add(tmp_bfr.ToStrAndClear());
 		}			
-		Tfds.Eq_ary(expd_rows, (String[])actl_list.ToAryAndClear(String.class));
+		GfoTstr.EqLines(expd_rows, (String[])actl_list.ToAryAndClear(String.class));
 	}
 }

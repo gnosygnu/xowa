@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 public class Int_flag_bldr_ {
 	public static int[] Bld_pow_ary(int... ary) {
 		int len = ary.length;
@@ -72,10 +74,10 @@ public class Int_flag_bldr_ {
 		Int_flag_bldr_.To_int_ary(rv, Pow_ary_date_short, v);
 		rv[0] += 1900;
 	}
-	public static DateAdp To_date_short(int v) {
+	public static GfoDate To_date_short(int v) {
 		int[] rv = new int[Pow_ary_date_short.length];
 		To_date_short_int_ary(rv, v);
-		return DateAdp_.seg_(rv);
+		return GfoDateUtl.NewBySegs(rv);
 	}		
 	private static final int[] Pow_ary_date_short = new int[] {1048576, 65536, 2048, 64, 1};	// yndhm -> 12,4,5,5,6
 	public static final int[] Base2_ary = new int[] 

@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.wkrs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_page_tbl_wkr {
 	private final Xowd_page_itm tmp_page_row = new Xowd_page_itm();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public void Search(Srch_search_ctx ctx, Srch_rslt_cbk cbk) {
 		byte[] search_raw = To_bry_or_null(tmp_bfr, ctx.Scanner_syms.Wild(), ctx.Crt_mgr);	// build up search String but handle escapes "\+" -> "+"
 		if (search_raw == null) return;	// search-term has not or symbols; EX: "earth -history"; "(earth & history)"
@@ -39,7 +44,7 @@ public class Srch_page_tbl_wkr {
 			}
 		}
 	}
-	public static byte[] To_bry_or_null(Bry_bfr bfr, byte wildcard_byte, Srch_crt_mgr mgr) {
+	public static byte[] To_bry_or_null(BryWtr bfr, byte wildcard_byte, Srch_crt_mgr mgr) {
 		if (mgr.Words_tid == Srch_crt_mgr.Tid__mixed) return null;
 		Srch_crt_tkn[] tkns = mgr.Tkns;
 		int len = tkns.length;
@@ -52,20 +57,20 @@ public class Srch_page_tbl_wkr {
 				default:
 					return null;
 			}
-			if (i != 0) bfr.Add_byte_space();
+			if (i != 0) bfr.AddByteSpace();
 			byte[] tkn_raw = tkn.Val;
 			int tkn_raw_len = tkn_raw.length;
-			int wildcard_pos = Bry_find_.Find_fwd(tkn_raw, wildcard_byte, 0, tkn_raw_len);
-			if (wildcard_pos != Bry_find_.Not_found) {
+			int wildcard_pos = BryFind.FindFwd(tkn_raw, wildcard_byte, 0, tkn_raw_len);
+			if (wildcard_pos != BryFind.NotFound) {
 				int last_pos = tkn_raw_len - 1;
 				if (wildcard_pos == last_pos)
-					bfr.Add_mid(tkn_raw, 0, last_pos);
+					bfr.AddMid(tkn_raw, 0, last_pos);
 				else
 					return null;
 			}
 			else
 				bfr.Add(tkn.Val);
 		}
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 }

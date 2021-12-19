@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.standards; import gplx.gfui.*;
 import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
+import gplx.types.commons.KeyValHash;
 public class GfuiLbl_ {
 	public static GfuiLbl sub_(String key, GfuiElem owner) {
 		GfuiLbl rv = new_();
@@ -22,7 +23,7 @@ public class GfuiLbl_ {
 		rv.TextMgr().AlignH_(GfuiAlign_.Mid);
 		return rv;
 	}
-	public static GfuiLbl kit_(Gfui_kit kit, String key, GxwElem elm, Keyval_hash ctorArgs) {
+	public static GfuiLbl kit_(Gfui_kit kit, String key, GxwElem elm, KeyValHash ctorArgs) {
 		GfuiLbl rv = new GfuiLbl();
 		rv.ctor_kit_GfuiElemBase(kit, key, elm, ctorArgs);
 		return rv;
@@ -42,7 +43,7 @@ public class GfuiLbl_ {
 		return rv;
 	}
 	public static final String Text_Null = null;
-	@gplx.Internal protected static GfuiLbl new_() {
+	public static GfuiLbl new_() {
 		GfuiLbl rv = new GfuiLbl();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_false_());
 		return rv;

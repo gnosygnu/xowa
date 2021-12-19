@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.files.*; import gplx.fsdb.*;
@@ -36,15 +39,15 @@ public class Xobldr__fsdb_db__create_orig extends Xob_cmd__base {
 			tbl_name = "wiki_orig";
 			fld_status = "status";
 		}
-		conn.Exec_sql_plog_txn("orig_wkr.deleting orig_reg"			, String_.Format(Sql_delete_wiki_orig, tbl_name)); // always delete orig_reg, else will not pick up changed sizes / moved repos; DATE:2014-07-21
-		conn.Exec_sql_plog_txn("orig_wkr.inserting xfer direct"		, String_.Format(Sql_create_xfer_direct, tbl_name, fld_status));
-		conn.Exec_sql_plog_txn("orig_wkr.inserting xfer redirect"	, String_.Format(Sql_create_xfer_redirect, tbl_name, fld_status));
-		conn.Exec_sql_plog_txn("orig_wkr.inserting orig direct"		, String_.Format(Sql_create_orig_direct, tbl_name, fld_status));
-		conn.Exec_sql_plog_txn("orig_wkr.inserting orig redirect"	, String_.Format(Sql_create_orig_redirect, tbl_name, fld_status));
+		conn.Exec_sql_plog_txn("orig_wkr.deleting orig_reg"			, StringUtl.Format(Sql_delete_wiki_orig, tbl_name)); // always delete orig_reg, else will not pick up changed sizes / moved repos; DATE:2014-07-21
+		conn.Exec_sql_plog_txn("orig_wkr.inserting xfer direct"		, StringUtl.Format(Sql_create_xfer_direct, tbl_name, fld_status));
+		conn.Exec_sql_plog_txn("orig_wkr.inserting xfer redirect"	, StringUtl.Format(Sql_create_xfer_redirect, tbl_name, fld_status));
+		conn.Exec_sql_plog_txn("orig_wkr.inserting orig direct"		, StringUtl.Format(Sql_create_orig_direct, tbl_name, fld_status));
+		conn.Exec_sql_plog_txn("orig_wkr.inserting orig redirect"	, StringUtl.Format(Sql_create_orig_redirect, tbl_name, fld_status));
 	}
 	private static final String
 	  Sql_delete_wiki_orig = "DELETE FROM {0};"
-	, Sql_create_xfer_direct = String_.Concat_lines_nl
+	, Sql_create_xfer_direct = StringUtl.ConcatLinesNl
 	( "INSERT INTO {0} "
 	, "(orig_ttl, {1}, orig_repo, orig_ext, orig_w, orig_h, orig_redirect)"
 	, "SELECT DISTINCT"
@@ -59,7 +62,7 @@ public class Xobldr__fsdb_db__create_orig extends Xob_cmd__base {
 	, "        LEFT JOIN {0} cur ON xfer.lnki_ttl = cur.orig_ttl"
 	, "WHERE   cur.orig_ttl IS NULL"
 	)
-	, Sql_create_xfer_redirect = String_.Concat_lines_nl
+	, Sql_create_xfer_redirect = StringUtl.ConcatLinesNl
 	( "INSERT INTO {0} "
 	, "(orig_ttl, {1}, orig_repo, orig_ext, orig_w, orig_h, orig_redirect)"
 	, "SELECT DISTINCT"
@@ -75,7 +78,7 @@ public class Xobldr__fsdb_db__create_orig extends Xob_cmd__base {
 	, "WHERE   cur.orig_ttl IS NULL"
 	, "AND     Coalesce(xfer.orig_redirect_src, '') != ''"
 	) 
-	, Sql_create_orig_direct = String_.Concat_lines_nl
+	, Sql_create_orig_direct = StringUtl.ConcatLinesNl
 	( "INSERT INTO {0} "
 	, "(orig_ttl, {1}, orig_repo, orig_ext, orig_w, orig_h, orig_redirect)"
 	, "SELECT DISTINCT"
@@ -93,7 +96,7 @@ public class Xobldr__fsdb_db__create_orig extends Xob_cmd__base {
 	, "AND     Coalesce(orig.orig_w           , -1) != -1"	// ignore entries that are either ext_id = 0 ("File:1") or don't have any width / height info (makes it useless); need to try to get again from wmf_api
 	, "AND     Coalesce(orig.orig_redirect_ttl, '') == ''"	// direct
 	)
-	, Sql_create_orig_redirect = String_.Concat_lines_nl
+	, Sql_create_orig_redirect = StringUtl.ConcatLinesNl
 	( "INSERT INTO {0} "
 	, "(orig_ttl, {1}, orig_repo, orig_ext, orig_w, orig_h, orig_redirect)"
 	, "SELECT DISTINCT"

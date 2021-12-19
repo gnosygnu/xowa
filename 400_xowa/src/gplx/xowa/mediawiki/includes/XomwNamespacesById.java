@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.lists.*;
 public class XomwNamespacesById {
 	private HashByInt hash = new HashByInt();
@@ -26,7 +27,7 @@ public class XomwNamespacesById {
 		return (XomwNamespaceItem)hash.Get_at_or_null(idx);
 	}
 	public XomwNamespacesById Add(int id, String text) {
-		hash.Add(id, new XomwNamespaceItem(id, Bry_.new_u8(text)));
+		hash.Add(id, new XomwNamespaceItem(id, BryUtl.NewU8(text)));
 		return this;
 	}
 	public XomwNamespacesById Clone() {

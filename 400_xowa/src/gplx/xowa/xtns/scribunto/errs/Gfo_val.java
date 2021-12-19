@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.errs;
-import gplx.objects.lists.CompareAble;
+import gplx.types.commons.lists.CompareAble;
 public interface Gfo_val extends CompareAble {
 	boolean Eq(Gfo_val rhs);
 	boolean Match_1(Gfo_comp_op_1 op, Gfo_val comp);

@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
-import gplx.core.interfaces.*;
+package gplx.gfui;
+import gplx.core.interfaces.ParseAble;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class GfuiAlign_ implements ParseAble {
 	public static GfuiAlign as_(Object obj) {return obj instanceof GfuiAlign ? (GfuiAlign)obj : null;}
-	public static GfuiAlign cast(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiAlign.class, obj);}}
+	public static GfuiAlign cast(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, GfuiAlign.class, obj);}}
 	public static final GfuiAlign
 		  Null	= new_(0, "nil")
 		, Lo	= new_(1, "lo")
@@ -38,9 +41,9 @@ public class GfuiAlign_ implements ParseAble {
 		else						return Null;
 	}
 	public static GfuiAlign parse(String raw) {
-		if		(String_.Eq(raw, "bot")) return Bot;
-		else if	(String_.Eq(raw, "mid")) return Mid;
-		else if	(String_.Eq(raw, "top")) return Top;
+		if		(StringUtl.Eq(raw, "bot")) return Bot;
+		else if	(StringUtl.Eq(raw, "mid")) return Mid;
+		else if	(StringUtl.Eq(raw, "top")) return Top;
 		return Null;
 	}
 	public static PointAdp CalcInsideOf(GfuiAlign h, GfuiAlign v, SizeAdp inner, SizeAdp outer, PointAdp adjust) {
@@ -50,11 +53,11 @@ public class GfuiAlign_ implements ParseAble {
 	}
 	public static int CalcInsideOfAxis(int posEnm, int innerSize, int outerSize) {
 		int rv = 0;
-		if		(posEnm == GfuiAlign_.Null.Val())	rv = Int_.Min_value;
+		if		(posEnm == GfuiAlign_.Null.Val())	rv = IntUtl.MinValue;
 		else if (posEnm == GfuiAlign_.Lo.Val())		rv = 0;
 		else if (posEnm == GfuiAlign_.Mid.Val())	rv = (outerSize - innerSize) / 2;
 		else if (posEnm == GfuiAlign_.Hi.Val())		rv = outerSize - innerSize;
-		else										throw Err_.new_unhandled(posEnm);
+		else										throw ErrUtl.NewUnhandled(posEnm);
 		if (rv < 0) rv = 0;
 		return rv;
 	}

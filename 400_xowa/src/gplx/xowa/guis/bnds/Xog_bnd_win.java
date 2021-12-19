@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.bnds;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.xowa.*;
 import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.envs.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
-import gplx.gfui.layouts.swts.*;
 import gplx.xowa.guis.cbks.*;
 public class Xog_bnd_win implements Gfo_invk {
 	private GfuiWin win;
@@ -63,7 +68,7 @@ public class Xog_bnd_win implements Gfo_invk {
 		IptEventData event_data = (IptEventData)m.Args_getAt(0).Val();
 		int keycode = event_data.Key().Val();
 		binding_txt.Text_(bnd_parser.Xto_norm(IptKey_.To_str(keycode)));
-		keycode_txt.Text_(Int_.To_str(keycode));
+		keycode_txt.Text_(IntUtl.ToStr(keycode));
 		event_data.Handled_on();
 	}
 	private void When_key_up(GfoMsg m) {

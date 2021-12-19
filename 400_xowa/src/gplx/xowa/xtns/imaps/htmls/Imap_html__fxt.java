@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.imaps.htmls;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.files.Xof_fsdb_itm;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
@@ -29,8 +29,8 @@ class Imap_html__fxt {
 	private boolean hdump;
 	public Imap_html__fxt() {
 		this.parser_fxt = new Xop_fxt();
-		Xol_msg_itm msg = parser_fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_a7("imagemap_description"));
-		msg.Atrs_set(Bry_.new_a7("click here"), false, false);
+		Xol_msg_itm msg = parser_fxt.Wiki().Msg_mgr().Get_or_make(BryUtl.NewA7("imagemap_description"));
+		msg.Atrs_set(BryUtl.NewA7("click here"), false, false);
 	}
 	public Imap_html__fxt Hdump_n_() {return Hdump_(BoolUtl.N);}
 	public Imap_html__fxt Hdump_y_() {return Hdump_(BoolUtl.Y);}
@@ -42,7 +42,7 @@ class Imap_html__fxt {
 	public void Test_html_full_str(String raw, String expd) {parser_fxt.Test_html_full_str(raw, expd);}
 	public void Test_html_full_frag(String raw, String expd) {parser_fxt.Test_html_full_frag(raw, expd);}
 	public String Frag_html_full() {
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<div id=\"imap_div_0\" class=\"noresize\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"
@@ -61,7 +61,7 @@ class Imap_html__fxt {
 		make_fxt.Init__usr_cache(fsdb_itms);
 		make_fxt.Page_chkr().Clear();
 		for (Xof_fsdb_itm itm : fsdb_itms) {
-			make_fxt.Page_chkr().Imgs__add(String_.new_u8(itm.Lnki_wiki_abrv()), String_.new_u8(itm.Lnki_ttl()), itm.Lnki_type(), itm.Lnki_upright(), itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_time(), itm.Lnki_page());
+			make_fxt.Page_chkr().Imgs__add(StringUtl.NewU8(itm.Lnki_wiki_abrv()), StringUtl.NewU8(itm.Lnki_ttl()), itm.Lnki_type(), itm.Lnki_upright(), itm.Lnki_w(), itm.Lnki_h(), itm.Lnki_time(), itm.Lnki_page());
 		}
 		make_fxt.Test__make(save, make_fxt.Page_chkr().Body_(load));
 	}
@@ -69,7 +69,7 @@ class Imap_html__fxt {
 		return new Xof_fsdb_itm[] {make_fxt.Init__fsdb_itm("en.w", "A.png", 123, 0, 123, 100, "mem/wiki/repo/trg/thumb/7/0/A.png/123px.png")};
 	}
 	public String Basic__wtxt() {
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<imagemap>"
 		, "File:A.png|thumb|123px|a1"
 		, "circle 0 0 5 [[B|b1]]"
@@ -128,7 +128,7 @@ class Imap_html__fxt {
 				magnify_id = " id=\"xolnki_2\"";
 				break;
 		}
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"thumb tright\">"
 		, "  <div" + div_id + " class=\"thumbinner\" style=\"width:" + div_width + "px;\">"
 		, "    <div id=\"imap_div_0\" class=\"noresize\">"
@@ -148,7 +148,7 @@ class Imap_html__fxt {
 	public String Desc__wtxt() {
 		make_fxt.Init__usr_cache(make_fxt.Init__fsdb_itm("en.w", "A.png", 123, 0, 123, 100, "mem/wiki/repo/trg/thumb/7/0/A.png/123px.png"));
 		make_fxt.Page_chkr().Imgs__add("en.w", "A.png", Xop_lnki_type.Id_none, -1, 123, 0, -1, -1);
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<imagemap>"
 		, "File:A.png|123px|a1"
 		, "desc top-left"
@@ -202,7 +202,7 @@ class Imap_html__fxt {
 				break;
 		}
 
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<div id=\"imap_div_0\" class=\"noresize\" style=\"height:0px; width: 123px;\">"
 		, "      <map name=\"imageMap_1_1\">"
 		, "      </map>"

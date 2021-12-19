@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*;
+package gplx.xowa.xtns.scribunto;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Scrib_lib_mgr {
 	private final List_adp list = List_adp_.New();
 	public int Len() {return list.Len();}
 	public void Add(Scrib_lib v) {list.Add(v); v.Init();}
-	public Scrib_lib Get_at(int i) {return (Scrib_lib)list.Get_at(i);}
+	public Scrib_lib Get_at(int i) {return (Scrib_lib)list.GetAt(i);}
 	public void Init_for_core(Scrib_core core, Io_url script_dir) {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {

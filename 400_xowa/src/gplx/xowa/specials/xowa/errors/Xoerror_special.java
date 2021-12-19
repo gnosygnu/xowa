@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.xowa.errors; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.net.*; import gplx.core.net.qargs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.apps.urls.*;
+package gplx.xowa.specials.xowa.errors;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.core.net.qargs.*;
 public class Xoerror_special implements Xow_special_page {
 	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__error;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
@@ -27,18 +30,18 @@ public class Xoerror_special implements Xow_special_page {
 		String data = qarg_mgr.Read_str_or("data", "unknown data");
 		String title = type;
 		String msg = data;
-		if (String_.Eq(type, "InvalidTitle")) {
+		if (StringUtl.Eq(type, "InvalidTitle")) {
 			title = "Invalid title";
 			msg = "The title has invalid characters: <span style='color:red;font-weight:bold'>" + data + "</span>";
 		}
-		else if (String_.Eq(type, "InvalidWiki")) {
+		else if (StringUtl.Eq(type, "InvalidWiki")) {
 			title = "Invalid wiki";
 			msg = "The wiki is not installed: <span style='color:red;font-weight:bold'>" + data + "</span>";
 		}
 
-		page.Db().Text().Text_bry_(fmt.Bld_many_to_bry(Bry_bfr_.New(), title, msg));
+		page.Db().Text().Text_bry_(fmt.Bld_many_to_bry(BryWtr.New(), title, msg));
 	}
-	private static final Bry_fmt fmt = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
+	private static final BryFmt fmt = BryFmt.Auto(StringUtl.ConcatLinesNlSkipLast
 	( "<h2>~{title}</h2>"
 	, "<p>~{msg}"
 	, "</p>"
@@ -46,9 +49,9 @@ public class Xoerror_special implements Xow_special_page {
 
 	public Xow_special_page Special__clone() {return this;}
 	public static byte[] Make_url__invalidTitle(byte[] ttl_bry) {
-		return Bry_.Add(Xow_special_meta_.Itm__error.Ttl_bry(), Bry_.new_a7("?type=InvalidTitle&data="), ttl_bry);
+		return BryUtl.Add(Xow_special_meta_.Itm__error.Ttl_bry(), BryUtl.NewA7("?type=InvalidTitle&data="), ttl_bry);
 	}
 	public static byte[] Make_url__invalidWiki(byte[] wiki) {
-		return Bry_.Add(Xow_special_meta_.Itm__error.Ttl_bry(), Bry_.new_a7("?type=InvalidWiki&data="), wiki);
+		return BryUtl.Add(Xow_special_meta_.Itm__error.Ttl_bry(), BryUtl.NewA7("?type=InvalidWiki&data="), wiki);
 	}
 }

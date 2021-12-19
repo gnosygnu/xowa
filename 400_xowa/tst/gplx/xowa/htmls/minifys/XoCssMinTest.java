@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.minifys;
 
-import gplx.core.tests.Gftest;
 import gplx.core.tooling.dataCollectors.GfoDataCollectorMgr;
 import gplx.core.tooling.asserts.TestAssert;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.Test;
 
 public class XoCssMinTest {
@@ -123,6 +123,6 @@ class XoCssMinTstr {
         if (expdRules != null) {
             TestAssert.Test(note, dataCollectorMgr, expdRules);
         }
-        Gftest.Eq__str(expd, actl, note);
+        GfoTstr.Eq(expd, actl, note);
     }
 }

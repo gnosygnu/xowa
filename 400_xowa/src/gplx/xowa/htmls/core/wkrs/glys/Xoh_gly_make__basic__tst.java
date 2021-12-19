@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.glys;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_gly_make__basic__tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void Init() {fxt.Clear();}
-	@Test  public void Media_div() {
-		String orig = String_.Concat_lines_nl_skip_last
+	@Test public void Media_div() {
+		String orig = StringUtl.ConcatLinesNlSkipLast
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional' style='max-width:978px; _width:978px;'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
 		,     "<div style='width:155px;'>"
@@ -42,7 +43,7 @@ public class Xoh_gly_make__basic__tst {
 		,     "</div>"
 		,   "</li>"
 		, "</ul>abc");
-		String expd = String_.Concat_lines_nl_skip_last
+		String expd = StringUtl.ConcatLinesNlSkipLast
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional' style='max-width:978px; _width:978px;'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
 		,     "<div style='width:155px;'>"

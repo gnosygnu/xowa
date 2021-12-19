@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.wikis.xwikis.sitelinks;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xoa_sitelink_mgr_parser_tst {
 	private final Xoa_sitelink_mgr_parser_fxt fxt = new Xoa_sitelink_mgr_parser_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic() {
-		String raw = String_.Concat_lines_nl_skip_last
+	@Test public void Basic() {
+		String raw = StringUtl.ConcatLinesNlSkipLast
 		( "0|Tier 0"
 		, "1|de|German"
 		, "1|en|English"
@@ -30,15 +34,15 @@ public class Xoa_sitelink_mgr_parser_tst {
 		fxt.Exec_parse(raw);
 		fxt.Test_parse(raw);
 	}
-	@Test  public void Move() {
-		String raw = String_.Concat_lines_nl_skip_last
+	@Test public void Move() {
+		String raw = StringUtl.ConcatLinesNlSkipLast
 		( "0|Tier 0"
 		, "1|de|German"
 		, "0|Tier 1"
 		, "1|ar|Arabic"
 		);
 		fxt.Exec_parse(raw);
-		raw = String_.Concat_lines_nl_skip_last
+		raw = StringUtl.ConcatLinesNlSkipLast
 		( "0|Tier 0"
 		, "1|ar|Arabic"
 		, "0|Tier 1"
@@ -51,17 +55,17 @@ public class Xoa_sitelink_mgr_parser_tst {
 class Xoa_sitelink_mgr_parser_fxt {
 	private final Xoa_sitelink_mgr mgr = new Xoa_sitelink_mgr();
 	private final Xoa_sitelink_mgr_parser parser;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public void Clear() {mgr.Grp_mgr().Clear();}
 	public Xoa_sitelink_mgr_parser_fxt() {
 		this.parser = new Xoa_sitelink_mgr_parser(mgr);
 	}
 	public void Exec_parse(String raw) {
-		byte[] src = Bry_.new_u8(raw);
+		byte[] src = BryUtl.NewU8(raw);
 		parser.Load_by_bry(src);
 	}
 	public void Test_parse(String expd) {
 		mgr.Grp_mgr().To_bfr(tmp_bfr);
-		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, tmp_bfr.ToStrAndClear());
 	}
 }

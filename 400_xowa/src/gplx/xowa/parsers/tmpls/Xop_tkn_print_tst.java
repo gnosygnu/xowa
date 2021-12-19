@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_tkn_print_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -28,11 +32,11 @@ public class Xop_tkn_print_tst {
 	@Test public void Tmpl_pf()		{tst_Print("{{#expr:1}}");}
 	private void tst_Print(String raw) {
 		Xop_ctx ctx = fxt.Ctx();
-		byte[] raw_bry = Bry_.new_u8(raw);
-		Xot_defn_tmpl defn = fxt.run_Parse_tmpl(Bry_.Empty, raw_bry);
+		byte[] raw_bry = BryUtl.NewU8(raw);
+		Xot_defn_tmpl defn = fxt.run_Parse_tmpl(BryUtl.Empty, raw_bry);
 		Xot_fmtr_prm raw_fmtr = new Xot_fmtr_prm();
 		defn.Root().Tmpl_fmt(ctx, raw_bry, raw_fmtr);
 		raw_fmtr.Print(tst_Print_bb);
-		Tfds.Eq(raw, tst_Print_bb.To_str_and_clear());
-	}	private Bry_bfr tst_Print_bb = Bry_bfr_.New();
+		GfoTstr.EqObj(raw, tst_Print_bb.ToStrAndClear());
+	}	private BryWtr tst_Print_bb = BryWtr.New();
 }

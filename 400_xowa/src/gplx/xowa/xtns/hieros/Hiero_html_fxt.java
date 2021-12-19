@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.hieros;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 import gplx.xowa.htmls.core.makes.tests.Xoh_make_fxt;
@@ -31,7 +31,7 @@ class Hiero_html_fxt {
 	public Hiero_html_fxt Hdump_n_() {return Hdump_(BoolUtl.N);}
 	public Hiero_html_fxt Hdump_y_() {return Hdump_(BoolUtl.Y);}
 	private Hiero_html_fxt Hdump_(boolean v) {
-		this.hdump_atr = v ? " " + String_.new_u8(Hiero_hdump_wkr.HDUMP_ATR) : " ";
+		this.hdump_atr = v ? " " + StringUtl.NewU8(Hiero_hdump_wkr.HDUMP_ATR) : " ";
 		return this;
 	}
 	public void Test__hview(String wtxt, String expd) {
@@ -49,7 +49,7 @@ class Hiero_html_fxt {
 	}
 	public String Glyph_1__html(boolean hiero_dir_has_value) {
 		String hiero_dir = Hiero_dir(hiero_dir_has_value);
-		return String_.Concat_lines_nl
+		return StringUtl.ConcatLinesNl
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"
@@ -71,7 +71,7 @@ class Hiero_html_fxt {
 	}
 	public String Cartouche__html(boolean hiero_dir_has_value) {
 		String hiero_dir = Hiero_dir(hiero_dir_has_value);
-		return String_.Concat_lines_nl_skip_last
+		return StringUtl.ConcatLinesNlSkipLast
 		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 		, "  <tr>"
 		, "    <td>"

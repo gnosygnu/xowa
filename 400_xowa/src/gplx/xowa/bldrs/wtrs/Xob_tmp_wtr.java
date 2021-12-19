@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wtrs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
 import gplx.core.ios.*;
 import gplx.xowa.wikis.nss.*;
 public class Xob_tmp_wtr {
@@ -21,9 +25,9 @@ public class Xob_tmp_wtr {
 		this.ns_itm = ns_itm;
 		this.url_gen = url_gen;
 		this.fil_max = fil_max; 
-		bfr = Bry_bfr_.Reset(fil_max);
+		bfr = BryWtr.NewAndReset(fil_max);
 	}	int fil_max;
-	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr;
+	public BryWtr Bfr() {return bfr;} BryWtr bfr;
 	public Io_url_gen Url_gen() {return url_gen;} Io_url_gen url_gen;
 	public void Clear() {bfr.ClearAndReset();}
 	public boolean FlushNeeded(int writeLen) {return bfr.Len() + writeLen > fil_max;} //int bfr_len;

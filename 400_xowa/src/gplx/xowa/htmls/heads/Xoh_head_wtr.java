@@ -13,16 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.heads;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*;
 import gplx.langs.htmls.*;
 public class Xoh_head_wtr {
 	private int indent; private int reset_bgn, reset_end;
 	private boolean js_tail_inited = false;
-	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr;
-	public Xoh_head_wtr Init(Bry_bfr bfr)	{this.bfr = bfr; return this;}
+	public BryWtr Bfr() {return bfr;} private BryWtr bfr;
+	public Xoh_head_wtr Init(BryWtr bfr)	{this.bfr = bfr; return this;}
 	public void Term() {
 		this.bfr = null;
 		js_tail_inited = true;
@@ -64,7 +67,7 @@ public class Xoh_head_wtr {
 		for (int i = 0; i < len; ++i)
 			Write_js_line(ary[i]);
 	}
-	public void Write_js_line(String str) {Write_js_line(Bry_.new_u8(str));}
+	public void Write_js_line(String str) {Write_js_line(BryUtl.NewU8(str));}
 	public void Write_js_line(byte[] bry) {
 		Write_nl_and_indent();
 		bfr.Add(bry);
@@ -113,15 +116,15 @@ public class Xoh_head_wtr {
 		bfr.Add(url);
 		bfr.Add(Js_line_2_end);
 	}
-	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
+	public byte[] To_bry_and_clear() {return bfr.ToBryAndClear();}
 	private static final byte[]
-	  Js_line_1						= Bry_.new_a7("xowa.js.jquery.init();")
-	, Js_line_2_bgn					= Bry_.new_a7("xowa.js.load_lib('")
-	, Js_line_2_end					= Bry_.new_a7("');")
+	  Js_line_1						= BryUtl.NewA7("xowa.js.jquery.init();")
+	, Js_line_2_bgn					= BryUtl.NewA7("xowa.js.load_lib('")
+	, Js_line_2_end					= BryUtl.NewA7("');")
 	;
 	private boolean Reset() {
 		if (bfr.Len() == reset_end) {			// itms wrote nothing
-			bfr.Delete_rng_to_end(reset_bgn);	// delete bgn
+			bfr.DelRngToEnd(reset_bgn);	// delete bgn
 			return true;
 		}
 		else
@@ -137,26 +140,26 @@ public class Xoh_head_wtr {
 			Write_js_quote(AsciiByte.Apos, val);
 		else
 			bfr.Add(val);
-		bfr.Add_byte(AsciiByte.Comma);
+		bfr.AddByte(AsciiByte.Comma);
 	}
 	public void Write_js_global_ini_atr_val(byte[] key, int val) {
 		Write_js_global_ini_atr_bgn(key);
-		bfr.Add_int_variable(val);
-		bfr.Add_byte(AsciiByte.Comma);
+		bfr.AddIntVariable(val);
+		bfr.AddByte(AsciiByte.Comma);
 	}
 	private void Write_js_global_ini_atr_bgn(byte[] key) {
 		Write_nl_and_indent();
-		bfr.Add_byte_apos();
+		bfr.AddByteApos();
 		bfr.Add(key);
-		bfr.Add_byte_apos();
+		bfr.AddByteApos();
 		bfr.Add(Js_globals_ini_atr_mid);
 	}
-	public void Write_js_ary_bgn() {js_ary_idx = 0; bfr.Add_byte(AsciiByte.BrackBgn);}
+	public void Write_js_ary_bgn() {js_ary_idx = 0; bfr.AddByte(AsciiByte.BrackBgn);}
 	public void Write_js_ary_itm(byte[] val) {
 		if (++js_ary_idx != 1) bfr.Add(js_ary_dlm);
 		Write_js_quote(AsciiByte.Apos, val);
-	}	private int js_ary_idx = 0; private static final byte[] js_ary_dlm = Bry_.new_a7(", ");
-	public void Write_js_ary_end() {js_ary_idx = 0; bfr.Add_byte(AsciiByte.BrackEnd);}
+	}	private int js_ary_idx = 0; private static final byte[] js_ary_dlm = BryUtl.NewA7(", ");
+	public void Write_js_ary_end() {js_ary_idx = 0; bfr.AddByte(AsciiByte.BrackEnd);}
 	public void Write_js_init_global(byte[] key) {	// EX: xowa.client = {};
 		Write_nl_and_indent();
 		bfr.Add(key);
@@ -172,7 +175,7 @@ public class Xoh_head_wtr {
 	}
 	public void Write_js_alias_kv(byte[] alias, byte[] key, byte[] val) {	// EX: x_s.port = 8080;
 		Write_nl_and_indent();
-		bfr.Add(alias).Add_byte_dot().Add(key);
+		bfr.Add(alias).AddByteDot().Add(key);
 		bfr.Add(Js_var_mid);
 		Write_js_quote(AsciiByte.Apos, val);
 		bfr.Add(Js_var_end);
@@ -204,32 +207,32 @@ public class Xoh_head_wtr {
 	}
 	private void Write_js_quote(byte quote_byte, byte[] val) {
 		int val_len = val.length;
-		bfr.Add_byte(quote_byte);
+		bfr.AddByte(quote_byte);
 		for (int i = 0; i < val_len; i++) {
 			byte b = val[i];
-			if		(b == quote_byte)			bfr.Add_byte_backslash();	// escape quote
-			else if (b == AsciiByte.Backslash) bfr.Add_byte_backslash();	// escape backslash
-			bfr.Add_byte(b);
+			if		(b == quote_byte)			bfr.AddByteBackslash();	// escape quote
+			else if (b == AsciiByte.Backslash) bfr.AddByteBackslash();	// escape backslash
+			bfr.AddByte(b);
 		}
-		bfr.Add_byte(quote_byte);
+		bfr.AddByte(quote_byte);
 	}
 	private void Write_nl_and_indent() {
-		bfr.Add_byte_nl(); Indent();
+		bfr.AddByteNl(); Indent();
 	}
-	private void Indent() {bfr.Add_byte_repeat(AsciiByte.Space, indent);}
+	private void Indent() {bfr.AddByteRepeat(AsciiByte.Space, indent);}
 	public Xoh_head_wtr Indent_add() {indent += 2; return this;}
 	public Xoh_head_wtr Indent_del() {indent -= 2; return this;}
 	private static final byte[]
-	  Css_include_bgn			= Bry_.new_a7("<link rel=\"stylesheet\" href=\"")
-	, Css_include_end			= Bry_.new_a7("\" type='text/css'>")
-	, Js_include_bgn			= Bry_.new_a7("<script src=\"")
-	, Js_include_end			= Bry_.new_a7("\" type='text/javascript'></script>")
-	, Js_globals_ini_var_bgn	= Bry_.new_a7("var xowa_global_values = {")
-	, Js_globals_ini_var_end	= Bry_.new_a7("}")
-	, Js_globals_ini_atr_mid	= Bry_.new_a7(" : ")
-	, Js_var_bgn				= Bry_.new_a7("var ")
-	, Js_var_mid				= Bry_.new_a7(" = ")
-	, Js_var_end				= Bry_.new_a7(";")
-	, Js_init_obj				= Bry_.new_a7(" = {};")
+	  Css_include_bgn			= BryUtl.NewA7("<link rel=\"stylesheet\" href=\"")
+	, Css_include_end			= BryUtl.NewA7("\" type='text/css'>")
+	, Js_include_bgn			= BryUtl.NewA7("<script src=\"")
+	, Js_include_end			= BryUtl.NewA7("\" type='text/javascript'></script>")
+	, Js_globals_ini_var_bgn	= BryUtl.NewA7("var xowa_global_values = {")
+	, Js_globals_ini_var_end	= BryUtl.NewA7("}")
+	, Js_globals_ini_atr_mid	= BryUtl.NewA7(" : ")
+	, Js_var_bgn				= BryUtl.NewA7("var ")
+	, Js_var_mid				= BryUtl.NewA7(" = ")
+	, Js_var_end				= BryUtl.NewA7(";")
+	, Js_init_obj				= BryUtl.NewA7(" = {};")
 	;
 }

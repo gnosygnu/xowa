@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.datas;
 import gplx.dbs.*;
+import gplx.types.errs.ErrUtl;
 public class Xobc_step_regy_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_step_id, fld_step_type;
@@ -34,7 +35,7 @@ public class Xobc_step_regy_tbl implements Db_tbl {
 			if (rdr.Move_next())
 				return rdr.Read_int(fld_step_type);
 			else
-				throw Err_.new_("", "bldr.central:could not find step_type", "step_id", step_id);
+				throw ErrUtl.NewArgs("bldr.central:could not find step_type", "step_id", step_id);
 		}
 		finally {rdr.Rls();}
 	}

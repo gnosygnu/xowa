@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
 class GfmlBldr_ {
-	@gplx.Internal protected static GfmlBldr new_() {return new GfmlBldr();}
-	@gplx.Internal protected static GfmlBldr default_() {			
+	public static GfmlBldr new_() {return new GfmlBldr();}
+	public static GfmlBldr default_() {
 		GfmlBldr rv = new GfmlBldr();
 		GfmlLxr rootLxr = GfmlDocLxrs.Root_lxr();
 		GfmlDocLxrs.Default_lxr(rv.Doc().LxrRegy(), rootLxr);

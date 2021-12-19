@@ -13,10 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.mediawiki.*;
-import gplx.xowa.mediawiki.includes.title.*;
+package gplx.xowa.mediawiki.includes; import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.XomwEnv;
+import gplx.xowa.mediawiki.XophpString_;
+import gplx.xowa.mediawiki.includes.title.XomwMalformedTitleException;
+import gplx.xowa.mediawiki.includes.title.XomwMediaWikiTitleCodec;
+import gplx.xowa.mediawiki.includes.title.XomwMediaWikiTitleCodecParts;
+import gplx.xowa.mediawiki.includes.title.XomwTitleFormatter;
 /**
 * Represents a title within MediaWiki.
 * Optionally may contain an interwiki designation or namespace.
@@ -50,14 +57,14 @@ public class XomwTitleOld { // implements XomwLinkTarget
 //		// @{
 
 	/** @var String Text form (spaces not underscores) of the main part */
-	private byte[] mTextform = Bry_.Empty;
+	private byte[] mTextform = BryUtl.Empty;
 
 	/** @var String URL-encoded form of the main part */
-	private byte[] mUrlform = Bry_.Empty;
+	private byte[] mUrlform = BryUtl.Empty;
 
 	/** @var String Main part with underscores */
 	// XO: EX: "Help_talk:A_b" . "A_b"
-	private byte[] mDbkeyform = Bry_.Empty;
+	private byte[] mDbkeyform = BryUtl.Empty;
 
 	/** @var String Database key with the initial letter in the case specified by the user */
 	protected byte[] mUserCaseDBKey;
@@ -66,13 +73,13 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	public int mNamespace = 0;
 
 	/** @var String Interwiki prefix */
-	public byte[] mInterwiki = Bry_.Empty;
+	public byte[] mInterwiki = BryUtl.Empty;
 
 	/** @var boolean Was this Title created from a String with a local interwiki prefix? */
 	private boolean mLocalInterwiki = false;
 
 	/** @var String Title fragment (i.e. the bit after the #) */
-	private byte[] mFragment = Bry_.Empty;
+	private byte[] mFragment = BryUtl.Empty;
 
 	/** @var int Article ID, fetched from the link cache on demand */
 	public int mArticleID = -1;
@@ -255,7 +262,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	* @return Title|null Title or null on an error.
 	*/
 	public static XomwTitleOld newFromText(XomwEnv env, byte[] text)                       {return newFromText(env, text, XomwDefines.NS_MAIN);}
-	public static XomwTitleOld newFromText(XomwEnv env, String text, int defaultNamespace) {return newFromText(env, Bry_.new_u8(text));}
+	public static XomwTitleOld newFromText(XomwEnv env, String text, int defaultNamespace) {return newFromText(env, BryUtl.NewU8(text));}
 	private static XomwTitleOld newFromText(XomwEnv env, byte[] text, int defaultNamespace) {
 		// DWIM: Integers can be passed in here when page titles are used as array keys.
 		// XO.MW.SKIP:STRONGCAST
@@ -269,7 +276,6 @@ public class XomwTitleOld { // implements XomwLinkTarget
 		try {
 			return XomwTitleOld.newFromTextThrow(env, text, defaultNamespace);
 		} catch (XomwMalformedTitleException ex) {
-			Err_.Noop(ex);
 			return null;
 		}
 	}
@@ -561,7 +567,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 		XomwTitleOld title = XomwTitleOld.newFromText(env, XomwGlobalFunctions.wfMessageOld(env, "mainpage").inContentLanguage().text());
 		// Don't give fatal errors if the message is broken
 		if (title == null) {
-			title = XomwTitleOld.newFromText(env, Bry_.new_a7("Main Page"));
+			title = XomwTitleOld.newFromText(env, BryUtl.NewA7("Main Page"));
 		}
 		return title;
 	}
@@ -799,7 +805,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	* @return boolean
 	*/
 	public boolean isExternal() {
-		return this.mInterwiki != Bry_.Empty;
+		return this.mInterwiki != BryUtl.Empty;
 	}
 
 	/**
@@ -1365,7 +1371,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	* @since 1.23
 	*/
 	public boolean hasFragment() {
-		return this.mFragment != Bry_.Empty;
+		return this.mFragment != BryUtl.Empty;
 	}
 
 //		/**
@@ -1421,15 +1427,15 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	* @return String The prefixed text
 	*/
 	private byte[] prefix(byte[] name) {
-		byte[] p = Bry_.Empty;
+		byte[] p = BryUtl.Empty;
 //			if (this.isExternal()) {
 //				p = this.mInterwiki . ':';
 //			}
 
 		if (0 != this.mNamespace) {
-			p = Bry_.Add(p, this.getNsText(), AsciiByte.ColonBry);
+			p = BryUtl.Add(p, this.getNsText(), AsciiByte.ColonBry);
 		}
-		return Bry_.Add(p, name);
+		return BryUtl.Add(p, name);
 	}
 
 	/**
@@ -1443,7 +1449,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 		s = XophpString_.strtr(s, AsciiByte.Space, AsciiByte.Underline);
 		return s;
 	}
-	public String getPrefixedDBkeyStr() {return String_.new_u8(getPrefixedDBkey());}
+	public String getPrefixedDBkeyStr() {return StringUtl.NewU8(getPrefixedDBkey());}
 
 	/**
 	* Get the prefixed title with spaces.
@@ -1459,7 +1465,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 		}
 		return this.mPrefixedText;
 	}
-	public String getPrefixedTextStr() {return String_.new_u8(getPrefixedText());}
+	public String getPrefixedTextStr() {return StringUtl.NewU8(getPrefixedText());}
 
 //		/**
 //		* Return a String representation of this title
@@ -1733,7 +1739,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 			byte[] dbkey = this.getPrefixedDBkey();
 //				if (query == Bry_.Empty) {
 //					url = str_replace('$1', dbkey, wgArticlePath);
-				url = Bry_.Add(Bry__wgArticlePath__wiki,  dbkey);
+				url = BryUtl.Add(Bry__wgArticlePath__wiki,  dbkey);
 				// XO.MW.HOOK:GetLocalURL::Article
 //				} else {
 //					global wgVariantArticlePath, wgActionPaths, wgContLang;
@@ -1816,13 +1822,13 @@ public class XomwTitleOld { // implements XomwLinkTarget
 //				$ret = this.getLocalURL($query, $query2) . this.getFragmentForURL();
 //			}
 //			return $ret;
-		return Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, this.getPrefixedText());
+		return BryUtl.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, this.getPrefixedText());
 	}
 
 //		/**
-//		* Get the URL form for an @gplx.Internal protected link.
+//		* Get the URL form for an public link.
 //		* - Used in various CDN-related code, in case we have a different
-//		* @gplx.Internal protected hostname for the server from the exposed one.
+//		* public hostname for the server from the exposed one.
 //		*
 //		* This uses $wgInternalServer to qualify the path, or $wgServer
 //		* if $wgInternalServer is not set. If the server variable used is
@@ -2447,7 +2453,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 //		}
 //
 //		/**
-//		* Can $user perform $action on this page? This is an @gplx.Internal protected function,
+//		* Can $user perform $action on this page? This is an public function,
 //		* with multiple levels of checks depending on performance needs; see $rigor below.
 //		* It does not check wfReadOnly().
 //		*
@@ -3363,8 +3369,8 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	*/
 	private boolean secureAndSplit(XomwEnv env) {
 		// Initialisation
-		this.mInterwiki = Bry_.Empty;
-		this.mFragment = Bry_.Empty;
+		this.mInterwiki = BryUtl.Empty;
+		this.mFragment = BryUtl.Empty;
 		this.mNamespace = this.mDefaultNamespace; // Usually NS_MAIN
 
 		byte[] dbkey = this.mDbkeyform;
@@ -4237,9 +4243,9 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	*/
 	public boolean equals(XomwTitleOld title) {
 		// Note: == is necessary for proper matching of number-like titles.
-		return Bry_.Eq(this.getInterwiki(), title.getInterwiki())
+		return BryLni.Eq(this.getInterwiki(), title.getInterwiki())
 			&& this.getNamespace() == title.getNamespace()
-			&& Bry_.Eq(this.getDBkey(), title.getDBkey());
+			&& BryLni.Eq(this.getDBkey(), title.getDBkey());
 	}
 
 //		/**
@@ -4844,7 +4850,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	//		this.mUrlform = wfUrlencode(this.mDbkeyform);
 	//		this.mTextform = strtr(this.mDbkeyform, '_', ' ');
 	//	}
-	private static final byte[] Bry__wgArticlePath__wiki = Bry_.new_a7("/wiki/");
+	private static final byte[] Bry__wgArticlePath__wiki = BryUtl.NewA7("/wiki/");
 
 	// REF.MW: DefaultSettings.php
 	// Allowed title characters -- regex character class
@@ -4888,7 +4894,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 		while (true) {
 			if (cur == src_end) break;
 			byte b = src[cur];
-			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+			int b_len = Utf8Utl.LenOfCharBy1stByte(b);
 			if (b_len == 1) {         // ASCII
 				if (valid[b & 0xFF])  // valid; EX: "a0A B&$"; PATCH.JAVA:need to convert to unsigned byte
 					cur++;

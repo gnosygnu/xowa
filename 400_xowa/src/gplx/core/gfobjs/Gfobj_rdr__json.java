@@ -14,10 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.gfobjs;
-
-import gplx.Err_;
-import gplx.Io_mgr;
-import gplx.Io_url;
 import gplx.langs.jsons.Json_ary;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_itm;
@@ -30,7 +26,9 @@ import gplx.langs.jsons.Json_itm_str;
 import gplx.langs.jsons.Json_kv;
 import gplx.langs.jsons.Json_nde;
 import gplx.langs.jsons.Json_parser;
-
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
 public class Gfobj_rdr__json {
 	private final Json_parser parser = new Json_parser();
 	public Gfobj_grp Load(Io_url url) {
@@ -62,7 +60,7 @@ public class Gfobj_rdr__json {
 				case Json_itm_.Tid__bool:		gnde.Add_bool	(key_str, ((Json_itm_bool)val).Data_as_bool()); break;
 				case Json_itm_.Tid__int:		gnde.Add_int	(key_str, ((Json_itm_int)val).Data_as_int()); break;
 				case Json_itm_.Tid__long:		gnde.Add_long	(key_str, ((Json_itm_long)val).Data_as_long()); break;
-				case Json_itm_.Tid__decimal:	gnde.Add_double	(key_str, ((Json_itm_decimal)val).Data_as_decimal().To_double()); break;
+				case Json_itm_.Tid__decimal:	gnde.Add_double	(key_str, ((Json_itm_decimal)val).Data_as_decimal().ToDouble()); break;
 				case Json_itm_.Tid__null:		gnde.Add_str	(key_str, null); break;
 				case Json_itm_.Tid__ary:
 					Gfobj_ary sub_ary = new Gfobj_ary(null);
@@ -74,7 +72,7 @@ public class Gfobj_rdr__json {
 					gnde.Add_nde(key_str, sub_gnde);
 					Parse_nde(Json_nde.Cast(val), sub_gnde);
 					break;
-				default:						throw Err_.new_unhandled_default(val_tid);
+				default:						throw ErrUtl.NewUnhandled(val_tid);
 			}
 		}
 	}

@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.dicts; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.xndes.dicts;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*;
 public class Xoh_xnde_dict_grp {
 	private final int id_len;
 	private int id_next = -1;
@@ -29,11 +34,11 @@ public class Xoh_xnde_dict_grp {
 		list.Clear();
 	}
 	public void Add(byte[] val) {Make(val);}
-	public Xoh_xnde_dict_itm Get_by_id_or_null(int id) {return (Xoh_xnde_dict_itm)list.Get_at(id);}
+	public Xoh_xnde_dict_itm Get_by_id_or_null(int id) {return (Xoh_xnde_dict_itm)list.GetAt(id);}
 	public Xoh_xnde_dict_itm Get_by_key_or_new(byte[] src, int src_bgn, int src_end) {
 		Xoh_xnde_dict_itm itm = (Xoh_xnde_dict_itm)hash.Get_by_mid(src, src_bgn, src_end);
 		if (itm == null) {
-			byte[] val = Bry_.Mid(src, src_bgn, src_end);
+			byte[] val = BryLni.Mid(src, src_bgn, src_end);
 			itm = Make(val);
 		}
 		else
@@ -45,16 +50,16 @@ public class Xoh_xnde_dict_grp {
 		// write dict_id?
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Xoh_xnde_dict_itm itm = (Xoh_xnde_dict_itm)list.Get_at(i);
+			Xoh_xnde_dict_itm itm = (Xoh_xnde_dict_itm)list.GetAt(i);
 			itm.Save(bfr, id_len);
 		}
 		bfr.Add(Bry__stop);
 	}
-	public void Load(Bry_rdr rdr) {
+	public void Load(BryRdr rdr) {
 		while (true) {
 			if (rdr.Is(Bry__stop)) break;
-			int id = rdr.Read_hzip_int(id_len);
-			byte[] val = rdr.Read_bry_to(AsciiByte.Nl);
+			int id = rdr.ReadHzipInt(id_len);
+			byte[] val = rdr.ReadBryTo(AsciiByte.Nl);
 			Xoh_xnde_dict_itm itm = new Xoh_xnde_dict_itm(id, val);
 			hash.Add(val, itm);
 			list.Add(itm);
@@ -68,5 +73,5 @@ public class Xoh_xnde_dict_grp {
 		list.Add(rv);
 		return rv;
 	}
-	public static final byte[] Bry__stop = Bry_.New_by_ints(255, 0);
+	public static final byte[] Bry__stop = BryUtl.NewByInts(255, 0);
 }

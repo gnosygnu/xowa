@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.sites;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
+import gplx.xowa.bldrs.wms.*;
 import gplx.core.net.*; import gplx.dbs.cfgs.*;
-import gplx.langs.jsons.*;	
 class Site_json_fetcher {
 	private Gfo_usr_dlg usr_dlg; private Gfo_inet_conn inet_conn; private String domain_str; private Db_cfg_tbl cfg_tbl;
 	private Io_url default_url;
@@ -43,7 +48,7 @@ class Site_json_fetcher {
 				case 1: rv = Get_json_from_db(cfg_tbl); break;
 				case 2: rv = Get_json_from_wm(usr_dlg, inet_conn, domain_str, cfg_tbl); break;
 				case 3: rv = Get_json_from_fs(default_url); break;
-				default: throw Err_.new_("api.site", "could not find site json", "wiki", domain_str);
+				default: throw ErrUtl.NewArgs("could not find site json", "wiki", domain_str);
 			}
 			if (rv == null)
 				++trial;

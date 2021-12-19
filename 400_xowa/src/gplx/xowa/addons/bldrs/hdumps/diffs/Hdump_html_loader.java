@@ -13,21 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.hdumps.*;
+package gplx.xowa.addons.bldrs.hdumps.diffs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.data.*;
 import gplx.xowa.htmls.*;
 class Hdump_html_loader {
 	private final Xowe_wiki wiki;
 	private Io_stream_zip_mgr stream_zip_mgr = new Io_stream_zip_mgr();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private final Xoh_page tmp_hpg = new Xoh_page();
 	private final Xoa_url tmp_url; private final Xoa_ttl tmp_ttl;
 
 	public Hdump_html_loader(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		this.tmp_url = wiki.Utl__url_parser().Parse(Bry_.new_a7("temp"));
-		this.tmp_ttl = wiki.Ttl_parse(Bry_.new_a7("temp"));
+		this.tmp_url = wiki.Utl__url_parser().Parse(BryUtl.NewA7("temp"));
+		this.tmp_ttl = wiki.Ttl_parse(BryUtl.NewA7("temp"));
 	}
 
 	public byte[] Load(int page_id, int html_db_id) {

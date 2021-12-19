@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.site_stats; import gplx.*;
+package gplx.xowa.wikis.data.site_stats;
 import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
 public class Xowd_site_stats_tbl implements Db_tbl {		
 	private final String fld_row_id, fld_good_articles, fld_total_pages, fld_images;
 	private final Db_conn conn; private final DbmetaFldList flds = new DbmetaFldList();
@@ -32,7 +34,7 @@ public class Xowd_site_stats_tbl implements Db_tbl {
 	}
 	public void Update(long num_articles, long num_pages, int num_files) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.site_stats: update started: num_articles=~{0} num_pages=~{1} num_files=~{2}", num_articles, num_pages, num_files);
-		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_row_id), fld_good_articles, fld_total_pages, fld_images);
+		Db_stmt stmt = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_row_id), fld_good_articles, fld_total_pages, fld_images);
 		stmt.Val_long(fld_good_articles, num_articles).Val_long(fld_total_pages, num_pages).Val_int(fld_images, num_files)
 			.Crt_int(fld_row_id, Site_stats_row_id)
 			.Exec_update();

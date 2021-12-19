@@ -13,25 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.core.log_msgs.*;
+package gplx.xowa.xtns.pfuncs.exprs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDecimal;
+import gplx.xowa.*;
+import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.langs.kwds.*; import gplx.core.log_msgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_expr extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
-		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == Bry_.Empty) return;
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+		byte[] val_dat_ary = Eval_argx(ctx, src, caller, self); if (val_dat_ary == BryUtl.Empty) return;
 		Evaluate(bfr, ctx, val_dat_ary);
 	}
-	public static boolean Evaluate(Bry_bfr bfr, Xop_ctx ctx, byte[] expr) {
+	public static boolean Evaluate(BryWtr bfr, Xop_ctx ctx, byte[] expr) {
 		Pfunc_expr_shunter shunter = ctx.Tmp_mgr().Expr_shunter();
-		Decimal_adp rslt = shunter.Evaluate(ctx, expr);	// NOTE: php uses "float" but really is a double; http://www.php.net/manual/en/language.types.float.php
+		GfoDecimal rslt = shunter.Evaluate(ctx, expr);	// NOTE: php uses "float" but really is a double; http://www.php.net/manual/en/language.types.float.php
 		if (rslt == Pfunc_expr_shunter.Null_rslt) {
-			bfr.Add_bfr_and_preserve(shunter.Err());
+			bfr.AddBfrAndPreserve(shunter.Err());
 			shunter.Err().Clear();
 			return false;
 		}
 		else {
-			bfr.Add_str_u8(rslt.To_str());
+			bfr.AddStrU8(rslt.ToStr());
 			return true;
 		}
 	}

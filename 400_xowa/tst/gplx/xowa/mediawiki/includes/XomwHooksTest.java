@@ -1,6 +1,6 @@
 package gplx.xowa.mediawiki.includes;
 
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
@@ -18,23 +18,23 @@ public class XomwHooksTest {
 
     @Test
     public void isRegistered() {
-        Gftest.Eq__bool_n(XomwHooks.isRegistered("test1"));
+        GfoTstr.EqBoolN(XomwHooks.isRegistered("test1"));
     }
 
     @Test
     public void register() {
-        Gftest.Eq__bool_n(XomwHooks.isRegistered("test1"));
+        GfoTstr.EqBoolN(XomwHooks.isRegistered("test1"));
         XomwHooks.register("test1", callbackOwner.NewCallback("test1"));
-        Gftest.Eq__bool_y(XomwHooks.isRegistered("test1"));
+        GfoTstr.EqBoolY(XomwHooks.isRegistered("test1"));
     }
 
     @Test
     public void clear() {
-        Gftest.Eq__bool_n(XomwHooks.isRegistered("test1"));
+        GfoTstr.EqBoolN(XomwHooks.isRegistered("test1"));
         XomwHooks.register("test1", callbackOwner.NewCallback("test1"));
-        Gftest.Eq__bool_y(XomwHooks.isRegistered("test1"));
+        GfoTstr.EqBoolY(XomwHooks.isRegistered("test1"));
         XomwHooks.clear("test1");
-        Gftest.Eq__bool_n(XomwHooks.isRegistered("test1"));
+        GfoTstr.EqBoolN(XomwHooks.isRegistered("test1"));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class XomwHooksTest {
         XomwHooks.register("test1", callbackOwner.NewCallback("test1b"));
         XomwHooks.register("test2", callbackOwner.NewCallback("test2"));
         XophpArray handlers = XomwHooks.getHandlers("test1");
-        Gftest.Eq__ary
+        GfoTstr.EqLines
         ( new String[] {"test1a", "test1b"}
         , extractKeysFromCallbackAry(handlers)
         );
@@ -55,9 +55,9 @@ public class XomwHooksTest {
         XomwHooks.register("test1", callbackOwner.NewCallback("test1b"));
         XomwHooks.register("test2", callbackOwner.NewCallback("test2"));
 
-        Gftest.Eq__bool_y(XomwHooks.run("test1", XophpArray.New(1, 2, 3)));
+        GfoTstr.EqBoolY(XomwHooks.run("test1", XophpArray.New(1, 2, 3)));
 
-        Gftest.Eq__str("test1a:3;test1b:3;", callbackOwner.Result());
+        GfoTstr.Eq("test1a:3;test1b:3;", callbackOwner.Result());
     }
 
     private static String[] extractKeysFromCallbackAry(XophpArray callbacks) {

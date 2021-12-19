@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.commons; import gplx.*;
+package gplx.xowa.files.commons;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
 public class Xof_commons_image_tbl implements Rls_able {
 	private Db_stmt stmt_insert;
 	public Db_conn Conn() {return conn;}

@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs;
-import gplx.Bry_;
-import gplx.Io_url;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
 import gplx.xowa.langs.kwds.Xol_kwd_grp_;
 import gplx.xowa.langs.kwds.Xol_kwd_mgr;
@@ -48,7 +48,7 @@ public class Xol_lang_itm_ {
 				return Char_tid_misc;
 		}
 	}
-	public static final byte[] Key_en = Bry_.new_a7("en");
+	public static final byte[] Key_en = BryUtl.NewA7("en");
 	public static Xol_lang_itm Lang_en_make(Xoa_lang_mgr lang_mgr) {
 		Xol_lang_itm rv = Xol_lang_itm.New(lang_mgr, Xol_lang_itm_.Key_en);
 		Xol_lang_itm_.Lang_init(rv);

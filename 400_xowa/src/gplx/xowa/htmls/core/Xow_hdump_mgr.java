@@ -14,19 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.core.ios.Io_stream_zip_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.htmls.Xoh_page;
 import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
 import gplx.xowa.htmls.core.hzips.Xoh_hzip_mgr;
 import gplx.xowa.wikis.data.Xowd_core_db_props;
 public class Xow_hdump_mgr {
-	private final Xoh_page tmp_hpg = new Xoh_page(); private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final Xoh_page tmp_hpg = new Xoh_page(); private final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	private final Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
 	private final Ordered_hash wkrs = Ordered_hash_.New_bry();
 	public Xow_hdump_mgr(Xow_wiki wiki) {

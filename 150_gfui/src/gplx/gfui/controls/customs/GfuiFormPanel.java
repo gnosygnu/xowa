@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.customs;
 import gplx.gfui.layouts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*;
+import gplx.types.commons.KeyValHash;
 public class GfuiFormPanel extends GfuiElemBase {
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		this.Width_(60);	// default to 60; do not force callers to always set width
-		GfuiWin ownerForm = (GfuiWin)ctorArgs.Get_val_or(GfuiElem_.InitKey_ownerWin, null);
+		GfuiWin ownerForm = (GfuiWin)ctorArgs.GetByValOr(GfuiElem_.InitKey_ownerWin, null);
 
 		GfoFactory_gfui.Btn_MoveBox(this, ownerForm);
 		GfoFactory_gfui.Btn_MinWin2(this);

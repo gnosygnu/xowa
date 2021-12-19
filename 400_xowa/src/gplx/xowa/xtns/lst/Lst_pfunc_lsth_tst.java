@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.lst;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Lst_pfunc_lsth_tst {
 	private final Lst_pfunc_lst_fxt fxt = new Lst_pfunc_lst_fxt();
-	private final String src_str_dflt = String_.Concat_lines_nl_skip_last
+	private final String src_str_dflt = StringUtl.ConcatLinesNlSkipLast
 	( "txt_0"
 	, "== hdr_1 =="
 	, "txt_1"
@@ -31,7 +32,7 @@ public class Lst_pfunc_lsth_tst {
 		fxt.Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_x}}", "");
 	}
 	@Test public void End__exists() {
-		fxt.Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_1|hdr_3}}", String_.Concat_lines_nl_skip_last
+		fxt.Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_1|hdr_3}}", StringUtl.ConcatLinesNlSkipLast
 		( "txt_1"
 		, ""
 		, "<h2> hdr_2 </h2>"
@@ -39,21 +40,21 @@ public class Lst_pfunc_lsth_tst {
 		));
 	}
 	@Test public void End__missing() {	// PURPOSE: read to end of next section
-		String expd = String_.Concat_lines_nl_skip_last
+		String expd = StringUtl.ConcatLinesNlSkipLast
 		( "txt_1"
 		);
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_1}}"		, expd);	// argument not given
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_1|hdr_x}}", expd);	// argument is wrong
 	}
 	@Test public void End__missing_eos() {	// PURPOSE: read to EOS if last
-		String expd = String_.Concat_lines_nl_skip_last
+		String expd = StringUtl.ConcatLinesNlSkipLast
 		( "txt_3"
 		);
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_3}}"		, expd);	// argument not given
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_3|hdr_x}}", expd);	// argument is wrong
 	}
 	@Test public void End__missing__match__len() {	// PURPOSE:match next hdr with same length; PAGE:en.w:10s_BC; DATE:2016-08-13
-		String src_str = String_.Concat_lines_nl_skip_last
+		String src_str = StringUtl.ConcatLinesNlSkipLast
 		( "txt_0"
 		, "== hdr_1 =="
 		, "txt_1"
@@ -62,7 +63,7 @@ public class Lst_pfunc_lsth_tst {
 		, "== hdr_2 =="
 		, "txt_2"
 		);
-		fxt.Page_txt_(src_str).Test_lst("{{#lsth::section_test|hdr_1}}", String_.Concat_lines_nl_skip_last
+		fxt.Page_txt_(src_str).Test_lst("{{#lsth::section_test|hdr_1}}", StringUtl.ConcatLinesNlSkipLast
 		( "txt_1"
 		, ""
 		, "<h3> hdr_1a </h3>"
@@ -70,7 +71,7 @@ public class Lst_pfunc_lsth_tst {
 		));
 	}
 	@Test public void Extra_nl() {	// PURPOSE: hdr.Src_end() includes trailing nl; PAGE:en.w:10s_BC; DATE:2016-08-13
-		String src_str = String_.Concat_lines_nl_skip_last
+		String src_str = StringUtl.ConcatLinesNlSkipLast
 		( "txt_0"
 		, "== hdr_1 =="
 		, ""
@@ -81,7 +82,7 @@ public class Lst_pfunc_lsth_tst {
 		fxt.Clear().Page_txt_(src_str).Test_lst("{{#lsth:section_test|hdr_1}}"		, "txt_1");
 	}
 	@Test public void Only_include() {	// PAGE:en.w:10s_BC; DATE:2016-08-13
-		String src_str = String_.Concat_lines_nl_skip_last
+		String src_str = StringUtl.ConcatLinesNlSkipLast
 		( "txt_0"
 		, "== hdr_1 =="
 		, "<onlyinclude>txt_1</onlyinclude>"
@@ -92,8 +93,8 @@ public class Lst_pfunc_lsth_tst {
 		);
 		fxt.Page_txt_(src_str).Test_lst("{{#lsth::section_test|hdr_1}}", "txt_1");
 	}
-	@Test  public void Bos() {	// PURPOSE.defensive:handle == at BOS; DATE:2016-08-13
-		String src_str = String_.Concat_lines_nl_skip_last
+	@Test public void Bos() {	// PURPOSE.defensive:handle == at BOS; DATE:2016-08-13
+		String src_str = StringUtl.ConcatLinesNlSkipLast
 		( "==hdr_1 =="
 		, "txt_1"
 		, "== hdr_2 =="
@@ -102,12 +103,12 @@ public class Lst_pfunc_lsth_tst {
 		fxt.Clear().Page_txt_(src_str).Test_lst("{{#lsth:section_test|hdr_1}}", "txt_1");
 	}
 	@Test public void Nested__lst() {	// PURPOSE:lst inside lsth will add its toc_mgr to lsth; PAGE:en.w:Germany_national_football_team; DATE:2016-08-13
-		fxt.Fxt().Init_page_create("Nested_lst", String_.Concat_lines_nl_skip_last
+		fxt.Fxt().Init_page_create("Nested_lst", StringUtl.ConcatLinesNlSkipLast
 		( "test"
 		, "==hdr_1=="
 		, "txt_1"
 		));
-		String src_str = String_.Concat_lines_nl_skip_last
+		String src_str = StringUtl.ConcatLinesNlSkipLast
 		( "{{#lst:Nested_lst}}"
 		, "==hdr_2=="
 		, "txt_2"
@@ -118,7 +119,7 @@ public class Lst_pfunc_lsth_tst {
 	}
 	@Test public void Tmpl_w_nowiki() {	// ISSUE:nowiki inside template can cause wrong offsets; PAGE:en.w:Germany_national_football_team; DATE:2016-08-13
 		fxt.Fxt().Init_page_create("Template:Nested_nowiki", "<nowiki>test</nowiki>");
-		String src_str = String_.Concat_lines_nl_skip_last
+		String src_str = StringUtl.ConcatLinesNlSkipLast
 		( "{{Nested_nowiki}}"
 		, "==hdr_2=="
 		, "txt_2"

@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*;
-import gplx.dbs.*; import gplx.dbs.utls.*;
+package gplx.xowa.addons.apps.cfgs.dbs.tbls;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.utls.Db_tbl__crud_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xocfg_grp_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__grp_id, fld__grp_key;
@@ -32,11 +40,11 @@ public class Xocfg_grp_tbl implements Db_tbl {
 		));
 	}
 	public void Upsert(int grp_id, String grp_key) {
-		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__grp_id), grp_id, grp_key);
+		Db_tbl__crud_.Upsert(conn, tbl_name, flds, StringUtl.Ary(fld__grp_id), grp_id, grp_key);
 	}
 	public int Select_id_by_key_or_fail(String key) {
 		Xocfg_grp_row itm = this.Select_by_key_or_null(key);
-		if (itm == null) throw Err_.new_wo_type("cfg.grp:invalid key", "key", key);
+		if (itm == null) throw ErrUtl.NewArgs("cfg.grp:invalid key", "key", key);
 		return itm.Id();
 	}
 	public Xocfg_grp_row Select_by_key_or_null(String key) {

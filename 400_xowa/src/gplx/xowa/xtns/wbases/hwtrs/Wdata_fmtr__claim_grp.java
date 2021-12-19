@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.xtns.wbases.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.apps.apis.xowa.html.*;
-class Wdata_fmtr__claim_grp implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__claim_grp implements BryBfrArg {
 	private Wdata_fmtr__claim_tbl fmtr_tbl = new Wdata_fmtr__claim_tbl(); private boolean is_empty;
 	private Xoapi_toggle_itm toggle_itm;
 	private Wdata_toc_data toc_data;
@@ -38,11 +42,11 @@ class Wdata_fmtr__claim_grp implements gplx.core.brys.Bfr_arg {
 		toc_data.Make(list_count);
 		fmtr_tbl.Init_by_wdoc(ttl, list);
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		if (is_empty) return;
-		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_tbl);
+		fmtr.BldToBfrMany(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_tbl);
 	}
-	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "  <h2 class='wb-section-heading' dir='auto' id='~{hdr_href}'>~{hdr_text}~{toggle_btn}</h2>"
 	, "  <div class='wb-claimlistview'~{toggle_hdr}>"
@@ -53,7 +57,7 @@ class Wdata_fmtr__claim_grp implements gplx.core.brys.Bfr_arg {
 	, "  </div>"
 	), "hdr_href", "hdr_text", "toggle_btn", "toggle_hdr", "tbls");
 }
-class Wdata_fmtr__claim_tbl implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__claim_tbl implements BryBfrArg {
 	private Wdata_fmtr__claim_row fmtr_row = new Wdata_fmtr__claim_row(); private Wdata_lbl_mgr lbl_mgr; 
 	private Ordered_hash list; private byte[] ttl;
 	public void Init_by_ctor(Wdata_wiki_mgr wdata_mgr, Wdata_lbl_mgr lbl_mgr) {this.lbl_mgr = lbl_mgr; fmtr_row.Init_by_ctor(wdata_mgr, lbl_mgr);}
@@ -64,18 +68,18 @@ class Wdata_fmtr__claim_tbl implements gplx.core.brys.Bfr_arg {
 		this.list = list;
 		this.ttl = ttl;
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wbase_claim_grp grp = (Wbase_claim_grp)list.Get_at(i);
+			Wbase_claim_grp grp = (Wbase_claim_grp)list.GetAt(i);
 			if (grp.Len() == 0) continue;	// NOTE: group will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
 			int pid = grp.Id();
 			byte[] pid_lbl = lbl_mgr.Get_text__pid(pid);
 			fmtr_row.Init_by_grp(ttl, grp);
-			fmtr.Bld_bfr_many(bfr, pid, pid_lbl, fmtr_row);				
+			fmtr.BldToBfrMany(bfr, pid, pid_lbl, fmtr_row);
 		}
 	}
-	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "            <div id='P~{pid}' class='wikibase-statementgroupview'>"
 	, "              <div class='wikibase-statementgroupview-property'>"
@@ -86,14 +90,14 @@ class Wdata_fmtr__claim_tbl implements gplx.core.brys.Bfr_arg {
 	, "            </div>"
 	), "pid", "pid_lbl", "itms");
 }
-class Wdata_fmtr__claim_row implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__claim_row implements BryBfrArg {
 	private byte[] ttl;
 	private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_fmtr__qual_tbl fmtr_qual = new Wdata_fmtr__qual_tbl();
 	private Wdata_fmtr__ref_tbl fmtr_ref = new Wdata_fmtr__ref_tbl();
 	private Wdata_wiki_mgr wdata_mgr; private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
 	private Xol_lang_itm lang;
-	private Wbase_claim_grp claim_grp; private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private Wbase_claim_grp claim_grp; private BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	public void Init_by_ctor(Wdata_wiki_mgr wdata_mgr, Wdata_lbl_mgr lbl_mgr) {
 		this.lbl_mgr = lbl_mgr;
 		this.wdata_mgr = wdata_mgr;
@@ -109,19 +113,19 @@ class Wdata_fmtr__claim_row implements gplx.core.brys.Bfr_arg {
 	public void Init_by_grp(byte[] ttl, Wbase_claim_grp claim_grp) {
 		this.ttl = ttl; this.claim_grp = claim_grp;
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = claim_grp.Len();
 		claim_html_wtr.Init(tmp_bfr, wdata_mgr, msgs, lbl_mgr, lang, ttl);
 		for (int i = 0; i < len; ++i) {
 			Wbase_claim_base itm = claim_grp.Get_at(i);
 			itm.Welcome(claim_html_wtr);
-			byte[] val = tmp_bfr.To_bry_and_clear();
+			byte[] val = tmp_bfr.ToBryAndClear();
 			fmtr_qual.Init_by_claim(ttl, itm);
 			fmtr_ref.Init_by_claim(ttl, itm);
-			row_fmtr.Bld_bfr_many(bfr, Wbase_claim_rank_.Reg.Get_str_or_fail(itm.Rank_tid()), val, fmtr_qual, fmtr_ref);
+			row_fmtr.BldToBfrMany(bfr, Wbase_claim_rank_.Reg.Get_str_or_fail(itm.Rank_tid()), val, fmtr_qual, fmtr_ref);
 		}
 	}
-	private Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr row_fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "          <div class='wikibase-statementlistview'>"
 	, "            <div class='wikibase-statementlistview-listview'>"
@@ -151,7 +155,7 @@ class Wdata_fmtr__claim_row implements gplx.core.brys.Bfr_arg {
 	), "rank_name", "value", "qualifiers", "references"
 	);
 }
-class Wdata_fmtr__qual_tbl implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__qual_tbl implements BryBfrArg {
 	private Wdata_fmtr__qual_row fmtr_row = new Wdata_fmtr__qual_row(); private Wbase_claim_base claim;
 	public void Init_by_ctor(Wdata_wiki_mgr wdata_mgr, Wdata_lbl_mgr lbl_mgr) {fmtr_row.Init_by_ctor(wdata_mgr, lbl_mgr);}
 	public void Init_by_lang(Xol_lang_itm lang, Wdata_hwtr_msgs msgs) {
@@ -161,11 +165,11 @@ class Wdata_fmtr__qual_tbl implements gplx.core.brys.Bfr_arg {
 		this.claim = claim;
 		fmtr_row.Init_by_grp(ttl, claim.Qualifiers());
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		if (claim.Qualifiers() == null || claim.Qualifiers().Len() == 0) return;
-		fmtr.Bld_bfr_many(bfr, fmtr_row);
+		fmtr.BldToBfrMany(bfr, fmtr_row);
 	}
-	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "                  <div class='wikibase-statementview-qualifiers'>"
 	, "                    <div class='wikibase-listview'>~{itms}"
@@ -173,15 +177,15 @@ class Wdata_fmtr__qual_tbl implements gplx.core.brys.Bfr_arg {
 	, "                  </div>"
 	), "itms");
 }
-class Wdata_fmtr__qual_row implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__qual_row implements BryBfrArg {
 	private byte[] ttl; private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_wiki_mgr wdata_mgr; private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
 	private Xol_lang_itm lang;
-	private Wbase_claim_grp_list quals; private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private Wbase_claim_grp_list quals; private BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	public void Init_by_ctor(Wdata_wiki_mgr wdata_mgr, Wdata_lbl_mgr lbl_mgr) {this.wdata_mgr = wdata_mgr; this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Xol_lang_itm lang, Wdata_hwtr_msgs msgs) {this.lang = lang; this.msgs = msgs;}
 	public void Init_by_grp(byte[] ttl, Wbase_claim_grp_list quals) {this.ttl = ttl; this.quals = quals;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = quals.Len();
 		claim_html_wtr.Init(tmp_bfr, wdata_mgr, msgs, lbl_mgr, lang, ttl);
 		for (int i = 0; i < len; ++i) {
@@ -190,12 +194,12 @@ class Wdata_fmtr__qual_row implements gplx.core.brys.Bfr_arg {
 			for (int j = 0; j < grp_len; ++j) {
 				Wbase_claim_base itm = grp.Get_at(j);
 				itm.Welcome(claim_html_wtr);
-				byte[] val = tmp_bfr.To_bry_and_clear();
-				row_fmtr.Bld_bfr_many(bfr, grp.Id(), lbl_mgr.Get_text__pid(grp.Id()), val);
+				byte[] val = tmp_bfr.ToBryAndClear();
+				row_fmtr.BldToBfrMany(bfr, grp.Id(), lbl_mgr.Get_text__pid(grp.Id()), val);
 			}
 		}
 	}
-	private Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr row_fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "                      <div class='wikibase-snaklistview'>"
 	, "                        <div class='wikibase-snaklistview-listview'>"
@@ -216,7 +220,7 @@ class Wdata_fmtr__qual_row implements gplx.core.brys.Bfr_arg {
 	), "pid", "pid_lbl", "value"
 	);
 }
-class Wdata_fmtr__ref_tbl implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__ref_tbl implements BryBfrArg {
 	private Wdata_fmtr__ref_row fmtr_row = new Wdata_fmtr__ref_row(); private Wbase_claim_base claim;
 	public void Init_by_ctor(Wdata_wiki_mgr wdata_mgr, Wdata_lbl_mgr lbl_mgr) {fmtr_row.Init_by_ctor(wdata_mgr, lbl_mgr);}
 	public void Init_by_lang(Xol_lang_itm lang, Wdata_hwtr_msgs msgs) {
@@ -226,11 +230,11 @@ class Wdata_fmtr__ref_tbl implements gplx.core.brys.Bfr_arg {
 		this.claim = claim;
 		fmtr_row.Init_by_grp(ttl, claim.References());
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		if (claim.References() == null) return;
-		fmtr.Bld_bfr_many(bfr, fmtr_row);
+		fmtr.BldToBfrMany(bfr, fmtr_row);
 	}
-	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 //		, "                <div class='wb-statement-references-heading'>1 reference</div>"
 	, "                <div class='wikibase-statementview-references'>"
@@ -248,16 +252,16 @@ class Wdata_fmtr__ref_tbl implements gplx.core.brys.Bfr_arg {
 	, "                </div>"
 	), "itms");
 }
-class Wdata_fmtr__ref_row implements gplx.core.brys.Bfr_arg {
+class Wdata_fmtr__ref_row implements BryBfrArg {
 	private byte[] ttl; private Wdata_visitor__html_wtr claim_html_wtr = new Wdata_visitor__html_wtr();
 	private Wdata_wiki_mgr wdata_mgr; private Wdata_lbl_mgr lbl_mgr; private Wdata_hwtr_msgs msgs;
 	private Xol_lang_itm lang;
-	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	private Wbase_references_grp[] ref_grps;
 	public void Init_by_ctor(Wdata_wiki_mgr wdata_mgr, Wdata_lbl_mgr lbl_mgr) {this.wdata_mgr = wdata_mgr; this.lbl_mgr = lbl_mgr;}
 	public void Init_by_lang(Xol_lang_itm lang, Wdata_hwtr_msgs msgs) {this.lang = lang; this.msgs = msgs;}
 	public void Init_by_grp(byte[] ttl, Wbase_references_grp[] ref_grps) {this.ttl = ttl; this.ref_grps = ref_grps;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = ref_grps.length;
 		claim_html_wtr.Init(tmp_bfr, wdata_mgr, msgs, lbl_mgr, lang, ttl);
 		for (int i = 0; i < len; ++i) {
@@ -270,13 +274,13 @@ class Wdata_fmtr__ref_row implements gplx.core.brys.Bfr_arg {
 				for (int k = 0; k < grp2_len; ++k) {
 					Wbase_claim_base itm = grp2.Get_at(k);
 					itm.Welcome(claim_html_wtr);
-					byte[] val = tmp_bfr.To_bry_and_clear();
-					row_fmtr.Bld_bfr_many(bfr, grp2.Id(), lbl_mgr.Get_text__pid(grp2.Id()), val);
+					byte[] val = tmp_bfr.ToBryAndClear();
+					row_fmtr.BldToBfrMany(bfr, grp2.Id(), lbl_mgr.Get_text__pid(grp2.Id()), val);
 				}
 			}
 		}
 	}
-	private Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr row_fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "                            <div class='wikibase-snakview'>"
 	, "                              <div class='wikibase-snakview-property-container'>"

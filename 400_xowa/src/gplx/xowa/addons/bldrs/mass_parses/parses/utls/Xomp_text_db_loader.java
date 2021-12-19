@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.bldrs.mass_parses.parses.utls;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.core.ios.*;
@@ -38,35 +43,35 @@ public class Xomp_text_db_loader {
 	public void Load() {
 		int text_db_hash_len = text_db_hash.Len();
 		for (int i = 0; i < text_db_hash_len; ++i) {
-			Xomp_text_db_itm itm = (Xomp_text_db_itm)text_db_hash.Get_at(i);
+			Xomp_text_db_itm itm = (Xomp_text_db_itm)text_db_hash.GetAt(i);
 			Load_list(itm.Text_db_id(), itm.Page_list());
 		}
 	}
 	private void Load_list(int text_db_id, List_adp list) {
 		int list_len = list.Len();
 		int batch_idx = 0;
-		Bry_bfr bry = Bry_bfr_.New();
+		BryWtr bry = BryWtr.New();
 		Ordered_hash page_hash = Ordered_hash_.New();
 		byte zip_tid = wiki.Data__core_mgr().Props().Zip_tid_text();
 		for (int i = 0; i < list_len; ++i) {
 			if (batch_idx == 0) {
 				page_hash.Clear();
-				bry.Add_str_a7("SELECT page_id, text_data FROM text WHERE page_id IN (");
+				bry.AddStrA7("SELECT page_id, text_data FROM text WHERE page_id IN (");
 			}
 
 			// build WHERE IN for page_ids; EX: "1, 2, 3, 4"
-			Xowd_text_bry_owner ppg = (Xowd_text_bry_owner)list.Get_at(i);
+			Xowd_text_bry_owner ppg = (Xowd_text_bry_owner)list.GetAt(i);
 			int page_id = ppg.Page_id();
-			if (batch_idx != 0) bry.Add_byte_comma();
-			bry.Add_int_variable(page_id);
+			if (batch_idx != 0) bry.AddByteComma();
+			bry.AddIntVariable(page_id);
 			page_hash.Add(page_id, ppg);
 			++batch_idx;
 
 			// load if 255 in list, or last
 			if (	batch_idx % 255 == 0 
 				||	i == list_len - 1) {
-				bry.Add_byte(AsciiByte.ParenEnd);
-				Load_from_text_db(page_hash, zip_tid, text_db_id, bry.To_str_and_clear());
+				bry.AddByte(AsciiByte.ParenEnd);
+				Load_from_text_db(page_hash, zip_tid, text_db_id, bry.ToStrAndClear());
 				batch_idx = 0;
 			}
 		}

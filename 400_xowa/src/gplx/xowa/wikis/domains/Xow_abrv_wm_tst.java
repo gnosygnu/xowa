@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.domains;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*; import gplx.xowa.langs.*;
 public class Xow_abrv_wm_tst {
 	private Xow_abrv_wm_fxt fxt = new Xow_abrv_wm_fxt();
@@ -41,11 +46,11 @@ public class Xow_abrv_wm_tst {
 		fxt.Test_parse("arwikimedia"			, Xol_lang_stub_.Id_es		, Xow_domain_tid_.Tid__wikimedia);
 		fxt.Test_parse("ukwikimedia"			, Xol_lang_stub_.Id_uk		, Xow_domain_tid_.Tid__wikimedia);
 	}
-	@Test  public void To_domain_itm() {
+	@Test public void To_domain_itm() {
 		fxt.Test_to_domain_itm("enwiki"		, "en"		, "en.wikipedia.org");
 		fxt.Test_to_domain_itm("zh_yuewiki"	, "zh-yue"	, "zh-yue.wikipedia.org");
 	}
-	@Test  public void To_domain_bry() {
+	@Test public void To_domain_bry() {
 		fxt.Test_to_domain_bry("enwiki"		, "en.wikipedia.org");
 		fxt.Test_to_domain_bry("zh_yuewiki"	, "zh-yue.wikipedia.org");
 		fxt.Test_to_domain_bry("arwikimedia", "ar.wikimedia.org");
@@ -72,33 +77,33 @@ public class Xow_abrv_wm_tst {
 }
 class Xow_abrv_wm_fxt {
 	public void Test_parse(String raw, int expd_lang_id, int expd_domain_tid) {
-		byte[] raw_bry = Bry_.new_a7(raw);
+		byte[] raw_bry = BryUtl.NewA7(raw);
 		Xow_abrv_wm abrv = Xow_abrv_wm_.Parse_to_abrv_or_null(raw_bry);
 		Xol_lang_stub actl_lang_itm = abrv.Lang_actl();
-		Tfds.Eq(expd_lang_id	, actl_lang_itm == null ? Xol_lang_stub_.Id__unknown :  actl_lang_itm.Id());
-		Tfds.Eq(expd_domain_tid	, abrv.Domain_type());
+		GfoTstr.EqObj(expd_lang_id	, actl_lang_itm == null ? Xol_lang_stub_.Id__unknown :  actl_lang_itm.Id());
+		GfoTstr.EqObj(expd_domain_tid	, abrv.Domain_type());
 	}
 	public void Test_parse_null(String raw) {
-		byte[] raw_bry = Bry_.new_a7(raw);
+		byte[] raw_bry = BryUtl.NewA7(raw);
 		Xow_abrv_wm abrv = Xow_abrv_wm_.Parse_to_abrv_or_null(raw_bry);
-		Tfds.Eq_true(abrv == null);
+		GfoTstr.EqBoolY(abrv == null);
 	}
 	public void Test_to_abrv(String domain_str, String expd) {
-		Xow_domain_itm domain = Xow_domain_itm_.parse(Bry_.new_a7(domain_str));
+		Xow_domain_itm domain = Xow_domain_itm_.parse(BryUtl.NewA7(domain_str));
 		byte[] actl = Xow_abrv_wm_.To_abrv(domain);
-		Tfds.Eq(expd, String_.new_a7(actl));
+		GfoTstr.EqObj(expd, StringUtl.NewA7(actl));
 	}
 	public void Test_to_abrv_by_lang(String lang_key, int wiki_tid, String expd) {
-		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
-		Xow_abrv_wm_.To_abrv(tmp_bfr, Bry_.new_a7(lang_key), gplx.core.primitives.Int_obj_ref.New(wiki_tid));
-		Tfds.Eq_str(expd, tmp_bfr.To_str_and_clear(), "to_abrv");
+		BryWtr tmp_bfr = BryWtr.NewAndReset(255);
+		Xow_abrv_wm_.To_abrv(tmp_bfr, BryUtl.NewA7(lang_key), IntRef.New(wiki_tid));
+		GfoTstr.Eq(expd, tmp_bfr.ToStrAndClear(), "to_abrv");
 	}
 	public void Test_to_domain_bry(String wmf_key, String expd_domain) {
-		Tfds.Eq(expd_domain		, String_.new_a7(Xow_abrv_wm_.Parse_to_domain_bry(Bry_.new_a7(wmf_key))));
+		GfoTstr.EqObj(expd_domain		, StringUtl.NewA7(Xow_abrv_wm_.Parse_to_domain_bry(BryUtl.NewA7(wmf_key))));
 	}
 	public void Test_to_domain_itm(String wmf_key, String expd_lang_key, String expd_domain) {
-		Xow_domain_itm domain = Xow_abrv_wm_.Parse_to_domain_itm(Bry_.new_a7(wmf_key));
-		Tfds.Eq(expd_lang_key	, String_.new_a7(domain.Lang_actl_key()));
-		Tfds.Eq(expd_domain		, String_.new_a7(domain.Domain_bry()));
+		Xow_domain_itm domain = Xow_abrv_wm_.Parse_to_domain_itm(BryUtl.NewA7(wmf_key));
+		GfoTstr.EqObj(expd_lang_key	, StringUtl.NewA7(domain.Lang_actl_key()));
+		GfoTstr.EqObj(expd_domain		, StringUtl.NewA7(domain.Domain_bry()));
 	}
 }

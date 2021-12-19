@@ -14,12 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.lnkis;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Err_;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.primitives.Gfo_number_parser;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_ctx_wkr;
@@ -67,7 +68,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		Xop_lnki_tkn lnki = (Xop_lnki_tkn)ctx.Stack_pop_til(root, src, stack_pos, false, bgn_pos, cur_pos, Xop_tkn_itm_.Tid_lnki_end);
 		if (!arg_bldr.Bld(ctx, tkn_mkr, this, Xop_arg_wkr_.Typ_lnki, root, lnki, bgn_pos, cur_pos, lnki.Tkn_sub_idx() + 1, root.Subs_len(), src))
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
-		if (lnki.Ns_id() != Xow_ns_.Tid__main && Bry_.Len_eq_0(lnki.Ttl().Page_txt()))	// handle anchor-only pages; EX:[[File:#A]] PAGE:en.w:Spindale,_North_Carolina; DATE:2015-12-28
+		if (lnki.Ns_id() != Xow_ns_.Tid__main && BryUtl.IsNullOrEmpty(lnki.Ttl().Page_txt()))	// handle anchor-only pages; EX:[[File:#A]] PAGE:en.w:Spindale,_North_Carolina; DATE:2015-12-28
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
 		if (Xop_lnki_wkr_.Adjust_for_brack_end_len_of_3(ctx, tkn_mkr, root, src, src_len, cur_pos, lnki))	// convert "]]]" into "]" + "]]", not "]]" + "]"; EX: "[[a|[b]]]"
 			++cur_pos;																						// position "]]" at end of "]]]"
@@ -121,7 +122,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 				if (arg.KeyTkn_exists()) {bgn = arg.Key_tkn().Dat_bgn(); end = arg.Key_tkn().Dat_end();}
 				arg_tid = ctx.Wiki().Lang().Lnki_arg_parser().Identify_tid(src, bgn, end, lnki);
 				if (arg_tid == Xop_lnki_arg_parser.Tid_caption && ctx.Wiki().Domain_itm().Domain_type_id() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
-					if (end > bgn && Bry_.Eq(src, bgn, end, Xop_lnki_arg_parser.Bry_target))
+					if (end > bgn && BryLni.Eq(src, bgn, end, Xop_lnki_arg_parser.Bry_target))
 						arg_tid = Xop_lnki_arg_parser.Tid_target;
 				}
 
@@ -204,13 +205,13 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_upright:
 						if (arg.KeyTkn_exists()) {
 							int val_tkn_bgn = arg.Val_tkn().Src_bgn(), val_tkn_end = arg.Val_tkn().Src_end();
-							val_tkn_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, val_tkn_bgn, val_tkn_end);	// trim ws at bgn; needed for next step
+							val_tkn_bgn = BryFind.FindFwdWhileSpaceOrTab(src, val_tkn_bgn, val_tkn_end);	// trim ws at bgn; needed for next step
 							if (val_tkn_end - val_tkn_bgn > 19) val_tkn_end = val_tkn_bgn + 19;	// HACK: limit upright tkn to 19 digits; 20 or more will overflow long; WHEN: rewrite number_parser to handle doubles; PAGE:de.w:Feuerland DATE:2015-02-03
 							number_parser.Parse(src, val_tkn_bgn, val_tkn_end);
 							if (number_parser.Has_err())
 								ctx.Msg_log().Add_itm_none(Xop_lnki_log.Upright_val_is_invalid, src, val_tkn_bgn, val_tkn_end);
 							else
-								lnki.Upright_(number_parser.Rv_as_dec().To_double());
+								lnki.Upright_(number_parser.Rv_as_dec().ToDouble());
 						}
 						else	// no =; EX: [[Image:a|upright]]
 							lnki.Upright_(gplx.xowa.files.Xof_img_size.Upright_default_marker);// NOTE: was incorrectly hardcoded as 1; DATE:2014-07-23
@@ -227,8 +228,8 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 			}
 			return true;
 		} catch (Exception e) {
-			ctx.App().Usr_dlg().Warn_many("", "", "fatal error in lnki: page=~{0} src=~{1} err=~{2}", String_.new_u8(ctx.Page().Ttl().Full_db()), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
+			ctx.App().Usr_dlg().Warn_many("", "", "fatal error in lnki: page=~{0} src=~{1} err=~{2}", StringUtl.NewU8(ctx.Page().Ttl().Full_db()), StringUtl.NewU8(src, lnki.Src_bgn(), lnki.Src_end()), ErrUtl.ToStrFull(e));
 			return false;
 		}
-	}	private static final byte[] Const_pipe = Bry_.new_a7("|");
+	}	private static final byte[] Const_pipe = BryUtl.NewA7("|");
 }

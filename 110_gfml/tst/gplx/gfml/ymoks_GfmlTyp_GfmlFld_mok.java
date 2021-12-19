@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 class GfmlFld_mok {
 	public String Name() {return name;} public GfmlFld_mok Name_(String v) {name = v; return this;} private String name;
 	public String TypeKey() {return typeKey;} public GfmlFld_mok TypeKey_(String v) {typeKey = v; return this;} private String typeKey;
@@ -31,11 +34,11 @@ class GfmlFld_mok {
 	public GfmlFld_mok ini_ndk_(String name, String typKey) {this.name = name; this.typeKey = typKey; this.keyed = true; return this;}
 	public static GfmlFld_mok new_() {return new GfmlFld_mok();} GfmlFld_mok() {}
 	public static String XtoRaw(GfmlObj gobj) {
-		if (gobj == null) return String_.Null_mark;
+		if (gobj == null) return StringUtl.NullMark;
 		GfmlTkn tkn = GfmlTkn_.as_(gobj);
 		if (tkn != null) return tkn.Raw();
 		GfmlNde nde = GfmlNde.as_(gobj);
-		return nde.To_str();
+		return nde.ToStr();
 	}
 }
 class GfmlTyp_mok {
@@ -55,7 +58,7 @@ class GfmlTyp_mok {
 	public GfmlType XtoGfmlType() {
 		GfmlType rv = GfmlType_.new_(key, name); // all types in tests are top-level
 		for (int i = 0; i < subFlds.Len(); i++) {
-			GfmlFld_mok fld = (GfmlFld_mok)subFlds.Get_at(i);
+			GfmlFld_mok fld = (GfmlFld_mok)subFlds.GetAt(i);
 			rv.SubFlds().Add(fld.XtoGfmlFld());
 		}
 		return rv;

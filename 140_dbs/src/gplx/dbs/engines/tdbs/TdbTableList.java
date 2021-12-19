@@ -13,12 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.lists.*; /*Ordered_hash_base*/ import gplx.langs.dsvs.*; /*DsvStoreLayout*/ import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*; import gplx.core.stores.*;
+package gplx.dbs.engines.tdbs;
+import gplx.types.basics.lists.Ordered_hash_base;
+import gplx.core.gfo_ndes.GfoFldList;
+import gplx.core.gfo_ndes.GfoFldList_;
+import gplx.core.stores.DataRdr;
+import gplx.core.stores.DataWtr;
+import gplx.core.type_xtns.IntClassXtn;
+import gplx.core.type_xtns.StringClassXtn;
+import gplx.langs.dsvs.DsvStoreLayout;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
 public class TdbTableList extends Ordered_hash_base {
 	public TdbTable Get_by(String name) {return TdbTable.as_(Fetch_base(name));}
 	public TdbTable Get_by_or_fail(String name) {
-		TdbTable rv = TdbTable.as_(Get_by(name)); if (rv == null) throw Err_.new_wo_type("could not find table; database file may not exist", "table", name);
+		TdbTable rv = TdbTable.as_(Get_by(name)); if (rv == null) throw ErrUtl.NewArgs("could not find table; database file may not exist", "table", name);
 		return rv;
 	}
 	public void Add(TdbTable dataTable) {Add_base(dataTable.Name(), dataTable);}
@@ -28,7 +37,7 @@ public class TdbTableList extends Ordered_hash_base {
 		rv.layout = DsvStoreLayout.dsv_full_();
 		return rv;
 	}
-	@gplx.Internal protected void DataObj_Wtr(DataWtr wtr) {
+	public void DataObj_Wtr(DataWtr wtr) {
 		wtr.InitWtr(DsvStoreLayout.Key_const, layout);
 		wtr.WriteTableBgn(StoreTableName, FldList);
 		for (Object tblObj : this) {
@@ -41,7 +50,7 @@ public class TdbTableList extends Ordered_hash_base {
 		}
 		wtr.WriteNodeEnd();
 	}
-	@gplx.Internal protected void DataObj_Rdr(DataRdr rdr, TdbFileList files) {
+	public void DataObj_Rdr(DataRdr rdr, TdbFileList files) {
 		layout = TdbStores.FetchLayout(rdr);
 		DataRdr subRdr = rdr.Subs();
 		this.Clear();

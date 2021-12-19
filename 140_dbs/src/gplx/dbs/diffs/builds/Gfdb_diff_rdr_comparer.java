@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.diffs.builds;
-import gplx.Err_;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.diffs.Gfdb_diff_tbl;
 import gplx.dbs.diffs.Gfdb_rdr_utl_;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 class Gfdb_diff_rdr_comparer {
 	private Db_rdr old_rdr, new_rdr;
 	private boolean old_rdr_move, new_rdr_move;
@@ -58,7 +58,7 @@ class Gfdb_diff_rdr_comparer {
 					old_rdr_move = false;
 					new_rdr_move = true;
 					return Gfdb_diff_rdr_comparer.Rslt__old_missing;
-				default: throw Err_.new_unhandled(comp);
+				default: throw ErrUtl.NewUnhandled(comp);
 			}
 		}
 	}

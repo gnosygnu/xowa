@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.customs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.layouts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*;
+import gplx.types.commons.KeyValHash;
 public class GfuiStatusBar extends GfuiElemBase {
 	public GfuiStatusBox Box() {return statusBox;} GfuiStatusBox statusBox;
 	public GfuiMoveElemBtn MoveButton() {return moveBtn;} GfuiMoveElemBtn moveBtn;
@@ -28,7 +31,7 @@ public class GfuiStatusBar extends GfuiElemBase {
 		else return super.Invk(ctx, ikey, k, m);
 		return this;
 	}	public static final String StatusBarFocus_cmd = "StatusBarFocus";
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		moveBtn = GfuiMoveElemBtn.new_();
 		statusBox = GfuiStatusBox_.new_("statusBox");

@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.syntax_highlights;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.Hash_adp_bry;
-import gplx.core.primitives.Byte_obj_val;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -35,20 +35,20 @@ import gplx.xowa.xtns.Xox_xnde;
 import gplx.xowa.xtns.Xox_xnde_;
 
 public class Synh_xtn_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
-	private byte[] lang = Bry_.Empty;
+	private byte[] lang = BryUtl.Empty;
 	private byte[] style = null;
-	private byte[] enclose = Bry_.Empty;
+	private byte[] enclose = BryUtl.Empty;
 	private boolean line_enabled = false;
 	private int start = 1;
 	private Int_rng_mgr highlight_idxs = Int_rng_mgr_null.Instance;
-	public Xop_xnde_tkn Xnde() {throw Err_.new_unimplemented();}
+	public Xop_xnde_tkn Xnde() {throw ErrUtl.NewUnimplemented();}
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
 		if (xatr_id_obj == null) return;
-		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		ByteVal xatr_id = (ByteVal)xatr_id_obj;
 		switch (xatr_id.Val()) {
 			case Xatr_line:			line_enabled	= true; break;
 			case Xatr_enclose:		enclose			= xatr.Val_as_bry(); break;
-			case Xatr_inline:		enclose			= Bry_.new_a7("none"); break; // 2020-08-27|ISSUE#:794|inline should be enclose=none
+			case Xatr_inline:		enclose			= BryUtl.NewA7("none"); break; // 2020-08-27|ISSUE#:794|inline should be enclose=none
 			case Xatr_lang:			lang			= xatr.Val_as_bry(); break;
 			case Xatr_style:		style			= xatr.Val_as_bry(); break;
 			case Xatr_start:		start			= xatr.Val_as_int_or(1); break;
@@ -61,7 +61,7 @@ public class Synh_xtn_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		ctx.Para().Process_block__xnde(tag, tag.Block_close());	// deactivate pre; pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-24
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		Synh_xtn_nde_.Make(bfr, app, src, xnde.Tag_open_end(), xnde.Tag_close_bgn(), lang, enclose, style, line_enabled, start, highlight_idxs);
 	}
 	private static final byte Xatr_enclose = 1, Xatr_lang = 2, Xatr_style = 3, Xatr_line = 4, Xatr_start = 5, Xatr_highlight = 6, Xatr_inline = 7;

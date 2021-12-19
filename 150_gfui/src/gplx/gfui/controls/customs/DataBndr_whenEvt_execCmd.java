@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.core.interfaces.*; import gplx.gfui.controls.elems.*;
+package gplx.gfui.controls.customs;
+import gplx.core.interfaces.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.controls.elems.*;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.types.basics.utls.ObjectUtl;
 public class DataBndr_whenEvt_execCmd implements InjectAble, Gfo_invk, Gfo_evt_itm {
 	public Gfo_evt_mgr Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} Gfo_evt_mgr evt_mgr;
 	public DataBndr_whenEvt_execCmd WhenArg_(String v) {whenArg = v; return this;} private String whenArg = "v";
@@ -35,7 +45,7 @@ public class DataBndr_whenEvt_execCmd implements InjectAble, Gfo_invk, Gfo_evt_i
 		if		(ctx.Match(k, whenEvt)) {
 			Object evtVal = m.CastObjOr(whenArg, "");
 			Object getVal = getInvk.Invk(GfsCtx.Instance, 0, getCmd, GfoMsg_.new_cast_(getCmd).Add("v", evtVal));
-			GfoMsg setMsg = GfoMsg_.new_cast_(setCmd).Add("v", Object_.Xto_str_strict_or_empty(getVal));
+			GfoMsg setMsg = GfoMsg_.new_cast_(setCmd).Add("v", ObjectUtl.ToStrOrEmpty(getVal));
 			setInvk.Invk(GfsCtx.Instance, 0, setCmd, setMsg);
 			return Gfo_invk_.Rv_handled;
 		}

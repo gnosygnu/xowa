@@ -13,15 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.hzips; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.encoders.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.hzips;
+import gplx.core.encoders.*;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.IntRef;
 public class Xoh_hzip_int {
 	private boolean mode_is_b256; private byte pad_byte; private byte[] prefix_ary;
 	public Xoh_hzip_int Mode_is_b256_(boolean v) {
 		mode_is_b256 = v;
 		if (mode_is_b256) {
-			pad_byte		= Byte_.Zero;
+			pad_byte		= ByteUtl.Zero;
 			prefix_ary		= prefix_ary__b256;
 		}
 		else {
@@ -30,13 +34,13 @@ public class Xoh_hzip_int {
 		}
 		return this;
 	}
-	public void Encode(int reqd_len, Bry_bfr bfr, int val) {
+	public void Encode(int reqd_len, BryWtr bfr, int val) {
 		int calc_len = Calc_len(mode_is_b256, val);
 		int full_len = Full_len(mode_is_b256, val, calc_len, reqd_len, B256__pow__ary);
 		int hdr_adj = full_len == calc_len || full_len == reqd_len ? 0 : 1;
 		int bfr_len = bfr.Len();
-		bfr.Add_byte_repeat(pad_byte, full_len);			// fill with 0s; asserts that underlying array will be large enough for following write
-		byte[] bfr_bry = bfr.Bfr();							// NOTE: set bry reference here b/c Add_byte_repeat may create a new one
+		bfr.AddByteRepeat(pad_byte, full_len);			// fill with 0s; asserts that underlying array will be large enough for following write
+		byte[] bfr_bry = bfr.Bry();							// NOTE: set bry reference here b/c Add_byte_repeat may create a new one
 		if (mode_is_b256)
 			Set_bry(val, bfr_bry, bfr_len + hdr_adj, reqd_len, calc_len, pad_byte, B256__pow__ary);
 		else
@@ -44,8 +48,8 @@ public class Xoh_hzip_int {
 		if (hdr_adj == 1)
 			bfr_bry[bfr_len] = prefix_ary[full_len];			// write the hdr_byte; EX: 256 -> 253, 1, 0 where 253 is the hdr_byte
 	}
-	public int Decode(int reqd_len, byte[] src, int src_len, int src_bgn, Int_obj_ref pos_ref) {
-		int radix = 256; byte offset = Byte_.Zero;
+	public int Decode(int reqd_len, byte[] src, int src_len, int src_bgn, IntRef pos_ref) {
+		int radix = 256; byte offset = ByteUtl.Zero;
 		boolean hdr_byte_exists = false;
 		int full_len = 1;	// default to 1
 		byte b0 = src[src_bgn];
@@ -68,7 +72,7 @@ public class Xoh_hzip_int {
 		}
 		if (full_len < reqd_len) full_len = reqd_len;	// len should be padded
 		int src_end = src_bgn + full_len;
-		pos_ref.Val_(src_end);
+		pos_ref.ValSet(src_end);
 		if (hdr_byte_exists) ++src_bgn;
 		return To_int_by_bry(src, src_bgn, src_end, offset, radix);
 	}
@@ -138,7 +142,7 @@ public class Xoh_hzip_int {
 	, B256__max__expd__2 =    65536				//        65,536
 	, B256__max__expd__3 = 16777216				//    16,777,216
 	;
-	private static final int[] B256__pow__ary = new int[] {1, B256__max__expd__1, B256__max__expd__2, B256__max__expd__3, Int_.Max_value};
+	private static final int[] B256__pow__ary = new int[] {1, B256__max__expd__1, B256__max__expd__2, B256__max__expd__3, IntUtl.MaxValue};
 	public static final byte prefix__b256__2 = (byte)(252 & 0xFF), prefix__b256__3 = (byte)(253 & 0xFF), prefix__b256__4 = (byte)(254 & 0xFF), prefix__b256__5 = (byte)(255 & 0xFF);
 	private static final byte[] 
 	  prefix_ary__b256 = new byte[] {0, 0, prefix__b256__2, prefix__b256__3, prefix__b256__4, prefix__b256__5}

@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.randoms.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.addons.wikis.pages.randoms.dbs;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.wikis.data.Xow_db_layout;
 public class Rndm_db_mgr {
 	private final Xow_wiki wiki;
 	public Rndm_db_mgr(Xow_wiki wiki) {
@@ -43,9 +48,9 @@ public class Rndm_db_mgr {
 		Io_url url = null;
 		switch (layout_text) {
 			case Xow_db_layout.Tid__all:	url = wiki.Data__core_mgr().Db__core().Url(); break;
-			case Xow_db_layout.Tid__few:	url = wiki.Fsys_mgr().Root_dir().GenSubFil(String_.Format("{0}-data.xowa", wiki.Domain_str())); break;
-			case Xow_db_layout.Tid__lot:	url = wiki.Fsys_mgr().Root_dir().GenSubFil(String_.Format("{0}-xtn.random.core.xowa", wiki.Domain_str())); break;
-			default:						throw Err_.new_unhandled(layout_text);
+			case Xow_db_layout.Tid__few:	url = wiki.Fsys_mgr().Root_dir().GenSubFil(StringUtl.Format("{0}-data.xowa", wiki.Domain_str())); break;
+			case Xow_db_layout.Tid__lot:	url = wiki.Fsys_mgr().Root_dir().GenSubFil(StringUtl.Format("{0}-xtn.random.core.xowa", wiki.Domain_str())); break;
+			default:						throw ErrUtl.NewUnhandled(layout_text);
 		}
 		return Db_conn_bldr.Instance.Get_or_autocreate(true, url);
 	}

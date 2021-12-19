@@ -14,21 +14,22 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.cases;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Byte_;
-import gplx.Err_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.langs.parsers.Xol_csv_parser;
 public class Xol_case_itm_ {
 	public static final byte Tid_both = 0, Tid_upper = 1, Tid_lower = 2;
-	public static Xol_case_itm new_(int tid, String src_str, String trg_str) {return new_((byte)tid, Bry_.new_u8(src_str), Bry_.new_u8(trg_str));}
+	public static Xol_case_itm new_(int tid, String src_str, String trg_str) {return new_((byte)tid, BryUtl.NewU8(src_str), BryUtl.NewU8(trg_str));}
 	public static Xol_case_itm new_(byte tid, byte[] src, byte[] trg) {
 		if (src.length == 1 && trg.length == 1)
 			return new Xol_case_itm_byt(tid, src[0], trg[0]);
@@ -38,7 +39,7 @@ public class Xol_case_itm_ {
 	public static Xol_case_itm[] parse_xo_(byte[] src) {
 		List_adp list = List_adp_.New();
 		int src_len = src.length, src_pos = 0, fld_bgn = 0, fld_idx = 0;
-		byte cur_cmd = Byte_.Zero;
+		byte cur_cmd = ByteUtl.Zero;
 		byte[] cur_lhs = null;
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
@@ -51,14 +52,14 @@ public class Xol_case_itm_ {
 							boolean fail = true;
 							if (src_pos - fld_bgn == 1) {
 								byte cmd_byte = src[src_pos - 1];
-								cur_cmd = Byte_.Zero;
+								cur_cmd = ByteUtl.Zero;
 								switch (cmd_byte) {
 									case AsciiByte.Num0:	cur_cmd = Xol_case_itm_.Tid_both; fail = false; break;
 									case AsciiByte.Num1:	cur_cmd = Xol_case_itm_.Tid_upper; fail = false; break;
 									case AsciiByte.Num2:	cur_cmd = Xol_case_itm_.Tid_lower; fail = false; break;
 								}
 							}
-							if (fail) throw Err_.new_wo_type("cmd is invalid", "cmd", String_.new_u8(src, fld_bgn, src_pos));
+							if (fail) throw ErrUtl.NewArgs("cmd is invalid", "cmd", StringUtl.NewU8(src, fld_bgn, src_pos));
 							break;
 						case 1: cur_lhs = csv_parser.Load(src, fld_bgn, src_pos); break;
 					}
@@ -71,7 +72,7 @@ public class Xol_case_itm_ {
 						Xol_case_itm itm = Xol_case_itm_.new_(cur_cmd, cur_lhs, cur_rhs);
 						list.Add(itm);
 					}
-					cur_cmd = Byte_.Zero;
+					cur_cmd = ByteUtl.Zero;
 					cur_lhs = null;
 					fld_idx = 0;
 					fld_bgn = src_pos + 1;
@@ -87,16 +88,16 @@ public class Xol_case_itm_ {
 		int pos = 0;
 		pos = parse_mw_grp(hash, raw, BoolUtl.Y, pos);
 		pos = parse_mw_grp(hash, raw, BoolUtl.N, pos);
-		return (Xol_case_itm[])hash.To_ary(Xol_case_itm.class);
+		return (Xol_case_itm[])hash.ToAry(Xol_case_itm.class);
 	}
 	private static int parse_mw_grp(Ordered_hash hash, byte[] raw, boolean section_is_upper, int find_bgn) {
 		byte[] find = section_is_upper ? parse_mw_upper : parse_mw_lower;
 		int raw_len = raw.length;
-		int pos = Bry_find_.Find_fwd(raw, find, find_bgn);					if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find section name", "name", String_.new_u8(find));
-		pos = Bry_find_.Find_fwd(raw, AsciiByte.CurlyBgn, pos, raw_len);	if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find '{' after section name", "name", String_.new_u8(find));
+		int pos = BryFind.FindFwd(raw, find, find_bgn);					if (pos == BryFind.NotFound) throw ErrUtl.NewArgs("could not find section name", "name", StringUtl.NewU8(find));
+		pos = BryFind.FindFwd(raw, AsciiByte.CurlyBgn, pos, raw_len);	if (pos == BryFind.NotFound) throw ErrUtl.NewArgs("could not find '{' after section name", "name", StringUtl.NewU8(find));
 		int itm_bgn = 0;
 		boolean quote_off = true, itm_is_first = true;
-		byte[] cur_lhs = Bry_.Empty;
+		byte[] cur_lhs = BryUtl.Empty;
 		boolean loop = true;
 		while (loop) {
 			if (pos >= raw_len) break;
@@ -109,12 +110,12 @@ public class Xol_case_itm_ {
 					}
 					else {
 						if (itm_is_first) {
-							cur_lhs = Bry_.Mid(raw, itm_bgn, pos);
+							cur_lhs = BryLni.Mid(raw, itm_bgn, pos);
 							itm_is_first = false;
 						}
 						else {
-							byte[] cur_rhs = Bry_.Mid(raw, itm_bgn, pos);
-							byte[] upper = null, lower = null; byte tid = Byte_.Zero, rev_tid = Byte_.Zero;
+							byte[] cur_rhs = BryLni.Mid(raw, itm_bgn, pos);
+							byte[] upper = null, lower = null; byte tid = ByteUtl.Zero, rev_tid = ByteUtl.Zero;
 							if (section_is_upper) {
 								upper = cur_rhs;
 								lower = cur_lhs;
@@ -133,11 +134,11 @@ public class Xol_case_itm_ {
 								hash.Add(upper, itm);
 							}
 							else {
-								if (itm.Tid() == rev_tid && Bry_.Eq(itm.Src_ary(), upper) && Bry_.Eq(itm.Trg_ary(), lower))
+								if (itm.Tid() == rev_tid && BryLni.Eq(itm.Src_ary(), upper) && BryLni.Eq(itm.Trg_ary(), lower))
 									itm.Tid_(Xol_case_itm_.Tid_both);
 								else {
 									itm = new Xol_case_itm_bry(tid, cur_lhs, cur_rhs);
-									byte[] add_key = Bry_.Add(section_is_upper ? Bry_upper : Bry_lower, Bry_pipe, upper, Bry_pipe, lower);
+									byte[] add_key = BryUtl.Add(section_is_upper ? Bry_upper : Bry_lower, Bry_pipe, upper, Bry_pipe, lower);
 									hash.Add(add_key, itm);
 								}
 							}
@@ -153,6 +154,6 @@ public class Xol_case_itm_ {
 			++pos;
 		}
 		return pos;
-	}	private static final byte[] parse_mw_upper= Bry_.new_a7("wikiUpperChars"), parse_mw_lower= Bry_.new_a7("wikiLowerChars"), Bry_upper = Bry_.new_a7("upper"), Bry_lower = Bry_.new_a7("lower"), Bry_pipe = Bry_.new_a7("|");
+	}	private static final byte[] parse_mw_upper= BryUtl.NewA7("wikiUpperChars"), parse_mw_lower= BryUtl.NewA7("wikiLowerChars"), Bry_upper = BryUtl.NewA7("upper"), Bry_lower = BryUtl.NewA7("lower"), Bry_pipe = BryUtl.NewA7("|");
 	static final String GRP_KEY = "xowa.langs.case_parser";
 }

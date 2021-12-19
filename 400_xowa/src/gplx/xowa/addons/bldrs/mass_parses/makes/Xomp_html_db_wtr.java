@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.cmds.*;
 class Xomp_html_db_wtr {
@@ -60,10 +65,10 @@ class Xomp_html_db_wtr {
 		if (prv_ns_id != ns_id
 			|| ns_itm == null) {
 			prv_ns_id = ns_id;
-			ns_itm = new Xob_ns_file_itm(Xow_db_file_.Tid__html_data, "ns." + Int_.To_str_pad_bgn_zero(ns_id, 3), Int_ary_.New(ns_id));
+			ns_itm = new Xob_ns_file_itm(Xow_db_file_.Tid__html_data, "ns." + IntUtl.ToStrPadBgnZero(ns_id, 3), IntAryUtl.New(ns_id));
 		}
 		String file_name = is_all_or_few ? "-html.xowa" : ns_itm.Make_file_name();
-		this.html_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__html_data, Int_.To_str(ns_id), ns_itm.Nth_db_idx(), file_name);
+		this.html_db = wiki.Data__core_mgr().Dbs__make_by_tid(Xow_db_file_.Tid__html_data, IntUtl.ToStr(ns_id), ns_itm.Nth_db_idx(), file_name);
 	}
 	public void Rls() {
 		this.Commit();
@@ -74,13 +79,13 @@ class Xomp_html_db_wtr {
 		html_tbl.Conn().Rls_conn();
 
 		// update page_ids
-		String sql = String_.Format(String_.Concat_lines_nl_skip_last	// ANSI.Y
+		String sql = StringUtl.Format(StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "UPDATE  page"
 		, "SET     page_html_db_id = {0}"
 		, "WHERE   page_id IN (SELECT page_id FROM <html_db>html h)"
 		), html_db.Id());
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(db_mgr.Db__core().Conn(), new Db_attach_itm("html_db", html_db.Conn()));
-		attach_mgr.Exec_sql_w_msg("updating page_ids: " + Int_.To_str(html_db.Id()), sql);
+		attach_mgr.Exec_sql_w_msg("updating page_ids: " + IntUtl.ToStr(html_db.Id()), sql);
 	}
 	public static void Delete_html_dbs(Xowe_wiki wiki) {
 		// run only for few /lot

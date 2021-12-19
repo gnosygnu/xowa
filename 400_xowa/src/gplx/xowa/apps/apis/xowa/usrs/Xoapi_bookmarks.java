@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.usrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
-import gplx.xowa.guis.history.*; import gplx.xowa.guis.views.*;
+package gplx.xowa.apps.apis.xowa.usrs; import gplx.*;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.xowa.guis.views.*;
 import gplx.xowa.users.bmks.*;
-import gplx.xowa.wikis.*;
 public class Xoapi_bookmarks implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
 	private boolean enabled = true;
@@ -35,9 +41,9 @@ public class Xoapi_bookmarks implements Gfo_invk {
 			url = tab.Page().Url();
 		}
 		else
-			url = app.User().Wikii().Utl__url_parser().Parse(Bry_.new_u8(url_str));
+			url = app.User().Wikii().Utl__url_parser().Parse(BryUtl.NewU8(url_str));
 		app.User().User_db_mgr().Bmk_mgr().Itms__add(Xoud_bmk_mgr.Owner_root, url);
-		String msg = "bookmark added: " + String_.new_u8(url.Page_bry());
+		String msg = "bookmark added: " + StringUtl.NewU8(url.Page_bry());
 		String rv = app.Html__bridge_mgr().Msg_bldr().Clear().Notify_pass_(msg).To_json_str();
 		win.Active_tab().Html_box().Html_js_eval_proc_as_str("xowa.cmds.exec_by_str", "xowa.notify", "{\"text\":\"" + msg + "\",\"status\":\"success\"}");
 		return rv;

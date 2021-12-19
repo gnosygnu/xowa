@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.miscs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
@@ -46,8 +50,8 @@ public class Xop_under_lxr implements Xop_lxr {
 					Object hook_obj = Hook_trie.Match_bgn(kwd_bry, 0, kwd_len);
 					if (hook_obj != null) {
 						Xop_under_hook hook = (Xop_under_hook)hook_obj;
-						byte[] word_bry = Bry_.Mid(kwd_bry, hook.Key_len(), kwd_bry.length);
-						words_trie.Add_obj(word_bry, new Xop_under_word(kwd_id, word_bry));
+						byte[] word_bry = BryLni.Mid(kwd_bry, hook.Key_len(), kwd_bry.length);
+						words_trie.AddObj(word_bry, new Xop_under_word(kwd_id, word_bry));
 						if (hook_alt_null && hook.Tid() == Xop_under_hook.Tid_alt) {
 							core_trie.Add(Xop_under_hook.Key_alt, lxr);
 							hook_alt_null = false;
@@ -58,7 +62,7 @@ public class Xop_under_lxr implements Xop_lxr {
 						if (kwd_case_match)					// cs; add word directly to trie
 							core_trie.Add(kwd_bry, word_lxr);
 						else {								// NOTE: next part is imprecise; XOWA parser is cs, but kwd is ci; for now, just add all upper and all lower
-							Gfo_usr_dlg_.Instance.Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, String_.new_u8(kwd_grp.Key()), String_.new_u8(kwd_bry));
+							Gfo_usr_dlg_.Instance.Warn_many("", "", "under keyword does not start with __; id=~{0} key=~{1} word=~{2}", kwd_id, StringUtl.NewU8(kwd_grp.Key()), StringUtl.NewU8(kwd_bry));
 							core_trie.Add(lang.Case_mgr().Case_build_lower(kwd_bry), word_lxr);
 							core_trie.Add(lang.Case_mgr().Case_build_upper(kwd_bry), word_lxr);	
 						}
@@ -82,9 +86,9 @@ public class Xop_under_lxr implements Xop_lxr {
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (cur_pos == src_len) return ctx.Lxr_make_txt_(cur_pos);					// eos
 		int rv = cur_pos;
-		Object word_obj = words_trie_cs.Match_at(trv_cs, src, cur_pos, src_len);	// check cs
+		Object word_obj = words_trie_cs.MatchAt(trv_cs, src, cur_pos, src_len);	// check cs
 		if (word_obj == null) {
-			word_obj = words_trie_ci.Match_at(trv_ci, src, cur_pos, src_len);		// check ci
+			word_obj = words_trie_ci.MatchAt(trv_ci, src, cur_pos, src_len);		// check ci
 			if (word_obj == null)
 				return ctx.Lxr_make_txt_(cur_pos);									// kwd not found; EX: "TOCA__"
 			else
@@ -131,7 +135,7 @@ class Xop_under_hook {
 	public byte[] Key() {return key;} private byte[] key;
 	public int Key_len() {return key_len;} private int key_len;
 	public static final byte Tid_std = 1, Tid_alt = 2;
-	public static final byte[] Key_std = new byte[] {AsciiByte.Underline, AsciiByte.Underline}, Key_alt = Bry_.new_u8("＿＿");	// ja wikis
+	public static final byte[] Key_std = new byte[] {AsciiByte.Underline, AsciiByte.Underline}, Key_alt = BryUtl.NewU8("＿＿");	// ja wikis
 	public static final Xop_under_hook
 	  Itm_std = new Xop_under_hook(Tid_std, Key_std)
 	, Itm_alt = new Xop_under_hook(Tid_alt, Key_alt)

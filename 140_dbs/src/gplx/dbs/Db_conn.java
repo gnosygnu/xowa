@@ -15,18 +15,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.Gfo_log_;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Rls_able;
-import gplx.String_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.libs.logs.Gfo_log_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.frameworks.objects.Rls_able;
 import gplx.core.stores.DataRdr;
 import gplx.core.stores.DataRdr_;
 import gplx.dbs.conn_props.Db_conn_props_mgr;
@@ -56,7 +56,7 @@ public class Db_conn {
 	public Db_engine			Engine()				{return engine;} private final Db_engine engine;
 	public Db_sys_mgr			Sys_mgr()				{return sys_mgr;} private final Db_sys_mgr sys_mgr;	// autonum and other functions
 	public SqlWkrMgr            WkrMgr()                {return wkrMgr;} private final SqlWkrMgr wkrMgr;
-	public boolean				Eq(Db_conn comp)		{return String_.Eq(engine.Conn_info().Db_api(), comp.Conn_info().Db_api());}
+	public boolean				Eq(Db_conn comp)		{return StringUtl.Eq(engine.Conn_info().Db_api(), comp.Conn_info().Db_api());}
 	public void					Txn_bgn(String name)	{engine.Txn_bgn(name);}
 	public void					Txn_end()				{engine.Txn_end();}
 	public void					Txn_cxl()				{engine.Txn_cxl();}
@@ -101,7 +101,7 @@ public class Db_conn {
 			&& !this.Meta_fld_exists(tbl_name, fld_name)) {
 			try {this.Meta_fld_append(tbl_name, fld);}
 			catch (Exception e) {
-				Gfo_log_.Instance.Warn("failed to append fld", "conn", this.Conn_info().Db_api(), "tbl", tbl_name, "fld", fld_name, "err", Err_.Message_gplx_log(e));
+				Gfo_log_.Instance.Warn("failed to append fld", "conn", this.Conn_info().Db_api(), "tbl", tbl_name, "fld", fld_name, "err", ErrUtl.ToStrLog(e));
 				fld_name = DbmetaFldItm.KeyNull;
 			}
 		}
@@ -118,21 +118,21 @@ public class Db_conn {
 	public Db_stmt				Stmt_update(String tbl, String[] where, String... cols)					{return engine.Stmt_by_qry(Db_qry_update.New(tbl, where, cols));}
 	public Db_stmt				Stmt_update_exclude(String tbl, DbmetaFldList flds, String... where)	{return engine.Stmt_by_qry(Db_qry_update.New(tbl, where, flds.ToStrAryExclude(where)));}
 	public Db_stmt				Stmt_delete(String tbl, String... where)									{return engine.Stmt_by_qry(Db_qry_delete.new_(tbl, where));}
-	public Db_stmt				Stmt_select_all(String tbl, DbmetaFldList flds)								{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, String_.Ary_empty, flds.ToStrAry(), null));}
+	public Db_stmt				Stmt_select_all(String tbl, DbmetaFldList flds)								{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, StringUtl.AryEmpty, flds.ToStrAry(), null));}
 	public Db_stmt				Stmt_select(String tbl, String[] cols, String... where)					{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, cols, null));}
 	public Db_stmt				Stmt_select(String tbl, DbmetaFldList flds, String... where)			{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.ToStrAry(), null));}
 	public Db_stmt				Stmt_select_order(String tbl, DbmetaFldList flds, String[] where, String... orderbys) {return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.ToStrAry(), orderbys));}
 	public Db_stmt				Stmt_select_order(String tbl, String[] flds, String[] where, String... orderbys) {return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds, orderbys));}
 	public Db_stmt				Stmt_new(Db_qry qry) {return engine.Stmt_by_qry(qry);}
 	public Db_stmt				Stmt_sql(String sql) {return engine.Stmt_by_qry(Db_qry_sql.sql_(sql));}
-	public int					Exec_qry(Db_qry qry)										{return Int_.Cast(engine.Exec_as_obj(qry));}
-	public int					Exec_sql_concat(String... ary)						{return this.Exec_qry(Db_qry_sql.dml_(String_.Concat_lines_nl_skip_last(ary)));}
+	public int					Exec_qry(Db_qry qry)										{return IntUtl.Cast(engine.Exec_as_obj(qry));}
+	public int					Exec_sql_concat(String... ary)						{return this.Exec_qry(Db_qry_sql.dml_(StringUtl.ConcatLinesNlSkipLast(ary)));}
 	public int					Exec_sql_concat_w_msg(String msg, String... ary)		{Gfo_usr_dlg_.Instance.Plog_many("", "", msg); return Exec_sql_concat(ary);}
 	public int					Exec_sql(String sql)										{return this.Exec_qry(Db_qry_sql.dml_(sql));}
 	public int					Exec_sql(String msg, String sql)							{Gfo_usr_dlg_.Instance.Plog_many("", "", msg); return this.Exec_sql(sql);}
 	public Db_rdr				Exec_rdr(String sql)										{return this.Stmt_sql(sql).Exec_select__rls_auto();}
 	public void					Exec_delete_all(String tbl)									{Stmt_delete(tbl).Exec_delete();}
-	public int					Exec_sql_args(String sql, Object... args)	{return this.Exec_qry(Db_qry_sql.dml_(String_.Format(sql, args)));}
+	public int					Exec_sql_args(String sql, Object... args)	{return this.Exec_qry(Db_qry_sql.dml_(StringUtl.Format(sql, args)));}
 	public int					Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(BoolUtl.N, msg, sql);}
 	public int					Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(BoolUtl.Y, msg, sql);}
 	public int					Exec_sql_plog(boolean txn, String msg, String sql) {			
@@ -144,15 +144,15 @@ public class Db_conn {
 		return rv;
 	}
 	public int					Exec_select_max_as_int	(String tbl_name, String fld_name, int or) {
-		Object rv = Exec_select_as_obj(String_.Format("SELECT Max({0}) FROM {1}", fld_name, tbl_name));
-		return rv == null ? or : Int_.Cast(rv);
+		Object rv = Exec_select_as_obj(StringUtl.Format("SELECT Max({0}) FROM {1}", fld_name, tbl_name));
+		return rv == null ? or : IntUtl.Cast(rv);
 	}
 	public int					Exec_select_count_as_int(String tbl_name, int or) {
-		Object rv = Exec_select_as_obj(String_.Format("SELECT Count(*) FROM {0}", tbl_name));
-		return rv == null ? or : Int_.Cast(rv);
+		Object rv = Exec_select_as_obj(StringUtl.Format("SELECT Count(*) FROM {0}", tbl_name));
+		return rv == null ? or : IntUtl.Cast(rv);
 	}
-	public int					Exec_select_as_int		(String sql, int    or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : Int_.Cast(rv);}
-	public double				Exec_select_as_double	(String sql, double or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : Double_.cast(rv);}
+	public int					Exec_select_as_int		(String sql, int    or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : IntUtl.Cast(rv);}
+	public double				Exec_select_as_double	(String sql, double or) {Object rv = Exec_select_as_obj(sql); return rv == null ? or : DoubleUtl.Cast(rv);}
 	private Object				Exec_select_as_obj(String sql) {
 		Db_rdr rdr = Exec_rdr(sql);
 		try {return rdr.Move_next() ? rdr.Read_at(0) : null;}
@@ -165,7 +165,7 @@ public class Db_conn {
 	public void					Rls_conn() {
 		int len = rls_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Rls_able itm = (Rls_able)rls_list.Get_at(i);
+			Rls_able itm = (Rls_able)rls_list.GetAt(i);
 			itm.Rls();
 		}
 		// rls_list.Clear(); // TOMBSTONE: do not clear rls_list, else tables which self-registered won't get called again; DATE:2016-07-06
@@ -177,7 +177,7 @@ public class Db_conn {
 		Db_conn_pool.Instance.Add_existing(this);
 	}
 	public Db_stmt				Stmt_select_max(String tbl, String col, String... where) {
-		Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl, String_.Ary(String_.Format("Max({0}) AS {0}", col)), where, null, null, null, null);
+		Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl, StringUtl.Ary(StringUtl.Format("Max({0}) AS {0}", col)), where, null, null, null, null);
 		qry.Where_(where.length == 0 ? Db_crt_.Wildcard : Db_crt_.eq_many_(where));
 		return engine.Stmt_by_qry(qry);
 	}

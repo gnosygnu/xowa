@@ -13,15 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*;
+package gplx.xowa.addons.wikis.searchs.specials.htmls;
 import gplx.langs.htmls.*;
-import gplx.objects.lists.CompareAbleUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.IntUtl;
 import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_html_row_wkr {
 	private final Srch_html_row_bldr html_row_bldr; private final Xog_js_wkr js_wkr;
 	private final Srch_rslt_row[] rows; private final int rows_len;
-	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+	private final BryWtr bfr = BryWtr.NewWithSize(255);
 	private final byte[] insert_new_key;
 	public Srch_html_row_wkr(Srch_html_row_bldr html_row_bldr, Xog_js_wkr js_wkr, int slab_len, byte[] wiki) {			
 		this.html_row_bldr = html_row_bldr; this.js_wkr = js_wkr;
@@ -48,7 +51,7 @@ public class Srch_html_row_wkr {
 
 		// generate html
 		html_row_bldr.Bld_html(bfr, new_row);
-		String html_tbl = bfr.To_str_and_clear();
+		String html_tbl = bfr.ToStrAndClear();
 		js_wkr.Html_elem_append_above(Gfh_utl.Encode_id_as_str(insert_key), html_tbl);
 		if (last_row != null) {
 			js_wkr.Html_elem_replace_html(Gfh_utl.Encode_id_as_str(last_row.Key), "");
@@ -69,8 +72,8 @@ public class Srch_html_row_wkr {
 		rows[new_row_slot] = new_row;
 	}
 	private int Compare(Srch_rslt_row lhs, Srch_rslt_row rhs) {
-		return -Int_.Compare(lhs.Page_score, rhs.Page_score);
+		return -IntUtl.Compare(lhs.Page_score, rhs.Page_score);
 	}
-	public static byte[] Gen_insert_key(byte[] wiki) {return Bry_.Add(Bry_insert_key, wiki);}
-	private static final byte[] Bry_insert_key = Bry_.new_a7("xowa_insert_");
+	public static byte[] Gen_insert_key(byte[] wiki) {return BryUtl.Add(Bry_insert_key, wiki);}
+	private static final byte[] Bry_insert_key = BryUtl.NewA7("xowa_insert_");
 }

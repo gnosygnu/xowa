@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
-import gplx.dbs.qrys.*;
+package gplx.dbs.metas;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.qrys.Db_qry__select_in_tbl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Schema_loader_mgr_ {
 	public static final Schema_loader_mgr Null = new Schema_loader_mgr__null();
 	public static final Schema_loader_mgr Sqlite = new Schema_loader_mgr__sqlite();
@@ -26,7 +32,7 @@ class Schema_loader_mgr__sqlite implements Schema_loader_mgr {
 	public void Load(Schema_db_mgr db_mgr, Db_conn conn) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.bgn: conn=~{0}", conn.Conn_info().Db_api());
 		Dbmeta_tbl_mgr tbl_mgr = db_mgr.Tbl_mgr();
-		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", String_.Ary_empty, String_.Ary("type", "name", "sql"), Db_qry__select_in_tbl.Order_by_null);
+		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", StringUtl.AryEmpty, StringUtl.Ary("type", "name", "sql"), Db_qry__select_in_tbl.Order_by_null);
 		Db_rdr rdr = conn.Stmt_new(qry).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -39,7 +45,7 @@ class Schema_loader_mgr__sqlite implements Schema_loader_mgr {
 						tbl_mgr.Add(tbl_itm);
 						break;
 					case Dbmeta_itm_tid.Tid_index:	break;	// noop for now
-					default:						throw Err_.new_unhandled(type_str);
+					default:						throw ErrUtl.NewUnhandled(type_str);
 				}
 			}
 		}	finally {rdr.Rls();}

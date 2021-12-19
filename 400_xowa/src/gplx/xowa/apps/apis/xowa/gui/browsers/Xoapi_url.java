@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.apis.xowa.gui.browsers;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.String_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.envs.Op_sys;
 import gplx.gfui.controls.standards.GfuiComboBox;
 import gplx.gfui.envs.ClipboardAdp_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.guis.views.Xog_tab_itm;
 import gplx.xowa.guis.views.Xog_tab_itm_;
@@ -36,7 +36,7 @@ public class Xoapi_url implements Gfo_invk {
 	public void Focus()					{
 		GfuiComboBox url_box = this.Url_box();
 		url_box.Focus(); 
-		url_box.Sel_(0, String_.Len(this.Url_box().Text()));
+		url_box.Sel_(0, StringUtl.Len(this.Url_box().Text()));
 	}
 	public void Exec()					{Exec_wkr(BoolUtl.N, this.Url_box().Text());}
 	public void Exec_by_paste()			{Exec_wkr(BoolUtl.N, ClipboardAdp_.GetText());}
@@ -50,8 +50,8 @@ public class Xoapi_url implements Gfo_invk {
 	}
 	private void Exec_wkr(boolean new_tab, String urls_text) {
 		if (Op_sys.Cur().Tid_is_wnt())
-			urls_text = String_.Replace(urls_text, Op_sys.Wnt.Nl_str(), Op_sys.Lnx.Nl_str());
-		String[] urls = String_.Split(String_.Trim(urls_text), Op_sys.Lnx.Nl_str());
+			urls_text = StringUtl.Replace(urls_text, Op_sys.Wnt.Nl_str(), Op_sys.Lnx.Nl_str());
+		String[] urls = StringUtl.Split(StringUtl.Trim(urls_text), Op_sys.Lnx.Nl_str());
 		int urls_len = urls.length;
 		if (urls_len == 0) return;
 		if (urls_len == 1) {								// 1 url; most cases
@@ -73,8 +73,8 @@ public class Xoapi_url implements Gfo_invk {
 		else {
 			for (int i = 0; i < urls_len; i++) {
 				String url = urls[i];
-				if (String_.Has_at_bgn(url, "\"") &&  String_.Has_at_bgn(url, "\""))
-					url = String_.Mid(url, 1, String_.Len(url) - 1);
+				if (StringUtl.HasAtBgn(url, "\"") &&  StringUtl.HasAtBgn(url, "\""))
+					url = StringUtl.Mid(url, 1, StringUtl.Len(url) - 1);
 				app.Gui_mgr().Browser_win().Tab_mgr().Tabs_new_link(url, false);
 			}
 		}

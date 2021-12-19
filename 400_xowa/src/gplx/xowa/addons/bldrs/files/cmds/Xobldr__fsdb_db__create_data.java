@@ -14,21 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.files.cmds;
-import gplx.Bry_;
-import gplx.Decimal_adp_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.Int_ary_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Math_;
-import gplx.String_;
-import gplx.core.envs.System_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.core.envs.SystemUtl;
 import gplx.core.ios.Io_size_;
 import gplx.core.ios.streams.Io_stream_rdr;
 import gplx.core.ios.streams.Io_stream_rdr_;
@@ -46,7 +40,14 @@ import gplx.fsdb.meta.Fsm_bin_fil;
 import gplx.fsdb.meta.Fsm_cfg_mgr;
 import gplx.fsdb.meta.Fsm_mnt_itm;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.MathUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.bldrs.files.dbs.Xob_xfer_regy_tbl;
@@ -74,11 +75,11 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = BoolUtl.N; private String src_bin_mgr__fsdb_version; private String[] src_bin_mgr__fsdb_skip_wkrs; private boolean src_bin_mgr__wmf_enabled;
 	private Fsm_mnt_itm trg_mnt_itm; private Fsm_cfg_mgr trg_cfg_mgr; private Fsm_atr_fil trg_atr_fil; private Fsm_bin_fil trg_bin_fil; private long trg_bin_db_max; private String trg_bin_mgr__fsdb_version;
 	private final Xof_bin_updater trg_bin_updater = new Xof_bin_updater(); private Xob_bin_db_mgr bin_db_mgr; private int[] ns_ids; private int prv_lnki_tier_id = -1;
-	private long download_size_max = Io_mgr.Len_mb_long * 5; private int[] download_keep_tier_ids = Int_ary_.New(0);
+	private long download_size_max = IoConsts.LenMBAsLong * 5; private int[] download_keep_tier_ids = IntAryUtl.New(0);
 	private Xobu_poll_mgr poll_mgr; private int poll_interval; private long time_bgn;
 	private int select_interval = 2500, progress_interval = 1, commit_interval = 1, delete_interval = 5000;
-	private boolean exec_done, resume_enabled; private int exec_count, exec_count_max = Int_.Max_value, exec_fail, exec_fail_max = 10000; // 115 errors over 900k images		
-	private int tier_id_bmk = -1, tier_id_val = -1; private int page_id_bmk = -1, page_id_val = -1, page_id_end = Int_.Max_value; private int lnki_id_bmk = -1, lnki_id_val = -1;
+	private boolean exec_done, resume_enabled; private int exec_count, exec_count_max = IntUtl.MaxValue, exec_fail, exec_fail_max = 10000; // 115 errors over 900k images
+	private int tier_id_bmk = -1, tier_id_val = -1; private int page_id_bmk = -1, page_id_val = -1, page_id_end = IntUtl.MaxValue; private int lnki_id_bmk = -1, lnki_id_val = -1;
 	private boolean exit_after_commit, exit_now;
 	public Xobldr__fsdb_db__create_data(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);
 		if (bldr != null) {
@@ -113,7 +114,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		}
 		// trg_mnt_itm
 		this.trg_bin_db_max = Xobldr_cfg.Max_size__file(app);
-		Io_url trg_file_dir_v1 = String_.Eq(trg_bin_mgr__fsdb_version, "v1") ? wiki.Fsys_mgr().File_dir().GenNewNameOnly(wiki.Domain_str() + "-prv") : wiki.Fsys_mgr().File_dir();	// NOTE: convoluted way of setting trg to -prv if trg_bin_mgr__fsdb_version_v1 is set; otherwise set to "en.wikipedia.org" which will noop; DATE:2015-12-02
+		Io_url trg_file_dir_v1 = StringUtl.Eq(trg_bin_mgr__fsdb_version, "v1") ? wiki.Fsys_mgr().File_dir().GenNewNameOnly(wiki.Domain_str() + "-prv") : wiki.Fsys_mgr().File_dir();	// NOTE: convoluted way of setting trg to -prv if trg_bin_mgr__fsdb_version_v1 is set; otherwise set to "en.wikipedia.org" which will noop; DATE:2015-12-02
 		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), trg_file_dir_v1);
 		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, BoolUtl.Y);
 		Fsm_mnt_mgr trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(trg_db_mgr);
@@ -134,7 +135,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	}
 	@Override public void Cmd_run() {
 		Init_bldr_bmks();
-		this.time_bgn = System_.Ticks();
+		this.time_bgn = SystemUtl.Ticks();
 		int total_pending = Xob_xfer_regy_tbl.Select_total_pending(bldr_conn);
 		// if (total_pending > 250000 && src_bin_mgr__fsdb_version == null) 
 		usr_dlg.Note_many("", "", "total pending: ~{0}", total_pending);
@@ -159,7 +160,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 			int len = list.Len();
 			usr_dlg.Prog_many("", "", "fetched pages: ~{0}", len);
 			for (int i = 0; i < len; ++i) {
-				Xodb_tbl_oimg_xfer_itm fsdb = (Xodb_tbl_oimg_xfer_itm)list.Get_at(i);
+				Xodb_tbl_oimg_xfer_itm fsdb = (Xodb_tbl_oimg_xfer_itm)list.GetAt(i);
 				Download_itm(fsdb);
 				if (	exit_now
 					||	exec_count	>= exec_count_max
@@ -190,7 +191,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		}
 		else {
 			if (tier_id_bmk == -1) {
-				tier_id_bmk = Int_.Parse(tier_id_str);
+				tier_id_bmk = IntUtl.Parse(tier_id_str);
 				usr_dlg.Note_many("", "", "restoring from bmk: tier_id=~{0}", tier_id_bmk);
 			}
 			if (page_id_bmk == -1) {
@@ -241,7 +242,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		}
 		catch (Exception exc) {
 			++exec_fail;
-			usr_dlg.Warn_many("", "", "download error; ttl=~{0} w=~{1} err=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), Err_.Message_gplx_full(exc));
+			usr_dlg.Warn_many("", "", "download error; ttl=~{0} w=~{1} err=~{2}", fsdb.Orig_ttl(), fsdb.Lnki_w(), ErrUtl.ToStrFull(exc));
 		}
 	}
 	private void Download_exec(Xodb_tbl_oimg_xfer_itm fsdb) {
@@ -249,14 +250,14 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		try {
 			if (src_rdr == Io_stream_rdr_.Noop) {	// download failed
 				++exec_fail;
-				usr_dlg.Warn_many("", "", "failed: ttl=~{0}", String_.Format("[[File:{0}|{1}px]]", fsdb.Orig_ttl(), fsdb.Html_w()));
+				usr_dlg.Warn_many("", "", "failed: ttl=~{0}", StringUtl.Format("[[File:{0}|{1}px]]", fsdb.Orig_ttl(), fsdb.Html_w()));
 				Print_progress(fsdb);
 			}
 			else {									// download passed
 				long src_rdr_len = src_rdr.Len();
 				int lnki_tier_id = fsdb.Lnki_tier_id();
 				if (	src_rdr_len > download_size_max
-					&&	!Int_.In(lnki_tier_id, download_keep_tier_ids)) {
+					&&	!IntUtl.In(lnki_tier_id, download_keep_tier_ids)) {
 					usr_dlg.Warn_many("", "", "skipped; ttl=~{0} w=~{1} size=~{2} tier=~{3}", fsdb.Orig_ttl(), fsdb.Lnki_w(), src_rdr_len, lnki_tier_id);
 					return;
 				}
@@ -323,7 +324,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		if (exit_after_commit) exit_now = true;
 	}
 	@Override public void Cmd_end() {
-		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, System_.Ticks__elapsed_in_sec(time_bgn)).To_str("#,###.000"));
+		usr_dlg.Note_many("", "", "fsdb_make.done: count=~{0} rate=~{1}", exec_count, GfoDecimalUtl.NewByDivideSafe(exec_count, SystemUtl.Ticks__elapsed_in_sec(time_bgn)).ToStr("#,###.000"));
 		if (src_fsdb_wkr != null) {
 			src_fsdb_wkr.Mnt_mgr().Mnts__get_main().Txn_end();	// NOTE: src_fsdb_wkr will be null if no src db defined
 		}
@@ -343,8 +344,8 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		bldr_conn.Rls_conn();
 	}
 	private void Print_progress(Xodb_tbl_oimg_xfer_itm itm) {
-		int time_elapsed = System_.Ticks__elapsed_in_sec(time_bgn);
-		usr_dlg.Prog_many("", "", "prog: num=~{0} err=~{1} time=~{2} rate=~{3} page=~{4} lnki=~{5} ttl=~{6}", exec_count, exec_fail, time_elapsed, Math_.Div_safe_as_int(exec_count, time_elapsed), page_id_val, lnki_id_val, itm.Orig_ttl());
+		int time_elapsed = SystemUtl.Ticks__elapsed_in_sec(time_bgn);
+		usr_dlg.Prog_many("", "", "prog: num=~{0} err=~{1} time=~{2} rate=~{3} page=~{4} lnki=~{5} ttl=~{6}", exec_count, exec_fail, time_elapsed, MathUtl.DivSafeAsInt(exec_count, time_elapsed), page_id_val, lnki_id_val, itm.Orig_ttl());
 	}
 	private void Delete_files() {}// TODO_OLD: purge /xowa/file/ dir to free up hard disk space
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -360,14 +361,14 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		else if	(ctx.Match(k, Invk_exit_after_commit_))				exit_after_commit = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_exit_now_))						exit_now = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_resume_enabled_))				resume_enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_ns_ids_))						ns_ids = Int_ary_.Parse(m.ReadStr("v"), "|");
+		else if	(ctx.Match(k, Invk_ns_ids_))						ns_ids = IntAryUtl.Parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__fsdb_version_))		src_bin_mgr__fsdb_version = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__fsdb_skip_wkrs_))	src_bin_mgr__fsdb_skip_wkrs = m.ReadStrAry("v", "|");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__wmf_enabled_))		src_bin_mgr__wmf_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_src_bin_mgr__cache_enabled_))	src_bin_mgr__cache_enabled = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_trg_bin_mgr__fsdb_version_))		trg_bin_mgr__fsdb_version = m.ReadStr("v");
 		else if	(ctx.Match(k, Invk_poll_mgr))						return poll_mgr;
-		else if	(ctx.Match(k, Invk_download_keep_tier_ids))			download_keep_tier_ids = Int_ary_.Parse(m.ReadStr("v"), "|");
+		else if	(ctx.Match(k, Invk_download_keep_tier_ids))			download_keep_tier_ids = IntAryUtl.Parse(m.ReadStr("v"), "|");
 		else if	(ctx.Match(k, Invk_download_size_max))				download_size_max = Io_size_.To_long_by_msg_mb(m, download_size_max);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
@@ -392,16 +393,16 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	public static Fsdb_db_mgr new_src_bin_db_mgr(Xow_wiki wiki, String version) {
 		String domain_str = wiki.Domain_str();
 		Fsdb_db_mgr rv = null; Io_url url = null;
-		if		(String_.Eq(version, "v1")) {
+		if		(StringUtl.Eq(version, "v1")) {
 			url = wiki.Fsys_mgr().File_dir().OwnerDir().GenSubDir(domain_str + "-prv");	// v1: EX: /xowa/file/en.wikipedia.org-prv/
 			rv = new Fsdb_db_mgr__v1(url);
 		}
-		else if (String_.Eq(version, "v2")) {
+		else if (StringUtl.Eq(version, "v2")) {
 			url = wiki.Fsys_mgr().Root_dir().GenSubDir("prv");		// v2: EX: /xowa/wiki/en.wikipedia.org/prv/
 			rv = Fsdb_db_mgr_.new_detect(wiki, url, url);			// note that v2 is prioritized over v1
 		}
-		else throw Err_.new_wo_type("fsdb.make:unknown fsdb_type", "version", version);
-		if (rv == null) throw Err_.new_wo_type("fsdb.make:source fsdb not found", "version", version, "url", url.Raw());
+		else throw ErrUtl.NewArgs("fsdb.make:unknown fsdb_type", "version", version);
+		if (rv == null) throw ErrUtl.NewArgs("fsdb.make:source fsdb not found", "version", version, "url", url.Raw());
 		return rv;
 	}
 	private static final byte Select_rv_stop = 0, Select_rv_process = 1, Select_rv_next_page = 2;
@@ -425,7 +426,7 @@ class Xodb_tbl_oimg_xfer_itm extends Xof_fsdb_itm {	public int 			Lnki_id()		{re
 		, rdr.ReadByte(Xob_xfer_regy_tbl.Fld_orig_repo)
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_w)
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_h)
-		, Bry_.Empty
+		, BryUtl.Empty
 		, rdr.ReadByte(Xob_xfer_regy_tbl.Fld_file_is_orig) == BoolUtl.YByte
 		);
 		return rv;

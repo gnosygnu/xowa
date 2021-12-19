@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.wtxts;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
 import gplx.xowa.parsers.hdrs.*;
 public class Xopg_toc_mgr {
 	private Xop_hdr_tkn[] hdrs_ary = Xop_hdr_tkn.Ary_empty; private int hdrs_max, hdrs_len;

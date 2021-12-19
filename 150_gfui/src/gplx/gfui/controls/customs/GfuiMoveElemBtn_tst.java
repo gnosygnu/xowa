@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.Tfds;
+package gplx.gfui.controls.customs;
 import gplx.gfui.controls.standards.GfuiBtn;
 import gplx.gfui.controls.standards.GfuiBtn_;
 import gplx.gfui.controls.windows.GfuiWin;
@@ -22,6 +22,7 @@ import gplx.gfui.ipts.IptEventMgr;
 import gplx.gfui.ipts.IptEvtDataKey;
 import gplx.gfui.ipts.IptKey;
 import gplx.gfui.ipts.IptKey_;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.Before;
 import org.junit.Test;
 public class GfuiMoveElemBtn_tst {
@@ -32,9 +33,9 @@ public class GfuiMoveElemBtn_tst {
 		moveBtn.IptBnds().Add(bnd);
 	}
 	@Test public void Basic() {
-		Tfds.Eq(form.X(), 0);
+		GfoTstr.EqObj(form.X(), 0);
 		IptEventMgr.ExecKeyDown(moveBtn, IptEvtDataKey.test_(MoveRightArg()));
-		Tfds.Eq(form.X(), 10);
+		GfoTstr.EqObj(form.X(), 10);
 	}
 
 	IptKey MoveRightArg() {return IptKey_.MOD_1ST.Add(IptKey_.Right);}

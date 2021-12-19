@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+package gplx.xowa.xtns.math.texvcs.tkns;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
 public class Texvc_tkn__leaf_repl implements Texvc_tkn {
 	private final byte[] repl;
 	public Texvc_tkn__leaf_repl(int tid, byte[] repl) {
@@ -34,9 +36,9 @@ public class Texvc_tkn__leaf_repl implements Texvc_tkn {
 	public int Src_end() {return src_end;} private int src_end;
 	public void Src_end_(int v) {this.src_end = v;}
 	public int Subs__len() {return 0;}
-	public Texvc_tkn Subs__get_at(int i) {throw Err_.new_unsupported();}
-	public void Print_tex_bry(Bry_bfr bfr, byte[] src, int indent) {bfr.Add(repl);}
-	public void Print_dbg_bry(Bry_bfr bfr, int indent) {
+	public Texvc_tkn Subs__get_at(int i) {throw ErrUtl.NewUnsupported();}
+	public void Print_tex_bry(BryWtr bfr, byte[] src, int indent) {bfr.Add(repl);}
+	public void Print_dbg_bry(BryWtr bfr, int indent) {
 		Texvc_tkn_.Print_dbg_str__bgn(bfr, indent, this);
 		Texvc_tkn_.Print_dbg_str__end_head(bfr);
 	}

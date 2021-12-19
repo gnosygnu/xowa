@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.addons.wikis.searchs.specials;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xow_domain_sorter__manual implements ComparerAble {
@@ -32,12 +36,12 @@ public class Xow_domain_sorter__manual implements ComparerAble {
 		int rhs_sort = Get_sort_idx_or_neg1(rhs);
 		if		(lhs_sort == -1 && rhs_sort != -1)	return rhs_sort;
 		else if	(lhs_sort != -1 && rhs_sort == -1)	return lhs_sort;
-		else if (lhs_sort != -1 && rhs_sort != -1)	return Int_.Compare(lhs_sort, rhs_sort);
-		else										return Bry_.Compare(lhs.Domain_bry(), rhs.Domain_bry());
+		else if (lhs_sort != -1 && rhs_sort != -1)	return IntUtl.Compare(lhs_sort, rhs_sort);
+		else										return BryUtl.Compare(lhs.Domain_bry(), rhs.Domain_bry());
 	}
 	private int Get_sort_idx_or_neg1(Xow_domain_itm domain) {
 		int sort_idx = domain.Sort_idx(); if (sort_idx != -1) return sort_idx;
-		sort_idx = Int_.Max_value;
+		sort_idx = IntUtl.MaxValue;
 		for (int i = 0; i < ary_len; ++i) {
 			Xow_domain_crt_itm crt = ary[i];
 			if (crt.Matches(cur_domain, domain)) {sort_idx = i; break;}
@@ -53,12 +57,12 @@ public class Xow_domain_sorter__manual implements ComparerAble {
 	}
 }
 class Xow_domain_sorter__manual_tid implements ComparerAble {
-	private final Hash_adp sort_hash = Hash_adp_.New(); private final Int_obj_ref sort_key = Int_obj_ref.New_neg1();
+	private final Hash_adp sort_hash = Hash_adp_.New(); private final IntRef sort_key = IntRef.NewNeg1();
 	public Xow_domain_sorter__manual_tid(int[] id_ary) {
 		int len = id_ary.length;
 		for (int i = 0; i < len; ++i) {
 			int id_itm = id_ary[i];
-			sort_hash.AddIfDupeUseNth(Int_obj_ref.New(id_itm), Int_obj_ref.New(i));
+			sort_hash.AddIfDupeUseNth(IntRef.New(id_itm), IntRef.New(i));
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -68,12 +72,12 @@ class Xow_domain_sorter__manual_tid implements ComparerAble {
 		int rhs_sort = Get_sort_idx_or_neg1(rhs.Domain_type_id());
 		if		(lhs_sort == -1 && rhs_sort != -1)	return rhs_sort;
 		else if	(lhs_sort != -1 && rhs_sort == -1)	return lhs_sort;
-		else if (lhs_sort != -1 && rhs_sort != -1)	return Int_.Compare(lhs_sort, rhs_sort);
-		else										return Bry_.Compare(Xow_domain_tid_.Get_type_as_bry(lhs.Domain_type_id()), Xow_domain_tid_.Get_type_as_bry(rhs.Domain_type_id()));
+		else if (lhs_sort != -1 && rhs_sort != -1)	return IntUtl.Compare(lhs_sort, rhs_sort);
+		else										return BryUtl.Compare(Xow_domain_tid_.Get_type_as_bry(lhs.Domain_type_id()), Xow_domain_tid_.Get_type_as_bry(rhs.Domain_type_id()));
 	}
 	private int Get_sort_idx_or_neg1(int tid) {
-		Object o = sort_hash.GetByOrNull(sort_key.Val_(tid));
-		return o == null ? -1 : ((Int_obj_ref)o).Val();
+		Object o = sort_hash.GetByOrNull(sort_key.ValSet(tid));
+		return o == null ? -1 : ((IntRef)o).Val();
 	}
 	public static Xow_domain_sorter__manual_tid new_(byte[]... id_brys) {
 		int len = id_brys.length;
@@ -87,12 +91,12 @@ class Xow_domain_sorter__manual_tid implements ComparerAble {
 	}
 }
 class Xow_domain_sorter__manual_lang implements ComparerAble {
-	private final Hash_adp sort_hash = Hash_adp_.New(); private final Int_obj_ref sort_key = Int_obj_ref.New_neg1();
+	private final Hash_adp sort_hash = Hash_adp_.New(); private final IntRef sort_key = IntRef.NewNeg1();
 	public Xow_domain_sorter__manual_lang(int[] id_ary) {
 		int len = id_ary.length;
 		for (int i = 0; i < len; ++i) {
 			int id_int = id_ary[i];
-			sort_hash.AddIfDupeUseNth(Int_obj_ref.New(id_int), Int_obj_ref.New(i));
+			sort_hash.AddIfDupeUseNth(IntRef.New(id_int), IntRef.New(i));
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -102,12 +106,12 @@ class Xow_domain_sorter__manual_lang implements ComparerAble {
 		int rhs_sort = Get_sort_idx_or_neg1(rhs.Lang_actl_uid());
 		if		(lhs_sort == -1 && rhs_sort != -1)	return rhs_sort;
 		else if	(lhs_sort != -1 && rhs_sort == -1)	return lhs_sort;
-		else if (lhs_sort != -1 && rhs_sort != -1)	return Int_.Compare(lhs_sort, rhs_sort);
-		else										return Bry_.Compare(lhs.Lang_actl_key(), rhs.Lang_actl_key());
+		else if (lhs_sort != -1 && rhs_sort != -1)	return IntUtl.Compare(lhs_sort, rhs_sort);
+		else										return BryUtl.Compare(lhs.Lang_actl_key(), rhs.Lang_actl_key());
 	}
 	private int Get_sort_idx_or_neg1(int tid) {
-		Object o = sort_hash.GetByOrNull(sort_key.Val_(tid));
-		return o == null ? -1 : ((Int_obj_ref)o).Val();
+		Object o = sort_hash.GetByOrNull(sort_key.ValSet(tid));
+		return o == null ? -1 : ((IntRef)o).Val();
 	}
 	public static Xow_domain_sorter__manual_lang new_(byte[]... id_brys) {
 		int len = id_brys.length;

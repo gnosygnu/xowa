@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.parsers;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.data_stores.*;
+import gplx.core.primitives.*; import gplx.types.custom.brys.fmts.fmtrs.*; import gplx.core.data_stores.*;
 import gplx.xowa.wikis.*; import gplx.core.envs.*;
 import gplx.xowa.files.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.ttls.*;
@@ -36,27 +41,27 @@ public class Xow_parser_mgr {
 	public Xof_img_size				Img_size()			{return img_size;} private final Xof_img_size img_size = new Xof_img_size();
 	public Pfunc_ifexist_mgr		Ifexist_mgr()		{return ifexist_mgr;} private final Pfunc_ifexist_mgr ifexist_mgr = new Pfunc_ifexist_mgr();
 	public Xof_url_bldr				Url_bldr()			{return url_bldr;} private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
-	public List_adp					Time_parser_itms()	{return time_parser_itms;} private final List_adp time_parser_itms = List_adp_.New();
+	public List_adp Time_parser_itms()	{return time_parser_itms;} private final List_adp time_parser_itms = List_adp_.New();
 	public Pft_func_formatdate_bldr Date_fmt_bldr()		{return date_fmt_bldr;} private final Pft_func_formatdate_bldr date_fmt_bldr = new Pft_func_formatdate_bldr();
 	public Gfo_number_parser		Pp_num_parser()		{return pp_num_parser;} private final Gfo_number_parser pp_num_parser = new Gfo_number_parser().Ignore_space_at_end_y_();
 	public int[]					Rel2abs_ary()		{return rel2abs_ary;} private final int[] rel2abs_ary = new int[Pfunc_rel2abs.Ttl_max];
 	public Xop_uniq_mgr				Uniq_mgr()			{return uniq_mgr;} private final Xop_uniq_mgr uniq_mgr = new Xop_uniq_mgr();
 	public Xomath_core				Math__core()		{return math__core;} private final Xomath_core math__core = new Xomath_core();
 	public boolean						Lst__recursing()	{return lst_recursing;} private boolean lst_recursing; public void	Lst__recursing_(boolean v) {lst_recursing = v;}
-	public Bry_bfr					Wbase__time__bfr()  {return wbase__time__bfr;} private final Bry_bfr wbase__time__bfr = Bry_bfr_.New();
-	public Bry_fmtr					Wbase__time__fmtr() {return wbase__time__fmtr;} private final Bry_fmtr wbase__time__fmtr = Bry_fmtr.new_();
+	public BryWtr Wbase__time__bfr()  {return wbase__time__bfr;} private final BryWtr wbase__time__bfr = BryWtr.New();
+	public BryFmtr Wbase__time__fmtr() {return wbase__time__fmtr;} private final BryFmtr wbase__time__fmtr = BryFmtr.New();
 	public Xop_section_mgr			Hdr__section_editable__mgr() {return hdr__section_editable__mgr;} private final Xop_section_mgr hdr__section_editable__mgr = new Xop_section_mgr();
 	public Wdata_hwtr_msgs			Wbase__time__msgs() {
 		if (wbase__time__msgs == null)
 			wbase__time__msgs = Wdata_hwtr_msgs.new_(wiki.Msg_mgr());
 		return wbase__time__msgs;
 	}	private Wdata_hwtr_msgs wbase__time__msgs;
-	public Bry_bfr                  Tmp_bfr()           {return tmp_bfr;} private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	public BryWtr Tmp_bfr()           {return tmp_bfr;} private final BryWtr tmp_bfr = BryWtr.New();
 	public int						Tag__next_idx() {return ++tag_idx;} private int tag_idx; // NOTE:must be wiki-level variable, not page-level, b/c pre-compiled templates can reserve tag #s; PAGE:de.s:Seite:NewtonPrincipien.djvu/465 DATE:2015-02-03
 	public void						Tmpl_stack_del() {--tmpl_stack_ary_len;}
 	public boolean						Tmpl_stack_add(byte[] key) {
 		for (int i = 0; i < tmpl_stack_ary_len; i++) {
-			if (Bry_.Match(key, tmpl_stack_ary[i])) return false;
+			if (BryLni.Eq(key, tmpl_stack_ary[i])) return false;
 		}
 		int new_len = tmpl_stack_ary_len + 1;
 		if (new_len > tmpl_stack_ary_max) {
@@ -66,7 +71,7 @@ public class Xow_parser_mgr {
 		tmpl_stack_ary[tmpl_stack_ary_len] = key;
 		tmpl_stack_ary_len = new_len;
 		return true;
-	}	private byte[][] tmpl_stack_ary = Bry_.Ary_empty; private int tmpl_stack_ary_len = 0, tmpl_stack_ary_max = 0;
+	}	private byte[][] tmpl_stack_ary = BryUtl.AryEmpty; private int tmpl_stack_ary_len = 0, tmpl_stack_ary_max = 0;
 	public Xop_parser Anchor_encoder_parser_or_new() {
 		synchronized (thread_lock) {
 			if (anchor_encoder_parser == null) {
@@ -84,7 +89,7 @@ public class Xow_parser_mgr {
 	public void Parse(Xoae_page page, boolean clear) {	// main parse method; should never be called nested
 		// init
 		if (!Env_.Mode_testing()) wiki.Init_assert();	// needed for html_server?
-		tmpl_stack_ary = Bry_.Ary_empty;
+		tmpl_stack_ary = BryUtl.AryEmpty;
 		tmpl_stack_ary_len = tmpl_stack_ary_max = 0;
 		uniq_mgr.Clear();
 

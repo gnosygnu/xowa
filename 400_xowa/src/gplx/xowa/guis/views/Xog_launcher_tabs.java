@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.xowa.apps.urls.*;
+package gplx.xowa.guis.views;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_bfr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 class Xog_launcher_tabs {
 	public void Launch(Xog_win_itm win) {
 		Xoae_app app = win.App(); Gfo_log_bfr log_bfr = app.Log_bfr();
@@ -46,14 +53,14 @@ class Xog_launcher_tabs {
 			return true;
 		}
 		catch (Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to launch urls: urls=~{0} err=~{1}", String_.AryXtoStr(launch_urls), Err_.Message_gplx_full(e));
+			app.Usr_dlg().Warn_many("", "", "failed to launch urls: urls=~{0} err=~{1}", StringUtl.AryToStr(launch_urls), ErrUtl.ToStrFull(e));
 			Restore_tab_failover(app, home_wiki, win);
 			return false;
 		}
 	}
 	private void Restore_tab_failover(Xoae_app app, Xowe_wiki home_wiki, Xog_win_itm win) {
 		try {Launch_tab(win, home_wiki, Xog_startup_tabs.Url__home_main);}
-		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", Err_.Message_gplx_full(e));}
+		catch (Exception e) {app.Usr_dlg().Warn_many("", "", "failed to launch failover tab: err=~{0}", ErrUtl.ToStrFull(e));}
 	}
 	private void Launch_tab(Xog_win_itm win, Xowe_wiki home_wiki, String launch_str) {
 		Xoae_app app = win.App();
@@ -81,7 +88,7 @@ class Io_fil_marker {
 					Io_mgr.Instance.DeleteFil(url);			// delete
 			}
 			catch (Exception exc) {					// something unexpected happened
-				usr_dlg.Warn_many("", "", "marker.bgn failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(exc));
+				usr_dlg.Warn_many("", "", "marker.bgn failed: url=~{0} err=~{1}", url.Raw(), ErrUtl.ToStrFull(exc));
 				Io_mgr.Instance.DeleteFil(url);				// try to delete it again
 			}
 		}
@@ -93,7 +100,7 @@ class Io_fil_marker {
 				Io_mgr.Instance.DeleteFil(url);				// delete
 			}
 			catch (Exception exc) {
-				usr_dlg.Warn_many("", "", "marker.end failed: url=~{0} err=~{1}", url.Raw(), Err_.Message_gplx_full(exc));
+				usr_dlg.Warn_many("", "", "marker.end failed: url=~{0} err=~{1}", url.Raw(), ErrUtl.ToStrFull(exc));
 				Io_mgr.Instance.DeleteFil(url);				// try to delete it again
 			}
 		}

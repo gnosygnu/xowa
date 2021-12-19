@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.users.data;
+import gplx.core.btries.*;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.IntVal;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
 class Xoud_opt_scope {
@@ -23,8 +31,8 @@ class Xoud_opt_scope {
 	public int Lang_id() {return lang_id;} private final int lang_id;
 	public int Type_id() {return type_id;} private final int type_id;
 	public String To_str() {
-		String lang_str = lang_id == Lang_id_wildcard ? "*" : String_.new_u8(Xol_lang_stub_.Get_by_id(lang_id).Key());
-		String type_str = type_id == Lang_id_wildcard ? "*" : String_.new_u8(Xow_domain_tid_.Get_type_as_bry(type_id));
+		String lang_str = lang_id == Lang_id_wildcard ? "*" : StringUtl.NewU8(Xol_lang_stub_.Get_by_id(lang_id).Key());
+		String type_str = type_id == Lang_id_wildcard ? "*" : StringUtl.NewU8(Xow_domain_tid_.Get_type_as_bry(type_id));
 		return lang_str + "." + type_str;
 	}
 	public static final int Lang_id_wildcard = -1, Type_id_wildcard = -1;
@@ -37,7 +45,7 @@ class Xoud_opt_scope_parser {
 		list.Clear();
 		int pos = 0; int src_len = src.length;
 		while (pos < src_len) {
-			int comma_pos = Bry_find_.Find_fwd(src, AsciiByte.Comma, pos, src_len); if (comma_pos == Bry_find_.Not_found) comma_pos = src_len;
+			int comma_pos = BryFind.FindFwd(src, AsciiByte.Comma, pos, src_len); if (comma_pos == BryFind.NotFound) comma_pos = src_len;
 			Xoud_opt_scope itm = Parse_itm(src, pos, comma_pos);
 			if (itm == Xoud_opt_scope.App) return Ary_app;
 			list.Add(itm);
@@ -46,20 +54,20 @@ class Xoud_opt_scope_parser {
 		return (Xoud_opt_scope[])list.ToAryAndClear(Xoud_opt_scope.class);
 	}
 	public Xoud_opt_scope Parse_itm(byte[] src, int bgn, int end) {
-		int lang_dot = Bry_find_.Find_fwd(src, AsciiByte.Dot, bgn, end);					if (lang_dot == Bry_find_.Not_found) return Warn("scope.parse.missing_lang_dot: src=~{0}", src, bgn, end);
-		int lang_id = Int_.Min_value;
+		int lang_dot = BryFind.FindFwd(src, AsciiByte.Dot, bgn, end);					if (lang_dot == BryFind.NotFound) return Warn("scope.parse.missing_lang_dot: src=~{0}", src, bgn, end);
+		int lang_id = IntUtl.MinValue;
 		if (lang_dot == 1 && src[bgn] == AsciiByte.Star)
 			lang_id = Xoud_opt_scope.Lang_id_wildcard;
 		else {
 			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(src, bgn, lang_dot);	if (lang_itm == null) return Warn("scope.parse.invalid_lang: src=~{0}", src, bgn, end);
 			lang_id = lang_itm.Id();
 		}
-		Object type_tid_obj = btrie_by_type.Match_bgn(src, lang_dot + 1, end);				if (type_tid_obj == null) return Warn("scope.parse.invalid_type: src=~{0}", src, bgn, end);
-		int type_id = ((Int_obj_val)type_tid_obj).Val();
+		Object type_tid_obj = btrie_by_type.MatchBgn(src, lang_dot + 1, end);				if (type_tid_obj == null) return Warn("scope.parse.invalid_type: src=~{0}", src, bgn, end);
+		int type_id = ((IntVal)type_tid_obj).Val();
 		return new Xoud_opt_scope(lang_id, type_id);
 	}
 	private Xoud_opt_scope Warn(String fmt, byte[] src, int bgn, int end) {
-		usr_dlg.Warn_many("", "", fmt, String_.new_u8(src, bgn, end));
+		usr_dlg.Warn_many("", "", fmt, StringUtl.NewU8(src, bgn, end));
 		return Xoud_opt_scope.App;
 	}
 	private static final Btrie_slim_mgr btrie_by_type = Btrie_slim_mgr.cs()

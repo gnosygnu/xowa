@@ -13,7 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
+package gplx.core.ios;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import org.junit.*;
 public class Io_sort_misc_tst {
 	@Before public void init() {
@@ -30,7 +38,7 @@ public class Io_sort_misc_tst {
 		String[] actl = actl_list.ToStrAry();
 		for (int i = 0; i < expd.length; i++)
 			expd[i] = dir_str + expd[i];
-		Tfds.Eq_ary_str(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 	}
 	@Test public void Io_line_rdr_comparer_all() {
 		tst_Io_line_rdr_fld_comparer(-1, "a", "b");
@@ -40,8 +48,8 @@ public class Io_sort_misc_tst {
 		tst_Io_line_rdr_fld_comparer( 1, "ab", "a");
 	}
 	private void tst_Io_line_rdr_fld_comparer(int expd, String lhs_str, String rhs_str) {
-		byte[] lhs = Bry_.new_u8(lhs_str), rhs = Bry_.new_u8(rhs_str);
-		Tfds.Eq(expd, Bry_.Compare(lhs, 0, lhs.length, rhs, 0, rhs.length));
+		byte[] lhs = BryUtl.NewU8(lhs_str), rhs = BryUtl.NewU8(rhs_str);
+		GfoTstr.EqObj(expd, BryUtl.Compare(lhs, 0, lhs.length, rhs, 0, rhs.length));
 	}
 	Io_line_rdr new_Io_line_rdr(String url_str, String text) {
 		Io_url url = Io_url_.mem_fil_(url_str);

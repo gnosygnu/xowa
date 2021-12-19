@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.proofreadPage;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.apps.cfgs.*;
 public class Pp_pages_nde_index_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -29,14 +32,14 @@ public class Pp_pages_nde_index_tst {
 	@Test public void Repeated() {	// PURPOSE: repeated pages should still show (and not be excluded by recursive logic); DATE:2014-01-01
 		fxt.Init_page_create("Page:A/1", "<pages index=\"A\" from=1 to=1 />abc");	// NOTE: recursive call to self
 		fxt.Init_page_create("Page:D/1", "d");
-		String main_txt = String_.Concat_lines_nl
+		String main_txt = StringUtl.ConcatLinesNl
 		(	"<pages index=\"A\" from=1 to=1 />"
 		,	"text_0"
 		,	"<pages index=\"D\" from=1 to=1/>"
 		,	"text_1"
 		,	"<pages index=\"D\" from=1 to=1/>"
 		); 
-		fxt.Test_parse_page_wiki_str(main_txt, String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(main_txt, StringUtl.ConcatLinesNl
 		(	"<p>abc&#32;"
 		,	"</p>"
 		,	"text_0"
@@ -48,7 +51,7 @@ public class Pp_pages_nde_index_tst {
 		));
 	}
 	@Test public void Index() {
-		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
+		fxt.Init_page_create("Index:A", StringUtl.ConcatLinesNl
 		(	"[[ignore]]"
 		,	"[[Page:A b/1]]"
 		,	"[[Page:A b/2]]"
@@ -61,14 +64,14 @@ public class Pp_pages_nde_index_tst {
 		fxt.Init_page_create("Page:A_b/3", "A_b/3\n");
 		fxt.Init_page_create("Page:A_b/4", "A_b/4\n");
 		fxt.Init_page_create("Page:A_b/5", "A_b/5\n");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A b/2' to='A_b/4' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A b/2' to='A_b/4' />", StringUtl.ConcatLinesNl
 		(	"<p>A_b/2"
 		,	"&#32;A_b/3"
 		,	"&#32;A_b/4"
 		,	"&#32;"
 		,	"</p>"
 		));
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A b/2' />", String_.Concat_lines_nl		// to missing
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A b/2' />", StringUtl.ConcatLinesNl        // to missing
 		(	"<p>A_b/2"
 		,	"&#32;A_b/3"
 		,	"&#32;A_b/4"
@@ -76,7 +79,7 @@ public class Pp_pages_nde_index_tst {
 		,	"&#32;"
 		,	"</p>"
 		));
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" to='A b/4' />", String_.Concat_lines_nl		// from missing
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" to='A b/4' />", StringUtl.ConcatLinesNl        // from missing
 		(	"<p>A_b/1"
 		,	"&#32;A_b/2"
 		,	"&#32;A_b/3"
@@ -113,19 +116,19 @@ public class Pp_pages_nde_index_tst {
 //		}
 	@Test public void Section_failed_when_xnde() {	// PURPOSE: section failed to be retrieved if preceding xnde; DATE:2014-01-15
 		fxt.Init_page_create("Page:A/1", "<b>a</b><section begin=\"sect_0\"/>b<section end=\"sect_0\"/>");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 fromsection='sect_0' tosection='sect_0' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 fromsection='sect_0' tosection='sect_0' />", StringUtl.ConcatLinesNl
 		(	"<p>b&#32;"
 		,	"</p>"
 		));
 	}
 	@Test public void Index_to_missing() {	// PURPOSE: if no to, get rest of pages
-		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
+		fxt.Init_page_create("Index:A", StringUtl.ConcatLinesNl
 		(	"[[Page:A b/1]]"
 		,	"[[Page:A b/2]]"
 		));
 		fxt.Init_page_create("Page:A_b/1", "A_b/1\n");
 		fxt.Init_page_create("Page:A_b/2", "A_b/2\n");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A b/1' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A b/1' />", StringUtl.ConcatLinesNl
 		(	"<p>A_b/1"
 		,	"&#32;A_b/2"
 		,	"&#32;"
@@ -134,13 +137,13 @@ public class Pp_pages_nde_index_tst {
 	}
 	@Test public void Set_from_to_if_missing() {	// PURPOSE: if no from / to, set from / to variables; note that earlier version of XO was correctly transcluding content, but just not updating from / to variable; fr.s:Constitution_de_la_France_de_1958_(version_initiale); DATE:2014-05-21
 		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", "{{{from}}}-{{{to}}}\n");
-		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
+		fxt.Init_page_create("Index:A", StringUtl.ConcatLinesNl
 		(	"[[Page:A/1]]"
 		,	"[[Page:A/2]]"
 		));
 		fxt.Init_page_create("Page:A/1", "A/1\n");
 		fxt.Init_page_create("Page:A/2", "A/2\n");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A/1' header='y' />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from='A/1' header='y' />", StringUtl.ConcatLinesNl
 		( "<p>0-1"
 		, "A/1"
 		, "&#32;A/2"
@@ -171,7 +174,7 @@ public class Pp_pages_nde_index_tst {
 	}
 	@Test public void Ref() {	// PURPOSE: ref on page should show; DATE:2014-01-18
 		fxt.Init_page_create("Page:A/1", "a<ref>b</ref>c");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 /><references/>", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 /><references/>", StringUtl.ConcatLinesNl
 		( "<p>a<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>c&#32;"
 		, "</p>"
 		, "<ol class=\"references\">"
@@ -183,7 +186,7 @@ public class Pp_pages_nde_index_tst {
 		fxt.Init_page_create("Page:A/1", "a");
 		fxt.Init_page_create("Page:A/2", "* b");
 		fxt.Init_page_create("Page:A/3", "c");
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=3 />", StringUtl.ConcatLinesNl
 		(	"<p>a&#32;"
 		,	"</p>"
 			,	""
@@ -202,31 +205,31 @@ public class Pp_pages_nde_index_tst {
 
 		// [[Index:]] has no [[Page:]] links; interpret to=1 as [[Page:A/1]]
 		fxt.Wiki().Cache_mgr().Free_mem__all();
-		fxt.Init_page_update("Index:A" , String_.Concat_lines_nl
+		fxt.Init_page_update("Index:A" , StringUtl.ConcatLinesNl
 		( "no links"
 		));
-		fxt.Test_parse_page_wiki_str("<pages index='A' to=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' to=1 />", StringUtl.ConcatLinesNl
 		( "<p>A/0&#32;A/1&#32;"
 		, "</p>"
 		));
 
 		// [[Index:]] has [[Page:]] links; interpret to=1 as 1st [[Page:]] in [[Index:]]'s [[Page:]] links
 		fxt.Wiki().Cache_mgr().Free_mem__all();
-		fxt.Init_page_update("Index:A" , String_.Concat_lines_nl
+		fxt.Init_page_update("Index:A" , StringUtl.ConcatLinesNl
 		( "[[Page:A/0]]"
 		));
-		fxt.Test_parse_page_wiki_str("<pages index='A' to=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' to=1 />", StringUtl.ConcatLinesNl
 		( "<p>A/0&#32;"
 		, "</p>"
 		));
 
 		// [[Index:]] has [[Page:]] links but also <pagelist>; interpret to=1 as [[Page:A/1]]
 		fxt.Wiki().Cache_mgr().Free_mem__all();
-		fxt.Init_page_update("Index:A" , String_.Concat_lines_nl
+		fxt.Init_page_update("Index:A" , StringUtl.ConcatLinesNl
 		( "[[Page:A/0]]"
 		, "<pagelist/>"
 		));
-		fxt.Test_parse_page_wiki_str("<pages index='A' to=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' to=1 />", StringUtl.ConcatLinesNl
 		( "<p>A/0&#32;A/1&#32;"
 		, "</p>"
 		));
@@ -236,14 +239,14 @@ public class Pp_pages_nde_index_tst {
 		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", "{{{prev}}}\n");
 
 		// create index page with 3 links: "current" page and flanking "prev" and "next" pages; note the xml in the caption
-		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
+		fxt.Init_page_create("Index:A", StringUtl.ConcatLinesNl
 		( "[[Test_page_prev|<b>prev</b>]]"
 		, "[[Test_page|<b>cur</b>]]"
 		, "[[Test_page_next|<b>next</b>]]"
 		));
 
 		// parse text; fails if "&lt;b&gt;prev&lt;/b&gt;"
-		fxt.Test_parse_page_wiki_str("<pages index='A' header=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index='A' header=1 />", StringUtl.ConcatLinesNl
 		( "<p><a href=\"/wiki/Test_page_prev\"><b>prev</b></a>"
 		, "</p>"
 		));

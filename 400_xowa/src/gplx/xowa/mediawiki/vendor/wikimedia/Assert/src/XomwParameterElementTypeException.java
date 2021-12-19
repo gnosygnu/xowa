@@ -16,8 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 
 package gplx.xowa.mediawiki.vendor.wikimedia.Assert.src;
 
-import gplx.String_;
-
+import gplx.types.basics.utls.StringUtl;
 // MW.SRC:1.33.1
 /**
  * Exception indicating that a parameter element type assertion failed.
@@ -44,7 +43,7 @@ public class XomwParameterElementTypeException extends XomwParameterAssertionExc
         //    throw new ParameterTypeException( 'elementType', 'string' );
         //}
 
-        super(parameterName, String_.Format("all elements must be {0}", elementType));
+        super(parameterName, StringUtl.Format("all elements must be {0}", elementType));
 
         this.elementType = elementType;
     }

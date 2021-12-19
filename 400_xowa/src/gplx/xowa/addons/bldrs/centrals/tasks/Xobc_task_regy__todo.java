@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.core.gfobjs.*;
+package gplx.xowa.addons.bldrs.centrals.tasks;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.dbs.*;
 public class Xobc_task_regy__todo extends Xobc_task_regy__base {
 	public Xobc_task_regy__todo(Xobc_task_mgr task_mgr) {super(task_mgr, "todo");}

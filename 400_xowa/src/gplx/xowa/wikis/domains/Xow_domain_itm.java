@@ -13,15 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.domains;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.langs.*;
 public class Xow_domain_itm {
 	Xow_domain_itm(byte[] domain_bry, Xow_domain_tid domain_type, Xol_lang_stub lang_actl_itm, byte[] lang_orig_key) {
 		this.domain_bry = domain_bry; this.domain_type = domain_type; this.lang_actl_itm = lang_actl_itm; this.lang_orig_key = lang_orig_key;
-		this.domain_str = String_.new_u8(domain_bry);
+		this.domain_str = StringUtl.NewU8(domain_bry);
 		this.abrv_wm = Xow_abrv_wm_.To_abrv(this);
 		this.abrv_xo = Xow_abrv_xo_.To_bry(domain_bry, lang_orig_key, domain_type);
-		this.abrv_xo_str = String_.new_u8(abrv_xo);
+		this.abrv_xo_str = StringUtl.NewU8(abrv_xo);
 	}
 	public byte[]			Domain_bry() {return domain_bry;} private final byte[] domain_bry;
 	public String			Domain_str() {return domain_str;} private final String domain_str;

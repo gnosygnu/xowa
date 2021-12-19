@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.exprs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.parsers.*;
 import gplx.xowa.langs.msgs.*;
 abstract class Func_tkn_base implements Func_tkn {
@@ -21,9 +23,9 @@ abstract class Func_tkn_base implements Func_tkn {
 	public abstract int Precedence();
 	public abstract int ArgCount();
 	public boolean Func_is_const() {return false;}
-	public void Ctor(String v) {val_ary = Bry_.new_u8(v);}
+	public void Ctor(String v) {val_ary = BryUtl.NewU8(v);}
 	public byte[] Val_ary()	{return val_ary;} private byte[] val_ary;
-	public String Val_str()	{return String_.new_u8(Val_ary());}
+	public String Val_str()	{return StringUtl.NewU8(Val_ary());}
 	public Func_tkn GetAlt() {return this;}
 	public boolean Calc(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		if (val_stack.Len() < this.ArgCount()) {shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_missing_operand, Val_ary()); return false;}

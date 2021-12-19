@@ -14,20 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.glys;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgBry;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.xtns.gallery.Gallery_mgr_base_;
 import org.junit.Test;
 public class Xoh_gly_itm_wtr_tst {
 	private final Xoh_gly_itm_wtr_fxt fxt = new Xoh_gly_itm_wtr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init__gly(Gallery_mgr_base_.Tid__traditional, -1, -1, -1, 0, 155, 150, 5, "caption");
 		fxt.Init__img("/wiki/File:A.png", "A.png", "0|120|120|-1|-1|-1");
-		fxt.Test__write(String_.Concat_lines_nl_skip_last
+		fxt.Test__write(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "<li id='xogly_li_0' class='gallerybox' style='width:155px;'>"
 		,   "<div id='xowa_gallery_div1_0' style='width:155px;'>"
@@ -44,16 +44,16 @@ public class Xoh_gly_itm_wtr_tst {
 }
 class Xoh_gly_itm_wtr_fxt {
 	private final Xoh_gly_itm_wtr wtr = new Xoh_gly_itm_wtr();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public void Init__gly(byte mode, int xnde_w, int xnde_h, int xnde_per_row, int id, int itm_w, int div_1_w, int div_3_margin, String caption) {
-		wtr.Init(BoolUtl.N, mode, xnde_w, xnde_h, xnde_per_row, id, 0, 0, itm_w, div_1_w, div_3_margin, Xoh_gly_itm_data.Capt_tid__p, Bry_.new_a7(caption));
+		wtr.Init(BoolUtl.N, mode, xnde_w, xnde_h, xnde_per_row, id, 0, 0, itm_w, div_1_w, div_3_margin, Xoh_gly_itm_data.Capt_tid__p, BryUtl.NewA7(caption));
 	}
 	public void Init__img(String href, String xowa_title, String xoimg) {
-		wtr.Img_wtr().Init_by_gly(gplx.core.brys.args.Bfr_arg__bry.New(Bry_.new_u8(href)), Bry_.new_u8(xowa_title), gplx.core.brys.args.Bfr_arg__bry.New(Bry_.new_u8(xoimg)));
+		wtr.Img_wtr().Init_by_gly(BryBfrArgBry.New(BryUtl.NewU8(href)), BryUtl.NewU8(xowa_title), BryBfrArgBry.New(BryUtl.NewU8(xoimg)));
 	}
 	public void Test__write(String expd) {
 		expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);
-		wtr.Bfr_arg__add(tmp_bfr);
-		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
+		wtr.AddToBfr(tmp_bfr);
+		GfoTstr.EqLines(expd, tmp_bfr.ToStrAndClear());
 	}
 }

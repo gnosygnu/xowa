@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.core.tests.*;	
-import gplx.xowa.files.caches.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.htmls.core.wkrs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.pages.lnkis.*;
 public class Xoh_htxt_fxt {
 	private final Xowe_wiki wiki;
@@ -41,8 +43,8 @@ public class Xoh_htxt_fxt {
 	}
 	public void Test__decode__raw(String htxt, String expd) {
 		hpg.Section_mgr().Clear();
-		byte[] actl = make_mgr.Parse(Bry_.new_u8(htxt), hpg.Wiki(), hpg);
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+		byte[] actl = make_mgr.Parse(BryUtl.NewU8(htxt), hpg.Wiki(), hpg);
+		GfoTstr.EqLines(expd, StringUtl.NewU8(actl));
 	}
 	public void Test__hpg__redlinks(String... expd_ttls) {
 		Xopg_lnki_list actl_list = hpg.Html_data().Redlink_list();
@@ -52,7 +54,7 @@ public class Xoh_htxt_fxt {
 			Xopg_lnki_itm actl_itm = actl_list.Get_at(i);
 			actl_ttls[i] = actl_itm.Ttl().Full_db_as_str();
 		}
-		Gftest.Eq__ary(expd_ttls, actl_ttls);
+		GfoTstr.EqLines(expd_ttls, actl_ttls);
 	}
-	public static String Escape(String v) {return String_.Replace(v, "~", "");}
+	public static String Escape(String v) {return StringUtl.Replace(v, "~", "");}
 }

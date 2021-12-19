@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
-public class PointAdp implements To_str_able {
+package gplx.gfui;
+import gplx.frameworks.objects.ToStrAble;
+import gplx.types.basics.utls.StringUtl;
+public class PointAdp implements ToStrAble {
 	public int X() {return x;} final int x;
 	public int Y() {return y;} final int y;
 	public		PointAdp Op_add(PointAdp val) {return new PointAdp(x + val.x, y + val.y);}
@@ -25,8 +27,8 @@ public class PointAdp implements To_str_able {
 		PointAdp comp = PointAdp_.as_(compObj); if (comp == null) return false;
 		return x == comp.x && y == comp.y;
 	}
-	public String To_str() {return String_.Concat_any(x, ",", y);}
-	@Override public String toString() {return To_str();}
+	public String ToStr() {return StringUtl.ConcatObjs(x, ",", y);}
+	@Override public String toString() {return ToStr();}
 	@Override public boolean equals(Object obj) {return Eq(obj);}
 	@Override public int hashCode() {return super.hashCode();}
 	public PointAdp(int x, int y) {this.x = x; this.y = y;}

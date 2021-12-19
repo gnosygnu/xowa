@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mysql; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.mysql; import gplx.dbs.*;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValHash;
 public class Mysql_conn_info extends Db_conn_info__base {
 	public Mysql_conn_info(String raw, String db_api, String database, String server, String uid, String pwd) {super(raw, db_api, database);
 		this.server = server;
@@ -34,10 +36,10 @@ public class Mysql_conn_info extends Db_conn_info__base {
 		, "charset", "utf8"
 		));
 	}
-	@Override public Db_conn_info New_self(String raw, Keyval_hash hash) {
+	@Override public Db_conn_info New_self(String raw, KeyValHash hash) {
 		return new Mysql_conn_info
-			( raw, Bld_api(hash, Keyval_.new_("charset", "utf8")), hash.Get_val_as_str_or_fail("database")
-			, hash.Get_val_as_str_or_fail("server"), hash.Get_val_as_str_or_fail("uid"), hash.Get_val_as_str_or_fail("pwd"));
+			( raw, Bld_api(hash, KeyVal.NewStr("charset", "utf8")), hash.GetByValAsStrOrFail("database")
+			, hash.GetByValAsStrOrFail("server"), hash.GetByValAsStrOrFail("uid"), hash.GetByValAsStrOrFail("pwd"));
 	}
         public static final Mysql_conn_info Instance = new Mysql_conn_info("", "", "", "", "", "");
 }

@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.template_styles;
 
-import gplx.Bry_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.javascripts.util.regex.JsPattern_;
 import gplx.xowa.htmls.minifys.XoCssMin;
 
@@ -47,7 +47,7 @@ public class XoCssTransformer {
         css = PrependSelector(css, "([^\\}\\{]*)\\{", selector);
         return this;
     }
-    public byte[] ToBry() {return Bry_.new_u8(css);}
+    public byte[] ToBry() {return BryUtl.NewU8(css);}
     public String ToStr() {return css;}
 
 	private String PrependSelector(String orig, String regx, String selector) {
@@ -82,7 +82,7 @@ public class XoCssTransformer {
 						String item = items[i].trim();
 						if (item.length() > 0) { // ignore empty items
                             // prepend the selector, except if it starts with 'body'
-							if (!String_.MidByLenSafe(item, 0, 4).equals("body")) {
+							if (!StringUtl.MidByLenSafe(item, 0, 4).equals("body")) {
                                 sb.append(selector);
                                 sb.append(' ');
                             }

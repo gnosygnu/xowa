@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms; import gplx.*;
-import gplx.objects.lists.CompareAble;
+package gplx.xowa.xtns.wbases.claims.itms;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.basics.utls.IntUtl;
 import gplx.xowa.xtns.wbases.claims.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public abstract class Wbase_claim_base implements CompareAble {
@@ -41,7 +42,7 @@ public abstract class Wbase_claim_base implements CompareAble {
 
 	public int compareTo(Object obj) {
 		Wbase_claim_base comp = (Wbase_claim_base)obj;
-		return Int_.Compare(pid, comp.pid);
+		return IntUtl.Compare(pid, comp.pid);
 	}
 
 	public static final Wbase_claim_base[] Ary_empty = new Wbase_claim_base[0];

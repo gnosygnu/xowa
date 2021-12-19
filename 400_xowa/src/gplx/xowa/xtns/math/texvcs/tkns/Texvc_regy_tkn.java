@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+package gplx.xowa.xtns.math.texvcs.tkns;
+import gplx.types.errs.Err;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.arrays.IntAryUtl;
 public class Texvc_regy_tkn {
-	private int[] ary = Int_ary_.Empty; private int ary_max; private int itms_len;
+	private int[] ary = IntAryUtl.Empty; private int ary_max; private int itms_len;
 	private final Texvc_root root; private Texvc_tkn_mkr tkn_mkr;
 	public int Len() {return itms_len;}
 	public Texvc_regy_tkn(Texvc_root root) {
@@ -74,7 +77,7 @@ public class Texvc_regy_tkn {
 		ary[cur_owner_uid_idx] = new_owner_uid;
 		return old_owner_uid;
 	}
-	private Err Make_err_invalid_uid(int uid) {return Err_.new_("math.texvc", "invalid uid", "uid", uid, "max", ary_max);}
+	private Err Make_err_invalid_uid(int uid) {return ErrUtl.NewArgs("invalid uid", "uid", uid, "max", ary_max);}
 	private static final int
 	  Idx__owner_id		= 1
 	, Idx__singleton_id	= 2

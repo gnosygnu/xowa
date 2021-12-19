@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs; import gplx.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs;
 import gplx.langs.jsons.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
 public class Xofulltext_args_qry {
 	public int qry_id;
@@ -31,7 +33,7 @@ public class Xofulltext_args_qry {
 	private boolean canceled;
 
 	public byte[] Qry_key(byte[] wiki, byte[] ns_ids) {
-		return Bry_.Add_w_dlm(AsciiByte.Nl, wiki, ns_ids, search_text); // EX: "en.wikipedia.org\n0|4\nearth"
+		return BryUtl.AddWithDlm(AsciiByte.Nl, wiki, ns_ids, search_text); // EX: "en.wikipedia.org\n0|4\nearth"
 	}
 	public void Cancel() {
 		synchronized (this) {
@@ -48,7 +50,7 @@ public class Xofulltext_args_qry {
 
 		// create wikis
 		byte[] wikis_bry = args.Get_as_bry("qarg_wikis");
-		byte[][] wikis_ary = Bry_split_.Split(wikis_bry, AsciiByte.Pipe, true);
+		byte[][] wikis_ary = BrySplit.Split(wikis_bry, AsciiByte.Pipe, true);
 		int wikis_len = wikis_ary.length;
 		Xofulltext_args_wiki[] wiki_args = new Xofulltext_args_wiki[wikis_len];
 		rv.wikis_ary = wiki_args;
@@ -70,7 +72,7 @@ public class Xofulltext_args_qry {
 	private static void Set_prop(Xofulltext_args_wiki[] wikis, int wikis_len, Json_nde args, String key) {
 		// set ns_ids
 		byte[] json_val = args.Get_as_bry("qarg_" + key);
-		byte[][] ary = Bry_split_.Split(json_val, AsciiByte.Pipe, true);
+		byte[][] ary = BrySplit.Split(json_val, AsciiByte.Pipe, true);
 		int ary_len = ary.length;
 		for (int i = 0; i < wikis_len; i++) {
 			byte[] val = i < ary_len ? ary[i] : ary[ary_len - 1];

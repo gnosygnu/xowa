@@ -13,16 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.durations; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.langs.durations;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.langs.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.langs.msgs.*;
 public class Xol_duration_mgr {
 	private Xol_msg_itm[] interval_msgs = null;
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
-	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
+	private final BryFmtr tmp_fmtr = BryFmtr.NewTmp();
 	public Xol_duration_mgr(Xol_lang_itm lang) {this.lang = lang;} private Xol_lang_itm lang;
 	public Xol_interval_itm[] Get_duration_intervals(long seconds, Xol_duration_itm[] intervals) {
 		if (intervals == null) intervals = Xol_duration_itm_.Ary_default;
@@ -64,10 +68,10 @@ public class Xol_duration_mgr {
 		interval_msgs = new Xol_msg_itm[len];
 		for (int i = 0; i < len; i++) {
 			Xol_duration_itm itm = Xol_duration_itm_.Ary_default[i];
-			byte[] msg_key = Bry_.Add(Bry_duration, itm.Name_bry());
+			byte[] msg_key = BryUtl.Add(Bry_duration, itm.Name_bry());
 			interval_msgs[i] = msg_mgr.Itm_by_key_or_new(msg_key);
 		}
-	}	private static final byte[] Bry_duration = Bry_.new_a7("duration-");
+	}	private static final byte[] Bry_duration = BryUtl.NewA7("duration-");
 	private void List_to_str_init() {
 		Xol_msg_mgr msg_mgr = lang.Msg_mgr();
 		Msg_and = msg_mgr.Val_by_str_or_empty("and");
@@ -78,7 +82,7 @@ public class Xol_duration_mgr {
 	public byte[] List_to_str(byte[][] segs_ary) {
 		int len = segs_ary.length;
 		switch (len) {
-			case 0: return Bry_.Empty;
+			case 0: return BryUtl.Empty;
 			case 1: return segs_ary[0];
 			default:
 				if (Msg_and == null) List_to_str_init();
@@ -88,7 +92,7 @@ public class Xol_duration_mgr {
 					tmp_bfr.Add(segs_ary[i]);
 				}
 				tmp_bfr.Add(Msg_and).Add(Msg_word_separator).Add(segs_ary[last_idx]);
-				return tmp_bfr.To_bry_and_clear();
+				return tmp_bfr.ToBryAndClear();
 		}
 	}
 }

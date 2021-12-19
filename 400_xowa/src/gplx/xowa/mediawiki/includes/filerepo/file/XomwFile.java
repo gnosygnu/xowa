@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.filerepo.file;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.MathUtl;
 import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
 import gplx.xowa.mediawiki.includes.media.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
@@ -297,7 +300,7 @@ public class XomwFile {
 		if (!XophpObject_.isset(this.extension)) {
 			int n = XophpString_.strpos(this.getName(), AsciiByte.Dot);
 			this.extension = normalizeExtension(
-				n != Bry_find_.Not_found ? XophpString_.substr(this.getName(), n + 1) : Bry_.Empty);
+				n != BryFind.NotFound ? XophpString_.substr(this.getName(), n + 1) : BryUtl.Empty);
 		}
 
 		return this.extension;
@@ -334,7 +337,7 @@ public class XomwFile {
 		if (!XophpObject_.isset(this.url)) {
 			// this.assertRepoDefined();
 			byte[] ext = this.getExtension();
-			this.url = Bry_.Add(this.repo.getZoneUrl(XomwFileRepo.Zone__public, ext), AsciiByte.SlashBry, this.getUrlRel());
+			this.url = BryUtl.Add(this.repo.getZoneUrl(XomwFileRepo.Zone__public, ext), AsciiByte.SlashBry, this.getUrlRel());
 		}
 
 		return this.url;
@@ -402,7 +405,7 @@ public class XomwFile {
 	public byte[] getPath() {
 		if (this.path == null) {
 			// this.assertRepoDefined();
-			this.path = Bry_.Add(this.repo.getZonePath(XomwFileRepo.Zone__public), AsciiByte.SlashBry, this.getRel());
+			this.path = BryUtl.Add(this.repo.getZonePath(XomwFileRepo.Zone__public), AsciiByte.SlashBry, this.getRel());
 		}
 
 		return this.path;
@@ -697,7 +700,7 @@ public class XomwFile {
 	public byte[] getMimeType() {
 		return Mime_type__unknown;
 	}
-	private static final byte[] Mime_type__unknown = Bry_.new_a7("unknown/unknown");
+	private static final byte[] Mime_type__unknown = BryUtl.NewA7("unknown/unknown");
 
 //		/**
 //		* Return the type of the media in the file.
@@ -960,7 +963,7 @@ public class XomwFile {
 //				thumbName .= '-' . this.getSha1() . '.' . thumbExt;
 //			}
 //			else {
-			thumbName = Bry_.Add(thumbName, AsciiByte.DashBry, name);
+			thumbName = BryUtl.Add(thumbName, AsciiByte.DashBry, name);
 
 //				if (thumbExt != extension) {
 //					thumbName .= ".thumbExt";
@@ -1132,7 +1135,7 @@ public class XomwFile {
 //			byte[] thumbPath = this.getThumbPath(thumbName); // final thumb path
 
 //			tmpThumbPath = tmpFile.getPath();
-		byte[] tmpThumbPath = Bry_.Empty;
+		byte[] tmpThumbPath = BryUtl.Empty;
 
 //			if (handler.supportsBucketing()) {
 //				this.generateBucketsIfNeeded(normalisedParams, flags);
@@ -1514,7 +1517,7 @@ public class XomwFile {
 	*/
 	private byte[] getRel() {
 		if (relPath == null) {
-			this.relPath = Bry_.Add(this.getHashPath(), this.getName());
+			this.relPath = BryUtl.Add(this.getHashPath(), this.getName());
 		}
 		return relPath;
 	}
@@ -1547,7 +1550,7 @@ public class XomwFile {
 	private byte[] getThumbRel(byte[] suffix) {
 		path = this.getRel();
 		if (suffix != null) {
-			path = Bry_.Add(path, AsciiByte.SlashBry, suffix);
+			path = BryUtl.Add(path, AsciiByte.SlashBry, suffix);
 		}
 
 		return path;
@@ -1560,7 +1563,7 @@ public class XomwFile {
 	* @return String
 	*/
 	private byte[] getUrlRel() {
-		return Bry_.Add(this.getHashPath(), XophpEncode_.rawurlencode(this.getName()));
+		return BryUtl.Add(this.getHashPath(), XophpEncode_.rawurlencode(this.getName()));
 	}
 
 //		/**
@@ -1617,7 +1620,7 @@ public class XomwFile {
 	public byte[] getThumbPath(byte[] suffix) {
 		// this.assertRepoDefined();
 
-		return Bry_.Add(this.repo.getZonePath(XomwFileRepo.Zone__thumb), AsciiByte.SlashBry, this.getThumbRel(suffix));
+		return BryUtl.Add(this.repo.getZonePath(XomwFileRepo.Zone__thumb), AsciiByte.SlashBry, this.getThumbRel(suffix));
 	}
 
 //		/**
@@ -1682,9 +1685,9 @@ public class XomwFile {
 	private byte[] getZoneUrl(int zone, byte[] suffix) {
 		// this.assertRepoDefined();
 		byte[] ext = this.getExtension();
-		byte[] path = Bry_.Add(this.repo.getZoneUrl(zone, ext), AsciiByte.SlashBry, this.getUrlRel());
+		byte[] path = BryUtl.Add(this.repo.getZoneUrl(zone, ext), AsciiByte.SlashBry, this.getUrlRel());
 		if (suffix != null) {
-			path = Bry_.Add(path, AsciiByte.SlashBry, gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_rawurlencode.Encode(suffix));
+			path = BryUtl.Add(path, AsciiByte.SlashBry, gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_rawurlencode.Encode(suffix));
 		}
 
 		return path;
@@ -1999,7 +2002,7 @@ public class XomwFile {
 			return 0;
 		}
 		else {
-			return (int)Math_.Round(srcHeight * dstWidth / srcWidth, 0);
+			return (int)MathUtl.Round(srcHeight * dstWidth / srcWidth, 0);
 		}
 	}
 

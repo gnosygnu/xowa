@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.xndes;
 
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Hash_adp_bry;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.primitives.Byte_obj_val;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.parsers.htmls.Mwh_atr_itm;
 import gplx.xowa.parsers.htmls.Mwh_atr_itm_;
 
@@ -44,7 +44,7 @@ public class Xop_xatr_whitelist_mgr {
 			chk_bgn = 0;
 			chk_end = key_bry.length;
 		}
-		Object o = key_trie.Match_at(trv, chk_bry, chk_bgn, chk_end);
+		Object o = key_trie.MatchAt(trv, chk_bry, chk_bgn, chk_end);
 		if (o == null) return false;// unknown atr_key; EX: <b unknown=1/>
 		Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)o;
 		byte itm_key_tid = itm.Key_tid();
@@ -283,17 +283,17 @@ public class Xop_xatr_whitelist_mgr {
 		return this;
 	}
 	private void Ini_grp(String key_str, String base_grp, String... cur_itms) {
-		byte[][] itms = Bry_.Ary(cur_itms);
+		byte[][] itms = BryUtl.Ary(cur_itms);
 		if (base_grp != null)
-			itms = Bry_.Ary_add(itms, (byte[][])grp_hash.Get_by_bry(Bry_.new_a7(base_grp)));
-		byte[] key = Bry_.new_a7(key_str);
+			itms = BryUtl.AryAdd(itms, (byte[][])grp_hash.Get_by_bry(BryUtl.NewA7(base_grp)));
+		byte[] key = BryUtl.NewA7(key_str);
 		grp_hash.Add_bry_obj(key, itms);
 	}
 	private void Ini_nde(int tag_tid, String... key_strs) {
 		List_adp keys = List_adp_.New();
 		int len = key_strs.length;
 		for (int i = 0; i < len; i++) {
-			byte[] key = Bry_.new_a7(key_strs[i]);
+			byte[] key = BryUtl.NewA7(key_strs[i]);
 			Object grp_obj = grp_hash.Get_by_bry(key);	// is the key a grp? EX: "common"
 			if (grp_obj == null)
 				keys.Add(key);
@@ -306,29 +306,29 @@ public class Xop_xatr_whitelist_mgr {
 		}
 		len = keys.Len();
 		for (int i = 0; i < len; i++) {
-			byte[] key_bry = (byte[])keys.Get_at(i);
+			byte[] key_bry = (byte[])keys.GetAt(i);
 			Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)key_trie.Match_exact(key_bry, 0, key_bry.length);
 			if (itm == null) {
 				itm = Ini_key_trie_add(key_bry, true);
-				key_trie.Add_obj(key_bry, itm);
+				key_trie.AddObj(key_bry, itm);
 			}
 			itm.Tags()[tag_tid] = 1;
 		}
 	}
 	private void Ini_all_loose(String key_str) {
-		byte[] key_bry = Bry_.new_a7(key_str);
+		byte[] key_bry = BryUtl.NewA7(key_str);
 		Ini_key_trie_add(key_bry, false);
 		Xop_xatr_whitelist_itm itm = Ini_key_trie_add(key_bry, false);
-		key_trie.Add_obj(key_bry, itm);
+		key_trie.AddObj(key_bry, itm);
 		int len = Xop_xnde_tag_.Tid__len;
 		for (int i = 0; i < len; i++)
 			itm.Tags()[i] = 1;
 	}
 	private Xop_xatr_whitelist_itm  Ini_key_trie_add(byte[] key, boolean exact) {
 		Object key_tid_obj = tid_hash.GetByOrNull(key);
-		byte key_tid = key_tid_obj == null ? Mwh_atr_itm_.Key_tid__generic : ((Byte_obj_val)key_tid_obj).Val();
+		byte key_tid = key_tid_obj == null ? Mwh_atr_itm_.Key_tid__generic : ((ByteVal)key_tid_obj).Val();
 		Xop_xatr_whitelist_itm rv = new Xop_xatr_whitelist_itm(key, key_tid, exact);
-		key_trie.Add_obj(key, rv);
+		key_trie.AddObj(key, rv);
 		return rv;
 	}
 	private Hash_adp_bry tid_hash = Hash_adp_bry.ci_a7()
@@ -353,20 +353,20 @@ public class Xop_xatr_whitelist_mgr {
 		}
 		int pos = chk_bgn;
 		while (pos < chk_end) {
-			Object o = style_trie.Match_at(trv, chk_bry, pos, chk_end);
+			Object o = style_trie.MatchAt(trv, chk_bry, pos, chk_end);
 			if (o == null)
 				++pos;
 			else {
 				pos = trv.Pos();
-				byte style_tid = ((Byte_obj_val)o).Val();
+				byte style_tid = ((ByteVal)o).Val();
 				switch (style_tid) {
 					case Style_expression:
-						xatr.Val_bry_(Bry_.Empty);
+						xatr.Val_bry_(BryUtl.Empty);
 						return false;
 					case Style_filter: 
 					case Style_accelerator:
 						if (Next_non_ws_byte(chk_bry, pos, chk_end) == AsciiByte.Colon) {
-							xatr.Val_bry_(Bry_.Empty);
+							xatr.Val_bry_(BryUtl.Empty);
 							return false;						
 						}
 						break;
@@ -375,7 +375,7 @@ public class Xop_xatr_whitelist_mgr {
 					case Style_image:
 					case Style_image_set:
 						if (Next_non_ws_byte(chk_bry, pos, chk_end) == AsciiByte.ParenBgn) {
-							xatr.Val_bry_(Bry_.Empty);
+							xatr.Val_bry_(BryUtl.Empty);
 							return false;
 						}
 						break;

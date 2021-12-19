@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.tcp;
+import gplx.types.basics.utls.BryUtl;
 public class Xosrv_cmd_types {
 	public static final byte[]
-		Cmd_exec 		= Bry_.new_a7("xowa.cmd.exec")	, Cmd_pass	 	= Bry_.new_a7("xowa.cmd.result")	, Cmd_fail		= Bry_.new_a7("xowa.cmd.error")
-	,	Js_exec 		= Bry_.new_a7("xowa.js.exec")	, Js_pass		= Bry_.new_a7("xowa.js.result")		, Js_fail		= Bry_.new_a7("xowa.js.error")
-	,	Browser_exec 	= Bry_.new_a7("browser.js.exec"), Browser_pass 	= Bry_.new_a7("browser.js.result")	, Browser_fail 	= Bry_.new_a7("browser.js.error")
+		Cmd_exec 		= BryUtl.NewA7("xowa.cmd.exec")	, Cmd_pass	 	= BryUtl.NewA7("xowa.cmd.result")	, Cmd_fail		= BryUtl.NewA7("xowa.cmd.error")
+	,	Js_exec 		= BryUtl.NewA7("xowa.js.exec")	, Js_pass		= BryUtl.NewA7("xowa.js.result")		, Js_fail		= BryUtl.NewA7("xowa.js.error")
+	,	Browser_exec 	= BryUtl.NewA7("browser.js.exec"), Browser_pass 	= BryUtl.NewA7("browser.js.result")	, Browser_fail 	= BryUtl.NewA7("browser.js.error")
 	;
 }

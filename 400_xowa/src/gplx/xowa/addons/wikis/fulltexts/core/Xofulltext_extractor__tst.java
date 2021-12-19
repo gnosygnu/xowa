@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.addons.wikis.fulltexts.core;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import org.junit.*;
 public class Xofulltext_extractor__tst {
 	private final Xofulltext_extractor__fxt fxt = new Xofulltext_extractor__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		// simple node
 		fxt.Test__extract("a <i>b</i> c", "a b c");
 
@@ -40,6 +42,6 @@ public class Xofulltext_extractor__tst {
 class Xofulltext_extractor__fxt {
 	private final Xofulltext_extractor extractor = new Xofulltext_extractor();
 	public void Test__extract(String src, String expd) {
-		Gftest.Eq__str(expd, extractor.Extract(Bry_.new_u8(src)));
+		GfoTstr.Eq(expd, extractor.Extract(BryUtl.NewU8(src)));
 	}
 }

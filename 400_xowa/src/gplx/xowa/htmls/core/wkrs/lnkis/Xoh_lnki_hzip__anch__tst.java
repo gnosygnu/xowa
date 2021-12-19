@@ -17,25 +17,25 @@ package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*;
 public class Xoh_lnki_hzip__anch__tst {
 	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
-	@Test  public void Basic() {			// EX: [[#a]]
+	@Test public void Basic() {			// EX: [[#a]]
 		fxt.Test__bicode("~$Ba~#a~", "<a href='#a'>#a</a>");
 	}
-	@Test  public void Capt() {			// EX: [[#a|b]]
+	@Test public void Capt() {			// EX: [[#a|b]]
 		fxt.Test__bicode("~$Ba~b~", "<a href='#a'>b</a>");
 	}
-	@Test  public void Capt_similar() {	// EX: [[#a|a]]
+	@Test public void Capt_similar() {	// EX: [[#a|a]]
 		fxt.Test__bicode("~$Ba~a~", "<a href='#a'>a</a>");
 	}
-	@Test  public void Quote() {			// PURPOSE: handle invalid href such as embedded quotes; ISSUE#:311; PAGE:en.v:Research_in_programming_Wikidata/Banks DATE:2018-12-27
+	@Test public void Quote() {			// PURPOSE: handle invalid href such as embedded quotes; ISSUE#:311; PAGE:en.v:Research_in_programming_Wikidata/Banks DATE:2018-12-27
 		fxt.Test__encode("<a href=\"#a\"b\"c\"></a>", "<a href=\"#a\"b\"c\"></a>");
 	}
-	@Test  public void Error() {			// EX: [[#a|b]]; make sure bad title character does not cause error
+	@Test public void Error() {			// EX: [[#a|b]]; make sure bad title character does not cause error
 		fxt.Test__bicode("~$Ba|b~#a|b~", "<a href='#a|b'>#a|b</a>");	// NOTE: the "|" should be url-encoded
 	}
-	@Test  public void Inet__file() {
+	@Test public void Inet__file() {
 		fxt.Test__bicode("~$Rfile:///C://A.png~b~", "<a href='file:///C://A.png' title='file:///C://A.png'>b</a>");
 	}
-	@Test  public void Inet__enc() {
+	@Test public void Inet__enc() {
 		fxt.Test__bicode("~${'Thttps://simple.wikisource.org/wiki/A%C3%A6e~b~Aæe~", "<a href='https://simple.wikisource.org/wiki/A%C3%A6e' title='Aæe'>b</a>");
 	}
 }

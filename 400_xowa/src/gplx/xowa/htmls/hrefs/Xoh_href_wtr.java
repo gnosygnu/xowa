@@ -15,12 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.hrefs;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.langs.htmls.encoders.Gfo_url_encoder;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
 import gplx.xowa.Xoa_app;
@@ -31,33 +30,33 @@ import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
 
 public class Xoh_href_wtr {	// TS:do not move to app-level
 	private final Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(BoolUtl.Y).Make();
-	private final Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
+	private final BryWtr encoder_bfr = BryWtr.NewAndReset(255), tmp_bfr = BryWtr.NewAndReset(255);
 	public byte[] Build_to_bry(Xow_wiki wiki, byte[] ttl_bry) {
 		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
 		Build_to_bfr(tmp_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
 	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl) {
 		Build_to_bfr(tmp_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
-	public byte[] Build_to_bry(Bry_bfr tmp, Xow_wiki wiki, Xoa_ttl ttl) {
+	public byte[] Build_to_bry(BryWtr tmp, Xow_wiki wiki, Xoa_ttl ttl) {
 		this.Build_to_bfr(tmp, wiki.App(), wiki.Domain_bry(), ttl);
-		return tmp.To_bry_and_clear();
+		return tmp.ToBryAndClear();
 	}
-	public byte[] Build_to_bry_w_qargs(Bry_bfr tmp, Xow_wiki wiki, Xoa_ttl ttl, byte[]... qargs_ary) {
+	public byte[] Build_to_bry_w_qargs(BryWtr tmp, Xow_wiki wiki, Xoa_ttl ttl, byte[]... qargs_ary) {
 		this.Build_to_bfr(tmp, wiki.App(), wiki.Domain_bry(), ttl);
 		int qargs_len = qargs_ary.length / 2;
 		for (int i = 0; i < qargs_len; i++) {
-			tmp.Add_byte(i == 0 ? AsciiByte.Question : AsciiByte.Eq);
+			tmp.AddByte(i == 0 ? AsciiByte.Question : AsciiByte.Eq);
 			tmp.Add(qargs_ary[i]);
-			tmp.Add_byte(AsciiByte.Eq);
+			tmp.AddByte(AsciiByte.Eq);
 			tmp.Add(qargs_ary[i + 1]);
 		}
-		return tmp.To_bry_and_clear();
+		return tmp.ToBryAndClear();
 	}
-	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, byte[] domain_bry, Xoa_ttl ttl) {Build_to_bfr(bfr, app, Xoh_wtr_ctx.Basic, domain_bry, ttl);}
-	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, Xoh_wtr_ctx hctx, byte[] domain_bry, Xoa_ttl ttl) { // given ttl, write href; EX: A -> '/wiki/A' 
+	public void Build_to_bfr(BryWtr bfr, Xoa_app app, byte[] domain_bry, Xoa_ttl ttl) {Build_to_bfr(bfr, app, Xoh_wtr_ctx.Basic, domain_bry, ttl);}
+	public void Build_to_bfr(BryWtr bfr, Xoa_app app, Xoh_wtr_ctx hctx, byte[] domain_bry, Xoa_ttl ttl) { // given ttl, write href; EX: A -> '/wiki/A'
 		byte[] page = ttl.Full_txt_raw();
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki == null)																		// not an xwiki; EX: [[wikt:Word]]
@@ -87,14 +86,14 @@ public class Xoh_href_wtr {	// TS:do not move to app-level
 				||	hctx.Mode_is_hdump()                                                        // hdump should never dump as "/site/"
 				||	hctx.Mode_is_file_dump()                                                    // filedump should never dump as "/site/"
 				) {
-				Bry_fmtr url_fmtr = xwiki.Url_fmtr();
+				BryFmtr url_fmtr = xwiki.Url_fmtr();
 				if (url_fmtr == null) {
 					bfr.Add(Xoh_href_.Bry__https);												// add "https://";	EX: https://
 					bfr.Add(xwiki.Domain_bry());												// add xwiki;		EX: en_dict	 
 					bfr.Add(Xoh_href_.Bry__wiki);												// add "/wiki/";	EX: /wiki/
 				}
 				else {																			// url_fmtr exists; DATE:2015-04-22
-					url_fmtr.Bld_bfr(bfr, encoder_bfr.To_bry_and_clear());						// use it and pass encoder_bfr for page_name;
+					url_fmtr.BldToBfr(bfr, encoder_bfr.ToBryAndClear());						// use it and pass encoder_bfr for page_name;
 					return;
 				}
 			}
@@ -104,11 +103,11 @@ public class Xoh_href_wtr {	// TS:do not move to app-level
 				bfr.Add(Xoh_href_.Bry__wiki);													// add "/wiki/";	EX: /wiki/
 			}
 		}
-		bfr.Add_bfr_and_clear(encoder_bfr);
+		bfr.AddBfrAndClear(encoder_bfr);
 	}
 	private void Build_to_bfr_page(Xoa_ttl ttl, Xoh_wtr_ctx hctx, byte[] ttl_full, int page_bgn) {
-		int anch_bgn = Bry_find_.Find_fwd(ttl_full, AsciiByte.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
-		if (anch_bgn == Bry_find_.Not_found){	// no anchor; just add page
+		int anch_bgn = BryFind.FindFwd(ttl_full, AsciiByte.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
+		if (anch_bgn == BryFind.NotFound){	// no anchor; just add page
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, ttl_full.length);
 			if (hctx.Mode_is_file_dump()) {
 				byte[] href_end = hctx.Anch__href__end();
@@ -116,8 +115,8 @@ public class Xoh_href_wtr {	// TS:do not move to app-level
 			}
 		}
 		else {									// anchor exists; check if anchor is preceded by ws; EX: [[A #b]] -> "/wiki/A#b"
-			int page_end = Bry_find_.Find_bwd_last_ws(ttl_full, anch_bgn);		// first 1st ws before #; handles multiple ws
-			page_end = page_end == Bry_find_.Not_found ? anch_bgn : page_end;	// if ws not found, use # pos; else use 1st ws pos
+			int page_end = BryFind.FindBwdLastWs(ttl_full, anch_bgn);		// first 1st ws before #; handles multiple ws
+			page_end = page_end == BryFind.NotFound ? anch_bgn : page_end;	// if ws not found, use # pos; else use 1st ws pos
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, page_end);			// add page
 			if (hctx.Mode_is_file_dump()) {
 				byte[] href_end = hctx.Anch__href__end();

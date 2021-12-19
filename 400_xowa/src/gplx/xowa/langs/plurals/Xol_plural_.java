@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.plurals; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.plurals;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.langs.*;
 public class Xol_plural_ {
 	public static Xol_plural new_by_lang_id(int lang_id) {
 		switch (lang_id) {
@@ -33,7 +35,7 @@ class Xol_plural__default implements Xol_plural {
 	public byte[] Plural_eval(Xol_lang_itm lang, int count, byte[][] forms) {
 		int forms_len = forms.length;
 		switch (forms_len) {
-			case 0:		return Bry_.Empty;		// forms is empty; do nothing
+			case 0:		return BryUtl.Empty;		// forms is empty; do nothing
 			case 1:		return forms[0];			// only one word specified; use it;	REF.MW:$pluralForm = min( $pluralForm, count( $forms ) - 1 );
 			default:	return count == 1 ? forms[0] : forms[1]; // TODO_OLD: incorporate plurals.xml logic
 		}

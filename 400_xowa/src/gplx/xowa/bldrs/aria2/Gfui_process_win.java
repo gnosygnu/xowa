@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.aria2; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.gfui.*;
+package gplx.xowa.bldrs.aria2;
+import gplx.frameworks.invks.Gfo_invk_cmd;
 class Gfui_process_win {
 	public void Exec_async(String process, String args, Gfo_invk_cmd done_cbk) {
 		// Gfo_process process = new Gfo_process().Init_process_(process, args).Init_async_(done_cbk).Init_strm_out_err_(output_box).Exec();			

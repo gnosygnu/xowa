@@ -10,9 +10,9 @@ store
   if end position before <
 */
 package gplx.xowa.xtns.lst;
-import gplx.Bry_;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
@@ -26,10 +26,9 @@ import gplx.xowa.parsers.Xop_tkn_mkr;
 import gplx.xowa.parsers.tmpls.Xot_invk_temp;
 import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
 import gplx.xowa.parsers.tmpls.Xot_defn_tmpl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.Hash_adp_bry;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
 
 public class Db_Section_list {
 	private List_adp sects;
@@ -130,21 +129,21 @@ public class Db_Section_list {
 			else							// bgn exists; set end to bgn; EX: {{#lst:page|bgn}} is same as {{#lst:page|bgn|bgn}}; NOTE: {{#lst:page|bgn|}} means write from bgn to eos
 				to = from;
 		}
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		byte include_mode = Include_between;
-		if		(Bry_.Len_eq_0(to))
+		if		(BryUtl.IsNullOrEmpty(to))
 			include_mode = Include_to_eos;
-		else if (Bry_.Len_eq_0(from))
+		else if (BryUtl.IsNullOrEmpty(from))
 			include_mode = Include_to_bos;
 		int bgn_pos = 0; boolean bgn_found = false; int src_page_bry_len = src.length;
 		int sections_len = sects.Len();
 		for (int i = 0; i < sections_len; i++) {
-			Section sect = (Section)sects.Get_at(i);
+			Section sect = (Section)sects.GetAt(i);
 			byte section_tid = (byte)sect.type;
 			if (section_tid == begin_end_result.BEGIN && Matchkey(sect, from)) {
 				int sect_bgn_rhs = sect.end;
 				if (include_mode == Include_to_eos) {					// write from cur to eos; EX: {{#lst:page|bgn|}}
-					bfr.Add_mid(src, sect_bgn_rhs, src_page_bry_len);
+					bfr.AddMid(src, sect_bgn_rhs, src_page_bry_len);
 					bgn_found = false;
 					break;
 				}
@@ -158,35 +157,35 @@ public class Db_Section_list {
 			else if (section_tid == begin_end_result.END && Matchkey(sect, to)) {
 				int sect_end_lhs = sect.bgn;
 				if (include_mode == Include_to_bos) {					// write from bos to cur; EX: {{#lst:page||end}}
-					bfr.Add_mid(src, 0, sect_end_lhs);
+					bfr.AddMid(src, 0, sect_end_lhs);
 					bgn_found = false;
 					break;
 				}
 				else {
 					if (bgn_found) {									// NOTE: bgn_found to prevent writing from bos; EX: a<s end=key0/>b should not write anything 
-						bfr.Add_mid(src, bgn_pos, sect_end_lhs);
+						bfr.AddMid(src, bgn_pos, sect_end_lhs);
 						bgn_found = false;
 					}
 				}
 			}
 		}
 		if (bgn_found)	// bgn_found, but no end; write to end of page; EX: "a <section begin=key/> b" -> " b"
-			bfr.Add_mid(src, bgn_pos, src_page_bry_len);
+			bfr.AddMid(src, bgn_pos, src_page_bry_len);
 
-		return Compile3(bfr.To_bry());
+		return Compile3(bfr.ToBry());
 	}
 	public byte[] Exclude(byte[] sect_exclude, byte[] sect_replace) {
-		if		(Bry_.Len_eq_0(sect_exclude)) {	// no exclude arg; EX: {{#lstx:page}} or {{#lstx:page}}
+		if		(BryUtl.IsNullOrEmpty(sect_exclude)) {	// no exclude arg; EX: {{#lstx:page}} or {{#lstx:page}}
 			return Compile3(src);							// write all and exit
 		}
 		int sections_len = sects.Len();
 		int bgn_pos = 0;
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		for (int i = 0; i < sections_len; i++) {
-			Section sect = (Section)sects.Get_at(i);
+			Section sect = (Section)sects.GetAt(i);
 			byte section_tid = (byte)sect.type;
 			if (section_tid == begin_end_result.BEGIN && Matchkey(sect, sect_exclude)) {
-				bfr.Add_mid(src, bgn_pos, sect.bgn);									// write everything from bgn_pos up to exclude
+				bfr.AddMid(src, bgn_pos, sect.bgn);									// write everything from bgn_pos up to exclude
 			}
 			else if (section_tid == begin_end_result.END && Matchkey(sect, sect_exclude)) {	// exclude end found
 				if (sect_replace != null)
@@ -194,11 +193,11 @@ public class Db_Section_list {
 				bgn_pos = sect.end;	// reset bgn_pos
 			}
 		}
-		bfr.Add_mid(src, bgn_pos, src.length);
-		return Compile3(bfr.To_bry());
+		bfr.AddMid(src, bgn_pos, src.length);
+		return Compile3(bfr.ToBry());
 	}
 	public byte[] Header(byte[] lhs_hdr, byte[] rhs_hdr) {
-		return Bry_.Empty;
+		return BryUtl.Empty;
 	}
 	private boolean Matchkey(Section sect, byte[] find) {
             if (find == Lst_pfunc_itm.Null_arg) return false;
@@ -216,7 +215,7 @@ public class Db_Section_list {
             Xop_root_tkn xtn_root = null;
 		// set recursing flag
 		Xoae_page page = ctx.Page();
-		Bry_bfr full_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr full_bfr = wiki.Utl__bfr_mkr().GetM001();
 		try {
 			wiki.Parser_mgr().Lst__recursing_(true);
 			Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
@@ -224,7 +223,7 @@ public class Db_Section_list {
 			xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
 		} finally {
 			wiki.Parser_mgr().Lst__recursing_(false);
-			full_bfr.Mkr_rls();
+			full_bfr.MkrRls();
 		}
 		page.Html_data().Indicators().Enabled_(BoolUtl.Y);
 		if (xtn_root == null) return null;
@@ -246,16 +245,16 @@ public class Db_Section_list {
 		wiki.Parser_mgr().Tmpl_stack_del();	// take template off stack; evaluate will never recurse, but will fail if ttl is still on stack; DATE:2014-03-10
 
 		// eval tmpl
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetM001();
 		try {
 			tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.New_root(ttl.Page_txt()), tmp_bfr);
-			sub_src = tmp_bfr.To_bry_and_clear();
+			sub_src = tmp_bfr.ToBryAndClear();
 		} finally {
-			tmp_bfr.Mkr_rls();
+			tmp_bfr.MkrRls();
 		}
 		return sub_src;
 	}
-	private Xop_root_tkn Bld_root_nde(Bry_bfr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {
+	private Xop_root_tkn Bld_root_nde(BryWtr page_bfr, Hash_adp_bry lst_page_regy, byte[] wikitext) {
 		Xop_ctx tmp_ctx = Xop_ctx.New__sub__reuse_lst(wiki, ctx, lst_page_regy);
 		tmp_ctx.Page().Ttl_(ctx.Page().Ttl());					// NOTE: must set tmp_ctx.Ttl to ctx.Ttl; EX: Flatland and First World; DATE:2013-04-29
 		tmp_ctx.Lnki().File_logger_(Xop_file_logger_.Noop);	// NOTE: set file_wkr to null, else items will be double-counted

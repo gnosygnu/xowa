@@ -14,21 +14,21 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.bins;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.core.ios.Io_download_fmt;
 import gplx.core.ios.streams.Io_stream_rdr;
 import gplx.core.ios.streams.Io_stream_rdr_;
 import gplx.core.ios.streams.Io_stream_wtr_;
-import gplx.core.primitives.String_obj_ref;
+import gplx.types.basics.wrappers.StringRef;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.Xof_exec_tid;
 import gplx.xowa.files.Xof_fsdb_itm;
 import gplx.xowa.files.Xof_img_size;
@@ -40,7 +40,7 @@ public class Xof_bin_mgr {
 	private final Fsm_mnt_mgr mnt_mgr;
 	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	private Xof_bin_wkr[] wkrs = Xof_bin_wkr_.Ary_empty; private int wkrs_len;
-	private final String_obj_ref resize_warning = String_obj_ref.null_(); private final Xof_img_size tmp_size = new Xof_img_size();
+	private final StringRef resize_warning = StringRef.NewNull(); private final Xof_img_size tmp_size = new Xof_img_size();
 	private final Io_download_fmt download_fmt;
 	private final Io_stream_rdr_wrapper rdr_wrapper = new Io_stream_rdr_wrapper();
 	public Xof_bin_mgr(Fsm_mnt_mgr mnt_mgr, Xow_repo_mgr repo_mgr, Xof_img_wkr_resize_img resize_wkr, Io_download_fmt download_fmt) {
@@ -52,7 +52,7 @@ public class Xof_bin_mgr {
 	public void Wkrs__del(String key) {
 		List_adp list = List_adp_.New();
 		for (Xof_bin_wkr wkr : wkrs) {
-			if (String_.Eq(key, wkr.Key())) continue;
+			if (StringUtl.Eq(key, wkr.Key())) continue;
 			list.Add(wkr);
 		}
 		this.wkrs = (Xof_bin_wkr[])list.ToAry(Xof_bin_wkr.class);
@@ -117,7 +117,7 @@ public class Xof_bin_mgr {
 				if (fsdb.Orig_ext().Id_is_video()) continue;					// item is video; don't download orig as imageMagick can't thumbnail it; DATE:2015-06-16
 				rv = wkr.Get_as_rdr(fsdb, BoolUtl.N, fsdb.Orig_w());				// thumb missing; get orig;
 				if (rv == Io_stream_rdr_.Noop) {
-					usr_dlg.Log_direct(String_.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Orig_ttl(), fsdb.Lnki_w()));
+					usr_dlg.Log_direct(StringUtl.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Orig_ttl(), fsdb.Lnki_w()));
 					continue;													// nothing found; continue;
 				}
 				if (!wkr.Resize_allowed()) continue;
@@ -159,7 +159,7 @@ public class Xof_bin_mgr {
 				Io_url orig = url_bldr.To_url_trg(repo, fsdb, BoolUtl.Y);			// get orig url
 				found = Get_bin(BoolUtl.N, fsdb.Orig_w(), orig, BoolUtl.Y, rdr_wrapper, fsdb, wkr);	// get orig; note: save_to_fsys set to true b/c imageMagick will need actual file to convert
 				if (!found) {
-					usr_dlg.Log_direct(String_.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Orig_ttl(), fsdb.Lnki_w()));
+					usr_dlg.Log_direct(StringUtl.Format("bin_mgr:thumb not found; wkr={0} ttl={1} w={2}", wkr.Key(), fsdb.Orig_ttl(), fsdb.Lnki_w()));
 					continue;													// orig not found; skip rest since resize can't happen;
 				}
 				boolean resized = Resize(exec_tid, fsdb, file_is_orig, orig, trg);

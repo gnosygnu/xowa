@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
+package gplx.core.ios;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import org.junit.*;
+import gplx.core.ios.streams.*;
 public class Io_buffer_rdr_tst {
 	@Before public void init() {
 		Io_mgr.Instance.InitEngine_mem();
@@ -54,9 +60,9 @@ public class Io_buffer_rdr_tst {
 	Io_buffer_rdr_tst tst_Bfr(String... expdAry) {
 		String[] actlAry = new String[rdr.Bfr_len()];
 		for (int i = 0; i < actlAry.length; i++)
-			actlAry[i] = String_.new_u8(rdr.Bfr(), i, i + 1);
-	    Tfds.Eq_ary(expdAry, actlAry);
+			actlAry[i] = StringUtl.NewU8(rdr.Bfr(), i, i + 1);
+	    GfoTstr.EqLines(expdAry, actlAry);
 		return this;
 	}
-	Io_buffer_rdr_tst tst_ReadDone(boolean expd) {Tfds.Eq(expd, rdr.Fil_eof()); return this;}
+	Io_buffer_rdr_tst tst_ReadDone(boolean expd) {GfoTstr.EqObj(expd, rdr.Fil_eof()); return this;}
 }

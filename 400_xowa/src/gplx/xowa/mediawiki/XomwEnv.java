@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.interwiki.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.includes.media.*;
@@ -21,7 +23,7 @@ import gplx.xowa.mediawiki.includes.site.*;
 import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.langs.*;
 public class XomwEnv {
-	public byte[] Lang__align_end = Bry_.new_a7("right");
+	public byte[] Lang__align_end = BryUtl.NewA7("right");
 	public int User__default__thumbsize = 220;
 
 	public int Global__wgSVGMaxSize = 5120;

@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.pfuncs;
-import gplx.Bry_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
@@ -25,14 +25,14 @@ import org.junit.Before;
 import org.junit.Test;
 public class Wdata_pf_noExternalLangLinks_tst {
 	@Before public void init() {fxt.Clear();} Wdata_pf_noExternalLangLinks_fxt fxt = new Wdata_pf_noExternalLangLinks_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Clear().Expd_enabled_(true).Test_parse("{{noexternallanglinks}}");
 		fxt.Clear().Expd_enabled_(false).Expd_sort_(false).Expd_langs_().Test_parse("");
 	}
-	@Test  public void Selected() {
+	@Test public void Selected() {
 		fxt.Clear().Expd_enabled_(true).Expd_langs_("en", "fr").Test_parse("{{noexternallanglinks:en|fr}}");
 	}
-	@Test  public void Sort() {
+	@Test public void Sort() {
 		fxt.Clear().Expd_enabled_(true).Expd_sort_(true).Expd_langs_().Test_parse("{{noexternallanglinks:*}}");
 	}
 }
@@ -54,16 +54,16 @@ class Wdata_pf_noExternalLangLinks_fxt {
 	public Wdata_pf_noExternalLangLinks_fxt Expd_langs_(String... v) {expd_langs = v; return this;} private String[] expd_langs;
 	public void Test_parse(String raw) {
 		byte[] expd = parser_fxt.Test_parse_tmpl_str_rv(raw);
-		Tfds.Eq(Bry_.Empty, expd);
-		if (expd_enabled != BoolUtl.NullByte) Tfds.Eq(expd_enabled == BoolUtl.YByte, data.Enabled());
-		if (expd_sort != BoolUtl.NullByte) Tfds.Eq(expd_sort == BoolUtl.YByte, data.Sort());
-		if (expd_langs != null) Tfds.Eq_ary_str(expd_langs, Data_langs_xto_str_ary());
+		GfoTstr.EqObj(BryUtl.Empty, expd);
+		if (expd_enabled != BoolUtl.NullByte) GfoTstr.EqObj(expd_enabled == BoolUtl.YByte, data.Enabled());
+		if (expd_sort != BoolUtl.NullByte) GfoTstr.EqObj(expd_sort == BoolUtl.YByte, data.Sort());
+		if (expd_langs != null) GfoTstr.EqLines(expd_langs, Data_langs_xto_str_ary());
 	}
 	String[] Data_langs_xto_str_ary() {
 		int len = data.Langs_len();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
-			rv[i] = String_.new_u8((byte[])data.Langs_get_at(i));
+			rv[i] = StringUtl.NewU8((byte[])data.Langs_get_at(i));
 		}
 		return rv;
 	}

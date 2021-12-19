@@ -13,12 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.standards;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.gfui.*;
 import gplx.gfui.gfxs.*; import gplx.gfui.controls.elems.*;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.errs.ErrUtl;
 public class GfuiChkBox_ {
 	public static GfuiChkBox as_(Object obj) {return obj instanceof GfuiChkBox ? (GfuiChkBox)obj : null;}
-	public static GfuiChkBox cast(Object obj) {try {return (GfuiChkBox)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiChkBox.class, obj);}}
-	@gplx.Internal protected static GfuiChkBox new_() {
+	public static GfuiChkBox cast(Object obj) {try {return (GfuiChkBox)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, GfuiChkBox.class, obj);}}
+	public static GfuiChkBox new_() {
 		GfuiChkBox rv = new GfuiChkBox();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_true_());
 		return rv;
@@ -65,7 +71,7 @@ public class GfuiChkBox_ {
 		if (box.Focus_has()) {
 			// -1 so border does not start right on top of text; RoundUp to give a little more space to edges
 			// +2 so that focusRect does not overlap mnemonic (in C#)
-			box.FocusBorder().Bounds_sync(RectAdp_.new_((int)textRect.X() - 1, (int)cboxRect.Y(), Float_.RoundUp(textRect.Width()), Float_.RoundUp(cboxRect.Height())));	
+			box.FocusBorder().Bounds_sync(RectAdp_.new_((int)textRect.X() - 1, (int)cboxRect.Y(), FloatUtl.RoundUp(textRect.Width()), FloatUtl.RoundUp(cboxRect.Height())));
 			box.FocusBorder().DrawData(gfx);
 		}
 	}

@@ -14,18 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.parsers;
-
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.Err_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.core.primitives.Int_obj_ref;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.langs.jsons.Json_ary;
 import gplx.langs.jsons.Json_itm;
 import gplx.langs.jsons.Json_kv;
 import gplx.langs.jsons.Json_nde;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
 import gplx.xowa.xtns.wbases.claims.Wbase_references_grp;
@@ -58,7 +57,7 @@ class Wdata_claims_parser_v2 {
 		Wbase_claim_base claim_itm = null; Wbase_claim_grp_list qualifiers = null; int[] qualifiers_order = null; Wbase_references_grp[] snaks_grp = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
-			byte tid = Wdata_dict_claim.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+			byte tid = Wdata_dict_claim.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == ByteUtl.MaxValue127) continue;
 			switch (tid) {
 				case Wdata_dict_claim.Tid__mainsnak:			claim_itm = Parse_mainsnak(qid, Json_nde.Cast(sub.Val()), pid); break;
 				case Wdata_dict_claim.Tid__rank:				rank_tid = Wbase_claim_rank_.Reg.Get_tid_or(sub.Val().Data_bry(), Wbase_claim_rank_.Tid__unknown); break;
@@ -93,7 +92,7 @@ class Wdata_claims_parser_v2 {
 		int len = owner.Len();
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.Cast(owner.Get_at(i));
-			byte tid = Wdata_dict_reference.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+			byte tid = Wdata_dict_reference.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == ByteUtl.MaxValue127) continue;
 			switch (tid) {
 				case Wdata_dict_reference.Tid__hash:            hash = sub.Val_as_bry(); break;
 				case Wdata_dict_reference.Tid__snaks:			snaks = Parse_qualifiers(qid, Json_nde.Cast(sub.Val())); break;
@@ -131,14 +130,14 @@ class Wdata_claims_parser_v2 {
 			Wbase_claim_base qualifier_itm = Parse_mainsnak(qid, qualifier_nde, pid);
 			list.Add(qualifier_itm);
 		}
-		return new Wbase_claim_grp(Int_obj_ref.New(pid), (Wbase_claim_base[])list.ToAryAndClear(Wbase_claim_base.class));
+		return new Wbase_claim_grp(IntRef.New(pid), (Wbase_claim_base[])list.ToAryAndClear(Wbase_claim_base.class));
 	}
 	public Wbase_claim_base Parse_mainsnak(byte[] qid, Json_nde nde, int pid) {
 		int len = nde.Len();
-		byte snak_tid = Byte_.Max_value_127;
+		byte snak_tid = ByteUtl.MaxValue127;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
-			byte tid = Wdata_dict_mainsnak.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+			byte tid = Wdata_dict_mainsnak.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == ByteUtl.MaxValue127) continue;
 			switch (tid) {
 				case Wdata_dict_mainsnak.Tid__snaktype:		snak_tid = Wbase_claim_value_type_.Reg.Get_tid_or_fail(sub.Val().Data_bry()); break;
 				case Wdata_dict_mainsnak.Tid__datavalue:	return Parse_datavalue(qid, pid, snak_tid, Json_nde.Cast(sub.Val()));
@@ -154,7 +153,7 @@ class Wdata_claims_parser_v2 {
 		Json_itm value_itm = null; byte value_tid = Wbase_claim_type_.Tid__unknown;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
-			byte tid = Wdata_dict_datavalue.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+			byte tid = Wdata_dict_datavalue.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == ByteUtl.MaxValue127) continue;
 			switch (tid) {
 				case Wdata_dict_datavalue.Tid__type:		value_tid = Wbase_claim_type_.Get_tid_or_unknown(sub.Val().Data_bry()); break;
 				case Wdata_dict_datavalue.Tid__value:		value_itm = sub.Val(); break;
@@ -164,7 +163,7 @@ class Wdata_claims_parser_v2 {
 		return factory.Parse(qid, pid, snak_tid, nde, value_tid, value_itm);
 	}
 	private static int Parse_pid(byte[] pid_bry) {
-		int rv = Bry_.To_int_or(pid_bry, 1, pid_bry.length, -1); if (rv == -1) throw Err_.new_wo_type("invalid pid", "pid", String_.new_u8(pid_bry));
+		int rv = BryUtl.ToIntOr(pid_bry, 1, pid_bry.length, -1); if (rv == -1) throw ErrUtl.NewArgs("invalid pid", "pid", StringUtl.NewU8(pid_bry));
 		return rv;
 	}
 }

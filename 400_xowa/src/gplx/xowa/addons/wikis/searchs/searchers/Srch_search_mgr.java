@@ -13,16 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.searchers;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.frameworks.objects.Cancelable;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.xowa.addons.wikis.searchs.searchers.wkrs.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
-import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
-import gplx.core.net.*; import gplx.core.net.qargs.*;
 public class Srch_search_mgr implements Gfo_invk {
 	private final Srch_search_addon			addon;
 	private final Xow_wiki					wiki;
 	private final Srch_rslt_list				cache__page = new Srch_rslt_list();
-	private final Hash_adp_bry				cache__word_counts = Hash_adp_bry.cs();
+	private final Hash_adp_bry cache__word_counts = Hash_adp_bry.cs();
 	private final Srch_rslt_cache			cache__rslts = new Srch_rslt_cache();
 	private final Srch_page_tbl_wkr			page_tbl_searcher = new Srch_page_tbl_wkr();
 	private final Srch_crt_parser			crt_parser;

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*;
-import gplx.objects.lists.CompareAble;
+package gplx.core.caches;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.basics.utls.LongUtl;
 class Gfo_cache_data implements CompareAble, Rls_able {
 	private int count = 0;
 	public Gfo_cache_data(byte[] key, Rls_able val, int size) {
@@ -36,7 +38,7 @@ class Gfo_cache_data implements CompareAble, Rls_able {
 	}
 	public int compareTo(Object obj) {
 		Gfo_cache_data comp = (Gfo_cache_data)obj;
-		return -Long_.Compare(count, comp.count);	// "-" to sort most-recent first
+		return -LongUtl.Compare(count, comp.count);	// "-" to sort most-recent first
 	}
 	public void Rls() {
 		val.Rls();

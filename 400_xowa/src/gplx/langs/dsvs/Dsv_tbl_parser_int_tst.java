@@ -13,12 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*;
+package gplx.langs.dsvs;
+import gplx.frameworks.objects.ToStrAble;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Dsv_tbl_parser_int_tst {		
 	private Dsv_mok_fxt fxt = new Dsv_mok_fxt();
 	@Test public void Basic() {
-		fxt	.Test_load(String_.Concat_lines_nl_skip_last
+		fxt	.Test_load(StringUtl.ConcatLinesNlSkipLast
 		( "a|1|3"
 		, "b|2|4"
 		)
@@ -28,15 +33,15 @@ public class Dsv_tbl_parser_int_tst {
 		);
 	}
 }
-class Mok_int_itm implements To_str_able {
+class Mok_int_itm implements ToStrAble {
 	private String fld_0;
 	private int fld_1, fld_2;
 	public Mok_int_itm(String fld_0, int fld_1, int fld_2) {this.fld_0 = fld_0; this.fld_1 = fld_1; this.fld_2 = fld_2;}
-	public String To_str() {return String_.Concat_with_str("|", fld_0, Int_.To_str(fld_1), Int_.To_str(fld_2));}
+	public String ToStr() {return StringUtl.ConcatWith("|", fld_0, IntUtl.ToStr(fld_1), IntUtl.ToStr(fld_2));}
 }
 class Mok_int_mgr extends Mok_mgr_base {
 	public void Clear() {itms.Clear();}
-	@Override public To_str_able[] Itms() {return (To_str_able[])itms.ToAry(To_str_able.class);} private List_adp itms = List_adp_.New();
+	@Override public ToStrAble[] Itms() {return (ToStrAble[])itms.ToAry(ToStrAble.class);} private List_adp itms = List_adp_.New();
 	private String fld_0;
 	private int fld_1, fld_2;
 	@Override public Dsv_fld_parser[] Fld_parsers() {
@@ -44,7 +49,7 @@ class Mok_int_mgr extends Mok_mgr_base {
 	}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {
-			case 0: fld_0 = String_.new_u8(src, bgn, end); return true;
+			case 0: fld_0 = StringUtl.NewU8(src, bgn, end); return true;
 			default: return false;
 		}
 	}

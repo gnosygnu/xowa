@@ -13,22 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*;
-import gplx.xowa.wikis.pages.wtxts.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs;
+import gplx.types.commons.GfoDate;
+import gplx.xowa.*;
 public class Xoctg_pagebox_itm {
 	public Xoctg_pagebox_itm(Xoa_ttl ttl) {
 		this.ttl = ttl;
 	}
 	public Xoa_ttl		Ttl()		{return ttl;} private final Xoa_ttl ttl;
 	public int			Id()		{return id;} private int id;
-	public DateAdp		Timestamp() {return timestamp;} private DateAdp timestamp;
+	public GfoDate Timestamp() {return timestamp;} private GfoDate timestamp;
 	public boolean			Hidden()	{return hidden;} private boolean hidden;
 	public int			Count__subcs()	{return count__subcs;} private int count__subcs;
 	public int			Count__pages()	{return count__pages;} private int count__pages;
 	public int			Count__files()	{return count__files;} private int count__files;
 	public int			Count__all()    {return count__all;} private int count__all;
 
-	public void Load_by_db(int id, DateAdp timestamp) {
+	public void Load_by_db(int id, GfoDate timestamp) {
 		this.id = id; this.timestamp = timestamp;
 	}
 	public void Load_by_cat_core(boolean hidden, int count__subcs, int count__pages, int count__files) {

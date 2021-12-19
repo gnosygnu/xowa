@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
-import gplx.xowa.guis.cbks.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
 import gplx.core.btries.*;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Xofulltext_finder_mgr {
 	private Btrie_slim_mgr hook_trie;
@@ -43,7 +44,7 @@ public class Xofulltext_finder_mgr {
 		// NOTE: skipping ahead to word-start instead of going byte-by-byte may seem more performant, but will still need to do substring analysis b/c of wildcards and punctuation; EX: "abc" and " 'abc' "; "*abc" and " xyzabc. "
 		while (cur <= src_end) {
 			// check each byte against hook_trie
-			Object hook_obj = hook_trie.Match_at(trv, src, cur, src_end);
+			Object hook_obj = hook_trie.MatchAt(trv, src, cur, src_end);
 
 			// current byte matches no hooks; go to next byte
 			if (hook_obj == null) {
@@ -71,7 +72,7 @@ public class Xofulltext_finder_mgr {
 				cur = word_end;
 			} catch (Exception e) {
 				cur = hook_end;
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error in match; page=~{0} hook=~{1} src=~{2}", cbk.Page_ttl(), hook.word_orig, Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error in match; page=~{0} hook=~{1} src=~{2}", cbk.Page_ttl(), hook.word_orig, ErrUtl.ToStrLog(e));
 			}
 		}
 

@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.algos.bouncy_castle; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
-import gplx.core.encoders.*;
+package gplx.core.security.algos.bouncy_castle;
+import gplx.types.basics.encoders.HexUtl;
+import gplx.core.security.algos.Hash_algo;
+import gplx.types.errs.ErrUtl;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.security.MessageDigest;
 import java.security.Security;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 public class Bouncy_castle_algo implements Hash_algo {
 	private static boolean Provider_needs_init = true;
 	private final MessageDigest md;
@@ -34,7 +36,7 @@ public class Bouncy_castle_algo implements Hash_algo {
 			this.md = MessageDigest.getInstance(key);
 		}
 		catch (Exception exc) {
-			throw Err_.new_wo_type("unknown messageDigest; key=" + key);
+			throw ErrUtl.NewArgs("unknown messageDigest; key=" + key);
 		}
 	}
 	public String Key() {return key;} private final String key;
@@ -43,6 +45,6 @@ public class Bouncy_castle_algo implements Hash_algo {
 	public byte[] To_hash_bry() {
 		// get hash
 		byte[] hash = md.digest();
-		return Hex_utl_.Encode_bry(hash);
+		return HexUtl.EncodeBry(hash);
 	}
 }

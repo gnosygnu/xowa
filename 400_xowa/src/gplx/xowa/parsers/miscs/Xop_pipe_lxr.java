@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.miscs;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Err_;
 import gplx.core.btries.Btrie_fast_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.parsers.Xop_ctx;
@@ -52,16 +52,16 @@ public class Xop_pipe_lxr implements Xop_lxr {
 					case Xop_parser_tid_.Tid__wtxt:		// should never happen?
 						ctx.Subs_add(root, tkn_mkr.Pipe(bgn_pos, cur_pos));
 						break;
-					default: throw Err_.new_unhandled(ctx.Parse_tid());
+					default: throw ErrUtl.NewUnhandled(ctx.Parse_tid());
 				}
 				return cur_pos;
 			case Xop_tkn_itm_.Tid_tblw_tb:
 			case Xop_tkn_itm_.Tid_tblw_tr:
 				rv = Xop_tblw_lxr_ws.Make(ctx, tkn_mkr, root, src, src_len, bgn_pos, cur_pos, Xop_tblw_wkr.Tblw_type_td, false);
 				if (rv == Xop_tblw_lxr_ws.Tblw_ws_cell_pipe) {
-					int prv_nl_pos = Bry_find_.Find_bwd(src, AsciiByte.Nl, cur_pos - 1, 0); if (prv_nl_pos == -1) prv_nl_pos = 0;	// find prv nl
-					if (Bry_.Match(src, prv_nl_pos, prv_nl_pos + 3, Xop_tblw_lxr.Hook_tr)) {					// "\n|-" aka tblw_tr
-						int nl_pos = Bry_find_.Find_fwd(src, AsciiByte.Nl, cur_pos, src_len); if (nl_pos == Bry_find_.Not_found) nl_pos = src_len;
+					int prv_nl_pos = BryFind.FindBwd(src, AsciiByte.Nl, cur_pos - 1, 0); if (prv_nl_pos == -1) prv_nl_pos = 0;	// find prv nl
+					if (BryLni.Eq(src, prv_nl_pos, prv_nl_pos + 3, Xop_tblw_lxr.Hook_tr)) {					// "\n|-" aka tblw_tr
+						int nl_pos = BryFind.FindFwd(src, AsciiByte.Nl, cur_pos, src_len); if (nl_pos == BryFind.NotFound) nl_pos = src_len;
 						ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, nl_pos, Xop_ignore_tkn.Ignore_tid_tr_w_td));	// gobble up rest of content between "|" and "\n"; PAGE:lv.w:Starptautiska_kosmosa_stacija; DATE:2015-11-21
 						return nl_pos;
 					}

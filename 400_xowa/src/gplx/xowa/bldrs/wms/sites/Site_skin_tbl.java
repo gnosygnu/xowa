@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
+package gplx.xowa.bldrs.wms.sites;
 import gplx.dbs.*;
+import gplx.types.basics.lists.Ordered_hash;
 class Site_skin_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_code, fld_dflt, fld_name, fld_unusable;
@@ -60,7 +61,7 @@ class Site_skin_tbl implements Db_tbl {
 		stmt_delete.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_delete();
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Site_skin_itm itm = (Site_skin_itm)list.Get_at(i);
+			Site_skin_itm itm = (Site_skin_itm)list.GetAt(i);
 			Insert(site_abrv, itm.Code(), itm.Dflt(), itm.Name(), itm.Unusable());
 		}
 	}

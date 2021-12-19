@@ -14,19 +14,21 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.DateAdp;
-import gplx.Datetime_now;
-import gplx.Err_;
-import gplx.Io_url;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.Ordered_hash;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.XoKeyvalUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xol_lang_itm;
@@ -84,7 +86,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			case Proc_convertGrammar:								return ConvertGrammar(args, rslt);
 			case Proc_gender:										return gender(args, rslt);
 			case Proc_isRTL:										return IsRTL(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int
@@ -102,14 +104,14 @@ public class Scrib_lib_language implements Scrib_lib {
 	, Invk_formatNum = "formatNum", Invk_formatDate = "formatDate", Invk_formatDuration = "formatDuration", Invk_getDurationIntervals = "getDurationIntervals", Invk_parseFormattedNumber = "parseFormattedNumber"
 	, Invk_convertPlural = "convertPlural", Invk_convertGrammar = "convertGrammar", Invk_gender = "gender", Invk_isRTL = "isRTL"
 	;
-	private static final String[] Proc_names = String_.Ary
+	private static final String[] Proc_names = StringUtl.Ary
 	( Invk_getContLangCode, Invk_isSupportedLanguage, Invk_isKnownLanguageTag
 	, Invk_isValidCode, Invk_isValidBuiltInCode, Invk_fetchLanguageName, Invk_fetchLanguageNames, Invk_getFallbacksFor
 	, Invk_lcfirst, Invk_ucfirst, Invk_lc, Invk_uc, Invk_caseFold
 	, Invk_formatNum, Invk_formatDate, Invk_formatDuration, Invk_getDurationIntervals, Invk_parseFormattedNumber
 	, Invk_convertPlural, Invk_convertGrammar, Invk_gender, Invk_isRTL
 	);
-	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), Keyval_.Ary_empty);}
+	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), KeyValUtl.AryEmpty);}
 	public boolean GetContLangCode(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(core.Ctx().Lang().Key_str());}
 	public boolean IsSupportedLanguage(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return IsKnownLanguageTag(args, rslt);}// NOTE: checks if "MessagesXX.php" exists; note that xowa has all "MessagesXX.php"; for now, assume same functionality as IsKnownLanguageTag (worst case is that a small wiki depends on a lang not being there; will need to put in a "wiki.Langs()" then)
 	public boolean IsKnownLanguageTag(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// NOTE: checks if in languages/data/Names.php; TODO: support foreign translations; EX: Englische is en in de.w
@@ -122,15 +124,15 @@ public class Scrib_lib_language implements Scrib_lib {
 
 		// check lang stubs which correlates roughly to languages/data/Names.php;
 		if (	lang_code != null									// null check; protecting against Module passing in nil from lua
-			&&	String_.Eq(lang_code, String_.Lower(lang_code))		// must be lower-case; REF.MW: $code === strtolower( $code )
-			&&	Xol_lang_stub_.Exists(Bry_.new_a7(lang_code))
+			&&	StringUtl.Eq(lang_code, StringUtl.Lower(lang_code))		// must be lower-case; REF.MW: $code === strtolower( $code )
+			&&	Xol_lang_stub_.Exists(BryUtl.NewA7(lang_code))
 			)
 			exists = true;
 
 		// check cldr names; ISSUE#:388; EX:goh in CldrNamesEn.json; DATE:2019-06-11
 		if (!exists) {
 			String lang_name = core.App().Lang_mgr().Name_mgr().fetchLanguageName(lang_code, core.Lang().Key_str(), Xol_name_mgr.Scope__str__all, core.Page_url());
-			exists = String_.Len_gt_0(lang_name); // NOTE: missing langs will come back as empty String
+			exists = StringUtl.IsNotNullOrEmpty(lang_name); // NOTE: missing langs will come back as empty String
 		}
 		return rslt.Init_obj(exists);
 	}
@@ -192,12 +194,12 @@ public class Scrib_lib_language implements Scrib_lib {
 		String lang_code = args.Cast_str_or_null(0);
 		String include = args.Cast_str_or(1, "mw");
 		Ordered_hash hash = core.App().Lang_mgr().Name_mgr().fetchLanguageNames(lang_code, include, core.Page().Url_bry_safe());
-		return rslt.Init_obj((Keyval[])hash.To_ary(Keyval.class));
+		return rslt.Init_obj((KeyVal[])hash.ToAry(KeyVal.class));
 	}
 	public boolean GetFallbacksFor(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		byte[] lang_code = args.Pull_bry(0);
 		Xol_lang_itm lang = core.App().Lang_mgr().Get_by_or_null(lang_code);
-		if (lang == null) return rslt.Init_bry_ary(Bry_.Ary("en"));	// lang is not valid; return en; REF:/languages/Language.php|getFallbacksFor; ISSUE#:340; DATE:2019-02-01
+		if (lang == null) return rslt.Init_bry_ary(BryUtl.Ary("en"));	// lang is not valid; return en; REF:/languages/Language.php|getFallbacksFor; ISSUE#:340; DATE:2019-02-01
 		return rslt.Init_bry_ary(lang.Fallback_bry_ary());
 	}
 	public boolean Lcfirst(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_1st(args, rslt, BoolUtl.N);}
@@ -205,10 +207,10 @@ public class Scrib_lib_language implements Scrib_lib {
 	private boolean Case_1st(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
 		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
-		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b128();
+		BryWtr bfr = core.Wiki().Utl__bfr_mkr().GetB128();
 		try {
 			return rslt.Init_obj(lang.Case_mgr().Case_build_1st(bfr, upper, word, 0, word.length));
-		} finally {bfr.Mkr_rls();}
+		} finally {bfr.MkrRls();}
 	}
 	public boolean Lc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, BoolUtl.N);}
 	public boolean Uc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, BoolUtl.Y);}
@@ -223,9 +225,9 @@ public class Scrib_lib_language implements Scrib_lib {
 		byte[] num = args.Xstr_bry_or_null(1);
 		boolean skip_commafy = false;
 		if (num != null) {	// MW: if num present, check options table for noCommafy arg;
-			Keyval[] kv_ary = args.Cast_kv_ary_or_null(2);
+			KeyVal[] kv_ary = args.Cast_kv_ary_or_null(2);
 			if (kv_ary != null) {
-				skip_commafy = !XophpObject_.empty_obj(Keyval_.Ary_get_by_key_or_null(kv_ary, "noCommafy"));
+				skip_commafy = !XophpObject_.empty_obj(XoKeyvalUtl.AryGetByKeyOrNull(kv_ary, "noCommafy"));
 			}
 		}
 		byte[] rv = lang.Num_mgr().Format_num(num, skip_commafy);
@@ -242,12 +244,12 @@ public class Scrib_lib_language implements Scrib_lib {
 		int date_bry_len = date_bry.length;
 		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(core.Ctx(), fmt_bry);
 		Xowe_wiki wiki = core.Wiki();
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
 
 		// parse date
-		DateAdp date = null;
-		if (Bry_.Len_eq_0(date_bry)) { // empty dates should be today
-			date = Datetime_now.Get();
+		GfoDate date = null;
+		if (BryUtl.IsNullOrEmpty(date_bry)) { // empty dates should be today
+			date = GfoDateNow.Get();
 		}			
 		else {
 			// handle wikidata-style dates; EX: +00000002010-05-01T00:00:00Z; PAGE:en.w:Mountain_Province; DATE:2015-07-29; EX: +0065-12-08T00:00:00Z; {{#invoke:Wikidata|getDateValue|P569|FETCH_WIKIDATA|y|BCE}}; PAGE:en.w:Horace; DATE:2019-06-22
@@ -256,23 +258,23 @@ public class Scrib_lib_language implements Scrib_lib {
 					&& date_bry[date_bry_len -  1] == AsciiByte.Ltr_Z
 					&& date_bry[date_bry_len - 10] == AsciiByte.Ltr_T
 					) {
-				int dash_pos = Bry_find_.Find_fwd(date_bry, AsciiByte.Dash);
+				int dash_pos = BryFind.FindFwd(date_bry, AsciiByte.Dash);
 				if (dash_pos <= 0) { // handle dash as first char (dash_pos = 0) as well as no dash found (dash_pos = -1)
-					tmp_bfr.Mkr_rls();
+					tmp_bfr.MkrRls();
 					return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");
 				}
-				date_bry = Bry_.Mid(date_bry, dash_pos - 4, date_bry.length); // take only 4 digits for years; lops off "+0000000" as well as "+"; FOOTNOTE:WIKIDATA_DATES
+				date_bry = BryLni.Mid(date_bry, dash_pos - 4, date_bry.length); // take only 4 digits for years; lops off "+0000000" as well as "+"; FOOTNOTE:WIKIDATA_DATES
 			}
 			date = Pft_func_time.ParseDate(date_bry, utc, tmp_bfr);	// NOTE: not using java's datetime parse b/c it is more strict; not reconstructing PHP's datetime parse b/c it is very complicated (state machine); re-using MW's parser b/c it is inbetween; DATE:2015-07-29
 		}
 		if (date == null || tmp_bfr.Len() > 0) {
-			tmp_bfr.Mkr_rls();
+			tmp_bfr.MkrRls();
 			return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");
 		}
 		
 		// format and return
 		wiki.Parser_mgr().Date_fmt_bldr().Format(tmp_bfr, wiki, lang, date, fmt_ary);
-		byte[] rv = tmp_bfr.To_bry_and_rls();
+		byte[] rv = tmp_bfr.ToBryAndRls();
 		return rslt.Init_obj(rv);
 	}
 	public boolean ParseFormattedNumber(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -285,7 +287,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean FormatDuration(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang_itm lang = lang_(args);
 		long seconds = args.Pull_long(1);
-		Keyval[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
+		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
 		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
 		byte[] rv = lang.Duration_mgr().Format_durations(core.Ctx(), seconds, intervals);
 		return rslt.Init_obj(rv);
@@ -293,7 +295,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	public boolean GetDurationIntervals(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang_itm lang = lang_(args);
 		long seconds = args.Pull_long(1);
-		Keyval[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
+		KeyVal[] intervals_kv_ary = args.Cast_kv_ary_or_null(2);
 		Xol_duration_itm[] intervals = Xol_duration_itm_.Xto_itm_ary(intervals_kv_ary);
 		Xol_interval_itm[] rv = lang.Duration_mgr().Get_duration_intervals(seconds, intervals);
 		return rslt.Init_obj(Xol_interval_itm.Xto_kv_ary(rv));
@@ -309,11 +311,11 @@ public class Scrib_lib_language implements Scrib_lib {
 		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
 		byte[] type = args.Pull_bry(2);
-		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = core.Wiki().Utl__bfr_mkr().GetB512();
 		lang.Grammar().Grammar_eval(bfr, lang, word, type);
-		return rslt.Init_obj(bfr.To_str_and_rls());
+		return rslt.Init_obj(bfr.ToStrAndRls());
 	}
-	public boolean gender(Scrib_proc_args args, Scrib_proc_rslt rslt) {throw Err_.new_unimplemented();}
+	public boolean gender(Scrib_proc_args args, Scrib_proc_rslt rslt) {throw ErrUtl.NewUnimplemented();}
 	public boolean IsRTL(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xol_lang_itm lang = lang_(args);
 		return rslt.Init_obj(!lang.Dir_ltr());
@@ -321,7 +323,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	private Xol_lang_itm lang_(Scrib_proc_args args) {
 		byte[] lang_code = args.Cast_bry_or_null(0);
 		Xol_lang_itm lang = lang_code == null ? null : core.App().Lang_mgr().Get_by_or_load(lang_code);
-		if (lang == null) throw Err_.new_wo_type("lang_code is not valid", "lang_code", String_.new_u8(lang_code));
+		if (lang == null) throw ErrUtl.NewArgs("lang_code is not valid", "lang_code", StringUtl.NewU8(lang_code));
 		return lang;
 	}
 }

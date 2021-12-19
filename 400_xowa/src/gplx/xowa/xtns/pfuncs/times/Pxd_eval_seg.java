@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times;
-import gplx.DateAdp_;
-import gplx.core.brys.Bfr_arg_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 class Pxd_eval_year {
 	public static void Eval_at_pos_0(Pxd_parser tctx, Pxd_itm_int cur) {
 		Pxd_itm[] data_ary = tctx.Data_ary();
@@ -36,7 +36,7 @@ class Pxd_eval_year {
 			if (itm_3 != null) {			// treat 4th number as hour adjustment; EX: 2014-03-24-72 -> 2014-03-26; DATE:2014-03-24
 				int itm_3_val = itm_3.Val();
 				if (itm_3_val > 99) itm_3_val = 0;	// only adjust if number is between 0 and 99;
-				Pxd_itm_int_.Convert_to_rel(tctx, itm_3, Pxd_parser_.Unit_name_hour, DateAdp_.SegIdx_hour, itm_3_val);
+				Pxd_itm_int_.Convert_to_rel(tctx, itm_3, Pxd_parser_.Unit_name_hour, GfoDateUtl.SegIdxHour, itm_3_val);
 			}
 		}
 	}
@@ -77,14 +77,14 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:
 				itm.Val_(val + (val > 69 ? 1900 : 2000));	// assume that 70 refers to 1970 and 69 refers to 2069
-				tctx.Seg_idxs_(itm, DateAdp_.SegIdx_year);
+				tctx.Seg_idxs_(itm, GfoDateUtl.SegIdxYear);
 				return true;
 			case 3:	// NOTE: 3 digit numbers are valid years; MW relies on PHP time parse which always zero-pad numbers; PAGE:en.w:Battle of the Catalaunian Plains; {{#time:Y|June 20, 451}}
 			case 4:
-				tctx.Seg_idxs_(itm, DateAdp_.SegIdx_year);
+				tctx.Seg_idxs_(itm, GfoDateUtl.SegIdxYear);
 				return true;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_year, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_year, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static boolean Eval_as_m(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -93,14 +93,14 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:					
 				if	(	val > -1 && val < 13	// val is between 0 and 12; possible month;
-					&&	tctx.Seg_idxs()[DateAdp_.SegIdx_month] == Pxd_itm_base.Seg_idx_null // month is empty; needed else multiple access-date errors in references; PAGE:en.w:Template:Date; en.w:Antipas,_Cotabato; EX:"2 12 November 2016" DATE:2017-04-01
+					&&	tctx.Seg_idxs()[GfoDateUtl.SegIdxMonth] == Pxd_itm_base.Seg_idx_null // month is empty; needed else multiple access-date errors in references; PAGE:en.w:Template:Date; en.w:Antipas,_Cotabato; EX:"2 12 November 2016" DATE:2017-04-01
 					) { 
-					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_month);
+					tctx.Seg_idxs_(itm, GfoDateUtl.SegIdxMonth);
 					return true;
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_month, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_month, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static boolean Eval_as_d(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -109,12 +109,12 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:
 				if (val > -1 && val < 32) { 
-					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_day);
+					tctx.Seg_idxs_(itm, GfoDateUtl.SegIdxDay);
 					return true;
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_day, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static boolean Eval_as_h(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -123,12 +123,12 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:
 				if (val > -1 && val < 25) { 
-					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_hour, val);
+					tctx.Seg_idxs_(itm, GfoDateUtl.SegIdxHour, val);
 					return true;
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_hour, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static boolean Eval_as_n(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -137,12 +137,12 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:
 				if (val > -1 && val < 60) { 
-					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_minute, val);
+					tctx.Seg_idxs_(itm, GfoDateUtl.SegIdxMinute, val);
 					return true;
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_minute, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_minute, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static boolean Eval_as_s(Pxd_parser tctx, Pxd_itm_int itm) {
@@ -151,12 +151,12 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:
 				if (val > -1 && val < 60) { 
-					tctx.Seg_idxs_(itm, DateAdp_.SegIdx_second);
+					tctx.Seg_idxs_(itm, GfoDateUtl.SegIdxSecond);
 					return true;
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_second, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_second, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static boolean Eval_as_tz_h(Pxd_parser tctx, Pxd_itm_int itm, boolean negative) {
@@ -167,12 +167,12 @@ class Pxd_eval_seg {
 			case 2:
 				if (val > -12 && val < 12) {
 					itm.Val_is_adj_(BoolUtl.Y);
-					itm.Seg_idx_(DateAdp_.SegIdx_hour);
+					itm.Seg_idx_(GfoDateUtl.SegIdxHour);
 					return true;
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_hour, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static boolean Eval_as_tz_m(Pxd_parser tctx, Pxd_itm_int itm, boolean negative) {
@@ -183,12 +183,12 @@ class Pxd_eval_seg {
 			case 2:
 				if (val > -60 && val < 60) { 
 					itm.Val_is_adj_(BoolUtl.Y);
-					itm.Seg_idx_(DateAdp_.SegIdx_minute);
+					itm.Seg_idx_(GfoDateUtl.SegIdxMinute);
 					return true;
 				}
 				break;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_minute, Bfr_arg_.New_int(val));
+		tctx.Err_set(Pft_func_time_log.Invalid_minute, BryBfrArgUtl.NewInt(val));
 		return false;
 	}
 	public static byte Eval_as_tz_sym(Pxd_parser tctx, Pxd_itm[] tkns, Pxd_itm_int hour_itm) {
@@ -201,7 +201,7 @@ class Pxd_eval_seg {
 				break;
 			case Pxd_itm_.Tid_dash: return BoolUtl.NByte;
 		}
-		tctx.Err_set(Pft_func_time_log.Invalid_timezone, Bfr_arg_.New_bry("null"));
+		tctx.Err_set(Pft_func_time_log.Invalid_timezone, BryBfrArgUtl.NewBry("null"));
 		return BoolUtl.NullByte;
 	}
 }

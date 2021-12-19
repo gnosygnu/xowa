@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.dbs.qrys.*;
+package gplx.dbs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import org.junit.*;
+import gplx.dbs.qrys.*;
 public class Db_attach_mgr__tst {
 	private final Db_attach_mgr__fxt fxt = new Db_attach_mgr__fxt();
 	@Test public void Basic() {
@@ -34,7 +38,7 @@ public class Db_attach_mgr__tst {
 		+     "INNER JOIN tbl_2 t2 ON t1.fld_2 = t2.fld_2 "		// NOTE: curr is db_2 so do not prefix tbl_2 with db_2; fails if "db_2.tbl_2"
 		+     "INNER JOIN db_3.tbl_3 t3 ON t1.fld_3 = t3.fld_3 "
 		+     "INNER JOIN tbl_4 t4 ON t1.fld_4 = t4.fld_4"
-		, String_.Ary("db_1", "db_3")							// NOTE: no "db_2"
+		, StringUtl.Ary("db_1", "db_3")							// NOTE: no "db_2"
 		);
 	}
 }
@@ -51,7 +55,7 @@ class Db_attach_mgr__fxt {
 	}
 	public void Test__make_stmt_and_attach(Db_qry__select_cmd qry, String expd_sql, String[] expd_dbs) {
 		mgr.Test__make_stmt_and_attach(qry, qry.From());
-		Gftest.Eq__str(expd_sql, mgr.Test__attach_sql());
-		Gftest.Eq__ary(expd_dbs, mgr.Test__attach_list_keys());
+		GfoTstr.Eq(expd_sql, mgr.Test__attach_sql());
+		GfoTstr.EqLines(expd_dbs, mgr.Test__attach_list_keys());
 	}
 }

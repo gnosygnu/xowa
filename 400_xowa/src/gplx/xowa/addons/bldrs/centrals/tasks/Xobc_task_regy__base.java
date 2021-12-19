@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*;
+package gplx.xowa.addons.bldrs.centrals.tasks;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.gfobjs.*;
 public abstract class Xobc_task_regy__base {
@@ -24,12 +26,12 @@ public abstract class Xobc_task_regy__base {
 	public int						Len()					{return hash.Len();}
 	public void						Add(Xobc_task_itm t)	{hash.Add(t.Task_id(), t);}
 	public void						Clear()					{hash.Clear();}
-	public Xobc_task_itm			Get_at(int i)			{return (Xobc_task_itm)hash.Get_at(i);}
+	public Xobc_task_itm			Get_at(int i)			{return (Xobc_task_itm)hash.GetAt(i);}
 	public Xobc_task_itm			Get_by(int i)			{return (Xobc_task_itm)hash.GetByOrNull(i);}
 	public void						Del_by(int i)			{hash.Del(i);}
 	public void						Sort()					{hash.Sort();}
 
-	public void Save_to(Gfobj_ary ary) {Save_to(ary, (Xobc_task_itm[])hash.To_ary(Xobc_task_itm.class));}
+	public void Save_to(Gfobj_ary ary) {Save_to(ary, (Xobc_task_itm[])hash.ToAry(Xobc_task_itm.class));}
 	public void Save_to(Gfobj_ary ary, Xobc_task_itm[] itms) {
 		int len = itms.length;
 		Gfobj_nde[] sub_ndes = new Gfobj_nde[len];

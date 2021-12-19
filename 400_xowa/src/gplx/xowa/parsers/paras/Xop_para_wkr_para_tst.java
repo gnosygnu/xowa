@@ -13,18 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.paras;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_para_wkr_para_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
 	@Test public void Pre_then_xnde_pre() {	// PURPOSE: if ws_pre is in effect, xnde_pre should end it; EX: b:Knowing Knoppix/Other applications
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	" a"
 		,	"b<pre>c"
 		,	"d</pre>"
 		,	"e"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( 	"<pre>a"
 		,	"</pre>"
 		,	"b<pre>c"
@@ -36,14 +38,14 @@ public class Xop_para_wkr_para_tst {
 		));
 	}
 	@Test public void List_ignore_pre_lines() {	// PURPOSE: "\s\n" should create new list; was continuing previous list; DATE:2013-07-12
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	": a"
 		,	":* b"
 		,	" "
 		,	": c"
 		,	":* d"
 		)
-		,	String_.Concat_lines_nl_skip_last
+		,	StringUtl.ConcatLinesNlSkipLast
 		(	"<dl>"
 		,	"  <dd> a"
 		,	""
@@ -67,7 +69,7 @@ public class Xop_para_wkr_para_tst {
 		));		
 	}
 	@Test public void Multiple_nl_in_tblx() {	// PURPOSE: "\n\n\n" was causing multiple breaks; EX:fr.w:Portail:G�nie m�canique; DATE:2014-02-17
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"<table><tr><td>a"
 		,	"</td>"
 		,	""
@@ -77,7 +79,7 @@ public class Xop_para_wkr_para_tst {
 		,	""
 		,	"</tr></table>"
 		)
-		,	String_.Concat_lines_nl_skip_last
+		,	StringUtl.ConcatLinesNlSkipLast
 		(	"<table>"
 		,	"  <tr>"
 		,	"    <td>a"
@@ -89,12 +91,12 @@ public class Xop_para_wkr_para_tst {
 		);
 	}
 	@Test public void Ignore_cr() {	// PURPOSE: handle "\r\n"; EX: Special:MovePage; DATE:2014-03-02
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"a\r"
 		,	"\r"
 		,	"b\r"
 		)
-		,	String_.Concat_lines_nl_skip_last
+		,	StringUtl.ConcatLinesNlSkipLast
 		(	"<p>a"
 		,	"</p>"
 		,	""

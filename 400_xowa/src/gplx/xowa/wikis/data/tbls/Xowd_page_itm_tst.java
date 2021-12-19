@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import org.junit.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.wikis.data.tbls;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.*;
+import gplx.xowa.wikis.nss.*;
 public class Xowd_page_itm_tst {
 	@Before public void init() {fxt.Init();} private Xowd_page_itm_fxt fxt = new Xowd_page_itm_fxt();
 	@Test public void Ttl_() {
@@ -34,8 +38,8 @@ class Xowd_page_itm_fxt {
 		}
 	}
 	public void Test_ttl_(String ttl, int expd_ns, String expd_ttl) {
-		tmp_page.Ttl_(Bry_.new_a7(ttl), ns_mgr);
-	    Tfds.Eq(expd_ns, tmp_page.Ns_id());
-		Tfds.Eq(expd_ttl, String_.new_a7(tmp_page.Ttl_page_db()));
+		tmp_page.Ttl_(BryUtl.NewA7(ttl), ns_mgr);
+	    GfoTstr.EqObj(expd_ns, tmp_page.Ns_id());
+		GfoTstr.EqObj(expd_ttl, StringUtl.NewA7(tmp_page.Ttl_page_db()));
 	}
 }

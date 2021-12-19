@@ -3,7 +3,7 @@ package gplx.gfdbs.cores.cmds;
 import gplx.gfdbs.cores.GfdbTbl;
 import gplx.gfdbs.cores.GfdbMeta;
 import gplx.gfdbs.cores.GfdbState;
-import gplx.objects.lists.GfoIndexedList;
+import gplx.types.commons.lists.GfoIndexedList;
 
 public class GfoDbModifyCmdHash {
 	private final GfoIndexedList<String, GfdbModifyCmd<Object>> hash = new GfoIndexedList<>();

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders;
+import gplx.types.basics.utls.BryLni;
 import gplx.core.btries.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Xofulltext_word_node_ {
@@ -48,7 +49,7 @@ public class Xofulltext_word_node_ {
 				}
 
 				// get hook
-				byte[] word_hook = wildcard_at_bgn || wildcard_at_end ? Bry_.Mid(word_orig, hook_bgn, hook_end) : word_orig;
+				byte[] word_hook = wildcard_at_bgn || wildcard_at_end ? BryLni.Mid(word_orig, hook_bgn, hook_end) : word_orig;
 
 				// assign to trg
 				trg.word_orig = word_orig;
@@ -58,7 +59,7 @@ public class Xofulltext_word_node_ {
 
 				// add to trie
 				if (word_trie.Match_exact(word_hook) == null) { // don't add if exists
-					word_trie.Add_obj(word_hook, trg);
+					word_trie.AddObj(word_hook, trg);
 				}						
 				break;
 		}

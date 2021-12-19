@@ -14,28 +14,28 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls.encoders;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.wtrs.BryBfrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.htmls.Url_encoder_interface;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfo_url_encoder implements Url_encoder_interface {	// TS; Gfo_url_encoder_itm[] are read-only; anchor_encoder is effectively read-only
 	private final Gfo_url_encoder_itm[] encode_ary, decode_ary; private final Gfo_url_encoder anchor_encoder;
 	public Gfo_url_encoder(Gfo_url_encoder_itm[] encode_ary, Gfo_url_encoder_itm[] decode_ary, Gfo_url_encoder anchor_encoder) {
 		this.encode_ary = encode_ary; this.decode_ary = decode_ary; this.anchor_encoder = anchor_encoder;
 	}
-	public String	Encode_str(String str)			{return String_.new_u8(Encode(Bry_.new_u8(str)));}
-	public byte[]	Encode_bry(String str)			{return Encode(Bry_.new_u8(str));}
-	public byte[]	Encode(byte[] bry)				{Bry_bfr bfr = Bry_bfr_.Get();	Encode(bfr, bry, 0, bry.length); return bfr.To_bry_and_rls();}
-	public Bry_bfr	Encode(Bry_bfr bfr, byte[] bry) {								Encode(bfr, bry, 0, bry.length); return bfr;}
-	public void		Encode(Bry_bfr bfr, byte[] bry, int bgn, int end) {
+	public String	Encode_str(String str)			{return StringUtl.NewU8(Encode(BryUtl.NewU8(str)));}
+	public byte[]	Encode_bry(String str)			{return Encode(BryUtl.NewU8(str));}
+	public byte[]	Encode(byte[] bry)				{BryWtr bfr = BryBfrUtl.Get();	Encode(bfr, bry, 0, bry.length); return bfr.ToBryAndRls();}
+	public BryWtr Encode(BryWtr bfr, byte[] bry) {								Encode(bfr, bry, 0, bry.length); return bfr;}
+	public void		Encode(BryWtr bfr, byte[] bry, int bgn, int end) {
 		for (int i = bgn; i < end; ++i) {
 			byte b = bry[i];
 			if (anchor_encoder != null && b == AsciiByte.Hash) {
-				bfr.Add_byte(AsciiByte.Hash);
+				bfr.AddByte(AsciiByte.Hash);
 				anchor_encoder.Encode(bfr, bry, i + 1, end);
 				break;
 			}
@@ -44,20 +44,20 @@ public class Gfo_url_encoder implements Url_encoder_interface {	// TS; Gfo_url_e
 		}
 	}
 	public byte[] Encode_to_file_protocol(Io_url url) {
-		Bry_bfr bfr = Bry_bfr_.Get();
+		BryWtr bfr = BryBfrUtl.Get();
 		bfr.Add(Io_url.Http_file_bry);
 		Encode(bfr, url.RawBry());
-		return bfr.To_bry_and_rls();
+		return bfr.ToBryAndRls();
 	}
-	public String	Decode_str(String str)									{return String_.new_u8(Decode(Bry_.new_u8(str)));}
+	public String	Decode_str(String str)									{return StringUtl.NewU8(Decode(BryUtl.NewU8(str)));}
 	public byte[]	Decode(byte[] bry)										{return Decode(BoolUtl.N, bry,   0, bry.length);}
 	public byte[]	Decode(byte[] bry, int bgn, int end)					{return Decode(BoolUtl.N, bry, bgn, end);}
-	private byte[]	Decode(boolean fail, byte[] bry, int bgn, int end)			{Bry_bfr bfr = Bry_bfr_.Get(); Decode(bfr, fail, bry, bgn, end); return bfr.To_bry_and_rls();}
-	public Bry_bfr	Decode(Bry_bfr bfr, boolean fail, byte[] bry, int bgn, int end) {
+	private byte[]	Decode(boolean fail, byte[] bry, int bgn, int end)			{BryWtr bfr = BryBfrUtl.Get(); Decode(bfr, fail, bry, bgn, end); return bfr.ToBryAndRls();}
+	public BryWtr Decode(BryWtr bfr, boolean fail, byte[] bry, int bgn, int end) {
 		for (int i = bgn; i < end; ++i) {
 			byte b = bry[i];
 			if (anchor_encoder != null && b == AsciiByte.Hash) {
-				bfr.Add_byte(AsciiByte.Hash);
+				bfr.AddByte(AsciiByte.Hash);
 				anchor_encoder.Decode(bfr, BoolUtl.N, bry, i + 1, end);
 				break;
 			}

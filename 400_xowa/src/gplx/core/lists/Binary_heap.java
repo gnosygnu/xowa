@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.lists.ComparerAbleUtl;
+package gplx.core.lists;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.commons.lists.ComparerAbleUtl;
 public class Binary_heap {
 	private final ComparerAble comparer;
 	private boolean is_max;
@@ -29,7 +30,7 @@ public class Binary_heap {
 		this.size = 0;
 	}
 	public Object Get() {
-		if (size == 0) throw Err_.new_wo_type("heap is empty");
+		if (size == 0) throw ErrUtl.NewArgs("heap is empty");
 		return heap[0];
 	}
 	public void Add(Object val) {
@@ -45,7 +46,7 @@ public class Binary_heap {
 	}
 	public Object Pop() {return Pop(0);}
 	public Object Pop(int idx) {
-		if (size == 0) throw Err_.new_wo_type("heap is empty");
+		if (size == 0) throw ErrUtl.NewArgs("heap is empty");
 		Object val = heap[idx];
 		heap[idx] = heap[size -1];
 		size--;

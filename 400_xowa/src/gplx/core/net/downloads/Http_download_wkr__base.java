@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net.downloads; import gplx.*; import gplx.core.*; import gplx.core.net.*;
+package gplx.core.net.downloads;
 import gplx.core.progs.*;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public abstract class Http_download_wkr__base implements Http_download_wkr {
 	private long expd_size;
 	private Io_url tmp_url, checkpoint_url;
@@ -36,14 +41,14 @@ public abstract class Http_download_wkr__base implements Http_download_wkr {
 		try {status = this.Exec_hook(prog_ui, src_str, tmp_url, downloaded);}
 		catch (Exception e) {
 			status = Gfo_prog_ui_.Status__fail;
-			fail_msg = Err_.Message_lang(e);
+			fail_msg = ErrUtl.Message(e);
 		}
 		switch (status) {
 			case Gfo_prog_ui_.Status__done: {
 				if (expd_size_val != -1) {
 					long actl_size = Io_mgr.Instance.QueryFil(tmp_url).Size();
 					if (expd_size != actl_size) {
-						this.fail_msg = String_.Format("bad size: bad={0} good={1}", actl_size, expd_size);
+						this.fail_msg = StringUtl.Format("bad size: bad={0} good={1}", actl_size, expd_size);
 						return Gfo_prog_ui_.Status__fail;
 					}
 				}
@@ -70,11 +75,11 @@ public abstract class Http_download_wkr__base implements Http_download_wkr {
 	}
 	private long Checkpoint__load() {
 		byte[] data = Io_mgr.Instance.LoadFilBryOrNull(checkpoint_url);
-		return data == null ? 0 : Long_.parse_or(String_.new_a7(data), 0);
+		return data == null ? 0 : LongUtl.ParseOr(StringUtl.NewA7(data), 0);
 	}
 	public void Checkpoint__save(long new_val) {
 		if (new_val < checkpoint_nxt) return;
-		Io_mgr.Instance.SaveFilStr(checkpoint_url, Long_.To_str(new_val));
+		Io_mgr.Instance.SaveFilStr(checkpoint_url, LongUtl.ToStr(new_val));
 		downloaded = new_val;
 		checkpoint_nxt += checkpoint_interval;
 	}

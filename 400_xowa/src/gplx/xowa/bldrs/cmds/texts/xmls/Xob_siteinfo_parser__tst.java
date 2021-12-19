@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
+package gplx.xowa.bldrs.cmds.texts.xmls;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xob_siteinfo_parser__tst {
 	private final Xob_siteinfo_parser__fxt fxt = new Xob_siteinfo_parser__fxt();
-	@Test  public void Basic__simplewikt() {	// PURPOSE: basic test of siteinfo parse; DATE:2015-11-01
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+	@Test public void Basic__simplewikt() {	// PURPOSE: basic test of siteinfo parse; DATE:2015-11-01
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "  <siteinfo>"
 		, "    <sitename>Wiktionary</sitename>"
 		, "    <dbname>simplewiktionary</dbname>"
@@ -53,7 +56,7 @@ public class Xob_siteinfo_parser__tst {
 		, "      <namespace key=\"2600\" case=\"first-letter\">Topic</namespace>"
 		, "    </namespaces>"
 		, "  </siteinfo>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "Main_Page|case-sensitive|Wiktionary|simplewiktionary|MediaWiki 1.27.0-wmf.3"
 		, "-2|case-sensitive|Media"
 		, "-1|first-letter|Special"
@@ -83,15 +86,15 @@ public class Xob_siteinfo_parser__tst {
 		, "2601|first-letter|2601"	// NOTE: Topic_talk doesn't exist in <siteinfo>, but added by XOWA b/c every subj ns must have a talk ns
 		));
 	}
-	@Test  public void Case_dflt() {	// PURPOSE: missing case should use dflt DATE:2015-11-01
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+	@Test public void Case_dflt() {	// PURPOSE: missing case should use dflt DATE:2015-11-01
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "  <siteinfo>"
 		, "    <case>case-sensitive</case>"
 		, "    <namespaces>"
 		, "      <namespace key=\"-2\">Media</namespace>"
 		, "    </namespaces>"
 		, "  </siteinfo>"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "Main_Page|case-sensitive|||"
 		, "-2|case-sensitive|Media"
 		));
@@ -99,10 +102,10 @@ public class Xob_siteinfo_parser__tst {
 }
 class Xob_siteinfo_parser__fxt {
 	private final Xow_ns_mgr ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public void Test__parse(String src_str, String expd) {
 		Xob_siteinfo_nde nde = Xob_siteinfo_parser_.Parse(src_str, ns_mgr);
 		nde.To_bfr(bfr);
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 }

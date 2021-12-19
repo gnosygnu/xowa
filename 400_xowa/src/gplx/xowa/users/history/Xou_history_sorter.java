@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users.history;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
 public class Xou_history_sorter implements ComparerAble {
 	public boolean Ascending() {return ascending;} public Xou_history_sorter Ascending_(boolean v) {ascending = v; return this;} private boolean ascending = false;
 	public int Sort_fld() {return sort_fld;} public Xou_history_sorter Sort_fld_(int v) {sort_fld = v; return this;} private int sort_fld = Xou_history_itm.Fld_view_end;

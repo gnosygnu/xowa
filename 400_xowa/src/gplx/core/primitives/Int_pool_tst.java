@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class Int_pool_tst {
 	private final Int_pool_tstr tstr = new Int_pool_tstr();
@@ -63,7 +64,7 @@ class Int_pool_tstr {
 	private final Int_pool pool = new Int_pool();
 	public void Clear() {pool.Clear();}
 	public Int_pool_tstr Test_get(int expd) {
-		Tfds.Eq(expd, pool.Get_next());
+		GfoTstr.EqObj(expd, pool.Get_next());
 		return this;
 	}
 	public Int_pool_tstr Exec_del(int val) {

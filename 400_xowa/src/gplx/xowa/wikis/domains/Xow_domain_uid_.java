@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.langs.*;
+package gplx.xowa.wikis.domains;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.langs.Xol_lang_stub;
+import gplx.xowa.langs.Xol_lang_stub_;
 public class Xow_domain_uid_ {
 	public static final int
 	  Tid_null						= 0
@@ -64,7 +67,7 @@ public class Xow_domain_uid_ {
 			case Xow_domain_tid_.Tid__wikiversity:			domain_tid = Tid_sub_wikiversity; break;
 			case Xow_domain_tid_.Tid__wikinews:				domain_tid = Tid_sub_wikinews; break;
 			case Xow_domain_tid_.Tid__wikimedia:			domain_tid = Tid_sub_wikimedia; break;
-			default:										throw Err_.new_unhandled(domain.Domain_type_id());
+			default:										throw ErrUtl.NewUnhandled(domain.Domain_type_id());
 		}
 		return	Const_system_reserved							// reserve first 100 slots
 			+	domain_tid										// domain_tid assigned above
@@ -98,10 +101,10 @@ public class Xow_domain_uid_ {
 			case Tid_sub_wikiversity:			tid_int = Xow_domain_tid_.Tid__wikiversity; tid_bry = Xow_domain_tid_.Bry__wikiversity; break;
 			case Tid_sub_wikinews:				tid_int = Xow_domain_tid_.Tid__wikinews;	tid_bry = Xow_domain_tid_.Bry__wikinews; break;
 			case Tid_sub_wikimedia:				tid_int = Xow_domain_tid_.Tid__wikimedia;	tid_bry = Xow_domain_tid_.Bry__wikimedia; break;
-			default:							throw Err_.new_unhandled(type_id);
+			default:							throw ErrUtl.NewUnhandled(type_id);
 		}
 		Xol_lang_stub lang = Xol_lang_stub_.Get_by_id(lang_id);
-		byte[] domain_bry = Bry_.Add(lang.Key(), AsciiByte.DotBry, tid_bry, AsciiByte.DotBry, Xow_domain_itm_.Seg__org);
+		byte[] domain_bry = BryUtl.Add(lang.Key(), AsciiByte.DotBry, tid_bry, AsciiByte.DotBry, Xow_domain_itm_.Seg__org);
 		return Xow_domain_itm.new_(domain_bry, tid_int, lang, lang.Key());
 	}
 }

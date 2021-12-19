@@ -13,15 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*;
-import gplx.dbs.sqls.itms.*;
-import gplx.core.stores.*; /*GfoNdeRdr*/
-import gplx.objects.lists.ComparerAble;
+package gplx.dbs.engines.tdbs;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.core.criterias.Criteria;
+import gplx.core.gfo_ndes.GfoFld;
+import gplx.core.gfo_ndes.GfoFldList;
+import gplx.core.gfo_ndes.GfoFldList_;
+import gplx.core.gfo_ndes.GfoNde;
+import gplx.core.gfo_ndes.GfoNdeList;
+import gplx.core.gfo_ndes.GfoNdeList_;
+import gplx.core.gfo_ndes.GfoNde_;
+import gplx.core.stores.GfoNdeRdr_;
+import gplx.dbs.Db_qry;
+import gplx.dbs.engines.Db_engine;
+import gplx.dbs.qrys.Db_qry__select_cmd;
+import gplx.dbs.sqls.itms.Sql_order_fld_sorter;
+import gplx.dbs.sqls.itms.Sql_select_fld;
+import gplx.dbs.sqls.itms.Sql_select_fld_list;
+import gplx.dbs.sqls.itms.Sql_where_clause;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.ComparerAble;
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;
-		if (cmd.From().Tbls.Len() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.ToSqlExec(engineObj.Sql_wtr()));
+		if (cmd.From().Tbls.Len() > 1) throw ErrUtl.NewArgs("joins not supported for tdbs", "sql", cmd.ToSqlExec(engineObj.Sql_wtr()));
 
 		TdbTable tbl = engine.FetchTbl(cmd.From().Base_tbl.Name);
 		GfoNdeList rv = (cmd.Where_itm() == Sql_where_clause.Where__null && cmd.Limit() == Db_qry__select_cmd.Limit__disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where_itm().Root, cmd.Limit());
@@ -50,8 +67,8 @@ class TdbSelectWkr implements Db_qryWkr {
 		for (int i = 0; i < len; ++i) {
 			Sql_select_fld selectFld = flds.Get_at(i);
 			GfoFld fld = tbl.Flds().FetchOrNull(selectFld.Fld);
-			if (fld == null) throw Err_.new_wo_type("fld not found in tbl", "fldName", selectFld.Fld, "tblName", tbl.Name(), "tblFlds", tbl.Flds().To_str());
-			if (rv.Has(selectFld.Alias)) throw Err_.new_wo_type("alias is not unique", "fldName", selectFld.Fld, "flds", rv.To_str());
+			if (fld == null) throw ErrUtl.NewArgs("fld not found in tbl", "fldName", selectFld.Fld, "tblName", tbl.Name(), "tblFlds", tbl.Flds().To_str());
+			if (rv.Has(selectFld.Alias)) throw ErrUtl.NewArgs("alias is not unique", "fldName", selectFld.Fld, "flds", rv.To_str());
 			selectFld.GroupBy_type(fld.Type());
 			rv.Add(selectFld.Alias, selectFld.Val_type());
 		}
@@ -83,7 +100,7 @@ class TdbGroupByWkr {
 		Ordered_hash curHash = groupByRows;
 		GfoNde rv = null;
 		for (int i = 0; i < len; i++) {
-			String fld = (String)groupByFlds.Get_at(i);
+			String fld = (String)groupByFlds.GetAt(i);
 			boolean last = i == len - 1;
 			Object val = selectRow.Read(fld);
 			Object o = curHash.GetByOrNull(val);

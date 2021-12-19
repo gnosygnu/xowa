@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files;
-import gplx.Bry_;
-import gplx.Gfo_usr_dlg_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.caches.Xof_cache_mgr;
 import gplx.xowa.files.origs.Xof_orig_wkr;
 import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
@@ -27,7 +27,7 @@ public class Xofv_file_mgr_tst {
 //		@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
 	@After  public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test public void Stub() {}
-//		@Test  public void Thumb() {
+//		@Test public void Thumb() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
@@ -37,7 +37,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test  public void Orig() {
+//		@Test public void Orig() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_orig("A.png", 440, 400))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_none(0, "A.png"))
@@ -47,7 +47,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test  public void Img_size() {	// PURPOSE: test integration of Xof_img_size
+//		@Test public void Img_size() {	// PURPOSE: test integration of Xof_img_size
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 110, 100))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", Xof_img_size.Null, Xof_img_size.Null).Upright_(.5f))
@@ -57,7 +57,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test  public void Orig_mgr() {	// PURPOSE: test integration of Orig_mgr
+//		@Test public void Orig_mgr() {	// PURPOSE: test integration of Orig_mgr
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm_redirect("B.jpg", "A.png", 440, 400))	// B.jpg redirects to A.png
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "B.jpg", 220, 200))
@@ -67,7 +67,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test  public void Cache_exists() {
+//		@Test public void Cache_exists() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
@@ -77,7 +77,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(0)	// skip download
 //				;
 //		}
-//		@Test  public void Cache_absent() {
+//		@Test public void Cache_absent() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
@@ -121,7 +121,7 @@ class Xof_orig_itm_mkr {
 	private Xofv_repo_itm repo_comm, repo_wiki;
 	public Xof_orig_itm_mkr() {this.Reset();}
 	private void Reset() {
-		redirect_bry = Bry_.Empty;
+		redirect_bry = BryUtl.Empty;
 	}
 	public void Setup_repos(Xofv_repo_itm repo_comm, Xofv_repo_itm repo_wiki) {this.repo_comm = repo_comm; this.repo_wiki = repo_wiki;}
 	public Xof_orig_itm_mkr Init_comm_redirect(String src, String trg, int orig_w, int orig_h) {return Init(BoolUtl.Y, src, trg, orig_w, orig_h);}
@@ -129,8 +129,8 @@ class Xof_orig_itm_mkr {
 	public Xof_orig_itm_mkr Init_wiki(String ttl_str, int orig_w, int orig_h) {return Init(BoolUtl.N, ttl_str, null, orig_w, orig_h);}
 	private Xof_orig_itm_mkr Init(boolean repo_is_comm, String ttl_str, String redirect_str, int orig_w, int orig_h) {
 		repo = repo_is_comm ? repo_comm : repo_wiki;
-		this.ttl_bry = Bry_.new_u8(ttl_str); this.orig_w = orig_w; this.orig_h = orig_h;
-		this.redirect_bry = redirect_str == null ? Bry_.Empty : Bry_.new_u8(redirect_str);
+		this.ttl_bry = BryUtl.NewU8(ttl_str); this.orig_w = orig_w; this.orig_h = orig_h;
+		this.redirect_bry = redirect_str == null ? BryUtl.Empty : BryUtl.NewU8(redirect_str);
 		this.ext = Xof_ext_.new_by_ttl_(ttl_bry).Id();
 		return this;
 	}
@@ -155,13 +155,13 @@ class Xof_fsdb_mkr {
 	public Xof_fsdb_mkr Init(boolean repo_is_commons, boolean file_is_orig, String ttl_str, int file_w, int file_h) {
 		this.lnki_type = file_is_orig ? Xop_lnki_type.Id_none : Xop_lnki_type.Id_thumb; 
 		this.repo = repo_is_commons ? repo_comm : repo_wiki;
-		this.ttl_bry = Bry_.new_u8(ttl_str);
+		this.ttl_bry = BryUtl.NewU8(ttl_str);
 		this.file_w = file_w; this.file_h = file_h;
 		return this;
 	}
 	public Xof_fsdb_itm Make() {
 		Xof_fsdb_itm rv = new Xof_fsdb_itm();
-		rv.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7("en.w"), ttl_bry, lnki_type, upright, file_w, file_h, time, page, Xof_patch_upright_tid_.Tid_all);
+		rv.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, BryUtl.NewA7("en.w"), ttl_bry, lnki_type, upright, file_w, file_h, time, page, Xof_patch_upright_tid_.Tid_all);
 		rv.Orig_repo_name_(repo);
 		this.Reset();
 		return rv;

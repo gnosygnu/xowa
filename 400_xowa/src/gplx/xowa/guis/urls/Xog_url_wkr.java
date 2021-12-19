@@ -14,11 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.urls;
-
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.String_;
-import gplx.xowa.Xoa_ttl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoa_url_;
 import gplx.xowa.Xoae_app;
@@ -32,7 +30,7 @@ public class Xog_url_wkr {
 	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
 	public Xoa_url Parse(Xog_win_itm win, String href_str) {
 		if (href_str == null) return tmp_url;	// text is not link; return;
-		byte[] href_bry = Bry_.new_u8(href_str);
+		byte[] href_bry = BryUtl.NewU8(href_str);
 		this.win = win; this.app = win.App(); 
 		this.page = win.Active_page();
 		this.wiki = win.Active_tab().Wiki();
@@ -50,13 +48,13 @@ public class Xog_url_wkr {
 			case Xoa_url_.Tid_xcmd:			return Exec_url_xowa(app);									// xowa:app.version or /xcmd/app.version
 			case Xoa_url_.Tid_file:			return Exec_url_file(app, wiki, page, win, url.Raw());		// file:///xowa/A.png
 			case Xoa_url_.Tid_page:			return Exec_url_page(wiki, url.Orig());						// /wiki/Page
-			default:						throw Err_.new_unhandled(url.Tid());
+			default:						throw ErrUtl.NewUnhandled(url.Tid());
 		}
 	}
 	private Xoa_url Exec_url_xowa(Xoae_app app) {		// EX: xowa:app.version
 		// NOTE: must catch exception else it will bubble to SWT browser and raise secondary exception of xowa is not a registered protocol
-		try {app.Gfs_mgr().Run_str(String_.new_u8(tmp_url.Page_bry()));}
-		catch (Exception e) {app.Gui_mgr().Kit().Ask_ok("", "", Err_.Message_gplx_full(e));}
+		try {app.Gfs_mgr().Run_str(StringUtl.NewU8(tmp_url.Page_bry()));}
+		catch (Exception e) {app.Gui_mgr().Kit().Ask_ok("", "", ErrUtl.ToStrFull(e));}
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_http(Xoae_app app) {		// EX: http://a.org

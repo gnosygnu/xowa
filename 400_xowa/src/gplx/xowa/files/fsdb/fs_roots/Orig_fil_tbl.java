@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb.fs_roots; import gplx.*;
+package gplx.xowa.files.fsdb.fs_roots;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 class Orig_fil_tbl implements Rls_able {
 	private final Db_conn conn;
 	private final DbmetaFldList flds = new DbmetaFldList();
@@ -49,14 +54,14 @@ class Orig_fil_tbl implements Rls_able {
 	private Orig_fil_row Load_itm(Db_rdr rdr, Io_url orig_root) {
 		String name = rdr.Read_str(fld_name);
 		String fil_orig_dir = rdr.Read_str(fld_dir_url);
-		Io_url dir = String_.Has_at_bgn(fil_orig_dir, Fs_root_wkr.Url_orig_dir)
+		Io_url dir = StringUtl.HasAtBgn(fil_orig_dir, Fs_root_wkr.Url_orig_dir)
 			// swap out orig_dir; EX: "~{orig_dir}7/70/" -> "/xowa/wiki/custom_wiki/file/orig/7/70/"
-			? Io_url_.new_dir_(orig_root.Raw() + String_.Mid(fil_orig_dir, String_.Len(Fs_root_wkr.Url_orig_dir)))
+			? Io_url_.new_dir_(orig_root.Raw() + StringUtl.Mid(fil_orig_dir, StringUtl.Len(Fs_root_wkr.Url_orig_dir)))
 			// load literally;    EX: "/xowa/wiki/custom_wiki/file/orig/7/70/"
 			: Io_url_.new_dir_(fil_orig_dir);
 		return Orig_fil_row.New_by_db
 		( rdr.Read_int(fld_uid)
-		, Bry_.new_u8(name)
+		, BryUtl.NewU8(name)
 		, rdr.Read_int(fld_ext_id)
 		, rdr.Read_int(fld_w)
 		, rdr.Read_int(fld_h)

@@ -13,11 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.imgs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.custom.brys.wtrs.BryRef;
 import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
+import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
@@ -25,7 +31,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(32);
 	private final Xoh_img_xoimg_hzip xoimg = new Xoh_img_xoimg_hzip();
 	public int Tid() {return Xoh_hzip_dict_.Tid__img;}
 	public String Key() {return Xoh_hzip_dict_.Key__img;}
@@ -36,7 +42,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_img_data data = (Xoh_img_data)data_obj;
 		Xoh_anch_href_data anch_href = data.Anch_href();
 		boolean					img_wo_anch = data.Img_wo_anch();
-		Bry_obj_ref				anch_page = data.Anch_xo_ttl();
+		BryRef anch_page = data.Anch_xo_ttl();
 		byte					anch_href_tid = anch_href.Tid();
 		boolean					anch__ns_is_custom = anch_href.Ttl_ns_custom() != null;
 		boolean					anch__ns_needs_saving = Xoh_anch_href_data.Ns_exists(anch_href.Tid()) && anch_href.Ttl_ns_id() != Xow_ns_.Tid__file;
@@ -46,10 +52,10 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_img_src_data		img_src = data.Img_src();
 		boolean					img__alt_diff_from_anch_title = data.Img_alt__diff__anch_title();
 		boolean					file__src_exists = !img_xoimg.Val_dat_exists();
-		boolean					anch_href_diff_file = !img_wo_anch && !Bry_.Match(anch_page.Val(), anch_page.Val_bgn(), anch_page.Val_end(), anch_href.Ttl_page_db());
+		boolean					anch_href_diff_file = !img_wo_anch && !BryLni.Eq(anch_page.Val(), anch_page.Bgn(), anch_page.End(), anch_href.Ttl_page_db());
 		boolean					img__is_imap		= flag_bldr.Set_as_bool(Flag__img__is_imap			, data.Img_imap_idx() != -1);
 		boolean					img__is_pgbnr		= flag_bldr.Set_as_bool(Flag__img__is_pgbnr			, data.Img_pgbnr().Exists());
-		boolean					img__src_is_diff	= flag_bldr.Set_as_bool(Flag__file__src_diff_href	, file__src_exists && img_src.Src_end() != -1 && !Bry_.Eq(anch_href.Ttl_page_db(), img_src.File_ttl_bry()));	// && img_src.Src_end() != -1; handle missing src in corrupt html; EX: <img w=1 h=2>
+		boolean					img__src_is_diff	= flag_bldr.Set_as_bool(Flag__file__src_diff_href	, file__src_exists && img_src.Src_end() != -1 && !BryLni.Eq(anch_href.Ttl_page_db(), img_src.File_ttl_bry()));	// && img_src.Src_end() != -1; handle missing src in corrupt html; EX: <img w=1 h=2>
 		flag_bldr.Set(Flag__img__wo_anch					, img_wo_anch);
 		flag_bldr.Set(Flag__img__is_vid						, data.Img_is_vid());
 		flag_bldr.Set(Flag__file__w_diff_from_html			, file__src_exists && data.Img_w__diff__file_w());
@@ -70,25 +76,25 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		// Tfds.Dbg(flag_bldr.Encode(), ArrayUtl.To_str(flag_bldr.Val_ary()));
 		if (wkr_is_root) bfr.Add(hook);
 		Gfo_hzip_int_.Encode(2, bfr, flag_bldr.Encode());
-		if (img_wo_anch)		bfr.Add_hzip_mid(anch_page.Val(), anch_page.Val_bgn(), anch_page.Val_end());
+		if (img_wo_anch)		bfr.Add_hzip_mid(anch_page.Val(), anch_page.Bgn(), anch_page.End());
 		else {
 			switch (anch_href_tid) {
 				case Xoh_anch_href_data.Tid__inet:
-					bfr.Add_mid(src, anch_href.Rng_bgn(), anch_href.Rng_end());
+					bfr.AddMid(src, anch_href.Rng_bgn(), anch_href.Rng_end());
 					break;
 				case Xoh_anch_href_data.Tid__site:
-					bfr.Add_mid(src, anch_href.Site_bgn(), anch_href.Site_end()).Add_byte(AsciiByte.Pipe).Add(anch_href.Ttl_page_db());
+					bfr.AddMid(src, anch_href.Site_bgn(), anch_href.Site_end()).AddByte(AsciiByte.Pipe).Add(anch_href.Ttl_page_db());
 					break;
 				case Xoh_anch_href_data.Tid__wiki:
 				case Xoh_anch_href_data.Tid__anch:
 					bfr.Add(anch_href.Ttl_page_db());
 					break;
 			}
-			bfr.Add_byte(Xoh_hzip_dict_.Escape);
+			bfr.AddByte(Xoh_hzip_dict_.Escape);
 		}
 		if (anch_href_diff_file) {
-			data.Anch_xo_ttl().Bfr_arg__add(bfr);
-			bfr.Add_byte(Xoh_hzip_dict_.Escape);
+			data.Anch_xo_ttl().AddToBfr(bfr);
+			bfr.AddByte(Xoh_hzip_dict_.Escape);
 		}
 		switch (anch_href_tid) {
 			case Xoh_anch_href_data.Tid__anch:
@@ -100,7 +106,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					Xoh_lnki_dict_.Ns_encode(bfr, anch_href.Ttl_ns_id());
 				break;
 		}
-		if (anch__ns_is_custom) bfr.Add(data.Anch_href().Ttl_ns_custom()).Add_byte(Xoh_hzip_dict_.Escape);
+		if (anch__ns_is_custom) bfr.Add(data.Anch_href().Ttl_ns_custom()).AddByte(Xoh_hzip_dict_.Escape);
 		if (file__src_exists) {
 			Gfo_hzip_int_.Encode(2, bfr, Gfo_hzip_int_.Neg_1_adj + data.Img_w());
 			Gfo_hzip_int_.Encode(2, bfr, Gfo_hzip_int_.Neg_1_adj + data.Img_h());
@@ -126,10 +132,10 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		}
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		// read flags; order doesn't matter, but reading <a> -> <img> -> src=
 		Xoh_img_data data = (Xoh_img_data)data_itm; data.Clear();
-		int flag = rdr.Read_hzip_int(2); flag_bldr.Decode(flag);
+		int flag = rdr.ReadHzipInt(2); flag_bldr.Decode(flag);
 		int		anch__href_tid					= flag_bldr.Get_as_int(Flag__anch__href_tid);
 		boolean	anch__title_missing				= flag_bldr.Get_as_bool(Flag__anch__title_missing);
 		boolean	anch__href_diff_file			= flag_bldr.Get_as_bool(Flag__anch__href_diff_file);
@@ -152,36 +158,36 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean	file__w_diff_from_html			= flag_bldr.Get_as_bool(Flag__file__w_diff_from_html);
 
 		// get href_page; note: encoded; EX: "A%C3%A9b.png" not "Aéb.png"
-		byte[] href_page = rdr.Read_bry_to();
+		byte[] href_page = rdr.ReadBryTo();
 
 		// get site_bry; note: href_page will include site_bry and separate with pipe; EX:"en.wiktionary.org|A~"
 		byte[] site_bry = null;
 		if (anch__href_tid == Xoh_anch_href_data.Tid__site) {
-			int pipe_pos = Bry_find_.Find_fwd(href_page, AsciiByte.Pipe);
-			site_bry = Bry_.Mid(href_page, 0, pipe_pos);
-			href_page = Bry_.Mid(href_page, pipe_pos + 1);
+			int pipe_pos = BryFind.FindFwd(href_page, AsciiByte.Pipe);
+			site_bry = BryLni.Mid(href_page, 0, pipe_pos);
+			href_page = BryLni.Mid(href_page, pipe_pos + 1);
 		}
 
 		// get xo_ttl; note: unencoded; EX: "Aéb.png"; defaults to href_page, else uses next bry
-		byte[] xo_ttl = anch__href_diff_file ? rdr.Read_bry_to() : href_page;
+		byte[] xo_ttl = anch__href_diff_file ? rdr.ReadBryTo() : href_page;
 
 		// get href_ns; usually -1 which means "File"; else, read next int
 		int href_ns_id = anch__ns_needs_saving ? Xoh_lnki_dict_.Ns_decode(rdr) : -1;
 
 		// get href_custom; usually null, but can be "Image";
 		byte[] href_ns_custom = anch__ns_is_custom 
-			? Xoa_ttl.Replace_spaces(rdr.Read_bry_to())	// NOTE: use unders not spaces; will be used directly below to generate href; else href="User talk:A"; PAGE:de.b:Wikibooks:Benutzersperrung/_InselFahrer DATE:2016-06-25
+			? Xoa_ttl.Replace_spaces(rdr.ReadBryTo())	// NOTE: use unders not spaces; will be used directly below to generate href; else href="User talk:A"; PAGE:de.b:Wikibooks:Benutzersperrung/_InselFahrer DATE:2016-06-25
 			: null;
 
 		// get img.src attributes like width, height, page, time
 		int file_w = -1, img_w = -1, img_h = -1, file_page = -1;
 		double file_time = -1;
 		if (file__src_exists) {
-			img_w = rdr.Read_hzip_int(2) - Gfo_hzip_int_.Neg_1_adj;
-			img_h = rdr.Read_hzip_int(2) - Gfo_hzip_int_.Neg_1_adj;
-			file_w = file__w_diff_from_html ? rdr.Read_hzip_int(2) - Gfo_hzip_int_.Neg_1_adj : img_w; 
-			if (file__time_exists)		file_time = rdr.Read_double_to();
-			if (file__page_exists)		file_page = rdr.Read_hzip_int(1) - Gfo_hzip_int_.Neg_1_adj;
+			img_w = rdr.ReadHzipInt(2) - Gfo_hzip_int_.Neg_1_adj;
+			img_h = rdr.ReadHzipInt(2) - Gfo_hzip_int_.Neg_1_adj;
+			file_w = file__w_diff_from_html ? rdr.ReadHzipInt(2) - Gfo_hzip_int_.Neg_1_adj : img_w;
+			if (file__time_exists)		file_time = rdr.ReadDoubleTo();
+			if (file__page_exists)		file_page = rdr.ReadHzipInt(1) - Gfo_hzip_int_.Neg_1_adj;
 		}
 		else
 			xoimg.Decode(bfr, hctx, hpg, rdr, src, data.Img_xoimg());
@@ -190,7 +196,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		int anch_title_bgn = -1, anch_title_end = -1;
 		if (!anch__title_missing) {
 			anch_title_bgn = rdr.Pos();
-			anch_title_end = rdr.Find_fwd_lr();				
+			anch_title_end = rdr.FindFwdLr();
 		}
 
 		// get alt; usually anch_title, else read next bry
@@ -201,37 +207,37 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		}
 		if (img__alt_diff_from_anch_title) {
 			img_alt_bgn = rdr.Pos();
-			img_alt_end = rdr.Find_fwd_lr();
+			img_alt_end = rdr.FindFwdLr();
 		}
 
 		// get img_cls; usually missing, else read next bry
 		int img_cls_other_bgn = -1; int img_cls_other_end = -1;
 		if (img__cls_other_exists) {
 			img_cls_other_bgn = rdr.Pos();
-			img_cls_other_end = rdr.Find_fwd_lr();
+			img_cls_other_end = rdr.FindFwdLr();
 		}
 
 		// get imap_idx
-		int img_imap_idx = img__is_imap ? rdr.Read_hzip_int(1) : -1;
+		int img_imap_idx = img__is_imap ? rdr.ReadHzipInt(1) : -1;
 
 		// get pgbnr
 		if (img__is_pgbnr) {
-			double data_pos_x = rdr.Read_double_to();
-			double data_pos_y = rdr.Read_double_to();
-			byte[] srcset = rdr.Read_bry_to();
-			byte[] style = rdr.Read_bry_to();
+			double data_pos_x = rdr.ReadDoubleTo();
+			double data_pos_y = rdr.ReadDoubleTo();
+			byte[] srcset = rdr.ReadBryTo();
+			byte[] style = rdr.ReadBryTo();
 			
 			data.Img_pgbnr().Init_by_decode(data_pos_x, data_pos_y, srcset, style);
 		}
 
 		// get img.src.page; usually same as anch.href.page, else read next bry
-		byte[] src_page = img__src_is_diff ? rdr.Read_bry_to() : href_page;
+		byte[] src_page = img__src_is_diff ? rdr.ReadBryTo() : href_page;
 
 		// rdr done; build full anch_href			
 		boolean anch_rel_is_nofollow = false; // anch_rel_is_nofollow usually false, but true when image points to another wiki
 		if (anch__href_tid == Xoh_anch_href_data.Tid__inet) {// handle external links
 			tmp_bfr.Add(href_page);			// href_page is actually entire url
-			if (Bry_.Len_gt_0(href_page))	// NOTE: href_page == "" for Media links; EX:[[File:A.png|link=file:///C:/A.ogg]] -> <a href='' class='image'>
+			if (BryUtl.IsNotNullOrEmpty(href_page))	// NOTE: href_page == "" for Media links; EX:[[File:A.png|link=file:///C:/A.ogg]] -> <a href='' class='image'>
 				anch_rel_is_nofollow = true;
 		}
 		else {
@@ -254,11 +260,11 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					}
 					else {
 						if (anch__ns_is_custom)	// handle ns aliases; EX: "Image:Page"; EX:WP; PAGE:en.w:Wikipedia:WikiProject_Molecular_and_Cell_Biology; DATE:2016-01-11
-							ttl_full = Bry_.Add(href_ns_custom, AsciiByte.ColonBry, href_page);
+							ttl_full = BryUtl.Add(href_ns_custom, AsciiByte.ColonBry, href_page);
 						else {
 							if (anch__href_tid == Xoh_anch_href_data.Tid__site) {	// if site, do not title-case page; EX:[[File:A.png|link=wikt:Category:en:A]]; PAGE:en.w:Portal:Trucks/Wikimedia; DATE:2016-01-11
 								Xow_ns href_ns = hctx.Wiki__ttl_parser().Ns_mgr().Ids_get_or_null(href_ns_id);
-								ttl_full = Bry_.Add(href_ns.Name_db_w_colon(), href_page);	// NOTE: just add href_page; do not call ttl.Parse which will title-case;
+								ttl_full = BryUtl.Add(href_ns.Name_db_w_colon(), href_page);	// NOTE: just add href_page; do not call ttl.Parse which will title-case;
 							}
 							else {
 								Xoa_ttl anch_href_ttl = hctx.Wiki__ttl_parser().Ttl_parse(href_ns_id, href_page);
@@ -271,10 +277,10 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			}
 			else {// no link
 				byte[] ns_bry = anch__ns_is_custom ? href_ns_custom : hctx.Wiki__ttl_parser().Ns_mgr().Ns_file().Name_db();
-				tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(ns_bry).Add_byte_colon().Add(href_page);
+				tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(ns_bry).AddByteColon().Add(href_page);
 			}
 		}
-		this.anch_href_bry = tmp_bfr.To_bry_and_clear();
+		this.anch_href_bry = tmp_bfr.ToBryAndClear();
 
 		// set url_bldr
 		Xof_url_bldr url_bldr = hctx.File__url_bldr();
@@ -291,7 +297,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 
 		// set data vars for wtr
 		data.Init_by_decode(anch_rel_is_nofollow, anch_title_bgn, anch_title_end, img__wo_anch, img__is_vid, img_w, img_h, img_alt_bgn, img_alt_end, img_imap_idx);
-		data.Anch_xo_ttl().Val_(xo_ttl);	// set data-xowa-title
+		data.Anch_xo_ttl().ValSet(xo_ttl);	// set data-xowa-title
 		data.Anch_href().Init_by_decode(anch_href_bry);
 		data.Anch_cls().Init_by_decode(anch__cls_tid);
 		data.Img_cls().Init_by_decode(src, img__cls, img_cls_other_bgn, img_cls_other_end);

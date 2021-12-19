@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*;
+package gplx.xowa.addons.bldrs.exports.packs.files;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 class Pack_hash {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public int			Len()				{return hash.Len();}
-	public Pack_list	Get_at(int i)		{return (Pack_list)hash.Get_at(i);}
+	public Pack_list	Get_at(int i)		{return (Pack_list)hash.GetAt(i);}
 	public Pack_list	Get_by(int tid)		{return (Pack_list)hash.GetByOrNull(tid);}
 	public Pack_itm Add(Pack_zip_name_bldr bldr, int list_tid, Io_url file_url) {return Add(list_tid, bldr.Bld(file_url), file_url);}
 	public Pack_itm Add(int list_tid, Io_url pack_url, Io_url... raw_urls) {

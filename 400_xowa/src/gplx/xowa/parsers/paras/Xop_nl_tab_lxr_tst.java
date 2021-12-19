@@ -13,18 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.paras;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_nl_tab_lxr_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
 	@Test public void Basic() {		// PURPOSE: \n\t|- should be recognized as tblw; EX:zh.v:西安; DATE:2014-05-06
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 		( "{|"
 		, "\t|-"
 		, "|a"
 		, "|}"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "<table>"
 		, "  <tr>"
 		, "    <td>a"
@@ -34,12 +36,12 @@ public class Xop_nl_tab_lxr_tst {
 		));
 	}
 	@Test public void Ws() {			// PURPOSE: \n\t|- should be recognized as tblw; EX:zh.v:西安; DATE:2014-05-06
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 		( "{|"
 		, "\t  |-"	// \t  
 		, "|a"
 		, "|}"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "<table>"
 		, "  <tr>"
 		, "    <td>a"
@@ -49,11 +51,11 @@ public class Xop_nl_tab_lxr_tst {
 		));
 	}
 	@Test public void Ignore() {// PURPOSE: \n\t should not be pre; EX:pl.w:Main_Page; DATE:2014-05-06
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "\t b"
 		, "c"
-		),	String_.Concat_lines_nl_skip_last
+		),	StringUtl.ConcatLinesNlSkipLast
 		( "<p>a"
 		, "\t b"
 		, "c"

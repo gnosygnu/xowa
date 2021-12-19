@@ -13,14 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp_;
 public class IptCfg_ {
 	public static final IptCfg Null = IptCfg_null.Instance;
 	public static IptCfg new_(String key) {return IptCfgRegy.Instance.GetOrNew(key);}
 }
 class IptCfg_null implements IptCfg {
 	public String CfgKey() {return "<<NULL KEY>>";}
-	public IptCfgItm GetOrDefaultArgs(String bndKey, GfoMsg m, IptArg[] argAry) {return IptCfgItm.new_().Key_(bndKey).Ipt_(List_adp_.New_by_many((Object[])argAry)).Msg_(m);}
+	public IptCfgItm GetOrDefaultArgs(String bndKey, GfoMsg m, IptArg[] argAry) {return IptCfgItm.new_().Key_(bndKey).Ipt_(List_adp_.NewByMany((Object[])argAry)).Msg_(m);}
 	public void Owners_add(String key, IptBndsOwner owner) {}
 	public void Owners_del(String key) {}
 	public Object NewByKey(Object o) {return this;}

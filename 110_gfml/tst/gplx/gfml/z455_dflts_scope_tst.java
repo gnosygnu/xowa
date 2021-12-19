@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import org.junit.*;
 public class z455_dflts_scope_tst {
 	@Before public void setup() {
@@ -37,11 +40,11 @@ public class z455_dflts_scope_tst {
 	}
 	GfmlType tst_FetchOrNullByPos(GfmlTypRegy regy, String key, GfmlDocPos docPos, String expdTypeKey, String... expdSubs) {
 		GfmlType actl = regy.FetchOrNull(key, docPos);
-		Tfds.Eq(expdTypeKey, actl.Key());
+		GfoTstr.EqObj(expdTypeKey, actl.Key());
 		String[] actlSubs = new String[actl.SubFlds().Count()];
 		for (int i = 0; i < actlSubs.length; i++)
 			actlSubs[i] = actl.SubFlds().Get_at(i).Name();
-		Tfds.Eq_ary(expdSubs, actlSubs);
+		GfoTstr.EqLines(expdSubs, actlSubs);
 		return actl;
 	}
 }

@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.makes.tests;
-import gplx.Bry_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.tests.Gfo_test_list_base;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_page_;
 import gplx.xowa.Xoa_url;
@@ -70,27 +70,27 @@ public class Xoh_make_fxt {
 	}
 	public Xof_fsdb_itm Init__fsdb_itm(String wiki_abrv, String lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, int img_w, int img_h, double lnki_time, int lnki_page, Io_url url) {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
-		itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7(wiki_abrv), Bry_.new_a7(lnki_ttl), lnki_type, lnki_upright, lnki_w, lnki_h, lnki_time, lnki_page, 0);
+		itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, BryUtl.NewA7(wiki_abrv), BryUtl.NewA7(lnki_ttl), lnki_type, lnki_upright, lnki_w, lnki_h, lnki_time, lnki_page, 0);
 		itm.Init_at_cache(true, img_w, img_h, url);
 		return itm;
 	}
 	public void Expd__redlinks(String... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			Xopg_lnki_itm__hdump itm = new Xopg_lnki_itm__hdump(wiki.Ttl_parse(Bry_.new_u8(ary[i])));
+			Xopg_lnki_itm__hdump itm = new Xopg_lnki_itm__hdump(wiki.Ttl_parse(BryUtl.NewU8(ary[i])));
 			expd_redlinks.Add(itm);
 		}
 	}
 	public void Test__html(String wtxt, String expd) {Test__html(wtxt, expd, true);}
 	public void Test__html(String wtxt, String expd, boolean escape_apos) {
-		if (escape_apos) expd = String_.Replace(expd, "'", "\"");
+		if (escape_apos) expd = StringUtl.Replace(expd, "'", "\"");
             String actl = parser_fxt.Exec__parse_to_hdump(wtxt);
-		Tfds.Eq_str_lines(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 	}
 	public void Test__make(String html) {Test__make(true, html, null);}
 	public void Test__make(String html, Xoh_page_chkr chkr) {Test__make(true, html, chkr);}
 	public void Test__make(boolean print_to_console, String html, Xoh_page_chkr chkr) {
-		html = String_.Replace(html, "'", "\"");
+		html = StringUtl.Replace(html, "'", "\"");
 
 		// init hpg
 		actl = new Xoh_page();
@@ -98,7 +98,7 @@ public class Xoh_make_fxt {
 
 		// run make
 		if (print_to_console) Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();
-		byte[] actl_body = make_mgr.Parse(Bry_.new_u8(html), parser_fxt.Wiki(), actl);
+		byte[] actl_body = make_mgr.Parse(BryUtl.NewU8(html), parser_fxt.Wiki(), actl);
 		if (print_to_console) Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;
 
 		// check html

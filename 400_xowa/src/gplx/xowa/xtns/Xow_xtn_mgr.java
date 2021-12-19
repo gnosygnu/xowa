@@ -13,10 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.xtns.relatedSites.*; import gplx.xowa.xtns.proofreadPage.*; import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.xtns.insiders.*; import gplx.xowa.xtns.indicators.*; import gplx.xowa.xtns.pagebanners.*;
+package gplx.xowa.xtns;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.xtns.cites.Cite_xtn_mgr;
+import gplx.xowa.xtns.imaps.Imap_xtn_mgr;
+import gplx.xowa.xtns.indicators.Indicator_xtn_mgr;
+import gplx.xowa.xtns.insiders.Insider_xtn_mgr;
+import gplx.xowa.xtns.pagebanners.Pgbnr_xtn_mgr;
+import gplx.xowa.xtns.proofreadPage.Pp_xtn_mgr;
+import gplx.xowa.xtns.relatedSites.Sites_xtn_mgr;
+import gplx.xowa.xtns.wbases.Wdata_xtn_mgr;
 public class Xow_xtn_mgr implements Gfo_invk {
 	private Ordered_hash regy = Ordered_hash_.New_bry();
 	public int Count() {return regy.Len();}
@@ -66,20 +83,20 @@ public class Xow_xtn_mgr implements Gfo_invk {
 	public void Init_by_app(Xoae_app app) {
 		int regy_len = regy.Len();
 		for (int i = 0; i < regy_len; i++) {
-			Xox_mgr mgr = (Xox_mgr)regy.Get_at(i);
+			Xox_mgr mgr = (Xox_mgr)regy.GetAt(i);
 			mgr.Xtn_init_by_app(app);
 		}
 	}
 	public Xow_xtn_mgr Init_by_wiki(Xowe_wiki wiki) {
 		int regy_len = regy.Len();
 		for (int i = 0; i < regy_len; i++) {
-			Xox_mgr mgr = (Xox_mgr)regy.Get_at(i);
+			Xox_mgr mgr = (Xox_mgr)regy.GetAt(i);
 			mgr.Xtn_init_by_wiki(wiki);
 		}
 		return this;
 	}
-	public Xox_mgr Get_at(int i) {return (Xox_mgr)regy.Get_at(i);}
-	public Xox_mgr Get_or_fail(byte[] key) {Object rv = regy.GetByOrNull(key); if (rv == null) throw Err_.new_wo_type("unknown xtn", "key", String_.new_u8(key)); return (Xox_mgr)rv;}
+	public Xox_mgr Get_at(int i) {return (Xox_mgr)regy.GetAt(i);}
+	public Xox_mgr Get_or_fail(byte[] key) {Object rv = regy.GetByOrNull(key); if (rv == null) throw ErrUtl.NewArgs("unknown xtn", "key", StringUtl.NewU8(key)); return (Xox_mgr)rv;}
 	private Xox_mgr Add(Xoae_app app, Xox_mgr xtn) {
 		xtn.Xtn_ctor_by_app(app);
 		regy.Add(xtn.Xtn_key(), xtn);
@@ -89,7 +106,7 @@ public class Xow_xtn_mgr implements Gfo_invk {
 	private void Set_members(Xox_mgr mgr) {
 		byte[] xtn_key = mgr.Xtn_key();
 		Object o = xtn_tid_trie.Match_exact(xtn_key, 0, xtn_key.length); if (o == null) return;
-		switch (((Byte_obj_val)o).Val()) {
+		switch (((ByteVal)o).Val()) {
 			case Tid_cite:			xtn_cite		= (Cite_xtn_mgr)mgr; break;
 			case Tid_sites:			xtn_sites		= (Sites_xtn_mgr)mgr; break;
 			case Tid_insider:		xtn_insider		= (Insider_xtn_mgr)mgr; break;

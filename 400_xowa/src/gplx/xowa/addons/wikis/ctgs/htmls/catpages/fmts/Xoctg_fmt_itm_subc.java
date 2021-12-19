@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.xowa.htmls.hrefs.*;
@@ -22,8 +25,8 @@ import gplx.xowa.langs.msgs.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 import gplx.xowa.users.history.*;
 class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
-	@Override public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
+	private final BryWtr tmp_bfr = BryWtr.New();
+	@Override public void Bld_html(BryWtr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
 		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		int count_subcs = 0;
 		int count_pages = 0;
@@ -35,21 +38,21 @@ class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
 		Fmt__exists__subc.Bld_many(bfr, ttl.Page_db(), ttl_page, itm_href, ttl_page, contains_title, contains_text);
 	}
 	private byte[] Bld_contains_text(Xow_msg_mgr msg_mgr, int count_subcs, int count_pages, int count_files) {
-		if (count_subcs == 0 && count_pages == 0 && count_files == 0) return Bry_.Empty;
-		tmp_bfr.Add_byte(AsciiByte.ParenBgn);
+		if (count_subcs == 0 && count_pages == 0 && count_files == 0) return BryUtl.Empty;
+		tmp_bfr.AddByte(AsciiByte.ParenBgn);
 		Bld_contains_text_itm(tmp_bfr, msg_mgr, Xol_msg_itm_.Id_ctgtree_subc_counts_ctg, count_subcs);
 		Bld_contains_text_itm(tmp_bfr, msg_mgr, Xol_msg_itm_.Id_ctgtree_subc_counts_page, count_pages);
 		Bld_contains_text_itm(tmp_bfr, msg_mgr, Xol_msg_itm_.Id_ctgtree_subc_counts_file, count_files);
-		tmp_bfr.Add_byte(AsciiByte.ParenEnd);
-		return tmp_bfr.To_bry_and_clear();
+		tmp_bfr.AddByte(AsciiByte.ParenEnd);
+		return tmp_bfr.ToBryAndClear();
 	}
-	private void Bld_contains_text_itm(Bry_bfr bfr, Xow_msg_mgr msg_mgr, int msg_id, int val) {
+	private void Bld_contains_text_itm(BryWtr bfr, Xow_msg_mgr msg_mgr, int msg_id, int val) {
 		if (val == 0) return;
 		if (bfr.Len() > 1) bfr.Add(Bld_contains_text_itm_dlm);	// NOTE: 1 b/c Paren_bgn is always added
 		bfr.Add(msg_mgr.Val_by_id_args(msg_id, val));
-	}	private static final byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", ");
-	private static final Bry_fmt
-	  Fmt__exists__subc = Bry_fmt.Auto_nl_skip_last
+	}	private static final byte[] Bld_contains_text_itm_dlm = BryUtl.NewA7(", ");
+	private static final BryFmt
+	  Fmt__exists__subc = BryFmt.Auto_nl_skip_last
 	( ""
 	, "            <li>"
 	, "              <div class=\"CategoryTreeSection\">"

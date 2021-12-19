@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.template_styles;
 
-import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.Test;
 
 public class XoCssTransformerTest {
@@ -72,16 +72,16 @@ class XoCssTranformerTstr {
     public void Test_Url(String note, String css, String src, String trg, String expd) {
         XoCssTransformer transformer = new XoCssTransformer(css);
         String actl = transformer.Url(src, trg).ToStr();
-        Gftest.Eq__str(expd, actl, note);
+        GfoTstr.Eq(expd, actl, note);
     }
     public void Test_Prepend(String css, String selector, String expd) {
         XoCssTransformer transformer = new XoCssTransformer(css);
         String actl = transformer.Prepend(selector).ToStr();
-        Gftest.Eq__str(expd, actl);
+        GfoTstr.Eq(expd, actl);
     }
     public void Test_Minify(String note, String css, String expd) {
         XoCssTransformer transformer = new XoCssTransformer(css);
         String actl = transformer.Minify().ToStr();
-        Gftest.Eq__str(expd, actl, note);
+        GfoTstr.Eq(expd, actl, note);
     }
 }

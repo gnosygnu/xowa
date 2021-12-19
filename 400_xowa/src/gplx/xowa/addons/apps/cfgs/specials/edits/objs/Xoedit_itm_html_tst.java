@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import org.junit.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm_html_tst {
 	private final Xoedit_itm_html_fxt fxt = new Xoedit_itm_html_fxt();
-	@Test  public void Build_html__memo() {
+	@Test public void Build_html__memo() {
 		fxt.Type_("memo").Key_("key1").Name_("name1").Html_cls_("html_cls1").Html_atrs_("key1=val1");
 
 		// normal
@@ -36,7 +39,7 @@ public class Xoedit_itm_html_tst {
 }
 class Xoedit_itm_html_fxt {
 	private final Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
-	private final Bry_bfr bry = Bry_bfr_.New();
+	private final BryWtr bry = BryWtr.New();
 	
 	public Xoedit_itm_html_fxt Type_(String v) {this.type = v; return this;} private String type;
 	public Xoedit_itm_html_fxt Key_(String v) {this.key = v; return this;} private String key;
@@ -46,7 +49,7 @@ class Xoedit_itm_html_fxt {
 	public Xoedit_itm_html_fxt Val_(String v) {this.val = v; return this;} private String val;
 
 	public void Test__Build_html(String expd) {
-		Xoedit_itm_html.Build_html(bry, type_mgr, key, name, type, html_atrs, html_cls, Bry_.new_u8(val));
-		Gftest.Eq__str(expd, bry.To_str_and_clear());
+		Xoedit_itm_html.Build_html(bry, type_mgr, key, name, type, html_atrs, html_cls, BryUtl.NewU8(val));
+		GfoTstr.Eq(expd, bry.ToStrAndClear());
 	}
 }

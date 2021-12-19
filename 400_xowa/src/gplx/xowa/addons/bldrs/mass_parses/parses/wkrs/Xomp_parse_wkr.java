@@ -15,16 +15,17 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs;
 
-import gplx.Bry_bfr;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.core.envs.SystemUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -147,7 +148,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 			if (ppg.Text() == null) continue; // some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
 			
 			try {
-				long done_bgn = gplx.core.envs.System_.Ticks();
+				long done_bgn = SystemUtl.Ticks();
 
 				// get ns / ttl
 				int cur_ns = ppg.Ns_id();
@@ -175,16 +176,16 @@ public class Xomp_parse_wkr implements Gfo_invk {
 				// index
 				long fulltext_time = 0;
 				if (indexer != null) {
-					fulltext_time = gplx.core.envs.System_.Ticks();
+					fulltext_time = SystemUtl.Ticks();
 					indexer.Index(wpg);
-					fulltext_time = gplx.core.envs.System_.Ticks__elapsed_in_frac(fulltext_time);
+					fulltext_time = SystemUtl.Ticks__elapsed_in_frac(fulltext_time);
 				}
 
 				// mark done for sake of progress
 				prog_mgr.Mark_done(ppg.Id());
 
 				// update stats
-				long time_cur = gplx.core.envs.System_.Ticks();
+				long time_cur = SystemUtl.Ticks();
 				long page_time = time_cur - done_bgn;
 				done_time += page_time;
 				++done_count;
@@ -201,7 +202,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 					wkr_db.Conn().Txn_sav();
 				}
 			} catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse.fail:ns=~{0} ttl=~{1} err=~{2}", ppg.Ns_id(), ppg.Ttl_bry(), Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse.fail:ns=~{0} ttl=~{1} err=~{2}", ppg.Ns_id(), ppg.Ttl_bry(), ErrUtl.ToStrLog(e));
 			}
 		}
 
@@ -215,16 +216,16 @@ public class Xomp_parse_wkr implements Gfo_invk {
 			mgr.Wkrs_done_add_1();		// NOTE: must release latch last else thread errors
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse.fail_end; err=~{0}", Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse.fail_end; err=~{0}", ErrUtl.ToStrLog(e));
 		}
 	}
-	public void Bld_stats(Bry_bfr bfr) {
+	public void Bld_stats(BryWtr bfr) {
 		int done_time_in_sec = (int)(done_time / 1000); if (done_time_in_sec == 0) done_time_in_sec = 1;
-		bfr.Add_int_pad_bgn(AsciiByte.Space, 4, uid		);
-		bfr.Add_int_pad_bgn(AsciiByte.Space, 8, (int)(done_count / done_time_in_sec));
-		bfr.Add_int_pad_bgn(AsciiByte.Space, 8, done_count);
-		bfr.Add_int_pad_bgn(AsciiByte.Space, 8, done_time_in_sec);
-		bfr.Add_byte_nl();
+		bfr.AddIntPadBgn(AsciiByte.Space, 4, uid		);
+		bfr.AddIntPadBgn(AsciiByte.Space, 8, (int)(done_count / done_time_in_sec));
+		bfr.AddIntPadBgn(AsciiByte.Space, 8, done_count);
+		bfr.AddIntPadBgn(AsciiByte.Space, 8, done_time_in_sec);
+		bfr.AddByteNl();
 	}
 	private Xomp_page_itm Get_next() {
 		if (list_idx == list_len) {
@@ -235,7 +236,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 			if (list_len == 0) return Xomp_page_itm.Null;
 			list_idx = 0;
 		}
-		return (Xomp_page_itm)list.Get_at(list_idx++);
+		return (Xomp_page_itm)list.GetAt(list_idx++);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__exec))		this.Exec();

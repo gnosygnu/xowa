@@ -13,19 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs;
+import gplx.libs.files.Io_url;
 public class TdbDatabase {
 	public String Name() {return name;} public void Name_set(String v) {name = v;} private String name = "xmpl";
 	public Io_url DbUrl() {return dbInfo;} Io_url dbInfo;
 	public TdbFileList Files() {return files;} TdbFileList files;
 	public TdbTableList Tables() {return tables;} TdbTableList tables;
-	@gplx.Internal protected boolean IsNew() {return isNew;} @gplx.Internal protected void IsNew_set(boolean v) {isNew = v;} private boolean isNew;
-	@gplx.Internal protected TdbFile MakeFile(Io_url url) {
+	public boolean IsNew() {return isNew;} public void IsNew_set(boolean v) {isNew = v;} private boolean isNew;
+	public TdbFile MakeFile(Io_url url) {
 		TdbFile rv = TdbFile.new_(FileId_next++, url);
 		files.Add(rv);
 		return rv;
 	}
-	@gplx.Internal protected TdbTable MakeTbl(String name, int fileId) {
+	public TdbTable MakeTbl(String name, int fileId) {
 		TdbFile file = files.Get_by_or_fail(fileId);
 		TdbTable rv = TdbTable.new_(TableId_next++, name, file);
 		tables.Add(rv);

@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls.itms;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Sql_order_fld {
 	public Sql_order_fld(String tbl, String name, byte sort) {this.Tbl = tbl; this.Name = name; this.Sort = sort;}
 	public final String Tbl;

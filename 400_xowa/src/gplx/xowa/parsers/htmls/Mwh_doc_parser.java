@@ -14,13 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.htmls;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Hash_adp_bry;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.Xop_tkn_itm;
 import gplx.xowa.parsers.Xop_tkn_mkr;
 import gplx.xowa.parsers.amps.Xop_amp_mgr;
@@ -103,9 +104,9 @@ public class Mwh_doc_parser {
 				// comment check
 				case AsciiByte.Bang:
 					boolean comment_found = false;
-					if (name_bgn == pos && Bry_.Eq(src, pos + 1, pos + 3, Comment_bgn)) {
-						int comment_end_pos = Bry_find_.Find_fwd(src, Comment_end, pos + 3);
-						if (comment_end_pos != Bry_find_.Not_found) {
+					if (name_bgn == pos && BryLni.Eq(src, pos + 1, pos + 3, Comment_bgn)) {
+						int comment_end_pos = BryFind.FindFwd(src, Comment_end, pos + 3);
+						if (comment_end_pos != BryFind.NotFound) {
 							nde_end_tid = Nde_end_tid__comment;
 							pos = comment_end_pos + 3;
 							comment_found = true;
@@ -244,7 +245,7 @@ public class Mwh_doc_parser {
 					wkr.On_nde_tail_end(this, src, cur_nde_tid, nde_bgn, pos);
 					txt_bgn = pos;
 					if (nde_itm.Id() == cur_nde_tid) {
-						cur_nde = (Xop_xnde_tag)List_adp_.Pop_or(nde_stack, null);
+						cur_nde = (Xop_xnde_tag)List_adp_.PopOr(nde_stack, null);
 						cur_nde_tid = cur_nde == null ? -1 : cur_nde.Id();
 					}
 					break;
@@ -253,5 +254,5 @@ public class Mwh_doc_parser {
 		return pos;
 	}
 	public static final int Nde_end_tid__invalid = 0, Nde_end_tid__gt = 1, Nde_end_tid__ws = 2, Nde_end_tid__inline = 3, Nde_end_tid__slash = 4, Nde_end_tid__backslash = 5, Nde_end_tid__comment = 6;
-	private static final byte[] Comment_bgn = Bry_.new_a7("--"), Comment_end = Bry_.new_a7("-->");
+	private static final byte[] Comment_bgn = BryUtl.NewA7("--"), Comment_end = BryUtl.NewA7("-->");
 }

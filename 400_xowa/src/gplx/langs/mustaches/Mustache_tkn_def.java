@@ -15,19 +15,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.objects.strings.AsciiByte;
-import gplx.String_;
-
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 class Mustache_tkn_def {
 	public byte[] Variable_lhs = Dflt_variable_lhs;
 	public byte[] Variable_rhs = Dflt_variable_rhs;
 	public int Variable_lhs_len;
 	public int Variable_rhs_len;
 	public static final byte[]
-	  Dflt_variable_lhs = Bry_.new_a7("{{")
-	, Dflt_variable_rhs = Bry_.new_a7("}}")
+	  Dflt_variable_lhs = BryUtl.NewA7("{{")
+	, Dflt_variable_rhs = BryUtl.NewA7("}}")
 	;
 	public static final byte
 	  Variable		= AsciiByte.CurlyEnd        // {{=<% %>=}}
@@ -43,7 +42,7 @@ class Mustache_tkn_def {
 	, Item          = AsciiByte.Dot            // {{.}}
 	;
 	public static final String
-	  ItemString    = String_.new_u8(Byte_.To_bry(Item))
+	  ItemString    = StringUtl.NewU8(ByteUtl.ToBry(Item))
 	;
 	public Mustache_tkn_def() {
 		Variable_lhs_len = Variable_lhs.length;

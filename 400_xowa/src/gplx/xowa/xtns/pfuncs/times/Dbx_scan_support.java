@@ -13,23 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-/*
-XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
-
-XOWA is licensed under the terms of the General Public License (GPL) Version 3,
-or alternatively under the terms of the Apache License Version 2.0.
-
-You may use XOWA according to either of these licenses as is most appropriate
-for your project on a case-by-case basis.
-
-The terms of each license can be found in the source code repository:
-
-GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
-Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
-*/
-import gplx.core.btries.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.errs.ErrUtl;
 public class Dbx_scan_support {
 	public static int TIMELIB_UNSET  =-99999;
 
@@ -151,12 +143,12 @@ public class Dbx_scan_support {
 		trie = triex;
 	}
 	public static void add_error(Dbx_scanner s, int errcode, String str) {
-		throw Err_.new_unhandled(0); // break early
+		throw ErrUtl.NewUnhandled(0); // break early
 		//s.errors.warning_count++;
 		//System.out.println("err: " + str);
 	}
 	public static void add_warning(Dbx_scanner s, int errcode, String str) {
-		throw Err_.new_unhandled(0); // break early
+		throw ErrUtl.NewUnhandled(0); // break early
 		//s.errors.error_count++;
 		//System.out.println("warn: " + str);
 	}
@@ -282,7 +274,7 @@ public class Dbx_scan_support {
 		s.length = end - begin;
 	
 		int tmp_nr = TIMELIB_UNSET;
-		tmp_nr = Bry_.To_int_or(s.src, begin, end, Int_.Min_value);
+		tmp_nr = BryUtl.ToIntOr(s.src, begin, end, IntUtl.MinValue);
 		return tmp_nr;
 	}
 	public static int timelib_get_month(Dbx_scanner s)
@@ -471,7 +463,7 @@ public class Dbx_scan_support {
 	public static int timelib_daynr_from_weeknr(int y, int w, int d)
 	{
 		/* Figure out the dayofweek for y-1-1 */
-		DateAdp yearstart = DateAdp_.FirstDayofYear(y); // should timezone be involved?
+		GfoDate yearstart = GfoDateUtl.New(y, 1, 1, 0, 0, 0, 0); // should timezone be involved?
 		int dow = yearstart.DayOfWeek();
 		//dow = timelib_day_of_week(iy, 1, 1);
 		/* then use that to figure out the offset for day 1 of week 1 */
@@ -511,7 +503,7 @@ public class Dbx_scan_support {
 		end = s.ptr;
 		s.length = end - begin;
 
-		tmp_nr = Bry_.To_double_or(s.src, begin, end, Int_.Min_value) * Math.pow(10, 7 - (end - begin));
+		tmp_nr = BryUtl.ToDoubleOr(s.src, begin, end, IntUtl.MinValue) * Math.pow(10, 7 - (end - begin));
                 
 		return (int)tmp_nr;
 	}
@@ -648,7 +640,7 @@ public class Dbx_scan_support {
 	}
 
 	private static timelib_time timelib_now() {
-		DateAdp now = Datetime_now.Get();
+		GfoDate now = GfoDateNow.Get();
 		timelib_time nowtime = new timelib_time();
 		nowtime.y = now.Year();
 		nowtime.m = now.Month();
@@ -662,7 +654,7 @@ public class Dbx_scan_support {
 		return nowtime;
 	}
 	private static int timelib_day_of_week(int y, int m, int d) {
-		DateAdp dte = DateAdp_.DateByBits(y, m, d, 0, 0, 0, 0, 0, null);
+		GfoDate dte = GfoDateUtl.NewDateByBits(y, m, d, 0, 0, 0, 0, 0, null);
 		return dte.DayOfWeek();
 	}
 
@@ -842,25 +834,25 @@ public class Dbx_scan_support {
 		switch (end - begin) {
 			case 1: /* H */
 			case 2: /* HH */
-				tmp = Bry_.To_int_or(s.src, begin, end, Int_.Min_value);
+				tmp = BryUtl.ToIntOr(s.src, begin, end, IntUtl.MinValue);
 				return tmp * 3600;
 			case 3: /* H:M */
 			case 4: /* H:MM, HH:M, HHMM */
 				if (s.src[begin + 1] == ':') {
-					tmp = Bry_.To_int_or(s.src, begin, begin+1, Int_.Min_value) * 3600 +
-						Bry_.To_int_or(s.src, begin+2, end, Int_.Min_value) * 60;
+					tmp = BryUtl.ToIntOr(s.src, begin, begin+1, IntUtl.MinValue) * 3600 +
+						BryUtl.ToIntOr(s.src, begin+2, end, IntUtl.MinValue) * 60;
 					return tmp;
 				} else if (s.src[begin + 2] == ':') {
-					tmp = Bry_.To_int_or(s.src, begin, begin+2, Int_.Min_value) * 3600 +
-						Bry_.To_int_or(s.src, begin+3, end, Int_.Min_value) * 60;
+					tmp = BryUtl.ToIntOr(s.src, begin, begin+2, IntUtl.MinValue) * 3600 +
+						BryUtl.ToIntOr(s.src, begin+3, end, IntUtl.MinValue) * 60;
 					return tmp;
 				} else {
-					tmp = Bry_.To_int_or(s.src, begin, end, Int_.Min_value);
+					tmp = BryUtl.ToIntOr(s.src, begin, end, IntUtl.MinValue);
 					return tmp / 100 * 3600 + (tmp % 100) * 60;
 				}
 			case 5: /* HH:MM */
-				tmp = Bry_.To_int_or(s.src, begin, begin+2, Int_.Min_value) * 3600 +
-					Bry_.To_int_or(s.src, begin+3, end, Int_.Min_value) * 60;
+				tmp = BryUtl.ToIntOr(s.src, begin, begin+2, IntUtl.MinValue) * 3600 +
+					BryUtl.ToIntOr(s.src, begin+3, end, IntUtl.MinValue) * 60;
 				return tmp;
 		}
 		return 0;
@@ -873,7 +865,7 @@ public class Dbx_scan_support {
 		do_adjust_special(time);
 	}
 
-	public static DateAdp Parse(byte[] src) {
+	public static GfoDate Parse(byte[] src) {
 		timelib_time parsed = Dbx_strtotime.timelib_strtotime(src);
 		// check for errors
 
@@ -881,7 +873,7 @@ public class Dbx_scan_support {
 		timelib_fill_holes(parsed, now, 0);
 		timelib_update_ts(parsed);
 
-		DateAdp dte = DateAdp_.DateByBits(parsed.y, parsed.m, parsed.d, parsed.h, parsed.i, parsed.s, parsed.us, parsed.z, parsed.tz_abbr);
+		GfoDate dte = GfoDateUtl.NewDateByBits(parsed.y, parsed.m, parsed.d, parsed.h, parsed.i, parsed.s, parsed.us, parsed.z, parsed.tz_abbr);
 		return dte;
 	}
 }

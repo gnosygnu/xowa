@@ -14,21 +14,21 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.Datetime_now;
-import gplx.Int_;
-import gplx.core.brys.Bfr_arg;
-import gplx.core.brys.Bfr_arg_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgUtl;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
 import gplx.core.log_msgs.Gfo_msg_itm;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 class Pxd_parser {
 	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
@@ -37,7 +37,7 @@ class Pxd_parser {
 	public Pxd_itm[] Data_ary() {return data_ary;} Pxd_itm[] data_ary;
 	public int Data_ary_len() {return data_ary_len;} private int data_ary_len;
 	public int Colon_count;
-	public int[] Seg_idxs() {return seg_idxs;} private int[] seg_idxs = new int[DateAdp_.SegIdx__max];	// temp ary for storing current state
+	public int[] Seg_idxs() {return seg_idxs;} private int[] seg_idxs = new int[GfoDateUtl.SegIdxMaxLen];	// temp ary for storing current state
 	public byte[] Src() {return src;}
 //		public Pxd_parser(Xop_ctx ctx) {
 //			this.trie = Pxd_parser_.Trie(ctx);
@@ -55,12 +55,12 @@ class Pxd_parser {
 		if (seg_idx >= 0)	// ignore Seg_idx_null and Seg_idx_skip
 			seg_idxs[seg_idx] = val;
 	}
-	public void Err_set(Gfo_msg_itm itm, Bfr_arg... args) {
+	public void Err_set(Gfo_msg_itm itm, BryBfrArg... args) {
 		if (itm == null) return;
-		Bry_fmtr fmtr = itm.Fmtr();
-		fmtr.Bld_bfr(error_bfr, args);
-	}	private Bry_bfr error_bfr = Bry_bfr_.New_w_size(32);
-	public DateAdp Parse(byte[] src, Bry_bfr error_bfr) {
+		BryFmtr fmtr = itm.Fmtr();
+		fmtr.BldToBfrArgs(error_bfr, args);
+	}	private BryWtr error_bfr = BryWtr.NewWithSize(32);
+	public GfoDate Parse(byte[] src, BryWtr error_bfr) {
 		Tokenize(src);	// NOTE: should check if Tokenize failed, but want to be liberal as date parser is not fully implemented; this will always default to 1st day of year; DATE:2014-03-27
 		return Evaluate(src, error_bfr);
 	}
@@ -71,7 +71,7 @@ class Pxd_parser {
 		cur_pos = 0;
 		Colon_count = 0;
 		error_bfr.Clear();
-		for (int i = 0; i < DateAdp_.SegIdx__max; i++)
+		for (int i = 0; i < GfoDateUtl.SegIdxMaxLen; i++)
 			seg_idxs[i] = Pxd_itm_base.Seg_idx_null;
 		while (cur_pos < src_len) {
 			byte b = src[cur_pos];
@@ -116,16 +116,16 @@ class Pxd_parser {
 		Pxd_itm itm = null;
 		switch (tkn_type) {
 			case Pxd_itm_.Tid_int:
-				int int_val = Bry_.To_int_or(src, tkn_bgn_pos, cur_pos, Int_.Min_value);
-				if (int_val == Int_.Min_value) {} // FUTURE: warn
+				int int_val = BryUtl.ToIntOr(src, tkn_bgn_pos, cur_pos, IntUtl.MinValue);
+				if (int_val == IntUtl.MinValue) {} // FUTURE: warn
 				int digits = cur_pos - tkn_bgn_pos;
 				switch (digits) {
 					case 14:	// yyyyMMddhhmmss
 					case 12:	// yyyyMMddhhmm; PAGE:en.w:Boron; DATE:2015-07-29
 					case 8:		// yyyyMMdd
-						itm = new Pxd_itm_int_dmy_14(tkns_len, Bry_.Mid(src, tkn_bgn_pos, cur_pos), digits); break;
+						itm = new Pxd_itm_int_dmy_14(tkns_len, BryLni.Mid(src, tkn_bgn_pos, cur_pos), digits); break;
 					case 6:
-						itm = new Pxd_itm_int_mhs_6(tkns_len, Bry_.Mid(src, tkn_bgn_pos, cur_pos)); break;
+						itm = new Pxd_itm_int_mhs_6(tkns_len, BryLni.Mid(src, tkn_bgn_pos, cur_pos)); break;
 					default:
 						itm = new Pxd_itm_int(tkns_len, digits, int_val); break;
 				}
@@ -144,31 +144,31 @@ class Pxd_parser {
 		tkn_type = nxt_type;
 		tkn_bgn_pos = cur_pos;
 	}
-	DateAdp Evaluate(byte[] src, Bry_bfr error) {
+	GfoDate Evaluate(byte[] src, BryWtr error) {
 		if (tkns_len == 0) {
-			Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_bry(src));
+			Err_set(Pft_func_time_log.Invalid_day, BryBfrArgUtl.NewBry(src));
 			return null;
 		}
 		Pxd_itm[] eval_ary = Pxd_itm_sorter.XtoAryAndSort(tkns, tkns_len);
 		MakeDataAry();
 		for (int i = 0; i < tkns_len; i++) {
 			if (!eval_ary[i].Eval(this)) {
-				error.Add_bfr_and_clear(error_bfr);
-				return DateAdp_.MinValue;
+				error.AddBfrAndClear(error_bfr);
+				return GfoDateUtl.MinValue;
 			}
 			if (error_bfr.Len() != 0) {
-				error.Add_bfr_and_clear(error_bfr);
-				return DateAdp_.MinValue;			
+				error.AddBfrAndClear(error_bfr);
+				return GfoDateUtl.MinValue;
 			}
 		}
 
 		// build date
-		DateAdp now = Datetime_now.Get();
+		GfoDate now = GfoDateNow.Get();
 		Pxd_date_bldr bldr = new Pxd_date_bldr(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0);
 		for (int i = 0; i < tkns_len; i++) {
 			Pxd_itm itm = (Pxd_itm)tkns[i];
 			if (!itm.Time_ini(bldr)) {
-				error.Add_str_a7("Invalid time");
+				error.AddStrA7("Invalid time");
 				return null;
 			}
 		}
@@ -211,14 +211,14 @@ class Pxd_parser_ {
 	private static void Init_unit(int seg_idx, int seg_val, String... name_ary) {
 		int name_ary_len = name_ary.length;
 		for (int i = 0; i < name_ary_len; i++) {
-			byte[] name_bry = Bry_.new_u8(name_ary[i]);
-			trie.Add_obj(name_bry, new Pxd_itm_unit(-1, name_bry, seg_idx, seg_val));
+			byte[] name_bry = BryUtl.NewU8(name_ary[i]);
+			trie.AddObj(name_bry, new Pxd_itm_unit(-1, name_bry, seg_idx, seg_val));
 		}
 	}
 	public static final byte[]
-	  Unit_name_month		= Bry_.new_a7("month")
-	, Unit_name_day			= Bry_.new_a7("day")
-	, Unit_name_hour		= Bry_.new_a7("hour")
+	  Unit_name_month		= BryUtl.NewA7("month")
+	, Unit_name_day			= BryUtl.NewA7("day")
+	, Unit_name_hour		= BryUtl.NewA7("hour")
 	;
 	private static void Init() {
 		Init_reg_months(Names_month_full);
@@ -227,58 +227,58 @@ class Pxd_parser_ {
 		Init_reg_month("sept", 9);
 		Init_reg_days_of_week(Names_day_full);
 		Init_reg_days_of_week(Names_day_abrv);
-		Init_unit(DateAdp_.SegIdx_second	, "sec", "secs", "second", "seconds");
-		Init_unit(DateAdp_.SegIdx_minute	, "min", "mins", "minute", "minutes");
-		Init_unit(DateAdp_.SegIdx_hour  	, "hour", "hours");
-		Init_unit(DateAdp_.SegIdx_day   	, "day", "days");
-		Init_unit(DateAdp_.SegIdx_day, 14	, "fortnight", "forthnight");
-		Init_unit(DateAdp_.SegIdx_month 	, "month", "months");
-		Init_unit(DateAdp_.SegIdx_year  	, "year", "years");
-		Init_unit(DateAdp_.SegIdx_day,  7	, "week", "weeks");
-		trie.Add_obj(Pxd_itm_ago.Name_ago, new Pxd_itm_ago(-1, -1));
+		Init_unit(GfoDateUtl.SegIdxSecond, "sec", "secs", "second", "seconds");
+		Init_unit(GfoDateUtl.SegIdxMinute, "min", "mins", "minute", "minutes");
+		Init_unit(GfoDateUtl.SegIdxHour, "hour", "hours");
+		Init_unit(GfoDateUtl.SegIdxDay, "day", "days");
+		Init_unit(GfoDateUtl.SegIdxDay, 14	, "fortnight", "forthnight");
+		Init_unit(GfoDateUtl.SegIdxMonth, "month", "months");
+		Init_unit(GfoDateUtl.SegIdxYear, "year", "years");
+		Init_unit(GfoDateUtl.SegIdxDay,  7	, "week", "weeks");
+		trie.AddObj(Pxd_itm_ago.Name_ago, new Pxd_itm_ago(-1, -1));
 		Init_suffix(Names_day_suffix);
 		Init_relative();
-		trie.Add_obj(Pxd_itm_unixtime.Name_const, new Pxd_itm_unixtime(-1, -1));
-		trie.Add_obj(Pxd_itm_iso8601_t.Name_const, new Pxd_itm_iso8601_t(-1, -1));
+		trie.AddObj(Pxd_itm_unixtime.Name_const, new Pxd_itm_unixtime(-1, -1));
+		trie.AddObj(Pxd_itm_iso8601_t.Name_const, new Pxd_itm_iso8601_t(-1, -1));
 		Init_meridian(BoolUtl.N, "am", "a.m", "am.", "a.m.");
 		Init_meridian(BoolUtl.Y, "pm", "p.m", "pm.", "p.m.");
 	}
 	private static void Init_reg_months(String[] names) {
 		for (int i = 0; i < names.length; i++)
-			Init_reg_month(names[i], i + Int_.Base1);	// NOTE: Months are Base1: 1-12
+			Init_reg_month(names[i], i + IntUtl.Base1);	// NOTE: Months are Base1: 1-12
 	}
 	private static void Init_reg_month(String name_str, int seg_val) {
-		byte[] name_ary = Bry_.new_u8(name_str);
-		trie.Add_obj(name_ary, new Pxd_itm_month_name(-1, name_ary, DateAdp_.SegIdx_month, seg_val));
+		byte[] name_ary = BryUtl.NewU8(name_str);
+		trie.AddObj(name_ary, new Pxd_itm_month_name(-1, name_ary, GfoDateUtl.SegIdxMonth, seg_val));
 	}
 	private static void Init_reg_days_of_week(String[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			byte[] itm_bry = Bry_.new_u8(ary[i]);
-			trie.Add_obj(itm_bry, new Pxd_itm_dow_name(-1, itm_bry, i));	// NOTE: days are base0; 0-6
+			byte[] itm_bry = BryUtl.NewU8(ary[i]);
+			trie.AddObj(itm_bry, new Pxd_itm_dow_name(-1, itm_bry, i));	// NOTE: days are base0; 0-6
 		}
 	}
 	private static void Init_suffix(String[] suffix_ary) {
 		int len = suffix_ary.length;
 		for (int i = 0; i < len; i++) {
 			String suffix = suffix_ary[i];
-			trie.Add_obj(suffix, Pxd_itm_day_suffix.Instance);
+			trie.AddObj(suffix, Pxd_itm_day_suffix.Instance);
 		}
 	}
 	private static void Init_relative() {
-		trie.Add_obj("today", Pxd_itm_day_relative.Today);
-		trie.Add_obj("tomorrow", Pxd_itm_day_relative.Tomorrow);
-		trie.Add_obj("yesterday", Pxd_itm_day_relative.Yesterday);
-		trie.Add_obj("now", Pxd_itm_time_relative.Now);
-		trie.Add_obj("next", Pxd_itm_unit_relative.Next);
-		trie.Add_obj("last", Pxd_itm_unit_relative.Prev);
-		trie.Add_obj("previous", Pxd_itm_unit_relative.Prev);
-		trie.Add_obj("this", Pxd_itm_unit_relative.This);
+		trie.AddObj("today", Pxd_itm_day_relative.Today);
+		trie.AddObj("tomorrow", Pxd_itm_day_relative.Tomorrow);
+		trie.AddObj("yesterday", Pxd_itm_day_relative.Yesterday);
+		trie.AddObj("now", Pxd_itm_time_relative.Now);
+		trie.AddObj("next", Pxd_itm_unit_relative.Next);
+		trie.AddObj("last", Pxd_itm_unit_relative.Prev);
+		trie.AddObj("previous", Pxd_itm_unit_relative.Prev);
+		trie.AddObj("this", Pxd_itm_unit_relative.This);
 	}
 	private static void Init_meridian(boolean is_pm, String... ary) {
 		Pxd_itm_meridian meridian = new Pxd_itm_meridian(-1, is_pm);
 		for (String itm : ary)
-			trie.Add_obj(itm, meridian);
+			trie.AddObj(itm, meridian);
 	}
 }
 /*

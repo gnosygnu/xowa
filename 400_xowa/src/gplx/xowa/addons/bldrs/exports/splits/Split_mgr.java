@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.splits;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 class Split_mgr {
@@ -71,7 +76,7 @@ class Split_mgr {
 		int len = page_list.Len();
 		for (int i = 0; i < len; ++i) { 
 			ctx.Trg_db__assert(ns_id);	// new db may be needed; EX: 10,000 will be read, and 1st 100 needs 1 db; next 100 needs another db
-			Xowd_page_itm page = (Xowd_page_itm)page_list.Get_at(i);
+			Xowd_page_itm page = (Xowd_page_itm)page_list.GetAt(i);
 			int page_id = page.Id();
 			for (Split_wkr wkr : wkrs)
 				wkr.Split__exec(ctx, rslt_mgr, page, page_id);

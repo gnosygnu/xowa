@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.repos;
+import gplx.types.basics.lists.List_adp;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.wikis.data.tbls.*;
@@ -24,7 +26,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 		byte[] ttl_bry = file.Lnki_ttl();
 		int repo_pairs_len = repo_pairs.Len();
 		for (int i = 0; i < repo_pairs_len; i++) {
-			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.Get_at(i);
+			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.GetAt(i);
 			byte[] wiki_key = repo_pair.Src().Wiki_domain();
 			if (repo_pair.Src().Wmf_api()) continue;
 			Xowe_wiki repo_wiki = (Xowe_wiki)wiki_mgr.Get_by_or_null(wiki_key); if (repo_wiki == null) {continue;}
@@ -46,7 +48,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 		rv.Init(ttl_db_key);
 		int repo_pairs_len = repo_pairs.Len();
 		for (int i = 0; i < repo_pairs_len; i++) {
-			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.Get_at(i);
+			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.GetAt(i);
 			byte[] src_wiki_key = repo_pair.Src().Wiki_domain();
 			Xowe_wiki src_wiki = (Xowe_wiki)wiki_mgr.Get_by_or_null(src_wiki_key); if (src_wiki == null) continue;	 // src_wiki defined as repo_pair in cfg, but it has not been downloaded; continue; EX: commons set up but not downloaded
 			boolean found = src_wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_db_page, file_ns, ttl_db_key);

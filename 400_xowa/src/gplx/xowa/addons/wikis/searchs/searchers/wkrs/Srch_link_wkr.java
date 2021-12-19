@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.searchs.searchers.wkrs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.dbs.percentiles.*;
@@ -61,7 +64,7 @@ public class Srch_link_wkr extends Percentile_select_base {
 				stmt = Db_stmt_.Rls(stmt);
 			}
 			catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Log_many("", "", "search.detaching fail; phrase=~{0} score_bgn=~{1} err=~{2}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Log_many("", "", "search.detaching fail; phrase=~{0} score_bgn=~{1} err=~{2}", ctx.Qry.Phrase.Orig, ctx.Score_rng.Score_bgn(), ErrUtl.ToStrLog(e));
 			}
 		}
 	}	

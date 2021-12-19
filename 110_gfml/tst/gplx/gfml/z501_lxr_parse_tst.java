@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class z501_lxr_parse_tst {
 	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
 	@Test public void SymCreate() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_lxr_sym:key='gfml.elm_key_1' raw='<-' cmd='gfml.elm_key';"
 			,	"a<-1;"
 			)
@@ -26,7 +27,7 @@ public class z501_lxr_parse_tst {
 			);
 	}
 	@Test public void SymUpdate() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_lxr_sym:key='gfml.elm_key_0' raw='<-';"
 			,	"a<-1 b=1;"
 			)
@@ -34,7 +35,7 @@ public class z501_lxr_parse_tst {
 			);
 	}
 	@Test public void SwapCreate() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_lxr_sym:key='gfml.swap_0' raw='/?/?' val='/?';"
 			,	"/?/?;"
 			)
@@ -42,7 +43,7 @@ public class z501_lxr_parse_tst {
 			);
 	}
 	@Test public void FrameCreate() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_lxr_frame:key='gfml.comment_2' type='comment' bgn='/-' end='-/';"
 			,	"a=/-ignore-/b;"
 			)
@@ -50,7 +51,7 @@ public class z501_lxr_parse_tst {
 			);
 	}
 	@Test public void FrameUpdate() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_lxr_frame:key='gfml.comment_0' bgn='--' end='!';"
 			,	"a=--ignore!"
 			,	"b;"
@@ -60,7 +61,7 @@ public class z501_lxr_parse_tst {
 	}
 	//@Test 
 	public void FrameCreateNest() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_lxr_frame:key='gfml.comment_2' type='comment' bgn='/-' end='-/' {"
 			,		"sym:key='gfml.comment_2_escape_bgn' raw='/-/-' val='/-' cmd='gfml.elm_data';"
 			,		"sym:key='gfml.comment_2_escape_end' raw='-/-/' val='-/' cmd='gfml.elm_data';"

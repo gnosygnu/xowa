@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.flds.*; import gplx.core.ios.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.bldrs.wkrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.bldrs.*;
+import gplx.core.flds.*; import gplx.core.ios.*;
 import gplx.xowa.bldrs.sql_dumps.*; import gplx.xowa.wikis.tdbs.bldrs.*;
 public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk {
 	private final Xosql_dump_parser parser; protected boolean fail = false;
@@ -35,7 +42,7 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 			Io_url src_dir = src_dir_manual == null ? wiki.Fsys_mgr().Root_dir() : src_dir_manual;
 			src_fil = Xob_io_utl_.Find_nth_by_wildcard_or_null(src_dir, Sql_file_name() + ".sql", ".gz", ".sql");
 			if (src_fil == null) {
-				String msg = String_.Format(".sql file not found in dir. Some data will not be imported.\nPlease download the file for your wiki from dumps.wikimedia.org.\nfile={0} dir={1}", Sql_file_name(), wiki.Fsys_mgr().Root_dir());
+				String msg = StringUtl.Format(".sql file not found in dir. Some data will not be imported.\nPlease download the file for your wiki from dumps.wikimedia.org.\nfile={0} dir={1}", Sql_file_name(), wiki.Fsys_mgr().Root_dir());
 				app.Usr_dlg().Warn_many("", "", msg);
 				app.Gui_mgr().Kit().Ask_ok("", "", msg);
 				fail = true;

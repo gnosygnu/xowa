@@ -13,46 +13,104 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.tags.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.mediawiki.*;
+package gplx.xowa.xtns.pfuncs;
+import gplx.core.primitives.Gfo_number_parser;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.kwds.Xol_kwd_mgr;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xot_defn;
+import gplx.xowa.parsers.tmpls.Xot_defn_subst;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.xtns.pfuncs.ifs.Pfunc_if;
+import gplx.xowa.xtns.pfuncs.ifs.Pfunc_ifeq;
+import gplx.xowa.xtns.pfuncs.ifs.Pfunc_iferror;
+import gplx.xowa.xtns.pfuncs.ifs.Pfunc_ifexist;
+import gplx.xowa.xtns.pfuncs.ifs.Pfunc_ifexpr;
+import gplx.xowa.xtns.pfuncs.ifs.Pfunc_switch;
+import gplx.xowa.xtns.pfuncs.ifs.Xop_xowa_dbg;
+import gplx.xowa.xtns.pfuncs.langs.Pfunc_gender;
+import gplx.xowa.xtns.pfuncs.langs.Pfunc_grammar;
+import gplx.xowa.xtns.pfuncs.langs.Pfunc_int;
+import gplx.xowa.xtns.pfuncs.langs.Pfunc_language;
+import gplx.xowa.xtns.pfuncs.langs.Pfunc_plural;
+import gplx.xowa.xtns.pfuncs.numbers.Pf_formatnum;
+import gplx.xowa.xtns.pfuncs.pages.Pfunc_defaultsort;
+import gplx.xowa.xtns.pfuncs.pages.Pfunc_displaytitle;
+import gplx.xowa.xtns.pfuncs.pages.Pfunc_noeditsection;
+import gplx.xowa.xtns.pfuncs.pages.Pfunc_pagelanguage;
+import gplx.xowa.xtns.pfuncs.pages.Pfunc_rev_props;
+import gplx.xowa.xtns.pfuncs.strings.Pfunc_case;
+import gplx.xowa.xtns.pfuncs.strings.Pfunc_pad;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_count;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_explode;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_len;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_pos;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_replace;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_rpos;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_sub;
+import gplx.xowa.xtns.pfuncs.stringutils.Pfunc_urldecode;
+import gplx.xowa.xtns.pfuncs.tags.Pfunc_tag;
+import gplx.xowa.xtns.pfuncs.times.Pft_func_date_int;
+import gplx.xowa.xtns.pfuncs.times.Pft_func_date_name;
+import gplx.xowa.xtns.pfuncs.times.Pft_func_formatdate;
+import gplx.xowa.xtns.pfuncs.times.Pft_func_time;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_anchorencode;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_filepath;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_ns;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_titleparts;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_ttl;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_urlencode;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_urlfunc;
+import gplx.xowa.xtns.pfuncs.wikis.Pfunc_pagesincategory;
+import gplx.xowa.xtns.pfuncs.wikis.Pfunc_wiki_props;
+import gplx.xowa.xtns.pfuncs.wikis.Pfunc_wiki_stats;
 public class Pf_func_ {
 	public static final byte Name_dlm = AsciiByte.Colon;
-	public static boolean Eval_arg_to_kvp(byte[][] rslt, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, Bry_bfr tmp_bfr, int i) {
+	public static boolean Eval_arg_to_kvp(byte[][] rslt, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, BryWtr tmp_bfr, int i) {
 		if (i >= self_args_len) return false;
 		// NOTE: must call Tmpl_evaluate; don't try to parse key / val by hand; EX:{{#tag:pre|a|{{#switch:a|a=id}}=c}}
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);
 		nde.Key_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
-		rslt[0] = tmp_bfr.To_bry_and_clear_and_trim();
+		rslt[0] = tmp_bfr.ToBryAndClearAndTrim();
 
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
-		rslt[1] = tmp_bfr.To_bry_and_clear_and_trim();
+		rslt[1] = tmp_bfr.ToBryAndClearAndTrim();
 		return true;
 	}
-	public static byte[] Eval_arg_or_empty(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i) {return Eval_arg_or(ctx, src, caller, self, self_args_len, i, Bry_.Empty);}
+	public static byte[] Eval_arg_or_empty(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i) {return Eval_arg_or(ctx, src, caller, self, self_args_len, i, BryUtl.Empty);}
 	public static byte[] Eval_arg_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
 		if (i >= self_args_len) return or;
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Eval_arg_or(bfr, ctx, src, caller, self, nde, or);
-		return bfr.To_bry_and_clear_and_trim();
+		return bfr.ToBryAndClearAndTrim();
 	}
-	public static void Eval_arg_or(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Arg_nde_tkn nde, byte[] or) {
+	public static void Eval_arg_or(BryWtr bfr, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Arg_nde_tkn nde, byte[] or) {
 		nde.Key_tkn().Tmpl_evaluate(ctx, src, caller, bfr);	// NOTE: must add key b/c parser functions do not have keys and some usages pass in xml_tkns; EX: {{#if|<a href='{{{1}}}'|}}; "<a href" should not be interpreted as key
-		if (nde.KeyTkn_exists()) bfr.Add_byte(AsciiByte.Eq);
+		if (nde.KeyTkn_exists()) bfr.AddByte(AsciiByte.Eq);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
 	}
 	public static byte[] Eval_val_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
 		if (i >= self_args_len) return or;
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Arg_nde_tkn nde = self.Args_get_by_idx(i);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
-		return bfr.To_bry_and_clear_and_trim();
+		return bfr.ToBryAndClearAndTrim();
 	}
 	public static boolean Eq(Xop_ctx ctx, byte[] lhs, byte[] rhs) {	// PATCH.PHP: php allows "003" == "3.0"; ASSUME: numbers are either int or int-like decimal; long, float, decimal not supported
 		int lhs_len = lhs.length, rhs_len = rhs.length;
@@ -113,8 +171,8 @@ public class Pf_func_ {
 	public static XophpArray Convert_xo_tmpl_to_mw_ary(Xop_ctx ctx, Xot_invk caller, Xot_invk tmpl, byte[] src) {
 		// init
 		XophpArray rv = XophpArray.New();
-		Bry_bfr rv_bfr = Bry_bfr_.New();
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr rv_bfr = BryWtr.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int args_len = tmpl.Args_len();
 
 		// loop
@@ -128,18 +186,18 @@ public class Pf_func_ {
 
 			// eval key; NOTE: could be recursive
 			arg.Key_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
-			rv_bfr.Add_bfr_and_clear(tmp_bfr);
+			rv_bfr.AddBfrAndClear(tmp_bfr);
 
 			// add eq
-			if (rv_bfr.Len_gt_0())
-				rv_bfr.Add_byte_eq();
+			if (rv_bfr.HasSome())
+				rv_bfr.AddByteEq();
 
 			// eval val; NOTE: could be recursive
 			arg.Val_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
-			rv_bfr.Add_bfr_and_clear(tmp_bfr);
+			rv_bfr.AddBfrAndClear(tmp_bfr);
 
 			// add to rv
-			rv.Add(rv_bfr.To_str_and_clear());
+			rv.Add(rv_bfr.ToStrAndClear());
 		}
 		return rv;
 	}
@@ -310,10 +368,10 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_utc_timestamp:
 			case Xol_kwd_grp_.Id_utc_week:
 			case Xol_kwd_grp_.Id_utc_dow:						return Pft_func_date_int.Utc;
-			case Xol_kwd_grp_.Id_utc_month_abrv:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_abrv_jan - Int_.Base1);
-			case Xol_kwd_grp_.Id_utc_month_name:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_name_january - Int_.Base1);
-			case Xol_kwd_grp_.Id_utc_month_gen:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_gen_january - Int_.Base1);
-			case Xol_kwd_grp_.Id_utc_day_name:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, DateAdp_.SegIdx_dayOfWeek, Xol_msg_itm_.Id_dte_dow_name_sunday);
+			case Xol_kwd_grp_.Id_utc_month_abrv:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_abrv_jan - IntUtl.Base1);
+			case Xol_kwd_grp_.Id_utc_month_name:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_name_january - IntUtl.Base1);
+			case Xol_kwd_grp_.Id_utc_month_gen:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_gen_january - IntUtl.Base1);
+			case Xol_kwd_grp_.Id_utc_day_name:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_utc, GfoDateUtl.SegIdxDayOfWeek, Xol_msg_itm_.Id_dte_dow_name_sunday);
 
 			case Xol_kwd_grp_.Id_lcl_year:
 			case Xol_kwd_grp_.Id_lcl_month_int_len2:
@@ -325,10 +383,10 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_lcl_timestamp:
 			case Xol_kwd_grp_.Id_lcl_week:
 			case Xol_kwd_grp_.Id_lcl_dow:						return Pft_func_date_int.Lcl;
-			case Xol_kwd_grp_.Id_lcl_month_abrv:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_abrv_jan - Int_.Base1);
-			case Xol_kwd_grp_.Id_lcl_month_name:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_name_january - Int_.Base1);
-			case Xol_kwd_grp_.Id_lcl_month_gen:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, DateAdp_.SegIdx_month, Xol_msg_itm_.Id_dte_month_gen_january - Int_.Base1);
-			case Xol_kwd_grp_.Id_lcl_day_name:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, DateAdp_.SegIdx_dayOfWeek, Xol_msg_itm_.Id_dte_dow_name_sunday);
+			case Xol_kwd_grp_.Id_lcl_month_abrv:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_abrv_jan - IntUtl.Base1);
+			case Xol_kwd_grp_.Id_lcl_month_name:				return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_name_january - IntUtl.Base1);
+			case Xol_kwd_grp_.Id_lcl_month_gen:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, GfoDateUtl.SegIdxMonth, Xol_msg_itm_.Id_dte_month_gen_january - IntUtl.Base1);
+			case Xol_kwd_grp_.Id_lcl_day_name:					return new Pft_func_date_name(-1, Pft_func_date_int.Date_tid_lcl, GfoDateUtl.SegIdxDayOfWeek, Xol_msg_itm_.Id_dte_dow_name_sunday);
 
 			case Xol_kwd_grp_.Id_rev_year:
 			case Xol_kwd_grp_.Id_rev_month_int_len2:
@@ -442,7 +500,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_safesubst:
 			case Xol_kwd_grp_.Id_msg:
 			case Xol_kwd_grp_.Id_msgnw:
-			case Xol_kwd_grp_.Id_raw:							return new Xot_defn_subst((byte)id, Bry_.Empty);
+			case Xol_kwd_grp_.Id_raw:							return new Xot_defn_subst((byte)id, BryUtl.Empty);
 
 			case Xol_kwd_grp_.Id_xowa_dbg:						return new Xop_xowa_dbg();
 			case Xol_kwd_grp_.Id_xowa:							return new gplx.xowa.xtns.xowa_cmds.Xop_xowa_func();
@@ -481,19 +539,19 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_bang:							return Pf_func_bang.Instance;
 			case Xol_kwd_grp_.Id_assessment:					return gplx.xowa.xtns.assessments.Assessment_func.Instance;
 			case Xol_kwd_grp_.Id_translation:					return gplx.xowa.xtns.translates.Translation_func.Instance;
-			default:											throw Err_.new_unhandled(id);
+			default:											throw ErrUtl.NewUnhandled(id);
 		}
 	}
 }
 class Pf_func_noop extends Pf_func_base {
 	public Pf_func_noop(int id) {this.id = id;} private int id;
 	@Override public int Id() {return id;}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {}
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {}
 	@Override public Pf_func New(int id, byte[] name) {return new Pf_func_noop(id).Name_(name);}
 }
 class Pf_func_bang extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_bang;}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {bfr.Add_byte_pipe();}
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {bfr.AddBytePipe();}
 	@Override public Pf_func New(int id, byte[] name) {return this;}
 	public static final Pf_func_bang Instance = new Pf_func_bang();
 	Pf_func_bang() {this.Name_(AsciiByte.BangBry);}

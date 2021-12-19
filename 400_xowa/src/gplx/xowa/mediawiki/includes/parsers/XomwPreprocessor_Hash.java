@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum;
 	public XomwPreprocessor_Hash(XomwParser parser) {this.parser = parser;}
@@ -41,7 +45,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		return node.toString();
 	}
 	@Override public XomwPPNode preprocessToObj(String text, int flags) {
-		return (XomwPPNode)preprocessToObj_base(Bry_.new_u8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
+		return (XomwPPNode)preprocessToObj_base(BryUtl.NewU8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
 	}
 	@Override protected void preprocessToObj_root() {} // NOTE: deliberately empty;
 
@@ -60,7 +64,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 			&&	endIndex >= 0) {
 			Object itm_obj = accum.Get_at(endIndex);
 			if (XophpType_.is_string(itm_obj)) {
-				byte[] itm = Bry_.new_u8((String)itm_obj);
+				byte[] itm = BryUtl.NewU8((String)itm_obj);
 				if (XophpString_.strspn_fwd__space_or_tab(itm, itm.length - ws_len, -1, itm.length) == ws_len) {
 					accum.Set(endIndex, XophpString_.substr(itm, 0, -ws_len));
 				}
@@ -69,12 +73,12 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 	}
 	@Override protected byte[] preprocessToObj_close_init() {return null;}
 	@Override protected byte[] preprocessToObj_close_make(byte[] src, int bgn, int end) {
-		return Bry_.Mid(src, bgn, end);
+		return BryLni.Mid(src, bgn, end);
 	}
 	@Override protected void preprocessToObj_ext(byte[] src, byte[] name, int atr_bgn, int atr_end, byte[] inner, byte[] close) {
 		XophpArray children = XophpArray.New();
 		children.Add(XophpArray.New("name", XophpArray.New(name)));
-		children.Add(XophpArray.New("attr", XophpArray.New(String_.new_u8(Bry_.Mid(src, atr_bgn, atr_end)))));
+		children.Add(XophpArray.New("attr", XophpArray.New(StringUtl.NewU8(BryLni.Mid(src, atr_bgn, atr_end)))));
 		if (inner != null)
 			children.Add(XophpArray.New("inner", XophpArray.New(inner)));
 		if (close != null)
@@ -103,7 +107,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 
 	@Override protected Xomw_prepro_accum preprocessToObj_text(XomwPPDStackElement piece, byte[] rule_end, int matching_count) {
 		XophpArray array = (XophpArray)((XomwPPDStackElement)piece).breakSyntax(matching_count);
-		addLiteral(array, XophpString_.str_repeat(String_.new_u8(rule_end), matching_count));
+		addLiteral(array, XophpString_.str_repeat(StringUtl.NewU8(rule_end), matching_count));
 		return new Xomw_prepro_accum__hash(array);
 	}
 	@Override protected Xomw_prepro_accum preprocessToObj_xml(XomwPPDStackElement piece, byte[] name_bry, int max_count, int matching_count) {
@@ -140,7 +144,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 				children.Add(partNode);
 			}
 		}
-		XophpArray element = XophpArray.New(XophpArray.New(String_.new_u8(name_bry), children));
+		XophpArray element = XophpArray.New(XophpArray.New(StringUtl.NewU8(name_bry), children));
 		return new Xomw_prepro_accum__hash(element);
 	}
 	@Override protected void preprocessToObj_add_element(Xomw_prepro_accum element) {
@@ -182,7 +186,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		return rootNode;
 	}
 
-	private static void addLiteral(XophpArray accum, byte[] text) {addLiteral(accum, String_.new_u8(text));}
+	private static void addLiteral(XophpArray accum, byte[] text) {addLiteral(accum, StringUtl.NewU8(text));}
 	private static void addLiteral(XophpArray accum, String text) {
 		int n = accum.Len();
 		Object itm = accum.Get_at(n - 1);

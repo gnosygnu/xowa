@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*;
-import gplx.core.primitives.*; import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
+package gplx.dbs.engines.mems; import gplx.dbs.*;
+import gplx.core.criterias.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
 import gplx.dbs.metas.*;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.wrappers.IntRef;
 public class Mem_tbl {
 	private final List_adp where_rows = List_adp_.New();
 	private final Hash_adp autonum_hash = Hash_adp_.New();
@@ -37,12 +42,12 @@ public class Mem_tbl {
 		return 1;
 	}
 	private int Autonum_calc(String name) {
-		Int_obj_ref autonum_itm = (Int_obj_ref)autonum_hash.GetByOrNull(name);
+		IntRef autonum_itm = (IntRef)autonum_hash.GetByOrNull(name);
 		if (autonum_itm == null) {
-			autonum_itm = Int_obj_ref.New(0);
+			autonum_itm = IntRef.New(0);
 			autonum_hash.Add(name, autonum_itm);
 		}
-		return autonum_itm.Val_add();
+		return autonum_itm.ValAddOne();
 	}
 	public int Update(Mem_stmt stmt) {
 		Db_qry_update qry = (Db_qry_update)stmt.Qry();
@@ -52,7 +57,7 @@ public class Mem_tbl {
 		int where_rows_len = where_rows.Len();
 		String[] update_cols = qry.Cols_for_update(); int update_cols_len = update_cols.length;
 		for (int i = 0; i < where_rows_len; ++i) {
-			Mem_row itm = (Mem_row)where_rows.Get_at(i);
+			Mem_row itm = (Mem_row)where_rows.GetAt(i);
 			for (int j = 0; j < update_cols_len; ++j)
 				itm.Set_by(update_cols[j], stmt.Args_get_at(j));
 		}
@@ -64,7 +69,7 @@ public class Mem_tbl {
 		Select_rows_where(where_rows, stmt, qry.Where());
 		int where_rows_len = where_rows.Len();
 		for (int i = 0; i < where_rows_len; ++i) {
-			Mem_row itm = (Mem_row)where_rows.Get_at(i);
+			Mem_row itm = (Mem_row)where_rows.GetAt(i);
 			rows.Del(itm);
 		}
 		return where_rows_len;
@@ -96,7 +101,7 @@ public class Mem_tbl {
 		rv.Clear();
 		int rows_len = rows.Len();
 		for (int i = 0; i < rows_len; ++i) {
-			Mem_row itm = (Mem_row)rows.Get_at(i);
+			Mem_row itm = (Mem_row)rows.GetAt(i);
 			if (crt.Matches(itm)) 
 				rv.Add(itm);
 		}

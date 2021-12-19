@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.sqlite;
-import gplx.Int_;
-import gplx.String_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_qry;
 import gplx.dbs.Db_qry_;
 import gplx.dbs.sqls.SqlQryWtr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Sqlite_pragma implements Db_qry {
 	private final String sql;
 	public Sqlite_pragma(boolean parens, String key, String val) {
 		String fmt = parens ? "PRAGMA {0}({1});" : "PRAGMA {0} = {1};";
-		this.sql = String_.Format(fmt, key, val);
+		this.sql = StringUtl.Format(fmt, key, val);
 	}
 	public int			Tid() {return Db_qry_.Tid_pragma;}
 	public boolean ReturnsRdr() {return false;}
@@ -42,12 +42,12 @@ public class Sqlite_pragma implements Db_qry {
 	public static Sqlite_pragma New__synchronous__normal()				{return new Sqlite_pragma(BoolUtl.N, "synchronous"		, "normal");}		// default if WAL
 	public static Sqlite_pragma New__synchronous__full()				{return new Sqlite_pragma(BoolUtl.N, "synchronous"		, "full");}			// default otherwise
 	public static Sqlite_pragma New__synchronous__extra()				{return new Sqlite_pragma(BoolUtl.N, "synchronous"		, "extra");}
-	public static Sqlite_pragma New__wal_autocheckpoint(int v)			{return new Sqlite_pragma(BoolUtl.N, "wal_auto_checkpoint", Int_.To_str(v));}	// default is 1000
+	public static Sqlite_pragma New__wal_autocheckpoint(int v)			{return new Sqlite_pragma(BoolUtl.N, "wal_auto_checkpoint", IntUtl.ToStr(v));}	// default is 1000
 	public static Sqlite_pragma New__wal_checkpoint__passive()			{return new Sqlite_pragma(BoolUtl.Y, "wal_checkpoint"		, "passive");}
 	public static Sqlite_pragma New__wal_checkpoint__full()				{return new Sqlite_pragma(BoolUtl.Y, "wal_checkpoint"		, "full");}
 	public static Sqlite_pragma New__wal_checkpoint__restart()			{return new Sqlite_pragma(BoolUtl.Y, "wal_checkpoint"		, "restart");}
 	public static Sqlite_pragma New__wal_checkpoint__truncate()			{return new Sqlite_pragma(BoolUtl.Y, "wal_checkpoint"		, "truncate");}
 	public static Sqlite_pragma New__locking_mode__normal()				{return new Sqlite_pragma(BoolUtl.N, "locking_mode"		, "normal");}		// default
 	public static Sqlite_pragma New__locking_mode__exclusive()			{return new Sqlite_pragma(BoolUtl.N, "locking_mode"		, "exclusive");}
-	public static Sqlite_pragma New__page_size(int v)					{return new Sqlite_pragma(BoolUtl.N, "page_size"			, Int_.To_str(v));}	// default is 1024
+	public static Sqlite_pragma New__page_size(int v)					{return new Sqlite_pragma(BoolUtl.N, "page_size"			, IntUtl.ToStr(v));}	// default is 1024
 }

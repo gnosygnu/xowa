@@ -13,14 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.Hash_adp_bry;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+package gplx.dbs.engines.mems;
 import gplx.core.criterias.Criteria;
 import gplx.dbs.Db_qry;
 import gplx.dbs.Db_rdr;
@@ -32,9 +25,16 @@ import gplx.dbs.sqls.itms.Sql_select_clause;
 import gplx.dbs.sqls.itms.Sql_select_fld;
 import gplx.dbs.sqls.itms.Sql_select_fld_list;
 import gplx.dbs.sqls.itms.Sql_tbl_itm;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Mem_exec_select {
 	private final Mem_engine engine;
 	private final List_adp tmp_where_rows = List_adp_.New();
@@ -61,7 +61,7 @@ public class Mem_exec_select {
 			List_adp join_tbls = qry2.From().Tbls;
 			int join_tbls_len = join_tbls.Len();
 			for (int i = 1; i < join_tbls_len; ++i) {
-				Sql_tbl_itm join_tbl = (Sql_tbl_itm)join_tbls.Get_at(i);
+				Sql_tbl_itm join_tbl = (Sql_tbl_itm)join_tbls.GetAt(i);
 				Mem_row[] join_rows = (Mem_row[])engine.Tbls__get(join_tbl.Name).rows.ToAry(Mem_row.class);
 				join_rows = Mem_exec_.Rows__alias(join_rows, join_tbl.Alias);
 				tbl_rows = Mem_exec_.Rows__join(join_tbl.Join_tid, tbl_rows, join_rows, join_tbl.Alias, join_tbl.Join_flds);
@@ -111,7 +111,7 @@ class Mem_sorter implements ComparerAble {
 class Mem_exec_ {
 	public static Mem_row[] Rows__join(int join_tid, Mem_row[] lhs_rows, Mem_row[] rhs_rows, String tbl_alias, Sql_join_fld[] join_flds) {
 		int join_flds_len = join_flds.length;
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Hash_adp_bry rhs_hash = Hash_adp_bry.cs();
 		int rhs_rows_len = rhs_rows.length;
 		for (int i = 0; i < rhs_rows_len; ++i) {
@@ -134,12 +134,12 @@ class Mem_exec_ {
 				switch (join_tid) {
 					case Sql_tbl_itm.Tid__inner: continue;
 					case Sql_tbl_itm.Tid__left: break;
-					default: throw Err_.new_unhandled_default(join_tid);
+					default: throw ErrUtl.NewUnhandled(join_tid);
 				}
 			}
 			int rhs_list_len = rhs_list == null ? 1 : rhs_list.Len();
 			for (int j = 0; j < rhs_list_len; ++j) {
-				Mem_row rhs_row = rhs_list == null ? Mem_row.Null_row : (Mem_row)rhs_list.Get_at(j); 
+				Mem_row rhs_row = rhs_list == null ? Mem_row.Null_row : (Mem_row)rhs_list.GetAt(j);
 				Mem_row merged = Rows__merge(lhs_row, rhs_row);
 				rv.Add(merged);
 			}
@@ -161,14 +161,14 @@ class Mem_exec_ {
 		}
 		return rv;
 	}
-	private static byte[] Rows__bld_key(Bry_bfr bfr, boolean join_is_src, String trg_tbl, Mem_row row, Sql_join_fld[] join_flds, int join_flds_len) {
+	private static byte[] Rows__bld_key(BryWtr bfr, boolean join_is_src, String trg_tbl, Mem_row row, Sql_join_fld[] join_flds, int join_flds_len) {
 		for (int i = 0; i < join_flds_len; ++i) {
-			if (i != 0) bfr.Add_byte_pipe();
+			if (i != 0) bfr.AddBytePipe();
 			Sql_join_fld join_fld = join_flds[i];
 			Object val = row.Get_by(join_fld.To_fld_sql(join_is_src, trg_tbl));
-			bfr.Add_obj(val);
+			bfr.AddObj(val);
 		}
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 	private static Mem_row Rows__merge(Mem_row lhs, Mem_row rhs) {
 		Mem_row rv = new Mem_row();
@@ -193,7 +193,7 @@ class Mem_exec_ {
 			Mem_row trg_row = new Mem_row(); rv[i] = trg_row;
 			for (int j = 0; j < select_flds_len; ++j) {						// loop over each fld
 				Sql_select_fld fld = select_flds.Get_at(j);
-				if (String_.Eq(fld.Alias, Sql_select_fld.Fld__wildcard)) {	// wildcard; add all cols
+				if (StringUtl.Eq(fld.Alias, Sql_select_fld.Fld__wildcard)) {	// wildcard; add all cols
 					for (int k = 0; k < src_row.Len(); ++k) {
 						String key = src_row.Fld_at(k);
 						Object val = src_row.Get_by_or_dbnull(key);

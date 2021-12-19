@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.math;
-import gplx.Bry_bfr;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.logs.Xop_log_basic_wkr;
@@ -38,13 +38,13 @@ public class Xomath_core implements Gfo_invk {
 	public void Log_wkr_(Xop_log_wkr_factory factory) {
 		this.log_wkr = factory.Make__generic().Save_src_str_(BoolUtl.Y);
 	}
-	public void Write(Bry_bfr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src) {
+	public void Write(BryWtr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (log_wkr != null) log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_math, src, xnde);
 		html_wtr.Write(bfr, ctx, xnde, src, !renderer_is_mathjax, enabled);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Cfg__enabled))		enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Cfg__renderer))		renderer_is_mathjax = String_.Eq(m.ReadStr("v"), "mathjax");
+		else if	(ctx.Match(k, Cfg__renderer))		renderer_is_mathjax = StringUtl.Eq(m.ReadStr("v"), "mathjax");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

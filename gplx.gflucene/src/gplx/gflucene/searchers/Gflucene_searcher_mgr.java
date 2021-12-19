@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gflucene.searchers; import gplx.*;
+package gplx.gflucene.searchers;
 import gplx.gflucene.core.*;
 import gplx.gflucene.analyzers.*;
 import java.io.IOException;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Ordered_hash;
 import org.lukhnos.portmobile.file.Path;
 import org.lukhnos.portmobile.file.Paths;
 
@@ -51,7 +53,7 @@ public class Gflucene_searcher_mgr {
 		try {
 			this.index = FSDirectory.open(path);
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to init searcher", "dir", idx_data.index_dir);
+			throw ErrUtl.NewArgs(e, "failed to init searcher", "dir", idx_data.index_dir);
 		}
 			}
 	public void Exec(Ordered_hash list, Gflucene_searcher_qry data) {
@@ -86,7 +88,7 @@ public class Gflucene_searcher_mgr {
 			
 			reader.close();
 		} catch (Exception e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to exec seearch", "query", data.query);
+			throw ErrUtl.NewArgs(e, "failed to exec seearch", "query", data.query);
 		}
 		}
 	public void Term() {

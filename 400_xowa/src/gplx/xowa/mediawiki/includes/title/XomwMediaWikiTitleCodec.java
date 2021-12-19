@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.title; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.title;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.mediawiki.includes.interwiki.*;
@@ -277,7 +281,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //				dbkey = trim(dbkey, '_'); # remove any subsequent whitespace
 //			}
 
-		if (dbkey == Bry_.Empty) {
+		if (dbkey == BryUtl.Empty) {
 			throw new XomwMalformedTitleException("title-invalid-empty", text);
 		}
 
@@ -312,8 +316,8 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 					// Redundant interwiki prefix to the local wiki
 					boolean doAnotherNamespaceSplit = false;
 					for (byte[] localIW : this.localInterwikis) {
-						if (Bry_.Eq(parts.interwiki, localIW)) {
-							if (Bry_.Len_eq_0(dbkey)) {
+						if (BryLni.Eq(parts.interwiki, localIW)) {
+							if (BryUtl.IsNullOrEmpty(dbkey)) {
 								// Empty self-links should point to the Main Page, to ensure
 								// compatibility with cross-wiki transclusions and the like.
 								XomwTitleOld mainPage = XomwTitleOld.newMainPage(mws.env);
@@ -325,7 +329,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 								// rv.dbkey = mainPage.getDBkey();
 								rv.user_case_dbkey = mainPage.getUserCaseDBKey();
 							}
-							parts.interwiki = Bry_.Empty;
+							parts.interwiki = BryUtl.Empty;
 							// local interwikis should behave like initial-colon links
 							parts.local_interwiki = true;
 
@@ -339,7 +343,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 
 					// If there's an initial colon after the interwiki, that also
 					// resets the default namespace
-					if (dbkey != Bry_.Empty && dbkey[0] == AsciiByte.Colon) {
+					if (dbkey != BryUtl.Empty && dbkey[0] == AsciiByte.Colon) {
 						parts.ns = XomwDefines.NS_MAIN;
 						dbkey = XophpString_.substr(dbkey, 1);
 					}
@@ -356,7 +360,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 			dbkey = XophpString_.substr(dbkey, 0, XophpString_.strlen(dbkey) - XophpString_.strlen(fragment));
 			// remove whitespace again: prevents "Foo_bar_#"
 			// becoming "Foo_bar_"
-			dbkey = Bry_.Replace(dbkey, AsciiByte.UnderlineBry, Bry_.Empty);
+			dbkey = BryUtlByWtr.Replace(dbkey, AsciiByte.UnderlineBry, BryUtl.Empty);
 		}
 
 		// Reject illegal characters.
@@ -426,7 +430,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //			}
 
 		// Any remaining initial :s are illegal.
-		if (dbkey != Bry_.Empty && AsciiByte.Colon == dbkey[0]) {
+		if (dbkey != BryUtl.Empty && AsciiByte.Colon == dbkey[0]) {
 			throw new XomwMalformedTitleException("title-invalid-leading-colon", text);
 		}
 
@@ -475,22 +479,22 @@ class XomwRegexTitlePrefix {
 		int len = src.length;
 
 		// look for colon
-		int colon_pos = Bry_find_.Find_fwd(src, AsciiByte.Colon, 0, len);
+		int colon_pos = BryFind.FindFwd(src, AsciiByte.Colon, 0, len);
 
 		// if no_colon, no match; just return bry;
-		if (colon_pos == Bry_find_.Not_found) {
+		if (colon_pos == BryFind.NotFound) {
 			rv[0] = src;
 			rv[1] = null;
 			return false;
 		}
 
 		// colon exists; strip any flanking underlines
-		int ns_end = Bry_find_.Find_bwd_while_v2(src, colon_pos, 0, AsciiByte.Underline);
-		int ttl_bgn = Bry_find_.Find_fwd_while(src, colon_pos + 1, len, AsciiByte.Underline);
+		int ns_end = BryFind.FindBwdWhileV2(src, colon_pos, 0, AsciiByte.Underline);
+		int ttl_bgn = BryFind.FindFwdWhile(src, colon_pos + 1, len, AsciiByte.Underline);
 
 		// split ns / title and return true
-		rv[0] = Bry_.Mid(src, 0, ns_end);
-		rv[1] = Bry_.Mid(src, ttl_bgn, len);
+		rv[0] = BryLni.Mid(src, 0, ns_end);
+		rv[1] = BryLni.Mid(src, ttl_bgn, len);
 		return true;
 	}
 }

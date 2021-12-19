@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.nss;
-import gplx.Bry_;
-import gplx.Int_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xow_ns_tst {
 	@Before public void init() {fxt.Clear();} private Xow_ns_fxt fxt = new Xow_ns_fxt();
-	@Test  public void Category() {
+	@Test public void Category() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
 			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
 			.Expd_id_subj_(BoolUtl.Y)
@@ -30,7 +30,7 @@ public class Xow_ns_tst {
 			.Test(Xow_ns_.Tid__category)
 			;
 	}		
-	@Test  public void Category_talk() {
+	@Test public void Category_talk() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
 			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
 			.Expd_id_subj_(BoolUtl.N)
@@ -38,7 +38,7 @@ public class Xow_ns_tst {
 			.Test(Xow_ns_.Tid__category_talk)
 			;
 	}
-	@Test  public void Special() {
+	@Test public void Special() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__special)
 			.Expd_id_talkId_(Xow_ns_.Tid__special)
 			.Expd_id_subj_(BoolUtl.Y)
@@ -49,7 +49,7 @@ public class Xow_ns_tst {
 }
 class Xow_ns_fxt {
 	public void Clear() {
-		expd_id_subjId = expd_id_talkId = Int_.Max_value;
+		expd_id_subjId = expd_id_talkId = IntUtl.MaxValue;
 		expd_id_subj = expd_id_talk = false;
 	}
 	public Xow_ns_fxt Expd_id_subjId_(int v) {expd_id_subjId = v; return this;} private int expd_id_subjId;
@@ -57,10 +57,10 @@ class Xow_ns_fxt {
 	public Xow_ns_fxt Expd_id_subj_(boolean v) {expd_id_subj = v; return this;} private boolean expd_id_subj;
 	public Xow_ns_fxt Expd_id_talk_(boolean v) {expd_id_talk = v; return this;} private boolean expd_id_talk;
 	public void Test(int nsId) {
-		Xow_ns actl = new Xow_ns(nsId, Xow_ns_case_.Tid__1st, Bry_.Empty, false);
-		Tfds.Eq(expd_id_subjId, actl.Id_subj_id());
-		Tfds.Eq(expd_id_talkId, actl.Id_talk_id());
-		Tfds.Eq(expd_id_subj, actl.Id_is_subj());
-		Tfds.Eq(expd_id_talk, actl.Id_is_talk());
+		Xow_ns actl = new Xow_ns(nsId, Xow_ns_case_.Tid__1st, BryUtl.Empty, false);
+		GfoTstr.EqObj(expd_id_subjId, actl.Id_subj_id());
+		GfoTstr.EqObj(expd_id_talkId, actl.Id_talk_id());
+		GfoTstr.EqObj(expd_id_subj, actl.Id_is_subj());
+		GfoTstr.EqObj(expd_id_talk, actl.Id_is_talk());
 	}	
 }

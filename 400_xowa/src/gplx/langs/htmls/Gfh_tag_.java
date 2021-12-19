@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.htmls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.errs.ErrUtl;
 public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	public static final int 
 	  Id__comment		= -3
@@ -85,17 +89,17 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__mark			= 62
 	;
 	public static final byte[]
-	  Bry__a			= Bry_.new_a7("a")
-	, Bry__ul			= Bry_.new_a7("ul")
-	, Bry__td			= Bry_.new_a7("td")
-	, Bry__th			= Bry_.new_a7("th")
-	, Bry__div			= Bry_.new_a7("div")
-	, Bry__link			= Bry_.new_a7("link")
-	, Bry__style		= Bry_.new_a7("style")
-	, Bry__script		= Bry_.new_a7("script")
-	, Bry__xowa_any		= Bry_.new_a7("xowa_any")
-	, Bry__xowa_comment	= Bry_.new_a7("xowa_comment")
-	, Bry__img			= Bry_.new_a7("img")
+	  Bry__a			= BryUtl.NewA7("a")
+	, Bry__ul			= BryUtl.NewA7("ul")
+	, Bry__td			= BryUtl.NewA7("td")
+	, Bry__th			= BryUtl.NewA7("th")
+	, Bry__div			= BryUtl.NewA7("div")
+	, Bry__link			= BryUtl.NewA7("link")
+	, Bry__style		= BryUtl.NewA7("style")
+	, Bry__script		= BryUtl.NewA7("script")
+	, Bry__xowa_any		= BryUtl.NewA7("xowa_any")
+	, Bry__xowa_comment	= BryUtl.NewA7("xowa_comment")
+	, Bry__img			= BryUtl.NewA7("img")
 	;
 
 //		private static final Gfh_tag_meta[] Ary = new Gfh_tag_meta[Id__ary_max];
@@ -238,38 +242,38 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__rt:			return "rt";
 			case Id__form:			return "form";
 			case Id__mark:			return "mark";
-			default:				throw Err_.new_unhandled(tid);
+			default:				throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public static final byte[]
-	  Br_inl					= Bry_.new_a7("<br/>")
-	, Br_lhs					= Bry_.new_a7("<br>")
-	, Hr_inl					= Bry_.new_a7("<hr/>")
-	, Body_lhs					= Bry_.new_a7("<body>")			, Body_rhs					= Bry_.new_a7("</body>")
-	, B_lhs						= Bry_.new_a7("<b>")			, B_rhs						= Bry_.new_a7("</b>")
-	, I_lhs						= Bry_.new_a7("<i>")			, I_rhs						= Bry_.new_a7("</i>")
-	, P_lhs						= Bry_.new_a7("<p>")			, P_rhs						= Bry_.new_a7("</p>")
-	, Pre_lhs					= Bry_.new_a7("<pre>")			, Pre_rhs					= Bry_.new_a7("</pre>")
-	, Div_lhs					= Bry_.new_a7("<div>")			, Div_rhs					= Bry_.new_a7("</div>")		, Div_lhs_bgn				= Bry_.new_a7("<div")
-	, Html_rhs					= Bry_.new_a7("</html>")
-	, Head_lhs_bgn				= Bry_.new_a7("<head")			, Head_rhs					= Bry_.new_a7("</head>")
-	, Style_lhs_w_type			= Bry_.new_a7("<style type=\"text/css\">")
-	, Style_rhs					= Bry_.new_a7("</style>")
-	, Script_lhs				= Bry_.new_a7("<script>")		, Script_rhs				= Bry_.new_a7("</script>")
-	, Script_lhs_w_type			= Bry_.new_a7("<script type='text/javascript'>")
-	, Span_lhs					= Bry_.new_a7("<span")			, Span_rhs					= Bry_.new_a7("</span>")
-	, Strong_lhs				= Bry_.new_a7("<strong>")		, Strong_rhs				= Bry_.new_a7("</strong>")
-	, Ul_lhs					= Bry_.new_a7("<ul>")			, Ul_rhs					= Bry_.new_a7("</ul>")
-	, Ol_lhs					= Bry_.new_a7("<ol>")			, Ol_rhs					= Bry_.new_a7("</ol>")
-	, Dt_lhs					= Bry_.new_a7("<dt>")			, Dt_rhs					= Bry_.new_a7("</dt>")
-	, Dd_lhs					= Bry_.new_a7("<dd>")			, Dd_rhs					= Bry_.new_a7("</dd>")
-	, Dl_lhs					= Bry_.new_a7("<dl>")			, Dl_rhs					= Bry_.new_a7("</dl>")
-	, Li_lhs					= Bry_.new_a7("<li>")			, Li_rhs					= Bry_.new_a7("</li>")		, Li_lhs_bgn				= Bry_.new_a7("<li")
-	, Table_lhs					= Bry_.new_a7("<table>")		, Table_rhs					= Bry_.new_a7("</table>")	, Table_lhs_bgn				= Bry_.new_a7("<table")
-	, Tr_lhs					= Bry_.new_a7("<tr>")			, Tr_rhs					= Bry_.new_a7("</tr>")		, Tr_lhs_bgn				= Bry_.new_a7("<tr")
-	, Td_lhs					= Bry_.new_a7("<td>")			, Td_rhs					= Bry_.new_a7("</td>")		, Td_lhs_bgn				= Bry_.new_a7("<td")
-	, Th_lhs					= Bry_.new_a7("<th>")			, Th_rhs					= Bry_.new_a7("</th>")		, Th_lhs_bgn				= Bry_.new_a7("<th")		
-	, Caption_lhs				= Bry_.new_a7("<caption>")		, Caption_rhs				= Bry_.new_a7("</caption>")	, Caption_lhs_bgn			= Bry_.new_a7("<caption")
+	  Br_inl					= BryUtl.NewA7("<br/>")
+	, Br_lhs					= BryUtl.NewA7("<br>")
+	, Hr_inl					= BryUtl.NewA7("<hr/>")
+	, Body_lhs					= BryUtl.NewA7("<body>")			, Body_rhs					= BryUtl.NewA7("</body>")
+	, B_lhs						= BryUtl.NewA7("<b>")			, B_rhs						= BryUtl.NewA7("</b>")
+	, I_lhs						= BryUtl.NewA7("<i>")			, I_rhs						= BryUtl.NewA7("</i>")
+	, P_lhs						= BryUtl.NewA7("<p>")			, P_rhs						= BryUtl.NewA7("</p>")
+	, Pre_lhs					= BryUtl.NewA7("<pre>")			, Pre_rhs					= BryUtl.NewA7("</pre>")
+	, Div_lhs					= BryUtl.NewA7("<div>")			, Div_rhs					= BryUtl.NewA7("</div>")		, Div_lhs_bgn				= BryUtl.NewA7("<div")
+	, Html_rhs					= BryUtl.NewA7("</html>")
+	, Head_lhs_bgn				= BryUtl.NewA7("<head")			, Head_rhs					= BryUtl.NewA7("</head>")
+	, Style_lhs_w_type			= BryUtl.NewA7("<style type=\"text/css\">")
+	, Style_rhs					= BryUtl.NewA7("</style>")
+	, Script_lhs				= BryUtl.NewA7("<script>")		, Script_rhs				= BryUtl.NewA7("</script>")
+	, Script_lhs_w_type			= BryUtl.NewA7("<script type='text/javascript'>")
+	, Span_lhs					= BryUtl.NewA7("<span")			, Span_rhs					= BryUtl.NewA7("</span>")
+	, Strong_lhs				= BryUtl.NewA7("<strong>")		, Strong_rhs				= BryUtl.NewA7("</strong>")
+	, Ul_lhs					= BryUtl.NewA7("<ul>")			, Ul_rhs					= BryUtl.NewA7("</ul>")
+	, Ol_lhs					= BryUtl.NewA7("<ol>")			, Ol_rhs					= BryUtl.NewA7("</ol>")
+	, Dt_lhs					= BryUtl.NewA7("<dt>")			, Dt_rhs					= BryUtl.NewA7("</dt>")
+	, Dd_lhs					= BryUtl.NewA7("<dd>")			, Dd_rhs					= BryUtl.NewA7("</dd>")
+	, Dl_lhs					= BryUtl.NewA7("<dl>")			, Dl_rhs					= BryUtl.NewA7("</dl>")
+	, Li_lhs					= BryUtl.NewA7("<li>")			, Li_rhs					= BryUtl.NewA7("</li>")		, Li_lhs_bgn				= BryUtl.NewA7("<li")
+	, Table_lhs					= BryUtl.NewA7("<table>")		, Table_rhs					= BryUtl.NewA7("</table>")	, Table_lhs_bgn				= BryUtl.NewA7("<table")
+	, Tr_lhs					= BryUtl.NewA7("<tr>")			, Tr_rhs					= BryUtl.NewA7("</tr>")		, Tr_lhs_bgn				= BryUtl.NewA7("<tr")
+	, Td_lhs					= BryUtl.NewA7("<td>")			, Td_rhs					= BryUtl.NewA7("</td>")		, Td_lhs_bgn				= BryUtl.NewA7("<td")
+	, Th_lhs					= BryUtl.NewA7("<th>")			, Th_rhs					= BryUtl.NewA7("</th>")		, Th_lhs_bgn				= BryUtl.NewA7("<th")
+	, Caption_lhs				= BryUtl.NewA7("<caption>")		, Caption_rhs				= BryUtl.NewA7("</caption>")	, Caption_lhs_bgn			= BryUtl.NewA7("<caption")
 	;
 	public static final String 
 	  Comm_bgn_str				= "<!--"
@@ -277,16 +281,16 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Anchor_str				= "#"
 	;
 	public static final byte[]
-	  Comm_bgn = Bry_.new_a7(Comm_bgn_str), Comm_end = Bry_.new_a7(Comm_end_str)
+	  Comm_bgn = BryUtl.NewA7(Comm_bgn_str), Comm_end = BryUtl.NewA7(Comm_end_str)
 	;
 	public static final int
 	  Comm_bgn_len = Comm_bgn.length
 	, Comm_end_len = Comm_end.length
 	;
-	public static final byte[] Rhs_bgn = Bry_.new_a7("</");
-	public static void Bld_lhs_bgn(Bry_bfr bfr, byte[] tag) {bfr.Add_byte(AsciiByte.Lt).Add(tag);}						// <tag
-	public static void Bld_lhs_bgn(Bry_bfr bfr, int tag_id) {bfr.Add_byte(AsciiByte.Lt).Add_str_a7(To_str(tag_id));}   // <tag
-	public static void Bld_lhs_end_nde(Bry_bfr bfr)			{bfr.Add_byte(AsciiByte.Gt);}								// >
-	public static void Bld_lhs_end_inl(Bry_bfr bfr)			{bfr.Add_byte(AsciiByte.Slash).Add_byte(AsciiByte.Gt);}	// "/>"
-	public static void Bld_rhs(Bry_bfr bfr, byte[] name)	{bfr.Add(Rhs_bgn).Add(name).Add_byte(AsciiByte.AngleEnd);}	// EX:"</tag_name>"
+	public static final byte[] Rhs_bgn = BryUtl.NewA7("</");
+	public static void Bld_lhs_bgn(BryWtr bfr, byte[] tag) {bfr.AddByte(AsciiByte.Lt).Add(tag);}						// <tag
+	public static void Bld_lhs_bgn(BryWtr bfr, int tag_id) {bfr.AddByte(AsciiByte.Lt).AddStrA7(To_str(tag_id));}   // <tag
+	public static void Bld_lhs_end_nde(BryWtr bfr)			{bfr.AddByte(AsciiByte.Gt);}								// >
+	public static void Bld_lhs_end_inl(BryWtr bfr)			{bfr.AddByte(AsciiByte.Slash).AddByte(AsciiByte.Gt);}	// "/>"
+	public static void Bld_rhs(BryWtr bfr, byte[] name)	{bfr.Add(Rhs_bgn).Add(name).AddByte(AsciiByte.AngleEnd);}	// EX:"</tag_name>"
 }

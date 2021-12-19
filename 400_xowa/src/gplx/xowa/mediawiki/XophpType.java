@@ -13,17 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+import gplx.types.basics.utls.TypeIds;
 public class XophpType {
 	private final int type_id;
 	public XophpType(int type_id) {
 		this.type_id = type_id;
 	}
 	public boolean is_string() {
-		return type_id == Type_ids_.Id__str;
+		return type_id == TypeIds.IdStr;
 	}
 	public boolean is_array() {
-		return type_id == Type_ids_.Id__array;
+		return type_id == TypeIds.IdArray;
 	}
 	public static XophpType New(Object o) {
 		return new XophpType(XophpType_.To_type_id(o));

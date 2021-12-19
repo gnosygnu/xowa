@@ -13,14 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.searchs.searchers;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.xowa.addons.wikis.searchs.*;
-import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*;
 public class Srch_ns_mgr {
-	private final Ordered_hash ns_hash = Ordered_hash_.New(); private final Int_obj_ref tmp_ns_id = Int_obj_ref.New_neg1();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
+	private final Ordered_hash ns_hash = Ordered_hash_.New(); private final IntRef tmp_ns_id = IntRef.NewNeg1();
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(32);
 	private boolean ns_all, ns_main;
 	public void Clear() {
 		ns_hash.Clear();
@@ -30,13 +36,13 @@ public class Srch_ns_mgr {
 	public boolean Has(int ns_id) {
 		return ns_all									// ns_all always returns true
 			|| ns_main && ns_id == Xow_ns_.Tid__main	// ns_main returns true if main_ns
-			|| ns_hash.Has(tmp_ns_id.Val_(ns_id));		// ns_hash returns true if has ns_id
+			|| ns_hash.Has(tmp_ns_id.ValSet(ns_id));		// ns_hash returns true if has ns_id
 	}
 	public void Add_all()					{ns_all = true;}
 	public Srch_ns_mgr Add_main_if_empty()	{if (ns_hash.Len() == 0) ns_main = true; return this;}
 	public void Add_by_id(int ns_id)	{
-		if (ns_hash.Has(tmp_ns_id.Val_(ns_id))) ns_hash.Del(tmp_ns_id);
-		ns_hash.AddAsKeyAndVal(Int_obj_ref.New(ns_id));
+		if (ns_hash.Has(tmp_ns_id.ValSet(ns_id))) ns_hash.Del(tmp_ns_id);
+		ns_hash.AddAsKeyAndVal(IntRef.New(ns_id));
 	}
 	public void Add_by_name(byte[] ns_name) {
 		int id = Xow_ns_canonical_.To_id(ns_name);
@@ -44,14 +50,14 @@ public class Srch_ns_mgr {
 			Add_by_id(id);
 	}
 	public void Add_by_parse(byte[] key, byte[] val) {
-		int ns_enabled = Bry_.To_int_or_neg1(val);
+		int ns_enabled = BryUtl.ToIntOrNeg1(val);
 		if (ns_enabled == 1) {										// make sure set to 1; EX: ignore &ns0=0
 			int key_len = key.length;
 			if (key_len == 3 && key[2] == Srch_search_addon.Wildcard__star)	// key=ns* sets ns_all to true
 				ns_all = true;
 			else {
-				int ns_id = Bry_.To_int_or(key, 2, key_len, Int_.Min_value);
-				if (ns_id != Int_.Min_value) {						// ignore invalid ints; EX: &nsabc=1;
+				int ns_id = BryUtl.ToIntOr(key, 2, key_len, IntUtl.MinValue);
+				if (ns_id != IntUtl.MinValue) {						// ignore invalid ints; EX: &nsabc=1;
 					Add_by_id(ns_id);
 					ns_main = ns_all = false;
 				}
@@ -64,11 +70,11 @@ public class Srch_ns_mgr {
 		else {
 			int ns_hash_len = ns_hash.Len();
 			for (int i = 0; i < ns_hash_len; i++) {
-				if (i != 0) tmp_bfr.Add_byte_semic();
-				Int_obj_ref ns_id_ref = (Int_obj_ref)ns_hash.Get_at(i);
-				tmp_bfr.Add_int_variable(ns_id_ref.Val());
+				if (i != 0) tmp_bfr.AddByteSemic();
+				IntRef ns_id_ref = (IntRef)ns_hash.GetAt(i);
+				tmp_bfr.AddIntVariable(ns_id_ref.Val());
 			}
-			return tmp_bfr.To_bry_and_clear();
+			return tmp_bfr.ToBryAndClear();
 		}
 	}
 	public void Add_by_int_ids(int[] ns_ids) {
@@ -83,13 +89,13 @@ public class Srch_ns_mgr {
 		}
 	}
 	public int[] To_int_ary() {
-		if		(ns_all)	return Int_ary_.Empty;
-		else if (ns_main)	return Int_ary_.New(Xow_ns_.Tid__main);
+		if		(ns_all)	return IntAryUtl.Empty;
+		else if (ns_main)	return IntAryUtl.New(Xow_ns_.Tid__main);
 		else {
 			int len = ns_hash.Len();
 			int[] rv = new int[len];
 			for (int i = 0; i < len; i++) {
-				Int_obj_ref ns_id_ref = (Int_obj_ref)ns_hash.Get_at(i);
+				IntRef ns_id_ref = (IntRef)ns_hash.GetAt(i);
 				rv[i] = ns_id_ref.Val();
 			}
 			return rv;

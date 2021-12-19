@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.fmtrs;
-import gplx.objects.lists.ComparerAble;
+import gplx.types.commons.lists.ComparerAble;
 public interface Gfo_sort_able {
 	void Sort(ComparerAble comparer);
 }

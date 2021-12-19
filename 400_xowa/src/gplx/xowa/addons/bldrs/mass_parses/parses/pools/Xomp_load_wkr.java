@@ -13,7 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.pools; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.pools;
+import gplx.core.envs.SystemUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoTimeSpanUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.core.threads.utils.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*;
 public class Xomp_load_wkr implements Gfo_invk {
 	private final Object thread_lock = new Object();
@@ -23,7 +35,7 @@ public class Xomp_load_wkr implements Gfo_invk {
 	private final Gfo_blocking_queue queue;
 	private final int num_wkrs;
 
-	private final Bry_bfr prog_bfr = Bry_bfr_.New();
+	private final BryWtr prog_bfr = BryWtr.New();
 	private int pages_done, pages_total;
 	private long time_bgn, time_prv, time_done;
 	public Xomp_load_wkr(Xow_wiki wiki, Db_conn mgr_conn, int num_pages_in_pool, int num_wkrs) {
@@ -32,7 +44,7 @@ public class Xomp_load_wkr implements Gfo_invk {
 		this.attach_mgr = new Db_attach_mgr(mgr_conn);
 		this.queue = new Gfo_blocking_queue(num_pages_in_pool);
 		this.num_wkrs = num_wkrs;
-		this.time_bgn = this.time_prv = gplx.core.envs.System_.Ticks();
+		this.time_bgn = this.time_prv = SystemUtl.Ticks();
 		this.pages_total = this.Get_pending_count();
 	}
 	public int Get_pending_count() {
@@ -51,7 +63,7 @@ public class Xomp_load_wkr implements Gfo_invk {
 	}
 	private int Load_pages(int prv_page_id) {
 		// page_tbl.prep_sql
-		String sql = String_.Format(String_.Concat_lines_nl_skip_last	// ANSI.Y
+		String sql = StringUtl.Format(StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "SELECT  mp.page_id"
 		, ",       pp.page_namespace"
 		, ",       pp.page_title"
@@ -94,7 +106,7 @@ public class Xomp_load_wkr implements Gfo_invk {
 
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			queue.Put((Xomp_page_itm)list.Get_at(i));
+			queue.Put((Xomp_page_itm)list.GetAt(i));
 		}
 
 		return count == 0 ? -1 : prv_page_id;
@@ -103,10 +115,10 @@ public class Xomp_load_wkr implements Gfo_invk {
 		synchronized (thread_lock) {
 			pages_done += 1;
 			if (pages_done % 1000 == 0) {
-				long time_cur = gplx.core.envs.System_.Ticks();
+				long time_cur = SystemUtl.Ticks();
 				int pages_left = pages_total - pages_done;
 				time_done += (time_cur - time_prv);
-				double rate_cur = pages_done / (time_done / Time_span_.Ratio_f_to_s);
+				double rate_cur = pages_done / (time_done / GfoTimeSpanUtl.RatioFracsToSecs);
 				String time_past = gplx.xowa.addons.bldrs.centrals.utils.Time_dhms_.To_str(prog_bfr, (int)((time_cur - time_bgn) / 1000), true, 0);
 				String time_left = gplx.xowa.addons.bldrs.centrals.utils.Time_dhms_.To_str(prog_bfr, (int)(pages_left / rate_cur), true, 0);
 				Gfo_usr_dlg_.Instance.Prog_many("", "", "done=~{0} left=~{1} rate=~{2} time_past=~{3} time_left=~{4}", pages_done, pages_left, (int)rate_cur, time_past, time_left);

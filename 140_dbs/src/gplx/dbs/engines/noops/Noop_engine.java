@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
- package gplx.dbs.engines.noops; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+ package gplx.dbs.engines.noops; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
 import gplx.dbs.wkrs.SqlWkrMgr;
-
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
 public class Noop_engine implements Db_engine {
 	public String				Tid() {return Noop_conn_info.Tid_const;}
 	public Db_conn_info			Conn_info() {return Db_conn_info_.Null;}
@@ -30,7 +32,7 @@ public class Noop_engine implements Db_engine {
 	public Db_rdr				Exec_as_rdr__rls_manual	(Object rdr_obj, String sql)				{return Db_rdr_.Empty;}
 	public Db_rdr				Exec_as_rdr__rls_auto	(Db_stmt stmt, Object rdr_obj, String sql)	{return Db_rdr_.Empty;}
 	public Db_stmt				Stmt_by_qry(Db_qry qry) {return Db_stmt_.Null;}
-	public Object				Stmt_by_sql(String sql) {throw Err_.new_unimplemented();}
+	public Object				Stmt_by_sql(String sql) {throw ErrUtl.NewUnimplemented();}
 	public DataRdr				New_rdr(java.sql.ResultSet rdr, String sql) {return DataRdr_.Null;} 
 	public void					Txn_bgn(String name)	{}
 	public String				Txn_end()				{return "";}

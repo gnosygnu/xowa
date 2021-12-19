@@ -13,26 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.heads;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
-import gplx.xowa.guis.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Xoh_head_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_head_mgr_fxt fxt = new Xoh_head_mgr_fxt();
-	@Test  public void Css() {
+	@Test public void Css() {
 		fxt.Mgr().Itm__css().Enabled_y_();
-		fxt.Test_write(String_.Concat_lines_nl_skip_last
+		fxt.Test_write(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <style type=\"text/css\">"
 		, "    .xowa-missing-category-entry {color: red;}"
 		, "  </style>"
 		));
 	}
-	@Test  public void Toc() {
+	@Test public void Toc() {
 		fxt.Init_msg(Xoh_head_itm__toc.Key_showtoc, "Sh\"ow");
 		fxt.Init_msg(Xoh_head_itm__toc.Key_hidetoc, "Hi'de");
 		fxt.Mgr().Itm__toc().Enabled_y_();
-		fxt.Test_write(String_.Concat_lines_nl_skip_last
+		fxt.Test_write(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <script type='text/javascript'>"
 		, "    var xowa_global_values = {"
@@ -47,7 +51,7 @@ public class Xoh_head_mgr_tst {
 	@Test public void Globals() {
 		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "Jan'uary" );	// add apos to simulate apostrophes in Hebrew months; DATE:2014-07-28
 		fxt.Mgr().Itm__globals().Enabled_y_();
-		fxt.Test_write(String_.Concat_lines_nl_skip_last
+		fxt.Test_write(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.css\" type='text/css'>"
 		, "  <script type='text/javascript'>"
@@ -80,13 +84,13 @@ public class Xoh_head_mgr_tst {
 		));
 		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "January" );	// set it back
 	}
-	@Test  public void Globals_la() { // PURPOSE: la.gfs only specifies "," not "."; make sure both "." and "," show up, or else null ref error during import; DATE:2014-05-13
+	@Test public void Globals_la() { // PURPOSE: la.gfs only specifies "," not "."; make sure both "." and "," show up, or else null ref error during import; DATE:2014-05-13
 		Xol_lang_itm la_lang = fxt.Wiki().Lang();
 		gplx.xowa.langs.numbers.Xol_transform_mgr separators_mgr = la_lang.Num_mgr().Separators_mgr();
 		separators_mgr.Clear();
-		separators_mgr.Set(gplx.xowa.langs.numbers.Xol_num_mgr.Separators_key__grp, Bry_.new_a7(" "));
+		separators_mgr.Set(gplx.xowa.langs.numbers.Xol_num_mgr.Separators_key__grp, BryUtl.NewA7(" "));
 		fxt.Mgr().Itm__globals().Enabled_y_();
-		fxt.Test_write(String_.Concat_lines_nl_skip_last
+		fxt.Test_write(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/xowa/core/core.css\" type='text/css'>"
 		, "  <script type='text/javascript'>"
@@ -122,25 +126,25 @@ public class Xoh_head_mgr_tst {
 class Xoh_head_mgr_fxt {
 	private final Xop_fxt fxt = new Xop_fxt();
 	private Xoh_head_mgr mgr;
-	private Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private BryWtr bfr = BryWtr.NewAndReset(255);
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xoh_head_mgr Mgr() {return mgr;}
-	public Xol_lang_itm Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_or_new(Bry_.new_a7(key));}
+	public Xol_lang_itm Make_lang(String key) {return wiki.Appe().Lang_mgr().Get_by_or_new(BryUtl.NewA7(key));}
 	public void Clear() {
 		fxt.Reset();
 		mgr = fxt.Page().Html_data().Head_mgr();
 		wiki = fxt.Wiki();
 	}
 	public void Init_msg(byte[] key, String val) {
-		wiki.Msg_mgr().Get_or_make(key).Atrs_set(Bry_.new_a7(val), false, false);
+		wiki.Msg_mgr().Get_or_make(key).Atrs_set(BryUtl.NewA7(val), false, false);
 	}
 	public void Init_msg(int id, String val) {
 		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(id);
-		msg_itm.Atrs_set(Bry_.new_a7(val), false, false);
+		msg_itm.Atrs_set(BryUtl.NewA7(val), false, false);
 	}
 	public void Test_write(String expd) {
 		fxt.Page().Page_guid_empty_();
 		mgr.Write(bfr, fxt.App(), wiki, fxt.Page());
-		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd, bfr.ToStrAndClear());
 	}
 }

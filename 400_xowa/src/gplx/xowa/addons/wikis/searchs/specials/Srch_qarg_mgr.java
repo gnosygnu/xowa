@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*;
+package gplx.xowa.addons.wikis.searchs.specials;
 import gplx.core.net.qargs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.addons.wikis.searchs.searchers.*;
 public class Srch_qarg_mgr {
 	public Srch_qarg_mgr(Srch_ns_mgr ns_mgr) {this.ns_mgr = ns_mgr;}
@@ -36,15 +39,15 @@ public class Srch_qarg_mgr {
 		for (int i = 0; i < len; ++i) {
 			Gfo_qarg_itm qarg = qargs_ary[i];
 			byte[] key = qarg.Key_bry();
-			byte tid = qarg_regy.Get_as_byte_or(key, Byte_.Max_value_127);
-			if (tid == Byte_.Max_value_127) {	// unknown qarg; check for ns*; EX: &ns0=1&ns8=1; NOTE: lowercase only
-				if (Bry_.Has_at_bgn(key, Ns_bry))
+			byte tid = qarg_regy.Get_as_byte_or(key, ByteUtl.MaxValue127);
+			if (tid == ByteUtl.MaxValue127) {	// unknown qarg; check for ns*; EX: &ns0=1&ns8=1; NOTE: lowercase only
+				if (BryUtl.HasAtBgn(key, Ns_bry))
 					ns_mgr.Add_by_parse(key, qarg.Val_bry());
 			}
 			else {
 				switch (tid) {
-					case Uid__search: 			this.search_raw 	= Bry_.Replace(qarg.Val_bry(), AsciiByte.Plus, AsciiByte.Space); break;
-					case Uid__slab_idx: 		this.slab_idx 		= Bry_.To_int_or(qarg.Val_bry(), 0); break;
+					case Uid__search: 			this.search_raw 	= BryUtl.Replace(qarg.Val_bry(), AsciiByte.Plus, AsciiByte.Space); break;
+					case Uid__slab_idx: 		this.slab_idx 		= BryUtl.ToIntOr(qarg.Val_bry(), 0); break;
 					case Uid__cancel: 			this.cancel			= qarg.Val_bry(); break;
 					default:					break;
 				}
@@ -52,9 +55,9 @@ public class Srch_qarg_mgr {
 		}
 		ns_mgr.Add_main_if_empty();
 	}
-	private static byte[] Ns_bry = Bry_.new_a7("ns");
+	private static byte[] Ns_bry = BryUtl.NewA7("ns");
 	private static final byte Uid__search = 0, Uid__slab_idx = 1, Uid__cancel = 2;
-	public static final byte[] Bry__slab_idx = Bry_.new_a7("xowa_page_index"), Bry__cancel = Bry_.new_a7("cancel");
+	public static final byte[] Bry__slab_idx = BryUtl.NewA7("xowa_page_index"), Bry__cancel = BryUtl.NewA7("cancel");
 	private static final Hash_adp_bry qarg_regy = Hash_adp_bry.ci_a7()
 	.Add_str_byte("search"				, Uid__search)
 	.Add_bry_byte(Bry__slab_idx			, Uid__slab_idx)

@@ -13,11 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.data.tbls;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.frameworks.objects.Cancelable;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.commons.GfoRandomUtl;
 import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.criterias.*;
+import gplx.core.criterias.*;
 import gplx.dbs.*;
 import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
@@ -51,8 +67,8 @@ public class Xowd_page_tbl implements Db_tbl {
 		fld_score			= flds.AddIntDflt(Fld__page_score__key, -1);	// MW:XOWA
 		if (fld_cat_db_id_name != DbmetaFldItm.KeyNull)
 			fld_cat_db_id		= flds.AddIntDflt(fld_cat_db_id_name, -1);// MW:XOWA
-		flds_select_all	= String_.Ary_wo_null(fld_id, fld_ns, fld_title, fld_touched, fld_is_redirect, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_score, fld_cat_db_id);
-		flds_select_idx	= String_.Ary_wo_null(fld_ns, fld_title, fld_id, fld_len, fld_score);
+		flds_select_all	= StringUtl.AryWoNull(fld_id, fld_ns, fld_title, fld_touched, fld_is_redirect, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_score, fld_cat_db_id);
+		flds_select_idx	= StringUtl.AryWoNull(fld_ns, fld_title, fld_id, fld_len, fld_score);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn()						{return conn;} private final Db_conn conn;
@@ -77,7 +93,7 @@ public class Xowd_page_tbl implements Db_tbl {
 		conn.Meta_fld_assert(tbl_name, Fld__page_score__key		, DbmetaFldType.ItmInt, -1);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.ToFldAry()));}
-	public void Insert(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
+	public void Insert(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, GfoDate modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
 		this.Insert_bgn();
 		this.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, page_is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id, -1);
 		this.Insert_end();
@@ -85,14 +101,14 @@ public class Xowd_page_tbl implements Db_tbl {
 	public void Insert_bgn() {conn.Txn_bgn("page__insert_bulk"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch
-		(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int
+		(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, GfoDate modified_on, int page_len, int random_int
 		, int text_db_id, int html_db_id, int cat_db_id) {
 		stmt_insert.Clear()
 		.Val_int(fld_id, page_id)
 		.Val_int(fld_ns, ns_id)
 		.Val_bry_as_str(fld_title, ttl_wo_ns)
 		.Val_bool_as_byte(fld_is_redirect, page_is_redirect)
-		.Val_str(fld_touched, modified_on.XtoStr_fmt(Page_touched_fmt))
+		.Val_str(fld_touched, modified_on.ToStrFmt(Page_touched_fmt))
 		.Val_int(fld_len, page_len)
 		.Val_int(fld_random_int, random_int)
 		.Val_int(fld_text_db_id, text_db_id)
@@ -108,7 +124,7 @@ public class Xowd_page_tbl implements Db_tbl {
 		.Val_int			(fld_ns				, itm.Ns_id())
 		.Val_bry_as_str		(fld_title			, itm.Ttl_page_db())
 		.Val_bool_as_byte	(fld_is_redirect	, itm.Redirected())
-		.Val_str			(fld_touched		, itm.Modified_on().XtoStr_fmt(Xowd_page_tbl.Page_touched_fmt))
+		.Val_str			(fld_touched		, itm.Modified_on().ToStrFmt(Xowd_page_tbl.Page_touched_fmt))
 		.Val_int			(fld_len			, itm.Text_len())
 		.Val_int			(fld_random_int		, itm.Random_int())
 		.Val_int			(fld_text_db_id		, itm.Text_db_id())
@@ -124,7 +140,7 @@ public class Xowd_page_tbl implements Db_tbl {
 	}
 	public boolean Select_by_ttl(Xowd_page_itm rv, Xoa_ttl ttl) {return Select_by_ttl(rv, ttl.Ns(), ttl.Page_db());}
 	public boolean Select_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {
-		if (stmt_select_all_by_ttl == null) stmt_select_all_by_ttl = conn.Stmt_select(tbl_name, flds, String_.Ary(fld_ns, fld_title));
+		if (stmt_select_all_by_ttl == null) stmt_select_all_by_ttl = conn.Stmt_select(tbl_name, flds, StringUtl.Ary(fld_ns, fld_title));
 		synchronized (thread_lock) { // LOCK:stmt-rls; DATE:2016-07-06
 			Db_rdr rdr = stmt_select_all_by_ttl.Clear().Crt_int(fld_ns, ns.Id()).Crt_bry_as_str(fld_title, ttl).Exec_select__rls_manual();
 			try {
@@ -167,12 +183,12 @@ public class Xowd_page_tbl implements Db_tbl {
 	}
 	public void Select_in__id(Select_in_cbk cbk) {
 		int pos = 0;
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Select_in_wkr wkr = Select_in_wkr.New(bfr, tbl_name, Flds_select_all(), fld_id);
 		while (true) {
 			pos = wkr.Make_sql_or_null(bfr, cbk, pos);
 			if (pos == -1) break;
-			Db_rdr rdr = conn.Stmt_sql(bfr.To_str_and_clear()).Exec_select__rls_auto();
+			Db_rdr rdr = conn.Stmt_sql(bfr.ToStrAndClear()).Exec_select__rls_auto();
 			try {
 				while (rdr.Move_next())
 					cbk.Read_data(rdr);
@@ -203,25 +219,25 @@ public class Xowd_page_tbl implements Db_tbl {
 			if (!hash.Has(p.Id_val()))	// NOTE: must check if file already exists b/c dynamicPageList currently allows dupes; DATE:2013-07-22
 				hash.Add(p.Id_val(), p);
 		}
-		hash.Sort_by(Xowd_page_itm_sorter.IdAsc);	// sort by ID to reduce disk thrashing; DATE:2015-03-31
+		hash.SortBy(Xowd_page_itm_sorter.IdAsc);	// sort by ID to reduce disk thrashing; DATE:2015-03-31
 		Xowd_page_tbl__id wkr = new Xowd_page_tbl__id(rv, hash, show_progress);
 		wkr.Ctor(this, tbl_name, fld_id);
 		wkr.Select_in(cancelable, conn, bgn, end);
 		return true;		
 	}
 	public byte[] Select_random(Xow_ns ns) {// ns should be ns_main
-		int random_int = RandomAdp_.new_().Next(ns.Count());
-		Db_rdr rdr = conn.Stmt_select(tbl_name, String_.Ary(fld_title), fld_random_int, fld_ns)
+		int random_int = GfoRandomUtl.New().Next(ns.Count());
+		Db_rdr rdr = conn.Stmt_select(tbl_name, StringUtl.Ary(fld_title), fld_random_int, fld_ns)
 				.Crt_int(fld_random_int, random_int).Crt_int(fld_ns, ns.Id())
 				.Exec_select__rls_auto();
 		try {return rdr.Move_next() ? rdr.Read_bry_by_str(fld_title) : null;}
 		finally {rdr.Rls();}
 	}
 	public void Select_by_search(Cancelable cancelable, List_adp rv, byte[] search, int results_max) {
-		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
+		if (BryUtl.IsNullOrEmpty(search)) return;	// do not allow empty search
 		Criteria crt = Criteria_.And_many(Db_crt_.New_eq(fld_ns, Xow_ns_.Tid__main), Db_crt_.New_like(fld_title, ""));
 		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_(fld_id, fld_len, fld_ns, fld_title).Where_(crt);	// NOTE: use fields from main index only
-		search = Bry_.Replace(search, AsciiByte.Star, AsciiByte.Percent);
+		search = BryUtl.Replace(search, AsciiByte.Star, AsciiByte.Percent);
 		Db_rdr rdr = conn.Stmt_new(qry).Clear().Crt_int(fld_ns, Xow_ns_.Tid__main).Val_bry_as_str(fld_title, search).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -233,13 +249,13 @@ public class Xowd_page_tbl implements Db_tbl {
 		}	finally {rdr.Rls();}
 	}
 	public void Select_for_search_suggest(Cancelable cancelable, List_adp rslt_list, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
-		String search_bgn = String_.new_u8(key);
-		String search_end = String_.new_u8(gplx.core.intls.Utf8_.Increment_char_at_last_pos(key));
-		String sql = String_.Format
+		String search_bgn = StringUtl.NewU8(key);
+		String search_end = StringUtl.NewU8(Utf8Utl.IncrementCharAtLastPos(key));
+		String sql = StringUtl.Format
 		( "SELECT {0}, {1}, {2}, {3} FROM {4} INDEXED BY {4}__title WHERE {1} = {5} AND {2} BETWEEN '{6}' AND '{7}' ORDER BY {3} DESC LIMIT {8};"
 		, fld_id, fld_ns, fld_title, fld_len
 		, tbl_name
-		, Int_.To_str(ns.Id()), search_bgn, search_end, Int_.To_str(max_results)
+		, IntUtl.ToStr(ns.Id()), search_bgn, search_end, IntUtl.ToStr(max_results)
 		);
 		Db_qry qry = Db_qry_sql.rdr_(sql);
 		Db_rdr rdr = conn.Stmt_new(qry).Exec_select__rls_auto();
@@ -256,11 +272,11 @@ public class Xowd_page_tbl implements Db_tbl {
 	}
 	public int Select_count_all() {return conn.Exec_select_count_as_int(tbl_name, -1);}
 	private Db_rdr Load_ttls_starting_with_rdr(int ns_id, byte[] ttl_frag, boolean include_redirects, int max_results, int min_page_len, int browse_len, boolean fwd, boolean search_suggest) {
-		String ttl_frag_str = String_.new_u8(ttl_frag);
+		String ttl_frag_str = StringUtl.NewU8(ttl_frag);
 		Criteria crt_ttl = fwd ? Db_crt_.New_mte(fld_title, ttl_frag_str) : Db_crt_.New_lt(fld_title, ttl_frag_str);
 		Criteria crt = Criteria_.And_many(Db_crt_.New_eq(fld_ns, ns_id), crt_ttl, Db_crt_.New_mte(fld_len, (Integer)min_page_len));
 		if (!include_redirects)
-			crt = Criteria_.And(crt, Db_crt_.New_eq(fld_is_redirect, Byte_.Zero));
+			crt = Criteria_.And(crt, Db_crt_.New_eq(fld_is_redirect, ByteUtl.Zero));
 		String[] cols = search_suggest 
 			? flds_select_idx 
 			: flds_select_all 
@@ -272,17 +288,17 @@ public class Xowd_page_tbl implements Db_tbl {
 			stmt.Crt_bool_as_byte(fld_is_redirect, include_redirects);
 		return stmt.Exec_select__rls_auto();
 	}
-	public void Select_for_special_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, Int_obj_ref rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
+	public void Select_for_special_all_pages(Cancelable cancelable, List_adp rslt_list, Xowd_page_itm rslt_nxt, Xowd_page_itm rslt_prv, IntRef rslt_count, Xow_ns ns, byte[] key, int max_results, int min_page_len, int browse_len, boolean include_redirects, boolean fetch_prv_item) {
 		Xowd_page_itm nxt_itm = null;
 		int rslt_idx = 0;
-		boolean max_val_check = max_results == Int_.Max_value;
+		boolean max_val_check = max_results == IntUtl.MaxValue;
 		Db_rdr rdr = Load_ttls_starting_with_rdr(ns.Id(), key, include_redirects, max_results, min_page_len, browse_len, true, true);
 		try {
 			while (rdr.Move_next()) {
 				if (cancelable.Canceled()) return;
 				Xowd_page_itm page = new Xowd_page_itm();
 				Read_page__idx(page, rdr);
-				if (max_val_check && !Bry_.Has_at_bgn(page.Ttl_page_db(), key)) break;
+				if (max_val_check && !BryUtl.HasAtBgn(page.Ttl_page_db(), key)) break;
 				nxt_itm = page;
 				if (rslt_idx == max_results) {}	// last item which is not meant for rslts, but only for nxt itm
 				else {
@@ -305,12 +321,12 @@ public class Xowd_page_tbl implements Db_tbl {
 					rslt_prv.Copy(prv_itm);
 				else {	// at beginning of range, so no items found; EX: "Module:A" is search, but 1st Module is "Module:B"
 					if (rslt_list.Len() > 0)	// use 1st item
-						rslt_prv.Copy((Xowd_page_itm)rslt_list.Get_at(0));
+						rslt_prv.Copy((Xowd_page_itm)rslt_list.GetAt(0));
 				}
 			}
 		}
 		finally {rdr.Rls();}
-		rslt_count.Val_(rslt_idx);
+		rslt_count.ValSet(rslt_idx);
 	}
 	public void Read_page__idx(Xowd_page_itm page, Db_rdr rdr) {
 		page.Init_by_load__idx
@@ -330,7 +346,7 @@ public class Xowd_page_tbl implements Db_tbl {
 		( rdr.Read_int(fld_id)
 		, rdr.Read_int(fld_ns)
 		, rdr.Read_bry_by_str(fld_title)
-		, DateAdp_.parse_fmt(rdr.Read_str(fld_touched), Page_touched_fmt)
+		, GfoDateUtl.ParseFmt(rdr.Read_str(fld_touched), Page_touched_fmt)
 		, rdr.Read_bool_by_byte(fld_is_redirect)
 		, page_len
 		, rdr.Read_int(fld_random_int)
@@ -342,39 +358,39 @@ public class Xowd_page_tbl implements Db_tbl {
 		);
 	}
 	public void Update__html_db_id(int page_id, int html_db_id) {
-		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_html_db_id);
+		Db_stmt stmt = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_html_db_id);
 		stmt.Val_int(fld_html_db_id, html_db_id).Crt_int(fld_id, page_id).Exec_update();
 	}
 	public void Update__cat_db_id(int page_id, int cat_db_id) {
-		Db_stmt stmt = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_cat_db_id);
+		Db_stmt stmt = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_cat_db_id);
 		stmt.Val_int(fld_cat_db_id, cat_db_id).Crt_int(fld_id, page_id).Exec_update();
 	}
 	public void Update__ns__ttl(int page_id, int trg_ns, byte[] trg_ttl) {
 		for (int i = 0; i < 2; ++i) {
 			try {
-				conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_ns, fld_title)
+				conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_ns, fld_title)
 					.Val_int(fld_ns, trg_ns).Val_bry_as_str(fld_title, trg_ttl)
 					.Crt_int(fld_id, page_id)
 					.Exec_update();
 				break;
 			} catch (Exception exc) {
-				if (String_.Has(Err_.Message_gplx_full(exc), "columns page_namespace, page_random_int are not unique")) {	// HACK: terrible hack, but moving pages across ns will break UNIQUE index
+				if (StringUtl.Has(ErrUtl.ToStrFull(exc), "columns page_namespace, page_random_int are not unique")) {	// HACK: terrible hack, but moving pages across ns will break UNIQUE index
 					conn.Exec_sql_args("DROP INDEX {0}__name_random;", tbl_name); // is UNIQUE by default
 					conn.Exec_sql_args("CREATE INDEX {0}__name_random ON {0} ({1}, {2});", tbl_name, fld_ns, fld_random_int);
 				}
 			}
 		}
 	}
-	public void Update__redirect__modified(int page_id, boolean redirect, DateAdp modified) {
-		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_is_redirect, fld_touched)
+	public void Update__redirect__modified(int page_id, boolean redirect, GfoDate modified) {
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_is_redirect, fld_touched)
 			.Val_int(fld_is_redirect, redirect ? 1 : 0)
-			.Val_str(fld_touched, modified.XtoStr_fmt(Page_touched_fmt))
+			.Val_str(fld_touched, modified.ToStrFmt(Page_touched_fmt))
 			.Crt_int(fld_id, page_id)
 			.Exec_update()
 			;
 	}
 	public void Update__redirect(int redirect_to_id, int page_id) {
-		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_is_redirect, fld_redirect_id)
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_is_redirect, fld_redirect_id)
 			.Val_int(fld_is_redirect, BoolUtl.YInt)
 			.Val_int(fld_redirect_id, redirect_to_id)
 			.Crt_int(fld_id, page_id)
@@ -389,7 +405,7 @@ public class Xowd_page_tbl implements Db_tbl {
 	}
 	public void Update_page_id(int old_id, int new_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: update page_id started: old_id=~{0} new_id=~{1}", old_id, new_id);
-		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_id).Val_int(fld_id, new_id).Crt_int(fld_id, old_id).Exec_update();
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_id).Val_int(fld_id, new_id).Crt_int(fld_id, old_id).Exec_update();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.page: update page_id done");
 	}
 	public void Create_idx() {

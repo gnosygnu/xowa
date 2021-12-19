@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
-import gplx.Bry_;
-import gplx.core.tests.Gftest;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class XomwMagicWordArray_tst {
 	private final XomwMagicWordArray_fxt fxt = new XomwMagicWordArray_fxt();
@@ -51,15 +51,15 @@ class XomwMagicWordArray_fxt {
 	private final XomwMagicWordMgr magic_word_mgr = new XomwMagicWordMgr();
 	private XomwMagicWordArray magic_word_ary;
 	public void Init__word(boolean cs, String word, String... synonyms) {
-		magic_word_mgr.Add(Bry_.new_u8(word), cs, Bry_.Ary(synonyms));
+		magic_word_mgr.Add(BryUtl.NewU8(word), cs, BryUtl.Ary(synonyms));
 	}
 	public void Init__ary(String... words) {
-		magic_word_ary = new XomwMagicWordArray(magic_word_mgr, Bry_.Ary(words));
+		magic_word_ary = new XomwMagicWordArray(magic_word_mgr, BryUtl.Ary(words));
 	}
 	public void Test__matchVariableStartToEnd(String src, String expd_name, String expd_val) {
 		byte[][] rv = new byte[2][];
-		magic_word_ary.matchVariableStartToEnd(rv, Bry_.new_u8(src));
-		Gftest.Eq__str(expd_name, rv[0], expd_name);
-		Gftest.Eq__str(expd_val , rv[1], expd_val);
+		magic_word_ary.matchVariableStartToEnd(rv, BryUtl.NewU8(src));
+		GfoTstr.Eq(expd_name, rv[0], expd_name);
+		GfoTstr.Eq(expd_val , rv[1], expd_val);
 	}
 }

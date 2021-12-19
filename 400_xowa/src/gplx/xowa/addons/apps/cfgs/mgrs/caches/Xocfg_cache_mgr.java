@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.mgrs.caches;
-import gplx.Gfo_invk;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.String_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
 import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app;
 import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_usr;
@@ -59,7 +59,7 @@ public class Xocfg_cache_mgr {
 		grp.Pub(ctx, val);	// publish first; if fail will throw error
 		grp.Set(ctx, val);
 		if (save) {
-			if (String_.Eq(grp.Dflt(), val))
+			if (StringUtl.Eq(grp.Dflt(), val))
 				db_usr.Del(ctx, key);
 			else
 				db_usr.Set_str(ctx, key, val);
@@ -97,7 +97,7 @@ public class Xocfg_cache_mgr {
 		Xocfg_itm_row meta_itm = db_app.Tbl__itm().Select_by_key_or_null(key);
 		if (meta_itm == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "cfg:itm not found; key=~{0}", key);
-			return new Xocfg_cache_grp(key, or, String_.Cls_val_name);
+			return new Xocfg_cache_grp(key, or, StringUtl.ClsValName);
 		}
 		Xocfg_val_row[] itms = db_usr.Tbl__val().Select_all(meta_itm.Key());
 

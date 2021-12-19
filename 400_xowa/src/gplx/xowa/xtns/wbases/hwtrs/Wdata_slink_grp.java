@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.html.*;
-import gplx.xowa.wikis.domains.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.apps.apis.xowa.html.Xoapi_toggle_itm;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
 class Wdata_slink_grp {
 	public Wdata_slink_grp(int tid, byte[] wiki_name, Xoapi_toggle_itm toggle_itm, Wdata_toc_data toc_data) {
 		this.tid = tid; this.wiki_name = wiki_name; this.toggle_itm = toggle_itm; this.toc_data = toc_data;
@@ -30,7 +35,7 @@ class Wdata_slink_grp {
 			rv[i].Rows().Clear();
 		int list_len = list.Len();
 		for (int i = 0; i < list_len; ++i) {
-			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);				
+			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.GetAt(i);
 			int idx = Idx_by_tid(itm.Domain_info().Domain_type_id());
 			rv[idx].Rows().Add(itm.Site(), itm);
 		}
@@ -59,7 +64,7 @@ class Wdata_slink_grp {
 			case Idx_u: return msgs.Slink_tbl_hdr_u();
 			case Idx_n: return msgs.Slink_tbl_hdr_n();
 			case Idx_x: return msgs.Slink_tbl_hdr_x();
-			default:	throw Err_.new_unhandled(tid);
+			default:	throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public static byte[] Name_by_tid(int idx) {
@@ -73,9 +78,9 @@ class Wdata_slink_grp {
 			case Idx_u: return Xow_domain_tid_.Bry__wikiversity;
 			case Idx_n: return Xow_domain_tid_.Bry__wikinews;
 			case Idx_x: return Name_special;
-			default:	throw Err_.new_unhandled(idx);
+			default:	throw ErrUtl.NewUnhandled(idx);
 		}
 	}
 	public static final int Idx__len = 9, Idx_w = 0, Idx_d = 1, Idx_s = 2, Idx_v = 3, Idx_q = 4, Idx_b = 5, Idx_u = 6, Idx_n = 7, Idx_x = 8;
-	private static final byte[] Name_special = Bry_.new_a7("special");
+	private static final byte[] Name_special = BryUtl.NewA7("special");
 }

@@ -13,15 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.wikis.pages.tags;
+import gplx.types.commons.GfoGuid;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 public class Xopg_tag_wtr_ {
 	public static void Add__baselib(Xopg_tag_mgr head_tags, Io_url http_root) {
 		Io_url css_dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "core");
 		head_tags.Add(Xopg_tag_itm.New_js_file(css_dir.GenSubFil_nest("Namespace_.js")));
 		head_tags.Add(Xopg_tag_itm.New_js_file(css_dir.GenSubFil_nest("String_.js")));
 	}
-	public static void Add__tab_uid(Xopg_tag_mgr head_tags, Guid_adp page_guid) {
-		head_tags.Add(Xopg_tag_itm.New_js_code("xo_page_guid = '" + page_guid.To_str() + "'"));
+	public static void Add__tab_uid(Xopg_tag_mgr head_tags, GfoGuid page_guid) {
+		head_tags.Add(Xopg_tag_itm.New_js_code("xo_page_guid = '" + page_guid.ToStr() + "'"));
 	}
 	public static void Add__xocss(Xopg_tag_mgr head_tags, Io_url http_root) {
 		Io_url css_dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "xocss", "core");

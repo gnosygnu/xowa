@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.domains.crts;
-import gplx.Bry_;
-import gplx.Bry_split_;
-import gplx.Hash_adp_bry;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.langs.Xol_lang_stub;
 import gplx.xowa.langs.Xol_lang_stub_;
 import gplx.xowa.wikis.domains.Xow_domain_tid_;
@@ -35,12 +35,12 @@ class Xow_domain_crt_itm_parser {
 	}
 	public List_adp Parse_as_obj_or_null(byte[] raw, boolean is_ary) {
 		List_adp rv = List_adp_.New();
-		byte[][] line_ary = Bry_split_.Split_lines(raw);
+		byte[][] line_ary = BrySplit.SplitLines(raw);
 		int line_len = line_ary.length;
 		for (int i = 0; i < line_len; ++i) {
 			byte[] line = line_ary[i];
 			if (line.length == 0) continue; // ignore blank lines
-			byte[][] word_ary = Bry_split_.Split(line, AsciiByte.Pipe);
+			byte[][] word_ary = BrySplit.Split(line, AsciiByte.Pipe);
 			int word_len = word_ary.length;
 			if (word_len != 2) return null;	// not A|B; exit now;
 			Xow_domain_crt_itm key_itm = Xow_domain_crt_itm_parser.Instance.Parse_as_in(word_ary[0]);
@@ -63,7 +63,7 @@ class Xow_domain_crt_itm_parser {
 		return in_ary == null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__in(in_ary);
 	}
 	public Xow_domain_crt_itm[] Parse_as_ary(byte[] raw) {
-		byte[][] terms = Bry_split_.Split(raw, AsciiByte.Comma, BoolUtl.Y);
+		byte[][] terms = BrySplit.Split(raw, AsciiByte.Comma, BoolUtl.Y);
 		int len = terms.length;
 		Xow_domain_crt_itm[] rv_ary = new Xow_domain_crt_itm[len];
 		for (int i = 0; i < len; ++i) {
@@ -76,11 +76,11 @@ class Xow_domain_crt_itm_parser {
 	public Xow_domain_crt_itm Parse_itm(byte[] raw) {						
 		Xow_domain_crt_itm rv = (Xow_domain_crt_itm)itm_hash.Get_by_bry(raw); if (rv != null) return rv;	// singleton; EX: <self>, <same_type>, etc..
 		int raw_len = raw.length;
-		if		(Bry_.Has_at_bgn(raw, Wild_lang)) {		// EX: *.wikipedia
+		if		(BryUtl.HasAtBgn(raw, Wild_lang)) {		// EX: *.wikipedia
 			int wiki_tid = Xow_domain_tid_.Get_type_as_tid(raw, Wild_lang.length, raw_len);
 			return wiki_tid == Xow_domain_tid_.Tid__null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__type(wiki_tid);
 		}
-		else if	(Bry_.Has_at_end(raw, Wild_type)) {		// EX: en.*
+		else if	(BryUtl.HasAtEnd(raw, Wild_type)) {		// EX: en.*
 			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(raw, 0, raw_len - Wild_type.length);
 			return lang_itm == null ? Xow_domain_crt_itm_.Null : new Xow_domain_crt_itm__lang(lang_itm.Key());
 		}
@@ -93,6 +93,6 @@ class Xow_domain_crt_itm_parser {
 	.Add_str_obj("<same_lang>"	, Xow_domain_crt_itm__same_lang.Instance)
 	.Add_str_obj("<any>"		, Xow_domain_crt_itm__any_wiki.Instance)
 	;
-	private static final byte[] Wild_lang = Bry_.new_a7("*."), Wild_type = Bry_.new_a7(".*");
+	private static final byte[] Wild_lang = BryUtl.NewA7("*."), Wild_type = BryUtl.NewA7(".*");
         public static final Xow_domain_crt_itm_parser Instance = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
 }

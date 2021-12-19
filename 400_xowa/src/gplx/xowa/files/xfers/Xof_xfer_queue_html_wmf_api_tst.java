@@ -122,7 +122,7 @@ public class Xof_xfer_queue_html_wmf_api_tst {
 				)
 			.tst();
 	}
-	@Test  public void Tilde() {
+	@Test public void Tilde() {
 		fxt	.ini_page_api("en_wiki", "A~.png", "", 2200, 2000);
 		fxt	.Lnki_thumb_("A~.png", 220)
 		.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/a/a5/A%7E.png/220px-A%7E.png", 220, 200))

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.progs.rates; import gplx.*; import gplx.core.*; import gplx.core.progs.*;
+package gplx.core.progs.rates;
 import gplx.core.lists.rings.*;
+import gplx.types.basics.utls.MathUtl;
 public class Gfo_rate_list {
 	private final Ring__long ring;
 	public Gfo_rate_list(int size) {
@@ -27,7 +28,7 @@ public class Gfo_rate_list {
 		ring.Add(data);
 		ring.Add(time);		
 		double new_rate = Cur_calc(data, time);
-		cur_delta = cur_rate == 0 ? new_rate : Math_.Abs_double((new_rate - cur_rate) / cur_rate);
+		cur_delta = cur_rate == 0 ? new_rate : MathUtl.AbsAsDouble((new_rate - cur_rate) / cur_rate);
 		cur_rate = new_rate;
 		return cur_rate;
 	}

@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.ComparerAble;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.ComparerAble;
 import gplx.xowa.*;
 public class Xoctg_catpage_grp {
 	private Xoctg_catpage_itm[] itms = Xoctg_catpage_itm.Ary_empty;
-	private byte[] next_sortkey = Bry_.Empty;
+	private byte[] next_sortkey = BryUtl.Empty;
 	public Xoctg_catpage_grp(byte tid) {this.tid = tid;}
 	public byte					Tid()				{return tid;} private byte tid;						// subc|page|file
 	public int					Count_all()			{return count_all;} private int count_all;			// count of items in entire category; EX: 456
@@ -36,9 +38,9 @@ public class Xoctg_catpage_grp {
 		ArrayUtl.Sort(itms, new Xoctg_catpage_itm_sorter()); // NOTE: need to reorder for page_until b/c ORDER BY DESC
 
 		// make sortkey_handle
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int itms_len = itms.length;
-		byte[] prv_sortkey_handle = Bry_.Empty;
+		byte[] prv_sortkey_handle = BryUtl.Empty;
 		for (int i = 0; i < itms_len; ++i) {
 			Xoctg_catpage_itm itm = itms[i];
 			prv_sortkey_handle = itm.Sortkey_handle_make(tmp_bfr, wiki, prv_sortkey_handle);
@@ -50,6 +52,6 @@ class Xoctg_catpage_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoctg_catpage_itm lhs = (Xoctg_catpage_itm)lhsObj;
 		Xoctg_catpage_itm rhs = (Xoctg_catpage_itm)rhsObj;
-		return Bry_.Compare(lhs.Sortkey_binary(), rhs.Sortkey_binary());
+		return BryUtl.Compare(lhs.Sortkey_binary(), rhs.Sortkey_binary());
 	}
 }

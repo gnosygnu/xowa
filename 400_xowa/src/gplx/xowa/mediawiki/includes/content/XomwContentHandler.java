@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.content; import gplx.*;
-import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.content;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.mediawiki.includes.XomwDefaultSettings;
 /**
 * A content handler knows how do deal with a specific type of content on a wiki
 * page. Content is stored in the database in a serialized form (using a
@@ -274,7 +277,7 @@ public abstract class XomwContentHandler {
 	* @param String $modelId The ID of the content model for which to get a
 	*    handler. Use CONTENT_MODEL_XXX constants.
 	*
-	* @throws MWException For @gplx.Internal protected errors and problems in the configuration.
+	* @throws MWException For public errors and problems in the configuration.
 	* @throws MWUnknownContentModelException If no handler is known for the model ID.
 	* @return ContentHandler The ContentHandler singleton for handling the model given by the ID.
 	*/
@@ -293,7 +296,7 @@ public abstract class XomwContentHandler {
 //				case XomwDefaultSettings.CONTENT_MODEL_JSON:            handler = new XomwWikitextContentHandler(); break;
 //				case XomwDefaultSettings.CONTENT_MODEL_CSS:             handler = new XomwWikitextContentHandler(); break;
 			case XomwDefaultSettings.CONTENT_MODEL_TEXT:            handler = new XomwTextContentHandler(); break;
-			default:                                                throw Err_.new_unhandled_default(modelId);
+			default:                                                throw ErrUtl.NewUnhandled(modelId);
 		}
 
 		XomwContentHandler.handlers[modelId] = handler;
@@ -394,7 +397,7 @@ public abstract class XomwContentHandler {
 //		/**
 //		* Applies transformations on export (returns the blob unchanged per default).
 //		* Subclasses may override this to perform transformations such as conversion
-//		* of legacy formats or filtering of @gplx.Internal protected meta-data.
+//		* of legacy formats or filtering of public meta-data.
 //		*
 //		* @param String $blob The blob to be exported
 //		* @param String|null $format The blob's serialization format

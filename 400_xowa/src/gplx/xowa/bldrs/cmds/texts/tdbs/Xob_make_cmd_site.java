@@ -13,13 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*;
+package gplx.xowa.bldrs.cmds.texts.tdbs;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xob_make_cmd_site implements Io_make_cmd {
-	Xob_xdat_file_wtr fil_wtr; Bry_bfr cur_bfr = Bry_bfr_.New(), reg_bfr = Bry_bfr_.New(), reg_key_0 = Bry_bfr_.New_w_size(512), reg_key_n = Bry_bfr_.New_w_size(512);
-	int make_fil_max = 65 * Io_mgr.Len_kb, fil_count = 0, itm_count = 0, itm_key_end = 0; Io_url reg_url;
+	Xob_xdat_file_wtr fil_wtr; BryWtr cur_bfr = BryWtr.New(), reg_bfr = BryWtr.New(), reg_key_0 = BryWtr.NewWithSize(512), reg_key_n = BryWtr.NewWithSize(512);
+	int make_fil_max = 65 * IoConsts.LenKB, fil_count = 0, itm_count = 0, itm_key_end = 0; Io_url reg_url;
 	public Xob_make_cmd_site(Gfo_usr_dlg usr_dlg, Io_url make_dir, int make_fil_max) {this.usr_dlg = usr_dlg; this.make_dir = make_dir; this.make_fil_max = make_fil_max;} Gfo_usr_dlg usr_dlg;
 	public Io_sort_cmd Make_dir_(Io_url v) {make_dir = v; return this;} Io_url make_dir;
 	public byte Line_dlm() {return line_dlm;} public Xob_make_cmd_site Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = AsciiByte.Null;
@@ -33,54 +40,54 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 		int rdr_key_bgn = rdr.Key_pos_bgn(), rdr_key_end = rdr.Key_pos_end();
 		int rdr_key_len = rdr_key_end - rdr_key_bgn;
 		int rdr_val_bgn = rdr_key_end, /* NOTE: no +1: want to include fld_dlm for below*/ rdr_val_end = rdr.Itm_pos_end() - 1; // -1: ignore rdr_dlm
-		if (Bry_.Match(cur_bfr.Bfr(), 0, itm_key_end, rdr.Bfr(), rdr_key_bgn, rdr_key_end))	// key is same; add rest of line as val
-			cur_bfr.Add_mid(rdr.Bfr(), rdr_val_bgn, rdr_val_end);
+		if (BryLni.Eq(cur_bfr.Bry(), 0, itm_key_end, rdr.Bfr(), rdr_key_bgn, rdr_key_end))	// key is same; add rest of line as val
+			cur_bfr.AddMid(rdr.Bfr(), rdr_val_bgn, rdr_val_end);
 		else {
 			if (fil_wtr.FlushNeeded(cur_bfr.Len() + rdr_key_len)) Flush();
 			byte[] bfr = rdr.Bfr();
 			if (reg_key_0.Len() == 0) {
 				if (cur_bfr.Len() == 0)
-					reg_key_0.Add_mid(bfr, rdr_key_bgn, rdr_key_end);
+					reg_key_0.AddMid(bfr, rdr_key_bgn, rdr_key_end);
 				else
-					reg_key_0.Add_mid(cur_bfr.Bfr(), 0, itm_key_end);
+					reg_key_0.AddMid(cur_bfr.Bry(), 0, itm_key_end);
 			}
 			if (cur_bfr.Len() > 0) {
-				reg_key_n.Clear().Add_mid(cur_bfr.Bfr(), 0, itm_key_end);
-				fil_wtr.Bfr().Add_bfr_and_clear(cur_bfr);
+				reg_key_n.Clear().AddMid(cur_bfr.Bry(), 0, itm_key_end);
+				fil_wtr.Bfr().AddBfrAndClear(cur_bfr);
 				fil_wtr.Add_idx(line_dlm);
 			}
-			cur_bfr.Add_mid(rdr.Bfr(), rdr.Itm_pos_bgn(), rdr.Itm_pos_end() - 1);	// -1 to ignore closing newline
+			cur_bfr.AddMid(rdr.Bfr(), rdr.Itm_pos_bgn(), rdr.Itm_pos_end() - 1);	// -1 to ignore closing newline
 			itm_key_end = rdr_key_len;	// NOTE: must be set last
 			++itm_count;
 		}
 	}
 	public void Do_bry(byte[] bry, int key_bgn, int key_end, int itm_bgn, int itm_end) {
 		int val_bgn = key_end, /* NOTE: no +1: want to include fld_dlm for below*/ val_end = itm_end - 1; // -1: ignore rdr_dlm
-		if (Bry_.Match(cur_bfr.Bfr(), 0, itm_key_end, bry, key_bgn, key_end))	// key is same; add rest of line as val
-			cur_bfr.Add_mid(bry, val_bgn, val_end);
+		if (BryLni.Eq(cur_bfr.Bry(), 0, itm_key_end, bry, key_bgn, key_end))	// key is same; add rest of line as val
+			cur_bfr.AddMid(bry, val_bgn, val_end);
 		else {																		// key changed;
 			int itm_len = itm_end - itm_bgn;
 			if (cur_bfr.Len() > 0) {											// pending itm
-				fil_wtr.Bfr().Add_bfr_and_clear(cur_bfr);							// add cur_bfr to fil_bfr
+				fil_wtr.Bfr().AddBfrAndClear(cur_bfr);							// add cur_bfr to fil_bfr
 				fil_wtr.Add_idx(line_dlm);											// add cur_itm to hdr
 				if (fil_wtr.FlushNeeded(cur_bfr.Len() + itm_len))
 					Flush();
 			}
 			if (reg_key_0.Len() == 0)											// regy.key_0 bfr is empty
-				reg_key_0.Add_mid(bry, key_bgn, key_end);							// update reg_0key_0
-			reg_key_n.Clear().Add_mid(bry, key_bgn, key_end);						// always update reg_key_n
-			if (itm_len > 100 * Io_mgr.Len_mb)
+				reg_key_0.AddMid(bry, key_bgn, key_end);							// update reg_0key_0
+			reg_key_n.Clear().AddMid(bry, key_bgn, key_end);						// always update reg_key_n
+			if (itm_len > 100 * IoConsts.LenMB)
 				Flush_large(bry, itm_bgn, itm_end, itm_len);
 			else {
-				cur_bfr.Add_mid(bry, itm_bgn, itm_end - 1);							// add incoming itm; -1 to ignore closing newline
+				cur_bfr.AddMid(bry, itm_bgn, itm_end - 1);							// add incoming itm; -1 to ignore closing newline
 				itm_key_end = key_end;												// NOTE: must be set last
 				++itm_count;
 			}
 		}
 	}
 	public void Sort_end() {
-		reg_key_n.Clear().Add_mid(cur_bfr.Bfr(), 0, itm_key_end);
-		fil_wtr.Bfr().Add_bfr_and_clear(cur_bfr);
+		reg_key_n.Clear().AddMid(cur_bfr.Bry(), 0, itm_key_end);
+		fil_wtr.Bfr().AddBfrAndClear(cur_bfr);
 		fil_wtr.Add_idx(line_dlm);
 		Flush();
 		Io_mgr.Instance.AppendFilBfr(reg_url, reg_bfr);
@@ -89,7 +96,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 //		private void Flush_large(byte[] bry, int itm_bgn, int itm_end, int itm_len) {
 //			++itm_count;
 //			this.Flush_reg();
-//			fil_wtr.Add_idx_direct(itm_len, Byte_.Zero);
+//			fil_wtr.Add_idx_direct(itm_len, ByteUtl.Zero);
 //			IoStream stream = IoStream_.Null;
 //			try {
 //				stream = Io_mgr.Instance.OpenStreamWrite(fil_wtr.Fil_url());
@@ -103,7 +110,7 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 	private void Flush_large(byte[] bry, int itm_bgn, int itm_end, int itm_len) {
 		++itm_count;
 		this.Flush_reg();
-		fil_wtr.Add_idx_direct(itm_len, Byte_.Zero);
+		fil_wtr.Add_idx_direct(itm_len, ByteUtl.Zero);
 		Io_stream_wtr wtr = null;
 		try {
 			wtr = Io_stream_wtr_.New__raw(fil_wtr.Fil_url());
@@ -122,10 +129,10 @@ public class Xob_make_cmd_site implements Io_make_cmd {
 	}
 	private void Flush_reg() {
 		reg_bfr
-			.Add_int_variable(fil_count++).Add_byte(AsciiByte.Pipe)
-			.Add_bfr_and_preserve(reg_key_0).Add_byte(AsciiByte.Pipe)
-			.Add_bfr_and_preserve(reg_key_n).Add_byte(AsciiByte.Pipe)
-			.Add_int_variable(itm_count).Add_byte(AsciiByte.Nl);
+			.AddIntVariable(fil_count++).AddByte(AsciiByte.Pipe)
+			.AddBfrAndPreserve(reg_key_0).AddByte(AsciiByte.Pipe)
+			.AddBfrAndPreserve(reg_key_n).AddByte(AsciiByte.Pipe)
+			.AddIntVariable(itm_count).AddByte(AsciiByte.Nl);
 		itm_count = 0;
 		reg_key_0.Clear();
 	}

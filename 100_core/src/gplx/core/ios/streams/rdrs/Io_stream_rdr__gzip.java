@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios.streams.rdrs; import gplx.*; import gplx.core.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
+package gplx.core.ios.streams.rdrs;
+import gplx.core.ios.streams.Io_stream_rdr_;
+import gplx.core.ios.streams.Io_stream_tid_;
+import gplx.types.errs.ErrUtl;
 public class Io_stream_rdr__gzip extends Io_stream_rdr__base {
 	@Override public byte Tid() {return Io_stream_tid_.Tid__gzip;}
 		@Override public int Read(byte[] bry, int bgn, int len) {
@@ -28,15 +31,15 @@ public class Io_stream_rdr__gzip extends Io_stream_rdr__base {
 				bgn += read;  // increase bgn by amount read
 				len -= read;  // decrease len by amount read 
 			}
-			return total_read == 0 ? Io_stream_rdr_.Read_done : total_read;	// gzip seems to allow 0 bytes read (bz2 and zip return -1 instead); normalize return to -1;
+			return total_read == 0 ? Io_stream_rdr_.Read_done : total_read;    // gzip seems to allow 0 bytes read (bz2 and zip return -1 instead); normalize return to -1;
 		}
 		catch (Exception e) {
-			throw Err_.new_exc(e, "io", "read failed", "bgn", bgn, "len", len);
+			throw ErrUtl.NewArgs(e, "read failed", "bgn", bgn, "len", len);
 		}
 		}
 	}
 	@Override public java.io.InputStream Wrap_stream(java.io.InputStream stream) {
 		try {return new java.util.zip.GZIPInputStream(stream);}
-		catch (Exception exc) {throw Err_.new_wo_type("failed to open gz stream");}
+		catch (Exception exc) {throw ErrUtl.NewArgs("failed to open gz stream");}
 	}
 	}

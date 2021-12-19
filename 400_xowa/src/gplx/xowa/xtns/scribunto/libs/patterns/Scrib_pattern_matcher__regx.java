@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs.patterns; import gplx.*;
+package gplx.xowa.xtns.scribunto.libs.patterns;
+import gplx.types.basics.strings.unicodes.Ustring;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.xtns.scribunto.libs.*;
-import gplx.objects.strings.unicodes.*;
 import gplx.langs.regxs.*;
 class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final byte[] page_url;
 	public Scrib_pattern_matcher__regx(byte[] page_url) {
@@ -45,7 +47,7 @@ class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final
 		rslts = regx_converter.Adjust_balanced(rslts);
 
 		// replace results
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int rslts_len = rslts.length;
 		int text_pos = 0;
 		for (int i = 0; i < rslts_len; i++) {
@@ -53,12 +55,12 @@ class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final
 
 			// add text up to find.bgn
 			Regx_match rslt = rslts[i];
-			tmp_bfr.Add_str_u8(String_.Mid(src_str, text_pos, rslt.Find_bgn()));	// NOTE: regx returns char text_pos (not bry); must add as String, not bry; DATE:2013-07-17
+			tmp_bfr.AddStrU8(StringUtl.Mid(src_str, text_pos, rslt.Find_bgn()));	// NOTE: regx returns char text_pos (not bry); must add as String, not bry; DATE:2013-07-17
 			
 			// replace result
 			if (!gsub_mgr.Exec_repl_itm(tmp_bfr, regx_converter, rslt)) {
 				// will be false when gsub_proc returns nothing; PAGE:en.d:tracer PAGE:en.d:שלום DATE:2017-04-22;
-				tmp_bfr.Add_str_u8(String_.Mid(src_str, rslt.Find_bgn(), rslt.Find_end()));
+				tmp_bfr.AddStrU8(StringUtl.Mid(src_str, rslt.Find_bgn(), rslt.Find_end()));
 			}
 
 			// update
@@ -67,9 +69,9 @@ class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final
 		}
 
 		// add rest of String
-		int text_len = String_.Len(src_str);
+		int text_len = StringUtl.Len(src_str);
 		if (text_pos < text_len)
-			tmp_bfr.Add_str_u8(String_.Mid(src_str, text_pos, text_len));			// NOTE: regx returns char text_pos (not bry); must add as String, not bry; DATE:2013-07-17
-		return tmp_bfr.To_str_and_clear();
+			tmp_bfr.AddStrU8(StringUtl.Mid(src_str, text_pos, text_len));			// NOTE: regx returns char text_pos (not bry); must add as String, not bry; DATE:2013-07-17
+		return tmp_bfr.ToStrAndClear();
 	}
 }

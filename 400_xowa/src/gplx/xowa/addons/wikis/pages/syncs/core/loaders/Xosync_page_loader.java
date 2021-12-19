@@ -14,20 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.pages.syncs.core.loaders;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Io_url;
-import gplx.String_;
-import gplx.core.brys.Bry_err_wkr;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.rdrs.BryRdrErrWkr;
 import gplx.core.btries.Btrie_rv;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.Gfh_tag_;
 import gplx.langs.htmls.docs.Gfh_atr;
 import gplx.langs.htmls.docs.Gfh_tag;
 import gplx.langs.htmls.docs.Gfh_tag_rdr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.Xosync_hdoc_parser;
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.Xosync_img_src_parser;
@@ -44,15 +43,15 @@ import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xosync_page_loader {
 	private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	private final Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
-	private final Bry_err_wkr err_wkr = new Bry_err_wkr();
+	private final BryRdrErrWkr err_wkr = new BryRdrErrWkr();
 	private final Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public byte[] Parse(Xow_wiki wiki, Xoh_page hpg, byte[] src) {
 		// init hctx, tag_rdr, err_wkr
 		int src_len = src.length;
 		hctx.Init_by_page(wiki, hpg);
 		tag_rdr.Init(hpg.Url_bry_safe(), src, 0, src_len);
-		err_wkr.Init_by_page(String_.new_u8(hpg.Url_bry_safe()), src);
+		err_wkr.InitByPage(StringUtl.NewU8(hpg.Url_bry_safe()), src);
 
 		// loop for all <img>
 		int pos = 0;
@@ -63,12 +62,12 @@ public class Xosync_page_loader {
 
 			// none found; add and exit
 			if (img_tag.Name_id() == Gfh_tag_.Id__eos) {					
-				tmp_bfr.Add_mid(src, pos, src_len); // add bytes between img_end and prv_pos
+				tmp_bfr.AddMid(src, pos, src_len); // add bytes between img_end and prv_pos
 				break;
 			}
 
 			// add bytes between prv_pos and img_bgn
-			tmp_bfr.Add_mid(src, pos, img_tag.Src_bgn());
+			tmp_bfr.AddMid(src, pos, img_tag.Src_bgn());
 
 			// do simple replace for @src
 			Gfh_atr img_src_atr = img_tag.Atrs__get_by_or_fail(Gfh_atr_.Bry__src);
@@ -87,13 +86,13 @@ public class Xosync_page_loader {
 		}
 
 		// overwrite html
-		src = tmp_bfr.To_bry_and_clear();
+		src = tmp_bfr.ToBryAndClear();
 		hpg.Db().Html().Html_bry_(src);
 		return src;
 	}
 	private Xof_fsdb_itm Add_img(Xow_wiki wiki, Xoh_page hpg, Gfh_tag img_tag, Gfh_atr img_src_atr, byte[] img_src_val, byte path_tid, byte[] src_find, byte[] src_repl) {
 		// replace "xowa:/file" with "file:////xowa/file/"
-		img_src_val = Bry_.Replace(img_src_val, src_find, src_repl);
+		img_src_val = BryUtlByWtr.Replace(img_src_val, src_find, src_repl);
 
 		// parse src
 		img_src_parser.Parse(err_wkr, wiki.Domain_bry(), img_src_atr.Src(), img_src_atr.Val_bgn(), img_src_atr.Val_end());

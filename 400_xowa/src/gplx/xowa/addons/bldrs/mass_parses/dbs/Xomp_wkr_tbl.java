@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs;
 import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
 public class Xomp_wkr_tbl implements Db_tbl {
 	private final String fld_wkr_uid, fld_wkr_url, fld_wkr_status, fld_wkr_status_time, fld_wkr_exec_count, fld_wkr_exec_time;
 	private final Db_conn conn;
@@ -56,7 +60,7 @@ public class Xomp_wkr_tbl implements Db_tbl {
 	private void Insert(Db_stmt stmt, int wkr_uid, String wkr_url) {
 		stmt.Clear()
 			.Val_int(fld_wkr_uid, wkr_uid)
-			.Val_str(fld_wkr_url, wkr_url).Val_int(fld_wkr_status, Status__running).Val_str(fld_wkr_status_time, Datetime_now.Get_force().XtoStr_fmt_yyyyMMdd_HHmmss())
+			.Val_str(fld_wkr_url, wkr_url).Val_int(fld_wkr_status, Status__running).Val_str(fld_wkr_status_time, GfoDateNow.GetForce().ToStrFmt_yyyyMMdd_HHmmss())
 			.Val_int(fld_wkr_exec_count, 0).Val_int(fld_wkr_exec_time, 0)
 			.Exec_insert();
 	}
@@ -69,14 +73,14 @@ public class Xomp_wkr_tbl implements Db_tbl {
 					break;
 				}
 				try {
-					conn.Stmt_update(tbl_name, String_.Ary(fld_wkr_uid), fld_wkr_status, fld_wkr_status_time, fld_wkr_exec_count, fld_wkr_exec_time).Clear()
-						.Val_int(fld_wkr_status, Status__running).Val_str(fld_wkr_status_time, Datetime_now.Get_force().XtoStr_fmt_yyyyMMdd_HHmmss())
+					conn.Stmt_update(tbl_name, StringUtl.Ary(fld_wkr_uid), fld_wkr_status, fld_wkr_status_time, fld_wkr_exec_count, fld_wkr_exec_time).Clear()
+						.Val_int(fld_wkr_status, Status__running).Val_str(fld_wkr_status_time, GfoDateNow.GetForce().ToStrFmt_yyyyMMdd_HHmmss())
 						.Val_int(fld_wkr_exec_count, wkr_exec_count).Val_int(fld_wkr_exec_time, (int)(wkr_exec_time / 1000))
 						.Crt_int(fld_wkr_uid, wkr_uid)
 						.Exec_update();
 					break;	// exit loop
 				} catch (Exception e) {
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "unable to update status; try=~{0} err=~{1}", attempts, Err_.Message_gplx_log(e));
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "unable to update status; try=~{0} err=~{1}", attempts, ErrUtl.ToStrLog(e));
 					gplx.core.threads.Thread_adp_.Sleep(10000);
 					continue;
 				}
@@ -85,8 +89,8 @@ public class Xomp_wkr_tbl implements Db_tbl {
 	}
 	public void Update_status(int wkr_uid, int status) {
 		synchronized (thread_lock) {	// LOCK:wkr_tbl is shared by multiple threads
-			conn.Stmt_update(tbl_name, String_.Ary(fld_wkr_uid), fld_wkr_status, fld_wkr_status_time).Clear()
-				.Val_int(fld_wkr_status, status).Val_str(fld_wkr_status_time, Datetime_now.Get_force().XtoStr_fmt_yyyyMMdd_HHmmss())
+			conn.Stmt_update(tbl_name, StringUtl.Ary(fld_wkr_uid), fld_wkr_status, fld_wkr_status_time).Clear()
+				.Val_int(fld_wkr_status, status).Val_str(fld_wkr_status_time, GfoDateNow.GetForce().ToStrFmt_yyyyMMdd_HHmmss())
 				.Crt_int(fld_wkr_uid, wkr_uid)
 				.Exec_update();
 		}

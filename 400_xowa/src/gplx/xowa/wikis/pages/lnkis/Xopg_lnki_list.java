@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
-import gplx.core.strings.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.wikis.pages.lnkis;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.xowa.*;
+import gplx.xowa.wikis.nss.*;
 public class Xopg_lnki_list {
 	private final List_adp list = List_adp_.New();
 	private int lnki_idx;
@@ -24,7 +29,7 @@ public class Xopg_lnki_list {
 	}
 	public boolean			Disabled() {return disabled;} private boolean disabled; public Xopg_lnki_list Disabled_(boolean v) {this.disabled = v; return this;} 
 	public int				Len() {return list.Len();}
-	public Xopg_lnki_itm	Get_at(int i) {return (Xopg_lnki_itm)list.Get_at(i);}
+	public Xopg_lnki_itm	Get_at(int i) {return (Xopg_lnki_itm)list.GetAt(i);}
 
 	public void Add_direct(Xopg_lnki_itm lnki) {
 		list.Add(lnki); // add lnki directly to list without changing html_uid; needed for hdumps which call "Fill_page" to transfer from Xoh_page to Xoae_page
@@ -52,7 +57,7 @@ public class Xopg_lnki_list {
 		String_bldr sb = String_bldr_.new_();
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			sb.Add(Object_.Xto_str_strict_or_null_mark(list.Get_at(i))).Add_char_nl();
+			sb.Add(ObjectUtl.ToStrOrNullMark(list.GetAt(i))).AddCharNl();
 		}
 		return sb.toString();
 	}

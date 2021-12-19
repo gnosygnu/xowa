@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.xfers;
+import gplx.libs.files.Io_mgr;
+import gplx.xowa.files.*;
 import org.junit.*;
-import gplx.xowa.files.*; import gplx.xowa.files.imgs.*;
+import gplx.xowa.files.imgs.*;
 public class Xof_xfer_queue_html_cases_tst {
 	Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
 	@Before public void init() {
@@ -240,7 +242,7 @@ public class Xof_xfer_queue_html_cases_tst {
 		.tst();
 		fxt.Src_en_wiki_repo().Ext_rules().Get_or_new(Xof_ext_.Bry_ogv).View_max_(-1);
 	}
-	@Test  public void Webm() {
+	@Test public void Webm() {
 		fxt	.ini_page_create_commons			("File:A.webm");
 		fxt	.Lnki_thumb_("A.webm", 220)
 		.Src(	fxt.ogg_("mem/src/commons.wikimedia.org/3/34/A.webm")

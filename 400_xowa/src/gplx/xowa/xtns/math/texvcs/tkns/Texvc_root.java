@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
-import gplx.core.primitives.*;
+package gplx.xowa.xtns.math.texvcs.tkns;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.arrays.IntAry;
 public class Texvc_root implements Texvc_tkn {
 	private final Texvc_regy_tkn regy_tkn;
 	private final Texvc_regy_nde regy_nde = new Texvc_regy_nde();
@@ -29,7 +31,7 @@ public class Texvc_root implements Texvc_tkn {
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;
 	public void Src_end_(int v) {this.src_end = v;}
-	public Texvc_tkn Init(Texvc_root root, int tid, int uid, int src_bgn, int src_end) {throw Err_.new_unsupported();}
+	public Texvc_tkn Init(Texvc_root root, int tid, int uid, int src_bgn, int src_end) {throw ErrUtl.NewUnsupported();}
 	public Texvc_tkn Init_as_root(Texvc_tkn_mkr tkn_mkr, byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.src_bgn = src_bgn; this.src_end = src_end;
 		int expd_len = (src_end - src_bgn) / 5;	// estimate # of tkns by dividing src_len by 5
@@ -62,12 +64,12 @@ public class Texvc_root implements Texvc_tkn {
 		regy_sub.Add(new_owner_uid, uid);
 	}
 	public void Regy__take_from_root_end(int uid) {
-		Int_ary root_subs = regy_sub.Get_subs_or_fail(Uid__root);
-		int uid_idx = root_subs.Idx_of(uid); if (uid_idx == Int_ary.Not_found) throw Err_.new_("math.texvc", "unable to find tkn in root", "uid", uid);
+		IntAry root_subs = regy_sub.Get_subs_or_fail(Uid__root);
+		int uid_idx = root_subs.IdxOf(uid); if (uid_idx == IntAry.NotFound) throw ErrUtl.NewArgs("unable to find tkn in root", "uid", uid);
 		int subs_len = root_subs.Len();
 		int bgn_idx = uid_idx + 1;	// +1 to skip current uid_idx
 		for (int i = bgn_idx; i < subs_len; ++i) {
-			int sub_uid = root_subs.Get_at_or_fail(bgn_idx);	// NOTE: use bgn_idx, not i, b/c move will shorten subs
+			int sub_uid = root_subs.GetAt(bgn_idx);	// NOTE: use bgn_idx, not i, b/c move will shorten subs
 			Regy__move(sub_uid, uid);
 		}
 	}
@@ -75,16 +77,16 @@ public class Texvc_root implements Texvc_tkn {
 		if (regy_tkn.Update_end(uid, end))
 			regy_nde.Update_end(uid, end);
 	}
-	public String Print_tex_str(Bry_bfr bfr) {Print_tex_bry(bfr, src, 0); return bfr.To_str_and_clear();}
-	public void Print_tex_bry(Bry_bfr bfr, byte[] src, int indent) {
+	public String Print_tex_str(BryWtr bfr) {Print_tex_bry(bfr, src, 0); return bfr.ToStrAndClear();}
+	public void Print_tex_bry(BryWtr bfr, byte[] src, int indent) {
 		int subs_len = Subs__len();
 		for (int i = 0; i < subs_len; ++i) {
 			Texvc_tkn sub_tkn = Subs__get_at(i);
 			sub_tkn.Print_tex_bry(bfr, src, indent + 1);
 		}
 	}
-	public String Print_dbg_str(Bry_bfr bfr) {Print_dbg_bry(bfr, 0); return bfr.To_str_and_clear();}
-	public void Print_dbg_bry(Bry_bfr bfr, int indent) {
+	public String Print_dbg_str(BryWtr bfr) {Print_dbg_bry(bfr, 0); return bfr.ToStrAndClear();}
+	public void Print_dbg_bry(BryWtr bfr, int indent) {
 		int len = this.Subs__len();
 		for (int i = 0; i < len; ++i) {
 			Texvc_tkn sub = this.Subs__get_at(i);

@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.cfgs;
 
-import gplx.Err_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_nde;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.Xowe_wiki;
@@ -44,7 +44,7 @@ public class ScribCfgResolverApp implements ScribCfgResolver, CfgResolver {
         Load(appNde, appInvokeArgs);
     }
     @Override public ScribCfg Resolve(byte[] page, byte[] mod, byte[] func) {
-        throw Err_.new_unimplemented_w_msg("appResolver should not be called; only wikiResolver");
+        throw ErrUtl.NewUnimplemented("appResolver should not be called; only wikiResolver");
     }
     @Override public void Load(Json_nde owner, ScribCfg ownerFallback) {
         ScribCfgResolverUtil.LoadNode(owner, ownerFallback, "wikis", wikis, this, ScribCfgResolverWiki.PROTOTYPE);
@@ -60,7 +60,7 @@ public class ScribCfgResolverApp implements ScribCfgResolver, CfgResolver {
         byte[] key = wiki.Domain_bry();
         ScribCfgResolverWiki wikiScope = (ScribCfgResolverWiki)wikis.GetByOrNull(key);
         if (wikiScope == null) { // no defined cfg; create defailt
-            wikiScope = new ScribCfgResolverWiki(String_.new_u8(key));
+            wikiScope = new ScribCfgResolverWiki(StringUtl.NewU8(key));
             wikis.Add(key, wikiScope); // cache it for future
         }
         wiki.Parser_mgr().Scrib().CfgResolverSet(wikiScope);

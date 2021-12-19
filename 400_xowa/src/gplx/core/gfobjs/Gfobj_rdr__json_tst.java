@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.langs.jsons.*;
+package gplx.core.gfobjs;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.*;
 public class Gfobj_rdr__json_tst {
 	private final Gfobj_wtr__json_fxt fxt = new Gfobj_wtr__json_fxt();
 	@Test 	public void Type() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'k1':true"
 		, ", 'k2':123"
 		, ", 'k3':9876543210"
@@ -37,8 +37,8 @@ public class Gfobj_rdr__json_tst {
 		, fxt.Make__fld_str		("k6", "abc")
 		));
 	}
-	@Test  public void Nested() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+	@Test public void Nested() {
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "{ 'a1':'1a'"
 		, ", 'a2':"
 		, "  { 'b1':'1b'"
@@ -59,8 +59,8 @@ public class Gfobj_rdr__json_tst {
 		, fxt.Make__fld_ary		("a3", 1, 2, 3)
 		));
 	}
-	@Test  public void Array() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+	@Test public void Array() {
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "["
 		, "  [1, 2, 3]"
 		, ", ['a', 'b', 'c']"

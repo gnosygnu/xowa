@@ -13,10 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.*;
-import gplx.core.threads.Thread_adp_;
-
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.evts.Gfo_evt_mgr_owner;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValHash;
 import org.eclipse.swt.*;
 import org.eclipse.swt.custom.*;
 import org.eclipse.swt.events.*;
@@ -38,7 +46,7 @@ import gplx.gfui.kits.core.Swt_kit;
 public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo_evt_mgr_owner {
 	private GfuiInvkCmd cmd_sync;
 //	private GfuiInvkCmd cmd_async;	// NOTE: async needed for some actions like responding to key_down and calling .setSelection; else app hangs; DATE:2014-04-30 
-	public Swt_tab_mgr(Swt_kit kit, Swt_control owner_control, Keyval_hash ctorArgs) {
+	public Swt_tab_mgr(Swt_kit kit, Swt_control owner_control, KeyValHash ctorArgs) {
 		this.kit = kit;
 		tab_folder = new CTabFolder(owner_control.Under_composite(), SWT.BORDER);
 		tab_folder.setBorderVisible(false);
@@ -125,7 +133,7 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 		Gfui_tab_itm_data trg_tab_data = Get_tab_data(trg_tab_itm);
 		int src_tab_idx = src_tab_data.Idx(), trg_tab_idx = trg_tab_data.Idx();
 		tab_folder.setSelection(trg_tab_itm);
-		Gfo_evt_mgr_.Pub_vals(this, Gfui_tab_mgr.Evt_tab_switched, Keyval_.new_("src", src_tab_data.Key()), Keyval_.new_("trg", trg_tab_data.Key()));
+		Gfo_evt_mgr_.Pub_vals(this, Gfui_tab_mgr.Evt_tab_switched, KeyVal.NewStr("src", src_tab_data.Key()), KeyVal.NewStr("trg", trg_tab_data.Key()));
 		return src_tab_idx < trg_tab_idx;
 	}
 	public void Tabs_select_by_itm(CTabItem itm) {
@@ -159,8 +167,8 @@ public class Swt_tab_mgr implements Gxw_tab_mgr, Swt_control, FocusListener, Gfo
 	@Override public void TextVal_set(String v) {}
 	@Override public void EnableDoubleBuffering() {}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(String_.Eq(k, Invk_tabs_select_by_idx_swt))	Tabs_select_by_idx_swt(m.ReadInt("v"));
-		else if	(String_.Eq(k, Invk_tabs_select_by_itm_swt))	Tabs_select_by_itm_swt((CTabItem)m.ReadObj("v", null));
+		if		(StringUtl.Eq(k, Invk_tabs_select_by_idx_swt))	Tabs_select_by_idx_swt(m.ReadInt("v"));
+		else if	(StringUtl.Eq(k, Invk_tabs_select_by_itm_swt))	Tabs_select_by_itm_swt((CTabItem)m.ReadObj("v", null));
 		else												return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -254,7 +262,7 @@ class Swt_tab_mgr_lnr_drag_drop implements Listener {
 				int prv_mouse_x = prv_mouse == null ? 0 : prv_mouse.x;
 				prv_mouse = cur_mouse;				// set prv_mouse now b/c of early return below; note that cur_mouse_x and prv_mouse_x are cached above
 				if (	dead_zone != null											// dead_zone exists
-					&&	Int_.Between(cur_mouse_x, dead_zone.x, dead_zone.y)) {		// mouse is in dead_zone
+					&&	IntUtl.Between(cur_mouse_x, dead_zone.x, dead_zone.y)) {		// mouse is in dead_zone
 					int drag_idx = Swt_tab_mgr.Get_tab_data(drag_itm).Idx();
 					int curr_idx = Swt_tab_mgr.Get_tab_data(curr_itm).Idx();
 					if 		(drag_idx > curr_idx && cur_mouse_x < prv_mouse_x) {}	// drag_itm is right of curr_itm, but mouse is moving  left (direction reversed); cancel

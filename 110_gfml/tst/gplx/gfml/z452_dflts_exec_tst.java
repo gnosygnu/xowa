@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class z452_dflts_exec_tst {
 	@Before public void setup() {
@@ -78,11 +79,11 @@ public class z452_dflts_exec_tst {
 		GfmlFld subFld = type.SubFlds().Get_by(subFldKey);
 		GfmlTkn defaultTkn = GfmlTkn_.as_(subFld.DefaultTkn());
 		String actlDefaultVal = defaultTkn == null || defaultTkn == GfmlTkn_.Null ? null : defaultTkn.Val();
-		Tfds.Eq(expdDefaultVal, actlDefaultVal);
+		GfoTstr.EqObj(expdDefaultVal, actlDefaultVal);
 	}
 	void tst_SubFldExists(GfmlType type, String subFldKey, boolean expd) {
 		GfmlFld subFld = type.SubFlds().Get_by(subFldKey);
-		Tfds.Eq(expd, subFld != null);
+		GfoTstr.EqObj(expd, subFld != null);
 	}
 	GfmlType make_(String key, String name, String... atrs) {
 		GfmlTypeMakr typeMakr = GfmlTypeMakr.new_();

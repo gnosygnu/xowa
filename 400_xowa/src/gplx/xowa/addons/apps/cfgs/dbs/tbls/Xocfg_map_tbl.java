@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*;
+package gplx.xowa.addons.apps.cfgs.dbs.tbls;
 import gplx.dbs.*; import gplx.dbs.utls.*;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xocfg_map_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__map_src, fld__map_trg, fld__map_sort;
@@ -34,7 +36,7 @@ public class Xocfg_map_tbl implements Db_tbl {
 		));
 	}
 	public void Upsert(int map_src, int map_trg, int map_sort) {
-		Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__map_src, fld__map_trg), map_src, map_trg, map_sort);
+		Db_tbl__crud_.Upsert(conn, tbl_name, flds, StringUtl.Ary(fld__map_src, fld__map_trg), map_src, map_trg, map_sort);
 	}
 	public int Select_sort_or_next(int src_id, int trg_id) {
 		// select map_sort by map_src,map_trg
@@ -51,7 +53,7 @@ public class Xocfg_map_tbl implements Db_tbl {
 		try {
 			if (!rdr.Move_next()) return 0;
 			Object max = rdr.Read_obj(fld__map_sort);
-			return max == null ? 0 : Int_.Cast(max) + 10;
+			return max == null ? 0 : IntUtl.Cast(max) + 10;
 		}
 		finally {rdr.Rls();}
 	}

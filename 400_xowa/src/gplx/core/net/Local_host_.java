@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
+package gplx.core.net;
+import gplx.types.errs.ErrUtl;
 public class Local_host_ {
 	public static String Ip_address() {
 		try {return java.net.InetAddress.getLocalHost().getHostAddress();}	
-		catch (Exception e) {throw Err_.new_exc(e, "net", "ip_address failed");}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "ip_address failed");}
 	}
 }

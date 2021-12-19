@@ -13,13 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.errs; import gplx.*;
+package gplx.xowa.xtns.scribunto.errs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.IntUtl;
 class Scrib_err_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private int key_id = 0;
-	private static final byte[] Key_prefix = Bry_.new_a7("scrib_err_");
+	private static final byte[] Key_prefix = BryUtl.NewA7("scrib_err_");
 	private Scrib_err_cmd Set(byte[] key) {
-		if (key == null) Bry_.Add(Key_prefix, Bry_.new_by_int(key_id++));
+		if (key == null) BryUtl.Add(Key_prefix, BryUtl.NewByInt(key_id++));
 		Scrib_err_cmd rv = new Scrib_err_cmd(key);
 		hash.AddIfDupeUse1st(key, rv);
 		return rv;
@@ -31,7 +39,7 @@ class Scrib_err_mgr implements Gfo_invk {
 	public void Process(Scrib_err_data err) {
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Scrib_err_cmd itm = (Scrib_err_cmd)hash.Get_at(i);
+			Scrib_err_cmd itm = (Scrib_err_cmd)hash.GetAt(i);
 			if (itm.Warn_disabled(err)) {
 				// log
 			}
@@ -58,7 +66,7 @@ class Scrib_err_data {
 class Scrib_err_cmd implements Gfo_invk {
 	public Scrib_err_cmd(byte[] key) {this.key = key;}
 	public byte[] Key() {return key;} private byte[] key;
-	public int Fail_after() {return fail_after;} private int fail_after = Int_.Max_value;
+	public int Fail_after() {return fail_after;} private int fail_after = IntUtl.MaxValue;
 	public int Warn_every() {return warn_every;} private int warn_every = 10000;	// worse case of 400 warnings for 4 million pages
 	public int Summary_ttls_len() {return summary_ttls_len;} private int summary_ttls_len = 8;
 	public String Warn_disabled_if() {return warn_disabled_if;} private String warn_disabled_if;

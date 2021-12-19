@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-public class Db_null implements gplx.core.brys.Bfr_arg {
-	public void Bfr_arg__add(Bry_bfr bfr) {bfr.Add_str_a7(Null_str);}
+package gplx.dbs;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.BryWtr;
+public class Db_null implements BryBfrArg {
+	public void AddToBfr(BryWtr bfr) {bfr.AddStrA7(Null_str);}
 	@Override public String toString() {return Null_str;}
 	public static final String Null_str = "NULL";
         public static final Db_null Instance = new Db_null(); Db_null() {}

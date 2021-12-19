@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls;
+import gplx.libs.files.Io_url;
 import gplx.langs.htmls.encoders.*;
 public class Xoh_cfg_file {
 	public Xoh_cfg_file(Gfo_url_encoder url_encoder, Io_url xowa_dir) {

@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.hwtrs;
-import gplx.Bry_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Hash_adp_bry;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
 import gplx.Yn;
-import gplx.core.primitives.Int_obj_ref;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.xtns.wbases.Wdata_doc;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
@@ -37,17 +37,17 @@ import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
 import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
 public class Wdata_lbl_mgr {
 	private Hash_adp_bry ttl_hash = Hash_adp_bry.ci_a7();
-	private Hash_adp qid_hash = Hash_adp_.New(), pid_hash = Hash_adp_.New(); private Int_obj_ref int_hash_key = Int_obj_ref.New_neg1();
+	private Hash_adp qid_hash = Hash_adp_.New(), pid_hash = Hash_adp_.New(); private IntRef int_hash_key = IntRef.NewNeg1();
 	private Wdata_visitor__lbl_gatherer lbl_gatherer;
 	public Wdata_lbl_mgr() {
 		lbl_gatherer = new Wdata_visitor__lbl_gatherer(this);
 	}
 	public void Clear() {ttl_hash.Clear(); qid_hash.Clear(); pid_hash.Clear(); queue.Clear();}
 	public List_adp Queue() {return queue;} private List_adp queue = List_adp_.New();
-	@gplx.Internal protected void Wkr_(Wdata_lbl_wkr v) {this.wkr = v;} private Wdata_lbl_wkr wkr;
+	public void Wkr_(Wdata_lbl_wkr v) {this.wkr = v;} private Wdata_lbl_wkr wkr;
 	public Wdata_lbl_itm Get_itm__ttl(byte[] ttl) {
 		Wdata_lbl_itm rv = (Wdata_lbl_itm)ttl_hash.GetByOrNull(ttl);
-		if (rv == null) Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; ttl=~{0}", String_.new_u8(ttl));	// NOTE: should not happen
+		if (rv == null) Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; ttl=~{0}", StringUtl.NewU8(ttl));	// NOTE: should not happen
 		return rv;
 	}
 	public byte[] Get_text__ttl(byte[] ttl, byte[] or) {
@@ -58,14 +58,14 @@ public class Wdata_lbl_mgr {
 	public byte[] Get_text__pid(int id) {return Get_text(BoolUtl.Y, id);}
 	private byte[] Get_text(boolean is_pid, int id) {
 		Hash_adp hash = is_pid ? pid_hash : qid_hash;
-		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.GetByOrNull(int_hash_key.Val_(id));
+		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.GetByOrNull(int_hash_key.ValSet(id));
 		if (rv_itm != null) return rv_itm.Text();	// found; return lbl
 		Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; is_pid=~{0} id=~{1}", Yn.To_str(is_pid), id);	// NOTE: should not happen
 		return Wdata_lbl_itm.Make_ttl(is_pid, id);	// missing; return ttl; EX: "Property:P1", "Q1";
 	}
 	public void Queue_if_missing__ttl(byte[] ttl) {Queue_if_missing__ttl(ttl, BoolUtl.N);}
 	public void Queue_if_missing__ttl(byte[] ttl, boolean get_en) {
-		if (ttl == null) {Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown href; href=~{0}", String_.new_u8(ttl)); return;}
+		if (ttl == null) {Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown href; href=~{0}", StringUtl.NewU8(ttl)); return;}
 		boolean has = ttl_hash.Has(ttl);
 		if (!has) Queue_add(qid_hash, BoolUtl.N, Qid_int(ttl), get_en);
 	}
@@ -73,19 +73,19 @@ public class Wdata_lbl_mgr {
 	public void Queue_if_missing__pid(int id) {Queue_if_missing(BoolUtl.Y, id);}
 	private void Queue_if_missing(boolean is_pid, int id) {
 		Hash_adp hash = is_pid ? pid_hash : qid_hash;
-		boolean has = hash.Has(int_hash_key.Val_(id));
+		boolean has = hash.Has(int_hash_key.ValSet(id));
 		if (!has) Queue_add(hash, is_pid, id, BoolUtl.N);
 	}
 	private void Queue_add(Hash_adp hash, boolean is_pid, int id, boolean get_en) {
 		Wdata_lbl_itm itm = new Wdata_lbl_itm(is_pid, id, get_en);
-		hash.Add(Int_obj_ref.New(id), itm);
+		hash.Add(IntRef.New(id), itm);
 		ttl_hash.Add(itm.Ttl(), itm);
 		queue.Add(itm);
 	}
 	public void Resolve(Ordered_hash found) {
 		int len = queue.Len();
 		for (int i = 0; i < len; ++i) {
-			Wdata_lbl_itm pending_itm = (Wdata_lbl_itm)queue.Get_at(i);
+			Wdata_lbl_itm pending_itm = (Wdata_lbl_itm)queue.GetAt(i);
 			Wdata_langtext_itm found_itm = (Wdata_langtext_itm)found.GetByOrNull(pending_itm.Ttl());
 			if (found_itm != null)
 				pending_itm.Load_vals(found_itm.Lang(), found_itm.Text());
@@ -96,7 +96,7 @@ public class Wdata_lbl_mgr {
 		Ordered_hash claim_list = wdoc.Claim_list();
 		int len = claim_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wbase_claim_grp grp = (Wbase_claim_grp)claim_list.Get_at(i);
+			Wbase_claim_grp grp = (Wbase_claim_grp)claim_list.GetAt(i);
 			int grp_len = grp.Len();
 			for (int j = 0; j < grp_len; ++j) {
 				Wbase_claim_base itm = (Wbase_claim_base)grp.Get_at(j);
@@ -138,7 +138,7 @@ public class Wdata_lbl_mgr {
 		Ordered_hash slink_list = wdoc.Slink_list();
 		len = slink_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)slink_list.Get_at(i);
+			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)slink_list.GetAt(i);
 			byte[][] badges = itm.Badges();
 			int badges_len = badges.length;
 			for (int j = 0; j < badges_len; ++j) {
@@ -151,6 +151,6 @@ public class Wdata_lbl_mgr {
 	public static int Qid_int(byte[] qid) {
 		byte qid_0 = qid[0];
 		if (qid_0 != AsciiByte.Ltr_Q && qid_0 != AsciiByte.Ltr_q) return -1;
-		return Bry_.To_int_or(qid, 1, qid.length, -1);
+		return BryUtl.ToIntOr(qid, 1, qid.length, -1);
 	}
 }

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*;
+package gplx.xowa.xtns.wbases.claims.itms;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Wbase_claim_globecoordinate_ {
 	public static final byte
@@ -36,6 +37,6 @@ public class Wbase_claim_globecoordinate_ {
 	  Val_globe_dflt_str						= "http://www.wikidata.org/entity/Q2"
 	;
 	public static byte[]
-	  Val_globe_dflt_bry						= Bry_.new_a7(Val_globe_dflt_str)
+	  Val_globe_dflt_bry						= BryUtl.NewA7(Val_globe_dflt_str)
 	;
 }

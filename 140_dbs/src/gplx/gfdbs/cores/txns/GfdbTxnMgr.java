@@ -2,7 +2,7 @@ package gplx.gfdbs.cores.txns;
 
 import gplx.dbs.Db_conn;
 import gplx.gfdbs.cores.GfdbCloseAble;
-import gplx.objects.lists.GfoListBase;
+import gplx.types.commons.lists.GfoListBase;
 
 public class GfdbTxnMgr {
     private final GfdbCloseAble dbMgr;

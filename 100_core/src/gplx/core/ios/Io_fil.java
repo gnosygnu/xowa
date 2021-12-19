@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
-import gplx.objects.lists.CompareAble;
-import gplx.objects.lists.CompareAbleUtl;
+package gplx.core.ios;
+import gplx.libs.files.Io_mgr;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.libs.files.Io_url;
 public class Io_fil implements CompareAble {
 	public Io_fil(Io_url url, String data) {this.url = url; this.data = data;}
 	public Io_url Url() {return url;} public Io_fil Url_(Io_url v) {url = v; return this;} Io_url url;

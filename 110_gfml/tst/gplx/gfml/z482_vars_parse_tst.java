@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class z482_vars_parse_tst {
 	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
 	@Test public void Basic() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_var:{"
 			,	"	size '20,20';"
 			,	"}"
@@ -28,7 +29,7 @@ public class z482_vars_parse_tst {
 			);
 	}
 	@Test public void Many() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_var:{"
 			,	"	size '20,20';"
 			,	"	pos '30,30';"
@@ -39,7 +40,7 @@ public class z482_vars_parse_tst {
 			);
 	}
 	@Test public void Deferred() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_var:{"
 			,	"	key0 '<~key1>';"
 			,	"}"
@@ -52,7 +53,7 @@ public class z482_vars_parse_tst {
 			);
 	}
 	@Test public void Swap() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"{"
 			,	"	_var:{"
 			,	"		size '20,20';"
@@ -71,7 +72,7 @@ public class z482_vars_parse_tst {
 			);
 	}
 	@Test public void Context() {
-		fx.tst_Parse(String_.Concat
+		fx.tst_Parse(StringUtl.Concat
 			(	"_var:{"
 			,	"	size '20,20' gui;"
 			,	"}"

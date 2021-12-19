@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+package gplx.xowa.bldrs.cmds.utils;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.xmls.*;
 import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xob_xml_dumper_cmd implements Xob_cmd {
@@ -30,7 +39,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 	public void Cmd_run() {
 		usr_dlg.Plog_many("", "", Cmd_key() + ":bgn;");
 		String wiki_abrv = "";
-		String main_page = String_.Format("https://{0}/wiki/{1}", wiki.Domain_str(), String_.new_u8(wiki.Props().Main_page()));
+		String main_page = StringUtl.Format("https://{0}/wiki/{1}", wiki.Domain_str(), StringUtl.NewU8(wiki.Props().Main_page()));
 		String ns_case = "first-letter";	// TODO_OLD:
 		xml_dumper.Write_root_bgn(wiki.Ns_mgr(), wiki.Domain_itm(), wiki_abrv, main_page, ns_case, "XOWA " + Xoa_app_.Version);
 		Xodb_page_rdr page_rdr = wiki.Db_mgr().Load_mgr().Get_page_rdr(wiki);
@@ -44,7 +53,7 @@ public class Xob_xml_dumper_cmd implements Xob_cmd {
 				if ((++page_count % commit_interval) == 0) Commit();
 			}
 		}
-		catch (Exception e) {throw Err_.new_exc(e, "xo", "xml_dumper failed");}
+		catch (Exception e) {throw ErrUtl.NewArgs(e, "xml_dumper failed");}
 		finally {page_rdr.Rls();}
 		xml_dumper.Write_root_end();
 		this.Commit();

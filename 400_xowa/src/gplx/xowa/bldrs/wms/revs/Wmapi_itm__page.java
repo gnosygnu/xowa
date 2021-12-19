@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.revs;
+import gplx.types.basics.utls.BryLni;
 class Wmapi_itm__pge {
 	public int		Page_id() {return page_id;} private int page_id;
 	public int		Page_ns() {return page_ns;} private int page_ns;
@@ -38,7 +39,7 @@ class Wmapi_itm__pge {
 	public boolean Eq_meta(Wmapi_itm__pge rhs_page, int idx) {
 		Wmapi_itm__rvn lhs = rvn_ary[idx];
 		Wmapi_itm__rvn rhs = rhs_page.rvn_ary[idx];
-		return lhs.Rvn_len() == rhs.Rvn_len() && Bry_.Eq(lhs.Rvn_time(), rhs.Rvn_time());
+		return lhs.Rvn_len() == rhs.Rvn_len() && BryLni.Eq(lhs.Rvn_time(), rhs.Rvn_time());
 	}
 }
 class Wmapi_itm__ttl {

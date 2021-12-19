@@ -15,13 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.site_cfgs;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_split_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.net.Gfo_url_parser;
 import gplx.langs.jsons.Json_itm;
 import gplx.langs.jsons.Json_nde;
@@ -32,32 +33,32 @@ import gplx.xowa.wikis.domains.Xow_domain_tid_;
 import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
 
 class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private final Gfo_url_parser url_parser = new Gfo_url_parser();
 	public Xoa_site_cfg_itm__interwikimap() {
 		this.Ctor(Xoa_site_cfg_loader__inet.Qarg__interwikimap);
 	}
-	@Override public void Parse_json_ary_itm(Bry_bfr bfr, Xow_wiki wiki, int i, Json_itm itm) {
+	@Override public void Parse_json_ary_itm(BryWtr bfr, Xow_wiki wiki, int i, Json_itm itm) {
 		Json_nde nde = Json_nde.Cast(itm);
-		if (i != 0) bfr.Add_byte_nl();
-		byte[] iw_key = nde.Get_bry_or_null("prefix");	if (iw_key == null) throw Err_.new_("site_meta", "invalid interwiki", "key", iw_key);
-		byte[] iw_url = nde.Get_bry_or_null("url");		if (iw_url == null) throw Err_.new_("site_meta", "invalid interwiki", "url", iw_key);
-		bfr.Add(iw_key).Add_byte_pipe().Add(Gfs_php_converter.To_gfs(tmp_bfr, iw_url));
+		if (i != 0) bfr.AddByteNl();
+		byte[] iw_key = nde.Get_bry_or_null("prefix");	if (iw_key == null) throw ErrUtl.NewArgs("invalid interwiki", "key", iw_key);
+		byte[] iw_url = nde.Get_bry_or_null("url");		if (iw_url == null) throw ErrUtl.NewArgs("invalid interwiki", "url", iw_key);
+		bfr.Add(iw_key).AddBytePipe().Add(Gfs_php_converter.To_gfs(tmp_bfr, iw_url));
 	}
 	@Override public void Exec_csv(Xow_wiki wiki, int loader_tid, byte[] dsv_bry) {
 		if (loader_tid == Xoa_site_cfg_loader_.Tid__fallback)
 			Exec_csv__fallback(wiki);
 		else {
-			byte[][] lines = Bry_split_.Split_lines(dsv_bry);
+			byte[][] lines = BrySplit.SplitLines(dsv_bry);
 			int lines_len = lines.length;
 			for (int i = 0; i < lines_len; ++i) {
-				byte[] line = lines[i]; if (Bry_.Len_eq_0(line)) continue;	// ignore blank lines
-				byte[][] flds = Bry_split_.Split(line, AsciiByte.Pipe);
+				byte[] line = lines[i]; if (BryUtl.IsNullOrEmpty(line)) continue;	// ignore blank lines
+				byte[][] flds = BrySplit.Split(line, AsciiByte.Pipe);
 				byte[] url_fmt = flds[1];
 				byte[] domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url_fmt);
 				wiki.Xwiki_mgr().Add_by_site_interwikimap
 					( flds[0], domain_bry, url_fmt
-					, Bry_.Replace(url_fmt, Arg0_xo, Arg0_wm) // NOTE: interwiki items are stored in wiki.core.xowa_cfg as https://en.wikipedia.org/wiki/~{0}
+					, BryUtlByWtr.Replace(url_fmt, Arg0_xo, Arg0_wm) // NOTE: interwiki items are stored in wiki.core.xowa_cfg as https://en.wikipedia.org/wiki/~{0}
 					);
 			}
 		}
@@ -90,11 +91,11 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 		}
 
 		// if simplewiki, add "w" -> "enwiki"
-		if	(Bry_.Eq(wiki.Domain_bry(), Xow_domain_itm_.Bry__simplewiki))	
+		if	(BryLni.Eq(wiki.Domain_bry(), Xow_domain_itm_.Bry__simplewiki))
 			xwiki_mgr.Add_by_csv(Csv__enwiki);
 	}
 	private static final byte[] 
-	  Csv__manual = Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	  Csv__manual = BryUtl.NewA7(StringUtl.ConcatLinesNlSkipLast
 	( "1|commons;c|commons.wikimedia.org|Commons"
 	, "1|m;metawikipedia|meta.wikipedia.org"
 	, "1|species;wikispecies|species.wikimedia.org"
@@ -107,7 +108,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	, "0|oldwikisource|https://wikisource.org/wiki/~{0}|Old Wikisoure"
 	, "0|mail|https://lists.wikimedia.org/mailman/listinfo/~{0}|Wikitech Mailing List"
 	))
-	, Csv__peers__lang = Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	, Csv__peers__lang = BryUtl.NewA7(StringUtl.ConcatLinesNlSkipLast
 	( "2|w;wikipedia|wikipedia"
 	, "2|wikt;wiktionary|wiktionary"
 	, "2|s;wikisource|wikisource"
@@ -117,7 +118,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	, "2|n;wikinews|wikinews"
 	, "2|voy;wikivoyage|wikivoyage"
 	))
-	, Csv__peers__english = Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	, Csv__peers__english = BryUtl.NewA7(StringUtl.ConcatLinesNlSkipLast
 	( "1|w|en.wikipedia.org"
 	, "1|wikt|en.wiktionary.org"
 	, "1|s|en.wikisource.org"
@@ -127,15 +128,15 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	, "1|n|en.wikinews.org"
 	, "1|voy|en.wikivoyage.org"
 	))
-	, Csv__wikivoyage = Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	, Csv__wikivoyage = BryUtl.NewA7(StringUtl.ConcatLinesNlSkipLast
 	( "0|commons|commons.wikimedia.org|Wikimedia Commons"
 	, "2|wikipedia|wikipedia|Wikipedia"
 	, "0|dmoz|http://www.dmoz.org/~{0}|DMOZ"
 	))
-	, Csv__enwiki = Bry_.new_a7("2|w|wikipedia")
+	, Csv__enwiki = BryUtl.NewA7("2|w|wikipedia")
 	;
 	private static final byte[]
-	  Arg0_xo = Bry_.new_a7("~{0}")
-	, Arg0_wm = Bry_.new_a7("$1")
+	  Arg0_xo = BryUtl.NewA7("~{0}")
+	, Arg0_wm = BryUtl.NewA7("$1")
 	;
 }

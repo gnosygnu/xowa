@@ -14,10 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.dbs;
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Rls_able;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.objects.Rls_able;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
@@ -25,7 +24,8 @@ import gplx.dbs.Db_stmt_;
 import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.wikis.data.Xow_db_mgr;
 import gplx.xowa.xtns.wbases.core.Wbase_pid;
@@ -60,12 +60,12 @@ public class Wbase_pid_tbl implements Rls_able {
 		try {
 			if (!rdr.Move_next()) return Wbase_pid.Id_null;	// occurs when pid exists, but does not have entry for language; see hu.w:Marco Polo argali; DATE: 2014-02-01
 			byte[] pid_bry = rdr.Read_bry_by_str(fld_trg_ttl);
-			return pid_bry == null ?  Wbase_pid.Id_null : Bry_.To_int_or(pid_bry, 1, pid_bry.length, Wbase_pid.Id_null);
+			return pid_bry == null ?  Wbase_pid.Id_null : BryUtl.ToIntOr(pid_bry, 1, pid_bry.length, Wbase_pid.Id_null);
 		}
 		catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "db.wdata_pids:failed to select pid; lang=~{0} src_ttl=~{1} err=~{2}", src_lang, src_ttl, Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "db.wdata_pids:failed to select pid; lang=~{0} src_ttl=~{1} err=~{2}", src_lang, src_ttl, ErrUtl.ToStrLog(e));
 			try {stmt_select.Rls();}
-			catch (Exception e2) {Gfo_usr_dlg_.Instance.Warn_many("", "", "db.wdata_pids: failed to rls stmt; err=~{0}", Err_.Message_gplx_log(e2));}
+			catch (Exception e2) {Gfo_usr_dlg_.Instance.Warn_many("", "", "db.wdata_pids: failed to rls stmt; err=~{0}", ErrUtl.ToStrLog(e2));}
 			stmt_select = null;
 			return Wbase_pid.Id_null;
 		}

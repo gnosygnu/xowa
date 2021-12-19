@@ -17,5 +17,5 @@ package gplx.xowa.xtns.pfuncs.stringutils; import gplx.*; import gplx.xowa.*; im
 import org.junit.*;
 public class Pfunc_urldecode_tst {
 	@Before public void init()						{fxt.Reset();} private final Xop_fxt fxt = Xop_fxt.new_nonwmf();
-	@Test  public void Basic()						{fxt.Test_parse_template("{{#urldecode:a%20b}}"			, "a b");}
+	@Test public void Basic()						{fxt.Test_parse_template("{{#urldecode:a%20b}}"			, "a b");}
 }

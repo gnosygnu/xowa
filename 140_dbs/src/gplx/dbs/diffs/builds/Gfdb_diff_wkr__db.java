@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.diffs.builds; import gplx.dbs.*; import gplx.dbs.diffs.*;
 import gplx.dbs.diffs.itms.*;
-import gplx.objects.lists.CompareAbleUtl;
+import gplx.types.commons.lists.CompareAbleUtl;
 public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 	private DbmetaFldItm[] val_flds; private int val_flds_len;
 	private Gfdb_diff_tbl tbl; private Db_rdr old_rdr, new_rdr;

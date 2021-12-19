@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,20 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios;
-import gplx.Err_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
 import gplx.core.caches.Lru_cache;
 import gplx.core.consoles.Console_adp;
 import gplx.core.criterias.Criteria;
 import gplx.core.envs.Op_sys;
 import gplx.core.ios.atrs.Io_itm_atr_req;
 import gplx.core.ios.streams.IoStream;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class IoEngineUtl {
-	public int BufferLength() {return bufferLength;} public void BufferLength_set(int v) {bufferLength = v;} int bufferLength = 4096; // 0x1000	
+	public int BufferLength() {return bufferLength;} public void BufferLength_set(int v) {bufferLength = v;} int bufferLength = 4096; // 0x1000    
 	public void DeleteRecycleGplx(IoEngine engine, IoEngine_xrg_recycleFil xrg) {
 		Io_url recycleUrl = xrg.RecycleUrl();
 		if (recycleUrl.Type_fil())
@@ -48,12 +48,12 @@ public class IoEngineUtl {
 			if (!args.MatchCrt().Matches(subFil)) continue;
 			Io_url subFilUrl = subFil.Url();
 			try {engine.DeleteFil_api(IoEngine_xrg_deleteFil.new_(subFilUrl).ReadOnlyFails_(args.ReadOnlyFails()));}
-			catch (Exception exc) {usrDlg.Write_fmt_w_nl(Err_.Message_lang(exc));}
+			catch (Exception exc) {usrDlg.Write_fmt_w_nl(ErrUtl.Message(exc));}
 		}
 		// all subs deleted; now delete dir
 		if (!args.MatchCrt().Matches(dir)) return;
 		try {engine.DeleteDir(dir.Url());}
-		catch (Exception exc) {usrDlg.Write_fmt_w_nl(Err_.Message_lang(exc));}
+		catch (Exception exc) {usrDlg.Write_fmt_w_nl(ErrUtl.Message(exc));}
 	}
 	public void XferDir(IoEngine srcEngine, Io_url src, IoEngine trgEngine, Io_url trg, IoEngine_xrg_xferDir args) {
 		trgEngine.CreateDir(trg);
@@ -62,7 +62,7 @@ public class IoEngineUtl {
 			IoItmDir subSrc = (IoItmDir)subSrcObj;
 			if (!args.SubDirScanCrt().Matches(subSrc)) continue;
 			if (!args.MatchCrt().Matches(subSrc)) continue;
-			Io_url subTrg = trg.GenSubDir_nest(subSrc.Url().NameOnly());	//EX: C:\abc\def\ -> C:\123\ + def\
+			Io_url subTrg = trg.GenSubDir_nest(subSrc.Url().NameOnly());    //EX: C:\abc\def\ -> C:\123\ + def\
 			if (args.Recur()) XferDir(srcEngine, subSrc.Url(), trgEngine, subTrg, args);
 		}
 		IoItmList srcFils = IoItmList.list_(src.Info().CaseSensitive());
@@ -73,7 +73,7 @@ public class IoEngineUtl {
 		for (Object srcFilObj : srcFils) {
 			IoItmFil srcFil = (IoItmFil)srcFilObj;
 			Io_url srcFilPath = srcFil.Url();
-			Io_url trgFilPath = trg.GenSubFil(srcFilPath.NameAndExt());	//EX: C:\abc\fil.txt -> C:\123\ + fil.txt
+			Io_url trgFilPath = trg.GenSubFil(srcFilPath.NameAndExt());    //EX: C:\abc\fil.txt -> C:\123\ + fil.txt
 			IoEngine_xrg_xferFil xferArgs = args.Type_move() ? IoEngine_xrg_xferFil.move_(srcFilPath, trgFilPath).Overwrite_(args.Overwrite()) : IoEngine_xrg_xferFil.copy_(srcFilPath, trgFilPath).Overwrite_(args.Overwrite());
 			XferFil(srcEngine, xferArgs);
 		}
@@ -81,7 +81,7 @@ public class IoEngineUtl {
 	}
 	public void XferFil(IoEngine srcEngine, IoEngine_xrg_xferFil args) {
 		Io_url src = args.Src(), trg = args.Trg();
-		if (String_.Eq(srcEngine.Key(), trg.Info().EngineKey())) {
+		if (StringUtl.Eq(srcEngine.Key(), trg.Info().EngineKey())) {
 			if (args.Type_move())
 				srcEngine.MoveFil(args);
 			else
@@ -99,13 +99,13 @@ public class IoEngineUtl {
 	}
 	static boolean QueryDirDeepCore(IoItmDir ownerDir, Io_url url, IoEngine engine, boolean recur, Criteria subDirScanCrt, Criteria dirCrt, Criteria filCrt, Console_adp usrDlg, boolean dirInclude) {
 		if (usrDlg.Canceled_chk()) return false;
-		if (usrDlg.Enabled()) usrDlg.Write_tmp(String_.Concat("scan: ", url.Raw()));
+		if (usrDlg.Enabled()) usrDlg.Write_tmp(StringUtl.Concat("scan: ", url.Raw()));
 		IoItmDir scanDir = engine.QueryDir(url);
 		for (Object subDirObj : scanDir.SubDirs()) {
 			IoItmDir subDir = (IoItmDir)subDirObj;
 			if (!subDirScanCrt.Matches(subDir)) continue;
 			if (dirCrt.Matches(subDir)) {
-				ownerDir.SubDirs().Add(subDir);		// NOTE: always add subDir; do not use dirCrt here, else its subFils will be added to non-existent subDir
+				ownerDir.SubDirs().Add(subDir);        // NOTE: always add subDir; do not use dirCrt here, else its subFils will be added to non-existent subDir
 			}
 			if (recur)
 				QueryDirDeepCore(subDir, subDir.Url(), engine, recur, subDirScanCrt, dirCrt, filCrt, usrDlg, dirInclude);
@@ -142,7 +142,7 @@ public class IoEngineUtl {
 			case Io_mgr.Read_only__perms__file:
 				return engine.Query_itm_atrs(url, Io_itm_atr_req.New__read_only()).Is_read_only();
 			default:
-				throw Err_.new_unhandled_default(read_only_type);
+				throw ErrUtl.NewUnhandled(read_only_type);
 		}
 	}
 	private static boolean Query_read_only__file_and_dirs(IoEngine engine, Io_url url) {

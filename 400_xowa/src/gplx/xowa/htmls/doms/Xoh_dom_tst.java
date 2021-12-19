@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.doms;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xoh_dom_tst {
 	@Test public void Find_atr() {
@@ -33,11 +36,11 @@ public class Xoh_dom_tst {
 	}
 	private void tst_Find(String src, String where_nde, String where_key, String where_val, String select_key, String expd) {
 		Xoh_find rv = new Xoh_find();
-		byte[] actl = Xoh_dom_.Query_val_by_where(rv, Bry_.new_u8(src), Bry_.new_u8(where_nde), Bry_.new_u8(where_key), Bry_.new_u8(where_val), Bry_.new_u8(select_key), 0);
-		Tfds.Eq(expd, String_.new_u8(actl));
+		byte[] actl = Xoh_dom_.Query_val_by_where(rv, BryUtl.NewU8(src), BryUtl.NewU8(where_nde), BryUtl.NewU8(where_key), BryUtl.NewU8(where_val), BryUtl.NewU8(select_key), 0);
+		GfoTstr.EqObj(expd, StringUtl.NewU8(actl));
 	}
 	private void Title_by_href_tst(String href, String html_src, String expd) {
-		String actl = Xoh_dom_.Title_by_href(Bry_.new_u8(href), Bry_.new_u8(html_src));
-		Tfds.Eq(expd, actl);
+		String actl = Xoh_dom_.Title_by_href(BryUtl.NewU8(href), BryUtl.NewU8(html_src));
+		GfoTstr.EqObj(expd, actl);
 	}
 }

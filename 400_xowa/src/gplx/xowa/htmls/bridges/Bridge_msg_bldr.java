@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.bridges;
-import gplx.Bry_;
-import gplx.Int_;
-import gplx.Object_;
-import gplx.Type_ids_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.TypeIds;
 import gplx.langs.jsons.Json_wtr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Bridge_msg_bldr {
 	private final Json_wtr wtr = new Json_wtr();
 	private boolean rslt_pass; private String rslt_msg;
@@ -38,10 +38,10 @@ public class Bridge_msg_bldr {
 	public Bridge_msg_bldr Notify_hint_(String v)	{synchronized(wtr){this.notify_hint = v;} return this;} private String notify_hint;
 	public Bridge_msg_bldr Notify_pass_(String v){synchronized(wtr){this.notify_text = v; this.notify_status = "success";} return this;}
 	public Bridge_msg_bldr Notify_fail_(String v){synchronized(wtr){this.notify_text = v; this.notify_status = "error"; this.rslt_pass = false;} return this;}
-	public Bridge_msg_bldr Data(String key, boolean val)			{return Data_obj(key, val, Type_ids_.Id__bool);}
-	public Bridge_msg_bldr Data(String key, int val)			{return Data_obj(key, val, Type_ids_.Id__int);}
-	public Bridge_msg_bldr Data(String key, String val)			{return Data_obj(key, val, Type_ids_.Id__str);}
-	public Bridge_msg_bldr Data(String key, byte[] val)			{return Data_obj(key, val, Type_ids_.Id__bry);}
+	public Bridge_msg_bldr Data(String key, boolean val)			{return Data_obj(key, val, TypeIds.IdBool);}
+	public Bridge_msg_bldr Data(String key, int val)			{return Data_obj(key, val, TypeIds.IdInt);}
+	public Bridge_msg_bldr Data(String key, String val)			{return Data_obj(key, val, TypeIds.IdStr);}
+	public Bridge_msg_bldr Data(String key, byte[] val)			{return Data_obj(key, val, TypeIds.IdBry);}
 	private Bridge_msg_bldr Data_obj(String key, Object val, int val_tid) {
 		synchronized (wtr) {data_root.Add_data(key, val, val_tid);}
 		return this;
@@ -87,10 +87,10 @@ public class Bridge_msg_bldr {
 				Gfo_tree_data sub_kv = (Gfo_tree_data)itm;
 				String key = sub_kv.Key(); Object val = sub_kv.Val();
 				switch (sub_kv.Val_tid()) {
-					case Type_ids_.Id__bool:	wtr.Kv_bool(key, BoolUtl.Cast(val)); break;
-					case Type_ids_.Id__int:		wtr.Kv_int(key, Int_.Cast(val)); break;
-					case Type_ids_.Id__bry:		wtr.Kv_bry(key, (byte[])val); break;
-					default:					wtr.Kv_str(key, Object_.Xto_str_strict_or_null_mark(val)); break;
+					case TypeIds.IdBool:	wtr.Kv_bool(key, BoolUtl.Cast(val)); break;
+					case TypeIds.IdInt:		wtr.Kv_int(key, IntUtl.Cast(val)); break;
+					case TypeIds.IdBry:		wtr.Kv_bry(key, (byte[])val); break;
+					default:					wtr.Kv_str(key, ObjectUtl.ToStrOrNullMark(val)); break;
 				}
 			}
 			else {
@@ -101,7 +101,7 @@ public class Bridge_msg_bldr {
 		wtr.Nde_end();
 	}
 	private static final byte[]
-	  Key_rslt = Bry_.new_a7("rslt"), Key_rslt_pass = Bry_.new_a7("pass"), Key_rslt_msg = Bry_.new_a7("msg")
-	, Key_notify = Bry_.new_a7("notify"), Key_notify_text = Bry_.new_a7("text"), Key_notify_status = Bry_.new_a7("status"), Key_notify_hint = Bry_.new_a7("hint")
+	  Key_rslt = BryUtl.NewA7("rslt"), Key_rslt_pass = BryUtl.NewA7("pass"), Key_rslt_msg = BryUtl.NewA7("msg")
+	, Key_notify = BryUtl.NewA7("notify"), Key_notify_text = BryUtl.NewA7("text"), Key_notify_status = BryUtl.NewA7("status"), Key_notify_hint = BryUtl.NewA7("hint")
 	;
 }

@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.phps;
-import gplx.objects.arrays.ArrayUtl;
+import gplx.types.basics.utls.ArrayUtl;
 public class Php_itm_ary implements Php_itm, Php_itm_sub {
 	public Php_itm_ary() {}
 	public byte Itm_tid() {return Php_itm_.Tid_ary;}

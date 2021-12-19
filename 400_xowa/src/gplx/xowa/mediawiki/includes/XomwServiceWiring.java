@@ -14,13 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
-
-import gplx.Err_;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
-import gplx.xowa.mediawiki.languages.XomwLanguage;
-
 // MW.SRC:1.33.1
 public class XomwServiceWiring implements XophpCallbackOwner {
     // XO:infrastructure to register the multiple wiring methods
@@ -46,7 +43,7 @@ public class XomwServiceWiring implements XophpCallbackOwner {
         XomwMediaWikiServices services = (XomwMediaWikiServices)args[0];
         XomwServiceWiringMethod method = methods.Get_by(methodName);
         if (method == null) {
-            throw Err_.new_unhandled_default(methodName);
+            throw ErrUtl.NewUnhandled(methodName);
         }
         return method.Call(services);
     };

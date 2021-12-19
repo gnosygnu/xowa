@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Keyval_;
-import gplx.Ordered_hash;
-import gplx.String_;
-import gplx.core.primitives.Int_obj_val;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.IntVal;
 
 public class Json_parser__list_nde__base extends Json_parser__itm__base {
 	public void Parse_grp(String context, Json_grp grp) {
@@ -45,7 +45,7 @@ public class Json_parser__list_nde__base extends Json_parser__itm__base {
 			Json_kv atr = nde.Get_at_as_kv(j);
 			Object idx_obj = hash.Get_by_bry(atr.Key_as_bry());
 			if (idx_obj == null) {Warn("unknown json parser key", atr); continue;}
-			int idx_int = ((Int_obj_val)idx_obj).Val();
+			int idx_int = ((IntVal)idx_obj).Val();
 			atrs[idx_int] = atr;
 		}
 		Parse_hook_nde(nde, atrs);
@@ -65,7 +65,7 @@ public class Json_parser__list_nde__base extends Json_parser__itm__base {
 			Json_kv sub = nde.Get_at_as_kv(i);
 			byte[] key = sub.Key_as_bry();
 			byte[] val = Parse_to_list_as_kv__get_val(sub, key);
-			list.Add(key, Keyval_.new_(String_.new_u8(key), String_.new_u8(val)));
+			list.Add(key, KeyVal.NewStr(StringUtl.NewU8(key), StringUtl.NewU8(val)));
 		}
 	}
 	protected byte[] Parse_to_list_as_kv__get_val(Json_kv sub, byte[] key) {return sub.Val_as_bry();}

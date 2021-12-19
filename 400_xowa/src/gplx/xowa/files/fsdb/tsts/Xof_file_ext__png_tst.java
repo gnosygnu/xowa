@@ -18,24 +18,24 @@ import org.junit.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_file_ext__png_tst {
 	@Before public void init() {fxt.Reset();} private final Xof_file_fxt fxt = new Xof_file_fxt();
 	@After public void term() {fxt.Rls();}
-	@Test  public void Copy_thumb() {
+	@Test public void Copy_thumb() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.png", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.png"));
 		fxt.Exec_get(Xof_exec_arg.new_thumb("A.png").Rslt_orig_exists_y().Rslt_file_exists_y());
 		fxt.Test_fsys("mem/root/common/thumb/7/0/A.png/220px.png", "220,200");
 	}
-	@Test  public void Copy_orig() {
+	@Test public void Copy_orig() {
 		fxt.Init__orig_w_fsdb__commons_orig("A.png", 440, 400);
 		fxt.Exec_get(Xof_exec_arg.new_orig("A.png").Rslt_orig_exists_y().Rslt_file_exists_y());
 		fxt.Test_fsys("mem/root/common/orig/7/0/A.png", "440,400");
 	}
-	@Test  public void Copy_orig_w_width() {	// PURPOSE: if not thumb, but width is specified; do not download orig and convert; EX: [[File:The Earth seen from Apollo 17.jpg|250px]]
+	@Test public void Copy_orig_w_width() {	// PURPOSE: if not thumb, but width is specified; do not download orig and convert; EX: [[File:The Earth seen from Apollo 17.jpg|250px]]
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.png", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.png", 220, 200));
 		fxt.Exec_get(Xof_exec_arg.new_("A.png", Xop_lnki_type.Id_null, 220, Xop_lnki_tkn.Height_null).Rslt_orig_exists_y().Rslt_file_exists_y());
 		fxt.Test_fsys("mem/root/common/thumb/7/0/A.png/220px.png", "220,200");
 	}
-	@Test  public void Make_thumb() {
+	@Test public void Make_thumb() {
 		fxt.Init__orig_w_fsdb__commons_orig("A.png", 440, 400);
 		fxt.Exec_get(Xof_exec_arg.new_thumb("A.png").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_y());
 		fxt.Test_fsys("mem/root/common/thumb/7/0/A.png/220px.png", "220,200");

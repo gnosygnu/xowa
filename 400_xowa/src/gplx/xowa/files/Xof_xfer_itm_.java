@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
 import gplx.core.primitives.*;
-import gplx.gfui.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.types.basics.utls.MathUtl;
+import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_itm_ {
 	public static void Calc_xfer_size(Int_2_ref rv, byte lnki_type, int thumb_default_w, int file_w, int file_h, int lnki_w, int lnki_h, boolean lnki_thumb, double lnki_upright, Xof_ext ext, int exec_tid) {
 		boolean ext_is_svg = ext.Id_is_svg();
@@ -49,15 +50,15 @@ public class Xof_xfer_itm_ {
 	}
 	public static int Calc_w(int file_w, int file_h, int lnki_h) {
 		double ideal_w = (double)file_w * (double)lnki_h / (double)file_h;
-		double ideal_w_ceil = Math_.Ceil(ideal_w);
-		return Math_.Round(ideal_w_ceil * file_h / file_w, 0) > lnki_h
-			? (int)Math_.Floor(ideal_w)
+		double ideal_w_ceil = MathUtl.Ceil(ideal_w);
+		return MathUtl.Round(ideal_w_ceil * file_h / file_w, 0) > lnki_h
+			? (int)MathUtl.Floor(ideal_w)
 			: (int)ideal_w_ceil;
 	}
 	public static int Scale_h(int file_w, int file_h, int lnki_w) {
 		return file_w == 0												// REF.MW:File.php|scaleHeight
 			? 0
-			: (int)Math_.Round(((double)lnki_w * file_h) / file_w, 0);	// NOTE: (double) needed else result will be int and decimal will be automatically truncated
+			: (int)MathUtl.Round(((double)lnki_w * file_h) / file_w, 0);	// NOTE: (double) needed else result will be int and decimal will be automatically truncated
 	}
 	public static boolean Lnki_thumbable_calc(byte lnki_type, int lnki_w, int lnki_h) {
 		return 

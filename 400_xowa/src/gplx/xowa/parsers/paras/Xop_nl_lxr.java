@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.paras;
-import gplx.Bry_;
-import gplx.Bry_find_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
 import gplx.core.btries.Btrie_fast_mgr;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.parsers.Xop_ctx;
@@ -46,7 +46,7 @@ public class Xop_nl_lxr implements Xop_lxr {
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) return ctx.Lxr_make_txt_(cur_pos); // simulated nl at beginning of every parse
 		int trim_category_pos = Scan_fwd_for_ctg(ctx, src, cur_pos, src_len);
-		if (trim_category_pos != Bry_find_.Not_found) {		// [[Category]] found after ws
+		if (trim_category_pos != BryFind.NotFound) {		// [[Category]] found after ws
 			int root_subs_len = root.Subs_len();
 			if (root_subs_len > 0) {
 				Xop_tkn_itm tkn = root.Subs_get(root_subs_len - 1);
@@ -116,23 +116,23 @@ public class Xop_nl_lxr implements Xop_lxr {
 				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:	// ignore ws
 					break;
 				case AsciiByte.BrackBgn: // [
-					if (	Bry_.Has_at(src, src_len, i + 1, AsciiByte.BrackBgn)	// [[
+					if (	BryUtl.HasAt(src, src_len, i + 1, AsciiByte.BrackBgn)	// [[
 						&&	i + 2 < src_len) {	
-						int ttl_bgn = Bry_find_.Find_fwd_while(src, i + 2, src_len, AsciiByte.Space);
+						int ttl_bgn = BryFind.FindFwdWhile(src, i + 2, src_len, AsciiByte.Space);
 						Btrie_slim_mgr ctg_trie = ctx.Wiki().Ns_mgr().Category_trie();
-						Object ctg_ns = ctg_trie.Match_at(trv, src, ttl_bgn, src_len);
+						Object ctg_ns = ctg_trie.MatchAt(trv, src, ttl_bgn, src_len);
 						if (ctg_ns != null	// "[[Category" found
-							&& Bry_.Has_at(src, src_len, trv.Pos(), AsciiByte.Colon)) {	// check that next char is :
+							&& BryUtl.HasAt(src, src_len, trv.Pos(), AsciiByte.Colon)) {	// check that next char is :
 							return i;// return pos of 1st [
 						}
-						return Bry_find_.Not_found;
+						return BryFind.NotFound;
 					}
 					break;
 				default:	// non-ws; return not found
-					return Bry_find_.Not_found;
+					return BryFind.NotFound;
 			}
 		}
-		return Bry_find_.Not_found;
+		return BryFind.NotFound;
 	}
 	public static final Xop_nl_lxr Instance = new Xop_nl_lxr(); Xop_nl_lxr() {}
 }

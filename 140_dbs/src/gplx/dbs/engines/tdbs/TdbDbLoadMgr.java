@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*;
-import gplx.core.stores.*;
+package gplx.dbs.engines.tdbs;
+import gplx.libs.files.Io_mgr;
+import gplx.core.stores.DataRdr;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 class TdbDbLoadMgr {
 	public TdbDatabase LoadTbls(Io_url dbInfo) {
 		TdbDatabase db = TdbDatabase.new_(dbInfo);
@@ -34,11 +38,11 @@ class TdbDbLoadMgr {
 		DataRdr rdr = rootRdr.Subs();
 		while (rdr.MoveNextPeer()) {
 			String name = rdr.NameOfNode();
-			if		(String_.Eq(name, TdbFileList.StoreTblName))		db.Files().DataObj_Rdr(rdr);
-			else if (String_.Eq(name, TdbTableList.StoreTableName))		db.Tables().DataObj_Rdr(rdr, db.Files());
+			if		(StringUtl.Eq(name, TdbFileList.StoreTblName))		db.Files().DataObj_Rdr(rdr);
+			else if (StringUtl.Eq(name, TdbTableList.StoreTableName))		db.Tables().DataObj_Rdr(rdr, db.Files());
 			else											db.Tables().Get_by_or_fail(rdr.NameOfNode()).DataObj_Rdr(rdr);
 		}
-		if (db.Files().Len() == 0) throw Err_.new_wo_type("fatal error: db has no files", "connectInfo", db.DbUrl());
+		if (db.Files().Len() == 0) throw ErrUtl.NewArgs("fatal error: db has no files", "connectInfo", db.DbUrl());
 	}
 	DataRdr MakeDataRdr(Io_url fil) {
 		String text = Io_mgr.Instance.LoadFilStr(fil);

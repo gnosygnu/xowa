@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.ipts;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.Test;
 public class IptKey__tst {
 	private final IptKey__fxt fxt = new IptKey__fxt();
@@ -24,16 +24,16 @@ public class IptKey__tst {
 	@Test public void To_str__numeric() {
 		fxt.Test_to_str(12345, "key.#12345");
 	}
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		fxt.Test_parse("key.#10", 10);
 	}
 	// 	public static final int KeyCode_Shift = 65536, KeyCode_Ctrl = 131072, KeyCode_Alt = 262144;
 }
 class IptKey__fxt {
 	public void Test_to_str(int keycode, String expd) {
-		Tfds.Eq(expd, IptKey_.To_str(keycode));
+		GfoTstr.EqObj(expd, IptKey_.To_str(keycode));
 	}
 	public void Test_parse(String raw, int keycode) {
-		Tfds.Eq(keycode, IptKey_.parse(raw).Val());
+		GfoTstr.EqObj(keycode, IptKey_.parse(raw).Val());
 	}
 }

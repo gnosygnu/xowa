@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*;
+package gplx.xowa.mediawiki.includes.filerepo.file;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
 public class XomwFileFinderMock implements XomwFileFinder {
 	private final XomwEnv env;
@@ -24,7 +26,7 @@ public class XomwFileFinderMock implements XomwFileFinder {
 		return (XomwFile)hash.GetByOrNull(ttl.getPrefixedDBkey());
 	}
 	public void Add(String title, XomwFileRepo repo, int w, int h, byte[] mime) {
-		byte[] title_bry = Bry_.new_u8(title);
+		byte[] title_bry = BryUtl.NewU8(title);
 		XomwLocalFile file = new XomwLocalFile(env, XomwTitleOld.newFromText(env, title_bry), repo, w, h, mime);
 		hash.AddIfDupeUseNth(title_bry, file);
 	}

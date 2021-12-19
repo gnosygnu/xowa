@@ -14,22 +14,23 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.htmls.sidebars;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.Bry_split_;
-import gplx.List_adp;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.parsers.lnkis.Xop_link_parser;
 class Xoh_sidebar_parser {	// TS:
-	public static void Parse(Bry_bfr tmp_bfr, Xowe_wiki wiki, List_adp grps, byte[] src) {
+	public static void Parse(BryWtr tmp_bfr, Xowe_wiki wiki, List_adp grps, byte[] src) {
 		// split MediaWiki:Sidebar into lines
-		byte[][] lines = Bry_split_.Split(src, AsciiByte.Nl);
+		byte[][] lines = BrySplit.Split(src, AsciiByte.Nl);
 
 		// init
 		Xop_link_parser link_parser = new Xop_link_parser();
@@ -48,7 +49,7 @@ class Xoh_sidebar_parser {	// TS:
 			boolean tid_is_itm = line[1] == AsciiByte.Star;
 
 			// trim ws; note that tid indicates # of asterisks; EX: '** a' ->  'a'
-			byte[] raw = Bry_.Trim(line, tid_is_itm ? 2 : 1, line_len);
+			byte[] raw = BryUtl.Trim(line, tid_is_itm ? 2 : 1, line_len);
 
 			// strip comments; DATE:2014-03-08
 			raw = gplx.langs.htmls.Gfh_utl.Del_comments(tmp_bfr, raw);
@@ -73,43 +74,43 @@ class Xoh_sidebar_parser {	// TS:
 	}
 	private static Xoh_sidebar_itm Parse_grp_or_null(Xowe_wiki wiki, byte[] raw) {
 		// ignore SEARCH, TOOLBOX, LANGUAGES
-		if (ignore_trie.Match_bgn(raw, 0, raw.length) != null) return null;
+		if (ignore_trie.MatchBgn(raw, 0, raw.length) != null) return null;
 
 		byte[] text_key = raw;
 		byte[] text_val = Resolve_key(wiki, text_key);
 		return new Xoh_sidebar_itm(BoolUtl.N, text_key, text_val, null);
 	}
-	private static Xoh_sidebar_itm Parse_itm_or_null(Xowe_wiki wiki, byte[] raw, Xop_link_parser link_parser, Xoa_url tmp_url, Bry_bfr bfr) {
+	private static Xoh_sidebar_itm Parse_itm_or_null(Xowe_wiki wiki, byte[] raw, Xop_link_parser link_parser, Xoa_url tmp_url, BryWtr bfr) {
 		// separate into key|val; note that grp uses entire raw for key while itm uses raw after "|"
-		int pipe_pos = Bry_find_.Find_fwd(raw, AsciiByte.Pipe);
+		int pipe_pos = BryFind.FindFwd(raw, AsciiByte.Pipe);
 		
 		// if no pipe, warn and return; EX: should be "href|main", but only "href"
-		if (pipe_pos == Bry_find_.Not_found) {
+		if (pipe_pos == BryFind.NotFound) {
 			// don't bother warning if es.wikisource.org and special:Random/Pagina; occurs in 2014-02-03 dump and still present as of 2016-09; note this sidebar item does not show on WMF either
-			if	(Bry_.Eq(wiki.Domain_bry(), Ignore_wiki_ess) && Bry_.Eq(raw, Ignore_item_ess_random)) {}
+			if	(BryLni.Eq(wiki.Domain_bry(), Ignore_wiki_ess) && BryLni.Eq(raw, Ignore_item_ess_random)) {}
 			else
-				wiki.Appe().Usr_dlg().Warn_many("", "", "sidebar item is missing pipe; only href is available; item will be hidden: item=~{0}", String_.new_u8(raw));			
+				wiki.Appe().Usr_dlg().Warn_many("", "", "sidebar item is missing pipe; only href is available; item will be hidden: item=~{0}", StringUtl.NewU8(raw));
 			return null;
 		}
 
 		// get text
-		byte[] text_key = Bry_.Mid(raw, pipe_pos + 1, raw.length);
+		byte[] text_key = BryLni.Mid(raw, pipe_pos + 1, raw.length);
 		byte[] text_val = Resolve_key(wiki, text_key);
 
 		// get href
-		byte[] href_key = Bry_.Mid(raw, 0, pipe_pos);
+		byte[] href_key = BryLni.Mid(raw, 0, pipe_pos);
 		byte[] href_val = Resolve_key(wiki, href_key);
-		href_val = link_parser.Parse(bfr, tmp_url, wiki, href_val, Bry_.Empty);
+		href_val = link_parser.Parse(bfr, tmp_url, wiki, href_val, BryUtl.Empty);
 
 		return new Xoh_sidebar_itm(BoolUtl.Y, text_key, text_val, href_val);
 	}
 	private static byte[] Resolve_key(Xowe_wiki wiki, byte[] key) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj(key);
-		if (Bry_.Len_eq_0(val)) val = key;	// if key is not found, default to val
+		if (BryUtl.IsNullOrEmpty(val)) val = key;	// if key is not found, default to val
 		return wiki.Parser_mgr().Main().Expand_tmpl(val);
 	}
 
-	private static byte[] Ignore_wiki_ess = Bry_.new_a7("es.wikisource.org"), Ignore_item_ess_random = Bry_.new_u8("special:Random/Página djvu");
+	private static byte[] Ignore_wiki_ess = BryUtl.NewA7("es.wikisource.org"), Ignore_item_ess_random = BryUtl.NewU8("special:Random/Página djvu");
 	private static final byte Ignore__search = 1, Ignore__toolbox = 2, Ignore__toolbox_end = 3, Ignore__languages = 4;
 	private static final Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte("SEARCH"		, Ignore__search)

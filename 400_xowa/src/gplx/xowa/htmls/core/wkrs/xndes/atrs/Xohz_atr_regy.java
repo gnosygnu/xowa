@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*;
+package gplx.xowa.htmls.core.wkrs.xndes.atrs;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Xohz_atr_regy {
 	private final Hash_adp_bry itm_regy = Hash_adp_bry.cs();
 	private final Hash_adp_bry grp_regy = Hash_adp_bry.cs();
@@ -32,7 +36,7 @@ public class Xohz_atr_regy {
 		Object sub_obj = itm_regy.GetByOrNull(sub_key);
 		if (sub_obj == null) {
 			sub_obj = grp_regy.GetByOrNull(sub_key);
-			if (sub_obj == null) throw Err_.new_("hzip", "sub_key is not known itm or grp", "sub_key", sub_key);
+			if (sub_obj == null) throw ErrUtl.NewArgs("sub_key is not known itm or grp", "sub_key", sub_key);
 			Xohz_atr_grp sub_grp = (Xohz_atr_grp)sub_obj;
 			byte[][] subs = sub_grp.Subs(); int subs_len = subs.length;
 			for (int i = 0; i < subs_len; ++i)

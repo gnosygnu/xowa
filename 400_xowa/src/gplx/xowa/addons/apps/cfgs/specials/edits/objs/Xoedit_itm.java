@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.gfobjs.Gfobj_nde;
 import gplx.langs.htmls.Gfh_utl;
 import gplx.langs.mustaches.Mustache_bfr;
@@ -44,7 +44,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	public String	Help()		{return help;}	private String help;
 
 	public int		Sort()		{return sort;}	private final int sort;
-	public void Load_by_meta(Bry_bfr tmp_bfr, String type, String dflt_str, String html_atrs, String html_cls) {
+	public void Load_by_meta(BryWtr tmp_bfr, String type, String dflt_str, String html_atrs, String html_cls) {
 		this.type = type;
 		this.dflt = Escape(tmp_bfr, type, dflt_str);
 		this.html_atrs = html_atrs;
@@ -55,22 +55,22 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		this.name = name;
 		this.help = help;
 	}
-	public void Load_by_data(Bry_bfr tmp_bfr, String ctx, String val_str, String date) {
+	public void Load_by_data(BryWtr tmp_bfr, String ctx, String val_str, String date) {
 		this.ctx = ctx;
 		this.val = Escape(tmp_bfr, type, val_str);
 		this.date = date;
 		this.edited = true;
-		if (	String_.Has(html_cls, "read"+"only")
+		if (	StringUtl.Has(html_cls, "read"+"only")
 			||	Xoitm_type_enum.To_uid(type) == Xoitm_type_enum.Tid__btn)
 			edited = false;
 	}
 	public void Set_data_by_dflt() {
 		this.ctx = Xocfg_mgr.Ctx__app;
 		this.val = dflt;
-		this.date = String_.Empty;
+		this.date = StringUtl.Empty;
 		this.edited = false;
 	}
-	public Gfobj_nde To_nde(Bry_bfr tmp_bfr) {
+	public Gfobj_nde To_nde(BryWtr tmp_bfr) {
 		Gfobj_nde rv = Gfobj_nde.New();
 		rv.Add_int("id", id);
 		rv.Add_str("key", key);
@@ -83,32 +83,32 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		rv.Add_str("date", date);
 		rv.Add_str("type", type);
 		To_html(tmp_bfr, type_mgr);
-		rv.Add_str("html", tmp_bfr.To_str_and_clear());
+		rv.Add_str("html", tmp_bfr.ToStrAndClear());
 		rv.Add_bool("edited", edited);
 		return rv;
 	}
-	private void To_html(Bry_bfr bfr, Xocfg_type_mgr type_mgr) {
+	private void To_html(BryWtr bfr, Xocfg_type_mgr type_mgr) {
 		Xoedit_itm_html.Build_html(bfr, type_mgr, key, name, type, html_atrs, html_cls, val);
 	}
 	public boolean Mustache__write(String k, Mustache_bfr bfr) {
-		if		(String_.Eq(k, "id"))				bfr.Add_int(id);
-		else if	(String_.Eq(k, "key"))				bfr.Add_str_u8(key);
-		else if	(String_.Eq(k, "dflt"))				bfr.Add_bry(dflt);
-		else if	(String_.Eq(k, "lang"))				bfr.Add_str_u8(lang);
-		else if	(String_.Eq(k, "name"))				bfr.Add_str_u8(name);
-		else if	(String_.Eq(k, "help"))				bfr.Add_str_u8(help);
-		else if	(String_.Eq(k, "ctx"))				bfr.Add_str_u8(ctx);
-		else if	(String_.Eq(k, "val"))				bfr.Add_bry(val);
-		else if	(String_.Eq(k, "date"))				bfr.Add_str_u8(date);
-		else if	(String_.Eq(k, "type"))				bfr.Add_str_u8(type);
-		else if	(String_.Eq(k, "html"))				To_html(bfr.Bfr(), type_mgr);
+		if		(StringUtl.Eq(k, "id"))				bfr.Add_int(id);
+		else if	(StringUtl.Eq(k, "key"))				bfr.Add_str_u8(key);
+		else if	(StringUtl.Eq(k, "dflt"))				bfr.Add_bry(dflt);
+		else if	(StringUtl.Eq(k, "lang"))				bfr.Add_str_u8(lang);
+		else if	(StringUtl.Eq(k, "name"))				bfr.Add_str_u8(name);
+		else if	(StringUtl.Eq(k, "help"))				bfr.Add_str_u8(help);
+		else if	(StringUtl.Eq(k, "ctx"))				bfr.Add_str_u8(ctx);
+		else if	(StringUtl.Eq(k, "val"))				bfr.Add_bry(val);
+		else if	(StringUtl.Eq(k, "date"))				bfr.Add_str_u8(date);
+		else if	(StringUtl.Eq(k, "type"))				bfr.Add_str_u8(type);
+		else if	(StringUtl.Eq(k, "html"))				To_html(bfr.Bfr(), type_mgr);
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String k) {
-		if	(String_.Eq(k, "edited"))		return Mustache_doc_itm_.Ary__bool(edited);
+		if	(StringUtl.Eq(k, "edited"))		return Mustache_doc_itm_.Ary__bool(edited);
 		return Mustache_doc_itm_.Ary__empty;
 	}
-	private static byte[] Escape(Bry_bfr tmp_bfr, String type, String val_str) {
+	private static byte[] Escape(BryWtr tmp_bfr, String type, String val_str) {
 		// NOTE: do not escape quotes for memo because it uses <textarea> which can use quotes;
 		// contrast with <input> which uses quotes for `value` property;
 		// EX: <input value="a&quot;b"> vs <textarea>a"b</textarea>
@@ -116,6 +116,6 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 			? BoolUtl.N
 			: BoolUtl.Y;
 
-		return Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), BoolUtl.N, BoolUtl.N, BoolUtl.N, escapeQuotes, BoolUtl.N);
+		return Gfh_utl.Escape_html_as_bry(tmp_bfr, BryUtl.NewU8(val_str), BoolUtl.N, BoolUtl.N, BoolUtl.N, escapeQuotes, BoolUtl.N);
 	}
 }

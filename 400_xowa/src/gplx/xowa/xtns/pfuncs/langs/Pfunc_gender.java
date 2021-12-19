@@ -13,19 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.langs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.pfuncs.langs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.IntVal;
 import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.primitives.*; import gplx.xowa.users.*;
+import gplx.xowa.users.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.genders.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_gender extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_i18n_gender;}
 	@Override public boolean Func_require_colon_arg() {return true;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_gender().Name_(name);}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] user_name = Eval_argx(ctx, src, caller, self);
-		byte[] when_m = Bry_.Empty, when_f = Bry_.Empty, when_u = Bry_.Empty;
+		byte[] when_m = BryUtl.Empty, when_f = BryUtl.Empty, when_u = BryUtl.Empty;
 		int self_args_len = self.Args_len();
 		if (self_args_len == 0) return;	// per MW: EX: {{gender:name}} -> ""
 		else {
@@ -51,7 +55,7 @@ public class Pfunc_gender extends Pf_func_base {
 			case 1:		if (user_name[0] == AsciiByte.Dot) return Xol_gender_.Tid_unknown; break;	// EX: {{gender:.|m|f}}; TODO_OLD: should define default gender for wiki
 		}
 		Object o = gender_cache.Get_by_bry(user_name);
-		return o == null ? user.Gender() : ((Int_obj_val)o).Val();
+		return o == null ? user.Gender() : ((IntVal)o).Val();
 	}
 	private static final Hash_adp_bry gender_cache = Hash_adp_bry.cs()	// for tests
 	.Add_str_int("xowa_male"	, Xol_gender_.Tid_male)

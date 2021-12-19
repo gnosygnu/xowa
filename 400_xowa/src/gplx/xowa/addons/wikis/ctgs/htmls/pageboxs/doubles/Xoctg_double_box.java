@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles;
-import gplx.Bry_bfr;
-import gplx.Bry_fmt;
-import gplx.core.brys.Bfr_arg;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_itm;
 import gplx.xowa.users.history.Xou_history_mgr;
-public class Xoctg_double_box implements Bfr_arg {
+public class Xoctg_double_box implements BryBfrArg {
 	public Xoctg_double_grp Grp_normal() {return grp_normal;} private final Xoctg_double_grp grp_normal = new Xoctg_double_grp();
 	public Xoctg_double_grp Grp_hidden() {return grp_hidden;} private final Xoctg_double_grp grp_hidden = new Xoctg_double_grp();
 	public void Init_by_wiki(Xow_wiki wiki) {
@@ -29,7 +29,7 @@ public class Xoctg_double_box implements Bfr_arg {
 		grp_normal.Init_by_wiki(wiki, history_mgr, BoolUtl.Y);
 		grp_hidden.Init_by_wiki(wiki, history_mgr, BoolUtl.N);
 	}
-	public void Write_pagebox(Bry_bfr bfr, Xoctg_pagebox_itm[] ary) {
+	public void Write_pagebox(BryWtr bfr, Xoctg_pagebox_itm[] ary) {
 		grp_normal.Itms().Itms__clear();
 		grp_hidden.Itms().Itms__clear();
 
@@ -39,13 +39,13 @@ public class Xoctg_double_box implements Bfr_arg {
 			Xoctg_double_grp list = itm.Hidden() ? grp_hidden : grp_normal; 
 			list.Itms().Itms__add(itm);
 		}
-		this.Bfr_arg__add(bfr);
+		this.AddToBfr(bfr);
 	}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		Fmt__all.Bld_many(bfr, grp_normal, grp_hidden);
 	}
-	private static final Bry_fmt
-	  Fmt__all = Bry_fmt.Auto_nl_skip_last
+	private static final BryFmt
+	  Fmt__all = BryFmt.Auto_nl_skip_last
 	( "<div id=\"catlinks\" class=\"catlinks\">~{grp_normal}~{grp_hidden}"
 	, "</div>"
 	);

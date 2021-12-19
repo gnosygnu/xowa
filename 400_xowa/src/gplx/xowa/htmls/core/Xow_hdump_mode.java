@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.core;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 public class Xow_hdump_mode {
 	private final int tid;
 	private final String key;
@@ -35,12 +38,12 @@ public class Xow_hdump_mode {
 	public static void Cfg__reg_type(gplx.xowa.addons.apps.cfgs.mgrs.types.Xocfg_type_mgr type_mgr) {
 		type_mgr.Lists__add("list:xowa.wiki.hdumps.html_mode", To_kv(Shown), To_kv(Swt_browser), To_kv(Hdump_save), To_kv(Hdump_load));
 	}
-	private static Keyval To_kv(Xow_hdump_mode mode) {return Keyval_.new_(mode.key, mode.gui);}
+	private static KeyVal To_kv(Xow_hdump_mode mode) {return KeyVal.NewStr(mode.key, mode.gui);}
 	public static Xow_hdump_mode Parse(String v) {
-		if		(String_.Eq(v, Shown.key))			return Shown;
-		else if	(String_.Eq(v, Hdump_save.key))		return Hdump_save;
-		else if	(String_.Eq(v, Hdump_load.key))		return Hdump_load;
-		else if	(String_.Eq(v, Swt_browser.key))    return Swt_browser;
-		else										throw Err_.new_unhandled(v);
+		if		(StringUtl.Eq(v, Shown.key))			return Shown;
+		else if	(StringUtl.Eq(v, Hdump_save.key))		return Hdump_save;
+		else if	(StringUtl.Eq(v, Hdump_load.key))		return Hdump_load;
+		else if	(StringUtl.Eq(v, Swt_browser.key))    return Swt_browser;
+		else										throw ErrUtl.NewUnhandled(v);
 	}
 }

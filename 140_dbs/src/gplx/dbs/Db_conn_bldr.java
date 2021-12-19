@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
 public class Db_conn_bldr {
 	private final Object thread_lock = new Object();	// LOCK:synchronized else random failures in Schema_mgr due to diff conn pointing to same db; DATE:2016-07-12
 	private Db_conn_bldr_wkr wkr;
@@ -40,12 +42,12 @@ public class Db_conn_bldr {
 			boolean exists = wkr.Exists(url);
 			if (exists) return Get(url);
 			if (autocreate) return New(url);
-			else throw Err_.new_("dbs", "db does not exist", "url", url.Raw());
+			else throw ErrUtl.NewArgs("db does not exist", "url", url.Raw());
 		}
 	}
 	public Db_conn Get_or_fail(Io_url url) {
 		Db_conn rv = Get(url);
-		if (rv == Db_conn_.Noop) throw Err_.new_wo_type("connection is null; file does not exist: file={0}", "file", url.Raw());
+		if (rv == Db_conn_.Noop) throw ErrUtl.NewArgs("connection is null; file does not exist: file={0}", "file", url.Raw());
 		return rv;
 	}
         public static final Db_conn_bldr Instance = new Db_conn_bldr(); Db_conn_bldr() {}

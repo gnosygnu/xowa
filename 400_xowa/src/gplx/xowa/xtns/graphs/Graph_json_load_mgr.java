@@ -13,20 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*;
+package gplx.xowa.xtns.graphs;
 import gplx.core.tests.*;
-import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.rdrs.BryRdrErrWkr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.hdumps.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.parsers.lnkis.*;
 class Graph_json_load_mgr implements Xoh_hdump_wkr {
 	public byte[] Key() {return KEY;}
-	public int Process(Bry_bfr bfr, Xoh_hdoc_ctx hctx, Xoh_hdoc_wkr hdoc_wkr, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag tag) {
+	public int Process(BryWtr bfr, Xoh_hdoc_ctx hctx, Xoh_hdoc_wkr hdoc_wkr, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag tag) {
 		// add opening <div>
-		bfr.Add_mid(src, tag.Src_bgn(), tag.Src_end());
+		bfr.AddMid(src, tag.Src_bgn(), tag.Src_end());
 
 		// find </div>
 		int src_bgn = tag.Src_end();
@@ -37,9 +42,9 @@ class Graph_json_load_mgr implements Xoh_hdump_wkr {
 		int bfr_prv = src_bgn;
 
 		// init err_wkr
-		Bry_err_wkr err_wkr = new Bry_err_wkr();
-		err_wkr.Init_by_page(String_.new_u8(hctx.Page__url()), src);
-		err_wkr.Init_by_sect("graph", src_bgn);
+		BryRdrErrWkr err_wkr = new BryRdrErrWkr();
+		err_wkr.InitByPage(StringUtl.NewU8(hctx.Page__url()), src);
+		err_wkr.InitBySect("graph", src_bgn);
 
 		Xow_domain_itm domain_itm = hctx.Wiki__domain_itm();
 		Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
@@ -47,20 +52,20 @@ class Graph_json_load_mgr implements Xoh_hdump_wkr {
 		int pos = src_bgn;
 		while (true) {
 			// find {XOWA_ROOT}
-			int find_bgn = Bry_find_.Find_fwd(src, Graph_json_save_mgr.Bry__xowa_root, pos);
+			int find_bgn = BryFind.FindFwd(src, Graph_json_save_mgr.Bry__xowa_root, pos);
 
 			// not found, or outside JSON range
-			if (find_bgn == Bry_find_.Not_found || find_bgn > src_end)
+			if (find_bgn == BryFind.NotFound || find_bgn > src_end)
 				break;
 
 			// {XOWA_ROOT} found; add everything up to it
-			bfr.Add_mid(src, bfr_prv, find_bgn);
+			bfr.AddMid(src, bfr_prv, find_bgn);
 
 			// check for {XOWA_ROOT}{XOWA_ROOT}
 			int find_end = find_bgn + Graph_json_save_mgr.Bry__xowa_root.length;
 			int double_end = find_end + Graph_json_save_mgr.Bry__xowa_root.length;
 			if (double_end < src_end
-				&& Bry_.Match(src, find_end, double_end, Graph_json_save_mgr.Bry__xowa_root)) {
+				&& BryLni.Eq(src, find_end, double_end, Graph_json_save_mgr.Bry__xowa_root)) {
 				bfr.Add(Graph_json_save_mgr.Bry__xowa_root);
 				bfr_prv = pos = double_end;
 				continue;
@@ -68,10 +73,10 @@ class Graph_json_load_mgr implements Xoh_hdump_wkr {
 
 			// get url_end by searching for '\"'
 			int url_bgn = find_bgn + Graph_json_save_mgr.Bry__xowa_root.length;
-			int url_end = Bry_find_.Find_fwd(src, AsciiByte.Quote, find_bgn, src_end);
-			if (url_end == Bry_find_.Not_found) {
+			int url_end = BryFind.FindFwd(src, AsciiByte.Quote, find_bgn, src_end);
+			if (url_end == BryFind.NotFound) {
 				err_wkr.Warn("Graph_json_save_mgr: missing endquote");
-				bfr.Add_mid(src, find_bgn, find_end);
+				bfr.AddMid(src, find_bgn, find_end);
 				bfr_prv = pos = find_end;
 				continue;
 			}
@@ -80,7 +85,7 @@ class Graph_json_load_mgr implements Xoh_hdump_wkr {
 			img_src_parser.Clear();
 			if (!img_src_parser.Parse(err_wkr, hctx.Wiki__domain_bry(), src, url_bgn, url_end)) { // -1 b/c find_bgn starts at "file/commons" and parser needs to start at "/file/commons"
 				err_wkr.Warn("", "", "Graph_json_save_mgr: invalid file_path");
-				bfr.Add_mid(src, find_bgn, find_end);
+				bfr.AddMid(src, find_bgn, find_end);
 				bfr_prv = pos = find_end;
 				continue;
 			}
@@ -97,19 +102,19 @@ class Graph_json_load_mgr implements Xoh_hdump_wkr {
 
 			// add root_dir
 			bfr.Add(hctx.App().Fsys_mgr().Root_dir().To_http_file_bry());
-			bfr.Add_mid(src, url_bgn + 1, url_end); // + 1 to skip slash in "/file/"
+			bfr.AddMid(src, url_bgn + 1, url_end); // + 1 to skip slash in "/file/"
 			bfr_prv = pos = url_end;
 		}
 
 		// add rest of json
-		bfr.Add_mid(src, bfr_prv, src_end);
+		bfr.AddMid(src, bfr_prv, src_end);
 
 		// add </div>
-		bfr.Add_mid(src, div_end.Src_bgn(), div_end.Src_end());
+		bfr.AddMid(src, div_end.Src_bgn(), div_end.Src_end());
 		return div_end.Src_end();
 	}
 	public void Test_lnr_(Gfo_test_lnr_base v) {this.test_lnr = v;} private Gfo_test_lnr_base test_lnr;
 
-	public static byte[] KEY = Bry_.new_a7("graph-json");
+	public static byte[] KEY = BryUtl.NewA7("graph-json");
 	public static byte[] HDUMP_ATR = Xoh_hdump_wkr_utl.Build_hdump_atr(KEY);
 }

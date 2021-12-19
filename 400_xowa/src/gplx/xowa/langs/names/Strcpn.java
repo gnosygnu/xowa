@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.names; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.names;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.btries.*;
-import gplx.core.intls.*;
 class Strcpn {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Strcpn(byte[][] ary) {
@@ -34,7 +35,7 @@ class Strcpn {
 
 			// no match; try next pos_in_bytes
 			if (trv.Pos() == pos_in_bytes) {
-				pos_in_bytes += Utf8_.Len_of_char_by_1st_byte(b);
+				pos_in_bytes += Utf8Utl.LenOfCharBy1stByte(b);
 				pos_in_chars++;
 			}
 			// match; return pos_in_bytes
@@ -46,7 +47,7 @@ class Strcpn {
 	}
 
 	public static byte[][] Split_concatenated_ascii(String str) {
-		byte[] bry = Bry_.new_u8(str);
+		byte[] bry = BryUtl.NewU8(str);
 		int len = bry.length;
 		byte[][] rv = new byte[len][];
 		for (int i = 0; i < len; i++) {

@@ -13,15 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
-import gplx.core.bits.*;
+package gplx.gfui;
+import gplx.core.bits.Bitmask_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class GfuiBorderEdge {
 	public int Val() {return val;} int val;
 	public boolean Has(GfuiBorderEdge comp) {return Bitmask_.Has_int(val, comp.val);}
 	public GfuiBorderEdge Add(GfuiBorderEdge comp) {
 		return new GfuiBorderEdge(comp.val + val);
 	}
-	@gplx.Internal protected GfuiBorderEdge(int v) {this.val = v;}
+	public GfuiBorderEdge(int v) {this.val = v;}
 	public static final GfuiBorderEdge Left		= new GfuiBorderEdge(1);
 	public static final GfuiBorderEdge Right		= new GfuiBorderEdge(2);
 	public static final GfuiBorderEdge Top		= new GfuiBorderEdge(4);
@@ -36,15 +38,15 @@ class GfuiBorderEdge_ {
 		else if (val == GfuiBorderEdge.Top.Val())		return Top_raw;
 		else if (val == GfuiBorderEdge.Bot.Val())		return Bot_raw;
 		else if (val == GfuiBorderEdge.All.Val())		return All_raw;
-		else throw Err_.new_unhandled(edge);
+		else throw ErrUtl.NewUnhandled(edge);
 	}
 	public static GfuiBorderEdge parse(String raw) {
-		if		(String_.Eq(raw, Left_raw))		return GfuiBorderEdge.Left;
-		else if (String_.Eq(raw, Right_raw))	return GfuiBorderEdge.Right;
-		else if (String_.Eq(raw, Top_raw))		return GfuiBorderEdge.Top;
-		else if (String_.Eq(raw, Bot_raw))		return GfuiBorderEdge.Bot;
-		else if (String_.Eq(raw, All_raw))		return GfuiBorderEdge.All;
-		else throw Err_.new_unhandled(raw);
+		if		(StringUtl.Eq(raw, Left_raw))		return GfuiBorderEdge.Left;
+		else if (StringUtl.Eq(raw, Right_raw))	return GfuiBorderEdge.Right;
+		else if (StringUtl.Eq(raw, Top_raw))		return GfuiBorderEdge.Top;
+		else if (StringUtl.Eq(raw, Bot_raw))		return GfuiBorderEdge.Bot;
+		else if (StringUtl.Eq(raw, All_raw))		return GfuiBorderEdge.All;
+		else throw ErrUtl.NewUnhandled(raw);
 	}
 	public static final String
 		  All_raw	= "all"

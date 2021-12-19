@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.caches;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.DateAdp_;
-import gplx.Datetime_now;
-import gplx.Io_mgr;
-import gplx.String_;
-import gplx.Tfds;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn_bldr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.files.Xof_exec_tid;
@@ -33,17 +33,17 @@ import org.junit.Before;
 import org.junit.Test;
 public class Xou_cache_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xou_cache_mgr_fxt fxt = new Xou_cache_mgr_fxt();
-	@Test  public void Update() {
+	@Test public void Update() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1);
 		fxt.Test_get(itm_1, 1, 0);
 	}
-	@Test  public void Update_mult() {
+	@Test public void Update_mult() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1, itm_1, itm_1);
 		fxt.Test_get(itm_1, 3, 2);
 	}
-	@Test  public void Reload() {
+	@Test public void Reload() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1, itm_1, itm_1);
 		fxt.Test_get(itm_1, 3, 2);
@@ -75,7 +75,7 @@ class Xou_cache_mgr_fxt {
 	private Xou_cache_mgr mgr;
 	private long cache_min;
 	public void Clear() {
-		Datetime_now.Manual_(DateAdp_.new_(1970, 1, 1, 0, 0, 0, 0));
+		GfoDateNow.ManualSet(GfoDateUtl.New(1970, 1, 1, 0, 0, 0, 0));
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();			
@@ -90,10 +90,10 @@ class Xou_cache_mgr_fxt {
 	}
 	public Xof_fsdb_itm Make_itm(String wiki, String file, int size) {
 		Xof_fsdb_itm rv = new Xof_fsdb_itm();
-		byte[] wiki_domain = Bry_.new_a7(wiki);
-		byte[] file_ttl = Bry_.new_a7(file);
-		rv.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, wiki_domain, file_ttl, Byte_.Zero, 1, 1, 1 ,1, 1, 1);
-		rv.Init_at_orig(Xof_repo_tid_.Tid__local, wiki_domain, file_ttl, Xof_ext_.new_by_id_(Xof_ext_.Id_png), 120, 120, Bry_.Empty);
+		byte[] wiki_domain = BryUtl.NewA7(wiki);
+		byte[] file_ttl = BryUtl.NewA7(file);
+		rv.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, wiki_domain, file_ttl, ByteUtl.Zero, 1, 1, 1 ,1, 1, 1);
+		rv.Init_at_orig(Xof_repo_tid_.Tid__local, wiki_domain, file_ttl, Xof_ext_.new_by_id_(Xof_ext_.Id_png), 120, 120, BryUtl.Empty);
 		rv.File_size_(size);
 		return rv;
 	}
@@ -110,19 +110,19 @@ class Xou_cache_mgr_fxt {
 	}
 	public void Test_get(Xof_fsdb_itm fsdb, int expd_view_count, long expd_view_date) {
 		Xou_cache_itm cache = mgr.Get_or_null(fsdb);
-		Tfds.Eq(expd_view_count, cache.View_count(), "count");
-		Tfds.Eq(expd_view_date , (cache.View_date() / 60) - 1, "time");	// Tfds.Now increments by 60 seconds; also -1 b/c Gfo_log now calls Datetime_now.Get once
+		GfoTstr.EqObj(expd_view_count, cache.View_count(), "count");
+		GfoTstr.EqObj(expd_view_date , (cache.View_date() / 60) - 1, "time");	// Tfds.Now increments by 60 seconds; also -1 b/c Gfo_log now calls Datetime_now.Get once
 	}
 	public void Test_get_n(Xof_fsdb_itm... ary) {
 		for (Xof_fsdb_itm itm : ary) {
 			Xou_cache_itm cache = mgr.Get_or_null(itm);
-			Tfds.Eq_null(cache, String_.new_u8(itm.Lnki_ttl()));
+			GfoTstr.EqNull(cache, StringUtl.NewU8(itm.Lnki_ttl()));
 		}
 	}
 	public void Test_get_y(Xof_fsdb_itm... ary) {
 		for (Xof_fsdb_itm itm : ary) {
 			Xou_cache_itm cache = mgr.Get_or_null(itm);
-			Tfds.Eq_nullNot(cache, String_.new_u8(itm.Lnki_ttl()));
+			GfoTstr.EqNotNull(cache, StringUtl.NewU8(itm.Lnki_ttl()));
 		}
 	}
 }

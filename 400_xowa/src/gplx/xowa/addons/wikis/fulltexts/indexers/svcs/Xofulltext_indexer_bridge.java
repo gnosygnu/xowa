@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.indexers.svcs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.htmls.bridges.*;
+package gplx.xowa.addons.wikis.fulltexts.indexers.svcs;
+import gplx.langs.jsons.Json_nde;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.htmls.bridges.Bridge_cmd_itm;
+import gplx.xowa.htmls.bridges.Bridge_cmd_mgr;
 public class Xofulltext_indexer_bridge implements Bridge_cmd_itm {
 	private Xofulltext_indexer_svc svc;
 	public void Init_by_app(Xoa_app app) {
@@ -28,7 +32,7 @@ public class Xofulltext_indexer_bridge implements Bridge_cmd_itm {
 		Json_nde args = data.Get_kv(Bridge_cmd_mgr.Msg__args).Val_as_nde();
 		switch (proc_id) {
 			case Proc__index:					svc.Index(args); break;
-			default: throw Err_.new_unhandled_default(proc_id);
+			default: throw ErrUtl.NewUnhandled(proc_id);
 		}
 		return "";
 	}
@@ -38,6 +42,6 @@ public class Xofulltext_indexer_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("index"						, Proc__index)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("xowa.wiki.fulltext.indexer");
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = BryUtl.NewA7("xowa.wiki.fulltext.indexer");
         public static final Xofulltext_indexer_bridge Prototype = new Xofulltext_indexer_bridge(); Xofulltext_indexer_bridge() {}
 }

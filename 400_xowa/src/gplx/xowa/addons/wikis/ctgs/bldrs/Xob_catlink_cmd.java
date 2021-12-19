@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
+package gplx.xowa.addons.wikis.ctgs.bldrs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sql_dumps.*;
 public class Xob_catlink_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk {
 	private final Xob_catlink_mgr mgr = new Xob_catlink_mgr();
@@ -35,13 +38,13 @@ public class Xob_catlink_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk
 	}
 	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		switch (fld_idx) {
-			case Fld__cl_from:				this.tmp_page_id			= Bry_.To_int_or(src, val_bgn, val_end, -1); break;
-			case Fld__cl_to:				this.tmp_ctg_ttl			= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld__cl_sortkey:			this.tmp_sortkey			= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld__cl_timestamp:			this.tmp_timestamp			= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld__cl_sortkey_prefix:	this.tmp_sortkey_prefix		= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld__cl_collation:			this.tmp_collation			= Bry_.Mid(src, val_bgn, val_end); break;
-			case Fld__cl_type:				this.tmp_type				= Bry_.Mid(src, val_bgn, val_end); break;
+			case Fld__cl_from:				this.tmp_page_id			= BryUtl.ToIntOr(src, val_bgn, val_end, -1); break;
+			case Fld__cl_to:				this.tmp_ctg_ttl			= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld__cl_sortkey:			this.tmp_sortkey			= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld__cl_timestamp:			this.tmp_timestamp			= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld__cl_sortkey_prefix:	this.tmp_sortkey_prefix		= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld__cl_collation:			this.tmp_collation			= BryLni.Mid(src, val_bgn, val_end); break;
+			case Fld__cl_type:				this.tmp_type				= BryLni.Mid(src, val_bgn, val_end); break;
 		}
 	}
 	public void On_row_done() {

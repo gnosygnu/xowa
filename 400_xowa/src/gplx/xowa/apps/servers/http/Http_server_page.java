@@ -15,10 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.servers.http;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Io_mgr;
-import gplx.String_;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.envs.Runtime_;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
@@ -59,26 +61,26 @@ public class Http_server_page {
 			this.url = wiki.Utl__url_parser().Parse(Xoerror_special.Make_url__invalidWiki(wiki_domain));
 			return true;
 		}
-		if (Runtime_.Memory_total() > Io_mgr.Len_gb) Xowe_wiki_.Rls_mem(wiki, true); // release memory at 1 GB; DATE:2015-09-11
+		if (Runtime_.Memory_total() > IoConsts.LenGB) Xowe_wiki_.Rls_mem(wiki, true); // release memory at 1 GB; DATE:2015-09-11
 
 		// get url
 		// empty title returns main page; EX: "" -> "Main_Page"
 		this.ttl_bry = ttl_bry_arg;
-		if (Bry_.Len_eq_0(ttl_bry)) {
+		if (BryUtl.IsNullOrEmpty(ttl_bry)) {
 			this.ttl_bry = wiki.Props().Main_page();
 		}
 		// generate ttl of domain/wiki/page; needed for pages with leading slash; EX: "/abcd" -> "en.wikipedia.org/wiki//abcd"; ISSUE#:301; DATE:2018-12-16
 		else {
-			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
+			BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetM001();
 			try {
-				tmp_bfr.Add(wiki.Domain_bry()).Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki).Add(ttl_bry).Add_safe(qarg);
-				this.ttl_bry = tmp_bfr.To_bry_and_clear();
-			} finally {tmp_bfr.Mkr_rls();}
+				tmp_bfr.Add(wiki.Domain_bry()).Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki).Add(ttl_bry).AddSafe(qarg);
+				this.ttl_bry = tmp_bfr.ToBryAndClear();
+			} finally {tmp_bfr.MkrRls();}
 		}
 
 		// get url
 		this.url = wiki.Utl__url_parser().Parse(ttl_bry);
-		if (!Bry_.Eq(url.Wiki_bry(), wiki.Domain_bry())) { // handle xwiki; EX: en.wikipedia.org/wiki/it:Roma; ISSUE#:600; DATE:2019-11-02
+		if (!BryLni.Eq(url.Wiki_bry(), wiki.Domain_bry())) { // handle xwiki; EX: en.wikipedia.org/wiki/it:Roma; ISSUE#:600; DATE:2019-11-02
 			this.redirect = url.To_bry();
 			return false;
 		}
@@ -97,7 +99,7 @@ public class Http_server_page {
 		this.page = wiki.Page_mgr().Load_page(url, ttl, tab);
 		app.Gui_mgr().Browser_win().Active_page_(page);	// HACK: init gui_mgr's page for output (which server ordinarily doesn't need)
 		if (page.Db().Page().Exists_n()) { // if page does not exist, replace with message; else null_ref error; DATE:2014-03-08
-			page.Db().Text().Text_bry_(Bry_.new_a7("'''Page not found.'''"));
+			page.Db().Text().Text_bry_(BryUtl.NewA7("'''Page not found.'''"));
 			wiki.Parser_mgr().Parse(page, false);
 		}
 		page.Html_data().Head_mgr().Itm__server().Init_by_http(data__client).Enabled_y_();
@@ -105,7 +107,7 @@ public class Http_server_page {
 	public void Make_html(byte retrieve_mode, byte mode, boolean popup_enabled, String popup_mode, String popup_id) {
 		// generate html
 		if (popup_enabled) {
-			if (String_.Eq(popup_mode, "more"))
+			if (StringUtl.Eq(popup_mode, "more"))
 				this.html = wiki.Html_mgr().Head_mgr().Popup_mgr().Show_more(popup_id);
 			else
 				this.html = wiki.Html_mgr().Head_mgr().Popup_mgr().Show_init(popup_id, ttl_bry, ttl_bry);
@@ -113,8 +115,8 @@ public class Http_server_page {
 		else {
 			// NOTE: generates HTML, but substitutes xoimg tags for <img>; ISSUE#:686; DATE:2020-06-27
 			byte[] page_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, mode);
-			page_html = Bry_.Replace_many(page_html, app.Fsys_mgr().Root_dir().To_http_file_bry(), Http_server_wkr.Url__fsys);
-			this.html = String_.new_u8(page_html); // NOTE: must generate HTML now in order for "wait" and "async_server" to work with text_dbs; DATE:2016-07-10
+			page_html = BryUtlByWtr.ReplaceMany(page_html, app.Fsys_mgr().Root_dir().To_http_file_bry(), Http_server_wkr.Url__fsys);
+			this.html = StringUtl.NewU8(page_html); // NOTE: must generate HTML now in order for "wait" and "async_server" to work with text_dbs; DATE:2016-07-10
 			switch (retrieve_mode) {
 				case File_retrieve_mode.Mode_skip:	// noop
 					break;
@@ -126,7 +128,7 @@ public class Http_server_page {
 					break;
 			}
 			// NOTE: substitutes xoimg tags for actual file; ISSUE#:686; DATE:2020-06-27
-			this.html = String_.new_u8(wiki.Html__hdump_mgr().Load_mgr().Parse(page_html, this.page));
+			this.html = StringUtl.NewU8(wiki.Html__hdump_mgr().Load_mgr().Parse(page_html, this.page));
 		}
 	}
 }

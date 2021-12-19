@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.core.btries.*;
-import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.title;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+import org.junit.*;
 import gplx.xowa.mediawiki.languages.*; import gplx.xowa.langs.*;
 public class XomwMediaWikiTitleCodec_tst {
 	private final XomwMediaWikiTitleCodec_fxt fxt = new XomwMediaWikiTitleCodec_fxt();
@@ -37,12 +39,12 @@ public class XomwMediaWikiTitleCodec_tst {
 class XomwMediaWikiTitleCodec_fxt {
 	private byte[][] regexTitlePrefixResult = new byte[2][];
 	public void Test_regexTitlePrefix(String src, String expd_ns, String expd_ttl) {
-		XomwRegexTitlePrefix.preg_match(regexTitlePrefixResult, Bry_.new_u8(src));
-		Gftest.Eq__str(expd_ns,  String_.new_u8(regexTitlePrefixResult[0]));
-		Gftest.Eq__str(expd_ttl, String_.new_u8(regexTitlePrefixResult[1]));
+		XomwRegexTitlePrefix.preg_match(regexTitlePrefixResult, BryUtl.NewU8(src));
+		GfoTstr.Eq(expd_ns,  StringUtl.NewU8(regexTitlePrefixResult[0]));
+		GfoTstr.Eq(expd_ttl, StringUtl.NewU8(regexTitlePrefixResult[1]));
 	}
 	public XomwMediaWikiTitleCodecParts Make_parts(int ns, String dbkey) {
-		return new XomwMediaWikiTitleCodecParts(Bry_.new_u8(dbkey), ns);
+		return new XomwMediaWikiTitleCodecParts(BryUtl.NewU8(dbkey), ns);
 	}
 	public XomwMediaWikiTitleCodec Make_codec(XomwLanguage lang) {
 		XomwEnv env = new XomwEnv(lang.XoLang());
@@ -54,7 +56,7 @@ class XomwMediaWikiTitleCodec_fxt {
 		return new XomwLanguage(lang);
 	}
 	public void Test_splitTitleString(XomwMediaWikiTitleCodec codec, String src, XomwMediaWikiTitleCodecParts expd) {
-		XomwMediaWikiTitleCodecParts actl = codec.splitTitleString(Bry_.new_u8(src), XomwDefines.NS_MAIN);
-		Gftest.Eq__str(expd.ToStr(), actl.ToStr());
+		XomwMediaWikiTitleCodecParts actl = codec.splitTitleString(BryUtl.NewU8(src), XomwDefines.NS_MAIN);
+		GfoTstr.Eq(expd.ToStr(), actl.ToStr());
 	}
 }

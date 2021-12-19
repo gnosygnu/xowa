@@ -13,22 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.elems; import gplx.objects.primitives.BoolUtl;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk_;
-import gplx.Gfo_invk_cmd;
-import gplx.Gfo_invk_cmd_mgr;
-import gplx.GfsCtx;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Keyval_hash;
-import gplx.Object_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+package gplx.gfui.controls.elems;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.Gfo_invk_cmd_mgr;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.core.interfaces.InjectAble;
 import gplx.gfui.GfuiAlign;
 import gplx.gfui.GfuiAlign_;
@@ -68,6 +64,11 @@ import gplx.gfui.layouts.GftGrid;
 import gplx.gfui.layouts.GftItem;
 import gplx.gfui.layouts.swts.Swt_layout_data;
 import gplx.gfui.layouts.swts.Swt_layout_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.KeyValHash;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
 public class GfuiElemBase implements GfuiElem {
 	//% Layout
 	public Gfo_evt_mgr Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} Gfo_evt_mgr evt_mgr;
@@ -125,7 +126,7 @@ public class GfuiElemBase implements GfuiElem {
 	public GfuiElem Border_off_() {border.All_(null); return this;}
 	public GfxStringData TextMgr() {return textMgr;} GfxStringData textMgr;
 	public String Text() {return textMgr.Val();}
-	public GfuiElem Text_any_(Object obj) {return Text_(Object_.Xto_str_strict_or_null_mark(obj));}
+	public GfuiElem Text_any_(Object obj) {return Text_(ObjectUtl.ToStrOrNullMark(obj));}
 	public GfuiElem Text_(String v) {
 		this.TextMgr().Text_set(v);
 		Click_key_set_(v);
@@ -155,13 +156,13 @@ public class GfuiElemBase implements GfuiElem {
 		if (subElems.Count() == 0)							// if no subs, focus self
 			underElem.Core().Focus();
 		else if (defaultFocusKey != null) {					// if default is specified, focus it
-			GfuiElem focusTarget = subElems.Get_by(defaultFocusKey); if (focusTarget == null) throw Err_.new_wo_type("could not find defaultTarget for focus", "ownerKey", this.Key_of_GfuiElem(), "defaultTarget", defaultFocusKey);
+			GfuiElem focusTarget = subElems.Get_by(defaultFocusKey); if (focusTarget == null) throw ErrUtl.NewArgs("could not find defaultTarget for focus", "ownerKey", this.Key_of_GfuiElem(), "defaultTarget", defaultFocusKey);
 			focusTarget.Focus();	
 		}
 		else {												// else, activate first visible elem; NOTE: some elems are visible, but not Focus_able (ex: ImgGalleryBox)
 			for (int i = 0; i < subElems.Count(); i++) {
 				GfuiElem sub = subElems.Get_at(i);
-				if (sub.Visible() && !String_.Eq(sub.Key_of_GfuiElem(), "statusBox")) {
+				if (sub.Visible() && !StringUtl.Eq(sub.Key_of_GfuiElem(), "statusBox")) {
 					sub.Focus();
 					return;
 				}
@@ -177,7 +178,7 @@ public class GfuiElemBase implements GfuiElem {
 	public void Click() {}
 	public boolean Click_able() {return false;}
 	public IptKey Click_key() {return clickKey;}
-	@gplx.Internal protected void Click_key_set_(String v) {clickKey = GfuiWinKeyCmdMgr.ExtractKeyFromText(v);} IptKey clickKey = IptKey_.None;
+	public void Click_key_set_(String v) {clickKey = GfuiWinKeyCmdMgr.ExtractKeyFromText(v);} IptKey clickKey = IptKey_.None;
 
 	//% Owner
 	public String Key_of_GfuiElem() {return keyIdf;} public GfuiElem Key_of_GfuiElem_(String val) {keyIdf = val; return this;} private String keyIdf;
@@ -317,17 +318,17 @@ public class GfuiElemBase implements GfuiElem {
 	}
 		public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();
 
-	public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		this.kit = Swing_kit.Instance;	// NOTE: assume that callers want Swing; SWT / Mem should be calling ctor_kit_GfuiElemBase
 		underElem = UnderElem_make(ctorArgs);
 		underElem.Host_set(this);
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(BoolUtl.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(BoolUtl.Cast(ctorArgs.GetByValOr(GfuiElem_.InitKey_focusAble, true)));
 		underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
-	public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
+	public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, KeyValHash ctorArgs) {
 		this.kit = kit;
 		this.keyIdf = key;
 		this.underElem = underElem;
@@ -335,14 +336,14 @@ public class GfuiElemBase implements GfuiElem {
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(BoolUtl.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(BoolUtl.Cast(ctorArgs.GetByValOr(GfuiElem_.InitKey_focusAble, true)));
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
-	public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.control_();}
+	public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.control_();}
 	public Object SubItms_getObj(String key) {return injected.GetByOrNull(key);}
 	public GfuiElemBase SubItms_add(String key, Object v) {injected.Add(key, v); return this;}
 	public Ordered_hash XtnAtrs() {return xtnAtrs;} Ordered_hash xtnAtrs = Ordered_hash_.New();
 	Hash_adp injected = Hash_adp_.New();
 	GxwCore_base underMgr;
-	@gplx.Internal protected static boolean SizeChanged_ignore = false;
+	public static boolean SizeChanged_ignore = false;
 }

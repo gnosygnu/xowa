@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new;
+import gplx.frameworks.objects.New;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 // MW.SRC:1.33
 import gplx.langs.regxs.*;
@@ -43,7 +47,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 	public XomwParser parser;
 
 	public static final String CACHE_PREFIX = "preprocess-hash";
-	@gplx.New public static final int CACHE_VERSION = 2;
+	@New public static final int CACHE_VERSION = 2;
 
 	public XomwPreprocessor_Hash(XomwParser parser) {
 		this.parser = parser;
@@ -238,26 +242,26 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					}
 				} else {
 					String curTwoChar = null;
-					curChar = curTwoChar = Char_.To_str(String_.CharAt(text, i));
+					curChar = curTwoChar = CharUtl.ToStr(StringUtl.CharAt(text, i));
 					if ((i + 1) < lengthText) {
-						curTwoChar += Char_.To_str(String_.CharAt(text, i + 1));
+						curTwoChar += CharUtl.ToStr(StringUtl.CharAt(text, i + 1));
 					}
-					if (String_.Eq(curChar, "|")) {
+					if (StringUtl.Eq(curChar, "|")) {
 						found = "pipe";
-					} else if (String_.Eq(curChar, "=")) {
+					} else if (StringUtl.Eq(curChar, "=")) {
 						found = "equals";
-					} else if (String_.Eq(curChar, "<")) {
+					} else if (StringUtl.Eq(curChar, "<")) {
 						found = "angle";
-					} else if (String_.Eq(curChar, "\n")) {
+					} else if (StringUtl.Eq(curChar, "\n")) {
 						if (inHeading) {
 							found = "line-end";
 						} else {
 							found = "line-start";
 						}
-					} else if (String_.Eq(curTwoChar, currentClosing)) {
+					} else if (StringUtl.Eq(curTwoChar, currentClosing)) {
 						found = "close";
 						curChar = curTwoChar;
-					} else if (String_.Eq(curChar, currentClosing)) {
+					} else if (StringUtl.Eq(curChar, currentClosing)) {
 						found = "close";
 					} else if (XophpObject_.isset_obj(this.rules.Get_by(curTwoChar))) {
 						curChar = curTwoChar;
@@ -272,7 +276,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 						// We also may get "-" and "}" characters here which
 						// don"t match -{ or currentClosing.  Add these to
 						// output and continue.
-						if (String_.Eq(curChar, "-") || String_.Eq(curChar, "}")) {
+						if (StringUtl.Eq(curChar, "-") || StringUtl.Eq(curChar, "}")) {
 							XomwPreprocessor_Hash.addLiteral(accum, curChar);
 						}
 						++i;
@@ -281,7 +285,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 				}
 			}
 
-			if (String_.Eq(found, "angle")) {
+			if (StringUtl.Eq(found, "angle")) {
 				String inner, close;
 				int attrEnd;
 				XophpArray matches = XophpArray.New();
@@ -301,7 +305,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					continue;
 				}
 				// Handle comments
-				if (XophpArray.isset(matches, 2) && String_.Eq(matches.Get_at_str(2), "!--")) {
+				if (XophpArray.isset(matches, 2) && StringUtl.Eq(matches.Get_at_str(2), "!--")) {
 					// To avoid leaving blank lines, when a sequence of
 					// space-separated comments is both preceded and followed by
 					// a newline (ignoring spaces), then
@@ -476,7 +480,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					children.Add(XophpArray.New("close", XophpArray.New(close)));
 				}
 				accum.Add(XophpArray.New("ext", children));
-			} else if (String_.Eq(found, "line-start")) {
+			} else if (StringUtl.Eq(found, "line-start")) {
 				// Is this the start of a heading?
 				// Line break belongs before the heading element in any case
 				if (fakeLineStart) {
@@ -590,7 +594,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 				// another heading. Infinite loops are avoided because the next iteration MUST
 				// hit the heading open case above, which unconditionally increments the
 				// input pointer.
-			} else if (String_.Eq(found, "open")) {
+			} else if (StringUtl.Eq(found, "open")) {
 				// count opening brace characters
 				int curLen = XophpString_.strlen(curChar);
 				int count = (curLen > 1) ?
@@ -601,7 +605,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 				String savedPrefix = "";
 				boolean lineStart = (i > 0 && XophpString_.Char_eq(text, i - 1, "\n"));
 
-				if (String_.Eq(curChar, "-{") && count > curLen) {
+				if (StringUtl.Eq(curChar, "-{") && count > curLen) {
 					// -{ => {{ transition because rightmost wins
 					savedPrefix = "-";
 					i++;
@@ -638,11 +642,11 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					XomwPreprocessor_Hash.addLiteral(accum, savedPrefix + XophpString_.str_repeat(curChar, count));
 				}
 				i += count;
-			} else if (String_.Eq(found, "close")) {
+			} else if (StringUtl.Eq(found, "close")) {
 				XomwPPDStackElement_Hash piece = (XomwPPDStackElement_Hash)stack.top;
 				// lets check if there are enough characters for closing brace
 				int maxCount = piece.count;
-				if (String_.Eq(piece.close, "}-") && String_.Eq(curChar, "}")) {
+				if (StringUtl.Eq(piece.close, "}-") && StringUtl.Eq(curChar, "}")) {
 					maxCount--; // don"t try to match closing "-" as a "}"
 				}
 				int curLen = XophpString_.strlen(curChar);
@@ -736,7 +740,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					if (piece.count >= min) {
 						stack.push(piece);
 						accum = stack.getAccum(); // =&
-					} else if (piece.count == 1 && String_.Eq(piece.open, "{") && String_.Eq(piece.savedPrefix, "-")) {
+					} else if (piece.count == 1 && StringUtl.Eq(piece.open, "{") && StringUtl.Eq(piece.savedPrefix, "-")) {
 						piece.savedPrefix = "";
 						piece.open = "-{";
 						piece.count = 2;
@@ -751,7 +755,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 						);
 						XomwPreprocessor_Hash.addLiteral(accum, piece.savedPrefix + s);
 					}
-				} else if (!String_.Eq(piece.savedPrefix, "")) {
+				} else if (!StringUtl.Eq(piece.savedPrefix, "")) {
 					XomwPreprocessor_Hash.addLiteral(accum, piece.savedPrefix);
 				}
 
@@ -768,12 +772,12 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 
 				// Add XML element to the enclosing accumulator
 				XophpArray.array_splice(accum, XophpArray.count(accum), 0, element);
-			} else if (String_.Eq(found, "pipe")) {
+			} else if (StringUtl.Eq(found, "pipe")) {
 				findEquals = true; // shortcut for getFlags()
 				stack.addPart();
 				accum = stack.getAccum(); // =&
 				++i;
-			} else if (String_.Eq(found, "equals")) {
+			} else if (StringUtl.Eq(found, "equals")) {
 				findEquals = false; // shortcut for getFlags()
 				accum.Add(XophpArray.New("equals", XophpArray.New("=")));
 				stack.getCurrentPart().eqpos = XophpArray.count(accum) - 1;
@@ -794,7 +798,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 		int rootAccumLen = rootAccum.Len();
 		for (int j = 0; j < rootAccumLen; j++) {
 			XophpArray node = rootAccum.Get_at_ary_or_null(j); // stack.rootAccum as &node
-			if (XophpArray.is_array(node) && String_.Eq(node.Get_at_str(XomwPPNode_Hash_Tree.NAME), "possible-h")) {
+			if (XophpArray.is_array(node) && StringUtl.Eq(node.Get_at_str(XomwPPNode_Hash_Tree.NAME), "possible-h")) {
 				node.Set(XomwPPNode_Hash_Tree.NAME, "h");
 			}
 		}

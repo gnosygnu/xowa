@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa;
 
-import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg__gui_;
-import gplx.Gfo_usr_dlg__log_base;
-import gplx.Gfo_usr_dlg_base;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg__gui_;
+import gplx.libs.dlgs.Gfo_usr_dlg__log_base;
+import gplx.libs.dlgs.Gfo_usr_dlg_base;
 import gplx.core.log_msgs.Gfo_msg_grp;
 import gplx.core.log_msgs.Gfo_msg_grp_;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.apps.boots.Xoa_boot_mgr;
 import gplx.xowa.apps.boots.Xoa_cmd_arg_mgr;
 import gplx.xowa.guis.views.boots.Xog_error_win; 
@@ -34,7 +34,7 @@ public class Xoa_app_ {
 			boot_mgr.Run(args, arg_mgr);
 		} catch (Error e) {	
 			if (arg_mgr.App_type().Tid_is_gui())
-				Xog_error_win.Run(Err_.Message_lang(e), Err_.Trace_lang(e));
+				Xog_error_win.Run(ErrUtl.Message(e), ErrUtl.Trace(e));
 			else
 				throw e;
 		}

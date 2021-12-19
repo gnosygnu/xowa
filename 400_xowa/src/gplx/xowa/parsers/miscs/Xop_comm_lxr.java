@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.miscs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.paras.*;
@@ -25,9 +28,9 @@ public class Xop_comm_lxr implements Xop_lxr {
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		int lhs_end = cur_pos;
-		int end_pos = Bry_find_.Find_fwd(src, End_ary, cur_pos, src_len);	// search for "-->"	// NOTE: do not reuse cur_pos, else cur_pos may become -1 and fatal error in ctx.Msg_log() below; DATE:2014-06-08
+		int end_pos = BryFind.FindFwd(src, End_ary, cur_pos, src_len);	// search for "-->"	// NOTE: do not reuse cur_pos, else cur_pos may become -1 and fatal error in ctx.Msg_log() below; DATE:2014-06-08
 		int rhs_bgn = end_pos;
-		if (end_pos == Bry_find_.Not_found) {								// "-->" not found
+		if (end_pos == BryFind.NotFound) {								// "-->" not found
 			ctx.Msg_log().Add_itm_none(Xop_comm_log.Eos, src, bgn_pos, cur_pos);
 			cur_pos = src_len;												// gobble up rest of content
 		}
@@ -40,7 +43,7 @@ public class Xop_comm_lxr implements Xop_lxr {
 	private static int Trim_ws_if_entire_line_is_commment(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, int lhs_end, int rhs_bgn) {// REF.MW:Preprocessor_DOM.php|preprocessToXml|handle comments; DATE:2014-02-24
 		if (	ctx.Tid_is_popup()
 			&&	ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt		// note that only popup parse can generate <!-- --> that makes it to wtxt
-			&&	Bry_.Match(src, lhs_end, rhs_bgn, Xowa_skip_text_bry)	// <!--XOWA_SKIP-->
+			&&	BryLni.Eq(src, lhs_end, rhs_bgn, Xowa_skip_text_bry)	// <!--XOWA_SKIP-->
 			)
 			return cur_pos;	// in popup mode only do not gobble trailing \n; PAGE:en.w:Gwynedd; DATE:2014-07-01
 		int nl_lhs = -1;
@@ -94,6 +97,6 @@ public class Xop_comm_lxr implements Xop_lxr {
 	private static final int End_len = End_ary.length;
 	public static final Xop_comm_lxr Instance = new Xop_comm_lxr(); Xop_comm_lxr() {}
 	private static final String Xowa_skip_text_str = "XOWA_SKIP";
-	private static final byte[] Xowa_skip_text_bry = Bry_.new_a7(Xowa_skip_text_str);
-	public static final byte[] Xowa_skip_comment_bry = Bry_.new_a7("<!--" + Xowa_skip_text_str + "-->");
+	private static final byte[] Xowa_skip_text_bry = BryUtl.NewA7(Xowa_skip_text_str);
+	public static final byte[] Xowa_skip_comment_bry = BryUtl.NewA7("<!--" + Xowa_skip_text_str + "-->");
 }

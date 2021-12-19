@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import org.junit.*;
 public class z811_useCase_GfmlIoSql_tst {
 	@Test public void Basic() {
@@ -34,7 +37,7 @@ public class z811_useCase_GfmlIoSql_tst {
 	void tst_Doc(String raw, GfmlNdeWrapper expd) {
 		GfmlDoc doc = SqlDoc.XtoDoc(raw);
 		GfmlNde actl = (GfmlNde)doc.RootNde();
-		Tfds.Eq_ary_str(To_str(expd.Nde()), To_str(actl));
+		GfoTstr.EqLines(To_str(expd.Nde()), To_str(actl));
 	}
 	String[] To_str(GfmlNde nde) {
 		List_adp list = List_adp_.New();

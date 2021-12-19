@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.htmls.core.htmls.tidy;
+import gplx.libs.files.Io_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 public class Xoh_tidy_wkr_tidy extends Process_adp implements Xoh_tidy_wkr { 	private Xoae_app app; private Io_url tidy_source, tidy_target;
 	public byte Tid() {return Xoh_tidy_wkr_.Tid_tidy;}
@@ -26,18 +31,18 @@ public class Xoh_tidy_wkr_tidy extends Process_adp implements Xoh_tidy_wkr { 	pr
 		return super.Tmp_dir_(v);
 	}
 	public void Indent_(boolean v) {Indent_val = v ? "y" : "n";}
-	public void Exec_tidy(Bry_bfr bfr, byte[] page_url) {
+	public void Exec_tidy(BryWtr bfr, byte[] page_url) {
 		int bfr_len = bfr.Len();
-		long bgn = System_.Ticks();
+		long bgn = SystemUtl.Ticks();
 		Io_mgr.Instance.SaveFilBfr(tidy_source, bfr);			// saves bfr to source; clears bfr
 		this.Run(tidy_source.Raw(), tidy_target.Raw());			// converts source to target
 		Io_mgr.Instance.LoadFilBryByBfr(tidy_target, bfr);		// loads bfr by target
-		if (bfr.Len_eq_0())										// something went wrong; load from source
+		if (bfr.HasNone())										// something went wrong; load from source
 			Io_mgr.Instance.LoadFilBryByBfr(tidy_source, bfr);	// loads bfr by target
-		app.Usr_dlg().Log_many("", "", "tidy exec; elapsed=~{0} len=~{1}", System_.Ticks__elapsed_in_frac(bgn), bfr_len);
+		app.Usr_dlg().Log_many("", "", "tidy exec; elapsed=~{0} len=~{1}", SystemUtl.Ticks__elapsed_in_frac(bgn), bfr_len);
 	}
 	private static String Indent_val = "y";
-	public static String Args_fmt = String_.Concat	// see https://meta.wikimedia.org/wiki/Data_dumps; missing numeric-entities:yes; enclose-text: yes
+	public static String Args_fmt = StringUtl.Concat	// see https://meta.wikimedia.org/wiki/Data_dumps; missing numeric-entities:yes; enclose-text: yes
 	(	"-utf8"							// default is ascii
 	,	" --force-output y"				// always generate output; do not fail on error
 	,	" --quiet y"					// suppress command-line header

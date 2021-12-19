@@ -14,12 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls.encoders;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Test;
 public class Gfo_url_encoder_tst {
 	private final Gfo_url_encoder_fxt fxt = new Gfo_url_encoder_fxt();
@@ -47,10 +46,10 @@ public class Gfo_url_encoder_tst {
 		fxt.Encoder_id().Test__decode("a.C2.A0b", "a b"); // WS is nbsp
 	}
 	@Test public void Id__err()  {
-		byte[] raw = Bry_.new_a7("0%.jpg");
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		byte[] raw = BryUtl.NewA7("0%.jpg");
+		BryWtr tmp_bfr = BryWtr.New();
 		fxt.Encoder_id().Encoder().Decode(tmp_bfr, BoolUtl.N, raw, 0, raw.length);
-		Tfds.Eq("0%.jpg", tmp_bfr.To_str_and_clear()); 
+		GfoTstr.EqObj("0%.jpg", tmp_bfr.ToStrAndClear());
 	}
 	@Test public void Ttl__syms__diff() 	{fxt.Encoder_ttl().Test__encode(" &'=+", "_%26%27%3D%2B");}
 	@Test public void Ttl__syms__same() 	{fxt.Encoder_ttl().Test__encode("!\"#$%()*,-./:;<>?@[\\]^_`{|}~", "!\"#$%()*,-./:;<>?@[\\]^_`{|}~");}
@@ -84,9 +83,9 @@ class Gfo_url_encoder_fxt {
 		Test__decode(encoded, raw);
 	}	
 	public void Test__encode(String raw, String expd) {
-		Tfds.Eq(expd, String_.new_u8(encoder.Encode(Bry_.new_u8(raw))));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(encoder.Encode(BryUtl.NewU8(raw))));
 	}
 	public void Test__decode(String raw, String expd) {
-		Tfds.Eq(expd, String_.new_u8(encoder.Decode(Bry_.new_u8(raw))));		
+		GfoTstr.EqObj(expd, StringUtl.NewU8(encoder.Decode(BryUtl.NewU8(raw))));
 	}
 }

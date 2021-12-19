@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.bldrs;
-import gplx.Bry_fmt;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_attach_itm;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
@@ -30,7 +30,7 @@ import gplx.dbs.Db_stmt;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.Xowe_wiki;
@@ -87,7 +87,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 			Xoa_app_.Usr_dlg().Plog_many("", "", "creating search_link");
 			Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__ary()[0];
 			new Db_attach_mgr(word_conn, new Db_attach_itm("link_db", link_tbl.conn))
-				.Exec_sql(String_.Concat_lines_nl_skip_last
+				.Exec_sql(StringUtl.ConcatLinesNlSkipLast
 				( "INSERT INTO <link_db>search_link (word_id, page_id)"
 				, "SELECT  w.word_id"
 				, ",       t.page_id"
@@ -112,7 +112,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		word_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("search_link_temp", DbmetaFldItm.NewInt("word_id"), DbmetaFldItm.NewInt("page_id"), DbmetaFldItm.NewInt("page_namespace")));
 		attach_mgr.Conn_main_(word_conn).Conn_links_(new Db_attach_itm("page_db", page_conn));
 		attach_mgr.Exec_sql_w_msg
-		( "filling search_link_temp (please wait)", String_.Concat_lines_nl_skip_last
+		( "filling search_link_temp (please wait)", StringUtl.ConcatLinesNlSkipLast
 		( "INSERT INTO search_link_temp (word_id, page_id, page_namespace)"
 		, "SELECT  w.word_id"
 		, ",       t.page_id"
@@ -132,7 +132,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, BoolUtl.Y);
 			attach_mgr.Conn_main_(link_tbl.conn).Conn_links_(new Db_attach_itm("word_db", word_conn));
 			attach_mgr.Exec_sql_w_msg
-			( Bry_fmt.Make_str("filling search_link: ~{idx} of ~{len}", i, len), String_.Concat_lines_nl_skip_last
+			( BryFmt.Make_str("filling search_link: ~{idx} of ~{len}", i, len), StringUtl.ConcatLinesNlSkipLast
 			( "INSERT INTO search_link (word_id, page_id)"
 			, "SELECT  t.word_id"
 			, ",       t.page_id"
@@ -157,10 +157,10 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 				this.page_id = page_rdr.Read_int(fld_page_id);
 				byte[] page_ttl = page_rdr.Read_bry_by_str(fld_page_ttl);
 				try {title_parser.Parse(this, page_ttl);}
-				catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "error while parsing title; id=~{0} title=~{1} err=~{2}", page_id, page_ttl, Err_.Message_gplx_log(e));}
+				catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "error while parsing title; id=~{0} title=~{1} err=~{2}", page_id, page_ttl, ErrUtl.ToStrLog(e));}
 				++page_count;
 				if	((page_count % commit_interval) == 0)	search_temp_tbl.conn.Txn_sav();
-				if	((page_count % progress_interval) == 0)	Gfo_usr_dlg_.Instance.Prog_many("", "", "parse progress: count=~{0} last=~{1}", page_count, String_.new_u8(page_ttl));
+				if	((page_count % progress_interval) == 0)	Gfo_usr_dlg_.Instance.Prog_many("", "", "parse progress: count=~{0} last=~{1}", page_count, StringUtl.NewU8(page_ttl));
 			}
 		}	finally {page_rdr.Rls();}
 		this.Term();
@@ -177,19 +177,19 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		cur_conn.Exec_sql("UPDATE search_temp SET word_id = -1");
 		Db_conn prv_conn = Db_conn_bldr.Instance.Get_or_noop(prv_url);			
 		new Db_attach_mgr(cur_conn, new Db_attach_itm("prv_db", prv_conn))
-			.Exec_sql_w_msg("updating old word ids", String_.Concat_lines_nl_skip_last
+			.Exec_sql_w_msg("updating old word ids", StringUtl.ConcatLinesNlSkipLast
 		( "UPDATE  search_temp"
 		, "SET     word_id = Coalesce((SELECT prv.word_id FROM <prv_db>search_word prv WHERE prv.word_text = search_temp.word_text), -1)"
 		));
 		// assign incrementing int to new_words
-		int nxt_word_id = cur_conn.Exec_select_as_int("SELECT Max(word_id) AS word_id FROM search_temp", -1); if (nxt_word_id == -1) throw Err_.new_("dbs", "max_id not found");
+		int nxt_word_id = cur_conn.Exec_select_as_int("SELECT Max(word_id) AS word_id FROM search_temp", -1); if (nxt_word_id == -1) throw ErrUtl.NewArgs("max_id not found");
 		int uids_max = 10000;
 		int[] uids_ary = new int[uids_max]; int uid_last = -1;
-		Db_stmt update_stmt = cur_conn.Stmt_update("search_temp", String_.Ary("word_uid"), "word_id");
+		Db_stmt update_stmt = cur_conn.Stmt_update("search_temp", StringUtl.Ary("word_uid"), "word_id");
 		while (true) {
 			// read 10,000 into memory
 			int uids_len = 0;
-			Db_rdr rdr = cur_conn.Exec_rdr("SELECT word_uid FROM search_temp WHERE word_id = -1 AND word_uid > " + Int_.To_str(uid_last));
+			Db_rdr rdr = cur_conn.Exec_rdr("SELECT word_uid FROM search_temp WHERE word_id = -1 AND word_uid > " + IntUtl.ToStr(uid_last));
 			try {
 				while (rdr.Move_next()) {
 					int uid = rdr.Read_int("word_uid");

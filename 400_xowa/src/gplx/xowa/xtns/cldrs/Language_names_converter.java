@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cldrs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.core.primitives.Byte_obj_ref;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.wrappers.ByteRef;
 import gplx.langs.jsons.Json_doc_wtr;
 import gplx.langs.phps.Php_evaluator;
 import gplx.langs.phps.Php_itm_ary;
@@ -32,21 +32,21 @@ import gplx.langs.phps.Php_line_assign;
 import gplx.langs.phps.Php_parser;
 import gplx.langs.phps.Php_text_itm_parser;
 import gplx.langs.phps.Php_tkn_comment;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 // REF.MW: /languages/data/Names.php
 class Language_names_converter {
 	private final Php_parser parser = new Php_parser();
 	private final Php_evaluator eval = new Php_evaluator(new gplx.core.log_msgs.Gfo_msg_log("test")).Comments_for_kv_();
 	private final Php_text_itm_parser text_itm_parser = new Php_text_itm_parser().Quote_is_single_(true);
 	private final List_adp tmp_list = List_adp_.New();
-	private final Byte_obj_ref tmp_result = Byte_obj_ref.zero_();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final ByteRef tmp_result = ByteRef.NewZero();
+	private final BryWtr tmp_bfr = BryWtr.New();
 
 	public Language_name[] Parse_fil(Io_url url) {
 		byte[] src = Io_mgr.Instance.LoadFilBry(url);
-		int bgn = Bry_find_.Find_fwd(src, Bry_.new_a7("$names"));
-		int end = Bry_find_.Find_bwd(src, Bry_.new_a7("];"), src.length);
-		return Parse(Bry_.Mid(src, bgn, end));
+		int bgn = BryFind.FindFwd(src, BryUtl.NewA7("$names"));
+		int end = BryFind.FindBwd(src, BryUtl.NewA7("];"), src.length);
+		return Parse(BryLni.Mid(src, bgn, end));
 	}
 	public Language_name[] Parse(byte[] src) {
 		parser.Parse_tkns(src, eval);
@@ -77,11 +77,11 @@ class Language_names_converter {
 
 			int comments_len = kv.Comments__len();
 			for (int j = 0; j < comments_len; j++) {
-				if (j != 0) tmp_bfr.Add_byte_space();
+				if (j != 0) tmp_bfr.AddByteSpace();
 				Php_tkn_comment tkn = kv.Comments__get_at__or_null(j);
 				tkn.To_bfr(tmp_bfr, src, true);
 			}
-			byte[] comm = tmp_bfr.To_bry_and_clear();
+			byte[] comm = tmp_bfr.ToBryAndClear();
                 list.Add(new byte[][] {key, val, comm});
 		}
 		return (byte[][][])list.ToAryAndClear(byte[][].class);
@@ -91,9 +91,9 @@ class Language_names_converter {
 		doc_wtr.Opt_unicode_y_();
 		doc_wtr.Ary_bgn();
 		int len = ary.length;
-		byte[] key_code = Bry_.new_a7("code");
-		byte[] key_name = Bry_.new_a7("name");
-		byte[] key_note = Bry_.new_a7("note");
+		byte[] key_code = BryUtl.NewA7("code");
+		byte[] key_name = BryUtl.NewA7("name");
+		byte[] key_note = BryUtl.NewA7("note");
 		for (int i = 0; i < len; i++) {
 			if (i != 0) doc_wtr.Comma();
 			doc_wtr.Nde_bgn();

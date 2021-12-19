@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.css;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
-import gplx.xowa.files.downloads.*;
 public class Xob_mirror_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xob_mirror_mgr_fxt fxt = new Xob_mirror_mgr_fxt();
-	@Test  public void Download_1() {
+	@Test public void Download_1() {
 		fxt.Fsys().Init_fil("mem/http/enwiki/file/a.png");
 		fxt.Fsys().Init_fil("mem/http/enwiki/wiki/Main_Page", "url('//enwiki/wiki/a.png')");
 //			fxt.Test_css();
@@ -56,6 +59,6 @@ class Io_fsys_fxt {
 	}
 	public void Test_fil(String url, String expd) {Test_fil(Io_url_.new_fil_(url), expd);}
 	public void Test_fil(Io_url url, String expd) {
-		Tfds.Eq_str_lines(expd, Io_mgr.Instance.LoadFilStr(url));
+		GfoTstr.EqLines(expd, Io_mgr.Instance.LoadFilStr(url));
 	}
 }

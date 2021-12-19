@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.wikis.*;
+package gplx.xowa.xtns.insiders;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Insider_xtn_mgr extends Xox_mgr_base {
 	public Insider_xtn_mgr() {
 		html_bldr = new Insider_html_bldr(this);
 	}
 	@Override public boolean Enabled_default() {return false;}
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("Insider");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = BryUtl.NewA7("Insider");
 	@Override public Xox_mgr Xtn_clone_new() {return new Insider_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki;

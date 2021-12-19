@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.sqlite; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.dbs.qrys.*;
 import gplx.dbs.metas.*; import gplx.dbs.metas.parsers.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Sqlite_schema_mgr implements Dbmeta_reload_cmd {
 	private final Db_engine engine; private boolean init = true;
 	private final Dbmeta_idx_mgr idx_mgr = new Dbmeta_idx_mgr();
@@ -48,7 +52,7 @@ public class Sqlite_schema_mgr implements Dbmeta_reload_cmd {
 		tbl_mgr.Clear(); idx_mgr.Clear();
 		Dbmeta_parser__tbl tbl_parser = new Dbmeta_parser__tbl();
 		Dbmeta_parser__idx idx_parser = new Dbmeta_parser__idx();
-		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", String_.Ary_empty, String_.Ary("type", "name", "sql"), Db_qry__select_in_tbl.Order_by_null);
+		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.new_("sqlite_master", StringUtl.AryEmpty, StringUtl.Ary("type", "name", "sql"), Db_qry__select_in_tbl.Order_by_null);
 		Db_rdr rdr = engine.Stmt_by_qry(qry).Exec_select__rls_auto();	
 		try {
 			Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.load.bgn: conn=~{0}", engine.Conn_info().Db_api());
@@ -60,19 +64,19 @@ public class Sqlite_schema_mgr implements Dbmeta_reload_cmd {
 					int type_int = Dbmeta_itm_tid.Xto_int(type_str);
 					switch (type_int) {
 						case Dbmeta_itm_tid.Tid_table:
-							if (String_.Has_at_bgn(name, "sqlite_")) continue;	// ignore b/c of non-orthodox syntax; EX: "CREATE TABLE sqlite_sequence(name, seq)"; also "CREATE TABLE sqlite_stat(tbl,idx,stat)";
-							tbl_mgr.Add(tbl_parser.Parse(Bry_.new_u8(sql)));
+							if (StringUtl.HasAtBgn(name, "sqlite_")) continue;	// ignore b/c of non-orthodox syntax; EX: "CREATE TABLE sqlite_sequence(name, seq)"; also "CREATE TABLE sqlite_stat(tbl,idx,stat)";
+							tbl_mgr.Add(tbl_parser.Parse(BryUtl.NewU8(sql)));
 							break;
 						case Dbmeta_itm_tid.Tid_index:
 							if (sql == null) continue; // ignore "autoindex"; EX: sqlite_autoindex_temp_page_len_avg_1
-							idx_mgr.Add(idx_parser.Parse(Bry_.new_u8(sql)));
+							idx_mgr.Add(idx_parser.Parse(BryUtl.NewU8(sql)));
 							break;
 						default:
 							Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.unknown type: conn=~{0} type=~{1} name=~{2} sql=~{3}", engine.Conn_info().Db_api(), type_str, name, sql);
 							break;
 					}
 				} catch (Exception e) {	// tables / indexes may be unparseable; skip them; EX: CREATE TABLE unparseable (col_1 /*comment*/ int); DATE:2016-06-08
-					Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.unparseable: conn=~{0} type=~{1} name=~{2} sql=~{3} err=~{4}", engine.Conn_info().Db_api(), type_str, name, sql, Err_.Message_gplx_log(e));
+					Gfo_usr_dlg_.Instance.Log_many("", "", "db.schema.unparseable: conn=~{0} type=~{1} name=~{2} sql=~{3} err=~{4}", engine.Conn_info().Db_api(), type_str, name, sql, ErrUtl.ToStrLog(e));
 				}
 			}
 		}	finally {rdr.Rls();}

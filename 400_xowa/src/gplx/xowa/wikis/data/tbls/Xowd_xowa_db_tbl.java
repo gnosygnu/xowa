@@ -13,10 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*;
-import gplx.objects.lists.ComparerAble;
-import gplx.xowa.wikis.data.*;
-import gplx.dbs.*;
+package gplx.xowa.wikis.data.tbls;
+import gplx.dbs.Db_cmd_mode;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_bldr;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.Db_tbl_owner;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoGuid;
+import gplx.types.commons.GfoGuidUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_core_db_props;
 public class Xowd_xowa_db_tbl implements Db_tbl {
 	public static final String Fld_id = "db_id", Fld_type = "db_type", Fld_url = "db_url";
 	private final DbmetaFldList flds = new DbmetaFldList();
@@ -45,11 +64,11 @@ public class Xowd_xowa_db_tbl implements Db_tbl {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
-				String ns_ids = ""; int part_id = -1; Guid_adp guid = Guid_adp_.Empty;
+				String ns_ids = ""; int part_id = -1; GfoGuid guid = GfoGuidUtl.Empty;
 				if (!schema_is_1) {
 					ns_ids = rdr.Read_str(fld_ns_ids);
 					part_id = rdr.Read_int(fld_part_id);
-					guid = Guid_adp_.Parse(rdr.Read_str(fld_guid));
+					guid = GfoGuidUtl.Parse(rdr.Read_str(fld_guid));
 				}
 				int db_id = rdr.Read_int(fld_id);
 				Xow_db_file db_file = Xow_db_file.Load(props, db_id, rdr.Read_byte(fld_type), wiki_root_dir.GenSubFil(rdr.Read_str(fld_url)), ns_ids, part_id, guid);
@@ -68,7 +87,7 @@ public class Xowd_xowa_db_tbl implements Db_tbl {
 		}	finally {stmt_bldr.Batch_end();}
 	}
 	public void Upsert(int id, byte tid, String url, String ns_ids, int part_id, String guid) {
-		gplx.dbs.utls.Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld_id), id, tid, url, ns_ids, part_id, guid);
+		gplx.dbs.utls.Db_tbl__crud_.Upsert(conn, tbl_name, flds, StringUtl.Ary(fld_id), id, tid, url, ns_ids, part_id, guid);
 	}
 	private void Commit_itm(Xow_db_file itm) {
 		Db_stmt stmt = stmt_bldr.Get(itm.Cmd_mode());
@@ -77,13 +96,13 @@ public class Xowd_xowa_db_tbl implements Db_tbl {
 			case Db_cmd_mode.Tid_update:	stmt.Clear();								Commit_itm_vals(stmt, itm); stmt.Crt_int(fld_id, itm.Id()).Exec_update(); break;
 			case Db_cmd_mode.Tid_delete:	stmt.Clear().Crt_int(fld_id, itm.Id()).Exec_delete();	break;
 			case Db_cmd_mode.Tid_ignore:	break;
-			default:						throw Err_.new_unhandled(itm.Cmd_mode());
+			default:						throw ErrUtl.NewUnhandled(itm.Cmd_mode());
 		}
 		itm.Cmd_mode_(Db_cmd_mode.Tid_ignore);
 	}
 	private void Commit_itm_vals(Db_stmt stmt, Xow_db_file itm) {
 		String url_rel = itm.Url().NameAndExt();
-		stmt.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, url_rel).Val_str(fld_ns_ids, itm.Ns_ids()).Val_int(fld_part_id, itm.Part_id()).Val_str(fld_guid, itm.Guid().To_str());
+		stmt.Val_byte(fld_type, itm.Tid()).Val_str(fld_url, url_rel).Val_str(fld_ns_ids, itm.Ns_ids()).Val_int(fld_part_id, itm.Part_id()).Val_str(fld_guid, itm.Guid().ToStr());
 	}
 	public void Rls() {}
 
@@ -93,7 +112,7 @@ class Xow_db_file_sorter__id implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xow_db_file lhs = (Xow_db_file)lhsObj;
 		Xow_db_file rhs = (Xow_db_file)rhsObj;
-		return Int_.Compare(lhs.Id(), rhs.Id());
+		return IntUtl.Compare(lhs.Id(), rhs.Id());
 	}
 	public static final Xow_db_file_sorter__id Instance = new Xow_db_file_sorter__id(); Xow_db_file_sorter__id() {}
 }

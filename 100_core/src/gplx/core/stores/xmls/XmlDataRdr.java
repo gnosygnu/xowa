@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores.xmls; import gplx.*; import gplx.core.*; import gplx.core.stores.*;
+package gplx.core.stores.xmls;
+import gplx.*; import gplx.core.*; import gplx.core.stores.*;
 import gplx.langs.xmls.*; /*Xpath_*/
 public class XmlDataRdr extends DataRdr_base implements DataRdr {
 	@Override public String NameOfNode() {return nde.Name();} public String To_str() {return nde.Xml_outer();}
@@ -27,7 +28,7 @@ public class XmlDataRdr extends DataRdr_base implements DataRdr {
 		return nde.Atrs().FetchValOr(key, null);
 	}
 	public boolean MoveNextPeer() {
-		if (++pos >= peerList.Count()){	// moved out Of range
+		if (++pos >= peerList.Count()){    // moved out Of range
 			nde = null;
 			return false; 
 		}
@@ -50,7 +51,7 @@ public class XmlDataRdr extends DataRdr_base implements DataRdr {
 		XmlDataRdr rv = new XmlDataRdr();
 		rv.ctor_(list, null);
 		return rv;
-	}		
+	}       
 	public void Rls() {nde = null; peerList = null;}
 	public String NodeValue_get() {
 		if (nde.SubNdes().Count() != 1) return "";
@@ -70,6 +71,6 @@ public class XmlDataRdr extends DataRdr_base implements DataRdr {
 	
 	XmlNde nde = null;
 	XmlNdeList peerList = null; int pos = -1;
-	@gplx.Internal protected XmlDataRdr(String raw) {this.LoadString(raw); this.Parse_set(true);}
+	public XmlDataRdr(String raw) {this.LoadString(raw); this.Parse_set(true);}
 	XmlDataRdr() {this.Parse_set(true);}
 }

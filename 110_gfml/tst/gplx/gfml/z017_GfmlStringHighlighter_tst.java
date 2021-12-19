@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class z017_GfmlStringHighlighter_tst {
 	@Test public void Short() {
@@ -46,6 +47,6 @@ public class z017_GfmlStringHighlighter_tst {
 	GfmlStringHighlighter sh_() {return GfmlStringHighlighter.new_();}
 	void tst_Err(GfmlStringHighlighter sh, String... expdLines) {
 		String[] actlLines = sh.Gen();
-		Tfds.Eq_ary_str(expdLines, actlLines);
+		GfoTstr.EqLines(expdLines, actlLines);
 	}
 }

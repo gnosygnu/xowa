@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.bldrs.cmds;
-import gplx.Bry_fmt;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Io_mgr;
-import gplx.String_;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_attach_itm;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
@@ -31,7 +31,7 @@ import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.DbmetaFldType;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.bldrs.utils_rankings.bldrs.Sqlite_percentile_cmd;
@@ -67,12 +67,12 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		int link_score_max = Srch_search_addon.Score_max;
 
 		// percentize page_len_score to 0 : 100,000,000; NOTE: 100,000,000 so that no individual score should have 2+ page; i.e.: score_range > page_count
-		new Sqlite_percentile_cmd(bldr, wiki).Init_by_rel_url(Xob_db_file.Name__page_link, "temp_page_len", link_score_max, String_.Concat_lines_nl_skip_last
+		new Sqlite_percentile_cmd(bldr, wiki).Init_by_rel_url(Xob_db_file.Name__page_link, "temp_page_len", link_score_max, StringUtl.ConcatLinesNlSkipLast
 		( "SELECT   p.page_id, p.page_len"
 		, "FROM     <page_db>page p"
 		, "ORDER BY p.page_len"	// NOTE: ORDER BY is needed b/c INSERT into AUTO INCREMENT table
 		)).Cmd_run();
-		plink_conn.Exec_sql("finalizing page_rank_temp.page_len_score", String_.Concat_lines_nl_skip_last
+		plink_conn.Exec_sql("finalizing page_rank_temp.page_len_score", StringUtl.ConcatLinesNlSkipLast
 		( "UPDATE   page_rank_temp"
 		, "SET      page_len_score = (SELECT tpl.row_score FROM temp_page_len tpl WHERE tpl.row_key = page_rank_temp.page_id)"
 		));
@@ -81,8 +81,8 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		if (page_rank_enabled) {
 			// get min / max
 			Gfo_usr_dlg_.Instance.Prog_none("", "", "search.page.score:calculating page_rank range");
-			double page_rank_min = plink_conn.Exec_select_as_double("SELECT Min(page_rank) FROM " + page_rank_tbl, Double_.MinValue); if (page_rank_min == Double_.MinValue) throw Err_.new_("bldr", "failed to get min; tbl=~{0}", page_rank_tbl);
-			double page_rank_max = plink_conn.Exec_select_as_double("SELECT Max(page_rank) FROM " + page_rank_tbl, Double_.MinValue); if (page_rank_max == Double_.MinValue) throw Err_.new_("bldr", "failed to get max; tbl=~{0}", page_rank_tbl);
+			double page_rank_min = plink_conn.Exec_select_as_double("SELECT Min(page_rank) FROM " + page_rank_tbl, DoubleUtl.MinValue); if (page_rank_min == DoubleUtl.MinValue) throw ErrUtl.NewArgs("failed to get min; tbl=~{0}", page_rank_tbl);
+			double page_rank_max = plink_conn.Exec_select_as_double("SELECT Max(page_rank) FROM " + page_rank_tbl, DoubleUtl.MinValue); if (page_rank_max == DoubleUtl.MinValue) throw ErrUtl.NewArgs("failed to get max; tbl=~{0}", page_rank_tbl);
 			double page_rank_rng = page_rank_max - page_rank_min;
 			if (page_rank_rng == 0) page_rank_rng = 1; // if 0, set to 1 to prevent divide by 0 below;
 			String score_multiplier_as_str = DbmetaFldItm.ToDoubleStrByInt(score_multiplier);
@@ -90,20 +90,20 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 			// normalize page_rank to 0 : 100,000,000
 			plink_conn.Exec_sql
 			( "normalizing page_rank_temp.page_rank_score"
-			, Bry_fmt.Make_str
+			, BryFmt.Make_str
 				("UPDATE ~{tbl} SET page_rank_score = ((Coalesce(page_rank, 0)) / ~{page_score_rng}) * ~{score_multiplier}"
-				, page_rank_tbl, Double_.To_str(page_rank_rng), score_multiplier_as_str)
+				, page_rank_tbl, DoubleUtl.ToStr(page_rank_rng), score_multiplier_as_str)
 			);
 
 			// percentize page_rank_score to 0 : 100,000
-			new Sqlite_percentile_cmd(bldr, wiki).Init_by_rel_url(Xob_db_file.Name__page_link, "temp_page_score", link_score_max, String_.Concat_lines_nl_skip_last
+			new Sqlite_percentile_cmd(bldr, wiki).Init_by_rel_url(Xob_db_file.Name__page_link, "temp_page_score", link_score_max, StringUtl.ConcatLinesNlSkipLast
 			( "SELECT   prt.page_id, prt.page_rank_score"
 			, "FROM     page_rank_temp prt"
 			, "ORDER BY prt.page_rank_score"	// NOTE: ORDER BY is needed b/c INSERT into AUTO INCREMENT table
 			)).Cmd_run();
 			plink_conn.Exec_sql
 			( "finalizing page_rank_temp.page_score"
-			, String_.Concat_lines_nl_skip_last
+			, StringUtl.ConcatLinesNlSkipLast
 			( "UPDATE   page_rank_temp"
 			, "SET      page_score = Cast((SELECT tmp.row_score FROM temp_page_score tmp WHERE tmp.row_key = page_rank_temp.page_id) AS int)"
 			));
@@ -114,7 +114,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		else {
 			plink_conn.Exec_sql
 			( "finalizing page_rank_temp.page_score"
-			, String_.Format(String_.Concat_lines_nl_skip_last
+			, StringUtl.Format(StringUtl.ConcatLinesNlSkipLast
 			( "UPDATE   page_rank_temp"
 			, "SET      page_score = Cast(page_len_score AS int)"
 			)));
@@ -129,7 +129,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 			page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page__rebind();
 		}
 		new Db_attach_mgr(page_conn, new Db_attach_itm("plink_db", plink_conn))
-			.Exec_sql_w_msg("updating page.page_score", String_.Concat_lines_nl_skip_last
+			.Exec_sql_w_msg("updating page.page_score", StringUtl.ConcatLinesNlSkipLast
 			( "UPDATE  page"
 			, "SET     page_score = Coalesce((SELECT Cast(pr.page_score AS integer) FROM <plink_db>page_rank_temp pr WHERE pr.page_id = page.page_id), 0)"
 			));
@@ -148,8 +148,8 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 			new Db_attach_mgr(link_tbl.conn
 				, new Db_attach_itm("page_db", page_conn)
 				).Exec_sql_w_msg
-				( Bry_fmt.Make_str("updating search_link.link_score: ~{idx} of ~{total}", i + 1, link_tbls_len)
-				, String_.Concat_lines_nl_skip_last
+				( BryFmt.Make_str("updating search_link.link_score: ~{idx} of ~{total}", i + 1, link_tbls_len)
+				, StringUtl.ConcatLinesNlSkipLast
 				( "UPDATE  search_link"
 				, "SET     link_score = Coalesce((SELECT page_score FROM <page_db>page p WHERE p.page_id = search_link.page_id), 0)"
 				));
@@ -180,8 +180,8 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		}
 		new Db_attach_mgr(word_tbl.conn, new Db_attach_itm("link_db", link_tbl.conn))
 			.Exec_sql_w_msg
-			( Bry_fmt.Make_str("creating temp.link_score_max: ~{idx} of ~{total}", i + 1, link_tbls_len)
-			, String_.Concat_lines_nl_skip_last
+			( BryFmt.Make_str("creating temp.link_score_max: ~{idx} of ~{total}", i + 1, link_tbls_len)
+			, StringUtl.ConcatLinesNlSkipLast
 			( "INSERT INTO link_score_mnx (word_id, mnx_val)"
 			, "SELECT  sw.word_id, " + prc_name + "(sl.link_score)"
 			, "FROM    search_word sw"
@@ -191,7 +191,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 			;
 		word_tbl.conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("link_score_mnx", "main", "word_id", "mnx_val"));
 		word_tbl.conn.Exec_sql_concat_w_msg
-			( Bry_fmt.Make_str("creating temp.link_score_max: ~{idx} of ~{total}", i + 1, link_tbls_len)
+			( BryFmt.Make_str("creating temp.link_score_max: ~{idx} of ~{total}", i + 1, link_tbls_len)
 			, "UPDATE  search_word"
 			, "SET     " + fld_name + " = "
 			, "                       Coalesce(("

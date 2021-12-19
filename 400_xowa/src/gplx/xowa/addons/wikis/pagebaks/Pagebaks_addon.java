@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pagebaks; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.xowa.addons.wikis.pagebaks;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*; import gplx.xowa.addons.*;
 import gplx.langs.htmls.encoders.*;
 public class Pagebaks_addon implements Xoax_addon_itm {
@@ -29,8 +35,8 @@ public class Pagebaks_addon implements Xoax_addon_itm {
 			byte[] file_name = encoder.Encode(ttl.Full_db());
 
 			// save file to backup dir; EX: /xowa/wiki/en.w/user/temp/save_backups/Earth/20170303_080102_123.txt
-			Io_url bak_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("user", "temp", "page_backups", String_.new_u8(file_name));
-			Io_url file_url = bak_dir.GenSubFil_ary(Datetime_now.Get().XtoStr_fmt("yyyyMMdd_HHmmss_fff"), ".txt");
+			Io_url bak_dir = wiki.Fsys_mgr().Root_dir().GenSubDir_nest("user", "temp", "page_backups", StringUtl.NewU8(file_name));
+			Io_url file_url = bak_dir.GenSubFil_ary(GfoDateNow.Get().ToStrFmt("yyyyMMdd_HHmmss_fff"), ".txt");
 			Io_mgr.Instance.SaveFilBry(file_url, text);
 
 			// #prune dir
@@ -48,7 +54,7 @@ public class Pagebaks_addon implements Xoax_addon_itm {
 				Io_mgr.Instance.DeleteFil(fils[i]);
 			}
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Log_many("", "", "failed to save page backup; wiki=~{0} ttl=~{1} err=~{2}", wiki.Domain_bry(), ttl.Full_db(), Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "failed to save page backup; wiki=~{0} ttl=~{1} err=~{2}", wiki.Domain_bry(), ttl.Full_db(), ErrUtl.ToStrLog(e));
 		}
 	}
 

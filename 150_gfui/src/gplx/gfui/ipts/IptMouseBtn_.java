@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class IptMouseBtn_ {
 	public static final int 
 	  Tid_none		= 0x00000000
@@ -32,13 +34,13 @@ public class IptMouseBtn_ {
 	, X2		= new IptMouseBtn(Tid_x2		, "mouse.x2")
 	;
 	public static IptMouseBtn parse(String raw) {
-		if		(String_.Eq(raw, None.Key())) return None;
-		else if	(String_.Eq(raw, Left.Key())) return Left;
-		else if	(String_.Eq(raw, Right.Key())) return Right;
-		else if	(String_.Eq(raw, Middle.Key())) return Middle;
-		else if	(String_.Eq(raw, X1.Key())) return X1;
-		else if	(String_.Eq(raw, X2.Key())) return X2;
-		else throw Err_.new_parse_type(IptMouseBtn.class, raw);
+		if		(StringUtl.Eq(raw, None.Key())) return None;
+		else if	(StringUtl.Eq(raw, Left.Key())) return Left;
+		else if	(StringUtl.Eq(raw, Right.Key())) return Right;
+		else if	(StringUtl.Eq(raw, Middle.Key())) return Middle;
+		else if	(StringUtl.Eq(raw, X1.Key())) return X1;
+		else if	(StringUtl.Eq(raw, X2.Key())) return X2;
+		else throw ErrUtl.NewParse(IptMouseBtn.class, raw);
 	}
 	public static IptMouseBtn api_(int val) {
 		if		(val == None.Val()) return None;
@@ -47,6 +49,6 @@ public class IptMouseBtn_ {
 		else if	(val == Middle.Val()) return Middle;
 		else if	(val == X1.Val()) return X1;
 		else if	(val == X2.Val()) return X2;
-		else throw Err_.new_unhandled(val);
+		else throw ErrUtl.NewUnhandled(val);
 	}
 }

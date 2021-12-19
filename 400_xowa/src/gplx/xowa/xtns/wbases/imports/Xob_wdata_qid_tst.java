@@ -14,15 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports;
-import gplx.Bry_;
-import gplx.Io_mgr;
-import gplx.Io_url_;
-import gplx.Object_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.ObjectUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.DbmetaFldList;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.bldrs.Xobldr_fxt;
 import gplx.xowa.bldrs.wms.sites.Site_core_db;
 import gplx.xowa.bldrs.wms.sites.Site_namespace_tbl;
@@ -45,36 +45,36 @@ public class Xob_wdata_qid_tst {
 		wkr.Ctor(fxt.Bldr(), fxt.Wiki());
 	}
 
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Run_page_wkr(wkr
-			,	fxt.New_page_wo_date(2, "q2", Wdata_wiki_mgr_fxt.New_json("q2", "links", String_.Ary("enwiki", "q2_en", "frwiki", "q2_fr")))
-			,	fxt.New_page_wo_date(1, "q1", Wdata_wiki_mgr_fxt.New_json("q1", "links", String_.Ary("enwiki", "q1_en", "frwiki", "q1_fr")))
+			,	fxt.New_page_wo_date(2, "q2", Wdata_wiki_mgr_fxt.New_json("q2", "links", StringUtl.Ary("enwiki", "q2_en", "frwiki", "q2_fr")))
+			,	fxt.New_page_wo_date(1, "q1", Wdata_wiki_mgr_fxt.New_json("q1", "links", StringUtl.Ary("enwiki", "q1_en", "frwiki", "q1_fr")))
 			);
 
 		db_tester.Test__select_tbl(conn, "wbase_qid", flds__wbase_qid
-		, Object_.Ary("enwiki", 0, "Q2_en", "q2")
-		, Object_.Ary("frwiki", 0, "Q2_fr", "q2")
-		, Object_.Ary("enwiki", 0, "Q1_en", "q1")
-		, Object_.Ary("frwiki", 0, "Q1_fr", "q1")
+		, ObjectUtl.Ary("enwiki", 0, "Q2_en", "q2")
+		, ObjectUtl.Ary("frwiki", 0, "Q2_fr", "q2")
+		, ObjectUtl.Ary("enwiki", 0, "Q1_en", "q1")
+		, ObjectUtl.Ary("frwiki", 0, "Q1_fr", "q1")
 		);
 	}
 	@Test public void Ns() {
 		Site_core_db json_db = new Site_core_db(fxt.App().Fsys_mgr().Cfg_site_meta_fil());
 		Site_namespace_tbl ns_tbl = json_db.Tbl__namespace();
-		ns_tbl.Insert(Bry_.new_a7("en.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Help"), BoolUtl.N, BoolUtl.N, Bry_.Empty);
-		ns_tbl.Insert(Bry_.new_a7("fr.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Aide"), BoolUtl.N, BoolUtl.N, Bry_.Empty);
+		ns_tbl.Insert(BryUtl.NewA7("en.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, BryUtl.Empty, BryUtl.NewA7("Help"), BoolUtl.N, BoolUtl.N, BryUtl.Empty);
+		ns_tbl.Insert(BryUtl.NewA7("fr.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, BryUtl.Empty, BryUtl.NewA7("Aide"), BoolUtl.N, BoolUtl.N, BryUtl.Empty);
 
 		fxt.Run_page_wkr(wkr
-		,	fxt.New_page_wo_date(1, "11", Wdata_wiki_mgr_fxt.New_json("q1", "links", String_.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))
+		,	fxt.New_page_wo_date(1, "11", Wdata_wiki_mgr_fxt.New_json("q1", "links", StringUtl.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))
 		);
 
 		db_tester.Test__select_tbl(conn, "wbase_qid", flds__wbase_qid
-		, Object_.Ary("enwiki", 12, "Q1_en", "q1")
-		, Object_.Ary("frwiki", 12, "Q1_fr", "q1")
+		, ObjectUtl.Ary("enwiki", 12, "Q1_en", "q1")
+		, ObjectUtl.Ary("frwiki", 12, "Q1_fr", "q1")
 		);
 	}
 	@Test public void Links_w_name() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
-		String q1_str = String_.Concat_lines_nl
+		String q1_str = StringUtl.ConcatLinesNl
 		(	"{ \"entity\":\"q1\""
 		,	", \"links\":"
 		,	"  { \"enwiki\":\"q1_en\""
@@ -82,7 +82,7 @@ public class Xob_wdata_qid_tst {
 		,	"  }"
 		,	"}"
 		);
-		String q2_str = String_.Concat_lines_nl
+		String q2_str = StringUtl.ConcatLinesNl
 		(	"{ \"entity\":[\"item\",2]"
 		,	", \"links\":"
 		,	"  { \"enwiki\":{\"name\":\"q2_en\",\"badges\":[]}"
@@ -97,23 +97,23 @@ public class Xob_wdata_qid_tst {
 		);
 
 		db_tester.Test__select_tbl(conn, "wbase_qid", flds__wbase_qid
-		, Object_.Ary("enwiki", 0, "Q1_en", "q1")
-		, Object_.Ary("frwiki", 0, "Q1_fr", "q1")
-		, Object_.Ary("enwiki", 0, "Q2_en", "q2")
-		, Object_.Ary("frwiki", 0, "Q2_fr", "q2")
+		, ObjectUtl.Ary("enwiki", 0, "Q1_en", "q1")
+		, ObjectUtl.Ary("frwiki", 0, "Q1_fr", "q1")
+		, ObjectUtl.Ary("enwiki", 0, "Q2_en", "q2")
+		, ObjectUtl.Ary("frwiki", 0, "Q2_fr", "q2")
 		);
 	}
 	@Test public void Spaces() {	// PURPOSE: assert that ttls with spaces are converted to unders DATE:2015-04-21
 		fxt.Run_page_wkr(wkr
-		,	fxt.New_page_wo_date(2, "q2", Wdata_wiki_mgr_fxt.New_json("q2", "links", String_.Ary("enwiki", "q2 en", "frwiki", "q2 fr")))	// note "q2 en" not "q2_en"
-		,	fxt.New_page_wo_date(1, "q1", Wdata_wiki_mgr_fxt.New_json("q1", "links", String_.Ary("enwiki", "q1 en", "frwiki", "q1 fr")))
+		,	fxt.New_page_wo_date(2, "q2", Wdata_wiki_mgr_fxt.New_json("q2", "links", StringUtl.Ary("enwiki", "q2 en", "frwiki", "q2 fr")))	// note "q2 en" not "q2_en"
+		,	fxt.New_page_wo_date(1, "q1", Wdata_wiki_mgr_fxt.New_json("q1", "links", StringUtl.Ary("enwiki", "q1 en", "frwiki", "q1 fr")))
 		);
 
 		db_tester.Test__select_tbl(conn, "wbase_qid", flds__wbase_qid
-		, Object_.Ary("enwiki", 0, "Q2_en", "q2") // NOTE: q2_en
-		, Object_.Ary("frwiki", 0, "Q2_fr", "q2")
-		, Object_.Ary("enwiki", 0, "Q1_en", "q1")
-		, Object_.Ary("frwiki", 0, "Q1_fr", "q1")
+		, ObjectUtl.Ary("enwiki", 0, "Q2_en", "q2") // NOTE: q2_en
+		, ObjectUtl.Ary("frwiki", 0, "Q2_fr", "q2")
+		, ObjectUtl.Ary("enwiki", 0, "Q1_en", "q1")
+		, ObjectUtl.Ary("frwiki", 0, "Q1_fr", "q1")
 		);
 	}
 }

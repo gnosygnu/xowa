@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.tocs; import gplx.*;
+package gplx.xowa.htmls.core.wkrs.tocs;
 import gplx.core.envs.Op_sys;
-import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_toc_make__basic__tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
-	private final String orig = String_.Concat_lines_nl_skip_last
+	private final String orig = StringUtl.ConcatLinesNlSkipLast
 	( "abc"
 	, "<div class=\"xo-toc\"></div>"
 	, "def"
@@ -29,8 +29,8 @@ public class Xoh_toc_make__basic__tst {
 	, "b 1"
 	);
 	@Before public void Init() {fxt.Clear();}
-	@Test  public void Enabled() {
-		String expd = String_.Concat_lines_nl_skip_last
+	@Test public void Enabled() {
+		String expd = StringUtl.ConcatLinesNlSkipLast
 		( "abc"
 		, "<div id='toc' class='toc'>"
 		, "  <div id='toctitle' class='toctitle'>"
@@ -52,10 +52,10 @@ public class Xoh_toc_make__basic__tst {
 		);
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(expd));
 	}
-	@Test  public void Disabled_if_drd() {
+	@Test public void Disabled_if_drd() {
 		int curTid = Op_sys.Cur().Tid();
 		gplx.core.envs.Op_sys.Cur_(gplx.core.envs.Op_sys.Tid_drd);
-		String expd = String_.Concat_lines_nl_skip_last
+		String expd = StringUtl.ConcatLinesNlSkipLast
 		( "abc"
 		, ""
 		, "def"

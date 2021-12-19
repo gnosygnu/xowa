@@ -14,28 +14,28 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.msgs;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xol_msg_itm_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_msg_itm_fxt fxt = new Xol_msg_itm_fxt();
-	@Test  public void New_plain() 			{fxt.Test_new("a"					, BoolUtl.N, BoolUtl.N);}
-	@Test  public void New_fmt() 				{fxt.Test_new("a~{0}b"				, BoolUtl.Y, BoolUtl.N);}
-	@Test  public void New_tmpl() 				{fxt.Test_new("a{{b}}c"				, BoolUtl.N, BoolUtl.Y);}
-	@Test  public void New_fmt_tmpl() 			{fxt.Test_new("a{{b}}c~{0}d"		, BoolUtl.Y, BoolUtl.Y);}
-	@Test  public void New_space() 			{fxt.Test_val("a&#32;b"				, "a b");}
+	@Test public void New_plain() 			{fxt.Test_new("a"					, BoolUtl.N, BoolUtl.N);}
+	@Test public void New_fmt() 				{fxt.Test_new("a~{0}b"				, BoolUtl.Y, BoolUtl.N);}
+	@Test public void New_tmpl() 				{fxt.Test_new("a{{b}}c"				, BoolUtl.N, BoolUtl.Y);}
+	@Test public void New_fmt_tmpl() 			{fxt.Test_new("a{{b}}c~{0}d"		, BoolUtl.Y, BoolUtl.Y);}
+	@Test public void New_space() 			{fxt.Test_val("a&#32;b"				, "a b");}
 }
 class Xol_msg_itm_fxt {
 	public void Clear() {}
 	public void Test_new(String val, boolean has_fmt_arg, boolean has_tmpl_txt) {
 		Xol_msg_itm itm = Xol_msg_itm_.new_(0, "test", val);
-		Tfds.Eq(has_fmt_arg, itm.Has_fmt_arg(), "has_fmt_arg");
-		Tfds.Eq(has_tmpl_txt, itm.Has_tmpl_txt(), "has_tmpl_txt");
+		GfoTstr.EqObj(has_fmt_arg, itm.Has_fmt_arg(), "has_fmt_arg");
+		GfoTstr.EqObj(has_tmpl_txt, itm.Has_tmpl_txt(), "has_tmpl_txt");
 	}
 	public void Test_val(String val, String expd) {
 		Xol_msg_itm itm = Xol_msg_itm_.new_(0, "test", val);
-		Tfds.Eq(expd, String_.new_u8(itm.Val()), "has_fmt_arg");
+		GfoTstr.EqObj(expd, StringUtl.NewU8(itm.Val()), "has_fmt_arg");
 	}
 }

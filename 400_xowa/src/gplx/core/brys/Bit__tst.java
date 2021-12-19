@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.arrays.IntAryUtl;
 import org.junit.*;
 public class Bit__tst {
 	@Before public void init() {fxt.Clear();} private Bit__fxt fxt = new Bit__fxt();
@@ -23,44 +25,44 @@ public class Bit__tst {
 		tst_XtoBitStr(  2, "00000010");
 		tst_XtoBitStr(  3, "00000011");
 		tst_XtoBitStr(255, "11111111");
-	}	void tst_XtoBitStr(int val, String expd) {Tfds.Eq(expd, Bit_.ToBitStr(val));}
-	@Test  public void Shift_lhs() {// simple: shift 1 bit
+	}	void tst_XtoBitStr(int val, String expd) {GfoTstr.EqObj(expd, Bit_.ToBitStr(val));}
+	@Test public void Shift_lhs() {// simple: shift 1 bit
 		fxt.Test_shift_lhs(1, 1,  2);
 		fxt.Test_shift_lhs(2, 1,  4);
 		fxt.Test_shift_lhs(3, 1,  6);
 		fxt.Test_shift_lhs(4, 1,  8);
 	}
-	@Test  public void Shift_rhs() {
+	@Test public void Shift_rhs() {
 		fxt.Test_shift_rhs(2, 1,  1);
 		fxt.Test_shift_rhs(4, 1,  2);
 		fxt.Test_shift_rhs(6, 1,  3);
 		fxt.Test_shift_rhs(8, 1,  4);
 	}
-	@Test  public void Shift_lhs_to_int() {
-		int[] shift_ary = Int_ary_.New(0, 3, 5);
-		fxt.Test_shift_lhs_to_int(shift_ary, Int_ary_.New(0, 0, 0),  0);
-		fxt.Test_shift_lhs_to_int(shift_ary, Int_ary_.New(7, 0, 0),  7);	// 1st 3 bits
-		fxt.Test_shift_lhs_to_int(shift_ary, Int_ary_.New(0, 3, 0), 24);	// 2nd 2 bits
-		fxt.Test_shift_lhs_to_int(shift_ary, Int_ary_.New(0, 0, 1), 32);	// 3rd 1 bit
-		fxt.Test_shift_lhs_to_int(shift_ary, Int_ary_.New(7, 3, 1), 63);	// many bits
+	@Test public void Shift_lhs_to_int() {
+		int[] shift_ary = IntAryUtl.New(0, 3, 5);
+		fxt.Test_shift_lhs_to_int(shift_ary, IntAryUtl.New(0, 0, 0),  0);
+		fxt.Test_shift_lhs_to_int(shift_ary, IntAryUtl.New(7, 0, 0),  7);	// 1st 3 bits
+		fxt.Test_shift_lhs_to_int(shift_ary, IntAryUtl.New(0, 3, 0), 24);	// 2nd 2 bits
+		fxt.Test_shift_lhs_to_int(shift_ary, IntAryUtl.New(0, 0, 1), 32);	// 3rd 1 bit
+		fxt.Test_shift_lhs_to_int(shift_ary, IntAryUtl.New(7, 3, 1), 63);	// many bits
 	}
-	@Test  public void Shift_rhs_to_ary() {
-		int[] shift_ary = Int_ary_.New(0, 3, 5);
-		fxt.Test_shift_rhs_to_ary(shift_ary,  0, Int_ary_.New(0, 0, 0));
-		fxt.Test_shift_rhs_to_ary(shift_ary,  7, Int_ary_.New(7, 0, 0));	// 1st 3 bits
-		fxt.Test_shift_rhs_to_ary(shift_ary, 24, Int_ary_.New(0, 3, 0));	// 2nd 2 bits
-		fxt.Test_shift_rhs_to_ary(shift_ary, 32, Int_ary_.New(0, 0, 1));	// 3rd 1 bit
-		fxt.Test_shift_rhs_to_ary(shift_ary, 63, Int_ary_.New(7, 3, 1));	// many bits
+	@Test public void Shift_rhs_to_ary() {
+		int[] shift_ary = IntAryUtl.New(0, 3, 5);
+		fxt.Test_shift_rhs_to_ary(shift_ary,  0, IntAryUtl.New(0, 0, 0));
+		fxt.Test_shift_rhs_to_ary(shift_ary,  7, IntAryUtl.New(7, 0, 0));	// 1st 3 bits
+		fxt.Test_shift_rhs_to_ary(shift_ary, 24, IntAryUtl.New(0, 3, 0));	// 2nd 2 bits
+		fxt.Test_shift_rhs_to_ary(shift_ary, 32, IntAryUtl.New(0, 0, 1));	// 3rd 1 bit
+		fxt.Test_shift_rhs_to_ary(shift_ary, 63, IntAryUtl.New(7, 3, 1));	// many bits
 	}
 }
 class Bit__fxt {
 	public void Clear() {}
-	public void Test_shift_lhs(int val, int shift, int expd) {Tfds.Eq(expd, Bit_.Shift_lhs(val, shift));}
-	public void Test_shift_rhs(int val, int shift, int expd) {Tfds.Eq(expd, Bit_.Shift_rhs(val, shift));}
-	public void Test_shift_lhs_to_int(int[] shift_ary, int[] val_ary, int expd) {Tfds.Eq(expd, Bit_.Shift_lhs_to_int(shift_ary, val_ary));}
+	public void Test_shift_lhs(int val, int shift, int expd) {GfoTstr.EqObj(expd, Bit_.Shift_lhs(val, shift));}
+	public void Test_shift_rhs(int val, int shift, int expd) {GfoTstr.EqObj(expd, Bit_.Shift_rhs(val, shift));}
+	public void Test_shift_lhs_to_int(int[] shift_ary, int[] val_ary, int expd) {GfoTstr.EqObj(expd, Bit_.Shift_lhs_to_int(shift_ary, val_ary));}
 	public void Test_shift_rhs_to_ary(int[] shift_ary, int val, int[] expd_ary) {
-		int[] actl_ary = Int_ary_.New(0, 0, 0);
+		int[] actl_ary = IntAryUtl.New(0, 0, 0);
 		Bit_.Shift_rhs_to_ary(actl_ary, shift_ary, val);
-		Tfds.Eq_ary(expd_ary, actl_ary);
+		GfoTstr.EqAry(expd_ary, actl_ary);
 	}
 }

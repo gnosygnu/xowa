@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.views; import gplx.*;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.gfui.*; import gplx.gfui.envs.*; import gplx.gfui.controls.windows.*;
 public class Xog_startup_win_ {
@@ -24,7 +26,7 @@ public class Xog_startup_win_ {
 
 		// change win_rect per mode: previous; absolute; etc.
 		boolean init_is_maximized = false;
-		if		(String_.Eq(window_mode, "previous")) {
+		if		(StringUtl.Eq(window_mode, "previous")) {
 			if (cfg_mgr.Get_bool_app_or(Cfg__prev_maximized, false)) {
 				win.Maximized_(true);
 				init_is_maximized = true;
@@ -32,7 +34,7 @@ public class Xog_startup_win_ {
 			else {
 				Rect_ref previous_rect = null;
 				String s = cfg_mgr.Get_str_app_or(Cfg__prev_rect, "");
-				if (String_.Eq(s, "")) {
+				if (StringUtl.Eq(s, "")) {
 					SizeAdp size = Screen_maximized_calc();
 					previous_rect = new Rect_ref(0, 0, size.Width(), size.Height());
 				}
@@ -41,15 +43,15 @@ public class Xog_startup_win_ {
 				win.Rect_set(previous_rect.XtoRectAdp());
 			}
 		}
-		else if (String_.Eq(window_mode, "absolute")) {
+		else if (StringUtl.Eq(window_mode, "absolute")) {
 			win.Rect_set(manual_rect.XtoRectAdp());
 		}
-		else if (String_.Eq(window_mode, "maximized")) {
+		else if (StringUtl.Eq(window_mode, "maximized")) {
 			win.Maximized_(true);
 			init_is_maximized = true; 
 		}
-		else if (String_.Eq(window_mode, "default")) {} // noop
-		else if (String_.Eq(window_mode, "relative")) {
+		else if (StringUtl.Eq(window_mode, "default")) {} // noop
+		else if (StringUtl.Eq(window_mode, "relative")) {
 			SizeAdp screen_maximized = Screen_maximized_calc();
 			Rect_ref win_rect = new Rect_ref(0, 0, screen_maximized.Width(), screen_maximized.Height());
 			win.Rect_set(win_rect.XtoRectAdp_add(manual_rect));
@@ -73,7 +75,7 @@ public class Xog_startup_win_ {
 	}
 	public static void Shutdown(Xoae_app app, GfuiWin win) {
 		gplx.xowa.addons.apps.cfgs.Xocfg_mgr cfg_mgr = app.Cfg();
-		if (String_.Eq(cfg_mgr.Get_str_app_or(Cfg__window_mode, "previous"), "previous")) {
+		if (StringUtl.Eq(cfg_mgr.Get_str_app_or(Cfg__window_mode, "previous"), "previous")) {
 			cfg_mgr.Set_str_app(Cfg__prev_rect			, win.Rect().Xto_str());
 			cfg_mgr.Set_str_app(Cfg__prev_maximized		, Yn.To_str(win.Maximized()));
 		}

@@ -515,15 +515,15 @@ public class XomwParserOutput // extends CacheTime
 //		/**
 //		* Checks, if a url is pointing to the own server
 //		*
-//		* @param String $@gplx.Internal protected The server to check against
+//		* @param String $public The server to check against
 //		* @param String $url The url to check
 //		* @return boolean
 //		*/
-//		public static function isLinkInternal( $@gplx.Internal protected, $url ) {
+//		public static function isLinkInternal( $@gplx.frameworks.objects.Internal protected, $url ) {
 //			return (boolean)preg_match( '/^' .
 //				# If server is proto relative, check also for http/https links
-//				( substr( $@gplx.Internal protected, 0, 2 ) === '//' ? '(?:https?:)?' : '' ) .
-//				preg_quote( $@gplx.Internal protected, '/' ) .
+//				( substr( $@gplx.frameworks.objects.Internal protected, 0, 2 ) === '//' ? '(?:https?:)?' : '' ) .
+//				preg_quote( $@gplx.frameworks.objects.Internal protected, '/' ) .
 //				# check for query/path/anchor or end of link in each case
 //				'(?:[\?\/\#]|$)/i',
 //				$url
@@ -617,7 +617,7 @@ public class XomwParserOutput // extends CacheTime
 //		*/
 //		public function addInterwikiLink( $title ) {
 //			if ( !$title->isExternal() ) {
-//				throw new MWException( 'Non-interwiki link passed, @gplx.Internal protected parser error.' );
+//				throw new MWException( 'Non-interwiki link passed, public parser error.' );
 //			}
 //			$prefix = $title->getInterwiki();
 //			if ( !isset( $this->mInterwikiLinks[$prefix] ) ) {

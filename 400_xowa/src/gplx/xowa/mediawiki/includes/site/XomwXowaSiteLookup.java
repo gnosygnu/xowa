@@ -13,15 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.site; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import gplx.dbs.*;
+package gplx.xowa.mediawiki.includes.site;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class XomwXowaSiteLookup implements XomwSiteLookup {
 	private final XomwSiteList sites = new XomwSiteList();
 	public XomwSite getSite(byte[] globalId) {
-		return (XomwSite)sites.getSite(String_.new_u8(globalId));
+		return (XomwSite)sites.getSite(StringUtl.NewU8(globalId));
 	}
 	public XomwSiteList getSites() {
-		throw Err_.new_unimplemented();
+		throw ErrUtl.NewUnimplemented();
 	}
 	public XomwSite addSite(String type, String global_key, int id, boolean forward, String group, byte[] language, String source) {
 		// REF:DBSiteStore

@@ -14,15 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.htmls.tidy;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xow_tidy_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xoh_tidy_mgr_fxt fxt = new Xoh_tidy_mgr_fxt();
-	@Test  public void Wrap() {
+	@Test public void Wrap() {
 		fxt.Test__wrap("<b>a</b>"
 		, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
@@ -34,7 +33,7 @@ public class Xow_tidy_mgr_tst {
 		+ "</html>"
 		);
 	}
-	@Test  public void Unwrap_pass() {
+	@Test public void Unwrap_pass() {
 		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
@@ -47,7 +46,7 @@ public class Xow_tidy_mgr_tst {
 		, BoolUtl.Y, "<b>a</b>"
 		);
 	}
-	@Test  public void Unwrap_fail_bgn() {
+	@Test public void Unwrap_fail_bgn() {
 		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
@@ -60,7 +59,7 @@ public class Xow_tidy_mgr_tst {
 		, BoolUtl.N, ""
 		);
 	}
-	@Test  public void Unwrap_fail_end() {
+	@Test public void Unwrap_fail_end() {
 		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
@@ -75,21 +74,21 @@ public class Xow_tidy_mgr_tst {
 	}
 }
 class Xoh_tidy_mgr_fxt {
-	private final Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private final BryWtr bfr = BryWtr.NewAndReset(255);
 	public void Clear() {
 		bfr.Clear();
 	}
 	public void Test__wrap(String val, String expd) {
-		bfr.Add_str_u8(val);
+		bfr.AddStrU8(val);
 		Xow_tidy_mgr.Tidy_wrap(bfr);
-		Tfds.Eq(expd, bfr.To_str_and_clear());
+		GfoTstr.EqObj(expd, bfr.ToStrAndClear());
 	}
 	public void Test__unwrap(String val, boolean expd_pass, String expd) {
-		bfr.Add_str_u8(val);
+		bfr.AddStrU8(val);
 		boolean actl_pass = Xow_tidy_mgr.Tidy_unwrap(bfr);
-		if (actl_pass != expd_pass) Tfds.Fail("expd={0} actl={1}", expd_pass, actl_pass);
+		if (actl_pass != expd_pass) GfoTstr.Fail("expd={0} actl={1}", expd_pass, actl_pass);
 		else if (expd_pass) {
-			Tfds.Eq(expd, bfr.To_str_and_clear());
+			GfoTstr.EqObj(expd, bfr.ToStrAndClear());
 		}
 	}
 }

@@ -24,7 +24,7 @@ public class ScreenAdp {
 	public int X() {return bounds.X();}
 	public int Y() {return bounds.Y();}
 			
-	@gplx.Internal protected ScreenAdp(int index, RectAdp bounds) {
+	public ScreenAdp(int index, RectAdp bounds) {
 		this.index = index; this.bounds = bounds;
 	}
 }

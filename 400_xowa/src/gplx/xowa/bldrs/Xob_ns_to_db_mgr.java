@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*;
+package gplx.xowa.bldrs;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.cmds.*;
 public class Xob_ns_to_db_mgr {
@@ -56,7 +59,7 @@ public class Xob_ns_to_db_mgr {
 		return rv;
 	}
 	private Xow_db_file Init_db(Xob_ns_file_itm ns_file_itm) {
-		Xow_db_file rv = db_mgr.Dbs__make_by_tid(ns_file_itm.Db_file_tid(), Int_ary_.To_str("|", ns_file_itm.Ns_ids()), ns_file_itm.Nth_db_idx(), ns_file_itm.Make_file_name());
+		Xow_db_file rv = db_mgr.Dbs__make_by_tid(ns_file_itm.Db_file_tid(), IntAryUtl.ToStr("|", ns_file_itm.Ns_ids()), ns_file_itm.Nth_db_idx(), ns_file_itm.Make_file_name());
 		ns_file_itm.Nth_db_id_(rv.Id());
 		Init_tbl(rv);
 		return rv;
@@ -70,7 +73,7 @@ public class Xob_ns_to_db_mgr {
 		db_list.Del(db.Id());
 	}
 	public void Rls_all() {
-		Xow_db_file[] ary = (Xow_db_file[])db_list.To_ary(Xow_db_file.class);
+		Xow_db_file[] ary = (Xow_db_file[])db_list.ToAry(Xow_db_file.class);
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xow_db_file db = (Xow_db_file)ary[i];
@@ -80,7 +83,7 @@ public class Xob_ns_to_db_mgr {
 	public void Commit() {
 		int len = db_list.Len();
 		for (int i = 0; i < len; ++i) {
-			Xow_db_file db = (Xow_db_file)db_list.Get_at(i);
+			Xow_db_file db = (Xow_db_file)db_list.GetAt(i);
 			db.Conn().Txn_sav();
 		}
 	}

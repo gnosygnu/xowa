@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.files.imgs.Xof_img_mode_;
 import gplx.xowa.files.repos.Xof_repo_tid_;
 import org.junit.Before;
@@ -37,7 +37,7 @@ public class Xof_url_bldr__tst {
 	@Test 	public void Stl() 			{fxt.Root_("http://test/").Md5_("62").Ttl_("A.stl").W_(220).Expd_src_("http://test/thumb/6/62/A.stl/220px-A.stl.png").Test();}
 	@Test 	public void Webp() 			{fxt.Root_("http://test/").Md5_("d9").Ttl_("A.webp").W_(220).Expd_src_("http://test/thumb/d/d9/A.webp/220px-A.webp.png").Test();}
 	@Test 	public void Long() {
-		String filename = String_.Repeat("A", 200) + ".png";
+		String filename = StringUtl.Repeat("A", 200) + ".png";
 		fxt.Root_("http://test/").Md5_("14").Ttl_(filename).W_(220)
 			.Expd_src_("http://test/thumb/1/14/" + filename + "/220px-thumbnail.png")
 			.Test()
@@ -49,7 +49,7 @@ public class Xof_url_bldr__tst {
 class Xof_url_bldr__fxt {
 	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Xof_url_bldr__fxt Clear() {
-		dir_spr = Byte_.Zero; ext = null; root = md5 = ttl = expd_src = null;
+		dir_spr = ByteUtl.Zero; ext = null; root = md5 = ttl = expd_src = null;
 		seek = Xof_lnki_time.Null;
 		page = Xof_lnki_page.Null;
 		w = Xof_img_size.Null;
@@ -60,7 +60,7 @@ class Xof_url_bldr__fxt {
 	public Xof_url_bldr__fxt Dir_spr_(byte v) {dir_spr = v; return this;} private byte dir_spr;
 	public Xof_url_bldr__fxt Root_(String v) {root = v; return this;} private String root;
 	public Xof_url_bldr__fxt Md5_(String v) {md5 = v; return this;} private String md5;
-	public Xof_url_bldr__fxt Ttl_(String v) {ttl = v; ext = Xof_ext_.new_by_ttl_(Bry_.new_u8(v)); return this;} private String ttl; Xof_ext ext;
+	public Xof_url_bldr__fxt Ttl_(String v) {ttl = v; ext = Xof_ext_.new_by_ttl_(BryUtl.NewU8(v)); return this;} private String ttl; Xof_ext ext;
 	public Xof_url_bldr__fxt W_(int v) {this.w = v; return this;} private int w;
 	public Xof_url_bldr__fxt Page_(int v) {page = v; return this;} private int page = Xof_lnki_page.Null;
 	public Xof_url_bldr__fxt Seek_(int v) {seek = v; return this;} private double seek = Xof_lnki_time.Null;
@@ -68,9 +68,9 @@ class Xof_url_bldr__fxt {
 	public Xof_url_bldr__fxt Fsys_is_wnt_(boolean v) {fsys_is_wnt = v; return this;} private boolean fsys_is_wnt;
 	public Xof_url_bldr__fxt Expd_src_(String v) {expd_src = v; return this;} private String expd_src;
 	public Xof_url_bldr__fxt Test() {
-		url_bldr.Init_by_repo(repo_tid, Bry_.new_u8(root), fsys_is_wnt, dir_spr, BoolUtl.Y, BoolUtl.N, 2);
-		url_bldr.Init_by_itm (Xof_img_mode_.Tid__thumb, Bry_.new_u8(ttl), Bry_.new_u8_safe(md5), ext, w, seek, page);
-		Tfds.Eq(expd_src, url_bldr.Xto_str());
+		url_bldr.Init_by_repo(repo_tid, BryUtl.NewU8(root), fsys_is_wnt, dir_spr, BoolUtl.Y, BoolUtl.N, 2);
+		url_bldr.Init_by_itm (Xof_img_mode_.Tid__thumb, BryUtl.NewU8(ttl), BryUtl.NewU8Safe(md5), ext, w, seek, page);
+		GfoTstr.EqObj(expd_src, url_bldr.Xto_str());
 		return this;
 	}
 }

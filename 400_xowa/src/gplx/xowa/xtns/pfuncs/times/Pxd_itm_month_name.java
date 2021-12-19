@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.errs.ErrUtl;
 class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	private byte[] name;
 	private int seg_val;
@@ -211,16 +217,16 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 		return true;
 	}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
-		DateAdp cur = bldr.To_date();
+		GfoDate cur = bldr.To_date();
 		int val = seg_val * seg_multiple;
 		switch (this.Seg_idx()) {
-			case DateAdp_.SegIdx_second: cur = cur.Add_second(val); break;
-			case DateAdp_.SegIdx_minute: cur = cur.Add_minute(val); break;
-			case DateAdp_.SegIdx_hour  : cur = cur.Add_hour  (val); break;
-			case DateAdp_.SegIdx_day   : cur = cur.Add_day   (val); break;
-			case DateAdp_.SegIdx_month : cur = cur.Add_month (val); break;
-			case DateAdp_.SegIdx_year  : cur = cur.Add_year  (val); break;
-			default: throw Err_.new_unhandled(this.Seg_idx());
+			case GfoDateUtl.SegIdxSecond: cur = cur.AddSecond(val); break;
+			case GfoDateUtl.SegIdxMinute: cur = cur.AddMinute(val); break;
+			case GfoDateUtl.SegIdxHour: cur = cur.AddHour(val); break;
+			case GfoDateUtl.SegIdxDay: cur = cur.AddDay(val); break;
+			case GfoDateUtl.SegIdxMonth: cur = cur.AddMonth(val); break;
+			case GfoDateUtl.SegIdxYear: cur = cur.AddYear(val); break;
+			default: throw ErrUtl.NewUnhandled(this.Seg_idx());
 		}
 		bldr.By_date(cur);
 		return true;
@@ -228,7 +234,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_ago extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_ago(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_ago;} public static final byte[] Name_ago = Bry_.new_a7("ago");
+	public byte[] Name() {return Name_ago;} public static final byte[] Name_ago = BryUtl.NewA7("ago");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_ago;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate before unit_name
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_ago(ary_idx, this.Seg_idx());}
@@ -263,10 +269,10 @@ class Pxd_itm_day_suffix extends Pxd_itm_base implements Pxd_itm_prototype {
 	@Override public boolean Eval(Pxd_parser state) {
 		Pxd_itm[] tkn_ary = state.Tkns();
 		int tkn_idx = this.Ary_idx();
-		if (tkn_idx == 0) {state.Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_int(Int_.Min_value)); return false;}	// PAGE:s.w:Aachen EX: "936" DATE:2016-07-06
+		if (tkn_idx == 0) {state.Err_set(Pft_func_time_log.Invalid_day, BryBfrArgUtl.NewInt(IntUtl.MinValue)); return false;}	// PAGE:s.w:Aachen EX: "936" DATE:2016-07-06
 		Pxd_itm day_itm = tkn_ary[tkn_idx - 1];
-		if (day_itm.Seg_idx() != DateAdp_.SegIdx_day) {
-			state.Err_set(Pft_func_time_log.Invalid_day, Bfr_arg_.New_int(Int_.Min_value));
+		if (day_itm.Seg_idx() != GfoDateUtl.SegIdxDay) {
+			state.Err_set(Pft_func_time_log.Invalid_day, BryBfrArgUtl.NewInt(IntUtl.MinValue));
 		}
 		return true;
 	}
@@ -279,11 +285,11 @@ class Pxd_itm_day_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_day_relative(adj, ary_idx);}
 	@Override public boolean Eval(Pxd_parser state) {return true;}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
-		DateAdp date = Datetime_now.Get();
-		if (adj != 0) date = date.Add_day(adj);			
-		bldr.Seg_set(DateAdp_.SegIdx_year		, date.Year());
-		bldr.Seg_set(DateAdp_.SegIdx_month		, date.Month());
-		bldr.Seg_set(DateAdp_.SegIdx_day		, date.Day());
+		GfoDate date = GfoDateNow.Get();
+		if (adj != 0) date = date.AddDay(adj);
+		bldr.Seg_set(GfoDateUtl.SegIdxYear, date.Year());
+		bldr.Seg_set(GfoDateUtl.SegIdxMonth, date.Month());
+		bldr.Seg_set(GfoDateUtl.SegIdxDay, date.Day());
 		return true;
 	}
 
@@ -301,14 +307,14 @@ class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_time_relative(ary_idx);}
 	@Override public boolean Eval(Pxd_parser state) {return true;}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
-		DateAdp date = Datetime_now.Get();
-		bldr.Seg_set(DateAdp_.SegIdx_year		, date.Year());
-		bldr.Seg_set(DateAdp_.SegIdx_month		, date.Month());
-		bldr.Seg_set(DateAdp_.SegIdx_day		, date.Day());
-		bldr.Seg_set(DateAdp_.SegIdx_hour		, date.Hour());
-		bldr.Seg_set(DateAdp_.SegIdx_minute		, date.Minute());
-		bldr.Seg_set(DateAdp_.SegIdx_second		, date.Second());
-		bldr.Seg_set(DateAdp_.SegIdx_frac		, date.Frac());
+		GfoDate date = GfoDateNow.Get();
+		bldr.Seg_set(GfoDateUtl.SegIdxYear, date.Year());
+		bldr.Seg_set(GfoDateUtl.SegIdxMonth, date.Month());
+		bldr.Seg_set(GfoDateUtl.SegIdxDay, date.Day());
+		bldr.Seg_set(GfoDateUtl.SegIdxHour, date.Hour());
+		bldr.Seg_set(GfoDateUtl.SegIdxMinute, date.Minute());
+		bldr.Seg_set(GfoDateUtl.SegIdxSecond, date.Second());
+		bldr.Seg_set(GfoDateUtl.SegIdxFrac, date.Frac());
 		return true;
 	}
 	public static final Pxd_itm_time_relative
@@ -319,37 +325,37 @@ class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 class Pxd_itm_unixtime extends Pxd_itm_base implements Pxd_itm_prototype {
 	private long unixtime;
 	public Pxd_itm_unixtime(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_a7("@");
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = BryUtl.NewA7("@");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unixtime;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate number early
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unixtime(ary_idx, this.Seg_idx());}
 	@Override public boolean Eval(Pxd_parser state) {
 		Pxd_itm[] tkns = state.Tkns();
-		unixtime = Pxd_itm_int_.Read_nearest_as_int_and_skip(state, tkns, this.Ary_idx(), true, Int_.Min_value);
+		unixtime = Pxd_itm_int_.Read_nearest_as_int_and_skip(state, tkns, this.Ary_idx(), true, IntUtl.MinValue);
 		return true;
 	}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
-		DateAdp date = DateAdp_.unixtime_utc_seconds_(unixtime);
-		bldr.Seg_set(DateAdp_.SegIdx_year		, date.Year());
-		bldr.Seg_set(DateAdp_.SegIdx_month		, date.Month());
-		bldr.Seg_set(DateAdp_.SegIdx_day		, date.Day());
-		bldr.Seg_set(DateAdp_.SegIdx_hour		, date.Hour());
-		bldr.Seg_set(DateAdp_.SegIdx_minute		, date.Minute());
-		bldr.Seg_set(DateAdp_.SegIdx_second		, date.Second());
-		bldr.Seg_set(DateAdp_.SegIdx_frac		, date.Frac());
+		GfoDate date = GfoDateUtl.NewUnixtimeUtcSeconds(unixtime);
+		bldr.Seg_set(GfoDateUtl.SegIdxYear, date.Year());
+		bldr.Seg_set(GfoDateUtl.SegIdxMonth, date.Month());
+		bldr.Seg_set(GfoDateUtl.SegIdxDay, date.Day());
+		bldr.Seg_set(GfoDateUtl.SegIdxHour, date.Hour());
+		bldr.Seg_set(GfoDateUtl.SegIdxMinute, date.Minute());
+		bldr.Seg_set(GfoDateUtl.SegIdxSecond, date.Second());
+		bldr.Seg_set(GfoDateUtl.SegIdxFrac, date.Frac());
 		return true;
 	}
 }
 class Pxd_itm_iso8601_t extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_iso8601_t(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_a7("T");
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = BryUtl.NewA7("T");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_iso8601_t;}
 	@Override public int Eval_idx() {return 99;}	// evaluate last
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_iso8601_t(ary_idx, this.Seg_idx());}
 	@Override public boolean Eval(Pxd_parser state) {			
 		Pxd_itm hour = Next_non_ws_tkn(state.Tkns(), this.Ary_idx() + 1);
-		if (hour != null && hour.Seg_idx() == DateAdp_.SegIdx_hour) return true;	// next item is hour
-		state.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_bry("T"));
+		if (hour != null && hour.Seg_idx() == GfoDateUtl.SegIdxHour) return true;	// next item is hour
+		state.Err_set(Pft_func_time_log.Invalid_hour, BryBfrArgUtl.NewBry("T"));
 		return true;
 	}
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {return true;}

@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.stores;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.xtns.wbases.*;
 import gplx.core.lists.caches.*;
 import gplx.core.logs.*;
 public interface Wbase_doc_cache {
@@ -40,8 +43,8 @@ class Wbase_doc_cache__mru implements Wbase_doc_cache {
 	public Wbase_doc_cache__mru(long cache_max, long compress_size, long used_weight) {
 		this.cache = Mru_cache_mgr.New_by_mb_secs(Gfo_log_wtr.New_dflt("wbase", "cache_mru_{0}.csv"), cache_max, compress_size, used_weight);
 	}
-	public void Add(byte[] qid, Wdata_doc doc) {cache.Add(String_.new_a7(qid), doc, doc.Jdoc_size());}
-	public Wdata_doc Get_or_null(byte[] qid) {return (Wdata_doc)cache.Get_or_null(String_.new_a7(qid));}
+	public void Add(byte[] qid, Wdata_doc doc) {cache.Add(StringUtl.NewA7(qid), doc, doc.Jdoc_size());}
+	public Wdata_doc Get_or_null(byte[] qid) {return (Wdata_doc)cache.Get_or_null(StringUtl.NewA7(qid));}
 	public void Clear() {}
 	public void Term() {
 		cache.Flush();

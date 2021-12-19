@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.interwiki; import gplx.*;
+package gplx.xowa.mediawiki.includes.interwiki;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
 import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.site.*;
 public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
@@ -53,7 +60,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 	* @return Interwiki|null|boolean
 	*/
 	public XomwInterwiki fetch(byte[] prefix) {
-		if (prefix == Bry_.Empty) {
+		if (prefix == BryUtl.Empty) {
 			return null;
 		}
 
@@ -78,7 +85,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 		Ordered_hash hash = this.getInterwikiMap();
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			XomwInterwiki interwiki = (XomwInterwiki)hash.Get_at(i);
+			XomwInterwiki interwiki = (XomwInterwiki)hash.GetAt(i);
 			if (interwiki.isLocal() == local) {
 				res.Add(interwiki.interwikiId);
 			}
@@ -146,25 +153,25 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 		Ordered_hash hash = site.getInterwikiIds();
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			String interwiki = (String)hash.Get_at(i);
+			String interwiki = (String)hash.GetAt(i);
 			String url = site.getPageUrl();
 			String path = null;
-			if (Type_.Eq_by_obj(site, XomwMediaWikiSite.class)) {
+			if (ClassUtl.EqByObj(XomwMediaWikiSite.class, site)) {
 				path = ((XomwMediaWikiSite)site).getFileUrl("api.php");
 			} else {
 				path = "";
 			}
-			boolean local = String_.Eq(site.getSource(), "local");
+			boolean local = StringUtl.Eq(site.getSource(), "local");
 			// TODO: How to adapt trans?
 			interwikis.Add(interwiki, new XomwInterwiki(
-				Bry_.new_u8(interwiki),
-				Bry_.new_u8(url),
-				Bry_.new_u8(path),
-				Bry_.new_u8(site.getGlobalId()),
+				BryUtl.NewU8(interwiki),
+				BryUtl.NewU8(url),
+				BryUtl.NewU8(path),
+				BryUtl.NewU8(site.getGlobalId()),
 				local
 				, false
 			));
 		}
-		return (XomwInterwiki[])interwikis.To_ary_and_clear(XomwInterwiki.class);
+		return (XomwInterwiki[])interwikis.ToAryAndClear(XomwInterwiki.class);
 	}
 }

@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.*;
-import gplx.core.envs.System_;
+package gplx.gfui.kits.swts;
+import gplx.core.envs.SystemUtl;
 
 import org.eclipse.swt.*;
-import org.eclipse.swt.browser.*; import org.eclipse.swt.custom.*; import org.eclipse.swt.events.*; import org.eclipse.swt.graphics.*; import org.eclipse.swt.layout.*; import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.browser.*;
+import org.eclipse.swt.events.*; import org.eclipse.swt.graphics.*; import org.eclipse.swt.layout.*; import org.eclipse.swt.widgets.*;
 public class Swt_app_browser {
     public static void main(String[] args) {
         new Swt_app_browser().start();
@@ -79,7 +79,7 @@ class Swt_app_browser_mgr {
 //			browser.setUrl("about:blank");
 			browser.dispose();
 		}
-		System_.Garbage_collect();
+		SystemUtl.Garbage_collect();
 		browser = null;
 	}
 }

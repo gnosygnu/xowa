@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.nearby; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.specials.nearby;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import org.junit.*;
 public class Nearby_mgr_tst {
@@ -47,31 +54,31 @@ class Nearby_mgr_fxt {
 			fxt = new Xop_fxt();
 			nearby_mgr = new Nearby_mgr();
 			excluded = Hash_adp_bry.ci_a7();
-			tmp_bfr = Bry_bfr_.New();
+			tmp_bfr = BryWtr.New();
 		}
 		fxt.Reset();
 		Io_mgr.Instance.InitEngine_mem();
 		nearby_mgr.Results_max_(1);
 		return this;
-	} 	private Xop_fxt fxt; Nearby_mgr nearby_mgr; Hash_adp_bry excluded; Bry_bfr tmp_bfr;
+	} 	private Xop_fxt fxt; Nearby_mgr nearby_mgr; Hash_adp_bry excluded; BryWtr tmp_bfr;
 	public void Init_page(String ttl, String text) {fxt.Init_page_create(ttl, text);}
 	public Nearby_mgr_fxt Init_results_max(int v) {nearby_mgr.Results_max_(v); return this;}
 	public void Test_find(String src, String trg, String... expd) {
-		List_adp actl = nearby_mgr.Find_from_to(fxt.Wiki(), Bry_.new_a7(src), Bry_.new_a7(trg), excluded);
-		Tfds.Eq_ary(String_.SplitLines_nl(Xto_str(actl)), expd);
+		List_adp actl = nearby_mgr.Find_from_to(fxt.Wiki(), BryUtl.NewA7(src), BryUtl.NewA7(trg), excluded);
+		GfoTstr.EqLines(StringUtl.SplitLinesNl(Xto_str(actl)), expd);
 	}
 	String Xto_str(List_adp list) {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Nearby_rslt rslt = (Nearby_rslt)list.Get_at(i);
+			Nearby_rslt rslt = (Nearby_rslt)list.GetAt(i);
 			int ttls = rslt.Len();
-			if (i != 0) tmp_bfr.Add_byte_nl();
+			if (i != 0) tmp_bfr.AddByteNl();
 			for (int j = 0; j < ttls; j++) {
 				Xoa_ttl ttl = rslt.Get_at(j);
-				if (j != 0) tmp_bfr.Add_byte(AsciiByte.Pipe);
+				if (j != 0) tmp_bfr.AddByte(AsciiByte.Pipe);
 				tmp_bfr.Add(ttl.Page_db());
 			}
 		}
-		return tmp_bfr.To_str_and_clear();
+		return tmp_bfr.ToStrAndClear();
 	}
 }

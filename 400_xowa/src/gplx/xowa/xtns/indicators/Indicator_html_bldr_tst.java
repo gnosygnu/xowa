@@ -13,14 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.xtns.indicators.*;
+package gplx.xowa.xtns.indicators;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
 public class Indicator_html_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Indicator_html_bldr_fxt fxt = new Indicator_html_bldr_fxt();
 	@Test public void Basic() {
 		fxt.Init_indicator("a", "a1");
 		fxt.Init_indicator("b", "b1");
-		fxt.Test_bld(String_.Concat_lines_nl_skip_last
+		fxt.Test_bld(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <div class='mw-indicators'>"
 		, "    <div id='mw-indicator-b' class='mw-indicator'>b1</div>"	// reverse-order
@@ -31,7 +36,7 @@ public class Indicator_html_bldr_tst {
 	@Test public void Multiple_ignore() {
 		fxt.Init_indicator("a", "a1");
 		fxt.Init_indicator("a", "a2");
-		fxt.Test_bld(String_.Concat_lines_nl_skip_last
+		fxt.Test_bld(StringUtl.ConcatLinesNlSkipLast
 		( ""
 		, "  <div class='mw-indicators'>"
 		, "    <div id='mw-indicator-a' class='mw-indicator'>a2</div>"	// 2nd overwrites 1st
@@ -52,13 +57,13 @@ class Indicator_html_bldr_fxt {
 	}
 	public void Init_indicator(String name, String html) {
 		Indicator_xnde xnde = new Indicator_xnde();
-		xnde.Init_for_test(name, Bry_.new_u8(html));			
+		xnde.Init_for_test(name, BryUtl.NewU8(html));
 		Indicator_html_bldr indicators = page.Html_data().Indicators();
 		indicators.Add(xnde);
 	}
 	public void Test_bld(String expd) {
-		Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
-		page.Html_data().Indicators().Bfr_arg__add(tmp_bfr);
-		Tfds.Eq_str_lines(expd, tmp_bfr.To_str_and_clear());
+		BryWtr tmp_bfr = BryWtr.NewAndReset(255);
+		page.Html_data().Indicators().AddToBfr(tmp_bfr);
+		GfoTstr.EqLines(expd, tmp_bfr.ToStrAndClear());
 	}
 }

@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers;
-import gplx.Bry_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class XomwPreprocessor__tst {
@@ -47,10 +47,10 @@ public class XomwPreprocessor__tst {
 		fxt.Test__parse("a{{b|c=d}}e", "<root>a<template><title>b</title><part><name>c</name>=<value>d</value></part></template>e</root>");
 	}
 	@Test public void Template__line_start() {	// COVERS: "The invocation is at the start of the line if lineStart is set in"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "{{b}}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "<template lineStart=\"1\"><title>b</title></template></root>"
 		));
@@ -77,12 +77,12 @@ public class XomwPreprocessor__tst {
 		fxt.Test__parse("a <!--1--> <!--2--> z", "<root>a <comment>&lt;!--1--&gt;</comment> <comment>&lt;!--2--&gt;</comment> z</root>"); // NOTE: space is outside comment; 
 	}
 	@Test public void Comment__nl__ws() {	// COVERS: "Eat the line if possible"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, " <!--1--> "
 		, " <!--2--> "
 		, "z"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "<comment> &lt;!--1--&gt; "  // NOTE: space is inside </comment> if flanked by nl; 
 		, "</comment><comment> &lt;!--2--&gt; "
@@ -119,95 +119,95 @@ public class XomwPreprocessor__tst {
 		fxt.Test__parse("a<includeonly>b<noinclude>c</noinclude>d</includeonly>e", "<root>a<ignore>&lt;includeonly&gt;b&lt;noinclude&gt;c&lt;/noinclude&gt;d&lt;/includeonly&gt;</ignore>e</root>");
 	}
 	@Test public void Heading() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "== b1 =="
 		, "z"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "<h level=\"2\" i=\"1\">== b1 ==</h>"
 		, "z</root>"
 		));
 	}
 	@Test public void Heading__eos__no_nl() {
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "== b1 =="
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "<h level=\"2\" i=\"1\">== b1 ==</h></root>"
 		));
 	}
 	@Test public void Heading__bos__implied_nl() {  // COVERS: "Is this the start of a heading?"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "== b1 =="
 		, "z"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root><h level=\"2\" i=\"1\">== b1 ==</h>"
 		, "z</root>"
 		));
 	}
 	@Test public void Heading__dwim__y() {	// COVERS: "DWIM: This looks kind of like a name/value separator."
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a{{b|"
 		, "=c="
 		, "}}d"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a<template><title>b</title><part><name>"
 		, "</name>=<value>c="
 		, "</value></part></template>d</root>"
 		));
 	}
 	@Test public void Heading__dwim__n() {	// COVERS: "DWIM: This looks kind of like a name/value separator."
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a{{b|"
 		, "==c=="
 		, "}}d"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a<template><title>b</title><part><name index=\"1\" /><value>"
 		, "<h level=\"2\" i=\"1\">==c==</h>"
 		, "</value></part></template>d</root>"
 		));
 	}
 	@Test public void Heading__comment() {	// COVERS: "Comment found at line end"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "==b== <!--c-->"
 		, ""
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "<h level=\"2\" i=\"1\">==b== <comment>&lt;!--c--&gt;</comment></h>"
 		, "</root>"
 		));
 	}
 	@Test public void Heading__consecutive__5() {	// COVERS: "This is just a single String of equals signs on its own line"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "====="
 		, ""
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "<h level=\"2\" i=\"1\">=====</h>"
 		, "</root>"
 		));
 	}
 	@Test public void Heading__consecutive__1() {	// COVERS: "Single equals sign on its own line, count=0"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "="
 		, ""
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "="
 		, "</root>"
 		));
 	}
 	@Test public void Heading__unclosed() {	// COVERS: "No match, no <h>, just pass down the inner src"
-		fxt.Test__parse(String_.Concat_lines_nl_skip_last
+		fxt.Test__parse(StringUtl.ConcatLinesNlSkipLast
 		( "a"
 		, "===b"
 		, ""
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<root>a"
 		, "===b"
 		, "</root>"
@@ -253,10 +253,10 @@ class XomwPreprocessor__fxt {
 		}
 
 		for (int i = 0; i < list.Len(); i++) {
-			XomwPreprocessor wkr = (XomwPreprocessor)list.Get_at(i);
-			byte[] src_bry = Bry_.new_u8(src_str);
+			XomwPreprocessor wkr = (XomwPreprocessor)list.GetAt(i);
+			byte[] src_bry = BryUtl.NewU8(src_str);
 			String actl = wkr.preprocessToDbg(src_bry, for_inclusion);
-			Tfds.Eq_str_lines(expd, actl, src_str);
+			GfoTstr.EqLines(expd, actl, src_str);
 		}
 	}
 }

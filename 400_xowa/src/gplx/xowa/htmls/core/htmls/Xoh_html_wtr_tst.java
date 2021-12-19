@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.htmls;
 
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.Xop_fxt;
 import org.junit.After;
 import org.junit.Test;
@@ -30,12 +30,12 @@ public class Xoh_html_wtr_tst {
 	@Test public void Lnki_caption_fmt()			{fxt.Test_parse_page_wiki_str("[[a|''b'']]"			, "<a href=\"/wiki/A\"><i>b</i></a>");}
 	@Test public void Lnki_tail_trg()				{fxt.Test_parse_page_wiki_str("[[a]]b"				, "<a href=\"/wiki/A\">ab</a>");}
 	@Test public void Lnki_tail_caption()			{fxt.Test_parse_page_wiki_str("[[a|b]]c"			, "<a href=\"/wiki/A\">bc</a>");}
-	@Test  public void Lnki_title() {
+	@Test public void Lnki_title() {
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_wiki_str("[[a|b]]", "<a href=\"/wiki/A\" title=\"A\">b</a>");
 		fxt.Wtr_cfg().Lnki__title_(false);
 	}
-	@Test  public void Lnki_title_page_text() {
+	@Test public void Lnki_title_page_text() {
 		fxt.Wtr_cfg().Lnki__title_(true);
 		fxt.Test_parse_page_wiki_str("[[a_b]]", "<a href=\"/wiki/A_b\" title=\"A b\">a_b</a>");
 		fxt.Wtr_cfg().Lnki__title_(false);
@@ -62,7 +62,7 @@ public class Xoh_html_wtr_tst {
 	@Test public void Html_ent()					{fxt.Test_parse_page_wiki_str("&#33;"						, "&#33;");}	// PURPOSE:ncrs should be literal, not decoded (!);  DATE:2014-11-06
 	@Test public void Html_ref()					{fxt.Test_parse_page_wiki_str("&gt;"						, "&gt;");}
 	@Test public void List_1_itm()	{
-		fxt.Test_parse_page_wiki_str("*a", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("*a", StringUtl.ConcatLinesNlSkipLast
 			( "<ul>"
 			, "  <li>a"
 			, "  </li>"
@@ -70,7 +70,7 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void List_2_itms()	{
-		fxt.Test_parse_page_wiki_str("*a\n*b", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("*a\n*b", StringUtl.ConcatLinesNlSkipLast
 			( "<ul>"
 			, "  <li>a"
 			, "  </li>"
@@ -80,7 +80,7 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void List_nest_ul()	{
-		fxt.Test_parse_page_wiki_str("*a\n**b", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("*a\n**b", StringUtl.ConcatLinesNlSkipLast
 			( "<ul>"
 			, "  <li>a"
 			, "    <ul>"
@@ -92,7 +92,7 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void List_dt_dd()	{
-		fxt.Test_parse_page_wiki_str(";a:b", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(";a:b", StringUtl.ConcatLinesNlSkipLast
 			( "<dl>"
 			, "  <dt>a"
 			, "  </dt>"
@@ -102,7 +102,7 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void List_dd_nest2()	{
-		fxt.Test_parse_page_wiki_str("::a", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str("::a", StringUtl.ConcatLinesNlSkipLast
 			( "<dl>"
 			, "  <dd>"
 			, "    <dl>"
@@ -114,7 +114,7 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void Tblw_basic() {
-		fxt.Test_parse_page_wiki_str("{|\n|+a\n!b||c\n|-\n|d||e\n|}", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("{|\n|+a\n!b||c\n|-\n|d||e\n|}", StringUtl.ConcatLinesNl
 			( "<table>"
 			, "  <caption>a"
 			, "  </caption>"
@@ -134,14 +134,14 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void Tblw_atrs() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{|style='z'"
 			,	"|+a"
 			,	"!style='y'|b||style='x'|c"
 			,	"|-style='w'"
 			,	"|style='v'|d||style='u'|e"
 			,	"|}"
-			), String_.Concat_lines_nl
+			), StringUtl.ConcatLinesNl
 			(	"<table style='z'>"
 			,	"  <caption>a"
 			,	"  </caption>"
@@ -162,12 +162,12 @@ public class Xoh_html_wtr_tst {
 	}
 	@Test public void Para_hdr_list() {
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			( "==a=="
 			, ""
 			, "*b"
 			, "*c"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			( "<h2>a</h2>"
 			, ""
 			, "<ul>"
@@ -181,10 +181,10 @@ public class Xoh_html_wtr_tst {
 	}
 	@Test public void Para_nl_is_space() {
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			( "a"
 			, "b"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			( "<p>a"
 			, "b"
 			, "</p>"
@@ -194,13 +194,13 @@ public class Xoh_html_wtr_tst {
 	}
 	@Test public void Para_nl_2_2() {
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			( "a"
 			, ""
 			, "b"
 			, ""
 			, "c"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			( "<p>a"
 			, "</p>"
 			, ""
@@ -215,18 +215,18 @@ public class Xoh_html_wtr_tst {
 	}
 	@Test public void Div_2() {	// WP:[[Air]]#Density of air
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			(	"<div>a</div>"
 			,	""
 			,	"<div>b</div>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			(	"<div>a</div>"
 			,	"<div>b</div>"
 			));
 		fxt.Init_para_n_();
 	}
 	@Test public void Tblw() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 			(	"{|"
 			,	"|-"
 			,	"|a"
@@ -236,7 +236,7 @@ public class Xoh_html_wtr_tst {
 			,	"|d"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl
+			, StringUtl.ConcatLinesNl
 			( "<table>"
 			, "  <tr>"
 			, "    <td>a"
@@ -255,13 +255,13 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void Tblw_lnki_bang() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 			(	"{|"
 			,	"|-"
 			,	"|[[a|!]]"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl
+			, StringUtl.ConcatLinesNl
 			( "<table>"
 			, "  <tr>"
 			, "    <td><a href=\"/wiki/A\">!</a>"
@@ -272,13 +272,13 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void Tr_inside_tblw_td() {	// WP:[[Earth]]
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 			(	"{|"
 			,	"|-"
 			,	"<tr><td>a</td></tr>"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl
+			, StringUtl.ConcatLinesNl
 			(	"<table>"
 			,	"  <tr>"
 			,	"    <td>a"
@@ -289,7 +289,7 @@ public class Xoh_html_wtr_tst {
 			));
 	}
 	@Test public void Tblw_tr_with_newlines() {// WP:[[John Adams]] Infobox Officeholder
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 			(	"{|"
 			,	"|-"
 			,	""
@@ -298,7 +298,7 @@ public class Xoh_html_wtr_tst {
 			,	"|a"
 			,	"|}"
 			)
-			, String_.Concat_lines_nl
+			, StringUtl.ConcatLinesNl
 			( "<table>"
 			, "  <tr>"
 			, "    <td>a"
@@ -332,12 +332,12 @@ public class Xoh_html_wtr_tst {
 	@Test public void Rtc() {// PURPOSE:make sure <rtc> prints itself; ISSUE#:730; DATE:2020-05-27
 		// REF.MOZILLA:https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rtc
 		fxt.Test_parse_page_wiki_str
-		( String_.Concat_lines_nl_skip_last
+		( StringUtl.ConcatLinesNlSkipLast
 			( "<rtc xml:lang=\"en\" style=\"ruby-position: over;\">"
 			, "  <rp>(</rp><rt>Malaysia</rt><rp>)</rp>"
 			, "</rtc>"
 			)
-		, (String_.Concat_lines_nl_skip_last
+		, (StringUtl.ConcatLinesNlSkipLast
 			( "<rtc style=\"ruby-position: over;\">"
 			, "  <rp>(</rp><rt>Malaysia</rt><rp>)</rp>"
 			, "</rtc>"

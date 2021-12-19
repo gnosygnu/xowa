@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.thms.divs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.thms.divs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Xoh_thm_caption_data {
@@ -71,7 +73,7 @@ public class Xoh_thm_caption_data {
 				tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);
 		}
 		else {
-			if (!Bry_.Match(src, capt_tail_end, capt_tail_end + 7, Bry__div_1_tail_bgn)) {	// next chars should be "\n</div>"
+			if (!BryLni.Eq(src, capt_tail_end, capt_tail_end + 7, Bry__div_1_tail_bgn)) {	// next chars should be "\n</div>"
 				capt_2_is_tidy = true;
 				capt_2_bgn = capt_tail_end;
 				capt_2_end = nxt_div_tail_bgn;
@@ -79,5 +81,5 @@ public class Xoh_thm_caption_data {
 		}
 	}
 	public void Capt_3_(int bgn, int end) {this.capt_3_bgn = bgn; this.capt_3_end = end;}
-	public static final byte[] Bry__div_1_tail_bgn = Bry_.new_a7("\n</div>");
+	public static final byte[] Bry__div_1_tail_bgn = BryUtl.NewA7("\n</div>");
 }

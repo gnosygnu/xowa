@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.wikis;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.Datetime_now;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoa_test_;
 import gplx.xowa.Xoae_app;
@@ -32,18 +32,18 @@ import org.junit.Test;
 public class Pfunc_pagesincategory_tst {
 	private final Pfunc_pagesincategory_tstr tstr = new Pfunc_pagesincategory_tstr();
 	@Before	public void setup()	{tstr.Init(); tstr.Init_category_counts("A", 1000, 2000, 3000);}
-	@Test  public void Type__none()				{tstr.Test_parse("{{PAGESINCATEGORY:A}}"			, "6,000");}
-	@Test  public void Type__empty()				{tstr.Test_parse("{{PAGESINCATEGORY:A|}}"			, "6,000");}	// FIX:throws null error; PAGE: DATE:2016-04-21
-	@Test  public void Type__none__fmt()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R}}"			, "6000");}
-	@Test  public void Type__page__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|pages}}"		, "1,000");}
-	@Test  public void Type__subc__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|subcats}}"	, "2,000");}
-	@Test  public void Type__file__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|files}}"		, "3,000");}
-	@Test  public void Type__page__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|pages}}"	, "1000");}
-	@Test  public void Type__subc__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|subcats}}"	, "2000");}
-	@Test  public void Type__file__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|files}}"	, "3000");}
-	@Test  public void Zero__no_title()			{tstr.Test_parse("{{PAGESINCATEGORY:}}"				, "0");}
-	@Test  public void Zero__missing_title()		{tstr.Test_parse("{{PAGESINCATEGORY:Missing}}"		, "0");}
-	@Test  public void Wrong_args()				{tstr.Test_parse("{{PAGESINCATEGORY:A|invalid|x}}"	, "6,000");}	// defaults to all,fmt
+	@Test public void Type__none()				{tstr.Test_parse("{{PAGESINCATEGORY:A}}"			, "6,000");}
+	@Test public void Type__empty()				{tstr.Test_parse("{{PAGESINCATEGORY:A|}}"			, "6,000");}	// FIX:throws null error; PAGE: DATE:2016-04-21
+	@Test public void Type__none__fmt()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R}}"			, "6000");}
+	@Test public void Type__page__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|pages}}"		, "1,000");}
+	@Test public void Type__subc__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|subcats}}"	, "2,000");}
+	@Test public void Type__file__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|files}}"		, "3,000");}
+	@Test public void Type__page__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|pages}}"	, "1000");}
+	@Test public void Type__subc__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|subcats}}"	, "2000");}
+	@Test public void Type__file__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|files}}"	, "3000");}
+	@Test public void Zero__no_title()			{tstr.Test_parse("{{PAGESINCATEGORY:}}"				, "0");}
+	@Test public void Zero__missing_title()		{tstr.Test_parse("{{PAGESINCATEGORY:Missing}}"		, "0");}
+	@Test public void Wrong_args()				{tstr.Test_parse("{{PAGESINCATEGORY:A|invalid|x}}"	, "6,000");}	// defaults to all,fmt
 }
 class Pfunc_pagesincategory_tstr {
 	private final Xop_fxt parser_tstr;
@@ -66,10 +66,10 @@ class Pfunc_pagesincategory_tstr {
 	public void Init_category_counts(String category_title, int pages, int subcs, int files) {
 		int page_id = 1;
 		page_tbl.Insert_bgn();
-		page_tbl.Insert_cmd_by_batch(page_id, Xow_ns_.Tid__category, Bry_.new_u8(category_title), BoolUtl.N, Datetime_now.Get(), 1, 1, 1, 1, -1);
+		page_tbl.Insert_cmd_by_batch(page_id, Xow_ns_.Tid__category, BryUtl.NewU8(category_title), BoolUtl.N, GfoDateNow.Get(), 1, 1, 1, 1, -1);
 		page_tbl.Insert_end();
 		cat_core_tbl.Insert_bgn();
-		cat_core_tbl.Insert_cmd_by_batch(page_id, pages, subcs, files, Byte_.Zero, 1);
+		cat_core_tbl.Insert_cmd_by_batch(page_id, pages, subcs, files, ByteUtl.Zero, 1);
 		cat_core_tbl.Insert_end();
 	}
 	public void Test_parse(String raw, String expd) {

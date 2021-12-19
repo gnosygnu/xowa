@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.tabs; import gplx.*;
+package gplx.gfui.controls.tabs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.draws.*; import gplx.gfui.layouts.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.types.commons.KeyValHash;
 public class TabBox extends GfuiElemBase {
 	public int Tabs_Count() {return mgr.Count();}
 	public TabPnlItm Tabs_SelectedItm() {return mgr.CurTab();}
@@ -33,9 +38,9 @@ public class TabBox extends GfuiElemBase {
 		TabPnlAreaMgr.Del(this, mgr.Get_at(idx));
 		mgr.Del_at(idx);
 	}
-	@gplx.Internal protected TabBoxMgr Mgr() {return mgr;} TabBoxMgr mgr = TabBoxMgr.new_();
+	public TabBoxMgr Mgr() {return mgr;} TabBoxMgr mgr = TabBoxMgr.new_();
 	public GfuiElem BtnBox() {return btnBox;} GfuiElem btnBox; 
-	@gplx.Internal protected GfuiElem PnlBox() {return pnlBox;} GfuiElem pnlBox;		
+	public GfuiElem PnlBox() {return pnlBox;} GfuiElem pnlBox;		
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, TabBoxEvt_tabSelectByBtn.Key))	TabBoxEvt_tabSelectByBtn.Rcvd(ctx.MsgSrc(), this);
 		else if	(ctx.Match(k, TabBoxEvt_tabSelect.Key))			TabBoxEvt_tabSelect.Select(this, ctx, m);
@@ -43,7 +48,7 @@ public class TabBox extends GfuiElemBase {
 		else return super.Invk(GfsCtx.Instance, 0, k, m);
 		return this;
 	}
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		btnBox = TabBtnAreaMgr.new_("btnBox", this);
 		pnlBox = TabPnlAreaMgr.new_("pnlBox", this);
@@ -141,7 +146,7 @@ class TabPnlAreaMgr {
 		newTab.Zorder_front();
 		newTab.Focus();
 	}
-	@gplx.Internal protected static GfuiElemBase pnl_(TabBox tabBox, GfuiElem pnlBox, String key) {
+	public static GfuiElemBase pnl_(TabBox tabBox, GfuiElem pnlBox, String key) {
 		GfuiElemBase rv = new GfuiElemBase();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_false_());
 		rv.Owner_(pnlBox, key);

@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.core.brys.Bfr_arg_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.custom.brys.wtrs.args.BryBfrArgUtl;
+import gplx.types.basics.utls.BoolUtl;
 interface Pxd_itm_int_interface extends Pxd_itm {
 	int Xto_int_or(int or);
 }
@@ -49,32 +49,32 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 		if (seg_idx == Pxd_itm_base.Seg_idx_skip) return true;
 		if (val_is_adj) {
 			if (val == 0) return true;	// no adjustment to make
-			DateAdp date = bldr.To_date();
+			GfoDate date = bldr.To_date();
 			switch (seg_idx) {
-				case DateAdp_.SegIdx_hour:			date = date.Add_hour(val); break;
-				case DateAdp_.SegIdx_minute:		date = date.Add_minute(val); break;
+				case GfoDateUtl.SegIdxHour:			date = date.AddHour(val); break;
+				case GfoDateUtl.SegIdxMinute:		date = date.AddMinute(val); break;
 				default:							return true;
 			}
 			bldr.By_date(date);
 		}
 		else {
 			if (val == 0) {	// 0 means subtract 1; EX:w:Mariyinsky_Palace; DATE:2014-03-25
-				DateAdp date = bldr.To_date();
+				GfoDate date = bldr.To_date();
 				switch (seg_idx) {
-					case DateAdp_.SegIdx_month:			date = DateAdp_.seg_(new int[] {date.Year(), 1, date.Day(), date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_month(-1); break;
-					case DateAdp_.SegIdx_day:			date = DateAdp_.seg_(new int[] {date.Year(), date.Month(), 1, date.Hour(), date.Minute(), date.Second(), date.Frac()}).Add_day(-1); break;
+					case GfoDateUtl.SegIdxMonth:			date = GfoDateUtl.NewBySegs(new int[] {date.Year(), 1, date.Day(), date.Hour(), date.Minute(), date.Second(), date.Frac()}).AddMonth(-1); break;
+					case GfoDateUtl.SegIdxDay:			date = GfoDateUtl.NewBySegs(new int[] {date.Year(), date.Month(), 1, date.Hour(), date.Minute(), date.Second(), date.Frac()}).AddDay(-1); break;
 					default:							return true;
 				}
 				bldr.By_date(date);
 			}
 			else {
 				if (seg_idx == -1) return false; // PAGE:New_York_City EX: March 14, 2,013; DATE:2016-07-06
-				if (seg_idx == DateAdp_.SegIdx_month) {
+				if (seg_idx == GfoDateUtl.SegIdxMonth) {
 					// NOTE: if day > month, set it to month's max; ISSUE#:644; DATE:2020-01-12
-					int day = bldr.Seg_get(DateAdp_.SegIdx_day);
-					int daysinmonth = DateAdp_.DaysInMonth(val, bldr.Seg_get(DateAdp_.SegIdx_year));
+					int day = bldr.Seg_get(GfoDateUtl.SegIdxDay);
+					int daysinmonth = GfoDateUtl.DaysInMonth(bldr.Seg_get(GfoDateUtl.SegIdxYear), val);
 					if (day > daysinmonth)
-						bldr.Seg_set(DateAdp_.SegIdx_day, daysinmonth);
+						bldr.Seg_set(GfoDateUtl.SegIdxDay, daysinmonth);
 				}
 				bldr.Seg_set(seg_idx, val);
 			}
@@ -88,11 +88,11 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 			case 5:																		// 5 digits
 				switch (data_idx) {
 					case 0: Pxd_eval_year.Eval_at_pos_0(tctx, this); break;				// year at pos 0; EX: 01234-02-03
-					case 1: tctx.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_bry(tctx.Src())); return false;		// year at pos 1; invalid; EX: 01-01234-02
-					case 2: tctx.Err_set(Pft_func_time_log.Invalid_date, Bfr_arg_.New_bry(tctx.Src())); break;				// year at pos 2; invalid; EX: 01-02-01234
+					case 1: tctx.Err_set(Pft_func_time_log.Invalid_date, BryBfrArgUtl.NewBry(tctx.Src())); return false;		// year at pos 1; invalid; EX: 01-01234-02
+					case 2: tctx.Err_set(Pft_func_time_log.Invalid_date, BryBfrArgUtl.NewBry(tctx.Src())); break;				// year at pos 2; invalid; EX: 01-02-01234
 				}
 				val = 2000 + (val % 10);												// NOTE: emulate PHP's incorrect behavior with 5 digit years; EX:ca.w:Nicolau_de_Mira; DATE:2014-04-18
-				tctx.Seg_idxs_(this, DateAdp_.SegIdx_year);
+				tctx.Seg_idxs_(this, GfoDateUtl.SegIdxYear);
 				break;
 			case 4:
 				// 4 digits; assume year
@@ -106,7 +106,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 					// year at pos 3 or more
 					default:
 						// if year already exists, ignore; needed else multiple access-date errors in references; PAGE:en.w:Template:Date; en.w:Antipas,_Cotabato; EX:"12 November 2016 2008" DATE:2017-04-01
-						if (tctx.Seg_idxs()[DateAdp_.SegIdx_year] != Pxd_itm_base.Seg_idx_null
+						if (tctx.Seg_idxs()[GfoDateUtl.SegIdxYear] != Pxd_itm_base.Seg_idx_null
 						) {
 							this.Seg_idx_(Seg_idx_skip);
 							return true;
@@ -117,7 +117,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 						}
 						break;
 				}
-				tctx.Seg_idxs_(this, DateAdp_.SegIdx_year);
+				tctx.Seg_idxs_(this, GfoDateUtl.SegIdxYear);
 				break;
 			default:
 				Pxd_itm[] data_ary = tctx.Data_ary();
@@ -125,9 +125,9 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 				Pxd_itm_int cur_itm = Pxd_itm_int_.CastOrNull(data_ary[data_idx]);
 				Pxd_itm lhs_itm = data_idx == 0					? null : data_ary[data_idx - 1];
 				Pxd_itm rhs_itm = data_idx == data_ary_len - 1	? null : data_ary[data_idx + 1];
-				if (	lhs_itm != null && lhs_itm.Seg_idx() == DateAdp_.SegIdx_month	// itm on left is month
-					&&	rhs_itm != null && rhs_itm.Seg_idx() == DateAdp_.SegIdx_year	// itm on right is year
-					&&	tctx.Seg_idxs()[DateAdp_.SegIdx_day] == -1						// day not yet set; needed for {{#time:Y|July 28 - August 1, 1975}}
+				if (	lhs_itm != null && lhs_itm.Seg_idx() == GfoDateUtl.SegIdxMonth    // itm on left is month
+					&&	rhs_itm != null && rhs_itm.Seg_idx() == GfoDateUtl.SegIdxYear    // itm on right is year
+					&&	tctx.Seg_idxs()[GfoDateUtl.SegIdxDay] == -1						// day not yet set; needed for {{#time:Y|July 28 - August 1, 1975}}
 					)
 					if (!Pxd_eval_seg.Eval_as_d(tctx, cur_itm)) return true;			// cur int should be day; EX:January 1, 2010; PAGE:en.w:Wikipedia:WikiProject_Maine/members; DATE:2014-06-25
 				if (val > Month_max) {									// value is not a month; assume day; DATE:2013-03-15
@@ -163,13 +163,13 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	}
 	public static final int Month_max = 12;		
 	private void Eval_unknown_at_pos_3(Pxd_parser tctx) {	// int at pos 4
-		if (	tctx.Seg_idxs_chk(DateAdp_.SegIdx_year, DateAdp_.SegIdx_month, DateAdp_.SegIdx_day)	// check that ymd is set
+		if (	tctx.Seg_idxs_chk(GfoDateUtl.SegIdxYear, GfoDateUtl.SegIdxMonth, GfoDateUtl.SegIdxDay)	// check that ymd is set
 			&&	Match_sym(tctx, false, Pxd_itm_.Tid_dash))												// check that preceding symbol is "-"
 			Pxd_eval_seg.Eval_as_h(tctx, this);															// mark as hour; handles strange fmts like November 2, 1991-06; DATE:2013-06-19
 	}
 	private void Eval_unknown_at_pos_4(Pxd_parser tctx) {
-		if (	tctx.Seg_idxs_chk(DateAdp_.SegIdx_year
-				, DateAdp_.SegIdx_month, DateAdp_.SegIdx_day, DateAdp_.SegIdx_hour)						// check that ymdh is set
+		if (	tctx.Seg_idxs_chk(GfoDateUtl.SegIdxYear
+				, GfoDateUtl.SegIdxMonth, GfoDateUtl.SegIdxDay, GfoDateUtl.SegIdxHour)						// check that ymdh is set
 			&&	Match_sym(tctx, false, Pxd_itm_.Tid_dash))												// check that preceding symbol is "-"
 			tctx.Seg_idxs_(this, Pxd_itm_base.Seg_idx_skip);											// mark as ignore; handles strange fmts like November 2, 1991-06-19; DATE:2013-06-19
 	}
@@ -251,7 +251,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	}
 	private void Eval_unknown_at_pos_0(Pxd_parser tctx) {	// NOTE: assumes dmy format
 		Pxd_itm[] data_ary = tctx.Data_ary();
-		if (tctx.Data_ary_len() < 2) {tctx.Err_set(Pft_func_time_log.Invalid_year, Bfr_arg_.New_int(val)); return;}
+		if (tctx.Data_ary_len() < 2) {tctx.Err_set(Pft_func_time_log.Invalid_year, BryBfrArgUtl.NewInt(val)); return;}
 		Pxd_itm_int itm_1 = Pxd_itm_int_.CastOrNull(data_ary[1]);
 		if (itm_1 != null) {				// if 1st itm to right is number, parse it as month
 			if (!Pxd_eval_seg.Eval_as_m(tctx, itm_1)) return;

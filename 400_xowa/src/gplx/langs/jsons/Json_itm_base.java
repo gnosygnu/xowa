@@ -15,18 +15,16 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-
+import gplx.types.custom.brys.wtrs.BryWtr;
 public abstract class Json_itm_base implements Json_itm {
 	public abstract byte Tid();
 	public abstract Object Data();
 	public abstract byte[] Data_bry();
 	public String Print_as_json() {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Print_as_json(bfr, 0);
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
-	public abstract void Print_as_json(Bry_bfr bfr, int depth);
+	public abstract void Print_as_json(BryWtr bfr, int depth);
 	public boolean Data_eq(byte[] comp) {return false;}
 }

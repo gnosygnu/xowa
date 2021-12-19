@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.parsers.lists.*;
 public class Xop_xnde_wkr__err_dangling_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -45,7 +47,7 @@ public class Xop_xnde_wkr__err_dangling_tst {
 			, fxt.tkn_xnde_	(5, 13).Subs_(fxt.tkn_txt_(8, 9))
 			);
 	}
-	@Test  public void Alternating() {	// PURPOSE: confirmation test for alternating dangling nodes; PAGE:en.w:Portal:Pornography/Selected_historical_image/Archive; DATE:2014-09-24
+	@Test public void Alternating() {	// PURPOSE: confirmation test for alternating dangling nodes; PAGE:en.w:Portal:Pornography/Selected_historical_image/Archive; DATE:2014-09-24
 		fxt.Test_parse_page_wiki_str
 		( "c<b><i>d<b><i>e"
 		, "c<b><i>d<b><i>e</i></b></i></b>"
@@ -54,7 +56,7 @@ public class Xop_xnde_wkr__err_dangling_tst {
 	@Test public void Li() {	// PURPOSE: auto-close <li>; NOTE: no longer encloses in <ul/>; DATE:2014-06-26
 		fxt.Test_parse_page_wiki_str
 			( "<li>a<li>b"
-			,	String_.Concat_lines_nl_skip_last
+			,	StringUtl.ConcatLinesNlSkipLast
 			( "<li>a</li>"
 			, "<li>b</li>"
 			));
@@ -77,14 +79,14 @@ public class Xop_xnde_wkr__err_dangling_tst {
 			);
 	}
 	@Test public void Tblw_and_tr() {// PURPOSE: <tr> should auto-close |-; EX:fr.wikipedia.org/wiki/Napoléon_Ier; DATE:2013-12-09
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNl
 		( "{|"
 		, "|-"
 		, "<td>row1</td>"
 		, "<tr><td>row2</td>"
 		, "|}"
 		)
-		,	String_.Concat_lines_nl
+		,	StringUtl.ConcatLinesNl
 		( "<table>"
 		, "  <tr>"
 		, "    <td>row1"
@@ -112,11 +114,11 @@ public class Xop_xnde_wkr__err_dangling_tst {
 	}
 	@Test public void Tblx_and_li() {	// PURPOSE: </td> should close list; see Stamp Act 1765
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			( "<table><tr><td>"
 			, "*abc</td></tr><tr><td>bcd</td></tr>"
 			, "</table>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			( "<table>"
 			, "  <tr>"
 			, "    <td>"
@@ -139,11 +141,11 @@ public class Xop_xnde_wkr__err_dangling_tst {
 	}
 	@Test public void Tblx_and_small() {	// PURPOSE: </td> should close <small> correctly; see Stamp Act 1765
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 			( "<table><tr><td>"
 			, "<small>abc</td></tr><tr><td>bcd</td></tr>"
 			, "</table>"
-			), String_.Concat_lines_nl_skip_last
+			), StringUtl.ConcatLinesNlSkipLast
 			( "<table>"
 			, "  <tr>"
 			, "    <td>"
@@ -179,12 +181,12 @@ public class Xop_xnde_wkr__err_dangling_tst {
 	@Test public void Underline() {	// PURPOSE: 2nd <u> should auto-close; PAGE:en.b:Textbook_of_Psychiatry/Alcoholism_and_Psychoactive_Substance_Use_Disorders DATE:2014-09-05
 		fxt.Test_html_full_str("a<u>b<u>c", "a<u>b</u>c");
 	}
-	@Test  public void Xtn_template() {	// PURPOSE: dangling xtns within templates should be auto-closed inside template, not in calling page; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
+	@Test public void Xtn_template() {	// PURPOSE: dangling xtns within templates should be auto-closed inside template, not in calling page; PAGE:en.w:Provinces_and_territories_of_Canada DATE:2014-11-13
 		fxt.Init_page_create("Template:A", "<poem>A");
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		( "{{A}}"
 		, " b"		// poem should not extend to " b"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div class=\"poem\">"
 		, "<p>"
 		, "A"
@@ -193,11 +195,11 @@ public class Xop_xnde_wkr__err_dangling_tst {
 		, " b"
 		));
 	}
-	@Test  public void Section_inline() {	// PURPOSE.FIX:do not output trailing '</xtn>' after '<xtn/>' PAGE:en.w:National_Popular_Vote_Interstate_Compact DATE:2017-04-10
+	@Test public void Section_inline() {	// PURPOSE.FIX:do not output trailing '</xtn>' after '<xtn/>' PAGE:en.w:National_Popular_Vote_Interstate_Compact DATE:2017-04-10
 		fxt.Init_page_create("Template:Abc", "<section begin=key/>val<section end=key/>");
-		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_tmpl_str(StringUtl.ConcatLinesNlSkipLast
 		( "{{Abc}}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<section begin=key/>val<section end=key/>" // fails if "<section begin=key/></section>val<section end=key/></section>"
 		));
 	}

@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users.wikis;
-import gplx.Tfds;
 import gplx.core.envs.Op_sys;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Xofs_url_itm_parser_tst {		
@@ -44,12 +44,12 @@ class Xofs_url_itm_parser_fxt {
 	public Xofs_url_itm_parser_fxt Init_dir_spr_wnt() {parser.Dir_spr_(Op_sys.Wnt.Fsys_dir_spr_byte()); return this;}
 	public void Test_parse_custom(String raw) {
 		parser.Parse(itm, raw);
-		Tfds.Eq(BoolUtl.N, itm.Tid_is_xowa());
-		Tfds.Eq(raw, itm.Url());
+		GfoTstr.EqObj(BoolUtl.N, itm.Tid_is_xowa());
+		GfoTstr.EqObj(raw, itm.Url());
 	}
 	public void Test_parse(String raw, String expd) {
 		parser.Parse(itm, raw);
-		Tfds.Eq(BoolUtl.Y, itm.Tid_is_xowa());
-		Tfds.Eq(expd, itm.Url());
+		GfoTstr.EqObj(BoolUtl.Y, itm.Tid_is_xowa());
+		GfoTstr.EqObj(expd, itm.Url());
 	}
 }

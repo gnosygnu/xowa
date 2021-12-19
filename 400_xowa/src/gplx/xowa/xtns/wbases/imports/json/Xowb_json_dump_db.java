@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports.json;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.Datetime_now;
-import gplx.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.dlgs.Gfo_usr_dlg;
 import gplx.core.ios.Io_stream_zip_mgr;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_parser;
@@ -51,7 +51,7 @@ class Xowb_json_dump_db {
 	private Xow_ns_mgr ns_mgr; private Xow_db_mgr db_mgr; 
 	private Xowd_page_tbl page_tbl; private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
-	private DateAdp page_modified_on;
+	private GfoDate page_modified_on;
 	private int page_id = 0, page_count_main = 0;
 	public Xowb_json_dump_db(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.app = bldr.App(); this.usr_dlg = app.Usr_dlg(); this.wiki = wiki; this.bldr = bldr;
@@ -79,7 +79,7 @@ class Xowb_json_dump_db {
 		// start import
 		this.text_zip_mgr = wiki.Utl__zip_mgr();
 		this.text_zip_tid = Xobldr_cfg.Zip_mode__text(app);
-		this.page_modified_on = Datetime_now.Get();
+		this.page_modified_on = GfoDateNow.Get();
 		page_tbl.Insert_bgn();
 		qid_cmd.Page_wkr__bgn();
 		pid_cmd.Pid__bgn();
@@ -92,7 +92,7 @@ class Xowb_json_dump_db {
 		// extract xid
 		byte[] id = jdoc.Get_val_as_bry_or(Bry__id_key, null);
 		if (id == null)		{usr_dlg.Warn_many("", "", "wbase.json_dump:id is invalid: json=~{0}", json_bry); return;}
-		boolean jdoc_is_qid = Bry_.Has_at_bgn(id, AsciiByte.Ltr_Q, 0);
+		boolean jdoc_is_qid = BryUtl.HasAtBgn(id, AsciiByte.Ltr_Q, 0);
 		Xow_ns ns = jdoc_is_qid ? ns_mgr.Ns_main() : ns_mgr.Ids_get_or_null(Wdata_wiki_mgr.Ns_property);
 
 		// create page entry
@@ -120,7 +120,7 @@ class Xowb_json_dump_db {
 		Xow_db_file db_core = db_mgr.Db__core();
 		db_core.Tbl__site_stats().Update(page_count_main, page_id, ns_mgr.Ns_file().Count());	// save page stats
 		db_core.Tbl__ns().Insert(ns_mgr);														// save ns
-		db_mgr.Tbl__cfg().Insert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest, page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
+		db_mgr.Tbl__cfg().Insert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest, page_modified_on.ToStrFmt(GfoDateUtl.FmtIso8561DateTime));
 	}
-	private static final byte[] Bry__id_key = Bry_.new_a7("id");
+	private static final byte[] Bry__id_key = BryUtl.NewA7("id");
 }

@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.files.Xof_cfg_download;
@@ -51,20 +51,20 @@ public class Xoh_file_mgr {
 		file_wtr.Init_by_wiki(wiki);
 	}
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {file_wtr.Init_by_page(hctx, page);}
-	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Bld_alt(BoolUtl.N, ctx, Xoh_wtr_ctx.Alt, src, lnki));}
-	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt_text) {
+	public void Write_or_queue(BryWtr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Bld_alt(BoolUtl.N, ctx, Xoh_wtr_ctx.Alt, src, lnki));}
+	public void Write_or_queue(BryWtr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt_text) {
 		try {
 			file_wtr.Write_file(bfr, ctx, hctx, src, lnki, this.Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki), alt_text);
 		}
 		catch (Exception e) { // do not let fatal exceptions during link_parse break page; DATE:2017-12-02
-			String link_text = String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end());
-			bfr.Add_str_u8("<span style='color:red'>FAIL.PARSER.LINK:" + link_text + "</span>");
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal err when parsing link; link=~{0} err=~{1}", link_text, Err_.Message_gplx_log(e));			
+			String link_text = StringUtl.NewU8(src, lnki.Src_bgn(), lnki.Src_end());
+			bfr.AddStrU8("<span style='color:red'>FAIL.PARSER.LINK:" + link_text + "</span>");
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal err when parsing link; link=~{0} err=~{1}", link_text, ErrUtl.ToStrLog(e));
 		}
 	}
 	public Xof_file_itm Lnki_eval(int exec_tid, Xop_ctx ctx, Xoae_page page, Xop_lnki_tkn lnki) {return Lnki_eval(exec_tid, ctx, page, page.File_queue(), lnki.Ttl().Page_url(), lnki.Lnki_type(), lnki.Upright(), lnki.W(), lnki.H(), lnki.Time(), lnki.Page(), lnki.Ns_id() == Xow_ns_.Tid__media);}
 	public Xof_file_itm Lnki_eval(int exec_tid, Xop_ctx ctx, Xoae_page page, Xof_xfer_queue queue, byte[] lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page, boolean lnki_is_media_ns) {
-		int uid = queue.Html_uid().Val_add();
+		int uid = queue.Html_uid().ValAddOne();
 		Xof_xfer_itm xfer = new Xof_xfer_itm();
 		xfer.Init_at_lnki(exec_tid, page.Wiki().Domain_itm().Abrv_xo(), lnki_ttl, lnki_type, lnki_upright, lnki_w, lnki_h, lnki_time, lnki_page, Xof_patch_upright_tid_.Tid_all);
 		xfer.Init_at_hdoc(uid, Xof_html_elem.Tid_img);

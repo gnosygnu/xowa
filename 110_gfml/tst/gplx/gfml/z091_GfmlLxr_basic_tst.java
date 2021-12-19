@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import org.junit.*;
 import gplx.core.texts.*; /*CharStream*/
 public class z091_GfmlLxr_basic_tst {
@@ -60,7 +63,7 @@ public class z091_GfmlLxr_basic_tst {
 			list.Add(tkn.Raw());
 		}
 		String[] actl = (String[])list.ToAry(String.class);
-		Tfds.Eq_ary(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 		return tkn;
 	}
 }

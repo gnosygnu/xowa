@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.bldrs.centrals.dbs;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.libs.files.Io_url;
 import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.progs.*; import gplx.core.net.downloads.*;
 import gplx.xowa.users.data.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
@@ -46,7 +53,7 @@ public class Xobc_data_db_upgrader {
 		//	Gfo_log_.Instance.Info("xobc_db update needed b/c of missing or invalid last_check_str", "last_check", last_check_str);
 
 		// update needed; first, update cfg_key, then get host
-		cfg_mgr.Upsert_str("", Cfg__last_check_date, Datetime_now.Get().XtoStr_fmt(Date_fmt));
+		cfg_mgr.Upsert_str("", Cfg__last_check_date, GfoDateNow.Get().ToStrFmt(Date_fmt));
 		Xobc_data_db bc_db = task_mgr.Data_db();
 		Xobc_host_regy_itm host_itm = bc_db.Tbl__host_regy().Select(Xobc_host_regy_tbl.Host_id__archive_org);
 
@@ -54,13 +61,13 @@ public class Xobc_data_db_upgrader {
 		Http_download_wkr download_wkr = Http_download_wkr_.Proto.Make_new();
 		Io_url manifest_url = data_db_url.GenNewExt(".txt");
 		download_wkr.Exec(Gfo_prog_ui_.Always
-			, String_.Format("http://{0}/{1}/bldr_central.data_db.txt", host_itm.Host_domain(), host_itm.Host_update_dir())
+			, StringUtl.Format("http://{0}/{1}/bldr_central.data_db.txt", host_itm.Host_domain(), host_itm.Host_update_dir())
 			, manifest_url, -1);
 
 		// parse manifest and get version_id
 		byte[] manifest_txt = Io_mgr.Instance.LoadFilBry(manifest_url);
-		byte[][] manifest_data = Bry_split_.Split(manifest_txt, AsciiByte.Pipe);
-		int expd_version_id = Bry_.To_int(manifest_data[0]);
+		byte[][] manifest_data = BrySplit.Split(manifest_txt, AsciiByte.Pipe);
+		int expd_version_id = BryUtl.ToInt(manifest_data[0]);
 		Xobc_version_regy_itm actl_version = bc_db.Tbl__version_regy().Select_latest();
 
 		// cleanup
@@ -77,9 +84,9 @@ public class Xobc_data_db_upgrader {
 		// cfg_mgr.Upsert_int("", Cfg__next_check_interval, next_check_interval);
 		// Gfo_log_.Instance.Info("xobc_db update needed", "version", expd_version_id, "next_check_interval", next_check_interval);
 		byte[] new_db_url = manifest_data[1];
-		String note = String_.new_u8(manifest_data[3]);
+		String note = StringUtl.NewU8(manifest_data[3]);
 		download_wkr.Exec(Gfo_prog_ui_.Always
-			, String_.new_u8(new_db_url)
+			, StringUtl.NewU8(new_db_url)
 			, data_db_url, -1);
 		Xopg_alertify_.Exec_log(task_mgr, "Wikis have been updated:<br/>" + note, 30);
 		task_mgr.Load_or_init();

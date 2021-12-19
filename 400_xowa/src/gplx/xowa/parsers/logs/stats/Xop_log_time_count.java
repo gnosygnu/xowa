@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.logs.stats; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*;
+package gplx.xowa.parsers.logs.stats;
+import gplx.core.envs.SystemUtl;
 public class Xop_log_time_count {
 	private int count;
 	private long time;
@@ -25,7 +26,7 @@ public class Xop_log_time_count {
 	public int Depth_max() {return depth_max;}
 	public void Bgn() {
 		if (time_bgn == 0) {
-			time_bgn = gplx.core.envs.System_.Ticks();
+			time_bgn = SystemUtl.Ticks();
 		}
 		depth++;
 		if (depth_max < depth)
@@ -34,7 +35,7 @@ public class Xop_log_time_count {
 	public void End() {
 		depth--;
 		if (depth == 0) {
-			long time_end = gplx.core.envs.System_.Ticks();
+			long time_end = SystemUtl.Ticks();
 			this.time += time_end - time_bgn;
 			this.time_bgn = 0;
 		}

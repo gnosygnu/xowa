@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.xtns.graphs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import org.junit.*;
 public class Json_fmtr_tst {
 	private final Json_fmtr_fxt fxt = new Json_fmtr_fxt();
 	@Test public void Comments() {
@@ -61,10 +64,10 @@ public class Json_fmtr_tst {
 	}
 }
 class Json_fmtr_fxt {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public void Test_clean(String src) {Test_clean(src, src);}
 	public void Test_clean(String src, String expd) {
-		byte[] actl = Json_fmtr.clean(tmp_bfr, Bry_.new_u8(src));
-		Gftest.Eq__bry(Bry_.new_u8(expd), actl);
+		byte[] actl = Json_fmtr.clean(tmp_bfr, BryUtl.NewU8(src));
+		GfoTstr.Eq(BryUtl.NewU8(expd), actl);
 	}
 }

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.bfr_args; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.bfr_args;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Bfr_arg__hatr_ {
-	public static byte[] Bld_atr_bgn(byte[] key) {return Bry_.Add(AsciiByte.SpaceBry, key, AsciiByte.EqBry, AsciiByte.QuoteBry);}	// ' key="'
+	public static byte[] Bld_atr_bgn(byte[] key) {return BryUtl.Add(AsciiByte.SpaceBry, key, AsciiByte.EqBry, AsciiByte.QuoteBry);}	// ' key="'
 }

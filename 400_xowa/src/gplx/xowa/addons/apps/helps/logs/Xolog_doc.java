@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.helps.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.helps.*;
+package gplx.xowa.addons.apps.helps.logs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.mustaches.*;
+import gplx.libs.files.Io_url;
 class Xolog_doc implements Mustache_doc_itm {		
 	public Xolog_doc(String log_file, String log_name, byte[] log_data, Xolog_doc_file[] log_files) {
 		this.log_file = log_file; this.log_name = log_name;
@@ -25,13 +30,13 @@ class Xolog_doc implements Mustache_doc_itm {
 	public byte[] Log_data() {return log_data;} private final byte[] log_data;
 	public Xolog_doc_file[] Log_files() {return log_files;} private final Xolog_doc_file[] log_files;
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "log_name"))		bfr.Add_str_u8(log_name);
-		else if	(String_.Eq(key, "log_file"))		bfr.Add_str_u8(log_file);
-		else if	(String_.Eq(key, "log_data"))		bfr.Add_bry(log_data);
+		if		(StringUtl.Eq(key, "log_name"))		bfr.Add_str_u8(log_name);
+		else if	(StringUtl.Eq(key, "log_file"))		bfr.Add_str_u8(log_file);
+		else if	(StringUtl.Eq(key, "log_data"))		bfr.Add_bry(log_data);
 		return false;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "log_files"))		return log_files;
+		if		(StringUtl.Eq(key, "log_files"))		return log_files;
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }
@@ -57,11 +62,11 @@ class Xolog_doc_ {
 			) {
 			cur_file = hash.Len() == 0
 				? null
-				: ((Xolog_doc_file)hash.Get_at(len - 1)).File();
+				: ((Xolog_doc_file)hash.GetAt(len - 1)).File();
 		}
 		if (cur_file != null)
 			hash.Del(cur_file);			// don't bother showing current item in list
-		Xolog_doc_file[] log_files = (Xolog_doc_file[])hash.To_ary_and_clear(Xolog_doc_file.class);
+		Xolog_doc_file[] log_files = (Xolog_doc_file[])hash.ToAryAndClear(Xolog_doc_file.class);
 
 		// get body
 		byte[] cur_body = Io_mgr.Instance.LoadFilBry(Xolog_file_utl.To_url_by_file(log_dir, cur_file));
@@ -76,8 +81,8 @@ class Xolog_doc_file implements Mustache_doc_itm {
 	public String File() {return file;} private final String file;
 	public String Name() {return name;} private final String name;
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "file"))			bfr.Add_str_u8(file);
-		else if	(String_.Eq(key, "name"))			bfr.Add_str_u8(name);
+		if		(StringUtl.Eq(key, "file"))			bfr.Add_str_u8(file);
+		else if	(StringUtl.Eq(key, "name"))			bfr.Add_str_u8(name);
 		else										return false;
 		return true;
 	}

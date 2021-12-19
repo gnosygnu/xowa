@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_xnde_wkr__include_uncommon_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -21,11 +23,11 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 	@Test public void Ex_Tmpl_io_oi()		{		// PURPOSE: <includeonly> not parsing internals; PAGE:en.w:[[Template:MONTHNAME]]
 		fxt.Test_parse_tmpl_str_test("<includeonly>{{#if:{{{1}}}|a|b}}</includeonly><noinclude>c</noinclude>", "{{test|1}}", "a");
 	}
-	@Test public void Ex_Tmpl_io_subst()		{	// PURPOSE: <includeonly> and @gplx.Internal protected subst; PAGE:en.w:[[Template:Dubious]]
+	@Test public void Ex_Tmpl_io_subst()		{	// PURPOSE: <includeonly> and public subst; PAGE:en.w:[[Template:Dubious]]
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("mwo_print", "{{{1}}}");
 		fxt.Init_defn_add("substcheck", "SUBST");
-		fxt.Test_parse_tmpl_str_test(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test(StringUtl.ConcatLinesNlSkipLast
 			(	"{{mwo_print"
 			,	"|<includeonly>{{subst:</includeonly><includeonly>substcheck}}</includeonly>"
 			,	"}}"
@@ -33,7 +35,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			,	"{{subst:substcheck}}\n"
 			);
 		fxt.Reset();
-		fxt.Test_parse_tmpl_str_test(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_tmpl_str_test(StringUtl.ConcatLinesNlSkipLast
 			(	"{{mwo_print"
 			,	"|<includeonly>{{safesubst:</includeonly><includeonly>substcheck}}</includeonly>"
 			,	"}}"
@@ -41,7 +43,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			,	"SUBST\n");
 		fxt.Init_defn_clear();
 	}
-	@Test public void Ex_Tmpl_noinclude_prm_1() {	// PURPOSE: <noinclude> should not process @gplx.Internal protected tkns; PAGE:en.w:[[Template:See]]
+	@Test public void Ex_Tmpl_noinclude_prm_1() {	// PURPOSE: <noinclude> should not process public tkns; PAGE:en.w:[[Template:See]]
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("mwo_print", "{{{1}}}{{{2}}}");
 		fxt.Test_parse_tmpl_str_test
@@ -103,13 +105,13 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 			);
 	}
 	@Test public void Only_include_preserves_nl() {	// PURPOSE: given "a\n<onlyinclude>{|\n", "{|" should be table; PAGE:en.w:Wikipedia:Reference_desk
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 			(	"a"
 			,	"<onlyinclude>==b==</onlyinclude>"
 			,	"c"
 			)
 //			,	"{{test}}"
-			,	String_.Concat_lines_nl
+			,	StringUtl.ConcatLinesNl
 			(	"a"
 			,	""
 			,	"<h2>b</h2>"
@@ -119,12 +121,12 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 	@Test public void Only_include_interprets_template() {	// PURPOSE: <oi> should interpret templates
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test", "see_me");
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 			(	"a"
 			,	"<onlyinclude>{{test}}</onlyinclude>"
 			,	"c"
 			)
-			,	String_.Concat_lines_nl
+			,	StringUtl.ConcatLinesNl
 			(	"a"
 			,	"see_me"
 			,	"c"
@@ -166,7 +168,7 @@ public class Xop_xnde_wkr__include_uncommon_tst {
 		fxt.Init_defn_add("pre2", "<pre<includeonly></includeonly>>{{{1}}}</pre>");
 		fxt.Test_parse_page_all_str
 			(	"{{pre2|a}}"
-			,	String_.Concat_lines_nl_skip_last
+			,	StringUtl.ConcatLinesNlSkipLast
 			(	"<pre>a</pre>"
 			));
 	}

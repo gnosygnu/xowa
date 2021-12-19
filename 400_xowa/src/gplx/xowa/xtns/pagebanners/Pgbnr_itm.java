@@ -15,13 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pagebanners;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_fmt;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.docs.Gfh_tag;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
@@ -55,7 +56,7 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 	// NOTE: used by hdump
 	public boolean Exists() {return exists;} private boolean exists;
 	public byte[] Srcset() {return srcset;}
-	public byte[] Style_if_not_dflt() {return Bry_.Eq(style, Atr_val__style_dflt) ? Bry_.Empty : style;}
+	public byte[] Style_if_not_dflt() {return BryLni.Eq(style, Atr_val__style_dflt) ? BryUtl.Empty : style;}
 	public byte[] Style() {return style;} private byte[] style;
 	public double Data_pos_x() {return data_pos_x;}
 	public double Data_pos_y() {return data_pos_y;}
@@ -86,7 +87,7 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 		this.data_pos_x = data_pos_x;
 		this.data_pos_y = data_pos_y;
 		this.srcset = srcset;
-		this.style = Bry_.Eq(style_if_not_dflt, Bry_.Empty) ? Atr_val__style_dflt : style_if_not_dflt;
+		this.style = BryLni.Eq(style_if_not_dflt, BryUtl.Empty) ? Atr_val__style_dflt : style_if_not_dflt;
 		this.exists = true;
 	}
 	public void Init_from_wtxt(Xoa_ttl banner_ttl, Xof_file_itm banner_file_itm, byte[] banner_anch_title, byte[] banner_hdr_text, boolean bottomtoc
@@ -114,52 +115,52 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 		this.isPanorama = isPanorama;
 	}
 	public void Init_hdump(boolean mode_is_hdump) {
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		if (mode_is_hdump) {
-			this.img_id_atr = Bry_.Empty;
+			this.img_id_atr = BryUtl.Empty;
 			this.img_xottl_atr = Gfh_atr_.Add_to_bry(tmp_bfr, Xoh_img_xoimg_data.Bry__data_xowa_title, file_ttl);
 			this.img_xoimg_atr = Gfh_atr_.Add_to_bry(tmp_bfr, Xoh_img_xoimg_data.Bry__data_xowa_image, Xoh_img_xoimg_data.Bry__data_xowa_image__full);
-			this.banner_img_src = Bry_.Empty;	// do not write img_src else hzip_diff will complain for every image; DATE:2016-10-18
+			this.banner_img_src = BryUtl.Empty;	// do not write img_src else hzip_diff will complain for every image; DATE:2016-10-18
 		}
 		else {
-			this.img_id_atr = tmp_bfr.Add(Bry__anch_atr_id).Add_int_variable(banner_file_itm.Html_uid()).Add_byte_quote().To_bry_and_clear();
-			this.img_xottl_atr = this.img_xoimg_atr = Bry_.Empty;
+			this.img_id_atr = tmp_bfr.Add(Bry__anch_atr_id).AddIntVariable(banner_file_itm.Html_uid()).AddByteQuote().ToBryAndClear();
+			this.img_xottl_atr = this.img_xoimg_atr = BryUtl.Empty;
 		}
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "title"))							bfr.Add_bry(banner_hdr_text);
-		else if	(String_.Eq(key, "tooltip"))						bfr.Add_bry(banner_anch_title);
-		else if	(String_.Eq(key, "bannerfile"))						bfr.Add_bry(banner_anch_href);
-		else if	(String_.Eq(key, "banner"))							bfr.Add_bry(banner_img_src);
-		else if	(String_.Eq(key, "srcset"))							bfr.Add_bry(srcset == null ? Bry_.Empty : Bry_.Empty);
-		else if	(String_.Eq(key, "originx"))						bfr.Add_bry(originx);
-		else if	(String_.Eq(key, "data-pos-x"))						bfr.Add_double(data_pos_x);
-		else if	(String_.Eq(key, "data-pos-y"))						bfr.Add_double(data_pos_y);
-		else if	(String_.Eq(key, "maxWidth"))						bfr.Add_int(max_width);
-		else if	(String_.Eq(key, "toc"))							bfr.Add_bry(toc);
-		else if	(String_.Eq(key, "img_id_atr"))						bfr.Add_bry(img_id_atr);
-		else if	(String_.Eq(key, "img_xottl"))						bfr.Add_bry(img_xottl_atr);
-		else if	(String_.Eq(key, "img_xoimg"))						bfr.Add_bry(img_xoimg_atr);
-		else if	(String_.Eq(key, "file_ttl"))						bfr.Add_bry(file_ttl);
+		if		(StringUtl.Eq(key, "title"))							bfr.Add_bry(banner_hdr_text);
+		else if	(StringUtl.Eq(key, "tooltip"))						bfr.Add_bry(banner_anch_title);
+		else if	(StringUtl.Eq(key, "bannerfile"))						bfr.Add_bry(banner_anch_href);
+		else if	(StringUtl.Eq(key, "banner"))							bfr.Add_bry(banner_img_src);
+		else if	(StringUtl.Eq(key, "srcset"))							bfr.Add_bry(srcset == null ? BryUtl.Empty : BryUtl.Empty);
+		else if	(StringUtl.Eq(key, "originx"))						bfr.Add_bry(originx);
+		else if	(StringUtl.Eq(key, "data-pos-x"))						bfr.Add_double(data_pos_x);
+		else if	(StringUtl.Eq(key, "data-pos-y"))						bfr.Add_double(data_pos_y);
+		else if	(StringUtl.Eq(key, "maxWidth"))						bfr.Add_int(max_width);
+		else if	(StringUtl.Eq(key, "toc"))							bfr.Add_bry(toc);
+		else if	(StringUtl.Eq(key, "img_id_atr"))						bfr.Add_bry(img_id_atr);
+		else if	(StringUtl.Eq(key, "img_xottl"))						bfr.Add_bry(img_xottl_atr);
+		else if	(StringUtl.Eq(key, "img_xoimg"))						bfr.Add_bry(img_xoimg_atr);
+		else if	(StringUtl.Eq(key, "file_ttl"))						bfr.Add_bry(file_ttl);
 		else														return false;
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "icons"))							return icons;
-		else if	(String_.Eq(key, "hasIcons"))						return Mustache_doc_itm_.Ary__bool(icons.length > 0);
-		else if	(String_.Eq(key, "bottomtoc"))						return Mustache_doc_itm_.Ary__bool(bottomtoc);
-		else if	(String_.Eq(key, "isHeadingOverrideEnabled"))		return Mustache_doc_itm_.Ary__bool(isHeadingOverrideEnabled);
-		else if	(String_.Eq(key, "isPanorama"))                     return Mustache_doc_itm_.Ary__bool(isPanorama);
-		else if	(String_.Eq(key, "enable-toc"))                     return Mustache_doc_itm_.Ary__bool(enable_toc);
-		else if	(String_.Eq(key, "hasPosition"))                    return Mustache_doc_itm_.Ary__bool(hasPosition);
+		if		(StringUtl.Eq(key, "icons"))							return icons;
+		else if	(StringUtl.Eq(key, "hasIcons"))						return Mustache_doc_itm_.Ary__bool(icons.length > 0);
+		else if	(StringUtl.Eq(key, "bottomtoc"))						return Mustache_doc_itm_.Ary__bool(bottomtoc);
+		else if	(StringUtl.Eq(key, "isHeadingOverrideEnabled"))		return Mustache_doc_itm_.Ary__bool(isHeadingOverrideEnabled);
+		else if	(StringUtl.Eq(key, "isPanorama"))                     return Mustache_doc_itm_.Ary__bool(isPanorama);
+		else if	(StringUtl.Eq(key, "enable-toc"))                     return Mustache_doc_itm_.Ary__bool(enable_toc);
+		else if	(StringUtl.Eq(key, "hasPosition"))                    return Mustache_doc_itm_.Ary__bool(hasPosition);
 		return Mustache_doc_itm_.Ary__empty;
 	}
-	private static final byte[] Bry__anch_atr_id = Bry_.new_a7(" id=\"xoimg_");
+	private static final byte[] Bry__anch_atr_id = BryUtl.NewA7(" id=\"xoimg_");
 	public static final byte[]
-	  Atr_key__srcset = Bry_.new_a7("srcset")
-	, Atr_key__data_pos_x = Bry_.new_a7("data-pos-x")
-	, Atr_key__data_pos_y = Bry_.new_a7("data-pos-y")
-	, Atr_val__style_dflt = Bry_.new_a7("max-width:-1px")
+	  Atr_key__srcset = BryUtl.NewA7("srcset")
+	, Atr_key__data_pos_x = BryUtl.NewA7("data-pos-x")
+	, Atr_key__data_pos_y = BryUtl.NewA7("data-pos-y")
+	, Atr_val__style_dflt = BryUtl.NewA7("max-width:-1px")
 	;
 	public Json_nde Mustache__json() {
 		return buildargs();
@@ -170,7 +171,7 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 		jnde.AddKvStr("tooltip", banner_anch_title);
 		jnde.AddKvStr("bannerfile", banner_anch_href);
 		jnde.AddKvStr("banner", banner_img_src);
-		jnde.AddKvStr("srcset", srcset == null ? Bry_.Empty : Bry_.Empty);
+		jnde.AddKvStr("srcset", srcset == null ? BryUtl.Empty : BryUtl.Empty);
 		jnde.AddKvStr("originx", originx);
 		jnde.AddKvStr("toc", toc);
 		jnde.AddKvStr("img_id_atr", img_id_atr);
@@ -191,7 +192,7 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 			ary = Json_ary.NewByVal();
 			int iconlen = json_icon_list.Len();
 			for (int i = 0; i < iconlen; i++) {
-				Json_nde inde = (Json_nde)json_icon_list.Get_at(i);
+				Json_nde inde = (Json_nde)json_icon_list.GetAt(i);
 				ary.Add(inde);
 			}
 			if (iconlen > 0) {
@@ -201,7 +202,7 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 		int iconLen = icons.length;
 		if (iconLen > 0) {
 			ary = Json_ary.NewByVal();
-			Bry_bfr tmpBfr = Bry_bfr_.New();
+			BryWtr tmpBfr = BryWtr.New();
 			for (int i = 0; i < iconLen; i++) {
 				Pgbnr_icon icon = icons[i];
 				Json_nde iconNde = Pgbnr_iconx(tmpBfr, icon.Name(), icon.Title(), icon.Href());
@@ -213,14 +214,14 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 	}
 
 	private List_adp json_icon_list;
-	public void Add_new_icon(Bry_bfr tmp_bfr, byte[] name, byte[] title, byte[] href) {
+	public void Add_new_icon(BryWtr tmp_bfr, byte[] name, byte[] title, byte[] href) {
 		if (json_icon_list == null) json_icon_list = List_adp_.New();
 		json_icon_list.Add(Pgbnr_iconx(tmp_bfr, name, title, href));
 	}
 
-	private Json_nde Pgbnr_iconx(Bry_bfr tmp_bfr, byte[] name, byte[] title, byte[] href) {
+	private Json_nde Pgbnr_iconx(BryWtr tmp_bfr, byte[] name, byte[] title, byte[] href) {
 		fmt.Bld_many(tmp_bfr, name, title);
-		byte[] html = tmp_bfr.To_bry_and_clear();
+		byte[] html = tmp_bfr.ToBryAndClear();
 		Json_nde jnde = Json_nde.NewByVal();
 		jnde.AddKvStr("name", name);
 		jnde.AddKvStr("title", title);
@@ -229,8 +230,8 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 		return jnde;
 	}
 
-	public static final Bry_fmt fmt = Bry_fmt.New
-	( Bry_.New_u8_nl_apos("<span aria-disabled=\"false\" title=\"~{title}\" class=\"oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-~{name} oo-ui-iconElement oo-ui-iconWidget\"></span>")
+	public static final BryFmt fmt = BryFmt.New
+	( BryUtlByWtr.NewU8NlSwapApos("<span aria-disabled=\"false\" title=\"~{title}\" class=\"oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-~{name} oo-ui-iconElement oo-ui-iconWidget\"></span>")
 	, "name", "title"
 	);
 }

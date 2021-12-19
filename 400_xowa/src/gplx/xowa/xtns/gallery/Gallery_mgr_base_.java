@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.gallery;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.errs.ErrUtl;
 public class Gallery_mgr_base_ {
 	public static final byte
 	  Tid__traditional		= 0
@@ -23,11 +26,11 @@ public class Gallery_mgr_base_ {
 	, Tid__packed__overlay	= 4
 	;
 	private static final byte[]
-	  Bry__traditional		= Bry_.new_a7("traditional")
-	, Bry__nolines			= Bry_.new_a7("nolines")
-	, Bry__packed			= Bry_.new_a7("packed")
-	, Bry__packed__hover	= Bry_.new_a7("packed-hover")
-	, Bry__packed__overlay	= Bry_.new_a7("packed-overlay")
+	  Bry__traditional		= BryUtl.NewA7("traditional")
+	, Bry__nolines			= BryUtl.NewA7("nolines")
+	, Bry__packed			= BryUtl.NewA7("packed")
+	, Bry__packed__hover	= BryUtl.NewA7("packed-hover")
+	, Bry__packed__overlay	= BryUtl.NewA7("packed-overlay")
 	;
 	private static final Hash_adp_bry bry_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Bry__traditional		, Tid__traditional)
@@ -49,7 +52,7 @@ public class Gallery_mgr_base_ {
 			case Tid__packed:			return Bry__packed;
 			case Tid__packed__hover:	return Bry__packed__hover;
 			case Tid__packed__overlay:	return Bry__packed__overlay;
-			default:					throw Err_.new_unhandled(tid);
+			default:					throw ErrUtl.NewUnhandled(tid);
 		}
 	}
 	public static Gallery_mgr_base New(byte mode) {

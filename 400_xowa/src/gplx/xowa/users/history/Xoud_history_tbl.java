@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*;
+package gplx.xowa.users.history;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
 public class Xoud_history_tbl implements Rls_able {
 	private final String tbl_name = "user_history"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_wiki, fld_url, fld_time, fld_count;
@@ -38,19 +43,19 @@ public class Xoud_history_tbl implements Rls_able {
 		stmt_select_by_page = Db_stmt_.Rls(stmt_select_by_page);
 		stmt_select_by_top = Db_stmt_.Rls(stmt_select_by_top);
 	}
-	public void Insert(byte[] wiki, byte[] url, DateAdp time, int count) {
+	public void Insert(byte[] wiki, byte[] url, GfoDate time, int count) {
 		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()
 			.Val_bry_as_str(fld_wiki, wiki)
 			.Val_bry_as_str(fld_url , url)
-			.Val_str(fld_time, time.XtoStr_fmt_iso_8561())
+			.Val_str(fld_time, time.ToStrFmtIso8561())
 			.Val_int(fld_count, count)
 			.Exec_insert();
 	}
-	public void Update(int id, DateAdp time, int count) {
-		if (stmt_update == null) stmt_update = conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_time, fld_count);
+	public void Update(int id, GfoDate time, int count) {
+		if (stmt_update == null) stmt_update = conn.Stmt_update(tbl_name, StringUtl.Ary(fld_id), fld_time, fld_count);
 		stmt_update.Clear()
-			.Val_str(fld_time, time.XtoStr_fmt_iso_8561())
+			.Val_str(fld_time, time.ToStrFmtIso8561())
 			.Val_int(fld_count, count)
 			.Crt_int(fld_id, id)
 			.Exec_update();
@@ -69,7 +74,7 @@ public class Xoud_history_tbl implements Rls_able {
 	}
 	public void Select_by_top(List_adp rv, int count) {
 		if (stmt_select_by_top == null) {
-			Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl_name, flds.ToStrAry(), null, null, null, fld_time + " DESC", " LIMIT " + Int_.To_str(count));
+			Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl_name, flds.ToStrAry(), null, null, null, fld_time + " DESC", " LIMIT " + IntUtl.ToStr(count));
 			stmt_select_by_top = conn.Stmt_new(qry);
 		}
 		Db_rdr rdr = stmt_select_by_top.Clear().Exec_select__rls_manual();

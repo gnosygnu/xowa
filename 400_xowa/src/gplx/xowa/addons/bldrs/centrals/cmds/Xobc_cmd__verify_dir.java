@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.cmds;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.progs.*;
 import gplx.core.security.algos.*; import gplx.core.security.files.*;
 public class Xobc_cmd__verify_dir extends Xobc_cmd__base {
@@ -39,14 +45,14 @@ public class Xobc_cmd__verify_dir extends Xobc_cmd__base {
 		for (int i = 0; i < len; ++i) {
 			Cksum_itm itm = itms[i];
 			gplx.core.ios.streams.IoStream stream = Io_mgr.Instance.OpenStreamRead(itm.File_url);
-			byte[] actl_hash = Bry_.Empty;
+			byte[] actl_hash = BryUtl.Empty;
 			this.Prog_data_cur_(prog_data_cur);
 			try {actl_hash = Hash_algo_utl.Calc_hash_w_prog_as_bry(algo, stream, this);}
 			finally {stream.Rls();}
 			prog_data_cur += itm.File_size;
 			if (this.Prog_notify_and_chk_if_suspended(prog_data_cur, Prog_data_end())) return;
-			if (this.Prog_status() != Gfo_prog_ui_.Status__suspended && !Bry_.Eq(itm.Hash, actl_hash)) {
-				this.Cmd_exec_err_(String_.Format("bad hash; file={0} bad={1} good={2}", itm.File_url.Raw(), actl_hash, itm.Hash));
+			if (this.Prog_status() != Gfo_prog_ui_.Status__suspended && !BryLni.Eq(itm.Hash, actl_hash)) {
+				this.Cmd_exec_err_(StringUtl.Format("bad hash; file={0} bad={1} good={2}", itm.File_url.Raw(), actl_hash, itm.Hash));
 				return;
 			}
 		}

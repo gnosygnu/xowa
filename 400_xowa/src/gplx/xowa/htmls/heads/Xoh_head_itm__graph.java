@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.xowa.guis.*;
+package gplx.xowa.htmls.heads;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
 import gplx.xowa.wikis.pages.tags.*;
 public class Xoh_head_itm__graph extends Xoh_head_itm__base {
 	private boolean version_is_1, version_is_2;
@@ -50,7 +54,7 @@ public class Xoh_head_itm__graph extends Xoh_head_itm__base {
 		wtr.Write_js_line(Js__graph_exec);
 	}
 
-	private static final byte[] Js__graph_exec = Bry_.new_a7("xo.xtns.graph.exec();");
+	private static final byte[] Js__graph_exec = BryUtl.NewA7("xo.xtns.graph.exec();");
 	private static void Add__xograph(Xopg_tag_mgr tags, Io_url http_root, Xoae_page page, boolean version_is_1, boolean version_is_2) {
 		Io_url base_dir = http_root.GenSubDir_nest("bin", "any", "xowa", "html", "res", "src", "xowa", "core");
 		tags.Add(Xopg_tag_itm.New_js_file(base_dir.GenSubFil_nest("Html_.js")));

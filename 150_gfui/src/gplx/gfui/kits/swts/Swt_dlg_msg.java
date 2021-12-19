@@ -13,14 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.*;
-import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
 import gplx.gfui.kits.core.Gfui_dlg_msg;
 import gplx.gfui.kits.core.Gfui_dlg_msg_;
-
-import org.eclipse.swt.widgets.*;
+import gplx.types.errs.ErrUtl;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 
 public class Swt_dlg_msg implements Gfui_dlg_msg, Runnable {
 	public Swt_dlg_msg(Shell shell)						{this.shell = shell;} Shell shell;
@@ -56,7 +55,7 @@ public class Swt_dlg_msg implements Gfui_dlg_msg, Runnable {
 			case Gfui_dlg_msg_.Ico_question: 		return SWT.ICON_QUESTION;
 			case Gfui_dlg_msg_.Ico_warning: 		return SWT.ICON_WARNING;
 			case Gfui_dlg_msg_.Ico_working: 		return SWT.ICON_WORKING;
-			default: 								throw Err_.new_unhandled(v);
+			default: 								throw ErrUtl.NewUnhandled(v);
 		}		
 	}
 	int Xto_swt_btn(int v) {
@@ -67,7 +66,7 @@ public class Swt_dlg_msg implements Gfui_dlg_msg, Runnable {
 			case Gfui_dlg_msg_.Btn_ignore: 		return SWT.IGNORE;
 			case Gfui_dlg_msg_.Btn_abort: 		return SWT.ABORT;
 			case Gfui_dlg_msg_.Btn_cancel: 		return SWT.CANCEL;
-			default: 							throw Err_.new_unhandled(v);
+			default: 							throw ErrUtl.NewUnhandled(v);
 		}		
 	}
 	int Xto_gfui_btn(int v) {
@@ -78,7 +77,7 @@ public class Swt_dlg_msg implements Gfui_dlg_msg, Runnable {
 			case SWT.IGNORE: 	return Gfui_dlg_msg_.Btn_ignore;
 			case SWT.ABORT: 	return Gfui_dlg_msg_.Btn_abort;
 			case SWT.CANCEL: 	return Gfui_dlg_msg_.Btn_cancel;
-			default: 							throw Err_.new_unhandled(v);
+			default: 							throw ErrUtl.NewUnhandled(v);
 		}		
 	}
 }

@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.wikis.pages.skins;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.*;
 public class Xopg_xtn_skin_itm_stub implements Xopg_xtn_skin_itm {
 	private final byte[] val;
 	public Xopg_xtn_skin_itm_stub(byte[] val) {this.val = val;}
 	public byte Tid()		{return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key()		{return Bry_.Empty;}
-	public void Write(Bry_bfr bfr, Xoae_page page) {bfr.Add(val);}
+	public byte[] Key()		{return BryUtl.Empty;}
+	public void Write(BryWtr bfr, Xoae_page page) {bfr.Add(val);}
 }

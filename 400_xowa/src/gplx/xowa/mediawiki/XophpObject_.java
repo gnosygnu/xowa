@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
-import gplx.Double_;
-import gplx.Int_;
-import gplx.String_;
-import gplx.Type_;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class XophpObject_ {
 	public static final Object False = null; // handles code like "if ($var === false)" where var is an Object;
 	public static boolean is_true(Object val) {return !empty_obj(val);}
@@ -28,7 +28,7 @@ public class XophpObject_ {
 	public static boolean is_null(Object val) {return val == null;}
 
 	// REF.PHP:http://php.net/manual/en/function.empty.php
-	public static boolean empty(String v)     {return v == null || String_.Len_eq_0(v);}
+	public static boolean empty(String v)     {return v == null || StringUtl.IsNullOrEmpty(v);}
 	public static boolean empty(byte[] v)     {return v == null || v.length == 0;}
 	public static boolean empty(boolean v)       {return v == false;}
 	public static boolean empty(int v)        {return v == 0;}
@@ -37,26 +37,26 @@ public class XophpObject_ {
 		if (v == null)
 			return true;
 
-		Class<?> type = Type_.Type_by_obj(v);
-		if (Type_.Eq(type, BoolUtl.ClsRefType)) {
+		Class<?> type = ClassUtl.TypeByObj(v);
+		if (ClassUtl.Eq(type, BoolUtl.ClsRefType)) {
 			if (!BoolUtl.Cast(v))
 				return true;
 		}
-		else if (Type_.Eq(type, Int_.Cls_ref_type)) {
-			if (Int_.Cast(v) == 0)
+		else if (ClassUtl.Eq(type, IntUtl.ClsRefType)) {
+			if (IntUtl.Cast(v) == 0)
 				return true;
 		}
-		else if (Type_.Eq(type, Double_.Cls_ref_type)) {
-			if (Double_.cast(v) == 0)
+		else if (ClassUtl.Eq(type, DoubleUtl.ClsRefType)) {
+			if (DoubleUtl.Cast(v) == 0)
 				return true;
 		}
-		else if (Type_.Eq(type, String_.Cls_ref_type)) {
-			String s = String_.cast(v);
-			if (String_.Len_eq_0(s) || String_.Eq(s, "0"))
+		else if (ClassUtl.Eq(type, StringUtl.ClsRefType)) {
+			String s = StringUtl.Cast(v);
+			if (StringUtl.IsNullOrEmpty(s) || StringUtl.Eq(s, "0"))
 				return true;
 		}
 		else {
-			if (Type_.Is_array(type)) {
+			if (ClassUtl.IsArray(type)) {
 				if (ArrayUtl.Len(ArrayUtl.Cast(v)) == 0)
 					return true;
 			}
@@ -85,8 +85,8 @@ public class XophpObject_ {
 	}
 
 	public static boolean is_null(int v) {return v == NULL_INT;}
-	public static final int NULL_INT = Int_.Max_value;
-	public static final double NULL_DOUBLE = Double_.MinValue;
+	public static final int NULL_INT = IntUtl.MaxValue;
+	public static final double NULL_DOUBLE = DoubleUtl.MinValue;
 	public static final byte[] NULL_BRY = null;
 	public static Object coalesce(Object val, Object if_null) {return val == null ? if_null : val;}
 

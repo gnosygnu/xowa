@@ -14,15 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.settings;
-
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.GfsCtx;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_parser;
-import gplx.objects.errs.ErrUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.Xoax_addon_itm;
@@ -52,7 +51,7 @@ public class SettingsAddon implements Xoax_addon_itm, Xoax_addon_itm__init, Gfo_
         else {
             if (jdoc == null) return;
             for (int i = 0; i < hash.Len(); i++) {
-                CfgResolver resolver = (CfgResolver)hash.Get_at(i);
+                CfgResolver resolver = (CfgResolver)hash.GetAt(i);
                 resolver.WhenWikiCreated(wiki);
             }
         }
@@ -63,7 +62,7 @@ public class SettingsAddon implements Xoax_addon_itm, Xoax_addon_itm__init, Gfo_
         this.jdoc = Json_parser.ParseToJdoc(json);
         if (jdoc == null) return;
         for (int i = 0; i < hash.Len(); i++) {
-            CfgResolver resolver = (CfgResolver)hash.Get_at(i);
+            CfgResolver resolver = (CfgResolver)hash.GetAt(i);
             resolver.WhenCfgChanged(jdoc);
         }
     }
@@ -75,7 +74,7 @@ public class SettingsAddon implements Xoax_addon_itm, Xoax_addon_itm__init, Gfo_
                 Update(m.ReadStrOr("v", null));
                 break;
             default:
-                throw ErrUtl.NewUnhandledDefault(k);
+                throw ErrUtl.NewUnhandled(k);
         }
         return null;
     }

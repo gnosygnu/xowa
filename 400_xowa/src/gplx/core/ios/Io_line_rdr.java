@@ -13,11 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
+package gplx.core.ios;
 import gplx.core.ios.streams.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.files.Io_url;
 public class Io_line_rdr {
 	public Io_line_rdr (Gfo_usr_dlg usr_dlg, Io_url... urls) {this.usr_dlg = usr_dlg; this.urls = urls; if (urls.length == 0) bfr_state = Bfr_state_end;} Gfo_usr_dlg usr_dlg;
 	public int Url_idx() {return url_idx;} private int url_idx;
@@ -44,8 +50,8 @@ public class Io_line_rdr {
 	public Io_line_rdr_key_gen Key_gen() {return key_gen;} public Io_line_rdr Key_gen_(Io_line_rdr_key_gen v) {key_gen = v; return this;} Io_line_rdr_key_gen key_gen = Io_line_rdr_key_gen_.first_pipe;
 	public void Truncate(int pos) {
 		this.Read_next();
-		int end = Bry_find_.Find_fwd(bfr, AsciiByte.Null); if (end == -1) end = bfr.length;
-		bfr = Bry_.Mid(bfr, pos, end);
+		int end = BryFind.FindFwd(bfr, AsciiByte.Null); if (end == -1) end = bfr.length;
+		bfr = BryLni.Mid(bfr, pos, end);
 		bfr_len = bfr.length;
 		bfr_last_read = 0;
 	}
@@ -89,7 +95,7 @@ public class Io_line_rdr {
 				return false;
 		}
 		while (true) {
-			int compare = Bry_.Compare(ttl, 0, ttl.length, bfr, key_pos_bgn, key_pos_end);
+			int compare = BryUtl.Compare(ttl, 0, ttl.length, bfr, key_pos_bgn, key_pos_end);
 			if 		(compare == CompareAbleUtl.Same) {	// eq; return true and move fwd; EX: "BA" and "BA"
 				return true;
 			}
@@ -138,11 +144,11 @@ public class Io_line_rdr {
 		if (file_skip_line0) {
 			byte[] stream_bry = Io_mgr.Instance.LoadFilBry(url);
 			int stream_bry_len = stream_bry.length;
-			int nl_pos = Bry_find_.Find_fwd(stream_bry, AsciiByte.Nl, 0, stream_bry_len);
-			if (nl_pos == Bry_find_.Not_found)
-				stream_bry = Bry_.Empty;
+			int nl_pos = BryFind.FindFwd(stream_bry, AsciiByte.Nl, 0, stream_bry_len);
+			if (nl_pos == BryFind.NotFound)
+				stream_bry = BryUtl.Empty;
 			else
-				stream_bry = Bry_.Mid(stream_bry, nl_pos + 1, stream_bry_len);
+				stream_bry = BryLni.Mid(stream_bry, nl_pos + 1, stream_bry_len);
 			stream = gplx.core.ios.streams.IoStream_.ary_(stream_bry);
 		}
 		else {

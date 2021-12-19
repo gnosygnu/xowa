@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.strings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.strings;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_case extends Pf_func_base {	// EX: {{lc:A}} -> a
@@ -22,15 +25,15 @@ public class Pfunc_case extends Pf_func_base {	// EX: {{lc:A}} -> a
 	@Override public int Id() {return Xol_kwd_grp_.Id_str_lc;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_case(case_type, first).Name_(name);}
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
-		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == Bry_.Empty) return;
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == BryUtl.Empty) return;
 		int argx_len = argx.length; if (argx_len == 0) return; // nothing to uc / lc; just return
 		Xol_lang_itm lang = ctx.Wiki().Lang();
 		boolean upper = case_type == Xol_lang_itm.Tid_upper;
 		if (first) {
-			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
+			BryWtr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().GetB512();
 			argx = lang.Case_mgr().Case_build_1st(tmp_bfr, upper, argx, 0, argx_len);
-			tmp_bfr.Mkr_rls();
+			tmp_bfr.MkrRls();
 		}
 		else
 			argx = lang.Case_mgr().Case_build(upper, argx, 0, argx_len);

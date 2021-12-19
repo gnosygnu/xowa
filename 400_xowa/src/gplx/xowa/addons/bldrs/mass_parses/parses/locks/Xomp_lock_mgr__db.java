@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.locks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.locks;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 public class Xomp_lock_mgr__db implements Xomp_lock_mgr {
 	private final Db_conn conn;
@@ -37,7 +39,7 @@ public class Xomp_lock_mgr__db implements Xomp_lock_mgr {
 		// loop until req is 1st record in req_tbl
 		while (true) {
 			String machine_name_1st = req_tbl.Select_1st();
-			if (String_.Eq(machine_name, machine_name_1st))
+			if (StringUtl.Eq(machine_name, machine_name_1st))
 				break;
 			else {
 				Gfo_usr_dlg_.Instance.Note_many("", "", "waiting for lock: ~{0}", machine_name);

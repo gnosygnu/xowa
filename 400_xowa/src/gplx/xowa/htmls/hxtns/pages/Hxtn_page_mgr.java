@@ -15,13 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.hxtns.pages;
 
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp_bry;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
 import gplx.core.lists.hashs.Hash_adp__int;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
@@ -38,7 +37,7 @@ public class Hxtn_page_mgr {
 	private Hash_adp_bry blob_hash = Hash_adp_bry.cs();
 	private final Hash_adp__int wkrs = new Hash_adp__int();
 	private boolean dbs_missing = true;
-	private Bry_bfr temp_bfr = Bry_bfr_.New();
+	private BryWtr temp_bfr = BryWtr.New();
 	public Hxtn_page_tbl Page_tbl() {return page_tbl;}
 	public Hxtn_blob_tbl Blob_tbl() {return blob_tbl;}
 
@@ -107,7 +106,7 @@ public class Hxtn_page_mgr {
 		List_adp list = page_tbl.Select_by_page(hpg.Page_id());
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Hxtn_page_itm itm = (Hxtn_page_itm)list.Get_at(i);
+			Hxtn_page_itm itm = (Hxtn_page_itm)list.GetAt(i);
 			Hxtn_page_wkr wkr = (Hxtn_page_wkr)wkrs.Get_by_or_null(itm.Wkr_id());
 			if (wkr == null) { // ignore unknown wkrs so other devs can add new xtns; ISSUE#:634; DATE:2020-03-08
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "hxtn.unknown wkr: page_id=~{0} wkr_id=~{1}", itm.Page_id(), itm.Wkr_id());

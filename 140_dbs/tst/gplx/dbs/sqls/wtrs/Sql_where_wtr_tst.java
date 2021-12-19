@@ -19,16 +19,16 @@ import gplx.dbs.Db_crt_;
 import org.junit.Test;
 public class Sql_where_wtr_tst {
 	private final Sql_core_wtr_fxt fxt = new Sql_core_wtr_fxt();
-	@Test  public void Eq()        {fxt.Test__where(Db_crt_.New_eq            ("fld", 1)                , "fld = 1");}
-	@Test  public void Eq_not()    {fxt.Test__where(Db_crt_.New_eq_not        ("fld", 1)                , "fld != 1");}
-	@Test  public void Eq_pre()    {fxt.Test__where(Db_crt_.New_eq            ("a", "fld", 1)            , "a.fld = 1");}
-	@Test  public void Lt()        {fxt.Test__where(Db_crt_.New_lt            ("fld", 1)                , "fld < 1");}
-	@Test  public void Lte()        {fxt.Test__where(Db_crt_.New_lte        ("fld", 1)                , "fld <= 1");}
-	@Test  public void Mt()        {fxt.Test__where(Db_crt_.New_mt            ("fld", 1)                , "fld > 1");}
-	@Test  public void Mte()        {fxt.Test__where(Db_crt_.New_mte        ("fld", 1)                , "fld >= 1");}
-	@Test  public void Between()    {fxt.Test__where(Db_crt_.New_between    ("fld", 1, 3)            , "fld BETWEEN 1 AND 3");}
-	@Test  public void In()        {fxt.Test__where(Db_crt_.New_in            ("fld", 1, 2, 3)        , "fld IN (1, 2, 3)");}
-	@Test  public void Like()        {fxt.Test__where(Db_crt_.New_like        ("fld", "A%")            , "fld LIKE 'A%' ESCAPE '|'");}
+	@Test public void Eq()        {fxt.Test__where(Db_crt_.New_eq            ("fld", 1)                , "fld = 1");}
+	@Test public void Eq_not()    {fxt.Test__where(Db_crt_.New_eq_not        ("fld", 1)                , "fld != 1");}
+	@Test public void Eq_pre()    {fxt.Test__where(Db_crt_.New_eq            ("a", "fld", 1)            , "a.fld = 1");}
+	@Test public void Lt()        {fxt.Test__where(Db_crt_.New_lt            ("fld", 1)                , "fld < 1");}
+	@Test public void Lte()        {fxt.Test__where(Db_crt_.New_lte        ("fld", 1)                , "fld <= 1");}
+	@Test public void Mt()        {fxt.Test__where(Db_crt_.New_mt            ("fld", 1)                , "fld > 1");}
+	@Test public void Mte()        {fxt.Test__where(Db_crt_.New_mte        ("fld", 1)                , "fld >= 1");}
+	@Test public void Between()    {fxt.Test__where(Db_crt_.New_between    ("fld", 1, 3)            , "fld BETWEEN 1 AND 3");}
+	@Test public void In()        {fxt.Test__where(Db_crt_.New_in            ("fld", 1, 2, 3)        , "fld IN (1, 2, 3)");}
+	@Test public void Like()        {fxt.Test__where(Db_crt_.New_like        ("fld", "A%")            , "fld LIKE 'A%' ESCAPE '|'");}
 	@Test public void And__subs__2() {
 		fxt.Test__where
 		( Criteria_.And

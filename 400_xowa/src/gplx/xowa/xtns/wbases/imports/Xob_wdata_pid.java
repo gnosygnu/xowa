@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Gfo_invk;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_conn;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_parser;
@@ -59,7 +59,7 @@ public class Xob_wdata_pid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 
 		Json_doc jdoc = jdoc_parser.Parse(page.Text()); 
 		if (jdoc == null) {
-			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), String_.new_u8(page.Ttl_page_db()));
+			bldr.Usr_dlg().Warn_many(GRP_KEY, "json.invalid", "json is invalid: ns=~{0} id=~{1}", page.Ns_id(), StringUtl.NewU8(page.Ttl_page_db()));
 			return;
 		}
 		Pid__run(jdoc);
@@ -75,7 +75,7 @@ public class Xob_wdata_pid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 		byte len = (byte)enum_hash.Len();
 		for (byte i = 0; i < len; i++) {
 			Wbase_claim_type claim_type = (Wbase_claim_type)enum_hash.Get_itm_or(i, null);
-			datatype_hash.Add(Bry_.new_u8(claim_type.Key_for_scrib()), claim_type);
+			datatype_hash.Add(BryUtl.NewU8(claim_type.Key_for_scrib()), claim_type);
 		}
 
 		// init wbase_pid
@@ -101,7 +101,7 @@ public class Xob_wdata_pid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 		Ordered_hash list = wdoc_parser.Parse_langvals(pid, jdoc, BoolUtl.Y);
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Wdata_langtext_itm label = (Wdata_langtext_itm)list.Get_at(i);
+			Wdata_langtext_itm label = (Wdata_langtext_itm)list.GetAt(i);
 			tbl__pid.Insert_cmd_by_batch(label.Lang(), label.Text(), pid);
 		}
 	}

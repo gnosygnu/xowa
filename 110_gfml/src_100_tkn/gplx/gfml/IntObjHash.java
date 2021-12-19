@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.gfml;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.errs.ErrUtl;
 class IntObjHash_base {
 	public int Count() {return count;} int count;
 	public boolean Has(int key) {return Get_by(key) != null;}
 	public Object Get_by(int key) {
-		if (key < 0) throw Err_.new_wo_type("key must be >= 0", "key", key);
+		if (key < 0) throw ErrUtl.NewArgs("key must be >= 0", "key", key);
 		if (key > maxKey) return null;
 		Object[] subAry = FetchSubAry(key);
 		return subAry == null ? null : subAry[subIdx];
@@ -39,8 +40,8 @@ class IntObjHash_base {
 		maxKey = -1;
 	}
 	void PutObjAtKey(int key, Object obj, boolean isAdd) {
-		if (key < 0) throw Err_.new_wo_type("key must be >= 0", "key", key);
-		if (obj == null) throw Err_.new_wo_type("Object cannot be null; call .Del on key instead", "key", key);
+		if (key < 0) throw ErrUtl.NewArgs("key must be >= 0", "key", key);
+		if (obj == null) throw ErrUtl.NewArgs("Object cannot be null; call .Del on key instead", "key", key);
 		if (key > maxKey) ExpandRootAry(key);
 		Object[] subAry = FetchSubAry(key);
 		if (subAry == null) {
@@ -48,8 +49,8 @@ class IntObjHash_base {
 			rootAry[rootIdx] = subAry;
 		}
 		Object curVal = subAry[subIdx];
-		if ( isAdd && curVal != null) throw Err_.new_wo_type(".Add cannot be called on non-null vals; call .Set instead", "key", key, "val", curVal);
-		if (!isAdd && curVal == null) throw Err_.new_wo_type(".Set cannot be called on null vals; call .Add instead", "key", key);
+		if ( isAdd && curVal != null) throw ErrUtl.NewArgs(".Add cannot be called on non-null vals; call .Set instead", "key", key, "val", curVal);
+		if (!isAdd && curVal == null) throw ErrUtl.NewArgs(".Set cannot be called on null vals; call .Add instead", "key", key);
 		subAry[subIdx] = obj;
 		if (isAdd) count++;
 	}

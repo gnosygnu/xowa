@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 public class GfmlType implements GfmlScopeItm {
 	public String Key() {return key;} private String key;				// key for typeRegy;		EX: itm/rect
 	public String NdeName() {return ndeName;} private String ndeName;	// name for typeResolver;	EX: rect	
@@ -27,9 +28,9 @@ public class GfmlType implements GfmlScopeItm {
 		}
 		return rv;
 	}
-	public boolean IsTypeAny() {return String_.Eq(key, GfmlType_.AnyKey);}
-	public boolean IsTypeNull() {return String_.Eq(key, GfmlType_.NullKey);}
-	@gplx.Internal protected GfmlType ctor_GfmlType_(String key, String ndeName) {
+	public boolean IsTypeAny() {return StringUtl.Eq(key, GfmlType_.AnyKey);}
+	public boolean IsTypeNull() {return StringUtl.Eq(key, GfmlType_.NullKey);}
+	public GfmlType ctor_GfmlType_(String key, String ndeName) {
 		this.key = key;
 		this.ndeName = ndeName;
 		return this;
@@ -45,7 +46,7 @@ class GfmlType_ {
 	public static final GfmlType String		= new_(StringKey, StringKey);
 	public static final GfmlType Null		= new_(NullKey, NullKey);
 
-	@gplx.Internal protected static GfmlType new_(String key, String ndeName) {return new GfmlType().ctor_GfmlType_(key, ndeName);}
-	@gplx.Internal protected static GfmlType new_any_() {return new_(AnyKey, AnyKey);}
-	@gplx.Internal protected static String MakeKey(String ownerKey, String ndeName) {return String_.Concat(ownerKey, "/", ndeName);}
+	public static GfmlType new_(String key, String ndeName) {return new GfmlType().ctor_GfmlType_(key, ndeName);}
+	public static GfmlType new_any_() {return new_(AnyKey, AnyKey);}
+	public static String MakeKey(String ownerKey, String ndeName) {return StringUtl.Concat(ownerKey, "/", ndeName);}
 }

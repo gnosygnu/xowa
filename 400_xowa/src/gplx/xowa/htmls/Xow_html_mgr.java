@@ -13,14 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.xowa.*;
 import gplx.gfui.kits.core.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.xtns.gallery.*;	
 import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.htmls.portal.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.wikis.modules.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.htmls.tidy.*; import gplx.xowa.htmls.js.*;
+import gplx.xowa.htmls.portal.*;
+import gplx.xowa.wikis.modules.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.core.htmls.tidy.*; import gplx.xowa.htmls.js.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.singles.*;
 public class Xow_html_mgr implements Gfo_invk {
 	private final Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 	public Xow_html_mgr(Xowe_wiki wiki) {

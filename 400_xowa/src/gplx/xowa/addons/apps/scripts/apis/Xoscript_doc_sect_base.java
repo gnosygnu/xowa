@@ -14,58 +14,57 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.scripts.apis;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Hash_adp_bry;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.addons.apps.scripts.Xoscript_env;
 public abstract class Xoscript_doc_sect_base {
 	protected final Xoscript_doc doc;
 	private final Hash_adp_bry marker_hash = Hash_adp_bry.cs();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	public Xoscript_doc_sect_base(Xoscript_doc doc) {this.doc = doc;}
 	private byte[] get_marker_by_pos(byte[] pos_bry) {
 		return (byte[])marker_hash.GetByOrFail(pos_bry);
 	}
 	public void reg_marker(String marker_str, String... pos_ary) {
 		int len = pos_ary.length;
-		byte[] marker_bry = Bry_.new_u8(marker_str);
+		byte[] marker_bry = BryUtl.NewU8(marker_str);
 		for (int i = 0; i < len; ++i) {
-			marker_hash.AddIfDupeUseNth(Bry_.new_u8(pos_ary[i]), marker_bry);
+			marker_hash.AddIfDupeUseNth(BryUtl.NewU8(pos_ary[i]), marker_bry);
 		}
 	}
 	public void add_html(String html)					{add_html(Pos__default, html);}
-	public void add_html(String pos_str, String html)	{add_html(Pos__default, Bry_.new_u8(html));}
+	public void add_html(String pos_str, String html)	{add_html(Pos__default, BryUtl.NewU8(html));}
 	public void add_html(String pos_str, byte[] html) {
-		doc.html_by_marker(get_marker_by_pos(Bry_.new_u8(pos_str)), html);
+		doc.html_by_marker(get_marker_by_pos(BryUtl.NewU8(pos_str)), html);
 	}
 	public void add_tag(String pos_str, String tag_str, String body, Object... head_atrs) {
 		// build tag.bgn; EX: '<tag k1="v1">'
-		tmp_bfr.Add_byte(AsciiByte.AngleBgn);
-		tmp_bfr.Add_str_u8(tag_str);
+		tmp_bfr.AddByte(AsciiByte.AngleBgn);
+		tmp_bfr.AddStrU8(tag_str);
 		int head_atrs_len = head_atrs.length;
 		for (int i = 0; i < head_atrs_len; i += 2) {
-			tmp_bfr.Add_byte_space();
-			tmp_bfr.Add_obj_strict(head_atrs[i]);
-			tmp_bfr.Add_byte_eq();
-			tmp_bfr.Add_byte_quote();
-			tmp_bfr.Add_obj_strict(head_atrs[i + 1]);
-			tmp_bfr.Add_byte_quote();
+			tmp_bfr.AddByteSpace();
+			tmp_bfr.AddObjStrict(head_atrs[i]);
+			tmp_bfr.AddByteEq();
+			tmp_bfr.AddByteQuote();
+			tmp_bfr.AddObjStrict(head_atrs[i + 1]);
+			tmp_bfr.AddByteQuote();
 		}
-		tmp_bfr.Add_byte(AsciiByte.AngleEnd);
+		tmp_bfr.AddByte(AsciiByte.AngleEnd);
 
 		// build tag.body; EX: 'some body'
-		tmp_bfr.Add_str_u8(body);
+		tmp_bfr.AddStrU8(body);
 
 		// build tag.end; EX: '</tag>\n'
-		tmp_bfr.Add_byte(AsciiByte.AngleBgn).Add_byte(AsciiByte.Slash);
-		tmp_bfr.Add_str_u8(tag_str);
-		tmp_bfr.Add_byte(AsciiByte.AngleEnd);
-		tmp_bfr.Add_byte_nl();
+		tmp_bfr.AddByte(AsciiByte.AngleBgn).AddByte(AsciiByte.Slash);
+		tmp_bfr.AddStrU8(tag_str);
+		tmp_bfr.AddByte(AsciiByte.AngleEnd);
+		tmp_bfr.AddByteNl();
 
-		add_html(pos_str, tmp_bfr.To_bry_and_clear());
+		add_html(pos_str, tmp_bfr.ToBryAndClear());
 	}
 	public void add_js_file(String file_str) {add_js_file(Pos__default, file_str);}
 	public void add_js_file(String pos_str, String file_str) {			

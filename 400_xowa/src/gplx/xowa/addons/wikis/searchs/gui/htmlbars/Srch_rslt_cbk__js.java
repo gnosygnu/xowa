@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.gui.htmlbars; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.gui.*;
+package gplx.xowa.addons.wikis.searchs.gui.htmlbars;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.*;
 import gplx.core.js.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 class Srch_rslt_cbk__js implements Srch_rslt_cbk {
@@ -48,7 +54,7 @@ class Srch_rslt_cbk__js implements Srch_rslt_cbk {
 	}
 	private static void Highlight(Srch_search_ctx ctx, Srch_rslt_row row) {
 		try {row.Page_ttl_highlight = ctx.Highlight_mgr.Highlight(row.Page_ttl.Full_txt());}	// NOTE: always highlight row; needed for when search done in url_bar (highlight=n) and then same search reused for search (highlight=y)
-		catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "highlight failed; ttl=~{0} err=~{1}", row.Page_ttl_wo_ns, Err_.Message_gplx_log(e));}
+		catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "highlight failed; ttl=~{0} err=~{1}", row.Page_ttl_wo_ns, ErrUtl.ToStrLog(e));}
 	}
 }
 class Srch_rslt_cbk__swt extends Srch_rslt_cbk__js implements Gfo_invk { 	private final Xoae_app app;

@@ -1,6 +1,6 @@
 package gplx.gfdbs.cores;
 
-import gplx.Io_url;
+import gplx.libs.files.Io_url;
 
 public class GfdbConnInfoSqlite implements GfdbConnInfo {
 	public GfdbConnInfoSqlite(Io_url dbFilPath) {

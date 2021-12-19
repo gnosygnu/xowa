@@ -13,35 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gflucene.highlighters; import gplx.*; import gplx.gflucene.*;
+package gplx.gflucene.highlighters;
 import gplx.gflucene.core.*;
 import gplx.gflucene.analyzers.*;
 import gplx.gflucene.searchers.*;
 import java.io.IOException;
-import java.nio.file.Paths;
-
+import gplx.types.errs.ErrUtl;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TopDocs;
-import org.apache.lucene.search.highlight.Formatter;
-import org.apache.lucene.search.highlight.Fragmenter;
 import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.search.highlight.QueryScorer;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
-import org.apache.lucene.search.highlight.SimpleSpanFragmenter;
 import org.apache.lucene.search.highlight.TextFragment;
-import org.apache.lucene.search.highlight.TokenSources;
-import org.apache.lucene.store.FSDirectory;
 public class Gflucene_highlighter_mgr {
 		private Analyzer analyzer;
 	
@@ -58,7 +46,7 @@ public class Gflucene_highlighter_mgr {
 		try {
 			query = parser.parse(qry_data.query);
 		} catch (ParseException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to parse", "query", qry_data.query);
+			throw ErrUtl.NewArgs(e, "failed to parse", "query", qry_data.query);
 		}
 		
 		// create highlighter
@@ -75,7 +63,7 @@ public class Gflucene_highlighter_mgr {
 		try {
 			tokenStream = analyzer.tokenStream("body", text);
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to get stream", "query", qry_data.query);
+			throw ErrUtl.NewArgs(e, "failed to get stream", "query", qry_data.query);
 		}
 		
 		// get fragments from stream
@@ -84,9 +72,9 @@ public class Gflucene_highlighter_mgr {
 //			frags = highlighter.getBestTextFragments(tokenStream, text, false, 1000);
 			frags = highlighter.getBestTextFragments(tokenStream, text, true, 10);
 		} catch (IOException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to get best", "query", qry_data.query);
+			throw ErrUtl.NewArgs(e, "failed to get best", "query", qry_data.query);
 		} catch (InvalidTokenOffsetsException e) {
-			throw Err_.new_exc(e, "lucene_index", "failed to get best", "query", qry_data.query);
+			throw ErrUtl.NewArgs(e, "failed to get best", "query", qry_data.query);
 		}
 		
 		// convert fragments to highlighter items

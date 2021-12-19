@@ -15,7 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 
-import org.junit.*; import gplx.core.tests.*;
+import gplx.core.tests.Gftest;
+import gplx.frameworks.tests.GfoTstr;
+import org.junit.Test;
 public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.types.array.php
 	private final XophpArrayfxt fxt = new XophpArrayfxt();
 	@Test public void array__kvs() {
@@ -132,7 +134,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 		fxt.Test__Count(ary, 0);
 		fxt.Test__Pop(ary, null);
 	}
-	@Test  public void Itm_str_concat_end() {
+	@Test public void Itm_str_concat_end() {
 		XophpArray ary = XophpArray.New();
 		ary.Add(0, "a").Add(1, "b").Add(2, "c");
 
@@ -141,13 +143,13 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 		fxt.Test__Itm_str_concat_end(ary, "b1", 1, "1");
 		fxt.Test__Itm_str_concat_end(ary, "c2", 2, "2");
 	}
-	@Test  public void Clone() {
+	@Test public void Clone() {
 		XophpArray ary = XophpArray.New();
 		ary.Add(0, "a").Add(1, "b").Add(2, "c");
 
 		fxt.Test__Eq(ary, ary.Clone());
 	}
-	@Test  public void Get_by() {
+	@Test public void Get_by() {
 		XophpArray ary = XophpArray.New();
 		ary.Add("0", "a").Add("1", "b").Add("2", "c");
 
@@ -157,29 +159,29 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 }
 class XophpArrayfxt {
 	public void Test__Count(XophpArray ary, int expd) {
-		Gftest.Eq__int(expd, ary.Len());
+		GfoTstr.Eq(expd, ary.Len());
 	}
 	public void Test__array(XophpArray ary, XophpArrayItm... expd) {
 		XophpArrayItm[] actl = ary.To_ary();
-		Gftest.Eq__ary(expd, actl);
+		Gftest.EqAry(expd, actl);
 	}
 	public void Test__unset(XophpArray ary, int idx, XophpArrayItm... expd) {
 		XophpArrayItm[] actl = ary.To_ary();
-		Gftest.Eq__ary(expd, actl);
+		Gftest.EqAry(expd, actl);
 	}
 	public void Test__Pop(XophpArray ary, String expd) {
 		String actl = (String)XophpArray.array_pop(ary);
-		Gftest.Eq__str(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test__Itm_str_concat_end(XophpArray ary, String expd, int idx, String v) {
 		ary.Itm_str_concat_end(idx, v);
 		String actl = ary.Get_at_str(idx);
-		Gftest.Eq__str(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test__Eq(XophpArray lhs, XophpArray rhs) {
-		Gftest.Eq__ary(lhs.To_ary(), rhs.To_ary());
+		Gftest.EqAry(lhs.To_ary(), rhs.To_ary());
 	}
 	public void Test__Get_by(XophpArray ary, String key, Object expd) {
-		Gftest.Eq__obj_or_null(expd, ary.Get_by(key));
+		GfoTstr.EqObjToStr(expd, ary.Get_by(key));
 	}
 }

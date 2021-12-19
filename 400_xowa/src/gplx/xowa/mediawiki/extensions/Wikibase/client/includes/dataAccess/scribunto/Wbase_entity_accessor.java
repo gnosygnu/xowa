@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto;
-
-import gplx.Bry_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.xtns.wbases.Wdata_doc;
 import gplx.xowa.xtns.wbases.Wdata_prop_val_visitor_;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
@@ -34,14 +34,14 @@ public class Wbase_entity_accessor {
 		this.entity_mgr = entity_mgr;
 	}
 	public Wbase_claim_base[] getEntityStatements(byte[] prefixedEntityId, byte[] propertyIdSerialization, byte[] rank) {
-		prefixedEntityId = Bry_.Trim(prefixedEntityId);
+		prefixedEntityId = BryUtl.Trim(prefixedEntityId);
 		// entityId = $this->entityIdParser->parse( $prefixedEntityId );
 		int propertyId = Wdata_prop_val_visitor_.To_pid_int(propertyIdSerialization);
 		// $this->usageAccumulator->addStatementUsage( $entityId, $propertyId );
 		// $this->usageAccumulator->addOtherUsage( $entityId );
 
 		// for some reason, prefixedEntityId can be ""; PAGE:en.w:Nature_and_Art DATE:2017-11-28
-		if (Bry_.Len_eq_0(prefixedEntityId))
+		if (BryUtl.IsNullOrEmpty(prefixedEntityId))
 			return null;
 
 		Wdata_doc entity = null;
@@ -49,20 +49,20 @@ public class Wbase_entity_accessor {
 			entity = entity_mgr.Get_by_xid_or_null(prefixedEntityId);
 		} catch (Exception ex) { // RevisionedUnresolvedRedirectException ex
 			// We probably hit a double redirect
-			Gfo_usr_dlg_.Instance.Log_many("", "", "Encountered a UnresolvedRedirectException when trying to load {0}; exc={1}", prefixedEntityId, Err_.Message_lang(ex));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "Encountered a UnresolvedRedirectException when trying to load {0}; exc={1}", prefixedEntityId, ErrUtl.Message(ex));
 			return null;
 		}
 		if (entity == null) return null; // must check for null; PAGE:fr.w:Wikipédia:Ateliers_Bases/Recherche ISSUE#:773; DATE:2020-08-04
 
 		int selected_rank = ID_NULL;
-		if		(Bry_.Eq(rank, RANK_BEST)) {
+		if		(BryLni.Eq(rank, RANK_BEST)) {
 			selected_rank = ID_BEST;
 		}
-		else if (Bry_.Eq(rank, RANK_ALL)) {
+		else if (BryLni.Eq(rank, RANK_ALL)) {
 			selected_rank = ID_ALL;
 		}
 		else {
-			throw Err_.new_wo_type("rank must be 'best' or 'all', " + String_.new_u8(rank) + " given");
+			throw ErrUtl.NewArgs("rank must be 'best' or 'all', " + StringUtl.NewU8(rank) + " given");
 		}
 
 		List_adp rv = List_adp_.New();
@@ -98,6 +98,6 @@ public class Wbase_entity_accessor {
 
 	private static final int ID_NULL = 0, ID_BEST = 1, ID_ALL = 2;
 	private static final byte[]
-	  RANK_BEST = Bry_.new_a7("best")
-	, RANK_ALL  = Bry_.new_a7("all");
+	  RANK_BEST = BryUtl.NewA7("best")
+	, RANK_ALL  = BryUtl.NewA7("all");
 }

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.Tfds;
+package gplx.gfui.ipts;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.Test;
 public class IptArg_parser_tst {
 	@Test public void KeyBasic() {
@@ -24,7 +25,7 @@ public class IptArg_parser_tst {
 		tst_parse_Key_("key.pageUp", IptKey_.PageUp);
 		tst_parse_Key_("key.ctrl", IptKey_.Ctrl);
 		tst_parse_Key_("key.none", IptKey_.None);
-	}	void tst_parse_Key_(String raw, IptKey expd) {Tfds.Eq(expd.Val(), IptKey_.parse(raw).Val());}
+	}	void tst_parse_Key_(String raw, IptKey expd) {GfoTstr.EqObj(expd.Val(), IptKey_.parse(raw).Val());}
 	@Test public void KbdCmdModifiers() {
 		tst_parse_Key_("key.ctrl+key.enter", IptKey_.Ctrl.Add(IptKey_.Enter));
 		tst_parse_Key_("key.alt+key.escape", IptKey_.Alt.Add(IptKey_.Escape));
@@ -42,11 +43,11 @@ public class IptArg_parser_tst {
 		tst_parse_MouseBtn_("mouse.middle", IptMouseBtn_.Middle);
 		tst_parse_MouseBtn_("mouse.x1", IptMouseBtn_.X1);
 		tst_parse_MouseBtn_("mouse.x2", IptMouseBtn_.X2);
-	}	void tst_parse_MouseBtn_(String raw, IptMouseBtn expd) {Tfds.Eq(expd, IptMouseBtn_.parse(raw));}
+	}	void tst_parse_MouseBtn_(String raw, IptMouseBtn expd) {GfoTstr.EqObj(expd, IptMouseBtn_.parse(raw));}
 	@Test public void MouseWheel() {
 		tst_parse_MouseWheel_("wheel.up", IptMouseWheel_.Up);
 		tst_parse_MouseWheel_("wheel.down", IptMouseWheel_.Down);
-	}	void tst_parse_MouseWheel_(String raw, IptMouseWheel expd) {Tfds.Eq(expd, IptMouseWheel_.parse(raw));}
+	}	void tst_parse_MouseWheel_(String raw, IptMouseWheel expd) {GfoTstr.EqObj(expd, IptMouseWheel_.parse(raw));}
 	@Test public void Mod() {
 		tst_parse_("mod.c", IptKey_.Ctrl);
 		tst_parse_("mod.cs", IptKey_.add_(IptKey_.Ctrl, IptKey_.Shift));
@@ -58,5 +59,5 @@ public class IptArg_parser_tst {
 		tst_parse_("mouse.left", IptMouseBtn_.Left);
 		tst_parse_("wheel.up", IptMouseWheel_.Up);
 		tst_parse_("mod.c", IptKey_.Ctrl);
-	}	void tst_parse_(String raw, IptArg expd) {Tfds.Eq(expd, IptArg_.parse(raw));}
+	}	void tst_parse_(String raw, IptArg expd) {GfoTstr.EqObj(expd, IptArg_.parse(raw));}
 }

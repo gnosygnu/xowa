@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.bulks; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.bulks;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldType;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.Err;
+import gplx.types.errs.ErrUtl;
 public class Db_bulk_exec_ {
 	public static void Insert(Db_bulk_prog prog_wkr, String msg, DbmetaFldItm[] flds, Db_rdr src, Db_stmt trg, Db_conn trg_conn) {
 		// init
@@ -38,9 +47,9 @@ public class Db_bulk_exec_ {
 						case DbmetaFldType.TidLong: trg.Val_long			(fld_name, src.Read_long			(fld_name)); row_size += 8; break;
 						case DbmetaFldType.TidFloat: trg.Val_float			(fld_name, src.Read_float			(fld_name)); row_size += 4; break;
 						case DbmetaFldType.TidDouble: trg.Val_double		(fld_name, src.Read_double			(fld_name)); row_size += 8; break;
-						case DbmetaFldType.TidStr: String src_str = src.Read_str(fld_name); trg.Val_str(fld_name, src_str); row_size += src_str == null ? 0 : String_.Len(src_str); break;
+						case DbmetaFldType.TidStr: String src_str = src.Read_str(fld_name); trg.Val_str(fld_name, src_str); row_size += src_str == null ? 0 : StringUtl.Len(src_str); break;
 						case DbmetaFldType.TidBry: byte[] src_bry = src.Read_bry(fld_name); trg.Val_bry(fld_name, src_bry); row_size += src_bry == null ? 0 : src_bry.length; break;
-						default							: throw Err_.new_unhandled_default(fld_types[i]);
+						default							: throw ErrUtl.NewUnhandled(fld_types[i]);
 					}					
 				}
 
@@ -52,7 +61,7 @@ public class Db_bulk_exec_ {
 				if (prog_wkr.Prog__insert_and_stop_if_suspended(row_size)) break;
 			}
 		}
-		catch (Exception e) {throw Err_.new_wo_type("dbs.bulk:insert failed", "err", e);}
+		catch (Exception e) {throw ErrUtl.NewArgs("dbs.bulk:insert failed", "err", e);}
 		finally {
 			trg_conn.Txn_end();
 		}
@@ -79,7 +88,7 @@ class Db_bulk_exec_utl_ {
 			args[i + 1] = rdr.Read_at(i);
 		}
 		args[flds_len - 2] = "err";
-		args[flds_len - 1] = Err_.Message_gplx_log(e);
-		return Err_.new_wo_type("dbs.bulk:insert row failed", args);
+		args[flds_len - 1] = ErrUtl.ToStrLog(e);
+		return ErrUtl.NewArgs("dbs.bulk:insert row failed", args);
 	}
 }

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.errs.ErrUtl;
 public class GfmlDataWtrOpts {
 	public static final String Key_const = "GfmlDataWtrOpts";
 	public String KeyedSpr() {return keyedSeparator;} public GfmlDataWtrOpts KeyedSeparator_(String val) {keyedSeparator = val; return this;} private String keyedSeparator = " ";
@@ -21,5 +22,5 @@ public class GfmlDataWtrOpts {
 	public boolean IgnoreNullNames() {return ignoreNullNames;} public GfmlDataWtrOpts IgnoreNullNamesOn_() {ignoreNullNames = true; return this;} private boolean ignoreNullNames;
         public static final GfmlDataWtrOpts Instance = new GfmlDataWtrOpts();
 	public static GfmlDataWtrOpts new_() {return new GfmlDataWtrOpts();} GfmlDataWtrOpts() {}
-	public static GfmlDataWtrOpts cast(Object obj) {try {return (GfmlDataWtrOpts)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlDataWtrOpts.class, obj);}}
+	public static GfmlDataWtrOpts cast(Object obj) {try {return (GfmlDataWtrOpts)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, GfmlDataWtrOpts.class, obj);}}
 }

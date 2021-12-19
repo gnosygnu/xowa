@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Int_2_ref {
 	public Int_2_ref() {}
 	public Int_2_ref(int v0, int v1) {Val_all_(v0, v1);}
@@ -33,24 +36,24 @@ public class Int_2_ref {
 	}
 	public static Int_2_ref parse(String raw) {
 		try {
-			String[] itms = String_.Split(raw, ",");
-			int v0 = Int_.Parse(itms[0]);
-			int v1 = Int_.Parse(itms[1]);
+			String[] itms = StringUtl.Split(raw, ",");
+			int v0 = IntUtl.Parse(itms[0]);
+			int v1 = IntUtl.Parse(itms[1]);
 			return new Int_2_ref(v0, v1);
-		} catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("Int_2_ref", raw);}
+		} catch (Exception e) {throw ErrUtl.NewParse("Int_2_ref", raw);}
 	}
 	public static Int_2_ref[] parse_ary_(String raw) {
 		try {
-			String[] itms = String_.Split(raw, ";");
+			String[] itms = StringUtl.Split(raw, ";");
 			int itms_len = itms.length;
 			Int_2_ref[] rv = new Int_2_ref[itms_len];
 			for (int i = 0; i < itms_len; i++) {
-				String[] vals = String_.Split(itms[i], ",");
-				int v0 = Int_.Parse(vals[0]);
-				int v1 = Int_.Parse(vals[1]);
+				String[] vals = StringUtl.Split(itms[i], ",");
+				int v0 = IntUtl.Parse(vals[0]);
+				int v1 = IntUtl.Parse(vals[1]);
 				rv[i] = new Int_2_ref(v0, v1);
 			}
 			return rv;
-		} catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("Int_2_ref[]", raw);}
+		} catch (Exception e) {throw ErrUtl.NewParse("Int_2_ref[]", raw);}
 	}
 }

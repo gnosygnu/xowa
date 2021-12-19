@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.criterias; import gplx.*; import gplx.core.*;
+package gplx.core.criterias;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 import org.junit.*;
 public class Criteria_tst {
 	@Test public void Equal() {
@@ -34,7 +37,7 @@ public class Criteria_tst {
 
 		fx.tst_Matches(Criteria_.eqn_(1), -1);
 		fx.tst_Matches(Criteria_.eqn_("equal"), "not equal");
-		fx.tst_Matches(Criteria_.eqn_(date), date.Add_minute(1));
+		fx.tst_Matches(Criteria_.eqn_(date), date.AddMinute(1));
 	}
 	@Test public void MoreThan() {
 		Criteria crt = Criteria_.mt_(0);
@@ -44,8 +47,8 @@ public class Criteria_tst {
 
 		fx.tst_Matches(Criteria_.mt_(0), 1);
 		fx.tst_Matches(Criteria_.mt_("a"), "b");
-		fx.tst_Matches(Criteria_.mt_(date), date.Add_minute(1));
-		fx.tst_Matches(Criteria_.mt_(false), true);		// MISC: thus truth is greater than falsehood
+		fx.tst_Matches(Criteria_.mt_(date), date.AddMinute(1));
+		fx.tst_Matches(Criteria_.mt_(false), true);        // MISC: thus truth is greater than falsehood
 	}
 	@Test public void MoreThanEq() {
 		Criteria crt = Criteria_.mte_(0);
@@ -67,7 +70,7 @@ public class Criteria_tst {
 		fx.tst_MatchesNot(crt, -2, 2);
 		fx.tst_MatchesFail(crt, "0");
 
-		fx.tst_Matches(Criteria_.between_(1, -1), 0);		// reverse range
+		fx.tst_Matches(Criteria_.between_(1, -1), 0);        // reverse range
 		fx.tst_Matches(Criteria_.between_("a", "c"), "b");
 	}
 	@Test public void In() {
@@ -77,14 +80,14 @@ public class Criteria_tst {
 		fx.tst_MatchesFail(crt, "0");
 	}
 	CriteriaFxt fx = new CriteriaFxt();
-	DateAdp date = DateAdp_.parse_gplx("2001-01-01");
+	GfoDate date = GfoDateUtl.ParseGplx("2001-01-01");
 }
 class CriteriaFxt {
-	public void tst_Matches(Criteria crt, Object... ary) {for (Object val : ary) Tfds.Eq(true, crt.Matches(val));}
-	public void tst_MatchesNot(Criteria crt, Object... ary) {for (Object val : ary) Tfds.Eq(false, crt.Matches(val));}
+	public void tst_Matches(Criteria crt, Object... ary) {for (Object val : ary) GfoTstr.EqObj(true, crt.Matches(val));}
+	public void tst_MatchesNot(Criteria crt, Object... ary) {for (Object val : ary) GfoTstr.EqObj(false, crt.Matches(val));}
 	public void tst_MatchesFail(Criteria crt, Object val) {
 		try {crt.Matches(val);}
-		catch(Exception exc) {Err_.Noop(exc); return;}
-		Tfds.Fail_expdError();
+		catch(Exception exc) {return;}
+		GfoTstr.FailBcExpdError();
 	}
 }

@@ -14,24 +14,24 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
-
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Char_;
-import gplx.Err;
-import gplx.Err_;
-import gplx.Int_;
-import gplx.String_;
 import gplx.core.primitives.Gfo_number_parser;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.CharUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.Err;
+import gplx.types.errs.ErrUtl;
 
 public class Json_parser {
 	private byte[] src;
 	private int src_len, pos;
 	private final Gfo_number_parser num_parser = new Gfo_number_parser();
-	public Json_doc Parse_by_apos_ary(String... ary) {return Parse_by_apos(String_.Concat_lines_nl(ary));}
-	public Json_doc Parse_by_apos(String s) {return Parse(Bry_.Replace(Bry_.new_u8(s), AsciiByte.Apos, AsciiByte.Quote));}
-	public Json_doc Parse(String src) {return Parse(Bry_.new_u8(src));}
+	public Json_doc Parse_by_apos_ary(String... ary) {return Parse_by_apos(StringUtl.ConcatLinesNl(ary));}
+	public Json_doc Parse_by_apos(String s) {return Parse(BryUtl.Replace(BryUtl.NewU8(s), AsciiByte.Apos, AsciiByte.Quote));}
+	public Json_doc Parse(String src) {return Parse(BryUtl.NewU8(src));}
 	public Json_doc Parse(byte[] src) {
 		this.src = src;				if (src == null) return null;
 		this.src_len = src.length;	if (src_len == 0) return null;
@@ -64,10 +64,10 @@ public class Json_parser {
 			switch (src[pos++]) {
 				case AsciiByte.Comma:			break;
 				case AsciiByte.CurlyEnd:		return nde;
-				default: throw Err_.new_unhandled(src[pos - 1]);
+				default: throw ErrUtl.NewUnhandled(src[pos - 1]);
 			}
 		}
-		throw Err_.new_wo_type("eos inside nde");
+		throw ErrUtl.NewArgs("eos inside nde");
 	}
 	private Json_itm Make_kv(Json_doc doc) {
 		Json_itm key = Make_string(doc);
@@ -91,18 +91,18 @@ public class Json_parser {
 				case AsciiByte.BrackBgn:	return Make_ary(doc);
 				case AsciiByte.CurlyBgn:	return Make_nde(doc);
 			}
-			throw Err_.new_unhandled(Char_.To_str(b));
+			throw ErrUtl.NewUnhandled(CharUtl.ToStr(b));
 		}
-		throw Err_.new_wo_type("eos reached in val");
+		throw ErrUtl.NewArgs("eos reached in val");
 	}
 	private Json_itm Make_literal(byte[] remainder, int remainder_len, Json_itm singleton) {
 		++pos;	// 1st char
 		int literal_end = pos + remainder_len;
-		if (Bry_.Eq(src, pos, literal_end, remainder)) {
+		if (BryLni.Eq(src, pos, literal_end, remainder)) {
 			pos = literal_end;
 			return singleton;
 		}
-		throw Err_.new_("json.parser", "invalid literal", "excerpt", Bry_.Mid_by_len_safe(src, pos - 1, 16));
+		throw ErrUtl.NewArgs("invalid literal", "excerpt", BryUtl.MidByLenSafe(src, pos - 1, 16));
 	}
 	private Json_itm Make_string(Json_doc doc) {
 		int bgn = pos++;	// ++: quote_bgn
@@ -124,13 +124,13 @@ public class Json_parser {
 					break;
 			}		
 		}
-		throw Err_.new_wo_type("eos reached inside quote");
+		throw ErrUtl.NewArgs("eos reached inside quote");
 	}
 	private Json_itm Make_num(Json_doc doc) {
 		int num_bgn = pos;
 		boolean loop = true;
 		while (loop) {
-			if (pos == src_len) throw Err_.new_wo_type("eos reached inside num");
+			if (pos == src_len) throw ErrUtl.NewArgs("eos reached inside num");
 			switch (src[pos]) {
 				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
 				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
@@ -168,7 +168,7 @@ public class Json_parser {
 				case AsciiByte.BrackEnd:		++pos; return rv;
 			}
 		}
-		throw Err_.new_wo_type("eos inside ary");
+		throw ErrUtl.NewArgs("eos inside ary");
 	}
 	private void Skip_ws() {
 		while (pos < src_len) {
@@ -182,14 +182,14 @@ public class Json_parser {
 		if (src[pos] == expd)
 			++pos;
 		else
-			throw err_(src, pos, "expected '{0}' but got '{1}'", Char_.To_str(expd), Char_.To_str(src[pos]));
+			throw err_(src, pos, "expected '{0}' but got '{1}'", CharUtl.ToStr(expd), CharUtl.ToStr(src[pos]));
 	}
 	private Err err_(byte[] src, int bgn, String fmt, Object... args) {return err_(src, bgn, src.length, fmt, args);}
 	private Err err_(byte[] src, int bgn, int src_len, String fmt, Object... args) {
-		String msg = String_.Format(fmt, args) + " " + Int_.To_str(bgn) + " " + String_.new_u8__by_len(src, bgn, 20);
-		return Err_.new_wo_type(msg);
+		String msg = StringUtl.Format(fmt, args) + " " + IntUtl.ToStr(bgn) + " " + StringUtl.NewU8ByLen(src, bgn, 20);
+		return ErrUtl.NewArgs(msg);
 	}
-	private static final byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");
+	private static final byte[] Bry_bool_rue = BryUtl.NewA7("rue"), Bry_bool_alse = BryUtl.NewA7("alse"), Bry_null_ull = BryUtl.NewA7("ull");
 	public static Json_doc ParseToJdoc(String src) {
 		Json_parser parser = new Json_parser();
 		return parser.Parse(src);

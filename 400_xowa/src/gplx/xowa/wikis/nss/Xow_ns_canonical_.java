@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.wikis.nss;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.IntVal;
 public class Xow_ns_canonical_ {
 	public static final Xow_ns[] Ary = new Xow_ns[]	// REF.MW: Namespace.php|$wgCanonicalNamespaceNames
 	{ New_itm(Xow_ns_.Tid__media					, Xow_ns_.Key__media)
@@ -38,7 +42,7 @@ public class Xow_ns_canonical_ {
 	, New_itm(Xow_ns_.Tid__module					, Xow_ns_.Key__module)
 	, New_itm(Xow_ns_.Tid__module_talk				, Xow_ns_.Key__module_talk)
 	};
-	private static Xow_ns New_itm(int id, String name) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, Bry_.new_a7(name), false);}	// NOTE: for id/name reference only; case_match and alias does not matter;
+	private static Xow_ns New_itm(int id, String name) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, BryUtl.NewA7(name), false);}	// NOTE: for id/name reference only; case_match and alias does not matter;
 	private static Ordered_hash id_hash;
 	public static int To_id(byte[] key) {
 		if (id_hash == null) {
@@ -46,11 +50,11 @@ public class Xow_ns_canonical_ {
 			int len = Ary.length;
 			for (int i = 0; i < len; ++i) {
 				Xow_ns ns = Ary[i];
-				id_hash.Add(ns.Name_db(), new Int_obj_val(ns.Id()));
+				id_hash.Add(ns.Name_db(), new IntVal(ns.Id()));
 			}
 		}
 		Object rv_obj = id_hash.GetByOrNull(key);
-		return rv_obj == null ? Xow_ns_.Tid__null : ((Int_obj_val)rv_obj).Val();
+		return rv_obj == null ? Xow_ns_.Tid__null : ((IntVal)rv_obj).Val();
 	}
 	public static String To_canonical_or_local_as_str(Xow_ns ns) {	// NOTE: prefer canonical names if they exist; otherwise use local; PAGE:sh.w:Koprno; DATE:2015-11-08
 		switch (ns.Id()) {
@@ -73,7 +77,7 @@ public class Xow_ns_canonical_ {
 			case Xow_ns_.Tid__category_talk:			return Xow_ns_.Key__category_talk;
 			case Xow_ns_.Tid__module:					return Xow_ns_.Key__module;
 			case Xow_ns_.Tid__module_talk:				return Xow_ns_.Key__module_talk;
-			default:									return String_.new_u8(ns.Name_ui());
+			default:									return StringUtl.NewU8(ns.Name_ui());
 		}
 	}
 	public static byte[] To_canonical_or_local_as_bry(Xow_ns ns) {
@@ -124,6 +128,6 @@ public class Xow_ns_canonical_ {
 			case Xow_ns_.Tid__module_talk:				rv = Xow_ns_.Bry__module_talk; break;
 			default:									return ns.Name_db_w_colon();
 		}
-		return Bry_.Add(rv, AsciiByte.ColonBry);
+		return BryUtl.Add(rv, AsciiByte.ColonBry);
 	}
 }

@@ -15,17 +15,15 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.mapSources;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.Math_;
-import gplx.String_;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.primitives.Byte_obj_val;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.MathUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.tmpls.Xot_invk;
 
@@ -49,15 +47,14 @@ class Map_math {// REF.MW:MapSources_math.php
 			if (until_step > 1 && error == 0)
 				Set_coord();
 		} catch (Exception e) {
-			Err_.Noop(e);
 			error = -128;
 		}
 		return error == 0;
 	}
-	public void Fail(Xop_ctx ctx, byte[] src, Xot_invk self, Bry_bfr bfr, byte[] pfunc_name) {
+	public void Fail(Xop_ctx ctx, byte[] src, Xot_invk self, BryWtr bfr, byte[] pfunc_name) {
 		String page_str = ctx.Page().Url().To_str();
-		String pfunc_name_str = String_.new_u8(pfunc_name);
-		String self_str = String_.new_u8(src, self.Src_bgn(), self.Src_end()); 
+		String pfunc_name_str = StringUtl.NewU8(pfunc_name);
+		String self_str = StringUtl.NewU8(src, self.Src_bgn(), self.Src_end());
 		switch (error) {
 			case  -1:	// empty coord; EX: {{#deg2dd:|precision=6}}}} PAGE:it.v:Sami; DATE:2014-03-02
 			case  -2:	// words > 4; EX:{{#geoLink: $1 $2 $3 $4 $5 $6|lat=51°20′00″19°55′50″}}; PAGE:pl.v:Rezerwat_przyrody_Jaksonek DATE:2014-08-14
@@ -82,16 +79,16 @@ class Map_math {// REF.MW:MapSources_math.php
 	private void Set_coord() {	// REF.MW:setCoord
 		if (step > 1) return;
 		if (prec < 9)
-			dec = Math_.Round(dec, prec);
+			dec = MathUtl.Round(dec, prec);
 		int sign = dec < 0 ? -1 : 1;
-		double angle = Math_.Abs_double(dec);
-		double deg = Math_.Floor(angle);
+		double angle = MathUtl.AbsAsDouble(dec);
+		double deg = MathUtl.Floor(angle);
 		double min = (angle - deg) * 60;
 		double sec = prec > 4 // 2020-09-03|ISSUE#:792|precision check should be > 4 not > 0;PAGE:en.w:Huntington_Plaza
-			? Math_.Round((min - Math_.Floor(min)) * 60, prec - 4)
-			: Math_.Round((min - Math_.Floor(min)) * 60, 0)
+			? MathUtl.Round((min - MathUtl.Floor(min)) * 60, prec - 4)
+			: MathUtl.Round((min - MathUtl.Floor(min)) * 60, 0)
 			;
-		min = Math_.Floor(min);
+		min = MathUtl.Floor(min);
 		if (sec >= 60) {
 			sec -= 60;
 			min++;
@@ -109,7 +106,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		}
 		if (prec < 1)
 			min = 0;
-		coord_dec = Math_.Round(dec, prec);
+		coord_dec = MathUtl.Round(dec, prec);
 		coord_deg = deg * sign;
 		coord_min = min;
 		coord_sec = sec;
@@ -127,37 +124,37 @@ class Map_math {// REF.MW:MapSources_math.php
 		if (step < 2) Set_coord();
 		double deg = coord_deg;
 		if (	dec < 0 
-			&& (	(Bry_.Len_gt_0(plus) || Bry_.Len_gt_0(minus))
+			&& (	(BryUtl.IsNotNullOrEmpty(plus) || BryUtl.IsNotNullOrEmpty(minus))
 				||	wikibase	// NOTE: wikibase will always pass in empty plus / minus; still need to suppress "-" sign because letter has already been reversed; EX:"-2 E" -> "2 W" x> "-2 W" DATE:2017-04-02
 				)
 			) {
-			deg = Math_.Abs_double(deg);
+			deg = MathUtl.AbsAsDouble(deg);
 		}
-		tmp_bfr.Add_double(deg).Add(Bry_deg);
+		tmp_bfr.AddDouble(deg).Add(Bry_deg);
 		if (prec > 0) {
 			if (!wikibase) // NOTE: do not add space if wikibase, else will fail in Module:en.w:WikidataCoord; PAGE:en.w:Hulme_Arch_Bridge DATE:2017-04-02
-				tmp_bfr.Add_byte_space();
-			tmp_bfr.Add_double(coord_min).Add(wikibase ? Bry_apos_wb : Bry_apos_mw);
+				tmp_bfr.AddByteSpace();
+			tmp_bfr.AddDouble(coord_min).Add(wikibase ? Bry_apos_wb : Bry_apos_mw);
 		}
 		if (prec > 2) {
 			if (!wikibase)	// NOTE: do not add space if wikibase, else will fail in Module:en.w:WikidataCoord; PAGE:en.w:Hulme_Arch_Bridge DATE:2017-04-02
-				tmp_bfr.Add_byte_space();
-			tmp_bfr.Add_double(coord_sec).Add(wikibase ? Bry_quot_wb : Bry_quot_mw);
+				tmp_bfr.AddByteSpace();
+			tmp_bfr.AddDouble(coord_sec).Add(wikibase ? Bry_quot_wb : Bry_quot_mw);
 		}
 		byte[] letter = null;
 		if (dir_id == Dir_lat_id)
 			letter = coord_dir_ns;
 		if (dir_id == Dir_long_id)
 			letter = coord_dir_ew;
-		if (dec > 0 && Bry_.Len_gt_0(plus))
+		if (dec > 0 && BryUtl.IsNotNullOrEmpty(plus))
 			letter = plus;
-		if (dec < 0 && Bry_.Len_gt_0(minus))
+		if (dec < 0 && BryUtl.IsNotNullOrEmpty(minus))
 			letter = minus;
 		if (letter != null) {
-			tmp_bfr.Add_byte_space();
+			tmp_bfr.AddByteSpace();
 			tmp_bfr.Add(letter);
 		}
-		return tmp_bfr.To_bry_and_clear();
+		return tmp_bfr.ToBryAndClear();
 	}
 	private void Parse_input(byte[] src) {	// REF.MW: toDec
 		src = Parse_input_normalize(tmp_bfr, src);
@@ -172,7 +169,7 @@ class Map_math {// REF.MW:MapSources_math.php
 				case AsciiByte.Space:
 					Parse_input_word(rv, src, ++word_idx, word_bgn, i);
 					++words_len;
-					i = Bry_find_.Find_fwd_while_space_or_tab(src, i, src_len);
+					i = BryFind.FindFwdWhileSpaceOrTab(src, i, src_len);
 					word_bgn = i;
 					break;
 			}
@@ -201,12 +198,12 @@ class Map_math {// REF.MW:MapSources_math.php
 	private void Parse_input_word(double[] rv, byte[] input, int word_idx, int word_bgn, int word_end) {
 		if (word_idx >= Input_units_len) return;
 		byte unit_dlm = Input_units[word_idx];
-		int pos = Bry_find_.Find_fwd(input, unit_dlm, word_bgn, word_end);
-		if (pos != Bry_find_.Not_found)	// remove dlms from end of bry; EX: "123'" -> "123"
+		int pos = BryFind.FindFwd(input, unit_dlm, word_bgn, word_end);
+		if (pos != BryFind.NotFound)	// remove dlms from end of bry; EX: "123'" -> "123"
 			word_end = pos;
 		if (!Parse_input_word_is_compass(input[word_bgn])) {	// if ( is_numeric( $v ) ) {
-			double word_val = Bry_.To_double_or(input, word_bgn, word_end, Double_.NaN);
-			if (!Double_.IsNaN(word_val)) {
+			double word_val = BryUtl.ToDoubleOr(input, word_bgn, word_end, DoubleUtl.NaN);
+			if (!DoubleUtl.IsNaN(word_val)) {
 				if (word_idx > 2) {error = -4; return;}
 				switch (word_idx) {
 					case 0:
@@ -256,17 +253,17 @@ class Map_math {// REF.MW:MapSources_math.php
 		}
 	}
 	private static byte Parse_dir(byte[] dir) {
-		if (Bry_.Len_eq_0(dir)) return Dir_unknown_id;
-		Object dir_obj = Dir_trie.Match_bgn(dir, 0, dir.length);
-		return dir_obj == null ? Dir_unknown_id : ((Byte_obj_val)dir_obj).Val();
+		if (BryUtl.IsNullOrEmpty(dir)) return Dir_unknown_id;
+		Object dir_obj = Dir_trie.MatchBgn(dir, 0, dir.length);
+		return dir_obj == null ? Dir_unknown_id : ((ByteVal)dir_obj).Val();
 	}
 	private static int Parse_precision(int val) {	// REF.MW: MapSourcesMath.php|newCoord
 		if		(val > -1 && val < 10)		return val;
 		else if	(val == -1)					return 9;
 		else								return 4;
 	}
-	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
-	public static byte[] Parse_input_normalize(Bry_bfr bfr, byte[] src) {
+	private BryWtr tmp_bfr = BryWtr.NewAndReset(32);
+	public static byte[] Parse_input_normalize(BryWtr bfr, byte[] src) {
 		/*
 		$w = str_replace( array( '‘', '’', '′' ), "'", $input );
 		$w = str_replace( array( "''", '“', '”', '″' ), '"', $w );
@@ -278,17 +275,17 @@ class Map_math {// REF.MW:MapSources_math.php
 		int src_end = src.length; if (src_end == 0) return null;			
 		src = Trie__normalize__apos.Replace(bfr, src, 0, src_end);		// normalize apos separately, since 2 apos can go to quotes; EX: ‘’ -> "; PAGE:it.v:Morro_d'Oro DATE:2015-12-06
 		src = Trie__normalize__rest.Replace(bfr, src, 0, src.length);	// normalize rest;
-		return Bry_.Trim(src);
+		return BryUtl.Trim(src);
 	}
 	private static final byte[]
-	  Bry_deg = Bry_.new_u8("°")
-	, Bry_quot_mw = Bry_.new_a7("&quot;")
-	, Bry_quot_wb = Bry_.new_a7("&#34;") // REF:en.w:Module:WikidataCoord
-	, Bry_apos_mw = Bry_.new_a7("'")
-	, Bry_apos_wb = Bry_.new_a7("&#39;") // REF:en.w:Module:WikidataCoord
+	  Bry_deg = BryUtl.NewU8("°")
+	, Bry_quot_mw = BryUtl.NewA7("&quot;")
+	, Bry_quot_wb = BryUtl.NewA7("&#34;") // REF:en.w:Module:WikidataCoord
+	, Bry_apos_mw = BryUtl.NewA7("'")
+	, Bry_apos_wb = BryUtl.NewA7("&#39;") // REF:en.w:Module:WikidataCoord
 	;
 	private static final byte Dir_unknown_id = 0, Dir_lat_id = 1, Dir_long_id = 2;
-	public static final byte[] Dir_lat_bry = Bry_.new_a7("lat"), Dir_long_bry = Bry_.new_a7("long");
+	public static final byte[] Dir_lat_bry = BryUtl.NewA7("lat"), Dir_long_bry = BryUtl.NewA7("long");
 	private static final Btrie_slim_mgr Dir_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:MW_const.en
 	.Add_bry_byte(Dir_lat_bry			, Dir_lat_id)
 	.Add_bry_byte(Dir_long_bry			, Dir_long_id)

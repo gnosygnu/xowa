@@ -13,13 +13,39 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*;
-import gplx.objects.lists.ComparerAble;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs;
+import gplx.dbs.Db_attach_itm;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_rdr_;
+import gplx.dbs.Db_sql_;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.encoders.XoHexUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.Xoctg_catpage_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_ctg;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_grp;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_itm;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.Xoctg_collation_mgr;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
 class Xoctg_catlink_loader {
 	private final Xow_wiki wiki;
 	private final Xoctg_catpage_mgr catpage_mgr;
@@ -27,7 +53,7 @@ class Xoctg_catlink_loader {
 	private final Db_attach_mgr attach_mgr;
 	private final byte version;
 	private final int link_dbs_len;
-	private final Bry_bfr sortkey_val_bfr = Bry_bfr_.New();
+	private final BryWtr sortkey_val_bfr = BryWtr.New();
 	Xoctg_catlink_loader(Xow_wiki wiki, Xoctg_catpage_mgr catpage_mgr, Xowd_page_tbl page_tbl, byte version, int link_dbs_len, Db_attach_mgr attach_mgr) {
 		this.wiki = wiki;
 		this.catpage_mgr = catpage_mgr;
@@ -53,18 +79,18 @@ class Xoctg_catlink_loader {
 		int catlink_list_len = catlink_list.Len();
 		int max = catlink_list_len < limit ? catlink_list_len : limit;
 		for (int i = 0; i < max; i++) {
-			Xoctg_catpage_itm itm = (Xoctg_catpage_itm)catlink_list.Get_at(i);
+			Xoctg_catpage_itm itm = (Xoctg_catpage_itm)catlink_list.GetAt(i);
 			catlink_hash.Add(itm.Page_id(), itm);
 		}
 
 		// load ns / ttl for each catlink
 		Xoctg_catpage_grp grp = rv.Grp_by_tid(grp_tid);
-		grp.Itms_(wiki, (Xoctg_catpage_itm[])catlink_hash.To_ary_and_clear(Xoctg_catpage_itm.class));
+		grp.Itms_(wiki, (Xoctg_catpage_itm[])catlink_hash.ToAryAndClear(Xoctg_catpage_itm.class));
 
 		// get zth_itm (for "Next 200" / "Previous 200")
 		if (catlink_list_len > limit) {
 			if (url_is_from) {	// from=some_key; 201st row is sort_key for "(Next 200)"
-				Xoctg_catpage_itm zth_itm = (Xoctg_catpage_itm)catlink_list.Get_at(limit);
+				Xoctg_catpage_itm zth_itm = (Xoctg_catpage_itm)catlink_list.GetAt(limit);
 				if (version == 4) {
 					Load_sortkey(grp, zth_itm);
 				}
@@ -88,8 +114,8 @@ class Xoctg_catlink_loader {
 		String sortkey_prefix_fld = version == 4 ? "cl_sortkey_prefix" : "''";
 
 		// build sql; NOTE: building sql with args embedded b/c (a) UNION requires multiple Crt_arg for each ?; (EX: 4 unions, 3 ? require 12 .Crt_arg); (b) easier to debug
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_u8_fmt(String_.Concat_lines_nl
+		BryWtr bfr = BryWtr.New();
+		bfr.AddStrU8Fmt(StringUtl.ConcatLinesNl
 		( "SELECT  cl_to_id"
 		, ",       cl_from"
 		, ",       cl_type_id"
@@ -100,16 +126,16 @@ class Xoctg_catlink_loader {
 		, "FROM    <link_db_{3}>cat_link cl{2}"
 		, "        LEFT JOIN <page_db>page p ON p.page_id = cl{2}.cl_from"
 		), sortkey_col, sortkey_prefix_fld, sortkey_join, link_db_id);
-		bfr.Add_str_u8_fmt(String_.Concat_lines_nl
+		bfr.AddStrU8Fmt(StringUtl.ConcatLinesNl
 		( "WHERE   cl_to_id = {0}"
 		, "AND     cl_type_id = {1}"
 		, "AND     {2} {3} {4}"
 		), cat_id, grp_tid, sortkey_col, url_is_from ? ">=" : "<", sortkey_val);
-		bfr.Add_str_u8_fmt(String_.Concat_lines_nl
+		bfr.AddStrU8Fmt(StringUtl.ConcatLinesNl
 		( "ORDER BY cl_to_id, cl_type_id, cl_sortkey {0}"
 		, "LIMIT {1}"
 		), url_is_from ? "ASC" : "DESC", limit + 1);
-		return attach_mgr.Resolve_sql(bfr.To_str_and_clear());
+		return attach_mgr.Resolve_sql(bfr.ToStrAndClear());
 	}
 	private void Load_catlinks(List_adp catlink_list, String sql) {
 		Db_rdr rdr = Db_rdr_.Empty;
@@ -141,35 +167,35 @@ class Xoctg_catlink_loader {
 		}
 
 		// make sortkey
-		byte[] prv_sortkey = grp.Itms__len() == 0 ? Bry_.Empty : grp.Itms__get_at(grp.Itms__len() - 1).Sortkey_handle();
-		zth_itm.Sortkey_handle_make(Bry_bfr_.New(), wiki, prv_sortkey);
+		byte[] prv_sortkey = grp.Itms__len() == 0 ? BryUtl.Empty : grp.Itms__get_at(grp.Itms__len() - 1).Sortkey_handle();
+		zth_itm.Sortkey_handle_make(BryWtr.New(), wiki, prv_sortkey);
 	}
-	public static byte[] Build_sortkey_val(Bry_bfr sortkey_val_bfr, byte version, Xoctg_collation_mgr collation_mgr, byte[] url_sortkey) {
+	public static byte[] Build_sortkey_val(BryWtr sortkey_val_bfr, byte version, Xoctg_collation_mgr collation_mgr, byte[] url_sortkey) {
 		// find \n and ignore everything after it; needed else "< 'A\nA'" will pull up "A"; NOTE: can't find logic in MediaWiki CategoryViewer.php; DATE:2016-10-11
 		// ALSO: needed for v2 else SQL will literally have WHERE cl_sortkey = 'A\nA';
 		byte[] tmp_sortkey = url_sortkey;
-		int nl_pos = Bry_find_.Find_fwd(tmp_sortkey, AsciiByte.Nl);
-		if (nl_pos != Bry_find_.Not_found)
-			tmp_sortkey = Bry_.Mid(tmp_sortkey, 0, nl_pos);
+		int nl_pos = BryFind.FindFwd(tmp_sortkey, AsciiByte.Nl);
+		if (nl_pos != BryFind.NotFound)
+			tmp_sortkey = BryLni.Mid(tmp_sortkey, 0, nl_pos);
 
 		if (version == 4) {
-			if (Bry_.Len_gt_0(url_sortkey)) {
+			if (BryUtl.IsNotNullOrEmpty(url_sortkey)) {
 				// make sortkey_val
-				sortkey_val_bfr.Add_byte(AsciiByte.Ltr_x).Add_byte_apos();
-				gplx.core.encoders.Hex_utl_.Encode_bfr(sortkey_val_bfr, collation_mgr.Get_sortkey(tmp_sortkey));
-				sortkey_val_bfr.Add_byte_apos();
+				sortkey_val_bfr.AddByte(AsciiByte.Ltr_x).AddByteApos();
+				XoHexUtl.EncodeBfr(sortkey_val_bfr, collation_mgr.Get_sortkey(tmp_sortkey));
+				sortkey_val_bfr.AddByteApos();
 			}
 			else
-				sortkey_val_bfr.Add_byte_apos().Add_byte_apos();
+				sortkey_val_bfr.AddByteApos().AddByteApos();
 		}
 		else
-			sortkey_val_bfr.Add_byte_apos().Add(Db_sql_.Escape_arg(tmp_sortkey)).Add_byte_apos();
-		return sortkey_val_bfr.To_bry_and_clear();
+			sortkey_val_bfr.AddByteApos().Add(Db_sql_.Escape_arg(tmp_sortkey)).AddByteApos();
+		return sortkey_val_bfr.ToBryAndClear();
 	}
 	public static Xoctg_catlink_loader New_v2(Xow_wiki wiki, Xoctg_catpage_mgr catpage_mgr, Xowd_page_tbl page_tbl, Xow_db_mgr db_mgr, int cat_link_db_idx) {
 		Xow_db_file cat_link_db = db_mgr.Dbs__get_by_id_or_fail(cat_link_db_idx);
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(cat_link_db.Conn(), new Db_attach_itm("link_db_1", cat_link_db.Conn()));
-		return new Xoctg_catlink_loader(wiki, catpage_mgr, page_tbl, Byte_.Cast(2), 1, attach_mgr);
+		return new Xoctg_catlink_loader(wiki, catpage_mgr, page_tbl, ByteUtl.Cast(2), 1, attach_mgr);
 	}
 	public static Xoctg_catlink_loader New_v3_v4(Xow_wiki wiki, Xoctg_catpage_mgr catpage_mgr, Xowd_page_tbl page_tbl, Xow_db_mgr db_mgr, Db_conn cat_core_conn) {
 		// init db vars
@@ -221,7 +247,7 @@ class Xoctg_catlink_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoctg_catpage_itm lhs = (Xoctg_catpage_itm)lhsObj;
 		Xoctg_catpage_itm rhs = (Xoctg_catpage_itm)rhsObj;
-		return sort_multiplier * Bry_.Compare(lhs.Sortkey_binary(), rhs.Sortkey_binary());
+		return sort_multiplier * BryUtl.Compare(lhs.Sortkey_binary(), rhs.Sortkey_binary());
 	}
 }
 /*

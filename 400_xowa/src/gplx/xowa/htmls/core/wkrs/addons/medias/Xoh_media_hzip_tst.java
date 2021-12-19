@@ -18,7 +18,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //	using gplx.langs.htmls; using gplx.xowa.htmls.core.makes.tests;
 //	public class Xoh_media_hzip_tst {
 //		private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
-//		@Test  public void Video__full__ogv__width_y() {	// EX: [[File:A.ogv|320px|bcd|alt=efg]]; DATE:2016-08-05
+//		@Test public void Video__full__ogv__width_y() {	// EX: [[File:A.ogv|320px|bcd|alt=efg]]; DATE:2016-08-05
 //			fxt.Test__bicode	// NOTE: caption not rendered; may need to reconsider;
 //			( "*!!aA.ogv~)$bA.ogv~efg~", String_.Concat_lines_nl_skip_last
 //			( "<div class='xowa_media_div'>"
@@ -34,7 +34,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //			, "</div>"
 //			));
 //		}
-//		@Test  public void Video__full__ogv__width_n() {	// EX: [[File:A.ogv]]; DATE:2016-08-05
+//		@Test public void Video__full__ogv__width_n() {	// EX: [[File:A.ogv]]; DATE:2016-08-05
 //			fxt.Test__bicode
 //			( "*!!aA.ogv~!A.ogv~efg~", String_.Concat_lines_nl_skip_last
 //			( "<div class='xowa_media_div'>"
@@ -50,7 +50,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //			, "</div>"
 //			));
 //		}
-//		@Test  public void Audio__thumb() {
+//		@Test public void Audio__thumb() {
 //			String html = Gfh_utl.Replace_apos(String_.Concat_lines_nl
 //			( "<div class='thumb tright'>"
 //			, "  <div class='thumbinner' style='width:11px;'>"
@@ -77,7 +77,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //			);
 //			fxt.Test__bicode(hzip, html);
 //		}
-//		@Test  public void Audio__noicon() {
+//		@Test public void Audio__noicon() {
 //			String html = Gfh_utl.Replace_apos(String_.Concat_lines_nl
 //			( "    <div class='xowa_media_div'>"
 //			,       "<div><a href='' xowa_title='A.oga' class='xowa_media_play' style='width:318px;max-width:320px;' alt='Play sound'></a></div>"

@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.caches; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.lists.ComparerAble;
+package gplx.core.lists.caches;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.types.basics.utls.LongUtl;
 class Mru_cache_itm {
 	private final long time_bgn;
 	private long time_dirty;
@@ -65,7 +66,7 @@ class Mru_cache_itm_comparer implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Mru_cache_itm lhs = (Mru_cache_itm)lhsObj;
 		Mru_cache_itm rhs = (Mru_cache_itm)rhsObj;
-		int rv = Long_.Compare(Score(lhs), Score(rhs));
+		int rv = LongUtl.Compare(Score(lhs), Score(rhs));
 		return rv == 0
 			? CompareAbleUtl.Compare_obj(lhs.Key(), rhs.Key())
 			: rv;

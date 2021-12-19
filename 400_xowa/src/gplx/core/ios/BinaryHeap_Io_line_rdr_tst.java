@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import org.junit.*;
 public class BinaryHeap_Io_line_rdr_tst {
 	BinaryHeap_Io_line_rdr_fxt fxt = new BinaryHeap_Io_line_rdr_fxt();
@@ -40,9 +46,9 @@ class BinaryHeap_Io_line_rdr_fxt {
 		String[] actl = new String[file_total];
 		for (int i = 0; i < actl.length; i++) {
 			Io_line_rdr bfr = heap.Pop();
-			actl[i] = String_.new_u8(bfr.Bfr(), 0, bfr.Bfr_len());
+			actl[i] = StringUtl.NewU8(bfr.Bfr(), 0, bfr.Bfr_len());
 		}
-		Tfds.Eq_ary_str(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 		return this;
 	}
 }

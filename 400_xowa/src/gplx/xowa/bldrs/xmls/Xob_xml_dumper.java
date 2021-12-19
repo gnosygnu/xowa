@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.xmls;
 import gplx.langs.xmls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
@@ -71,7 +71,7 @@ public class Xob_xml_dumper {
 		wtr.Nde_lhs("revision");
 		wtr.Nde_txt_int("id"					, -1);
 		wtr.Nde_txt_int("parent"				, -1);
-		wtr.Nde_txt_str("timestamp"				, page.Modified_on().XtoStr_fmt_iso_8561());
+		wtr.Nde_txt_str("timestamp"				, page.Modified_on().ToStrFmtIso8561());
 		Write_revision_contributor(page);
 		wtr.Nde_txt_str("comment"				, "");
 		wtr.Nde_txt_str("model"					, "wikitext");

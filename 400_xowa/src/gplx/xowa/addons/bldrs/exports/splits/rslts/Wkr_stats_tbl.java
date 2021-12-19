@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*;
-import gplx.dbs.*;
+package gplx.xowa.addons.bldrs.exports.splits.rslts;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.frameworks.objects.Rls_able;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Wkr_stats_tbl implements Rls_able {
 	private final String tbl_name;
 	private final DbmetaFldList flds = new DbmetaFldList();
@@ -49,12 +58,12 @@ public class Wkr_stats_tbl implements Rls_able {
 		return (Wkr_stats_itm[])list.ToAryAndClear(Wkr_stats_itm.class);
 	}
 	public Wkr_stats_itm Select_all__summary() {
-		Db_rdr rdr = conn.Stmt_sql(String_.Format("SELECT Sum({0}) AS {0}, Sum({1}) AS {1} FROM {2}", fld_wkr_count, fld_wkr_size, tbl_name)).Exec_select__rls_auto();	// ANSI.Y
+		Db_rdr rdr = conn.Stmt_sql(StringUtl.Format("SELECT Sum({0}) AS {0}, Sum({1}) AS {1} FROM {2}", fld_wkr_count, fld_wkr_size, tbl_name)).Exec_select__rls_auto();	// ANSI.Y
 		try {
 			if (rdr.Move_next())
 				return new Wkr_stats_itm(-1, rdr.Read_int(fld_wkr_count), rdr.Read_long(fld_wkr_size));
 			else
-				throw Err_.new_wo_type("failed to get sum of wkr_size", "url", conn.Conn_info().Raw());
+				throw ErrUtl.NewArgs("failed to get sum of wkr_size", "url", conn.Conn_info().Raw());
 		} finally {rdr.Rls();}
 	}
 	public void Rls() {}

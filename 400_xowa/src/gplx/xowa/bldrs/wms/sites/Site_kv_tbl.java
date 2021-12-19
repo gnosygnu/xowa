@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
+package gplx.xowa.bldrs.wms.sites;
 import gplx.dbs.*;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.Ordered_hash;
 class Site_kv_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_key, fld_val;
@@ -43,7 +45,7 @@ class Site_kv_tbl implements Db_tbl {
 			while (rdr.Move_next()) {
 				String key = rdr.Read_str(fld_key);
 				String val = rdr.Read_str(fld_val);
-				list.Add(key, Keyval_.new_(key, val));
+				list.Add(key, KeyVal.NewStr(key, val));
 			}
 		}
 		finally {rdr.Rls();}
@@ -54,8 +56,8 @@ class Site_kv_tbl implements Db_tbl {
 		stmt_delete.Clear().Crt_bry_as_str(fld_site_abrv, site_abrv).Exec_delete();
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
-			Keyval itm = (Keyval)list.Get_at(i);
-			Insert(site_abrv, itm.Key(), itm.Val_to_str_or_empty());
+			KeyVal itm = (KeyVal)list.GetAt(i);
+			Insert(site_abrv, itm.KeyToStr(), itm.ValToStrOrEmpty());
 		}
 	}
 	private void Insert(byte[] site_abrv, String key, String val) {

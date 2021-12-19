@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.standards; import gplx.gfui.*;
 import gplx.gfui.controls.gxws.*;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.KeyValHash;
 public class GfuiTextMemo extends GfuiTextBox {		public int LinesPerScreen() {return textBox.LinesPerScreen();}
 	public int LinesTotal() {return textBox.LinesTotal();}
-	public int ScreenCount() {return Int_.DivAndRoundUp(this.LinesTotal(), this.LinesPerScreen());}
+	public int ScreenCount() {return IntUtl.DivAndRoundUp(this.LinesTotal(), this.LinesPerScreen());}
 	public int CharIndexOfFirst() {return textBox.CharIndexOfFirst();}
 	public int CharIndexOf(int lineIndex) {return textBox.CharIndexOf(lineIndex);}
 	public int CharIndexAtLine(int lineIndex) {return textBox.CharIndexOf(lineIndex);}
@@ -31,8 +34,8 @@ public class GfuiTextMemo extends GfuiTextBox {		public int LinesPerScreen() {re
 	public void SelectionStart_toFirstChar() {textBox.SelectionStart_toFirstChar(); Gfo_evt_mgr_.Pub(this, SelectionStartChanged_evt);}
 	public void ScrollTillSelectionStartIsFirstLine() {textBox.ScrollTillSelectionStartIsFirstLine();}
 
-	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.text_memo_();}
-	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	@Override public GxwElem UnderElem_make(KeyValHash ctorArgs) {return GxwElemFactory_.Instance.text_memo_();}
+	@Override public void ctor_GfuiBox_base(KeyValHash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		textBox = (GxwTextMemo)UnderElem();
 		this.SetTextBox(textBox);

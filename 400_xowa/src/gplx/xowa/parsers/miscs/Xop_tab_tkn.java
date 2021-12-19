@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*;
+package gplx.xowa.parsers.miscs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.xowa.parsers.*;
 public class Xop_tab_tkn extends Xop_tkn_itm_base {
 	public Xop_tab_tkn(int bgn, int end) {this.Tkn_ini_pos(false, bgn, end);}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tab;}
-	public static final byte[] Bry_tab_ent = Bry_.new_a7("&#09;");
+	public static final byte[] Bry_tab_ent = BryUtl.NewA7("&#09;");
 }
 /*
 NOTE_1:tabs

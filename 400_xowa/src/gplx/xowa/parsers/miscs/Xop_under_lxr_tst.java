@@ -14,11 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.miscs;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.Xol_lang_itm;
@@ -30,24 +29,24 @@ public class Xop_under_lxr_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Toc_basic() {
+	@Test public void Toc_basic() {
 		fxt.Test_parse_page_all_str("a__TOC__b", "ab");
 	}
-	@Test  public void Toc_match_failed() {
+	@Test public void Toc_match_failed() {
 		fxt.Test_parse_page_all_str("a__TOCA__b", "a__TOCA__b");
 	}
-	@Test  public void Toc_match_ci() {
+	@Test public void Toc_match_ci() {
 		fxt.Test_parse_page_all_str("a__toc__b", "ab");
 	}
-	@Test  public void Notoc_basic() {
+	@Test public void Notoc_basic() {
 		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);	// NOTE: must enable in order for TOC to show (and to make sure NOTOC suppresses)
-		fxt.Test_parse_page_all_str__esc(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str__esc(StringUtl.ConcatLinesNl
 		(	"__NOTOC__"
 		,	"==a=="
 		,	"==b=="
 		,	"==c=="
 		,	"==d=="
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<h2><span class='mw-headline' id='a'>a</span></h2>"
 		,	""
 		,	"<h2><span class='mw-headline' id='b'>b</span></h2>"
@@ -58,9 +57,9 @@ public class Xop_under_lxr_tst {
 		));
 		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}
-	@Test  public void Ignore_pre() {
+	@Test public void Ignore_pre() {
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str("a\n   __NOTOC__\n", String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str("a\n   __NOTOC__\n", StringUtl.ConcatLinesNl
 		(	"<p>a"
 		,	"</p>"		// NOTE: do not capture "   " in front of __NOTOC__; confirmed against MW; DATE:2014-02-19
 		,	""
@@ -69,11 +68,11 @@ public class Xop_under_lxr_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Toc_works() {	// PURPOSE: make sure "suppressed" pre does not somehow suppress TOC
+	@Test public void Toc_works() {	// PURPOSE: make sure "suppressed" pre does not somehow suppress TOC
 		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);
 		fxt.Init_para_y_();
-		Bry_bfr tmp = Bry_bfr_.New();
-		String expd = String_.Concat_lines_nl
+		BryWtr tmp = BryWtr.New();
+		String expd = StringUtl.ConcatLinesNl
 		( "<p>a"
 		, "</p>"
 		, "<div id=\"toc\" class=\"toc\">"
@@ -89,17 +88,17 @@ public class Xop_under_lxr_tst {
 		, "<h2><span class=\"mw-headline\" id=\"b\">b</span></h2>"
 		);
 		String actl = gplx.xowa.addons.htmls.tocs.Xowe_hdr_bldr_fxt.Bld_page_with_toc(tmp, fxt, "a\n__TOC__\n==b==\n");
-		Tfds.Eq_str_lines(expd, actl);
+		GfoTstr.EqLines(expd, actl);
 		fxt.Init_para_n_();
 		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}		
 	@Test public void Ignore_pre_after() {	// PURPOSE: "__TOC__\s\n" must be trimmed at end, else false pre; assertion only (no code exists to handle this test);  DATE:2013-07-08
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNl
 		(	"a"
 		,	"__NOTOC__ "
 		,	"b"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<p>a"
 		,	"</p>"		// NOTE: do not capture " "; confirmed against MW; DATE:2014-02-19
 		,	""
@@ -113,22 +112,22 @@ public class Xop_under_lxr_tst {
 	}
 	@Test public void Nocontentconvert() {	 // simple test; test for flag only; DATE:2014-02-06
 		gplx.xowa.parsers.Xop_ctx_page_data page_data = fxt.Ctx().Page_data();
-		Tfds.Eq(page_data.Lang_convert_content(), true);
-		Tfds.Eq(page_data.Lang_convert_title(), true);
+		GfoTstr.EqObj(page_data.Lang_convert_content(), true);
+		GfoTstr.EqObj(page_data.Lang_convert_title(), true);
 		fxt.Test_parse_page_all_str("__NOCONTENTCONVERT__ __NOTITLECONVERT__", " ");
-		Tfds.Eq(page_data.Lang_convert_content(), false);
-		Tfds.Eq(page_data.Lang_convert_title(), false);
+		GfoTstr.EqObj(page_data.Lang_convert_content(), false);
+		GfoTstr.EqObj(page_data.Lang_convert_title(), false);
 	}
 	@Test public void Eos() {	// PURPOSE: check that __ at eos doesn't fail; es.s:Luisa de Bustamante: 3; DATE:2014-02-15
 		fxt.Test_parse_page_all_str("__", "__");
 	}
 	@Test public void Pre_toc() {				// PURPOSE: make sure that "\n\s__TOC" does not create pre; PAGE:de.w:Main_Page; DATE:2014-04-07
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"a"
 		,	" __TOC__ "							// NOTE: this should not be a pre; DATE:2014-07-05
 		,	"b"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<p>a"
 		,	"</p>"
 		,	" "									// NOTE: \s should not be captured, but leaving for now
@@ -140,11 +139,11 @@ public class Xop_under_lxr_tst {
 	}
 	@Test public void Pre_notoc() {			// PURPOSE: make sure that "\n\s__NOTOC" does not create pre. note that mechanism is different from TOC; DATE:2014-07-05
 		fxt.Init_para_y_();
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"a"
 		,	" __NOTOC__ "						// NOTE: does not capture " "; confirmed against MW
 		,	"b"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		(	"<p>a"
 		,	"</p>"
 		,	""
@@ -202,13 +201,13 @@ public class Xop_under_lxr_tst {
 		fxt.Init_page_create("Template:Notoc", "page_text\n__NOTOC__");
 		fxt.Wiki().Html_mgr().Html_wtr().Cfg().Toc__show_(true);
 
-		fxt.Test__parse_to_html_w_skin(String_.Concat_lines_nl
+		fxt.Test__parse_to_html_w_skin(StringUtl.ConcatLinesNl
 		( "==A1=="
 		, "==A2=="
 		, "==A3=="
 		, "==A4=="
 		, "{{Notoc}}"
-		), String_.Concat_lines_nl
+		), StringUtl.ConcatLinesNl
 		( "<div id=\"toc\" class=\"toc\">"
 		, "  <div id=\"toctitle\" class=\"toctitle\">"
 		, "    <h2>Contents</h2>"

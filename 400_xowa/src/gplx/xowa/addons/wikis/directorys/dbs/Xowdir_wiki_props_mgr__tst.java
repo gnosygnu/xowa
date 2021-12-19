@@ -14,36 +14,36 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.directorys.dbs;
-import gplx.Io_url_;
-import gplx.core.tests.Gftest;
+import gplx.libs.files.Io_url_;
 import gplx.langs.jsons.Json_wtr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.wikis.data.Xowd_cfg_key_;
 import org.junit.Test;
 public class Xowdir_wiki_props_mgr__tst {
 	private final Xowdir_wiki_props_mgr__fxt fxt = new Xowdir_wiki_props_mgr__fxt();
 
-	@Test  public void Import__wiki__missing_all() {
+	@Test public void Import__wiki__missing_all() {
 		// handle all imported .xowa wikis pre v4.3
 		fxt.Init__wiki_props(null, null, null);
 		fxt.Test__verify(BoolUtl.Y, "/dir/test.xowa", BoolUtl.Y, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test  public void Import__wiki__missing_domain() {
+	@Test public void Import__wiki__missing_domain() {
 		// handle personal wikis from v4.2
 		fxt.Init__wiki_props(null, null, "Main_Page");
 		fxt.Test__verify(BoolUtl.Y, "/dir/test.xowa", BoolUtl.Y, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test  public void Import__wiki__wmf_domain() {
+	@Test public void Import__wiki__wmf_domain() {
 		// handle wmf wikis with a core-file of "test-core.xowa"
 		fxt.Init__wiki_props(null, null, "Main_Page");
 		fxt.Test__verify(BoolUtl.Y, "/dir/test-core.xowa", BoolUtl.Y, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test  public void Import__wiki__clean() {
+	@Test public void Import__wiki__clean() {
 		// handle clean wiki
 		fxt.Init__wiki_props("test", "test", "Main_Page");
 		fxt.Test__verify(BoolUtl.Y, "/dir/test.xowa", BoolUtl.N, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test  public void Open__wiki__missing_name() {
+	@Test public void Open__wiki__missing_name() {
 		// handle missing name
 		fxt.Init__user_json("test", "my test", "Main_Page");
 		fxt.Init__wiki_props(null, null, "Main_Page");
@@ -67,7 +67,7 @@ class Xowdir_wiki_props_mgr__fxt {
 	public void Test__verify(boolean mode_is_import, String url, boolean expd_dirty, Xowdir_wiki_props expd) {
 		Xowdir_wiki_props actl = mgr.Verify(mode_is_import, "", Io_url_.new_any_(url));
 
-		Gftest.Eq__ary__lines(expd.To_str(), actl.To_str(), "expd");
-		Gftest.Eq__bool(expd_dirty, actl.Dirty(), "dirty");
+		GfoTstr.EqLines(expd.To_str(), actl.To_str(), "expd");
+		GfoTstr.Eq(expd_dirty, actl.Dirty(), "dirty");
 	}
 }

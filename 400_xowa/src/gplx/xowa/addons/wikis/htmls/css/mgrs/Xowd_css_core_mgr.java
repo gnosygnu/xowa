@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.htmls.css.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.htmls.*; import gplx.xowa.addons.wikis.htmls.css.*;
+package gplx.xowa.addons.wikis.htmls.css.mgrs;
+import gplx.libs.files.Io_mgr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateNow;
 import gplx.core.envs.*;
 import gplx.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.xowa.addons.wikis.htmls.css.dbs.*;
 public class Xowd_css_core_mgr {
 	public static void Set(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
@@ -25,7 +30,7 @@ public class Xowd_css_core_mgr {
 		try {
 			conn.Txn_bgn("schema__css_core__set");
 			int css_id = core_tbl.Select_id_by_key(key);
-			DateAdp updated_on = Datetime_now.Get().XtoUtc();
+			GfoDate updated_on = GfoDateNow.Get().ToUtc();
 			if (css_id == -1)
 				css_id = core_tbl.Insert(key, updated_on);
 			else {
@@ -39,7 +44,7 @@ public class Xowd_css_core_mgr {
 			}
 			conn.Txn_end();
 		}
-		catch (Exception e) {conn.Txn_cxl(); throw Err_.new_exc(e, "css", "Xowd_css_core_mgr.Set failed", "key", key, "err", Err_.Message_gplx_log(e));}
+		catch (Exception e) {conn.Txn_cxl(); throw ErrUtl.NewArgs(e, "Xowd_css_core_mgr.Set failed", "key", key, "err", ErrUtl.ToStrLog(e));}
 	}
 	public static boolean Get(Xowd_css_core_tbl core_tbl, Xowd_css_file_tbl file_tbl, Io_url css_dir, String key) {
 		String dbg = "enter";
@@ -62,7 +67,7 @@ public class Xowd_css_core_mgr {
 				dbg += ";file_data:" + file.Data().length;
 			}
 			return true;
-		} catch (Exception e) {throw Err_.new_exc(e, "css", "Xowd_css_core_mgr.Get failed", "dbg", dbg, "err", Err_.Message_gplx_log(e));}
+		} catch (Exception e) {throw ErrUtl.NewArgs(e, "Xowd_css_core_mgr.Get failed", "dbg", dbg, "err", ErrUtl.ToStrLog(e));}
 	}
 	public static final String Key_default = "xowa.default", Key_mobile = "xowa.mobile";
 }

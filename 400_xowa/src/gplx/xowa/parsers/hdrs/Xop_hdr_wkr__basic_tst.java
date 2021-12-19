@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.hdrs;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import org.junit.After;
 import org.junit.Before;
@@ -32,22 +32,22 @@ public class Xop_hdr_wkr__basic_tst {
 	@Test public void Comment_bgn()				{fxt.Test_parse_page_all_str ("<!--b-->==a=="		, "<h2>a</h2>\n");}
 	@Test public void Comment_end()				{fxt.Test_parse_page_all_str ("==a==<!--b-->"		, "<h2>a</h2>\n");}
 	@Test public void Ws_end() {	// PURPOSE: "==\n" merges all ws following it; \n\n\n is not transformed by Para_wkr to "<br/>"
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		(	"==a== \t"
 		,	""
 		,	""
 		,	""
 		,	"b"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"<h2>a</h2>"
 		,	"b"
 		));
 	}
 	@Test public void Many() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		(	"==a=="
 		,	"===b==="
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"<h2>a</h2>"
 		,	""
 		,	"<h3>b</h3>"
@@ -55,12 +55,12 @@ public class Xop_hdr_wkr__basic_tst {
 		));
 	}
 	@Test public void Hdr_w_tblw() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		(	"==a=="
 		,	"{|"
 		,	"|+"
 		,	"|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"<h2>a</h2>"
 		,	"<table>"
 		,	"  <caption>"
@@ -70,10 +70,10 @@ public class Xop_hdr_wkr__basic_tst {
 		));
 	}
 	@Test public void Hdr_w_hr() {
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		(	"==a=="
 		,	"----"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"<h2>a</h2>"
 		,	"<hr/>"
 		));
@@ -86,11 +86,11 @@ public class Xop_hdr_wkr__basic_tst {
 	@Test public void Err_end_hdr_is_1()			{fxt.Init_log_(Xop_hdr_log.Mismatched, Xop_hdr_log.Len_1).Test_parse_page_wiki_str("==a="			, "<h1>=a</h1>\n").tst_Log_check();}
 	@Test public void Html_hdr_many() {
 		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);
-		fxt.Test_parse_page_wiki_str__esc(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str__esc(StringUtl.ConcatLinesNlSkipLast
 		(	"==a=="
 		,	"==a=="
 		,	"==a=="
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"<h2><span class='mw-headline' id='a'>a</span></h2>"
 		,	""
 		,	"<h2><span class='mw-headline' id='a_2'>a</span></h2>"
@@ -102,7 +102,7 @@ public class Xop_hdr_wkr__basic_tst {
 	}
 	@Test public void Hdr_inside_dangling_tmpl_fix() {	// PURPOSE: one-off fix to handle == inside dangling tmpl; DATE:2014-02-11
 		fxt.Test_parse_page_all_str("{{a|}\n==b=="
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		(	"{{a|}"
 		,	""
 		,	"<h2>b</h2>"
@@ -112,7 +112,7 @@ public class Xop_hdr_wkr__basic_tst {
 	@Test public void Pfunc() {// multiple = should not be interpreted as key-val equals; PAGE:en.w:Wikipedia:Picture_of_the_day/June_2014 DATE:2014-07-21
 		fxt.Test_parse_page_all_str
 		( "{{#if:exists|==a==|no}}"
-		, String_.Concat_lines_nl_skip_last
+		, StringUtl.ConcatLinesNlSkipLast
 		( "<h2>a</h2>"
 		, ""
 		));

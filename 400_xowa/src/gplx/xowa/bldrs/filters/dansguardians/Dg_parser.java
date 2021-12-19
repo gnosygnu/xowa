@@ -13,10 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.bldrs.filters.dansguardians;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 class Dg_parser {
-	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance; private final Bry_bfr key_bldr = Bry_bfr_.Reset(32);
+	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance; private final BryWtr key_bldr = BryWtr.NewAndReset(32);
 	private final List_adp files = List_adp_.New(), lines = List_adp_.New(), words = List_adp_.New();
 	private int next_id = 0;
 	public Dg_file[] Parse_dir(Io_url dir) {
@@ -38,7 +50,7 @@ class Dg_parser {
 		int file_id = ++next_id;
 		while (line_bgn < src_len) {
 			++line_idx;
-			int line_end = Bry_find_.Find_fwd(src, AsciiByte.Nl, line_bgn); if (line_end == Bry_find_.Not_found) line_end = src_len;
+			int line_end = BryFind.FindFwd(src, AsciiByte.Nl, line_bgn); if (line_end == BryFind.NotFound) line_end = src_len;
 			Dg_rule line = Parse_line(rel_path, file_id, line_idx, src, line_bgn, line_end);
 			if (line.Tid() != Dg_rule.Tid_invalid)
 				lines.Add(line);
@@ -53,9 +65,9 @@ class Dg_parser {
 		if (src[line_bgn] == AsciiByte.Hash)	return Dg_rule.Itm_comment;	// ignore lines starting with hash; EX: "# comment"
 		while (brack_bgn < line_end) {	// look for terms bracketed by "<>"
 			if (src[brack_bgn] != AsciiByte.Lt) {Warn("dg.invalid_line.term must start with angle_bgn", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;}
-			int brack_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, brack_bgn);
-			if (brack_end == Bry_find_.Not_found) {Warn("dg.invalid_line.angle_end not found", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;} 
-			byte[] word = Bry_.Mid(src, brack_bgn + 1, brack_end);
+			int brack_end = BryFind.FindFwd(src, AsciiByte.Gt, brack_bgn);
+			if (brack_end == BryFind.NotFound) {Warn("dg.invalid_line.angle_end not found", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;}
+			byte[] word = BryLni.Mid(src, brack_bgn + 1, brack_end);
 			words.Add(word);
 			int next_pos = brack_end + 1;
 			if (next_pos == line_end) {
@@ -68,15 +80,15 @@ class Dg_parser {
 			else {
 				brack_bgn = brack_end + 1;
 				if (src[brack_bgn] != AsciiByte.Lt) {Warn("dg.invalid_line.wrong_term_dlm", rel_path, line_idx, src, line_bgn, line_end); break;}
-				brack_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, brack_bgn);
-				if (brack_end == Bry_find_.Not_found) {Warn("dg.invalid_line.score not found", rel_path, line_idx, src, line_bgn, line_end); break;}
-				int parse_score = Bry_.To_int_or(src, brack_bgn + 1, brack_end, Int_.Min_value);
-				if (parse_score == Int_.Min_value) {Warn("dg.invalid_line.score is invalid", rel_path, line_idx, src, line_bgn, line_end); break;}
+				brack_end = BryFind.FindFwd(src, AsciiByte.Gt, brack_bgn);
+				if (brack_end == BryFind.NotFound) {Warn("dg.invalid_line.score not found", rel_path, line_idx, src, line_bgn, line_end); break;}
+				int parse_score = BryUtl.ToIntOr(src, brack_bgn + 1, brack_end, IntUtl.MinValue);
+				if (parse_score == IntUtl.MinValue) {Warn("dg.invalid_line.score is invalid", rel_path, line_idx, src, line_bgn, line_end); break;}
 				score = parse_score;
 				break;
 			}
 		}
-		byte[] key = key_bldr.Add_int_variable(file_id).Add_byte_dot().Add_int_variable(line_idx).To_bry_and_clear();
+		byte[] key = key_bldr.AddIntVariable(file_id).AddByteDot().AddIntVariable(line_idx).ToBryAndClear();
 		return new Dg_rule(file_id, ++next_id, line_idx, Dg_rule.Tid_rule, key, score, Ary_new_by_ary((byte[][])words.ToAryAndClear(byte[].class)));
 	}
 	private static Dg_word[] Ary_new_by_ary(byte[][] ary) {
@@ -89,6 +101,6 @@ class Dg_parser {
 		return rv;
 	}
 	private void Warn(String err_msg, String rel_path, int line_idx, byte[] src, int line_bgn, int line_end) {
-		usr_dlg.Warn_many("", "", err_msg + "; file=~{0} line_idx=~{1} line=~{2}", rel_path, line_idx, String_.new_u8(src, line_bgn, line_end));
+		usr_dlg.Warn_many("", "", err_msg + "; file=~{0} line_idx=~{1} line=~{2}", rel_path, line_idx, StringUtl.NewU8(src, line_bgn, line_end));
 	}
 }

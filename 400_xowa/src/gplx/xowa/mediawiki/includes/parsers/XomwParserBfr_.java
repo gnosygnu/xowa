@@ -14,57 +14,57 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.BoolUtl;
 public class XomwParserBfr_ {
 	public static void Replace(XomwParserBfr pbfr, byte[] find, byte[] repl) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 
 		if (Replace(bfr, BoolUtl.N, src, src_bgn, src_end, find, repl) != null)
 			pbfr.Switch();
 	}
-	private static byte[] Replace(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end, byte[] find, byte[] repl) {
+	private static byte[] Replace(BryWtr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end, byte[] find, byte[] repl) {
 		boolean dirty = false;
 		int cur = src_bgn;
 		boolean called_by_bry = bfr == null;
 
 		while (true) {
-			int find_bgn = Bry_find_.Find_fwd(src, find, cur);
-			if (find_bgn == Bry_find_.Not_found) {
+			int find_bgn = BryFind.FindFwd(src, find, cur);
+			if (find_bgn == BryFind.NotFound) {
 				if (dirty)
-					bfr.Add_mid(src, cur, src_end);
+					bfr.AddMid(src, cur, src_end);
 				break;
 			}
-			if (called_by_bry) bfr = Bry_bfr_.New();
-			bfr.Add_mid(src, cur, find_bgn);
+			if (called_by_bry) bfr = BryWtr.New();
+			bfr.AddMid(src, cur, find_bgn);
 			cur += find.length;
 			dirty = true;
 		}
 
 		if (dirty) {
 			if (called_by_bry)
-				return bfr.To_bry_and_clear();
+				return bfr.ToBryAndClear();
 			else
-				return Bry_.Empty;
+				return BryUtl.Empty;
 		}
 		else {
 			if (called_by_bry) {
 				if (src_bgn == 0 && src_end == src.length)
 					return src;
 				else
-					return Bry_.Mid(src, src_bgn, src_end);
+					return BryLni.Mid(src, src_bgn, src_end);
 			}
 			else {
 				if (lone_bfr)
-					bfr.Add_mid(src, src_bgn, src_end);
+					bfr.AddMid(src, src_bgn, src_end);
 				return null;
 			}
 		}

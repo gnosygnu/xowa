@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkes;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Xop_lnke_wkr_uncommon_tst {
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
@@ -38,9 +40,9 @@ public class Xop_lnke_wkr_uncommon_tst {
 			);
 	}
 	@Test public void Defect_2nd_consecutive_lnke() {	// PURPOSE: bad code that was causing lnkes to show up; PAGE:en.w:Template:Infobox_country;
-		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_wiki_str(StringUtl.ConcatLinesNlSkipLast
 		(	"[[http://a.org a]] [[http://b.org b]]"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"[<a href=\"http://a.org\" rel=\"nofollow\" class=\"external text\">a</a>] [<a href=\"http://b.org\" rel=\"nofollow\" class=\"external text\">b</a>]"
 		));
 	}

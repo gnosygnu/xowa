@@ -14,19 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.repos;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.consoles.Gfo_cmd_arg_itm_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
 import gplx.xowa.files.Xof_ext;
@@ -49,7 +49,7 @@ public class Xof_repo_itm implements Gfo_invk {
 	public byte				Dir_spr()			{return dir_spr;}		private byte dir_spr;					// EX: "/"
 	public int				Dir_depth()			{return dir_depth;}		private int dir_depth = 4;				// EX: "/1/2/3/4" vs "/1/2"
 	public byte[]			Root_bry()			{return root_bry;}		private byte[] root_bry;				// EX:
-	public byte[]			Root_http()			{return root_http;}		private byte[] root_http = Bry_.Empty;	// EX: 
+	public byte[]			Root_http()			{return root_http;}		private byte[] root_http = BryUtl.Empty;	// EX:
 	public String			Root_str()			{return root_str;}		private String root_str;
 	public boolean			Fsys_is_wnt()		{return fsys_is_wnt;}	private boolean fsys_is_wnt;
 	public boolean			Shorten_ttl()		{return shorten_ttl;}	private boolean shorten_ttl = true;
@@ -75,15 +75,15 @@ public class Xof_repo_itm implements Gfo_invk {
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(v);
 		if (domain_itm == null) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "repo:invalid domain; raw=~{0}", v);
-			this.wiki_abrv_xo = Bry_.Empty;
+			this.wiki_abrv_xo = BryUtl.Empty;
 		}
 		else
 			this.wiki_abrv_xo = Xow_abrv_xo_.To_bry(v, domain_itm.Lang_actl_key(), domain_itm.Domain_type());
 	}
 	public Xof_repo_itm Root_str_(String root_str) {
-		this.wmf_fsys = String_.Has_at_bgn(root_str, "http") || String_.Has_at_bgn(root_str, "ftp");
+		this.wmf_fsys = StringUtl.HasAtBgn(root_str, "http") || StringUtl.HasAtBgn(root_str, "ftp");
 		if (wmf_fsys) {
-			this.root_bry = Bry_.new_u8(root_str);
+			this.root_bry = BryUtl.NewU8(root_str);
 			this.dir_spr = AsciiByte.Slash;
 			this.wmf_api = true;
 		}
@@ -96,11 +96,11 @@ public class Xof_repo_itm implements Gfo_invk {
 		this.root_str = root_str;
 		return this;
 	}
-	public byte[] Gen_name_src(Bry_bfr tmp_bfr, byte[] name) {
+	public byte[] Gen_name_src(BryWtr tmp_bfr, byte[] name) {
 		if (!fsys_is_wnt || wmf_fsys) return name;
 		return Xof_itm_ttl_.Remove_invalid(tmp_bfr, name);
 	}
-	public byte[] Gen_name_trg(Bry_bfr tmp_bfr, byte[] bry, byte[] md5, Xof_ext ext) {
+	public byte[] Gen_name_trg(BryWtr tmp_bfr, byte[] bry, byte[] md5, Xof_ext ext) {
 		byte[] rv = Gen_name_src(tmp_bfr, bry);
 		if (shorten_ttl) {
 			int max = url_max_len;
@@ -124,8 +124,8 @@ public class Xof_repo_itm implements Gfo_invk {
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_owner))				throw Err_.new_unimplemented_w_msg("deprecated repo_itm.owner");
-		else if	(ctx.Match(k, Invk_fsys_))				fsys_is_wnt = String_.Eq(m.ReadStr("v"), "wnt");
+		if		(ctx.Match(k, Invk_owner))				throw ErrUtl.NewUnimplemented("deprecated repo_itm.owner");
+		else if	(ctx.Match(k, Invk_fsys_))				fsys_is_wnt = StringUtl.Eq(m.ReadStr("v"), "wnt");
 		else if	(ctx.Match(k, Invk_primary_))			primary = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_ext_rules_))			Ext_rules_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_wmf_api_))			wmf_api = m.ReadYn("v");

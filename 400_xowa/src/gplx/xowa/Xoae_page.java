@@ -13,14 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
+package gplx.xowa;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.commons.GfoGuid;
+import gplx.types.commons.GfoGuidUtl;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
-import gplx.xowa.files.*; import gplx.xowa.files.xfers.*;
+import gplx.xowa.files.xfers.*;
 import gplx.xowa.apps.kvs.*;
-import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.pfuncs.*;
+import gplx.xowa.parsers.*;
+import gplx.xowa.xtns.cites.*;
+import gplx.xowa.xtns.wbases.pfuncs.*;
 import gplx.xowa.parsers.logs.stats.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.modules.popups.*;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.modules.popups.*;
 import gplx.xowa.wikis.pages.wtxts.*; import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xoae_page implements Xoa_page {
 	Xoae_page(Xowe_wiki wiki, Xoa_ttl ttl) {
@@ -52,14 +58,14 @@ public class Xoae_page implements Xoa_page {
 	public int						Xtn__math_uid__next() {return xtn__math_uid++;}	private int xtn__math_uid;
 	public Xoa_kv_hash              Kv_data() {return kv_data;} private Xoa_kv_hash kv_data = new Xoa_kv_hash();
 	public void Kv_data_(Xoa_kv_hash v) {kv_data = v;}
-	private Guid_adp page_guid;
-	public Guid_adp Page_guid() {
+	private GfoGuid page_guid;
+	public GfoGuid Page_guid() {
 		if (page_guid == null) {
-			page_guid = Guid_adp_.New();
+			page_guid = GfoGuidUtl.New();
 		}
 		return page_guid;
 	}
-	public void Page_guid_empty_() {page_guid = Guid_adp_.Empty;} // TEST
+	public void Page_guid_empty_() {page_guid = GfoGuidUtl.Empty;} // TEST
 
 	public Xowe_wiki				Wikie() {return wiki;} private Xowe_wiki wiki;
 	public Xol_lang_itm				Lang() {return lang;} public Xoae_page Lang_(Xol_lang_itm v) {lang = v; return this;} private Xol_lang_itm lang;
@@ -70,7 +76,7 @@ public class Xoae_page implements Xoa_page {
 
 	public Xoh_cmd_mgr				Html_cmd_mgr() {return html_cmd_mgr;} private Xoh_cmd_mgr html_cmd_mgr = new Xoh_cmd_mgr();
 	public Xof_xfer_queue			File_queue() {return file_queue;} private Xof_xfer_queue file_queue = new Xof_xfer_queue();
-	public List_adp					File_math() {return file_math;} private List_adp file_math = List_adp_.New();
+	public List_adp File_math() {return file_math;} private List_adp file_math = List_adp_.New();
 	public List_adp					Lnki_list() {return lnki_list;} public void Lnki_list_(List_adp v) {this.lnki_list = v;} private List_adp lnki_list = List_adp_.New();
 	public Ref_itm_mgr				Ref_mgr() {return ref_mgr;} private Ref_itm_mgr ref_mgr = new Ref_itm_mgr(); public void Ref_mgr_(Ref_itm_mgr v) {this.ref_mgr = v;}
 	public Xopg_popup_mgr			Popup_mgr() {return popup_mgr;} private Xopg_popup_mgr popup_mgr = new Xopg_popup_mgr();

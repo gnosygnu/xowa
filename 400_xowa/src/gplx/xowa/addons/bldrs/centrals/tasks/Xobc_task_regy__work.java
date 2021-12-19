@@ -13,11 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.tasks;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.threads.*;	
 import gplx.xowa.drds.powers.*;
 import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.cmds.*;
-import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*;
 public class Xobc_task_regy__work extends Xobc_task_regy__base {
 	private final Thread_adp_mgr thread_mgr = new Thread_adp_mgr(1000, 5000);
 	private final Xobc_cmd_ctx ctx;

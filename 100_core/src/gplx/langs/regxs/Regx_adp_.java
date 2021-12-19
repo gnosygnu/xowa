@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
+package gplx.langs.regxs;
+import gplx.types.commons.lists.GfoListBase;
+import gplx.types.basics.utls.StringUtl;
 public class Regx_adp_ {
 	public static Regx_adp new_(String pattern) {return new Regx_adp(pattern, Regx_adp.FLAG__DEFAULT);}
-	public static List_adp Find_all(String src, String pat) {
-		int src_len = String_.Len(src);
+	public static GfoListBase<Regx_match> Find_all(String src, String pat) {
+		int src_len = StringUtl.Len(src);
 		Regx_adp regx = Regx_adp_.new_(pat);
 		int pos = 0;
-		List_adp rv = List_adp_.New();
+		GfoListBase<Regx_match> rv = new GfoListBase<Regx_match>();
 		while (pos < src_len) {
 			Regx_match match = regx.Match(src, pos);
 			if (match.Rslt_none()) break;

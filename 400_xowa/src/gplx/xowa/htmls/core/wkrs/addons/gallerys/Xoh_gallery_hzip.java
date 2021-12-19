@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.addons.gallerys; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.htmls.core.wkrs.addons.gallerys;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.threads.poolables.*;
+import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_gallery_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public int Tid()		{return Xoh_hzip_dict_.Tid__gallery;}
@@ -26,13 +30,13 @@ public class Xoh_gallery_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {
 		Xoh_gallery_data data = (Xoh_gallery_data)data_obj;
 
-		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+		bfr.AddMid(src, data.Src_bgn(), data.Src_end());
 
 		return this;
 	}
-	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
+	public void Decode1(BryWtr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, BryRdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		int gallery_bgn = src_bgn;
-		int gallery_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, src_bgn, src_end);
+		int gallery_end = BryFind.FindFwd(src, AsciiByte.Gt, src_bgn, src_end);
 		if (gallery_end == -1) {
 			Gfo_log_.Instance.Warn("hzip.gallery.end_not_found", "page", hpg.Url_bry_safe(), "src_bgn", src_bgn);
 			gallery_end = gallery_bgn;
@@ -42,7 +46,7 @@ public class Xoh_gallery_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 
 		Xoh_gallery_data data = (Xoh_gallery_data)data_itm;
 		data.Init_by_decode(gallery_bgn, gallery_end);
-		rdr.Move_to(gallery_end);
+		rdr.MoveTo(gallery_end);
 	}
 
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;

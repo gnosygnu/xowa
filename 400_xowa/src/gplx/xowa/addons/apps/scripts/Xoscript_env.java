@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.scripts;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.envs.Op_sys;
 import gplx.core.scripts.Gfo_script_engine;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Xoscript_env {
 	private final Gfo_script_engine engine;
 	public Xoscript_env(Gfo_script_engine engine, Io_url root_dir) {
@@ -34,16 +34,16 @@ public class Xoscript_env {
 		String rv = file;
 
 		// resolve relative urls; EX: "./a.js" -> "/xowa/wiki/simple.wikipedia.org/bin/script/a.js"
-		if (String_.Has_at_bgn(rv, "./")) {
+		if (StringUtl.HasAtBgn(rv, "./")) {
 			// remove "./"
-			rv = String_.Mid(rv, 2);
+			rv = StringUtl.Mid(rv, 2);
 
 			if (use_file_protocol)
 				rv = root_dir.To_http_file_str() + rv;
 			else {
 				// if fsys_url && wnt, replace "\" with "/"
 				if (Op_sys.Cur().Tid_is_wnt())
-					rv = String_.Replace(rv, Op_sys.Lnx.Fsys_dir_spr_str(), Op_sys.Wnt.Fsys_dir_spr_str());
+					rv = StringUtl.Replace(rv, Op_sys.Lnx.Fsys_dir_spr_str(), Op_sys.Wnt.Fsys_dir_spr_str());
 				rv = root_dir.Xto_api() + Op_sys.Cur().Fsys_dir_spr_str() + rv;
 			}
 		}

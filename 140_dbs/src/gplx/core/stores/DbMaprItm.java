@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*;
+package gplx.core.stores;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
 public class DbMaprItm {
 	public String TableName() {return tableName;} public DbMaprItm TableName_(String val) {tableName = val; return this;} private String tableName;
 	public Ordered_hash Flds() {return flds;} Ordered_hash flds = Ordered_hash_.New();
@@ -27,7 +36,7 @@ public class DbMaprItm {
 		contextFlds.Add(arg.ObjProp(), arg);
 		return this;
 	}
-	public DbMaprItm ConstantFlds_add(String dbFld, Object dbVal) {constantFlds.Add(dbFld, Keyval_.new_(dbFld, dbVal)); return this;}
+	public DbMaprItm ConstantFlds_add(String dbFld, Object dbVal) {constantFlds.Add(dbFld, KeyVal.NewStr(dbFld, dbVal)); return this;}
 	public DbMaprItm Subs_add(DbMaprItm... ary) {
 		for (DbMaprItm itm : ary)
 			subs.Add(itm);
@@ -36,9 +45,9 @@ public class DbMaprItm {
 	public DbMaprItm Subs_get(String find) {
 		for (Object itmObj : subs) {
 			DbMaprItm itm = (DbMaprItm)itmObj;
-			if (String_.Eq(find, itm.key)) return itm;
+			if (StringUtl.Eq(find, itm.key)) return itm;
 		}
-		throw Err_.new_missing_key(find);
+		throw ErrUtl.NewMissingKey(find);
 	}
 	public DbMaprArg Flds_get(String key) {return (DbMaprArg)flds.GetByOrNull(key);}
 	SrlObj proto; String key; List_adp subs = List_adp_.New();

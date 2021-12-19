@@ -14,10 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis;
-import gplx.Bry_;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.net.Gfo_url_parser;
 import gplx.core.threads.Gfo_thread_pool;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.apps.Xoav_wiki_mgr;
 import gplx.xowa.guis.history.Xog_history_itm;
@@ -31,8 +31,8 @@ public abstract class Xogv_tab_base {
 	public Xog_history_stack History_stack()		{return history_stack;} private final Xog_history_stack history_stack = new Xog_history_stack(); 
 	public Xog_history_itm Cur_itm()				{return history_stack.Cur_itm();}
 	public Xow_wiki Get_wiki_or_null(byte[] key)	{return wiki_mgr.Get_by_or_null(key);}
-	public Xoh_page Go_to(byte[] page)				{return Go_to(history_stack.Cur_itm().Wiki(), page, Bry_.Empty, Bry_.Empty, false, "");}
-	public Xoh_page Go_to(byte[] wiki, byte[] page)	{return Go_to(wiki, page, Bry_.Empty, Bry_.Empty, false, "");}
+	public Xoh_page Go_to(byte[] page)				{return Go_to(history_stack.Cur_itm().Wiki(), page, BryUtl.Empty, BryUtl.Empty, false, "");}
+	public Xoh_page Go_to(byte[] wiki, byte[] page)	{return Go_to(wiki, page, BryUtl.Empty, BryUtl.Empty, false, "");}
 	public Xoh_page Go_to(byte[] wiki, byte[] page, byte[] anch, byte[] qarg, boolean redirect_force, String bmk_pos) {
 		Xog_history_itm old_itm = this.Cur_itm();
 		Xog_history_itm new_itm = new Xog_history_itm(wiki, page, anch, qarg, redirect_force, bmk_pos);

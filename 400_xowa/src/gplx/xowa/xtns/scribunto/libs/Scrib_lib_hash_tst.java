@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.xtns.scribunto.*;
 import org.junit.*;
 public class Scrib_lib_hash_tst {
 	@Before public void init() {
@@ -21,7 +24,7 @@ public class Scrib_lib_hash_tst {
 		lib = fxt.Core().Lib_hash().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
 	@Test public void ListAlgorithms() {
-		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_hash.Invk_listAlgorithms, Object_.Ary_empty, String_.Concat_lines_nl
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_hash.Invk_listAlgorithms, ObjectUtl.AryEmpty, StringUtl.ConcatLinesNl
 			( "1="
 			, "  1=md2"
 			, "  2=md4"
@@ -498,6 +501,6 @@ public class Scrib_lib_hash_tst {
 		Test__HashValue(algo_key, Test_vectors[4], "c9c7d8afa159fd9e965cb83ff5ee6f58aeda352c0eff005548153a61551c38ee");
 	}
 		private void Test__HashValue(String algo, String val, String expd) {
-		fxt.Test__proc__kvps__flat(lib, Scrib_lib_hash.Invk_hashValue, Object_.Ary(algo, val), expd);
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_hash.Invk_hashValue, ObjectUtl.Ary(algo, val), expd);
 	}
 }

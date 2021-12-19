@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.exts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*;
+package gplx.xowa.files.exts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.xowa.files.*;
 public class Xof_rule_grp implements Gfo_invk {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xof_rule_grp(Xof_rule_mgr owner, byte[] key) {this.owner = owner; this.key = key;}
@@ -32,9 +38,9 @@ public class Xof_rule_grp implements Gfo_invk {
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_owner))		return owner;
-		else if	(ctx.Match(k, Invk_set))		return Get_or_new(Bry_.new_u8(m.ReadStr("v")));
+		else if	(ctx.Match(k, Invk_set))		return Get_or_new(BryUtl.NewU8(m.ReadStr("v")));
 		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_owner = "owner", Invk_set = "set";
 	private static final String Grp_app_default_str = "app_default";
-	public static byte[] Grp_app_default = Bry_.new_u8(Grp_app_default_str);
+	public static byte[] Grp_app_default = BryUtl.NewU8(Grp_app_default_str);
 }

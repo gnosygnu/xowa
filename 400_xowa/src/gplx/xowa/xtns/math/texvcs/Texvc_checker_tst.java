@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
+package gplx.xowa.xtns.math.texvcs;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
 import org.junit.*; import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
 public class Texvc_checker_tst {
 	private final Texvc_checker_fxt fxt = new Texvc_checker_fxt();
@@ -32,7 +34,7 @@ public class Texvc_checker_tst {
 			)
 		);
 	}
-	@Test  public void Mathrm() {
+	@Test public void Mathrm() {
 		fxt.Test_check("\\mathrm\\frac{a}{b}"	, "\\mathrm{\\frac{a}{b}}");
 		fxt.Test_check("\\mathrm{\\frac{a}{b}}"	, "\\mathrm{\\frac{a}{b}}");
 		fxt.Test_check("\\frac a b"	, "\\frac a b");
@@ -40,15 +42,15 @@ public class Texvc_checker_tst {
 }
 class Texvc_checker_fxt extends Texvc_parser_fxt {		private final Texvc_checker checker = new Texvc_checker();
 	public void Test_check(String src_str, Texvc_tkn... expd_tkns) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		Texvc_root actl_root = this.Exec_parse(src_bry);
 		checker.Check(src_bry, actl_root);
-		Tfds.Eq_str_lines(Texvc_tkn_.Print_dbg_str(tmp_bfr, expd_tkns), actl_root.Print_dbg_str(tmp_bfr), src_str);
+		GfoTstr.EqLines(Texvc_tkn_.Print_dbg_str(tmp_bfr, expd_tkns), actl_root.Print_dbg_str(tmp_bfr), src_str);
 	}
 	public void Test_check(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
+		byte[] src_bry = BryUtl.NewU8(src_str);
 		Texvc_root actl_root = this.Exec_parse(src_bry);
 		checker.Check(src_bry, actl_root);			
-		Tfds.Eq_str_lines(expd, actl_root.Print_tex_str(tmp_bfr));
+		GfoTstr.EqLines(expd, actl_root.Print_tex_str(tmp_bfr));
 	}
 }

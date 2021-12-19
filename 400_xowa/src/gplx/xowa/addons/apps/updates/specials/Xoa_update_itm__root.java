@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+package gplx.xowa.addons.apps.updates.specials;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.mustaches.*;
 class Xoa_update_itm__root extends Xoa_update_itm__leaf { 	private final String current_version, current_date, check_date;
 	private final boolean web_access_enabled;
@@ -31,15 +32,15 @@ class Xoa_update_itm__root extends Xoa_update_itm__leaf { 	private final String 
 		this.itms = v;
 	}
 	@Override public boolean Mustache__write(String k, Mustache_bfr bfr) {
-		if		(String_.Eq(k, "current_version"))		bfr.Add_str_u8(current_version);
-		else if	(String_.Eq(k, "current_date"))			bfr.Add_str_u8(current_date);
-		else if	(String_.Eq(k, "check_date"))			bfr.Add_str_u8(check_date);
+		if		(StringUtl.Eq(k, "current_version"))		bfr.Add_str_u8(current_version);
+		else if	(StringUtl.Eq(k, "current_date"))			bfr.Add_str_u8(current_date);
+		else if	(StringUtl.Eq(k, "check_date"))			bfr.Add_str_u8(check_date);
 		return super.Mustache__write (k, bfr);
 	}
 	@Override public Mustache_doc_itm[] Mustache__subs(String k) {
-		if		(String_.Eq(k, "itms"))					return itms;
-		else if	(String_.Eq(k, "itms_exist"))			return Mustache_doc_itm_.Ary__bool(itms.length > 0);
-		else if	(String_.Eq(k, "web_access_enabled"))	return Mustache_doc_itm_.Ary__bool(web_access_enabled);
+		if		(StringUtl.Eq(k, "itms"))					return itms;
+		else if	(StringUtl.Eq(k, "itms_exist"))			return Mustache_doc_itm_.Ary__bool(itms.length > 0);
+		else if	(StringUtl.Eq(k, "web_access_enabled"))	return Mustache_doc_itm_.Ary__bool(web_access_enabled);
 		return super.Mustache__subs(k);
 	}
 }

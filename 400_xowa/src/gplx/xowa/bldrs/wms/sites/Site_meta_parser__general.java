@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
-import gplx.core.primitives.*; import gplx.langs.jsons.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.bldrs.wms.sites;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_itm_;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser__list_nde__base;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.wrappers.IntVal;
+import gplx.types.errs.ErrUtl;
 class Site_meta_parser__general extends Json_parser__list_nde__base {
 	private final Site_meta_parser__general__kv parser__image = new Site_meta_parser__general__kv("imagelimits", "width", "height");
 	private final Site_meta_parser__general__lone parser__fallback = new Site_meta_parser__general__lone("fallback", "code");
@@ -28,12 +40,12 @@ class Site_meta_parser__general extends Json_parser__list_nde__base {
 	@Override protected byte[] Parse_to_list_as_kv__get_val(Json_kv sub, byte[] key) {
 		Object o = complex_props.Get_by_bry(key);
 		if (o == null) return sub.Val_as_bry();
-		switch (((Int_obj_val)o).Val()) {
-			case Tid__thumblimits:	return Bry_.Add_w_dlm(AsciiByte.Pipe, sub.Val_as_ary().Xto_bry_ary());	// [120, 150, 180] -> "120|150|180"
+		switch (((IntVal)o).Val()) {
+			case Tid__thumblimits:	return BryUtl.AddWithDlm(AsciiByte.Pipe, sub.Val_as_ary().Xto_bry_ary());	// [120, 150, 180] -> "120|150|180"
 			case Tid__fallback:		return parser__fallback.Parse(cur_context, tmp_bfr, sub.Val_as_ary());	// [{'code':'zh'},{'code':'zh-hans'}] -> "zh|zh-hans"
 			case Tid__variants:		return parser__variants.Parse(cur_context, tmp_bfr, sub.Val_as_ary());	// [{'code':'zh','name':'a'},{'code':'zh-hans','name':'b'}] -> "zh=a|zh-hans=b"
 			case Tid__imagelimits:	return parser__image.Parse(cur_context, tmp_bfr, sub.Val_as_ary());		// [{'width':320,'height':240},{'width':640,'height':480}] -> '320=240|640=480'
-			default: throw Err_.new_unhandled(o);
+			default: throw ErrUtl.NewUnhandled(o);
 		}
 	}
 	private static final int Tid__fallback = 1, Tid__variants = 2, Tid__thumblimits = 3, Tid__imagelimits = 4, Tid__imagelimits__width = 5, Tid__imagelimits__height = 6;
@@ -47,36 +59,36 @@ class Site_meta_parser__general extends Json_parser__list_nde__base {
 	;
 }
 class Site_meta_parser__general__lone extends Json_parser__list_nde__base {
-	private Bry_bfr bfr; private String context_name;
+	private BryWtr bfr; private String context_name;
 	public Site_meta_parser__general__lone(String context_name, String key) {
 		this.context_name = context_name;
 		this.Ctor(key);
 	}
-	public byte[] Parse(String context, Bry_bfr bfr, Json_ary ary) {
-		if (ary.Len() == 0) return Bry_.Empty;	// no fallbacks
+	public byte[] Parse(String context, BryWtr bfr, Json_ary ary) {
+		if (ary.Len() == 0) return BryUtl.Empty;	// no fallbacks
 		this.bfr = bfr;
 		this.Parse_grp(context + "." + context_name, ary);
-		bfr.Del_by_1();	// delete trailing dlm at end of fallbacks
-		return bfr.To_bry_and_clear();
+		bfr.DelBy1();	// delete trailing dlm at end of fallbacks
+		return bfr.ToBryAndClear();
 	}
 	@Override protected void Parse_hook_nde(Json_nde sub, Json_kv[] atrs) {
-		bfr.Add(Kv__bry(atrs, 0)).Add_byte_pipe();
+		bfr.Add(Kv__bry(atrs, 0)).AddBytePipe();
 	}
 }
 class Site_meta_parser__general__kv extends Json_parser__list_nde__base {
-	private Bry_bfr bfr; private String context_name;
+	private BryWtr bfr; private String context_name;
 	public Site_meta_parser__general__kv(String context_name, String key, String val) {
 		this.context_name = context_name;
 		this.Ctor(key, val);
 	}
-	public byte[] Parse(String context, Bry_bfr bfr, Json_ary ary) {
+	public byte[] Parse(String context, BryWtr bfr, Json_ary ary) {
 		this.bfr = bfr;
 		this.Parse_grp(context + "." + context_name, ary);
-		bfr.Del_by_1();
-		return bfr.To_bry_and_clear();
+		bfr.DelBy1();
+		return bfr.ToBryAndClear();
 	}
 	@Override protected void Parse_hook_nde(Json_nde sub, Json_kv[] atrs) {
-		bfr.Add(Kv__bry(atrs, 0)).Add_byte_eq().Add(Kv__bry(atrs, 1)).Add_byte_pipe();
+		bfr.Add(Kv__bry(atrs, 0)).AddByteEq().Add(Kv__bry(atrs, 1)).AddBytePipe();
 	}
 }
 class Site_meta_parser__namespace extends Json_parser__list_nde__base {
@@ -233,8 +245,8 @@ class Site_meta_parser__showhook extends Json_parser__list_nde__base {
 	@Override protected void Parse_hook_nde(Json_nde sub, Json_kv[] atrs) {
 		byte[] key = Kv__bry(atrs, 0);
 		Json_kv subscribers_kv = atrs[1];
-		byte[] scribunto = Bry_.Empty;
-		byte[][] subscribers_bry_ary = Bry_.Ary_empty;
+		byte[] scribunto = BryUtl.Empty;
+		byte[][] subscribers_bry_ary = BryUtl.AryEmpty;
 		if (subscribers_kv.Val().Tid() == Json_itm_.Tid__ary)
 			subscribers_bry_ary = Kv__bry_ary(atrs, 1);
 		else {
@@ -242,13 +254,13 @@ class Site_meta_parser__showhook extends Json_parser__list_nde__base {
 			int atr_len = subscribers_nde.Len();
 			for (int j = 0; j < atr_len; ++j) {
 				Json_kv atr = subscribers_nde.Get_at_as_kv(j);
-				if (!Bry_.Eq(atr.Key_as_bry(), Key__scribunto)) {Warn("unknown subscriber key", atr); continue;}
+				if (!BryLni.Eq(atr.Key_as_bry(), Key__scribunto)) {Warn("unknown subscriber key", atr); continue;}
 				scribunto = atr.Val_as_bry();
 			}
 		}
 		list.Add(key, new Site_showhook_itm(key, scribunto, subscribers_bry_ary));
 	}
-	private final static byte[] Key__scribunto = Bry_.new_a7("scribunto");
+	private final static byte[] Key__scribunto = BryUtl.NewA7("scribunto");
 }
 class Site_meta_parser__language extends Json_parser__list_nde__base {
 	private Ordered_hash list;

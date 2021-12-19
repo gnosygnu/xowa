@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.srchs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.exports.splits.srchs;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*;
@@ -42,7 +45,7 @@ class Split_srch_init {
 		for (int i = 0; i < len; ++i) {
 			Db_conn link_conn = srch_db_mgr.Tbl__link__get_at(i).conn;
 			attach_mgr.Conn_links_(new Db_attach_itm("word_db", word_conn), new Db_attach_itm("link_db", link_conn));
-			attach_mgr.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
+			attach_mgr.Exec_sql(StringUtl.ConcatLinesNl    // ANSI.Y
 			( "INSERT INTO split_search_word (word_id, word_text, link_count, link_count_score, link_score_min, link_score_max, page_uid, page_ns, page_id, page_score)"
 			, "SELECT  sw.word_id, sw.word_text, sw.link_count, sw.link_count_score, sw.link_score_min, sw.link_score_max, Min(pr.page_uid), -1, -1, -1"
 			, "FROM    <word_db>search_word sw"

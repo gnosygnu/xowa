@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*;
+package gplx.xowa.guis.menus.dom;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.guis.*;
+import gplx.gfui.kits.core.*;
 import gplx.xowa.langs.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.langs.msgs.*;
 public class Xog_mnu_itm extends Xog_mnu_base {
 	private Xoa_gui_mgr gui_mgr;
 	public Xog_mnu_itm(Xoa_gui_mgr gui_mgr, String key) {
-		this.gui_mgr = gui_mgr; this.key = key; this.key_bry = Bry_.new_u8(key);
+		this.gui_mgr = gui_mgr; this.key = key; this.key_bry = BryUtl.NewU8(key);
 		this.Ctor(gui_mgr);
 	}
 	public byte Tid() {return tid;} public Xog_mnu_itm Tid_(byte v) {tid = v; return this;} private byte tid;		
@@ -28,7 +33,7 @@ public class Xog_mnu_itm extends Xog_mnu_base {
 	public String Name() {return name;} public void Name_(String v) {this.name = v; Gui_text_calc_();} private String name = "";
 	public String Shortcut() {return shortcut;} public void Shortcut_(String v) {this.shortcut = v; Gui_text_calc_();}  private String shortcut;
 	public String Gui_text() {return gui_text;} public void Gui_text_calc_() {gui_text = Gui_text_calc(name, shortcut);} private String gui_text = "";
-	public String[] Img_nest() {return img_nest;} private String[] img_nest = String_.Ary_empty;
+	public String[] Img_nest() {return img_nest;} private String[] img_nest = StringUtl.AryEmpty;
 	private String Cmd() {
 		Xog_cmd_itm cmd_itm = gui_mgr.Cmd_mgr().Get_or_null(key);
 		return cmd_itm == null ? "" : cmd_itm.Cmd();
@@ -56,10 +61,10 @@ public class Xog_mnu_itm extends Xog_mnu_base {
 		this.gui_text		= Gui_text_calc(name, shortcut);
 	}	
 	public static String Gui_text_calc(String name, String shortcut) {
-		if (shortcut == null || String_.Len(shortcut) != 1) return name;			// shortcut is null or > 1 char; return name
-		int pos = String_.FindFwd(String_.Lower(name), String_.Lower(shortcut));	// search for shortcut in name
-		if (pos == String_.Find_none) return name;									// shortcut not found; return name; EX: "x" in "File" returns "File"
-		return String_.Mid(name, 0, pos) + "&" + String_.Mid(name, pos);			// add & before shortcut; EX: "x" in "Exit" -> "E&xit"
+		if (shortcut == null || StringUtl.Len(shortcut) != 1) return name;			// shortcut is null or > 1 char; return name
+		int pos = StringUtl.FindFwd(StringUtl.Lower(name), StringUtl.Lower(shortcut));	// search for shortcut in name
+		if (pos == StringUtl.FindNone) return name;									// shortcut not found; return name; EX: "x" in "File" returns "File"
+		return StringUtl.Mid(name, 0, pos) + "&" + StringUtl.Mid(name, pos);			// add & before shortcut; EX: "x" in "Exit" -> "E&xit"
 	}
 	public Xog_mnu_itm Clone() {
 		Xog_mnu_itm rv = new Xog_mnu_itm(gui_mgr, key).Init_by_clone(this);
@@ -73,7 +78,7 @@ public class Xog_mnu_itm extends Xog_mnu_base {
 		else if	(ctx.Match(k, Invk_shortcut_))		Shortcut_(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_cmd))			return this.Cmd();
 		else if	(ctx.Match(k, Invk_cmd_))			Cmd_(m.ReadStr("v"));
-		else if	(ctx.Match(k, Invk_img))			return String_.Concat_with_str("/", img_nest);
+		else if	(ctx.Match(k, Invk_img))			return StringUtl.ConcatWith("/", img_nest);
 		else if	(ctx.Match(k, Invk_img_))			img_nest = Img_nest_of(m.ReadStr("v"));
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;
@@ -81,6 +86,6 @@ public class Xog_mnu_itm extends Xog_mnu_base {
 	private static final String Invk_text = "text", Invk_text_ = "text_", Invk_shortcut = "shortcut", Invk_shortcut_ = "shortcut_", Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_img = "img", Invk_img_ = "img_"
 	;
 	public static final byte Tid_nil = 0, Tid_grp = 1, Tid_spr = 2, Tid_btn = 3, Tid_chk = 4, Tid_rdo = 5;
-	private static String[] Img_nest_of(String img) {return String_.Len_eq_0(img) ? String_.Ary_empty : String_.Split(img, "/");}
+	private static String[] Img_nest_of(String img) {return StringUtl.IsNullOrEmpty(img) ? StringUtl.AryEmpty : StringUtl.Split(img, "/");}
 	public static final Xog_mnu_itm Null = new Xog_mnu_itm(null, "null");
 }

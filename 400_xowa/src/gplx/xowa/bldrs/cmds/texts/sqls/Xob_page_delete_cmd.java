@@ -14,18 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds.texts.sqls;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.Io_url;
-import gplx.String_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.dbs.Db_attach_itm;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.bldrs.Xob_bldr;
 import gplx.xowa.bldrs.Xob_cmd_keys;
@@ -52,7 +52,7 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 			,   Dbmeta_idx_itm.new_normal_by_tbl("page_filter", "page_id", "page_id")
 			));
 		}
-		core_db_conn.Exec_sql_plog_ntx("finding missing redirects", String_.Concat_lines_nl_skip_last
+		core_db_conn.Exec_sql_plog_ntx("finding missing redirects", StringUtl.ConcatLinesNlSkipLast
 		( "INSERT INTO page_filter (page_id, page_text_db_id)"
 		, "SELECT  ptr.page_id, ptr.page_text_db_id"
 		, "FROM    page ptr"
@@ -92,7 +92,7 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 				if	(db_file_is_text || db_file_is_cat || db_file_is_search)
 					db_file.Conn().Env_vacuum();
 			}
-		} catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error during page deletion: cur=~{0} err=~{1}", db_file_cur, Err_.Message_gplx_log(e));}
+		} catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "fatal error during page deletion: cur=~{0} err=~{1}", db_file_cur, ErrUtl.ToStrLog(e));}
 		core_db_conn.Exec_sql_plog_ntx("deleting from table: page", "DELETE FROM page WHERE page_id IN (SELECT page_id FROM page_filter);");
 		// core_db_conn.Meta_tbl_delete("page_filter");
 		core_db_conn.Env_vacuum();

@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.mapSources;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Hash_adp_bry;
-import gplx.core.primitives.Byte_obj_val;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.langs.kwds.Xol_kwd_grp_;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
@@ -29,11 +29,11 @@ import gplx.xowa.xtns.pfuncs.Pf_func_base;
 public class Map_dd2dms_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_mapSources_dd2dms;}
 	@Override public Pf_func New(int id, byte[] name) {return new Map_dd2dms_func().Name_(name);}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] coord = Eval_argx(ctx, src, caller, self);
 		int args_len = self.Args_len();
-		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b128();
-		byte[] plus = Bry_.Empty, minus = Bry_.Empty;
+		BryWtr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().GetB128();
+		byte[] plus = BryUtl.Empty, minus = BryUtl.Empty;
 		int prec = 4;
 		Xop_func_arg_itm func_arg = new Xop_func_arg_itm();
 		for (int i = 0; i < args_len; i++) {
@@ -43,27 +43,27 @@ public class Map_dd2dms_func extends Pf_func_base {
 			Object key_tid_obj = Key_hash.GetByOrNull(key);
 			if (key_tid_obj != null) {
 				byte[] val = func_arg.val;
-				switch (((Byte_obj_val)key_tid_obj).Val()) {
+				switch (((ByteVal)key_tid_obj).Val()) {
 					case Key_tid_plus:		plus = val; break;
 					case Key_tid_minus:		minus = val; break;
-					case Key_tid_precision:	prec = Bry_.To_int_or(val, prec); break;
+					case Key_tid_precision:	prec = BryUtl.ToIntOr(val, prec); break;
 				}
 			}
 		}
-		tmp_bfr.Mkr_rls();
+		tmp_bfr.MkrRls();
 		Map_math map_math = Map_math.Instance;
-		if (map_math.Ctor(coord, prec, Bry_.Empty, 2))
+		if (map_math.Ctor(coord, prec, BryUtl.Empty, 2))
 			bfr.Add(map_math.Get_dms(BoolUtl.N, plus, minus));
 		else
 			map_math.Fail(ctx, src, self, bfr, this.Name());
 	}
-	public static void Deg_to_dms(Bry_bfr bfr, boolean wikibase, boolean coord_is_lng, byte[] coord, int prec) { // NOTE: called by wikibase
+	public static void Deg_to_dms(BryWtr bfr, boolean wikibase, boolean coord_is_lng, byte[] coord, int prec) { // NOTE: called by wikibase
 		Map_math map_math = Map_math.Instance;
-		if (map_math.Ctor(coord, prec, Bry_.Empty, 2)) {
-			bfr.Add(map_math.Get_dms(wikibase, Bry_.Empty, Bry_.Empty));
+		if (map_math.Ctor(coord, prec, BryUtl.Empty, 2)) {
+			bfr.Add(map_math.Get_dms(wikibase, BryUtl.Empty, BryUtl.Empty));
 			byte[] dir = coord_is_lng ? map_math.Coord_dir_ew() : map_math.Coord_dir_ns();
 			if (!wikibase)	// NOTE: do not add space if wikibase, else will fail in Module:en.w:WikidataCoord; PAGE:en.w:Hulme_Arch_Bridge DATE:2017-04-02
-				bfr.Add_byte_space();
+				bfr.AddByteSpace();
 			bfr.Add(dir);
 		}
 	}

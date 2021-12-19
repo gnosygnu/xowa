@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.TfdsTstr_fxt;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 class GfmlTkn_mok {
 	public String Raw() {return raw;} public GfmlTkn_mok Raw_(String v) {raw = v; return this;} private String raw;
 	public List_adp Subs() {return list;} List_adp list = List_adp_.New();
@@ -66,10 +71,10 @@ class GfmlTkn_mok {
 		for (int i = 0; i < max; i++) {
 			GfmlTkn_mok expdSub = (GfmlTkn_mok)tstr.List_FetchAtOrNull(expd.Subs(), i);
 			GfmlTkn_mok actlSub = (GfmlTkn_mok)tstr.List_FetchAtOrNull(actl.Subs(), i);
-			tstr.SubName_push(Int_.To_str(i));
+			tstr.SubName_push(IntUtl.ToStr(i));
 			tst(tstr, expdSub, actlSub);
 			tstr.SubName_pop();
 		}
 	}
-	static GfmlTkn_mok NullObj(GfmlTkn_mok v) {return v == null ? GfmlTkn_mok.new_().Raw_(String_.Null_mark) : v;}
+	static GfmlTkn_mok NullObj(GfmlTkn_mok v) {return v == null ? GfmlTkn_mok.new_().Raw_(StringUtl.NullMark) : v;}
 }

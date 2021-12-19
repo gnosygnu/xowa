@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.bldrs;
-import gplx.Bry_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Int_;
-import gplx.String_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.dbs.Db_attach_itm;
 import gplx.dbs.Db_attach_mgr;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.DbmetaFldItm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_link_tbl;
 import gplx.xowa.wikis.data.Xow_db_file;
@@ -35,7 +35,7 @@ class Xob_catlink_wkr {
 	public void Make_catlink_dbs(Xowe_wiki wiki, Db_conn tmp_conn, Db_conn page_conn, Db_conn cat_core_conn) {
 		// init select
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(page_conn, new Db_attach_itm("temp_db", tmp_conn), new Db_attach_itm("cat_db", cat_core_conn));	// NOTE: main_conn must be page_conn, else sqlite will be very slow when doing insert
-		String sql = attach_mgr.Resolve_sql(String_.Concat_lines_nl_skip_last
+		String sql = attach_mgr.Resolve_sql(StringUtl.ConcatLinesNlSkipLast
 		( "SELECT  tcl.cl_from"
 		, ",       p.page_id"
 		, ",       tcl.cl_type_id"
@@ -60,7 +60,7 @@ class Xob_catlink_wkr {
 				// check if row can fit in db; else update db_size
 				int page_id_cur = rdr.Read_int("cl_from");
 				byte[] sortkey = rdr.Read_bry("cl_sortkey");
-				if (sortkey == null) sortkey = Bry_.Empty;	// WORKAROUND: sortkey should never be null; however, sqlite.jdbc sometimes returns as null; EX:ru.s and cl_from = 1324; DATE:2016-11-19
+				if (sortkey == null) sortkey = BryUtl.Empty;	// WORKAROUND: sortkey should never be null; however, sqlite.jdbc sometimes returns as null; EX:ru.s and cl_from = 1324; DATE:2016-11-19
 				byte[] sortkey_prefix = rdr.Read_bry_by_str("cl_sortkey_prefix");
 				long db_size_new = db_size_cur + 48 + (sortkey.length * 2) + sortkey_prefix.length;// 46 = 3 ints (12) + 1 long (8) + 1 byte (2?) + 2 index (24?) + 11 fudge factor (?); DATE:2016-09-06
 				if (	db_size_cur > db_size_max		// size exceeded
@@ -74,7 +74,7 @@ class Xob_catlink_wkr {
 				// insert; notify;
 				cat_link_tbl.Insert_cmd_by_batch(page_id_prv, rdr.Read_int("page_id"), rdr.Read_byte("cl_type_id"), rdr.Read_long("cl_timestamp"), sortkey, sortkey_prefix);
 				if (++rows % 100000 == 0) {
-					Gfo_usr_dlg_.Instance.Prog_many("", "", "inserting cat_link row: ~{0}", Int_.To_str_fmt(rows, "#,##0"));
+					Gfo_usr_dlg_.Instance.Prog_many("", "", "inserting cat_link row: ~{0}", IntUtl.ToStrFmt(rows, "#,##0"));
 				}
 			}
 		}
@@ -111,7 +111,7 @@ class Xob_catlink_wkr {
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(cat_core_conn, new Db_attach_itm("temp_db", tmp_conn), new Db_attach_itm("page_db", page_conn));
 		Xowd_cat_core_tbl cat_core_tbl = new Xowd_cat_core_tbl(cat_core_conn, BoolUtl.N);
 		cat_core_conn.Meta_tbl_remake(cat_core_tbl);
-		String sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
+		String sql = StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "INSERT INTO cat_core (cat_id, cat_pages, cat_subcats, cat_files, cat_hidden, cat_link_db_id)"
 		, "SELECT  p.page_id"
 		, ",       Sum(CASE WHEN tcl.cl_type_id = 2 THEN 1 ELSE 0 END)"
@@ -134,7 +134,7 @@ class Xob_catlink_wkr {
 		page_conn.Meta_fld_append_if_missing(page_tbl.Tbl_name(), page_tbl.Flds__all(), DbmetaFldItm.NewInt("page_cat_db_id").DefaultValSet(-1));
 
 		// prep sql
-		String sql = String_.Concat_lines_nl_skip_last
+		String sql = StringUtl.ConcatLinesNlSkipLast
 		( "UPDATE  page"
 		, "SET     page_cat_db_id = {0}"
 		, "WHERE   page_id IN (SELECT cl_from FROM <link_db>cat_link WHERE cl_from = page.page_id);"

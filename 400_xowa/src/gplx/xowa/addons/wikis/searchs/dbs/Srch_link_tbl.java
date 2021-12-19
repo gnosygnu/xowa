@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.searchs.dbs;
 import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
 public class Srch_link_tbl {
 	public final String fld_word_id, fld_page_id, fld_link_score;
 	public final Db_conn conn;
@@ -45,7 +47,7 @@ public class Srch_link_tbl {
 	}
 	public void Update_page_id(int old_id, int new_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: update_page_id started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
-		conn.Stmt_update(tbl_name, String_.Ary(fld_page_id), fld_page_id).Val_int(fld_page_id, old_id).Crt_int(fld_page_id, new_id).Exec_update();
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld_page_id), fld_page_id).Val_int(fld_page_id, old_id).Crt_int(fld_page_id, new_id).Exec_update();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: update done");
 	}
 

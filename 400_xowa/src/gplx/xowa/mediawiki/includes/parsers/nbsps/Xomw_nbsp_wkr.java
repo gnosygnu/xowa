@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.nbsps; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.parsers.nbsps;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*;
 public class Xomw_nbsp_wkr {
@@ -32,11 +36,11 @@ public class Xomw_nbsp_wkr {
 		// ];
 		// $text = preg_replace( array_keys( $fixtags ), array_values( $fixtags ), $text );
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 
 		if (trie == null) {
 			synchronized (this.getClass()) {
@@ -61,10 +65,10 @@ public class Xomw_nbsp_wkr {
 		while (true) {
 			if (cur == src_end) {
 				if (dirty)
-					bfr.Add_mid(src, prv, src_end);
+					bfr.AddMid(src, prv, src_end);
 				break;
 			}
-			Object o = trie.Match_at(trv, src, cur, src_end);
+			Object o = trie.MatchAt(trv, src, cur, src_end);
 			if (o == null) {
 				cur++;
 				continue;
@@ -76,20 +80,20 @@ public class Xomw_nbsp_wkr {
 			int important_end = -1;
 			if (itm_tid == Tid__important) {
 				int space_bgn = cur + itm.Key().length;
-				int space_end = Bry_find_.Find_fwd_while(src, space_bgn, src_end, AsciiByte.Space);
+				int space_end = BryFind.FindFwdWhile(src, space_bgn, src_end, AsciiByte.Space);
 				important_end = space_end + Bry__important.length;
-				if (!Bry_.Match(src, space_end, important_end, Bry__important)) {
+				if (!BryLni.Eq(src, space_end, important_end, Bry__important)) {
 					continue;
 				}
 			}
 			dirty = true;
-			bfr.Add_mid(src, prv, cur);
+			bfr.AddMid(src, prv, cur);
 			switch (itm_tid) {
 				case Tid__space_lhs:
-					bfr.Add_bry_many(Bry__nbsp, itm.Val());
+					bfr.AddBryMany(Bry__nbsp, itm.Val());
 					break;
 				case Tid__space_rhs:
-					bfr.Add_bry_many(itm.Val(), Bry__nbsp);
+					bfr.AddBryMany(itm.Val(), Bry__nbsp);
 					break;
 				case Tid__important:
 					bfr.Add(Bry__important__repl);
@@ -104,23 +108,23 @@ public class Xomw_nbsp_wkr {
 	private static final byte Tid__space_lhs = 0, Tid__space_rhs = 1, Tid__important = 2;
 	private static Btrie_slim_mgr trie;
 	private static void Trie__add(Btrie_slim_mgr trie, byte tid, String key_str) {
-		byte[] key_bry = Bry_.new_u8(key_str);
+		byte[] key_bry = BryUtl.NewU8(key_str);
 		byte[] val_bry = null;
 		switch (tid) {
 			case Tid__space_lhs:
-				val_bry = Bry_.Mid(key_bry, 1);
+				val_bry = BryLni.Mid(key_bry, 1);
 				break;
 			case Tid__space_rhs:
-				val_bry = Bry_.Mid(key_bry, 0, key_bry.length - 1);
+				val_bry = BryLni.Mid(key_bry, 0, key_bry.length - 1);
 				break;
 			case Tid__important:
 				val_bry = key_bry;
 				break;
 		}
 		Xomw_nbsp_itm itm = new Xomw_nbsp_itm(tid, key_bry, val_bry);
-		trie.Add_obj(key_bry, itm);
+		trie.AddObj(key_bry, itm);
 	}
-	private static final byte[] Bry__nbsp = Bry_.new_a7("&#160;"), Bry__important = Bry_.new_a7("important"), Bry__important__repl = Bry_.new_a7(" !");
+	private static final byte[] Bry__nbsp = BryUtl.NewA7("&#160;"), Bry__important = BryUtl.NewA7("important"), Bry__important__repl = BryUtl.NewA7(" !");
 }
 class Xomw_nbsp_itm {
 	public Xomw_nbsp_itm(byte tid, byte[] key, byte[] val) {

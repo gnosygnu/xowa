@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.caches; import gplx.*;
-import gplx.core.primitives.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.caches;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.wrappers.IntVal;
 public class Xofulltext_cache_mgr {
 	private final Ordered_hash qry_hash = Ordered_hash_.New();
 	private final Hash_adp_bry id_hash = Hash_adp_bry.cs();
@@ -23,12 +28,12 @@ public class Xofulltext_cache_mgr {
 		qry_hash.Clear();
 	}
 	public int Ids__get_or_neg1(byte[] qry_key) {
-		Int_obj_val id = (Int_obj_val)id_hash.GetByOrNull(qry_key);
+		IntVal id = (IntVal)id_hash.GetByOrNull(qry_key);
 		return id == null ? -1 : id.Val();
 	}
 	public int Ids__next() {return next_qry_id++;}
 	public void Add(int id, byte[] key) {
-		id_hash.Add(key, new Int_obj_val(id));
+		id_hash.Add(key, new IntVal(id));
 		Xofulltext_cache_qry qry = (Xofulltext_cache_qry)qry_hash.GetByOrNull(id);
 		if (qry == null) {
 			qry = new Xofulltext_cache_qry(id, key);
@@ -66,7 +71,7 @@ public class Xofulltext_cache_mgr {
 		int len = qry.Pages().Len();
 		for (int i = page_seq_bgn; i < page_seq_end; i++) {
 			if (i >= len) break;
-			Xofulltext_cache_page page = (Xofulltext_cache_page)qry.Pages().Get_at(i);
+			Xofulltext_cache_page page = (Xofulltext_cache_page)qry.Pages().GetAt(i);
 			list.Add(page);
 		}
 		return (Xofulltext_cache_page[])list.ToAryAndClear(Xofulltext_cache_page.class);
@@ -80,7 +85,7 @@ public class Xofulltext_cache_mgr {
 		List_adp list = List_adp_.New();
 		int lines_len = page.Lines().Len();
 		for (int i = 1; i < lines_len; i++) {
-			Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().Get_at(i);				
+			Xofulltext_cache_line line = (Xofulltext_cache_line)page.Lines().GetAt(i);
 			list.Add(line);
 		}
 		return (Xofulltext_cache_line[])list.ToAryAndClear(Xofulltext_cache_line.class);

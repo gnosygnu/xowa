@@ -13,18 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.tabs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.tabs;
+import gplx.frameworks.evts.Gfo_evt_mgr_;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
 public class TabBoxEvt_tabSelect {
 	public static String Key = "TabBoxEvt_tabSelect";
 	public static final String SelectedChanged_evt = "SelectedChanged_evt";
 	public static void Send(TabBoxMgr tabBoxMgr, TabPnlItm oldTab, TabPnlItm newTab) {
 		Gfo_evt_mgr_.Pub_val(tabBoxMgr, Key, new TabPnlItm[] {oldTab, newTab});
 	}
-	@gplx.Internal protected static void Select(TabBox tabBox, GfsCtx ctx, GfoMsg m) {
+	public static void Select(TabBox tabBox, GfsCtx ctx, GfoMsg m) {
 		TabPnlItm[] ary = (TabPnlItm[])m.CastObj("v");
 		Select(tabBox, ary[0], ary[1]);
 	}
-	@gplx.Internal protected static void Select(TabBox tabBox, TabPnlItm curTabItm, TabPnlItm newTabItm) {
+	public static void Select(TabBox tabBox, TabPnlItm curTabItm, TabPnlItm newTabItm) {
 		TabPnlAreaMgr.Select(tabBox, curTabItm, newTabItm);
 		TabBtnAreaMgr.Select(tabBox, curTabItm, newTabItm);
 		Gfo_evt_mgr_.Pub_val(tabBox, SelectedChanged_evt, newTabItm.Idx());

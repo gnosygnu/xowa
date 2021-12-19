@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.encoders; import gplx.*; import gplx.core.*;
+package gplx.core.encoders;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Base85_ {
-	public static String To_str(int val, int min_len) {return String_.new_u8(Set_bry(val, null, 0, min_len));}
+	public static String To_str(int val, int min_len) {return StringUtl.NewU8(Set_bry(val, null, 0, min_len));}
 	public static byte[] To_bry(int val, int min_len) {return Set_bry(val, null, 0, min_len);}
 	public static byte[] Set_bry(int val, byte[] ary, int ary_pos, int min_len) {
 		int val_len = Bry_len(val);
@@ -27,7 +30,7 @@ public class Base85_ {
 		}
 		if (ary == null) ary = new byte[ary_len];
 		if (pad) {
-			for (int i = 0; i < pad_len; i++)		// fill ary with pad_len
+			for (int i = 0; i < pad_len; i++)        // fill ary with pad_len
 				ary[i + ary_pos] = A7_offset;
 		}
 		for (int i = ary_len - pad_len; i > 0; i--) {
@@ -39,7 +42,7 @@ public class Base85_ {
 		return ary;
 	}
 	public static int To_int_by_str(String s) {
-		byte[] ary = Bry_.new_u8(s);
+		byte[] ary = BryUtl.NewU8(s);
 		return To_int_by_bry(ary, 0, ary.length - 1);
 	}
 	public static int To_int_by_bry(byte[] ary, int bgn, int end) {
@@ -54,7 +57,7 @@ public class Base85_ {
 		if (v == 0) return 1;
 		for (int i = Pow85_last; i > -1; i--)
 			if (v >= Pow85[i]) return i + 1;
-		throw Err_.new_wo_type("neg number not allowed", "v", v);
+		throw ErrUtl.NewArgs("neg number not allowed", "v", v);
 	}
 	public static final int Len_int = 5;
 	private static final int Pow85_last = 4, Radix = 85; 

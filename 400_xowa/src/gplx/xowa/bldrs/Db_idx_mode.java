@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 public class Db_idx_mode {
 	private int tid;
 	Db_idx_mode(int tid) {this.tid = tid;}
@@ -28,9 +30,9 @@ public class Db_idx_mode {
 	, Itm_end	= new Db_idx_mode(Tid_end)
 	;
 	public static Db_idx_mode Xto_itm(String key) {
-		if		(String_.Eq(key, Key_skip))		return Itm_skip;
-		else if	(String_.Eq(key, Key_bgn))		return Itm_bgn;
-		else if	(String_.Eq(key, Key_end))		return Itm_end;
-		else									throw Err_.new_unhandled(key);
+		if		(StringUtl.Eq(key, Key_skip))		return Itm_skip;
+		else if	(StringUtl.Eq(key, Key_bgn))		return Itm_bgn;
+		else if	(StringUtl.Eq(key, Key_end))		return Itm_end;
+		else									throw ErrUtl.NewUnhandled(key);
 	}
 }

@@ -13,15 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.pfuncs.ifs;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.wrappers.ByteVal;
 import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.core.btries.*;
 import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_iferror extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		int self_args_len = self.Args_len();
 		byte[] argx = Eval_argx(ctx, src, caller, self);
 		if (argx == null) return;
@@ -51,7 +53,7 @@ public class Pfunc_iferror extends Pf_func_base {
 			if (o == null) 
 				++pos;
 			else {
-				Byte_obj_val bv = (Byte_obj_val)o;
+				ByteVal bv = (ByteVal)o;
 				int pos_nxt = trv.Pos();
 				if (pos_nxt == src_len) return false; // each of the three states requires at least one character afterwards
 				switch (bv.Val()) {
@@ -122,5 +124,5 @@ public class Pfunc_iferror extends Pf_func_base {
 		trie_init(rv, State_close, ">");
 		return rv;
 	}
-	private static void trie_init(Btrie_slim_mgr trie, byte b, String s) {trie.Add_obj(s, Byte_obj_val.new_(b));}
+	private static void trie_init(Btrie_slim_mgr trie, byte b, String s) {trie.AddObj(s, ByteVal.New(b));}
 }

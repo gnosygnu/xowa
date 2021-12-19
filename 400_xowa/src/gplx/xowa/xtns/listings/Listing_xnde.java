@@ -13,21 +13,42 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.listings; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.langs.msgs.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+package gplx.xowa.xtns.listings;
+import gplx.langs.htmls.Gfh_wtr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.langs.msgs.Xol_msg_itm;
+import gplx.xowa.langs.msgs.Xol_msg_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_parser;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm_owner1;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.xtns.Xox_mgr_base;
+import gplx.xowa.xtns.Xox_xnde;
+import gplx.xowa.xtns.Xox_xnde_;
 public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
-	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
+	private final BryFmtr tmp_fmtr = BryFmtr.NewTmp();
 	public Listing_xnde(int tag_id) {}
 	private byte[] xatr_name, xatr_alt, xatr_address, xatr_directions, xatr_phone, xatr_tollfree, xatr_email, xatr_fax, xatr_url, xatr_hours, xatr_price, xatr_checkin, xatr_checkout;
 	private int xatr_lat = Xatr_meridian_null, xatr_long = Xatr_meridian_null;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
 		if (xatr_id_obj == null) return;
-		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		ByteVal xatr_id = (ByteVal)xatr_id_obj;
 		switch (xatr_id.Val()) {
 			case Listing_xatrs.Tid_name:		xatr_name = xatr.Val_as_bry__blank_to_null(); break;
 			case Listing_xatrs.Tid_alt:			xatr_alt = xatr.Val_as_bry__blank_to_null(); break;
@@ -48,7 +69,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}
 	private void Init_args(Xop_ctx ctx) {
 		if (xatr_name == null) {
-			xatr_name = msg_mgr.Itm_by_key_or_new(Bry_.new_a7("listings-unknown")).Val();
+			xatr_name = msg_mgr.Itm_by_key_or_new(BryUtl.NewA7("listings-unknown")).Val();
 		}
 		xatr_alt			= Parse_wikitext(ctx, xatr_alt);
 		xatr_address		= Parse_wikitext(ctx, xatr_address);
@@ -56,12 +77,12 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}		
 	private Xowe_wiki wiki; private Xop_parser parser; private Xop_ctx sub_ctx; private Xol_msg_mgr msg_mgr;
 	private byte[] Parse_wikitext(Xop_ctx ctx, byte[] v) {
-		if (Bry_.Len_eq_0(v)) return v;	// ignore null, ""
+		if (BryUtl.IsNullOrEmpty(v)) return v;	// ignore null, ""
 		if (sub_ctx == null) sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		return parser.Parse_text_to_html(sub_ctx, v);
 	}
 	private Listing_xtn_mgr xtn_mgr;
-	private byte[] html_output = Bry_.Empty;
+	private byte[] html_output = BryUtl.Empty;
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		this.wiki = wiki; this.parser = wiki.Parser_mgr().Main(); this.msg_mgr = wiki.Lang().Msg_mgr();
 		xtn_mgr = (Listing_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Listing_xtn_mgr.Xtn_key_static);
@@ -74,7 +95,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			html_output = hwtr.To_bry_and_clear();
 		}
 	}
-	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+	public void Xtn_write(BryWtr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_mgr == null || !xtn_mgr.Enabled()) 
 			Xox_mgr_base.Xtn_write_escape(app, bfr, src, xnde);
 		else
@@ -83,25 +104,25 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private boolean Bld_by_template(Xop_ctx ctx, Xop_xnde_tkn xnde, Mwh_atr_itm[] atrs, byte[] src) {
 		byte[] listings_template = xtn_mgr.Listings_template();
 		if (listings_template == null) return false;
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
 		bfr.Add(Bry__invk_bgn);					// "{{"
 		bfr.Add(listings_template);				// name
 		int atrs_len = atrs.length;
 		for (int i = 0; i < atrs_len; i++) {
 			Mwh_atr_itm atr = atrs[i];
-			bfr.Add_byte_pipe();				// "|"
+			bfr.AddBytePipe();				// "|"
 			byte[] atr_key = atr.Key_bry(); if (atr_key == null) continue;	// skip keyless atrs; PAGE:nl.v:Rome;EX:<sleep phone='' "abc"/> DATE:2014-06-04
 			bfr.Add(atr_key);					// key
-			bfr.Add_byte(AsciiByte.Eq);		// "="
+			bfr.AddByte(AsciiByte.Eq);		// "="
 			bfr.Add(atr.Val_as_bry());			// val; NOTE: must use Val_as_bry(src), not Val_bry, else int or "" will not be captured; DATE:2014-05-21
 		}
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {
-			bfr.Add_byte_pipe();				// "|"
-			bfr.Add_mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+			bfr.AddBytePipe();				// "|"
+			bfr.AddMid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		}
 		bfr.Add(Bry__invk_end);					// "}}"
 		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
-		html_output = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, bfr.To_bry_and_rls());			
+		html_output = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, bfr.ToBryAndRls());
 		return true;
 	}
 	private void Bld_by_args(Listing_xtn_mgr xtn_mgr, Xop_ctx ctx, Gfh_wtr wtr, Xop_xnde_tkn xnde, byte[] src) {
@@ -161,7 +182,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				.Txt(Txt_colon_space)
 				;
 			wtr	.Nde_full_atrs(Tag_a, xatr_email, true
-			, Atr_a_href	, Bry_.Add(Txt_mailto, xatr_email)	// NOTE: switched from "class,href" to "href,class" for hzip; PAGE:de.v:Bansin; DATE:2016-04-21
+			, Atr_a_href	, BryUtl.Add(Txt_mailto, xatr_email)	// NOTE: switched from "class,href" to "href,class" for hzip; PAGE:de.v:Bansin; DATE:2016-04-21
 			, Atr_a_class	, Atr_a_class_email
 			);
 		}
@@ -170,7 +191,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			wtr.Txt(xatr_hours).Txt(Txt_dot_space);
 
 		if (xatr_checkin != null || xatr_checkout != null) {
-			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
+			BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB128();
 			if (xatr_checkin != null) {
 				byte[] checkin_val = xtn_mgr.Checkin_msg().Fmt(tmp_bfr, tmp_fmtr, xatr_checkin);
 				wtr.Txt_raw(checkin_val);
@@ -183,49 +204,49 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				wtr.Txt_raw(checkout_val);
 			}
 			wtr.Txt(Txt_dot_space);
-			tmp_bfr.Mkr_rls();
+			tmp_bfr.MkrRls();
 		}
 		if (xatr_price != null)
 			wtr.Txt(xatr_price).Txt(Txt_dot_space);
 
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
-			wtr.Txt(Bry_.Trim(Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())));
+			wtr.Txt(BryUtl.Trim(BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())));
 	}
 	private byte[] Bld_position(Xop_ctx ctx) {
 		if (xatr_lat >= Xatr_meridian_null || xatr_long >= Xatr_meridian_null) return null;		// check that lat and long are valid
 		Xol_msg_itm position_template = xtn_mgr.Position_template();
 		if (position_template == null) return null;
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB128();
 		try {
 			byte[] rv = position_template.Fmt(tmp_bfr, tmp_fmtr, xatr_lat, xatr_long);
 			tmp_bfr.Add(Bry__invk_bgn);					// "{{"
 			tmp_bfr.Add(rv);							// rv is not message, but actually template precursor
 			tmp_bfr.Add(Bry__invk_end);					// "}}"
 			Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
-			rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.To_bry_and_clear());
+			rv = wiki.Parser_mgr().Main().Parse_text_to_html(sub_ctx, tmp_bfr.ToBryAndClear());
 			Xol_msg_itm position_text = xtn_mgr.Position_text();
-			if (Bry_.Len_eq_0(position_text.Val())) return rv;
+			if (BryUtl.IsNullOrEmpty(position_text.Val())) return rv;
 			return position_text.Fmt(tmp_bfr, tmp_fmtr, rv);
-		} finally {tmp_bfr.Mkr_rls();}
+		} finally {tmp_bfr.MkrRls();}
 	}
 	private static final int Xatr_meridian_null = 361;
 	public static final byte[]
-	  Tag_strong					= Bry_.new_a7("strong")
-	, Tag_a							= Bry_.new_a7("a")
-	, Tag_em						= Bry_.new_a7("em")
-	, Tag_abbr						= Bry_.new_a7("abbr")
-	, Atr_a_href					= Bry_.new_a7("href")
-	, Atr_a_class					= Bry_.new_a7("class")
-	, Atr_a_class_external_text		= Bry_.new_a7("external text")
-	, Atr_a_class_email				= Bry_.new_a7("email")
-	, Atr_a_rel						= Bry_.new_a7("rel")
-	, Atr_a_rel_nofollow			= Bry_.new_a7("nofollow")
-	, Atr_a_title					= Bry_.new_a7("title")
-	, Txt_comma_space				= Bry_.new_a7(", ")
-	, Txt_space_paren				= Bry_.new_a7(" (")
-	, Txt_colon_space				= Bry_.new_a7(": ")
-	, Txt_dot_space					= Bry_.new_a7(". ")
-	, Txt_mailto					= Bry_.new_a7("mailto:")
+	  Tag_strong					= BryUtl.NewA7("strong")
+	, Tag_a							= BryUtl.NewA7("a")
+	, Tag_em						= BryUtl.NewA7("em")
+	, Tag_abbr						= BryUtl.NewA7("abbr")
+	, Atr_a_href					= BryUtl.NewA7("href")
+	, Atr_a_class					= BryUtl.NewA7("class")
+	, Atr_a_class_external_text		= BryUtl.NewA7("external text")
+	, Atr_a_class_email				= BryUtl.NewA7("email")
+	, Atr_a_rel						= BryUtl.NewA7("rel")
+	, Atr_a_rel_nofollow			= BryUtl.NewA7("nofollow")
+	, Atr_a_title					= BryUtl.NewA7("title")
+	, Txt_comma_space				= BryUtl.NewA7(", ")
+	, Txt_space_paren				= BryUtl.NewA7(" (")
+	, Txt_colon_space				= BryUtl.NewA7(": ")
+	, Txt_dot_space					= BryUtl.NewA7(". ")
+	, Txt_mailto					= BryUtl.NewA7("mailto:")
 	;
 	private static final byte[]
 	  Bry__invk_bgn					= gplx.xowa.parsers.tmpls.Xop_curly_bgn_lxr.Hook
@@ -263,7 +284,7 @@ class Listing_xatrs {
 			case Xop_xnde_tag_.Tid__listing_listing:	rv = Xop_xnde_tag_.Tag__listing_listing; break;
 			case Xop_xnde_tag_.Tid__listing_see:		rv = Xop_xnde_tag_.Tag__listing_see; break;
 			case Xop_xnde_tag_.Tid__listing_sleep:		rv = Xop_xnde_tag_.Tag__listing_sleep; break;
-			default: throw Err_.new_unhandled(tid);
+			default: throw ErrUtl.NewUnhandled(tid);
 		}
 		return rv;
 	}

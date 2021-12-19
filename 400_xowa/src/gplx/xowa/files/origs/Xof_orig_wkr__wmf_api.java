@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.apps.wms.apis.*; import gplx.xowa.files.downloads.*;
+package gplx.xowa.files.origs;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.files.*;
+import gplx.xowa.files.repos.*;
+import gplx.xowa.files.downloads.*;
 import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 	private final Xoapi_orig_base orig_api; private final Xof_download_wkr download_wkr; private final Xow_repo_mgr repo_mgr; private final byte[] wiki_domain;
@@ -33,11 +41,11 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		if (!found) return Xof_orig_itm.Null;	// ttl not found by api; return
 
 		// deserialize values and return
-		byte api_repo = Bry_.Eq(api_rv.Orig_wiki(), wiki_domain) ? Xof_orig_itm.Repo_wiki : Xof_orig_itm.Repo_comm;
+		byte api_repo = BryLni.Eq(api_rv.Orig_wiki(), wiki_domain) ? Xof_orig_itm.Repo_wiki : Xof_orig_itm.Repo_comm;
 		byte[] api_page = api_rv.Orig_page();
 		int api_w = api_rv.Orig_w(), api_h = api_rv.Orig_h();
 		Xof_ext api_ext = Xof_ext_.new_by_ttl_(api_page); api_ext = Ext__handle_ogg(api_ext, api_w, api_h);
-		byte[] api_redirect = Bry_.Eq(api_page, ttl) ? Bry_.Empty : api_page;	// ttl is different; must be redirect
+		byte[] api_redirect = BryLni.Eq(api_page, ttl) ? BryUtl.Empty : api_page;	// ttl is different; must be redirect
 		Xof_orig_itm rv = new Xof_orig_itm(api_repo, api_page, api_ext.Id(), api_w, api_h, api_redirect);
 		rv.Insert_new_y_();
 		return rv;
@@ -52,6 +60,6 @@ public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
 		return Xof_ext_.new_by_id_(actl_ext_id);
 	}
 	private static String Prog_msg(int idx, int len, byte[] ttl) {
-		return String_.Format("downloading file {0} of {1}: {2}", idx + List_adp_.Base1, len, ttl);
+		return StringUtl.Format("downloading file {0} of {1}: {2}", idx + List_adp_.Base1, len, ttl);
 	}
 }

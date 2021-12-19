@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.tdbs;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
@@ -37,6 +37,6 @@ class Xow_fsys_mgr_fxt {
 	Xoae_app app; Xowe_wiki wiki;
 	public Xow_fsys_mgr_fxt Zip_(byte tid, boolean v) {wiki.Tdb_fsys_mgr().Tdb_dir_regy()[tid].Ext_tid_(v ? gplx.core.ios.streams.Io_stream_tid_.Tid__zip : gplx.core.ios.streams.Io_stream_tid_.Tid__raw); return this;}
 	public void Url_ns_fil(byte tid, int ns_id, int fil_idx, String expd) {
-		Tfds.Eq(expd, wiki.Tdb_fsys_mgr().Url_ns_fil(tid, ns_id, fil_idx).Raw());
+		GfoTstr.EqObj(expd, wiki.Tdb_fsys_mgr().Url_ns_fil(tid, ns_id, fil_idx).Raw());
 	}
 }

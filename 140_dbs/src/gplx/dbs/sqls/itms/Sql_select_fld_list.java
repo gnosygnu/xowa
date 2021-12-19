@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.itms; import gplx.*;
+package gplx.dbs.sqls.itms;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Sql_select_fld_list {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Len()						{return hash.Len();}
 	public Sql_select_fld_list Clear()		{hash.Clear();return this;}
-	public Sql_select_fld Get_at(int i)		{return (Sql_select_fld)hash.Get_at(i);}
+	public Sql_select_fld Get_at(int i)		{return (Sql_select_fld)hash.GetAt(i);}
 	public void Add(Sql_select_fld fld)		{hash.Add(fld.Alias, fld);}
 }

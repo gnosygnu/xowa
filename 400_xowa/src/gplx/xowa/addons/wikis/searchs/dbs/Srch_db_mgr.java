@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.dbs;
-import gplx.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash;
 import gplx.dbs.cfgs.Db_cfg_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.wikis.data.Xow_db_file;
 import gplx.xowa.wikis.data.Xow_db_file_;
 import gplx.xowa.wikis.data.Xow_db_mgr;
@@ -58,7 +58,7 @@ public class Srch_db_mgr {
 				int dbs_len = hash.Len();
 				tbl__link__ary = new Srch_link_tbl[dbs_len];
 				for (int i = 0; i < dbs_len; ++i) {
-					Xow_db_file db_file = (Xow_db_file)hash.Get_at(i);
+					Xow_db_file db_file = (Xow_db_file)hash.GetAt(i);
 					Tbl__link__ary__set(tbl__link__ary, i, db_file.Conn());
 				}
 			}

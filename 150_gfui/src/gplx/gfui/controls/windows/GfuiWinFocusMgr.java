@@ -13,12 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.Err_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.gfui.controls.elems.GfuiElem;
+package gplx.gfui.controls.windows; import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.gxws.GxwTextMemo_lang;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
@@ -44,7 +43,7 @@ public class GfuiWinFocusMgr {
 		int nxt = fwd 
 			? cur == subElems.IdxLast() ? 0 : ++cur
 			: cur == 0 ? subElems.IdxLast() : --cur;
-		GfuiElem elm = (GfuiElem)subElems.Get_at(nxt);
+		GfuiElem elm = (GfuiElem)subElems.GetAt(nxt);
 		elm.Focus();
 		return elm;
 	}
@@ -73,10 +72,9 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 			if (idx == elems.Len())
 				idx = 0;
 			GfuiElem elem = null;
-			try {elem = (GfuiElem)elems.Get_at(idx);}
+			try {elem = (GfuiElem)elems.GetAt(idx);}
 			catch (Exception e) {
 				System.out.println("getComponentAfter:" + e.getMessage() + ":" + idx);
-				Err_.Noop(e);
 			}
 			if (elem == null) return c; // FIXME: why is elem null?; REP: add new tab through history and then close out
 			if (elem.Focus_able() && elem.Visible()) {	
@@ -103,7 +101,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 				idx = elems.Len() - List_adp_.Base1;
 			GfuiElem elem = null;
 			try {
-				elem = (GfuiElem)elems.Get_at(idx);
+				elem = (GfuiElem)elems.GetAt(idx);
 //				System.out.println(elem.Key_of_GfuiElem() + " " + elem.Focus_able() + " " + elem.Visible());
 				if (elem.getClass().getName().equals("gplx.gfds.gbu.GbuGrid") && elem.Key_of_GfuiElem().equals("grid0")) {
 					System.out.println(elem.Key_of_GfuiElem() + " " + elem.Focus_able() + " " + elem.Visible());
@@ -112,7 +110,6 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 			}
 			catch (Exception e) {
 				System.out.println("getComponentBefore:" + e.getMessage() + ":" + idx);
-				Err_.Noop(e);				
 			}
 			if (elem == null) return c; // FIXME: why is elem null?; REP: add new tab through history and then close out
 			if (elem.Focus_able() && elem.Visible()) {
@@ -130,7 +127,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 	public Component getDefaultComponent(Container focusCycleRoot) 	{return getFirstComponent(focusCycleRoot);}
 	public Component getFirstComponent(Container focusCycleRoot) 	{return elems_empty() ? focusCycleRoot : (Component)FetchAt(0).UnderElem();}
 	public Component getLastComponent(Container focusCycleRoot) 	{return elems_empty() ? focusCycleRoot : (Component)FetchAt(elems.Len() - 1).UnderElem();}
-	GfuiElem FetchAt(int idx) {return (GfuiElem)elems.Get_at(idx);}
+	GfuiElem FetchAt(int idx) {return (GfuiElem)elems.GetAt(idx);}
 	GxwElem GxwElemOf(Component c) {		
 		if (GxwElem.class.isAssignableFrom(c.getClass())) return (GxwElem)c;		
 		return (GxwElem)c.getParent(); // HACK: occurs for JComboBox when editable is true; focus is on MetalComboBox, with parent of JComboBox

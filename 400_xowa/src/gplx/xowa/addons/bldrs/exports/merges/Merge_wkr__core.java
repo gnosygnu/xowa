@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.bulks.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.bldrs.infos.*;
+import gplx.xowa.wikis.data.*;
+import gplx.xowa.bldrs.infos.*;
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
-import gplx.fsdb.*; import gplx.fsdb.meta.*;
+import gplx.fsdb.meta.*;
 class Merge_wkr__core {
 	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
 	private final Db_tbl_copy copy_mgr = new Db_tbl_copy();
@@ -80,7 +83,7 @@ class Merge_wkr__core {
 	private void Merge_cfg(Db_conn src_conn, Db_conn trg_conn, String src_tbl_name) {
 		if (trg_conn.Meta_tbl_exists("xowa_cfg")) {
 			attach_mgr.Conn_main_(trg_conn).Conn_links_(new Db_attach_itm("src_db", src_conn));
-			attach_mgr.Exec_sql(String_.Concat_lines_nl
+			attach_mgr.Exec_sql(StringUtl.ConcatLinesNl
 			( "INSERT  INTO xowa_cfg"
 			, "SELECT  s.cfg_grp, s.cfg_key, s.cfg_val"
 			, "FROM    <src_db>" + src_tbl_name + " s"

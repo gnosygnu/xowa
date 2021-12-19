@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.wmdumps.imglinks;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 public class Imglnk_reg_tbl implements Db_tbl {
@@ -40,13 +43,13 @@ public class Imglnk_reg_tbl implements Db_tbl {
 		return select_by_ttl_stmt;
 	}	private Db_stmt select_by_ttl_stmt;
 	public void Insert(Db_conn conn, byte repo_id, Xowe_wiki wiki) {
-		String repo_id_str = Byte_.To_str(repo_id);
+		String repo_id_str = ByteUtl.ToStr(repo_id);
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(conn);
 		String sql = "";
 		
 		Xob_db_file redirect_db = Xob_db_file.New__wiki_redirect(wiki.Fsys_mgr().Root_dir());
 		attach_mgr.Conn_links_(new Db_attach_itm("redirect_db", redirect_db.Conn()));
-		sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
+		sql = StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "INSERT INTO imglnk_reg (img_src, img_trg, img_repo, img_count)"
 		, "SELECT  ilt.img_name, r.trg_ttl, " + repo_id_str + ", Count(ilt.img_name)"
 		, "FROM    imglnk_tmp ilt"
@@ -59,7 +62,7 @@ public class Imglnk_reg_tbl implements Db_tbl {
 
 		Xob_db_file image_db = Xob_db_file.New__wiki_image(wiki.Fsys_mgr().Root_dir());
 		attach_mgr.Conn_links_(new Db_attach_itm("image_db", image_db.Conn()));
-		sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
+		sql = StringUtl.ConcatLinesNlSkipLast    // ANSI.Y
 		( "INSERT INTO imglnk_reg (img_src, img_trg, img_repo, img_count)"
 		, "SELECT  ilt.img_name, ilt.img_name, " + repo_id_str + ", Count(ilt.img_name)"
 		, "FROM    imglnk_tmp ilt"

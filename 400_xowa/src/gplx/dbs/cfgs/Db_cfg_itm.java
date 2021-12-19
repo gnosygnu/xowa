@@ -14,55 +14,55 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.cfgs;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.Err;
-import gplx.Err_;
-import gplx.Guid_adp;
-import gplx.Guid_adp_;
-import gplx.Int_;
-import gplx.Long_;
-import gplx.String_;
+import gplx.types.errs.Err;
 import gplx.Yn;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoGuid;
+import gplx.types.commons.GfoGuidUtl;
 public class Db_cfg_itm {
 	public Db_cfg_itm(String grp, String key, String val) {this.grp = grp; this.key = key; this.val = val;}
 	public String		Grp() {return grp;} private final String grp;
 	public String		Key() {return key;} private final String key;
 	public String		Val() {return val;} public Db_cfg_itm Val_(String v) {val = v; return this;} private String val;
 	public String		To_str_or(String or)			{return val == null ? or : val;}
-	public byte[]		To_bry_or(byte[] or)			{try {return val == null ? or : Bry_.new_u8(val)			;} catch (Exception e) {throw err_parse(e, Bry_.Cls_val_name);}}
-	public int			To_int_or(int or)				{try {return val == null ? or : Int_.Parse_or(val, or)		;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
-	public long			To_long_or(long or)				{try {return val == null ? or : Long_.parse_or(val, or)	;} catch (Exception e) {throw err_parse(e, Long_.Cls_val_name);}}
-	public byte			To_byte_or(byte or)				{try {return val == null ? or : Byte_.Parse_or(val, or)	;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
+	public byte[]		To_bry_or(byte[] or)			{try {return val == null ? or : BryUtl.NewU8(val)			;} catch (Exception e) {throw err_parse(e, BryUtl.ClsValName);}}
+	public int			To_int_or(int or)				{try {return val == null ? or : IntUtl.ParseOr(val, or)		;} catch (Exception e) {throw err_parse(e, IntUtl.ClsValName);}}
+	public long			To_long_or(long or)				{try {return val == null ? or : LongUtl.ParseOr(val, or)	;} catch (Exception e) {throw err_parse(e, LongUtl.ClsValName);}}
+	public byte			To_byte_or(byte or)				{try {return val == null ? or : ByteUtl.ParseOr(val, or)	;} catch (Exception e) {throw err_parse(e, ByteUtl.ClsValName);}}
 	public boolean		To_yn_or_n()					{return To_yn_or(BoolUtl.N);}
 	public boolean		To_yn_or(boolean or)			{try {return val == null ? or : Yn.parse_by_char_or(val, or);} catch (Exception e) {throw err_parse(e, BoolUtl.ClsValName);}}
-	public DateAdp		To_date_or(DateAdp or)			{try {return val == null ? or : DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, DateAdp_.Cls_ref_name);}}
-	public Guid_adp		To_guid_or(Guid_adp or)			{try {return val == null ? or : Guid_adp_.Parse(val)		;} catch (Exception e) {throw err_parse(e, Guid_adp_.Cls_ref_name);}}
+	public GfoDate To_date_or(GfoDate or)			{try {return val == null ? or : GfoDateUtl.ParseGplx(val)	;} catch (Exception e) {throw err_parse(e, GfoDateUtl.ClsRefName);}}
+	public GfoGuid To_guid_or(GfoGuid or)			{try {return val == null ? or : GfoGuidUtl.Parse(val)		;} catch (Exception e) {throw err_parse(e, GfoGuidUtl.Cls_ref_name);}}
 	public boolean  	To_bool()						{Fail_if_null(); try {return Yn.parse(val)					;} catch (Exception e) {throw err_parse(e, BoolUtl.ClsValName);}}
-	public byte			To_byte()						{Fail_if_null(); try {return Byte_.Parse(val)				;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
-	public int     		To_int()						{Fail_if_null(); try {return Int_.Parse(val)				;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
+	public byte			To_byte()						{Fail_if_null(); try {return ByteUtl.Parse(val)				;} catch (Exception e) {throw err_parse(e, ByteUtl.ClsValName);}}
+	public int     		To_int()						{Fail_if_null(); try {return IntUtl.Parse(val)				;} catch (Exception e) {throw err_parse(e, IntUtl.ClsValName);}}
 	public String		To_str()						{Fail_if_null(); return val;}
-	private void		Fail_if_null()					{if (val == null) throw Err_.new_wo_type("cfg.val is empty", "grp", grp, "key", key); }
-	private Err			err_parse(Exception e, String type) {return Err_.new_wo_type("cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type).Trace_ignore_add_1_();}
+	private void		Fail_if_null()					{if (val == null) throw ErrUtl.NewArgs("cfg.val is empty", "grp", grp, "key", key); }
+	private Err			err_parse(Exception e, String type) {return ErrUtl.NewArgs("cfg.val is not parseable", "grp", grp, "key", key, "val", val, "type", type);}
 	private static final String Grp_none = "";
 	public static		Db_cfg_itm new_str		(String key, String val)						{return new Db_cfg_itm(Grp_none	, key, val);}
 	public static		Db_cfg_itm new_str		(String grp, String key, String val)			{return new Db_cfg_itm(grp		, key, val);}
-	public static		Db_cfg_itm new_bry		(String key, byte[] val)						{return new Db_cfg_itm(Grp_none	, key, String_.new_u8(val));}
-	public static		Db_cfg_itm new_bry		(String grp, String key, byte[] val)			{return new Db_cfg_itm(grp		, key, String_.new_u8(val));}
-	public static		Db_cfg_itm new_int		(String key, int val)							{return new Db_cfg_itm(Grp_none	, key, Int_.To_str(val));}
-	public static		Db_cfg_itm new_int		(String grp, String key, int val)				{return new Db_cfg_itm(grp		, key, Int_.To_str(val));}
-	public static		Db_cfg_itm new_long		(String key, long val)							{return new Db_cfg_itm(Grp_none	, key, Long_.To_str(val));}
-	public static		Db_cfg_itm new_long		(String grp, String key, long val)				{return new Db_cfg_itm(grp		, key, Long_.To_str(val));}
-	public static		Db_cfg_itm new_byte		(String key, byte val)							{return new Db_cfg_itm(Grp_none	, key, Byte_.To_str(val));}
-	public static		Db_cfg_itm new_byte		(String grp, String key, byte val)				{return new Db_cfg_itm(grp		, key, Byte_.To_str(val));}
+	public static		Db_cfg_itm new_bry		(String key, byte[] val)						{return new Db_cfg_itm(Grp_none	, key, StringUtl.NewU8(val));}
+	public static		Db_cfg_itm new_bry		(String grp, String key, byte[] val)			{return new Db_cfg_itm(grp		, key, StringUtl.NewU8(val));}
+	public static		Db_cfg_itm new_int		(String key, int val)							{return new Db_cfg_itm(Grp_none	, key, IntUtl.ToStr(val));}
+	public static		Db_cfg_itm new_int		(String grp, String key, int val)				{return new Db_cfg_itm(grp		, key, IntUtl.ToStr(val));}
+	public static		Db_cfg_itm new_long		(String key, long val)							{return new Db_cfg_itm(Grp_none	, key, LongUtl.ToStr(val));}
+	public static		Db_cfg_itm new_long		(String grp, String key, long val)				{return new Db_cfg_itm(grp		, key, LongUtl.ToStr(val));}
+	public static		Db_cfg_itm new_byte		(String key, byte val)							{return new Db_cfg_itm(Grp_none	, key, ByteUtl.ToStr(val));}
+	public static		Db_cfg_itm new_byte		(String grp, String key, byte val)				{return new Db_cfg_itm(grp		, key, ByteUtl.ToStr(val));}
 	public static		Db_cfg_itm new_yn		(String key, boolean val)						{return new Db_cfg_itm(Grp_none	, key, Yn.To_str(val));}
 	public static		Db_cfg_itm new_yn		(String grp, String key, boolean val)			{return new Db_cfg_itm(grp		, key, Yn.To_str(val));}
-	public static		Db_cfg_itm new_DateAdp	(String key, DateAdp val)						{return new Db_cfg_itm(Grp_none	, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
-	public static		Db_cfg_itm new_DateAdp	(String grp, String key, DateAdp val)			{return new Db_cfg_itm(grp		, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
-	public static		Db_cfg_itm new_guid		(String key, Guid_adp val)						{return new Db_cfg_itm(Grp_none	, key, val.To_str());}
-	public static		Db_cfg_itm new_guid		(String grp, String key, Guid_adp val)			{return new Db_cfg_itm(grp		, key, val.To_str());}
+	public static		Db_cfg_itm new_DateAdp	(String key, GfoDate val)						{return new Db_cfg_itm(Grp_none	, key, val.ToStrFmt_yyyyMMdd_HHmmss());}
+	public static		Db_cfg_itm new_DateAdp	(String grp, String key, GfoDate val)			{return new Db_cfg_itm(grp		, key, val.ToStrFmt_yyyyMMdd_HHmmss());}
+	public static		Db_cfg_itm new_guid		(String key, GfoGuid val)						{return new Db_cfg_itm(Grp_none	, key, val.ToStr());}
+	public static		Db_cfg_itm new_guid		(String grp, String key, GfoGuid val)			{return new Db_cfg_itm(grp		, key, val.ToStr());}
 	public static final Db_cfg_itm Empty = new Db_cfg_itm("empty", "empty", null);
 }

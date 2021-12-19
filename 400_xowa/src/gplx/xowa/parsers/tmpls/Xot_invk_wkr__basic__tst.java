@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.wikis.nss.*;
 public class Xot_invk_wkr__basic__tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -175,7 +178,7 @@ public class Xot_invk_wkr__basic__tst {
 	@Test public void Mismatch_tblw() {	// PURPOSE: handle {{{!}}; WP:Soviet Union
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("!", "|");
-		fxt.Test_parse_page_all_str("a\n{{{!}}\n|b\n|}", String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_all_str("a\n{{{!}}\n|b\n|}", StringUtl.ConcatLinesNlSkipLast
 			(	"a"
 			,	"<table>"
 			,	"  <tr>"
@@ -244,7 +247,7 @@ public class Xot_invk_wkr__basic__tst {
 	}
 	@Test public void Ws_eval_prm() {	// PURPOSE: skip ws in prm_idx; EX:it.w:Portale:Giochi_da_tavolo; it.w:Template:Alternate; DATE:2014-02-09
 		fxt.Init_defn_clear();
-		fxt.Init_defn_add("test_1", String_.Concat_lines_nl_skip_last
+		fxt.Init_defn_add("test_1", StringUtl.ConcatLinesNlSkipLast
 		(	"{{{ {{#expr: 1}} }}}"
 		));
 		fxt.Test_parse_tmpl_str("{{test_1|a}}", "a");
@@ -278,7 +281,7 @@ public class Xot_invk_wkr__basic__tst {
 			);
 	}
 	@Test public void Lnki_has_invk_end() {// PURPOSE: [[A|bcd}}]] should not break enclosing templates; EX.CM:Template:Protect
-		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_tmpl_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{{#switch:y"
 			,	"  |y=[[A|b}}]]"
 			,	"  |#default=n"
@@ -286,7 +289,7 @@ public class Xot_invk_wkr__basic__tst {
 			),	"[[A|b}}]]");		
 	}
 	@Test public void Lnki_has_prm_end() {// PURPOSE: [[A|bcd}}}]] should not break enclosing templates; EX.CM:Template:Protect
-		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_tmpl_str(StringUtl.ConcatLinesNlSkipLast
 			(	"{{#switch:y"
 			,	"  |y=[[A|b}}}]]"
 			,	"  |#default=n"
@@ -335,13 +338,13 @@ public class Xot_invk_wkr__basic__tst {
 //			fxt.Test_parse_tmpl_str("{{test_a}}"	, "a\n\nbc");
 //			fxt.Init_defn_clear();
 //		}
-	@Test  public void Nowiki_tblw() {	// PURPOSE: nowiki does not exclude sections with pipe; will cause tables to fail; EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung
-		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+	@Test public void Nowiki_tblw() {	// PURPOSE: nowiki does not exclude sections with pipe; will cause tables to fail; EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung
+		fxt.Test_parse_page_all_str(StringUtl.ConcatLinesNlSkipLast
 		(	"{|"
 		,	"|-"
 		,	"|<nowiki>{{ #time:M|Jan}}</nowiki>"
 		,	"|}"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		(	"<table>"
 		,	"  <tr>"	
 		,	"    <td>{{ #time:M|Jan}}"	
@@ -351,7 +354,7 @@ public class Xot_invk_wkr__basic__tst {
 		,	""
 		));
 	}
-	@Test  public void Template_plus_other_ns() {  // PURPOSE.fix: Template:Wikipedia:A was transcluding "Wikipedia:A" instead of "Template:Wikipedia:A"; DATE:2013-04-03
+	@Test public void Template_plus_other_ns() {  // PURPOSE.fix: Template:Wikipedia:A was transcluding "Wikipedia:A" instead of "Template:Wikipedia:A"; DATE:2013-04-03
 		fxt.Init_defn_clear();
 		fxt.Init_page_create("Template:Wikipedia:A"				, "B");
 		fxt.Test_parse_tmpl_str("{{Template:Wikipedia:A}}"		, "B");
@@ -365,14 +368,14 @@ public class Xot_invk_wkr__basic__tst {
 	@Test public void Ignore_hdr() {	// PURPOSE: hdr-like tkns inside tmpl should not be treated as "=" in tmpl_prm; EX: key_1\n==a==; EX:it.b:Wikibooks:Vetrina; DATE:2014-02-09
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{{key_1|null_key_1}}}");
-		fxt.Test_parse_tmpl_str(String_.Concat_lines_nl_skip_last		// == a === should be treated as hdr;
+		fxt.Test_parse_tmpl_str(StringUtl.ConcatLinesNlSkipLast        // == a === should be treated as hdr;
 		(	"{{test_1|key_1"
 		,	"== a =="
 		,	"}}"
 		)
 		,	"null_key_1"
 		);
-		fxt.Test_parse_tmpl_str(String_.Concat_lines_nl_skip_last		// = a = should not be treated as hdr; 
+		fxt.Test_parse_tmpl_str(StringUtl.ConcatLinesNlSkipLast        // = a = should not be treated as hdr;
 		(	"{{test_1|key_1"
 		,	"= a ="
 		,	"}}"
@@ -383,12 +386,12 @@ public class Xot_invk_wkr__basic__tst {
 	}
 	@Test public void Ignore_hdr_2() {	// PURPOSE: hdr-like logic did not work for "== \n"; PAGE:nl.q:Geert_Wilders; DATE:2014-06-05
 		fxt.Init_defn_clear();
-		fxt.Init_defn_add("Hdr_w_space", String_.Concat_lines_nl_skip_last
+		fxt.Init_defn_add("Hdr_w_space", StringUtl.ConcatLinesNlSkipLast
 		( "{{#if:{{{key|}}} | "
 		, "==={{{key}}}=== "	// NOTE " " after "==="
 		, "|}}"
 		));
-		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_tmpl_str(StringUtl.ConcatLinesNlSkipLast
 		( "{{Hdr_w_space"
 		, "|key=A"
 		, "}}"
@@ -399,7 +402,7 @@ public class Xot_invk_wkr__basic__tst {
 	@Test public void Ignore_hdr_3() {	// PURPOSE: tkn with multiple eq should have be treated as value, not header; PAGE:zh.w:Wikipedia:条目评选; DATE:2014-08-27
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{{key_1|null_key_1}}}");
-		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_tmpl_str(StringUtl.ConcatLinesNlSkipLast
 		( "{{test_1"
 		, "|key_1===A=="	// note that this is not "===A==", but "=","===A=="
 		, "}}"
@@ -410,7 +413,7 @@ public class Xot_invk_wkr__basic__tst {
 	@Test public void Ignore_hdr_4() {	// PURPOSE: variation of above; make sure 2nd "==" doesn't trigger another key; DATE:2014-08-27
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_1", "{{{key_1|null_key_1}}}");
-		fxt.Test_parse_page_tmpl_str(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse_page_tmpl_str(StringUtl.ConcatLinesNlSkipLast
 		( "{{test_1"
 		, "|key_1===A===B"	// = should be at "==A", not "==B"
 		, "}}"

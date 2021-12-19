@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.portal;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xoh_rtl_utl_tst {
 	@Before public void init() {fxt.Init();} private Xoh_rtl_utl_fxt fxt = new Xoh_rtl_utl_fxt();
@@ -27,7 +30,7 @@ public class Xoh_rtl_utl_tst {
 		fxt.Test_reverse_li("<ul><li>a</li></ul>", "<ul><li>a</li></ul>");
 	}
 	@Test public void Example() {
-		fxt.Test_reverse_li(String_.Concat_lines_nl_skip_last
+		fxt.Test_reverse_li(StringUtl.ConcatLinesNlSkipLast
 		( "<div>"
 		, "  <ul>"
 		, "    <li>a"
@@ -38,7 +41,7 @@ public class Xoh_rtl_utl_tst {
 		, "    </li>"
 		, "  </ul>"
 		, "</div>"
-		), String_.Concat_lines_nl_skip_last
+		), StringUtl.ConcatLinesNlSkipLast
 		( "<div>"
 		, "  <ul>"
 		, "    <li>c"
@@ -56,7 +59,7 @@ class Xoh_rtl_utl_fxt {
 	public void Init() {
 	}
 	public void Test_reverse_li(String raw, String expd) {
-		byte[] actl = Xoh_rtl_utl.Reverse_li(Bry_.new_u8(raw));
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
+		byte[] actl = Xoh_rtl_utl.Reverse_li(BryUtl.NewU8(raw));
+		GfoTstr.EqLines(expd, StringUtl.NewU8(actl));
 	}
 }

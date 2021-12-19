@@ -14,9 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.percentiles;
-import gplx.Int_;
-import gplx.Math_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.core.envs.SystemUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.MathUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Percentile_rng {
 	private long total_max; private int total_needed;
 	private int score_max, score_len_max;
@@ -36,7 +37,7 @@ public class Percentile_rng {
 	public void Select_init(int total_needed, int prv_score_bgn, int prv_score_len, int score_len_adj) {
 		this.total_needed = total_needed;
 		this.found_all = 0;
-		this.prv_time = gplx.core.envs.System_.Ticks();
+		this.prv_time = SystemUtl.Ticks();
 		int score_unit = Calc_score_unit(total_needed, total_max, score_max);
 		if (prv_score_bgn == Score_null) {
 			score_len = score_unit + (score_unit * score_len_adj);
@@ -59,7 +60,7 @@ public class Percentile_rng {
 			rng_multiplier = 4;
 		} else {
 			int total_remaining = total_needed - found_all;
-			rng_multiplier = total_remaining == 0 ? 1 : Math_.Ceil_as_int(total_remaining / found_rdr);
+			rng_multiplier = total_remaining == 0 ? 1 : MathUtl.CeilAsInt(total_remaining / found_rdr);
 		}
 
 		// calc new score_len
@@ -70,8 +71,8 @@ public class Percentile_rng {
 		Rng_len_(BoolUtl.N);
 
 		// update times
-		long new_time = gplx.core.envs.System_.Ticks();
-		this.elapsed = Int_.Subtract_long(new_time, prv_time);
+		long new_time = SystemUtl.Ticks();
+		this.elapsed = IntUtl.SubtractLong(new_time, prv_time);
 		prv_time = new_time;
 	}
 	private void Rng_len_(boolean first) {
@@ -86,8 +87,8 @@ public class Percentile_rng {
 		if (score_end < 0)
 			score_end = 0;
 	}
-	@gplx.Internal protected static int Calc_score_unit(int total_needed, long total_max, int score_max) {// TEST:
-		int rv = (int)Math_.Ceil(Math_.Div_safe_as_double(total_needed, Math_.Div_safe_as_double(total_max, score_max)));	// EX: 100 needed / (16 M / 1 M) -> 7 units to fill 100
+	public static int Calc_score_unit(int total_needed, long total_max, int score_max) {// TEST:
+		int rv = (int)MathUtl.Ceil(MathUtl.DivSafeAsDouble(total_needed, MathUtl.DivSafeAsDouble(total_max, score_max)));	// EX: 100 needed / (16 M / 1 M) -> 7 units to fill 100
 		if (rv > score_max) rv = score_max;			// never allow score_unit to be > score_max; occurs when total_needed > total_max; EX: 50 needed; 10 available
 		return rv;
 	}

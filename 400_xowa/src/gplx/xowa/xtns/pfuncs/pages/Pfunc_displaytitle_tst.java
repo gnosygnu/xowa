@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.pages;
-import gplx.String_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.Xop_fxt;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +53,6 @@ class Pfunc_displaytitle_fxt {
 	public void Test(String raw, String expd) {
 		fxt.Page().Html_data().Display_ttl_(null);	// TEST: always reset; needed for Strip_display which calls multiple times
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", "");
-		Tfds.Eq(expd, String_.new_u8(fxt.Page().Html_data().Display_ttl()));
+		GfoTstr.EqObj(expd, StringUtl.NewU8(fxt.Page().Html_data().Display_ttl()));
 	}
 }

@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wiki_cfgs;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Xoi_wiki_props_alias {
 	public int Id() {return id;} private int id;
 	public String Alias() {return alias;} private String alias;
 	public Xoi_wiki_props_alias Init_by_ctor(int id, String alias) {this.id = id; this.alias = alias; return this;}
 	public void Init_by_xml(gplx.langs.xmls.XmlNde ns_nde) {
-		this.id = Int_.Parse(ns_nde.Atrs().FetchValOr("id", "-1"));
-		this.alias = String_.Replace(String_.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
+		this.id = IntUtl.Parse(ns_nde.Atrs().FetchValOr("id", "-1"));
+		this.alias = StringUtl.Replace(StringUtl.Replace(ns_nde.Text_inner(), " ", "_"), "'", "''");
 	}
 }

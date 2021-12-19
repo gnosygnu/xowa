@@ -13,14 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*;
-import gplx.core.threads.*; import gplx.core.primitives.*;
+package gplx.xowa.htmls.modules.popups;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.wrappers.IntRef;
+import gplx.xowa.*;
+import gplx.core.threads.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.specials.*;
 class Load_popup_wkr implements Gfo_thread_wkr {
 	private Xow_popup_itm itm; private Xoae_page cur_page; private Xoa_url tmp_url;
-	private Hash_adp ns_allowed_regy; 
-	private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.New_zero();
-	public Load_popup_wkr(Xowe_wiki wiki, Xoae_page cur_page, Xow_popup_itm itm, Xoa_url tmp_url, Hash_adp ns_allowed_regy, Int_obj_ref ns_allowed_regy_key) {
+	private Hash_adp ns_allowed_regy;
+	private IntRef ns_allowed_regy_key = IntRef.NewZero();
+	public Load_popup_wkr(Xowe_wiki wiki, Xoae_page cur_page, Xow_popup_itm itm, Xoa_url tmp_url, Hash_adp ns_allowed_regy, IntRef ns_allowed_regy_key) {
 		this.wiki = wiki; this.cur_page = cur_page; this.itm = itm; this.tmp_url = tmp_url; this.ns_allowed_regy = ns_allowed_regy; this.ns_allowed_regy_key = ns_allowed_regy_key;
 	}
 	public String			Thread__name() {return "xowa.load_popup_wkr";}
@@ -47,7 +51,7 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 					if (!Xow_special_meta_.Itm__popup_history.Match_ttl(popup_ttl)) return;	// do not popup for special, unless popupHistory; DATE:2015-04-20
 					break;
 			}
-			if (ns_allowed_regy.Len() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return;
+			if (ns_allowed_regy.Len() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.ValSet(popup_ttl.Ns().Id()))) return;
 			itm.Init(popup_wiki.Domain_bry(), popup_ttl);
 			Xoae_page popup_page = popup_wiki.Data_mgr().Load_page_by_ttl(popup_ttl);
 			byte[] rv = popup_wiki.Html_mgr().Head_mgr().Popup_mgr().Parser().Parse(wiki, popup_page, cur_page.Tab_data().Tab(), itm);
@@ -55,7 +59,7 @@ class Load_popup_wkr implements Gfo_thread_wkr {
 			Rslt_(rv);
 		}
 		catch(Exception e) {
-			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", itm.Page_href(), Err_.Message_gplx_full(e));
+			app.Usr_dlg().Warn_many("", "", "failed to get popup: href=~{0} err=~{1}", itm.Page_href(), ErrUtl.ToStrFull(e));
 			Rslt_(null);
 		}
 		finally {

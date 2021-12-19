@@ -14,18 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cldrs;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Cldr_name_loader_tst {
 	private final Cldr_name_loader_fxt fxt = new Cldr_name_loader_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Load_file_is_null() {
+	@Test public void Load_file_is_null() {
 		fxt.Init__file("CldrNamesEn.json", "{}");
 		fxt.Test__load_file_is_empty(BoolUtl.N, "En");
 		fxt.Test__load_file_is_empty(BoolUtl.N, "en"); // NOTE: scrib will pass "en", but earlier implementation was trying to read CldrNamesen.json which failed on LNX; DATE:2018-10-14
 	}
-	@Test  public void Hyphen() {
+	@Test public void Hyphen() {
 		fxt.Init__file("CldrNamesEn_gb.json", "{}");
 		fxt.Test__load_file_is_empty(BoolUtl.N, "en-gb");
 		fxt.Test__load_file_is_empty(BoolUtl.Y, "en_gb");

@@ -14,21 +14,22 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.imaps;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg;
-import gplx.Gfo_usr_dlg_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.core.primitives.Byte_obj_val;
-import gplx.core.primitives.Double_obj_val;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.basics.wrappers.DoubleVal;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xoae_app;
@@ -68,7 +69,7 @@ public class Imap_parser {
 		this.app = wiki.Appe(); this.wiki = wiki; this.page_url = page.Url(); this.usr_dlg = usr_dlg;
 		this.wiki_ctx = wiki.Parser_mgr().Ctx();
 		imap_ctx = Xop_ctx.New__top(wiki, page.Ttl().Raw());	// NOTE: must update page ttl for Modules; PAGE:it.s:Patria_Esercito_Re/Indice_generale; DATE:2015-12-02
-		imap_root = app.Parser_mgr().Tkn_mkr().Root(Bry_.Empty);
+		imap_root = app.Parser_mgr().Tkn_mkr().Root(BryUtl.Empty);
 	}
 	public void Clear() {
 		this.itm_idx = 0;
@@ -87,11 +88,11 @@ public class Imap_parser {
 		itm_bgn = src_bgn; itm_end = src_bgn - 1;
 		while (true) {
 			if (itm_end == src_end) break;
-			itm_bgn = Bry_find_.Trim_fwd_space_tab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
+			itm_bgn = BryFind.TrimFwdSpaceTab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
 			if (itm_bgn == src_end) break;														// line is entirely ws and terminated by eos; EX: "\n  EOS"
-			itm_end = Bry_find_.Find_fwd_until(src, itm_bgn, src_end, AsciiByte.Nl);			// look for \n
-			if (itm_end == Bry_find_.Not_found) itm_end = src_end;								// no \n; make EOS = \n
-			itm_end = Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn);						// trim any ws at end
+			itm_end = BryFind.FindFwdUntil(src, itm_bgn, src_end, AsciiByte.Nl);			// look for \n
+			if (itm_end == BryFind.NotFound) itm_end = src_end;								// no \n; make EOS = \n
+			itm_end = BryFind.TrimBwdSpaceTab(src, itm_end, itm_bgn);						// trim any ws at end
 			if (itm_end - itm_bgn == 0) continue;												// line is entirely ws; continue;
 			byte b = src[itm_bgn];
 			if (b == AsciiByte.Hash) {
@@ -103,7 +104,7 @@ public class Imap_parser {
 					itm_end = Parse_img(rv, itm_bgn, itm_end, src_end);
 				else {
 					Object tid_obj = tid_trie.Match_at_w_b0(trv, b, src, itm_bgn, itm_end);
-					byte tid_val = tid_obj == null ? Imap_part_.Tid_invalid : ((Byte_obj_val)tid_obj).Val();
+					byte tid_val = tid_obj == null ? Imap_part_.Tid_invalid : ((ByteVal)tid_obj).Val();
 					int tid_end_pos = trv.Pos();
 					switch (tid_val) {
 						case Imap_part_.Tid_desc:			Parse_desc(tid_end_pos, itm_end); break;
@@ -115,16 +116,16 @@ public class Imap_parser {
 						case Imap_part_.Tid_invalid:			Parse_invalid(itm_bgn, itm_end); break;
 					}
 				}
-			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.To_str(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx_log(e));}
+			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.To_str(), BryUtl.MidSafe(src, itm_bgn, itm_end), ErrUtl.ToStrLog(e));}
 			++itm_idx;
 		}
 		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_part_shape[])shapes.ToAryAndClear(Imap_part_shape.class), (Imap_err[])errs.ToAryAndClear(Imap_err.class));
 	}
 	private void Parse_comment(int itm_bgn, int itm_end) {}	// noop comments; EX: "# comment\n"
-	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.To_str(), String_.new_u8(src, itm_bgn, itm_end));}
+	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.To_str(), StringUtl.NewU8(src, itm_bgn, itm_end));}
 	private boolean Parse_desc(int itm_bgn, int itm_end) {
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
-		byte tid_desc = Imap_desc_tid.Parse_to_tid(trie, src, Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn));
+		byte tid_desc = Imap_desc_tid.Parse_to_tid(trie, src, BryFind.TrimFwdSpaceTab(src, itm_bgn, itm_end), BryFind.TrimBwdSpaceTab(src, itm_end, itm_bgn));
 		switch (tid_desc) {
 			case Imap_desc_tid.Tid_null: return Add_err(BoolUtl.N, itm_bgn, itm_end, "imagemap_invalid_coord");
 			case Imap_desc_tid.Tid_none: return true;
@@ -139,8 +140,8 @@ public class Imap_parser {
 	}
 	private boolean Parse_shape(byte shape_tid, int tid_end_pos, int itm_bgn, int itm_end, int reqd_pts) {
 		boolean shape_is_poly = shape_tid == Imap_part_.Tid_shape_poly;
-		int pos = Bry_find_.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
-		int grp_end = Bry_find_.Find_fwd(src, AsciiByte.BrackBgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
+		int pos = BryFind.TrimFwdSpaceTab(src, tid_end_pos, itm_end);				// gobble any leading spaces
+		int grp_end = BryFind.FindFwd(src, AsciiByte.BrackBgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
 		if (grp_end == -1) {return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imap.parse:No valid link was found");}
 		int num_bgn = -1, comma_pos = -1, pts_len = 0;
 		while (true) {
@@ -154,18 +155,18 @@ public class Imap_parser {
 						byte[] num_bry 
 							=		comma_pos == -1			// if commas exist, treat first as decimal; echo(intval(round('1,2,3,4' * 1))) -> 1; PAGE:fr.w:Gouesnou; DATE:2014-08-12
 								||	comma_pos < num_bgn		// if comma is at start of number, ignore; EX: "poly ,1 2"; PAGE:en.w:Area_codes_281,_346,_713,_and_832; DATE:2015-07-31
-							? Bry_.Mid(src, num_bgn, pos)
-							: Bry_.Mid(src, num_bgn, comma_pos)
+							? BryLni.Mid(src, num_bgn, pos)
+							: BryLni.Mid(src, num_bgn, comma_pos)
 							;
-						double num = Bry_.To_double_or(num_bry, Double_.NaN);
-						if (Double_.IsNaN(num)) { 
+						double num = BryUtl.ToDoubleOr(num_bry, DoubleUtl.NaN);
+						if (DoubleUtl.IsNaN(num)) {
 							if (shape_is_poly)	// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"word1"; PAGE:uk.w:Стратосфера; DATE:2014-07-26
 								num = 0;
 							else
 								return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imagemap_invalid_coord");								
 						}
 						num_bgn = -1; comma_pos = -1;
-						pts.Add(Double_obj_val.new_(num));
+						pts.Add(DoubleVal.New(num));
 						++pts_len;
 						if (pts_len == reqd_pts) // NOTE: MW allows more points, but doesn't show them; EX: rect 1 2 3 4 5 -> rect 1 2 3 4; PAGE:en.w:Kilauea DATE:2014-07-28; EX:1 2 3 4 <!-- --> de.w:Wilhelm_Angele DATE:2014-10-30
 							last = true;
@@ -182,20 +183,20 @@ public class Imap_parser {
 		else {
 			if		(pts_len < reqd_pts)	return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imagemap_missing_coord");
 		}
-		pos = Bry_find_.Trim_fwd_space_tab(src, pos, itm_end);
-		Imap_part_shape shape_itm = new Imap_part_shape(shape_tid, (Double_obj_val[])pts.ToAryAndClear(Double_obj_val.class));
+		pos = BryFind.TrimFwdSpaceTab(src, pos, itm_end);
+		Imap_part_shape shape_itm = new Imap_part_shape(shape_tid, (DoubleVal[])pts.ToAryAndClear(DoubleVal.class));
 		Init_link_owner(shape_itm, src, pos, itm_end);
 		shapes.Add(shape_itm);
 		return true;
 	}
 	private boolean Add_err(boolean clear_pts, int bgn, int end, String err_key) {
-		usr_dlg.Warn_many("", "", err_key + ": page=~{0} line=~{1}", page_url.To_str(), String_.new_u8(src, bgn, end));
+		usr_dlg.Warn_many("", "", err_key + ": page=~{0} line=~{1}", page_url.To_str(), StringUtl.NewU8(src, bgn, end));
 		errs.Add(new Imap_err(itm_idx, err_key));
 		if (clear_pts) pts.Clear();
 		return false;
 	}
 	private void Init_link_owner(Imap_link_owner link_owner, byte[] src, int bgn, int end) {
-		byte[] link_tkn_src = Bry_.Mid(src, bgn, end);
+		byte[] link_tkn_src = BryLni.Mid(src, bgn, end);
 		Xop_tkn_itm link_tkn = Parse_link(link_tkn_src);
 		if (link_tkn == null) {Add_err(BoolUtl.N, bgn, end, "imap.invalid link_owner"); return;}	// exit early if invalid; PAGE:de.u:PPA/Raster/TK25/51/18/12/20; DATE:2015-02-02
 		link_tkn_src = imap_root.Data_mid();	// NOTE:must re-set link_tkn_src since link_tkn is expanded wikitext; i.e.: not "{{A}}" but "expanded"; PAGE:fr.w:Arrondissements_de_Lyon DATE:2014-08-12
@@ -217,9 +218,9 @@ public class Imap_parser {
 		return null;
 	}
 	private int Parse_img(Imap_map imap, int itm_bgn, int itm_end, int src_end) {
-		int img_bgn = Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end);	// trim ws
+		int img_bgn = BryFind.TrimFwdSpaceTab(src, itm_bgn, itm_end);	// trim ws
 		int img_end = Parse_img__get_img_end(itm_end, src_end);
-		imap_img_src = Bry_.Add(Xop_tkn_.Lnki_bgn, Bry_.Mid(src, img_bgn, img_end), Xop_tkn_.Lnki_end);
+		imap_img_src = BryUtl.Add(Xop_tkn_.Lnki_bgn, BryLni.Mid(src, img_bgn, img_end), Xop_tkn_.Lnki_end);
 		Xop_tkn_itm tkn_itm = Parse_link(imap_img_src);			// NOTE: need to parse before imap_root.Data_mid() below
 		imap_img_src = imap_root.Data_mid();					// need to re-set src to pick up templates; EX: <imagemap>File:A.png|thumb|{{Test_template}}\n</imagemap>; PAGE:en.w:Kilauea; DATE:2014-07-27
 		if (	tkn_itm == null									// no lnki or lnke
@@ -239,7 +240,7 @@ public class Imap_parser {
 		int rv = line_end;
 		int pos = line_end + 1;
 		while (pos < src_end) {
-			pos = Bry_find_.Trim_fwd_space_tab(src, pos, src_end);	// trim ws
+			pos = BryFind.TrimFwdSpaceTab(src, pos, src_end);	// trim ws
 			if (pos == src_end) break;
 			byte b = src[pos];
 			if (b == AsciiByte.Nl)	// new-line; end
@@ -248,8 +249,8 @@ public class Imap_parser {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
 					Xoa_app_.Usr_dlg().Log_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
-					int next_line = Bry_find_.Find_fwd(src, AsciiByte.Nl, pos);
-					if (next_line == Bry_find_.Not_found) next_line = src_end;
+					int next_line = BryFind.FindFwd(src, AsciiByte.Nl, pos);
+					if (next_line == BryFind.NotFound) next_line = src_end;
 					rv = next_line;
 					pos = rv + 1;
 				}

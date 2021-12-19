@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.types.basics.utls.StringUtl;
 class GfmlPragmaLxrSym implements GfmlPragma {
 	public String KeyOfPragma() {return "_lxr_sym";}
 	public void Exec(GfmlBldr bldr, GfmlNde pragmaNde) {
 		Compile(bldr, pragmaNde);
 	}
-	@gplx.Internal protected static GfmlLxr Compile(GfmlBldr bldr, GfmlNde ownerNde) {
+	public static GfmlLxr Compile(GfmlBldr bldr, GfmlNde ownerNde) {
 		String key = ownerNde.SubKeys().FetchDataOrFail("key");
 		String raw = ownerNde.SubKeys().FetchDataOrFail("raw");
 		String val = ownerNde.SubKeys().FetchDataOr("val", raw);
@@ -36,7 +37,7 @@ class GfmlPragmaLxrSym implements GfmlPragma {
 			GfmlTkn curTkn = lxr.CmdTkn();
 			if (raw == null) raw = curTkn.Raw();
 			if (val == null) val = curTkn.Val();
-			if (String_.Eq(cmdTkn.Raw(), GfmlTkn_.NullRaw)) cmd = bldr.Doc().CmdRegy().GetOrFail(curTkn.Cmd_of_Tkn().Key());
+			if (StringUtl.Eq(cmdTkn.Raw(), GfmlTkn_.NullRaw)) cmd = bldr.Doc().CmdRegy().GetOrFail(curTkn.Cmd_of_Tkn().Key());
 
 			GfmlTkn tkn = GfmlTkn_.singleton_(key, raw, val, cmd);
 			lxr.CmdTkn_set(tkn);

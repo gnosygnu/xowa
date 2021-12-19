@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.consoles; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
+package gplx.core.consoles;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Console_adp__mem implements Console_adp {
 	private final List_adp written = List_adp_.New();
 	private final Hash_adp ignored = Hash_adp_.New();
@@ -23,7 +30,7 @@ public class Console_adp__mem implements Console_adp {
 	public int Chars_per_line_max() {return 80;} public void Chars_per_line_max_(int v) {}
 	public Console_adp__mem Ignore_add(String s) {ignored.AddAsKeyAndVal(s); return this;}
 	public void Write_str(String s) {WriteString(s);}
-	public void Write_fmt_w_nl(String s, Object... args) {WriteString(String_.Format(s, args) + String_.CrLf);}
+	public void Write_fmt_w_nl(String s, Object... args) {WriteString(StringUtl.Format(s, args) + StringUtl.CrLf);}
 	public void Write_tmp(String s) {WriteString(s);}
 	public String Read_line(String msg) {return "";}
 	public char Read_key(String msg) {return '\0';}
@@ -34,7 +41,7 @@ public class Console_adp__mem implements Console_adp {
 	void WriteString(String s) {
 		if (ignored.Has(s)) return;
 		written.Add(s);
-		if (cancelVal != null && String_.Has(s, cancelVal)) throw Err_.new_wo_type("canceled", "cancel_val", s);
+		if (cancelVal != null && StringUtl.Has(s, cancelVal)) throw ErrUtl.NewArgs("canceled", "cancel_val", s);
 	}
 	String cancelVal;
 
@@ -43,7 +50,7 @@ public class Console_adp__mem implements Console_adp {
 		String[] actl = new String[written.Len()];
 		int actlLength = ArrayUtl.Len(actl);
 		for (int i = 0; i < actlLength; i++)
-			actl[i] = written.Get_at(i).toString();
-		Tfds.Eq_ary(actl, expd);
+			actl[i] = written.GetAt(i).toString();
+		GfoTstr.EqLines(actl, expd);
 	}
 }

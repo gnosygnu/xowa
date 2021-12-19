@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,16 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
-import gplx.objects.lists.CompareAble;
+package gplx.core.ios;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.lists.CompareAble;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 public abstract class IoItm_base implements Gfo_invk, CompareAble {
 	public abstract int TypeId(); public abstract boolean Type_dir(); public abstract boolean Type_fil();
-	public Io_url Url() {return ownerDir == null ? url : ownerDir.Url().GenSubFil(name); /*NOTE: must call .Url*/} Io_url url;		
+	public Io_url Url() {return ownerDir == null ? url : ownerDir.Url().GenSubFil(name); /*NOTE: must call .Url*/} Io_url url;
 	public IoItmDir OwnerDir() {return ownerDir;} IoItmDir ownerDir;
-	public void OwnerDir_set(IoItmDir v) {if (v == this) throw Err_.new_wo_type("dir cannot be its own owner", "url", v.url.Raw());
+	public void OwnerDir_set(IoItmDir v) {if (v == this) throw ErrUtl.NewArgs("dir cannot be its own owner", "url", v.url.Raw());
 		url = v == null && ownerDir != null
-						? ownerDir.url.GenSubFil(name)	// create url, since ownerDir will soon be null; NOTE: must call .url
-						: Io_url_.Empty;					// delete url, since ownerDir will be avail
+						? ownerDir.url.GenSubFil(name)    // create url, since ownerDir will soon be null; NOTE: must call .url
+						: Io_url_.Empty;                    // delete url, since ownerDir will be avail
 		ownerDir = v;
 	}
 	public String Name() {return name;} private String name;
@@ -38,15 +47,15 @@ public abstract class IoItm_base implements Gfo_invk, CompareAble {
 		props.Add(key, val);
 		return this;
 	}
-	public int compareTo(Object comp) {return url.compareTo(((IoItm_base)comp).url);}	// NOTE: needed for comic importer (sort done on IoItmHash which contains IoItm_base)
-//		public Object Data_get(String name)				{return Gfo_invk_.Invk_by_key(this, name);}
+	public int compareTo(Object comp) {return url.compareTo(((IoItm_base)comp).url);}    // NOTE: needed for comic importer (sort done on IoItmHash which contains IoItm_base)
+//        public Object Data_get(String name)                {return Gfo_invk_.Invk_by_key(this, name);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, IoItm_base_.Prop_Type))	return this.TypeId();
-		else if	(ctx.Match(k, IoItm_base_.Prop_Path))	return this.Url();
-		else if	(ctx.Match(k, IoItm_base_.Prop_Title))	return this.Url().NameOnly();	// needed for gfio script criteria;
-		else if (ctx.Match(k, IoItm_base_.Prop_Ext))	return this.Url().Ext();		// needed for gfio script criteria; EX: where "ext LIKE '.java'"
+		if        (ctx.Match(k, IoItm_base_.Prop_Type))    return this.TypeId();
+		else if    (ctx.Match(k, IoItm_base_.Prop_Path))    return this.Url();
+		else if    (ctx.Match(k, IoItm_base_.Prop_Title))    return this.Url().NameOnly();    // needed for gfio script criteria;
+		else if (ctx.Match(k, IoItm_base_.Prop_Ext))    return this.Url().Ext();        // needed for gfio script criteria; EX: where "ext LIKE '.java'"
 		else return Gfo_invk_.Rv_unhandled;
 	}
-	@gplx.Internal protected void ctor_IoItmBase_url(Io_url url) {this.url = url; this.name = url.NameAndExt();}
-	@gplx.Internal protected void ctor_IoItmBase_name(String name) {this.name = name;}
+	public void ctor_IoItmBase_url(Io_url url) {this.url = url; this.name = url.NameAndExt();}
+	public void ctor_IoItmBase_name(String name) {this.name = name;}
 }

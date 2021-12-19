@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.intls.ucas; import gplx.*; import gplx.core.*; import gplx.core.intls.*;
-import java.util.Locale;
+package gplx.core.intls.ucas;
 import com.ibm.icu.text.CollationKey;
 import com.ibm.icu.text.Collator;
 import com.ibm.icu.text.RuleBasedCollator;
+import gplx.types.errs.ErrUtl;
+import java.util.Locale;
 class Uca_collator__icu__4_8 implements Uca_collator {
 	private Collator collator;
 	public void	Init(String locale, boolean numeric_ordering) {
@@ -27,7 +28,7 @@ class Uca_collator__icu__4_8 implements Uca_collator {
 				// NOTE: delaying cast to RuleBasedCollator b/c Collator.getInstance may return a non-RuleBasedCollator and don't want cast to fail if numeric_ordering is false 
 				((RuleBasedCollator)collator).setNumericCollation(true);
 			}
-		} catch (Exception e) {throw Err_.new_wo_type("collator init failed", "err", Err_.Message_lang(e));}		
+		} catch (Exception e) {throw ErrUtl.NewArgs("collator init failed", "err", ErrUtl.Message(e));}
 	}
 	public byte[]	Get_sortkey(String s) {
 		CollationKey key = collator.getCollationKey(s);		

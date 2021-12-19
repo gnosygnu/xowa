@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.xndes;
-import gplx.Err_;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
-import gplx.Ordered_hash;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.parsers.Xop_parser_tid_;
 public class Xop_xnde_tag_regy {
 	private boolean init_needed = true;
@@ -30,7 +30,7 @@ public class Xop_xnde_tag_regy {
 	;
 	public Xop_xnde_tag Get_tag_in_tmpl(byte[] tag) {
 		if (init_needed) Init_by_hash(null); // TEST:
-		return (Xop_xnde_tag)trie_tmpl.Match_bgn(tag, 0, tag.length);
+		return (Xop_xnde_tag)trie_tmpl.MatchBgn(tag, 0, tag.length);
 	}
 	public Btrie_slim_mgr Get_trie(int i) {
 		if (init_needed) Init_by_hash(null); // TEST:
@@ -38,7 +38,7 @@ public class Xop_xnde_tag_regy {
 			case Xop_parser_tid_.Tid__defn: return trie_tmpl;
 			case Xop_parser_tid_.Tid__tmpl: return trie_wtxt_tmpl;
 			case Xop_parser_tid_.Tid__wtxt: return trie_wtxt_main;
-			default: throw Err_.new_unhandled(i);
+			default: throw ErrUtl.NewUnhandled(i);
 		}
 	}
 	public void Init_by_meta(Hash_adp_bry xtn_hash) {Init_by_hash(xtn_hash);}
@@ -68,18 +68,18 @@ public class Xop_xnde_tag_regy {
 		return 	xtn_hash != null					// xtn_hash is null during tests or when wiki is not in site_meta_db
 			&&	xnde.Xtn_mw()						// only apply filter to xtn_xnde, not basic_xnde; EX: <dynamicpagelist> not <table>
 			&&	!xtn_hash.Has(xnde.Name_bry())		// xtn_xnde is not in xtn_hash
-			&&	!Int_.In(xnde.Id(), Xop_xnde_tag_.Tid__translate, Xop_xnde_tag_.Tid__languages)	// always include <translate> and <languages>; TODO_OLD:filter out when extensions supported in site_cfg; DATE:2015-10-13
+			&&	!IntUtl.In(xnde.Id(), Xop_xnde_tag_.Tid__translate, Xop_xnde_tag_.Tid__languages)	// always include <translate> and <languages>; TODO_OLD:filter out when extensions supported in site_cfg; DATE:2015-10-13
 			;
 	}
 	private void Add_itm(Btrie_slim_mgr trie, Xop_xnde_tag xnde) {
 		// register in individual trie
-		trie.Add_obj(xnde.Name_bry(), xnde);
+		trie.AddObj(xnde.Name_bry(), xnde);
 		Ordered_hash langs = xnde.Langs();
 		if (langs != null) {						// tag has langs; EX: <section>; DATE:2014-07-18
 			int langs_len = langs.Len();
 			for (int i = 0; i < langs_len; ++i) {	// register each lang's tag; EX: "<Abschnitt>", "<trecho>"
-				Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.Get_at(i);
-				trie.Add_obj(lang.Name_bry(), xnde);
+				Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.GetAt(i);
+				trie.AddObj(lang.Name_bry(), xnde);
 			}
 		}
 	}

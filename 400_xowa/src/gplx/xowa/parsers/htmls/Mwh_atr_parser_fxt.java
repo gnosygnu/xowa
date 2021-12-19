@@ -14,29 +14,28 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.htmls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
 class Mwh_atr_parser_fxt {
-	private final Bry_bfr expd_bfr = Bry_bfr_.New(), actl_bfr = Bry_bfr_.New();
+	private final BryWtr expd_bfr = BryWtr.New(), actl_bfr = BryWtr.New();
 	private final Mwh_atr_parser parser = new Mwh_atr_parser();
 	private final Mwh_doc_wkr__atr_bldr wkr = new Mwh_doc_wkr__atr_bldr();
-	public Mwh_atr_itm Make_pair(String key, String val)	{return new Mwh_atr_itm(Bry_.Empty, BoolUtl.Y, BoolUtl.N, BoolUtl.Y,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(val)	, -1, -1);}
-	public Mwh_atr_itm Make_name(String key)				{return new Mwh_atr_itm(Bry_.Empty, BoolUtl.Y, BoolUtl.N, BoolUtl.N,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(key)	, -1, -1);}
-	public Mwh_atr_itm Make_fail(int bgn, int end)			{return new Mwh_atr_itm(Bry_.Empty, BoolUtl.N, BoolUtl.N, BoolUtl.N, bgn, end, -1, -1, null				, -1, -1, null				, -1, -1);}
+	public Mwh_atr_itm Make_pair(String key, String val)	{return new Mwh_atr_itm(BryUtl.Empty, BoolUtl.Y, BoolUtl.N, BoolUtl.Y,  -1,  -1, -1, -1, BryUtl.NewU8(key)	, -1, -1, BryUtl.NewU8(val)	, -1, -1);}
+	public Mwh_atr_itm Make_name(String key)				{return new Mwh_atr_itm(BryUtl.Empty, BoolUtl.Y, BoolUtl.N, BoolUtl.N,  -1,  -1, -1, -1, BryUtl.NewU8(key)	, -1, -1, BryUtl.NewU8(key)	, -1, -1);}
+	public Mwh_atr_itm Make_fail(int bgn, int end)			{return new Mwh_atr_itm(BryUtl.Empty, BoolUtl.N, BoolUtl.N, BoolUtl.N, bgn, end, -1, -1, null				, -1, -1, null				, -1, -1);}
 	public void Test_val_as_int(String raw, int expd) {
-		byte[] src = Bry_.new_u8(raw);
+		byte[] src = BryUtl.NewU8(raw);
 		Mwh_atr_itm itm = new Mwh_atr_itm(src, true, false, false, 0, src.length, -1, -1, null, 0, src.length, src, -1, -1);
-		Tfds.Eq_int(expd, itm.Val_as_int_or(-1));
+		GfoTstr.Eq(expd, itm.Val_as_int_or(-1));
 	}
 	public void Test_parse(String raw, Mwh_atr_itm... expd) {
 		Mwh_atr_itm[] actl = Exec_parse(raw);
 		Test_print(expd, actl);
 	}
 	private Mwh_atr_itm[] Exec_parse(String raw) {
-		byte[] bry = Bry_.new_u8(raw);
+		byte[] bry = BryUtl.NewU8(raw);
 		parser.Parse(wkr, -1, -1, bry, 0, bry.length);
 		return wkr.To_atr_ary();
 	}
@@ -47,9 +46,9 @@ class Mwh_atr_parser_fxt {
 		for (int i = 0; i < len; ++i) {
 			To_bfr(expd_bfr, i < expd_len ? expd_ary[i] : null, actl_bfr, i < actl_len ? actl_ary[i] : null);
 		}
-		Tfds.Eq_str_lines(expd_bfr.To_str_and_clear(), actl_bfr.To_str_and_clear());
+		GfoTstr.EqLines(expd_bfr.ToStrAndClear(), actl_bfr.ToStrAndClear());
 	}
-	private void To_bfr(Bry_bfr expd_bfr, Mwh_atr_itm expd_itm, Bry_bfr actl_bfr, Mwh_atr_itm actl_itm) {
+	private void To_bfr(BryWtr expd_bfr, Mwh_atr_itm expd_itm, BryWtr actl_bfr, Mwh_atr_itm actl_itm) {
 		To_bfr__main(expd_bfr, expd_itm);
 		To_bfr__main(actl_bfr, actl_itm);
 		To_bfr__head(expd_bfr, expd_itm);
@@ -59,21 +58,21 @@ class Mwh_atr_parser_fxt {
 			To_bfr__atr_rng(actl_bfr, actl_itm);
 		}
 	}
-	private void To_bfr__head(Bry_bfr bfr, Mwh_atr_itm itm) {
+	private void To_bfr__head(BryWtr bfr, Mwh_atr_itm itm) {
 		if (itm == null) return;
-		bfr.Add_str_a7("head:").Add_yn(itm.Valid()).Add_byte_semic().Add_yn(itm.Repeated()).Add_byte_semic().Add_yn(itm.Key_exists()).Add_byte_nl();			
+		bfr.AddStrA7("head:").AddYn(itm.Valid()).AddByteSemic().AddYn(itm.Repeated()).AddByteSemic().AddYn(itm.Key_exists()).AddByteNl();
 	}
-	private void To_bfr__main(Bry_bfr bfr, Mwh_atr_itm itm) {
+	private void To_bfr__main(BryWtr bfr, Mwh_atr_itm itm) {
 		if (itm == null) return;
 		if (itm.Valid()) {
-			bfr.Add_str_a7("key:").Add(itm.Key_bry()).Add_byte_nl();
-			bfr.Add_str_a7("val:").Add(itm.Val_as_bry()).Add_byte_nl();
+			bfr.AddStrA7("key:").Add(itm.Key_bry()).AddByteNl();
+			bfr.AddStrA7("val:").Add(itm.Val_as_bry()).AddByteNl();
 		}
 //			else
 //				To_bfr__atr_rng(bfr, itm);
 	}
-	private void To_bfr__atr_rng(Bry_bfr bfr, Mwh_atr_itm itm) {
+	private void To_bfr__atr_rng(BryWtr bfr, Mwh_atr_itm itm) {
 		if (itm == null) return;
-		bfr.Add_str_a7("rng:").Add_int_variable(itm.Atr_bgn()).Add_byte_semic().Add_int_variable(itm.Atr_end()).Add_byte_nl();
+		bfr.AddStrA7("rng:").AddIntVariable(itm.Atr_bgn()).AddByteSemic().AddIntVariable(itm.Atr_end()).AddByteNl();
 	}
 }

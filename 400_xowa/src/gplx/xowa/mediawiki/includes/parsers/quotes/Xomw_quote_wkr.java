@@ -14,35 +14,35 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.quotes;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.core.primitives.Int_list;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.IntList;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.XophpPreg_;
 import gplx.xowa.mediawiki.XophpString_;
 import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
 import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
 public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
-	private Bry_bfr tmp;
-	private final Int_list apos_pos_ary = new Int_list(32);
-	public Xomw_quote_wkr(Bry_bfr tmp) {
+	private BryWtr tmp;
+	private final IntList apos_pos_ary = new IntList(32);
+	public Xomw_quote_wkr(BryWtr tmp) {
 		this.tmp = tmp;
 	}
 	public void doAllQuotes(XomwParserCtx pctx, XomwParserBfr pbfr) {
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 		pbfr.Switch();
 
 		int cur = src_bgn;
 		int line_bgn = cur;
 		while (true) {
-			int line_end = Bry_find_.Find_fwd(src, AsciiByte.Nl, line_bgn, src_end);
-			if (line_end == Bry_find_.Not_found) {
+			int line_end = BryFind.FindFwd(src, AsciiByte.Nl, line_bgn, src_end);
+			if (line_end == BryFind.NotFound) {
 				line_end = src_end;
 			}
 			Do_quotes(bfr, BoolUtl.Y, src, line_bgn, line_end);
@@ -52,19 +52,19 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 				line_bgn = line_end + 1;	// 1=\n.length
 		}
 		// Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Nl, BoolUtl.N, this); // PORTED.SPLIT: $lines = StringUtils::explode( "\n", $text );
-		if (bfr.Match_end_byt(AsciiByte.Nl))
-			bfr.Del_by_1(); // REF.MW: $outtext = substr( $outtext, 0, -1 );
+		if (bfr.MatchEndByte(AsciiByte.Nl))
+			bfr.DelBy1(); // REF.MW: $outtext = substr( $outtext, 0, -1 );
 		apos_pos_ary.Clear();
 	}
-	public byte[] Do_quotes(Bry_bfr tmp, byte[] src) {
+	public byte[] Do_quotes(BryWtr tmp, byte[] src) {
 		boolean found = Do_quotes(tmp, BoolUtl.N, src, 0, src.length);
-		return found ? tmp.To_bry_and_clear() : src;
+		return found ? tmp.ToBryAndClear() : src;
 	}
-	private boolean Do_quotes(Bry_bfr bfr, boolean all_quotes_mode, byte[] src, int line_bgn, int line_end) {
+	private boolean Do_quotes(BryWtr bfr, boolean all_quotes_mode, byte[] src, int line_bgn, int line_end) {
 		byte[][] arr = XophpPreg_.split(apos_pos_ary, src, line_bgn, line_end, Wtxt__apos, BoolUtl.Y);	// PORTED.REGX: arr = preg_split("/(''+)/", text, -1, PREG_SPLIT_DELIM_CAPTURE);
 		if (arr == null) {
 			if (all_quotes_mode) {
-				bfr.Add_mid(src, line_bgn, line_end).Add_byte_nl();
+				bfr.AddMid(src, line_bgn, line_end).AddByteNl();
 			}
 			return false;
 		}
@@ -81,16 +81,16 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// be text, and the remaining three constitute mark-up for bold text.
 			// (bug 13227: ''''foo'''' turns into ' ''' foo ' ''')
 			if (apos_len == 4) {
-				arr[i - 1] = Bry_.Add(arr[i - 1], AsciiByte.AposBry);
-				arr[i] = Bry_.new_a7("'''");
+				arr[i - 1] = BryUtl.Add(arr[i - 1], AsciiByte.AposBry);
+				arr[i] = BryUtl.NewA7("'''");
 				apos_len = 3;
 			}
 			else if (apos_len > 5) {
 				// If there are more than 5 apostrophes in a row, assume they're all
 				// text except for the last 5.
 				// (bug 13227: ''''''foo'''''' turns into ' ''''' foo ' ''''')
-				arr[i - 1] = Bry_.Add(arr[i - 1], Bry_.Repeat(AsciiByte.Apos, apos_len - 5));
-				arr[i] = Bry_.new_a7("'''''");
+				arr[i - 1] = BryUtl.Add(arr[i - 1], BryUtl.Repeat(AsciiByte.Apos, apos_len - 5));
+				arr[i] = BryUtl.NewA7("'''''");
 				apos_len = 5;
 			}
 			// Count the number of occurrences of bold and italics mark-ups.
@@ -142,19 +142,19 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// If there is a single-letter word, use it!
 			if (prv_ends_w_word_1char > -1) {
 				arr[prv_ends_w_word_1char] = Wtxt__apos;
-				arr[prv_ends_w_word_1char - 1] = Bry_.Add(arr[prv_ends_w_word_1char - 1], AsciiByte.Apos);
+				arr[prv_ends_w_word_1char - 1] = BryUtl.Add(arr[prv_ends_w_word_1char - 1], AsciiByte.Apos);
 			}
 			else if (prv_ends_w_word_nchar > -1) {
 				// If not, but there's a multi-letter word, use that one.
 				arr[prv_ends_w_word_nchar] = Wtxt__apos;
-				arr[prv_ends_w_word_nchar - 1] = Bry_.Add(arr[prv_ends_w_word_nchar - 1], AsciiByte.Apos);
+				arr[prv_ends_w_word_nchar - 1] = BryUtl.Add(arr[prv_ends_w_word_nchar - 1], AsciiByte.Apos);
 			}
 			else if (prv_ends_w_space > -1) {
 				// ... otherwise use the first one that has neither.
 				// (notice that it is possible for all three to be -1 if, for example,
 				// there is only one pentuple-apostrophe in the line)
 				arr[prv_ends_w_space] = Wtxt__apos;
-				arr[prv_ends_w_space - 1] = Bry_.Add(arr[prv_ends_w_space - 1], AsciiByte.Apos);
+				arr[prv_ends_w_space - 1] = BryUtl.Add(arr[prv_ends_w_space - 1], AsciiByte.Apos);
 			}
 		}
 
@@ -173,67 +173,67 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 				int apos_len = arr[j].length;
 				if (apos_len == 2) {
 					if (state == State__i) {
-						bfr.Add_str_a7("</i>");
+						bfr.AddStrA7("</i>");
 						state = State__empty;
 					}
 					else if (state == State__bi) {
-						bfr.Add_str_a7("</i>");
+						bfr.AddStrA7("</i>");
 						state = State__b;
 					}
 					else if (state == State__ib) {
-						bfr.Add_str_a7("</b></i><b>");
+						bfr.AddStrA7("</b></i><b>");
 						state = State__b;
 					}
 					else if (state == State__both) {
-						bfr.Add_str_a7("<b><i>").Add_bfr_and_preserve(tmp).Add_str_a7("</i>");
+						bfr.AddStrA7("<b><i>").AddBfrAndPreserve(tmp).AddStrA7("</i>");
 						state = State__b;
 					}
 					else { // state can be 'b' or ''
-						bfr.Add_str_a7("<i>");
+						bfr.AddStrA7("<i>");
 						state = state == State__b ? State__bi : State__i;
 					}
 				}
 				else if (apos_len == 3) {
 					if (state == State__b) {
-						bfr.Add_str_a7("</b>");
+						bfr.AddStrA7("</b>");
 						state = State__empty;
 					}
 					else if (state == State__bi) {
-						bfr.Add_str_a7("</i></b><i>");
+						bfr.AddStrA7("</i></b><i>");
 						state = State__i;
 					}
 					else if (state == State__ib) {
-						bfr.Add_str_a7("</b>");
+						bfr.AddStrA7("</b>");
 						state = State__i;
 					}
 					else if (state == State__both) {
-						bfr.Add_str_a7("<i><b>").Add_bfr_and_preserve(tmp).Add_str_a7("</b>");
+						bfr.AddStrA7("<i><b>").AddBfrAndPreserve(tmp).AddStrA7("</b>");
 						state = State__i;
 					}
 					else { // state can be 'i' or ''
-						bfr.Add_str_a7("<b>");
+						bfr.AddStrA7("<b>");
 						state = state == State__i ? State__ib : State__b;
 					}
 				}
 				else if (apos_len == 5) {
 					if (state == State__b) {
-						bfr.Add_str_a7("</b><i>");
+						bfr.AddStrA7("</b><i>");
 						state = State__i;
 					}
 					else if (state == State__i) {
-						bfr.Add_str_a7("</i><b>");
+						bfr.AddStrA7("</i><b>");
 						state = State__b;
 					}
 					else if (state == State__bi) {
-						bfr.Add_str_a7("</i></b>");
+						bfr.AddStrA7("</i></b>");
 						state = State__empty;
 					}
 					else if (state == State__ib) {
-						bfr.Add_str_a7("</b></i>");
+						bfr.AddStrA7("</b></i>");
 						state = State__empty;
 					}
 					else if (state == State__both) {
-						bfr.Add_str_a7("<i><b>").Add_bfr_and_preserve(tmp).Add_str_a7("</b></i>");
+						bfr.AddStrA7("<i><b>").AddBfrAndPreserve(tmp).AddStrA7("</b></i>");
 						state = State__empty;
 					}
 					else { // (state == '')
@@ -245,19 +245,19 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 		}
 		// Now close all remaining tags.  Notice that the order is important.
 		if (state == State__b || state == State__ib) {
-			bfr.Add_str_a7("</b>");
+			bfr.AddStrA7("</b>");
 		}
 		if (state == State__i || state == State__bi || state == State__ib) {
-			bfr.Add_str_a7("</i>");
+			bfr.AddStrA7("</i>");
 		}
 		if (state == State__bi) {
-			bfr.Add_str_a7("</b>");
+			bfr.AddStrA7("</b>");
 		}
 		// There might be lonely ''''', so make sure we have a buffer
-		if (state == State__both && tmp.Len_gt_0()) {
-			bfr.Add_str_a7("<b><i>").Add_bfr_and_clear(tmp).Add_str_a7("</i></b>");
+		if (state == State__both && tmp.HasSome()) {
+			bfr.AddStrA7("<b><i>").AddBfrAndClear(tmp).AddStrA7("</i></b>");
 		}
-		bfr.Add_byte_nl();
+		bfr.AddByteNl();
 		return true;
 	}
 	private static final int 
@@ -268,7 +268,7 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 	, State__ib = 4
 	, State__both = 5
 	;
-	private static final byte[] Wtxt__apos = Bry_.new_a7("''");
+	private static final byte[] Wtxt__apos = BryUtl.NewA7("''");
 //		/**
 //		* Replace single quotes with HTML markup
 //		* @private

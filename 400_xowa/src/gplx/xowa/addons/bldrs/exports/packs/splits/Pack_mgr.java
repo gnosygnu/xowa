@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.splits; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.bldrs.exports.packs.splits;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.logs.Gfo_log_;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.xowa.*;
 import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.algos.*;
 import gplx.dbs.*;
@@ -27,7 +34,7 @@ class Pack_mgr {
 		// init
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		wiki.Init_assert();
-		String wiki_date = wiki.Props().Modified_latest().XtoStr_fmt("yyyyMMdd");
+		String wiki_date = wiki.Props().Modified_latest().ToStrFmt("yyyyMMdd");
 
 		// build pack list
 		Pack_list pack_list = Make_list(wiki, wiki_date, pack_size_max);
@@ -41,7 +48,7 @@ class Pack_mgr {
 
 		// loop packs and (a) zip raws; (b) create entry
 		Hash_algo hash_algo = Hash_algo_.New__md5();
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int len = pack_list.Len();
 		int task_id = bc_conn.Sys_mgr().Autonum_next("task_regy.task_id");
 		bc_db.Tbl__task_regy().Insert(task_id, task_id, len, wiki.Domain_str(), wiki.Domain_str());
@@ -51,7 +58,7 @@ class Pack_mgr {
 	}
 	private static Pack_list Make_list(Xow_wiki wiki, String wiki_date, long pack_size_max) {
 		// init; delete dir;
-		String wiki_abrv = String_.new_a7(wiki.Domain_itm().Abrv_wm());
+		String wiki_abrv = StringUtl.NewA7(wiki.Domain_itm().Abrv_wm());
 		Io_url wiki_dir = wiki.Fsys_mgr().Root_dir();
 		Io_url pack_root  = wiki_dir.GenSubDir_nest("tmp", "pack");
 		Io_url split_root = wiki_dir.GenSubDir_nest("tmp", "split");
@@ -75,7 +82,7 @@ class Pack_mgr {
 			if (	pack_size_new > pack_size_max 
 				||	i == len - 1) {
 				int pack_idx = rv.Len();
-				Io_url fil_1st = (Io_url)list.Get_at(0);
+				Io_url fil_1st = (Io_url)list.GetAt(0);
 				int ns_id = Split_file_tid_.Get_ns_by_url(fil_1st);
 				Io_url zip_url = pack_root.GenSubFil(Split_file_tid_.Make_file_name(wiki_abrv, wiki_date, rv.Len(), ns_id, ".zip"));
 				Pack_itm itm = new Pack_itm(pack_idx, Xobc_import_type.Tid__pack, zip_url, (Io_url[])list.ToAryAndClear(Io_url.class));
@@ -87,7 +94,7 @@ class Pack_mgr {
 		}
 		return rv;
 	}
-	private static void Make_pack(Xowe_wiki wiki, Io_url wiki_dir, byte[] wiki_abrv, String wiki_date, Xobc_data_db bc_db, Hash_algo hash_algo, Bry_bfr tmp_bfr, Pack_itm itm, int task_id) {
+	private static void Make_pack(Xowe_wiki wiki, Io_url wiki_dir, byte[] wiki_abrv, String wiki_date, Xobc_data_db bc_db, Hash_algo hash_algo, BryWtr tmp_bfr, Pack_itm itm, int task_id) {
 		// hash raws			
 		Io_url zip_url = itm.Zip_url();
 		Gfo_log_.Instance.Prog("hashing raw: " + zip_url.NameAndExt());
@@ -101,7 +108,7 @@ class Pack_mgr {
 			byte[] raw_md5 = null;
 			try {raw_md5 = Hash_algo_utl.Calc_hash_w_prog_as_bry(hash_algo, raw_stream, Gfo_prog_ui_.Noop);}
 			finally {raw_stream.Rls();}
-			tmp_bfr.Add(raw_md5).Add_byte_space().Add_byte(AsciiByte.Star).Add_str_a7(raw_url.NameAndExt()).Add_byte_nl();
+			tmp_bfr.Add(raw_md5).AddByteSpace().AddByte(AsciiByte.Star).AddStrA7(raw_url.NameAndExt()).AddByteNl();
 			raw_size += raw_stream.Len();
 		}
 		Io_mgr.Instance.SaveFilBfr(md5_url, tmp_bfr);

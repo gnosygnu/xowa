@@ -22,7 +22,7 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; impor
 *     * Leaf nodes, which contain the actual data
 *
 * This interface provides access to the tree structure and to the contents of array nodes,
-* but it does not provide access to the @gplx.Internal protected structure of leaf nodes. Access to leaf
+* but it does not provide access to the public structure of leaf nodes. Access to leaf
 * data is provided via two means:
 *     * PPFrame::expand(), which provides expanded text
 *     * The PPNode::split*() functions, which provide metadata about certain types of tree node

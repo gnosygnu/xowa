@@ -13,17 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.xowa.*;
-import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.parsers;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_cfg;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.tmpls.Xot_compile_data;
+import gplx.xowa.parsers.tmpls.Xot_fmtr;
+import gplx.xowa.parsers.tmpls.Xot_invk;
 public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public abstract byte Tkn_tid();
 	public Xop_tkn_grp Tkn_grp() {return grp == null ? this : grp;} private Xop_tkn_grp grp;	// NOTE: not sure about this; need to handle null refs when tkns are manipulated but not yet added to a group
 	public Xop_tkn_itm Tkn_ini_pos(boolean immutable, int bgn, int end) {this.immutable = immutable; this.src_bgn = bgn; this.src_end = end; return this;}
 	public Xop_tkn_itm Tkn_grp_(Xop_tkn_grp grp, int sub_idx) {this.grp = grp; this.tkn_sub_idx = sub_idx; return this;}
-	public Xop_tkn_itm Tkn_clone(Xop_ctx ctx, int bgn, int end) {throw Err_.new_wo_type("tkn_clone not implemented", "name", Xop_tkn_itm_.Tid__names[this.Tkn_tid()]);}
+	public Xop_tkn_itm Tkn_clone(Xop_ctx ctx, int bgn, int end) {throw ErrUtl.NewArgs("tkn_clone not implemented", "name", Xop_tkn_itm_.Tid__names[this.Tkn_tid()]);}
 	public boolean Tkn_immutable() {return immutable;} private boolean immutable;
 	public int Tkn_sub_idx() {return tkn_sub_idx;} private int tkn_sub_idx = -1;
 	public int Src_bgn() {return src_bgn;} private int src_bgn = -1;
@@ -31,8 +39,8 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public void Src_end_(int v) {src_end = v;}
 	public int Src_bgn_grp(Xop_tkn_grp grp, int sub_idx) {return immutable ? grp.Subs_src_bgn(sub_idx) : src_bgn;}
 	public int Src_end_grp(Xop_tkn_grp grp, int sub_idx) {return immutable ? grp.Subs_src_end(sub_idx) : src_end;}
-	public int Subs_src_bgn(int sub_idx) {if (subs_len == 0) throw Err_.new_wo_type("no subs available", "idx", sub_idx); return subs_pos_ary[ sub_idx * 2];}
-	public int Subs_src_end(int sub_idx) {if (subs_len == 0) throw Err_.new_wo_type("no subs available", "idx", sub_idx); return subs_pos_ary[(sub_idx * 2) + 1];}
+	public int Subs_src_bgn(int sub_idx) {if (subs_len == 0) throw ErrUtl.NewArgs("no subs available", "idx", sub_idx); return subs_pos_ary[ sub_idx * 2];}
+	public int Subs_src_end(int sub_idx) {if (subs_len == 0) throw ErrUtl.NewArgs("no subs available", "idx", sub_idx); return subs_pos_ary[(sub_idx * 2) + 1];}
 	public void Subs_src_pos_(int sub_idx, int bgn, int end) {
 		int pos_idx = sub_idx * 2;
 		int subs_pos_ary_len = subs_pos_ary.length;
@@ -64,7 +72,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		subs[subs_len] = sub;
 		sub.Tkn_grp_(this, subs_len);
 		subs_len = new_len;
-	}	private Xop_tkn_itm[] subs = Xop_tkn_itm_.Ary_empty; int subs_max; int[] subs_pos_ary = Int_ary_.Empty;
+	}	private Xop_tkn_itm[] subs = Xop_tkn_itm_.Ary_empty; int subs_max; int[] subs_pos_ary = IntAryUtl.Empty;
 	public void Subs_add_grp(Xop_tkn_itm sub, Xop_tkn_grp old_grp, int old_sub_idx) {
 		this.Subs_add(sub);	
 		if (sub.Tkn_immutable())
@@ -95,7 +103,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public void Subs_clear() {
 		subs_len = subs_max = 0;
 		subs = Xop_tkn_itm_.Ary_empty;
-		subs_pos_ary = Int_ary_.Empty;
+		subs_pos_ary = IntAryUtl.Empty;
 	}
 	public void Subs_move(Xop_tkn_itm tkn) {
 		int nxt_idx = tkn_sub_idx + 1, len = tkn.Subs_len();
@@ -147,7 +155,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		}
 		subs_len = 0;
 	}
-	public void Html__write(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src) {throw Err_.new_unimplemented();}
+	public void Html__write(BryWtr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src) {throw ErrUtl.NewUnimplemented();}
 	public void Clear() {
 		src_bgn = src_end = tkn_sub_idx = -1; ignore = false;  tmpl_static = false;
 		Subs_clear();
@@ -158,8 +166,8 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		for (int i = 0; i < subs_len; i++)
 			subs[i].Tmpl_compile(ctx, src, prep_data);
 	}	boolean tmpl_static = false;
-	public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {
-		if (tmpl_static) bfr.Add_mid(src, src_bgn, src_end);
+	public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, BryWtr bfr) {
+		if (tmpl_static) bfr.AddMid(src, src_bgn, src_end);
 		for (int i = 0; i < subs_len; i++)
 			subs[i].Tmpl_evaluate(ctx, src, caller, bfr);
 		return true;

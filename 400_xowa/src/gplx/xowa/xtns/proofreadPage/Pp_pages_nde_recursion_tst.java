@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.proofreadPage;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import org.junit.*;
 public class Pp_pages_nde_recursion_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
@@ -23,7 +25,7 @@ public class Pp_pages_nde_recursion_tst {
 	}
 	@Test public void Page() {	// PURPOSE: handle recursive calls on page; EX: fr.s:Page:NRF_19.djvu/19; DATE:2014-01-01
 		fxt.Init_page_create("Page:A/1", "<pages index=\"A\" from=1 to=1 />abc");	// NOTE: recursive call to self
-		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", String_.Concat_lines_nl
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 />", StringUtl.ConcatLinesNl
 		( "<p>abc&#32;"
 		, "</p>"
 		, ""

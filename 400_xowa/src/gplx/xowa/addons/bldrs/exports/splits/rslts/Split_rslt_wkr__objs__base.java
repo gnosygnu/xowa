@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*;
+package gplx.xowa.addons.bldrs.exports.splits.rslts;
 import gplx.dbs.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public abstract class Split_rslt_wkr__objs__base implements Split_rslt_wkr {
 	private Split_rslt_mgr rslt_mgr;
 	private Db_conn wkr_conn; private Db_stmt stmt; private int db_id;
@@ -40,7 +43,7 @@ public abstract class Split_rslt_wkr__objs__base implements Split_rslt_wkr {
 		for (DbmetaFldItm pkey_fld : pkey_flds )
 			meta_tbl.Flds().Add(pkey_fld);
 		wkr_conn.Meta_tbl_remake(meta_tbl);
-		this.stmt = wkr_conn.Stmt_insert(tbl_name, String_.Ary_add(String_.Ary("db_id"), pkey_names));
+		this.stmt = wkr_conn.Stmt_insert(tbl_name, StringUtl.AryAdd(StringUtl.Ary("db_id"), pkey_names));
 	}
 	public void On__nth__new(int db_id) {
 		this.db_id = db_id;
@@ -56,7 +59,7 @@ public abstract class Split_rslt_wkr__objs__base implements Split_rslt_wkr {
 		int len = pkey_list.Len();
 		for (int i = 0; i < len; ++i) {
 			stmt.Clear().Val_int("db_id", db_id);
-			Object[] pkey_objs = (Object[])pkey_list.Get_at(i);
+			Object[] pkey_objs = (Object[])pkey_list.GetAt(i);
 			for (int j = 0; j < pkey_flds_len; ++j) {
 				DbmetaFldItm pkey_fld = pkey_flds[j];
 				gplx.dbs.stmts.Db_stmt_arg_list.Fill_val(stmt, pkey_fld.Type().Tid(), pkey_fld.Name(), pkey_objs[j]);

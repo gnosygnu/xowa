@@ -13,12 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*;
+package gplx.xowa.addons.bldrs.exports.merges;
 import gplx.dbs.*; import gplx.dbs.bulks.*; import gplx.dbs.engines.sqlite.*;
+import gplx.libs.files.Io_mgr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 import gplx.xowa.addons.bldrs.exports.utls.*;
 class Merge_wkr_utl {
 	public static void Merge_by_sql(Db_bulk_prog prog_wkr, String msg, String tbl_name, DbmetaFldList flds, Db_conn src_conn, Merge2_trg_itm trg_db, int trg_db_id, boolean disable_synchronous) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		Db_conn trg_conn = trg_db.Conn();
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(trg_conn, new Db_attach_itm("src_db", src_conn));
 		Io_url trg_url = Sqlite_conn_info.To_url(trg_conn);
@@ -45,16 +49,16 @@ class Merge_wkr_utl {
 			rdr.Rls();
 		}
 	}
-	private static String Bld_insert_into(Bry_bfr bfr, String tbl_name, DbmetaFldList flds, int trg_db_id, boolean disable_synchronous) {
+	private static String Bld_insert_into(BryWtr bfr, String tbl_name, DbmetaFldList flds, int trg_db_id, boolean disable_synchronous) {
 		Split_tbl_.Bld_insert_by_select(bfr, tbl_name, flds);
 		if (trg_db_id != -1 && !disable_synchronous)
-			bfr.Add_str_u8_fmt("WHERE trg_db_id = {0}", trg_db_id);
-		return bfr.To_str_and_clear();
+			bfr.AddStrU8Fmt("WHERE trg_db_id = {0}", trg_db_id);
+		return bfr.ToStrAndClear();
 	}
 	public static void Merge_by_rows(Db_bulk_prog prog_wkr, String msg, String tbl_name, DbmetaFldList flds, Db_conn src_conn, Db_conn trg_conn, String[] order_bys) {
-		Db_stmt src_stmt = order_bys == String_.Ary_empty
+		Db_stmt src_stmt = order_bys == StringUtl.AryEmpty
 			? src_conn.Stmt_select_all(tbl_name, flds)
-			: src_conn.Stmt_select_order(tbl_name, flds, String_.Ary_empty, order_bys)
+			: src_conn.Stmt_select_order(tbl_name, flds, StringUtl.AryEmpty, order_bys)
 			;
 		Db_rdr src = src_stmt.Exec_select__rls_auto();
 		Db_stmt trg = trg_conn.Stmt_insert(tbl_name, flds);

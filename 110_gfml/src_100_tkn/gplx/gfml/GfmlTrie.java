@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.texts.*; /*CharStream*/
+package gplx.gfml;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.core.texts.CharStream;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class GfmlTrie {
 	public String[] Symbols() {
 		String[] rv = new String[symbols.Len()];
 		for (int i = 0; i < rv.length; i++)
-			rv[i] = String_.cast(symbols.Get_at(i));
+			rv[i] = StringUtl.Cast(symbols.GetAt(i));
 		return rv;
 	}	Ordered_hash symbols = Ordered_hash_.New();
 	public int LastMatchCount; // PERF: prop is faster than method
@@ -46,9 +50,9 @@ public class GfmlTrie {
 		return result;
 	}
 	public void Add(String symbol, Object data) {
-		if (data == null) throw Err_.new_wo_type("null objects cannot be registered", "symbol", symbol);
+		if (data == null) throw ErrUtl.NewArgs("null objects cannot be registered", "symbol", symbol);
 
-		char[] ary = String_.XtoCharAry(symbol); int lastIndex = ary.length - 1;
+		char[] ary = StringUtl.ToCharAry(symbol); int lastIndex = ary.length - 1;
 		IntObjHash_base curLink = rootLink;
 		for (int i = 0; i < ary.length; i++) {
 			char c = ary[i];
@@ -80,7 +84,7 @@ public class GfmlTrie {
 		symbols.AddIfDupeUseNth(symbol, symbol);
 	}
 	public void Del(String symbol) {
-		char[] ary = String_.XtoCharAry(symbol); int lastIndex = ary.length - 1;
+		char[] ary = StringUtl.ToCharAry(symbol); int lastIndex = ary.length - 1;
 		IntObjHash_base[] linkAry = new IntObjHash_base[ary.length];		//	first, get linkAry -- one link for each symbol
 		IntObjHash_base link = rootLink;
 		for (int i = 0; i < ary.length; i++) {

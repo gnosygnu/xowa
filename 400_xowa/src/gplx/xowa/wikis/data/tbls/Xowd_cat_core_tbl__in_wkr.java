@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*;
+package gplx.xowa.wikis.data.tbls;
 import gplx.dbs.*; import gplx.dbs.utls.*;
+import gplx.frameworks.objects.Cancelable;
+import gplx.types.basics.lists.Ordered_hash;
 class Xowd_cat_core_tbl__in_wkr extends Db_in_wkr__base {
 	private Xowd_cat_core_tbl tbl;
 	private String tbl_name, fld_cat_id; private DbmetaFldList flds; private Ordered_hash hash;
@@ -28,7 +30,7 @@ class Xowd_cat_core_tbl__in_wkr extends Db_in_wkr__base {
 	}
 	@Override protected void Fill_stmt(Db_stmt stmt, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
-			Xowd_page_itm itm = (Xowd_page_itm)hash.Get_at(i);
+			Xowd_page_itm itm = (Xowd_page_itm)hash.GetAt(i);
 			stmt.Crt_int(fld_cat_id, itm.Id());
 		}
 	}

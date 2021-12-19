@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls.encoders;
 import gplx.langs.htmls.entitys.Gfh_entity_trie;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfo_url_encoder_ {
 	public static Gfo_url_encoder_mkr New__html_id() { // EX: "<a id='a�b'>" -> "<a id='a.C3.A9b'>"
 		return new Gfo_url_encoder_mkr()

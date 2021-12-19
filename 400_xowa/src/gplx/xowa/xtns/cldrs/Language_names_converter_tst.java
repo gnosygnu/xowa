@@ -13,14 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.langs.phps.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.xtns.cldrs;
+import gplx.core.tests.Gftest;
+import gplx.langs.jsons.Json_doc;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import org.junit.Test;
 public class Language_names_converter_tst {
 	private final Language_names_converter_fxt fxt = new Language_names_converter_fxt();
-	@Test  public void Parse_fil() {
-		fxt.Exec__Parse(String_.Concat_lines_nl
+	@Test public void Parse_fil() {
+		fxt.Exec__Parse(StringUtl.ConcatLinesNl
 		( "/*ignore_bgn*/ $names = ["
 		, "  'aa' => 'Afar', # comment_a "
 		, "  'mic' => 'Mikmaq', # comment_m "
@@ -53,7 +56,7 @@ public class Language_names_converter_tst {
 		, "]"
 		));
 	}
-//		@Test  public void Convert() {
+//		@Test public void Convert() {
 //			Language_names_converter converter = new Language_names_converter();
 //			Language_name[] names = converter.Parse_fil(Io_url_.new_dir_("C:\\000\\100_bin\\200_server\\200_http\\100_apache\\100_v2.4\\htdocs\\mediawiki\\v1.29.1\\languages\\data\\Names.php"));
 //			String json = converter.To_json(names);
@@ -62,10 +65,10 @@ public class Language_names_converter_tst {
 }
 class Language_names_converter_fxt {
 	private final Language_names_converter converter = new Language_names_converter();
-	public Language_name Make__language_name(String code, String name, String note) {return new Language_name(Bry_.new_u8(code), Bry_.new_u8(name), Bry_.new_u8(note));}
+	public Language_name Make__language_name(String code, String name, String note) {return new Language_name(BryUtl.NewU8(code), BryUtl.NewU8(name), BryUtl.NewU8(note));}
 	public void Exec__Parse(String src, Language_name[] expd_names, String expd_json) {
-		Language_name[] actl = converter.Parse(Bry_.new_u8(src));
-		Gftest.Eq__ary(expd_names, actl);
-		Gftest.Eq__ary__lines(expd_json, converter.To_json(actl));
+		Language_name[] actl = converter.Parse(BryUtl.NewU8(src));
+		Gftest.EqAry(expd_names, actl);
+		GfoTstr.EqLines(expd_json, converter.To_json(actl));
 	}
 }

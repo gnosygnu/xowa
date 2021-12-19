@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.strings.*;
+package gplx.gfml;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class GfmlDocWtr_ {
-	public String To_str_and_clear()			{return sb.To_str_and_clear();}
+	public String To_str_and_clear()			{return sb.ToStrAndClear();}
 	public void BuildAttrib(GfmlAtr atr)	{Build(atr);}
 	public void BuildNode(GfmlNde nde)		{Build(nde);}
 	void Build(GfmlItm owner) {

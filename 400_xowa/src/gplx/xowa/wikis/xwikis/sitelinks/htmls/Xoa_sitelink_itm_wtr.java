@@ -13,21 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
-import gplx.core.brys.fmtrs.*;
+package gplx.xowa.wikis.xwikis.sitelinks.htmls;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
+import gplx.xowa.wikis.xwikis.sitelinks.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.domains.*;
-class Xoa_sitelink_itm_wtr implements gplx.core.brys.Bfr_arg {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+class Xoa_sitelink_itm_wtr implements BryBfrArg {
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(255);
 	private Xoa_app app; private Xoa_sitelink_grp grp;
 	public void Init_by_app(Xoa_app app) {this.app = app;}
 	public Xoa_sitelink_itm_wtr Fmt__init(Xoa_sitelink_grp grp) {this.grp = grp; return this;}
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		int len = grp.Len();
 		boolean tr_opened = false; int td_idx = 0;
 		for (int i = 0; i < len; ++i) {
 			Xoa_sitelink_itm itm = grp.Get_at(i);
-			if (Bry_.Len_eq_0(itm.Page_name())) continue;		// xwiki does not exist for current page
+			if (BryUtl.IsNullOrEmpty(itm.Page_name())) continue;		// xwiki does not exist for current page
 			if (td_idx == 0) {
 				bfr.Add(tr_bgn);
 				tr_opened = true;
@@ -36,9 +42,9 @@ class Xoa_sitelink_itm_wtr implements gplx.core.brys.Bfr_arg {
 			byte[] domain_bry = domain_itm.Domain_bry();
 			byte[] page_name = itm.Page_name();
 			byte[] url_protocol = app.Xwiki_mgr__missing(domain_bry) ? Xoh_href_.Bry__https : Xoh_href_.Bry__site;	// if wiki exists, "/site/", else "https://"
-			byte[] url_page = itm.Page_name_is_empty() ? Bry_.Empty : page_name;
-			byte[] url = Bry_.Add(url_protocol, domain_bry, Xoh_href_.Bry__wiki, url_page);
-			td_fmtr.Bld_bfr_many(bfr, domain_itm.Lang_actl_key(), domain_itm.Domain_bry(), itm.Name(), url, page_name, Xoa_sitelink_itm_wtr__badge.Bld_badge_class(tmp_bfr, itm.Page_badges()));
+			byte[] url_page = itm.Page_name_is_empty() ? BryUtl.Empty : page_name;
+			byte[] url = BryUtl.Add(url_protocol, domain_bry, Xoh_href_.Bry__wiki, url_page);
+			td_fmtr.BldToBfrMany(bfr, domain_itm.Lang_actl_key(), domain_itm.Domain_bry(), itm.Name(), url, page_name, Xoa_sitelink_itm_wtr__badge.Bld_badge_class(tmp_bfr, itm.Page_badges()));
 			++td_idx;
 			if (td_idx == td_max) {
 				tr_opened = false;
@@ -53,10 +59,10 @@ class Xoa_sitelink_itm_wtr implements gplx.core.brys.Bfr_arg {
 		}
 	}
 	private static final int td_max = 3;
-	private static final byte[] tr_bgn = Bry_.new_a7("\n    <tr>");
-	private static final byte[] td_nil = Bry_.new_a7("\n      <td/>");
-	private static final byte[] tr_end = Bry_.new_a7("\n    </tr>");
-	private static final Bry_fmtr td_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final byte[] tr_bgn = BryUtl.NewA7("\n    <tr>");
+	private static final byte[] td_nil = BryUtl.NewA7("\n      <td/>");
+	private static final byte[] tr_end = BryUtl.NewA7("\n    </tr>");
+	private static final BryFmtr td_fmtr = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	( ""
 	, "      <td style='width: 10%; padding-bottom: 5px;'>~{lang_name}</td><td style='width: 20%; padding-bottom: 5px;'><li~{page_badge}><a hreflang=\"~{lang_code}\" title=\"~{pagename_translation}\" href=\"~{lang_href}\">~{pagename_translation}</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 	), "lang_code", "lang_domain", "lang_name", "lang_href", "pagename_translation", "page_badge");

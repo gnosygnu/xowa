@@ -17,13 +17,13 @@ package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sq
 import org.junit.*;
 public class Sql_from_wtr_tst {
 	private final Sql_core_wtr_fxt fxt = new Sql_core_wtr_fxt();
-	@Test  public void Abrv() {
+	@Test public void Abrv() {
 		fxt.Test__qry(Db_qry_.select_().Cols_all_().From_("tbl", "t"), "SELECT * FROM tbl t");
 	}
-	@Test  public void Db() {
+	@Test public void Db() {
 		fxt.Test__qry(Db_qry_.select_().Cols_all_().From_("db", "tbl", "t"), "SELECT * FROM db.tbl t");
 	}
-	@Test  public void Join() {
+	@Test public void Join() {
 		fxt.Test__qry
 		( Db_qry_.select_().Cols_all_().From_("src", "s").Join_("trg", "t", Db_qry_.New_join__join("trg_id", "s", "src_id"))
 		, "SELECT * FROM src s INNER JOIN trg t ON s.src_id = t.trg_id");

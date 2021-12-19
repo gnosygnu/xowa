@@ -13,16 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
+package gplx.core.ios;
 import gplx.core.envs.*;
-import gplx.objects.lists.ComparerAble;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.ios.IoConsts;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.ComparerAble;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Io_sort {
-	public Io_sort Memory_max_(int v) {memory_max = v; return this;} private int memory_max = Io_mgr.Len_kb;
+	public Io_sort Memory_max_(int v) {memory_max = v; return this;} private int memory_max = IoConsts.LenKB;
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, Io_line_rdr_key_gen key_gen) {return Split(usr_dlg, src_fil_gen, trg_fil_gen, Io_sort_split_itm_sorter.Instance, key_gen);}
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, ComparerAble row_comparer, Io_line_rdr_key_gen key_gen) {
-		Io_line_rdr rdr = new Io_line_rdr(usr_dlg, src_fil_gen.Prv_urls()).Load_len_(4 * Io_mgr.Len_kb).Key_gen_(key_gen);	// NOTE: do not set load_len to memory_max; only want to load in increments
+		Io_line_rdr rdr = new Io_line_rdr(usr_dlg, src_fil_gen.Prv_urls()).Load_len_(4 * IoConsts.LenKB).Key_gen_(key_gen);	// NOTE: do not set load_len to memory_max; only want to load in increments
 		List_adp rv = List_adp_.New();
-		Bry_bfr bfr = Bry_bfr_.Reset(Const_bfr_max); int size_cur = 0;
+		BryWtr bfr = BryWtr.NewAndReset(Const_bfr_max); int size_cur = 0;
 		List_adp row_list = List_adp_.New();
 		while (true) {
 			boolean reading = rdr.Read_next(); 
@@ -35,17 +42,17 @@ public class Io_sort {
 				usr_dlg.Prog_one(GRP_KEY, "write", "writing chunk: ~{0}", trg_url.Raw());
 				Split_flush(trg_url, row_list, memory_max, bfr, rv);
 				row_list.ResizeBounds(16);	// MEM: resize bounds manually; note that each Flush-set may have widely disparately #of rows (EX: 1 row with a million pages vs. 1 million rows with 1 page)
-				size_new = size_row; System_.Garbage_collect();
+				size_new = size_row; SystemUtl.Garbage_collect();
 				if (!reading) break;
 			}
 			row_list.Add(new Io_sort_split_itm(rdr));
 			size_cur = size_new;
 		}
-		rdr.Rls(); bfr.Rls(); System_.Garbage_collect();
+		rdr.Rls(); bfr.Rls(); SystemUtl.Garbage_collect();
 		return (Io_url[])rv.ToAry(Io_url.class);
 	}
 	public void Merge(Gfo_usr_dlg usr_dlg, Io_url[] src_ary, ComparerAble comparer, Io_line_rdr_key_gen key_gen, Io_sort_cmd cmd) {
-		BinaryHeap_Io_line_rdr heap = load_(usr_dlg, src_ary, comparer, key_gen, memory_max); if (heap.Len() == 0) return;//throw Err_.new_wo_type(ArrayUtl.To_str(src_ary));
+		BinaryHeap_Io_line_rdr heap = load_(usr_dlg, src_ary, comparer, key_gen, memory_max); if (heap.Len() == 0) return;//throw ErrUtl.NewArgs(ArrayUtl.To_str(src_ary));
 		Io_line_rdr stream = null;
 		cmd.Sort_bgn();
 		while (true) {
@@ -64,13 +71,13 @@ public class Io_sort {
 		cmd.Sort_end();
 		heap.Rls();
 	}
-	private static void Split_flush(Io_url url, List_adp list, int max, Bry_bfr tmp, List_adp url_list) {
+	private static void Split_flush(Io_url url, List_adp list, int max, BryWtr tmp, List_adp url_list) {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			Io_sort_split_itm itm = (Io_sort_split_itm)list.Get_at(i);
+			Io_sort_split_itm itm = (Io_sort_split_itm)list.GetAt(i);
 			int add_len = itm.Row_end() - itm.Row_bgn();
 			if ((tmp.Len() + add_len) > Const_bfr_max) Io_mgr.Instance.AppendFilBfr(url, tmp);
-			tmp.Add_mid(itm.Bfr(), itm.Row_bgn(), itm.Row_end());
+			tmp.AddMid(itm.Bfr(), itm.Row_bgn(), itm.Row_end());
 			itm.Rls();
 		}
 		Io_mgr.Instance.AppendFilBfr(url, tmp);
@@ -92,6 +99,6 @@ public class Io_sort {
 		}
 		return rv;
 	}
-	static final int Const_bfr_max = Io_mgr.Len_mb;
+	static final int Const_bfr_max = IoConsts.LenMB;
 	static final String GRP_KEY = "xowa.bldr.io_sort";
 }

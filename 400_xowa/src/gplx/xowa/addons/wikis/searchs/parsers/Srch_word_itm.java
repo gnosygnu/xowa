@@ -22,5 +22,5 @@ public class Srch_word_itm {
 	public final byte[] Word;
 	public int Count() {return count;} private int count; 
 	public void Count_add_1_() {++count;}
-	@gplx.Internal protected Srch_word_itm Count_(int v) {this.count = v; return this;}
+	public Srch_word_itm Count_(int v) {this.count = v; return this;}
 }

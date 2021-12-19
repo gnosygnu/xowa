@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
-import gplx.core.gfo_regys.*;
+package gplx.langs.gfs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsg_;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.Gfo_invk_cmd_mgr_owner;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.dlgs.UsrDlg_;
+import gplx.libs.dlgs.UsrMsg;
+import gplx.core.gfo_regys.GfoMsgParser;
+import gplx.core.gfo_regys.GfoRegy;
+import gplx.core.gfo_regys.GfoRegyItm;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.StringUtl;
 public class GfsCore implements Gfo_invk {
 	public Gfo_invk Root() {return root;}
-	@gplx.Internal protected GfsRegy Root_as_regy() {return root;} GfsRegy root = GfsRegy.new_();
+	public GfsRegy Root_as_regy() {return root;} GfsRegy root = GfsRegy.new_();
 	public void Clear() {root.Clear();}
 	public GfoMsgParser MsgParser() {return msgParser;} public GfsCore MsgParser_(GfoMsgParser v) {msgParser = v; return this;} GfoMsgParser msgParser;
 	public void Del(String key) {root.Del(key);}
@@ -55,12 +69,12 @@ public class GfsCore implements Gfo_invk {
 	public Object ExecFile(Io_url url) {return ExecText(Io_mgr.Instance.LoadFilStr(url));}
 	public Object ExecFile_ignoreMissing(Gfo_invk root, Io_url url) {
 		if (!Io_mgr.Instance.ExistsFil(url)) return null; 
-		if (msgParser == null) throw Err_.new_wo_type("msgParser is null");
+		if (msgParser == null) throw ErrUtl.NewArgs("msgParser is null");
 		return Exec_bry(Io_mgr.Instance.LoadFilBry(url), root);
 	}
 	public Object Exec_bry(byte[] bry) {return Exec_bry(bry, root);}
 	public Object Exec_bry(byte[] bry, Gfo_invk root) {
-		GfoMsg rootMsg = msgParser.ParseToMsg(String_.new_u8(bry));
+		GfoMsg rootMsg = msgParser.ParseToMsg(StringUtl.NewU8(bry));
 		Object rv = null;
 		GfsCtx ctx = GfsCtx.new_();
 		for (int i = 0; i < rootMsg.Subs_count(); i++) {
@@ -70,19 +84,19 @@ public class GfsCore implements Gfo_invk {
 		return rv;
 	}
 	public Object ExecText(String text) {
-		if (msgParser == null) throw Err_.new_wo_type("msgParser is null");
+		if (msgParser == null) throw ErrUtl.NewArgs("msgParser is null");
 		GfsCtx ctx = GfsCtx.new_();
 		return ExecMany(ctx, msgParser.ParseToMsg(text));
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_ExecFil)) {
+		if        (ctx.Match(k, Invk_ExecFil)) {
 			Io_url url = m.ReadIoUrl("url");
 			if (ctx.Deny()) return this;
 			return ExecFile(url);
 		}
-		else	return Gfo_invk_.Rv_unhandled;
-//			return this;
-	}	public static final String Invk_ExecFil = "ExecFil";
-        public static final GfsCore Instance = new GfsCore();
-        @gplx.Internal protected static GfsCore new_() {return new GfsCore();}
+		else    return Gfo_invk_.Rv_unhandled;
+//            return this;
+	}   public static final String Invk_ExecFil = "ExecFil";
+		public static final GfsCore Instance = new GfsCore();
+		public static GfsCore new_() {return new GfsCore();}
 }

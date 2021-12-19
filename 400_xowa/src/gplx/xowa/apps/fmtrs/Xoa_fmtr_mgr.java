@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.ios.*;
+package gplx.xowa.apps.fmtrs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.xowa.*;
 public class Xoa_fmtr_mgr implements Gfo_invk {
 	public Xoa_fmtr_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -15,8 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.caches;
 
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
+import gplx.types.custom.brys.wtrs.BryWtr;
 import gplx.core.caches.Gfo_cache_mgr;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.parsers.tmpls.Xot_defn;
@@ -24,7 +23,7 @@ import gplx.xowa.wikis.nss.Xow_ns_case_;
 
 public class Xow_defn_cache {
 	private final Xol_lang_itm lang; // needed to lowercase names;
-	private final Bry_bfr upper_1st_bfr = Bry_bfr_.Reset(255);
+	private final BryWtr upper_1st_bfr = BryWtr.NewAndReset(255);
 	private final Gfo_cache_mgr cache = new Gfo_cache_mgr().Max_size_(64 * 1024 * 1024).Reduce_by_(32 * 1024 * 1024);
 	public Xow_defn_cache(Xol_lang_itm lang) {this.lang = lang;}
 	public Xot_defn Get_by_key(byte[] name) {return (Xot_defn)cache.Get_by_key(name);}

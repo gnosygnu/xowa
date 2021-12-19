@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs;
-import gplx.Bry_bfr;
-import gplx.Err_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.htmls.Xoh_page;
 import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
 import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
@@ -24,12 +24,12 @@ import gplx.xowa.htmls.core.hzips.Xoh_hzip_wkr;
 public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 	private Xoh_hzip_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private Xoh_page hpg;
-	public Bry_bfr Bfr() {return bfr;}
-	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
+	public BryWtr Bfr() {return bfr;}
+	public void On_page_bgn(BryWtr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = (Xoh_hzip_bfr)bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
 	}
 	public void On_page_end() {}
-	public void On_txt		(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}
+	public void On_txt		(int rng_bgn, int rng_end)									{bfr.AddMid(src, rng_bgn, rng_end);}
 	public void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data)	{hctx.Pool_mgr__hzip().Mw__escape().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();}
 	public void On_xnde		(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)		{hctx.Pool_mgr__hzip().Mw__xnde().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();}
 	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)		{hctx.Pool_mgr__hzip().Mw__lnki().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();}
@@ -44,7 +44,7 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 			case Xoh_hzip_dict_.Tid__img_bare:	wkr = hctx.Pool_mgr__hzip().Mw__img_bare(); break;
 			case Xoh_hzip_dict_.Tid__toc:		wkr = hctx.Pool_mgr__hzip().Mw__toc(); break;
 			case Xoh_hzip_dict_.Tid__media:		wkr = hctx.Pool_mgr__hzip().Mw__media(); break;
-			default:							throw Err_.new_unhandled(data.Tid());
+			default:							throw ErrUtl.NewUnhandled(data.Tid());
 		}
 		wkr.Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();
 		return true;

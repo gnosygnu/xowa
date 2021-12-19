@@ -15,26 +15,26 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Datetime_now;
-import gplx.Decimal_adp;
-import gplx.Decimal_adp_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_usr_dlg;
-import gplx.GfsCtx;
-import gplx.Int_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Math_;
-import gplx.String_;
-import gplx.core.envs.System_;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.commons.GfoDecimal;
+import gplx.types.commons.GfoDecimalUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.MathUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.core.envs.SystemUtl;
 import gplx.dbs.Db_conn;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xowe_wiki;
@@ -61,9 +61,9 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private Xow_db_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
 	private int[] ns_ary; private Xow_db_file[] db_ary;
 	private int ns_bgn = -1, db_bgn = -1, pg_bgn = -1;
-	private int ns_end = -1, db_end = -1, pg_end = Int_.Max_value;
-	private int commit_interval = 1000, progress_interval = 250, cleanup_interval = 2500, select_size = 10 * Io_mgr.Len_mb;
-	private int exec_count, exec_count_max = Int_.Max_value;
+	private int ns_end = -1, db_end = -1, pg_end = IntUtl.MaxValue;
+	private int commit_interval = 1000, progress_interval = 250, cleanup_interval = 2500, select_size = 10 * IoConsts.LenMB;
+	private int exec_count, exec_count_max = IntUtl.MaxValue;
 	private boolean reset_db = false, exit_after_commit = false, exit_now = false;
 	private boolean load_tmpls;
 	private Xob_dump_bmk_mgr bmk_mgr = new Xob_dump_bmk_mgr();
@@ -76,7 +76,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	public void Cmd_bgn(Xob_bldr bldr) {
 		parser = wiki.Parser_mgr().Main();
 		ctx = wiki.Parser_mgr().Ctx();
-		root = ctx.Tkn_mkr().Root(Bry_.Empty);
+		root = ctx.Tkn_mkr().Root(BryUtl.Empty);
 		wiki.Init_assert();	// NOTE: must init wiki for db_mgr_as_sql
 
 		// assert by calling Db_mgr_as_sql
@@ -112,9 +112,9 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	private long time_bgn;
 	public void Cmd_run() {Exec_ns_ary();}
 	private void Exec_ns_ary() {
-		if (pg_bgn == Int_.Max_value) return;
+		if (pg_bgn == IntUtl.MaxValue) return;
 		if (load_tmpls) Xob_dump_mgr_base_.Load_all_tmpls(usr_dlg, wiki, page_src);
-		time_bgn = System_.Ticks();
+		time_bgn = SystemUtl.Ticks();
 		Xob_dump_bmk dump_bmk = new Xob_dump_bmk();
 		rate_mgr.Init();
 		int ns_ary_len = ns_ary.length;
@@ -131,7 +131,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			if (ns_id == ns_end) exit_now = true;		// ns_end set; exit
 			if (exit_now) break;						// exit_now b/c of pg_bgn, db_bgn or something else
 		}
-		Exec_commit(dump_bmk.Ns_id(), dump_bmk.Db_id(), dump_bmk.Pg_id(), Bry_.Empty);
+		Exec_commit(dump_bmk.Ns_id(), dump_bmk.Db_id(), dump_bmk.Pg_id(), BryUtl.Empty);
 	}
 	private void Exec_db_ary(int ns_ord, Xob_dump_bmk dump_bmk, int ns_id) {
 		int db_ary_len = db_ary.length;
@@ -163,7 +163,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			}
 			usr_dlg.Prog_many("", "", "fetched pages: ~{0}", pages_len);
 			for (int i = 0; i < pages_len; i++) {
-				Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
+				Xowd_page_itm page = (Xowd_page_itm)pages.GetAt(i);
 				dump_bmk.Pg_id_(pg_id);
 				Exec_pg_itm(ns_ord, ns, db_id, page);
 				if (	pg_id		>= pg_end
@@ -180,12 +180,12 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			if ((exec_count % progress_interval) == 0)
 				usr_dlg.Prog_many("", "", "parsing: ns=~{0} db=~{1} pg=~{2} count=~{3} time=~{4} rate=~{5} ttl=~{6}"
 					, ns.Id(), db_id, page.Id(), exec_count
-					, System_.Ticks__elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), String_.new_u8(page.Ttl_page_db()));
+					, SystemUtl.Ticks__elapsed_in_sec(time_bgn), rate_mgr.Rate_as_str(), StringUtl.NewU8(page.Ttl_page_db()));
 			ctx.Clear_all();
 			byte[] page_src = page.Text();
 			if (page_src != null)	// some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
 				Exec_pg_itm_hook(ns_ord, ns, page, page_src);
-			ctx.Wiki().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
+			ctx.Wiki().Utl__bfr_mkr().ClearFailCheck();	// make sure all bfrs are released
 			++exec_count;
 			rate_mgr.Increment();
 			if ((exec_count % poll_interval) == 0)
@@ -196,14 +196,14 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 				Free();
 		}
 		catch (Exception exc) {
-			bldr.Usr_dlg().Warn_many("", "", "parse failed: wiki=~{0} ttl=~{1} err=~{2}", wiki.Domain_str(), page.Ttl_full_db(), Err_.Message_gplx_log(exc));
+			bldr.Usr_dlg().Warn_many("", "", "parse failed: wiki=~{0} ttl=~{1} err=~{2}", wiki.Domain_str(), page.Ttl_full_db(), ErrUtl.ToStrLog(exc));
 			ctx.Wiki().Utl__bfr_mkr().Clear();
 			this.Free();
 		}
 	}
 	public abstract void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm page, byte[] page_text);
 	private void Exec_commit(int ns_id, int db_id, int pg_id, byte[] ttl) {
-		usr_dlg.Prog_many("", "", "committing: ns=~{0} db=~{1} pg=~{2} count=~{3} ttl=~{4}", ns_id, db_id, pg_id, exec_count, String_.new_u8(ttl));
+		usr_dlg.Prog_many("", "", "committing: ns=~{0} db=~{1} pg=~{2} count=~{3} ttl=~{4}", ns_id, db_id, pg_id, exec_count, StringUtl.NewU8(ttl));
 		Exec_commit_hook();
 		bmk_mgr.Save(ns_id, db_id, pg_id);
 		if (exit_after_commit) exit_now = true;
@@ -214,11 +214,11 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 	public void Cmd_term() {}		
 	public void Cmd_end() {
 		if (!exit_now)
-			pg_bgn = Int_.Max_value;
-		Exec_commit(-1, -1, -1, Bry_.Empty);
+			pg_bgn = IntUtl.MaxValue;
+		Exec_commit(-1, -1, -1, BryUtl.Empty);
 		Exec_end_hook();
 		Free();
-		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, Decimal_adp_.divide_safe_(exec_count, System_.Ticks__elapsed_in_sec(time_bgn)).To_str("#,###.000"));
+		usr_dlg.Note_many("", "", "done: ~{0} ~{1}", exec_count, GfoDecimalUtl.NewByDivideSafe(exec_count, SystemUtl.Ticks__elapsed_in_sec(time_bgn)).ToStr("#,###.000"));
 	}
 	private void Free() {
 		Xowe_wiki_.Rls_mem(wiki, true);
@@ -229,7 +229,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		else if	(ctx.Match(k, Invk_progress_interval_))		progress_interval = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_rate_interval_))			rate_mgr.Reset_interval_(m.ReadInt("v"));
 		else if	(ctx.Match(k, Invk_cleanup_interval_))		cleanup_interval = m.ReadInt("v");
-		else if	(ctx.Match(k, Invk_select_size_))			select_size = m.ReadInt("v") * Io_mgr.Len_mb;
+		else if	(ctx.Match(k, Invk_select_size_))			select_size = m.ReadInt("v") * IoConsts.LenMB;
 		else if	(ctx.Match(k, Invk_ns_bgn_))				{ns_bgn = m.ReadInt("v"); Notify_restoring("ns", ns_bgn);}
 		else if	(ctx.Match(k, Invk_db_bgn_))				{db_bgn = m.ReadInt("v"); Notify_restoring("db", db_bgn);}
 		else if	(ctx.Match(k, Invk_pg_bgn_))				{pg_bgn = m.ReadInt("v"); Notify_restoring("pg", pg_bgn);}
@@ -242,7 +242,7 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 		else if	(ctx.Match(k, Invk_exec_count_max_))		exec_count_max = m.ReadInt("v");
 		else if	(ctx.Match(k, Invk_exit_now_))				exit_now = m.ReadYn("v");
 		else if	(ctx.Match(k, Invk_exit_after_commit_))		exit_after_commit = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk__manual_now_))			Datetime_now.Manual_and_freeze_(m.ReadDate("v"));
+		else if	(ctx.Match(k, Invk__manual_now_))			GfoDateNow.ManualSetAndFreeze(m.ReadDate("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -274,7 +274,7 @@ class Xob_dump_mgr_base_ {
 			if (page_count == 0) break;	// no more pages in db;
 			Xowd_page_itm page = null;
 			for (int i = 0; i < page_count; i++) {
-				page = (Xowd_page_itm)pages.Get_at(i);
+				page = (Xowd_page_itm)pages.GetAt(i);
 				Xot_defn_tmpl defn = new Xot_defn_tmpl();
 				defn.Init_by_new(ns_tmpl, ns_tmpl.Gen_ttl(page.Ttl_page_db()), page.Text(), null, false);	// NOTE: passing null, false; will be overriden later when Parse is called
 				defn_cache.Add(defn, ns_tmpl.Case_match());
@@ -302,7 +302,7 @@ class Xob_dump_mgr_base_ {
 	}
 }
 class Xob_dump_bmk_mgr {
-	private Bry_bfr save_bfr = Bry_bfr_.Reset(1024);
+	private BryWtr save_bfr = BryWtr.NewAndReset(1024);
 	public Io_url Cfg_url() {return cfg_url;} public Xob_dump_bmk_mgr Cfg_url_(Io_url v) {cfg_url = v; return this;} private Io_url cfg_url;
 	public void Reset() {Io_mgr.Instance.DeleteFil(cfg_url);}
 	public void Load(Xoae_app app, Xob_dump_mgr_base dump_mgr) {
@@ -314,23 +314,23 @@ class Xob_dump_bmk_mgr {
 		Save_itm(save_bfr, Xob_dump_mgr_base.Invk_pg_bgn_, pg_id);
 		Io_mgr.Instance.SaveFilBfr(cfg_url, save_bfr);
 	}
-	private void Save_itm(Bry_bfr save_bfr, String key, int val) {
+	private void Save_itm(BryWtr save_bfr, String key, int val) {
 		String fmt = "{0}('{1}');\n";
-		String str = String_.Format(fmt, key, val);
-		save_bfr.Add_str_u8(str);
+		String str = StringUtl.Format(fmt, key, val);
+		save_bfr.AddStrU8(str);
 	}
 }
 class Xob_rate_mgr {
 	private long time_bgn;
 	private int item_len;
-	private Bry_bfr save_bfr = Bry_bfr_.Reset(255);
+	private BryWtr save_bfr = BryWtr.NewAndReset(255);
 	public int Reset_interval() {return reset_interval;} public Xob_rate_mgr Reset_interval_(int v) {reset_interval = v; return this;} private int reset_interval = 10000;
 	public Io_url Log_file_url() {return log_file;} public Xob_rate_mgr Log_file_(Io_url v) {log_file = v; return this;} private Io_url log_file;
-	public void Init() {time_bgn = System_.Ticks();}
+	public void Init() {time_bgn = SystemUtl.Ticks();}
 	public void Increment() {
 		++item_len;
 		if (item_len % reset_interval == 0) {
-			long time_end = System_.Ticks();
+			long time_end = SystemUtl.Ticks();
 			Save(item_len, time_bgn, time_end);
 			time_bgn = time_end;
 			item_len = 0;
@@ -338,18 +338,18 @@ class Xob_rate_mgr {
 	}
 	private void Save(int count, long bgn, long end) {
 		int dif = (int)(end - bgn) / 1000;
-		Decimal_adp rate = Decimal_adp_.divide_safe_(count, dif);
+		GfoDecimal rate = GfoDecimalUtl.NewByDivideSafe(count, dif);
 		save_bfr
-			.Add_str_a7(rate.To_str("#,##0.000")).Add_byte_pipe()
-			.Add_int_variable(count).Add_byte_pipe()
-			.Add_int_variable(dif).Add_byte_nl()
+			.AddStrA7(rate.ToStr("#,##0.000")).AddBytePipe()
+			.AddIntVariable(count).AddBytePipe()
+			.AddIntVariable(dif).AddByteNl()
 			;
-		Io_mgr.Instance.AppendFilByt(log_file, save_bfr.To_bry_and_clear());
+		Io_mgr.Instance.AppendFilByt(log_file, save_bfr.ToBryAndClear());
 	}
-	public String Rate_as_str() {return Int_.To_str(Rate());}
+	public String Rate_as_str() {return IntUtl.ToStr(Rate());}
 	public int Rate() {
-		int elapsed = System_.Ticks__elapsed_in_sec(time_bgn);
-		return Math_.Div_safe_as_int(item_len, elapsed);
+		int elapsed = SystemUtl.Ticks__elapsed_in_sec(time_bgn);
+		return MathUtl.DivSafeAsInt(item_len, elapsed);
 	}
 }
 class Xob_dump_bmk {

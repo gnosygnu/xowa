@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 
 package gplx.xowa.mediawiki.vendor.wikimedia.Assert.src;
 
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.XophpRuntimeException;
 
 // MW.SRC:1.33.1
@@ -29,5 +29,5 @@ import gplx.xowa.mediawiki.XophpRuntimeException;
  * @copyright Wikimedia Deutschland e.V.
  */
 public class XomwPreconditionException extends XophpRuntimeException implements XomwAssertionException {
-    public XomwPreconditionException(String fmt, Object... args) {super(String_.Format(fmt, args));}
+    public XomwPreconditionException(String fmt, Object... args) {super(StringUtl.Format(fmt, args));}
 }

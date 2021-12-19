@@ -13,14 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.langs.dsvs;
+import gplx.types.errs.Err;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Dsv_fld_parser_ {
 	public static final Dsv_fld_parser Bry_parser = Dsv_fld_parser_bry.Instance;
 	public static final Dsv_fld_parser Int_parser = Dsv_fld_parser_int.Instance;
 	public static final Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(AsciiByte.Pipe);
 	public static Err err_fld_unhandled(Dsv_fld_parser parser, Dsv_wkr_base wkr, int fld_idx, byte[] src, int bgn, int end) {
-		throw Err_.new_wo_type("fld unhandled", "parser", Type_.Name_by_obj(parser), "wkr", Type_.Name_by_obj(wkr), "fld_idx", fld_idx, "val", String_.new_u8(src, bgn, end)).Trace_ignore_add_1_();
+		throw ErrUtl.NewArgs("fld unhandled", "parser", ClassUtl.NameByObj(parser), "wkr", ClassUtl.NameByObj(wkr), "fld_idx", fld_idx, "val", StringUtl.NewU8(src, bgn, end));
 	}
 }
 class Dsv_fld_parser_line implements Dsv_fld_parser {
@@ -34,8 +40,8 @@ class Dsv_fld_parser_line implements Dsv_fld_parser {
 			boolean pos_is_last = pos == src_len;				
 			byte b = pos_is_last ? row_dlm : src[pos];
 			if		(b == comment_dlm) {
-				pos = Bry_find_.Find_fwd_until(src, pos, src_len, row_dlm);
-				if (pos == Bry_find_.Not_found)
+				pos = BryFind.FindFwdUntil(src, pos, src_len, row_dlm);
+				if (pos == BryFind.NotFound)
 					pos = src_len;
 			}
 			else if (b == row_dlm) {
@@ -91,14 +97,14 @@ class Dsv_fld_parser_int implements Dsv_fld_parser {
 			boolean pos_is_last = pos == src_len;				
 			byte b = pos_is_last ? row_dlm : src[pos];
 			if		(b == fld_dlm) {
-				boolean pass = wkr.Write_int(parser, fld_idx, pos, Bry_.To_int_or(src, fld_bgn, pos, -1));
+				boolean pass = wkr.Write_int(parser, fld_idx, pos, BryUtl.ToIntOr(src, fld_bgn, pos, -1));
 				if (!pass) throw Dsv_fld_parser_.err_fld_unhandled(this, wkr, fld_idx, src, fld_bgn, pos);
 				int rv = pos + 1; // fld_dlm is always 1 byte
 				parser.Update_by_fld(rv);
 				return rv;
 			}
 			else if (b == row_dlm) {
-				boolean pass = wkr.Write_int(parser, fld_idx, pos, Bry_.To_int_or(src, fld_bgn, pos, -1));
+				boolean pass = wkr.Write_int(parser, fld_idx, pos, BryUtl.ToIntOr(src, fld_bgn, pos, -1));
 				if (!pass) throw Dsv_fld_parser_.err_fld_unhandled(this, wkr, fld_idx, src, fld_bgn, pos);
 				wkr.Commit_itm(parser, pos);
 				int rv = pos + 1; // row_dlm is always 1 byte

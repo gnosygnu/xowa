@@ -13,20 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.scripts; import gplx.*; import gplx.core.*;
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
-import javax.script.SimpleBindings;
-import javax.script.Bindings;
-import javax.script.Compilable;
-import javax.script.CompiledScript;
-
+package gplx.core.scripts;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.CoerceLuaToJava;
+import javax.script.Compilable;
+import javax.script.CompiledScript;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.SimpleBindings;
 public class Gfo_script_engine__luaj implements Gfo_script_engine {
 	private final ScriptEngine engine;
 	private final List_adp script_list = List_adp_.New();
@@ -47,7 +49,7 @@ public class Gfo_script_engine__luaj implements Gfo_script_engine {
 			compiled.eval(bindings);
 		}
 		catch (Exception e) {
-			Warn("failed to load_script; url=~{0} err=~{1}", url, Err_.Message_lang(e));
+			Warn("failed to load_script; url=~{0} err=~{1}", url, ErrUtl.Message(e));
 		}
 	}
 	public void Put_object(String key, Object val) {
@@ -56,19 +58,19 @@ public class Gfo_script_engine__luaj implements Gfo_script_engine {
 	public Object Get_object(String obj_name) {
 		try {return engine.get(obj_name);}
 		catch (Exception e) {
-			Warn("failed to get object; obj_name=~{0} err=~{1}", obj_name, Err_.Message_lang(e));
+			Warn("failed to get object; obj_name=~{0} err=~{1}", obj_name, ErrUtl.Message(e));
 			return null;
 		}
 	}
 	public Object Eval_script(String script) {
 		try {return engine.eval(script);}
 		catch (Exception e) {
-			Warn("", "", "failed to eval; script=~{0} err=~{1}", script, Err_.Message_lang(e));
+			Warn("", "", "failed to eval; script=~{0} err=~{1}", script, ErrUtl.Message(e));
 			return null;
 		}
 	}
 	public Object Invoke_method(Object obj, String func, Object... args) {
-		throw Err_.new_unimplemented_w_msg("luaj does not support invocable interface");	// NOTE: cannot support with Get_object, b/c Get_object needs obj_name, and only "obj" exists
+		throw ErrUtl.NewUnimplemented("luaj does not support invocable interface");	// NOTE: cannot support with Get_object, b/c Get_object needs obj_name, and only "obj" exists
 	}
 	public Object Invoke_function(String func, Object... args) {
 		try {
@@ -78,12 +80,12 @@ public class Gfo_script_engine__luaj implements Gfo_script_engine {
 			return CoerceLuaToJava.coerce(rv, Object.class);
 		}
 		catch (Exception e) {
-			Gfo_script_engine__luaj.Warn("", "", "failed to invoke method; method=~{0} err=~{1}", func, Err_.Message_lang(e));
+			Gfo_script_engine__luaj.Warn("", "", "failed to invoke method; method=~{0} err=~{1}", func, ErrUtl.Message(e));
 			return null;
 		}
 	}
 	public static void Warn(String fmt, Object... args) {
-		String msg = Gfo_usr_dlg_.Instance.Warn_many("", "", fmt, args);		
+		String msg = Gfo_usr_dlg_.Instance.Warn_many("", "", fmt, args);
 		System.out.println(msg);
 	}
 }

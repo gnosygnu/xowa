@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.config;
 
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.includes.XomwGlobals;
 
@@ -50,7 +50,7 @@ public class XomwGlobalVarConfig implements XomwConfig {
 	 */
 	public Object get(String name) {
 		if (!this.has(name)) {
-			throw new XomwConfigException(String_.Format("get: undefined option: '{0}'", name));
+			throw new XomwConfigException(StringUtl.Format("get: undefined option: '{0}'", name));
 		}
 		return this.getWithPrefix(this.prefix, name);
 	}

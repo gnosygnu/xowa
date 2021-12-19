@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.kvs; import gplx.*;
+package gplx.xowa.apps.kvs;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
 public class Xoa_kv_hash {
 	private final Hash_adp hash = Hash_adp_.New();
 	public Object Get_or_make(Xoa_kv_itm itm) {

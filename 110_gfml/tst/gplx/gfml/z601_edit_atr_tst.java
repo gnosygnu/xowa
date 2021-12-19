@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import org.junit.*;
 public class z601_edit_atr_tst {
 	GfmlUpdateFx fx = GfmlUpdateFx.new_();
@@ -116,11 +119,11 @@ class GfmlUpdateFx {
 	public GfmlUpdateFx tst_(String expd) {
 		GfmlDoc actlDoc = GfmlDataNde.new_any_eol_(raw).Doc();
 		for (int i = 0; i < cmds.Len(); i++) {
-			GfmlUpdateCmd cmd = (GfmlUpdateCmd)cmds.Get_at(i);
+			GfmlUpdateCmd cmd = (GfmlUpdateCmd)cmds.GetAt(i);
 			cmd.Exec(actlDoc);
 		}
-		String actl = actlDoc.RootNde().To_str();
-		Tfds.Eq(expd, actl);
+		String actl = actlDoc.RootNde().ToStr();
+		GfoTstr.EqObj(expd, actl);
 		cmds.Clear();
 		return this;
 	}

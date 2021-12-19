@@ -13,18 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.slabs; import gplx.*;
-import gplx.core.brys.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.addons.wikis.searchs.searchers.slabs;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Srch_slab_itm_parser {
 	private final List_adp itm_list = List_adp_.New();
-	private final Bry_rdr rdr = new Bry_rdr();
+	private final BryRdr rdr = new BryRdr();
 	public Srch_slab_itm[] Parse(byte[] raw) {	// EX: en.wikipedia.org|41|60;en.wiktionary.org|21|40;
-		rdr.Init_by_src(raw);
-		while (!rdr.Pos_is_eos()) {
-			byte[] wiki = rdr.Read_bry_to(AsciiByte.Pipe);
-			int bgn = rdr.Read_int_to(AsciiByte.Pipe);
-			int end = rdr.Read_int_to(AsciiByte.Semic);
+		rdr.InitBySrc(raw);
+		while (!rdr.PosIsEos()) {
+			byte[] wiki = rdr.ReadBryTo(AsciiByte.Pipe);
+			int bgn = rdr.ReadIntTo(AsciiByte.Pipe);
+			int end = rdr.ReadIntTo(AsciiByte.Semic);
 			Srch_slab_itm itm = new Srch_slab_itm(wiki, bgn, end);
 			itm_list.Add(itm);
 		}

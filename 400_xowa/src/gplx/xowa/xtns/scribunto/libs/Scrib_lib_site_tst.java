@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_site_tst {
 	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
@@ -21,25 +27,25 @@ public class Scrib_lib_site_tst {
 		fxt.Clear();
 		lib = fxt.Core().Lib_site().Init();
 	}
-	@Test  public void GetNsIndex__valid() {
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Help"), 12);
+	@Test public void GetNsIndex__valid() {
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_getNsIndex, ObjectUtl.Ary("Help"), 12);
 	}
-	@Test  public void GetNsIndex__invalid() {
-		fxt.Test__proc__objs__empty(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Helpx"));	// unknown ns; return empty String
+	@Test public void GetNsIndex__invalid() {
+		fxt.Test__proc__objs__empty(lib, Scrib_lib_site.Invk_getNsIndex, ObjectUtl.Ary("Helpx"));	// unknown ns; return empty String
 	}
-	@Test  public void UsersInGroup() {
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_usersInGroup, Object_.Ary("sysop"), 0); // SELECT * FROM user_groups;
+	@Test public void UsersInGroup() {
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_usersInGroup, ObjectUtl.Ary("sysop"), 0); // SELECT * FROM user_groups;
 	}
-	@Test  public void PagesInCategory__invalid() {
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A|"), 0);
+	@Test public void PagesInCategory__invalid() {
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, ObjectUtl.Ary("A|"), 0);
 	}
-	@Test  public void PagesInCategory__exists() {
-		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A"), 3, 2, 1);
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "pages")	, 3);
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "subcats")	, 2);
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "files")	, 1);
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "all")		, 6);
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "*")	, String_.Concat_lines_nl_skip_last
+	@Test public void PagesInCategory__exists() {
+		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(BryUtl.NewA7("A"), 3, 2, 1);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, ObjectUtl.Ary("A", "pages")	, 3);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, ObjectUtl.Ary("A", "subcats")	, 2);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, ObjectUtl.Ary("A", "files")	, 1);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, ObjectUtl.Ary("A", "all")		, 6);
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_pagesInCategory, ObjectUtl.Ary("A", "*")	, StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  all=6"
 		, "  pages=3"
@@ -47,20 +53,20 @@ public class Scrib_lib_site_tst {
 		, "  files=1"
 		));
 	}
-	@Test  public void PagesInCategory__spaces() { // replace space with underlines (and possibly other normalizations) else TOC will not show; PAGE:en.wiktionary.org/wiki/Category:English_conjunctions; ISSUE#:557; DATE:2019-08-22
-		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A_b"), 3, 2, 1);
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A b", "pages")	, 3);
+	@Test public void PagesInCategory__spaces() { // replace space with underlines (and possibly other normalizations) else TOC will not show; PAGE:en.wiktionary.org/wiki/Category:English_conjunctions; ISSUE#:557; DATE:2019-08-22
+		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(BryUtl.NewA7("A_b"), 3, 2, 1);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, ObjectUtl.Ary("A b", "pages")	, 3);
 	}
-	@Test  public void PagesInNs() {
-		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
+	@Test public void PagesInNs() {
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInNs, ObjectUtl.Ary("12"), 0);
 	}
-	@Test  public void InterwikiMap() {
+	@Test public void InterwikiMap() {
 		String key = "scribunto.interwikimap.en.wikipedia.org.!local";
-		fxt.Core().Wiki().Cache_mgr().Misc_cache().Add(key, new Keyval[] 
-		{ Keyval_.new_("en"
+		fxt.Core().Wiki().Cache_mgr().Misc_cache().Add(key, new KeyVal[]
+		{ KeyVal.NewStr("en"
 		, Scrib_lib_site.InterwikiMap_itm("en.wikipedia.org", false, "https://en.wikipedia.org/wiki/$1"))
 		});
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_interwikiMap, Object_.Ary("!local"), String_.Concat_lines_nl_skip_last
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_interwikiMap, ObjectUtl.Ary("!local"), StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  en="
 		, "    prefix=en.wikipedia.org"
@@ -72,7 +78,7 @@ public class Scrib_lib_site_tst {
 		, "    isExtraLanguageLink=false"
 		));
 	}
-	@Test  public void Init_lib_site() {
+	@Test public void Init_lib_site() {
 		Xowe_wiki wiki = fxt.Core().Wiki();
 		wiki.Stats().Load_by_db(1, 2, 3, 4, 5, 6, 7, 8);
 		wiki.Ns_mgr()
@@ -84,7 +90,7 @@ public class Scrib_lib_site_tst {
 			.Add_new(Xow_ns_.Tid__talk			, Xow_ns_.Key__talk)
 			.Init_w_defaults()
 			;
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_init_site_for_wiki, Object_.Ary_empty, String_.Concat_lines_nl_skip_last
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_site.Invk_init_site_for_wiki, ObjectUtl.AryEmpty, StringUtl.ConcatLinesNlSkipLast
 		( "1="
 		, "  siteName=Wikipedia"
 		, "  server=//en.wikipedia.org"
@@ -187,8 +193,8 @@ public class Scrib_lib_site_tst {
 		, "    admins=8"
 		));
 	}
-//		@Test  public void LoadSiteStats() {	// deprecated by Scribunto; DATE:2013-04-12
+//		@Test public void LoadSiteStats() {	// deprecated by Scribunto; DATE:2013-04-12
 //			fxt.Parser_fxt().Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7);
-//			fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_site.Invk_loadSiteStats, Object_.Ary_empty, "1;2;3;4;5;6;7");
+//			fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_site.Invk_loadSiteStats, ObjectUtl.Ary_empty, "1;2;3;4;5;6;7");
 //		}
 }	

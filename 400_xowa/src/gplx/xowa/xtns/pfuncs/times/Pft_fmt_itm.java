@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDate;
+import gplx.xowa.*;
 import gplx.xowa.langs.*;
 public interface Pft_fmt_itm {
 	int TypeId();
-	void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr);
+	void Fmt(BryWtr bfr, Xowe_wiki wiki, Xol_lang_itm lang, GfoDate date, Pft_func_formatdate_bldr bldr);
 }

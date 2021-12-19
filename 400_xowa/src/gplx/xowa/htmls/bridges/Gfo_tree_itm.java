@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.bridges; import gplx.*;
+package gplx.xowa.htmls.bridges;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 interface Gfo_tree_itm {
 	int Tid();
 }
@@ -39,5 +41,5 @@ class Gfo_tree_list implements Gfo_tree_itm {
 	public Gfo_tree_data Add_data(String key, Object val, int val_tid)	{Gfo_tree_data rv = new Gfo_tree_data(key, val, val_tid);	this.Add(key, rv); return rv;}
 	public Gfo_tree_list Add_list(String key)							{Gfo_tree_list rv = new Gfo_tree_list(key);					this.Add(key, rv); return rv;}
 	private void Add(String key, Gfo_tree_itm itm) {list.Add(key, itm);}
-	public Gfo_tree_itm Get_at(int i) {return (Gfo_tree_itm)list.Get_at(i);}
+	public Gfo_tree_itm Get_at(int i) {return (Gfo_tree_itm)list.GetAt(i);}
 }

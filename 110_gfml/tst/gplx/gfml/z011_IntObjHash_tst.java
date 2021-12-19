@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class z011_IntObjHash_tst {
 	@Before public void setup() {
@@ -56,6 +57,6 @@ public class z011_IntObjHash_tst {
 		tst_Fetch(17, null);	// works
 		tst_Fetch(16, null);	// used to fail
 	}
-	void tst_Fetch(int key, Object expd) {Tfds.Eq(expd, hash.Get_by(key));}
-	void tst_Count(int expd) {Tfds.Eq(expd, hash.Count());}
+	void tst_Fetch(int key, Object expd) {GfoTstr.EqObj(expd, hash.Get_by(key));}
+	void tst_Count(int expd) {GfoTstr.EqObj(expd, hash.Count());}
 }

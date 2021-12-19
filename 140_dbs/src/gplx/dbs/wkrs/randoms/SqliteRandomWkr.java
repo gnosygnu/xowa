@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.wkrs.randoms;
 
-import gplx.RandomAdp_;
+import gplx.types.commons.GfoRandomUtl;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_rdr_;
@@ -39,7 +39,7 @@ public class SqliteRandomWkr implements SqlRandomWkr {
             int rowCount = rdr.Read_int("RowCount");
 
             // get random row
-            int random = RandomAdp_.new_().Next(rowCount);
+            int random = GfoRandomUtl.New().Next(rowCount);
             rdr = conn.Stmt_sql("SELECT " + select + " " + sqlSuffix + " LIMIT 1 OFFSET " + random).Exec_select__rls_auto();
 
             // return result

@@ -14,42 +14,42 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.math;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_fmt;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.itms.BryFmt;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import gplx.core.envs.Op_sys;
 import gplx.core.security.algos.Hash_algo;
 import gplx.core.security.algos.Hash_algo_;
 import gplx.core.security.algos.Hash_algo_utl;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.Gfh_tag_;
-import gplx.langs.htmls.entitys.Gfh_entity_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.langs.html.HtmlEntityCodes;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
 class Xomath_html_wtr {
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(512);
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(512);
 	private final Xomath_subst_mgr subst_mgr = new Xomath_subst_mgr();
 	private final Hash_algo md5_wkr = Hash_algo_.New__md5();
-	private final Bry_fmt
-	  fmt__latex	= Bry_fmt.Auto( "<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>")
-	, fmt__mathjax	= Bry_fmt.Auto("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>");
-	private static final byte[] Bry__math = Bry_.new_a7("math");
+	private final BryFmt
+	  fmt__latex	= BryFmt.Auto( "<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>")
+	, fmt__mathjax	= BryFmt.Auto("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>");
+	private static final byte[] Bry__math = BryUtl.NewA7("math");
 
-	public void Write(Bry_bfr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src, boolean is_latex, boolean enabled) {
+	public void Write(BryWtr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src, boolean is_latex, boolean enabled) {
 		// init vars
 		Xoae_app app = ctx.App(); Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Page();
 
 		// get math_bry; also, escape if mathjax and check js
-		byte[] math_bry = Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
+		byte[] math_bry = BryLni.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn());
 		if (!is_latex) math_bry = Escape_for_mathjax(tmp_bfr, math_bry);
 		byte[] scrubbed_js = wiki.Html_mgr().Js_cleaner().Clean(wiki, math_bry, 0, math_bry.length);
 		if (scrubbed_js != null) math_bry = scrubbed_js;	// js found; use clean version; DATE:2013-08-26
@@ -63,12 +63,12 @@ class Xomath_html_wtr {
 			// make url
 			byte dir_spr = Op_sys.Cur().Fsys_dir_spr_byte();
 			tmp_bfr
-				.Add_str_u8(app.Fsys_mgr().Root_dir().GenSubDir_nest("file", wiki.Domain_str(), "math").Raw())	// add dir
-				.Add_byte(md5[0]).Add_byte(dir_spr)
-				.Add_byte(md5[1]).Add_byte(dir_spr)
-				.Add_byte(md5[2]).Add_byte(dir_spr)
-				.Add(md5).Add_str_a7(".png");
-			Io_url png = Io_url_.new_fil_(tmp_bfr.To_str_and_clear());
+				.AddStrU8(app.Fsys_mgr().Root_dir().GenSubDir_nest("file", wiki.Domain_str(), "math").Raw())	// add dir
+				.AddByte(md5[0]).AddByte(dir_spr)
+				.AddByte(md5[1]).AddByte(dir_spr)
+				.AddByte(md5[2]).AddByte(dir_spr)
+				.Add(md5).AddStrA7(".png");
+			Io_url png = Io_url_.new_fil_(tmp_bfr.ToStrAndClear());
 
 			// if url exists, just write <img> directly
 			if (Io_mgr.Instance.ExistsFil(png)) {
@@ -86,11 +86,11 @@ class Xomath_html_wtr {
 
 		// write html: <span>math_expr</math>
 		byte[] unique_bry = wiki.Parser_mgr().Uniq_mgr().Add(BoolUtl.Y, Bry__math, math_bry);
-		Bry_fmt fmt = is_latex ? fmt__latex : fmt__mathjax;
+		BryFmt fmt = is_latex ? fmt__latex : fmt__mathjax;
 		fmt.Bld_many(tmp_bfr, uid, unique_bry);
-		bfr.Add_bfr_and_clear(tmp_bfr);
+		bfr.AddBfrAndClear(tmp_bfr);
 	}
-	private static byte[] Escape_for_mathjax(Bry_bfr tmp, byte[] src) {
+	private static byte[] Escape_for_mathjax(BryWtr tmp, byte[] src) {
 		if (src == null) return null;
 		boolean dirty = false;
 		byte[] escaped = null;
@@ -99,24 +99,24 @@ class Xomath_html_wtr {
 		for (int i = 0; i < src.length; i++) {
 			byte b = src[i];
 			switch (b) {
-				case AsciiByte.Lt: 		escaped = Gfh_entity_.Lt_bry; break;
-				case AsciiByte.Gt: 		escaped = Gfh_entity_.Gt_bry; break;
+				case AsciiByte.Lt: 		escaped = HtmlEntityCodes.LtBry; break;
+				case AsciiByte.Gt: 		escaped = HtmlEntityCodes.GtBry; break;
 				// case Byte_ascii.Amp:		escaped = Const_amp; break;				// TOMBSTONE:do not escape ampersand; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				// case Byte_ascii.Quote:	escaped = Gfh_entity_.Quote_bry; break; // TOMBSTONE:do not escape quote; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				default:
 					if (dirty)
-						tmp.Add_byte(b);
+						tmp.AddByte(b);
 					continue;
 			}
 
 			// add escaped; note that only lt / gt will enter here; all other bytes are handled by "default / continue" above
 			if (!dirty) {
 				dirty = true;
-				tmp.Add_mid(src, 0, i);
+				tmp.AddMid(src, 0, i);
 			}
 			tmp.Add(escaped);
 			escaped = null;
 		}
-		return dirty ? tmp.To_bry_and_clear() : src;
+		return dirty ? tmp.ToBryAndClear() : src;
 	}
 }

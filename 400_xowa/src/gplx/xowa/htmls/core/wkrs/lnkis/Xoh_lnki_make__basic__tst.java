@@ -18,22 +18,22 @@ import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*; import gplx.xowa.
 public class Xoh_lnki_make__basic__tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void Init() {fxt.Clear();}
-	@Test  public void Wiki() {
+	@Test public void Wiki() {
 		fxt.Test__make("<a href='/wiki/Help:A' title='Help:A'>Help:A</a>", fxt.Page_chkr().Body_("<a id='xolnki_2' href='/wiki/Help:A' title='Help:A'>Help:A</a>"));
 	}
-	@Test  public void Anch() {
+	@Test public void Anch() {
 		String orig = "<a href='#a'>#a</a>";
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(orig));
 	}
-	@Test  public void Site() {
+	@Test public void Site() {
 		String orig = "<a href='/site/en.wiktionary.org/wiki/A' title='wikt:A'>wikt:A</a>";
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(orig));
 	}
-	@Test  public void Inet() {
+	@Test public void Inet() {
 		String orig = "<a href='https://simple.wikisource.org/wiki/A' title='A'>b</a>";
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(orig));
 	}
-	@Test  public void Redlinks() {// PURPOSE: redlink should have ns and ttl, not just ns; ISSUE#:568 DATE:2019-09-29
+	@Test public void Redlinks() {// PURPOSE: redlink should have ns and ttl, not just ns; ISSUE#:568 DATE:2019-09-29
 		fxt.Expd__redlinks("Help:A_\"_b");
 		fxt.Test__make("<a href='/wiki/Help:A_%22_b' title='Help:A_\"_b'>Help:A \" b</a>");
 	}

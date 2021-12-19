@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*;
-import gplx.objects.lists.CompareAble;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.objects.primitives.BoolUtl;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments;
+import gplx.types.commons.lists.CompareAble;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
 class Page_stub implements CompareAble {
 	public Page_stub(int id, boolean is_redirect, int len, int score) {
 		this.Id = id;
@@ -34,7 +35,7 @@ class Page_stub implements CompareAble {
 		// sort redirects and small pages to bottom
 		int is_redirect_compare = -BoolUtl.Compare(Is_redirect, comp.Is_redirect);
 		if (is_redirect_compare == CompareAbleUtl.Same)
-			return Int_.Compare(Len, comp.Len);
+			return IntUtl.Compare(Len, comp.Len);
 		else
 			return is_redirect_compare;
 	}

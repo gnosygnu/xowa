@@ -14,16 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.xmls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfo_xml_wtr {
-	private final Bry_bfr bfr = Bry_bfr_.Reset(255), txt_bfr = Bry_bfr_.Reset(32);
+	private final BryWtr bfr = BryWtr.NewAndReset(255), txt_bfr = BryWtr.NewAndReset(32);
 	private byte quote_byte = AsciiByte.Apos;
 	private byte[] quote_escape = Bry_quote_1_escape;
 	private List_adp nde_stack = List_adp_.New();
@@ -44,14 +43,14 @@ public class Gfo_xml_wtr {
 	private Gfo_xml_wtr Nde_lhs_bgn(boolean grp, String v) {
 		nde_cur = new Gfo_xml_nde(grp, v);
 		nde_stack.Add(nde_cur);
-		bfr.Add_byte_repeat(AsciiByte.Space, indent);
-		bfr.Add_byte(AsciiByte.AngleBgn).Add_str_u8(v);
+		bfr.AddByteRepeat(AsciiByte.Space, indent);
+		bfr.AddByte(AsciiByte.AngleBgn).AddStrU8(v);
 		indent += 2;
 		return this;
 	}
 	public Gfo_xml_wtr Nde_lhs_end() {
-		bfr.Add_byte(AsciiByte.AngleEnd);
-		if (nde_cur.Grp()) bfr.Add_byte_nl();
+		bfr.AddByte(AsciiByte.AngleEnd);
+		if (nde_cur.Grp()) bfr.AddByteNl();
 		return this;
 	}
 	public Gfo_xml_wtr Nde_lhs(String v) {return Nde_lhs(BoolUtl.Y, v);}
@@ -63,9 +62,9 @@ public class Gfo_xml_wtr {
 	public Gfo_xml_wtr Nde_rhs() {
 		Gfo_xml_nde nde = (Gfo_xml_nde)List_adp_.Pop(nde_stack);
 		indent -= 2;
-		if (nde.Grp()) bfr.Add_byte_repeat(AsciiByte.Space, indent);
-		bfr.Add(Bry_nde_rhs_bgn).Add_str_u8(nde.Name()).Add_byte(AsciiByte.AngleEnd);	// EX: </node>
-		bfr.Add_byte_nl();
+		if (nde.Grp()) bfr.AddByteRepeat(AsciiByte.Space, indent);
+		bfr.Add(Bry_nde_rhs_bgn).AddStrU8(nde.Name()).AddByte(AsciiByte.AngleEnd);	// EX: </node>
+		bfr.AddByteNl();
 		return this;
 	}
 	public Gfo_xml_wtr Nde_txt_str(String name, String text) {
@@ -82,35 +81,35 @@ public class Gfo_xml_wtr {
 	}
 	public Gfo_xml_wtr Nde_txt_int(String name, int text) {
 		this.Nde_lhs(BoolUtl.N, name);
-		this.Txt_bry(Int_.To_bry(text));
+		this.Txt_bry(IntUtl.ToBry(text));
 		this.Nde_rhs();
 		return this;
 	}
 	public Gfo_xml_wtr Atr_bgn(String key) {
-		bfr.Add_byte_space().Add_str_u8(key).Add_byte(AsciiByte.Eq).Add_byte(quote_byte);
+		bfr.AddByteSpace().AddStrU8(key).AddByte(AsciiByte.Eq).AddByte(quote_byte);
 		return this;
 	}
-	public Gfo_xml_wtr Atr_val_str_a7(String v)		{bfr.Add_str_a7(v); return this;}
-	public Gfo_xml_wtr Atr_val_str_u8(String v)		{bfr.Add_str_u8 (v); return this;}
+	public Gfo_xml_wtr Atr_val_str_a7(String v)		{bfr.AddStrA7(v); return this;}
+	public Gfo_xml_wtr Atr_val_str_u8(String v)		{bfr.AddStrU8(v); return this;}
 	public Gfo_xml_wtr Atr_val_bry		(byte[] v)	{bfr.Add(v); return this;}
-	public Gfo_xml_wtr Atr_val_int		(int v)		{bfr.Add_int_variable(v); return this;}
+	public Gfo_xml_wtr Atr_val_int		(int v)		{bfr.AddIntVariable(v); return this;}
 	public Gfo_xml_wtr Atr_end() {
-		bfr.Add_byte(quote_byte);
+		bfr.AddByte(quote_byte);
 		return this;
 	}
-	public Gfo_xml_wtr Atr_kv_int(String key, int val)			{return Atr_kv_bry(key, Int_.To_bry(val));}
-	public Gfo_xml_wtr Atr_kv_str_a7(String key, String val)	{return Atr_kv_bry(key, Bry_.new_a7(val));}
-	public Gfo_xml_wtr Atr_kv_str_u8(String key, String val)	{return Atr_kv_bry(key, Bry_.new_u8(val));}
+	public Gfo_xml_wtr Atr_kv_int(String key, int val)			{return Atr_kv_bry(key, IntUtl.ToBry(val));}
+	public Gfo_xml_wtr Atr_kv_str_a7(String key, String val)	{return Atr_kv_bry(key, BryUtl.NewA7(val));}
+	public Gfo_xml_wtr Atr_kv_str_u8(String key, String val)	{return Atr_kv_bry(key, BryUtl.NewU8(val));}
 	public Gfo_xml_wtr Atr_kv_bry(String key, byte[] val) {
-		bfr.Add_byte_space().Add_str_u8(key);
-		bfr.Add_byte(AsciiByte.Eq);
+		bfr.AddByteSpace().AddStrU8(key);
+		bfr.AddByte(AsciiByte.Eq);
 		Atr_val_quote(val);
 		return this;
 	}
 	private Gfo_xml_wtr Atr_val_quote(byte[] val_bry) {
-		bfr.Add_byte(quote_byte);
-		bfr.Add_bry_escape(quote_byte, quote_escape, val_bry, 0, val_bry.length);
-		bfr.Add_byte(quote_byte);
+		bfr.AddByte(quote_byte);
+		bfr.AddBryEscape(quote_byte, quote_escape, val_bry, 0, val_bry.length);
+		bfr.AddByte(quote_byte);
 		return this;
 	}
 	public Gfo_xml_wtr Txt_bry(byte[] txt) {
@@ -126,28 +125,28 @@ public class Gfo_xml_wtr {
 				default: break;
 			}
 			if (escape != null && !dirty) {
-				bfr.Add_mid(txt, 0, i);
+				bfr.AddMid(txt, 0, i);
 				dirty = true;
 			}
 			if (dirty) {
-				if (escape == null) bfr.Add_byte(b);
+				if (escape == null) bfr.AddByte(b);
 				else				bfr.Add(escape);
 			}
 		}
-		if (dirty)	bfr.Add_bfr_and_clear(txt_bfr);
+		if (dirty)	bfr.AddBfrAndClear(txt_bfr);
 		else		bfr.Add(txt);
 		return this;
 	}
-	public Gfo_xml_wtr Txt_str_u8(String txt)	{return Txt_bry(Bry_.new_u8(txt));}
-	public String Bld_str() {return bfr.To_str_and_clear();}
+	public Gfo_xml_wtr Txt_str_u8(String txt)	{return Txt_bry(BryUtl.NewU8(txt));}
+	public String Bld_str() {return bfr.ToStrAndClear();}
 	private static final byte[]
-	  Bry_nde_rhs_bgn		= Bry_.new_a7("</")
+	  Bry_nde_rhs_bgn		= BryUtl.NewA7("</")
 //		, Bry_nde_inline		= Bry_.new_a7("/>")
-	, Bry_quote_1_escape	= Bry_.new_a7("&apos;")
-	, Bry_quote_2_escape	= Bry_.new_a7("&quot;")
-	, Bry_escape_lt			= Bry_.new_a7("&lt;")
-	, Bry_escape_gt			= Bry_.new_a7("&gt;")
-	, Bry_escape_amp		= Bry_.new_a7("&amp;")
+	, Bry_quote_1_escape	= BryUtl.NewA7("&apos;")
+	, Bry_quote_2_escape	= BryUtl.NewA7("&quot;")
+	, Bry_escape_lt			= BryUtl.NewA7("&lt;")
+	, Bry_escape_gt			= BryUtl.NewA7("&gt;")
+	, Bry_escape_amp		= BryUtl.NewA7("&amp;")
 	;
 }
 class Gfo_xml_nde {

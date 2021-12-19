@@ -17,7 +17,7 @@ package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Wdata_pf_wbreponame_tst {
 	@Before public void init() {fxt.Clear();} private Wdata_pf_wbreponame_fxt fxt = new Wdata_pf_wbreponame_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse("{{wbreponame}}", "Wikidata");
 	}
 }

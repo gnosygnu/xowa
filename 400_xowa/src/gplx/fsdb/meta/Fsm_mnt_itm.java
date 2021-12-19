@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.meta;
-import gplx.String_;
+import gplx.types.basics.utls.StringUtl;
 import gplx.core.ios.streams.Io_stream_rdr;
 import gplx.dbs.Db_conn;
 import gplx.fsdb.Fsdb_db_mgr;
@@ -22,7 +22,7 @@ import gplx.fsdb.data.Fsd_bin_tbl;
 import gplx.fsdb.data.Fsd_fil_itm;
 import gplx.fsdb.data.Fsd_img_itm;
 import gplx.fsdb.data.Fsd_thm_itm;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Fsm_mnt_itm {
 	public Fsm_mnt_itm(int id, String name, String url_rel) {this.id = id; this.name = name; this.url_rel = url_rel;}
 	public int				Id() {return id;} private final int id;
@@ -72,7 +72,7 @@ public class Fsm_mnt_itm {
 }
 class Fsm_mnt_itm_ {
 	public static void Patch_next_id(Fsm_mnt_itm abc_mgr, String name) {
-		if (!String_.Eq(name, "fsdb.user")) return;
+		if (!StringUtl.Eq(name, "fsdb.user")) return;
 		Fsm_atr_mgr atr_mgr = abc_mgr.Atr_mgr();
 		Fsm_cfg_mgr cfg_mgr = abc_mgr.Cfg_mgr();
 		int last_id = -1;

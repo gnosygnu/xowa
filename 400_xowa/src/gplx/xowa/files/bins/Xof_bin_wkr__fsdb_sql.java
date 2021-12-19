@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.bins;
-import gplx.Int_;
-import gplx.Io_url;
+import gplx.types.basics.utls.IntUtl;
+import gplx.libs.files.Io_url;
 import gplx.core.ios.streams.Io_stream_rdr;
 import gplx.core.ios.streams.Io_stream_rdr_;
 import gplx.fsdb.data.Fsd_bin_tbl;
@@ -24,7 +24,7 @@ import gplx.fsdb.data.Fsd_thm_itm;
 import gplx.fsdb.meta.Fsm_bin_fil;
 import gplx.fsdb.meta.Fsm_cfg_mgr;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.Xof_ext;
 import gplx.xowa.files.Xof_fsdb_itm;
 public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
@@ -54,7 +54,7 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	}
 	public Io_stream_rdr Get_to_fsys_near(Xof_fsdb_itm rv, byte[] orig_repo, byte[] orig_ttl, Xof_ext orig_ext, double lnki_time, int lnki_page) {
 		Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
-		thm_itm.Init_by_req(Int_.Max_value, lnki_time, lnki_page);
+		thm_itm.Init_by_req(IntUtl.MaxValue, lnki_time, lnki_page);
 		boolean found = Select_thm_bin(BoolUtl.N, thm_itm, orig_repo, orig_ttl);
 		if (found) {
 			tmp_ids.Init_by_thm(found, thm_itm);

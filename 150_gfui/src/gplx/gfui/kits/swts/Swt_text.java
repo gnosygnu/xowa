@@ -13,31 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwTextFld;
 import gplx.gfui.controls.standards.GfuiTextBox_;
 import gplx.gfui.draws.ColorAdp;
-
+import gplx.types.commons.KeyValHash;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class Swt_text implements GxwTextFld, Swt_control {
 	private Text text_box;
-	public Swt_text(Swt_control owner_control, Keyval_hash ctorArgs) {
+	public Swt_text(Swt_control owner_control, KeyValHash ctorArgs) {
 		int text_box_args = ctorArgs.Has(GfuiTextBox_.Ctor_Memo)
 			? SWT.MULTI | SWT.WRAP | SWT.V_SCROLL
 			: SWT.NONE

@@ -14,16 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.Before;
 import org.junit.Test;
 public class Scrib_fsys_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Scrib_fsys_mgr_fxt fxt = new Scrib_fsys_mgr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init("mem/xowa/"
 		, "mw.lua"
 		, "mw.ustring.lua"
@@ -62,7 +62,7 @@ class Scrib_fsys_mgr_fxt {
 		for (int i = 0; i < keys_len; i++) {
 			String key = keys[i];
 			String code = fsys_mgr.Get_or_null(key);
-			Tfds.Eq(expd, code != null, key);
+			GfoTstr.EqObj(expd, code != null, key);
 		}
 	}
 }

@@ -14,29 +14,28 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.Gfo_evt_itm;
-import gplx.Gfo_evt_mgr;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.Gfo_log_bfr;
-import gplx.Gfo_usr_dlg_;
-import gplx.GfsCtx;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Rls_able;
-import gplx.core.brys.Bry_bfr_mkr;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.evts.Gfo_evt_itm;
+import gplx.frameworks.evts.Gfo_evt_mgr;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.libs.logs.Gfo_log_bfr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.custom.brys.wtrs.BryBfrMkr;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.core.ios.Io_stream_zip_mgr;
-import gplx.core.primitives.Int_obj_ref;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.fsdb.Fsdb_db_mgr;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.addons.Xoax_addon_mgr;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.Xoctg_catpage_mgr;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_wtr;
@@ -216,16 +215,16 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private final Xow_msg_mgr msg_mgr;
 	public Xow_fragment_mgr			Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
 	public Bfmtr_eval_wiki			Eval_mgr() {return eval_mgr;} private Bfmtr_eval_wiki eval_mgr;
-	public Bry_bfr_mkr				Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public BryBfrMkr Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final BryBfrMkr utl__bry_bfr_mkr = new BryBfrMkr();
 	public Io_stream_zip_mgr		Utl__zip_mgr()		{return utl__zip_mgr;}		private final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
 	public int						Wdata_wiki_tid() {return wdata_wiki_tid;} private int wdata_wiki_tid;
 	public byte[]					Wdata_wiki_lang() {return wdata_wiki_lang;} private byte[] wdata_wiki_lang;
 	public void						Wdata_wiki_lang_(byte[] v) {this.wdata_wiki_lang = v; Wdata_wiki_abrv_();}	// TEST:
 	public byte[]					Wdata_wiki_abrv() {return wdata_wiki_abrv;} private byte[] wdata_wiki_abrv;
 	private void Wdata_wiki_abrv_() {
-		Bry_bfr bfr = utl__bry_bfr_mkr.Get_b128();
-		Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, Int_obj_ref.New(wdata_wiki_tid));
-		wdata_wiki_abrv = bfr.To_bry_and_rls();
+		BryWtr bfr = utl__bry_bfr_mkr.GetB128();
+		Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, IntRef.New(wdata_wiki_tid));
+		wdata_wiki_abrv = bfr.ToBryAndRls();
 	}
 	private Xow_html_util util;
 	public boolean Init_needed() {return init_needed;} public Xowe_wiki Init_needed_(boolean v) {init_needed = v; return this;} private boolean init_needed = true;
@@ -267,21 +266,21 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 			// FOLDER.RENAME: handle renamed folders; EX:"/wiki/en.wikipedia.org-2016-12" DATE:2017-02-01
 			try {
 				byte[] cfg_domain_bry = db_mgr_sql.Core_data_mgr().Db__core().Tbl__cfg().Select_bry_or("xowa.bldr.session", "wiki_domain", domain_bry);	// NOTE: or is "wiki.domain" for user_wikis
-				if (!Bry_.Eq(cfg_domain_bry, domain_bry)) {
+				if (!BryLni.Eq(cfg_domain_bry, domain_bry)) {
 					// set wikidata vars
 					Xow_domain_itm cfg_domain_itm = Xow_domain_itm_.parse(cfg_domain_bry);
 					this.wdata_wiki_tid	= cfg_domain_itm.Domain_type_id();
 					this.wdata_wiki_lang = cfg_domain_itm.Lang_orig_key();			
-					Bry_bfr bfr = Bry_bfr_.New();
-					Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, Int_obj_ref.New(wdata_wiki_tid));
-					this.wdata_wiki_abrv = bfr.To_bry_and_clear();
+					BryWtr bfr = BryWtr.New();
+					Xow_abrv_wm_.To_abrv(bfr, wdata_wiki_lang, IntRef.New(wdata_wiki_tid));
+					this.wdata_wiki_abrv = bfr.ToBryAndClear();
 
 					// set lang; handles "German Wikipedia" for "de.wikipedia.org"
 					this.lang = app.Lang_mgr().Get_by_or_load(cfg_domain_itm.Lang_actl_key());
 					this.msg_mgr.Lang_(lang);
 				}
 			} catch (Exception e) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "db.init: failed to get domain from config; err=~{0}", Err_.Message_gplx_log(e));
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "db.init: failed to get domain from config; err=~{0}", ErrUtl.ToStrLog(e));
 			}
 		}
 	}
@@ -322,7 +321,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		html_mgr.Init_by_lang(lang);
 
 		// other init
-		Bry_fmtr.Null.Eval_mgr().Enabled_(false); app.Wiki_mgr().Scripts().Exec(this); Bry_fmtr.Null.Eval_mgr().Enabled_(true);
+		BryFmtr.Null.EvalMgr().EnabledSet(false); app.Wiki_mgr().Scripts().Exec(this); BryFmtr.Null.EvalMgr().EnabledSet(true);
 		app.Html__css_installer().Install(this, Xowd_css_core_mgr.Key_default);
 		html_mgr.Init_by_wiki(this);
 		html__hdump_mgr.Init_by_db(this);
@@ -346,7 +345,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		if (rls_list != null) {
 			int len = rls_list.Len();
 			for (int i = 0; i < len; i++) {
-				Rls_able rls = (Rls_able)rls_list.Get_at(i);
+				Rls_able rls = (Rls_able)rls_list.GetAt(i);
 				rls.Rls();
 			}
 		}
@@ -361,7 +360,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_props))				return props;
 		else if	(ctx.Match(k, Invk_commons_wiki_))		commons_wiki_key = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_lang))				return lang;
-		else if	(ctx.Match(k, Invk_lang_))				throw Err_.new_deprecated("wiki.lang_");
+		else if	(ctx.Match(k, Invk_lang_))				throw ErrUtl.NewDeprecated("wiki.lang_");
 		else if	(ctx.Match(k, Invk_html))				return html_mgr;
 		else if	(ctx.Match(k, Invk_cfg_history))		return cfg_history;
 		else if	(ctx.Match(k, Invk_user))				return user;

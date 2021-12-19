@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*;
-import gplx.dbs.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDateNow;
+import gplx.types.basics.utls.StringUtl;
 public class Xomp_lock_req_tbl implements Db_tbl {
 	private final String fld_machine_name, fld_req_time;
 	private final Db_conn conn;
@@ -33,13 +41,13 @@ public class Xomp_lock_req_tbl implements Db_tbl {
 		));
 	}
 	public void Insert(String machine_name) {
-		conn.Stmt_insert(tbl_name, flds).Clear().Val_str(fld_machine_name, machine_name).Val_str(fld_req_time, Datetime_now.Get_force().XtoStr_fmt_yyyyMMdd_HHmmss()).Exec_insert();
+		conn.Stmt_insert(tbl_name, flds).Clear().Val_str(fld_machine_name, machine_name).Val_str(fld_req_time, GfoDateNow.GetForce().ToStrFmt_yyyyMMdd_HHmmss()).Exec_insert();
 	}
 	public String Select_1st() {
-		String sql = String_.Format("SELECT * FROM {0} ORDER BY {1} DESC", tbl_name, fld_machine_name);	// ANSI.y
+		String sql = StringUtl.Format("SELECT * FROM {0} ORDER BY {1} DESC", tbl_name, fld_machine_name);	// ANSI.y
 		Db_rdr rdr = conn.Stmt_sql(sql).Exec_select__rls_auto();
 		try {
-			if (!rdr.Move_next()) throw Err_.new_wo_type("xomp_lock_req has no rows");
+			if (!rdr.Move_next()) throw ErrUtl.NewArgs("xomp_lock_req has no rows");
 			return rdr.Read_str(fld_machine_name);}
 		finally {rdr.Rls();}
 	}

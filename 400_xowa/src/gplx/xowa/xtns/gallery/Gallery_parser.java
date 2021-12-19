@@ -13,14 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.files.*;
+package gplx.xowa.xtns.gallery;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteRef;
+import gplx.types.basics.wrappers.ByteVal;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.kwds.Xol_kwd_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_parse_data;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn_mock;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Gallery_parser {
 	private Xowe_wiki wiki; private Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
 	private Gallery_itm cur_itm;
@@ -28,16 +51,16 @@ public class Gallery_parser {
 	private int cur_pos; private byte cur_byte;
 	private byte cur_fld;
 	private int itm_bgn;
-	private Bry_bfr caption_bfr = Bry_bfr_.Reset(255); private int caption_bgn;
+	private BryWtr caption_bfr = BryWtr.NewAndReset(255); private int caption_bgn;
 	private Xop_ctx ctx;
 	private final Btrie_rv trv = new Btrie_rv();
 	public Gallery_parser Init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki; Xol_lang_itm lang = wiki.Lang();
 		this.ctx = wiki.Parser_mgr().Ctx();
 		trie.Clear();
-		Byte_obj_ref tmp_bref = Byte_obj_ref.zero_();
-		Init_keyword(tmp_bref, lang, Xol_kwd_grp_.Id_img_alt, Fld_alt);		// NOTE: MW uses "gallery-@gplx.Internal protected-alt" which just maps to "img-alt"
-		Init_keyword(tmp_bref, lang, Xol_kwd_grp_.Id_img_link, Fld_link);	// NOTE: MW uses "gallery-@gplx.Internal protected-link" which just maps to "img-link"
+		ByteRef tmp_bref = ByteRef.NewZero();
+		Init_keyword(tmp_bref, lang, Xol_kwd_grp_.Id_img_alt, Fld_alt);		// NOTE: MW uses "gallery-@gplx.frameworks.objects.Internal protected-alt" which just maps to "img-alt"
+		Init_keyword(tmp_bref, lang, Xol_kwd_grp_.Id_img_link, Fld_link);	// NOTE: MW uses "gallery-@gplx.frameworks.objects.Internal protected-link" which just maps to "img-link"
 		Init_keyword(tmp_bref, lang, Xol_kwd_grp_.Id_img_page, Fld_page);
 		return this;
 	}
@@ -54,7 +77,7 @@ public class Gallery_parser {
 			byte cur_mode = Parse_itm();
 			if (cur_itm.Ttl() != null) {
 				if (caption_bfr.Len() > 0)
-					cur_itm.Caption_bry_(Make_caption_bry(caption_bfr, wiki, ctx, caption_bfr.To_bry_and_clear()));
+					cur_itm.Caption_bry_(Make_caption_bry(caption_bfr, wiki, ctx, caption_bfr.ToBryAndClear()));
 				Make_lnki_tkn(mgr, xnde, src);
 				rv.Add(cur_itm);
 				cur_itm = new Gallery_itm();
@@ -67,15 +90,15 @@ public class Gallery_parser {
 	private void Make_lnki_tkn(Gallery_mgr_base mgr, Gallery_xnde xnde, byte[] src) {
 		Xop_lnki_tkn lnki_tkn = ctx.Tkn_mkr().Lnki(cur_itm.Ttl_bgn(), cur_itm.Ttl_end()).Ttl_(cur_itm.Ttl());
 		if (cur_itm.Link_bgn() != -1)
-			lnki_tkn.Link_tkn_(new Arg_nde_tkn_mock("link", String_.new_u8(src, cur_itm.Link_bgn(), cur_itm.Link_end())));	// NOTE: hackish, but add the link as arg_nde, since gallery link is not parsed like a regular lnki
+			lnki_tkn.Link_tkn_(new Arg_nde_tkn_mock("link", StringUtl.NewU8(src, cur_itm.Link_bgn(), cur_itm.Link_end())));	// NOTE: hackish, but add the link as arg_nde, since gallery link is not parsed like a regular lnki
 		cur_itm.Lnki_tkn_(lnki_tkn);
 		if (cur_itm.Page_bgn() != -1) {
-			int page_val = Bry_.To_int_or(src, cur_itm.Page_bgn(), cur_itm.Page_end(), -1);
-			if (page_val == -1) Xoa_app_.Usr_dlg().Warn_many("", "", "page is not an int: wiki=~{0} ttl=~{1} page=~{2}", wiki.Domain_str(), ctx.Page().Ttl().Page_db(), String_.new_u8(src, cur_itm.Page_bgn(), cur_itm.Page_end()));
+			int page_val = BryUtl.ToIntOr(src, cur_itm.Page_bgn(), cur_itm.Page_end(), -1);
+			if (page_val == -1) Xoa_app_.Usr_dlg().Warn_many("", "", "page is not an int: wiki=~{0} ttl=~{1} page=~{2}", wiki.Domain_str(), ctx.Page().Ttl().Page_db(), StringUtl.NewU8(src, cur_itm.Page_bgn(), cur_itm.Page_end()));
 			lnki_tkn.Page_(page_val);
 		}
 		byte[] lnki_caption = cur_itm.Caption_bry();
-		if (Bry_.Len_gt_0(lnki_caption)) {
+		if (BryUtl.IsNotNullOrEmpty(lnki_caption)) {
 			Xop_root_tkn caption_tkn = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, lnki_caption, true);
 			cur_itm.Caption_tkn_(caption_tkn);
 		}
@@ -115,7 +138,7 @@ public class Gallery_parser {
 			if (cur_byte == AsciiByte.Eq) {	// "="
 				++cur_pos;						// position after eq
 				Skip_ws();
-				cur_fld = ((Byte_obj_val)o).Val();
+				cur_fld = ((ByteVal)o).Val();
 				switch (cur_fld) {
 					case Fld_alt:	cur_itm.Alt_bgn_(cur_pos);  return Mode_text;
 					case Fld_link:	cur_itm.Link_bgn_(cur_pos); return Mode_text;
@@ -165,14 +188,14 @@ public class Gallery_parser {
 	private void Fld_end() {
 		int fld_end = cur_pos;
 		if (cur_fld != Fld_caption) {
-			int non_ws_pos = Bry_find_.Find_bwd_non_ws_or_not_found(src, cur_pos - 1, itm_bgn) + 1;	// SEE:non_ws_pos
-			if (non_ws_pos != Bry_find_.Not_found + 1)
+			int non_ws_pos = BryFind.FindBwdNonWsOrNotFound(src, cur_pos - 1, itm_bgn) + 1;	// SEE:non_ws_pos
+			if (non_ws_pos != BryFind.NotFound + 1)
 				fld_end = non_ws_pos;
 		}
 		switch (cur_fld) {
 			case Fld_ttl:
 				cur_itm.Ttl_end_(fld_end);
-				byte[] ttl_bry = Bry_.Mid(src, cur_itm.Ttl_bgn(), fld_end);
+				byte[] ttl_bry = BryLni.Mid(src, cur_itm.Ttl_bgn(), fld_end);
 				ttl_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl.Decode(ttl_bry);	// NOTE: must decode url-encoded entries; EX: "A%28b%29.png" -> "A(b).png"; DATE:2014-01-01
 				if (gplx.core.envs.Env_.Mode_testing() && wiki == null) return; // TEST: else one test will throw benign null ref exception; DATE:2017-03-01
 				Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
@@ -188,8 +211,8 @@ public class Gallery_parser {
 				}
 				break;
 			case Fld_caption:
-				if (caption_bfr.Len() != 0) caption_bfr.Add_byte_pipe();	// prepend | to all other captions; EX: File:A.png|a|b -> "a|b" (pipe not added to 1st, but added to 2nd)
-				caption_bfr.Add_mid(src, caption_bgn, fld_end);
+				if (caption_bfr.Len() != 0) caption_bfr.AddBytePipe();	// prepend | to all other captions; EX: File:A.png|a|b -> "a|b" (pipe not added to 1st, but added to 2nd)
+				caption_bfr.AddMid(src, caption_bgn, fld_end);
 				break;
 			case Fld_alt: 
 				if (fld_end < cur_itm.Alt_bgn()) 
@@ -209,7 +232,7 @@ public class Gallery_parser {
 				else
 					cur_itm.Page_end_(fld_end);
 				break;
-			default:			throw Err_.new_unhandled(fld_end);
+			default:			throw ErrUtl.NewUnhandled(fld_end);
 		}
 	}
 	private byte Skip_ws() {
@@ -228,20 +251,20 @@ public class Gallery_parser {
 	}
 	private static final byte Fld_null = 0, Fld_ttl = 1, Fld_caption = 2, Fld_alt = 3, Fld_link = 4, Fld_page = 5;
 	private static final byte Mode_eos = 1, Mode_nl = 2, Mode_pipe = 3, Mode_text = 4;
-	private void Init_keyword(Byte_obj_ref tmp_bref, Xol_lang_itm lang, int kwd_id, byte trie_key) {
+	private void Init_keyword(ByteRef tmp_bref, Xol_lang_itm lang, int kwd_id, byte trie_key) {
 		Xol_kwd_grp grp = lang.Kwd_mgr().Get_at(kwd_id);
-		if (grp == null) {Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find gallery keyword: ~{0}", String_.new_u8(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
+		if (grp == null) {Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find gallery keyword: ~{0}", StringUtl.NewU8(Xol_kwd_grp_.Bry_by_id(kwd_id))); return;}
 		Xol_kwd_itm[] itms = grp.Itms();
 		int len = itms.length;
-		Byte_obj_val trie_ref = Byte_obj_val.new_(trie_key);
+		ByteVal trie_ref = ByteVal.New(trie_key);
 		for (int i = 0; i < len; i++) {
 			Xol_kwd_itm itm = itms[i];
 			byte[] itm_bry = Xol_kwd_parse_data.Strip(caption_bfr, itm.Val(), tmp_bref);	// strip off =$1 for "alt=$1"
-			trie.Add_obj(itm_bry, trie_ref);
+			trie.AddObj(itm_bry, trie_ref);
 		}
 	}
 	// MW changed behavior from chaining multiple args to keeping last one; EX: "File:A.png|a|b" -> "b" x> "a|b" PAGE:fr.w:Belgique DATE:2016-10-17 REF: https://github.com/wikimedia/mediawiki/commit/63aeabeff1e098e872cc46f3698c61457e44ba15
-	private static byte[] Make_caption_bry(Bry_bfr tmp_bfr, Xowe_wiki wiki, Xop_ctx ctx, byte[] src) {			
+	private static byte[] Make_caption_bry(BryWtr tmp_bfr, Xowe_wiki wiki, Xop_ctx ctx, byte[] src) {
 		// parse caption to tkns
 		Xop_root_tkn root = wiki.Parser_mgr().Main().Parse_text_to_wdom(Xop_ctx.New__top(wiki), src, false);	// NOTE: ctx must be top, else <ref> will get double-counted
 
@@ -254,9 +277,9 @@ public class Gallery_parser {
 				tmp_bfr.Clear();
 			// else, add tkn to caption; note that loop does not recurse through tkn's subtkns; EX: "a|[[b|c]]" -> "text_tkn,lnki_tkn" -> "[[b|c]]"
 			else
-				tmp_bfr.Add_mid(root.Data_mid(), sub.Src_bgn(), sub.Src_end());
+				tmp_bfr.AddMid(root.Data_mid(), sub.Src_bgn(), sub.Src_end());
 		}
-		return tmp_bfr.To_bry_and_clear_and_trim();
+		return tmp_bfr.ToBryAndClearAndTrim();
 	}
 }
 /*

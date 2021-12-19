@@ -14,16 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.engines.mocks;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Int_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.Object_;
-import gplx.Tfds;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.XoKeyvalUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_app_fxt;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xop_fxt;
@@ -50,14 +49,14 @@ public class Mock_scrib_fxt {
 	public void Clear() {Clear("en.wikipedia.org", "en");}
 	public void Clear(String domain, String lang) {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, domain, app.Lang_mgr().Get_by_or_new(Bry_.new_u8(lang)));
+		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, domain, app.Lang_mgr().Get_by_or_new(BryUtl.NewU8(lang)));
 		parser_fxt = new Xop_fxt(app, wiki); // NOTE: always new(); don't try to cache; causes errors in Language_lib
 		core = wiki.Parser_mgr().Scrib().Core_init(wiki.Parser_mgr().Ctx());
 		core.Engine_(engine); engine.Clear();
 		core.Interpreter().Server_(server);
 		Xot_invk parent_frame = Xot_invk_temp.New_root(parser_fxt.Page().Ttl().Page_txt()); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
-		Xot_invk current_frame = Xot_invk_mock.test_(Bry_.new_a7("Module:Mod_0"));
-		core.Invoke_init(core.Wiki(), core.Ctx(), Bry_.Empty, parent_frame, current_frame);
+		Xot_invk current_frame = Xot_invk_mock.test_(BryUtl.NewA7("Module:Mod_0"));
+		core.Invoke_init(core.Wiki(), core.Ctx(), BryUtl.Empty, parent_frame, current_frame);
 		core.When_page_changed(parser_fxt.Page());
 	}
 	public void Init__cbk(Mock_proc_stub... ary) {
@@ -87,52 +86,52 @@ public class Mock_scrib_fxt {
 	public Mock_proc_stub Init__mock_fnc_for_lib(String fnc_name, Scrib_lib lib, String proc_name, Object... proc_args) {
 		return new Mock_exec_lib(mock_mod_id_next++, fnc_name, lib, proc_name, proc_args);
 	}
-	public void Test__proc__ints      (Scrib_lib lib, String proc_name, Object[] args, int expd)		{Test__proc__kvps(lib, proc_name, BoolUtl.Y, Int_.To_str(expd), Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__ints      (Scrib_lib lib, String proc_name, Object[] args, int expd)		{Test__proc__kvps(lib, proc_name, BoolUtl.Y, IntUtl.ToStr(expd), Scrib_kv_utl_.base1_many_(args));}
 	public void Test__proc__objs__flat(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, BoolUtl.Y, expd, Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, Keyval[] expd)	{Test__proc__kvps(lib, proc_name, BoolUtl.N, Keyval_.Ary__to_str__nest(new Keyval[] {Keyval_.int_(Scrib_core.Base_1, expd)}), Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, KeyVal[] expd)	{Test__proc__kvps(lib, proc_name, BoolUtl.N, XoKeyvalUtl.AryToStrNest(new KeyVal[] {KeyVal.NewInt(Scrib_core.Base_1, expd)}), Scrib_kv_utl_.base1_many_(args));}
 	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, BoolUtl.N, expd, Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, BoolUtl.Y, expd, args);}
-	public void Test__proc__kvps__nest(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, BoolUtl.N, expd, args);}
-	private static void Test__proc__kvps(Scrib_lib lib, String proc_name, boolean flat, String expd, Keyval[] args) {
-		Keyval[] actl_ary = Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args);
+	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {Test__proc__kvps(lib, proc_name, BoolUtl.Y, expd, args);}
+	public void Test__proc__kvps__nest(Scrib_lib lib, String proc_name, KeyVal[] args, String expd) {Test__proc__kvps(lib, proc_name, BoolUtl.N, expd, args);}
+	private static void Test__proc__kvps(Scrib_lib lib, String proc_name, boolean flat, String expd, KeyVal[] args) {
+		KeyVal[] actl_ary = Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args);
 		if (flat)
-			Tfds.Eq(expd, Mock_scrib_fxt_.Kvp_vals_to_str(actl_ary));
+			GfoTstr.EqObj(expd, Mock_scrib_fxt_.Kvp_vals_to_str(actl_ary));
 		else
-			Tfds.Eq_str_lines(expd, Keyval_.Ary__to_str__nest(actl_ary));
+			GfoTstr.EqLines(expd, XoKeyvalUtl.AryToStrNest(actl_ary));
 	}
 	public void Test__proc__objs__empty(Scrib_lib lib, String proc_name, Object[] args) {Test__proc__kvps__empty(lib, proc_name, Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__kvps__empty(Scrib_lib lib, String proc_name, Keyval[] args) {
-		Tfds.Eq(0, Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args).length);
+	public void Test__proc__kvps__empty(Scrib_lib lib, String proc_name, KeyVal[] args) {
+		GfoTstr.EqObj(0, Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args).length);
 	}
-	public void Test__proc__kvps__vals(Scrib_lib lib, String proc_name, Keyval[] args, Object... expd_ary) {
-		Keyval[] actl_kvs = Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args);
+	public void Test__proc__kvps__vals(Scrib_lib lib, String proc_name, KeyVal[] args, Object... expd_ary) {
+		KeyVal[] actl_kvs = Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args);
 		Object[] actl_ary = Mock_scrib_fxt_.Kvp_vals_to_objs(actl_kvs);
-		Tfds.Eq_ary(expd_ary, actl_ary);
+		GfoTstr.EqAryObj(expd_ary, actl_ary);
 	}
 	public void Test__parse__tmpl_to_html(String raw, String expd) {parser_fxt.Test__parse__tmpl_to_html(raw, expd);}
 }
 class Mock_scrib_fxt_ {
-	public static Keyval[] Test__lib_proc__core(Scrib_lib lib, String proc_name, Keyval[] args) {
+	public static KeyVal[] Test__lib_proc__core(Scrib_lib lib, String proc_name, KeyVal[] args) {
 		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
 		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
 		proc.Proc_exec(new Scrib_proc_args(args), proc_rslt);
 		return proc_rslt.Ary();
 	}
-	public static Object[] Kvp_vals_to_objs(Keyval[] kvps) {
+	public static Object[] Kvp_vals_to_objs(KeyVal[] kvps) {
 		int len = kvps.length;
 		Object[] rv = new Object[len];
 		for (int i = 0; i < len; ++i)
 			rv[i] = kvps[i].Val();
 		return rv;
 	}
-	public static String Kvp_vals_to_str(Keyval[] ary) {
-		Bry_bfr bfr = Bry_bfr_.New();
+	public static String Kvp_vals_to_str(KeyVal[] ary) {
+		BryWtr bfr = BryWtr.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_byte(AsciiByte.Semic);
-			Keyval kv = ary[i];
-			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(kv.Val()));
+			if (i != 0) bfr.AddByte(AsciiByte.Semic);
+			KeyVal kv = ary[i];
+			bfr.AddStrU8(ObjectUtl.ToStrOrNullMark(kv.Val()));
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 }

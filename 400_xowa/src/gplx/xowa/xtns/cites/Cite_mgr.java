@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.cites;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.langs.htmls.*;
 class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
@@ -30,7 +34,7 @@ class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
 		// get message; use cache to avoid multiple concantenations; EX: "cite_link_label_group-" + "lower-roman";
 		byte[] message = (byte[])messages_by_group.Get_by_bry(group);
 		if (message == null) {
-			message = Bry_.Add(Msg__cite_link_label_group, group);
+			message = BryUtl.Add(Msg__cite_link_label_group, group);
 			messages_by_group.Add(group, message);
 		}
 
@@ -42,7 +46,7 @@ class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
 
 		// if linkLabels group missing, just concat; EX: "custom-group 1"
 		if (linkLabels.Len() == 0) {
-			return Bry_.Add((group.length == 0 ? Bry_.Empty : Bry_.Add(group, AsciiByte.Space)), wiki.Lang().Num_mgr().Format_num(offset));
+			return BryUtl.Add((group.length == 0 ? BryUtl.Empty : BryUtl.Add(group, AsciiByte.Space)), wiki.Lang().Num_mgr().Format_num(offset));
 		}
 
 		// linkLabels group exists; pull corresponding offset; EX: "5" in lower-roman -> "v"
@@ -55,16 +59,16 @@ class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
 		// linkLabels are generally "a", "b", "c", etc.
 		Xol_msg_itm msg = wiki.Msg_mgr().Find_or_null(message);
 		byte[][] text = msg == null
-			? Bry_.Ary_empty
-			: Bry_split_.Split_ws(msg.Val());
+			? BryUtl.AryEmpty
+			: BrySplit.SplitWs(msg.Val());
 
 		Cite_link_label_grp grp = new Cite_link_label_grp(group, text);
 		link_label_mgr.Add(group, grp);
 		return grp;
 	}
 	private byte[] plainError(byte[] key, Object... ary) {
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
+		BryWtr tmp_bfr = BryWtr.New();
+		BryFmtr tmp_fmtr = BryFmtr.NewTmp();
 
 		// build specific error msg
 		Xol_msg_itm msg_itm = wiki.Msg_mgr().Find_or_null(key);
@@ -87,8 +91,8 @@ class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
 		return ret;
 	}
 	public static final byte[]
-	  Msg__cite_link_label_group = Bry_.new_a7("cite_link_label_group-")
-	, Msg__cite_error = Bry_.new_a7("cite_error")
-	, Msg__cite_error_no_link_label_group = Bry_.new_a7("cite_error_no_link_label_group")
+	  Msg__cite_link_label_group = BryUtl.NewA7("cite_link_label_group-")
+	, Msg__cite_error = BryUtl.NewA7("cite_error")
+	, Msg__cite_error_no_link_label_group = BryUtl.NewA7("cite_error_no_link_label_group")
 	;
 }

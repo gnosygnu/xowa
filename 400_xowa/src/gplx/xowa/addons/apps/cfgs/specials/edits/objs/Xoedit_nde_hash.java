@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 public class Xoedit_nde_hash {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	private final Ordered_hash id_hash = Ordered_hash_.New();
@@ -26,7 +30,7 @@ public class Xoedit_nde_hash {
 		id_hash.Add(nde.Id(), nde);
 	}
 	public Xoedit_nde Get_at(int i) {
-		return (Xoedit_nde)hash.Get_at(i);
+		return (Xoedit_nde)hash.GetAt(i);
 	}
 	public Xoedit_nde Get_by_or_fail(String key) {
 		return (Xoedit_nde)hash.GetByOrFail(key);
@@ -35,21 +39,21 @@ public class Xoedit_nde_hash {
 		return (Xoedit_nde)id_hash.GetByOrFail(id);
 	}
 	public Xoedit_grp[] To_grp_ary_and_clear() {
-		Xoedit_grp[] rv = (Xoedit_grp[])hash.To_ary_and_clear(Xoedit_grp.class);
+		Xoedit_grp[] rv = (Xoedit_grp[])hash.ToAryAndClear(Xoedit_grp.class);
 		id_hash.Clear();
 		return rv;
 	}
 	public void Delete_container_grps() {// remove container grps else headers with no items will show up
 		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
-			Xoedit_grp grp = (Xoedit_grp)hash.Get_at(i);
+			Xoedit_grp grp = (Xoedit_grp)hash.GetAt(i);
 			if (grp.Itms().length == 0)
 				deleted.Add(grp);
 		}
 
 		len = deleted.Len();
 		for (int i = 0; i < len; i++) {
-			Xoedit_grp grp = (Xoedit_grp)deleted.Get_at(i);
+			Xoedit_grp grp = (Xoedit_grp)deleted.GetAt(i);
 			hash.Del(grp.Key());
 			id_hash.Del(grp.Id());
 		}
@@ -68,7 +72,7 @@ public class Xoedit_nde_hash {
 	public void Deleted__commit() {
 		int len = deleted.Len();
 		for (int i = 0; i < len; i++) {
-			Xoedit_nde nde = (Xoedit_nde)deleted.Get_at(i);
+			Xoedit_nde nde = (Xoedit_nde)deleted.GetAt(i);
 			hash.Del(nde.Key());
 			id_hash.Del(nde.Id());
 		}

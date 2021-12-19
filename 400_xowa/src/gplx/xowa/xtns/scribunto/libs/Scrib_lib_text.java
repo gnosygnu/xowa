@@ -13,14 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
-import gplx.xowa.xtns.scribunto.*;
-import gplx.core.bits.*; import gplx.core.btries.*;
-import gplx.xowa.langs.msgs.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.core.bits.Bitmask_;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.commons.KeyValUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.langs.msgs.Xow_msg_mgr;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Scrib_lib_text implements Scrib_lib {
 	private final Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
 	private final Scrib_lib_text__nowiki_util nowiki_util = new Scrib_lib_text__nowiki_util();
@@ -50,13 +65,13 @@ public class Scrib_lib_text implements Scrib_lib {
 			case Proc_init_text_for_wiki:				return Init_text_for_wiki(args, rslt);
 			case Proc_jsonEncode:						return JsonEncode(args, rslt);
 			case Proc_jsonDecode:						return JsonDecode(args, rslt);
-			default: throw Err_.new_unhandled(key);
+			default: throw ErrUtl.NewUnhandled(key);
 		}
 	}
 	private static final int Proc_unstrip = 0, Proc_unstripNoWiki = 1, Proc_killMarkers = 2, Proc_getEntityTable = 3, Proc_init_text_for_wiki = 4, Proc_jsonEncode = 5, Proc_jsonDecode = 6;
 	public static final String Invk_unstrip = "unstrip", Invk_unstripNoWiki = "unstripNoWiki", Invk_killMarkers = "killMarkers", Invk_getEntityTable = "getEntityTable"
 	, Invk_init_text_for_wiki = "init_text_for_wiki", Invk_jsonEncode = "jsonEncode", Invk_jsonDecode = "jsonDecode";
-	private static final String[] Proc_names = String_.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki, Invk_jsonEncode, Invk_jsonDecode);
+	private static final String[] Proc_names = StringUtl.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki, Invk_jsonEncode, Invk_jsonDecode);
 	public boolean Unstrip(Scrib_proc_args args, Scrib_proc_rslt rslt)			{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
 		// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
@@ -67,37 +82,37 @@ public class Scrib_lib_text implements Scrib_lib {
 	public boolean GetEntityTable(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		if (html_entities == null) html_entities = Scrib_lib_text_html_entities.new_();
 		return rslt.Init_obj(html_entities);
-	}	private static Keyval[] html_entities;
+	}	private static KeyVal[] html_entities;
 	public boolean JsonEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Object itm = args.Pull_obj(0);
 
 		// check if json is primitive, and return that; see NOTE below; PAGE:en.w:Template:Format_TemplateData ISSUE#:301; DATE:2019-01-13
-		int itm_type_id = Type_ids_.To_id_by_obj(itm);
+		int itm_type_id = TypeIds.ToIdByObj(itm);
 		switch (itm_type_id) {
-			case Type_ids_.Id__bool:
-			case Type_ids_.Id__byte:
-			case Type_ids_.Id__short:
-			case Type_ids_.Id__int:
-			case Type_ids_.Id__long:
-			case Type_ids_.Id__float:
-			case Type_ids_.Id__double:
-			case Type_ids_.Id__char:
-			case Type_ids_.Id__str:
-			case Type_ids_.Id__bry:
-			case Type_ids_.Id__date:
-			case Type_ids_.Id__decimal:
+			case TypeIds.IdBool:
+			case TypeIds.IdByte:
+			case TypeIds.IdShort:
+			case TypeIds.IdInt:
+			case TypeIds.IdLong:
+			case TypeIds.IdFloat:
+			case TypeIds.IdDouble:
+			case TypeIds.IdChar:
+			case TypeIds.IdStr:
+			case TypeIds.IdBry:
+			case TypeIds.IdDate:
+			case TypeIds.IdDecimal:
 				return rslt.Init_obj(itm);
 		}
 
 		// try to determine if node or array; EX: {a:1, b:2} vs [a:1, b:2]
-		Keyval[] itm_as_nde = null;
+		KeyVal[] itm_as_nde = null;
 		Object itm_as_ary = null;	
 		Class<?> itm_type = itm.getClass();
-		boolean itm_is_nde = Type_.Eq(itm_type, Keyval[].class);
+		boolean itm_is_nde = ClassUtl.Eq(itm_type, KeyVal[].class);
 
 		// additional logic to classify "[]" as ary, not nde; note that this is done by checking len of itm_as_nde
 		if (itm_is_nde) {
-			itm_as_nde = (Keyval[])itm;
+			itm_as_nde = (KeyVal[])itm;
 			int itm_as_nde_len = itm_as_nde.length;
 			if (itm_as_nde_len == 0) {	// Keyval[0] could be either "[]" or "{}"; for now, classify as "[]" per TextLibraryTests.lua; 'json encode, empty table (could be either [] or {}, but change should be announced)'; DATE:2016-08-01
 				itm_as_nde = null;
@@ -130,7 +145,7 @@ public class Scrib_lib_text implements Scrib_lib {
 			? json_util.Encode_as_nde(itm_as_nde, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all)
 			: json_util.Encode_as_ary(itm_as_ary, flags & Scrib_lib_text__json_util.Flag__pretty, Scrib_lib_text__json_util.Skip__all)
 			;
-		if (rv == null) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to encode value");
+		if (rv == null) throw ErrUtl.NewArgs("mw.text.jsonEncode: Unable to encode value");
 		return rslt.Init_obj(rv);
 	}
 	public boolean JsonDecode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -162,12 +177,12 @@ public class Scrib_lib_text implements Scrib_lib {
 		}
 		if (!is_json_like) {
 			if (is_numeric) {
-				return rslt.Init_obj(Bry_.To_int(json));
+				return rslt.Init_obj(BryUtl.ToInt(json));
 			}
 			else {
-				if (Bry_.Eq(json, BoolUtl.TrueBry))
+				if (BryLni.Eq(json, BoolUtl.TrueBry))
 					return rslt.Init_obj(true);
-				else if (Bry_.Eq(json, BoolUtl.FalseBry))
+				else if (BryLni.Eq(json, BoolUtl.FalseBry))
 					return rslt.Init_obj(false);
 				else {
 					return rslt.Init_obj(json);
@@ -180,23 +195,23 @@ public class Scrib_lib_text implements Scrib_lib {
 		if (Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__try_fixing))
 			opts = Bitmask_.Add_int(opts, Scrib_lib_text__json_util.Flag__try_fixing);
 
-		Keyval[] rv = JsonDecodeStatic(args, core, json_util, json, opts, flags);
+		KeyVal[] rv = JsonDecodeStatic(args, core, json_util, json, opts, flags);
 		return rslt.Init_obj(rv);
 	}
-	public static Keyval[] JsonDecodeStatic
+	public static KeyVal[] JsonDecodeStatic
 		( Scrib_proc_args args, Scrib_core core, Scrib_lib_text__json_util json_util
 		, byte[] json, int opts, int flags) {
 		// decode json to Object; note that BoolUtl.Y means ary and BoolUtl.N means ary
 		byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
-		if (rv_tid == BoolUtl.NullByte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
+		if (rv_tid == BoolUtl.NullByte) throw ErrUtl.NewArgs("mw.text.jsonEncode: Unable to decode String " + StringUtl.NewU8(json));
 		if (rv_tid == BoolUtl.YByte) {
-			Keyval[] rv_as_kvy = (Keyval[])json_util.Decode_rslt_as_nde();
+			KeyVal[] rv_as_kvy = (KeyVal[])json_util.Decode_rslt_as_nde();
 
 			// reindex unless preserve_keys passed
 			if (!(Bitmask_.Has_int(flags, Scrib_lib_text__json_util.Flag__preserve_keys))) {
 				Scrib_lib_text__reindex_data reindex_data = new Scrib_lib_text__reindex_data();
 				json_util.Reindex_arrays(reindex_data, rv_as_kvy, false);
-				rv_as_kvy = reindex_data.Rv_is_kvy() ? (Keyval[])reindex_data.Rv_as_kvy() : (Keyval[])reindex_data.Rv_as_ary();
+				rv_as_kvy = reindex_data.Rv_is_kvy() ? (KeyVal[])reindex_data.Rv_as_kvy() : (KeyVal[])reindex_data.Rv_as_ary();
 			}					
 			return rv_as_kvy;
 		}
@@ -204,18 +219,18 @@ public class Scrib_lib_text implements Scrib_lib {
 			return json_util.Decode_rslt_as_ary();
 	}
 
-	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), Keyval_.Ary_empty);}
+	public void Notify_wiki_changed() {if (notify_wiki_changed_fnc != null) core.Interpreter().CallFunction(notify_wiki_changed_fnc.Id(), KeyValUtl.AryEmpty);}
 	public boolean Init_text_for_wiki(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Xow_msg_mgr msg_mgr = core.Wiki().Msg_mgr();
-		Keyval[] rv = new Keyval[4];
-		rv[0] = Keyval_.new_("comma", Init_lib_text_get_msg(msg_mgr, "comma-separator"));
-		rv[1] = Keyval_.new_("and", Init_lib_text_get_msg(msg_mgr, "and") + Init_lib_text_get_msg(msg_mgr, "word-separator"));
-		rv[2] = Keyval_.new_("ellipsis", Init_lib_text_get_msg(msg_mgr, "ellipsis"));
-		rv[3] = Keyval_.new_("nowiki_protocols", Keyval_.Ary_empty);	// NOTE: code implemented, but waiting for it to be used; DATE:2014-03-20
+		KeyVal[] rv = new KeyVal[4];
+		rv[0] = KeyVal.NewStr("comma", Init_lib_text_get_msg(msg_mgr, "comma-separator"));
+		rv[1] = KeyVal.NewStr("and", Init_lib_text_get_msg(msg_mgr, "and") + Init_lib_text_get_msg(msg_mgr, "word-separator"));
+		rv[2] = KeyVal.NewStr("ellipsis", Init_lib_text_get_msg(msg_mgr, "ellipsis"));
+		rv[3] = KeyVal.NewStr("nowiki_protocols", KeyValUtl.AryEmpty);	// NOTE: code implemented, but waiting for it to be used; DATE:2014-03-20
 		return rslt.Init_obj(rv);
 	}
 	private String Init_lib_text_get_msg(Xow_msg_mgr msg_mgr, String msg_key) {
-		return String_.new_u8(msg_mgr.Val_by_key_obj(Bry_.new_u8(msg_key)));
+		return StringUtl.NewU8(msg_mgr.Val_by_key_obj(BryUtl.NewU8(msg_key)));
 	}
 }
 /*

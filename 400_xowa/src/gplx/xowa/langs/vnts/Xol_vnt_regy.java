@@ -13,15 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts; import gplx.*;
+package gplx.xowa.langs.vnts;
 import gplx.core.btries.*; import gplx.core.bits.*;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 public class Xol_vnt_regy {
 	private final Hash_adp_bry hash = Hash_adp_bry.ci_a7(); private int hash_len;
 	private final List_adp list = List_adp_.New();
 	public Btrie_slim_mgr	Trie()				{return trie;} private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();
 	public int				Len()				{return hash.Len();}
 	public boolean				Has(byte[] k)		{return hash.Has(k);}
-	public Xol_vnt_itm		Get_at(int i)		{return (Xol_vnt_itm)list.Get_at(i);}
+	public Xol_vnt_itm		Get_at(int i)		{return (Xol_vnt_itm)list.GetAt(i);}
 	public Xol_vnt_itm		Get_by(byte[] k)	{return (Xol_vnt_itm)hash.GetByOrNull(k);}
 	public Xol_vnt_itm		Get_by(byte[] s, int b, int e) {return (Xol_vnt_itm)hash.Get_by_mid(s, b, e);}
 	public void				Clear()				{hash.Clear(); list.Clear(); trie.Clear(); hash_len = 0;}
@@ -30,7 +33,7 @@ public class Xol_vnt_regy {
 		Xol_vnt_itm itm = new Xol_vnt_itm(hash_len, key, name, mask);
 		hash.Add(key, itm);
 		list.Add(itm);
-		trie.Add_obj(key, itm);
+		trie.AddObj(key, itm);
 		hash_len = hash.Len();
 		return itm;
 	}

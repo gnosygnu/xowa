@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs; import gplx.dbs.*;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.frameworks.tests.GfoTstr;
 import org.junit.*;
 public class TdbConnectInfo_tst {
 	@Test public void Full() {
@@ -25,6 +28,6 @@ public class TdbConnectInfo_tst {
 		tst_Parse(connectInfo, Io_url_.new_any_("C:\\dir\\xmpl.tdb"), "dsv");
 	}
 	void tst_Parse(Db_conn_info connectInfo, Io_url url, String format) {
-		Tfds.Eq(((Tdb_conn_info)connectInfo).Url(), url);
+		GfoTstr.EqObj(((Tdb_conn_info)connectInfo).Url(), url);
 	}
 }

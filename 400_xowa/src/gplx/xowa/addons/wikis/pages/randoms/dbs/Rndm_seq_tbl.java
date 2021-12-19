@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.pages.randoms.dbs;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.errs.ErrUtl;
 public class Rndm_seq_tbl implements Rls_able {	// list of page_ids w/ random_idx; EX: 0,123|1,23|2,31|...
 	private final String fld_qry_idx, fld_rng_idx, fld_seq_idx, fld_page_id;
 	private final Db_conn conn;
@@ -36,7 +39,7 @@ public class Rndm_seq_tbl implements Rls_able {	// list of page_ids w/ random_id
 		Db_stmt stmt = conn.Stmt_select(tbl_name, flds, fld_qry_idx, fld_rng_idx, fld_seq_idx);
 		Db_rdr rdr = stmt.Clear().Crt_int(fld_qry_idx, qry_idx).Crt_int(fld_rng_idx, rng_idx).Val_int(fld_seq_idx, seq_idx).Exec_select__rls_auto();
 		try {return rdr.Move_next() ? rdr.Read_int(fld_page_id) : -1;}
-		catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to get seq_idx; url=~{0} qry_idx=~{1} rng_idx=~{2} seq_idx=~{3} err=~{4}", conn.Conn_info().Db_api(), qry_idx, rng_idx, seq_idx, Err_.Message_gplx_log(e)); return -1;}
+		catch (Exception e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to get seq_idx; url=~{0} qry_idx=~{1} rng_idx=~{2} seq_idx=~{3} err=~{4}", conn.Conn_info().Db_api(), qry_idx, rng_idx, seq_idx, ErrUtl.ToStrLog(e)); return -1;}
 		finally {rdr.Rls();}
 	}
 	public Db_stmt Insert_stmt() {return conn.Stmt_insert(tbl_name, flds);}

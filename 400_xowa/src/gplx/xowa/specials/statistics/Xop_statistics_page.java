@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.statistics; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
+package gplx.xowa.specials.statistics;
+import gplx.types.custom.brys.wtrs.args.BryBfrArg;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*; import gplx.xowa.specials.*;
+import gplx.types.custom.brys.fmts.fmtrs.*;
+import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
 import gplx.xowa.wikis.nss.*;
 public class Xop_statistics_page implements Xow_special_page {
 	private Xop_statistics_stats_page_grp stats_page = new Xop_statistics_stats_page_grp();
@@ -29,14 +34,14 @@ public class Xop_statistics_page implements Xow_special_page {
 		page.Db().Text().Text_bry_(html);
 	}
 	public byte[] Build_html(Xowe_wiki wiki) {
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetM001();
 		stats_page.Wiki_(wiki);
 //			stats_wiki.Wiki_(wiki);
 		stats_ns.Wiki_(wiki);
-		fmtr_all.Bld_bfr_many(tmp_bfr, stats_page, stats_ns);
-		return tmp_bfr.To_bry_and_rls();
+		fmtr_all.BldToBfrMany(tmp_bfr, stats_page, stats_ns);
+		return tmp_bfr.ToBryAndRls();
 	}
-	private Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr_all = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	(	"<div id=\"mw-content-text\">"
 	,	"<table class=\"wikitable mw-statistics-table\">~{page_stats}~{ns_stats}"
 	,	"</table>"
@@ -45,17 +50,17 @@ public class Xop_statistics_page implements Xow_special_page {
 
 	public Xow_special_page Special__clone() {return this;}
 }
-class Xop_statistics_stats_page_grp implements gplx.core.brys.Bfr_arg {
+class Xop_statistics_stats_page_grp implements BryBfrArg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	public void Bfr_arg__add(Bry_bfr bfr) {			
+	public void AddToBfr(BryWtr bfr) {
 		byte[] lbl_header_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_pages);
 		byte[] lbl_articles = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_articles);
 		byte[] lbl_pages = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_pages);
 		byte[] lbl_pages_desc = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_pages_desc);
 		Xol_num_mgr num_mgr = wiki.Lang().Num_mgr();
-		fmtr_page.Bld_bfr_many(bfr, lbl_header_pages, lbl_articles, lbl_pages, lbl_pages_desc , num_mgr.Format_num_by_long(wiki.Stats().Num_articles()), num_mgr.Format_num_by_long(wiki.Stats().Num_pages()));
+		fmtr_page.BldToBfrMany(bfr, lbl_header_pages, lbl_articles, lbl_pages, lbl_pages_desc , num_mgr.Format_num_by_long(wiki.Stats().Num_articles()), num_mgr.Format_num_by_long(wiki.Stats().Num_pages()));
 	}
-	private Bry_fmtr fmtr_page = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr_page = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	(	""
 	,	"  <tr>"
 	,	"    <th colspan=\"2\">~{lbl_header_pages}</th>"
@@ -70,23 +75,23 @@ class Xop_statistics_stats_page_grp implements gplx.core.brys.Bfr_arg {
 	,	"  </tr>"
 	), "lbl_header_pages", "lbl_articles", "lbl_pages", "lbl_pages_desc", "page_count_main", "page_count_all");
 }
-class Xop_statistics_stats_ns_grp implements gplx.core.brys.Bfr_arg {
+class Xop_statistics_stats_ns_grp implements BryBfrArg {
 	private Xop_statistics_stats_ns_itm ns_itm_fmtr = new Xop_statistics_stats_ns_itm();
 	public void Wiki_(Xowe_wiki v) {this.wiki = v; ns_itm_fmtr.Wiki_(v);} private Xowe_wiki wiki;
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		byte[] lbl_header_ns = wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_statistics_header_ns);
-		fmtr_ns_grp.Bld_bfr_many(bfr, lbl_header_ns, ns_itm_fmtr);
+		fmtr_ns_grp.BldToBfrMany(bfr, lbl_header_ns, ns_itm_fmtr);
 	}
-	private Bry_fmtr fmtr_ns_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr_ns_grp = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	(	""
 	,	"  <tr>"
 	,	"    <th colspan=\"2\">~{lbl_header_ns}</th>"
 	,	"  </tr>~{ns_itms}"
 	), "lbl_header_ns", "ns_itms");
 }
-class Xop_statistics_stats_ns_itm implements gplx.core.brys.Bfr_arg {
+class Xop_statistics_stats_ns_itm implements BryBfrArg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	public void Bfr_arg__add(Bry_bfr bfr) {
+	public void AddToBfr(BryWtr bfr) {
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		int ns_len = ns_mgr.Count();
 		for (int i = 0; i < ns_len; i++) {
@@ -94,10 +99,10 @@ class Xop_statistics_stats_ns_itm implements gplx.core.brys.Bfr_arg {
 			if (ns.Is_meta()) continue;
 			if (ns.Count() == 0) continue;
 			byte[] ns_name = ns.Id_is_main() ? wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_ns_blankns) : ns.Name_ui();
-			fmtr_ns_itm.Bld_bfr_many(bfr, ns_name, wiki.Lang().Num_mgr().Format_num(ns.Count()));
+			fmtr_ns_itm.BldToBfrMany(bfr, ns_name, wiki.Lang().Num_mgr().Format_num(ns.Count()));
 		}
 	}
-	private Bry_fmtr fmtr_ns_itm = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr_ns_itm = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	(	""
 	,	"  <tr>"
 	,	"    <td>~{ns_name}</td>"
@@ -105,12 +110,12 @@ class Xop_statistics_stats_ns_itm implements gplx.core.brys.Bfr_arg {
 	,	"  </tr>"
 	), "ns_name", "ns_count");
 }
-class Xop_statistics_stats_wiki_grp implements gplx.core.brys.Bfr_arg {
+class Xop_statistics_stats_wiki_grp implements BryBfrArg {
 	public void Wiki_(Xowe_wiki v) {this.wiki = v;} private Xowe_wiki wiki;
-	public void Bfr_arg__add(Bry_bfr bfr) {
-		fmtr_wiki.Bld_bfr_many(bfr, wiki.Db_mgr().Tid_name(), wiki.Fsys_mgr().Root_dir().Raw(), Byte_.To_str(wiki.Db_mgr().Category_version()), wiki.Maint_mgr().Wiki_dump_date().XtoStr_fmt_iso_8561());
+	public void AddToBfr(BryWtr bfr) {
+		fmtr_wiki.BldToBfrMany(bfr, wiki.Db_mgr().Tid_name(), wiki.Fsys_mgr().Root_dir().Raw(), ByteUtl.ToStr(wiki.Db_mgr().Category_version()), wiki.Maint_mgr().Wiki_dump_date().ToStrFmtIso8561());
 	}
-	private Bry_fmtr fmtr_wiki = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private BryFmtr fmtr_wiki = BryFmtr.New(StringUtl.ConcatLinesNlSkipLast
 	(	""	
 	,	"  <tr>"
 	,	"    <th colspan=\"2\">Wiki statistics</th>"

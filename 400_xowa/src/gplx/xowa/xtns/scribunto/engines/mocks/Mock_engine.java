@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*;
+package gplx.xowa.xtns.scribunto.engines.mocks;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.lists.hashs.*;
 public class Mock_engine implements Scrib_engine {
@@ -27,13 +32,13 @@ public class Mock_engine implements Scrib_engine {
 	public Scrib_lua_proc LoadString(String name, String text) {
 		return (Scrib_lua_proc)mod_init_hash.GetByOrNull(name);
 	}
-	public Keyval[] CallFunction(int id, Keyval[] args) {
+	public KeyVal[] CallFunction(int id, KeyVal[] args) {
 		Mock_proc_stub fnc = (Mock_proc_stub)fnc_hash.Get_by_or_fail(id);
 		return fnc.Exec_by_scrib(args);
 	}
-	public void RegisterLibrary(Keyval[] functions_ary) {}
-	public Keyval[] ExecuteModule(int mod_id) {throw Err_.new_unimplemented();}
-	public void CleanupChunks(Keyval[] ids) {}
+	public void RegisterLibrary(KeyVal[] functions_ary) {}
+	public KeyVal[] ExecuteModule(int mod_id) {throw ErrUtl.NewUnimplemented();}
+	public void CleanupChunks(KeyVal[] ids) {}
 	public void	Clear() {fnc_hash.Clear();}
 
 	public void	InitFunctionForTest(Mock_proc_stub proc) {
@@ -62,8 +67,8 @@ class Mock_server implements Scrib_server {
 	public int		Server_timeout() {return server_timeout;} public Scrib_server Server_timeout_(int v) {server_timeout = v; return this;} private int server_timeout = 60;
 	public int		Server_timeout_polling() {return server_timeout_polling;} public Scrib_server Server_timeout_polling_(int v) {server_timeout_polling = v; return this;} private int server_timeout_polling = 1;
 	public int		Server_timeout_busy_wait() {return server_timeout_busy_wait;} public Scrib_server Server_timeout_busy_wait_(int v) {server_timeout_busy_wait = v; return this;} private int server_timeout_busy_wait = 1;
-	public byte[]	Server_comm(byte[] cmd, Object[] cmd_objs) {return Bry_.Empty;}
+	public byte[]	Server_comm(byte[] cmd, Object[] cmd_objs) {return BryUtl.Empty;}
 	public void		Server_send(byte[] cmd, Object[] cmd_objs) {}
-	public byte[]	Server_recv() {return Bry_.Empty;}
+	public byte[]	Server_recv() {return BryUtl.Empty;}
 	public void		Term() {}
 }

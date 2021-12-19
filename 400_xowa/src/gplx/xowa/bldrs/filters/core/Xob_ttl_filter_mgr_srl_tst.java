@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.core; import gplx.*;
+package gplx.xowa.bldrs.filters.core;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Xob_ttl_filter_mgr_srl_tst {
 	@Before public void init() {fxt.Clear();} private final Xob_ttl_filter_mgr_srl_fxt fxt = new Xob_ttl_filter_mgr_srl_fxt();
@@ -23,7 +27,7 @@ public class Xob_ttl_filter_mgr_srl_tst {
 	@Test public void Comment_many()	{fxt.Test_parse("|x||"		, 0);}
 	@Test public void Blank()			{fxt.Test_parse("\n"		, 0);}
 	@Test public void Mix()			{
-		fxt.Test_parse(String_.Concat_lines_nl_skip_last
+		fxt.Test_parse(StringUtl.ConcatLinesNlSkipLast
 		( "|comment 1"
 		, "a"
 		, ""
@@ -41,12 +45,12 @@ class Xob_ttl_filter_mgr_srl_fxt {
 	}
 	public void Test_parse(String src, int expd_count, String... expd_itms) {
 		mgr.Init(hash);
-		mgr.Load_by_bry(Bry_.new_u8(src));
-		Tfds.Eq(expd_count, hash.Len());
+		mgr.Load_by_bry(BryUtl.NewU8(src));
+		GfoTstr.EqObj(expd_count, hash.Len());
 		int expd_len = expd_itms.length;
 		for (int i = 0; i < expd_len; ++i) {
 			String expd_itm = expd_itms[i];
-			Tfds.Eq_true(hash.Has(Bry_.new_u8(expd_itm)));
+			GfoTstr.EqBoolY(hash.Has(BryUtl.NewU8(expd_itm)));
 		}
 	}
 } 

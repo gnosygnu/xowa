@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.gfui.*;
 import gplx.gfui.controls.elems.*;
+import gplx.types.errs.ErrUtl;
 public class IptEventData {
 	public GfuiElem		Sender() {return sender;} GfuiElem sender;
 	public IptArg		EventArg() {return eventArg;} IptArg eventArg;
@@ -35,9 +39,9 @@ public class IptEventData {
 	}
 
 	public static IptEventData as_(Object obj) {return obj instanceof IptEventData ? (IptEventData)obj : null;}
-	public static IptEventData cast(Object obj) {try {return (IptEventData)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptEventData.class, obj);}}
-	@gplx.Internal protected static IptEventData new_(GfuiElem sender, IptEventType eventType, IptArg eventArg, IptEvtDataKey keyData, IptEvtDataMouse mouseData) {return new_(sender, eventType, eventArg, keyData, IptEvtDataKeyHeld.Null, mouseData);}
-	@gplx.Internal protected static IptEventData new_(GfuiElem sender, IptEventType eventType, IptArg eventArg, IptEvtDataKey keyData, IptEvtDataKeyHeld keyPressData, IptEvtDataMouse mouseData) {
+	public static IptEventData cast(Object obj) {try {return (IptEventData)obj;} catch(Exception exc) {throw ErrUtl.NewCast(exc, IptEventData.class, obj);}}
+	public static IptEventData new_(GfuiElem sender, IptEventType eventType, IptArg eventArg, IptEvtDataKey keyData, IptEvtDataMouse mouseData) {return new_(sender, eventType, eventArg, keyData, IptEvtDataKeyHeld.Null, mouseData);}
+	public static IptEventData new_(GfuiElem sender, IptEventType eventType, IptArg eventArg, IptEvtDataKey keyData, IptEvtDataKeyHeld keyPressData, IptEvtDataMouse mouseData) {
 		IptEventData rv = new IptEventData();
 		rv.sender = sender;
 		rv.eventType = eventType; rv.eventArg = eventArg;

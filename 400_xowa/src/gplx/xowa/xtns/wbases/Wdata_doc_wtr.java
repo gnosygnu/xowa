@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases;
-import gplx.Bry_;
-import gplx.Double_;
-import gplx.Err_;
-import gplx.Keyval;
-import gplx.Ordered_hash;
-import gplx.String_;
 import gplx.langs.jsons.Json_doc_wtr;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_rank_;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
 import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
@@ -59,8 +59,8 @@ public class Wdata_doc_wtr {
 		wtr.Key(true, key);
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
-			Keyval kv = (Keyval)list.Get_at(i);
-			wtr.Kv(i != 0, Bry_.new_u8(kv.Key()), Bry_.new_u8(kv.Val_to_str_or_empty()));
+			KeyVal kv = (KeyVal)list.GetAt(i);
+			wtr.Kv(i != 0, BryUtl.NewU8(kv.KeyToStr()), BryUtl.NewU8(kv.ValToStrOrEmpty()));
 		}
 		wtr.Nde_end();
 		list.Clear();
@@ -72,10 +72,10 @@ public class Wdata_doc_wtr {
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
 			if (i != 0) wtr.Comma();
-			Keyval kv = (Keyval)list.Get_at(i);
-			wtr.Key(false, Bry_.new_u8(kv.Key()));												// write key;	EX: enwiki:
+			KeyVal kv = (KeyVal)list.GetAt(i);
+			wtr.Key(false, BryUtl.NewU8(kv.KeyToStr()));												// write key;	EX: enwiki:
 			wtr.Nde_bgn();																			// bgn nde;		EX: {
-			wtr.Kv(false, Wdata_doc_parser_v1.Bry_name, Bry_.new_u8(kv.Val_to_str_or_empty()));	// write name;	EX:   name=Earth
+			wtr.Kv(false, Wdata_doc_parser_v1.Bry_name, BryUtl.NewU8(kv.ValToStrOrEmpty()));	// write name;	EX:   name=Earth
 			wtr.Nde_end();																			// end nde;		EX: }
 		}
 		wtr.Nde_end();
@@ -87,7 +87,7 @@ public class Wdata_doc_wtr {
 		wtr.Key(true, Wdata_doc_parser_v1.Bry_aliases);
 		wtr.Nde_bgn();
 		for (int i = 0; i < len; i++) {
-			Wdata_alias_itm alias = (Wdata_alias_itm)aliases.Get_at(i);
+			Wdata_alias_itm alias = (Wdata_alias_itm)aliases.GetAt(i);
 			wtr.Key(i != 0, alias.Lang());
 			wtr.Ary_bgn();
 			byte[][] aliases_ary = alias.Vals();
@@ -108,7 +108,7 @@ public class Wdata_doc_wtr {
 		wtr.Ary_bgn();
 		for (int i = 0; i < len; i++) {
 			if (i != 0) wtr.Comma();
-			Wbase_claim_base prop = (Wbase_claim_base)props.Get_at(i);
+			Wbase_claim_base prop = (Wbase_claim_base)props.GetAt(i);
 			wtr.Nde_bgn();
 			wtr.Key(false, Wdata_dict_claim_v1.Bry_m);
 			wtr.Ary_bgn();
@@ -148,8 +148,8 @@ public class Wdata_doc_wtr {
 						wtr.Val(BoolUtl.Y, Wbase_claim_type_.Itm__globecoordinate.Key_bry());
 						wtr.Comma();
 						wtr.Nde_bgn();
-						wtr.Kv_double	(BoolUtl.N, Wbase_claim_globecoordinate_.Itm__latitude.Key_bry()	, Double_.parse(String_.new_a7(claim_globecoordinate.Lat())));
-						wtr.Kv_double	(BoolUtl.Y, Wbase_claim_globecoordinate_.Itm__longitude.Key_bry()	, Double_.parse(String_.new_a7(claim_globecoordinate.Lng())));
+						wtr.Kv_double	(BoolUtl.N, Wbase_claim_globecoordinate_.Itm__latitude.Key_bry()	, DoubleUtl.Parse(StringUtl.NewA7(claim_globecoordinate.Lat())));
+						wtr.Kv_double	(BoolUtl.Y, Wbase_claim_globecoordinate_.Itm__longitude.Key_bry()	, DoubleUtl.Parse(StringUtl.NewA7(claim_globecoordinate.Lng())));
 						wtr.Kv			(BoolUtl.Y, Wbase_claim_globecoordinate_.Itm__altitude.Key_bry()	, null);
 						wtr.Kv			(BoolUtl.Y, Wbase_claim_globecoordinate_.Itm__globe.Key_bry()		, Wbase_claim_globecoordinate_.Val_globe_dflt_bry);
 						wtr.Kv_double	(BoolUtl.Y, Wbase_claim_globecoordinate_.Itm__precision.Key_bry()	, .00001d);
@@ -178,7 +178,7 @@ public class Wdata_doc_wtr {
 						wtr.Nde_end();
 						break;
 					}
-					default: throw Err_.new_unhandled(prop.Val_tid());
+					default: throw ErrUtl.NewUnhandled(prop.Val_tid());
 				}
 			}
 			wtr.Ary_end();

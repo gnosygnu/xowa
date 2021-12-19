@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-public class Site_statistic_itm implements To_str_able {
+package gplx.xowa.bldrs.wms.sites;
+import gplx.frameworks.objects.ToStrAble;
+import gplx.types.basics.utls.StringUtl;
+public class Site_statistic_itm implements ToStrAble {
 	public Site_statistic_itm Ctor(long pages, long articles, long edits, long images, long users, long activeusers, long admins, long jobs, long queued_massmessages) {
 		this.pages = pages;
 		this.articles = articles;
@@ -36,5 +38,5 @@ public class Site_statistic_itm implements To_str_able {
 	public long Admins() {return admins;} private long admins;
 	public long Jobs() {return jobs;} private long jobs;
 	public long Queued_massmessages() {return queued_massmessages;} private long queued_massmessages;
-	public String To_str() {return String_.Concat_with_obj("|", pages, articles, edits, images, users, activeusers, admins, queued_massmessages);}
+	public String ToStr() {return StringUtl.ConcatWithObj("|", pages, articles, edits, images, users, activeusers, admins, queued_massmessages);}
 }

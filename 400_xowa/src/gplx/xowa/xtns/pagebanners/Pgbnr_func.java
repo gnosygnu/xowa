@@ -15,18 +15,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pagebanners;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Double_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp_bry;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
 import gplx.langs.mustaches.JsonMustacheNde;
 import gplx.langs.mustaches.Mustache_bfr;
@@ -55,17 +55,17 @@ import gplx.xowa.xtns.pfuncs.Pf_func_base;
 public class Pgbnr_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_pagebanner;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pgbnr_func().Name_(name);}
-	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) { // {{PAGEBANNER}} appears on page; WikidataPageBanner.hooks.php|addCustomBanner
+	@Override public void Func_evaluate(BryWtr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) { // {{PAGEBANNER}} appears on page; WikidataPageBanner.hooks.php|addCustomBanner
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Page();
 		Pgbnr_xtn_mgr xtn_mgr = wiki.Xtn_mgr().Xtn_pgbnr();
 		Pgbnr_cfg cfg = xtn_mgr.Cfg();
 		Xoa_ttl ttl = page.Ttl();
 		if (!cfg.Chk_pgbnr_allowed(ttl, wiki)) return;
-		byte[] tooltip = ttl.Page_txt(), title = ttl.Page_txt(), toc = Bry_.Empty, origin_x = Bry_.Empty;
+		byte[] tooltip = ttl.Page_txt(), title = ttl.Page_txt(), toc = BryUtl.Empty, origin_x = BryUtl.Empty;
 		boolean bottomtoc = false;;
 		double data_pos_x = 0, data_pos_y = 0;
 		List_adp icons_list = null;
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int args_len = self.Args_len();
 		Xop_func_arg_itm func_arg = new Xop_func_arg_itm();
 		for (int i = 0; i < args_len; ++i) {
@@ -73,47 +73,47 @@ public class Pgbnr_func extends Pf_func_base {
 			func_arg.Set(tmp_bfr, ctx, src, caller, self, arg);
 			byte[] key = func_arg.key;
 			byte[] val = func_arg.val;
-			if (key == Bry_.Empty) continue; // ignore blank args; EX:{{PAGEBANNER:A.png|\n|toc=yes}}
+			if (key == BryUtl.Empty) continue; // ignore blank args; EX:{{PAGEBANNER:A.png|\n|toc=yes}}
 			int tid = arg_hash.Get_as_int_or(key, -1);
 			if (tid == Arg__pgname)
 				tooltip = title = val;
 			if (tid == Arg__tooltip)	// note that this overrides pgname above
 				tooltip = val;
-			if (tid == Arg__bottomtoc	&& Bry_.Eq(val, Bry__yes))
+			if (tid == Arg__bottomtoc	&& BryLni.Eq(val, Bry__yes))
 				bottomtoc = true;
-			if (tid == Arg__toc			&& Bry_.Eq(val, Bry__yes))						// REF.MW:addToc
-				toc = Bry_.Empty;						// note that "" will be overwritten later by actual toc html
+			if (tid == Arg__toc			&& BryLni.Eq(val, Bry__yes))						// REF.MW:addToc
+				toc = BryUtl.Empty;						// note that "" will be overwritten later by actual toc html
 			if (	tid == -1							// note that "icon-*" won't have a tid
-				&&	Bry_.Has_at_bgn(key, Bry__icon)		// if (substr($key, 0, 5) === 'icon-')
-				&&	Bry_.Len(key)	> 5					// if ( !isset( $iconname) )
-				&&	Bry_.Len_gt_0(val)					// if ( !isset( $$value ) )
+				&&	BryUtl.HasAtBgn(key, Bry__icon)		// if (substr($key, 0, 5) === 'icon-')
+				&&	BryUtl.Len(key)	> 5					// if ( !isset( $iconname) )
+				&&	BryUtl.IsNotNullOrEmpty(val)					// if ( !isset( $$value ) )
 				) {										// REF.MW:addIcons
 				tid = Arg__icon;
 				if (icons_list == null) icons_list = List_adp_.New();
-				byte[] icon_key = Bry_.Mid(key, 5);
+				byte[] icon_key = BryLni.Mid(key, 5);
 				byte[] icon_name = Xop_sanitizer.Escape_cls(icon_key);
 				byte[] icon_title = icon_name;
 				Xoa_ttl icon_ttl = wiki.Ttl_parse(val);
 				byte[] icon_href = Bry__icon_href_dflt;
 				if (icon_ttl != null) {
-					icon_href = Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, icon_ttl.Page_db());
+					icon_href = BryUtl.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, icon_ttl.Page_db());
 					icon_title = icon_ttl.Page_txt();
 				}
 				icons_list.Add(new Pgbnr_icon(tmp_bfr, icon_name, icon_title, icon_href));
 //				itm.Add_new_icon(tmp_bfr, icon_name, icon_title, icon_href);
 			}
 			if (tid == Arg__origin) {					// REF.MW:addFocus
-				double tmp_data_pos_x = Double_.NaN, tmp_data_pos_y = Double_.NaN;
-				int comma_pos = Bry_find_.Find_fwd(val, AsciiByte.Comma);
-				if (comma_pos != Bry_find_.Not_found) {
-					tmp_data_pos_x = Bry_.To_double_or(val, 0, comma_pos, Double_.NaN);
-					if (!Double_.IsNaN(tmp_data_pos_x)) {
+				double tmp_data_pos_x = DoubleUtl.NaN, tmp_data_pos_y = DoubleUtl.NaN;
+				int comma_pos = BryFind.FindFwd(val, AsciiByte.Comma);
+				if (comma_pos != BryFind.NotFound) {
+					tmp_data_pos_x = BryUtl.ToDoubleOr(val, 0, comma_pos, DoubleUtl.NaN);
+					if (!DoubleUtl.IsNaN(tmp_data_pos_x)) {
 						if (tmp_data_pos_x >= -1 && tmp_data_pos_x <= 1) {
 							data_pos_x = tmp_data_pos_x;
 							origin_x = tmp_data_pos_x <= .25d ? Bry__origin_x__left : Bry__origin_x__right;
 						}
 					}
-					if (!Double_.IsNaN(tmp_data_pos_y)) {
+					if (!DoubleUtl.IsNaN(tmp_data_pos_y)) {
 						if (tmp_data_pos_y >= -1 && tmp_data_pos_y <= 1)
 							data_pos_y = tmp_data_pos_y;
 					}
@@ -138,7 +138,7 @@ public class Pgbnr_func extends Pf_func_base {
 		page.Html_data().Head_mgr().Itm__pgbnr().Enabled_y_();	// register css / js during parse stage
 		page.Wtxt().Toc().Flag__toc_(true);	// NOTE: must mark toc_manual else will show 2nd TOC in edit mode; DATE:2016-07-10
 	}
-	public static void Add_banner(Bry_bfr bfr, Xoae_page wpg, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_itm itm) {
+	public static void Add_banner(BryWtr bfr, Xoae_page wpg, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_itm itm) {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_app app = wiki.Appe();
 		Pgbnr_cfg cfg = wiki.Xtn_mgr().Xtn_pgbnr().Cfg(); if (!cfg.enabled) return;
 		Xoa_ttl ttl = wpg.Ttl();
@@ -161,7 +161,7 @@ public class Pgbnr_func extends Pf_func_base {
 				banner_ttl = wiki.Ttl_parse(cfg.dflt_img_title);
 			Xof_file_itm banner_file_itm = File__make_tkn(ctx, Xop_file_logger_.Tid__pgbnr_main, banner_ttl, Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null);
 			itm = new Pgbnr_itm();
-			itm.Init_from_wtxt(banner_ttl, banner_file_itm, Bry_.Empty, Bry_.Empty, false, Bry_.Empty, 0, 0, Bry_.Empty, Pgbnr_icon.Ary_empty);
+			itm.Init_from_wtxt(banner_ttl, banner_file_itm, BryUtl.Empty, BryUtl.Empty, false, BryUtl.Empty, 0, 0, BryUtl.Empty, Pgbnr_icon.Ary_empty);
 			itm.Init_hdump(hctx.Mode_is_hdump());
 			banner_html = Get_banner_html(wiki, ctx, hctx, cfg, banner_ttl, itm);
 		}
@@ -171,16 +171,16 @@ public class Pgbnr_func extends Pf_func_base {
 	}
 	public static byte[] Get_banner_html(Xowe_wiki wiki, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_cfg cfg, Xoa_ttl banner_ttl, Pgbnr_itm itm) {
 		byte[][] urls = Get_standard_size_urls(wiki, cfg, banner_ttl); if (urls == null) return null;
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		BryWtr tmp_bfr = BryWtr.New();
 		int urls_len = urls.length;
 		int[] sizes = cfg.standard_sizes;
 		for (int i = 0; i < urls_len; ++i) {
 			int size = sizes[i];
-			if (i != 0) tmp_bfr.Add_byte_comma();
-			tmp_bfr.Add(urls[i]).Add_byte_space().Add_int_variable(size).Add_byte(AsciiByte.Ltr_w); //	REF.MW: $srcset[] = "$url {$size}w";
+			if (i != 0) tmp_bfr.AddByteComma();
+			tmp_bfr.Add(urls[i]).AddByteSpace().AddIntVariable(size).AddByte(AsciiByte.Ltr_w); //	REF.MW: $srcset[] = "$url {$size}w";
 		}
-		byte[] srcset = tmp_bfr.To_bry_and_clear();
-		byte[] banner_url = itm.banner_img_src != null ? itm.banner_img_src : urls.length == 0 ? Bry_.Empty : urls[urls_len - 1];	// gets largest url
+		byte[] srcset = tmp_bfr.ToBryAndClear();
+		byte[] banner_url = itm.banner_img_src != null ? itm.banner_img_src : urls.length == 0 ? BryUtl.Empty : urls[urls_len - 1];	// gets largest url
 		Xof_file_itm banner_file_itm = itm.banner_file_itm;
 		int max_width = banner_file_itm.Orig_w();  // $file = wfFindFile( banner_file ); $options['max_width'] = $file->getWidth();
 		// Provide information to the logic-less template about whether it is a panorama or not.
@@ -190,13 +190,13 @@ public class Pgbnr_func extends Pf_func_base {
 		byte[] toc_html = null;
 		if (hctx.Mode_is_hdump()) {
 			gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_tag(tmp_bfr, true);
-			toc_html = tmp_bfr.To_bry_and_clear();
-			banner_file = Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, gplx.xowa.wikis.nss.Xow_ns_.Bry__file, AsciiByte.ColonBry
+			toc_html = tmp_bfr.ToBryAndClear();
+			banner_file = BryUtl.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, gplx.xowa.wikis.nss.Xow_ns_.Bry__file, AsciiByte.ColonBry
 				, Gfo_url_encoder_.Href.Encode(banner_ttl.Full_db()));	// NOTE: must encode so "'" becomes "%27", not "&#39;"; PAGE:en.v:'s-Hertogenbosch; DATE:2016-07-12
 		}
 		else {
 			ctx.Page().Html_data().Toc_mgr().To_html(tmp_bfr, Xoh_wtr_ctx.Basic, true);
-			toc_html = tmp_bfr.To_bry_and_clear();
+			toc_html = tmp_bfr.ToBryAndClear();
 		}
 		itm.Init_from_html(max_width, banner_file, banner_url, srcset, cfg.enable_heading_override, toc_html, isPanorama);
 
@@ -215,7 +215,7 @@ public class Pgbnr_func extends Pf_func_base {
 			if (url != null)
 				hash.AddIfDupeUse1st(url, url);
 		}
-		return (byte[][])hash.To_ary_and_clear(byte[].class);
+		return (byte[][])hash.ToAryAndClear(byte[].class);
 	}
 	private static byte[] Get_image_url(Xow_wiki wiki, Xoa_ttl banner_ttl, int width) {
 		// Object file = new Object(); // $file = wfFindFile( file_ttl );
@@ -240,7 +240,7 @@ public class Pgbnr_func extends Pf_func_base {
 		Xof_file_itm file_itm = ctx.Wiki().Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, ctx.Page(), lnki);
 		return file_itm;
 	}
-	private static final byte[] Bry__yes = Bry_.new_a7("yes"), Bry__icon = Bry_.new_a7("icon-"), Bry__icon_href_dflt = Bry_.new_a7("#"), Bry__origin_x__left = Bry_.new_a7("wpb-left"), Bry__origin_x__right = Bry_.new_a7("wpb-right");
+	private static final byte[] Bry__yes = BryUtl.NewA7("yes"), Bry__icon = BryUtl.NewA7("icon-"), Bry__icon_href_dflt = BryUtl.NewA7("#"), Bry__origin_x__left = BryUtl.NewA7("wpb-left"), Bry__origin_x__right = BryUtl.NewA7("wpb-right");
 	private static final int Arg__pgname = 0, Arg__tooltip = 1, Arg__bottomtoc = 2, Arg__toc = 3, Arg__icon = 4, Arg__origin = 5;
 	private static final Hash_adp_bry arg_hash = Hash_adp_bry.cs().Add_str_int("pgname", Arg__pgname)
 		.Add_str_int("tooltip", Arg__tooltip).Add_str_int("bottomtoc", Arg__bottomtoc).Add_str_int("toc", Arg__toc).Add_str_int("origin", Arg__origin);

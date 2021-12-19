@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.registrys.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.registrys.*;
-import gplx.xowa.specials.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.addons.wikis.registrys.lists;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.xowa.*;
+import gplx.xowa.specials.*;
+import gplx.core.net.qargs.*;
 public class Xow_list_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
 		Gfo_qarg_mgr url_args = new Gfo_qarg_mgr().Init(url.Qargs_ary());
@@ -23,7 +27,7 @@ public class Xow_list_special implements Xow_special_page {
 		if (url_args.Read_enm_as_int_or(Enm_cmd.Itm, -1) == Enm_cmd.Tid__add) {
 			byte[] file = url_args.Read_bry_or_fail("file");
 			if (wiki.App().Tid_is_edit()) wiki.App().User().User_db_mgr().Init_site_mgr();	// HACK.USER_DB: init site_mgr for desktop
-			wiki.App().Wiki_mgri().Import_by_url(Io_url_.new_fil_(String_.new_u8(file)));
+			wiki.App().Wiki_mgri().Import_by_url(Io_url_.new_fil_(StringUtl.NewU8(file)));
 		}
 
 		// show list of wikis

@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.apps.fsys;
+import gplx.libs.files.Io_mgr;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import org.junit.*;
 import gplx.xowa.users.*;
 public class Xoa_url_finder_tst {
 	private final Xoa_url_finder_fxt fxt = new Xoa_url_finder_fxt();
@@ -22,7 +27,7 @@ public class Xoa_url_finder_tst {
 		// init
 		String wiki = "en.wikipedia.org";
 		String file = "logo_night.png";
-		String[] subs = String_.Ary("bin", "any", "xowa", "html", "css", "nightmode");
+		String[] subs = StringUtl.Ary("bin", "any", "xowa", "html", "css", "nightmode");
 		String expd = null;
 
 		// null case
@@ -59,6 +64,6 @@ class Xoa_url_finder_fxt {
 	}
 	public void Test__Find_by_css_or_null(String expd, String wiki, String file, String[] dir_parts) {
 		Io_url actl = finder.Find_by_css_or(wiki, file, dir_parts, false);
-		Gftest.Eq__str(expd, actl == null ? null : actl.Raw());
+		GfoTstr.Eq(expd, actl == null ? null : actl.Raw());
 	}
 }

@@ -14,10 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb;
-import gplx.Err_;
-import gplx.Guid_adp_;
-import gplx.Io_mgr;
-import gplx.Io_url;
+import gplx.types.commons.GfoGuidUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.libs.files.Io_url;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.cfgs.Db_cfg_tbl;
@@ -29,7 +28,8 @@ import gplx.fsdb.meta.Fsm_atr_tbl;
 import gplx.fsdb.meta.Fsm_bin_tbl;
 import gplx.fsdb.meta.Fsm_mnt_mgr;
 import gplx.fsdb.meta.Fsm_mnt_tbl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.errs.ErrUtl;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.bldrs.infos.Xob_info_file;
 import gplx.xowa.files.origs.Xof_orig_tbl;
@@ -104,7 +104,7 @@ public class Fsdb_db_mgr__v2_bldr {
 			case Xow_db_layout.Tid__all:	return Main_core_name_all(wiki_domain);
 			case Xow_db_layout.Tid__few:	return Main_core_name_few(wiki_domain);
 			case Xow_db_layout.Tid__lot:  return Main_core_name_lot(wiki_domain);
-			default:						throw Err_.new_unimplemented();
+			default:						throw ErrUtl.NewUnimplemented();
 		}
 	}
 	private static byte Main_core_tid(Xow_db_layout layout) {
@@ -112,14 +112,14 @@ public class Fsdb_db_mgr__v2_bldr {
 			case Xow_db_layout.Tid__all:	return Xow_db_file_.Tid__core;
 			case Xow_db_layout.Tid__few:	return Xow_db_file_.Tid__file_solo;
 			case Xow_db_layout.Tid__lot:	return Xow_db_file_.Tid__file_core;
-			default:						throw Err_.new_unimplemented();
+			default:						throw ErrUtl.NewUnimplemented();
 		}
 	}
 	public static void Make_cfg_data(Xow_wiki wiki, String file_core_name, Fsdb_db_file file, byte file_tid, int part_id) {
 		Db_cfg_tbl cfg_tbl = file.Tbl__cfg();
 		Xow_db_file core_db = wiki.Data__core_mgr().Db__core();
 		core_db.Info_session().Save(cfg_tbl);
-		Xob_info_file info_file = new Xob_info_file(-1, Xow_db_file_.To_key(file_tid), Xob_info_file.Ns_ids_empty, part_id, Guid_adp_.New(), 2, file_core_name, file.Url().NameAndExt());
+		Xob_info_file info_file = new Xob_info_file(-1, Xow_db_file_.To_key(file_tid), Xob_info_file.Ns_ids_empty, part_id, GfoGuidUtl.New(), 2, file_core_name, file.Url().NameAndExt());
 		info_file.Save(cfg_tbl);
 	}
 	private static String	Main_core_name_all(String wiki_domain)	{return wiki_domain + ".xowa";}					// EX: en.wikipedia.org.xowa

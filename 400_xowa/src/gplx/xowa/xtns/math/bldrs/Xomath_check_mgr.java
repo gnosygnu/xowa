@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.bldrs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.math.bldrs;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryUtlByWtr;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.parsers.logs.*;
@@ -48,35 +55,35 @@ class Xomath_check_mgr {
 		, count_total, count_xnde_invalid, count_xnde_w_atrs, count_texvc_invalid, count_texvc_adjusted);
 	}
 
-	private final byte[] math_lhs_bry = Bry_.new_a7("<math"), math_rhs_bry = Bry_.new_a7("</math>"), nl_repl_bry = Bry_.new_a7("    ");
+	private final byte[] math_lhs_bry = BryUtl.NewA7("<math"), math_rhs_bry = BryUtl.NewA7("</math>"), nl_repl_bry = BryUtl.NewA7("    ");
 	private byte[] Assert_flanking_math_ndes(int page_id, byte[] src) {
 		// assert "<math" at start
-		if (!Bry_.Has_at_bgn(src, math_lhs_bry)) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "math.check:xnde_invalid b/c '<math' is not at beginning; page_id=~{0}, src=~{1}", page_id, Bry_.Replace(src, AsciiByte.NlBry, nl_repl_bry));
+		if (!BryUtl.HasAtBgn(src, math_lhs_bry)) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "math.check:xnde_invalid b/c '<math' is not at beginning; page_id=~{0}, src=~{1}", page_id, BryUtlByWtr.Replace(src, AsciiByte.NlBry, nl_repl_bry));
 			return null;
 		}
 
 		// assert "</math>" at end
-		if (!Bry_.Has_at_end(src, math_rhs_bry)) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "math.check:xnde_invalid b/c '</math>' is not at end; page_id=~{0}, src=~{1}", page_id, Bry_.Replace(src, AsciiByte.NlBry, nl_repl_bry));
+		if (!BryUtl.HasAtEnd(src, math_rhs_bry)) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "math.check:xnde_invalid b/c '</math>' is not at end; page_id=~{0}, src=~{1}", page_id, BryUtlByWtr.Replace(src, AsciiByte.NlBry, nl_repl_bry));
 			return null;
 		}
 
 		// assert "<math>"
-		int math_lhs_end = Bry_find_.Find_fwd(src, AsciiByte.GtBry, math_lhs_bry.length);
+		int math_lhs_end = BryFind.FindFwd(src, AsciiByte.GtBry, math_lhs_bry.length);
 		if (math_lhs_end != math_lhs_bry.length) {
 			count_xnde_w_atrs++;
-			Gfo_usr_dlg_.Instance.Log_many("", "", "math.check:xnde_w_atrs; page_id=~{0}, src=~{1}", page_id, Bry_.Replace(src, AsciiByte.NlBry, nl_repl_bry));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "math.check:xnde_w_atrs; page_id=~{0}, src=~{1}", page_id, BryUtlByWtr.Replace(src, AsciiByte.NlBry, nl_repl_bry));
 		}
 
 		// remove "<math>", "</math>"
-		return Bry_.Mid(src, math_lhs_end + 1, src.length - math_rhs_bry.length);
+		return BryLni.Mid(src, math_lhs_end + 1, src.length - math_rhs_bry.length);
 	}
 
 	private final Texvc_parser parser = new Texvc_parser();
 	private final Texvc_checker checker = new Texvc_checker();
 	private final Texvc_ctx ctx = new Texvc_ctx();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final BryWtr tmp_bfr = BryWtr.New();
 	private void Check_texvc(int page_id, byte[] src) {
 		try {
 			Texvc_root root = new Texvc_root();
@@ -85,14 +92,14 @@ class Xomath_check_mgr {
 			checker.Check(src, root);
 			tmp_bfr.Clear();
 			root.Print_tex_bry(tmp_bfr, src, 0);
-			byte[] texvc_bry = tmp_bfr.To_bry_and_clear();
-			if (!Bry_.Eq(src, texvc_bry)) {
+			byte[] texvc_bry = tmp_bfr.ToBryAndClear();
+			if (!BryLni.Eq(src, texvc_bry)) {
 				count_texvc_adjusted++;
-				Gfo_usr_dlg_.Instance.Log_many("", "", "math.check:texvc_adjusted; page_id=~{0}, src=~{1} texvc=~{2}", page_id, Bry_.Replace(src, AsciiByte.NlBry, nl_repl_bry), Bry_.Replace(texvc_bry, AsciiByte.NlBry, nl_repl_bry));
+				Gfo_usr_dlg_.Instance.Log_many("", "", "math.check:texvc_adjusted; page_id=~{0}, src=~{1} texvc=~{2}", page_id, BryUtlByWtr.Replace(src, AsciiByte.NlBry, nl_repl_bry), BryUtlByWtr.Replace(texvc_bry, AsciiByte.NlBry, nl_repl_bry));
 			}
 		} catch (Exception exc) {
 			count_texvc_invalid++;
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "math.check:texvc_invalid; page_id=~{0}, src=~{1} err=~{2}", page_id, Bry_.Replace(src, AsciiByte.NlBry, nl_repl_bry), Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "math.check:texvc_invalid; page_id=~{0}, src=~{1} err=~{2}", page_id, BryUtlByWtr.Replace(src, AsciiByte.NlBry, nl_repl_bry), ErrUtl.ToStrLog(exc));
 		}
 	}
 }

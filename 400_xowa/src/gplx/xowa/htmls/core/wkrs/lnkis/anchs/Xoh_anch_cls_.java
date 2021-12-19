@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.anchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.anchs;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.btries.*;
 public class Xoh_anch_cls_ {
 	public static final byte	// SERIALIZED
@@ -27,12 +28,12 @@ public class Xoh_anch_cls_ {
 	, Tid__voyage__email	= 7
 	;
 	public static final byte[]
-	  Bry__media_play		= Bry_.new_a7("xowa_media_play")
-	, Bry__media_info		= Bry_.new_a7("xowa_media_info")
-	, Bry__ctg_main			= Bry_.new_a7("internal")
+	  Bry__media_play		= BryUtl.NewA7("xowa_media_play")
+	, Bry__media_info		= BryUtl.NewA7("xowa_media_info")
+	, Bry__ctg_main			= BryUtl.NewA7("internal")
 	, Bry__ctg_tree			= gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr.Html__cls__bry
-	, Bry__ctg_xnav			= Bry_.new_a7("xowa_nav")
-	, Bry__voyage_email		= Bry_.new_a7("email")
+	, Bry__ctg_xnav			= BryUtl.NewA7("xowa_nav")
+	, Bry__voyage_email		= BryUtl.NewA7("email")
 	;
 	public static final Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Bry__media_play		, Tid__media_play)

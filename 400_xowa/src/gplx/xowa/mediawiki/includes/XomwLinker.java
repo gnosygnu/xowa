@@ -14,18 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.Bry_split_;
-import gplx.Hash_adp_bry;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.BrySplitWkr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.Gfh_tag_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.mediawiki.XomwEnv;
 import gplx.xowa.mediawiki.XophpMath_;
 import gplx.xowa.mediawiki.XophpObject_;
@@ -50,7 +51,7 @@ import gplx.xowa.mediawiki.includes.xohtml.Xomw_qry_mgr;
 */
 public class XomwLinker {
 //		private XomwEnv env;
-	private final Bry_bfr tmp = Bry_bfr_.New(), tmp_2 = Bry_bfr_.New();
+	private final BryWtr tmp = BryWtr.New(), tmp_2 = BryWtr.New();
 	private final Linker_rel_splitter splitter = new Linker_rel_splitter();
 	private byte[] wg_title = null;
 	private final Btrie_rv trv = new Btrie_rv();
@@ -59,16 +60,16 @@ public class XomwLinker {
 	private final Xomw_atr_mgr tmp_attribs = new Xomw_atr_mgr();
 	private final XomwHtmlTemp htmlTemp = new XomwHtmlTemp();
 
-	private static final byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
+	private static final byte[] Atr__class = BryUtl.NewA7("class"), Atr__rel = BryUtl.NewA7("rel"), Atr__href = BryUtl.NewA7("href"), Rel__nofollow = BryUtl.NewA7("nofollow");
 	public static final byte[]
-	  Align__frame__center = Bry_.new_a7("center")
-	, Align__frame__none = Bry_.new_a7("none")
-	, Align__frame__right = Bry_.new_a7("right")
-	, Prefix__center = Bry_.new_a7("<div class=\"center\">")
-	, Class__internal = Bry_.new_a7("internal")
-	, Class__magnify = Bry_.new_a7("magnify")
-	, Img_class__thumbborder = Bry_.new_a7("thumbborder")
-	, Img_class__thumbimage = Bry_.new_a7("thumbimage")
+	  Align__frame__center = BryUtl.NewA7("center")
+	, Align__frame__none = BryUtl.NewA7("none")
+	, Align__frame__right = BryUtl.NewA7("right")
+	, Prefix__center = BryUtl.NewA7("<div class=\"center\">")
+	, Class__internal = BryUtl.NewA7("internal")
+	, Class__magnify = BryUtl.NewA7("magnify")
+	, Img_class__thumbborder = BryUtl.NewA7("thumbborder")
+	, Img_class__thumbimage = BryUtl.NewA7("thumbimage")
 	;
 	private final XomwLinkRenderer link_renderer;
 	public XomwLinker(XomwLinkRenderer link_renderer) {
@@ -147,7 +148,7 @@ public class XomwLinker {
 	//     'https': Force a full URL with https:// as the scheme.
 	//     'stubThreshold' => (int): Stub threshold to use when determining link classes.
 	// @return String HTML <a> attribute
-	public void Link(Bry_bfr bfr, XomwTitleOld target, byte[] html, Xomw_atr_mgr custom_attribs, Xomw_qry_mgr query, Xomw_opt_mgr options) {
+	public void Link(BryWtr bfr, XomwTitleOld target, byte[] html, Xomw_atr_mgr custom_attribs, Xomw_qry_mgr query, Xomw_opt_mgr options) {
 		// XO.MW.UNSUPPORTED:MW has different renderers -- presumably for forcing "https:" and others; XO only has one
 		//if (options != null) {
 		//	// Custom options, create new LinkRenderer
@@ -175,7 +176,7 @@ public class XomwLinker {
 			link_renderer.makeBrokenLink(bfr, target, text, custom_attribs, query);
 		}
 		else if (options.no_classes) {
-			link_renderer.makePreloadedLink(bfr, target, text, Bry_.Empty, custom_attribs, query);
+			link_renderer.makePreloadedLink(bfr, target, text, BryUtl.Empty, custom_attribs, query);
 		}
 		else {
 			link_renderer.makeLink(bfr, target, text, custom_attribs, query);
@@ -213,18 +214,18 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeSelfLinkObj(Bry_bfr bfr, XomwTitleOld nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {
+	public void makeSelfLinkObj(BryWtr bfr, XomwTitleOld nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {
 		// MW.HOOK:SelfLinkBegin
-		if (html == Bry_.Empty) {
-			html = tmp.Add_bry_escape_html(nt.getPrefixedText()).To_bry_and_clear();
+		if (html == BryUtl.Empty) {
+			html = tmp.AddBryEscapeHtml(nt.getPrefixedText()).ToBryAndClear();
 		}
-		byte[] inside = Bry_.Empty;
+		byte[] inside = BryUtl.Empty;
 		byte[][] split_trail = splitTrail(trail);
 		inside = split_trail[0];
 		trail = split_trail[1];
-		bfr.Add_str_a7("<strong class=\"selflink\">");
-		bfr.Add_bry_many(prefix, html, inside);
-		bfr.Add_str_a7("</strong>");
+		bfr.AddStrA7("<strong class=\"selflink\">");
+		bfr.AddBryMany(prefix, html, inside);
+		bfr.AddStrA7("</strong>");
 		bfr.Add(trail);
 	}
 
@@ -354,7 +355,7 @@ public class XomwLinker {
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeImageLink(Bry_bfr bfr, XomwEnv env, XomwParserCtx pctx, XomwParserIface parser, XomwTitleOld title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
+	public void makeImageLink(BryWtr bfr, XomwEnv env, XomwParserCtx pctx, XomwParserIface parser, XomwTitleOld title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
 		if (file != null && !file.allowInlineDisplay()) {
@@ -365,21 +366,21 @@ public class XomwLinker {
 		// Clean up parameters
 		int page = handlerParams.page;
 		if (!XophpObject_.isset(frameParams.align)) {
-			frameParams.align = Bry_.Empty;
+			frameParams.align = BryUtl.Empty;
 		}
 		if (!XophpObject_.isset(frameParams.alt)) {
-			frameParams.alt = Bry_.Empty;
+			frameParams.alt = BryUtl.Empty;
 		}
 		if (!XophpObject_.isset(frameParams.title)) {
-			frameParams.title = Bry_.Empty;
+			frameParams.title = BryUtl.Empty;
 		}
 		if (!XophpObject_.isset(frameParams.cls)) {
-			frameParams.cls = Bry_.Empty;
+			frameParams.cls = BryUtl.Empty;
 		}
 
-		byte[] prefix = Bry_.Empty; byte[] postfix = Bry_.Empty;
+		byte[] prefix = BryUtl.Empty; byte[] postfix = BryUtl.Empty;
 
-		if (Bry_.Eq(Align__frame__center, frameParams.align)) {
+		if (BryLni.Eq(Align__frame__center, frameParams.align)) {
 			prefix = Prefix__center;
 			postfix = Gfh_tag_.Div_rhs;
 			frameParams.align = Align__frame__none;
@@ -433,7 +434,7 @@ public class XomwLinker {
 			// left-aligned for RTL languages)
 			// If a thumbnail width has not been provided, it is set
 			// to the default user option as specified in Language*.php
-			if (frameParams.align == Bry_.Empty) {
+			if (frameParams.align == BryUtl.Empty) {
 				frameParams.align = env.Lang__align_end;
 			}
 			bfr.Add(prefix);
@@ -464,7 +465,7 @@ public class XomwLinker {
 		byte[] s = null;
 		if (thumb == null) {
 //				$s = self::makeBrokenImageLinkObj($title, frameParams['title'], '', '', '', $time == true);
-			s = Bry_.Empty;
+			s = BryUtl.Empty;
 		}
 		else {
 //				self::processResponsiveImages($file, $thumb, handlerParams);
@@ -479,14 +480,14 @@ public class XomwLinker {
 			getImageLinkMTOParams(prms, frameParams, query, parser);
 
 			thumb.toHtml(tmp, tmp_2, prms);
-			s = tmp.To_bry_and_clear();
+			s = tmp.ToBryAndClear();
 		}
-		if (frameParams.align != Bry_.Empty) {
-			tmp.Add_str_a7("<div class=\"float").Add(frameParams.align);
+		if (frameParams.align != BryUtl.Empty) {
+			tmp.AddStrA7("<div class=\"float").Add(frameParams.align);
 			tmp.Add(s);
-			tmp.Add_str_a7("\">");
-			tmp.Add_str_a7("</div>");
-			s = tmp.To_bry_and_clear();
+			tmp.AddStrA7("\">");
+			tmp.AddStrA7("</div>");
+			s = tmp.ToBryAndClear();
 		}
 
 		// XO.MW: "str_replace("\n", ' ', prefix . $s . postfix);"
@@ -494,7 +495,7 @@ public class XomwLinker {
 		bfr.Add(prefix);
 		bfr.Add(s);
 		bfr.Add(postfix);
-		Bry_.Replace_all_direct(bfr.Bfr(), AsciiByte.Nl, AsciiByte.Space, rv_bgn, bfr.Len());
+		BryUtl.ReplaceAllDirect(bfr.Bry(), AsciiByte.Nl, AsciiByte.Space, rv_bgn, bfr.Len());
 	}
 	// Get the link parameters for MediaTransformOutput::toHtml() from given
 	// frame parameters supplied by the Parser.
@@ -504,7 +505,7 @@ public class XomwLinker {
 	// @return array
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
 	private static void getImageLinkMTOParams(Xomw_params_mto rv, Xomw_params_frame frameParams, byte[] query, XomwParserIface parser) {
-		if (XophpObject_.isset(frameParams.link_url) && frameParams.link_url != Bry_.Empty) {
+		if (XophpObject_.isset(frameParams.link_url) && frameParams.link_url != BryUtl.Empty) {
 			rv.custom_url_link = frameParams.link_url;
 			if (XophpObject_.isset(frameParams.link_target)) {
 				rv.custom_target_link = frameParams.link_target;
@@ -517,7 +518,7 @@ public class XomwLinker {
 //					}
 			}
 		}
-		else if (XophpObject_.isset(frameParams.link_title) && frameParams.link_title != Bry_.Empty) {
+		else if (XophpObject_.isset(frameParams.link_title) && frameParams.link_title != BryUtl.Empty) {
 //				rv.custom_title_link = Title::newFromLinkTarget(Normalize_speecial_page(frameParams.link_title));
 		}
 		else if (!XophpObject_.empty(frameParams.no_link)) {
@@ -557,7 +558,7 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	private void makeThumbLink2(Bry_bfr bfr, XomwEnv env, XomwParserCtx pctx, XomwTitleOld title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
+	private void makeThumbLink2(BryWtr bfr, XomwEnv env, XomwParserCtx pctx, XomwTitleOld title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
 		boolean exists = file != null && file.exists();
 
 		int page = handlerParams.page;
@@ -565,13 +566,13 @@ public class XomwLinker {
 			frameParams.align = Align__frame__right;
 		}
 		if (!XophpObject_.isset(frameParams.alt)) {
-			frameParams.alt = Bry_.Empty;
+			frameParams.alt = BryUtl.Empty;
 		}
 		if (!XophpObject_.isset(frameParams.title)) {
-			frameParams.title = Bry_.Empty;
+			frameParams.title = BryUtl.Empty;
 		}
 		if (!XophpObject_.isset(frameParams.caption)) {
-			frameParams.caption = Bry_.Empty;
+			frameParams.caption = BryUtl.Empty;
 		}
 
 		if (XophpObject_.empty(handlerParams.width)) {
@@ -641,18 +642,18 @@ public class XomwLinker {
 		}
 
 		int rv_bgn = bfr.Len();
-		bfr.Add_str_a7("<div class=\"thumb t").Add(frameParams.align)
-			.Add_str_a7("\"><div class=\"thumbinner\" style=\"width:").Add_int_variable(outerWidth).Add_str_a7("px;\">");
+		bfr.AddStrA7("<div class=\"thumb t").Add(frameParams.align)
+			.AddStrA7("\"><div class=\"thumbinner\" style=\"width:").AddIntVariable(outerWidth).AddStrA7("px;\">");
 
-		byte[] zoom_icon = Bry_.Empty;
+		byte[] zoom_icon = BryUtl.Empty;
 		if (!exists) {
 //				$s .= self::makeBrokenImageLinkObj($title, frameParams.title, '', '', '', $time == true);
-			zoom_icon = Bry_.Empty;
+			zoom_icon = BryUtl.Empty;
 		}
 		else if (thumb == null) {
 			// env.Msg_mgr().Get_by_id().Escaped();
 //				$s .= wfMessage('thumbnail_error', '')->escaped();
-			zoom_icon = Bry_.Empty;
+			zoom_icon = BryUtl.Empty;
 		}
 		else {
 			if (!noscale && !manualthumb) {
@@ -666,7 +667,7 @@ public class XomwLinker {
 			getImageLinkMTOParams(prms, frameParams, query, null);
 			thumb.toHtml(bfr, tmp, prms);
 			if (XophpObject_.isset(frameParams.framed)) {
-				zoom_icon = Bry_.Empty;
+				zoom_icon = BryUtl.Empty;
 			}
 			else {
 				XomwHtml.rawElement(tmp, htmlTemp, Gfh_tag_.Bry__a
@@ -674,14 +675,14 @@ public class XomwLinker {
 					.Add(Gfh_atr_.Bry__href , url)
 					.Add(Gfh_atr_.Bry__class, Class__internal)
 					.Add(Gfh_atr_.Bry__title, XomwGlobalFunctions.wfMessageOld(env, "thumbnail-more").text())
-					, Bry_.Empty);
-				byte[] zoom_anch = tmp.To_bry_and_clear();
+					, BryUtl.Empty);
+				byte[] zoom_anch = tmp.ToBryAndClear();
 				XomwHtml.rawElement(tmp, htmlTemp, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);
-				zoom_icon = tmp.To_bry_and_clear();
+				zoom_icon = tmp.ToBryAndClear();
 			}
 		}
-		bfr.Add_str_a7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frameParams.caption).Add_str_a7("</div></div></div>");
-		Bry_.Replace_all_direct(bfr.Bfr(), AsciiByte.Nl, AsciiByte.Space, rv_bgn, bfr.Len());	// XO.MW:str_replace("\n", ' ', $s);
+		bfr.AddStrA7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frameParams.caption).AddStrA7("</div></div></div>");
+		BryUtl.ReplaceAllDirect(bfr.Bry(), AsciiByte.Nl, AsciiByte.Space, rv_bgn, bfr.Len());	// XO.MW:str_replace("\n", ' ', $s);
 	}
 //		/**
 //		* Process responsive images: add 1.5x and 2x subimages to the thumbnail, where
@@ -822,7 +823,7 @@ public class XomwLinker {
 //		public static function makeMediaLinkFile( Title $title, $file, $html = '' ) {
 //			if ( $file && $file->exists() ) {
 //				$url = $file->getUrl();
-//				$class = '@gplx.Internal protected';
+//				$class = '@gplx.frameworks.objects.Internal protected';
 //			} else {
 //				$url = self::getUploadUrl( $title );
 //				$class = 'new';
@@ -880,19 +881,19 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeExternalLink(Bry_bfr bfr, byte[] url, byte[] text, boolean escape, byte[] link_type, Xomw_atr_mgr attribs, byte[] title) {
-		tmp.Add_str_a7("external");
+	public void makeExternalLink(BryWtr bfr, byte[] url, byte[] text, boolean escape, byte[] link_type, Xomw_atr_mgr attribs, byte[] title) {
+		tmp.AddStrA7("external");
 		if (link_type != null) {
-			tmp.Add_byte_space().Add(link_type);
+			tmp.AddByteSpace().Add(link_type);
 		}
 		Xomw_atr_itm cls_itm = attribs.Get_by_or_make(Atr__class);
 		if (cls_itm.Val() != null) {
  				tmp.Add(cls_itm.Val());
 		}
-		cls_itm.Val_(tmp.To_bry_and_clear());
+		cls_itm.Val_(tmp.ToBryAndClear());
 
 		if (escape) {
-			text = tmp.Add_bry_escape_html(text).To_bry_and_clear();
+			text = tmp.AddBryEscapeHtml(text).ToBryAndClear();
 		}
 
 		if (title == null)
@@ -906,14 +907,14 @@ public class XomwLinker {
 		else {
 			// Merge the rel attributes.
 			byte[] cur_rel = cur_rel_atr.Val();
-			Bry_split_.Split(new_rel, 0, new_rel.length, AsciiByte.Space, BoolUtl.N, splitter);	// $newRels = explode(' ', $newRel);
-			Bry_split_.Split(cur_rel, 0, cur_rel.length, AsciiByte.Space, BoolUtl.N, splitter);	// $oldRels = explode(' ', $attribs['rel']);
+			BrySplit.Split(new_rel, 0, new_rel.length, AsciiByte.Space, BoolUtl.N, splitter);	// $newRels = explode(' ', $newRel);
+			BrySplit.Split(cur_rel, 0, cur_rel.length, AsciiByte.Space, BoolUtl.N, splitter);	// $oldRels = explode(' ', $attribs['rel']);
 			cur_rel_atr.Val_(splitter.To_bry());		// $attribs['rel'] = implode(' ', $combined);				
 		}
 		// XO.MW.HOOK:LinkerMakeExternalLink
 		attribs.Set(Atr__href, url);
 
-		XomwHtml.rawElement(bfr, htmlTemp, Bry_.new_a7("a"), attribs, text);
+		XomwHtml.rawElement(bfr, htmlTemp, BryUtl.NewA7("a"), attribs, text);
 	}
 	// XO.MW: MW puts this function in Parser.php
 	private byte[] getExternalLinkRel(byte[] url, byte[] title) {
@@ -1407,66 +1408,66 @@ public class XomwLinker {
 		// Some namespaces don't allow subpages,
 		// so only perform processing if subpages are allowed
 		if (context_title != null) {// && context_title.Ns().Subpages_enabled()) {
-			int hash = Bry_find_.Find_fwd(target, AsciiByte.Hash);
+			int hash = BryFind.FindFwd(target, AsciiByte.Hash);
 			byte[] suffix = null;
-			if (hash != Bry_find_.Not_found) {
-				suffix = Bry_.Mid(target, hash);
-				target = Bry_.Mid(target, 0, hash);
+			if (hash != BryFind.NotFound) {
+				suffix = BryLni.Mid(target, hash);
+				target = BryLni.Mid(target, 0, hash);
 			}
 			else {
-				suffix = Bry_.Empty;
+				suffix = BryUtl.Empty;
 			}
 			// bug 7425
-			target = Bry_.Trim(target);
+			target = BryUtl.Trim(target);
 			// Look at the first character
-			if (target != Bry_.Empty && target[0] == AsciiByte.Slash) {
+			if (target != BryUtl.Empty && target[0] == AsciiByte.Slash) {
 				// / at end means we don't want the slash to be shown
 				int target_len = target.length;
-				int trailing_slashes_bgn = Bry_find_.Find_bwd_while(target, target_len, 0, AsciiByte.Slash) + 1;
+				int trailing_slashes_bgn = BryFind.FindBwdWhile(target, target_len, 0, AsciiByte.Slash) + 1;
 				byte[] no_slash = null;
 				if (trailing_slashes_bgn != target_len) {
-					no_slash = target = Bry_.Mid(target, 1, trailing_slashes_bgn);
+					no_slash = target = BryLni.Mid(target, 1, trailing_slashes_bgn);
 				}
 				else {
-					no_slash = Bry_.Mid(target, 1);
+					no_slash = BryLni.Mid(target, 1);
 				}
 
-				ret = Bry_.Add(context_title.getPrefixedText(), AsciiByte.SlashBry, Bry_.Trim(no_slash), suffix);
-				if (text == Bry_.Empty) {
-					text = Bry_.Add(target, suffix);
+				ret = BryUtl.Add(context_title.getPrefixedText(), AsciiByte.SlashBry, BryUtl.Trim(no_slash), suffix);
+				if (text == BryUtl.Empty) {
+					text = BryUtl.Add(target, suffix);
 				} // this might be changed for ugliness reasons
 			}
 			else {
 				// check for .. subpage backlinks
 				int dot2_count = 0;
 				byte[] dot2_stripped = target;
-				while (Bry_.Match(dot2_stripped, 0, 3, Bry__dot2)) {
+				while (BryLni.Eq(dot2_stripped, 0, 3, Bry__dot2)) {
 					++dot2_count;
-					dot2_stripped = Bry_.Mid(dot2_stripped, 3);
+					dot2_stripped = BryLni.Mid(dot2_stripped, 3);
 				}
 				if (dot2_count > 0) {
-					byte[][] exploded = Bry_split_.Split(context_title.getPrefixedText(), AsciiByte.Slash);
+					byte[][] exploded = BrySplit.Split(context_title.getPrefixedText(), AsciiByte.Slash);
 					int exploded_len = exploded.length;
 					if (exploded_len > dot2_count) { // not allowed to go below top level page
 						//	PORTED: ret = implode('/', array_slice($exploded, 0, -dot2_count));
 						int implode_len = exploded_len - dot2_count;
 						for (int i = 0; i < implode_len; i++) {
-							if (i != 0) tmp.Add_byte(AsciiByte.Slash);
+							if (i != 0) tmp.AddByte(AsciiByte.Slash);
 							tmp.Add(exploded[i]);
 						}
 						// / at the end means don't show full path
-						if (Bry_.Has_at_end(dot2_stripped, AsciiByte.Slash)) {
-							dot2_stripped = Bry_.Mid(dot2_stripped, 0, dot2_stripped.length - 1);
-							if (text == Bry_.Empty) {
-								text = Bry_.Add(dot2_stripped, suffix);
+						if (BryUtl.HasAtEnd(dot2_stripped, AsciiByte.Slash)) {
+							dot2_stripped = BryLni.Mid(dot2_stripped, 0, dot2_stripped.length - 1);
+							if (text == BryUtl.Empty) {
+								text = BryUtl.Add(dot2_stripped, suffix);
 							}
 						}
-						dot2_stripped = Bry_.Trim(dot2_stripped);
-						if (dot2_stripped != Bry_.Empty) {
-							tmp.Add_bry_many(AsciiByte.SlashBry, dot2_stripped);
+						dot2_stripped = BryUtl.Trim(dot2_stripped);
+						if (dot2_stripped != BryUtl.Empty) {
+							tmp.AddBryMany(AsciiByte.SlashBry, dot2_stripped);
 						}
 						tmp.Add(suffix);
-						ret = tmp.To_bry_and_clear();
+						ret = tmp.ToBryAndClear();
 					}
 				}
 			}
@@ -1687,7 +1688,7 @@ public class XomwLinker {
 		int cur = 0;
 		int src_end = trail.length;
 		while (true) {
-			Object o = split_trail_trie.Match_at(trv, trail, cur, src_end);
+			Object o = split_trail_trie.MatchAt(trv, trail, cur, src_end);
 			if (o == null) break;
 			byte[] bry = (byte[])o;
 			cur += bry.length;
@@ -1698,8 +1699,8 @@ public class XomwLinker {
 			split_trail_rv[1] = trail;
 		}
 		else {
-			split_trail_rv[0] = Bry_.Mid(trail, 0, cur);
-			split_trail_rv[1] = Bry_.Mid(trail, cur, src_end);
+			split_trail_rv[0] = BryLni.Mid(trail, 0, cur);
+			split_trail_rv[1] = BryLni.Mid(trail, cur, src_end);
 		}
 		return split_trail_rv;
 	}
@@ -1714,7 +1715,7 @@ public class XomwLinker {
 //		public static function makeMediaLinkFile(Title $title, $file, $html = '') {
 //			if ($file && $file->exists()) {
 //				$url = $file->getUrl();
-//				$class = '@gplx.Internal protected';
+//				$class = '@gplx.frameworks.objects.Internal protected';
 //			} else {
 //				$url = self::getUploadUrl($title);
 //				$class = 'new';
@@ -2225,23 +2226,23 @@ public class XomwLinker {
 //				'title' => $tooltip
 //			] );
 //		}
-	private static final byte[] Bry__dot2 = Bry_.new_a7("../");
+	private static final byte[] Bry__dot2 = BryUtl.NewA7("../");
 }
-class Linker_rel_splitter implements gplx.core.brys.Bry_split_wkr {
+class Linker_rel_splitter implements BrySplitWkr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
-	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final BryWtr bfr = BryWtr.New();
 	public int Split(byte[] src, int itm_bgn, int itm_end) {	// $combined = array_unique(array_merge($newRels, $oldRels));
 		byte[] val = (byte[])hash.Get_by_mid(src, itm_bgn, itm_end);
 		if (val == null) {
-			val = Bry_.Mid(src, itm_bgn, itm_end);
+			val = BryLni.Mid(src, itm_bgn, itm_end);
 			hash.AddAsKeyAndVal(val);
-			if (bfr.Len_gt_0()) bfr.Add_byte_space();
+			if (bfr.HasSome()) bfr.AddByteSpace();
 			bfr.Add(val);
 		}
-		return Bry_split_.Rv__ok;
+		return BrySplit.Rv__ok;
 	}
 	public byte[] To_bry() {
 		hash.Clear();
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 }

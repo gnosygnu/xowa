@@ -13,15 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Gfo_invk_cmd;
-import gplx.GfoMsg;
-import gplx.GfsCtx;
-import gplx.Io_url_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.frameworks.invks.Gfo_invk_cmd;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.files.Io_url_;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCbkHost_;
 import gplx.gfui.controls.gxws.GxwCore_base;

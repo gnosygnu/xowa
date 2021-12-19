@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
-import gplx.core.tests.*; import gplx.langs.jsons.*;
+package gplx.core.gfobjs;
+import gplx.langs.jsons.*;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.StringUtl;
 public class Gfobj_wtr__json_fxt {
 	protected final Gfobj_wtr__json mgr = new Gfobj_wtr__json();
 	public Gfobj_nde Make__nde(Gfobj_fld... ary)					{return Make__nde(Gfobj_nde.New(), ary);}
@@ -40,13 +43,13 @@ public class Gfobj_wtr__json_fxt {
 	public Gfobj_ary Make__ary			(Object... ary)				{return new Gfobj_ary(ary);}
 	public Gfobj_wtr__json_fxt Test__write(Gfobj_grp root, String... lines) {
 		String[] expd = Json_doc.Make_str_ary_by_apos(lines);
-		Gftest.Eq__ary(expd, Bry_.Ary(String_.SplitLines_nl(mgr.Write(root).To_str())), "json_write");
+		GfoTstr.EqLines(expd, StringUtl.SplitLinesNl(mgr.Write(root).To_str()), "json_write");
 		return this;
 	}
 	public Gfobj_wtr__json_fxt Test__parse(String src, Gfobj_grp expd) {
 		Gfobj_rdr__json rdr = new Gfobj_rdr__json();
-		Gfobj_grp actl = rdr.Parse(Bry_.new_u8(Json_doc.Make_str_by_apos(src)));
-		Gftest.Eq__ary(Bry_.Ary(String_.SplitLines_nl(mgr.Write(expd).To_str())), Bry_.Ary(String_.SplitLines_nl(mgr.Write(actl).To_str())), "json_write");
+		Gfobj_grp actl = rdr.Parse(BryUtl.NewU8(Json_doc.Make_str_by_apos(src)));
+		GfoTstr.EqLines(BryUtl.Ary(StringUtl.SplitLinesNl(mgr.Write(expd).To_str())), BryUtl.Ary(StringUtl.SplitLinesNl(mgr.Write(actl).To_str())), "json_write");
 		return this;
 	}
 }

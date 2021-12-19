@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
-import gplx.core.strings.*;
+package gplx.gfml;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
 public class GfmlFld {
 	public String Name() {return name;} private String name;
 	public boolean Name_isKey() {return name_isKey;} private boolean name_isKey;
@@ -26,8 +27,8 @@ public class GfmlFld {
 		rv.defaultTkn = defaultTkn;	// FIXME: defaultTkn.clone_()
 		return rv;
 	}
-	public String To_str() {String_bldr sb = String_bldr_.new_(); this.To_str(sb); return sb.To_str_and_clear();}
-	public void To_str(String_bldr sb) {sb.Add_fmt("name={0} typeKey={1}", name, typeKey);}
+	public String To_str() {String_bldr sb = String_bldr_.new_(); this.To_str(sb); return sb.ToStrAndClear();}
+	public void To_str(String_bldr sb) {sb.AddFmt("name={0} typeKey={1}", name, typeKey);}
 
 	public static final GfmlFld Null = new_(false, GfmlItmKeys.NullKey, GfmlType_.AnyKey);
 	public static GfmlFld new_(boolean name_isKey, String name, String typeKey) {

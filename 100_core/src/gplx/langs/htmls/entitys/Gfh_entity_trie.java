@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,22 +14,23 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls.entitys;
-import gplx.Bry_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
-public class Gfh_entity_trie {	// TS
-	public static final String		// NOTE: top_define; entities needed for <nowiki> escaping
-	  Str__xowa_lt			= "&xowa_lt;"
-	, Str__xowa_brack_bgn	= "&xowa_brack_bgn;"
-	, Str__xowa_brack_end	= "&xowa_brack_end;"
-	, Str__xowa_pipe		= "&xowa_pipe;"
-	, Str__xowa_apos		= "&xowa_apos;"
-	, Str__xowa_colon		= "&xowa_colon;"
-	, Str__xowa_underline	= "&xowa_underline;"
-	, Str__xowa_asterisk	= "&xowa_asterisk;"
-	, Str__xowa_space		= "&xowa_space;"
-	, Str__xowa_nl			= "&xowa_nl;"
-	, Str__xowa_dash		= "&xowa_dash;"
+import gplx.types.basics.utls.BoolUtl;
+public class Gfh_entity_trie {    // TS
+	public static final String        // NOTE: top_define; entities needed for <nowiki> escaping
+		Str__xowa_lt            = "&xowa_lt;"
+	, Str__xowa_brack_bgn    = "&xowa_brack_bgn;"
+	, Str__xowa_brack_end    = "&xowa_brack_end;"
+	, Str__xowa_pipe        = "&xowa_pipe;"
+	, Str__xowa_apos        = "&xowa_apos;"
+	, Str__xowa_colon        = "&xowa_colon;"
+	, Str__xowa_underline    = "&xowa_underline;"
+	, Str__xowa_asterisk    = "&xowa_asterisk;"
+	, Str__xowa_space        = "&xowa_space;"
+	, Str__xowa_nl            = "&xowa_nl;"
+	, Str__xowa_dash        = "&xowa_dash;"
 	;
 	public static final Btrie_slim_mgr Instance = New(); Gfh_entity_trie() {}
 	private static Btrie_slim_mgr New() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
@@ -305,13 +306,13 @@ public class Gfh_entity_trie {	// TS
 	}
 	private static void Add_name(Btrie_slim_mgr trie, boolean tid_is_xowa, int char_int, String xml_name_str) {
 		byte itm_tid = tid_is_xowa ? Gfh_entity_itm.Tid_name_xowa : Gfh_entity_itm.Tid_name_std;
-		byte[] xml_name_bry = Bry_.new_a7(xml_name_str);
-		byte[] key = Bry_.Mid(xml_name_bry, 1, xml_name_bry.length); // ignore & for purpose of trie; EX: "amp;"; NOTE: must keep trailing ";" else "&amp " will be valid;
-		trie.Add_obj(key, new Gfh_entity_itm(itm_tid, char_int, xml_name_bry));
+		byte[] xml_name_bry = BryUtl.NewA7(xml_name_str);
+		byte[] key = BryLni.Mid(xml_name_bry, 1, xml_name_bry.length); // ignore & for purpose of trie; EX: "amp;"; NOTE: must keep trailing ";" else "&amp " will be valid;
+		trie.AddObj(key, new Gfh_entity_itm(itm_tid, char_int, xml_name_bry));
 	}
 	private static void Add_prefix(Btrie_slim_mgr trie, byte prefix_type, String prefix) {
-		byte[] prefix_ary = Bry_.new_u8(prefix);
+		byte[] prefix_ary = BryUtl.NewU8(prefix);
 		Gfh_entity_itm itm = new Gfh_entity_itm(prefix_type, Gfh_entity_itm.Char_int_null, prefix_ary);
-		trie.Add_obj(prefix_ary, itm);
+		trie.AddObj(prefix_ary, itm);
 	}
 }

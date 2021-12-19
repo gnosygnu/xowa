@@ -14,24 +14,23 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.data;
-
-import gplx.Byte_;
-import gplx.DateAdp;
-import gplx.Err_;
-import gplx.Guid_adp_;
-import gplx.Int_;
-import gplx.Int_ary_;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
+import gplx.types.basics.arrays.IntAryUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
 import gplx.dbs.Db_cmd_mode;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Db_conn_bldr;
 import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.types.errs.ErrUtl;
+import gplx.types.commons.GfoDate;
+import gplx.libs.files.Io_url;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoGuidUtl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.bldrs.infos.Xob_info_file;
@@ -64,7 +63,7 @@ public class Xow_db_mgr {
 		// create core_conn / core_db
 		Db_conn core_conn = Db_conn_bldr.Instance.Get(core_url);
 		props = Xowd_core_db_props.Cfg_load(core_conn);	// load props to get layout_text
-		Dbs__set_by_tid(Xow_db_file.Load(props, Xow_db_file_.Uid__core, Xow_db_file__core_.Core_db_tid(props.Layout_text()), core_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, Guid_adp_.Empty));
+		Dbs__set_by_tid(Xow_db_file.Load(props, Xow_db_file_.Uid__core, Xow_db_file__core_.Core_db_tid(props.Layout_text()), core_url, Xob_info_file.Ns_ids_empty, Xob_info_file.Part_id_1st, GfoGuidUtl.Empty));
 
 		// load dbs from "xowa_db" tbl
 		Xow_db_file[] ary = db__core.Tbl__db().Select_all(props, core_url.OwnerDir());
@@ -87,13 +86,13 @@ public class Xow_db_mgr {
 	public void Rls() {
 		int len = hash_by_id.Len();
 		for (int i = 0; i < len; i++) {
-			Xow_db_file db_file = (Xow_db_file)hash_by_id.Get_at(i);
+			Xow_db_file db_file = (Xow_db_file)hash_by_id.GetAt(i);
 			db_file.Rls();
 		}
 	}
 
 	public int						Dbs__len()						{return hash_by_id.Len();}		
-	public Xow_db_file				Dbs__get_at(int i)				{return (Xow_db_file)hash_by_id.Get_at(i);}
+	public Xow_db_file				Dbs__get_at(int i)				{return (Xow_db_file)hash_by_id.GetAt(i);}
 	public Xow_db_file				Dbs__get_by_id_or_fail(int id)	{return (Xow_db_file)hash_by_id.GetByOrFail(id);}
 	public Xow_db_file				Dbs__get_by_id_or_null(int id)	{return (Xow_db_file)hash_by_id.GetByOrNull(id);}
 	public Xow_db_file				Dbs__get_by_tid_or_core(byte... tids_ary) {Xow_db_file rv = Dbs__get_by_tid_or_null(tids_ary); return rv == null ? db__core : rv;}
@@ -106,7 +105,7 @@ public class Xow_db_mgr {
 			if (tid_dbs_len != 1) {	// NOTE: occurs when multiple search imports fail; DATE:2016-04-04
 				Xoa_app_.Usr_dlg().Warn_many("", "", "expecting only 1 db for tid; tid=~{0} len=~{1} db_api=~{2}", tid, tid_dbs.Len(), db__core.Conn().Conn_info().Db_api());
 			}
-			return (Xow_db_file)tid_dbs.Get_at(tid_dbs_len - 1);	// get last idx;
+			return (Xow_db_file)tid_dbs.GetAt(tid_dbs_len - 1);	// get last idx;
 		}
 		return null;
 	}
@@ -139,8 +138,8 @@ public class Xow_db_mgr {
 	public void						Dbs__delete_by_tid(byte... tids) {
 		int len = hash_by_id.Len();
 		for (int i = 0; i < len; ++i) {
-			Xow_db_file db = (Xow_db_file)hash_by_id.Get_at(i);
-			if (!Byte_.Match_any(db.Tid(), tids)) continue;
+			Xow_db_file db = (Xow_db_file)hash_by_id.GetAt(i);
+			if (!ByteUtl.EqAny(db.Tid(), tids)) continue;
 			db.Rls();
 			Io_mgr.Instance.DeleteFil_args(db.Url()).MissingFails_off().Exec();
 			db.Cmd_mode_(Db_cmd_mode.Tid_delete);
@@ -152,7 +151,7 @@ public class Xow_db_mgr {
 	}
 	public Xow_db_file Dbs__get_for_create(byte tid, int ns_id) {
 		Xow_db_file[] ary = Dbs__get_ary(tid, ns_id);
-		if (ary.length == 0) throw Err_.new_wo_type("no dbs exist; wiki=~{0} type=~{1}", domain_str, tid);
+		if (ary.length == 0) throw ErrUtl.NewArgs("no dbs exist; wiki=~{0} type=~{1}", domain_str, tid);
 		return ary[ary.length - 1];
 	}
 	public Xow_db_file[] Dbs__get_ary(byte tid, int ns_id) {
@@ -185,7 +184,7 @@ public class Xow_db_mgr {
 							add = true;                    // text will be in db if solo; 
 							break;
 						case Xow_db_file_.Tid__text:       // EX: "en.wikipedia.org-text-ns.000.xowa"
-							int[] db_ns_ids = Int_ary_.Parse(db.Ns_ids(), "|"); // need to handle both "0" and "0|4"
+							int[] db_ns_ids = IntAryUtl.Parse(db.Ns_ids(), "|"); // need to handle both "0" and "0|4"
 							for (int db_ns_id : db_ns_ids) {								
 								if (db_ns_id == ns_id) {
 									add = true;				// text will be in db if ns matches; EX: en.wikipedia.org-text-ns.014.xowa
@@ -202,7 +201,7 @@ public class Xow_db_mgr {
 
 		return (Xow_db_file[])rv.ToAryAndClear(Xow_db_file.class);
 	}
-	public void Create_page(Xowd_page_tbl core_tbl, Xowd_text_tbl text_tbl, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, byte[] text_zip_data, int text_raw_len, int random_int, int text_db_id, int html_db_id) {
+	public void Create_page(Xowd_page_tbl core_tbl, Xowd_text_tbl text_tbl, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, GfoDate modified_on, byte[] text_zip_data, int text_raw_len, int random_int, int text_db_id, int html_db_id) {
 		core_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, redirect, modified_on, text_raw_len, random_int, text_db_id, html_db_id, -1);
 		text_tbl.Insert_cmd_by_batch(page_id, text_zip_data);
 	}
@@ -232,16 +231,16 @@ public class Xow_db_mgr {
 		db_file.Info_file().Save(db_file.Tbl__cfg());
 		db_file.Info_session().Save(db_file.Tbl__cfg());
 	}
-	private int Get_tid_idx(Xow_db_file_hash hash, byte tid) {return hash.Count_of_tid(tid) + Int_.Base1;}
+	private int Get_tid_idx(Xow_db_file_hash hash, byte tid) {return hash.Count_of_tid(tid) + IntUtl.Base1;}
 	private static String Get_tid_name(int tid_idx, byte tid) {
 		String tid_name = Xow_db_file_.To_key(tid);
 		String tid_idx_str = "";
 		switch (tid) {
 			case Xow_db_file_.Tid__cat_core		: break;
-			case Xow_db_file_.Tid__cat_link		: tid_idx_str = "-db." + Int_.To_str_pad_bgn_zero(tid_idx, 3); break;
-			default									: tid_idx_str = tid_idx == 1 ? "" : "-db." + Int_.To_str_pad_bgn_zero(tid_idx, 3); break;
+			case Xow_db_file_.Tid__cat_link		: tid_idx_str = "-db." + IntUtl.ToStrPadBgnZero(tid_idx, 3); break;
+			default									: tid_idx_str = tid_idx == 1 ? "" : "-db." + IntUtl.ToStrPadBgnZero(tid_idx, 3); break;
 		}
-		return String_.Format("-{0}{1}.xowa", tid_name, tid_idx_str);	// EX: en.wikipedia.org-text-001.sqlite3
+		return StringUtl.Format("-{0}{1}.xowa", tid_name, tid_idx_str);	// EX: en.wikipedia.org-text-001.sqlite3
 	}
 
 	// helper method for wikis to (a) init db_mgr; (b) load wiki.props; should probably be moved to more generic "wiki.Init_by_db()"

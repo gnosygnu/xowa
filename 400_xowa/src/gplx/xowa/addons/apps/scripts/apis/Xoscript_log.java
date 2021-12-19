@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
+package gplx.xowa.addons.apps.scripts.apis;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.utls.StringUtl;
 public class Xoscript_log {
 	public void log(String... v) {
-		Gfo_usr_dlg_.Instance.Log_many("", "", String_.Concat_with_str(" ", v));
+		Gfo_usr_dlg_.Instance.Log_many("", "", StringUtl.ConcatWith(" ", v));
 	}
 }

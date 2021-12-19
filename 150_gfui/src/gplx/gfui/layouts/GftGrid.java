@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.layouts; import gplx.*; import gplx.gfui.*;
-import gplx.gfui.controls.elems.*;
+package gplx.gfui.layouts;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.gfui.DirInt;
+import gplx.gfui.controls.elems.GfuiElemBase;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.StringUtl;
 public class GftGrid {
 	public String Key() {return key;} public GftGrid Key_(String v) {key = v; return this;} private String key;
 	public List_adp Bands() {return bands;} List_adp bands = List_adp_.New();
@@ -23,15 +28,15 @@ public class GftGrid {
 	public DirInt Bands_dir() {return bandDir;} public GftGrid Bands_dir_(DirInt v) {bandDir = v; return this;} DirInt bandDir = DirInt.Fwd;
 	public GftGrid SubLyts_get(String key) {
 		for (int i = 0; i < subLyts.Len(); i++) {
-			GftGrid grid = (GftGrid)subLyts.Get_at(i);
-			if (String_.Eq(key, grid.Key())) return grid;
+			GftGrid grid = (GftGrid)subLyts.GetAt(i);
+			if (StringUtl.Eq(key, grid.Key())) return grid;
 		}
 		return null;
 	}
 	public GftBand Bands_get(String key) {
 		for (int i = 0; i < bands.Len(); i++) {
-			GftBand band = (GftBand)bands.Get_at(i);
-			if (String_.Eq(key, band.Key())) return band;
+			GftBand band = (GftBand)bands.GetAt(i);
+			if (StringUtl.Eq(key, band.Key())) return band;
 		}
 		return null;
 	}
@@ -46,17 +51,17 @@ public class GftGrid {
 		}
 		return this;
 	}
-	@gplx.Internal protected void Bands_delAt(int i) {bands.DelAt(i);}
-	public boolean Bands_has(String key) {return Bands_indexOf(key) != List_adp_.Not_found;}
+	public void Bands_delAt(int i) {bands.DelAt(i);}
+	public boolean Bands_has(String key) {return Bands_indexOf(key) != List_adp_.NotFound;}
 	public void Bands_del(String key) {
 		int idx = Bands_indexOf(key);
-		if (idx != List_adp_.Not_found) bands.DelAt(idx);
+		if (idx != List_adp_.NotFound) bands.DelAt(idx);
 	}
 	int Bands_indexOf(String key) {
-		int curIdx = List_adp_.Not_found;
+		int curIdx = List_adp_.NotFound;
 		for (int i = 0; i < bands.Len(); i++) {
-			GftBand band = (GftBand)bands.Get_at(i);
-			if (String_.Eq(key, band.Key())) {
+			GftBand band = (GftBand)bands.GetAt(i);
+			if (StringUtl.Eq(key, band.Key())) {
 				curIdx = i;
 				break;
 			}
@@ -79,7 +84,7 @@ public class GftGrid {
 	void ExecLyts(GftItem owner, GftItem[] ary) {
 		int idx = 0;
 		for (int i = 0; i < subLyts.Len(); i++) {
-			GftGrid subGrid = (GftGrid)subLyts.Get_at(i);
+			GftGrid subGrid = (GftGrid)subLyts.GetAt(i);
 			GftItem[] subAry = new GftItem[subGrid.Bands_cellCount()];
 			for (int j = 0; j < subAry.length; j++) {
 				subAry[j] = ary[idx++];
@@ -94,14 +99,14 @@ public class GftGrid {
 		int bgn = bandDir.GetValByDir(bands.IdxLast(), 0);
 		int end = bandDir.GetValByDir(-1, bands.Len());
 		for (int i = bgn; i != end; i += bandDir.Val()) {
-			band = (GftBand)bands.Get_at(i);
+			band = (GftBand)bands.GetAt(i);
 			if (band.Len1().Key() == GftSizeCalc_abs.KEY) {
 				GftSizeCalc_abs calc = (GftSizeCalc_abs)band.Len1();
 				availY -= calc.Val();
 			}
 		}
 		int bandIdx = 0;
-		band = (GftBand)bands.Get_at(bandIdx);
+		band = (GftBand)bands.GetAt(bandIdx);
 		band.Items().Clear();
 		int y = bandDir.GetValByDir(owner.Gft_h(), 0);
 		for (int itmIdx = 0; itmIdx < ary.length; itmIdx++) {
@@ -110,8 +115,8 @@ public class GftGrid {
 				int h = band.Len1().Calc(this, band, owner, itm, availY);
 				band.Calc(owner, y, h);
 				y += h * bandDir.Val();
-				if (bandIdx + 1 >= bands.Len()) throw Err_.new_wo_type("error retrieving band", "owner", owner.Key_of_GfuiElem(), "item", itm.Key_of_GfuiElem(), "bandIdx", bandIdx + 1, "count", bands.Len());
-				band = (GftBand)bands.Get_at(++bandIdx);
+				if (bandIdx + 1 >= bands.Len()) throw ErrUtl.NewArgs("error retrieving band", "owner", owner.Key_of_GfuiElem(), "item", itm.Key_of_GfuiElem(), "bandIdx", bandIdx + 1, "count", bands.Len());
+				band = (GftBand)bands.GetAt(++bandIdx);
 				band.Items().Clear();
 			}
 			band.Items_add(itm);
@@ -121,7 +126,7 @@ public class GftGrid {
 	int Bands_cellCount() {
 		int rv = 0;
 		for (int i = 0; i < bands.Len(); i++) {
-			GftBand band = (GftBand)bands.Get_at(i);
+			GftBand band = (GftBand)bands.GetAt(i);
 			rv += band.Cells().Len();
 		}
 		return rv;

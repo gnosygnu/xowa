@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*;
+package gplx.langs.gfs;
 import gplx.core.btries.*;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Gfs_parser {
 	private final Btrie_fast_mgr trie = Gfs_parser_.trie_();
 	private final Gfs_parser_ctx ctx = new Gfs_parser_ctx();
@@ -74,9 +75,9 @@ class Gfs_parser_ {
 		trie_add_many(rv, Gfs_lxr_whitespace.Instance, AsciiByte.Space, AsciiByte.Nl, AsciiByte.Cr, AsciiByte.Tab);
 		trie_add_quote(rv, new byte[] {AsciiByte.Apos});
 		trie_add_quote(rv, new byte[] {AsciiByte.Quote});
-		trie_add_quote(rv, Bry_.new_a7("<:[\"\n"), Bry_.new_a7("\n\"]:>"));
-		trie_add_quote(rv, Bry_.new_a7("<:['\n"), Bry_.new_a7("\n']:>"));
-		trie_add_quote(rv, Bry_.new_a7("<:{'"), Bry_.new_a7("'}:>"));
+		trie_add_quote(rv, BryUtl.NewA7("<:[\"\n"), BryUtl.NewA7("\n\"]:>"));
+		trie_add_quote(rv, BryUtl.NewA7("<:['\n"), BryUtl.NewA7("\n']:>"));
+		trie_add_quote(rv, BryUtl.NewA7("<:{'"), BryUtl.NewA7("'}:>"));
 		trie_add_comment(rv, new byte[] {AsciiByte.Slash, AsciiByte.Slash}, new byte[] {AsciiByte.Nl});
 		trie_add_comment(rv, new byte[] {AsciiByte.Slash, AsciiByte.Star}, new byte[] {AsciiByte.Star, AsciiByte.Slash});
 		rv.Add(AsciiByte.Semic, Gfs_lxr_semic.Instance);

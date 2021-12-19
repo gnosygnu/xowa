@@ -14,19 +14,18 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.uniqs;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Int_;
-import gplx.RandomAdp;
-import gplx.RandomAdp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.GfoRandom;
+import gplx.types.commons.GfoRandomUtl;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 	private final Btrie_slim_mgr general_trie = Btrie_slim_mgr.cs(); private final Btrie_rv trv = new Btrie_rv();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final BryWtr tmp_bfr = BryWtr.NewWithSize(32);
 	private int nxt_idx = -1;
 	public void Clear() {
 		nxt_idx = -1;
@@ -40,21 +39,21 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		int idx = ++nxt_idx;
 		byte[] key = tmp_bfr	
 			.Add(Bry__uniq__bgn_w_dash)          // "\u007f'\"`UNIQ-"
-			.Add(type).Add_byte(AsciiByte.Dash) // "ref-"
-			.Add_int_variable(idx)               // "1"
+			.Add(type).AddByte(AsciiByte.Dash) // "ref-"
+			.AddIntVariable(idx)               // "1"
 			.Add(Bry__uniq__add__end)            // "-QINU`\"'\u007f"
-			.To_bry_and_clear(); 
+			.ToBryAndClear();
 		Xop_uniq_itm itm = new Xop_uniq_itm(expand_after_template_parsing, type, idx, key, val);
-		general_trie.Add_obj(key, itm);
+		general_trie.AddObj(key, itm);
 		return key;
 	}
-	public void Parse(Bry_bfr bfr) {
+	public void Parse(BryWtr bfr) {
 		if (general_trie.Count() == 0) return;
-		byte[] rv = Parse_recurse(BoolUtl.Y, tmp_bfr, bfr.To_bry_and_clear());
+		byte[] rv = Parse_recurse(BoolUtl.Y, tmp_bfr, bfr.ToBryAndClear());
 		bfr.Add(rv);
 	}
 	public byte[] Parse(byte[] src) {return Parse_recurse(BoolUtl.Y, tmp_bfr, src);}
-	private byte[] Parse_recurse(boolean template_parsing, Bry_bfr bfr, byte[] src) {
+	private byte[] Parse_recurse(boolean template_parsing, BryWtr bfr, byte[] src) {
 		int src_len = src.length;
 		int pos = 0;
 		int prv_bgn = 0;
@@ -80,10 +79,10 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 				}
 
 				// add everything from prv_bgn up to UNIQ
-				bfr.Add_mid(src, prv_bgn, pos);
+				bfr.AddMid(src, prv_bgn, pos);
 
 				// expand UNIQ (can be recursive)
-				byte[] val = Parse_recurse(template_parsing, Bry_bfr_.New(), itm.Val());
+				byte[] val = Parse_recurse(template_parsing, BryWtr.New(), itm.Val());
 //					val = gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx.Wiki().Parser_mgr().Main().Parse_text_to_html(gplx.xowa.parsers.xndes.Xop_xnde_tkn.Hack_ctx, val);	// CHART
 				bfr.Add(val);
 				dirty = true;
@@ -91,34 +90,34 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 			}
 			if (is_last) {
 				if (dirty)
-					bfr.Add_mid(src, prv_bgn, src_len);
+					bfr.AddMid(src, prv_bgn, src_len);
 				break;
 			}
 		}
-		return dirty ? bfr.To_bry_and_clear() : src;
+		return dirty ? bfr.ToBryAndClear() : src;
 	}
 	public byte[] Uniq_bry_new() {
-		return Bry_.Add
+		return BryUtl.Add
 		( Bry__uniq__bgn			// "\x7fUNIQ" where "\x7f" is (byte)127
 		, Random_bry_new(16));		// random hexdecimal String
 	}
 	public void Random_int_ary_(int... v) {random_int_ary = v;} private int[] random_int_ary;	// TEST:
 	public byte[] Random_bry_new(int len) {
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		RandomAdp random_gen = RandomAdp_.new_();
+		BryWtr tmp_bfr = BryWtr.New();
+		GfoRandom random_gen = GfoRandomUtl.New();
 		for (int i = 0; i < len; i += 7) {
-			int rand = random_int_ary == null ? random_gen.Next(Int_.Max_value) : random_int_ary[i / 7];
-			String rand_str = Int_.To_str_hex(BoolUtl.N, BoolUtl.Y, rand & 0xfffffff);	// limits value to 268435455
-			tmp_bfr.Add_str_a7(rand_str);
+			int rand = random_int_ary == null ? random_gen.Next(IntUtl.MaxValue) : random_int_ary[i / 7];
+			String rand_str = IntUtl.ToStrHex(BoolUtl.N, BoolUtl.Y, rand & 0xfffffff);	// limits value to 268435455
+			tmp_bfr.AddStrA7(rand_str);
 		}
-		byte[] rv = tmp_bfr.To_bry(0, len);
+		byte[] rv = tmp_bfr.ToBry(0, len);
 		tmp_bfr.Clear();
 		return rv;
 	}
 
 	public static final byte[]
-	  Bry__uniq__bgn		= Bry_.new_a7("\u007f'\"`UNIQ-")
-	, Bry__uniq__bgn_w_dash	= Bry_.Add(Bry__uniq__bgn, AsciiByte.DashBry)
-	, Bry__uniq__add__end	= Bry_.new_a7("-QINU`\"'\u007f")
+	  Bry__uniq__bgn		= BryUtl.NewA7("\u007f'\"`UNIQ-")
+	, Bry__uniq__bgn_w_dash	= BryUtl.Add(Bry__uniq__bgn, AsciiByte.DashBry)
+	, Bry__uniq__add__end	= BryUtl.NewA7("-QINU`\"'\u007f")
 	;
 }

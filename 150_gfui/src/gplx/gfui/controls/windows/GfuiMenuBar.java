@@ -13,17 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.Char_;
-import gplx.Err_;
-import gplx.GfoMsg;
-import gplx.GfoMsgUtl;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.Hash_adp;
-import gplx.Hash_adp_;
-import gplx.Int_;
-import gplx.String_;
+package gplx.gfui.controls.windows;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.CharUtl;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.GfoMsgUtl;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
 import gplx.gfui.controls.gxws.GxwWin;
 import gplx.gfui.draws.ColorAdp;
 import gplx.gfui.draws.ColorAdpCache;
@@ -60,7 +61,7 @@ public class GfuiMenuBar implements Gfo_invk {
 			GfsCore.Instance.AddObj(this, "GfuiMenuBar_");
 			GfsCore.Instance.ExecRegy("gplx.gfui.GfuiMenuBar.ini");
 		}
-		catch (Exception e) {GfuiEnv_.ShowMsg(Err_.Message_gplx_full(e));}
+		catch (Exception e) {GfuiEnv_.ShowMsg(ErrUtl.ToStrFull(e));}
 	}
 	String separatorText, mnemonicPrefix; int separatorIdx = 0;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -89,7 +90,7 @@ public class GfuiMenuBar implements Gfo_invk {
 			GfuiMenuBarItm itm = GfuiMenuBarItm.sub_(curOwnerItm);
 			itm.Type_(GfuiMenuBarItmType.Spr);
 			itm.Text_(text);
-			itm.Key_(curOwnerItm.Key() + "." + text + Int_.To_str(separatorIdx++));
+			itm.Key_(curOwnerItm.Key() + "." + text + IntUtl.ToStr(separatorIdx++));
 			itm.ExecProps();
 		}
 		else if (ctx.Match(k, Invk_RegCmd)) {
@@ -116,13 +117,13 @@ public class GfuiMenuBar implements Gfo_invk {
 	IptKey Read_prop_ipt(IptKey ipt, GfuiMenuBarItm itm) {
 		if (mnemonicPrefix == null) return ipt;
 		String text = itm.Text();
-		int pos = String_.FindFwd(text, mnemonicPrefix);
-		if (pos == String_.Find_none || pos == String_.Len(text) - 1) return ipt;	// mnemonic not found
-		String keyChar = String_.MidByLen(text, pos + 1, 1);
-		if (!Char_.IsLetterEnglish(String_.CharAt(keyChar, 0))) return ipt;	// keyChar is not a character; EX: 'A & B' (keyChar = space)
-		String keyCharRaw = "key." + String_.Lower(keyChar);
+		int pos = StringUtl.FindFwd(text, mnemonicPrefix);
+		if (pos == StringUtl.FindNone || pos == StringUtl.Len(text) - 1) return ipt;	// mnemonic not found
+		String keyChar = StringUtl.MidByLen(text, pos + 1, 1);
+		if (!CharUtl.IsLetterEnglish(StringUtl.CharAt(keyChar, 0))) return ipt;	// keyChar is not a character; EX: 'A & B' (keyChar = space)
+		String keyCharRaw = "key." + StringUtl.Lower(keyChar);
 		ipt = IptKey_.parse(keyCharRaw);
-		text = String_.MidByLen(text, 0, pos) + String_.Mid(text, pos + 1);	// remove mnemPrefix; ex: &File -> File && key.f
+		text = StringUtl.MidByLen(text, 0, pos) + StringUtl.Mid(text, pos + 1);	// remove mnemPrefix; ex: &File -> File && key.f
 		itm.Text_(text);
 		return ipt;
 	}
@@ -210,7 +211,7 @@ class GfuiMenuBarItm {
 		if (backColor != null) itm.setBackground(ColorAdpCache.Instance.GetNativeColor(backColor));
 		if (foreColor != null) itm.setForeground(ColorAdpCache.Instance.GetNativeColor(foreColor));
 		itm.setFont(MakeFont(itm.getFont()));		
-		if (String_.Len(tipText) > 0) itm.setToolTipText(tipText);		
+		if (StringUtl.Len(tipText) > 0) itm.setToolTipText(tipText);
 	}
 	Font MakeFont(Font cur) {
 		if (fontFamily == null && fontStyle == null && fontSize == -1) return cur;
@@ -222,13 +223,13 @@ class GfuiMenuBarItm {
 	GfuiMenuBarItm Under_(Object o) {under = o; return this;}
 	char GetMnemonic(String text, IptKey ipt) {
 		if (ipt.Val() == IptKey_.None.Val()) return '\0';
-		String iptStr = ipt.XtoUiStr(); if (String_.Len(iptStr) > 1) return '\0';
-		return String_.CharAt(iptStr, 0);
+		String iptStr = ipt.XtoUiStr(); if (StringUtl.Len(iptStr) > 1) return '\0';
+		return StringUtl.CharAt(iptStr, 0);
 	}
 	GfuiMenuBarItmCmd itmCmd;
 	Object under;
 		public static GfoMsg CmdMsg(GfuiMenuBarItm itm) {
-		if (itm.cmd == null) throw Err_.new_null().Args_add("key", itm.key, "text", itm.text);
+		if (itm.cmd == null) throw ErrUtl.NewNull().ArgsAdd("key", itm.key).ArgsAdd("text", itm.text);
 		return gplx.gfml.GfmlDataNde.XtoMsgNoRoot(itm.cmd);
 	}
 	public static GfuiMenuBarItm new_() {return new GfuiMenuBarItm();}
@@ -253,7 +254,7 @@ class GfuiMenuBarItmType {
 	GfuiMenuBarItmType(int v, String n) {val = v; name = n; regy.Add(n, this);}
 	public static GfuiMenuBarItmType parse(String raw) {
 		try {return (GfuiMenuBarItmType)regy.GetByOrNull(raw);}
-		catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("GfuiMenuBarItmType", raw);}
+		catch (Exception e) {throw ErrUtl.NewParse("GfuiMenuBarItmType", raw);}
 	}
 	static Hash_adp regy = Hash_adp_.New();
 	public static final GfuiMenuBarItmType Root = new GfuiMenuBarItmType(1, "root");

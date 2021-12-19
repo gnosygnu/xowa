@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.tmpls;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.parsers.*;
 import gplx.xowa.parsers.xndes.*;
 public class Xop_curly_wkr implements Xop_ctx_wkr {
@@ -23,14 +26,14 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
 	public void AutoClose(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int lxr_bgn_pos, int lxr_cur_pos, Xop_tkn_itm tkn) {}
 	public int MakeTkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int lxr_bgn_pos, int lxr_cur_pos) {
-		int lxr_end_pos = Bry_find_.Find_fwd_while(src, lxr_cur_pos, src_len, AsciiByte.CurlyBgn);	// NOTE: can be many consecutive {; EX: {{{{{1}}}|a}}
+		int lxr_end_pos = BryFind.FindFwdWhile(src, lxr_cur_pos, src_len, AsciiByte.CurlyBgn);	// NOTE: can be many consecutive {; EX: {{{{{1}}}|a}}
 		ctx.Subs_add_and_stack(root, tkn_mkr.Tmpl_curly_bgn(lxr_bgn_pos, lxr_end_pos));
 		return lxr_end_pos;
 	}		
 	public int MakeTkn_end(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int lxr_bgn_pos, int lxr_cur_pos) {
 		if (ctx.Cur_tkn_tid() == Xop_tkn_itm_.Tid_brack_bgn)	// WORKAROUND: ignore }} if inside lnki; EX.CM:Template:Protected; {{#switch:a|b=[[a|ja=}}]]}}
 			return ctx.Lxr_make_txt_(lxr_cur_pos);
-		int lxr_end_pos = Bry_find_.Find_fwd_while(src, lxr_cur_pos, src_len, AsciiByte.CurlyEnd);	// NOTE: can be many consecutive }; EX: {{a|{{{1}}}}}
+		int lxr_end_pos = BryFind.FindFwdWhile(src, lxr_cur_pos, src_len, AsciiByte.CurlyEnd);	// NOTE: can be many consecutive }; EX: {{a|{{{1}}}}}
 		int end_tkn_len = lxr_end_pos - lxr_bgn_pos;
 		boolean vnt_enabled = ctx.Wiki().Lang().Vnt_mgr().Enabled();
 		while (end_tkn_len > 0) {
@@ -68,7 +71,7 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 					int curly_end_dash = lxr_end_pos;
 					if (curly_end_dash < src_len && src[curly_end_dash] == AsciiByte.Dash) {	// "-" exists after curlies;  EX: "}}-"
 						if (bgn_tkn_len > 2 && end_tkn_len > 2) {	// more than 3 curlies at bgn / end with flanking dashes; EX: "-{{{ }}}-"; NOTE: 3 is needed b/c 2 will never be reduced; EX: "-{{" will always be "-" and "{{", not "-{" and "{"
-							int numeric_val = Bry_.To_int_or(src, bgn_tkn.Src_end(), lxr_bgn_pos, -1);
+							int numeric_val = BryUtl.ToIntOr(src, bgn_tkn.Src_end(), lxr_bgn_pos, -1);
 							if (	numeric_val != -1						// do not apply if numeric val; EX:"-{{{0}}}-" vs "-{{{#expr:0}}}-" sr.w:Template:Link_FA
 								&&	bgn_tkn_len == 3 && end_tkn_len == 3	// exactly 3 tokens; assume param token; "-{{{" -> "-" + "{{{" x> -> "-{" + "{{"; if unbalanced (3,4 or 4,3) fall into code below
 								) {
@@ -132,7 +135,7 @@ public class Xop_curly_wkr implements Xop_ctx_wkr {
 			if (vnt_dash_adjust) {
 				Xop_tkn_itm text_tkn = root.Subs_get_or_null(root.Subs_len() - 2);	// -2 to get tkn before newly-created tmpl / prm
 				if (text_tkn == null || text_tkn.Tkn_tid() != Xop_tkn_itm_.Tid_txt)
-					ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "token before curly_bgn was not text tkn; src=~{0}", String_.new_u8(src, lxr_bgn_pos, lxr_end_pos));
+					ctx.Wiki().Appe().Usr_dlg().Warn_many("", "", "token before curly_bgn was not text tkn; src=~{0}", StringUtl.NewU8(src, lxr_bgn_pos, lxr_end_pos));
 				else
 					text_tkn.Src_end_(text_tkn.Src_end() + 1);	// +1 to extend txt_tkn with dash be 1 to include curly; EX: "-" "{{{" -> "-{" "{{"
 			}

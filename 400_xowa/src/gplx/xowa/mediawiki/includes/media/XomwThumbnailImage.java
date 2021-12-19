@@ -14,14 +14,14 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.media;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Int_;
-import gplx.List_adp;
-import gplx.List_adp_;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.Gfh_tag_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.includes.XomwXml;
 import gplx.xowa.mediawiki.includes.filerepo.file.XomwFile;
@@ -136,7 +136,7 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 	// For images, desc-link and file-link are implemented as a click-through. For
 	// sounds and videos, they may be displayed in other ways.
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
-	@Override public void toHtml(Bry_bfr bfr, Bry_bfr tmp, Xomw_params_mto options) {
+	@Override public void toHtml(BryWtr bfr, BryWtr tmp, Xomw_params_mto options) {
 		byte[] alt = options.alt;
 
 //			byte[] query = options.desc_query;
@@ -190,11 +190,11 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 		}
 
 		if (XophpObject_.empty(options.no_dimensions)) {
-			attribs.AddMany(Gfh_atr_.Bry__width, Int_.To_bry(width));
-			attribs.AddMany(Gfh_atr_.Bry__height, Int_.To_bry(height));
+			attribs.AddMany(Gfh_atr_.Bry__width, IntUtl.ToBry(width));
+			attribs.AddMany(Gfh_atr_.Bry__height, IntUtl.ToBry(height));
 		}
 		if (!XophpObject_.empty(options.valign)) {
-			attribs.AddMany(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
+			attribs.AddMany(Gfh_atr_.Bry__style, BryUtl.Add(Bry__vertical_align, options.valign));
 		}
 		if (!XophpObject_.empty(options.img_cls)) {
 			attribs.AddMany(Gfh_atr_.Bry__class, options.img_cls);
@@ -214,8 +214,8 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 //			}
 
 		// XO.MW.HOOK:ThumbnailBeforeProduceHTML
-		XomwXml.Element(tmp, Gfh_tag_.Bry__img, attribs, Bry_.Empty, BoolUtl.Y);
-		Link_wrap(bfr, link_attribs_is_null ? null : link_attribs, tmp.To_bry_and_clear());
+		XomwXml.Element(tmp, Gfh_tag_.Bry__img, attribs, BryUtl.Empty, BoolUtl.Y);
+		Link_wrap(bfr, link_attribs_is_null ? null : link_attribs, tmp.ToBryAndClear());
 	}
-	private static final byte[] Bry__vertical_align = Bry_.new_a7("vertical-align: ");
+	private static final byte[] Bry__vertical_align = BryUtl.NewA7("vertical-align: ");
 }

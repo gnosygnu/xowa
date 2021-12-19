@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*;
+package gplx.xowa.apps.servers.tcp;
+import gplx.core.ios.streams.*;
+import gplx.types.errs.ErrUtl;
 public class Socket_rdr {
 		private java.net.ServerSocket server;
 	private java.net.Socket client;
@@ -34,20 +35,20 @@ public class Socket_rdr {
 			stream = client.getInputStream();			
 			rdr_stream = new IoStream_stream_rdr().UnderRdr_(stream);
 					return this;
-		}	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to open socket", "port", port);}
+		}	catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to open socket", "port", port);}
 	}
 	public void Close() {
 		try {
 		//			if (server != null) server.close();
 			if (client != null) client.close();
 			if (stream != null) stream.close();
-				} 	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to close socket", "port", port);}
+				} 	catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to close socket", "port", port);}
 	}
 	public void Rls() {
 		try {
 					if (server != null) server.close();
 			if (client != null) client.close();
 			if (stream != null) stream.close();
-				} 	catch (Exception e) {throw Err_.new_exc(e, "net", "failed to rls socket", "port", port);}
+				} 	catch (Exception e) {throw ErrUtl.NewArgs(e, "failed to rls socket", "port", port);}
 	}
 }

@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.imgs;
-import gplx.Err_;
-import gplx.Io_url;
-import gplx.Io_url_;
 import gplx.core.gfo_regys.GfoRegy;
 import gplx.core.gfo_regys.GfoRegyItm;
+import gplx.types.errs.ErrUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Image;
@@ -43,7 +43,7 @@ public class IconAdp {
 //			UsrDlg_.Instance.Warn("missing icon; key={0}", key);
 			return null;
 		}
-		if	(itm.ValType() != GfoRegyItm.ValType_Url) throw Err_.new_wo_type("regyItm should be of type url", "key", key);
+		if	(itm.ValType() != GfoRegyItm.ValType_Url) throw ErrUtl.NewArgs("regyItm should be of type url", "key", key);
 		return IconAdp.file_(itm.Url());
 	}
 	public static IconAdp as_(Object obj) {return obj instanceof IconAdp ? (IconAdp)obj : null;}

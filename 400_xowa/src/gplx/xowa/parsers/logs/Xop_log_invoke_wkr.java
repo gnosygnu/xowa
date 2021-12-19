@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.logs;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.*;
 import gplx.core.envs.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.parsers.logs.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xop_log_invoke_wkr implements Gfo_invk {
 	private Db_conn conn; private Db_stmt stmt;
@@ -33,14 +41,14 @@ public class Xop_log_invoke_wkr implements Gfo_invk {
 	public boolean Eval_bgn(Xoae_page page, byte[] mod_name, byte[] fnc_name) {return !exclude_mod_names.Has(mod_name);}
 	public void Eval_end(Xoae_page page, byte[] mod_name, byte[] fnc_name, long invoke_time_bgn) {
 		if (log_enabled && stmt != null) {
-			int eval_time = (int)(System_.Ticks() - invoke_time_bgn);
+			int eval_time = (int)(SystemUtl.Ticks() - invoke_time_bgn);
 			Xop_log_invoke_tbl.Insert(stmt, page.Ttl().Rest_txt(), mod_name, fnc_name, eval_time);
 		}
 	}
 	private void Exclude_mod_names_add(String[] v) {
 		int len = v.length;
 		for (int i = 0; i < len; i++) {
-			byte[] bry = Bry_.new_u8(v[i]);
+			byte[] bry = BryUtl.NewU8(v[i]);
 			exclude_mod_names.Add_bry_bry(bry);
 		}
 	}
@@ -66,7 +74,7 @@ class Xop_log_invoke_tbl {
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "log_invoke_temp", Fld_invk_page_ttl = "invk_page_ttl", Fld_invk_mod_name = "invk_mod_name", Fld_invk_fnc_name = "invk_fnc_name", Fld_invk_eval_time = "invk_eval_time";
-	private static final String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = StringUtl.ConcatLinesNl
 		(	"CREATE TABLE IF NOT EXISTS log_invoke_temp"
 		,	"( invk_id                  integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
 		,	", invk_page_ttl            varchar(255)        NOT NULL"

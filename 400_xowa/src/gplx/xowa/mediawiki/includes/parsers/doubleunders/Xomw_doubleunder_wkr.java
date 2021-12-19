@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.doubleunders; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+package gplx.xowa.mediawiki.includes.parsers.doubleunders;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.kwds.Xol_kwd_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_mgr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
 public class Xomw_doubleunder_wkr {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
 	private final Btrie_rv trv = new Btrie_rv();
@@ -39,11 +50,11 @@ public class Xomw_doubleunder_wkr {
 	}
 	public void doDoubleUnderscore(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 
 		data.Reset();
 
@@ -57,7 +68,7 @@ public class Xomw_doubleunder_wkr {
 			// reached end; stop
 			if (cur == src_end) {
 				if (dirty) {
-					bfr.Add_mid(src, prv, src_end);
+					bfr.AddMid(src, prv, src_end);
 				}
 				break;
 			}
@@ -66,21 +77,21 @@ public class Xomw_doubleunder_wkr {
 			byte b = src[cur];
 			Object o = trie.Match_at_w_b0(trv, b, src, cur, src_end);
 			if (o == null) {
-				cur += gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+				cur += Utf8Utl.LenOfCharBy1stByte(b);
 				continue;
 			}
 
 			// if cs, ensure exact-match (trie is case-insensitive)
 			int kwd_end = trv.Pos();
 			Xomw_doubleunder_itm itm = (Xomw_doubleunder_itm)o;
-			if (itm.case_match && !Bry_.Match(src, cur, kwd_end, itm.val)) {
+			if (itm.case_match && !BryLni.Eq(src, cur, kwd_end, itm.val)) {
 				cur = kwd_end;
 				continue;
 			}
 
 			// match; replace __KWD__ with "" (or "<!--MWTOC-->" if __TOC__)
 			dirty = true;
-			bfr.Add_mid(src, prv, cur);
+			bfr.AddMid(src, prv, cur);
 			switch (itm.tid) {
 				case Xol_kwd_grp_.Id_toc:
 					// The position of __TOC__ needs to be recorded
@@ -90,7 +101,7 @@ public class Xomw_doubleunder_wkr {
 					data.force_toc_position = true;
 
 					if (already_seen) { // Set a placeholder. At the end we'll fill it in with the TOC.
-						bfr.Add_str_a7("<!--MWTOC-->");
+						bfr.AddStrA7("<!--MWTOC-->");
 					}
 					else { // Only keep the first one. XO.MW:ignore by not adding anything to bfr
 					}
@@ -107,7 +118,7 @@ public class Xomw_doubleunder_wkr {
 				case Xol_kwd_grp_.Id_staticredirect:       data.static_redirect = true; break;
 				case Xol_kwd_grp_.Id_notitleconvert:       data.no_title_convert = true; break;
 				case Xol_kwd_grp_.Id_nocontentconvert:     data.no_content_convert = true; break;
-				default:                                   throw Err_.new_unhandled_default(itm.tid);
+				default:                                   throw ErrUtl.NewUnhandled(itm.tid);
 			}
 			cur = kwd_end;
 			prv = cur;
@@ -185,7 +196,7 @@ public class Xomw_doubleunder_wkr {
 			Xol_kwd_itm[] itms = grp.Itms();
 			for (Xol_kwd_itm itm : itms) {
 				byte[] val = itm.Val();
-				trie.Add_obj(val, new Xomw_doubleunder_itm(id, grp.Case_match(), val));
+				trie.AddObj(val, new Xomw_doubleunder_itm(id, grp.Case_match(), val));
 			}
 		}
 	}

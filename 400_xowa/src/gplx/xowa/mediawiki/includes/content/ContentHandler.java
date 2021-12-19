@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import gplx.core.brys.*;
+package gplx.xowa.mediawiki.includes.content;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.mediawiki.XophpArray;
 public abstract class ContentHandler {
 //		/**
 //		* Convenience function for getting flat text from a Content Object. This
@@ -255,7 +256,7 @@ public abstract class ContentHandler {
 //		* @param String $modelId The ID of the content model for which to get a
 //		*    handler. Use CONTENT_MODEL_XXX constants.
 //		*
-//		* @throws MWException For @gplx.Internal protected errors and problems in the configuration.
+//		* @throws MWException For public errors and problems in the configuration.
 //		* @throws MWUnknownContentModelException If no handler is known for the model ID.
 //		* @return ContentHandler The ContentHandler singleton for handling the model given by the ID.
 //		*/
@@ -389,7 +390,7 @@ public abstract class ContentHandler {
 //		/**
 //		* Applies transformations on export (returns the blob unchanged per default).
 //		* Subclasses may override this to perform transformations such as conversion
-//		* of legacy formats or filtering of @gplx.Internal protected meta-data.
+//		* of legacy formats or filtering of public meta-data.
 //		*
 //		* @param String $blob The blob to be exported
 //		* @param String|null $format The blob's serialization format
@@ -544,7 +545,7 @@ public abstract class ContentHandler {
 	*/
 	protected void checkFormat(String format) {
 		if (!this.isSupportedFormat(format)) {
-			throw Err_.new_wo_type(
+			throw ErrUtl.NewArgs(
 				"Format $format is not supported for content model "
 				+ this.getModelID()
 			);

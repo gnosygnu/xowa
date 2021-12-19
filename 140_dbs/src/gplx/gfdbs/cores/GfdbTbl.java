@@ -1,6 +1,4 @@
 package gplx.gfdbs.cores;
-
-import gplx.Err_;
 import gplx.dbs.Db_conn;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
@@ -9,7 +7,7 @@ import gplx.gfdbs.cores.cmds.GfdbModifyCmd;
 import gplx.gfdbs.cores.cmds.GfdbSelectCmd;
 import gplx.gfdbs.cores.cmds.GfoDbSelectWkrAll;
 import gplx.gfdbs.cores.txns.GfdbTxnMgr;
-
+import gplx.types.errs.ErrUtl;
 public class GfdbTbl<I, M extends GfdbMeta<I>> implements GfdbCloseAble {
     protected final Db_conn conn;
     protected final M meta;
@@ -34,7 +32,7 @@ public class GfdbTbl<I, M extends GfdbMeta<I>> implements GfdbCloseAble {
             case Insert: return insertCmd;
             case Update: return updateCmd;
             case Delete: return deleteCmd;
-            default: throw Err_.new_unhandled_default(dbState);
+            default: throw ErrUtl.NewUnhandled(dbState);
         }
     }
 	public void DeleteAll() {conn.Stmt_new(Db_qry_delete.new_all_(meta.TblName())).Exec_delete();}

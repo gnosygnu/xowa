@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*;
+package gplx.xowa.xtns.wbases.stores;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.Ordered_hash;
 import gplx.xowa.xtns.wbases.core.*;
 public class Wbase_prop_mgr {	// lang-agnostic registry of props; EX: "p15" -> commonsmedia		
 	private Ordered_hash cache;

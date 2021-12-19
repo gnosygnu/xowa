@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.lists;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.List_adp_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_ctx_wkr;
 import gplx.xowa.parsers.Xop_parser_;
@@ -29,7 +29,7 @@ import gplx.xowa.parsers.Xop_tkn_mkr;
 import gplx.xowa.parsers.tblws.Xop_tblw_wkr;
 import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
 public class Xop_list_wkr implements Xop_ctx_wkr {
-	private int listId = 0; byte[] curSymAry = new byte[Max_list_depth]; int curSymLen = 0; byte[] prvSymAry = Bry_.Empty;
+	private int listId = 0; byte[] curSymAry = new byte[Max_list_depth]; int curSymLen = 0; byte[] prvSymAry = BryUtl.Empty;
 	private HierPosAryBldr posBldr = new HierPosAryBldr(Max_list_depth);
 	private boolean SymAry_fill_overflow;
 	public void Ctor_ctx(Xop_ctx ctx) {}
@@ -101,7 +101,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 			}
 		}
 		if (allDd) { // NOTE: if indent && next == {| then invoke table; EX: ":::{|"
-			int tblw_bgn = Bry_find_.Find_fwd_while(src, cur_pos, src_len, AsciiByte.Space);  // skip spaces; EX: ": {|" DATE:2017-01-26
+			int tblw_bgn = BryFind.FindFwdWhile(src, cur_pos, src_len, AsciiByte.Space);  // skip spaces; EX: ": {|" DATE:2017-01-26
 			if (tblw_bgn < src_len - 2 && src[tblw_bgn] == '{' && src[tblw_bgn + 1] == '|')	   // check if next chars are "{|"
 				return ctx.Tblw().Make_tkn_bgn(ctx, tkn_mkr, root, src, src_len, tblw_bgn, tblw_bgn+ 2, false, Xop_tblw_wkr.Tblw_type_tb, Xop_tblw_wkr.Called_from_list, -1, -1);	// NOTE: ws_enabled must be set to true; see test for Adinkras; Cato the Elder
 		}
@@ -189,7 +189,7 @@ public class Xop_list_wkr implements Xop_ctx_wkr {
 	private void Reset(int newListId) {
 		posBldr.Init();
 		curSymLen = 0;
-		prvSymAry = Bry_.Empty;
+		prvSymAry = BryUtl.Empty;
 		dd_chk = false;
 		listId = newListId;
 	}

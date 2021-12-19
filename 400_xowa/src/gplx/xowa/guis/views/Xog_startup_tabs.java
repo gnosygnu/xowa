@@ -13,15 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.xowa.*;
-import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.updates.specials.*;
+package gplx.xowa.guis.views;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
+import gplx.xowa.addons.apps.updates.specials.Xoa_update_special;
 public class Xog_startup_tabs {
 	private String type, custom_list, prev_list, prev_version, curr_version;
 	private boolean show_app_update;
 	public int Startup_idx() {return startup_idx;} private int startup_idx;
-	public String[] Startup_urls() {return startup_urls;} private String[] startup_urls = String_.Ary_empty;
+	public String[] Startup_urls() {return startup_urls;} private String[] startup_urls = StringUtl.AryEmpty;
 	public Xog_startup_tabs Init_by_app(Xoae_app app) {
 		Xocfg_mgr cfg = app.Cfg();
 		this.type = cfg.Get_str_app_or(Cfg__startup_type, Opt__startup_type__previous);
@@ -38,11 +46,11 @@ public class Xog_startup_tabs {
 
 		// process main types
 		if (Manual == null) {
-			if		(String_.Eq(type, "blank"))						list.Add(gplx.xowa.specials.Xow_special_meta_.Itm__default_tab.Ttl_str());
-			else if (String_.Eq(type, "xowa"))						list.Add(Url__home_main);
-			else if (String_.Eq(type, "custom"))					Parse_ary(list, custom_list);
-			else if (String_.Eq(type, Opt__startup_type__previous))	Parse_ary(list, prev_list);
-			else													throw Err_.new_unhandled(type);
+			if		(StringUtl.Eq(type, "blank"))						list.Add(gplx.xowa.specials.Xow_special_meta_.Itm__default_tab.Ttl_str());
+			else if (StringUtl.Eq(type, "xowa"))						list.Add(Url__home_main);
+			else if (StringUtl.Eq(type, "custom"))					Parse_ary(list, custom_list);
+			else if (StringUtl.Eq(type, Opt__startup_type__previous))	Parse_ary(list, prev_list);
+			else													throw ErrUtl.NewUnhandled(type);
 		}
 		else
 			list.Add(Manual);
@@ -69,10 +77,10 @@ public class Xog_startup_tabs {
 		// check list for page
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
-			String itm = (String)list.Get_at(i);
+			String itm = (String)list.GetAt(i);
 
 			// page found; return its index
-			if (String_.Eq(itm, page)) {
+			if (StringUtl.Eq(itm, page)) {
 				return i;
 			}
 		}
@@ -82,19 +90,19 @@ public class Xog_startup_tabs {
 		return list.Len();
 	}
 	private static void Parse_ary(List_adp list, String s) {
-		if (String_.Len_eq_0(s)) return;
-		String[] ary = String_.SplitLines_nl(String_.Trim(s));
+		if (StringUtl.IsNullOrEmpty(s)) return;
+		String[] ary = StringUtl.SplitLinesNl(StringUtl.Trim(s));
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
 			String itm = ary[i];
-			if (String_.Len_eq_0(itm)) continue;
+			if (StringUtl.IsNullOrEmpty(itm)) continue;
 			list.Add(itm);
 		}
 	}
 	public static String Version_previous(Xoa_app app) {return app.Cfg().Get_str_app_or(Cfg__prev_version, "");}
 	public static void Shutdown(Xoae_app app) {
 		app.Cfg().Set_str_app(Cfg__prev_version, Xoa_app_.Version);
-		if (String_.Eq(app.Cfg().Get_str_app_or(Cfg__startup_type, Opt__startup_type__previous), Opt__startup_type__previous)) {
+		if (StringUtl.Eq(app.Cfg().Get_str_app_or(Cfg__startup_type, Opt__startup_type__previous), Opt__startup_type__previous)) {
 			app.Cfg().Set_str_app(Cfg__prev_list	, Calc_previous_tabs(app.Gui_mgr().Browser_win().Tab_mgr()));
 
 			// save prev_selected
@@ -105,14 +113,14 @@ public class Xog_startup_tabs {
 		}
 	}
 	private static String Calc_previous_tabs(gplx.xowa.guis.views.Xog_tab_mgr tab_mgr) {
-		Bry_bfr bfr = Bry_bfr_.New();
+		BryWtr bfr = BryWtr.New();
 		int len = tab_mgr.Tabs_len();
 		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_byte_nl();
+			if (i != 0) bfr.AddByteNl();
 			gplx.xowa.guis.views.Xog_tab_itm tab = tab_mgr.Tabs_get_at(i);
-			bfr.Add_str_u8(tab.Page().Url().To_str());
+			bfr.AddStrU8(tab.Page().Url().To_str());
 		}
-		return bfr.To_str_and_clear();
+		return bfr.ToStrAndClear();
 	}
 	public static String Manual = null;	// note set by command-line at startup;
 	private static final String

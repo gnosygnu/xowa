@@ -14,11 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims.enums;
-
-import gplx.Bry_;
-import gplx.objects.strings.AsciiByte;
-import gplx.Err_;
-
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.errs.ErrUtl;
 // NOTE: could not find definitive list, so using these links for now
 // REF.MW:https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-datamodel/src/main/java/org/wikidata/wdtk/datamodel/implementation/EntityIdValueImpl.java
 // REF.MW:https://github.com/wikimedia/wikibase-property-suggester-scripts/blob/1d25e76f894796bfd57dd107102cf39088885138/propertysuggester/parser/JsonReader.py
@@ -41,8 +39,8 @@ public class Wbase_claim_entity_type_ {
 
 	public static Wbase_enum_itm ToTid(byte[] id) {
 		// fail if null or 0-length
-		if (Bry_.Len_eq_0(id)) {
-			throw Err_.new_unhandled_default(id);
+		if (BryUtl.IsNullOrEmpty(id)) {
+			throw ErrUtl.NewUnhandled(id);
 		}
 
 		// get 1st byte and uppercase it
@@ -60,7 +58,7 @@ public class Wbase_claim_entity_type_ {
 			case AsciiByte.Ltr_L:
 				return Wbase_claim_entity_type_.Itm__lexeme;
 			default:
-				throw Err_.new_unhandled_default(id);
+				throw ErrUtl.NewUnhandled(id);
 		}
 	}
 }

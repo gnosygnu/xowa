@@ -1,9 +1,7 @@
 package gplx.langs.javascripts;
-
-import gplx.Err_;
-import gplx.String_;
 import gplx.langs.javascripts.util.regex.JsPattern_;
-
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.errs.ErrUtl;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,7 +26,7 @@ public class JsString_ {
 	public static String charAt(String s, int i) {
 		int len = s.length();
 		if (i < 0 || i >= len) {
-			return String_.Empty;
+			return StringUtl.Empty;
 		} else {
 			return Character.toString(s.charAt(i));
 		}
@@ -136,7 +134,7 @@ public class JsString_ {
 					repl = ((JsStringReplaceArg3)replObj).processMatcher(m.group(0), m.group(1), m.group(2));
 					break;
 				default:
-					throw Err_.new_unhandled_default(replType);
+					throw ErrUtl.NewUnhandled(replType);
 			}
 
 			if (sb == null) {

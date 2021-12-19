@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files;
+import gplx.types.basics.utls.IntUtl;
 import gplx.core.threads.*; import gplx.xowa.guis.cbks.js.*;
 public class Xog_redlink_thread implements Gfo_thread_wkr {
 	private final int[] redlink_ary; private final Xog_js_wkr js_wkr;
@@ -23,7 +24,7 @@ public class Xog_redlink_thread implements Gfo_thread_wkr {
 	public void Thread__exec() {
 		int len = redlink_ary.length;
 		for (int i = 0; i < len; ++i) {
-			js_wkr.Html_redlink(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix + Int_.To_str(redlink_ary[i]));
+			js_wkr.Html_redlink(gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list.Lnki_id_prefix + IntUtl.ToStr(redlink_ary[i]));
 		}
 	}
 }

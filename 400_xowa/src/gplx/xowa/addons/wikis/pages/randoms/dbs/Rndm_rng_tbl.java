@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.pages.randoms.dbs;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.types.basics.utls.StringUtl;
 public class Rndm_rng_tbl implements Rls_able {
 	private final String tbl_name = "rndm_rng"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_qry_idx, fld_rng_idx, fld_seq_bgn, fld_seq_end;
@@ -35,7 +37,7 @@ public class Rndm_rng_tbl implements Rls_able {
 		finally {rdr.Rls();}
 	}
 	public Rndm_rng_itm Select_by_rndm_num_or_noop(int qry_idx, int rndm_num) {
-		Db_rdr rdr = conn.Stmt_sql(String_.Format("SELECT * FROM rndm_rng WHERE qry_idx = {0} AND seq_bgn <= {1} AND seq_end > {2}", qry_idx, rndm_num)).Exec_select__rls_auto();	// ANSI.Y
+		Db_rdr rdr = conn.Stmt_sql(StringUtl.Format("SELECT * FROM rndm_rng WHERE qry_idx = {0} AND seq_bgn <= {1} AND seq_end > {2}", qry_idx, rndm_num)).Exec_select__rls_auto();	// ANSI.Y
 		try		{return Load_or_noop(rdr);}
 		finally {rdr.Rls();}
 	}

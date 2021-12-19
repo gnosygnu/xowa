@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.core;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_cmd;
 import gplx.gfui.imgs.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.files.Io_url;
+import gplx.types.commons.KeyVal;
 public interface Gfui_kit extends Gfo_invk {
 	byte			Tid();
 	String			Key();
@@ -31,15 +36,15 @@ public interface Gfui_kit extends Gfo_invk {
 	int				Ask_yes_no_cancel(String grp_key, String msg_key, String fmt, Object... args);
 	GfuiInvkCmd		New_cmd_sync(Gfo_invk invk);
 	GfuiInvkCmd		New_cmd_async(Gfo_invk invk);
-	GfuiWin			New_win_app(String key, Keyval... args);
-	GfuiWin			New_win_utl(String key, GfuiWin owner, Keyval... args);
-	Gfui_html		New_html(String key, GfuiElem owner, Keyval... args);
-	Gfui_tab_mgr	New_tab_mgr(String key, GfuiElem owner, Keyval... args);
-	Gfui_grp		New_grp(String key, GfuiElem owner, Keyval... args);
-	GfuiTextBox		New_text_box(String key, GfuiElem owner, Keyval... args);
-	GfuiBtn			New_btn(String key, GfuiElem owner, Keyval... args);
-	GfuiComboBox	New_combo(String key, GfuiElem owner, Keyval... args);
-	GfuiLbl			New_lbl(String key, GfuiElem owner, Keyval... args);
+	GfuiWin			New_win_app(String key, KeyVal... args);
+	GfuiWin			New_win_utl(String key, GfuiWin owner, KeyVal... args);
+	Gfui_html		New_html(String key, GfuiElem owner, KeyVal... args);
+	Gfui_tab_mgr	New_tab_mgr(String key, GfuiElem owner, KeyVal... args);
+	Gfui_grp		New_grp(String key, GfuiElem owner, KeyVal... args);
+	GfuiTextBox		New_text_box(String key, GfuiElem owner, KeyVal... args);
+	GfuiBtn			New_btn(String key, GfuiElem owner, KeyVal... args);
+	GfuiComboBox	New_combo(String key, GfuiElem owner, KeyVal... args);
+	GfuiLbl			New_lbl(String key, GfuiElem owner, KeyVal... args);
 	Gfui_dlg_file	New_dlg_file(byte type, String msg);
 	Gfui_dlg_msg	New_dlg_msg(String msg);
 	ImageAdp		New_img_load(Io_url path);

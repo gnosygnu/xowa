@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls;
 
-import gplx.objects.primitives.BoolUtl;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.DateAdp;
-import gplx.DateAdp_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.envs.SystemUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.langs.htmls.Gfh_utl;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.Xoa_ttl;
@@ -47,18 +47,18 @@ import gplx.xowa.xtns.pfuncs.times.Pft_func_formatdate;
 import gplx.xowa.xtns.wbases.Wdata_xwiki_link_wtr;
 public class Xoh_page_wtr_wkr {
 	private final Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
-	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final BryWtr tmp_bfr = BryWtr.NewAndReset(255);
 	private final Xoh_page_wtr_mgr mgr; private final byte page_mode;
 	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
 	private final gplx.xowa.addons.apps.scripts.Xoscript_mgr scripting_mgr = new gplx.xowa.addons.apps.scripts.Xoscript_mgr();
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(Xoh_page_wtr_mgr mgr, byte page_mode) {this.mgr = mgr; this.page_mode = page_mode;}		
 	public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;		
-	public void Write_page(Bry_bfr rv, Xoae_page page, Xop_ctx ctx, Xoh_page_html_source page_html_source) {
+	public void Write_page(BryWtr rv, Xoae_page page, Xop_ctx ctx, Xoh_page_html_source page_html_source) {
 		synchronized (thread_lock_1) {
 			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();
 			ctx.Page_(page); // HACK: must update page for toc_mgr; WHEN: Xoae_page rewrite
-			Bry_fmtr fmtr = null;
+			BryFmtr fmtr = null;
 			if (mgr.Html_capable()) {
 				wdata_lang_wtr.Page_(page);
 				byte view_mode = page_mode;
@@ -69,34 +69,34 @@ public class Xoh_page_wtr_wkr {
 						// ctx.Page().Redlink_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately); NOTE: probably put in to handle reusable redlink lists; redlink lists are now instantiated per page, so clear is not useful
 						break;
 				}
-				Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
+				BryWtr page_bfr = wiki.Utl__bfr_mkr().GetM001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				try {
 				Xoh_wtr_ctx hctx = null;
 				if (page_mode == Xopg_view_mode_.Tid__html 
 					&& wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid() == Xow_hdump_mode.Hdump_save.Tid()) {
 					hctx = Xoh_wtr_ctx.Hdump;
 					Write_body(page_bfr, ctx, hctx, page);
-					byte[] html_bry = page_bfr.To_bry_and_clear();
+					byte[] html_bry = page_bfr.ToBryAndClear();
 					Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(html_bry));
 				}
 				else {
 					// NOTE: if HTTP, generate hdump html b/c of async image download; HTTP will later call make_mgr to substitute out <xoimg>; ISSUE#:686; DATE:2020-06-27
 					hctx = app.Mode().Tid_is_http() ? Xoh_wtr_ctx.HttpServer : Xoh_wtr_ctx.Basic;
 					Write_body(page_bfr, ctx, hctx, page);
-					Write_page_by_tid(ctx, hctx, view_mode, rv, fmtr, page_bfr.To_bry_and_rls());
+					Write_page_by_tid(ctx, hctx, view_mode, rv, fmtr, page_bfr.ToBryAndRls());
 					scripting_mgr.Write(rv, wiki, page);
 					if (page_mode == Xopg_view_mode_.Tid__html)	// if html, write page again, but wrap it in html skin this time
-						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.To_bry_and_clear()));
+						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.ToBryAndClear()));
 					wdata_lang_wtr.Page_(null);
 				}
-				} finally {page_bfr.Mkr_rls();}
+				} finally {page_bfr.MkrRls();}
 			}
 			else
 				Write_body(rv, ctx, Xoh_wtr_ctx.Basic, page);
 			this.page = null;
 		}
 	}
-	private void Write_page_by_tid(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte html_gen_tid, Bry_bfr bfr, Bry_fmtr fmtr, byte[] page_data) {
+	private void Write_page_by_tid(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte html_gen_tid, BryWtr bfr, BryFmtr fmtr, byte[] page_data) {
 		// if custom_html, use it and exit; needed for Default_tab
 		byte[] custom_html = page.Html_data().Custom_html();
 		if (custom_html != null) {bfr.Add(custom_html); return;}
@@ -106,18 +106,18 @@ public class Xoh_page_wtr_wkr {
 		byte page_tid = Xow_page_tid.Identify(wiki.Domain_tid(), page_ns_id, page_ttl.Page_db());
 
 		// write modified_on; handle invalid dates
-		DateAdp modified_on = page.Db().Page().Modified_on();
-		byte[] modified_on_msg = Bry_.Empty;
-		if (modified_on != DateAdp_.MinValue) {
+		GfoDate modified_on = page.Db().Page().Modified_on();
+		byte[] modified_on_msg = BryUtl.Empty;
+		if (modified_on != GfoDateUtl.MinValue) {
 			wiki.Parser_mgr().Date_fmt_bldr().Format(tmp_bfr, wiki, wiki.Lang(), modified_on, Pft_func_formatdate.Fmt_dmy);
-			modified_on_msg = wiki.Msg_mgr().Val_by_key_args(Key_lastmodifiedat, tmp_bfr.To_bry_and_clear(), modified_on.XtoStr_fmt_HHmm());
+			modified_on_msg = wiki.Msg_mgr().Val_by_key_args(Key_lastmodifiedat, tmp_bfr.ToBryAndClear(), modified_on.ToStrFmt_HHmm());
 		}
 
 		byte[] page_body_class = Xoh_page_body_cls.Calc(tmp_bfr, page_ttl, page_tid);
 		// byte[] html_content_editable = wiki.Gui_mgr().Cfg_browser().Content_editable() ? Content_editable_bry : Bry_.Empty;
-		byte[] html_content_editable = Bry_.Empty;
+		byte[] html_content_editable = BryUtl.Empty;
 		byte[] page_content_sub = Xoh_page_wtr_wkr_.Bld_page_content_sub(app, wiki, page, tmp_bfr);
-		byte[] js_edit_toolbar_bry = html_gen_tid == Xopg_view_mode_.Tid__edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
+		byte[] js_edit_toolbar_bry = html_gen_tid == Xopg_view_mode_.Tid__edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : BryUtl.Empty;
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) {
 			byte[] converted_title = vnt_mgr.Convert_lang().Converted_title();	// prefer converted title
@@ -136,7 +136,7 @@ public class Xoh_page_wtr_wkr {
 		// main build
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
 		boolean nightmode_enabled = app.Gui_mgr().Nightmode_mgr().Enabled();
-		fmtr.Bld_bfr_many(bfr
+		fmtr.BldToBfrMany(bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Db().Page().Id(), page.Ttl().Full_db()
 		, pagename_for_tab
@@ -163,9 +163,9 @@ public class Xoh_page_wtr_wkr {
 		Xoh_page_wtr_wkr_.Bld_head_end(bfr, tmp_bfr, page);	// add after </head>
 		Xoh_page_wtr_wkr_.Bld_html_end(bfr, tmp_bfr, page);	// add after </html>			
 	}
-	public void Write_hdump(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page wpg) {
+	public void Write_hdump(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page wpg) {
 		if (wpg.Html_data().Xtn_pgbnr() != null) {
-			ctx.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(wpg, ctx, hctx).Bfr_arg__add(bfr);	// if pgbnr exists, write to top of html
+			ctx.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(wpg, ctx, hctx).AddToBfr(bfr);	// if pgbnr exists, write to top of html
 		}
 
 		int page_id = wpg.Db().Page().Id();
@@ -177,7 +177,7 @@ public class Xoh_page_wtr_wkr {
 
 		this.Write_body(bfr, ctx, hctx, wpg);
 	}
-	public void Write_body(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page) {
+	public void Write_body(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page) {
 		synchronized (thread_lock_2) {
 			this.page = page; this.wiki = page.Wikie(); this.app = wiki.Appe();
 			Xoa_ttl page_ttl = page.Ttl(); int page_ns_id = page_ttl.Ns().Id();
@@ -204,10 +204,10 @@ public class Xoh_page_wtr_wkr {
 			}
 		}
 	}
-	private void Write_body_wikitext(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page, byte page_tid, int ns_id) {
+	private void Write_body_wikitext(BryWtr bfr, Xoae_app app, Xowe_wiki wiki, byte[] data_raw, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page, byte page_tid, int ns_id) {
 		// dump and exit if pre-generated html from html dumps
 		byte[] hdump_data = page.Db().Html().Html_bry();
-		if (Bry_.Len_gt_0(hdump_data)) {
+		if (BryUtl.IsNotNullOrEmpty(hdump_data)) {
 			bfr.Add(hdump_data);
 			return;
 		}
@@ -222,7 +222,7 @@ public class Xoh_page_wtr_wkr {
 		if (ns_id == Xow_ns_.Tid__file) app.Ns_file_page_mgr().Bld_html(wiki, ctx, page, bfr, page.Ttl(), wiki.Cfg_file_page(), page.File_queue());
 
 		// get separate bfr; note that bfr already has <html> and <head> written to it, so this can't be passed to tidy; DATE:2014-06-11
-		Bry_bfr tidy_bfr = wiki.Utl__bfr_mkr().Get_m001();
+		BryWtr tidy_bfr = wiki.Utl__bfr_mkr().GetM001();
 
 		try {
 		// write wikitext
@@ -240,20 +240,20 @@ public class Xoh_page_wtr_wkr {
 		}
 		
 		// if [[Category]], add catpage data
-		if (ns_id == Xow_ns_.Tid__category) tidy_bfr.Add_safe(page.Html_data().Catpage_data());
+		if (ns_id == Xow_ns_.Tid__category) tidy_bfr.AddSafe(page.Html_data().Catpage_data());
 		// if (ns_id == Xow_ns_.Tid__category) wiki.Ctg__catpage_mgr().Write_catpage(tidy_bfr, page, hctx);
 
 		// tidy html
 		if (ns_id != Xow_ns_.Tid__special) { // skip Special b/c
-			long tidy_time = gplx.core.envs.System_.Ticks();
+			long tidy_time = SystemUtl.Ticks();
 			wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
-			page.Stat_itm().Tidy_time = gplx.core.envs.System_.Ticks__elapsed_in_frac(tidy_time);
+			page.Stat_itm().Tidy_time = SystemUtl.Ticks__elapsed_in_frac(tidy_time);
 		}
 		
 		// add back to main bfr
-		bfr.Add_bfr_and_clear(tidy_bfr);
+		bfr.AddBfrAndClear(tidy_bfr);
 		} finally {
-			tidy_bfr.Mkr_rls();
+			tidy_bfr.MkrRls();
 		}
 
 		// handle Categories at bottom of page; note that html is XOWA-generated so does not need to be tidied
@@ -269,12 +269,12 @@ public class Xoh_page_wtr_wkr {
 
 		// translate if variants are enabled
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
-		if (vnt_mgr.Enabled()) bfr.Add(vnt_mgr.Convert_lang().Parse_page(vnt_mgr.Cur_itm(), page.Db().Page().Id(), bfr.To_bry_and_clear()));
+		if (vnt_mgr.Enabled()) bfr.Add(vnt_mgr.Convert_lang().Parse_page(vnt_mgr.Cur_itm(), page.Db().Page().Id(), bfr.ToBryAndClear()));
 
 		// handle uniqs
 		wiki.Parser_mgr().Uniq_mgr().Parse(bfr);
 	}
-	private void Write_body_pre(Bry_bfr bfr, Xoae_app app, Xowe_wiki wiki, Xoh_wtr_ctx hctx, byte[] data_raw, Bry_bfr tmp_bfr) {
+	private void Write_body_pre(BryWtr bfr, Xoae_app app, Xowe_wiki wiki, Xoh_wtr_ctx hctx, byte[] data_raw, BryWtr tmp_bfr) {
 		Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), tmp_bfr, data_raw, 0, data_raw.length, false, false);
 		if (hctx.Mode_is_hdump())
 			bfr.Add(data_raw);
@@ -282,7 +282,7 @@ public class Xoh_page_wtr_wkr {
 			app.Html_mgr().Page_mgr().Content_code_fmt().Bld_many(bfr, tmp_bfr);
 		tmp_bfr.Clear();
 	}
-	private void Write_body_edit(Bry_bfr bfr, byte[] data_raw, int ns_id, byte page_tid) {
+	private void Write_body_edit(BryWtr bfr, byte[] data_raw, int ns_id, byte page_tid) {
 		if	(	ns_id == Xow_ns_.Tid__mediawiki			// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			&&	page_tid == Xow_page_tid.Tid_wikitext
 			)
@@ -296,8 +296,8 @@ public class Xoh_page_wtr_wkr {
 		else
 			bfr.Add(data_raw);
 		if (data_raw_len > 0)		// do not add nl if empty String
-			bfr.Add_byte_nl();		// per MW:EditPage.php: "Ensure there's a newline at the end, otherwise adding lines is awkward."
+			bfr.AddByteNl();		// per MW:EditPage.php: "Ensure there's a newline at the end, otherwise adding lines is awkward."
 	}
-	private static final byte[] Key_lastmodifiedat = Bry_.new_a7("lastmodifiedat");
+	private static final byte[] Key_lastmodifiedat = BryUtl.NewA7("lastmodifiedat");
 	
 }

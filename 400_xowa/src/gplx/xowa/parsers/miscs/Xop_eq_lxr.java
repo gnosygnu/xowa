@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.parsers.miscs;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.tmpls.*;	
@@ -25,7 +26,7 @@ public class Xop_eq_lxr implements Xop_lxr {
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, AsciiByte.Eq); // gobble up eq; "==" should produce 1 eq_tkn with len of 2, not 2 eq_tkn with len of 1; DATE:2014-04-17
+		cur_pos = BryFind.FindFwdWhile(src, cur_pos, src_len, AsciiByte.Eq); // gobble up eq; "==" should produce 1 eq_tkn with len of 2, not 2 eq_tkn with len of 1; DATE:2014-04-17
 		int eq_len = cur_pos - bgn_pos;
 		boolean hdr_like = false;
 		if (tmpl_mode) {
@@ -36,7 +37,7 @@ public class Xop_eq_lxr implements Xop_lxr {
 				if (prv_pos > -1 && src[prv_pos] == AsciiByte.Nl)						// is prv char \n; EX: "\n==="
 					hdr_like = true;
 				else {
-					int eol_pos = Bry_find_.Find_fwd_while_space_or_tab(src, cur_pos, src_len);	// skip trailing ws; EX: "== \n"; PAGE:nl.q:Geert_Wilders; DATE:2014-06-05
+					int eol_pos = BryFind.FindFwdWhileSpaceOrTab(src, cur_pos, src_len);	// skip trailing ws; EX: "== \n"; PAGE:nl.q:Geert_Wilders; DATE:2014-06-05
 					if (	eol_pos == src_len											// eos
 						||	src[eol_pos] == AsciiByte.Nl								// cur_pos is \n; EX: "===\n"
 						) {
@@ -57,15 +58,15 @@ public class Xop_eq_lxr implements Xop_lxr {
 			ctx.Subs_add(root, tkn_mkr.Eq(bgn_pos, cur_pos));
 			return cur_pos;
 		}
-		int ws_end = Bry_find_.Find_fwd_while_space_or_tab(src, cur_pos, src_len);
+		int ws_end = BryFind.FindFwdWhileSpaceOrTab(src, cur_pos, src_len);
 		hdr_like = ws_end == src_len || src[ws_end] == AsciiByte.Nl;					// hdr_like if next char \n or eos
 		if (!hdr_like) {
 			int ctg_end = Xop_nl_lxr.Scan_fwd_for_ctg(ctx, src, cur_pos, src_len);		// check if ==[[Category:A]]; DATE:2014-04-17
-			if (	ctg_end != Bry_find_.Not_found) {									// [[Category: found
-				ctg_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ctg_end, src_len);
-				if (ctg_end != Bry_find_.Not_found) {									// ]] found; note that this should do more validation; EX: [[Category:]] should not be valid; DATE:2014-04-17
+			if (	ctg_end != BryFind.NotFound) {									// [[Category: found
+				ctg_end = BryFind.FindFwd(src, Xop_tkn_.Lnki_end, ctg_end, src_len);
+				if (ctg_end != BryFind.NotFound) {									// ]] found; note that this should do more validation; EX: [[Category:]] should not be valid; DATE:2014-04-17
 					ctg_end += Xop_tkn_.Lnki_end_len;
-					ctg_end = Bry_find_.Find_fwd_while_space_or_tab(src, ctg_end, src_len);
+					ctg_end = BryFind.FindFwdWhileSpaceOrTab(src, ctg_end, src_len);
 					if (ctg_end == src_len || src[ctg_end] == AsciiByte.Nl)			// hdr_like if ]]\n after [[Category:A]]
 						hdr_like = true;
 				}

@@ -14,15 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.String_;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.htmls.Gfh_atr_;
 import gplx.langs.htmls.Gfh_bldr_;
 import gplx.langs.htmls.Gfh_utl;
 import gplx.langs.htmls.Gfh_wtr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
@@ -69,10 +70,10 @@ public class Xoh_lnki_wtr {
 		this.history_mgr = app.Usere().History_mgr();
 		if (hctx.Mode_is_hdump()) cfg.Lnki__id_(false);
 	}
-	public void Write_lnki(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
+	public void Write_lnki(BryWtr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		Xoa_ttl lnki_ttl = lnki.Ttl();
 		if (lnki_ttl == null) {// NOTE: parser failed to properly invalidate lnki; escape tkn now and warn; DATE:2014-06-06
-			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Page().Url().To_str(), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()));
+			app.Usr_dlg().Warn_many("", "", "invalid lnki evaded parser; page=~{0} ex=~{1}", ctx.Page().Url().To_str(), StringUtl.NewU8(src, lnki.Src_bgn(), lnki.Src_end()));
 			Xoh_html_wtr_escaper.Escape(app.Parser_amp_mgr(), bfr, src, lnki.Src_bgn(), lnki.Src_end(), true, false);
 			return;
 		}
@@ -109,28 +110,28 @@ public class Xoh_lnki_wtr {
 		}
 		Write_plain_by_tkn(bfr, hctx, src, lnki, lnki_ttl);
 	}
-	public void Write_file(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt) {
+	public void Write_file(BryWtr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt) {
 		file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki, alt);
 	}
-	public void Write_file(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer, byte[] alt) {
+	public void Write_file(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xof_file_itm xfer, byte[] alt) {
 		file_wtr.File_wtr().Write_file(bfr, ctx, hctx, src, lnki, xfer, alt);
 	}
-	public void Write_plain_by_bry(Bry_bfr bfr, byte[] src, Xop_lnki_tkn lnki, byte[] caption) {
+	public void Write_plain_by_bry(BryWtr bfr, byte[] src, Xop_lnki_tkn lnki, byte[] caption) {
 		Write_plain(bfr, Xoh_wtr_ctx.Basic, src, lnki, lnki.Ttl(), caption_bry_wtr.Caption_bry_(caption));
 	}
-	public void Write_plain_by_tkn(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl) {
+	public void Write_plain_by_tkn(BryWtr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl) {
 		Write_plain(bfr, hctx, src, lnki, lnki_ttl, caption_tkn_wtr);
 	}
-	public void Write_caption(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl) {
+	public void Write_caption(BryWtr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl) {
 		Write_caption(bfr, ctx, hctx, src, lnki, lnki.Ttl_ary(), true, caption_tkn_wtr);
 	}
-	private void Write_plain(Bry_bfr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl, Xop_lnki_caption_wtr caption_wkr) {
+	private void Write_plain(BryWtr bfr, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, Xoa_ttl lnki_ttl, Xop_lnki_caption_wtr caption_wkr) {
 		byte[] ttl_bry = lnki.Ttl_ary();
-		if (Bry_.Len_eq_0(ttl_bry)) ttl_bry = lnki_ttl.Full_txt_raw();		// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
+		if (BryUtl.IsNullOrEmpty(ttl_bry)) ttl_bry = lnki_ttl.Full_txt_raw();		// NOTE: handles ttls like [[fr:]] and [[:fr;]] which have an empty Page_txt, but a valued Full_txt_raw
 
 		// lnki is same as pagename; PAGE:en.w:January 1
-		if (    Bry_.Eq(lnki_ttl.Full_txt_by_orig(), page.Ttl().Full_txt_by_orig())
-			&&  lnki_ttl.Anch_bgn() == -1 && Bry_.Eq(lnki_ttl.Wik_txt(), page.Ttl().Wik_txt())) { // only bold if lnki is not pointing to anchor on same page; PAGE:en.w:Comet; [[Comet#Physical characteristics|ion tail]]
+		if (    BryLni.Eq(lnki_ttl.Full_txt_by_orig(), page.Ttl().Full_txt_by_orig())
+			&&  lnki_ttl.Anch_bgn() == -1 && BryLni.Eq(lnki_ttl.Wik_txt(), page.Ttl().Wik_txt())) { // only bold if lnki is not pointing to anchor on same page; PAGE:en.w:Comet; [[Comet#Physical characteristics|ion tail]]
 			bfr.Add(Gfh_bldr_.Bry__a_lhs_bgn);
 			Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__class, Bry__selflink);
 			bfr.Add(Gfh_bldr_.Bry__lhs_end_head);
@@ -150,7 +151,7 @@ public class Xoh_lnki_wtr {
 				int lnki_html_id = lnki.Html_uid();
 				if (lnki_html_id > Lnki_id_ignore)					// html_id=0 for skipped lnkis; EX:anchors and interwiki
 					bfr	.Add(Xoh_consts.A_mid_id)					// '" id=\"xowa_lnki_'
-						.Add_int_variable(lnki_html_id);			// '1234'
+						.AddIntVariable(lnki_html_id);			// '1234'
 			}
 			if (cfg.Lnki__title()) {
 				byte[] title_bry = lnki_ttl.Full_txt();	// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
@@ -162,7 +163,7 @@ public class Xoh_lnki_wtr {
 			}
 			if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
 				if (lnki.Target != null) {
-					bfr.Add_str_a7("\" target=\"");
+					bfr.AddStrA7("\" target=\"");
 					bfr.Add(lnki.Target);
 				}
 			}
@@ -178,13 +179,13 @@ public class Xoh_lnki_wtr {
 				= (anch_txt.length > 0 && anch_txt[0] == AsciiByte.Hash)	// 1st char is #; occurs when page_txt has trailing space; causes 1st letter of anch_txt to start at # instead of 1st letter
 				? AsciiByte.Space	// ASSUME: 1 space ("Help:A #b"); does not handle multiple spaces like ("Help:A   #b"); needs change to Xoa_ttl
 				: AsciiByte.Hash;	// Anch_txt bgns at 1st letter, so add # for caption;
-				ttl_bry = Bry_.Add_w_dlm(anch_spr, ttl_bry, anch_txt);	// manually add anchor; else "Help:A#b" becomes "Help:A". note that lnki.Ttl_ary() uses .Full_txt (wiki + page but no anchor) to captialize 1st letter of page otherwise "Help:A#b" shows as "Help:A" (so Help:a -> Help:A); DATE:2013-06-21
+				ttl_bry = BryUtl.AddWithDlm(anch_spr, ttl_bry, anch_txt);	// manually add anchor; else "Help:A#b" becomes "Help:A". note that lnki.Ttl_ary() uses .Full_txt (wiki + page but no anchor) to captialize 1st letter of page otherwise "Help:A#b" shows as "Help:A" (so Help:a -> Help:A); DATE:2013-06-21
 			}
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 			bfr.Add(Gfh_bldr_.Bry__a_rhs);							// </a>
 		}
 	}
-	private void Write_caption(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] ttl_bry, boolean tail_enabled, Xop_lnki_caption_wtr caption_wkr) {
+	private void Write_caption(BryWtr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] ttl_bry, boolean tail_enabled, Xop_lnki_caption_wtr caption_wkr) {
 		if	(lnki.Caption_exists()) {					// lnki has a caption seg; EX: [[A|caption]]
 			if (lnki.Caption_tkn_pipe_trick())			// "pipe trick"; [[A|]] is same as [[A|A]]; also, [[Help:A|]] -> [[Help:A|A]]
 				bfr.Add(lnki.Ttl().Page_txt());
@@ -197,10 +198,10 @@ public class Xoh_lnki_wtr {
 		}
 		if (tail_enabled) {								// write tail if enabled; EX: [[A]]b -> Ab
 			int tail_bgn = lnki.Tail_bgn();
-			if (tail_bgn != -1) bfr.Add_mid(src, tail_bgn, lnki.Tail_end());
+			if (tail_bgn != -1) bfr.AddMid(src, tail_bgn, lnki.Tail_end());
 		}
 	}
-	private static boolean Write_caption_for_rel2abs(Bry_bfr bfr, Xop_lnki_tkn lnki) {
+	private static boolean Write_caption_for_rel2abs(BryWtr bfr, Xop_lnki_tkn lnki) {
 		int subpage_tid = lnki.Subpage_tid(); if (subpage_tid == Pfunc_rel2abs.Id_null) return false;	// not a subpage
 		boolean subpage_slash_at_end = lnki.Subpage_slash_at_end();
 		byte[] leaf_txt = lnki.Ttl().Leaf_txt_wo_qarg();
@@ -209,7 +210,7 @@ public class Xoh_lnki_wtr {
 				if (subpage_slash_at_end)		// "/" at end; only add text;		EX: [[/A/]] -> A
 					bfr.Add(leaf_txt);
 				else							// "/" absent; add slash to bgn;	EX: [[/A]]  -> /A
-					bfr.Add_byte(AsciiByte.Slash).Add(leaf_txt);
+					bfr.AddByte(AsciiByte.Slash).Add(leaf_txt);
 				return true;
 			case Pfunc_rel2abs.Id_dot_dot_slash:
 				if (subpage_slash_at_end)		// "/" at end; only add text;		EX: [[../A/]] -> A
@@ -221,14 +222,14 @@ public class Xoh_lnki_wtr {
 		return false;
 	}
 	public static byte[] Lnki_cls_visited(gplx.xowa.users.history.Xou_history_mgr history_mgr, byte[] wiki_key, byte[] page_ttl) {
-		return history_mgr.Has(wiki_key, page_ttl) ? Lnki_cls_visited_bry : Bry_.Empty;
-	}	private static final byte[] Lnki_cls_visited_bry = Bry_.new_a7(" class=\"xowa-visited\"");
-	private static final byte[] Bry_xowa_visited = Bry_.new_a7("\" class=\"xowa-visited");
-	private static final byte[] Bry__selflink = Bry_.new_a7("mw-selflink selflink");
+		return history_mgr.Has(wiki_key, page_ttl) ? Lnki_cls_visited_bry : BryUtl.Empty;
+	}	private static final byte[] Lnki_cls_visited_bry = BryUtl.NewA7(" class=\"xowa-visited\"");
+	private static final byte[] Bry_xowa_visited = BryUtl.NewA7("\" class=\"xowa-visited");
+	private static final byte[] Bry__selflink = BryUtl.NewA7("mw-selflink selflink");
 	public static final int Lnki_id_ignore = 0, Lnki_id_min = 1;
 }
 interface Xop_lnki_caption_wtr {
-	void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn);
+	void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, BryWtr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn);
 }
 class Xop_lnki_caption_wtr_bry implements Xop_lnki_caption_wtr {
 	private byte[] caption_bry;
@@ -236,7 +237,7 @@ class Xop_lnki_caption_wtr_bry implements Xop_lnki_caption_wtr {
 		this.caption_bry = caption_bry;
 		return this;
 	}
-	public void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn) {
+	public void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, BryWtr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn) {
 		bfr.Add(caption_bry);
 	}
 }
@@ -245,7 +246,7 @@ class Xop_lnki_caption_wtr_tkn implements Xop_lnki_caption_wtr {
 	public Xop_lnki_caption_wtr_tkn(Xoh_html_wtr html_wtr) {
 		this.html_wtr = html_wtr;
 	}
-	public void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, Bry_bfr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn) {
+	public void Write_tkn(Xop_ctx ctx, Xoh_wtr_ctx hctx, BryWtr bfr, byte[] src, Xop_tkn_grp grp, int sub_idx, Xop_tkn_itm tkn) {
 		html_wtr.Write_tkn_to_html(bfr, ctx, hctx, src, grp, sub_idx, tkn);
 	}
 }

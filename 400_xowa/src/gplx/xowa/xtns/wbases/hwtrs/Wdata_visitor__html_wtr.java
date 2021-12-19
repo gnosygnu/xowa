@@ -14,11 +14,10 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.hwtrs;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.core.brys.fmtrs.Bry_fmtr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_app_;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.xtns.wbases.Wdata_prop_val_visitor;
@@ -35,9 +34,9 @@ import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
 class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
 	private Wdata_wiki_mgr wdata_mgr; private Wdata_hwtr_msgs msgs; private Wdata_lbl_mgr lbl_mgr;
 	private Xol_lang_itm lang;
-	private byte[] ttl; private Bry_bfr tmp_bfr;
-	private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_(); private final Bry_bfr tmp_time_bfr = Bry_bfr_.New_w_size(32);
-	public Wdata_visitor__html_wtr Init(Bry_bfr tmp_bfr, Wdata_wiki_mgr wdata_mgr, Wdata_hwtr_msgs msgs, Wdata_lbl_mgr lbl_mgr, Xol_lang_itm lang, byte[] ttl) {
+	private byte[] ttl; private BryWtr tmp_bfr;
+	private final BryFmtr tmp_time_fmtr = BryFmtr.New(); private final BryWtr tmp_time_bfr = BryWtr.NewWithSize(32);
+	public Wdata_visitor__html_wtr Init(BryWtr tmp_bfr, Wdata_wiki_mgr wdata_mgr, Wdata_hwtr_msgs msgs, Wdata_lbl_mgr lbl_mgr, Xol_lang_itm lang, byte[] ttl) {
 		this.wdata_mgr = wdata_mgr; this.msgs = msgs; this.lbl_mgr = lbl_mgr; this.lang = lang;
 		this.tmp_bfr = tmp_bfr; this.ttl = ttl;
 		return this;
@@ -56,7 +55,7 @@ class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
 	}
 	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm) {
 		tmp_bfr.Add(itm.Text());
-		tmp_bfr.Add_byte(AsciiByte.Space).Add_byte(AsciiByte.BrackBgn).Add(itm.Lang()).Add_byte(AsciiByte.BrackEnd);
+		tmp_bfr.AddByte(AsciiByte.Space).AddByte(AsciiByte.BrackBgn).Add(itm.Lang()).AddByte(AsciiByte.BrackEnd);
 	}
 	public void Visit_quantity(Wbase_claim_quantity itm) {
 		Wdata_prop_val_visitor.Write_quantity(tmp_bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*;
+package gplx.xowa.xtns.scribunto;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
 public class Scrib_fsys_mgr {
 	private Ordered_hash libs;
 	private Io_url[] lib_dirs = new Io_url[lib_dirs_len]; static final int lib_dirs_len = 3;
@@ -43,7 +48,7 @@ public class Scrib_fsys_mgr {
 		int fils_len = fils.length;
 		for (int i = 0; i < fils_len; i++) {
 			Io_url fil = fils[i];
-			if (!String_.Eq(fil.Ext(), ".lua")) continue;	// ignore readme.txt, readme
+			if (!StringUtl.Eq(fil.Ext(), ".lua")) continue;	// ignore readme.txt, readme
 			gplx.core.ios.Io_fil fil_itm = new gplx.core.ios.Io_fil(fil, null);
 			// Scribunto allows multiple ways of lookup; for example, "a/b/c.lua"
 			// * "c"
@@ -51,11 +56,11 @@ public class Scrib_fsys_mgr {
 			// * "a.b.c"
 			String rel_path = fil.GenRelUrl_orEmpty(script_dir); // get rel path; EX: "C:\xowa\a\b.lua" -> "a\b.lua"
 			if (gplx.core.envs.Op_sys.Cur().Tid_is_wnt()) // if windows, replace "\"
-				rel_path = String_.Replace(rel_path, fil.Info().DirSpr(), "/");
-			rel_path = String_.DelEndIf(rel_path, ".lua"); // remove ".lua"	
+				rel_path = StringUtl.Replace(rel_path, fil.Info().DirSpr(), "/");
+			rel_path = StringUtl.DelEndIf(rel_path, ".lua"); // remove ".lua"
 			rv.AddIfDupeUse1st(fil.NameOnly(), fil_itm); // add filename only (no extension); EX: "c"
 			rv.AddIfDupeUse1st(rel_path, fil_itm); // add relpath; EX: "a/b/c"
-			rv.AddIfDupeUse1st(String_.Replace(rel_path, "/", "."), fil_itm); // add relpath in dotted form; EX: "a.b.c"
+			rv.AddIfDupeUse1st(StringUtl.Replace(rel_path, "/", "."), fil_itm); // add relpath in dotted form; EX: "a.b.c"
 		}
 		
 		return rv;
@@ -63,7 +68,7 @@ public class Scrib_fsys_mgr {
 	public void Shrink() {
 		int len = libs.Len();
 		for (int i = 0; i < len; i++) {
-			gplx.core.ios.Io_fil fil = (gplx.core.ios.Io_fil)libs.Get_at(i);
+			gplx.core.ios.Io_fil fil = (gplx.core.ios.Io_fil)libs.GetAt(i);
 			fil.Url_(null).Data_(null);
 		}
 	}

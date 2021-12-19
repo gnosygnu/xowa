@@ -14,13 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers;
-import gplx.Err_;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
 import gplx.core.log_msgs.Gfo_msg_itm;
 import gplx.core.log_msgs.Gfo_msg_log;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.IntUtl;
 import gplx.xowa.Xoa_page_;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
@@ -87,7 +86,7 @@ public class Xop_ctx {
 	public boolean				Tid_is_image_map()	{return tid_is_image_map;} public Xop_ctx Tid_is_image_map_(boolean v) {tid_is_image_map = v; return this;} private boolean tid_is_image_map;
 
 	public boolean				Tmpl_load_enabled() {return tmpl_load_enabled;} public void Tmpl_load_enabled_(boolean v) {tmpl_load_enabled = v;} private boolean tmpl_load_enabled = true;
-	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = Int_.Max_value;
+	public int					Tmpl_tkn_max()		{return tmpl_tkn_max;} public void Tmpl_tkn_max_(int v) {tmpl_tkn_max = v;} private int tmpl_tkn_max = IntUtl.MaxValue;
 	public Xop_keeplist_wiki	Tmpl_keeplist()		{return tmpl_keeplist;} public void Tmpl_keeplist_(Xop_keeplist_wiki v) {this.tmpl_keeplist = v;} private Xop_keeplist_wiki tmpl_keeplist;
 	public boolean				Tmpl_args_parsing() {return tmpl_args_parsing;} public Xop_ctx Tmpl_args_parsing_(boolean v) {tmpl_args_parsing = v; return this;} private boolean tmpl_args_parsing;
 	public Xot_defn_trace		Defn_trace()		{return defn_trace;} public Xop_ctx Defn_trace_(Xot_defn_trace v) {defn_trace = v; return this;} private Xot_defn_trace defn_trace = Xot_defn_trace_null.Instance;
@@ -119,7 +118,7 @@ public class Xop_ctx {
 	}
 	public String Page_url_str() {
 		try {return cur_page.Url().To_str();}
-		catch (Exception e) {Err_.Noop(e); return "page_url shouldn't fail";}
+		catch (Exception e) {return "page_url shouldn't fail";}
 	}
 	public void Parser__page_init(Xop_root_tkn root, byte[] src) {
 		this.Msg_log().Clear(); cur_tkn_tid = Xop_tkn_itm_.Tid_null;

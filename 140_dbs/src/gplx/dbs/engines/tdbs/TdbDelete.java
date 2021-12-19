@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.criterias.*;
 import gplx.dbs.qrys.*; import gplx.core.gfo_ndes.*;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
 class TdbDeleteWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_delete cmd = (Db_qry_delete)cmdObj;
@@ -34,7 +36,7 @@ class TdbDeleteWkr implements Db_qryWkr {
 					deleted.Add(row);
 			}
 			for (int i = 0; i < deleted.Len(); i++) {
-				GfoNde row = (GfoNde)deleted.Get_at(i);
+				GfoNde row = (GfoNde)deleted.GetAt(i);
 				tbl.Rows().Del(row);
 				rv++;
 			}

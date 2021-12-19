@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.btries;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Byte_;
-import gplx.Err_;
-import gplx.String_;
-import gplx.core.primitives.Byte_obj_val;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.wrappers.ByteVal;
 public class Btrie_fast_mgr {
 	private ByteTrieItm_fast root;
 	public boolean CaseAny() {return root.CaseAny();} public Btrie_fast_mgr CaseAny_(boolean v) {root.CaseAny_(v); return this;}
@@ -31,24 +31,24 @@ public class Btrie_fast_mgr {
 		Object rv_obj = null; 
 		int rv_pos = bgn_pos;
 		ByteTrieItm_fast nxt = root.Ary_find(b);
-		if (nxt == null) {				// nxt does not have b; return rv;
+		if (nxt == null) {                // nxt does not have b; return rv;
 			rv.Init(rv_pos, rv_obj);
 			return rv_obj;
 		}
 		int cur_pos = bgn_pos + 1;
 		ByteTrieItm_fast cur = root;
 		while (true) {
-			if (nxt.Ary_is_empty()) {		// nxt is leaf; return nxt.Val() (which should be non-null)
+			if (nxt.Ary_is_empty()) {        // nxt is leaf; return nxt.Val() (which should be non-null)
 				rv_obj = nxt.Val();
 				rv.Init(cur_pos, rv_obj);
 				return rv_obj;
 			}
 			Object nxt_val = nxt.Val();
-			if (nxt_val != null) {		// nxt is node; cache rv (in case of false match)
+			if (nxt_val != null) {        // nxt is node; cache rv (in case of false match)
 				rv_pos = cur_pos;
 				rv_obj = nxt_val;
 			}
-			if (cur_pos == src_end) {	// eos; exit
+			if (cur_pos == src_end) {    // eos; exit
 				rv.Init(rv_pos, rv_obj);
 				return rv_obj;
 			}
@@ -70,27 +70,27 @@ public class Btrie_fast_mgr {
 	public Object Match_bgn(byte[] src, int bgn_pos, int end_pos) {return Match_bgn_w_byte(src[bgn_pos], src, bgn_pos, end_pos);}
 	public Object Match_bgn_w_byte(byte b, byte[] src, int bgn_pos, int src_len) {
 		match_pos = bgn_pos;
-		ByteTrieItm_fast nxt = root.Ary_find(b); if (nxt == null) return null;	// nxt does not have b; return rv;
+		ByteTrieItm_fast nxt = root.Ary_find(b); if (nxt == null) return null;    // nxt does not have b; return rv;
 		Object rv = null; int cur_pos = bgn_pos + 1;
 		ByteTrieItm_fast cur = root;
 		while (true) {
-			if (nxt.Ary_is_empty()) {match_pos = cur_pos; return nxt.Val();}	// nxt is leaf; return nxt.Val() (which should be non-null)
+			if (nxt.Ary_is_empty()) {match_pos = cur_pos; return nxt.Val();}    // nxt is leaf; return nxt.Val() (which should be non-null)
 			Object nxt_val = nxt.Val();
-			if (nxt_val != null) {match_pos = cur_pos; rv = nxt_val;}			// nxt is node; cache rv (in case of false match)
-			if (cur_pos == src_len) return rv;									// eos; exit
+			if (nxt_val != null) {match_pos = cur_pos; rv = nxt_val;}            // nxt is node; cache rv (in case of false match)
+			if (cur_pos == src_len) return rv;                                    // eos; exit
 			b = src[cur_pos];
 			cur = nxt;
 			nxt = cur.Ary_find(b); if (nxt == null) return rv;
 			++cur_pos;
 		}
 	}
-	public Btrie_fast_mgr Add_bry_byte(byte   key, byte val) {return Add(new byte[] {key}, Byte_obj_val.new_(val));}
-	public Btrie_fast_mgr Add_bry_byte(byte[] key, byte val) {return Add(key, Byte_obj_val.new_(val));}
-	public Btrie_fast_mgr Add_str_byte(String key, byte val) {return Add(Bry_.new_u8(key), Byte_obj_val.new_(val));}
+	public Btrie_fast_mgr Add_bry_byte(byte   key, byte val) {return Add(new byte[] {key}, ByteVal.New(val));}
+	public Btrie_fast_mgr Add_bry_byte(byte[] key, byte val) {return Add(key, ByteVal.New(val));}
+	public Btrie_fast_mgr Add_str_byte(String key, byte val) {return Add(BryUtl.NewU8(key), ByteVal.New(val));}
 	public Btrie_fast_mgr Add(byte key, Object val) {return Add(new byte[] {key}, val);}
-	public Btrie_fast_mgr Add(String key, Object val) {return Add(Bry_.new_u8(key), val);}
+	public Btrie_fast_mgr Add(String key, Object val) {return Add(BryUtl.NewU8(key), val);}
 	public Btrie_fast_mgr Add(byte[] key, Object val) {
-		if (val == null) throw Err_.new_wo_type("null objects cannot be registered", "key", String_.new_u8(key));
+		if (val == null) throw ErrUtl.NewArgs("null objects cannot be registered", "key", StringUtl.NewU8(key));
 		int key_len = key.length; int key_end = key_len - 1;
 		ByteTrieItm_fast cur = root;
 		for (int i = 0; i < key_len; i++) {
@@ -105,7 +105,7 @@ public class Btrie_fast_mgr {
 		return this;
 	}
 	public Btrie_fast_mgr Add_stub(byte tid, String s) {
-		byte[] bry = Bry_.new_u8(s);
+		byte[] bry = BryUtl.NewU8(s);
 		Btrie_itm_stub stub = new Btrie_itm_stub(tid, bry);
 		return Add(bry, stub);
 	}
@@ -115,22 +115,22 @@ public class Btrie_fast_mgr {
 		for (int i = 0; i < key_len; i++) {
 			byte b = key[i];
 			Object itm_obj = cur.Ary_find(b);
-			if (itm_obj == null) break;	// b not found; no match; exit;
+			if (itm_obj == null) break;    // b not found; no match; exit;
 			ByteTrieItm_fast itm = (ByteTrieItm_fast)itm_obj;
-			if (i == key_len - 1) {	// last char
+			if (i == key_len - 1) {    // last char
 				if (itm.Val() == null) break; // itm does not have val; EX: trie with "abc", and "ab" deleted
 				if (itm.Ary_is_empty())
 					cur.Ary_del(b);
 				else
 					itm.Val_set(null);
 			}
-			else {					// mid char; set itm as cur and continue
+			else {                    // mid char; set itm as cur and continue
 				cur = itm;
 			}
 		}
 	}
 	public void Clear() {root.Clear();}
-	public byte[] Replace(Bry_bfr tmp_bfr, byte[] src, int bgn, int end) {
+	public byte[] Replace(BryWtr tmp_bfr, byte[] src, int bgn, int end) {
 		int pos = bgn;
 		boolean dirty = false;
 		while (pos < end) {
@@ -138,25 +138,25 @@ public class Btrie_fast_mgr {
 			Object o = this.Match_bgn_w_byte(b, src, pos, end);
 			if (o == null) {
 				if (dirty)
-					tmp_bfr.Add_byte(b);
+					tmp_bfr.AddByte(b);
 				pos++;
 			}
 			else {
 				if (!dirty) {
-					tmp_bfr.Add_mid(src, bgn, pos);
+					tmp_bfr.AddMid(src, bgn, pos);
 					dirty = true;
 				}
 				tmp_bfr.Add((byte[])o);
 				pos = match_pos;
 			}
 		}
-		return dirty ? tmp_bfr.To_bry_and_clear() : src;
+		return dirty ? tmp_bfr.ToBryAndClear() : src;
 	}
-	public static Btrie_fast_mgr cs()			{return new Btrie_fast_mgr(BoolUtl.N);}
-	public static Btrie_fast_mgr ci_a7()		{return new Btrie_fast_mgr(BoolUtl.Y);}
+	public static Btrie_fast_mgr cs()            {return new Btrie_fast_mgr(BoolUtl.N);}
+	public static Btrie_fast_mgr ci_a7()        {return new Btrie_fast_mgr(BoolUtl.Y);}
 	public static Btrie_fast_mgr new_(boolean case_any) {return new Btrie_fast_mgr(case_any);}
 	Btrie_fast_mgr(boolean case_any) {
-		root = new ByteTrieItm_fast(Byte_.Zero, null, case_any);
+		root = new ByteTrieItm_fast(ByteUtl.Zero, null, case_any);
 	}
 }
 class ByteTrieItm_fast {
@@ -193,6 +193,6 @@ class ByteTrieItm_fast {
 		ary[key_byte] = null;
 		--ary_len;
 		ary_is_empty = ary_len == 0;
-	}	int ary_len = 0;
+	}   int ary_len = 0;
 	public ByteTrieItm_fast(byte key_byte, Object val, boolean case_any) {this.key_byte = key_byte; this.val = val; this.case_any = case_any;}
 }

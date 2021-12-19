@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.scribunto;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class Scrib_core_tst {
 	@Before public void init() {fxt.Clear();} Scrib_core_fxt fxt = new Scrib_core_fxt();
@@ -27,25 +29,25 @@ public class Scrib_core_tst {
 	@Test public void CallFunction() {
 		fxt	.Expd_server_rcvd_add("000000300000005F{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=0,[\"args\"]={}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:1:{s:4:\"noop\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:2;}}}}")
-			.Test_CallFunction(1, Object_.Ary_empty, fxt.kv_ary_(fxt.kv_(1, fxt.kv_func_("noop", 2))))
+			.Test_CallFunction(1, ObjectUtl.AryEmpty, fxt.kv_ary_(fxt.NewKvInt(1, fxt.kv_func_("noop", 2))))
 			;
 	}
 	@Test public void CallFunction_args() {
 		fxt	.Expd_server_rcvd_add("0000004100000081{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]={[\"key\"]=123}}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:1:{s:4:\"noop\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:2;}}}}")
-			.Test_CallFunction(1, Object_.Ary(fxt.kv_("key", 123)), fxt.kv_ary_(fxt.kv_(1, fxt.kv_func_("noop", 2))))
+			.Test_CallFunction(1, ObjectUtl.Ary(fxt.NewKvStr("key", 123)), fxt.kv_ary_(fxt.NewKvInt(1, fxt.kv_func_("noop", 2))))
 			;
 	}
 	@Test public void RegisterLibrary() {
 		fxt	.Expd_server_rcvd_add("00000074000000E7{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"prc_0\"]=\"mwInit|prc_0\",[\"prc_1\"]=\"mwInit|prc_1\"}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
-			.Test_RegisterLibrary(String_.Ary("prc_0", "prc_1"), String_.Ary("mwInit|prc_0", "mwInit|prc_1"))
+			.Test_RegisterLibrary(StringUtl.Ary("prc_0", "prc_1"), StringUtl.Ary("mwInit|prc_0", "mwInit|prc_1"))
 			;
 	}
 	@Test public void LoadLibraryFromFile() {
 		fxt	.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:15;}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:2:{s:5:\"prc_2\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:2;}s:5:\"prc_3\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:3;}}}}")
-			.Test_LoadLibraryFromFile("lib_name", "doesn't matter", fxt.kv_("prc_2", 2), fxt.kv_("prc_3", 3));
+			.Test_LoadLibraryFromFile("lib_name", "doesn't matter", fxt.NewKvStr("prc_2", 2), fxt.NewKvStr("prc_3", 3));
 			;
 	}
 	@Test public void LoadLibraryFromFile__rv_has_no_values() {	// PURPOSE: "package.lua" does not return any prc_ids
@@ -57,7 +59,7 @@ public class Scrib_core_tst {
 	@Test public void CallFunction_cbk() {	// PURPOSE: 'simulates interpreter.CallFunction(mw_lib.Fncs_get_by_key("setup").Id(), "allowEnvFuncs", allow_env_funcs);'
 		fxt	.Expd_server_rcvd_add("00000080000000FF{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"loadPackage\"]=\"mwInit|loadPackage\",[\"prc_1\"]=\"mwInit|prc_1\"}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
-			.Test_RegisterLibrary(String_.Ary("loadPackage", "prc_1"), String_.Ary("mwInit|loadPackage", "mwInit|prc_1"))
+			.Test_RegisterLibrary(StringUtl.Ary("loadPackage", "prc_1"), StringUtl.Ary("mwInit|loadPackage", "mwInit|prc_1"))
 			;		
 		fxt	.Init_lib_fil("package.lua", "package_text")
 			.Expd_server_rcvd_add("000000470000008D{[\"op\"]=\"call\",[\"id\"]=2,[\"nargs\"]=1,[\"args\"]={[1]={[\"key_0\"]=\"val_0\"}}}")
@@ -66,7 +68,7 @@ public class Scrib_core_tst {
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:14;}}")
 			.Expd_server_rcvd_add("0000003B00000075{[\"op\"]=\"return\",[\"nvalues\"]=1,[\"values\"]={[1]=chunks[14]}}")				                       
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
-			.Test_CallFunction(2, Object_.Ary(fxt.kv_("key_0", "val_0")));
+			.Test_CallFunction(2, ObjectUtl.Ary(fxt.NewKvStr("key_0", "val_0")));
 	}
 	@Test public void Module_GetInitChunk() {	// PURPOSE: similar to LoadString except name is prepended with "="
 		String mod_text = Mod_basic();
@@ -105,7 +107,7 @@ public class Scrib_core_tst {
 //				;
 //		}
 	String Mod_basic() {
-		return String_.Concat
+		return StringUtl.Concat
 		(	"local p = {}"
 		,	"function p.noop(frame)"
 		,	"end"

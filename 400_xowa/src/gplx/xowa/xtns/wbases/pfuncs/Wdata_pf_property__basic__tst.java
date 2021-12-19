@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.pfuncs;
 
-import gplx.Bry_;
+import gplx.types.basics.utls.BryUtl;
 import gplx.xowa.xtns.wbases.Wdata_wiki_mgr_fxt;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class Wdata_pf_property__basic__tst {
 	}
 	@Test public void Entity_fr() {	// PURPOSE: non-English wiki should default to English label if non-English label not available; DATE:2013-12-19
 		// set wiki to French
-		fxt.Wiki().Wdata_wiki_lang_(Bry_.new_a7("fr"));
+		fxt.Wiki().Wdata_wiki_lang_(BryUtl.NewA7("fr"));
 
 		fxt.Init__docs__add(fxt.Wdoc("Q1")
 			.Add_claims(fxt.Make_claim_entity_qid(1, 2))

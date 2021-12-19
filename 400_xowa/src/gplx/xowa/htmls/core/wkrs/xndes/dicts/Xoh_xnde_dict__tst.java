@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.xndes.dicts;
-import gplx.Bry_;
-import gplx.Tfds;
-import gplx.core.brys.Bry_rdr;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.rdrs.BryRdr;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.Xoh_hzip_bfr;
 import org.junit.Test;
 public class Xoh_xnde_dict__tst {
@@ -36,47 +36,47 @@ public class Xoh_xnde_dict__tst {
 class Xoh_xnde_dict__fxt {
 	private final Xoh_xnde_dict_grp grp = new Xoh_xnde_dict_grp(1);
 	private final Xoh_hzip_bfr bfr = new Xoh_hzip_bfr(32, BoolUtl.Y, AsciiByte.Escape);
-	private final Bry_rdr rdr = new Bry_rdr();
+	private final BryRdr rdr = new BryRdr();
 	public Xoh_xnde_dict__fxt() {
 		this.dump_bldr = new Xoh_xnde_dict__dump_bldr(bfr);
 	}
 	public Xoh_xnde_dict__dump_bldr Dump_bldr() {return dump_bldr;} private final Xoh_xnde_dict__dump_bldr dump_bldr;
-	public void Exec__add(String val)	{grp.Add(Bry_.new_u8(val));}
+	public void Exec__add(String val)	{grp.Add(BryUtl.NewU8(val));}
 	public void Exec__clear()			{grp.Clear();}
 	public void Test__get_by_key_or_new(String val, int expd_id) {
-		byte[] val_bry = Bry_.new_u8(val);
+		byte[] val_bry = BryUtl.NewU8(val);
 		Xoh_xnde_dict_itm actl_itm = grp.Get_by_key_or_new(val_bry, 0, val_bry.length);
-		Tfds.Eq_int(expd_id, actl_itm.Id());
-		Tfds.Eq_bry(val_bry, actl_itm.Val());
+		GfoTstr.Eq(expd_id, actl_itm.Id());
+		GfoTstr.Eq(val_bry, actl_itm.Val());
 	}
 	public void Test__save(byte[] expd) {
 		grp.Save(bfr);
-		Tfds.Eq_bry(expd, bfr.To_bry_and_clear());
+		GfoTstr.Eq(expd, bfr.ToBryAndClear());
 	}
 	public void Test__load(byte[] dump, Xoh_xnde_dict_itm... itms) {
-		rdr.Init_by_page(Bry_.Empty, dump, dump.length);
+		rdr.InitByPage(BryUtl.Empty, dump, dump.length);
 		grp.Load(rdr);
 		int itms_len = itms.length;
 		for (int i = 0; i < itms_len; ++i) {
 			Xoh_xnde_dict_itm expd_itm = itms[i];
 			Xoh_xnde_dict_itm actl_itm = grp.Get_by_id_or_null(expd_itm.Id());
-			Tfds.Eq_int(expd_itm.Id(), actl_itm.Id());
-			Tfds.Eq_bry(expd_itm.Val(), actl_itm.Val());
+			GfoTstr.Eq(expd_itm.Id(), actl_itm.Id());
+			GfoTstr.Eq(expd_itm.Val(), actl_itm.Val());
 		}			
 	}
-	public Xoh_xnde_dict_itm Make__itm(int id, String val) {return new Xoh_xnde_dict_itm(id, Bry_.new_u8(val));}
+	public Xoh_xnde_dict_itm Make__itm(int id, String val) {return new Xoh_xnde_dict_itm(id, BryUtl.NewU8(val));}
 }
 class Xoh_xnde_dict__dump_bldr {
 	private final Xoh_hzip_bfr bfr;
 	public Xoh_xnde_dict__dump_bldr(Xoh_hzip_bfr bfr) {this.bfr = bfr;}
 	public Xoh_xnde_dict__dump_bldr Add(int id, String val) {
 		bfr.Add_hzip_int(1, (byte)id);
-		bfr.Add_str_u8(val);
-		bfr.Add_byte_nl();
+		bfr.AddStrU8(val);
+		bfr.AddByteNl();
 		return this;
 	}
 	public byte[] To_bry() {
 		bfr.Add(Xoh_xnde_dict_grp.Bry__stop);
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 }

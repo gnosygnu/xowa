@@ -14,10 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.origs;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Byte_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.BoolUtl;
 import gplx.xowa.files.Xof_ext;
 import gplx.xowa.files.Xof_ext_;
 public class Xof_orig_itm {
@@ -36,19 +35,19 @@ public class Xof_orig_itm {
 
 	public int Db_row_size() {return Db_row_size_fixed + redirect.length + ttl.length;}
 	private static final int Db_row_size_fixed = (5 * 4);	// 3 ints; 2 bytes
-	public static final byte Repo_comm = 0, Repo_wiki = 1, Repo_null = Byte_.Max_value_127;	// SERIALIZED: "wiki_orig.orig_repo"
+	public static final byte Repo_comm = 0, Repo_wiki = 1, Repo_null = ByteUtl.MaxValue127;	// SERIALIZED: "wiki_orig.orig_repo"
 	public static final Xof_orig_itm Null = null;
 	public static final int File_len_null = -1;	// file_len used for filters (EX: don't download ogg > 1 MB)
 	public static String dump(Xof_orig_itm itm) {
 		if (itm == null)
 			return "NULL";
-		Bry_bfr bfr = Bry_bfr_.New_w_size(255);
-		bfr.Add_str_a7("repo").Add_byte_eq().Add_int_variable((int)itm.repo).Add_byte_semic();
-		bfr.Add_str_a7("ttl").Add_byte_eq().Add(itm.ttl).Add_byte_semic();
-		bfr.Add_str_a7("ext_id").Add_byte_eq().Add_int_variable(itm.ext_id).Add_byte_semic();
-		bfr.Add_str_a7("w").Add_byte_eq().Add_int_variable(itm.w).Add_byte_semic();
-		bfr.Add_str_a7("h").Add_byte_eq().Add_int_variable(itm.h).Add_byte_semic();
-		bfr.Add_str_a7("redirect").Add_byte_eq().Add(itm.redirect).Add_byte_semic();
-		return bfr.To_str_and_clear();
+		BryWtr bfr = BryWtr.NewWithSize(255);
+		bfr.AddStrA7("repo").AddByteEq().AddIntVariable((int)itm.repo).AddByteSemic();
+		bfr.AddStrA7("ttl").AddByteEq().Add(itm.ttl).AddByteSemic();
+		bfr.AddStrA7("ext_id").AddByteEq().AddIntVariable(itm.ext_id).AddByteSemic();
+		bfr.AddStrA7("w").AddByteEq().AddIntVariable(itm.w).AddByteSemic();
+		bfr.AddStrA7("h").AddByteEq().AddIntVariable(itm.h).AddByteSemic();
+		bfr.AddStrA7("redirect").AddByteEq().Add(itm.redirect).AddByteSemic();
+		return bfr.ToStrAndClear();
 	}
 }

@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*;
-import gplx.objects.arrays.ArrayUtl;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.mediawiki.includes.parsers.lnkis;
+import gplx.types.basics.utls.ArrayUtl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.custom.brys.wtrs.HtmlBryBfr;
 import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*;
 import gplx.xowa.mediawiki.includes.parsers.quotes.*;
@@ -45,7 +54,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Xow_wiki wiki;
 	private XomwTitleOld mPageTitle;
 //		private final XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
-	private final Bry_bfr tmp;
+	private final BryWtr tmp;
 	private final XomwParserIface parser;
 	private final Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
 	private final Xomw_qry_mgr query = new Xomw_qry_mgr();
@@ -54,7 +63,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final Hash_adp mImageParams = Hash_adp_bry.cs();
 	private final Hash_adp mImageParamsMagicArray = Hash_adp_bry.cs();
 	public Xomw_lnki_wkr(XomwParserIface parser, XomwLinkHolderArray holders, XomwLinkRenderer link_renderer, Btrie_slim_mgr protocols_trie
-		, XomwLinker linker, Xomw_quote_wkr quote_wkr, Bry_bfr tmp, XomwStripState strip_state
+		, XomwLinker linker, Xomw_quote_wkr quote_wkr, BryWtr tmp, XomwStripState strip_state
 		) {
 		this.parser = parser;
 		this.holders = holders;
@@ -81,11 +90,11 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	}
 	public void replaceInternalLinks(XomwParserBfr pbfr, XomwEnv env, XomwParserCtx pctx) {
 		// XO.PBFR
-		Bry_bfr src_bfr = pbfr.Src();
-		byte[] src = src_bfr.Bfr();
+		BryWtr src_bfr = pbfr.Src();
+		byte[] src = src_bfr.Bry();
 		int src_bgn = 0;
 		int src_end = src_bfr.Len();
-		Bry_bfr bfr = pbfr.Trg();
+		BryWtr bfr = pbfr.Trg();
 		pbfr.Switch();
 
 		this.mPageTitle = pctx.Page_title();
@@ -93,7 +102,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		replaceInternalLinks(env, pctx, bfr, src, src_bgn, src_end);
 	}
 	// XO.MW:SYNC:1.29; DATE:2017-02-02
-	public void replaceInternalLinks(XomwEnv env, XomwParserCtx pctx, Bry_bfr bfr, byte[] src, int src_bgn, int src_end) {
+	public void replaceInternalLinks(XomwEnv env, XomwParserCtx pctx, BryWtr bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW: regex for tc move to header; e1 and e1_img moved to code
 		// the % is needed to support urlencoded titles as well
 
@@ -101,9 +110,9 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		int cur = src_bgn;
 		int prv = cur;
 		while (true) {
-			int lnki_bgn = Bry_find_.Find_fwd(src, Bry__wtxt__lnki__bgn, cur, src_end);	// $a = StringUtils::explode('[[', ' ' . $s);
-			if (lnki_bgn == Bry_find_.Not_found) {	// no more "[["; stop loop
-				bfr.Add_mid(src, cur, src_end);
+			int lnki_bgn = BryFind.FindFwd(src, Bry__wtxt__lnki__bgn, cur, src_end);	// $a = StringUtils::explode('[[', ' ' . $s);
+			if (lnki_bgn == BryFind.NotFound) {	// no more "[["; stop loop
+				bfr.AddMid(src, cur, src_end);
 				break;
 			}
 			cur = lnki_bgn + 2;	// 2="[[".length
@@ -126,7 +135,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// $nottalk = !this.mTitle->isTalkPage();
 
 			// TODO.XO:link_prefix
-			byte[] prefix = Bry_.Empty;
+			byte[] prefix = BryUtl.Empty;
 			//if ($useLinkPrefixExtension) {
 			//	$m = [];
 			//	if (preg_match($e2, $s, $m)) {
@@ -168,14 +177,14 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 					cur = ttl_end + 1;
 
 					// find next "[["
-					nxt_lnki = Bry_find_.Find_fwd(src, Bry__wtxt__lnki__bgn, cur, src_end);
-					if (nxt_lnki == Bry_find_.Not_found)
+					nxt_lnki = BryFind.FindFwd(src, Bry__wtxt__lnki__bgn, cur, src_end);
+					if (nxt_lnki == BryFind.NotFound)
 						nxt_lnki = src_end;
 
 					// find end "]]"
 					capt_bgn = cur;
-					capt_end = Bry_find_.Find_fwd(src, Bry__wtxt__lnki__end, cur, nxt_lnki);
-					if (capt_end == Bry_find_.Not_found) {
+					capt_end = BryFind.FindFwd(src, Bry__wtxt__lnki__end, cur, nxt_lnki);
+					if (capt_end == BryFind.NotFound) {
 						capt_end = nxt_lnki;
 						cur = nxt_lnki;
 						might_be_img = true;
@@ -184,7 +193,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						cur = capt_end + Bry__wtxt__lnki__end.length;
 					}
 				}
-				else if (Bry_.Match(src, ttl_end, ttl_end + 2, Bry__wtxt__lnki__end)) {	// handles simple lnki; EX: [[A]]
+				else if (BryLni.Eq(src, ttl_end, ttl_end + 2, Bry__wtxt__lnki__end)) {	// handles simple lnki; EX: [[A]]
 					cur = ttl_end + 2;
 				}
 				else {
@@ -195,15 +204,15 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				ttl_end = -1;
 			if (ttl_end == -1) { // either (a) no valid title-chars ("[[<") or (b) title char, but has stray "]" ("[[a]b]]")
 				// Invalid form; output directly
-				bfr.Add_mid(src, prv, lnki_bgn + 2);
-				bfr.Add_mid(src, cur, ttl_bgn);
+				bfr.AddMid(src, prv, lnki_bgn + 2);
+				bfr.AddMid(src, cur, ttl_bgn);
 				prv = cur = ttl_bgn;
 				continue;
 			}
 			// PORTED.END: if (preg_match($e1, $line, $m)) && else if (preg_match($e1_img, $line, $m))
 
-			byte[] text = Bry_.Mid(src, capt_bgn, capt_end);
-			byte[] trail = Bry_.Empty;
+			byte[] text = BryLni.Mid(src, capt_bgn, capt_end);
+			byte[] trail = BryUtl.Empty;
 			if (!might_be_img) {
 				// TODO.XO:
 				// If we get a ] at the beginning of $m[3] that means we have a link that's something like:
@@ -236,10 +245,10 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //					$trail = "";
 			}
 
-			byte[] orig_link = Bry_.Mid(src, ttl_bgn, ttl_end);
+			byte[] orig_link = BryLni.Mid(src, ttl_bgn, ttl_end);
 
 			// TODO.XO: handle "[[http://a.org]]"
-			// Don't allow @gplx.Internal protected links to pages containing
+			// Don't allow public links to pages containing
 			// PROTO: where PROTO is a valid URL protocol; these
 			// should be external links.
 			// if (preg_match('/^(?i:' . this.mUrlProtocols . ')/', $origLink)) {
@@ -251,7 +260,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			boolean no_force = orig_link[0] != AsciiByte.Colon;
 			if (!no_force) {
 				// Strip off leading ':'
-				link = Bry_.Mid(link, 1);
+				link = BryLni.Mid(link, 1);
 			}
 			// $nt = is_string( $unstrip ) ? Title::newFromText( $unstrip ) : null;
 			XomwTitleOld nt = XomwTitleOld.newFromText(env, link);
@@ -270,10 +279,10 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// }
 
 			byte[] unstrip = strip_state.unstripNoWiki(link);
-			if (!Bry_.Eq(unstrip, link))
+			if (!BryLni.Eq(unstrip, link))
 				nt = XomwTitleOld.newFromText(env, unstrip);
 			if (nt == null) {
-				bfr.Add_mid(src, prv, lnki_bgn + 2);	// $s .= $prefix . '[[' . $line;
+				bfr.AddMid(src, prv, lnki_bgn + 2);	// $s .= $prefix . '[[' . $line;
 				prv = cur = lnki_bgn + 2;					
 				continue;
 			}
@@ -310,16 +319,16 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 					if (!found) {
 						// we couldn't find the end of this imageLink, so output it raw
 						// but don't ignore what might be perfectly normal links in the text we've examined
-						Bry_bfr nested = wiki.Utl__bfr_mkr().Get_b128();
+						BryWtr nested = wiki.Utl__bfr_mkr().GetB128();
 						this.replaceInternalLinks(env, pctx, nested, text, 0, text.length);
-						nested.Mkr_rls();
-						bfr.Add(prefix).Add(Bry__wtxt__lnki__bgn).Add(link).Add_byte_pipe().Add(text); // s .= "{prefix}[[link|text";
+						nested.MkrRls();
+						bfr.Add(prefix).Add(Bry__wtxt__lnki__bgn).Add(link).AddBytePipe().Add(text); // s .= "{prefix}[[link|text";
 						// note: no trail, because without an end, there *is* no trail
 						continue;
 					}
 				}
 				else { // it's not an image, so output it raw
-					bfr.Add(prefix).Add(Bry__wtxt__lnki__bgn).Add(link).Add_byte_pipe().Add(text); // s .= "{prefix}[[link|text";
+					bfr.Add(prefix).Add(Bry__wtxt__lnki__bgn).Add(link).AddBytePipe().Add(text); // s .= "{prefix}[[link|text";
 					// note: no trail, because without an end, there *is* no trail
 					continue;
 				}
@@ -366,7 +375,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 							// becomes something like "File:Foo.png",
 							// which we don't want to pass on to the
 							// image generator
-							text = Bry_.Empty;
+							text = BryUtl.Empty;
 						}
 						else {
 							// recursively parse links inside the image caption
@@ -384,7 +393,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 					}
 				} 
 				else if (ns == XomwDefines.NS_CATEGORY) {
-					bfr.Trim_end_ws(); // s = rtrim(s . "\n"); // T2087
+					bfr.TrimEndWs(); // s = rtrim(s . "\n"); // T2087
 
 					if (was_blank) {
 //							sortkey = this->getDefaultSort();
@@ -409,7 +418,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// for linking to a different variant.
 			if (ns != XomwDefines.NS_SPECIAL  && nt.equals(mPageTitle) && !nt.hasFragment()) {
 				bfr.Add(prefix);
-				linker.makeSelfLinkObj(bfr, nt, text, Bry_.Empty, trail, Bry_.Empty);
+				linker.makeSelfLinkObj(bfr, nt, text, BryUtl.Empty, trail, BryUtl.Empty);
 				continue;
 			}
 
@@ -432,7 +441,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// be shown as bluelinks even though they're not included in the page table
 			// @todo FIXME: isAlwaysKnown() can be expensive for file links; we should really do
 			// batch file existence checks for NS_FILE and NS_MEDIA
-			bfr.Add_mid(src, prv, lnki_bgn);
+			bfr.AddMid(src, prv, lnki_bgn);
 			prv = cur;
 			if (iw == null && nt.isAlwaysKnown()) {
 				// this->mOutput->addLink(nt);
@@ -440,11 +449,11 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 			else {
 				// Links will be added to the output link list after checking
-				holders.makeHolder(bfr, nt, text, Bry_.Ary_empty, trail, prefix);
+				holders.makeHolder(bfr, nt, text, BryUtl.AryEmpty, trail, prefix);
 			}
 		}
 	}
-	public void makeImage(XomwEnv env, XomwParserCtx pctx, Bry_bfr bfr, XomwTitleOld title, byte[] options_at_link, XomwLinkHolderArray holders) {
+	public void makeImage(XomwEnv env, XomwParserCtx pctx, BryWtr bfr, XomwTitleOld title, byte[] options_at_link, XomwLinkHolderArray holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -494,7 +503,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// XO.MW.UNSUPPORTED.TrackingCategory: if (!$file) this.addTrackingCategory('broken-file-category');
 
 		// Process the input parameters
-		byte[] caption = Bry_.Empty;
+		byte[] caption = BryUtl.Empty;
 		// XO.MW: $params = [ 'frame' => [], 'handler' => [], 'horizAlign' => [], 'vertAlign' => [] ];
 		Xomw_params_frame       frameParams = paramMap.Frame.Clear();
 		Xomw_params_handler     handlerParams = paramMap.Handler.Clear();
@@ -505,7 +514,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		int parts_len = parts.length;
 		for (int i = 0; i < parts_len; i++) {
 			byte[] part = parts[i];
-			part = Bry_.Trim(part);
+			part = BryUtl.Trim(part);
 			byte[][] tmp_match_word = pctx.Lnki_wkr__make_image__match_magic_word;
 			mwArray.matchVariableStartToEnd(tmp_match_word, part);
 			byte[] magic_name = tmp_match_word[0];
@@ -542,7 +551,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 						// validated = $handler->validateParam($paramName, $value);
 					}
 					else {
-						// Validate @gplx.Internal protected parameters
+						// Validate public parameters
 						switch (paramNameUid) {
 							case Xomw_param_itm.Name__manual_thumb:
 							case Xomw_param_itm.Name__alt:
@@ -590,7 +599,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 								break;
 							default:
 								// Most other things appear to be empty or numeric...
-								validated = (val == null || XophpObject_.isnumeric(Bry_.Trim(val)));
+								validated = (val == null || XophpObject_.isnumeric(BryUtl.Trim(val)));
 								break;
 						}
 					}
@@ -639,7 +648,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// plicit caption= parameter and preserving the old magic unnamed para-
 		// meter for BC; ...
 		if (image_is_framed) { // Framed image
-			if (caption == Bry_.Empty && frameParams.alt == null) {
+			if (caption == BryUtl.Empty && frameParams.alt == null) {
 				// No caption or alt text, add the filename as the alt text so
 				// that screen readers at least get some description of the image
 				frameParams.alt = title.getText();
@@ -650,7 +659,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		else { // Inline image
 			if (frameParams.alt == null) {
 				// No alt text, use the "caption" for the alt text
-				if (caption != Bry_.Empty) {
+				if (caption != BryUtl.Empty) {
 					frameParams.alt = parser.stripAltText(caption, holders);
 				}
 				else {
@@ -680,7 +689,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private static Xomw_param_map internalParamMap;
 
 	private void getImageParams(Xomw_image_params rv, XomwMediaHandler handler) {
-		byte[] handlerClass = handler == null ? Bry_.Empty : handler.Key();
+		byte[] handlerClass = handler == null ? BryUtl.Empty : handler.Key();
 		rv.paramMap = (Xomw_param_map)mImageParams.GetByOrNull(handlerClass);
 		// NOTE: lazy-init; code below can be inefficent
 		if (rv.paramMap == null) {
@@ -693,10 +702,10 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				};
 
 				internalParamMap = new Xomw_param_map();
-				byte[] bry_img = Bry_.new_a7("img_");
+				byte[] bry_img = BryUtl.NewA7("img_");
 				for (Xomw_param_list param_list : internalParamNames) {
 					for (byte[] name : param_list.names) {
-						byte[] magic_name = Bry_.Add(bry_img, Bry_.Replace(name, AsciiByte.Dash, AsciiByte.Underline));
+						byte[] magic_name = BryUtl.Add(bry_img, BryUtl.Replace(name, AsciiByte.Dash, AsciiByte.Underline));
 						internalParamMap.Add(magic_name, param_list.type_uid, name);
 					}
 				}
@@ -726,7 +735,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	// XO.MW.NOTE: for MW, "" -> null, null while "AxB" -> 0x0
 	public void parseWidthParam(int[] img_size, byte[] src) {
 		img_size[0] = img_size[1] = XophpObject_.NULL_INT;
-		if (src == Bry_.Empty) {
+		if (src == BryUtl.Empty) {
 			return;
 		}
 		// (T15500) In both cases (width/height and width only),
@@ -734,23 +743,23 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		int src_bgn = 0;
 		int src_end = src.length;
 		// XO: "px" is optional; if exists at end, ignore it
-		if (Bry_.Has_at_end(src, Bry__px)) {
+		if (BryUtl.HasAtEnd(src, Bry__px)) {
 			src_end -= 2;
 		}
 
 		// XO.MW: if ( preg_match( '/^([0-9]*)x([0-9]*)\s*(?:px)?\s*$/', $value, $m ) ) {
 		int w_bgn = 0;
-		int w_end = Bry_find_.Find_fwd_while_num(src, src_bgn, src_end);
+		int w_end = BryFind.FindFwdWhileNum(src, src_bgn, src_end);
 		int h_bgn = -1;
 		int h_end = -1;
 		if (w_end < src_end && src[w_end] == AsciiByte.Ltr_x) {
 			h_bgn = w_end + 1;
-			h_end = Bry_find_.Find_fwd_while_num(src, h_bgn, src_end);
+			h_end = BryFind.FindFwdWhileNum(src, h_bgn, src_end);
 		}
-		img_size[0] = Bry_.To_int_or(src, w_bgn, w_end, 0);
-		img_size[1] = Bry_.To_int_or(src, h_bgn, h_end, 0);
+		img_size[0] = BryUtl.ToIntOr(src, w_bgn, w_end, 0);
+		img_size[1] = BryUtl.ToIntOr(src, h_bgn, h_end, 0);
 	}
-	public static final byte[] Bry__px = Bry_.new_a7("px");
+	public static final byte[] Bry__px = BryUtl.NewA7("px");
 
 	/**
 	* Fetch a file and its title and register a reference to it.
@@ -800,29 +809,29 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public void replaceLinkHolders(XomwParserBfr pbfr) {
 		holders.replace(pbfr);
 	}
-	public void Make_known_link_holder(Bry_bfr bfr, XomwTitleOld nt, byte[] text, byte[] trail, byte[] prefix) {
+	public void Make_known_link_holder(BryWtr bfr, XomwTitleOld nt, byte[] text, byte[] trail, byte[] prefix) {
 		byte[][] split_trail = linker.splitTrail(trail);
 		byte[] inside = split_trail[0];
 		trail = split_trail[1];
 
-		if (text == Bry_.Empty) {
-			text = Bry_.Escape_html(nt.getPrefixedText()); 
+		if (text == BryUtl.Empty) {
+			text = HtmlBryBfr.EscapeHtml(nt.getPrefixedText());
 		}
 
 		// PORTED:new HtmlArmor( "$prefix$text$inside" )
-		tmp.Add_bry_escape_html(prefix);
-		tmp.Add_bry_escape_html(text);
-		tmp.Add_bry_escape_html(inside);
-		text = tmp.To_bry_and_clear();
+		tmp.AddBryEscapeHtml(prefix);
+		tmp.AddBryEscapeHtml(text);
+		tmp.AddBryEscapeHtml(inside);
+		text = tmp.ToBryAndClear();
 		
 		link_renderer.makeKnownLink(bfr, nt, text, extra_atrs, query);
-		byte[] link = bfr.To_bry_and_clear();
+		byte[] link = bfr.ToBryAndClear();
 		parser.armorLinks(bfr, link, 0, link.length);
 		bfr.Add(trail);
 	}
 
 	private static boolean[] title_chars_for_lnki;
-	private static final byte[] Bry__wtxt__lnki__bgn = Bry_.new_a7("[["), Bry__wtxt__lnki__end = Bry_.new_a7("]]");
+	private static final byte[] Bry__wtxt__lnki__bgn = BryUtl.NewA7("[["), Bry__wtxt__lnki__end = BryUtl.NewA7("]]");
 
 	// $e1 = "/^([{$tc}]+)(?:\\|(.+?))?]](.*)\$/sD";
 	// 
@@ -977,7 +986,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //
 //				$origLink = ltrim($m[1], ' ');
 //
-//				# Don't allow @gplx.Internal protected links to pages containing
+//				# Don't allow public links to pages containing
 //				# PROTO: where PROTO is a valid URL protocol; these
 //				# should be external links.
 //				if (preg_match('/^(?i:' . this.mUrlProtocols . ')/', $origLink)) {

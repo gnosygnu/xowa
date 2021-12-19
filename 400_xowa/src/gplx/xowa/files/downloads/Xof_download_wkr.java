@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.downloads; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.downloads;
+import gplx.libs.files.Io_url;
 import gplx.core.ios.*;
 public interface Xof_download_wkr {
 	byte Download(boolean src_is_web, String src, Io_url trg, String prog_fmt_hdr);

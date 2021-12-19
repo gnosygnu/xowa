@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors;
+import gplx.frameworks.objects.New;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 ///**
 // * Expansion frame with template arguments
 // * @ingroup Parser
 // */
 class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray numberedArgs, namedArgs;
-	@gplx.New public XomwPPFrame_Hash parent;
+	@New public XomwPPFrame_Hash parent;
 	public XophpArray numberedExpansionCache, namedExpansionCache;
 
 	/**
@@ -178,7 +181,7 @@ class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray num
 	 */
 	public String getArgument(Object name) {
 		String text = this.getNumberedArgument((int)name);
-		if (String_.Eq(text, XophpString_.False)) {
+		if (StringUtl.Eq(text, XophpString_.False)) {
 			text = this.getNamedArgument((String)name);
 		}
 		return text;

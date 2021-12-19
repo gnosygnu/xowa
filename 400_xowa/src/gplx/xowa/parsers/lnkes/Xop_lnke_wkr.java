@@ -14,15 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.lnkes;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_find_;
-import gplx.Byte_;
+import gplx.types.basics.strings.unicodes.Utf8Utl;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.utls.ByteUtl;
 import gplx.core.net.Gfo_protocol_itm;
 import gplx.core.net.Gfo_url_parser;
 import gplx.core.net.Gfo_url_site_data;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoa_url;
 import gplx.xowa.Xowe_wiki;
@@ -48,7 +50,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		ctx.Msg_log().Add_itm_none(Xop_lnke_log.Dangling, src, tkn.Src_bgn(), cur_pos);
 	}
 	public static final String Str_xowa_protocol = "xowa-cmd:";
-	public static final byte[] Bry_xowa_protocol = Bry_.new_a7(Str_xowa_protocol);
+	public static final byte[] Bry_xowa_protocol = BryUtl.NewA7(Str_xowa_protocol);
 	public int MakeTkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte[] protocol, byte proto_tid, byte lnke_type) {
 		boolean lnke_type_brack = (lnke_type == Xop_lnke_tkn.Lnke_typ_brack);
 		if (	!lnke_type_brack										// lnke doesn't have "["; EX: "ttl:"
@@ -181,13 +183,13 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		tkn.Lnke_relative_(site_data.Rel());
 		Xow_xwiki_itm xwiki = ctx.App().Usere().Wiki().Xwiki_mgr().Get_by_mid(src, site_bgn, site_end);	// NOTE: check User_wiki.Xwiki_mgr, not App.Wiki_mgr() b/c only it is guaranteed to know all wikis on system
 		if (	xwiki != null												// lnke is to an xwiki; EX: [http://en.wikipedia.org/A a]
-			&& 	Byte_.Match_any(proto_tid, Gfo_protocol_itm.Tid_relative_1, Gfo_protocol_itm.Tid_relative_2, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https)	// only consider http / https; ignore mailto and others; PAGE:uk.w:Маскалі; DATE:2015-07-28
-			&& 	Bry_.Match(src, site_bgn, site_end, xwiki.Domain_bry())		// only consider full domains, not alliases; EX: [http://w/b] should not match alias of w for en.wikipedia.org
+			&& 	ByteUtl.EqAny(proto_tid, Gfo_protocol_itm.Tid_relative_1, Gfo_protocol_itm.Tid_relative_2, Gfo_protocol_itm.Tid_http, Gfo_protocol_itm.Tid_https)	// only consider http / https; ignore mailto and others; PAGE:uk.w:Маскалі; DATE:2015-07-28
+			&& 	BryLni.Eq(src, site_bgn, site_end, xwiki.Domain_bry())		// only consider full domains, not alliases; EX: [http://w/b] should not match alias of w for en.wikipedia.org
 			) {	
 			Xowe_wiki wiki = ctx.Wiki();
 
 			// HACK: this is not correct; "&#61;" or "&amp;" is not handled by Gfo_url_parser which assumes that all "&" separates qargs; DATE:2016-10-10
-			byte[] decoded_src = gplx.xowa.parsers.amps.Xop_amp_mgr.Instance.Decode_as_bry(Bry_.Mid(src, lnke_bgn, lnke_end));
+			byte[] decoded_src = gplx.xowa.parsers.amps.Xop_amp_mgr.Instance.Decode_as_bry(BryLni.Mid(src, lnke_bgn, lnke_end));
 			xo_url_parser_url = wiki.Utl__url_parser().Parse(decoded_src, 0, decoded_src.length);
 
 			byte[] xwiki_wiki = xo_url_parser_url.Wiki_bry();
@@ -244,8 +246,8 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 					break;
 				case AsciiByte.ParenEnd:	// differentiate between "(http://a.org)" (trim) and "http://a.org/b(c)" (don't trim)
 					if (paren_bgn_chk == BoolUtl.NullByte) {
-						int paren_bgn_pos = Bry_find_.Find_fwd(src, AsciiByte.ParenBgn, proto_end, lnke_end);
-						paren_bgn_chk = paren_bgn_pos == Bry_find_.Not_found ? BoolUtl.NByte : BoolUtl.YByte;
+						int paren_bgn_pos = BryFind.FindFwd(src, AsciiByte.ParenBgn, proto_end, lnke_end);
+						paren_bgn_chk = paren_bgn_pos == BryFind.NotFound ? BoolUtl.NByte : BoolUtl.YByte;
 					}
 					if (paren_bgn_chk == BoolUtl.YByte)	// "(" found; do not ignore ")"
 						return rv;
@@ -298,7 +300,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 				return false;	// alpha-numerical is invalid; EX: "titel:" should not generate a lnke for "tel:"
 		}
 		if (prv_byte >= AsciiByte.AsciiMin && prv_byte <= AsciiByte.AsciiMax) return true;	// consider all other ASCII chars as true; EX: \t\n !, etc;
-		prv_pos = gplx.core.intls.Utf8_.Get_prv_char_pos0_old(src, prv_pos);
+		prv_pos = Utf8Utl.GetPrvCharPos0Old(src, prv_pos);
 		prv_byte = src[prv_pos];
 		boolean prv_char_is_letter = ctx.Lang().Case_mgr().Match_any_exists(prv_byte, src, prv_pos, bgn_pos);
 		return !prv_char_is_letter;
@@ -307,17 +309,17 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		// NOTE: fmt is [xowa-cmd:^"app.setup_mgr.import_wiki('');"^ ]
 		if (lnke_type != Xop_lnke_tkn.Lnke_typ_brack) return ctx.Lxr_make_txt_(cur_pos); // NOTE: must check for [ or else C:\xowa\ will cause it to evaluate as lnke
 		int proto_end_pos = cur_pos + 1;	// +1 to skip past :
-		int lhs_dlm_pos = Bry_find_.Find_fwd(src, AsciiByte.Quote, proto_end_pos, src_len); if (lhs_dlm_pos == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
+		int lhs_dlm_pos = BryFind.FindFwd(src, AsciiByte.Quote, proto_end_pos, src_len); if (lhs_dlm_pos == BryFind.NotFound) return ctx.Lxr_make_txt_(cur_pos);
 		int lnke_bgn_pos = lhs_dlm_pos + 1;
 		byte[] rhs_dlm_bry = Bry_quote;
 		if (lhs_dlm_pos - proto_end_pos > 0) {
-			Bry_bfr bfr = ctx.Wiki().Utl__bfr_mkr().Get_k004();
-			rhs_dlm_bry = bfr.Add(Bry_quote).Add_mid(src, proto_end_pos, lhs_dlm_pos).To_bry_and_clear();
-			bfr.Mkr_rls();
+			BryWtr bfr = ctx.Wiki().Utl__bfr_mkr().GetK004();
+			rhs_dlm_bry = bfr.Add(Bry_quote).AddMid(src, proto_end_pos, lhs_dlm_pos).ToBryAndClear();
+			bfr.MkrRls();
 		}
-		int rhs_dlm_pos = Bry_find_.Find_fwd(src, rhs_dlm_bry, lnke_bgn_pos, src_len); if (rhs_dlm_pos == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
-		int txt_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, rhs_dlm_pos + rhs_dlm_bry.length, src_len); if (txt_bgn == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
-		int txt_end = Bry_find_.Find_fwd(src, AsciiByte.BrackEnd, txt_bgn, src_len); if (txt_end == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
+		int rhs_dlm_pos = BryFind.FindFwd(src, rhs_dlm_bry, lnke_bgn_pos, src_len); if (rhs_dlm_pos == BryFind.NotFound) return ctx.Lxr_make_txt_(cur_pos);
+		int txt_bgn = BryFind.FindFwdWhileSpaceOrTab(src, rhs_dlm_pos + rhs_dlm_bry.length, src_len); if (txt_bgn == BryFind.NotFound) return ctx.Lxr_make_txt_(cur_pos);
+		int txt_end = BryFind.FindFwd(src, AsciiByte.BrackEnd, txt_bgn, src_len); if (txt_end == BryFind.NotFound) return ctx.Lxr_make_txt_(cur_pos);
 
 		int end_pos = txt_end + 1;	// +1 to place after ]
 		Xop_lnke_tkn tkn = tkn_mkr.Lnke(bgn_pos, end_pos, protocol, proto_tid, lnke_type, lnke_bgn_pos, rhs_dlm_pos);	// +1 to ignore [

@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.bldrs.*; import gplx.xowa.addons.wikis.searchs.bldrs.cmds.*;
-import gplx.core.lists.hashs.*; import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.xowa.*;
+import gplx.core.lists.hashs.*;
 class Page_matcher_mgr implements Gfo_invk {
 	private final Xow_wiki wiki;
 	public Page_matcher_mgr(Xow_wiki wiki) {this.wiki = wiki;}

@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.utils;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
 import org.junit.*;
-import gplx.core.ios.*;
 public class Xos_url_gen_tst {
 	@Test public void Url_gen() {
 		tst_url_gen("mem/root/",          0, "mem/root/00/00/00/00/0000000000.csv");
@@ -24,7 +27,7 @@ public class Xos_url_gen_tst {
 	}
 	private void tst_url_gen(String root_str, int idx, String expd) {
 		Io_url root = Io_url_.mem_fil_(root_str);
-		Io_url actl_url = Xos_url_gen.bld_fil_(root, idx, Bry_.new_a7(".csv"));
-		Tfds.Eq(expd, actl_url.Xto_api());
+		Io_url actl_url = Xos_url_gen.bld_fil_(root, idx, BryUtl.NewA7(".csv"));
+		GfoTstr.EqObj(expd, actl_url.Xto_api());
 	}
 }

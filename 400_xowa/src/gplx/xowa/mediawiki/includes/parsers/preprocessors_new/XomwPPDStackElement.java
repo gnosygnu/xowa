@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new;
+import gplx.types.basics.utls.StringUtl;
+import gplx.xowa.mediawiki.*;
 // MW.SRC:1.33
 /**
 * Stack cl+ass to help Preprocessor::preprocessToObj()
@@ -90,11 +92,11 @@ public abstract class XomwPPDStackElement {
 	*/
 	public XophpArray getFlags() {
 		int partCount = XophpArray.count(this.parts);
-		boolean findPipe = !String_.Eq(this.open, "\n") && !String_.Eq(this.open, "[");
+		boolean findPipe = !StringUtl.Eq(this.open, "\n") && !StringUtl.Eq(this.open, "[");
 		return XophpArray.New()
 			.Add("findPipe", findPipe)
 			.Add("findEquals", findPipe && partCount > 1 && !XophpObject_.isset_obj(((XomwPPDPart)this.parts.Get_at(partCount - 1)).eqpos))
-			.Add("inHeading", String_.Eq(this.open, "\n"))
+			.Add("inHeading", StringUtl.Eq(this.open, "\n"))
 		;
 	}
 

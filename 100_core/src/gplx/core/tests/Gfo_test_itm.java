@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,20 +14,20 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.tests;
-import gplx.Byte_;
-import gplx.Int_;
-import gplx.Keyval;
-import gplx.Keyval_;
-import gplx.Long_;
-import gplx.Object_;
-import gplx.Ordered_hash;
-import gplx.Ordered_hash_;
-import gplx.String_;
-import gplx.Type_;
-import gplx.Type_ids_;
-import gplx.core.strings.String_bldr;
-import gplx.core.strings.String_bldr_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.ObjectUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.commons.KeyVal;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.basics.utls.TypeIds;
+import gplx.types.basics.utls.ClassUtl;
+import gplx.types.commons.String_bldr;
+import gplx.types.commons.String_bldr_;
+import gplx.types.basics.utls.BoolUtl;
 public class Gfo_test_itm {
 	private final boolean is_expd;
 	private final Ordered_hash hash = Ordered_hash_.New();
@@ -35,12 +35,12 @@ public class Gfo_test_itm {
 		this.is_expd = is_expd;
 	}
 	public int Len() {return hash.Len();}
-	public Gfo_test_itm Add(String key, Object val) {hash.Add(key, Keyval_.new_(key, val)); return this;}
-	private Object Get_by_val(String key) {return ((Keyval)hash.GetByOrFail(key)).Val();}
+	public Gfo_test_itm Add(String key, Object val) {hash.Add(key, KeyVal.NewStr(key, val)); return this;}
+	private Object Get_by_val(String key) {return ((KeyVal)hash.GetByOrFail(key)).Val();}
 	public String Get_str(String key) {
 		Object val_obj = Get_by_val(key);
-		if (Type_.Eq_by_obj(val_obj, byte[].class)) {
-			return String_.new_u8((byte[])val_obj);
+		if (ClassUtl.EqByObj(byte[].class, val_obj)) {
+			return StringUtl.NewU8((byte[])val_obj);
 		}
 		else
 			return (String)val_obj;
@@ -49,65 +49,65 @@ public class Gfo_test_itm {
 		boolean cur = BoolUtl.Cast(Get_by_val(key));
 		boolean expd = is_expd ? cur : val;
 		boolean actl = is_expd ? val : cur;
-		Gftest.Eq__bool(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test_bry(String key, byte[] val) {
 		byte[] cur = (byte[])Get_by_val(key);
 		byte[] expd = is_expd ? cur : val;
 		byte[] actl = is_expd ? val : cur;
-		Gftest.Eq__bry(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test_long(String key, long val) {
-		long cur = Long_.cast(Get_by_val(key));
+		long cur = LongUtl.Cast(Get_by_val(key));
 		long expd = is_expd ? cur : val;
 		long actl = is_expd ? val : cur;
-		Gftest.Eq__long(expd, actl);
+		GfoTstr.EqLong(expd, actl);
 	}
 	public void Test_int(String key, int val) {
-		int cur = Int_.Cast(Get_by_val(key));
+		int cur = IntUtl.Cast(Get_by_val(key));
 		int expd = is_expd ? cur : val;
 		int actl = is_expd ? val : cur;
-		Gftest.Eq__int(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test_byte(String key, byte val) {
-		byte cur = Byte_.Cast(Get_by_val(key));
+		byte cur = ByteUtl.Cast(Get_by_val(key));
 		byte expd = is_expd ? cur : val;
 		byte actl = is_expd ? val : cur;
-		Gftest.Eq__byte(expd, actl);
+		GfoTstr.EqByte(expd, actl);
 	}
 	public void Test_str(String key, String val) {
-		String cur = String_.cast(Get_by_val(key));
+		String cur = StringUtl.Cast(Get_by_val(key));
 		String expd = is_expd ? cur : val;
 		String actl = is_expd ? val : cur;
-		Gftest.Eq__str(expd, actl);
+		GfoTstr.Eq(expd, actl);
 	}
 	public void Test_actl(Gfo_test_itm actl) {
 		int expd_len = hash.Len();
 		String[] expd_ary = new String[expd_len];
 		String[] actl_ary = new String[expd_len];
 		for (int i = 0; i < expd_len; i++) {
-			Keyval expd_kv = (Keyval)hash.Get_at(i);
-			String key = expd_kv.Key();
-			expd_ary[i] = Object_.Xto_str_strict_or_null(expd_kv.Val());
+			KeyVal expd_kv = (KeyVal)hash.GetAt(i);
+			String key = expd_kv.KeyToStr();
+			expd_ary[i] = ObjectUtl.ToStrOrNull(expd_kv.Val());
 
-			Keyval actl_kv = (Keyval)actl.hash.GetByOrNull(key);
-			actl_ary[i] = actl_kv == null ? "MISSING" : Object_.Xto_str_strict_or_null(actl_kv.Val());
+			KeyVal actl_kv = (KeyVal)actl.hash.GetByOrNull(key);
+			actl_ary[i] = actl_kv == null ? "MISSING" : ObjectUtl.ToStrOrNull(actl_kv.Val());
 		}
-		Gftest.Eq__ary(expd_ary, actl_ary);
+		GfoTstr.EqLines(expd_ary, actl_ary);
 	}
 	public String To_str(boolean single_line) {
 		String_bldr bldr = String_bldr_.new_();
 		int len = hash.Len();
 		String itm_dlm = single_line ? ";" : "\n";
 		for (int i = 0; i < len; i++) {
-			Object itm = hash.Get_at(i);
-			int itm_tid = Type_ids_.To_id_by_obj(itm);
-			if (itm_tid == Type_ids_.Id__bry)
-				itm = String_.new_u8((byte[])itm);
-			bldr.Add_obj(itm);
+			Object itm = hash.GetAt(i);
+			int itm_tid = TypeIds.ToIdByObj(itm);
+			if (itm_tid == TypeIds.IdBry)
+				itm = StringUtl.NewU8((byte[])itm);
+			bldr.AddObj(itm);
 			bldr.Add(itm_dlm);
 		}
-		return bldr.To_str();
+		return bldr.ToStr();
 	}
 	@Override public String toString() {
 		return this.To_str(true);

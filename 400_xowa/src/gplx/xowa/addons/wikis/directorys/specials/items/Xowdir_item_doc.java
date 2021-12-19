@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*;
+package gplx.xowa.addons.wikis.directorys.specials.items;
+import gplx.types.basics.utls.StringUtl;
 import gplx.langs.mustaches.*; import gplx.xowa.addons.wikis.directorys.dbs.*;
 public class Xowdir_item_doc implements Mustache_doc_itm {
 	private final boolean mode_is_new;
@@ -28,16 +29,16 @@ public class Xowdir_item_doc implements Mustache_doc_itm {
 		this.main_page = main_page;
 	}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		if		(String_.Eq(key, "id"))				bfr.Add_int(id);
-		else if	(String_.Eq(key, "domain"))			bfr.Add_str_u8(domain);
-		else if	(String_.Eq(key, "name"))			bfr.Add_str_u8(name);
-		else if	(String_.Eq(key, "dir"))			bfr.Add_str_u8(dir);
-		else if	(String_.Eq(key, "mainpage"))		bfr.Add_str_u8(main_page);
+		if		(StringUtl.Eq(key, "id"))				bfr.Add_int(id);
+		else if	(StringUtl.Eq(key, "domain"))			bfr.Add_str_u8(domain);
+		else if	(StringUtl.Eq(key, "name"))			bfr.Add_str_u8(name);
+		else if	(StringUtl.Eq(key, "dir"))			bfr.Add_str_u8(dir);
+		else if	(StringUtl.Eq(key, "mainpage"))		bfr.Add_str_u8(main_page);
 		else										return false;
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		if		(String_.Eq(key, "mode_is_new"))		return Mustache_doc_itm_.Ary__bool(mode_is_new);
+		if		(StringUtl.Eq(key, "mode_is_new"))		return Mustache_doc_itm_.Ary__bool(mode_is_new);
 		return Mustache_doc_itm_.Ary__empty;
 	}
 

@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+package gplx.xowa.xtns.scribunto.engines.process;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.commons.KeyVal;
 import org.junit.*;
 public class Process_send_wtr_tst {
 	@Before public void init() {fxt.Clear();} Scrib_lua_srl_fxt fxt = new Scrib_lua_srl_fxt();
@@ -34,7 +38,7 @@ class Scrib_lua_srl_fxt {
 			srl = new Process_send_wtr(usr_dlg);
 		}
 	}	Process_send_wtr srl; Gfo_usr_dlg usr_dlg;
-	public Keyval[] ary_(Keyval... ary)		{return ary;}
-	public Keyval   itm_(String key, Object val)	{return Keyval_.new_(key, val);}
-	public void Test_encode(Object o, String expd) {Tfds.Eq(expd, srl.Encode(o));}
+	public KeyVal[] ary_(KeyVal... ary)		{return ary;}
+	public KeyVal itm_(String key, Object val)	{return KeyVal.NewStr(key, val);}
+	public void Test_encode(Object o, String expd) {GfoTstr.EqObj(expd, srl.Encode(o));}
 }

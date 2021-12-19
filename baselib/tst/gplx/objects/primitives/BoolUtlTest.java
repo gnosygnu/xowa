@@ -14,8 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.objects.primitives;
-import gplx.objects.lists.CompareAbleUtl;
-import gplx.tests.GfoTstr;
+import gplx.types.commons.lists.CompareAbleUtl;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BoolUtl;
 import org.junit.*;
 public class BoolUtlTest {
 	private final BoolUtlTstr fxt = new BoolUtlTstr();
@@ -27,5 +28,5 @@ public class BoolUtlTest {
 	}
 }
 class BoolUtlTstr {
-	public void TestCompare(boolean lhs, boolean rhs, int expd) {GfoTstr.EqInt(expd, BoolUtl.Compare(lhs, rhs));}
+	public void TestCompare(boolean lhs, boolean rhs, int expd) {GfoTstr.Eq(expd, BoolUtl.Compare(lhs, rhs));}
 }

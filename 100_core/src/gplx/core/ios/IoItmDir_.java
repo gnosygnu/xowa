@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,11 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios;
-import gplx.Io_mgr;
-import gplx.Io_url;
-import gplx.Io_url_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.libs.files.Io_mgr;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.utls.BoolUtl;
 public class IoItmDir_ {
 	public static IoItmDir as_(Object obj) {return obj instanceof IoItmDir ? (IoItmDir)obj : null;}
 	public static final IoItmDir Null = null_();
@@ -34,7 +34,7 @@ public class IoItmDir_ {
 		return rv;
 	}
 	static IoItmDir null_() {
-		IoItmDir rv = new IoItmDir(true);	// TODO_OLD: NULL should be removed
+		IoItmDir rv = new IoItmDir(true);    // TODO_OLD: NULL should be removed
 		rv.ctor_IoItmBase_url(Io_url_.Empty);
 		rv.Exists_set(false);
 		return rv;
@@ -43,13 +43,13 @@ public class IoItmDir_ {
 		Io_mgr.Instance.CreateDir(dir.Url());
 		int len = dir.SubDirs().Len();
 		for (int i = 0; i < len; ++i) {
-			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().Get_at(i);
+			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().GetAt(i);
 			Make(sub_dir);
 		}
 		len = dir.SubFils().Len();
 		for (int i = 0; i < len; ++i) {
-			IoItmFil sub_fil = (IoItmFil)dir.SubFils().Get_at(i);
-			String text = String_.Repeat("a", (int)sub_fil.Size());
+			IoItmFil sub_fil = (IoItmFil)dir.SubFils().GetAt(i);
+			String text = StringUtl.Repeat("a", (int)sub_fil.Size());
 			Io_url sub_url = sub_fil.Url();
 			Io_mgr.Instance.SaveFilStr(sub_url, text);
 			Io_mgr.Instance.UpdateFilModifiedTime(sub_url, sub_fil.ModifiedTime());

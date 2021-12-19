@@ -13,33 +13,38 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.site_cfgs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.apps.site_cfgs;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BrySplit;
+import gplx.types.errs.ErrUtl;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.lists.Hash_adp_bry;
 import gplx.xowa.*;
 import gplx.langs.jsons.*;
 class Xoa_site_cfg_itm__extensiontags extends Xoa_site_cfg_itm__base {
 	public Xoa_site_cfg_itm__extensiontags() {
 		this.Ctor(Xoa_site_cfg_loader__inet.Qarg__extensiontags);
 	}
-	@Override public void Parse_json_ary_itm(Bry_bfr bfr, Xow_wiki wiki, int i, Json_itm itm) {
+	@Override public void Parse_json_ary_itm(BryWtr bfr, Xow_wiki wiki, int i, Json_itm itm) {
 		byte[] tag = itm.Data_bry();
-		if (i != 0) bfr.Add_byte_nl();
+		if (i != 0) bfr.AddByteNl();
 		int idx_last = tag.length - 1;
 		if (	tag.length < 3
 			||	tag[0]			!= AsciiByte.AngleBgn
 			||	tag[idx_last]	!= AsciiByte.AngleEnd
 			)
-			throw Err_.new_("site_meta", "invalid extensiontag", "tag", tag);
-		bfr.Add_mid(tag, 1, idx_last);	// convert "<pre>" to "pre"
+			throw ErrUtl.NewArgs("invalid extensiontag", "tag", tag);
+		bfr.AddMid(tag, 1, idx_last);	// convert "<pre>" to "pre"
 	}
 	@Override public void Exec_csv(Xow_wiki wiki, int loader_tid, byte[] dsv_bry) {
 		Hash_adp_bry hash = null;
 		if (loader_tid != Xoa_site_cfg_loader_.Tid__fallback) {	// fallback will result in null hash which will result in loading all extensions
 			hash = Hash_adp_bry.ci_a7();						// NOTE: must be case-insensitive; EX: <imageMap> vs <imagemap>
-			byte[][] lines = Bry_split_.Split_lines(dsv_bry);
+			byte[][] lines = BrySplit.SplitLines(dsv_bry);
 			int lines_len = lines.length;
 			for (int i = 0; i < lines_len; ++i) {
-				byte[] line = lines[i]; if (Bry_.Len_eq_0(line)) continue;	// ignore blank lines
+				byte[] line = lines[i]; if (BryUtl.IsNullOrEmpty(line)) continue;	// ignore blank lines
 				hash.Add(line, line);
 			}
 		}

@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.wms.apis.origs; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.apps.wms.apis.origs;
+import gplx.libs.dlgs.Gfo_usr_dlg;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.envs.*;
 import gplx.langs.htmls.encoders.*; 
@@ -33,25 +39,25 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 			rv.Clear();
 			int xml_len = xml.length;
 			int pos = 0;
-			pos = Bry_find_.Find_fwd(xml, Bry_xml_ii			, pos, xml_len); 
-			if (pos == Bry_find_.Not_found) {usr_dlg.Log_many(GRP_KEY, "api_failed", "api failed: ~{0}", String_.new_u8(xml)); return false;}
+			pos = BryFind.FindFwd(xml, Bry_xml_ii			, pos, xml_len);
+			if (pos == BryFind.NotFound) {usr_dlg.Log_many(GRP_KEY, "api_failed", "api failed: ~{0}", StringUtl.NewU8(xml)); return false;}
 			pos += Bry_xml_ii.length;
 
 			byte[] orig_wiki = null, orig_page = null; int orig_w = 0, orig_h = 0;
 			if (Parse_xml_val(tmp_rng, usr_dlg, xml, xml_len, pos, Bry_xml_width))
-				orig_w = Bry_.To_int_or(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
+				orig_w = BryUtl.ToIntOr(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
 
 			if (Parse_xml_val(tmp_rng, usr_dlg, xml, xml_len, pos, Bry_xml_height))
-				orig_h = Bry_.To_int_or(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
+				orig_h = BryUtl.ToIntOr(xml, tmp_rng.Val_0(), tmp_rng.Val_1(), 0);
 
 			if (Parse_xml_val(tmp_rng, usr_dlg, xml, xml_len, pos, Bry_xml_descriptionurl)) {
-				byte[] file_url = Bry_.Mid(xml, tmp_rng.Val_0(), tmp_rng.Val_1());
+				byte[] file_url = BryLni.Mid(xml, tmp_rng.Val_0(), tmp_rng.Val_1());
 				Gfo_url url = url_parser.Parse(file_url, 0, file_url.length);
 				orig_wiki = url.Segs__get_at_1st();
 				byte[] page = Xoa_ttl.Replace_spaces(url.Segs__get_at_nth());
-				int colon_pos = Bry_find_.Find_fwd(page, AsciiByte.Colon, 0, page.length);
-				if (colon_pos != Bry_find_.Not_found)
-					page = Bry_.Mid(page, colon_pos + 1, page.length);
+				int colon_pos = BryFind.FindFwd(page, AsciiByte.Colon, 0, page.length);
+				if (colon_pos != BryFind.NotFound)
+					page = BryLni.Mid(page, colon_pos + 1, page.length);
 				orig_page = page;
 			}
 			rv.Init_all(orig_wiki, orig_page, orig_w, orig_h);
@@ -62,9 +68,9 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 	private static Gfo_url_parser url_parser = new Gfo_url_parser();
 	private static boolean Parse_xml_val(Int_2_ref rv, Gfo_usr_dlg usr_dlg, byte[] xml, int xml_len, int pos, byte[] key) {
 		int bgn = 0, end = 0;
-		bgn = Bry_find_.Find_fwd(xml, key, pos, xml_len); if (bgn == Bry_find_.Not_found) return false;
+		bgn = BryFind.FindFwd(xml, key, pos, xml_len); if (bgn == BryFind.NotFound) return false;
 		bgn += key.length;
-		end = Bry_find_.Find_fwd(xml, AsciiByte.Quote	, bgn, xml_len); if (end == Bry_find_.Not_found) return false;
+		end = BryFind.FindFwd(xml, AsciiByte.Quote	, bgn, xml_len); if (end == BryFind.NotFound) return false;
 		rv.Val_all_(bgn, end);
 		return true;
 	}
@@ -76,22 +82,22 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 				.Add(tmp_encoder.Encode(ttl))						// "A%20B.png"
 				;
 			if (width > 0)
-				tmp_bfr.Add(Bry_width).Add_int_variable(width);		// "&iiurlwidth=800"
+				tmp_bfr.Add(Bry_width).AddIntVariable(width);		// "&iiurlwidth=800"
 			if (height > 0 && width > 0)							// NOTE: height cannot be used alone; width must also exist; "iiurlheight cannot be used without iiurlwidth"
-				tmp_bfr.Add(Bry_height).Add_int_variable(height);	// "&iiurlheight=600"
-			return tmp_bfr.To_str_and_clear();
+				tmp_bfr.Add(Bry_height).AddIntVariable(height);	// "&iiurlheight=600"
+			return tmp_bfr.ToStrAndClear();
 		}
 	}
 	private static Gfo_url_encoder tmp_encoder = Gfo_url_encoder_.New__http_url().Init__diff__one(AsciiByte.Space, AsciiByte.Underline).Make();
-	private static final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private static final BryWtr tmp_bfr = BryWtr.New();
 	private static final byte[]
-	  Bry_api					= Bry_.new_a7("/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:")	// NOTE: using File b/c it should be canonical
-	, Bry_width					= Bry_.new_a7("&iiurlwidth=")
-	, Bry_height				= Bry_.new_a7("&iiurlheight=")
-	, Bry_xml_ii				= Bry_.new_a7("<ii ")
-	, Bry_xml_width				= Bry_.new_a7("width=\"")
-	, Bry_xml_height			= Bry_.new_a7("height=\"")
-	, Bry_xml_descriptionurl	= Bry_.new_a7("descriptionurl=\"")
+	  Bry_api					= BryUtl.NewA7("/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:")	// NOTE: using File b/c it should be canonical
+	, Bry_width					= BryUtl.NewA7("&iiurlwidth=")
+	, Bry_height				= BryUtl.NewA7("&iiurlheight=")
+	, Bry_xml_ii				= BryUtl.NewA7("<ii ")
+	, Bry_xml_width				= BryUtl.NewA7("width=\"")
+	, Bry_xml_height			= BryUtl.NewA7("height=\"")
+	, Bry_xml_descriptionurl	= BryUtl.NewA7("descriptionurl=\"")
 	;
 	public static final String GRP_KEY = "xowa.file.wmf.api";
 }

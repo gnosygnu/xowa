@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*;
+package gplx.xowa.addons.wikis.ctgs.dbs;
 import gplx.dbs.*;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.StringUtl;
 public class Xodb_cat_link_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__from, fld__to_id, fld__type_id, fld__timestamp_unix, fld__sortkey, fld__sortkey_prefix;
@@ -90,12 +94,12 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 	}
 	public void Update_page_id_for_pages(int old_id, int new_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_from started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
-		conn.Stmt_update(tbl_name, String_.Ary(fld__from), fld__from).Val_int(fld__from, new_id).Crt_int(fld__from, old_id).Exec_update();
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld__from), fld__from).Val_int(fld__from, new_id).Crt_int(fld__from, old_id).Exec_update();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_from done");
 	}
 	public void Update_page_id_for_cats(int old_id, int new_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_to started: db=~{0} old_id=~{1} new_id=~{2}", conn.Conn_info().Raw(), old_id, new_id);
-		conn.Stmt_update(tbl_name, String_.Ary(fld__to_id), fld__to_id).Val_int(fld__to_id, new_id).Crt_int(fld__to_id, old_id).Exec_update();
+		conn.Stmt_update(tbl_name, StringUtl.Ary(fld__to_id), fld__to_id).Val_int(fld__to_id, new_id).Crt_int(fld__to_id, old_id).Exec_update();
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: update cl_to done");
 	}
 	public void Rls() {

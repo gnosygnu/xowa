@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.StringUtl;
 import org.junit.*;
 public class IptArgChainMgr_tst {
 	@Before public void setup() {
@@ -43,16 +45,16 @@ public class IptArgChainMgr_tst {
 			String activeKey = under.ActiveKey();
 			String literal = key.Key();
 	        if		(expd == 0) {
-				Tfds.Eq(process, "", "0:{0} should be empty:process", literal);
-				Tfds.Eq(activeKey, "", "0:{0} should be noop:activeKey", literal);
+				GfoTstr.EqObj(process, "", "0:{0} should be empty:process", literal);
+				GfoTstr.EqObj(activeKey, "", "0:{0} should be noop:activeKey", literal);
 			}
 	        else if	(expd == 1) {
-				Tfds.Eq(process, "", "1:{0} should be empty:process", literal);
-				Tfds.Eq_true(String_.Has_at_end(activeKey, key.Key() + ","), "1:{0} should set key:activeKey,{1}", literal, activeKey);
+				GfoTstr.EqObj(process, "", "1:{0} should be empty:process", literal);
+				GfoTstr.EqBoolY(StringUtl.HasAtEnd(activeKey, key.Key() + ","), "1:{0} should set key:activeKey,{1}", literal, activeKey);
 			}
 	        else if	(expd == 2) {
-				Tfds.Eq_true(String_.EqNot(process, ""), "2:{0} should not be empty;process,{1}", literal, process);
-				Tfds.Eq(activeKey, "", "2:{0} should be empty:activeKey", literal);
+				GfoTstr.EqBoolY(StringUtl.EqNot(process, ""), "2:{0} should not be empty;process,{1}", literal, process);
+				GfoTstr.EqObj(activeKey, "", "2:{0} should be empty:activeKey", literal);
 			}
 			return this;
 		}

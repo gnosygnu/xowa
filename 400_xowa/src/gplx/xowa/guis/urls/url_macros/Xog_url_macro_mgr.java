@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.urls.url_macros; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.guis.urls.url_macros;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.basics.utls.StringUtl;
 public class Xog_url_macro_mgr {
-	private Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private BryWtr bfr = BryWtr.NewAndReset(255);
 	public Xog_url_macro_mgr() {
 		this.Init();
 	}
-	public void Lang_default_(byte[] v) {lang_default = v;} private byte[] lang_default = Bry_.new_a7("en");
+	public void Lang_default_(byte[] v) {lang_default = v;} private byte[] lang_default = BryUtl.NewA7("en");
 	public Xog_url_macro_grp Types_mgr() {return types_mgr;} private Xog_url_macro_grp types_mgr = new Xog_url_macro_grp();
 	public Xog_url_macro_grp Custom_mgr() {return custom_mgr;} private Xog_url_macro_grp custom_mgr = new Xog_url_macro_grp();
 	public byte[] Fmt_or_null(byte[] raw) {
@@ -46,13 +53,13 @@ public class Xog_url_macro_mgr {
 		if (custom_obj == null) {
 			Object type_obj = types_mgr.Trie().Match_exact(raw, type_bgn, type_end);
 			if (type_obj == null) return Unhandled;	// type abrv is not known; exit; EX: "en.unknown:Page"; "Page"
-			byte[] lang_bry = dot_missing ? lang_default : Bry_.Mid(raw, 0, dot_pos);
+			byte[] lang_bry = dot_missing ? lang_default : BryLni.Mid(raw, 0, dot_pos);
 			Xog_url_macro_itm type_itm = (Xog_url_macro_itm)type_obj;
-			return type_itm.Fmtr_exec(bfr, lang_bry, Bry_.Mid(raw, colon_pos + 1, raw_len));
+			return type_itm.Fmtr_exec(bfr, lang_bry, BryLni.Mid(raw, colon_pos + 1, raw_len));
 		}
 		else {
 			Xog_url_macro_itm custom_itm = (Xog_url_macro_itm)custom_obj;
-			return custom_itm.Fmtr_exec(bfr, Bry_.Mid(raw, colon_pos + 1, raw_len));
+			return custom_itm.Fmtr_exec(bfr, BryLni.Mid(raw, colon_pos + 1, raw_len));
 		}
 	}
 	private void Init() {
@@ -79,7 +86,7 @@ public class Xog_url_macro_mgr {
 		custom_mgr.Set("?"		, "Special:Search/~{0}?fulltext=y");
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_lang_default))					return String_.new_u8(lang_default);
+		if		(ctx.Match(k, Invk_lang_default))					return StringUtl.NewU8(lang_default);
 		else if	(ctx.Match(k, Invk_lang_default_))					lang_default = m.ReadBry("v");
 		else if	(ctx.Match(k, Invk_types))							return types_mgr;
 		else if	(ctx.Match(k, Invk_custom))							return custom_mgr;

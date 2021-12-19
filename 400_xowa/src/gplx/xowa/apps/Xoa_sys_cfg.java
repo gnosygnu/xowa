@@ -13,7 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.apps;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.libs.ios.IoConsts;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.lists.Ordered_hash;
+import gplx.types.basics.lists.Ordered_hash_;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.KeyVal;
+import gplx.xowa.*;
 import gplx.xowa.langs.*;
 public class Xoa_sys_cfg implements Gfo_invk {
 	private Xoae_app app;
@@ -34,12 +46,12 @@ public class Xoa_sys_cfg implements Gfo_invk {
 	}
 	private static final String Cfg__lang = "xowa.gui.app.lang";
 	public int Options_version() {return options_version;} public Xoa_sys_cfg Options_version_(int v) {options_version = v; return this;} private int options_version = 1;
-	public Keyval[] Options_lang_list() {if (options_lang_list == null) options_lang_list = Options_list_lang_.new_(); return options_lang_list;} private Keyval[] options_lang_list;
+	public KeyVal[] Options_lang_list() {if (options_lang_list == null) options_lang_list = Options_list_lang_.new_(); return options_lang_list;} private KeyVal[] options_lang_list;
 	public long Free_mem_when() {return free_mem_when;} long free_mem_when;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_version))			return Xoa_app_.Version;
 		else if	(ctx.Match(k, Invk_build_date))			return Xoa_app_.Build_date;
-		else if	(ctx.Match(k, Invk_free_mem_when_))		free_mem_when = gplx.core.ios.Io_size_.parse_or(m.ReadStr("v"), Io_mgr.Len_mb * 5);
+		else if	(ctx.Match(k, Invk_free_mem_when_))		free_mem_when = gplx.core.ios.Io_size_.parse_or(m.ReadStr("v"), IoConsts.LenMB * 5);
 		else if	(ctx.Match(k, Invk_lang))				return lang_key;
 		else if	(ctx.Match(k, Invk_lang_))				Lang_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_lang_list))			return Options_lang_list();
@@ -53,7 +65,7 @@ public class Xoa_sys_cfg implements Gfo_invk {
 		, Invk_lang = "lang", Invk_lang_ = "lang_", Invk_lang_list = "lang_list";
 }
 class Options_list_lang_ {
-	public static Keyval[] new_() {
+	public static KeyVal[] new_() {
 		Ordered_hash translated = Ordered_hash_.New_bry();
 		List_adp untranslated = List_adp_.New();
 		Add_itm_many(translated, Xol_lang_stub_.Id_en, Xol_lang_stub_.Id_de, Xol_lang_stub_.Id_pl, Xol_lang_stub_.Id_zh_hans, Xol_lang_stub_.Id_zh_hant); // add langs with translations first, so they alphabetize to top of list			
@@ -65,19 +77,19 @@ class Options_list_lang_ {
 		}
 		untranslated.SortBy(Xol_lang_stub_.Comparer_key);
 
-		Keyval[] rv = new Keyval[len];
+		KeyVal[] rv = new KeyVal[len];
 		int translated_max = translated.Len();
 		for (int i = 0; i < translated_max; i++)
-			rv[i] = new_itm((Xol_lang_stub)translated.Get_at(i));
+			rv[i] = new_itm((Xol_lang_stub)translated.GetAt(i));
 
 		for (int i = translated_max; i < len; i++)
-			rv[i] = new_itm((Xol_lang_stub)untranslated.Get_at(i - translated_max));
+			rv[i] = new_itm((Xol_lang_stub)untranslated.GetAt(i - translated_max));
 		return rv;
 	}
-	private static Keyval new_itm(Xol_lang_stub itm) {
-		String key_str = String_.new_u8(itm.Key());
-		String name_str = String_.new_u8(itm.Canonical_name());
-		return Keyval_.new_(key_str, name_str + " [" + key_str + "]");
+	private static KeyVal new_itm(Xol_lang_stub itm) {
+		String key_str = StringUtl.NewU8(itm.Key());
+		String name_str = StringUtl.NewU8(itm.Canonical_name());
+		return KeyVal.NewStr(key_str, name_str + " [" + key_str + "]");
 	}
 	private static void Add_itm_many(Ordered_hash translated, int... langs) {
 		int langs_len = langs.length;

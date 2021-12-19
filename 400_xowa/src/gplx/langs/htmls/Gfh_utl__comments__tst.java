@@ -17,8 +17,8 @@ package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Gfh_utl__comments__tst {
 	@Before public void init() {fxt.Clear();} private final Gfh_class_fxt fxt = new Gfh_class_fxt();
-	@Test  public void Basic() 		{fxt.Test_del_comments("a<!-- b -->c"				, "ac");}
-	@Test  public void Bgn_missing() 	{fxt.Test_del_comments("a b c"						, "a b c");}
-	@Test  public void End_missing() 	{fxt.Test_del_comments("a<!-- b c"					, "a");}
-	@Test  public void Multiple()	 	{fxt.Test_del_comments("a<!--b-->c<!--d-->e"		, "ace");}
+	@Test public void Basic() 		{fxt.Test_del_comments("a<!-- b -->c"				, "ac");}
+	@Test public void Bgn_missing() 	{fxt.Test_del_comments("a b c"						, "a b c");}
+	@Test public void End_missing() 	{fxt.Test_del_comments("a<!-- b c"					, "a");}
+	@Test public void Multiple()	 	{fxt.Test_del_comments("a<!--b-->c<!--d-->e"		, "ace");}
 }

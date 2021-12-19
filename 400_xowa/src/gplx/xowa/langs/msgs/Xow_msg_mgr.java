@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.msgs;
 
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.objects.strings.AsciiByte;
-import gplx.GfoMsg;
-import gplx.Gfo_invk;
-import gplx.Gfo_invk_;
-import gplx.GfsCtx;
-import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.frameworks.invks.GfoMsg;
+import gplx.frameworks.invks.Gfo_invk;
+import gplx.frameworks.invks.Gfo_invk_;
+import gplx.frameworks.invks.GfsCtx;
+import gplx.types.custom.brys.fmts.fmtrs.BryFmtr;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.htmls.sidebars.Xoh_sidebar_itm;
 import gplx.xowa.langs.Xol_lang_itm;
@@ -31,7 +31,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 	private final Xow_wiki wiki;
 	private final Xol_msg_mgr msg_mgr;
 	private Xol_lang_itm lang;
-	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
+	private final BryFmtr tmp_fmtr = BryFmtr.NewTmp();
 	public Xow_msg_mgr(Xow_wiki wiki, Xol_lang_itm lang) {
 		this.wiki = wiki;
 		this.lang = lang;
@@ -48,9 +48,9 @@ public class Xow_msg_mgr implements Gfo_invk {
 		Xol_msg_itm itm = msg_mgr.Itm_by_id_or_null(id);
 		if (itm == null)
 			itm = lang.Msg_mgr().Itm_by_id_or_null(id);
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
 		byte[] rv = Val_by_itm(tmp_bfr, itm, args);
-		tmp_bfr.Mkr_rls();
+		tmp_bfr.MkrRls();
 		return rv;
 	}
 	public Xol_msg_itm Get_or_make(byte[] key) {return msg_mgr.Itm_by_key_or_new(key);}
@@ -58,70 +58,70 @@ public class Xow_msg_mgr implements Gfo_invk {
 	public Xol_msg_itm Find_or_null(byte[] key) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
 		if (itm == null) {
-			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+			BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 			if (itm.Defined_in_none()) itm = null;
-			tmp_bfr.Mkr_rls();
+			tmp_bfr.MkrRls();
 		}
 		return itm;
 	}
 	public byte[] Val_by_key_args(byte[] key, Object... args) {return Val_by_key(key, args);}
-	public byte[] Val_by_key_obj(String key) {return Val_by_key(Bry_.new_u8(key), null);}
+	public byte[] Val_by_key_obj(String key) {return Val_by_key(BryUtl.NewU8(key), null);}
 	public byte[] Val_by_key_obj(byte[] key) {return Val_by_key(key, null);}
 	private byte[] Val_by_key(byte[] key, Object[] args) {
 		Xol_msg_itm itm = msg_mgr.Itm_by_key_or_null(key);
-		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr tmp_bfr = wiki.Utl__bfr_mkr().GetB512();
 		if (itm == null)
 			itm = Xol_msg_mgr_.Get_msg_itm(tmp_bfr, wiki, lang, key);
 		if (itm.Defined_in_none()) {
-			tmp_bfr.Mkr_rls();
-			return Bry_.Empty;
+			tmp_bfr.MkrRls();
+			return BryUtl.Empty;
 		}
 		byte[] rv = Val_by_itm(tmp_bfr, itm, args);
-		tmp_bfr.Mkr_rls();
+		tmp_bfr.MkrRls();
 		return rv;
 	}
-	public byte[] Val_by_itm(Bry_bfr tmp_bfr, Xol_msg_itm itm, Object[] args) {
+	public byte[] Val_by_itm(BryWtr tmp_bfr, Xol_msg_itm itm, Object[] args) {
 		byte[] rv = itm.Val();
 		if (args != null) rv = itm.Fmt_tmp(tmp_bfr, tmp_fmtr, rv, args);
 		if (itm.Has_tmpl_txt()) rv = wiki.Wtxt__expand_tmpl(rv);
 		return rv;
 	}
-	public byte[] Val_html_accesskey_and_title(String id) {return Val_html_accesskey_and_title(Bry_.new_u8(id));}
+	public byte[] Val_html_accesskey_and_title(String id) {return Val_html_accesskey_and_title(BryUtl.NewU8(id));}
 	public byte[] Val_html_accesskey_and_title(byte[] id) {
-		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
+		BryWtr bfr = wiki.Utl__bfr_mkr().GetB512();
 		byte[] rv = Val_html_accesskey_and_title(id, bfr, null);
-		bfr.Mkr_rls();
+		bfr.MkrRls();
 		return rv;
 	}
-	public byte[] Val_html_accesskey_and_title(byte[] id, Bry_bfr bfr, Xoh_sidebar_itm itm) {
-		byte[] tooltip_key = Bry_.Add(CONST_prefix_tooltip, id);
+	public byte[] Val_html_accesskey_and_title(byte[] id, BryWtr bfr, Xoh_sidebar_itm itm) {
+		byte[] tooltip_key = BryUtl.Add(CONST_prefix_tooltip, id);
 		byte[] tooltip_val = Val_by_key_obj(tooltip_key);
-		boolean tooltip_found = Bry_.Len_gt_0(tooltip_val);
-		byte[] accesskey_key = Bry_.Empty, accesskey_val = Bry_.Empty;
+		boolean tooltip_found = BryUtl.IsNotNullOrEmpty(tooltip_val);
+		byte[] accesskey_key = BryUtl.Empty, accesskey_val = BryUtl.Empty;
 		boolean accesskey_found = false;
 		if (tooltip_found) {
-			accesskey_key = Bry_.Add(CONST_prefix_accesskey, id);
+			accesskey_key = BryUtl.Add(CONST_prefix_accesskey, id);
 			accesskey_val = Val_by_key_obj(accesskey_key);
-			accesskey_found = Bry_.Len_gt_0(accesskey_val);
+			accesskey_found = BryUtl.IsNotNullOrEmpty(accesskey_val);
 		}
 		if (accesskey_found)
-			bfr.Add(CONST_atr_accesskey).Add(accesskey_val).Add_byte(AsciiByte.Quote);
-		bfr.Add(CONST_atr_title).Add(tooltip_found ? tooltip_val : Bry_.Empty);	// NOTE: if tooltip not found, make blank; don't bother showing tooltip_key
+			bfr.Add(CONST_atr_accesskey).Add(accesskey_val).AddByte(AsciiByte.Quote);
+		bfr.Add(CONST_atr_title).Add(tooltip_found ? tooltip_val : BryUtl.Empty);	// NOTE: if tooltip not found, make blank; don't bother showing tooltip_key
 		if (accesskey_found)
-			bfr.Add_byte(AsciiByte.Space).Add_byte(AsciiByte.BrackBgn).Add(accesskey_val).Add_byte(AsciiByte.BrackEnd);
-		bfr.Add_byte(AsciiByte.Quote);
-		byte[] rv = bfr.To_bry_and_clear();
+			bfr.AddByte(AsciiByte.Space).AddByte(AsciiByte.BrackBgn).Add(accesskey_val).AddByte(AsciiByte.BrackEnd);
+		bfr.AddByte(AsciiByte.Quote);
+		byte[] rv = bfr.ToBryAndClear();
 		if (itm == null)
 			return rv;
 		else {
 			itm.Init_by_title_and_accesskey(tooltip_val, accesskey_val, rv);
 			return null;
 		}
-	}	private static final byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");
+	}	private static final byte[] CONST_prefix_tooltip = BryUtl.NewA7("tooltip-"), CONST_prefix_accesskey = BryUtl.NewA7("accesskey-"), CONST_atr_title = BryUtl.NewA7(" title=\""), CONST_atr_accesskey = BryUtl.NewA7(" accesskey=\"");
 	public Xol_msg_itm Set(String key_str, String val_str) { // TEST
-		Xol_msg_itm msg_itm = this.Get_or_make(Bry_.new_u8(key_str));
-		msg_itm.Atrs_set(Bry_.new_u8(val_str), false, false);
+		Xol_msg_itm msg_itm = this.Get_or_make(BryUtl.NewU8(key_str));
+		msg_itm.Atrs_set(BryUtl.NewU8(val_str), false, false);
 		msg_itm.Defined_in_(Xol_msg_itm.Defined_in__lang);
 		return msg_itm;
 	}

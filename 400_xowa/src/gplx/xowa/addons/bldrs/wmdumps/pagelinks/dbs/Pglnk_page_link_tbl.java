@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs; import gplx.*;
+package gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs;
 import gplx.dbs.*;
+import gplx.frameworks.objects.Rls_able;
+import gplx.libs.dlgs.Gfo_usr_dlg_;
 public class Pglnk_page_link_tbl implements Rls_able {
 	private static final String tbl_name = "page_link"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_src_id, fld_trg_id;

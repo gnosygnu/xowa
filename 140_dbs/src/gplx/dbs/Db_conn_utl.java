@@ -14,17 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
-import gplx.Bry_;
-import gplx.Byte_;
-import gplx.Double_;
-import gplx.Float_;
-import gplx.Int_;
-import gplx.Io_url_;
-import gplx.List_adp;
-import gplx.List_adp_;
-import gplx.Long_;
-import gplx.String_;
-import gplx.objects.primitives.BoolUtl;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.DoubleUtl;
+import gplx.types.basics.utls.FloatUtl;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.libs.files.Io_url_;
+import gplx.types.basics.lists.List_adp;
+import gplx.types.basics.lists.List_adp_;
+import gplx.types.basics.utls.LongUtl;
+import gplx.types.basics.utls.BoolUtl;
 public class Db_conn_utl {
 	public static Db_conn Conn__new(String url_rel) {
 		Db_conn_bldr.Instance.Reg_default_mem();
@@ -44,13 +44,13 @@ public class Db_conn_utl {
 				Object val = row[j];
 				switch (fld.Type().Tid()) {
 					case DbmetaFldType.TidBool:		stmt.Val_bool_as_byte	(fld_name, BoolUtl.Cast(val)); break;
-					case DbmetaFldType.TidByte:		stmt.Val_byte			(fld_name, Byte_.Cast(val)); break;
-					case DbmetaFldType.TidInt:		stmt.Val_int			(fld_name, Int_.Cast(val)); break;
-					case DbmetaFldType.TidLong:		stmt.Val_long			(fld_name, Long_.cast(val)); break;
-					case DbmetaFldType.TidFloat:		stmt.Val_float			(fld_name, Float_.cast(val)); break;
-					case DbmetaFldType.TidDouble:	stmt.Val_double			(fld_name, Double_.cast(val)); break;
-					case DbmetaFldType.TidStr:		stmt.Val_str			(fld_name, String_.cast(val)); break;
-					case DbmetaFldType.TidBry:		stmt.Val_bry			(fld_name, Bry_.cast(val)); break;
+					case DbmetaFldType.TidByte:		stmt.Val_byte			(fld_name, ByteUtl.Cast(val)); break;
+					case DbmetaFldType.TidInt:		stmt.Val_int			(fld_name, IntUtl.Cast(val)); break;
+					case DbmetaFldType.TidLong:		stmt.Val_long			(fld_name, LongUtl.Cast(val)); break;
+					case DbmetaFldType.TidFloat:		stmt.Val_float			(fld_name, FloatUtl.Cast(val)); break;
+					case DbmetaFldType.TidDouble:	stmt.Val_double			(fld_name, DoubleUtl.Cast(val)); break;
+					case DbmetaFldType.TidStr:		stmt.Val_str			(fld_name, StringUtl.Cast(val)); break;
+					case DbmetaFldType.TidBry:		stmt.Val_bry			(fld_name, BryUtl.Cast(val)); break;
 				}
 			}
 			stmt.Exec_insert();

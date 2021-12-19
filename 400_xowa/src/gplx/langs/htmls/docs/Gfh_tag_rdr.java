@@ -14,33 +14,34 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls.docs;
-import gplx.Bry_;
-import gplx.Bry_find_;
-import gplx.Hash_adp_bry;
-import gplx.Int_;
-import gplx.String_;
-import gplx.core.brys.Bry_err_wkr;
-import gplx.core.primitives.Int_obj_ref;
+import gplx.types.basics.utls.BryLni;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.BryFind;
+import gplx.types.basics.lists.Hash_adp_bry;
+import gplx.types.basics.utls.IntUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.custom.brys.rdrs.BryRdrErrWkr;
+import gplx.types.basics.wrappers.IntRef;
 import gplx.langs.htmls.Gfh_tag_;
-import gplx.objects.primitives.BoolUtl;
-import gplx.objects.strings.AsciiByte;
+import gplx.types.basics.utls.BoolUtl;
+import gplx.types.basics.constants.AsciiByte;
 import gplx.xowa.parsers.htmls.Mwh_atr_parser;
 import gplx.xowa.parsers.htmls.Mwh_atr_wkr;
 public class Gfh_tag_rdr {
 	private final Hash_adp_bry name_hash;
 	private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
 	private final Gfh_tag tag__tmp__move = new Gfh_tag(), tag__tmp__peek = new Gfh_tag(), tag__eos = new Gfh_tag(), tag__comment = new Gfh_tag();
-	private final Int_obj_ref tmp_depth = Int_obj_ref.New_zero();
+	private final IntRef tmp_depth = IntRef.NewZero();
 	Gfh_tag_rdr(Hash_adp_bry name_hash) {this.name_hash = name_hash;}
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_end() {return src_end;} private int src_end;
-	public Bry_err_wkr Err_wkr() {return err_wkr;} private final Bry_err_wkr err_wkr = new Bry_err_wkr();
+	public BryRdrErrWkr Err_wkr() {return err_wkr;} private final BryRdrErrWkr err_wkr = new BryRdrErrWkr();
 	public Gfh_tag_rdr Skip_ws_after_slash_y_() {skip_ws_after_slash_y = true; return this;} private boolean skip_ws_after_slash_y;
 	public Gfh_tag_rdr Reg(String tag_name, int tag_id) {name_hash.Add_str_int(tag_name, tag_id); return this;}
 	public Gfh_tag_rdr Init(byte[] ctx_name, byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.pos = src_bgn; this.src_end = src_end;
-		tag__eos.Init(this, src, BoolUtl.N, BoolUtl.N, src_end, src_end, src_end, src_end, Gfh_tag_.Id__eos, Bry_.Empty);
-		err_wkr.Init_by_page(String_.new_u8(ctx_name), src);
+		tag__eos.Init(this, src, BoolUtl.N, BoolUtl.N, src_end, src_end, src_end, src_end, Gfh_tag_.Id__eos, BryUtl.Empty);
+		err_wkr.InitByPage(StringUtl.NewU8(ctx_name), src);
 		return this;
 	}
 	public void Src_rng_(int src_bgn, int src_end) {
@@ -66,7 +67,7 @@ public class Gfh_tag_rdr {
 			adj = -1;
 			--tmp;	// subtract 1 from tmp; needed when pos is at src_len, else array error below
 		}
-		tmp_depth.Val_zero_();
+		tmp_depth.ValSetZero();
 		Gfh_tag rv = null;
 		while (tmp != stop_pos) {
 			if (src[tmp] == AsciiByte.AngleBgn) {
@@ -95,7 +96,7 @@ public class Gfh_tag_rdr {
 		if (move) pos = rv.Src_end();
 		return rv;
 	}
-	private boolean Tag__match(boolean move, boolean bwd, boolean tail, int match_name_id, Int_obj_ref depth_obj, Gfh_tag tag) {
+	private boolean Tag__match(boolean move, boolean bwd, boolean tail, int match_name_id, IntRef depth_obj, Gfh_tag tag) {
 		int tag_name_id = tag.Name_id();
 		if (	tag_name_id != match_name_id												// tag doesn't match requested
 			&&	match_name_id != Gfh_tag_.Id__any											// requested is not wildcard
@@ -108,14 +109,14 @@ public class Gfh_tag_rdr {
 				return true;
 			else {
 				if (match_name_id == tag_name_id)
-					depth_obj.Val_add(-1);
+					depth_obj.ValAdd(-1);
 				return false;
 			}
 		}
 		else {
 			if (!bwd && tail && !tag_is_tail && !tag.Tag_is_inline()) {
 				if (match_name_id == tag_name_id)
-					depth_obj.Val_add(1);
+					depth_obj.ValAdd(1);
 				return false;
 			}
 			else
@@ -132,12 +133,12 @@ public class Gfh_tag_rdr {
 			adj = -1;
 			--tmp;	// subtract 1 from tmp; needed when pos is at src_len, else array error below
 		}
-		tmp_depth.Val_zero_();
+		tmp_depth.ValSetZero();
 		Gfh_tag rv = null;
 		while (tmp != stop_pos) {
 			if (src[tmp] == AsciiByte.AngleBgn) {
 				rv = Tag__extract(move, tail, find_tag_bry, tmp);
-				if (Bry_.Eq(rv.Name_bry(), Gfh_tag_.Bry__xowa_comment)) {	// ignore comments DATE:2016-06-25
+				if (BryLni.Eq(rv.Name_bry(), Gfh_tag_.Bry__xowa_comment)) {	// ignore comments DATE:2016-06-25
 					tmp = rv.Src_end();
 					rv = null;	// null rv, else rv will still be comment and may get returned to caller
 					continue;
@@ -161,9 +162,9 @@ public class Gfh_tag_rdr {
 		if (move) pos = rv.Src_end();
 		return rv;
 	}
-	private boolean Tag__match(boolean move, boolean bwd, boolean tail, byte[] find_tag_bry, Int_obj_ref depth_obj, Gfh_tag tag) {
+	private boolean Tag__match(boolean move, boolean bwd, boolean tail, byte[] find_tag_bry, IntRef depth_obj, Gfh_tag tag) {
 		byte[] cur_tag_bry = tag.Name_bry();
-		if (	!Bry_.Eq(cur_tag_bry, find_tag_bry)				// tag doesn't match requested
+		if (	!BryLni.Eq(cur_tag_bry, find_tag_bry)				// tag doesn't match requested
 			&&	find_tag_bry != Gfh_tag_.Bry__xowa_any			// requested is not wildcard
 			)	return false;
 		if (cur_tag_bry == Gfh_tag_.Bry__xowa_comment) return true;	// ignore comments
@@ -173,15 +174,15 @@ public class Gfh_tag_rdr {
 			if (depth == 0)
 				return true;
 			else {
-				if (Bry_.Eq(cur_tag_bry, find_tag_bry))
-					depth_obj.Val_add(-1);
+				if (BryLni.Eq(cur_tag_bry, find_tag_bry))
+					depth_obj.ValAdd(-1);
 				return false;
 			}
 		}
 		else {
 			if (!bwd && tail && !tag_is_tail && !tag.Tag_is_inline()) {
-				if (Bry_.Eq(cur_tag_bry, find_tag_bry))
-					depth_obj.Val_add(1);
+				if (BryLni.Eq(cur_tag_bry, find_tag_bry))
+					depth_obj.ValAdd(1);
 				return false;
 			}
 			else
@@ -194,7 +195,7 @@ public class Gfh_tag_rdr {
 		boolean cur_is_tail = false;
 		switch (name_0) {
 			case AsciiByte.Bang:
-				if (Bry_.Match(src, name_bgn + 1, name_bgn + 3, Bry__comment__mid))			// skip comment; EX: "<!"
+				if (BryLni.Eq(src, name_bgn + 1, name_bgn + 3, Bry__comment__mid))			// skip comment; EX: "<!"
 					return Tag__comment(tag_bgn);
 				break;
 			case AsciiByte.Slash:
@@ -217,7 +218,7 @@ public class Gfh_tag_rdr {
 					name_end = name_pos;
 					tag_end = name_pos + 1; if (tag_end == src_end) return Tag__eos(tag_bgn);// EX: "<a/EOS"
 					if (skip_ws_after_slash_y) {// skip ws after slash; EX:"<br />"; ISSUE#:542: DATE:2020-03-09
-						tag_end = Bry_find_.Find_fwd_while_ws(src, tag_end, src_end);
+						tag_end = BryFind.FindFwdWhileWs(src, tag_end, src_end);
 					}
 					if (src[tag_end] == AsciiByte.AngleEnd) {
 						atrs_end = name_end;
@@ -239,8 +240,8 @@ public class Gfh_tag_rdr {
 			name_byte = src[name_pos];
 		}
 		if (tag_end == -1) {
-			tag_end = Bry_find_.Find_fwd(src, AsciiByte.AngleEnd, name_end, src_end);
-			if (tag_end == Bry_find_.Not_found) return Tag__eos(tag_bgn);
+			tag_end = BryFind.FindFwd(src, AsciiByte.AngleEnd, name_end, src_end);
+			if (tag_end == BryFind.NotFound) return Tag__eos(tag_bgn);
 			int prv_pos = tag_end - 1;
 			if (src[prv_pos] == AsciiByte.Slash) {
 				atrs_end = prv_pos;
@@ -251,7 +252,7 @@ public class Gfh_tag_rdr {
 			++tag_end;	// position after ">"
 		}
 		Gfh_tag tmp = move ? tag__tmp__move : tag__tmp__peek;
-		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end, Gfh_tag_.Id__unknown, Bry_.Mid(src, name_bgn, name_end));
+		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end, Gfh_tag_.Id__unknown, BryLni.Mid(src, name_bgn, name_end));
 	}
 	public Gfh_tag Tag__extract(boolean move, boolean tail, int match_name_id, int tag_bgn) {
 		int name_bgn = tag_bgn + 1; if (name_bgn == src_end) return Tag__eos(tag_bgn);		// EX: "<EOS"
@@ -259,7 +260,7 @@ public class Gfh_tag_rdr {
 		boolean cur_is_tail = false;
 		switch (name_0) {
 			case AsciiByte.Bang:
-				if (Bry_.Match(src, name_bgn + 1, name_bgn + 3, Bry__comment__mid))			// skip comment; EX: "<!"
+				if (BryLni.Eq(src, name_bgn + 1, name_bgn + 3, Bry__comment__mid))			// skip comment; EX: "<!"
 					return Tag__comment(tag_bgn);
 				break;
 			case AsciiByte.Slash:
@@ -282,7 +283,7 @@ public class Gfh_tag_rdr {
 					name_end = name_pos;
 					tag_end = name_pos + 1; if (tag_end == src_end) return Tag__eos(tag_bgn);// EX: "<a/EOS"
 					if (skip_ws_after_slash_y) {// skip ws after slash; EX:"<br />"; ISSUE#:542: DATE:2020-03-09
-						tag_end = Bry_find_.Find_fwd_while_ws(src, tag_end, src_end);
+						tag_end = BryFind.FindFwdWhileWs(src, tag_end, src_end);
 					}
 					if (src[tag_end] == AsciiByte.AngleEnd) {
 						atrs_end = name_end;
@@ -304,8 +305,8 @@ public class Gfh_tag_rdr {
 			name_byte = src[name_pos];
 		}
 		if (tag_end == -1) {
-			tag_end = Bry_find_.Find_fwd(src, AsciiByte.AngleEnd, name_end, src_end);
-			if (tag_end == Bry_find_.Not_found) return Tag__eos(tag_bgn);
+			tag_end = BryFind.FindFwd(src, AsciiByte.AngleEnd, name_end, src_end);
+			if (tag_end == BryFind.NotFound) return Tag__eos(tag_bgn);
 			int prv_pos = tag_end - 1;
 			if (src[prv_pos] == AsciiByte.Slash) {
 				atrs_end = prv_pos;
@@ -318,7 +319,7 @@ public class Gfh_tag_rdr {
 		Gfh_tag tmp = move ? tag__tmp__move : tag__tmp__peek;
 		return tmp.Init(this, src, cur_is_tail, inline, tag_bgn, tag_end, name_end, atrs_end
 			, name_hash.Get_as_int_or(src, name_bgn, name_end, -1)	// TODO_OLD: change from -1 to Unknown
-			, Bry_.Mid(src, name_bgn, name_end));
+			, BryLni.Mid(src, name_bgn, name_end));
 	}
 	public boolean Read_and_move(byte match) {
 		byte b = src[pos];
@@ -330,7 +331,7 @@ public class Gfh_tag_rdr {
 			return false;
 	}
 	public int Read_int_to(byte to_char) {
-		int rv = Read_int_to(to_char, Int_.Max_value); if (rv == Int_.Max_value) err_wkr.Fail("invalid int", "pos", pos);
+		int rv = Read_int_to(to_char, IntUtl.MaxValue); if (rv == IntUtl.MaxValue) err_wkr.Fail("invalid int", "pos", pos);
 		return rv;
 	}
 	public int Read_int_to(byte to_char, int or_int) {
@@ -363,14 +364,14 @@ public class Gfh_tag_rdr {
 		return bgn == pos ? or_int : rv * negative;
 	}
 	private Gfh_tag Tag__comment(int tag_bgn) {
-		int tag_end = Bry_find_.Move_fwd(src, gplx.langs.htmls.Gfh_tag_.Comm_end, tag_bgn, src_end); if (tag_end == Bry_find_.Not_found) tag_end = src_end;
-		return tag__comment.Init(this, src, BoolUtl.N, BoolUtl.N, tag_bgn, tag_end, tag_end, tag_end, Gfh_tag_.Id__comment, Bry_.Empty);
+		int tag_end = BryFind.MoveFwd(src, gplx.langs.htmls.Gfh_tag_.Comm_end, tag_bgn, src_end); if (tag_end == BryFind.NotFound) tag_end = src_end;
+		return tag__comment.Init(this, src, BoolUtl.N, BoolUtl.N, tag_bgn, tag_end, tag_end, tag_end, Gfh_tag_.Id__comment, BryUtl.Empty);
 	}
 	private Gfh_tag Tag__eos(int tag_bgn) {
 		int tag_end = tag_bgn + 255; if (tag_end > src_end) tag_end = src_end;
-		return tag__comment.Init(this, src, BoolUtl.N, BoolUtl.N, tag_bgn, tag_end, tag_end, tag_end, Gfh_tag_.Id__eos, Bry_.Empty);
+		return tag__comment.Init(this, src, BoolUtl.N, BoolUtl.N, tag_bgn, tag_end, tag_end, tag_end, Gfh_tag_.Id__eos, BryUtl.Empty);
 	}
-	private static final byte[] Bry__comment__mid = Bry_.new_a7("--");
+	private static final byte[] Bry__comment__mid = BryUtl.NewA7("--");
 	public static Gfh_tag_rdr New__html()	{return new Gfh_tag_rdr(Gfh_tag_.Hash);}
 	public static Gfh_tag_rdr New__custom()	{return new Gfh_tag_rdr(Hash_adp_bry.cs());}
 }

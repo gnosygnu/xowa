@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
+package gplx.xowa.bldrs.setups.maints;
+import gplx.frameworks.tests.GfoTstr;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.basics.utls.ByteUtl;
+import gplx.types.basics.utls.StringUtl;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 import org.junit.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 public class Wmf_dump_list_parser_tst {
 	@Before public void init() {fxt.Clear();} private Wmf_dump_list_parser_fxt fxt = new Wmf_dump_list_parser_fxt();
 	@Test public void Parse() {
@@ -23,7 +28,7 @@ public class Wmf_dump_list_parser_tst {
 		(	"<li>2013-07-17 00:32:33 <a href=\"http://dumps.wikimedia.org/enwiki/20130708\">enwiki</a>: <span class=\"done\">Dump complete</span></li>"
 		,	fxt.itm("enwiki", "20130708", Wmf_dump_itm.Status_tid_complete, "Dump complete", "2013-07-17 00:32:33")
 		);
-		fxt.Test_parse(String_.Concat_lines_nl
+		fxt.Test_parse(StringUtl.ConcatLinesNl
 		(	"<li>2013-07-24 02:02:13 <a href=\"http://dumps.wikimedia.org/kawiki/20130724\">kawiki</a>: <span class=\"in-progress\">Dump in progress</span></li>"
 		,	"<ul><li class=\"in-progress\"><span class=\"updates\">2013-07-24 00:54:55</span> <span class=\"status\">in-progress</span> <span class=\"title\">All pages with complete page edit history (.bz2)</span><div class=\"progress\">2013-07-24 02:02:13: kawiki (ID 18587) 22046 pages (5.5|11140.9/sec all|curr), 869000 revs (215.2|505.3/sec all|curr), 99.9%|99.9% prefetched (all|curr), ETA 2013-07-24 04:09:41 [max 2514872]</div>"
 		,	"<ul><li class=\"file\">kawiki-20130724-pages-meta-history.xml.bz2 245.2 MB (written) </li></ul></li></ul>"
@@ -105,15 +110,15 @@ class Wmf_dump_list_parser_fxt {
 	public void Clear() {}
 	private Wmf_dump_list_parser parser = new Wmf_dump_list_parser();
 	public String itm(String wiki_abrv, String dump_date, byte status_done, String status_msg, String status_time) {
-		return String_.Concat_with_str("\n", wiki_abrv, dump_date
-		, Byte_.To_str(status_done)
+		return StringUtl.ConcatWith("\n", wiki_abrv, dump_date
+		, ByteUtl.ToStr(status_done)
 		, status_msg
 		, status_time
 		);
 	}
 	public void Test_parse(String raw, String... expd) {
-		Wmf_dump_itm[] actl = parser.Parse(Bry_.new_a7(raw));
-		Tfds.Eq_str_lines(String_.Concat_lines_nl(expd), String_.Concat_lines_nl(Xto_str(actl)));
+		Wmf_dump_itm[] actl = parser.Parse(BryUtl.NewA7(raw));
+		GfoTstr.EqLines(StringUtl.ConcatLinesNl(expd), StringUtl.ConcatLinesNl(Xto_str(actl)));
 	}
 	public String[] Xto_str(Wmf_dump_itm[] ary) {
 		int len = ary.length;
@@ -123,11 +128,11 @@ class Wmf_dump_list_parser_fxt {
 		return rv;
 	}
 	public static String Xto_str(Wmf_dump_itm itm) {
-		DateAdp status_time = itm.Status_time();
-		String status_time_str = status_time == null ? "" : status_time.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time); 
-		return String_.Concat_with_str("\n", String_.new_a7(itm.Wiki_abrv()), itm.Dump_date().XtoStr_fmt("yyyyMMdd")
-			, Byte_.To_str(itm.Status_tid())
-			, String_.new_a7(itm.Status_msg())
+		GfoDate status_time = itm.Status_time();
+		String status_time_str = status_time == null ? "" : status_time.ToStrFmt(GfoDateUtl.FmtIso8561DateTime);
+		return StringUtl.ConcatWith("\n", StringUtl.NewA7(itm.Wiki_abrv()), itm.Dump_date().ToStrFmt("yyyyMMdd")
+			, ByteUtl.ToStr(itm.Status_tid())
+			, StringUtl.NewA7(itm.Status_msg())
 			, status_time_str
 			);
 		

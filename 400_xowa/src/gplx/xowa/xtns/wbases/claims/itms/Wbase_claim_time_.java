@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms; import gplx.*;
-import gplx.objects.strings.AsciiByte;
+package gplx.xowa.xtns.wbases.claims.itms;
+import gplx.types.basics.utls.BryUtl;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.types.basics.constants.AsciiByte;
+import gplx.types.commons.GfoDate;
+import gplx.types.commons.GfoDateUtl;
 import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.times.*;
 public class Wbase_claim_time_ {
 	public static final byte
@@ -42,24 +46,24 @@ public class Wbase_claim_time_ {
 	, Dflt__calendarmodel	= Wbase_data_itm.New_str("http://www.wikidata.org/entity/Q1985727")
 	;
 
-	private static final byte[] Bry_year_prefix = Bry_.new_a7("+0000000");
-	public static byte[] To_bry(Bry_bfr bfr,  String date) {return To_bry(bfr, DateAdp_.parse_fmt(date, "yyyy-MM-dd HH:mm:ss"));}
-	public static byte[] To_bry(Bry_bfr bfr, DateAdp date) {// +0000000yyyy-MM-ddTHH:mm:ssZ
+	private static final byte[] Bry_year_prefix = BryUtl.NewA7("+0000000");
+	public static byte[] To_bry(BryWtr bfr, String date) {return To_bry(bfr, GfoDateUtl.ParseFmt(date, "yyyy-MM-dd HH:mm:ss"));}
+	public static byte[] To_bry(BryWtr bfr, GfoDate date) {// +0000000yyyy-MM-ddTHH:mm:ssZ
 		bfr
 		.Add(Bry_year_prefix)
-		.Add_int_fixed(date.Year(), 4)
-		.Add_byte(AsciiByte.Dash)
-		.Add_int_fixed(date.Month(), 2)
-		.Add_byte(AsciiByte.Dash)
-		.Add_int_fixed(date.Day(), 2)
-		.Add_byte(AsciiByte.Ltr_T)
-		.Add_int_fixed(date.Hour(), 2)
-		.Add_byte(AsciiByte.Colon)
-		.Add_int_fixed(date.Minute(), 2)
-		.Add_byte(AsciiByte.Colon)
-		.Add_int_fixed(date.Second(), 2)
-		.Add_byte(AsciiByte.Ltr_Z)
+		.AddIntFixed(date.Year(), 4)
+		.AddByte(AsciiByte.Dash)
+		.AddIntFixed(date.Month(), 2)
+		.AddByte(AsciiByte.Dash)
+		.AddIntFixed(date.Day(), 2)
+		.AddByte(AsciiByte.Ltr_T)
+		.AddIntFixed(date.Hour(), 2)
+		.AddByte(AsciiByte.Colon)
+		.AddIntFixed(date.Minute(), 2)
+		.AddByte(AsciiByte.Colon)
+		.AddIntFixed(date.Second(), 2)
+		.AddByte(AsciiByte.Ltr_Z)
 		;
-		return bfr.To_bry_and_clear();
+		return bfr.ToBryAndClear();
 	}
 }

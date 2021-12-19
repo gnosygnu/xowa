@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.amps;
+import gplx.types.custom.brys.wtrs.BryWtr;
+import gplx.xowa.parsers.*;
 import gplx.langs.htmls.entitys.*;
 public class Xop_amp_tkn_ent extends Xop_tkn_itm_base {
 	private Gfh_entity_itm html_ref_itm;
@@ -25,6 +27,6 @@ public class Xop_amp_tkn_ent extends Xop_tkn_itm_base {
 	public int Char_int()					{return html_ref_itm.Char_int();}
 	public byte[] Xml_name_bry()			{return html_ref_itm.Xml_name_bry();}
 	public boolean Itm_is_custom()				{return html_ref_itm.Tid() == Gfh_entity_itm.Tid_name_xowa;}
-	public void Print_ncr(Bry_bfr bfr)		{html_ref_itm.Print_ncr(bfr);}
-	public void Print_literal(Bry_bfr bfr)	{html_ref_itm.Print_literal(bfr);}
+	public void Print_ncr(BryWtr bfr)		{html_ref_itm.Print_ncr(bfr);}
+	public void Print_literal(BryWtr bfr)	{html_ref_itm.Print_literal(bfr);}
 }
