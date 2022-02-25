@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  wiki:
+    build: .
+    volumes:
+      - /h/DOCKER/wiki:/root/wiki
+    ports:
+      - "4040:8080"
